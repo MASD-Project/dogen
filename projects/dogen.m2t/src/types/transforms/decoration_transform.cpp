@@ -444,11 +444,12 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      */
     const auto root_id(rm.name().qualified().dot());
     const auto ats(logical::entities::technical_space::agnostic);
-    for (auto e : m.elements()) {
-        const auto id(e->name().qualified().dot());
+    for (auto pair : m.elements()) {
+        auto& e(*pair.logical_element());
+        const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
-        if (e->origin_type() != logical::entities::origin_types::target) {
+        if (e.origin_type() != logical::entities::origin_types::target) {
             BOOST_LOG_SEV(lg, trace) << "Element is not in target model.";
             continue;
         }
@@ -457,9 +458,9 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
          * If the meta-element is intrinsically not generatable, there
          * is no point in creating a decoration for it.
          */
-        if (!is_generatable(e->meta_name())) {
+        if (!is_generatable(e.meta_name())) {
             BOOST_LOG_SEV(lg, trace) << "Element is not generatable: "
-                                     << e->meta_name().qualified().dot();
+                                     << e.meta_name().qualified().dot();
             continue;
         }
 
@@ -468,7 +469,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
          * different from the rest of the model elements; if we detect
          * it, we need to skip it.
          */
-        if (e->name().qualified().dot() == root_id) {
+        if (e.name().qualified().dot() == root_id) {
             BOOST_LOG_SEV(lg, trace) << "Element is root module, skipping.";
             continue;
         }
@@ -478,7 +479,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
          * build the decoration based on the local configuration, and
          * the global configuration.
          */
-        const auto& cfg(*e->configuration());
+        const auto& cfg(*e.configuration());
         const auto dc(read_decoration_configuration(fg, cfg));
         auto lambda(
             [&](const logical::entities::technical_space nts) {
@@ -493,7 +494,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
                 const auto ld(
                     make_local_decoration(drp, root_dc, gd, dc, gt, h, nts));
                 auto pair(std::make_pair(nts, *ld));
-                const auto inserted(e->decoration().insert(pair).second);
+                const auto inserted(e.decoration().insert(pair).second);
                 if (!inserted) {
                     const auto s(boost::lexical_cast<std::string>(nts));
                     BOOST_LOG_SEV(lg, error) << duplicate_technical_space << s;
@@ -507,7 +508,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
          * space. If that's the case, we need to ensure we use the
          * element's technical space instead.
          */
-        const auto its(e->intrinsic_technical_space());
+        const auto its(e.intrinsic_technical_space());
         const auto ts(its == ats ? mts : its);
         BOOST_LOG_SEV(lg, trace) << "Element intrinsic technical space: " << its
                                  << " Model technical space: " << mts;

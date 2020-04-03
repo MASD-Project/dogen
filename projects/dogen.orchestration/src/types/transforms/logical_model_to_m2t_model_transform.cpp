@@ -68,7 +68,10 @@ private:
         const auto id(e->name().qualified().dot());
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
-        result_.elements().push_back(e);
+
+        m2t::entities::logical_physical_pair pair;
+        pair.logical_element(e);
+        result_.elements().push_back(pair);
     }
 
 public:

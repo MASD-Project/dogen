@@ -62,7 +62,8 @@ apply(const context& ctx, entities::model& m) {
     ats.insert(technical_space::xml);
     ats.insert(technical_space::cmake);
 
-    for (const auto& ptr : m.elements()) {
+    for (const auto& pair : m.elements()) {
+        auto ptr(pair.logical_element());
         const auto id(ptr->name().qualified().dot());
         const auto ts(ptr->intrinsic_technical_space());
 

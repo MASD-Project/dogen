@@ -23,11 +23,11 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.m2t/io/entities/element_archetype_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
+#include "dogen.m2t/io/entities/logical_physical_pair_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/extraction_properties_io.hpp"
 #include "dogen.m2t/io/entities/global_enablement_properties_io.hpp"
@@ -72,25 +72,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::element>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::logical::entities::element> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::m2t::entities::logical_physical_pair>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

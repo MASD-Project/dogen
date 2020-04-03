@@ -258,7 +258,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;logical::entities::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;logical_physical_pair&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

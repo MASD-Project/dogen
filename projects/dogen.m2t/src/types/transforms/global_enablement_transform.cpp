@@ -355,8 +355,11 @@ void global_enablement_transform::populate_local_enablement_properties(
     std::unordered_map<std::string,
                        std::list<boost::shared_ptr<logical::entities::element>>>
         bucketed_elements;
-    for (auto ptr : m.elements())
-        bucketed_elements[ptr->meta_name().qualified().dot()].push_back(ptr);
+    for (auto pair : m.elements()) {
+        auto ptr(pair.logical_element());
+        const auto& mn(ptr->meta_name());
+        bucketed_elements[mn.qualified().dot()].push_back(ptr);
+    }
 
     for (auto& pair : bucketed_elements) {
         /*
@@ -365,7 +368,7 @@ void global_enablement_transform::populate_local_enablement_properties(
          * do here. This can happen if the meta-model element is not
          * expressed as an artefact at all. This is the case, for
          * example, for object templates (at the time of this
-         * wwritting).
+         * writing).
          */
         const auto mn_id(pair.first);
         const auto& albmn(nrp.by_meta_name());
