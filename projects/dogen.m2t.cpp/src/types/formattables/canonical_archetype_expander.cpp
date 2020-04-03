@@ -21,6 +21,7 @@
 #include <typeindex>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/inclusion_support_types.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
@@ -70,10 +71,10 @@ void canonical_archetype_expander::expand(const transforms::repository& frp,
         if (fmt.inclusion_support_type() != cs)
             continue;
 
-        const auto n(fmt.physical_name());
-        const auto al(n.location());
-        const auto arch(al.archetype());
-        const auto fct(al.facet());
+        const auto pn(fmt.physical_name());
+        const auto arch(pn.qualified());
+        using qnb = physical::helpers::qualified_name_builder;
+        const auto fct(qnb::build_facet(pn));
 
         const auto carch(transforms::traits::canonical_archetype(fct));
         eprops.canonical_archetype_to_archetype()[carch] = arch;

@@ -92,7 +92,8 @@ std::list<physical::entities::artefact> workflow::execute(
     const auto& fmts(i->second);
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
-        const auto arch(fmt.physical_name().location().archetype());
+        const auto pn(fmt.physical_name());
+        const auto arch(pn.qualified());
         const auto& ap(get_artefact_properties(e, arch));
 
         if (!ap.enabled()) {

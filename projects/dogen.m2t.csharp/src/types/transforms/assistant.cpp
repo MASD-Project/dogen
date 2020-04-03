@@ -59,12 +59,12 @@ assistant(const context& ctx, const logical::entities::element& e,
     const physical::entities::name& n) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(
-        obtain_artefact_properties(n.location().archetype())),
+        obtain_artefact_properties(n.qualified())),
     physical_name_(n) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: "
-                             << physical_name_.location().archetype();
+                             << physical_name_.qualified();
 
     m2t::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -225,16 +225,16 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
          * Not all formatters need help, so its fine not to have a
          * helper registered against a particular formatter.
          */
-        const auto j(i->second.find(physical_name_.location().archetype()));
+        const auto j(i->second.find(physical_name_.qualified()));
         if (j != i->second.end()) {
             BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                     << physical_name_.location().archetype();
+                                     << physical_name_.qualified();
             return j->second;
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_name_.location().archetype();
+                             << physical_name_.qualified();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
@@ -291,7 +291,7 @@ physical::entities::artefact assistant::make_artefact() const {
     r.paths().absolute(artefact_properties_.file_path());
 
     const auto& ap(element_.artefact_properties());
-    const auto arch(physical_name_.location().archetype());
+    const auto arch(physical_name_.qualified());
     const auto i(ap.find(arch));
     if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;

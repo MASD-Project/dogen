@@ -47,8 +47,8 @@ std::string variability_initializer_implementation_transform::id() const {
 physical::entities::name
 variability_initializer_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), variability_initializer_implementation_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::variability_initializer_implementation_archetype_sn()));
     return r;
 }
 

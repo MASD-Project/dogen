@@ -73,7 +73,7 @@ formatting_transform::make_feature_groups(
 
     std::unordered_map<std::string, formatting_transform::feature_group> r;
     for (const auto& n : ns) {
-        const auto arch(n.location().archetype());
+        const auto arch(n.qualified());
 
         feature_group fg;
         const variability::helpers::feature_selector s(fm);

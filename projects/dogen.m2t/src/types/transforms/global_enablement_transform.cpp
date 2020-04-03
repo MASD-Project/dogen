@@ -26,6 +26,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
@@ -110,14 +111,13 @@ global_enablement_transform::make_global_archetype_feature_group(
     const variability::helpers::feature_selector s(fm);
     for (const auto& n : nrp.all()) {
         global_archetype_feature_group gatg;
-        const auto l(n.location());
         const auto ebl(logical::traits::enabled());
-        gatg.enabled = s.get_by_name(l.archetype(), ebl);
+        gatg.enabled = s.get_by_name(n.qualified(), ebl);
 
         const auto ow(logical::traits::overwrite());
-        gatg.overwrite = s.get_by_name(l.archetype(), ow);
+        gatg.overwrite = s.get_by_name(n.qualified(), ow);
 
-        r.insert(std::make_pair(l.archetype(), gatg));
+        r.insert(std::make_pair(n.qualified(), gatg));
     }
     return r;
 }
@@ -131,18 +131,20 @@ global_enablement_transform::make_local_archetype_feature_group(
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
+    using qnb = physical::helpers::qualified_name_builder;
     for (const auto& n : nrp.all()) {
-        const auto l(n.location());
         local_archetype_feature_group latg;
+        const auto qn(n.qualified());
         const auto ebl(logical::traits::enabled());
-        latg.facet_enabled = s.get_by_name(l.facet(), ebl);
-        latg.archetype_enabled = s.get_by_name(l.archetype(), ebl);
+        const auto f(qnb::build_facet(n));
+        latg.facet_enabled = s.get_by_name(f, ebl);
+        latg.archetype_enabled = s.get_by_name(qn, ebl);
 
         const auto ow(logical::traits::overwrite());
-        latg.facet_overwrite = s.get_by_name(l.facet(), ow);
-        latg.archetype_overwrite = s.get_by_name(l.archetype(), ow);
+        latg.facet_overwrite = s.get_by_name(f, ow);
+        latg.archetype_overwrite = s.get_by_name(qn, ow);
 
-        r.insert(std::make_pair(l.archetype(), latg));
+        r.insert(std::make_pair(qn, latg));
     }
     return r;
 }
@@ -240,7 +242,7 @@ void global_enablement_transform::populate_global_enablement_properties(
     for (const auto& backend_pair : nrp.by_backend_by_facet()) {
         /*
          * First we locate the backend for the current batch of
-         * artchefeature locations.
+         * physical locations.
          */
         const auto& bn(backend_pair.first);
         const auto i(galp.backend_properties().find(bn));
@@ -264,7 +266,7 @@ void global_enablement_transform::populate_global_enablement_properties(
             const auto& facet(j->second);
 
             /*
-             * Finally we can loop through all of the archetype
+             * Finally we can loop through all of the physical
              * locations owned by both this backend and facet and
              * populate the denormalised properties.
              */
@@ -296,13 +298,12 @@ global_enablement_transform::obtain_local_enablement_properties(
     const std::list<physical::entities::name>& ns,
     const variability::entities::configuration& cfg) {
 
-    BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
+    BOOST_LOG_SEV(lg, debug) << "Creating global enablement properties.";
 
     std::unordered_map<std::string, logical::entities::enablement_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& n : ns) {
-        const auto& l(n.location());
-        const auto archetype(l.archetype());
+        const auto archetype(n.qualified());
         const auto i(fgs.find(archetype));
         if (i == fgs.end()) {
             BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
@@ -333,7 +334,7 @@ global_enablement_transform::obtain_local_enablement_properties(
         r[archetype] = lalp;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Created local archetype location properties.";
+    BOOST_LOG_SEV(lg, debug) << "Created global enablement properties.";
     return r;
 }
 
@@ -342,7 +343,7 @@ void global_enablement_transform::populate_local_enablement_properties(
     const physical::entities::name_repository& nrp,
     entities::model& m) {
     /*
-     * Computes all of the possible features for every archetype
+     * Computes all of the possible features for every physical
      * location. Not all of these will be of use to a given element,
      * because they may not be expressed for that element.
      */
@@ -359,7 +360,7 @@ void global_enablement_transform::populate_local_enablement_properties(
 
     for (auto& pair : bucketed_elements) {
         /*
-         * Locate all of the archetype locations that make sense for
+         * Locate all of the physical locations that make sense for
          * the current meta-name. If none do, there nothing for us to
          * do here. This can happen if the meta-model element is not
          * expressed as an artefact at all. This is the case, for
@@ -376,7 +377,7 @@ void global_enablement_transform::populate_local_enablement_properties(
 
         /*
          * Now process each of the elements of this meta-feature, only
-         * taking into account the archetype locations relevant to the
+         * taking into account the physical locations relevant to the
          * meta-feature.
          */
         for (auto ptr : pair.second) {
@@ -390,8 +391,7 @@ void global_enablement_transform::populate_local_enablement_properties(
 
 void global_enablement_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg,
-        "archetype location properties transform",
+    tracing::scoped_transform_tracer stp(lg, "global enablement transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto &fm(*ctx.feature_model());

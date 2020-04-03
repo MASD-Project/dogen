@@ -43,7 +43,7 @@ std::string traits::solution_archetype_qn() {
 }
 
 std::string traits::solution_archetype_sn() {
-    static std::string r("visual_studio.solution");
+    static std::string r("solution");
     return r;
 }
 
@@ -53,7 +53,7 @@ std::string traits::project_archetype_qn() {
 }
 
 std::string traits::project_archetype_sn() {
-    static std::string r("visual_studio.project");
+    static std::string r("project");
     return r;
 }
 

@@ -42,15 +42,15 @@ std::string object_odb_options_transform::static_id() {
 }
 
 std::string object_odb_options_transform::id() const {
-    static auto r(physical_name().location().archetype());
+    static auto r(static_id());
     return r;
 }
 
 physical::entities::name
 object_odb_options_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), object_odb_options_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::object_odb_options_archetype_sn()));
     return r;
 }
 

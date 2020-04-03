@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
 #include "dogen.m2t.csharp/types/formattables/location_error.hpp"
 #include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
@@ -65,12 +66,12 @@ locator::feature_group locator::make_feature_group(
     const variability::helpers::feature_selector s(feature_model);
 
     std::unordered_set<std::string> processed_facets;
+    using qnb = physical::helpers::qualified_name_builder;
     for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto al(fmt.physical_name().location());
-
-        const auto arch(al.archetype());
-        const auto fct(al.facet());
+        const auto n(fmt.physical_name());
+        const auto arch(n.qualified());
+        const auto fct(qnb::build_facet(n));
         const auto pf(traits::postfix());
 
         formatter_feature_group fmt_tg;

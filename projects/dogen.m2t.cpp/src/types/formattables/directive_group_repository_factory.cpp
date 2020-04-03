@@ -26,6 +26,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
@@ -72,8 +73,8 @@ directive_group_repository_factory::make_feature_group(
     r.inclusion_required = s.get_by_name(ir);
 
     for (const auto& f : frp.stock_artefact_formatters()) {
-        const auto al(f->physical_name().location());
-        const auto arch(al.archetype());
+        const auto n(f->physical_name());
+        const auto arch(n.qualified());
 
         using transforms::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);
@@ -258,8 +259,8 @@ compute_directives(const feature_group& fg,
      */
     const auto cs(transforms::inclusion_support_types::canonical_support);
     for (const auto& fmt : formatters) {
-        const auto al(fmt->physical_name().location());
-        const auto arch(al.archetype());
+        const auto pn(fmt->physical_name());
+        const auto arch(pn.qualified());
         BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
 
         const auto ist(fmt->inclusion_support_type());
@@ -288,7 +289,8 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                const auto fct(al.facet());
+                using qnb = physical::helpers::qualified_name_builder;
+                const auto fct(qnb::build_facet(pn));
                 const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, dg, dgrp);
             }
@@ -318,7 +320,8 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                const auto fct(al.facet());
+                using qnb = physical::helpers::qualified_name_builder;
+                const auto fct(qnb::build_facet(pn));
                 const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, *dg, dgrp);
             }

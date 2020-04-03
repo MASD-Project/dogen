@@ -38,32 +38,32 @@ std::string traits::canonical_archetype() {
 }
 
 std::string traits::solution_archetype_qn() {
-    static std::string r("visual_studio.solution");
+    static std::string r(traits::facet_qn() + ".solution");
     return r;
 }
 
 std::string traits::solution_archetype_sn() {
-    static std::string r("visual_studio.solution");
+    static std::string r("solution");
     return r;
 }
 
 std::string traits::project_archetype_qn() {
-    static std::string r("visual_studio.project");
+    static std::string r(traits::facet_qn() + ".project");
     return r;
 }
 
 std::string traits::project_archetype_sn() {
-    static std::string r("visual_studio.project");
+    static std::string r("project");
     return r;
 }
 
 std::string traits::msbuild_targets_archetype_qn() {
-    static std::string r("visual_studio.msbuild_targets");
+    static std::string r(traits::facet_qn() + ".msbuild_targets");
     return r;
 }
 
 std::string traits::msbuild_targets_archetype_sn() {
-    static std::string r("visual_studio.msbuild_targets");
+    static std::string r("msbuild_targets");
     return r;
 }
 

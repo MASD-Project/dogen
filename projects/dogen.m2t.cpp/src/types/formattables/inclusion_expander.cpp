@@ -137,8 +137,8 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     for (const auto& fmt : i->second) {
-        const auto l(fmt->physical_name().location());
-        const auto arch(l.archetype());
+        const auto n(fmt->physical_name());
+        const auto arch(n.qualified());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
                                  << " using formatter: " << fmt->id();
 

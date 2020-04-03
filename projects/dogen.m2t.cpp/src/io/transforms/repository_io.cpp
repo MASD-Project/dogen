@@ -21,6 +21,7 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"
@@ -74,7 +75,7 @@ inline std::ostream& to_stream(std::ostream& s,
         s <<  "{ \"" << i->first << "\":" << "[ ";
         for(auto j(i->second.begin()); j != i->second.end(); ++j) {
             if (j != i->second.begin()) s << ", ";
-                s <<  "\"" << (*j)->id() << "\"";
+            s <<  (*j)->physical_name();
         }
             s << "] }";
     }

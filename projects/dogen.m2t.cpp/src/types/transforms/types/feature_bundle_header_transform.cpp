@@ -48,8 +48,8 @@ std::string feature_bundle_header_transform::id() const {
 physical::entities::name
 feature_bundle_header_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), feature_bundle_header_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::feature_bundle_header_archetype_sn()));
     return r;
 }
 

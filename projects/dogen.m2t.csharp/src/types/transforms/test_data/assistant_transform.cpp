@@ -40,8 +40,8 @@ std::string assistant_transform::id() const {
 physical::entities::name
 assistant_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(csharp::traits::backend_qn(),
-        traits::facet_qn(), assistant_transform::static_id()));
+    static const auto r(name_factory::make(csharp::traits::backend_sn(),
+        traits::facet_sn(), traits::assistant_archetype_sn()));
     return r;
 }
 

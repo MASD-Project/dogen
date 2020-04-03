@@ -20,15 +20,15 @@ std::string msbuild_targets_transform::static_id() {
 }
 
 std::string msbuild_targets_transform::id() const {
-    static auto r(physical_name().location().archetype());
+    static auto r(physical_name().qualified());
     return r;
 }
 
 physical::entities::name
 msbuild_targets_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), msbuild_targets_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::msbuild_targets_archetype_sn()));
     return r;
 }
 

@@ -39,15 +39,15 @@ std::string solution_transform::static_id() {
 }
 
 std::string solution_transform::id() const {
-    static auto r(physical_name().location().archetype());
+    static auto r(physical_name().qualified());
     return r;
 }
 
 physical::entities::name
 solution_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), solution_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::solution_archetype_sn()));
     return r;
 }
 

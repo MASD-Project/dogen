@@ -42,8 +42,8 @@ std::string class_forward_declarations_transform::id() const {
 physical::entities::name
 class_forward_declarations_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), class_forward_declarations_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::class_forward_declarations_archetype_sn()));
     return r;
 }
 

@@ -30,7 +30,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("m2t.csharp.formatters.registrar"));
+static logger lg(logger_factory("m2t.csharp.transforms.registrar"));
 
 const std::string no_transforms("Transform repository is empty.");
 const std::string no_transforms_by_meta_name(
@@ -108,14 +108,13 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * transform into this repository has the helpful side-effect of
      * ensuring the id is unique in physical space.
      */
-    const auto& l(n.location());
-    const auto arch(l.archetype());
-    auto& fffn(transform_repository_.stock_artefact_formatters_by_archetype());
-    const auto pair(std::make_pair(arch, t));
-    const auto inserted(fffn.insert(pair).second);
+    const auto qn(n.qualified());
+    auto& safba(transform_repository_.stock_artefact_formatters_by_archetype());
+    const auto pair(std::make_pair(qn, t));
+    const auto inserted(safba.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
+        BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + qn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id()

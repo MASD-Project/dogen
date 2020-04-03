@@ -171,8 +171,8 @@ model adapter::adapt(const transforms::repository& frp,
          */
         auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
-            const auto l(fmt->physical_name().location());
-            const auto arch(l.archetype());
+            const auto n(fmt->physical_name());
+            const auto arch(n.qualified());
             const auto pair(std::make_pair(arch, artefact_properties()));
             const auto inserted(art_props.insert(pair).second);
             if (!inserted) {

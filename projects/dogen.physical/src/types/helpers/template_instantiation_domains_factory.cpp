@@ -25,6 +25,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 
 namespace {
@@ -65,33 +66,36 @@ make(const std::list<entities::name>& ns) {
 
     const auto masd_kernel("masd");
     for (const auto& n: ns) {
-        const auto& l(n.location());
-
+        n.location();
         /*
          * Kernel
          */
-        sorted[masd_kernel].insert(l.backend());
-        sorted[masd_kernel].insert(l.facet());
-        sorted[masd_kernel].insert(l.archetype());
+        const auto bqn(qualified_name_builder::build_backend(n));
+        const auto fqn(qualified_name_builder::build_facet(n));
+        const auto qn(n.qualified());
 
-        sorted[masd_kernel + backend_postfix].insert(l.backend());
-        sorted[masd_kernel + facet_postfix].insert(l.facet());
-        ensure_inserted(masd_kernel + archetype_postfix, l.archetype());
+        sorted[masd_kernel].insert(bqn);
+        sorted[masd_kernel].insert(fqn);
+        sorted[masd_kernel].insert(qn);
+
+        sorted[masd_kernel + backend_postfix].insert(bqn);
+        sorted[masd_kernel + facet_postfix].insert(fqn);
+        ensure_inserted(masd_kernel + archetype_postfix, qn);
 
         /*
          * Backend
          */
-        sorted[l.backend()].insert(l.facet());
-        ensure_inserted(l.backend(), l.archetype());
+        sorted[bqn].insert(fqn);
+        ensure_inserted(bqn, qn);
 
-        sorted[l.backend() + facet_postfix].insert(l.facet());
-        sorted[l.backend() + archetype_postfix].insert(l.archetype());
+        sorted[bqn + facet_postfix].insert(fqn);
+        sorted[bqn + archetype_postfix].insert(qn);
 
         /*
          * Facet
          */
-        ensure_inserted(l.facet(), l.archetype());
-        ensure_inserted(l.facet() + archetype_postfix, l.archetype());
+        ensure_inserted(fqn, qn);
+        ensure_inserted(fqn + archetype_postfix, qn);
     }
 
     /*

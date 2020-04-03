@@ -45,8 +45,8 @@ std::string primitive_implementation_transform::id() const {
 physical::entities::name
 primitive_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet_qn(), primitive_implementation_transform::static_id()));
+    static auto r(name_factory::make(cpp::traits::backend_sn(),
+        traits::facet_sn(), traits::primitive_implementation_archetype_sn()));
     return r;
 }
 
