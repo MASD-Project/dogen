@@ -36719,7 +36719,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6003;-51.7385,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6003;-51.7381,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36727,8 +36727,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-51.9392,-85"/>
-        <dia:point val="-51.9385,-86.5502"/>
+        <dia:point val="-51.9385,-85"/>
+        <dia:point val="-51.9381,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -44656,7 +44656,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:point val="-172.715,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.465,43.6004;-145.272,51.8"/>
+        <dia:rectangle val="-173.465,43.6004;-145.273,51.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
