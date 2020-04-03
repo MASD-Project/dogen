@@ -3048,7 +3048,7 @@ user defined stereotypes.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#logical_model_to_generation_model_transform#</dia:string>
+        <dia:string>#logical_model_to_m2t_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

@@ -27,7 +27,7 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
-#include "dogen.orchestration/types/transforms/logical_model_to_generation_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
@@ -76,7 +76,7 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Obtain the generation model set.
      */
-    auto gms(transforms::logical_model_to_generation_model_transform::
+    auto gms(transforms::logical_model_to_m2t_model_transform::
         apply(ctx.generation_context(), cms));
 
     /*

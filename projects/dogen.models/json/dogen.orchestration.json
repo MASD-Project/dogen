@@ -170,7 +170,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::logical_model_to_generation_model_transform",
+      "name": "transforms::logical_model_to_m2t_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
