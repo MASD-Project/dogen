@@ -34,9 +34,6 @@ namespace dogen::orchestration::transforms {
 
 class logical_model_to_generation_model_transform final {
 private:
-    static std::size_t
-    compute_total_size(const logical::entities::model& em);
-
     static m2t::entities::model
     apply(const logical::entities::model& m);
 

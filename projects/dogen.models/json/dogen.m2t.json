@@ -44,7 +44,7 @@
         },
         {
           "name": "elements",
-          "type": "std::vector<boost::shared_ptr<logical::entities::element>>"
+          "type": "std::list<boost::shared_ptr<logical::entities::element>>"
         },
         {
           "name": "root_module",

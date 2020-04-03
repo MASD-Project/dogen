@@ -98,32 +98,6 @@ private:
 
 }
 
-std::size_t logical_model_to_generation_model_transform::
-compute_total_size(const logical::entities::model& m) {
-    std::size_t r;
-    r = m.structural_elements().modules().size();
-    r += m.structural_elements().object_templates().size();
-    r += m.structural_elements().builtins().size();
-    r += m.structural_elements().enumerations().size();
-    r += m.structural_elements().primitives().size();
-    r += m.structural_elements().objects().size();
-    r += m.structural_elements().exceptions().size();
-    r += m.structural_elements().visitors().size();
-    r += m.decoration_elements().licences().size();
-    r += m.decoration_elements().generation_markers().size();
-    r += m.decoration_elements().modeline_groups().size();
-    r += m.decoration_elements().modelines().size();
-    r += m.variability_elements().feature_template_bundles().size();
-    r += m.variability_elements().initializer()
-        != nullptr ?  1 : 0;
-    r += m.templating_elements().logic_less_templates().size();
-    r += m.serialization_elements().type_registrars().size();
-    r += m.visual_studio_elements().solutions().size();
-    r += m.visual_studio_elements().projects().size();
-
-    return r;
-}
-
 m2t::entities::model logical_model_to_generation_model_transform::
 apply(const logical::entities::model& m) {
     m2t::entities::model r;
@@ -147,9 +121,6 @@ apply(const logical::entities::model& m) {
     r.orm_properties(m.orm_properties());
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
-
-    const auto size(compute_total_size(m));
-    r.elements().reserve(size);
 
     model_populator mp(r);
     logical::entities::shared_elements_traversal(m, mp);

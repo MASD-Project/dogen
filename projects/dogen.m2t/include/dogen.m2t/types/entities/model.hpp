@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -68,7 +68,7 @@ public:
         const std::string& origin_sha1_hash,
         const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
         const std::unordered_set<dogen::logical::entities::name>& leaves,
-        const std::vector<boost::shared_ptr<dogen::logical::entities::element> >& elements,
+        const std::list<boost::shared_ptr<dogen::logical::entities::element> >& elements,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
@@ -123,10 +123,10 @@ public:
     void leaves(const std::unordered_set<dogen::logical::entities::name>&& v);
     /**@}*/
 
-    const std::vector<boost::shared_ptr<dogen::logical::entities::element> >& elements() const;
-    std::vector<boost::shared_ptr<dogen::logical::entities::element> >& elements();
-    void elements(const std::vector<boost::shared_ptr<dogen::logical::entities::element> >& v);
-    void elements(const std::vector<boost::shared_ptr<dogen::logical::entities::element> >&& v);
+    const std::list<boost::shared_ptr<dogen::logical::entities::element> >& elements() const;
+    std::list<boost::shared_ptr<dogen::logical::entities::element> >& elements();
+    void elements(const std::list<boost::shared_ptr<dogen::logical::entities::element> >& v);
+    void elements(const std::list<boost::shared_ptr<dogen::logical::entities::element> >&& v);
 
     /**
      * @brief The module that represents the model.
@@ -222,7 +222,7 @@ private:
     std::string origin_sha1_hash_;
     std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types> references_;
     std::unordered_set<dogen::logical::entities::name> leaves_;
-    std::vector<boost::shared_ptr<dogen::logical::entities::element> > elements_;
+    std::list<boost::shared_ptr<dogen::logical::entities::element> > elements_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;

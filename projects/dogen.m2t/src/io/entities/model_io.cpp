@@ -90,7 +90,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::logical::entities::element> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::logical::entities::element> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
