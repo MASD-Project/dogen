@@ -12,42 +12,44 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-04 Sat 13:09]
+#+CAPTION: Clock summary at [2020-04-04 Sat 21:57]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *70:52* |       |       | 100.0 |
+| *Total time*                                              | *74:29* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 70:52   |       |       | 100.0 |
-| Active                                                    |         | 70:52 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  7:27 |  10.5 |
-| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  5:59 |   8.4 |
-| Rename archetypes model to physical model                 |         |       |  0:28 |   0.7 |
-| Rename assets model to logical model                      |         |       |  0:29 |   0.7 |
-| Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.9 |
-| Rename engine to orchestration                            |         |       |  1:04 |   1.5 |
-| Merge extraction model with physical model                |         |       |  4:35 |   6.5 |
+| Stories                                                   | 74:29   |       |       | 100.0 |
+| Active                                                    |         | 74:29 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  7:27 |  10.0 |
+| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
+| Sprint and product backlog grooming                       |         |       |  6:21 |   8.5 |
+| Rename archetypes model to physical model                 |         |       |  0:28 |   0.6 |
+| Rename assets model to logical model                      |         |       |  0:29 |   0.6 |
+| Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.8 |
+| Rename engine to orchestration                            |         |       |  1:04 |   1.4 |
+| Merge extraction model with physical model                |         |       |  4:35 |   6.2 |
 | Remove manual feature in profile merge transform          |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity         |         |       |  0:12 |   0.3 |
 | Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.2 |
-| Analysis on designing and implement physical types        |         |       |  6:52 |   9.7 |
+| Analysis on designing and implement physical types        |         |       |  6:52 |   9.2 |
 | Remove =element= from the modeling location               |         |       |  0:02 |   0.0 |
-| Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.5 |
+| Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.4 |
 | Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.2 |
-| Rename generation models to =m2t=                         |         |       |  1:04 |   1.5 |
+| Rename generation models to =m2t=                         |         |       |  1:04 |   1.4 |
 | Move all generation features away from generation         |         |       |  0:17 |   0.4 |
-| Rename generation transforms                              |         |       |  4:49 |   6.8 |
+| Rename generation transforms                              |         |       |  4:49 |   6.5 |
 | Remove kernel from models                                 |         |       |  0:36 |   0.8 |
 | Rename the default MASD kernel                            |         |       |  0:44 |   1.0 |
 | Consider removing archetype location by family            |         |       |  0:40 |   0.9 |
-| Add part to physical location                             |         |       |  1:16 |   1.8 |
-| Add names to logical model                                |         |       |  1:48 |   2.5 |
-| Consider generating a colour palette procedurally         |         |       |  2:48 |   4.0 |
+| Add part to physical location                             |         |       |  1:16 |   1.7 |
+| Add names to logical model                                |         |       |  1:48 |   2.4 |
+| Consider generating a colour palette procedurally         |         |       |  2:48 |   3.8 |
 | Add support for clang-10                                  |         |       |  0:44 |   1.0 |
-| Make physical location entries simple names               |         |       | 20:37 |  29.1 |
-| Implement archetype locations from physical meta-model    |         |       |  3:36 |   5.1 |
-| Implement the generation model in terms of "formattables" |         |       |  0:42 |   1.0 |
+| Make physical location entries simple names               |         |       | 20:37 |  27.7 |
+| Consider upgrading to clang 10 on windows                 |         |       |  0:08 |   0.2 |
+| Implement archetype locations from physical meta-model    |         |       |  5:37 |   7.5 |
+| Rename physical names to meta-names                       |         |       |  1:06 |   1.5 |
+| Implement the generation model in terms of "formattables" |         |       |  0:42 |   0.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -880,12 +882,25 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
-*** Rename physical names to meta-names                               :story:
+*** STARTED Rename physical names to meta-names                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-04 Sat 20:51]--[2020-04-04 Sat 21:57] =>  1:06
+    :END:
 
 We made a modeling error: we called the physical names "names". These
 are not really names. Physical names are file names. What we really
 mean is physical meta-names. We need to rename this type to avoid
 confusion.
+
+Notes:
+
+- passes:
+  - name repository, name repository parts, name group. *Done*.
+  - name builder, qualified name builder, name validator, name factory
+  - model to text interface and implementations physical name,
+    meta-name should be logical meta-name.
+  - assistant: physical name
+  - registrar: name repository parts member
 
 *** STARTED Implement the generation model in terms of "formattables" :story:
     :LOGBOOK:
@@ -910,6 +925,10 @@ Notes:
   logical model.
 - we need to add artefacts to formatters and get them to populate
   them.
+
+*** Make m2t interfaces header only                                   :story:
+
+It seems we have implementation files on this at present.
 
 *** Replace artefact properties with artefacts                        :story:
 
