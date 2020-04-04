@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-03 Fri 21:09]
+#+CAPTION: Clock summary at [2020-04-04 Sat 13:09]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *70:00* |       |       | 100.0 |
+| *Total time*                                              | *70:52* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 70:00   |       |       | 100.0 |
-| Active                                                    |         | 70:00 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  7:27 |  10.6 |
+| Stories                                                   | 70:52   |       |       | 100.0 |
+| Active                                                    |         | 70:52 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  7:27 |  10.5 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                       |         |       |  5:56 |   8.5 |
+| Sprint and product backlog grooming                       |         |       |  5:59 |   8.4 |
 | Rename archetypes model to physical model                 |         |       |  0:28 |   0.7 |
 | Rename assets model to logical model                      |         |       |  0:29 |   0.7 |
 | Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.9 |
@@ -30,24 +30,24 @@
 | Merge extraction model with physical model                |         |       |  4:35 |   6.5 |
 | Remove manual feature in profile merge transform          |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity         |         |       |  0:12 |   0.3 |
-| Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.3 |
-| Analysis on designing and implement physical types        |         |       |  6:52 |   9.8 |
+| Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.2 |
+| Analysis on designing and implement physical types        |         |       |  6:52 |   9.7 |
 | Remove =element= from the modeling location               |         |       |  0:02 |   0.0 |
 | Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.5 |
-| Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.3 |
+| Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.2 |
 | Rename generation models to =m2t=                         |         |       |  1:04 |   1.5 |
 | Move all generation features away from generation         |         |       |  0:17 |   0.4 |
-| Rename generation transforms                              |         |       |  4:49 |   6.9 |
-| Remove kernel from models                                 |         |       |  0:36 |   0.9 |
+| Rename generation transforms                              |         |       |  4:49 |   6.8 |
+| Remove kernel from models                                 |         |       |  0:36 |   0.8 |
 | Rename the default MASD kernel                            |         |       |  0:44 |   1.0 |
-| Consider removing archetype location by family            |         |       |  0:40 |   1.0 |
+| Consider removing archetype location by family            |         |       |  0:40 |   0.9 |
 | Add part to physical location                             |         |       |  1:16 |   1.8 |
-| Add names to logical model                                |         |       |  1:48 |   2.6 |
+| Add names to logical model                                |         |       |  1:48 |   2.5 |
 | Consider generating a colour palette procedurally         |         |       |  2:48 |   4.0 |
 | Add support for clang-10                                  |         |       |  0:44 |   1.0 |
-| Make physical location entries simple names               |         |       | 20:37 |  29.5 |
+| Make physical location entries simple names               |         |       | 20:37 |  29.1 |
+| Implement archetype locations from physical meta-model    |         |       |  3:36 |   5.1 |
 | Implement the generation model in terms of "formattables" |         |       |  0:42 |   1.0 |
-| Implement archetype locations from physical meta-model    |         |       |  2:47 |   4.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -320,6 +320,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-04 Sat 13:04]--[2020-04-04 Sat 13:07] =>  0:03
     CLOCK: [2020-04-03 Fri 20:05]--[2020-04-03 Fri 20:25] =>  0:20
     CLOCK: [2020-04-03 Fri 13:28]--[2020-04-03 Fri 14:00] =>  0:32
     CLOCK: [2020-04-02 Thu 21:51]--[2020-04-02 Thu 22:16] =>  0:25
@@ -812,24 +813,9 @@ Notes:
 - when querying for features for a given backend, we need to assemble
   the qualified name.
 
-*** COMPLETED Implement the generation model in terms of "formattables" :story:
-    CLOSED: [2020-04-03 Fri 21:08]
-    :LOGBOOK:
-    CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
-    :END:
-
-We need to find a way to expand the generation model into a pair of:
-
-- element
-- artefact
-
-In effect, a formattable. Then we need to update the backends to stop
-expanding across physical space and instead use the expansion created
-by the generation model. We then need to update formattables to have
-an artefact, and supply the artefact to all formatters.
-
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-04 Sat 12:14]--[2020-04-04 Sat 13:03] =>  0:49
     CLOCK: [2020-03-28 Sat 21:07]--[2020-03-28 Sat 21:20] =>  0:13
     CLOCK: [2020-03-28 Sat 15:50]--[2020-03-28 Sat 16:14] =>  0:24
     CLOCK: [2020-03-27 Fri 22:01]--[2020-03-27 Fri 22:58] =>  0:57
@@ -879,6 +865,59 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** STARTED Implement the generation model in terms of "formattables" :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
+    :END:
+
+We need to find a way to expand the generation model into a pair of:
+
+- element
+- artefact
+
+In effect, a formattable. Then we need to update the backends to stop
+expanding across physical space and instead use the expansion created
+by the generation model. We then need to update formattables to have
+an artefact, and supply the artefact to all formatters.
+
+Notes:
+
+- next task is to use the artefact from pair inside c++ and c# instead
+  of creating one inside each formatter.
+- we need to also perform the archetype expansion within =m2t= not
+  logical model.
+- we need to add artefacts to formatters and get them to populate
+  them.
+
+*** Replace artefact properties with artefacts                        :story:
+
+Now that we understand the role of the physical model, we need to get
+rid of all the failed attempts at representing physical data across
+other models such as the logical model, =m2t= etc. We need to use the
+artefact itself and supply it to the formatters.
+
+Notes:
+
+- these attributes need to be migrated from the logical model into the
+  physical model:
+  - artefact level: artefact_properties, enablement_properties
+  - model level: extraction_properties
+- we need to understand what the pair =element_archetype= does. If
+  necessary, it needs to be moved to the physical model or to the
+  logical/physical mapping (see also =enabled_archetype_for_element=
+  set).
+
+*** Move decorations to their "final" resting place                   :story:
+
+At present we are handling decorations in the generation model but
+these are really logical concerns. The main reason why is because we
+are not expanding the decoration across physical space, but instead we
+expand them depending on the used technical spaces. However, since the
+technical spaces are obtained from the formatters, there is an
+argument to say that archetypes should have an associated technical
+space. We need to decouple these concepts in order to figure out where
+they belong.
 
 *** Implement enablement in physical model                            :story:
 
@@ -1183,17 +1222,6 @@ meta-data. The only way would be to convert the top-level
 
 We need to figure out how to implement this. For now we are manually
 adding flags.
-
-*** Move decorations to their "final" resting place                   :story:
-
-At present we are handling decorations in the generation model but
-these are really logical concerns. The main reason why is because we
-are not expanding the decoration across physical space, but instead we
-expand them depending on the used technical spaces. However, since the
-technical spaces are obtained from the formatters, there is an
-argument to say that archetypes should have an associated technical
-space. We need to decouple these concepts in order to figure out where
-they belong.
 
 *** Move technical space and generability transforms                  :story:
 
