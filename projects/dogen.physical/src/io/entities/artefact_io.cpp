@@ -28,6 +28,7 @@
 #include "dogen.physical/io/entities/logical_name_io.hpp"
 #include "dogen.physical/io/entities/enablement_flags_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.physical/io/entities/formatting_styles_io.hpp"
 
 namespace boost {
 
@@ -89,7 +90,9 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "
-      << "\"enablement_flags\": " << v.enablement_flags()
+      << "\"enablement_flags\": " << v.enablement_flags() << ", "
+      << "\"formatting_style\": " << v.formatting_style() << ", "
+      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
       << " }";
     return(s);
 }

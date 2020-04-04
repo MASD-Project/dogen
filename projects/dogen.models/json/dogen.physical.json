@@ -669,6 +669,14 @@
           "name": "enablement_flags",
           "type": "enablement_flags",
           "documentation": "Local enablement flags.\n"
+        },
+        {
+          "name": "formatting_style",
+          "type": "formatting_styles"
+        },
+        {
+          "name": "formatting_input",
+          "type": "std::string"
         }
       ]
     },
@@ -1182,6 +1190,27 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::formatting_styles",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stock",
+          "type": ""
+        },
+        {
+          "name": "wale",
+          "type": ""
+        },
+        {
+          "name": "stitch",
+          "type": ""
+        }
+      ]
     }
   ]
 }

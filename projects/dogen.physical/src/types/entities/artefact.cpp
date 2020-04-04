@@ -34,7 +34,8 @@ namespace dogen::physical::entities {
 
 artefact::artefact()
     : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)) { }
+      overwrite_(static_cast<bool>(0)),
+      formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
 
 artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -48,7 +49,9 @@ artefact::artefact(
     const std::vector<boost::filesystem::path>& dependencies,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
-    const dogen::physical::entities::enablement_flags& enablement_flags)
+    const dogen::physical::entities::enablement_flags& enablement_flags,
+    const dogen::physical::entities::formatting_styles formatting_style,
+    const std::string& formatting_input)
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
@@ -60,7 +63,9 @@ artefact::artefact(
       dependencies_(dependencies),
       unified_diff_(unified_diff),
       operation_(operation),
-      enablement_flags_(enablement_flags) { }
+      enablement_flags_(enablement_flags),
+      formatting_style_(formatting_style),
+      formatting_input_(formatting_input) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -76,6 +81,8 @@ void artefact::swap(artefact& other) noexcept {
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_flags_, other.enablement_flags_);
+    swap(formatting_style_, other.formatting_style_);
+    swap(formatting_input_, other.formatting_input_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -90,7 +97,9 @@ bool artefact::operator==(const artefact& rhs) const {
         dependencies_ == rhs.dependencies_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
-        enablement_flags_ == rhs.enablement_flags_;
+        enablement_flags_ == rhs.enablement_flags_ &&
+        formatting_style_ == rhs.formatting_style_ &&
+        formatting_input_ == rhs.formatting_input_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -273,6 +282,30 @@ void artefact::enablement_flags(const dogen::physical::entities::enablement_flag
 
 void artefact::enablement_flags(const dogen::physical::entities::enablement_flags&& v) {
     enablement_flags_ = std::move(v);
+}
+
+dogen::physical::entities::formatting_styles artefact::formatting_style() const {
+    return formatting_style_;
+}
+
+void artefact::formatting_style(const dogen::physical::entities::formatting_styles v) {
+    formatting_style_ = v;
+}
+
+const std::string& artefact::formatting_input() const {
+    return formatting_input_;
+}
+
+std::string& artefact::formatting_input() {
+    return formatting_input_;
+}
+
+void artefact::formatting_input(const std::string& v) {
+    formatting_input_ = v;
+}
+
+void artefact::formatting_input(const std::string&& v) {
+    formatting_input_ = std::move(v);
 }
 
 }
