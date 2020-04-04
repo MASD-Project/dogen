@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include <unordered_set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
@@ -28,6 +29,7 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
@@ -42,6 +44,7 @@ static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string duplicate_id("Duplicate ID for element: ");
+const std::string duplicate_physical_name("Duplicate physical name: ");
 const std::string expected_one_output_technical_space(
     "Expected exactly one output technical space.");
 
@@ -56,7 +59,8 @@ namespace {
  */
 class populator {
 public:
-    explicit populator(m2t::entities::model& m) : result_(m) { }
+    populator(const physical::entities::meta_model& pmm,
+        m2t::entities::model& m) : physical_meta_model_(pmm), result_(m) { }
 
 private:
     /**
@@ -71,15 +75,63 @@ private:
     }
 
     /**
-     * @brief Adds an element to the model.
+     * @brief Adds an element to the model, performing an expansion
+     * across physical space.
      */
     void add(boost::shared_ptr<logical::entities::element> e) {
+        /*
+         * Element IDs are expected to be processed exactly only once.
+         */
         const auto id(e->name().qualified().dot());
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
 
+        /*
+         * The logical part of the element is very straightforward,
+         * just add it to the element_artefacts structure.
+         */
         m2t::entities::element_artefacts ea;
         ea.element(e);
+
+        /*
+         * Obtain all of the archetypes associated with this element's
+         * meta-type, if any. If there are none this just means this
+         * element has a meta-type which is cannot be transformed into
+         * text.
+         */
+        const auto& pmm(physical_meta_model_);
+        const auto& nrp(pmm.kernels().cbegin()->second.names());
+        const auto& c(nrp.by_meta_name());
+        const auto mn(e->meta_name().qualified().dot());
+        const auto i(c.find(mn));
+        if (i != c.end()) {
+            const auto& physical_names(i->second.names());
+            BOOST_LOG_SEV(lg, debug) << "Element has physical names: "
+                                     << physical_names.size();
+
+            /*
+             * Now, for each physical meta-name, create an entry with the
+             * associated artefact. We only expect one instance of a
+             * physical meta-name.
+             */
+            auto& arts(ea.artefacts());
+            for (const auto& pn : physical_names) {
+                const auto pqn(pn.qualified());
+                auto art(boost::make_shared<physical::entities::artefact>());
+                const auto pair(std::make_pair(pqn, art));
+                const auto inserted(arts.insert(pair).second);
+                if (!inserted) {
+                    BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pqn;
+                    BOOST_THROW_EXCEPTION(
+                        transform_exception(duplicate_physical_name + pqn));
+                }
+                BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: "
+                                         << pqn;
+            }
+        } else {
+            BOOST_LOG_SEV(lg, debug) << "No physical names for meta-name: "
+                                     << mn;
+        }
         result_.elements().push_back(ea);
     }
 
@@ -98,6 +150,7 @@ public:
     const m2t::entities::model& result() const { return result_; }
 
 private:
+    const physical::entities::meta_model& physical_meta_model_;
     m2t::entities::model& result_;
     std::unordered_set<std::string> processed_ids_;
 };
@@ -105,7 +158,8 @@ private:
 }
 
 m2t::entities::model
-logical_model_to_m2t_model_transform::apply(const logical::entities::model& m) {
+logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
+    const logical::entities::model& m) {
     m2t::entities::model r;
     r.name(m.name());
     r.meta_name(logical::helpers::meta_name_factory::make_model_name());
@@ -128,7 +182,7 @@ logical_model_to_m2t_model_transform::apply(const logical::entities::model& m) {
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
 
-    populator p(r);
+    populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);
 
     return r;
@@ -136,13 +190,13 @@ logical_model_to_m2t_model_transform::apply(const logical::entities::model& m) {
 
 std::list<m2t::entities::model>
 logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
-    const std::list<logical::entities::model>& ms) {
+    const std::list<logical::entities::model>& lms) {
     tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
-        transform_id, *ctx.tracer(), ms);
+        transform_id, *ctx.tracer(), lms);
 
     std::list<m2t::entities::model> r;
-    for(const auto& m : ms)
-        r.push_back(apply(m));
+    for(const auto& lm : lms)
+        r.push_back(apply(ctx, lm));
 
     stp.end_transform(r);
     return r;

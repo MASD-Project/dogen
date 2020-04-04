@@ -32,15 +32,26 @@
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Transforms a logical model representation into a m2t
+ * representation, performing an expansion into physical space.
+ */
 class logical_model_to_m2t_model_transform final {
 private:
+    /**
+     * @brief Transform a logical model into its m2t counterpart.
+     */
     static m2t::entities::model
-    apply(const logical::entities::model& m);
+    apply(const m2t::transforms::context& ctx,
+        const logical::entities::model& lm);
 
 public:
+    /**
+     * @brief Transform logical models into its m2t counterparts.
+     */
     static std::list<m2t::entities::model>
     apply(const m2t::transforms::context& ctx,
-        const std::list<logical::entities::model>& cms);
+        const std::list<logical::entities::model>& lms);
 };
 
 }
