@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/meta_name_group_io.hpp"
-#include "dogen.physical/io/entities/name_repository_parts_io.hpp"
+#include "dogen.physical/io/entities/meta_name_repository_parts_io.hpp"
 
 namespace std {
 
@@ -66,9 +66,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const name_repository_parts& v) {
+std::ostream& operator<<(std::ostream& s, const meta_name_repository_parts& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::name_repository_parts\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::meta_name_repository_parts\"" << ", "
       << "\"all\": " << v.all() << ", "
       << "\"by_logical_meta_name\": " << v.by_logical_meta_name()
       << " }";

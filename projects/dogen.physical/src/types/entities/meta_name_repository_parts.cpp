@@ -18,62 +18,62 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/name_repository_parts.hpp"
+#include "dogen.physical/types/entities/meta_name_repository_parts.hpp"
 
 namespace dogen::physical::entities {
 
-name_repository_parts::name_repository_parts(
+meta_name_repository_parts::meta_name_repository_parts(
     const std::list<dogen::physical::entities::meta_name>& all,
     const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name)
     : all_(all),
       by_logical_meta_name_(by_logical_meta_name) { }
 
-void name_repository_parts::swap(name_repository_parts& other) noexcept {
+void meta_name_repository_parts::swap(meta_name_repository_parts& other) noexcept {
     using std::swap;
     swap(all_, other.all_);
     swap(by_logical_meta_name_, other.by_logical_meta_name_);
 }
 
-bool name_repository_parts::operator==(const name_repository_parts& rhs) const {
+bool meta_name_repository_parts::operator==(const meta_name_repository_parts& rhs) const {
     return all_ == rhs.all_ &&
         by_logical_meta_name_ == rhs.by_logical_meta_name_;
 }
 
-name_repository_parts& name_repository_parts::operator=(name_repository_parts other) {
+meta_name_repository_parts& meta_name_repository_parts::operator=(meta_name_repository_parts other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::physical::entities::meta_name>& name_repository_parts::all() const {
+const std::list<dogen::physical::entities::meta_name>& meta_name_repository_parts::all() const {
     return all_;
 }
 
-std::list<dogen::physical::entities::meta_name>& name_repository_parts::all() {
+std::list<dogen::physical::entities::meta_name>& meta_name_repository_parts::all() {
     return all_;
 }
 
-void name_repository_parts::all(const std::list<dogen::physical::entities::meta_name>& v) {
+void meta_name_repository_parts::all(const std::list<dogen::physical::entities::meta_name>& v) {
     all_ = v;
 }
 
-void name_repository_parts::all(const std::list<dogen::physical::entities::meta_name>&& v) {
+void meta_name_repository_parts::all(const std::list<dogen::physical::entities::meta_name>&& v) {
     all_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& name_repository_parts::by_logical_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_repository_parts::by_logical_meta_name() const {
     return by_logical_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& name_repository_parts::by_logical_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_repository_parts::by_logical_meta_name() {
     return by_logical_meta_name_;
 }
 
-void name_repository_parts::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
+void meta_name_repository_parts::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
     by_logical_meta_name_ = v;
 }
 
-void name_repository_parts::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v) {
+void meta_name_repository_parts::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v) {
     by_logical_meta_name_ = std::move(v);
 }
 

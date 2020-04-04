@@ -258,7 +258,7 @@ registrar::physical_names_by_family() const {
     return physical_names_by_family_;
 }
 
-const physical::entities::name_repository_parts&
+const physical::entities::meta_name_repository_parts&
 registrar::physical_name_repository_parts() const {
     return physical_name_repository_parts_;
 }

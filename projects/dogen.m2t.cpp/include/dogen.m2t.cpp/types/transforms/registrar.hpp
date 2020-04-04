@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/meta_name_group.hpp"
-#include "dogen.physical/types/entities/name_repository_parts.hpp"
+#include "dogen.physical/types/entities/meta_name_repository_parts.hpp"
 #include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
@@ -97,9 +97,10 @@ public:
     physical_names_by_family() const;
 
     /**
-     * @brief Returns the repository parts for the physical names.
+     * @brief Returns the repository parts for the physical
+     * meta-names.
      */
-    const physical::entities::name_repository_parts&
+    const physical::entities::meta_name_repository_parts&
     physical_name_repository_parts() const;
 
     /**
@@ -119,7 +120,7 @@ private:
     physical_names_by_meta_name_;
     std::unordered_map<std::string, std::list<physical::entities::meta_name>>
     physical_names_by_family_;
-    physical::entities::name_repository_parts
+    physical::entities::meta_name_repository_parts
     physical_name_repository_parts_;
 };
 

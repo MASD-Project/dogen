@@ -1200,7 +1200,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#name_repository_parts#</dia:string>
+        <dia:string>#meta_name_repository_parts#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

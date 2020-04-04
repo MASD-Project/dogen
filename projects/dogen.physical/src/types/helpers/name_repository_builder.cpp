@@ -159,7 +159,8 @@ void name_repository_builder::add(const std::unordered_map<std::string,
     }
 }
 
-void name_repository_builder::add(const entities::name_repository_parts& parts) {
+void name_repository_builder::
+add(const entities::meta_name_repository_parts& parts) {
     add(parts.all());
     add(parts.by_logical_meta_name());
 }

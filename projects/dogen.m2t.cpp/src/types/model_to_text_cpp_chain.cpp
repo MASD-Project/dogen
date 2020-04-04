@@ -129,7 +129,7 @@ model_to_text_cpp_chain::physical_names_by_family() const {
     return rg.physical_names_by_family();
 }
 
-const physical::entities::name_repository_parts&
+const physical::entities::meta_name_repository_parts&
 model_to_text_cpp_chain::
 physical_name_repository_parts() const {
     const auto& rg(transforms::workflow::registrar());
