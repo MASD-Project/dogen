@@ -320,7 +320,8 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
-    CLOCK: [2020-04-04 Sat 13:04]--[2020-04-04 Sat 13:07] =>  0:03
+    CLOCK: [2020-04-04 Sat 16:56]--[2020-04-04 Sat 17:10] =>  0:14
+    CLOCK: [2020-04-04 Sat 13:04]--[2020-04-04 Sat 13:15] =>  0:11
     CLOCK: [2020-04-03 Fri 20:05]--[2020-04-03 Fri 20:25] =>  0:20
     CLOCK: [2020-04-03 Fri 13:28]--[2020-04-03 Fri 14:00] =>  0:32
     CLOCK: [2020-04-02 Thu 21:51]--[2020-04-02 Thu 22:16] =>  0:25
@@ -813,8 +814,21 @@ Notes:
 - when querying for features for a given backend, we need to assemble
   the qualified name.
 
+*** CANCELLED Consider upgrading to clang 10 on windows               :story:
+    CLOSED: [2020-04-04 Sat 14:53]
+    :LOGBOOK:
+    CLOCK: [2020-04-04 Sat 14:45]--[2020-04-04 Sat 14:53] =>  0:08
+    :END:
+
+We have a number of failures on windows that we can't quite
+explain. May be worth seeing if latest clang fixes them.
+
+Actually we are using the appvetor supplied clang so its probably not
+a good idea.
+
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-04 Sat 14:54]--[2020-04-04 Sat 16:55] =>  2:01
     CLOCK: [2020-04-04 Sat 12:14]--[2020-04-04 Sat 13:03] =>  0:49
     CLOCK: [2020-03-28 Sat 21:07]--[2020-03-28 Sat 21:20] =>  0:13
     CLOCK: [2020-03-28 Sat 15:50]--[2020-03-28 Sat 16:14] =>  0:24
@@ -865,6 +879,13 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** Rename physical names to meta-names                               :story:
+
+We made a modeling error: we called the physical names "names". These
+are not really names. Physical names are file names. What we really
+mean is physical meta-names. We need to rename this type to avoid
+confusion.
 
 *** STARTED Implement the generation model in terms of "formattables" :story:
     :LOGBOOK:

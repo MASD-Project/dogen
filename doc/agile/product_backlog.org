@@ -6022,6 +6022,17 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Add support for stack traces                                      :story:
+
+At present when we throw we have very little context around the
+exception. With recent versions of boost its possible to output a
+stack trace. It would be nice to be able to do this on debug builds at
+least.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_72_0/doc/html/stacktrace/getting_started.html#stacktrace.getting_started.exceptions_with_stacktrace][Exceptions with stacktrace]]
+
 *** Consider adding =ClangBuildAnalyzer=                              :story:
 
 Interesting clang tool:
