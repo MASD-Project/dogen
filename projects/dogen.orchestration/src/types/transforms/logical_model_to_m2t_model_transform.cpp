@@ -28,6 +28,7 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
@@ -40,7 +41,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
-const std::string duplicate_qualified_name("Duplicate qualified name: ");
+const std::string duplicate_id("Duplicate ID for element: ");
 const std::string expected_one_output_technical_space(
     "Expected exactly one output technical space.");
 
@@ -50,20 +51,28 @@ namespace dogen::orchestration::transforms {
 
 namespace {
 
-class model_populator {
+/**
+ * @brief Populates a m2t model with entities from a logical model.
+ */
+class populator {
 public:
-    explicit model_populator(m2t::entities::model& m) : result_(m) { }
+    explicit populator(m2t::entities::model& m) : result_(m) { }
 
 private:
-    void ensure_not_yet_processed(const std::string& id) {
+    /**
+     * @brief If this ID was seen already, throws.
+     */
+    void ensure_not_yet_processed(const std::string& id) const {
         const auto i(processed_ids_.find(id));
         if (i != processed_ids_.end()) {
-            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-            BOOST_THROW_EXCEPTION(
-                transform_exception(duplicate_qualified_name + id));
+            BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+            BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + id));
         }
     }
 
+    /**
+     * @brief Adds an element to the model.
+     */
     void add(boost::shared_ptr<logical::entities::element> e) {
         const auto id(e->name().qualified().dot());
         ensure_not_yet_processed(id);
@@ -78,17 +87,11 @@ public:
     void operator()(boost::shared_ptr<logical::entities::element> e) {
         add(e);
     }
+
     void operator()
     (boost::shared_ptr<logical::entities::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
-    }
-
-public:
-    void add(
-        const std::list<boost::shared_ptr<logical::entities::element>>& ie) {
-        for (const auto& e : ie)
-            add(e);
     }
 
 public:
@@ -101,8 +104,8 @@ private:
 
 }
 
-m2t::entities::model logical_model_to_m2t_model_transform::
-apply(const logical::entities::model& m) {
+m2t::entities::model
+logical_model_to_m2t_model_transform::apply(const logical::entities::model& m) {
     m2t::entities::model r;
     r.name(m.name());
     r.meta_name(logical::helpers::meta_name_factory::make_model_name());
@@ -125,18 +128,16 @@ apply(const logical::entities::model& m) {
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
 
-    model_populator mp(r);
-    logical::entities::shared_elements_traversal(m, mp);
+    populator p(r);
+    logical::entities::shared_elements_traversal(m, p);
 
     return r;
 }
 
 std::list<m2t::entities::model>
-logical_model_to_m2t_model_transform::
-apply(const m2t::transforms::context& ctx,
+logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
     const std::list<logical::entities::model>& ms) {
-    tracing::scoped_transform_tracer stp(lg,
-        "logical model to generation model transform",
+    tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
         transform_id, *ctx.tracer(), ms);
 
     std::list<m2t::entities::model> r;
