@@ -42,7 +42,7 @@ std::string logic_less_template_transform::id() const {
     return static_id();
 }
 
-physical::entities::name
+physical::entities::meta_name
 logic_less_template_transform::physical_name() const {
     using physical::helpers::name_factory;
     static const auto r(name_factory::make(cpp::traits::backend_sn(),

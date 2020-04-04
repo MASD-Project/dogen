@@ -46,7 +46,7 @@ namespace dogen::physical::helpers {
 
 std::unordered_map<std::string, std::vector<std::string>>
 template_instantiation_domains_factory::
-make(const std::list<entities::name>& ns) {
+make(const std::list<entities::meta_name>& mns) {
     BOOST_LOG_SEV(lg, debug) << "Building instantiation domains.";
 
     /*
@@ -65,14 +65,13 @@ make(const std::list<entities::name>& ns) {
         });
 
     const auto masd_kernel("masd");
-    for (const auto& n: ns) {
-        n.location();
+    for (const auto& mn: mns) {
         /*
          * Kernel
          */
-        const auto bqn(qualified_name_builder::build_backend(n));
-        const auto fqn(qualified_name_builder::build_facet(n));
-        const auto qn(n.qualified());
+        const auto bqn(qualified_name_builder::build_backend(mn));
+        const auto fqn(qualified_name_builder::build_facet(mn));
+        const auto qn(mn.qualified());
 
         sorted[masd_kernel].insert(bqn);
         sorted[masd_kernel].insert(fqn);

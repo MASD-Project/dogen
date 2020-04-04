@@ -41,11 +41,11 @@ const std::string non_empty_archetype("Archetype is not empty.");
 
 namespace dogen::physical::helpers {
 
-void name_validator::common_validation(const entities::name& n) {
+void name_validator::common_validation(const entities::meta_name& mn) {
     /*
      * Simple name must be populated.
      */
-    if (n.simple().empty()) {
+    if (mn.simple().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_simple;
         BOOST_THROW_EXCEPTION(validation_error(empty_simple));
     }
@@ -53,7 +53,7 @@ void name_validator::common_validation(const entities::name& n) {
     /*
      * Qualified name must be populated.
      */
-    if (n.qualified().empty()) {
+    if (mn.qualified().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_qualified;
         BOOST_THROW_EXCEPTION(validation_error(empty_qualified));
     }
@@ -61,7 +61,7 @@ void name_validator::common_validation(const entities::name& n) {
     /*
      * All locations must belong to a kernel.
      */
-    const auto& l(n.location());
+    const auto& l(mn.location());
     if (l.kernel().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_kernel;
         BOOST_THROW_EXCEPTION(validation_error(empty_kernel));
@@ -76,13 +76,13 @@ void name_validator::common_validation(const entities::name& n) {
     }
 }
 
-void name_validator::validate_backend_name(const entities::name& n) {
-    common_validation(n);
+void name_validator::validate_backend_name(const entities::meta_name& mn) {
+    common_validation(mn);
 
     /*
      * Facet must not be populated.
      */
-    const auto& l(n.location());
+    const auto& l(mn.location());
     if (!l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << non_empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
@@ -97,12 +97,13 @@ void name_validator::validate_backend_name(const entities::name& n) {
     }
 }
 
-void name_validator::validate_facet_name(const entities::name& n) {
-    common_validation(n);
+void name_validator::validate_facet_name(const entities::meta_name& mn) {
+    common_validation(mn);
+
     /*
      * Facet must be populated.
      */
-    const auto& l(n.location());
+    const auto& l(mn.location());
     if (l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(empty_facet));
@@ -117,13 +118,13 @@ void name_validator::validate_facet_name(const entities::name& n) {
     }
 }
 
-void name_validator::validate_archetype_name(const entities::name& n) {
-    common_validation(n);
+void name_validator::validate_archetype_name(const entities::meta_name& mn) {
+    common_validation(mn);
 
     /*
      * All locations must belong to a facet.
      */
-    const auto& l(n.location());
+    const auto& l(mn.location());
     if (l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(empty_facet));

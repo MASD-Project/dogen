@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/location.hpp"
 
 namespace dogen::physical::helpers {
@@ -46,7 +46,7 @@ public:
      */
     /**@{*/
     static std::string build_kernel(const entities::location& l);
-    static std::string build_kernel(const entities::name& n);
+    static std::string build_kernel(const entities::meta_name& mn);
     /**@}*/
 
     /**
@@ -55,7 +55,7 @@ public:
      */
     /**@{*/
     static std::string build_backend(const entities::location& l);
-    static std::string build_backend(const entities::name& n);
+    static std::string build_backend(const entities::meta_name& n);
     /**@}*/
 
     /**
@@ -65,7 +65,7 @@ public:
     /**@{*/
     static std::string build_facet(const entities::location& l,
         const bool add_canonical = false);
-    static std::string build_facet(const entities::name& n,
+    static std::string build_facet(const entities::meta_name& n,
         const bool add_canonical = false);
     /**@}*/
 
@@ -74,7 +74,7 @@ public:
      */
     /**@{*/
     static std::string build_archetype(const entities::location& l);
-    static std::string build_archetype(const entities::name& n);
+    static std::string build_archetype(const entities::meta_name& n);
     /**@}*/
 };
 

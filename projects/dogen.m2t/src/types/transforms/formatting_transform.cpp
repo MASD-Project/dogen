@@ -67,13 +67,13 @@ formatting_transform::to_formatting_style(const std::string& s) {
 std::unordered_map<std::string, formatting_transform::feature_group>
 formatting_transform::make_feature_groups(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::name>& ns) {
+    const std::list<physical::entities::meta_name>& mns) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
 
     std::unordered_map<std::string, formatting_transform::feature_group> r;
-    for (const auto& n : ns) {
-        const auto arch(n.qualified());
+    for (const auto& mn : mns) {
+        const auto arch(mn.qualified());
 
         feature_group fg;
         const variability::helpers::feature_selector s(fm);

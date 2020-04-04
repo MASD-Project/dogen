@@ -20,13 +20,13 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/name_group_io.hpp"
 #include "dogen.physical/io/entities/name_repository_parts_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::meta_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& s, const name_repository_parts& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::name_repository_parts\"" << ", "
       << "\"all\": " << v.all() << ", "
-      << "\"by_meta_name\": " << v.by_meta_name()
+      << "\"by_logical_meta_name\": " << v.by_logical_meta_name()
       << " }";
     return(s);
 }

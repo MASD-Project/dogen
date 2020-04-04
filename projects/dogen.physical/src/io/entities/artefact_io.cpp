@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/paths_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/logical_name_io.hpp"
 #include "dogen.physical/io/entities/enablement_flags_io.hpp"
@@ -82,7 +82,7 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"logical_name\": " << v.logical_name() << ", "
-      << "\"physical_name\": " << v.physical_name() << ", "
+      << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
       << "\"paths\": " << v.paths() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "

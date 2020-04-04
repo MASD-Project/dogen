@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
-#include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"

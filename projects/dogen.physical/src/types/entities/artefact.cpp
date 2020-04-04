@@ -41,7 +41,7 @@ artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const dogen::physical::entities::logical_name& logical_name,
-    const dogen::physical::entities::name& physical_name,
+    const dogen::physical::entities::meta_name& physical_meta_name,
     const dogen::physical::entities::paths& paths,
     const std::string& content,
     const bool enabled,
@@ -55,7 +55,7 @@ artefact::artefact(
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
-      physical_name_(physical_name),
+      physical_meta_name_(physical_meta_name),
       paths_(paths),
       content_(content),
       enabled_(enabled),
@@ -72,7 +72,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(logical_name_, other.logical_name_);
-    swap(physical_name_, other.physical_name_);
+    swap(physical_meta_name_, other.physical_meta_name_);
     swap(paths_, other.paths_);
     swap(content_, other.content_);
     swap(enabled_, other.enabled_);
@@ -89,7 +89,7 @@ bool artefact::operator==(const artefact& rhs) const {
     return configuration_ == rhs.configuration_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         logical_name_ == rhs.logical_name_ &&
-        physical_name_ == rhs.physical_name_ &&
+        physical_meta_name_ == rhs.physical_meta_name_ &&
         paths_ == rhs.paths_ &&
         content_ == rhs.content_ &&
         enabled_ == rhs.enabled_ &&
@@ -156,20 +156,20 @@ void artefact::logical_name(const dogen::physical::entities::logical_name&& v) {
     logical_name_ = std::move(v);
 }
 
-const dogen::physical::entities::name& artefact::physical_name() const {
-    return physical_name_;
+const dogen::physical::entities::meta_name& artefact::physical_meta_name() const {
+    return physical_meta_name_;
 }
 
-dogen::physical::entities::name& artefact::physical_name() {
-    return physical_name_;
+dogen::physical::entities::meta_name& artefact::physical_meta_name() {
+    return physical_meta_name_;
 }
 
-void artefact::physical_name(const dogen::physical::entities::name& v) {
-    physical_name_ = v;
+void artefact::physical_meta_name(const dogen::physical::entities::meta_name& v) {
+    physical_meta_name_ = v;
 }
 
-void artefact::physical_name(const dogen::physical::entities::name&& v) {
-    physical_name_ = std::move(v);
+void artefact::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
+    physical_meta_name_ = std::move(v);
 }
 
 const dogen::physical::entities::paths& artefact::paths() const {

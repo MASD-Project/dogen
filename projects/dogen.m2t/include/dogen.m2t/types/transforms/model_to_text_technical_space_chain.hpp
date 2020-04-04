@@ -63,7 +63,7 @@ public:
      * transform, listing all available backends, facets and
      * archetypes.
      */
-    virtual const std::forward_list<physical::entities::name>&
+    virtual const std::forward_list<physical::entities::meta_name>&
     physical_names() const = 0;
 
     /**
@@ -82,7 +82,7 @@ public:
      * @brief Returns the archetype locations for each family.
      */
     virtual const std::unordered_map<std::string,
-                                     std::list<physical::entities::name>
+                                     std::list<physical::entities::meta_name>
                                      >&
     physical_names_by_family() const = 0;
 

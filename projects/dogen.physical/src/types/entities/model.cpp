@@ -36,7 +36,7 @@ model::model(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const dogen::physical::entities::logical_name& logical_name,
-    const dogen::physical::entities::name& physical_name,
+    const dogen::physical::entities::meta_name& physical_meta_name,
     const std::string& name,
     const std::string& technical_space,
     const std::list<dogen::physical::entities::artefact>& artefacts,
@@ -45,7 +45,7 @@ model::model(
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
-      physical_name_(physical_name),
+      physical_meta_name_(physical_meta_name),
       name_(name),
       technical_space_(technical_space),
       artefacts_(artefacts),
@@ -57,7 +57,7 @@ void model::swap(model& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(logical_name_, other.logical_name_);
-    swap(physical_name_, other.physical_name_);
+    swap(physical_meta_name_, other.physical_meta_name_);
     swap(name_, other.name_);
     swap(technical_space_, other.technical_space_);
     swap(artefacts_, other.artefacts_);
@@ -69,7 +69,7 @@ bool model::operator==(const model& rhs) const {
     return configuration_ == rhs.configuration_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         logical_name_ == rhs.logical_name_ &&
-        physical_name_ == rhs.physical_name_ &&
+        physical_meta_name_ == rhs.physical_meta_name_ &&
         name_ == rhs.name_ &&
         technical_space_ == rhs.technical_space_ &&
         artefacts_ == rhs.artefacts_ &&
@@ -131,20 +131,20 @@ void model::logical_name(const dogen::physical::entities::logical_name&& v) {
     logical_name_ = std::move(v);
 }
 
-const dogen::physical::entities::name& model::physical_name() const {
-    return physical_name_;
+const dogen::physical::entities::meta_name& model::physical_meta_name() const {
+    return physical_meta_name_;
 }
 
-dogen::physical::entities::name& model::physical_name() {
-    return physical_name_;
+dogen::physical::entities::meta_name& model::physical_meta_name() {
+    return physical_meta_name_;
 }
 
-void model::physical_name(const dogen::physical::entities::name& v) {
-    physical_name_ = v;
+void model::physical_meta_name(const dogen::physical::entities::meta_name& v) {
+    physical_meta_name_ = v;
 }
 
-void model::physical_name(const dogen::physical::entities::name&& v) {
-    physical_name_ = std::move(v);
+void model::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
+    physical_meta_name_ = std::move(v);
 }
 
 const std::string& model::name() const {

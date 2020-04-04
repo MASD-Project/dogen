@@ -80,9 +80,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "names",
-          "type": "std::list<name>",
-          "documentation": "All names that belong to this group.\n"
+          "name": "meta_names",
+          "type": "std::list<meta_name>",
+          "documentation": "All meta-names that belong to this group.\n"
         },
         {
           "name": "canonical_locations",
@@ -93,28 +93,33 @@
     },
     {
       "name": "entities::name_repository",
-      "documentation": "Repository containing physical names, indexed as required by use cases.\n",
+      "documentation": "Repository containing physical meta-names, indexed as required by use cases.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "all",
-          "type": "std::list<name>"
+          "type": "std::list<meta_name>",
+          "documentation": "All meta-names.\n"
         },
         {
           "name": "facet_names_by_backend_name",
-          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>",
+          "documentation": "Qualified names of facets by qualified names of backends.\n"
         },
         {
           "name": "formatter_names_by_backend_name",
-          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>",
+          "documentation": "Qualified archetype names by qualified backend names.\n"
         },
         {
           "name": "by_meta_name",
-          "type": "std::unordered_map<std::string, name_group>"
+          "type": "std::unordered_map<std::string, name_group>",
+          "documentation": "Physical names by logical meta-names.\n"
         },
         {
           "name": "by_backend_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>",
+          "documentation": "Archetype names by qualified backend and facet names\n"
         }
       ]
     },
@@ -124,13 +129,13 @@
       "attributes": [
         {
           "name": "all",
-          "type": "std::list<name>",
-          "documentation": "All physical names for the archetypes owned by this part, listing all available\nbackends, facets and archetypes.\n"
+          "type": "std::list<meta_name>",
+          "documentation": "All physical meta-names for the archetypes owned by this part, listing all\navailable backends, facets and archetypes.\n"
         },
         {
-          "name": "by_meta_name",
+          "name": "by_logical_meta_name",
           "type": "std::unordered_map<std::string, name_group>",
-          "documentation": "Returns the archetype locations for each meta name.\n"
+          "documentation": "Returns the physical meta-names for each logical meta name.\n"
         }
       ]
     },
@@ -449,16 +454,17 @@
       ]
     },
     {
-      "name": "entities::Nameable",
-      "documentation": "Ability to have a name.\n",
+      "name": "entities::MetaNameable",
+      "documentation": "Ability to have a meta-name.\n",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "name",
-          "type": "name"
+          "name": "meta_name",
+          "type": "meta_name",
+          "documentation": "Meta-name for this meta-element.\n"
         }
       ]
     },
@@ -467,7 +473,7 @@
       "parents": [
         "entities::Locatable",
         "entities::Describable",
-        "entities::Nameable"
+        "entities::MetaNameable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -714,9 +720,9 @@
           "documentation": "Logical model details of the element that originated this physical element.\n"
         },
         {
-          "name": "physical_name",
-          "type": "name",
-          "documentation": "Physical model details of the element that originated this physical element.\n"
+          "name": "physical_meta_name",
+          "type": "meta_name",
+          "documentation": "Physical model details of the meta-element that originated this element.\n"
         }
       ]
     },
@@ -1134,7 +1140,7 @@
       ]
     },
     {
-      "name": "entities::name",
+      "name": "entities::meta_name",
       "documentation": "Name of an element in physical space.\n\nA name represents a point or a region in physical space. It can only be used by one\nphysical element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regionsin physical\nspace cannot have the same name and b) the same point or region in physical space\ncan only have one and only one name.\n",
       "fallback_element_type": "masd::object",
       "attributes": [

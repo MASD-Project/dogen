@@ -46,7 +46,7 @@ std::string object_odb_options_transform::id() const {
     return r;
 }
 
-physical::entities::name
+physical::entities::meta_name
 object_odb_options_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_sn(),

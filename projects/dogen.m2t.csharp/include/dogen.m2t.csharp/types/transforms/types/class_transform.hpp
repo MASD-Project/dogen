@@ -36,7 +36,7 @@ public:
 
 public:
     std::string id() const override;
-    physical::entities::name physical_name() const override;
+    physical::entities::meta_name physical_name() const override;
     const logical::entities::name& meta_name() const override;
 
 public:

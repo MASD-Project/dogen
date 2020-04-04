@@ -56,11 +56,11 @@ namespace dogen::m2t::csharp::transforms {
 
 assistant::
 assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::name& n) :
+    const physical::entities::meta_name& mn) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(
-        obtain_artefact_properties(n.qualified())),
-    physical_name_(n) {
+        obtain_artefact_properties(mn.qualified())),
+    physical_name_(mn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: "

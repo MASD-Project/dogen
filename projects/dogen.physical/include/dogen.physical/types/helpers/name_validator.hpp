@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::helpers {
 
 /**
- * @brief Checks the validity of physical names.
+ * @brief Checks the validity of physical meta-names.
  *
- * Note that the components of the name are hierarchical, so
+ * Note that the components of the meta-name are hierarchical, so
  * archetypes require a backend, part and facet and parts require a
  * backend. The exception is facet, which does not require a part.
  */
@@ -41,23 +41,23 @@ private:
     /**
      * @brief Validation rules that are common to all types of names.
      */
-    static void common_validation(const entities::name& n);
+    static void common_validation(const entities::meta_name& mn);
 
 public:
     /**
-     * @brief Checks if the name is valid as a backend name.
+     * @brief Checks if the meta-name is valid as a backend name.
      */
-    static void validate_backend_name(const entities::name& n);
+    static void validate_backend_name(const entities::meta_name& mn);
 
     /**
      * @brief Checks if the name is valid as a facet name.
      */
-    static void validate_facet_name(const entities::name& n);
+    static void validate_facet_name(const entities::meta_name& mn);
 
     /**
      * @brief Checks if the name is valid as an archetype name.
      */
-    static void validate_archetype_name(const entities::name& n);
+    static void validate_archetype_name(const entities::meta_name& mn);
 };
 
 }

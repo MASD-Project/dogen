@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/kernel_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/name_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const kernel& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::kernel\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
-      << "\"name\": " << v.name() << ", "
+      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"backends\": " << v.backends() << ", "
       << "\"names\": " << v.names()
       << " }";

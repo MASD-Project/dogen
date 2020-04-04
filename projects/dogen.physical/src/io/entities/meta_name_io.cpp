@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,9 +33,9 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const name& v) {
+std::ostream& operator<<(std::ostream& s, const meta_name& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::name\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::meta_name\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
       << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
       << "\"location\": " << v.location()

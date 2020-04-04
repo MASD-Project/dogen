@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::entities {
 
-name::name(
+meta_name::meta_name(
     const std::string& simple,
     const std::string& qualified,
     const dogen::physical::entities::location& location)
@@ -30,70 +30,70 @@ name::name(
       qualified_(qualified),
       location_(location) { }
 
-void name::swap(name& other) noexcept {
+void meta_name::swap(meta_name& other) noexcept {
     using std::swap;
     swap(simple_, other.simple_);
     swap(qualified_, other.qualified_);
     swap(location_, other.location_);
 }
 
-bool name::operator==(const name& rhs) const {
+bool meta_name::operator==(const meta_name& rhs) const {
     return simple_ == rhs.simple_ &&
         qualified_ == rhs.qualified_ &&
         location_ == rhs.location_;
 }
 
-name& name::operator=(name other) {
+meta_name& meta_name::operator=(meta_name other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& name::simple() const {
+const std::string& meta_name::simple() const {
     return simple_;
 }
 
-std::string& name::simple() {
+std::string& meta_name::simple() {
     return simple_;
 }
 
-void name::simple(const std::string& v) {
+void meta_name::simple(const std::string& v) {
     simple_ = v;
 }
 
-void name::simple(const std::string&& v) {
+void meta_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const std::string& name::qualified() const {
+const std::string& meta_name::qualified() const {
     return qualified_;
 }
 
-std::string& name::qualified() {
+std::string& meta_name::qualified() {
     return qualified_;
 }
 
-void name::qualified(const std::string& v) {
+void meta_name::qualified(const std::string& v) {
     qualified_ = v;
 }
 
-void name::qualified(const std::string&& v) {
+void meta_name::qualified(const std::string&& v) {
     qualified_ = std::move(v);
 }
 
-const dogen::physical::entities::location& name::location() const {
+const dogen::physical::entities::location& meta_name::location() const {
     return location_;
 }
 
-dogen::physical::entities::location& name::location() {
+dogen::physical::entities::location& meta_name::location() {
     return location_;
 }
 
-void name::location(const dogen::physical::entities::location& v) {
+void meta_name::location(const dogen::physical::entities::location& v) {
     location_ = v;
 }
 
-void name::location(const dogen::physical::entities::location&& v) {
+void meta_name::location(const dogen::physical::entities::location&& v) {
     location_ = std::move(v);
 }
 

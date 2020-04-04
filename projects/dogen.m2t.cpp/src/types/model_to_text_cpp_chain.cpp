@@ -110,7 +110,7 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-const std::forward_list<physical::entities::name>&
+const std::forward_list<physical::entities::meta_name>&
 model_to_text_cpp_chain::physical_names() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names();
@@ -123,7 +123,7 @@ model_to_text_cpp_chain::physical_names_by_meta_name() const {
     return rg.physical_names_by_meta_name();
 }
 
-const std::unordered_map<std::string, std::list<physical::entities::name>>&
+const std::unordered_map<std::string, std::list<physical::entities::meta_name>>&
 model_to_text_cpp_chain::physical_names_by_family() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names_by_family();

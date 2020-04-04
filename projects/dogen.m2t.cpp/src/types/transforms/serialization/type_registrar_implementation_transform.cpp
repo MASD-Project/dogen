@@ -43,7 +43,7 @@ std::string type_registrar_implementation_transform::id() const {
     return static_id();
 }
 
-physical::entities::name
+physical::entities::meta_name
 type_registrar_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_sn(),

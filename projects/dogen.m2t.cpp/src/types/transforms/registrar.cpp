@@ -25,7 +25,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
@@ -175,26 +175,26 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
     /*
      * Add the transform to the physical names stores.
      */
-    const auto& pn(f->physical_name());
-    physical_names_.push_front(pn);
+    const auto& pmn(f->physical_name());
+    physical_names_.push_front(pmn);
 
     /*
      * Handle the meta-type collection of physical names.
      */
     const auto mn(f->meta_name().qualified().dot());
     auto& g(physical_names_by_meta_name_[mn]);
-    g.names().push_back(pn);
+    g.meta_names().push_back(pmn);
 
     /*
      * If the archetype location points to a canonical archetype,
      * update the canonical archetype mapping.
      */
     auto& cal(g.canonical_locations());
-    const auto qn(pn.qualified());
+    const auto qn(pmn.qualified());
     using qnb = physical::helpers::qualified_name_builder;
     const auto cs(inclusion_support_types::canonical_support);
     if (f->inclusion_support_type() == cs) {
-        const auto fct(qnb::build_facet(pn));
+        const auto fct(qnb::build_facet(pmn));
         const auto carch(transforms::traits::canonical_archetype(fct));
         const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
         if (!inserted) {
@@ -243,7 +243,7 @@ const repository& registrar::formatter_repository() const {
     return transform_repository_;
 }
 
-const std::forward_list<physical::entities::name>&
+const std::forward_list<physical::entities::meta_name>&
 registrar::physical_names() const {
     return physical_names_;
 }
@@ -253,7 +253,7 @@ registrar::physical_names_by_meta_name() const {
     return physical_names_by_meta_name_;
 }
 
-const std::unordered_map<std::string, std::list<physical::entities::name>>&
+const std::unordered_map<std::string, std::list<physical::entities::meta_name>>&
 registrar::physical_names_by_family() const {
     return physical_names_by_family_;
 }

@@ -42,15 +42,15 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 namespace dogen::physical::helpers {
 
 void name_repository_builder::
-validate(const std::list<entities::name>& ns) const {
+validate(const std::list<entities::meta_name>& mns) const {
     BOOST_LOG_SEV(lg, debug) << "Validating physical names.";
 
-    for (const auto& n : ns) {
+    for (const auto& mn : mns) {
         /*
          * We expect all three key coordinates of the location to be
          * populated.
          */
-        const auto& l(n.location());
+        const auto& l(mn.location());
         if (l.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_archetype;
             BOOST_THROW_EXCEPTION(building_error(empty_archetype));
@@ -71,9 +71,9 @@ validate(const std::list<entities::name>& ns) const {
 }
 
 void name_repository_builder::
-populate_names(const std::list<entities::name>& ns) {
-    for(const auto& n : ns)
-        repository_.all().push_back(n);
+populate_names(const std::list<entities::meta_name>& mns) {
+    for(const auto& mn : mns)
+        repository_.all().push_back(mn);
 }
 
 void name_repository_builder::populate_facet_names_by_backend_name() {
@@ -105,47 +105,47 @@ void name_repository_builder::populate_archetypes_by_facet_by_backend() {
     }
 }
 
-void name_repository_builder::add(const std::list<entities::name>& ns) {
-    BOOST_LOG_SEV(lg, debug) << "Adding list of physical names.";
+void name_repository_builder::add(const std::list<entities::meta_name>& mns) {
+    BOOST_LOG_SEV(lg, debug) << "Adding list of physical meta-names.";
 
-    validate(ns);
-    populate_names(ns);
+    validate(mns);
+    populate_names(mns);
 
     BOOST_LOG_SEV(lg, debug) << "Added list of physical names. ";
 }
 
-void name_repository_builder::
-add(const std::unordered_map<std::string, entities::name_group>& by_meta_name) {
+void name_repository_builder::add(const std::unordered_map<std::string,
+    entities::name_group>& by_logical_meta_name) {
     auto& albmn(repository_.by_meta_name());
-    for (const auto& pair : by_meta_name) {
+    for (const auto& pair : by_logical_meta_name) {
         /*
-         * We start by inserting the archetype locations into the
-         * overall container with all archetype locations across all
+         * We start by inserting the physical meta-names into the
+         * overall container with all physical meta-names across all
          * backends.
          */
         const auto& src(pair.second);
-        add(src.names());
+        add(src.meta_names());
 
         /*
-         * Now lets populate the meta-name specific container.
+         * Now lets populate the logical meta-name specific container.
          */
         const auto& mn(pair.first);
         auto& dst(albmn[mn]);
 
         /*
-         * We need to merge the archetype locations at the meta-type
-         * level because each backend is reusing the same yarn
-         * meta-types.
+         * We need to merge the physical meta-names at the logical
+         * meta-type level because each backend is reusing the same
+         * set of logical meta-types.
          */
-        for (const auto& n : src.names())
-            dst.names().push_back(n);
+        for (const auto& n : src.meta_names())
+            dst.meta_names().push_back(n);
 
         /*
          * However, when it comes down to the canonical archetype
          * mapping, we expect each archetype to be unique - after all,
-         * no two formatters can be pointing to the same archetype
-         * location (by definition). So, if we spot any duplicates,
-         * its a logic error.
+         * no two text transforms are expected to point to the same
+         * archetype (by definition). So, if we spot any duplicates
+         * its an error.
          */
         auto& cal(dst.canonical_locations());
         for (const auto& pair : src.canonical_locations()) {
@@ -161,7 +161,7 @@ add(const std::unordered_map<std::string, entities::name_group>& by_meta_name) {
 
 void name_repository_builder::add(const entities::name_repository_parts& parts) {
     add(parts.all());
-    add(parts.by_meta_name());
+    add(parts.by_logical_meta_name());
 }
 
 const entities::name_repository& name_repository_builder::build() {

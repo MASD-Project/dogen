@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/dependencies_builder_factory.hpp"
@@ -54,7 +54,7 @@ public:
     /**
      * @brief Physical name associated with this transform.
      */
-    virtual physical::entities::name physical_name() const = 0;
+    virtual physical::entities::meta_name physical_name() const = 0;
 
     /**
      * @brief Returns name of the meta-model element that this

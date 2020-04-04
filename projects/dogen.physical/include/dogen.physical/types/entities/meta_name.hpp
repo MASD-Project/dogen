@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,15 +41,15 @@ namespace dogen::physical::entities {
  * space cannot have the same name and b) the same point or region in physical space
  * can only have one and only one name.
  */
-class name final {
+class meta_name final {
 public:
-    name() = default;
-    name(const name&) = default;
-    name(name&&) = default;
-    ~name() = default;
+    meta_name() = default;
+    meta_name(const meta_name&) = default;
+    meta_name(meta_name&&) = default;
+    ~meta_name() = default;
 
 public:
-    name(
+    meta_name(
         const std::string& simple,
         const std::string& qualified,
         const dogen::physical::entities::location& location);
@@ -88,14 +88,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const name& rhs) const;
-    bool operator!=(const name& rhs) const {
+    bool operator==(const meta_name& rhs) const;
+    bool operator!=(const meta_name& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(name& other) noexcept;
-    name& operator=(name other);
+    void swap(meta_name& other) noexcept;
+    meta_name& operator=(meta_name other);
 
 private:
     std::string simple_;
@@ -109,8 +109,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::name& lhs,
-    dogen::physical::entities::name& rhs) {
+    dogen::physical::entities::meta_name& lhs,
+    dogen::physical::entities::meta_name& rhs) {
     lhs.swap(rhs);
 }
 

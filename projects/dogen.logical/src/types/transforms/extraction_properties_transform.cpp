@@ -47,7 +47,7 @@ namespace dogen::logical::transforms {
 extraction_properties_transform::feature_group
 extraction_properties_transform::make_feature_group(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::name>& ns) {
+    const std::list<physical::entities::meta_name>& mns) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
@@ -59,8 +59,8 @@ extraction_properties_transform::make_feature_group(
 
     const auto en(traits::enabled());
     using qnb = physical::helpers::qualified_name_builder;
-    for (const auto& n : ns) {
-        const auto b(qnb::build_backend(n));
+    for (const auto& mn : mns) {
+        const auto b(qnb::build_backend(mn));
         r.enabled[b] = s.get_by_name(b, en);
     }
 
@@ -109,10 +109,10 @@ obtain_enable_backend_directories(const feature_group& fg,
 
 entities::extraction_properties
 extraction_properties_transform::make_extraction_properties(const context& ctx,
-    const std::list<physical::entities::name>& ns,
+    const std::list<physical::entities::meta_name>& mns,
     const variability::entities::configuration& cfg) {
 
-    const auto fg(make_feature_group(*ctx.feature_model(), ns));
+    const auto fg(make_feature_group(*ctx.feature_model(), mns));
     entities::extraction_properties r;
     r.cpp_headers_output_directory(
         obtain_cpp_headers_output_directory(fg, cfg));

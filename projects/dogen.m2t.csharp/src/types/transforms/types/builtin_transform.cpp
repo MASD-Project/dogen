@@ -36,7 +36,7 @@ std::string builtin_transform::id() const {
     return static_id();
 }
 
-physical::entities::name
+physical::entities::meta_name
 builtin_transform::physical_name() const {
     using physical::helpers::name_factory;
     static const auto r(name_factory::make(csharp::traits::backend_sn(),

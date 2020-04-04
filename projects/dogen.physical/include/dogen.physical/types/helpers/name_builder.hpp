@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -51,10 +51,10 @@ public:
     name_builder& archetype(const std::string& s);
 
 public:
-    entities::name build();
+    entities::meta_name build();
 
 private:
-    entities::name name_;
+    entities::meta_name meta_name_;
 };
 
 }

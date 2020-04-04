@@ -30,8 +30,8 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
@@ -53,7 +53,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const dogen::physical::entities::logical_name& logical_name,
-        const dogen::physical::entities::name& physical_name,
+        const dogen::physical::entities::meta_name& physical_meta_name,
         const std::string& name,
         const std::string& technical_space,
         const std::list<dogen::physical::entities::artefact>& artefacts,
@@ -92,13 +92,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Physical model details of the element that originated this physical element.
+     * @brief Physical model details of the meta-element that originated this element.
      */
     /**@{*/
-    const dogen::physical::entities::name& physical_name() const;
-    dogen::physical::entities::name& physical_name();
-    void physical_name(const dogen::physical::entities::name& v);
-    void physical_name(const dogen::physical::entities::name&& v);
+    const dogen::physical::entities::meta_name& physical_meta_name() const;
+    dogen::physical::entities::meta_name& physical_meta_name();
+    void physical_meta_name(const dogen::physical::entities::meta_name& v);
+    void physical_meta_name(const dogen::physical::entities::meta_name&& v);
     /**@}*/
 
     const std::string& name() const;
@@ -145,7 +145,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     dogen::physical::entities::logical_name logical_name_;
-    dogen::physical::entities::name physical_name_;
+    dogen::physical::entities::meta_name physical_meta_name_;
     std::string name_;
     std::string technical_space_;
     std::list<dogen::physical::entities::artefact> artefacts_;

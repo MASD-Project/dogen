@@ -7,7 +7,7 @@ std::string {{class.simple_name}}::id() const {
     return static_id();
 }
 
-physical::entities::name
+physical::entities::meta_name
 {{class.simple_name}}::physical_name() const {
     using physical::helpers::name_factory;
     static const auto r(name_factory::make(csharp::traits::backend_sn(),

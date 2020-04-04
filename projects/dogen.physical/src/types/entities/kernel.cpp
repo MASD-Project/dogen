@@ -25,12 +25,12 @@ namespace dogen::physical::entities {
 kernel::kernel(
     const dogen::physical::entities::location& location,
     const std::string& description,
-    const dogen::physical::entities::name& name,
+    const dogen::physical::entities::meta_name& meta_name,
     const std::list<dogen::physical::entities::backend>& backends,
     const dogen::physical::entities::name_repository& names)
     : location_(location),
       description_(description),
-      name_(name),
+      meta_name_(meta_name),
       backends_(backends),
       names_(names) { }
 
@@ -38,7 +38,7 @@ void kernel::swap(kernel& other) noexcept {
     using std::swap;
     swap(location_, other.location_);
     swap(description_, other.description_);
-    swap(name_, other.name_);
+    swap(meta_name_, other.meta_name_);
     swap(backends_, other.backends_);
     swap(names_, other.names_);
 }
@@ -46,7 +46,7 @@ void kernel::swap(kernel& other) noexcept {
 bool kernel::operator==(const kernel& rhs) const {
     return location_ == rhs.location_ &&
         description_ == rhs.description_ &&
-        name_ == rhs.name_ &&
+        meta_name_ == rhs.meta_name_ &&
         backends_ == rhs.backends_ &&
         names_ == rhs.names_;
 }
@@ -89,20 +89,20 @@ void kernel::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::name& kernel::name() const {
-    return name_;
+const dogen::physical::entities::meta_name& kernel::meta_name() const {
+    return meta_name_;
 }
 
-dogen::physical::entities::name& kernel::name() {
-    return name_;
+dogen::physical::entities::meta_name& kernel::meta_name() {
+    return meta_name_;
 }
 
-void kernel::name(const dogen::physical::entities::name& v) {
-    name_ = v;
+void kernel::meta_name(const dogen::physical::entities::meta_name& v) {
+    meta_name_ = v;
 }
 
-void kernel::name(const dogen::physical::entities::name&& v) {
-    name_ = std::move(v);
+void kernel::meta_name(const dogen::physical::entities::meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const std::list<dogen::physical::entities::backend>& kernel::backends() const {

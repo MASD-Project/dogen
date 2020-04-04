@@ -28,7 +28,7 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/name.hpp"
@@ -54,7 +54,7 @@ public:
     /**
      * @brief Physical name linked to this formatter.
      */
-    virtual physical::entities::name physical_name() const = 0;
+    virtual physical::entities::meta_name physical_name() const = 0;
 
     /**
      * @brief Returns name of the meta-model element that this

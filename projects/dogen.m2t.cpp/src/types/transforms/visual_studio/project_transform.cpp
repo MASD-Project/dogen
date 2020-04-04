@@ -43,7 +43,7 @@ std::string project_transform::id() const {
     return r;
 }
 
-physical::entities::name
+physical::entities::meta_name
 project_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_sn(),

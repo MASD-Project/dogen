@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -35,7 +35,7 @@ namespace dogen::physical::helpers {
  */
 class name_factory final {
 public:
-    static entities::name make(const std::string& backend,
+    static entities::meta_name make(const std::string& backend,
         const std::string& facet, const std::string& archetype);
 };
 

@@ -104,14 +104,15 @@ public:
     std::string description() const override;
     std::string id() const override;
 
-    const std::forward_list<physical::entities::name>&
+    const std::forward_list<physical::entities::meta_name>&
     physical_names() const override;
 
     const std::unordered_map<std::string,
                              physical::entities::name_group>&
     physical_names_by_meta_name() const override;
 
-    const std::unordered_map<std::string, std::list<physical::entities::name>>&
+    const std::unordered_map<std::string,
+                             std::list<physical::entities::meta_name>>&
     physical_names_by_family() const override;
 
     const physical::entities::name_repository_parts&

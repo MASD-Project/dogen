@@ -27,7 +27,7 @@ facet::facet(
     const std::string& override_directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
-    const dogen::physical::entities::name& name,
+    const dogen::physical::entities::meta_name& meta_name,
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes)
@@ -35,7 +35,7 @@ facet::facet(
       override_directory_name_(override_directory_name),
       location_(location),
       description_(description),
-      name_(name),
+      meta_name_(meta_name),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
       archetypes_(archetypes) { }
@@ -46,7 +46,7 @@ void facet::swap(facet& other) noexcept {
     swap(override_directory_name_, other.override_directory_name_);
     swap(location_, other.location_);
     swap(description_, other.description_);
-    swap(name_, other.name_);
+    swap(meta_name_, other.meta_name_);
     swap(default_postfix_, other.default_postfix_);
     swap(override_postfix_, other.override_postfix_);
     swap(archetypes_, other.archetypes_);
@@ -57,7 +57,7 @@ bool facet::operator==(const facet& rhs) const {
         override_directory_name_ == rhs.override_directory_name_ &&
         location_ == rhs.location_ &&
         description_ == rhs.description_ &&
-        name_ == rhs.name_ &&
+        meta_name_ == rhs.meta_name_ &&
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
         archetypes_ == rhs.archetypes_;
@@ -133,20 +133,20 @@ void facet::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::name& facet::name() const {
-    return name_;
+const dogen::physical::entities::meta_name& facet::meta_name() const {
+    return meta_name_;
 }
 
-dogen::physical::entities::name& facet::name() {
-    return name_;
+dogen::physical::entities::meta_name& facet::meta_name() {
+    return meta_name_;
 }
 
-void facet::name(const dogen::physical::entities::name& v) {
-    name_ = v;
+void facet::meta_name(const dogen::physical::entities::meta_name& v) {
+    meta_name_ = v;
 }
 
-void facet::name(const dogen::physical::entities::name&& v) {
-    name_ = std::move(v);
+void facet::meta_name(const dogen::physical::entities::meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const std::string& facet::default_postfix() const {

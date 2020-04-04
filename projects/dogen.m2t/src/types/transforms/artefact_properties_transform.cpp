@@ -76,18 +76,18 @@ update_element(const context& ctx, logical::entities::element& e) {
      * sourced from the formatting available in each backend.
      */
     auto& ap(e.artefact_properties());
-    for (const auto& n : i->second.names()) {
-        const auto a(n.qualified());
+    for (const auto& mn : i->second.meta_names()) {
+        const auto pqn(mn.qualified());
         using logical::entities::artefact_properties;
-        const auto pair(std::make_pair(a, artefact_properties()));
+        const auto pair(std::make_pair(pqn, artefact_properties()));
         const auto inserted(ap.insert(pair).second);
         if (inserted) {
-            BOOST_LOG_SEV(lg, debug) << "Added archetype location: " << a;
+            BOOST_LOG_SEV(lg, debug) << "Added physical meta-name: " << pqn;
             continue;
         }
 
-        BOOST_LOG_SEV(lg, error) << duplicate_archetype << a;
-        BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + a));
+        BOOST_LOG_SEV(lg, error) << duplicate_archetype << pqn;
+        BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + pqn));
     }
 }
 

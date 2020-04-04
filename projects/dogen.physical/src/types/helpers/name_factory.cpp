@@ -23,7 +23,7 @@
 
 namespace dogen::physical::helpers {
 
-entities::name name_factory::make(const std::string& backend,
+entities::meta_name name_factory::make(const std::string& backend,
     const std::string& facet, const std::string& archetype) {
     name_builder b;
     b.backend(backend);

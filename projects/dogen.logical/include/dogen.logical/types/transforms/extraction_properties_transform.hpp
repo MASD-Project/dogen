@@ -28,7 +28,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -52,7 +52,7 @@ private:
 
     static feature_group make_feature_group(
         const variability::entities::feature_model& fm,
-        const std::list<physical::entities::name>& ns);
+        const std::list<physical::entities::meta_name>& mns);
 
     static boost::filesystem::path
     obtain_cpp_headers_output_directory(const feature_group& fg,
@@ -66,7 +66,7 @@ private:
         const variability::entities::configuration& cfg);
 
     static entities::extraction_properties make_extraction_properties(
-        const context& ctx, const std::list<physical::entities::name>& ns,
+        const context& ctx, const std::list<physical::entities::meta_name>& mns,
         const variability::entities::configuration& cfg);
 
 public:

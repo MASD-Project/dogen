@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.m2t.csharp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar_error.hpp"
@@ -95,7 +95,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     physical_names_.push_front(n);
     const auto mn(t->meta_name().qualified().dot());
     auto& g(physical_names_by_meta_name_[mn]);
-    g.names().push_back(n);
+    g.meta_names().push_back(n);
 
     /*
      * Add the transform to the index by meta-name.
@@ -145,7 +145,7 @@ const repository& registrar::formatter_repository() const {
     return transform_repository_;
 }
 
-const std::forward_list<physical::entities::name>&
+const std::forward_list<physical::entities::meta_name>&
 registrar::physical_names() const {
     return physical_names_;
 }
@@ -155,7 +155,7 @@ registrar::physical_names_by_meta_name() const {
     return physical_names_by_meta_name_;
 }
 
-const std::unordered_map<std::string, std::list<physical::entities::name>>&
+const std::unordered_map<std::string, std::list<physical::entities::meta_name>>&
 registrar::physical_names_by_family() const {
     return physical_names_by_family_;
 }

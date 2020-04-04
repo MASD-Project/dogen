@@ -105,9 +105,9 @@ private:
         const auto mn(e->meta_name().qualified().dot());
         const auto i(c.find(mn));
         if (i != c.end()) {
-            const auto& physical_names(i->second.names());
-            BOOST_LOG_SEV(lg, debug) << "Element has physical names: "
-                                     << physical_names.size();
+            const auto& physical_meta_names(i->second.meta_names());
+            BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
+                                     << physical_meta_names.size();
 
             /*
              * Now, for each physical meta-name, create an entry with the
@@ -115,8 +115,8 @@ private:
              * physical meta-name.
              */
             auto& arts(ea.artefacts());
-            for (const auto& pn : physical_names) {
-                const auto pqn(pn.qualified());
+            for (const auto& pmn : physical_meta_names) {
+                const auto pqn(pmn.qualified());
                 auto art(boost::make_shared<physical::entities::artefact>());
                 const auto pair(std::make_pair(pqn, art));
                 const auto inserted(arts.insert(pair).second);

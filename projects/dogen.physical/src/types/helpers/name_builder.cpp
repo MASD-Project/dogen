@@ -42,25 +42,26 @@ const std::string empty_archetype(
 namespace dogen::physical::helpers {
 
 name_builder& name_builder::backend(const std::string& s) {
-    name_.location().backend(s);
+    meta_name_.location().backend(s);
     return *this;
 }
 
 name_builder& name_builder::facet(const std::string& s) {
-    name_.location().facet(s);
+    meta_name_.location().facet(s);
     return *this;
 }
 
 name_builder& name_builder::archetype(const std::string& s) {
-    name_.location().archetype(s);
+    meta_name_.location().archetype(s);
     return *this;
 }
 
-entities::name name_builder::build() {
+entities::meta_name name_builder::build() {
     /*
      * Kernel is always hard-coded to MASD.
      */
-    auto& l(name_.location());
+    auto& mn(meta_name_);
+    auto& l(mn.location());
     l.kernel(kernel_name);
 
     /*
@@ -69,20 +70,19 @@ entities::name name_builder::build() {
     const bool has_facet(!l.facet().empty());
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
-        name_.simple(l.archetype());
-        name_.qualified(qualified_name_builder::build_archetype(l));
-        name_validator::validate_archetype_name(name_);
+        mn.simple(l.archetype());
+        mn.qualified(qualified_name_builder::build_archetype(l));
+        name_validator::validate_archetype_name(mn);
     } else if (has_facet) {
-        name_.simple(l.facet());
-        name_.qualified(qualified_name_builder::build_facet(l));
-        name_validator::validate_facet_name(name_);
+        mn.simple(l.facet());
+        mn.qualified(qualified_name_builder::build_facet(l));
+        name_validator::validate_facet_name(mn);
     } else {
-        name_.simple(l.backend());
-        name_.qualified(qualified_name_builder::build_backend(l));
-        name_validator::validate_backend_name(name_);
+        mn.simple(l.backend());
+        mn.qualified(qualified_name_builder::build_backend(l));
+        name_validator::validate_backend_name(mn);
     }
-
-    return name_;
+    return mn;
 }
 
 }

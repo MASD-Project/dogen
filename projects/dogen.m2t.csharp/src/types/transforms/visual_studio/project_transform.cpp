@@ -40,7 +40,7 @@ std::string project_transform::id() const {
     return r;
 }
 
-physical::entities::name
+physical::entities::meta_name
 project_transform::physical_name() const {
     using physical::helpers::name_factory;
     static const auto r(name_factory::make(csharp::traits::backend_sn(),

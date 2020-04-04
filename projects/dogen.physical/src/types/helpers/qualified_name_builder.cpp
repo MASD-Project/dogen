@@ -51,8 +51,8 @@ std::string qualified_name_builder::build_kernel(const entities::location& l) {
     return k;
 }
 
-std::string qualified_name_builder::build_kernel(const entities::name& n) {
-    return build_kernel(n.location());
+std::string qualified_name_builder::build_kernel(const entities::meta_name& mn) {
+    return build_kernel(mn.location());
 }
 
 std::string qualified_name_builder::build_backend(const entities::location& l) {
@@ -65,8 +65,8 @@ std::string qualified_name_builder::build_backend(const entities::location& l) {
     return build_kernel(l) + dot + b;
 }
 
-std::string qualified_name_builder::build_backend(const entities::name& n) {
-    return build_backend(n.location());
+std::string qualified_name_builder::build_backend(const entities::meta_name& mn) {
+    return build_backend(mn.location());
 }
 
 std::string qualified_name_builder::build_facet(const entities::location& l,
@@ -87,9 +87,9 @@ std::string qualified_name_builder::build_facet(const entities::location& l,
     return r;
 }
 
-std::string qualified_name_builder::build_facet(const entities::name& n,
+std::string qualified_name_builder::build_facet(const entities::meta_name& mn,
     const bool add_canonical) {
-    return build_facet(n.location(), add_canonical);
+    return build_facet(mn.location(), add_canonical);
 }
 
 std::string
@@ -106,8 +106,9 @@ qualified_name_builder::build_archetype(const entities::location& l) {
     return r;
 }
 
-std::string qualified_name_builder::build_archetype(const entities::name& n) {
-    return build_archetype(n.location());
+std::string qualified_name_builder::
+build_archetype(const entities::meta_name& mn) {
+    return build_archetype(mn.location());
 }
 
 }

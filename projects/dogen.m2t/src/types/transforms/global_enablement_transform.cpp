@@ -295,15 +295,15 @@ void global_enablement_transform::populate_global_enablement_properties(
 std::unordered_map<std::string, logical::entities::enablement_properties>
 global_enablement_transform::obtain_local_enablement_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
-    const std::list<physical::entities::name>& ns,
+    const std::list<physical::entities::meta_name>& mns,
     const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating global enablement properties.";
 
     std::unordered_map<std::string, logical::entities::enablement_properties> r;
     const variability::helpers::configuration_selector s(cfg);
-    for (const auto& n : ns) {
-        const auto archetype(n.qualified());
+    for (const auto& mn : mns) {
+        const auto archetype(mn.qualified());
         const auto i(fgs.find(archetype));
         if (i == fgs.end()) {
             BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
@@ -376,7 +376,7 @@ void global_enablement_transform::populate_local_enablement_properties(
         if (i == albmn.end())
             continue;
 
-        const auto& ns(i->second.names());
+        const auto& ns(i->second.meta_names());
 
         /*
          * Now process each of the elements of this meta-feature, only

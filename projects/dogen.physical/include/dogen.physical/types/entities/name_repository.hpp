@@ -30,13 +30,13 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
 
 /**
- * @brief Repository containing physical names, indexed as required by use cases.
+ * @brief Repository containing physical meta-names, indexed as required by use cases.
  */
 class name_repository final {
 public:
@@ -47,37 +47,62 @@ public:
 
 public:
     name_repository(
-        const std::list<dogen::physical::entities::name>& all,
+        const std::list<dogen::physical::entities::meta_name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
-    const std::list<dogen::physical::entities::name>& all() const;
-    std::list<dogen::physical::entities::name>& all();
-    void all(const std::list<dogen::physical::entities::name>& v);
-    void all(const std::list<dogen::physical::entities::name>&& v);
+    /**
+     * @brief All meta-names.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::meta_name>& all() const;
+    std::list<dogen::physical::entities::meta_name>& all();
+    void all(const std::list<dogen::physical::entities::meta_name>& v);
+    void all(const std::list<dogen::physical::entities::meta_name>&& v);
+    /**@}*/
 
+    /**
+     * @brief Qualified names of facets by qualified names of backends.
+     */
+    /**@{*/
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name();
     void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+    /**@}*/
 
+    /**
+     * @brief Qualified archetype names by qualified backend names.
+     */
+    /**@{*/
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name();
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+    /**@}*/
 
+    /**
+     * @brief Physical names by logical meta-names.
+     */
+    /**@{*/
     const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name() const;
     std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name();
     void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v);
     void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v);
+    /**@}*/
 
+    /**
+     * @brief Archetype names by qualified backend and facet names
+     */
+    /**@{*/
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet() const;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet();
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v);
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v);
+    /**@}*/
 
 public:
     bool operator==(const name_repository& rhs) const;
@@ -90,7 +115,7 @@ public:
     name_repository& operator=(name_repository other);
 
 private:
-    std::list<dogen::physical::entities::name> all_;
+    std::list<dogen::physical::entities::meta_name> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;

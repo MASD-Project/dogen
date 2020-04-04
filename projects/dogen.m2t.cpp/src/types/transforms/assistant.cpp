@@ -85,14 +85,14 @@ const std::string helpless_family("No registered helpers found for family: ");
 namespace dogen::m2t::cpp::transforms {
 
 assistant::assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::name& pn, const bool requires_header_guard)
+    const physical::entities::meta_name& pmn, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),
-            pn.qualified())),
+            pmn.qualified())),
       new_artefact_properties_(
-          obtain_new_artefact_properties(e, pn.qualified())),
-      physical_name_(pn), requires_header_guard_(requires_header_guard) {
+          obtain_new_artefact_properties(e, pmn.qualified())),
+      physical_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()

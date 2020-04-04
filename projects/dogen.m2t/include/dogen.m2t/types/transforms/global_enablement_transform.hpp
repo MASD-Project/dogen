@@ -111,7 +111,7 @@ private:
     obtain_local_enablement_properties(
         const std::unordered_map<std::string,
         local_archetype_feature_group>& fgs,
-        const std::list<physical::entities::name>& ns,
+        const std::list<physical::entities::meta_name>& mns,
         const variability::entities::configuration& cfg);
 
     static void populate_local_enablement_properties(

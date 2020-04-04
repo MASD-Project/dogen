@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -42,18 +42,18 @@ public:
 
 public:
     name_group(
-        const std::list<dogen::physical::entities::name>& names,
+        const std::list<dogen::physical::entities::meta_name>& meta_names,
         const std::unordered_map<std::string, std::string>& canonical_locations);
 
 public:
     /**
-     * @brief All names that belong to this group.
+     * @brief All meta-names that belong to this group.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::name>& names() const;
-    std::list<dogen::physical::entities::name>& names();
-    void names(const std::list<dogen::physical::entities::name>& v);
-    void names(const std::list<dogen::physical::entities::name>&& v);
+    const std::list<dogen::physical::entities::meta_name>& meta_names() const;
+    std::list<dogen::physical::entities::meta_name>& meta_names();
+    void meta_names(const std::list<dogen::physical::entities::meta_name>& v);
+    void meta_names(const std::list<dogen::physical::entities::meta_name>&& v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
     name_group& operator=(name_group other);
 
 private:
-    std::list<dogen::physical::entities::name> names_;
+    std::list<dogen::physical::entities::meta_name> meta_names_;
     std::unordered_map<std::string, std::string> canonical_locations_;
 };
 

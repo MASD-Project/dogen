@@ -903,16 +903,16 @@ The kernel is always expected to be  @e masd.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#names#</dia:string>
+            <dia:string>#meta_names#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All names that belong to this group.#</dia:string>
+            <dia:string>#All meta-names that belong to this group.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -979,7 +979,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Repository containing physical names, indexed as required by use cases.#</dia:string>
+        <dia:string>#Repository containing physical meta-names, indexed as required by use cases.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1065,13 +1065,13 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#all#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#All meta-names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1094,7 +1094,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Qualified names of facets by qualified names of backends.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1117,7 +1117,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Qualified archetype names by qualified backend names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1140,7 +1140,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Physical names by logical meta-names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1163,7 +1163,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Archetype names by qualified backend and facet names#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1188,13 +1188,13 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="107,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,-112.05;129.88,-108.35"/>
+        <dia:rectangle val="106.95,-112.05;132.96,-108.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,-112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1292,14 +1292,14 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#all#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All physical names for the archetypes owned by this part, listing all available
-backends, facets and archetypes.#</dia:string>
+            <dia:string>#All physical meta-names for the archetypes owned by this part, listing all
+available backends, facets and archetypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1313,7 +1313,7 @@ backends, facets and archetypes.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#by_meta_name#</dia:string>
+            <dia:string>#by_logical_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, name_group&gt;#</dia:string>
@@ -1322,7 +1322,7 @@ backends, facets and archetypes.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Returns the archetype locations for each meta name.#</dia:string>
+            <dia:string>#Returns the physical meta-names for each logical meta name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5177,17 +5177,17 @@ user choices.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="118.415,-112"/>
+        <dia:point val="119.955,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.905,-114.8;119.165,-111.2"/>
+        <dia:rectangle val="90.905,-114.8;120.705,-111.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="118.415,-112"/>
-        <dia:point val="118.415,-114"/>
+        <dia:point val="119.955,-112"/>
+        <dia:point val="119.955,-114"/>
         <dia:point val="90.955,-114"/>
         <dia:point val="90.955,-112"/>
       </dia:attribute>
@@ -6797,16 +6797,16 @@ user choices.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#physical_name#</dia:string>
+            <dia:string>#physical_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#name#</dia:string>
+            <dia:string>#meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Physical model details of the element that originated this physical element.#</dia:string>
+            <dia:string>#Physical model details of the meta-element that originated this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8308,17 +8308,17 @@ user choices.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="118.415,-108.4"/>
+        <dia:point val="119.955,-108.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.305,-109.15;119.165,-102.2"/>
+        <dia:rectangle val="116.305,-109.15;120.705,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="118.415,-108.4"/>
-        <dia:point val="118.415,-105"/>
+        <dia:point val="119.955,-108.4"/>
+        <dia:point val="119.955,-105"/>
         <dia:point val="116.355,-105"/>
         <dia:point val="116.355,-103"/>
       </dia:attribute>
@@ -13366,13 +13366,13 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Nameable#</dia:string>
+        <dia:string>#MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Ability to have a name.#</dia:string>
+        <dia:string>#Ability to have a meta-name.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13455,16 +13455,16 @@ space. If you are targetting more than one, it will automatically be set to true
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#name#</dia:string>
+            <dia:string>#meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#name#</dia:string>
+            <dia:string>#meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Meta-name for this meta-element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13501,7 +13501,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#name#</dia:string>
+        <dia:string>#meta_name#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

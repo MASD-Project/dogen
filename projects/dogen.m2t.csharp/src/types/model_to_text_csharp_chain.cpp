@@ -72,7 +72,7 @@ apply(const formattables::model& fm) const {
     return wf.execute(fm);
 }
 
-const std::forward_list<physical::entities::name>&
+const std::forward_list<physical::entities::meta_name>&
 model_to_text_csharp_chain::physical_names() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names();
@@ -86,7 +86,7 @@ model_to_text_csharp_chain::physical_names_by_meta_name() const {
 }
 
 const std::unordered_map<std::string,
-                         std::list<physical::entities::name>>&
+                         std::list<physical::entities::meta_name>>&
 model_to_text_csharp_chain::physical_names_by_family() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names_by_family();

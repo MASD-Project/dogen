@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 
 namespace dogen::physical::entities {
@@ -46,7 +46,7 @@ public:
     kernel(
         const dogen::physical::entities::location& location,
         const std::string& description,
-        const dogen::physical::entities::name& name,
+        const dogen::physical::entities::meta_name& meta_name,
         const std::list<dogen::physical::entities::backend>& backends,
         const dogen::physical::entities::name_repository& names);
 
@@ -71,10 +71,15 @@ public:
     void description(const std::string&& v);
     /**@}*/
 
-    const dogen::physical::entities::name& name() const;
-    dogen::physical::entities::name& name();
-    void name(const dogen::physical::entities::name& v);
-    void name(const dogen::physical::entities::name&& v);
+    /**
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::physical::entities::meta_name& meta_name() const;
+    dogen::physical::entities::meta_name& meta_name();
+    void meta_name(const dogen::physical::entities::meta_name& v);
+    void meta_name(const dogen::physical::entities::meta_name&& v);
+    /**@}*/
 
     const std::list<dogen::physical::entities::backend>& backends() const;
     std::list<dogen::physical::entities::backend>& backends();
@@ -99,7 +104,7 @@ public:
 private:
     dogen::physical::entities::location location_;
     std::string description_;
-    dogen::physical::entities::name name_;
+    dogen::physical::entities::meta_name meta_name_;
     std::list<dogen::physical::entities::backend> backends_;
     dogen::physical::entities::name_repository names_;
 };
