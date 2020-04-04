@@ -24,7 +24,7 @@
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/location_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

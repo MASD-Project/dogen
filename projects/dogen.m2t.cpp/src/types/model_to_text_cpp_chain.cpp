@@ -117,7 +117,7 @@ model_to_text_cpp_chain::physical_names() const {
 }
 
 const std::unordered_map<std::string,
-                         physical::entities::name_group>&
+                         physical::entities::meta_name_group>&
 model_to_text_cpp_chain::physical_names_by_meta_name() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names_by_meta_name();

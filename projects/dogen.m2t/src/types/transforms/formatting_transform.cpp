@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_repository.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"

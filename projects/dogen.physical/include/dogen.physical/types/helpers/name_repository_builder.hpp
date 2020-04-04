@@ -27,9 +27,9 @@
 
 #include <list>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/name_group.hpp"
+#include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_repository.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -44,16 +44,16 @@ private:
 public:
     void add(const std::list<entities::meta_name>& mns);
     void add(const std::unordered_map<std::string,
-        entities::name_group>& by_logical_meta_name);
+        entities::meta_name_group>& by_logical_meta_name);
 
 public:
     void add(const entities::name_repository_parts& parts);
 
 public:
-    const entities::name_repository& build();
+    const entities::meta_name_repository& build();
 
 private:
-    entities::name_repository repository_;
+    entities::meta_name_repository repository_;
 };
 
 }

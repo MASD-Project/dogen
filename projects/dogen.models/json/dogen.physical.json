@@ -76,7 +76,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::name_group",
+      "name": "entities::meta_name_group",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -92,7 +92,7 @@
       ]
     },
     {
-      "name": "entities::name_repository",
+      "name": "entities::meta_name_repository",
       "documentation": "Repository containing physical meta-names, indexed as required by use cases.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -112,9 +112,9 @@
           "documentation": "Qualified archetype names by qualified backend names.\n"
         },
         {
-          "name": "by_meta_name",
-          "type": "std::unordered_map<std::string, name_group>",
-          "documentation": "Physical names by logical meta-names.\n"
+          "name": "by_logical_meta_name",
+          "type": "std::unordered_map<std::string, meta_name_group>",
+          "documentation": "Physical meta-names by logical meta-names.\n"
         },
         {
           "name": "by_backend_by_facet",
@@ -134,7 +134,7 @@
         },
         {
           "name": "by_logical_meta_name",
-          "type": "std::unordered_map<std::string, name_group>",
+          "type": "std::unordered_map<std::string, meta_name_group>",
           "documentation": "Returns the physical meta-names for each logical meta name.\n"
         }
       ]
@@ -189,7 +189,8 @@
         },
         {
           "name": "names",
-          "type": "name_repository"
+          "type": "meta_name_repository",
+          "documentation": "Repository with all the meta-names in this kernel.\n"
         }
       ]
     },

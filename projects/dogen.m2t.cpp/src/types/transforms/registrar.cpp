@@ -64,10 +64,10 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     }
 
     /*
-     * Validate the physical name.
+     * Validate the physical meta-name.
      */
-    const auto& n(t->physical_name());
-    physical::helpers::name_validator::validate_archetype_name(n);
+    const auto& mn(t->physical_name());
+    physical::helpers::name_validator::validate_archetype_name(mn);
 }
 
 void registrar::validate(std::shared_ptr<helper_transform> ht) const {
@@ -248,7 +248,7 @@ registrar::physical_names() const {
     return physical_names_;
 }
 
-const std::unordered_map<std::string, physical::entities::name_group>&
+const std::unordered_map<std::string, physical::entities::meta_name_group>&
 registrar::physical_names_by_meta_name() const {
     return physical_names_by_meta_name_;
 }

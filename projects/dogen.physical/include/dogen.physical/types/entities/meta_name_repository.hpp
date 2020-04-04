@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,26 +31,26 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/name_group.hpp"
+#include "dogen.physical/types/entities/meta_name_group.hpp"
 
 namespace dogen::physical::entities {
 
 /**
  * @brief Repository containing physical meta-names, indexed as required by use cases.
  */
-class name_repository final {
+class meta_name_repository final {
 public:
-    name_repository() = default;
-    name_repository(const name_repository&) = default;
-    name_repository(name_repository&&) = default;
-    ~name_repository() = default;
+    meta_name_repository() = default;
+    meta_name_repository(const meta_name_repository&) = default;
+    meta_name_repository(meta_name_repository&&) = default;
+    ~meta_name_repository() = default;
 
 public:
-    name_repository(
+    meta_name_repository(
         const std::list<dogen::physical::entities::meta_name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name,
+        const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
@@ -85,13 +85,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Physical names by logical meta-names.
+     * @brief Physical meta-names by logical meta-names.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name() const;
-    std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name();
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v);
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v);
+    const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name() const;
+    std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name();
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v);
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v);
     /**@}*/
 
     /**
@@ -105,20 +105,20 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const name_repository& rhs) const;
-    bool operator!=(const name_repository& rhs) const {
+    bool operator==(const meta_name_repository& rhs) const;
+    bool operator!=(const meta_name_repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(name_repository& other) noexcept;
-    name_repository& operator=(name_repository other);
+    void swap(meta_name_repository& other) noexcept;
+    meta_name_repository& operator=(meta_name_repository other);
 
 private:
     std::list<dogen::physical::entities::meta_name> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
-    std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;
+    std::unordered_map<std::string, dogen::physical::entities::meta_name_group> by_logical_meta_name_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
 };
 
@@ -128,8 +128,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::name_repository& lhs,
-    dogen::physical::entities::name_repository& rhs) {
+    dogen::physical::entities::meta_name_repository& lhs,
+    dogen::physical::entities::meta_name_repository& rhs) {
     lhs.swap(rhs);
 }
 

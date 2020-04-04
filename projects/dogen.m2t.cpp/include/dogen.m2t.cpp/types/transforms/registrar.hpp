@@ -31,7 +31,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/name_group.hpp"
+#include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
@@ -86,7 +86,7 @@ public:
     /**
      * @brief Returns the physical names for each meta-type.
      */
-    const std::unordered_map<std::string, physical::entities::name_group>&
+    const std::unordered_map<std::string, physical::entities::meta_name_group>&
     physical_names_by_meta_name() const;
 
     /**
@@ -115,7 +115,7 @@ public:
 private:
     repository transform_repository_;
     std::forward_list<physical::entities::meta_name> physical_names_;
-    std::unordered_map<std::string, physical::entities::name_group>
+    std::unordered_map<std::string, physical::entities::meta_name_group>
     physical_names_by_meta_name_;
     std::unordered_map<std::string, std::list<physical::entities::meta_name>>
     physical_names_by_family_;

@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_repository.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/facet_properties_io.hpp"
@@ -254,7 +254,7 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
 
 void local_enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    physical::entities::name_group>& physical_names_by_meta_name,
+    physical::entities::meta_name_group>& physical_names_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_enablement_properties,
@@ -364,13 +364,13 @@ apply(const context& ctx, entities::model& m) {
 
     const auto& pmm(*ctx.physical_meta_model());
     const auto& nrp(pmm.kernels().cbegin()->second.names());
-    const auto& albmn(nrp.by_meta_name());
+    const auto& lmn(nrp.by_logical_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;
     for(auto& ea : m.elements()) {
         auto& e(*ea.element());
-        compute_enablement_for_element(albmn, galp, eafe, e);
+        compute_enablement_for_element(lmn, galp, eafe, e);
     }
 
     m.enabled_archetype_for_element(eafe);

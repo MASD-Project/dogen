@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/name_group_io.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_group_io.hpp"
+#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 
 namespace std {
 
@@ -80,7 +80,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::name_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -148,13 +148,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const name_repository& v) {
+std::ostream& operator<<(std::ostream& s, const meta_name_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::name_repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::meta_name_repository\"" << ", "
       << "\"all\": " << v.all() << ", "
       << "\"facet_names_by_backend_name\": " << v.facet_names_by_backend_name() << ", "
       << "\"formatter_names_by_backend_name\": " << v.formatter_names_by_backend_name() << ", "
-      << "\"by_meta_name\": " << v.by_meta_name() << ", "
+      << "\"by_logical_meta_name\": " << v.by_logical_meta_name() << ", "
       << "\"by_backend_by_facet\": " << v.by_backend_by_facet()
       << " }";
     return(s);

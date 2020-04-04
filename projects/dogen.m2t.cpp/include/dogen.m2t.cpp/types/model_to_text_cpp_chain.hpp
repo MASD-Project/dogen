@@ -108,7 +108,7 @@ public:
     physical_names() const override;
 
     const std::unordered_map<std::string,
-                             physical::entities::name_group>&
+                             physical::entities::meta_name_group>&
     physical_names_by_meta_name() const override;
 
     const std::unordered_map<std::string,

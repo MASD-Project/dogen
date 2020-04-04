@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_GROUP_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_GROUP_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@
 
 namespace dogen::physical::entities {
 
-class name_group final {
+class meta_name_group final {
 public:
-    name_group() = default;
-    name_group(const name_group&) = default;
-    name_group(name_group&&) = default;
-    ~name_group() = default;
+    meta_name_group() = default;
+    meta_name_group(const meta_name_group&) = default;
+    meta_name_group(meta_name_group&&) = default;
+    ~meta_name_group() = default;
 
 public:
-    name_group(
+    meta_name_group(
         const std::list<dogen::physical::entities::meta_name>& meta_names,
         const std::unordered_map<std::string, std::string>& canonical_locations);
 
@@ -68,14 +68,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const name_group& rhs) const;
-    bool operator!=(const name_group& rhs) const {
+    bool operator==(const meta_name_group& rhs) const;
+    bool operator!=(const meta_name_group& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(name_group& other) noexcept;
-    name_group& operator=(name_group other);
+    void swap(meta_name_group& other) noexcept;
+    meta_name_group& operator=(meta_name_group other);
 
 private:
     std::list<dogen::physical::entities::meta_name> meta_names_;
@@ -88,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::name_group& lhs,
-    dogen::physical::entities::name_group& rhs) {
+    dogen::physical::entities::meta_name_group& lhs,
+    dogen::physical::entities::meta_name_group& rhs) {
     lhs.swap(rhs);
 }
 

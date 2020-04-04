@@ -26,7 +26,7 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 #include "dogen.physical/types/helpers/name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"

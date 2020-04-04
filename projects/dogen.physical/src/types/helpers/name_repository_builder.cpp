@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 #include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.physical/types/helpers/name_repository_builder.hpp"
 
@@ -115,8 +115,8 @@ void name_repository_builder::add(const std::list<entities::meta_name>& mns) {
 }
 
 void name_repository_builder::add(const std::unordered_map<std::string,
-    entities::name_group>& by_logical_meta_name) {
-    auto& albmn(repository_.by_meta_name());
+    entities::meta_name_group>& by_logical_meta_name) {
+    auto& lmn(repository_.by_logical_meta_name());
     for (const auto& pair : by_logical_meta_name) {
         /*
          * We start by inserting the physical meta-names into the
@@ -130,7 +130,7 @@ void name_repository_builder::add(const std::unordered_map<std::string,
          * Now lets populate the logical meta-name specific container.
          */
         const auto& mn(pair.first);
-        auto& dst(albmn[mn]);
+        auto& dst(lmn[mn]);
 
         /*
          * We need to merge the physical meta-names at the logical
@@ -164,7 +164,7 @@ void name_repository_builder::add(const entities::name_repository_parts& parts) 
     add(parts.by_logical_meta_name());
 }
 
-const entities::name_repository& name_repository_builder::build() {
+const entities::meta_name_repository& name_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();
     populate_archetypes_by_facet_by_backend();

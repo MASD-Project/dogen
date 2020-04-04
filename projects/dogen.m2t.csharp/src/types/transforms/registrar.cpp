@@ -150,7 +150,7 @@ registrar::physical_names() const {
     return physical_names_;
 }
 
-const std::unordered_map<std::string, physical::entities::name_group>&
+const std::unordered_map<std::string, physical::entities::meta_name_group>&
 registrar::physical_names_by_meta_name() const {
     return physical_names_by_meta_name_;
 }

@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/name_group_io.hpp"
+#include "dogen.physical/io/entities/meta_name_group_io.hpp"
 #include "dogen.physical/io/entities/name_repository_parts_io.hpp"
 
 namespace std {
@@ -48,7 +48,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::name_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

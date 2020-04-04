@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/name_group_io.hpp"
+#include "dogen.physical/io/entities/meta_name_group_io.hpp"
 
 namespace std {
 
@@ -65,9 +65,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const name_group& v) {
+std::ostream& operator<<(std::ostream& s, const meta_name_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::name_group\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::meta_name_group\"" << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
       << "\"canonical_locations\": " << v.canonical_locations()
       << " }";

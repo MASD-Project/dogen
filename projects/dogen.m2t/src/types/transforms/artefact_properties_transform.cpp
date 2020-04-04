@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_repository.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -62,9 +62,9 @@ update_element(const context& ctx, logical::entities::element& e) {
     const auto mn(e.meta_name().qualified().dot());
     const auto& pmm(*ctx.physical_meta_model());
     const auto& nrp(pmm.kernels().cbegin()->second.names());
-    const auto& c(nrp.by_meta_name());
-    const auto i(c.find(mn));
-    if (i == c.end()) {
+    const auto& lmn(nrp.by_logical_meta_name());
+    const auto i(lmn.find(mn));
+    if (i == lmn.end()) {
         BOOST_LOG_SEV(lg, debug) << "No archetypes for meta-name: " << mn;
         return;
     }

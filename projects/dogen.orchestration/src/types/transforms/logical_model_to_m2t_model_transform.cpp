@@ -101,10 +101,10 @@ private:
          */
         const auto& pmm(physical_meta_model_);
         const auto& nrp(pmm.kernels().cbegin()->second.names());
-        const auto& c(nrp.by_meta_name());
+        const auto& lmn(nrp.by_logical_meta_name());
         const auto mn(e->meta_name().qualified().dot());
-        const auto i(c.find(mn));
-        if (i != c.end()) {
+        const auto i(lmn.find(mn));
+        if (i != lmn.end()) {
             const auto& physical_meta_names(i->second.meta_names());
             BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
                                      << physical_meta_names.size();

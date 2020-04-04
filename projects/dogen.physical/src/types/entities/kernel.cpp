@@ -27,7 +27,7 @@ kernel::kernel(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::list<dogen::physical::entities::backend>& backends,
-    const dogen::physical::entities::name_repository& names)
+    const dogen::physical::entities::meta_name_repository& names)
     : location_(location),
       description_(description),
       meta_name_(meta_name),
@@ -121,19 +121,19 @@ void kernel::backends(const std::list<dogen::physical::entities::backend>&& v) {
     backends_ = std::move(v);
 }
 
-const dogen::physical::entities::name_repository& kernel::names() const {
+const dogen::physical::entities::meta_name_repository& kernel::names() const {
     return names_;
 }
 
-dogen::physical::entities::name_repository& kernel::names() {
+dogen::physical::entities::meta_name_repository& kernel::names() {
     return names_;
 }
 
-void kernel::names(const dogen::physical::entities::name_repository& v) {
+void kernel::names(const dogen::physical::entities::meta_name_repository& v) {
     names_ = v;
 }
 
-void kernel::names(const dogen::physical::entities::name_repository&& v) {
+void kernel::names(const dogen::physical::entities::meta_name_repository&& v) {
     names_ = std::move(v);
 }
 

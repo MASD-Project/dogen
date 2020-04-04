@@ -61,11 +61,11 @@ std::unordered_map<
     global_enablement_transform::backend_feature_group>
 global_enablement_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp) {
+    const physical::entities::meta_name_repository& mnrp) {
     std::unordered_map<std::string, backend_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& pair : nrp.facet_names_by_backend_name()) {
+    for (const auto& pair : mnrp.facet_names_by_backend_name()) {
         const auto& backend(pair.first);
         backend_feature_group btg;
         const auto ebl(logical::traits::enabled());
@@ -81,7 +81,7 @@ std::unordered_map<
     global_enablement_transform::facet_feature_group>
 global_enablement_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp) {
+    const physical::entities::meta_name_repository& nrp) {
     std::unordered_map<std::string, facet_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -105,7 +105,7 @@ std::unordered_map<
     global_enablement_transform::global_archetype_feature_group>
 global_enablement_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp) {
+    const physical::entities::meta_name_repository& nrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -127,7 +127,7 @@ std::unordered_map<
     global_enablement_transform::local_archetype_feature_group>
 global_enablement_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp) {
+    const physical::entities::meta_name_repository& nrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -222,7 +222,7 @@ global_enablement_transform::obtain_archetype_properties(
 
 void global_enablement_transform::populate_global_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp,
+    const physical::entities::meta_name_repository& nrp,
     entities::model& m) {
 
     const auto bftg(make_backend_feature_group(fm, nrp));
@@ -340,7 +340,7 @@ global_enablement_transform::obtain_local_enablement_properties(
 
 void global_enablement_transform::populate_local_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& nrp,
+    const physical::entities::meta_name_repository& nrp,
     entities::model& m) {
     /*
      * Computes all of the possible features for every physical
@@ -371,9 +371,9 @@ void global_enablement_transform::populate_local_enablement_properties(
          * writing).
          */
         const auto mn_id(pair.first);
-        const auto& albmn(nrp.by_meta_name());
-        const auto i(albmn.find(mn_id));
-        if (i == albmn.end())
+        const auto& lmn(nrp.by_logical_meta_name());
+        const auto i(lmn.find(mn_id));
+        if (i == lmn.end())
             continue;
 
         const auto& ns(i->second.meta_names());

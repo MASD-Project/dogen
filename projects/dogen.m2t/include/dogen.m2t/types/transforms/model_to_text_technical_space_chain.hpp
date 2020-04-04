@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/name_group.hpp"
+#include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
@@ -75,7 +75,7 @@ public:
      * @brief Returns the physical names for each meta name.
      */
     virtual const std::unordered_map<std::string,
-                                     physical::entities::name_group>&
+                                     physical::entities::meta_name_group>&
     physical_names_by_meta_name() const = 0;
 
     /**

@@ -24,7 +24,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_repository.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"

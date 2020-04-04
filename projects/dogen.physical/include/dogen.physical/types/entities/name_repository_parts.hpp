@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/name_group.hpp"
+#include "dogen.physical/types/entities/meta_name_group.hpp"
 
 namespace dogen::physical::entities {
 
@@ -44,7 +44,7 @@ public:
 public:
     name_repository_parts(
         const std::list<dogen::physical::entities::meta_name>& all,
-        const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_logical_meta_name);
+        const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name);
 
 public:
     /**
@@ -62,10 +62,10 @@ public:
      * @brief Returns the physical meta-names for each logical meta name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_logical_meta_name() const;
-    std::unordered_map<std::string, dogen::physical::entities::name_group>& by_logical_meta_name();
-    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v);
-    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v);
+    const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name() const;
+    std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name();
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v);
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v);
     /**@}*/
 
 public:
@@ -80,7 +80,7 @@ public:
 
 private:
     std::list<dogen::physical::entities::meta_name> all_;
-    std::unordered_map<std::string, dogen::physical::entities::name_group> by_logical_meta_name_;
+    std::unordered_map<std::string, dogen::physical::entities::meta_name_group> by_logical_meta_name_;
 };
 
 }
