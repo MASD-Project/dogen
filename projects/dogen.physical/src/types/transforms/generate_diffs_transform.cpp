@@ -27,6 +27,7 @@
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
 #include "dogen.physical/types/helpers/file_status_collector.hpp"
 #include "dogen.physical/types/helpers/unified_differ.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/generate_diffs_transform.hpp"
 
 namespace {
@@ -43,6 +44,7 @@ const std::string reason_changed("Reason: Changed generated file.");
 const std::string reason_unexpected("Reason: unexpected file.");
 const std::string reason_force_write("Reason: Force write requested.");
 const std::string reason_other("Reason: Other.");
+const std::string empty_managed_dirs("No managed directories supplied.");
 
 }
 
@@ -65,6 +67,11 @@ apply(const context& ctx, entities::model& m) {
     }
 
     bool found_diffs(false);
+    if (m.managed_directories().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_managed_dirs;
+        BOOST_THROW_EXCEPTION(transform_exception(empty_managed_dirs));
+    }
+
     const auto md(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
         const auto& p(a.paths().absolute());
