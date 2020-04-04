@@ -34,7 +34,6 @@
 #include "dogen.logical/types/entities/artefact_properties.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.m2t/types/transforms/artefact_properties_transform.hpp"
 
 namespace {
@@ -77,9 +76,8 @@ update_element(const context& ctx, logical::entities::element& e) {
      * sourced from the formatting available in each backend.
      */
     auto& ap(e.artefact_properties());
-    using qnb = physical::helpers::qualified_name_builder;
     for (const auto& n : i->second.names()) {
-        const auto a(qnb::build_archetype(n));
+        const auto a(n.qualified());
         using logical::entities::artefact_properties;
         const auto pair(std::make_pair(a, artefact_properties()));
         const auto inserted(ap.insert(pair).second);
