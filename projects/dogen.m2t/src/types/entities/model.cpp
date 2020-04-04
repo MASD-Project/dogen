@@ -61,7 +61,7 @@ model::model(
     const std::string& origin_sha1_hash,
     const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
-    const std::list<dogen::m2t::entities::logical_physical_pair>& elements,
+    const std::list<dogen::m2t::entities::element_artefacts>& elements,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
@@ -214,19 +214,19 @@ void model::leaves(const std::unordered_set<dogen::logical::entities::name>&& v)
     leaves_ = std::move(v);
 }
 
-const std::list<dogen::m2t::entities::logical_physical_pair>& model::elements() const {
+const std::list<dogen::m2t::entities::element_artefacts>& model::elements() const {
     return elements_;
 }
 
-std::list<dogen::m2t::entities::logical_physical_pair>& model::elements() {
+std::list<dogen::m2t::entities::element_artefacts>& model::elements() {
     return elements_;
 }
 
-void model::elements(const std::list<dogen::m2t::entities::logical_physical_pair>& v) {
+void model::elements(const std::list<dogen::m2t::entities::element_artefacts>& v) {
     elements_ = v;
 }
 
-void model::elements(const std::list<dogen::m2t::entities::logical_physical_pair>&& v) {
+void model::elements(const std::list<dogen::m2t::entities::element_artefacts>&& v) {
     elements_ = std::move(v);
 }
 

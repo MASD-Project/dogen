@@ -444,8 +444,8 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      */
     const auto root_id(rm.name().qualified().dot());
     const auto ats(logical::entities::technical_space::agnostic);
-    for (auto pair : m.elements()) {
-        auto& e(*pair.logical_element());
+    for (auto ea : m.elements()) {
+        auto& e(*ea.element());
         const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 

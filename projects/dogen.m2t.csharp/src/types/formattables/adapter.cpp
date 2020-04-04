@@ -41,8 +41,8 @@ adapter::adapt(const transforms::repository& frp,
                              << " Elements in model: " << m.elements().size();
 
     std::unordered_map<std::string, formattable> r;
-    for (const auto& pair : m.elements()) {
-        auto ptr(pair.logical_element());
+    for (const auto& ea : m.elements()) {
+        auto ptr(ea.element());
         formattable fbl;
         fbl.element(ptr);
 

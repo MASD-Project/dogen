@@ -119,8 +119,8 @@ model adapter::adapt(const transforms::repository& frp,
             r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
     }
 
-    for (const auto& pair : m.elements()) {
-        auto ptr(pair.logical_element());
+    for (const auto& ea : m.elements()) {
+        auto ptr(ea.element());
         const auto& e(*ptr);
         const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;

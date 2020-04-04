@@ -368,8 +368,8 @@ apply(const context& ctx, entities::model& m) {
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;
-    for(auto& pair : m.elements()) {
-        auto& e(*pair.logical_element());
+    for(auto& ea : m.elements()) {
+        auto& e(*ea.element());
         compute_enablement_for_element(albmn, galp, eafe, e);
     }
 

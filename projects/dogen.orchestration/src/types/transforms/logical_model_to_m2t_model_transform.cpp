@@ -69,9 +69,9 @@ private:
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
 
-        m2t::entities::logical_physical_pair pair;
-        pair.logical_element(e);
-        result_.elements().push_back(pair);
+        m2t::entities::element_artefacts ea;
+        ea.element(e);
+        result_.elements().push_back(ea);
     }
 
 public:

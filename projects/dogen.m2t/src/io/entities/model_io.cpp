@@ -25,9 +25,9 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.m2t/io/entities/element_archetype_io.hpp"
+#include "dogen.m2t/io/entities/element_artefacts_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
-#include "dogen.m2t/io/entities/logical_physical_pair_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/extraction_properties_io.hpp"
 #include "dogen.m2t/io/entities/global_enablement_properties_io.hpp"
@@ -74,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::m2t::entities::logical_physical_pair>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::m2t::entities::element_artefacts>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

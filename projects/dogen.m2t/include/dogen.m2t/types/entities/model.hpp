@@ -36,9 +36,9 @@
 #include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.m2t/types/entities/element_archetype.hpp"
+#include "dogen.m2t/types/entities/element_artefacts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.m2t/hash/entities/element_archetype_hash.hpp"
-#include "dogen.m2t/types/entities/logical_physical_pair.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/extraction_properties.hpp"
@@ -68,7 +68,7 @@ public:
         const std::string& origin_sha1_hash,
         const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
         const std::unordered_set<dogen::logical::entities::name>& leaves,
-        const std::list<dogen::m2t::entities::logical_physical_pair>& elements,
+        const std::list<dogen::m2t::entities::element_artefacts>& elements,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
@@ -123,10 +123,10 @@ public:
     void leaves(const std::unordered_set<dogen::logical::entities::name>&& v);
     /**@}*/
 
-    const std::list<dogen::m2t::entities::logical_physical_pair>& elements() const;
-    std::list<dogen::m2t::entities::logical_physical_pair>& elements();
-    void elements(const std::list<dogen::m2t::entities::logical_physical_pair>& v);
-    void elements(const std::list<dogen::m2t::entities::logical_physical_pair>&& v);
+    const std::list<dogen::m2t::entities::element_artefacts>& elements() const;
+    std::list<dogen::m2t::entities::element_artefacts>& elements();
+    void elements(const std::list<dogen::m2t::entities::element_artefacts>& v);
+    void elements(const std::list<dogen::m2t::entities::element_artefacts>&& v);
 
     /**
      * @brief The module that represents the model.
@@ -222,7 +222,7 @@ private:
     std::string origin_sha1_hash_;
     std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types> references_;
     std::unordered_set<dogen::logical::entities::name> leaves_;
-    std::list<dogen::m2t::entities::logical_physical_pair> elements_;
+    std::list<dogen::m2t::entities::element_artefacts> elements_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;

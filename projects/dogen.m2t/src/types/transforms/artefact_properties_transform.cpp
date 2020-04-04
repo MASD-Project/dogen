@@ -98,8 +98,8 @@ apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "artefact properties transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    for(auto& pair : m.elements())
-        update_element(ctx, *pair.logical_element());
+    for(auto& ea : m.elements())
+        update_element(ctx, *ea.element());
 
     stp.end_transform(m);
 }

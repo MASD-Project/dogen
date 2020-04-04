@@ -355,8 +355,8 @@ void global_enablement_transform::populate_local_enablement_properties(
     std::unordered_map<std::string,
                        std::list<boost::shared_ptr<logical::entities::element>>>
         bucketed_elements;
-    for (auto pair : m.elements()) {
-        auto ptr(pair.logical_element());
+    for (auto ea : m.elements()) {
+        auto ptr(ea.element());
         const auto& mn(ptr->meta_name());
         bucketed_elements[mn.qualified().dot()].push_back(ptr);
     }

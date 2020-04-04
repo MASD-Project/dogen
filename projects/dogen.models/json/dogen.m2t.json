@@ -44,7 +44,7 @@
         },
         {
           "name": "elements",
-          "type": "std::list<logical_physical_pair>"
+          "type": "std::list<element_artefacts>"
         },
         {
           "name": "root_module",
@@ -776,18 +776,18 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::logical_physical_pair",
-      "documentation": "Pairs up logical elements with the physical artefacts that will be produced from them.\n",
+      "name": "entities::element_artefacts",
+      "documentation": "Maps logical elements with the physical artefacts that will be produced from them.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "logical_element",
+          "name": "element",
           "type": "boost::shared_ptr<logical::entities::element>",
           "documentation": "Logical element that gives rise to the artefact.\n"
         },
         {
-          "name": "physical_artefact",
-          "type": "boost::shared_ptr<physical::entities::artefact>",
+          "name": "artefacts",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>",
           "documentation": "Physical artefact that will be produced from the logical element.\n"
         }
       ]

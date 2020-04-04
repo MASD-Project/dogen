@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_ENTITIES_LOGICAL_PHYSICAL_PAIR_FWD_HPP
-#define DOGEN_M2T_TYPES_ENTITIES_LOGICAL_PHYSICAL_PAIR_FWD_HPP
+#ifndef DOGEN_M2T_IO_ENTITIES_ELEMENT_ARTEFACTS_IO_HPP
+#define DOGEN_M2T_IO_ENTITIES_ELEMENT_ARTEFACTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.m2t/types/entities/element_artefacts.hpp"
+
 namespace dogen::m2t::entities {
 
-class logical_physical_pair;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::m2t::entities::element_artefacts& v);
 
 }
 

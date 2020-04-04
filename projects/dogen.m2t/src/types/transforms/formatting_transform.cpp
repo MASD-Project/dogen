@@ -171,8 +171,8 @@ void formatting_transform::apply(const context& ctx, entities::model& m) {
     const auto& ns(nrp.all());
     const auto& fm(*ctx.feature_model());
     const auto fgs(make_feature_groups(fm, ns));
-    for(auto& pair : m.elements()) {
-        auto& e(*pair.logical_element());
+    for(auto& ea : m.elements()) {
+        auto& e(*ea.element());
         apply(fgs, e);
     }
 

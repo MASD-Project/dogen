@@ -166,9 +166,9 @@ decoration_repository_factory::make(const entities::model& m) const {
     const auto modeline_group_name(mnf::make_modeline_group_name());
 
     decoration_repository r;
-    for (const auto& pair : m.elements()) {
-        auto& ptr(pair.logical_element());
-        const auto& e(*pair.logical_element());
+    for (const auto& ea : m.elements()) {
+        auto& ptr(ea.element());
+        const auto& e(*ptr);
         BOOST_LOG_SEV(lg, trace) << "Processing element: "
                                  << e.name().qualified().dot()
                                  << " meta-element name: "
