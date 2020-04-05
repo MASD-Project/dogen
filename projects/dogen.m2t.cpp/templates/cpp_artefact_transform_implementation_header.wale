@@ -9,8 +9,8 @@ std::string {{class.simple_name}}::id() const {
 
 physical::entities::meta_name
 {{class.simple_name}}::physical_name() const {
-    using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
     return r;
 }

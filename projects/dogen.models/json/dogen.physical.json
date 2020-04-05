@@ -1160,7 +1160,7 @@
       ]
     },
     {
-      "name": "helpers::name_factory",
+      "name": "helpers::meta_name_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

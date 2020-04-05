@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.cpp/types/transforms/assistant.hpp"
@@ -38,8 +38,8 @@ std::string primitive_forward_declarations_transform::id() const {
 
 physical::entities::meta_name
 primitive_forward_declarations_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::primitive_forward_declarations_archetype_sn()));
     return r;
 }

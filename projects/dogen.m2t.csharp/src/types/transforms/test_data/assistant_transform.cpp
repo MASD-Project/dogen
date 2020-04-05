@@ -20,7 +20,7 @@
  */
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
 #include "dogen.m2t.csharp/types/transforms/test_data/traits.hpp"
@@ -39,8 +39,8 @@ std::string assistant_transform::id() const {
 
 physical::entities::meta_name
 assistant_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static const auto r(name_factory::make(csharp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::assistant_archetype_sn()));
     return r;
 }

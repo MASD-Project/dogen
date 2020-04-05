@@ -21,7 +21,7 @@
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
@@ -45,8 +45,8 @@ std::string enum_implementation_transform::id() const {
 
 physical::entities::meta_name
 enum_implementation_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::enum_implementation_archetype_sn()));
     return r;
 }

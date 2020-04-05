@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
@@ -44,8 +44,8 @@ std::string logic_less_template_transform::id() const {
 
 physical::entities::meta_name
 logic_less_template_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static const auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::logic_less_template_archetype_sn()));
     return r;
 }

@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -48,8 +48,8 @@ std::string feature_bundle_implementation_transform::id() const {
 
 physical::entities::meta_name
 feature_bundle_implementation_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::feature_bundle_implementation_archetype_sn()));
     return r;
 }

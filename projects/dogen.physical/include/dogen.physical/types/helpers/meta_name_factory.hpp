@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_NAME_FACTORY_HPP
-#define DOGEN_PHYSICAL_TYPES_HELPERS_NAME_FACTORY_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_FACTORY_HPP
+#define DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@ namespace dogen::physical::helpers {
 /**
  * @brief Constructs physical names.
  */
-class name_factory final {
+class meta_name_factory final {
 public:
     static entities::meta_name make(const std::string& backend,
         const std::string& facet, const std::string& archetype);

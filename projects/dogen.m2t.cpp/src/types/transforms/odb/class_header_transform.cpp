@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/helpers/name_factory.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -42,8 +42,8 @@ std::string class_header_transform::id() const {
 
 physical::entities::meta_name
 class_header_transform::physical_name() const {
-    using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend_sn(),
+    using physical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::class_header_archetype_sn()));
     return r;
 }
