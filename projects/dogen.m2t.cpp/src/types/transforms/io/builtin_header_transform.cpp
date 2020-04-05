@@ -39,14 +39,14 @@ std::string builtin_header_transform::id() const {
 }
 
 physical::entities::meta_name
-builtin_header_transform::physical_name() const {
+builtin_header_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::builtin_header_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& builtin_header_transform::meta_name() const {
+const logical::entities::name& builtin_header_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;

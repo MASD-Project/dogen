@@ -137,7 +137,7 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     for (const auto& fmt : i->second) {
-        const auto n(fmt->physical_name());
+        const auto n(fmt->physical_meta_name());
         const auto arch(n.qualified());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
                                  << " using formatter: " << fmt->id();

@@ -44,14 +44,14 @@ std::string enum_implementation_transform::id() const {
 }
 
 physical::entities::meta_name
-enum_implementation_transform::physical_name() const {
+enum_implementation_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::enum_implementation_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& enum_implementation_transform::meta_name() const {
+const logical::entities::name& enum_implementation_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_enumeration_name());
     return r;
@@ -89,7 +89,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
 
 physical::entities::artefact enum_implementation_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
     const auto& ye(a.as<logical::entities::structural::enumeration>(e));
 
     {

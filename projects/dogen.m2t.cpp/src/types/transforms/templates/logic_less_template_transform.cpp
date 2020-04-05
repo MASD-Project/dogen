@@ -43,14 +43,15 @@ std::string logic_less_template_transform::id() const {
 }
 
 physical::entities::meta_name
-logic_less_template_transform::physical_name() const {
+logic_less_template_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::logic_less_template_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& logic_less_template_transform::meta_name() const {
+const logical::entities::name&
+logic_less_template_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_templating_logic_less_templates_name());
     return r;
@@ -86,7 +87,7 @@ std::list<std::string> logic_less_template_transform::inclusion_dependencies(
 
 physical::entities::artefact logic_less_template_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
     auto r(a.make_artefact());
     r.overwrite(false);
     return r;

@@ -94,7 +94,7 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
     const auto& fmts(i->second);
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
-        const auto pn(fmt.physical_name());
+        const auto pn(fmt.physical_meta_name());
         const auto arch(pn.qualified());
         const auto& ap(get_artefact_properties(e, arch));
 

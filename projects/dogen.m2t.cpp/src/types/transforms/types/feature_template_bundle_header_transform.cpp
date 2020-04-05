@@ -46,14 +46,14 @@ std::string feature_template_bundle_header_transform::id() const {
 }
 
 physical::entities::meta_name
-feature_template_bundle_header_transform::physical_name() const {
+feature_template_bundle_header_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::feature_template_bundle_header_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& feature_template_bundle_header_transform::meta_name() const {
+const logical::entities::name& feature_template_bundle_header_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_bundle_name());
     return r;
@@ -101,7 +101,7 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
 
 physical::entities::artefact feature_template_bundle_header_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
     const auto& fb(a.as<logical::entities::variability::feature_template_bundle>(e));
 
     {

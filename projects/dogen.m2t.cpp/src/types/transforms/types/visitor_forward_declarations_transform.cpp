@@ -37,14 +37,14 @@ std::string visitor_forward_declarations_transform::id() const {
 }
 
 physical::entities::meta_name
-visitor_forward_declarations_transform::physical_name() const {
+visitor_forward_declarations_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::visitor_forward_declarations_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& visitor_forward_declarations_transform::meta_name() const {
+const logical::entities::name& visitor_forward_declarations_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visitor_name());
     return r;
@@ -73,7 +73,7 @@ std::list<std::string> visitor_forward_declarations_transform::inclusion_depende
 
 physical::entities::artefact visitor_forward_declarations_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name(), true/*requires_header_guard*/);
+    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::visitor>(e));
 
     {

@@ -71,7 +71,7 @@ void canonical_archetype_expander::expand(const transforms::repository& frp,
         if (fmt.inclusion_support_type() != cs)
             continue;
 
-        const auto pn(fmt.physical_name());
+        const auto pn(fmt.physical_meta_name());
         const auto arch(pn.qualified());
         using qnb = physical::helpers::qualified_meta_name_builder;
         const auto fct(qnb::build_facet(pn));
