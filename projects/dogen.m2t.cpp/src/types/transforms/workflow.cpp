@@ -134,7 +134,12 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
 
              const auto& p(a.name().qualified());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-             r.push_back(aptr);
+             if (!a.content().empty()) {
+                 BOOST_LOG_SEV(lg, debug) << "Template has content.";
+                 r.push_back(aptr);
+             } else {
+                 BOOST_LOG_SEV(lg, debug) << "Template has no content.";
+             }
         } else {
              BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
              BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
