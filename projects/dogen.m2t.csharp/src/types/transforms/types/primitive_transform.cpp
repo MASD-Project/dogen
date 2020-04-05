@@ -39,14 +39,14 @@ std::string primitive_transform::id() const {
 }
 
 physical::entities::meta_name
-primitive_transform::physical_name() const {
+primitive_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::primitive_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& primitive_transform::meta_name() const {
+const logical::entities::name& primitive_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());
     return r;
@@ -66,7 +66,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 physical::entities::artefact primitive_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
     const auto id(e.name().qualified().dot());
-    assistant a(ctx, e, physical_name());
+    assistant a(ctx, e, physical_meta_name());
     const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());

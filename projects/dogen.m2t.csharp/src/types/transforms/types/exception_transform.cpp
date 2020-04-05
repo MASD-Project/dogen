@@ -38,14 +38,14 @@ std::string exception_transform::id() const {
 }
 
 physical::entities::meta_name
-exception_transform::physical_name() const {
+exception_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::exception_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& exception_transform::meta_name() const {
+const logical::entities::name& exception_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_exception_name());
     return r;
@@ -64,7 +64,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact exception_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name());
+    assistant a(ctx, e, physical_meta_name());
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

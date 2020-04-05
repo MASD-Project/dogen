@@ -79,7 +79,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     /*
      * Validate the physical name.
      */
-    const auto& n(t->physical_name());
+    const auto& n(t->physical_meta_name());
     physical::helpers::meta_name_validator::validate_archetype_name(n);
 
     /*
@@ -93,7 +93,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * does not require them.
      */
     physical_meta_names_.push_front(n);
-    const auto mn(t->meta_name().qualified().dot());
+    const auto mn(t->logical_meta_name().qualified().dot());
     auto& g(physical_meta_names_by_logical_meta_name_[mn]);
     g.meta_names().push_back(n);
 

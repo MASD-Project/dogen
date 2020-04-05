@@ -4,8 +4,8 @@ public:
 
 public:
     std::string id() const override;
-    physical::entities::meta_name physical_name() const override;
-    const logical::entities::name& meta_name() const override;
+    physical::entities::meta_name physical_meta_name() const override;
+    const logical::entities::name& logical_meta_name() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(

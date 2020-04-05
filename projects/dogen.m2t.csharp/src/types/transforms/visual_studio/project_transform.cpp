@@ -36,12 +36,12 @@ std::string project_transform::static_id() {
 }
 
 std::string project_transform::id() const {
-    static auto r(physical_name().qualified());
+    static auto r(physical_meta_name().qualified());
     return r;
 }
 
 physical::entities::meta_name
-project_transform::physical_name() const {
+project_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::project_archetype_sn()));
@@ -49,7 +49,7 @@ project_transform::physical_name() const {
 }
 
 const logical::entities::name&
-project_transform::meta_name() const {
+project_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_project_name());
     return r;
@@ -70,7 +70,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact project_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name());
+    assistant a(ctx, e, physical_meta_name());
     using logical::entities::visual_studio::project;
     const auto& proj(a.as<project>(static_id(), e));
 

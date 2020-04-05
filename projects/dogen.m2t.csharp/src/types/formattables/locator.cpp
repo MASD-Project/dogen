@@ -69,7 +69,7 @@ locator::feature_group locator::make_feature_group(
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto n(fmt.physical_name());
+        const auto n(fmt.physical_meta_name());
         const auto arch(n.qualified());
         const auto fct(qnb::build_facet(n));
         const auto pf(traits::postfix());

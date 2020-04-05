@@ -8,14 +8,14 @@ std::string {{class.simple_name}}::id() const {
 }
 
 physical::entities::meta_name
-{{class.simple_name}}::physical_name() const {
+{{class.simple_name}}::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& {{class.simple_name}}::meta_name() const {
+const logical::entities::name& {{class.simple_name}}::logical_meta_name() const {
     using {{meta_name_factory}};
     static auto r(meta_name_factory::make_{{meta_element}}_name());
     return r;

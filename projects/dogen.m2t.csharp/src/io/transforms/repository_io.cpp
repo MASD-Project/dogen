@@ -75,7 +75,7 @@ inline std::ostream& to_stream(std::ostream& s,
         s <<  "{ \"" << i->first << "\":" << "[ ";
         for(auto j(i->second.begin()); j != i->second.end(); ++j) {
             if (j != i->second.begin()) s << ", ";
-                s << (*j)->physical_name();
+                s << (*j)->physical_meta_name();
         }
             s << "] }";
     }

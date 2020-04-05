@@ -37,14 +37,14 @@ std::string builtin_transform::id() const {
 }
 
 physical::entities::meta_name
-builtin_transform::physical_name() const {
+builtin_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::builtin_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& builtin_transform::meta_name() const {
+const logical::entities::name& builtin_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;

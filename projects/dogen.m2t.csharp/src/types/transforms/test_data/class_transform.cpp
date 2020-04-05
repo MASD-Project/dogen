@@ -38,14 +38,14 @@ std::string class_transform::id() const {
 }
 
 physical::entities::meta_name
-class_transform::physical_name() const {
+class_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::class_archetype_sn()));
     return r;
 }
 
-const logical::entities::name& class_transform::meta_name() const {
+const logical::entities::name& class_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
@@ -64,7 +64,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact class_transform::apply(
     const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name());
+    assistant a(ctx, e, physical_meta_name());
     const auto& o(a.as<logical::entities::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());

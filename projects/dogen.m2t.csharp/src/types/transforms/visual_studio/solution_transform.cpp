@@ -37,12 +37,12 @@ std::string solution_transform::static_id() {
 }
 
 std::string solution_transform::id() const {
-    static auto r(physical_name().qualified());
+    static auto r(physical_meta_name().qualified());
     return r;
 }
 
 physical::entities::meta_name
-solution_transform::physical_name() const {
+solution_transform::physical_meta_name() const {
     using physical::helpers::meta_name_factory;
     static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
         traits::facet_sn(), traits::solution_archetype_sn()));
@@ -50,7 +50,7 @@ solution_transform::physical_name() const {
 }
 
 const logical::entities::name&
-solution_transform::meta_name() const {
+solution_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
@@ -71,7 +71,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact solution_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name());
+    assistant a(ctx, e, physical_meta_name());
     using logical::entities::visual_studio::solution;
     const auto& sln(a.as<solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;

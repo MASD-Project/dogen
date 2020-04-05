@@ -52,15 +52,16 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief Physical name linked to this formatter.
+     * @brief Physical meta-name that the physical elements generated
+     * by this formatter belong to.
      */
-    virtual physical::entities::meta_name physical_name() const = 0;
+    virtual physical::entities::meta_name physical_meta_name() const = 0;
 
     /**
-     * @brief Returns name of the meta-model element that this
-     * formatter supports.
+     * @brief Logical meta-name of the types of entities consumed by
+     * this formatter.
      */
-    virtual const logical::entities::name& meta_name() const = 0;
+    virtual const logical::entities::name& logical_meta_name() const = 0;
 
 public:
     /**
