@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
@@ -33,16 +33,16 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

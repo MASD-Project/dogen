@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #>
@@ -36,40 +36,40 @@ std::list<std::string> visitor_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact visitor_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& v(a.as<logical::entities::structural::visitor>(e));
+void visitor_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& v(ast.as<logical::entities::structural::visitor>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(v.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(v.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
-            a.comment(v.documentation());
+            ast.comment(v.documentation());
             if (!v.parent())
 #>
 class <#= v.name().simple() #> {
 <#+
             else {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));
+                const auto pqn(ast.get_qualified_name(pn));
 #>
 class <#= v.name().simple() #> : public <#= pqn #> {
 <#+
             }
 #>
 public:
-    virtual ~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> = 0;
+    virtual ~<#= v.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> = 0;
 
 public:
 <#+
             if (v.parent()) {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));
+                const auto pqn(ast.get_qualified_name(pn));
 #>
     using <#= pqn #>::visit;
 
@@ -82,22 +82,22 @@ public:
 #>
 
 <#+
-                const auto qn(a.get_qualified_name(t));
+                const auto qn(ast.get_qualified_name(t));
                 const auto doc("Accept visits for type " + qn);
-                a.comment_start_method_group(doc);
+                ast.comment_start_method_group(doc);
 #>
     virtual void visit(const <#= qn #>&) const { }
     virtual void visit(const <#= qn #>&) { }
     virtual void visit(<#= qn #>&) const { }
     virtual void visit(<#= qn #>&) { }
 <#+
-                a.comment_end_method_group(doc);
+                ast.comment_end_method_group(doc);
                 is_first = false;
             }
 #>
 };
 
-inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> { }
+inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> { }
 
 <#+
         } // snf
@@ -105,7 +105,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= a.make_noexcept_
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

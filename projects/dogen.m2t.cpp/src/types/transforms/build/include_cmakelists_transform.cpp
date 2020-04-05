@@ -89,26 +89,26 @@ std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact include_cmakelists_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void include_cmakelists_transform::apply(const context& ctx,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
-    const auto& c(a.as<cmakelists>(e));
+    const auto& c(ast.as<cmakelists>(e));
 
     {
         const auto ts(logical::entities::technical_space::cmake);
-        a.make_decoration_preamble(e, ts);
-a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
-       if (a.is_tests_enabled()) {
-a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.tests_directory_name() << ")" << std::endl;
+        ast.make_decoration_preamble(e, ts);
+ast.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
+       if (ast.is_tests_enabled()) {
+ast.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.tests_directory_name() << ")" << std::endl;
        }
-a.stream() << std::endl;
-a.stream() << "install(" << std::endl;
-a.stream() << "    DIRECTORY " << c.include_directory_path() << "/" << std::endl;
-a.stream() << "    DESTINATION " << c.include_directory_path() << "/" << std::endl;
-a.stream() << "    COMPONENT headers" << std::endl;
-a.stream() << "    FILES_MATCHING PATTERN \"*." << c.header_file_extension() << "\")" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "install(" << std::endl;
+ast.stream() << "    DIRECTORY " << c.include_directory_path() << "/" << std::endl;
+ast.stream() << "    DESTINATION " << c.include_directory_path() << "/" << std::endl;
+ast.stream() << "    COMPONENT headers" << std::endl;
+ast.stream() << "    FILES_MATCHING PATTERN \"*." << c.header_file_extension() << "\")" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

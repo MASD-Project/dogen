@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #>
@@ -24,16 +24,16 @@ std::list<std::string> visitor_forward_declarations_transform::inclusion_depende
     return r;
 }
 
-physical::entities::artefact visitor_forward_declarations_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::visitor>(e));
+void visitor_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::visitor>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 class <#= o.name().simple() #>;
@@ -44,7 +44,7 @@ class <#= o.name().simple() #>;
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

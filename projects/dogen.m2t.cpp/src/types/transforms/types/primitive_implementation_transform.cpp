@@ -92,105 +92,105 @@ primitive_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto attr(p.value_attribute());
 
             /*
              * Default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "()" << std::endl;
-a.stream() << "    : " << attr.member_variable_name() << "(static_cast<" << a.get_qualified_name(attr.parsed_type()) << ">(0)) { }" << std::endl;
+            if (ast.requires_manual_default_constructor()) {
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "()" << std::endl;
+ast.stream() << "    : " << attr.member_variable_name() << "(static_cast<" << ast.get_qualified_name(attr.parsed_type()) << ">(0)) { }" << std::endl;
             }
 
             /*
              * Move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
-a.stream() << "    : " << attr.member_variable_name() << "(std::move(rhs." << attr.member_variable_name() << ")) { }" << std::endl;
+            if (ast.requires_manual_move_constructor()) {
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
+ast.stream() << "    : " << attr.member_variable_name() << "(std::move(rhs." << attr.member_variable_name() << ")) { }" << std::endl;
             }
 
             /*
              * Complete constructor.
              */
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
-a.stream() << "    : " << attr.member_variable_name() << "(" << attr.name().simple() << ") { }" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "(const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
+ast.stream() << "    : " << attr.member_variable_name() << "(" << attr.name().simple() << ") { }" << std::endl;
+ast.stream() << std::endl;
             /*
              * Getters and setters
              */
              if (attr.parsed_type().is_current_simple_type()) {
-a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << ast.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 if (!p.is_immutable()) {
-a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 }
             } else {
-a.stream() << "const " << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << "const " << ast.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
                 if (!p.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = std::move(v);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << ast.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = std::move(v);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 }
             }
 
             /*
              * Equality.
              */
-a.stream() << "bool " << sn << "::operator==(const " << sn << "& rhs) const {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << " == rhs." << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "bool " << sn << "::operator==(const " << sn << "& rhs) const {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << " == rhs." << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             /*
              * Swap and assignment.
              */
             if (!p.is_immutable()) {
-a.stream() << "void " << sn << "::swap(" << sn << "& other)" << a.make_noexcept_keyword_text() << " {" << std::endl;
-a.stream() << "    using std::swap;" << std::endl;
-a.stream() << "    swap(" << attr.member_variable_name() << ", other." << attr.member_variable_name() << ");" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
-a.stream() << "    using std::swap;" << std::endl;
-a.stream() << "    swap(*this, other);" << std::endl;
-a.stream() << "    return *this;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "void " << sn << "::swap(" << sn << "& other)" << ast.make_noexcept_keyword_text() << " {" << std::endl;
+ast.stream() << "    using std::swap;" << std::endl;
+ast.stream() << "    swap(" << attr.member_variable_name() << ", other." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
+ast.stream() << "    using std::swap;" << std::endl;
+ast.stream() << "    swap(*this, other);" << std::endl;
+ast.stream() << "    return *this;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             }
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

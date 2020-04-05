@@ -85,8 +85,9 @@ const std::string helpless_family("No registered helpers found for family: ");
 namespace dogen::m2t::cpp::transforms {
 
 assistant::assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::meta_name& pmn, const bool requires_header_guard)
-    : element_(e), context_(ctx),
+    const physical::entities::meta_name& pmn, const bool requires_header_guard,
+    physical::entities::artefact& a)
+    : element_(e), context_(ctx), artefact_(a),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),
             pmn.qualified())),
@@ -674,13 +675,12 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-physical::entities::artefact assistant::make_artefact() const {
-    physical::entities::artefact r;
-    r.content(stream_.str());
-    r.name().qualified(artefact_properties_.file_path());
-    r.logical_name().simple(element_.name().simple());
-    r.logical_name().qualified(element_.name().qualified().dot());
-    r.origin_sha1_hash(element_.origin_sha1_hash());
+void assistant::update_artefact() const {
+    artefact_.content(stream_.str());
+    artefact_.name().qualified(artefact_properties_.file_path());
+    artefact_.logical_name().simple(element_.name().simple());
+    artefact_.logical_name().qualified(element_.name().qualified().dot());
+    artefact_.origin_sha1_hash(element_.origin_sha1_hash());
 
     const auto& ap(element_.artefact_properties());
     const auto arch(physical_meta_name_.qualified());
@@ -690,14 +690,12 @@ physical::entities::artefact assistant::make_artefact() const {
         BOOST_THROW_EXCEPTION(
             formatting_error(artefact_properties_missing + arch));
     }
-    r.overwrite(i->second.overwrite());
+    artefact_.overwrite(i->second.overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;
-    op.type(r.overwrite() ? ot::write : ot::create_only);
-    r.operation(op);
-
-    return r;
+    op.type(artefact_.overwrite() ? ot::write : ot::create_only);
+    artefact_.operation(op);
 }
 
 }

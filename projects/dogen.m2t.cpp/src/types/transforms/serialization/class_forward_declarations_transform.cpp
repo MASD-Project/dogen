@@ -79,28 +79,28 @@ std::list<std::string> class_forward_declarations_transform::inclusion_dependenc
     return builder.build();
 }
 
-physical::entities::artefact class_forward_declarations_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
-        const auto qn(a.get_qualified_name(o.name()));
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
-a.stream() << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        const auto qn(ast.get_qualified_name(o.name()));
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<class Archive>" << std::endl;
+ast.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<class Archive>" << std::endl;
+ast.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

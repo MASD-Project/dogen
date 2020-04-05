@@ -72,30 +72,30 @@ std::list<std::string> type_registrar_header_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact type_registrar_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));
+void type_registrar_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& rg(ast.as<logical::entities::serialization::type_registrar>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(rg.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(rg.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(e.name().simple());
-a.stream() << std::endl;
-a.stream() << "class " << sn << " {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "static void register_types(Archive& ar);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "class " << sn << " {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "static void register_types(Archive& ar);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "};" << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
 
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

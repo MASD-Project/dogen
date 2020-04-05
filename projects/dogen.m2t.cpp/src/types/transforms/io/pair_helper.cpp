@@ -66,26 +66,25 @@ bool pair_helper::is_enabled(const assistant& a,
     return a.is_streaming_enabled(hp);
 }
 
-void pair_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void pair_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
         const auto first(hp.direct_descendants().front());
         const auto second(hp.direct_descendants().back());
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    s << \"\\\"first\\\": \" << " << a.streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
-a.stream() << "    s << \"\\\"second\\\": \" << " << a.streaming_for_type(second, "v.second") << ";" << std::endl;
-a.stream() << "    s << \" }\";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+ast.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << n_qn << "\\\"\" << \", \";" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    s << \"\\\"first\\\": \" << " << ast.streaming_for_type(first, "v.first") << " << \", \";" << std::endl;
+ast.stream() << "    s << \"\\\"second\\\": \" << " << ast.streaming_for_type(second, "v.second") << ";" << std::endl;
+ast.stream() << "    s << \" }\";" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     }
-a.stream() << std::endl;
+ast.stream() << std::endl;
 }
 }

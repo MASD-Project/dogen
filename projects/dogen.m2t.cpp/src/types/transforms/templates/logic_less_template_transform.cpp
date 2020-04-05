@@ -85,11 +85,10 @@ std::list<std::string> logic_less_template_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact logic_less_template_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    auto r(a.make_artefact());
-    r.overwrite(false);
-    return r;
+void logic_less_template_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    ast.update_artefact();
+    a.overwrite(false);
 }
 }

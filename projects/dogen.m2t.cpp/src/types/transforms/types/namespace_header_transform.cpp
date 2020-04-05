@@ -72,32 +72,32 @@ std::list<std::string> namespace_header_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact namespace_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& m(a.as<logical::entities::structural::module>(e));
+void namespace_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& m(ast.as<logical::entities::structural::module>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            if (a.requires_nested_namespaces()) {
-                a.comment(m.documentation());
-                const auto ns(a.make_namespaces(e.name(),
+            if (ast.requires_nested_namespaces()) {
+                ast.comment(m.documentation());
+                const auto ns(ast.make_namespaces(e.name(),
                         false/*detect_model_name*/));
-                auto snf(a.make_scoped_namespace_formatter(ns));
+                auto snf(ast.make_scoped_namespace_formatter(ns));
             } else {
-                const auto ns(a.make_namespaces(m.name()));
-                auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-                a.comment(m.documentation());
-a.stream() << "namespace " << m.name().simple() << " {" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+                const auto ns(ast.make_namespaces(m.name()));
+                auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+                ast.comment(m.documentation());
+ast.stream() << "namespace " << m.name().simple() << " {" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             }
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

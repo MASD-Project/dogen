@@ -90,51 +90,51 @@ std::list<std::string> project_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact project_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void project_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::project;
-    const auto& proj(a.as<project>(e));
+    const auto& proj(ast.as<project>(e));
 
-a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
-a.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
-a.stream() << "  <PropertyGroup>" << std::endl;
-a.stream() << "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" << std::endl;
-a.stream() << "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" << std::endl;
-a.stream() << "    <ProjectGuid>{" << proj.guid() << "}</ProjectGuid>" << std::endl;
-a.stream() << "    <OutputType>Library</OutputType>" << std::endl;
-a.stream() << "    <RootNamespace>" << proj.project_name() << "</RootNamespace>" << std::endl;
-a.stream() << "    <AssemblyName>" << proj.project_name() << "</AssemblyName>" << std::endl;
-a.stream() << "  </PropertyGroup>" << std::endl;
-a.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" << std::endl;
-a.stream() << "    <DebugSymbols>true</DebugSymbols>" << std::endl;
-a.stream() << "    <DebugType>full</DebugType>" << std::endl;
-a.stream() << "    <Optimize>false</Optimize>" << std::endl;
-a.stream() << "    <OutputPath>bin\\Debug</OutputPath>" << std::endl;
-a.stream() << "    <DefineConstants>DEBUG;</DefineConstants>" << std::endl;
-a.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
-a.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
-a.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
-a.stream() << "  </PropertyGroup>" << std::endl;
-a.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">" << std::endl;
-a.stream() << "    <DebugType>full</DebugType>" << std::endl;
-a.stream() << "    <Optimize>true</Optimize>" << std::endl;
-a.stream() << "    <OutputPath>bin\\Release</OutputPath>" << std::endl;
-a.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
-a.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
-a.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
-a.stream() << "  </PropertyGroup>" << std::endl;
-a.stream() << "  <ItemGroup>" << std::endl;
-a.stream() << "    <Reference Include=\"System\" />" << std::endl;
-a.stream() << "  </ItemGroup>" << std::endl;
+ast.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
+ast.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
+ast.stream() << "  <PropertyGroup>" << std::endl;
+ast.stream() << "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" << std::endl;
+ast.stream() << "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" << std::endl;
+ast.stream() << "    <ProjectGuid>{" << proj.guid() << "}</ProjectGuid>" << std::endl;
+ast.stream() << "    <OutputType>Library</OutputType>" << std::endl;
+ast.stream() << "    <RootNamespace>" << proj.project_name() << "</RootNamespace>" << std::endl;
+ast.stream() << "    <AssemblyName>" << proj.project_name() << "</AssemblyName>" << std::endl;
+ast.stream() << "  </PropertyGroup>" << std::endl;
+ast.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" << std::endl;
+ast.stream() << "    <DebugSymbols>true</DebugSymbols>" << std::endl;
+ast.stream() << "    <DebugType>full</DebugType>" << std::endl;
+ast.stream() << "    <Optimize>false</Optimize>" << std::endl;
+ast.stream() << "    <OutputPath>bin\\Debug</OutputPath>" << std::endl;
+ast.stream() << "    <DefineConstants>DEBUG;</DefineConstants>" << std::endl;
+ast.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
+ast.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
+ast.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
+ast.stream() << "  </PropertyGroup>" << std::endl;
+ast.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">" << std::endl;
+ast.stream() << "    <DebugType>full</DebugType>" << std::endl;
+ast.stream() << "    <Optimize>true</Optimize>" << std::endl;
+ast.stream() << "    <OutputPath>bin\\Release</OutputPath>" << std::endl;
+ast.stream() << "    <ErrorReport>prompt</ErrorReport>" << std::endl;
+ast.stream() << "    <WarningLevel>4</WarningLevel>" << std::endl;
+ast.stream() << "    <ConsolePause>false</ConsolePause>" << std::endl;
+ast.stream() << "  </PropertyGroup>" << std::endl;
+ast.stream() << "  <ItemGroup>" << std::endl;
+ast.stream() << "    <Reference Include=\"System\" />" << std::endl;
+ast.stream() << "  </ItemGroup>" << std::endl;
         for (const auto& ig : proj.item_groups()) {
-a.stream() << "  <ItemGroup>" << std::endl;
+ast.stream() << "  <ItemGroup>" << std::endl;
             for (const auto& i : ig.items())
-a.stream() << "    <" << i.name() << " Include=\"" << i.include() << "\" />" << std::endl;
-a.stream() << "  </ItemGroup>" << std::endl;
+ast.stream() << "    <" << i.name() << " Include=\"" << i.include() << "\" />" << std::endl;
+ast.stream() << "  </ItemGroup>" << std::endl;
         }
-a.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.Cpp.targets\" />" << std::endl;
-a.stream() << "</Project>" << std::endl;
-    return a.make_artefact();
+ast.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.Cpp.targets\" />" << std::endl;
+ast.stream() << "</Project>" << std::endl;
+    ast.update_artefact();
 }
 }

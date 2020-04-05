@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/smart_pointer_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
@@ -11,13 +11,12 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void smart_pointer_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void smart_pointer_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
         const auto containee(hp.direct_descendants().front());
 #>
 
@@ -26,7 +25,7 @@ inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
     if (v)
-        s << "\"data\": " << <#= a.streaming_for_type(containee, "*v") #>;
+        s << "\"data\": " << <#= ast.streaming_for_type(containee, "*v") #>;
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";

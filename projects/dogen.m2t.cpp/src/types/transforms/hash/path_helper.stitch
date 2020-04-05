@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
@@ -11,7 +11,7 @@
 <#+
 
 void path_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());

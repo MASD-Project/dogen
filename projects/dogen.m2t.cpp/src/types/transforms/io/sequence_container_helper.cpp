@@ -66,25 +66,24 @@ bool sequence_container_helper::is_enabled(const assistant& a,
     return a.is_streaming_enabled(hp);
 }
 
-void sequence_container_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void sequence_container_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
         const auto containee(hp.direct_descendants().front());
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
-a.stream() << "    s << \"[ \";" << std::endl;
-a.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
-a.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
-a.stream() << "        s << " << a.streaming_for_type(containee, "*i") << ";" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    s << \"] \";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << qn << "& v) {" << std::endl;
+ast.stream() << "    s << \"[ \";" << std::endl;
+ast.stream() << "    for (auto i(v.begin()); i != v.end(); ++i) {" << std::endl;
+ast.stream() << "        if (i != v.begin()) s << \", \";" << std::endl;
+ast.stream() << "        s << " << ast.streaming_for_type(containee, "*i") << ";" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "    s << \"] \";" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     }
-a.stream() << std::endl;
+ast.stream() << std::endl;
 }
 }

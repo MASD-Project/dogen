@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp>
@@ -123,19 +123,19 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
-        const auto qn(a.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        const auto qn(ast.get_qualified_name(o.name()));
         auto list(e.name().location().internal_modules());
         list.push_back(o.name().simple());
         const std::string test_suite_name(boost::join(list, "_"));
 
         std::string type_name("auto");
-        if (a.is_cpp_standard_98())
+        if (ast.is_cpp_standard_98())
             type_name = qn;
 
 #>
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_SUITE(<#= test_suite_name #>_tests)
          * fake test for now. The real solution will be to filter
          * based on element state.
          */
-        if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
+        if (o.all_attributes().empty() || !ast.is_test_data_enabled()) {
             /*
              * No tests.
              */
@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
                 }
 
                 // FIXME: should be 11 or greater.
-                if (!a.is_cpp_standard_98()) {
+                if (!ast.is_cpp_standard_98()) {
 #>
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
     <#= qn #>_generator g;
@@ -280,7 +280,7 @@ BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
                 }
             }
 
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 /*
                  * IO tests.
                  */
@@ -314,12 +314,12 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 <#+
             }
 
-            if (a.is_serialization_enabled()) {
+            if (ast.is_serialization_enabled()) {
                 /*
                  * Serialization tests.
                  */
                  const auto registrar_qn(o.type_registrar() ?
-                     a.get_qualified_name(*o.type_registrar()) : std::string());
+                     ast.get_qualified_name(*o.type_registrar()) : std::string());
 
                 if (o.is_parent()) {
 #>
@@ -547,7 +547,7 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
                 }
             }
 
-            if (a.is_hash_enabled() && !o.is_parent()) {
+            if (ast.is_hash_enabled() && !o.is_parent()) {
                 /*
                  * hash tests.
                  */
@@ -579,6 +579,6 @@ BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
 BOOST_AUTO_TEST_SUITE_END()
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

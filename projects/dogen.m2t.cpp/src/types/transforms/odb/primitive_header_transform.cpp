@@ -79,48 +79,48 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
         const auto sn(p.name().simple());
-        const auto qn(a.get_qualified_name(p.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(p.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         const auto attr(p.value_attribute());
 
         if (!p.orm_properties() || p.orm_properties()->odb_pragmas().empty()) {
-a.stream() << "// class has no ODB pragmas defined." << std::endl;
-a.stream() << std::endl;
+ast.stream() << "// class has no ODB pragmas defined." << std::endl;
+ast.stream() << std::endl;
         } else {
             {
-                const auto ns(a.make_namespaces(p.name()));
-                auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "#ifdef ODB_COMPILER" << std::endl;
-a.stream() << std::endl;
+                const auto ns(ast.make_namespaces(p.name()));
+                auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "#ifdef ODB_COMPILER" << std::endl;
+ast.stream() << std::endl;
                 for (const auto& pg : p.orm_properties()->odb_pragmas())
-a.stream() << pg << std::endl;
+ast.stream() << pg << std::endl;
 
                 bool is_first(true);
                 if (p.value_attribute().orm_properties() &&
                     !p.value_attribute().orm_properties()->odb_pragmas().empty()) {
                     for (const auto& pg : p.value_attribute().orm_properties()->odb_pragmas()) {
                         if (is_first)
-a.stream() << std::endl;
+ast.stream() << std::endl;
                             is_first = false;
-a.stream() << pg << std::endl;
+ast.stream() << pg << std::endl;
                     }
-a.stream() << std::endl;
-a.stream() << "#endif" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "#endif" << std::endl;
+ast.stream() << std::endl;
                 }
             }
-a.stream() << std::endl;
+ast.stream() << std::endl;
         }
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

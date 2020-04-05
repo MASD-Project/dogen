@@ -78,33 +78,33 @@ std::list<std::string> exception_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact exception_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::exception>(e));
+void exception_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::exception>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-            a.comment(ye.documentation());
-a.stream() << "class " << ye.name().simple() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
-a.stream() << "public:" << std::endl;
-            if (a.is_cpp_standard_98()) {
-a.stream() << "    " << ye.name().simple() << "() {}" << std::endl;
-a.stream() << "    ~" << ye.name().simple() << "() {}" << std::endl;
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+            ast.comment(ye.documentation());
+ast.stream() << "class " << ye.name().simple() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
+ast.stream() << "public:" << std::endl;
+            if (ast.is_cpp_standard_98()) {
+ast.stream() << "    " << ye.name().simple() << "() {}" << std::endl;
+ast.stream() << "    ~" << ye.name().simple() << "() {}" << std::endl;
             } else {
-a.stream() << "    " << ye.name().simple() << "() = default;" << std::endl;
-a.stream() << "    ~" << ye.name().simple() << "()" << a.make_noexcept_keyword_text() << " = default;" << std::endl;
+ast.stream() << "    " << ye.name().simple() << "() = default;" << std::endl;
+ast.stream() << "    ~" << ye.name().simple() << "()" << ast.make_noexcept_keyword_text() << " = default;" << std::endl;
             }
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    explicit " << ye.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-            if (a.is_cpp_standard_98()) {
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    explicit " << ye.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+            if (ast.is_cpp_standard_98()) {
                 // Note: we are using BOOST_NOEXCEPT here by design. The problem is
                 // users may include this header in a C++ 98 project or in a C++ > 11 project;
                 // and we need to have different behaviours. Depending on this inclusion.
@@ -113,19 +113,19 @@ a.stream() << "public:" << std::endl;
                 // but we won't (as we were generated for C++ 98), so we'd be weakening the exception
                 // guarantees. By using the boost macro we will do the right thing hopefully.
                 // And since we already need boost for exception, we should be ok.
-a.stream() << "    const char* what() const BOOST_NOEXCEPT { return(message_.c_str()); }" << std::endl;
+ast.stream() << "    const char* what() const BOOST_NOEXCEPT { return(message_.c_str()); }" << std::endl;
             } else {
-a.stream() << "    const char* what() const" << a.make_noexcept_keyword_text() << " { return(message_.c_str()); }" << std::endl;
+ast.stream() << "    const char* what() const" << ast.make_noexcept_keyword_text() << " { return(message_.c_str()); }" << std::endl;
             }
-a.stream() << std::endl;
-a.stream() << "private:" << std::endl;
-a.stream() << "    const std::string message_;" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "private:" << std::endl;
+ast.stream() << "    const std::string message_;" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

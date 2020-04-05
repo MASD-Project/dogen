@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #>
@@ -31,25 +31,25 @@ std::list<std::string> exception_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact exception_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::exception>(e));
+void exception_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::exception>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
-            a.comment(ye.documentation());
+            ast.comment(ye.documentation());
 #>
 class <#= ye.name().simple() #> : public virtual std::exception, public virtual boost::exception {
 public:
 <#+
-            if (a.is_cpp_standard_98()) {
+            if (ast.is_cpp_standard_98()) {
 #>
     <#= ye.name().simple() #>() {}
     ~<#= ye.name().simple() #>() {}
@@ -57,7 +57,7 @@ public:
             } else {
 #>
     <#= ye.name().simple() #>() = default;
-    ~<#= ye.name().simple() #>()<#= a.make_noexcept_keyword_text() #> = default;
+    ~<#= ye.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> = default;
 <#+
             }
 #>
@@ -67,7 +67,7 @@ public:
 
 public:
 <#+
-            if (a.is_cpp_standard_98()) {
+            if (ast.is_cpp_standard_98()) {
                 // Note: we are using BOOST_NOEXCEPT here by design. The problem is
                 // users may include this header in a C++ 98 project or in a C++ > 11 project;
                 // and we need to have different behaviours. Depending on this inclusion.
@@ -81,7 +81,7 @@ public:
 <#+
             } else {
 #>
-    const char* what() const<#= a.make_noexcept_keyword_text() #> { return(message_.c_str()); }
+    const char* what() const<#= ast.make_noexcept_keyword_text() #> { return(message_.c_str()); }
 <#+
             }
 #>
@@ -96,7 +96,7 @@ private:
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

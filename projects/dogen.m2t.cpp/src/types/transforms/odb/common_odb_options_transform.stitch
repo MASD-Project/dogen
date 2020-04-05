@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
@@ -70,17 +70,17 @@ std::list<std::string> common_odb_options_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact common_odb_options_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void common_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::orm::common_odb_options;
-    const auto& o(a.as<common_odb_options>(e));
+    const auto& o(ast.as<common_odb_options>(e));
 
     {
         const auto ts(logical::entities::technical_space::odb);
-        a.make_decoration_preamble(e, ts);
+        ast.make_decoration_preamble(e, ts);
 
-        if (!a.is_cpp_standard_98()) {
+        if (!ast.is_cpp_standard_98()) {
 #>
 # enable C++11
 --std c++11
@@ -133,6 +133,6 @@ apply(const context& ctx, const logical::entities::element& e) const {
 # --include-regex-trace
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

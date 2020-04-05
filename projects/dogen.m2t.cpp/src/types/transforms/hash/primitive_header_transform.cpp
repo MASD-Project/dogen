@@ -77,39 +77,39 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "struct " << sn << "_hasher {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    static std::size_t hash(const " << sn << "& v);" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "struct " << sn << "_hasher {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static std::size_t hash(const " << sn << "& v);" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
-a.stream() << "namespace std {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<>" << std::endl;
-a.stream() << "struct hash<" << qn << "> {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    size_t operator()(const " << qn << "& v) const {" << std::endl;
-a.stream() << "        return " << qn << "_hasher::hash(v);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace std {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<>" << std::endl;
+ast.stream() << "struct hash<" << qn << "> {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    size_t operator()(const " << qn << "& v) const {" << std::endl;
+ast.stream() << "        return " << qn << "_hasher::hash(v);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

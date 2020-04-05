@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
@@ -37,35 +37,35 @@ primitive_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto attr(p.value_attribute());
 
             /*
              * Default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
+            if (ast.requires_manual_default_constructor()) {
 #>
 
 <#= sn #>::<#= sn #>()
-    : <#= attr.member_variable_name() #>(static_cast<<#= a.get_qualified_name(attr.parsed_type()) #>>(0)) { }
+    : <#= attr.member_variable_name() #>(static_cast<<#= ast.get_qualified_name(attr.parsed_type()) #>>(0)) { }
 <#+
             }
 
             /*
              * Move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
+            if (ast.requires_manual_move_constructor()) {
 #>
 
 <#= sn #>::<#= sn #>(<#= sn #>&& rhs)
@@ -78,7 +78,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
              */
 #>
 
-<#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
+<#= sn #>::<#= sn #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
     : <#= attr.member_variable_name() #>(<#= attr.name().simple() #>) { }
 
 <#+
@@ -87,14 +87,14 @@ apply(const context& ctx, const logical::entities::element& e) const {
              */
              if (attr.parsed_type().is_current_simple_type()) {
 #>
-<#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
+<#= ast.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
     return <#= attr.member_variable_name() #>;
 }
 
 <#+
                 if (!p.is_immutable()) {
 #>
-void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
+void <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #> v) {
     <#= attr.member_variable_name() #> = v;
 }
 
@@ -102,22 +102,22 @@ void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.
                 }
             } else {
 #>
-const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
+const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
     return <#= attr.member_variable_name() #>;
 }
 <#+
                 if (!p.is_immutable()) {
 #>
 
-<#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
+<#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
     return <#= attr.member_variable_name() #>;
 }
 
-void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
+void <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>& v) {
     <#= attr.member_variable_name() #> = v;
 }
 
-void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
+void <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>&& v) {
     <#= attr.member_variable_name() #> = std::move(v);
 }
 
@@ -139,7 +139,7 @@ bool <#= sn #>::operator==(const <#= sn #>& rhs) const {
              */
             if (!p.is_immutable()) {
 #>
-void <#= sn #>::swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #> {
+void <#= sn #>::swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #> {
     using std::swap;
     swap(<#= attr.member_variable_name() #>, other.<#= attr.member_variable_name() #>);
 }
@@ -154,6 +154,6 @@ void <#= sn #>::swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #> {
             }
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

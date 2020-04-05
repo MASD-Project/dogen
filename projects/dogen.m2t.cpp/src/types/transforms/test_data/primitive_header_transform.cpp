@@ -75,44 +75,44 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "class " << sn << "_generator {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    " << sn << "_generator();" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    typedef " << qn << " result_type;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "class " << sn << "_generator {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    " << sn << "_generator();" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    typedef " << qn << " result_type;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
             if (!p.is_immutable())
-a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
-a.stream() << "    static result_type create(const unsigned int position);" << std::endl;
-a.stream() << "    result_type operator()();" << std::endl;
-a.stream() << std::endl;
-a.stream() << "private:" << std::endl;
-a.stream() << "    unsigned int position_;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
+ast.stream() << "    static result_type create(const unsigned int position);" << std::endl;
+ast.stream() << "    result_type operator()();" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "private:" << std::endl;
+ast.stream() << "    unsigned int position_;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

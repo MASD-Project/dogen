@@ -63,17 +63,16 @@ bool path_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void path_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void path_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-a.stream() << std::endl;
-a.stream() << qn << std::endl;
-a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    std::ostringstream s;" << std::endl;
-a.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
-a.stream() << "    return " << qn << "(s.str());" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << std::endl;
+ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+ast.stream() << "    std::ostringstream s;" << std::endl;
+ast.stream() << "    s << \"/a/path/number_\" << position;" << std::endl;
+ast.stream() << "    return " << qn << "(s.str());" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

@@ -37,9 +37,10 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    physical::entities::artefact apply(const formattables::locator& l,
+    void apply(const formattables::locator& l,
         const model_to_text_transform& stock_transform,
-        const context& ctx, const logical::entities::element& e) const;
+        const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const;
 };
 
 }

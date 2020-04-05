@@ -71,23 +71,23 @@ std::list<std::string> primitive_forward_declarations_transform::inclusion_depen
     return r;
 }
 
-physical::entities::artefact primitive_forward_declarations_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(p));
+        auto sbf(ast.make_scoped_boilerplate_formatter(p));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "class " << p.name().simple() << ";" << std::endl;
-a.stream() << std::endl;
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "class " << p.name().simple() << ";" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

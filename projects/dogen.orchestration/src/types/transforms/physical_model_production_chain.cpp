@@ -89,8 +89,7 @@ physical_model_production_chain::apply(const context& ctx,
      * Obtain the physical models.
      */
     using m2t::transforms::model_to_text_chain;
-    auto r(model_to_text_chain::apply(
-            ctx.generation_context(), gms));
+    auto r(model_to_text_chain::apply(ctx.generation_context(), gms));
 
     /*
      * Runn all of the physical transforms against the physical models.

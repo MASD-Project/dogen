@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
@@ -32,21 +32,21 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
-            a.comment(e.documentation());
-            if (a.is_cpp_standard_98()) {
+            ast.comment(e.documentation());
+            if (ast.is_cpp_standard_98()) {
 #>
 enum <#= ye.name().simple() #> {
 <#+
@@ -57,7 +57,7 @@ enum class <#= ye.name().simple() #> {
 <#+
                 else
 #>
-enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_element()) #> {
+enum class <#= ye.name().simple() #> : <#= ast.get_qualified_name(ye.underlying_element()) #> {
 <#+
             }
 
@@ -65,11 +65,11 @@ enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_el
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 #>
-    <#= en.name().simple() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+    <#= en.name().simple() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>
 <#+
                 else
 #>
-    <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+    <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>
 <#+
                 sf.next();
             }
@@ -82,7 +82,7 @@ enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_el
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

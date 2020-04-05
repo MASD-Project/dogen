@@ -80,64 +80,64 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& enm(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& enm(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(enm));
-        const auto qn(a.get_qualified_name(enm.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(enm));
+        const auto qn(ast.get_qualified_name(enm.name()));
         const auto sn(enm.name().simple());
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<>" << std::endl;
-a.stream() << "inline std::string lexical_cast(const " << qn << "& v) {" << std::endl;
-        if (!a.is_cpp_standard_98()) {
-a.stream() << "    using " << qn << ";" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<>" << std::endl;
+ast.stream() << "inline std::string lexical_cast(const " << qn << "& v) {" << std::endl;
+        if (!ast.is_cpp_standard_98()) {
+ast.stream() << "    using " << qn << ";" << std::endl;
+ast.stream() << std::endl;
         }
-a.stream() << "    switch (v) {" << std::endl;
+ast.stream() << "    switch (v) {" << std::endl;
         for (const auto& enu : enm.enumerators()) {
             const auto enu_sn(enu.name().simple());
             std::string enu_qn;
-            if (a.is_cpp_standard_98())
-                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
             else
                 enu_qn = sn + "::" + enu_sn;
-a.stream() << "    case " << enu_qn << ":" << std::endl;
-a.stream() << "        return \"" << sn + "::" + enu_sn << "\";" << std::endl;
+ast.stream() << "    case " << enu_qn << ":" << std::endl;
+ast.stream() << "        return \"" << sn + "::" + enu_sn << "\";" << std::endl;
         }
-a.stream() << "    default:" << std::endl;
-a.stream() << "        throw boost::bad_lexical_cast();" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<>" << std::endl;
-a.stream() << "inline " << qn << " lexical_cast(const std::string & s) {" << std::endl;
-        if (!a.is_cpp_standard_98()) {
-a.stream() << "    using " << qn << ";" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    default:" << std::endl;
+ast.stream() << "        throw boost::bad_lexical_cast();" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<>" << std::endl;
+ast.stream() << "inline " << qn << " lexical_cast(const std::string & s) {" << std::endl;
+        if (!ast.is_cpp_standard_98()) {
+ast.stream() << "    using " << qn << ";" << std::endl;
+ast.stream() << std::endl;
         }
 
         for (const auto& enu : enm.enumerators()) {
            const auto enu_sn(enu.name().simple());
            std::string enu_qn;
-           if (a.is_cpp_standard_98())
-               enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+           if (ast.is_cpp_standard_98())
+               enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
            else
                enu_qn = sn + "::" + enu_sn;
-a.stream() << "    if (s == \"" << enu_sn << "\" || s == \"" << sn + "::" + enu_sn << "\")" << std::endl;
-a.stream() << "        return " << enu_qn << ";" << std::endl;
+ast.stream() << "    if (s == \"" << enu_sn << "\" || s == \"" << sn + "::" + enu_sn << "\")" << std::endl;
+ast.stream() << "        return " << enu_qn << ";" << std::endl;
         }
-a.stream() << "    throw boost::bad_lexical_cast();" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    throw boost::bad_lexical_cast();" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency=<boost/predef.h>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
@@ -120,17 +120,17 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& enm(a.as<logical::entities::structural::enumeration>(e));
+void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& enm(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
         const auto sn(e.name().simple());
         std::string type_name("auto");
-        if (a.is_cpp_standard_98())
+        if (ast.is_cpp_standard_98())
             type_name = qn;
 #>
 BOOST_AUTO_TEST_SUITE(<#= e.name().simple() #>_tests)
@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_SUITE(<#= e.name().simple() #>_tests)
          * generated. We need to insert a fake test for now. The real
          * solution will be to filter based on element state.
          */
-        if (!a.is_test_data_enabled()) {
+        if (!ast.is_test_data_enabled()) {
             /*
              * No tests.
              */
@@ -152,7 +152,7 @@ BOOST_AUTO_TEST_CASE(fake_test) {
 
 <#+
         } else {
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 /*
                  * IO tests.
                  */
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
 <#+
             }
 
-            if (a.is_lexical_cast_enabled()) {
+            if (ast.is_lexical_cast_enabled()) {
                 /*
                  * Lexical cast tests.
                  */
@@ -182,8 +182,8 @@ BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
         for (const auto& enu : enm.enumerators()) {
             const auto enu_sn(enu.name().simple());
             std::string enu_qn;
-            if (a.is_cpp_standard_98())
-                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
             else
                 enu_qn = sn + "::" + enu_sn;
 #>
@@ -210,8 +210,8 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
         for (const auto& enu : enm.enumerators()) {
             const auto enu_sn(enu.name().simple());
             std::string enu_qn;
-            if (a.is_cpp_standard_98())
-                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
             else
                 enu_qn = sn + "::" + enu_sn;
 
@@ -241,7 +241,7 @@ BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
 <#+
             }
 
-            if (a.is_serialization_enabled()) {
+            if (ast.is_serialization_enabled()) {
                 /*
                  * Serialization tests.
                  */
@@ -309,7 +309,7 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
 <#+
             }
 
-             if (a.is_hash_enabled()) {
+             if (ast.is_hash_enabled()) {
                  /*
                   * hash tests.
                   */
@@ -341,7 +341,7 @@ BOOST_AUTO_TEST_CASE(different_enums_generate_different_hashes) {
 BOOST_AUTO_TEST_SUITE_END()
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

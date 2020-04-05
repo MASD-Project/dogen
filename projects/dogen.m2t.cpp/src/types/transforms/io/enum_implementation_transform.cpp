@@ -92,40 +92,40 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(ye.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << ye.name().simple() << "& v) {" << std::endl;
-a.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << ye.name().simple() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    std::string attr;" << std::endl;
-a.stream() << "    switch (v) {" << std::endl;
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << ye.name().simple() << "& v) {" << std::endl;
+ast.stream() << "    s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << ye.name().simple() << "\\\", \" << \"\\\"value\\\": \";" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    std::string attr;" << std::endl;
+ast.stream() << "    switch (v) {" << std::endl;
             for (const auto& en : ye.enumerators()) {
-                if (a.is_cpp_standard_98())
-a.stream() << "    case " << en.name().simple() << ":" << std::endl;
+                if (ast.is_cpp_standard_98())
+ast.stream() << "    case " << en.name().simple() << ":" << std::endl;
                 else
-a.stream() << "    case " << ye.name().simple() << "::" << en.name().simple() << ":" << std::endl;
-a.stream() << "        attr = \"\\\"" << en.name().simple() << "\\\"\";" << std::endl;
-a.stream() << "        break;" << std::endl;
+ast.stream() << "    case " << ye.name().simple() << "::" << en.name().simple() << ":" << std::endl;
+ast.stream() << "        attr = \"\\\"" << en.name().simple() << "\\\"\";" << std::endl;
+ast.stream() << "        break;" << std::endl;
             }
-a.stream() << "    default:" << std::endl;
-a.stream() << "        throw std::invalid_argument(\"Invalid value for " << ye.name().simple() << "\");" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "    s << attr << \" }\";" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    default:" << std::endl;
+ast.stream() << "        throw std::invalid_argument(\"Invalid value for " << ye.name().simple() << "\");" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "    s << attr << \" }\";" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
          } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

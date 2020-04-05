@@ -89,57 +89,57 @@ std::list<std::string> common_odb_options_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact common_odb_options_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void common_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::orm::common_odb_options;
-    const auto& o(a.as<common_odb_options>(e));
+    const auto& o(ast.as<common_odb_options>(e));
 
     {
         const auto ts(logical::entities::technical_space::odb);
-        a.make_decoration_preamble(e, ts);
+        ast.make_decoration_preamble(e, ts);
 
-        if (!a.is_cpp_standard_98()) {
-a.stream() << "# enable C++11" << std::endl;
-a.stream() << "--std c++11" << std::endl;
-a.stream() << std::endl;
+        if (!ast.is_cpp_standard_98()) {
+ast.stream() << "# enable C++11" << std::endl;
+ast.stream() << "--std c++11" << std::endl;
+ast.stream() << std::endl;
         }
 
         if (!o.sql_name_case().empty()) {
-a.stream() << "# casing" << std::endl;
-a.stream() << "--sql-name-case " << o.sql_name_case() << std::endl;
-a.stream() << std::endl;
+ast.stream() << "# casing" << std::endl;
+ast.stream() << "--sql-name-case " << o.sql_name_case() << std::endl;
+ast.stream() << std::endl;
         }
 
         if (o.databases().size() > 1) {
-a.stream() << "# enable multi-database support" << std::endl;
-a.stream() << "--multi-database static" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "# enable multi-database support" << std::endl;
+ast.stream() << "--multi-database static" << std::endl;
+ast.stream() << std::endl;
         }
 
         if (!o.databases().empty()) {
-a.stream() << "# target databases" << std::endl;
+ast.stream() << "# target databases" << std::endl;
 
             for (const auto& d : o.databases())
-a.stream() << "--database " << d << std::endl;
-a.stream() << std::endl;
+ast.stream() << "--database " << d << std::endl;
+ast.stream() << std::endl;
         }
-a.stream() << "# use the boost profile" << std::endl;
-a.stream() << "--profile boost" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# generate queries and embedded schemas" << std::endl;
-a.stream() << "--generate-query" << std::endl;
-a.stream() << "--generate-schema" << std::endl;
-a.stream() << "--schema-format embedded" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# force odb extensions to be different from dogen ones just in case." << std::endl;
-a.stream() << "--ixx-suffix .ixx" << std::endl;
-a.stream() << "--hxx-suffix .hxx" << std::endl;
-a.stream() << "--cxx-suffix .cxx" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# debug regexes" << std::endl;
-a.stream() << "# --include-regex-trace" << std::endl;
+ast.stream() << "# use the boost profile" << std::endl;
+ast.stream() << "--profile boost" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# generate queries and embedded schemas" << std::endl;
+ast.stream() << "--generate-query" << std::endl;
+ast.stream() << "--generate-schema" << std::endl;
+ast.stream() << "--schema-format embedded" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# force odb extensions to be different from dogen ones just in case." << std::endl;
+ast.stream() << "--ixx-suffix .ixx" << std::endl;
+ast.stream() << "--hxx-suffix .hxx" << std::endl;
+ast.stream() << "--cxx-suffix .cxx" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# debug regexes" << std::endl;
+ast.stream() << "# --include-regex-trace" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

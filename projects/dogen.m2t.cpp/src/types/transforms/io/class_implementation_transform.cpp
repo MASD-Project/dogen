@@ -107,33 +107,33 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple());
-            const auto qn(a.get_qualified_name(o.name()));
+            const auto qn(ast.get_qualified_name(o.name()));
             const bool no_arg(!o.is_parent() && o.parents().empty() &&
                 o.local_attributes().empty());
-a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "&" << (no_arg ? "" : " v") << ") {" << std::endl;
             if (o.is_parent() || !o.parents().empty()) {
-a.stream() << "    v.to_stream(s);" << std::endl;
-a.stream() << "    return(s);" << std::endl;
+ast.stream() << "    v.to_stream(s);" << std::endl;
+ast.stream() << "    return(s);" << std::endl;
             } else
-                io::inserter_implementation_helper(a, o, false/*inside_class*/);
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+                io::inserter_implementation_helper(ast, o, false/*inside_class*/);
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

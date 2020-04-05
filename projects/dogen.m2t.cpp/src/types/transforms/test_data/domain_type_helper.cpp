@@ -63,8 +63,7 @@ bool domain_type_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void domain_type_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void domain_type_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
@@ -72,21 +71,21 @@ apply(assistant& a, const formattables::helper_properties& hp) const {
     const bool is_recursive(d.is_circular_dependency());
 
     if (is_recursive) {
-a.stream() << std::endl;
-a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-a.stream() << "create_" << ident << "(const unsigned int) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << (is_pointer ? "*" : "") << std::endl;
+ast.stream() << "create_" << ident << "(const unsigned int) {" << std::endl;
         if (is_pointer) {
-a.stream() << "    return nullptr;" << std::endl;
+ast.stream() << "    return nullptr;" << std::endl;
         } else {
-a.stream() << "    return " << qn << "();" << std::endl;
+ast.stream() << "    return " << qn << "();" << std::endl;
         }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
     } else {
-a.stream() << std::endl;
-a.stream() << qn << (is_pointer ? "*" : "") << std::endl;
-a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << (is_pointer ? "*" : "") << std::endl;
+ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+ast.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr" : "") << "(position);" << std::endl;
+ast.stream() << "}" << std::endl;
     }
 }
 }

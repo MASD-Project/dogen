@@ -77,21 +77,21 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-a.stream() << std::endl;
-a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void serialize(Archive& ar, " << a.get_qualified_name(ye.name()) << "& v, unsigned int /*version*/){" << std::endl;
-a.stream() << "    using boost::serialization::make_nvp;" << std::endl;
-a.stream() << "    ar & make_nvp(\"" << ye.name().simple() << "\", v);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+ast.stream() << std::endl;
+ast.stream() << "template<class Archive>" << std::endl;
+ast.stream() << "void serialize(Archive& ar, " << ast.get_qualified_name(ye.name()) << "& v, unsigned int /*version*/){" << std::endl;
+ast.stream() << "    using boost::serialization::make_nvp;" << std::endl;
+ast.stream() << "    ar & make_nvp(\"" << ye.name().simple() << "\", v);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

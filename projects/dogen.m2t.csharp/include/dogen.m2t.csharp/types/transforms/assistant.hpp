@@ -142,8 +142,8 @@ public:
     std::ostream& stream();
 
     /**
-     * @brief Generates a file with the current contents of the
-     * stream.
+     * @brief Updates all of the relevant properties of the cached
+     * artefact, including content.
      */
     void update_artefact();
 

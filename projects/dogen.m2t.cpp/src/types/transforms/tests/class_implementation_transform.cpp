@@ -142,23 +142,23 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
-        const auto qn(a.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        const auto qn(ast.get_qualified_name(o.name()));
         auto list(e.name().location().internal_modules());
         list.push_back(o.name().simple());
         const std::string test_suite_name(boost::join(list, "_"));
 
         std::string type_name("auto");
-        if (a.is_cpp_standard_98())
+        if (ast.is_cpp_standard_98())
             type_name = qn;
 
-a.stream() << "BOOST_AUTO_TEST_SUITE(" << test_suite_name << "_tests)" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_SUITE(" << test_suite_name << "_tests)" << std::endl;
+ast.stream() << std::endl;
         /*
          * If we have no attributes at all, we cannot test this
          * type. Similarly, if test data is not enabled, none of the
@@ -166,362 +166,362 @@ a.stream() << std::endl;
          * fake test for now. The real solution will be to filter
          * based on element state.
          */
-        if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
+        if (o.all_attributes().empty() || !ast.is_test_data_enabled()) {
             /*
              * No tests.
              */
-a.stream() << "BOOST_AUTO_TEST_CASE(fake_test) {" << std::endl;
-a.stream() << "    BOOST_CHECK(true);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(fake_test) {" << std::endl;
+ast.stream() << "    BOOST_CHECK(true);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } else {
             /*
              * Types tests. These cannot be performed to parents as
              * they are abstract.
              */
             if (!o.is_parent()) {
-a.stream() << "BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(a);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "    BOOST_CHECK(b == a);" << std::endl;
-a.stream() << "    BOOST_CHECK(!(a != b));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(a == a);" << std::endl;
-a.stream() << "    BOOST_CHECK(!(a != a));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(!(a == b));" << std::endl;
-a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(a);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(b == a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(!(a != b));" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(a == a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(!(a != a));" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(!(a == b));" << std::endl;
+ast.stream() << "    BOOST_CHECK(a != b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 if (!o.is_immutable()) {
-a.stream() << "BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {" << std::endl;
-a.stream() << "#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)" << std::endl;
-a.stream() << "#pragma clang diagnostic push" << std::endl;
-a.stream() << "#pragma clang diagnostic ignored \"-Wself-assign-overloaded\"" << std::endl;
-a.stream() << "#endif" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(a);" << std::endl;
-a.stream() << "    const " << type_name << " c(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    a = a;" << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "    BOOST_CHECK(a != c);" << std::endl;
-a.stream() << "#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)" << std::endl;
-a.stream() << "#pragma clang diagnostic pop" << std::endl;
-a.stream() << "#endif" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {" << std::endl;
+ast.stream() << "#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)" << std::endl;
+ast.stream() << "#pragma clang diagnostic push" << std::endl;
+ast.stream() << "#pragma clang diagnostic ignored \"-Wself-assign-overloaded\"" << std::endl;
+ast.stream() << "#endif" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(a);" << std::endl;
+ast.stream() << "    const " << type_name << " c(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    a = a;" << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(a != c);" << std::endl;
+ast.stream() << "#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)" << std::endl;
+ast.stream() << "#pragma clang diagnostic pop" << std::endl;
+ast.stream() << "#endif" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 }
 
                 // FIXME: should be 11 or greater.
-                if (!a.is_cpp_standard_98()) {
-a.stream() << "BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    g();" << std::endl;
-a.stream() << "    " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b = " << qn << "();" << std::endl;
-a.stream() << "    const " << type_name << " c(a);" << std::endl;
-a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
-a.stream() << "    BOOST_CHECK(a == c);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    const " << type_name << " d = std::move(a);" << std::endl;
-a.stream() << "    BOOST_CHECK(d == c);" << std::endl;
-a.stream() << "    BOOST_CHECK(d != b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+                if (!ast.is_cpp_standard_98()) {
+ast.stream() << "BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    g();" << std::endl;
+ast.stream() << "    " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b = " << qn << "();" << std::endl;
+ast.stream() << "    const " << type_name << " c(a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(a != b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(a == c);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    const " << type_name << " d = std::move(a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(d == c);" << std::endl;
+ast.stream() << "    BOOST_CHECK(d != b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 }
 
                 if (!o.is_immutable()) {
-a.stream() << "BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    g();" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    " << qn << " b;" << std::endl;
-a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    b = a;" << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    g();" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    " << type_name << " b(a);" << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    b = " << qn << "();" << std::endl;
-a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    " << type_name << " c(a);" << std::endl;
-a.stream() << "    " << type_name << " d(b);" << std::endl;
-a.stream() << "    BOOST_CHECK(c == a);" << std::endl;
-a.stream() << "    BOOST_CHECK(d == b);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    std::swap(c, d);" << std::endl;
-a.stream() << "    BOOST_CHECK(c == b);" << std::endl;
-a.stream() << "    BOOST_CHECK(d == a);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    g();" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    " << qn << " b;" << std::endl;
+ast.stream() << "    BOOST_CHECK(a != b);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    b = a;" << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    g();" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    " << type_name << " b(a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    b = " << qn << "();" << std::endl;
+ast.stream() << "    BOOST_CHECK(a != b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    " << type_name << " c(a);" << std::endl;
+ast.stream() << "    " << type_name << " d(b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(c == a);" << std::endl;
+ast.stream() << "    BOOST_CHECK(d == b);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    std::swap(c, d);" << std::endl;
+ast.stream() << "    BOOST_CHECK(c == b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(d == a);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 }
             }
 
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 /*
                  * IO tests.
                  */
-a.stream() << "BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {" << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {" << std::endl;
                 if (o.is_parent()) {
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
-a.stream() << "    std::stringstream s;" << std::endl;
-a.stream() << "    s << *a;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    boost::property_tree::ptree pt;" << std::endl;
-a.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+ast.stream() << "    std::stringstream s;" << std::endl;
+ast.stream() << "    s << *a;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::property_tree::ptree pt;" << std::endl;
+ast.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
                 } else {
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    std::stringstream s;" << std::endl;
-a.stream() << "    s << a;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    boost::property_tree::ptree pt;" << std::endl;
-a.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    std::stringstream s;" << std::endl;
+ast.stream() << "    s << a;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::property_tree::ptree pt;" << std::endl;
+ast.stream() << "    BOOST_REQUIRE_NO_THROW(read_json(s, pt));" << std::endl;
                 }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             }
 
-            if (a.is_serialization_enabled()) {
+            if (ast.is_serialization_enabled()) {
                 /*
                  * Serialization tests.
                  */
                  const auto registrar_qn(o.type_registrar() ?
-                     a.get_qualified_name(*o.type_registrar()) : std::string());
+                     ast.get_qualified_name(*o.type_registrar()) : std::string());
 
                 if (o.is_parent()) {
-a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        xml_oarchive oa(os);" << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        xml_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<xml_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<xml_oarchive>(oa);" << std::endl;
                     }
-a.stream() << std::endl;
-a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        xml_iarchive ia(is);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        xml_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<xml_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<xml_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
-a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
-a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        text_oarchive oa(os);" << std::endl;
+ast.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+ast.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        text_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<text_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<text_oarchive>(oa);" << std::endl;
                     }
-a.stream() << "        oa << a;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        text_iarchive ia(is);" << std::endl;
+ast.stream() << "        oa << a;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        text_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<text_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<text_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> b;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
-a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
-a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        binary_oarchive oa(os);" << std::endl;
+ast.stream() << "        ia >> b;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+ast.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const boost::shared_ptr<" << qn << "> a(g.create_ptr(1));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        binary_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<binary_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<binary_oarchive>(oa);" << std::endl;
                     }
-a.stream() << "        oa << a;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        binary_iarchive ia(is);" << std::endl;
+ast.stream() << "        oa << a;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::shared_ptr<" << qn << "> b;" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        binary_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<binary_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<binary_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> b;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_REQUIRE(a);" << std::endl;
-a.stream() << "    BOOST_REQUIRE(b);" << std::endl;
-a.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "        ia >> b;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_REQUIRE(a);" << std::endl;
+ast.stream() << "    BOOST_REQUIRE(b);" << std::endl;
+ast.stream() << "    BOOST_CHECK(*a == *b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
                 } else {
 
-a.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        xml_oarchive oa(os);" << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        xml_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<xml_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<xml_oarchive>(oa);" << std::endl;
                     }
-a.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        xml_iarchive ia(is);" << std::endl;
+ast.stream() << "        oa << BOOST_SERIALIZATION_NVP(a);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        xml_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<xml_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<xml_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        text_oarchive oa(os);" << std::endl;
+ast.stream() << "        ia >> BOOST_SERIALIZATION_NVP(b);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        text_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<text_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<text_oarchive>(oa);" << std::endl;
                     }
-a.stream() << "        oa << a;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        text_iarchive ia(is);" << std::endl;
+ast.stream() << "        oa << a;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        text_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<text_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<text_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> b;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    using namespace boost::archive;" << std::endl;
-a.stream() << "    std::ostringstream os;" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        binary_oarchive oa(os);" << std::endl;
+ast.stream() << "        ia >> b;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    using namespace boost::archive;" << std::endl;
+ast.stream() << "    std::ostringstream os;" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        binary_oarchive oa(os);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<binary_oarchive>(oa);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<binary_oarchive>(oa);" << std::endl;
                     }
-a.stream() << "        oa << a;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
-a.stream() << "    std::istringstream is(os.str());" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        binary_iarchive ia(is);" << std::endl;
+ast.stream() << "        oa << a;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    " << qn << " b = " << qn << "();" << std::endl;
+ast.stream() << "    std::istringstream is(os.str());" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        binary_iarchive ia(is);" << std::endl;
                     if (o.type_registrar()) {
-a.stream() << "        " << registrar_qn << "::register_types<binary_iarchive>(ia);" << std::endl;
+ast.stream() << "        " << registrar_qn << "::register_types<binary_iarchive>(ia);" << std::endl;
                     }
-a.stream() << "        ia >> b;" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    BOOST_CHECK(a == b);" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << "        ia >> b;" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    BOOST_CHECK(a == b);" << std::endl;
+ast.stream() << "}" << std::endl;
                 }
             }
 
-            if (a.is_hash_enabled() && !o.is_parent()) {
+            if (ast.is_hash_enabled() && !o.is_parent()) {
                 /*
                  * hash tests.
                  */
-a.stream() << "BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    g();" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(a);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
-a.stream() << "    BOOST_CHECK(hasher(a) == hasher(b));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {" << std::endl;
-a.stream() << "    " << qn << "_generator g;" << std::endl;
-a.stream() << "    g();" << std::endl;
-a.stream() << "    const " << type_name << " a(g());" << std::endl;
-a.stream() << "    const " << type_name << " b(g());" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
-a.stream() << "    BOOST_CHECK(hasher(a) != hasher(b));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    g();" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(a);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
+ast.stream() << "    BOOST_CHECK(hasher(a) == hasher(b));" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {" << std::endl;
+ast.stream() << "    " << qn << "_generator g;" << std::endl;
+ast.stream() << "    g();" << std::endl;
+ast.stream() << "    const " << type_name << " a(g());" << std::endl;
+ast.stream() << "    const " << type_name << " b(g());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    std::hash<" << qn << "> hasher;" << std::endl;
+ast.stream() << "    BOOST_CHECK(hasher(a) != hasher(b));" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             }
         }
-a.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;
+ast.stream() << "BOOST_AUTO_TEST_SUITE_END()" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

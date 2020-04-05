@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
@@ -76,47 +76,47 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
 
 <#+
-            a.comment(o.documentation());
+            ast.comment(o.documentation());
             if (o.parents().empty()) {
 #>
-class <#= sn #> <#= a.make_final_keyword_text(o) #>{
+class <#= sn #> <#= ast.make_final_keyword_text(o) #>{
 <#+
             } else {
                 const auto& pn(o.parents().front());
-                const auto pqn(a.get_qualified_name(pn));
+                const auto pqn(ast.get_qualified_name(pn));
 #>
-class <#= sn #> <#= a.make_final_keyword_text(o) #>: public <#= pqn #> {
+class <#= sn #> <#= ast.make_final_keyword_text(o) #>: public <#= pqn #> {
 <#+
             }
 
             /*
              * Compiler generated constructors and destructors.
              */
-            if (a.supports_defaulted_functions()) {
+            if (ast.supports_defaulted_functions()) {
 #>
 public:
 <#+
-                if (!a.requires_manual_default_constructor())
+                if (!ast.requires_manual_default_constructor())
 #>
     <#= sn #>() = default;
     <#= sn #>(const <#= sn #>&) = default;
 <#+
-                if (!a.requires_manual_move_constructor())
+                if (!ast.requires_manual_move_constructor())
 #>
     <#= sn #>(<#= sn #>&&) = default;
 <#+
@@ -138,7 +138,7 @@ public:
             /*
              * Manually generated default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
+            if (ast.requires_manual_default_constructor()) {
 #>
 public:
     <#= sn #>();
@@ -158,12 +158,12 @@ public:
              */
             if (o.is_parent()) {
 #>
-    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> = 0;
+    virtual ~<#= sn #>()<#= ast.make_noexcept_keyword_text() #> = 0;
 
 <#+
             } else if (o.is_child() != 0) {
 #>
-    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
+    virtual ~<#= sn #>()<#= ast.make_noexcept_keyword_text() #> { }
 
 <#+
             }
@@ -171,7 +171,7 @@ public:
             /*
              * Manually generated move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
+            if (ast.requires_manual_move_constructor()) {
 #>
 public:
     <#= sn #>(<#= sn #>&& rhs);
@@ -190,7 +190,7 @@ public:
                 if (attr_count == 1) {
                     const auto attr(*o.all_attributes().begin());
 #>
-    explicit <#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
+    explicit <#= sn #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
 <#+
                 } else {
 #>
@@ -200,7 +200,7 @@ public:
                     sf.postfix_configuration().last(");");
                     for (const auto& attr : o.all_attributes()) {
 #>
-        const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
+        const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
 <#+
                         sf.next();
                     }
@@ -213,7 +213,7 @@ public:
             /*
              * Serialisaton Friends
              */
-            if (a.is_serialization_enabled()) {
+            if (ast.is_serialization_enabled()) {
 #>
 private:
     template<typename Archive>
@@ -242,8 +242,8 @@ public:
                 std::string bvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
-                    bvn = a.get_qualified_name(*o.base_visitor());
-                    rpn = a.get_qualified_name(o.root_parents().front());
+                    bvn = ast.get_qualified_name(*o.base_visitor());
+                    rpn = ast.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
                     rpn = o.root_parents().front().simple();
@@ -252,17 +252,17 @@ public:
 public:
     using <#= rpn #>::accept;
 
-    virtual void accept(const <#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
-    virtual void accept(<#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
-    virtual void accept(const <#= bvn #>& v)<#= a.make_override_keyword_text() #>;
-    virtual void accept(<#= bvn #>& v)<#= a.make_override_keyword_text() #>;
+    virtual void accept(const <#= bvn #>& v) const<#= ast.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v) const<#= ast.make_override_keyword_text() #>;
+    virtual void accept(const <#= bvn #>& v)<#= ast.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v)<#= ast.make_override_keyword_text() #>;
 <#+
             }
 
             /*
              * Streaming
              */
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 if (o.is_parent()) {
 #>
 public:
@@ -272,7 +272,7 @@ public:
                 } else if (!o.parents().empty()) {
 #>
 public:
-    void to_stream(std::ostream& s) const<#= a.make_override_keyword_text() #>;
+    void to_stream(std::ostream& s) const<#= ast.make_override_keyword_text() #>;
 
 <#+
                 }
@@ -286,11 +286,11 @@ public:
 public:
 <#+
                 for (const auto& attr : o.local_attributes()) {
-                    a.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+                    ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());
 
                     if (attr.parsed_type().is_current_simple_type()) {
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
+    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
 <#+
                         if (attr.is_immutable()) {
 #>
@@ -299,11 +299,11 @@ public:
                             continue;
                         }
 #>
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);
 <#+
                     } else {
 #>
-    const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
+    const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
 <#+
                         if (attr.is_immutable()) {
 #>
@@ -312,16 +312,16 @@ public:
                             continue;
                         }
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+    <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);
 <#+
-                        if (a.supports_move_operator()) {
+                        if (ast.supports_move_operator()) {
 #>
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v);
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>&& v);
 <#+
                         }
                     }
-                    a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+                    ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());
 #>
 
 <#+
@@ -360,12 +360,12 @@ public:
                 } else if (o.is_parent()) {
                     const auto rpn(o.root_parents().front());
 #>
-    virtual bool equals(const <#= a.get_qualified_name(rpn) #>& other) const = 0;
+    virtual bool equals(const <#= ast.get_qualified_name(rpn) #>& other) const = 0;
 <#+
                 } else if (!o.root_parents().empty()) {
                     const auto rpn(o.root_parents().front());
 #>
-    bool equals(const <#= a.get_qualified_name(rpn) #>& other) const<#= a.make_override_keyword_text() #>;
+    bool equals(const <#= ast.get_qualified_name(rpn) #>& other) const<#= ast.make_override_keyword_text() #>;
 <#+
                 }
 #>
@@ -389,7 +389,7 @@ public:
 <#+
                 }
 #>
-    void swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #>;
+    void swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #>;
 <#+
                 if (!o.is_parent() && !o.is_immutable()) {
 #>
@@ -410,7 +410,7 @@ private:
 <#+
                 for (const auto& attr : o.local_attributes()) {
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
+    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
 <#+
                 }
             }
@@ -423,7 +423,7 @@ private:
              */
             if (o.is_parent()) {
 #>
-inline <#= sn #>::~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
+inline <#= sn #>::~<#= sn #>()<#= ast.make_noexcept_keyword_text() #> { }
 
 <#+
             }
@@ -460,6 +460,6 @@ inline void swap(
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
@@ -39,13 +39,13 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
 #>
 
 namespace {
@@ -61,17 +61,17 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 <#+
         }
 
-        a.add_helper_methods(o.name().qualified().dot());
+        ast.add_helper_methods(o.name().qualified().dot());
 #>
 
 }
 
 <#+
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(o.name().simple());
-            const auto qn(a.get_qualified_name(o.name()));
+            const auto qn(ast.get_qualified_name(o.name()));
 
 #>
 
@@ -83,7 +83,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 
 <#+
                 const auto& pn(o.parents().front());
-                const auto pqn(a.get_qualified_name(pn));
+                const auto pqn(ast.get_qualified_name(pn));
 #>
     combine(seed, dynamic_cast<const <#= pqn #>&>(v));
 <#+
@@ -94,7 +94,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 
 <#+
                 for (const auto& attr : o.local_attributes()) {
-                    if (a.requires_hashing_helper_method(attr))
+                    if (ast.requires_hashing_helper_method(attr))
 #>
     combine(seed, hash_<#= attr.parsed_type().qualified().identifiable() #>(v.<#= attr.name().simple() #>()));
 <#+
@@ -116,6 +116,6 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 <#+
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

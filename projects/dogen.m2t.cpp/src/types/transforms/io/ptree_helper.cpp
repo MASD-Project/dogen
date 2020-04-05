@@ -66,26 +66,25 @@ bool ptree_helper::is_enabled(const assistant& a,
     return a.is_streaming_enabled(hp);
 }
 
-void ptree_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void ptree_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
-a.stream() << "    std::ostringstream ss;" << std::endl;
-a.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    std::string content(ss.str());" << std::endl;
-a.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
-a.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    s << content;" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+ast.stream() << std::endl;
+ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << nt_qn << "& v) {" << std::endl;
+ast.stream() << "    std::ostringstream ss;" << std::endl;
+ast.stream() << "    boost::property_tree::write_json(ss, v);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    std::string content(ss.str());" << std::endl;
+ast.stream() << "    boost::replace_all(content, \"\\r\\n\", \"\");" << std::endl;
+ast.stream() << "    boost::replace_all(content, \"\\n\", \"\");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    s << content;" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     }
-a.stream() << std::endl;
+ast.stream() << std::endl;
 }
 }

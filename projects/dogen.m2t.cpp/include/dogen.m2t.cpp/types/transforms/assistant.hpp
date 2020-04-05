@@ -52,7 +52,7 @@ class assistant final {
 public:
     assistant(const context& ctx, const logical::entities::element& e,
         const physical::entities::meta_name& pn,
-        const bool requires_header_guard);
+        const bool requires_header_guard, physical::entities::artefact& a);
 
 private:
     /**
@@ -386,16 +386,17 @@ public:
     std::ostream& stream();
 
     /**
-     * @brief Generates a file with the current contents of the
-     * stream.
+     * @brief Updates all of the relevant properties of the cached
+     * artefact, including content.
      */
-    physical::entities::artefact make_artefact() const;
+    void update_artefact() const;
 
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const logical::entities::element& element_;
     const context& context_;
+    physical::entities::artefact& artefact_;
     formattables::artefact_properties artefact_properties_;
     logical::entities::artefact_properties new_artefact_properties_;
     const physical::entities::meta_name physical_meta_name_;

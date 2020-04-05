@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/string_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
@@ -11,8 +11,7 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-void string_helper::
-apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
+void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
 #>
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

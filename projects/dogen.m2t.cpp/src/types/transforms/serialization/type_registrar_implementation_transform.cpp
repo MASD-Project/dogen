@@ -108,55 +108,55 @@ inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact type_registrar_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));
+void type_registrar_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+   physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& rg(ast.as<logical::entities::serialization::type_registrar>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(rg.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(rg.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto deps(rg.registrar_dependencies());
             const auto carch(traits::canonical_archetype());
-            const auto leaves(a.names_with_enabled_archetype(carch, rg.leaves()));
+            const auto leaves(ast.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
             const auto sn(e.name().simple());
-a.stream() << std::endl;
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void " << sn << "::register_types(Archive&" << arg_name << ") {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "void " << sn << "::register_types(Archive&" << arg_name << ") {" << std::endl;
             if (has_types) {
                 for (const auto& d : deps) {
-                    const auto dqn(a.get_qualified_name(d));
-a.stream() << "    " << dqn << "::register_types(ar);" << std::endl;
+                    const auto dqn(ast.get_qualified_name(d));
+ast.stream() << "    " << dqn << "::register_types(ar);" << std::endl;
                 }
 
                 if (!deps.empty() && !leaves.empty())
-a.stream() << std::endl;
+ast.stream() << std::endl;
                 for (const auto& l : leaves) {
-                    const auto lqn(a.get_qualified_name(l));
-a.stream() << "    ar.template register_type<" << lqn << ">();" << std::endl;
+                    const auto lqn(ast.get_qualified_name(l));
+ast.stream() << "    ar.template register_type<" << lqn << ">();" << std::endl;
                 }
             }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_iarchive&" << arg_name << ");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::text_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::text_iarchive&" << arg_name << ");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::binary_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::binary_iarchive&" << arg_name << ");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::xml_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void " << sn << "::register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_oarchive&" << arg_name << ");" << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_iarchive&" << arg_name << ");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::text_oarchive&" << arg_name << ");" << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::text_iarchive&" << arg_name << ");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::binary_oarchive&" << arg_name << ");" << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::binary_iarchive&" << arg_name << ");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::xml_oarchive&" << arg_name << ");" << std::endl;
+ast.stream() << "template void " << sn << "::register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

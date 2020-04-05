@@ -79,28 +79,28 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-            const auto qn(a.get_qualified_name(p.name()));
-a.stream() << std::endl;
-a.stream() << "std::ostream&" << std::endl;
-a.stream() << "operator<<(std::ostream& s, const " << qn << "& v);" << std::endl;
-a.stream() << std::endl;
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto qn(ast.get_qualified_name(p.name()));
+ast.stream() << std::endl;
+ast.stream() << "std::ostream&" << std::endl;
+ast.stream() << "operator<<(std::ostream& s, const " << qn << "& v);" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

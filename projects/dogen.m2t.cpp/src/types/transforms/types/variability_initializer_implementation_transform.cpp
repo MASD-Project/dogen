@@ -98,34 +98,34 @@ std::list<std::string> variability_initializer_implementation_transform::inclusi
     return builder.build();
 }
 
-physical::entities::artefact variability_initializer_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::variability::initializer>(e));
+void variability_initializer_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::" << std::endl;
-a.stream() << "register_entities(variability::helpers::registrar& rg) {" << std::endl;
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::" << std::endl;
+ast.stream() << "register_entities(variability::helpers::registrar& rg) {" << std::endl;
             for (const auto& n : o.feature_template_bundles())
-a.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
+ast.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
             if (!o.feature_bundles().empty()) {
                 for (const auto& n : o.feature_bundles())
-a.stream() << "    rg.register_features(" << n.qualified().colon() << "::make_features());" << std::endl;
+ast.stream() << "    rg.register_features(" << n.qualified().colon() << "::make_features());" << std::endl;
             }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

@@ -74,13 +74,11 @@ std::list<std::string> builtin_header_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact builtin_header_transform::
-apply(const context& /*ctx*/, const logical::entities::element& e) const {
-    physical::entities::artefact r;
-    r.logical_name().simple(e.name().simple());
-    r.logical_name().qualified(e.name().qualified().dot());
-    r.origin_sha1_hash(e.origin_sha1_hash());
-    return r;
+void builtin_header_transform::apply(const context& /*ctx*/, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    a.logical_name().simple(e.name().simple());
+    a.logical_name().qualified(e.name().qualified().dot());
+    a.origin_sha1_hash(e.origin_sha1_hash());
 }
 
 }

@@ -63,20 +63,19 @@ bool smart_pointer_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void smart_pointer_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void smart_pointer_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-a.stream() << std::endl;
-a.stream() << "inline bool operator==(const " << qn << "& lhs," << std::endl;
-a.stream() << "const " << qn << "& rhs) {" << std::endl;
-a.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+ast.stream() << std::endl;
+ast.stream() << "inline bool operator==(const " << qn << "& lhs," << std::endl;
+ast.stream() << "const " << qn << "& rhs) {" << std::endl;
+ast.stream() << "    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     }
-a.stream() << std::endl;
+ast.stream() << std::endl;
 }
 
 }

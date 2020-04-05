@@ -68,8 +68,7 @@ merge(physical::entities::model&& src, physical::entities::model& dst) {
 }
 
 physical::entities::model model_to_text_chain::
-apply(const m2t::transforms::context& ctx,
-    const m2t::entities::model& m) {
+apply(const m2t::transforms::context& ctx, const m2t::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
                              << m.name().qualified().dot();
 

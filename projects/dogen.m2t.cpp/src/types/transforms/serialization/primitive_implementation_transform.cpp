@@ -107,57 +107,57 @@ primitive_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         const auto attr(p.value_attribute());
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
 
         /*
          * Save function
          */
-a.stream() << std::endl;
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void save(Archive& ar, const " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
-a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "void save(Archive& ar, const " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
+ast.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         /*
          * Load function
          */
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void load(Archive& ar, " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
-a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "void load(Archive& ar, " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
+ast.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

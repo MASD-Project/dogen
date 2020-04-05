@@ -63,13 +63,12 @@ bool string_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void string_helper::
-apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
-a.stream() << std::endl;
-a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
-a.stream() << "    std::ostringstream s;" << std::endl;
-a.stream() << "    s << \"a_string_\" << position;" << std::endl;
-a.stream() << "    return s.str();" << std::endl;
-a.stream() << "}" << std::endl;
+void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+ast.stream() << std::endl;
+ast.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
+ast.stream() << "    std::ostringstream s;" << std::endl;
+ast.stream() << "    s << \"a_string_\" << position;" << std::endl;
+ast.stream() << "    return s.str();" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

@@ -66,44 +66,43 @@ bool variant_helper::is_enabled(const assistant& a,
     return a.is_streaming_enabled(hp);
 }
 
-void variant_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void variant_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
         const auto n_qn(d.name_qualified());
-        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
-a.stream() << std::endl;
-a.stream() << "struct " << d.name_tree_identifiable() << "_visitor : public boost::static_visitor<> {" << std::endl;
-a.stream() << "    " << d.name_tree_identifiable() << "_visitor(std::ostream& s) : stream_(s) {" << std::endl;
-a.stream() << "        s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << d.name_qualified() << "\\\"\" << \", \";" << std::endl;
-a.stream() << "        s << \"\\\"data\\\": \";" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    ~" << d.name_tree_identifiable() << "_visitor() { stream_ << \" }\"; }" << std::endl;
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+ast.stream() << std::endl;
+ast.stream() << "struct " << d.name_tree_identifiable() << "_visitor : public boost::static_visitor<> {" << std::endl;
+ast.stream() << "    " << d.name_tree_identifiable() << "_visitor(std::ostream& s) : stream_(s) {" << std::endl;
+ast.stream() << "        s << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << d.name_qualified() << "\\\"\" << \", \";" << std::endl;
+ast.stream() << "        s << \"\\\"data\\\": \";" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    ~" << d.name_tree_identifiable() << "_visitor() { stream_ << \" }\"; }" << std::endl;
         for (const auto& dd : hp.direct_descendants()) {
-a.stream() << std::endl;
-a.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    void operator()(const " << dd.name_qualified() << (dd.is_simple_type() ? "" : "&") << " v) const {" << std::endl;
             if (dd.is_simple_type()) {
-a.stream() << "        stream_ << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << dd.name_qualified() << "\\\"\" << \", \";" << std::endl;
-a.stream() << "        stream_ << \"\\\"value\\\": \";" << std::endl;
-a.stream() << "        stream_ << " << a.streaming_for_type(dd, "v") << ";" << std::endl;
-a.stream() << "        stream_ << \" }\";" << std::endl;
+ast.stream() << "        stream_ << \"{ \" << \"\\\"__type__\\\": \" << \"\\\"" << dd.name_qualified() << "\\\"\" << \", \";" << std::endl;
+ast.stream() << "        stream_ << \"\\\"value\\\": \";" << std::endl;
+ast.stream() << "        stream_ << " << ast.streaming_for_type(dd, "v") << ";" << std::endl;
+ast.stream() << "        stream_ << \" }\";" << std::endl;
             } else
-a.stream() << "        stream_ << " << a.streaming_for_type(dd, "v") << ";" << std::endl;
-a.stream() << "    }" << std::endl;
+ast.stream() << "        stream_ << " << ast.streaming_for_type(dd, "v") << ";" << std::endl;
+ast.stream() << "    }" << std::endl;
         }
-a.stream() << std::endl;
-a.stream() << "private:" << std::endl;
-a.stream() << "    std::ostream& stream_;" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
-a.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << d.name_tree_qualified() << "& v) {" << std::endl;
-a.stream() << "    boost::apply_visitor(" << d.name_tree_identifiable() << "_visitor(s), v);" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "private:" << std::endl;
+ast.stream() << "    std::ostream& stream_;" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline std::ostream& operator<<(std::ostream& s, const " << d.name_tree_qualified() << "& v) {" << std::endl;
+ast.stream() << "    boost::apply_visitor(" << d.name_tree_identifiable() << "_visitor(s), v);" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     }
-a.stream() << std::endl;
+ast.stream() << std::endl;
 }
 }

@@ -96,38 +96,38 @@ std::list<std::string> main_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact main_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void main_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::structural::entry_point;
-    const auto& ep(a.as<entry_point>(e));
-    const auto qn(a.get_qualified_name(ep.name()));
-a.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;
-a.stream() << std::endl;
+    const auto& ep(ast.as<entry_point>(e));
+    const auto qn(ast.get_qualified_name(ep.name()));
+ast.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;
+ast.stream() << std::endl;
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(ep));
-a.stream() << std::endl;
-a.stream() << "namespace  {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "const std::string error_msg(\"Error during test.\");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "inline void translate(const boost::exception& e) {" << std::endl;
-a.stream() << "    std::cerr << std::endl << boost::diagnostic_information(e);" << std::endl;
-a.stream() << "    throw std::runtime_error(error_msg);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "struct exception_fixture {" << std::endl;
-a.stream() << "    exception_fixture() {" << std::endl;
-a.stream() << "        using boost::exception;" << std::endl;
-a.stream() << "        using boost::unit_test::unit_test_monitor;" << std::endl;
-a.stream() << "        unit_test_monitor.register_exception_translator<exception>(&translate);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "BOOST_GLOBAL_FIXTURE(exception_fixture);" << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(ep));
+ast.stream() << std::endl;
+ast.stream() << "namespace  {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "const std::string error_msg(\"Error during test.\");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline void translate(const boost::exception& e) {" << std::endl;
+ast.stream() << "    std::cerr << std::endl << boost::diagnostic_information(e);" << std::endl;
+ast.stream() << "    throw std::runtime_error(error_msg);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "struct exception_fixture {" << std::endl;
+ast.stream() << "    exception_fixture() {" << std::endl;
+ast.stream() << "        using boost::exception;" << std::endl;
+ast.stream() << "        using boost::unit_test::unit_test_monitor;" << std::endl;
+ast.stream() << "        unit_test_monitor.register_exception_translator<exception>(&translate);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_GLOBAL_FIXTURE(exception_fixture);" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

@@ -23,33 +23,32 @@
 
 namespace dogen::m2t::cpp::transforms::io {
 
-void inserter_implementation_helper(
-    assistant& a, const logical::entities::structural::object& o, const bool inside_class) {
+void inserter_implementation_helper(assistant& ast, const logical::entities::structural::object& o,
+    const bool inside_class) {
+    const auto qn(ast.get_qualified_name(o.name()));
 
-    const auto qn(a.get_qualified_name(o.name()));
-
-    if (a.requires_stream_manipulators()) {
-a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
-a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
-a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
-a.stream() << "    s.precision(6);" << std::endl;
-a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
-a.stream() << std::endl;
+    if (ast.requires_stream_manipulators()) {
+ast.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+ast.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+ast.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+ast.stream() << "    s.precision(6);" << std::endl;
+ast.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+ast.stream() << std::endl;
     }
 
     const bool no_parent_and_no_attributes(o.parents().empty() &&
         o.all_attributes().empty());
-a.stream() << "    s << \" { \"" << std::endl;
-a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
+ast.stream() << "    s << \" { \"" << std::endl;
+ast.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
 
     m2t::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {
         const auto& pn(o.parents().front());
-        const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
-a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
+        const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    " << sf.prefix() << "\"\\\"__parent_" << sf.current_position() << "__\\\": \"" << sf.postfix() << ";" << std::endl;
+ast.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
         sf.next();
     }
 
@@ -70,18 +69,18 @@ a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
         else
             variable_name = "v." + attr.getter_setter_name() + "()";
 
-a.stream() << "    " << sf.prefix() << "<< \"\\\"" << attr.name().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << sf.postfix() << std::endl;
+ast.stream() << "    " << sf.prefix() << "<< \"\\\"" << attr.name().simple() << "\\\": \" << " << ast.streaming_for_type(attr.parsed_type().current(), variable_name) << sf.postfix() << std::endl;
         sf.next();
     }
 
     if (!no_parent_and_no_attributes) {
         if (!o.local_attributes().empty())
-a.stream() << "      << \" }\";" << std::endl;
+ast.stream() << "      << \" }\";" << std::endl;
         else
-a.stream() << "    s << \" }\";" << std::endl;
+ast.stream() << "    s << \" }\";" << std::endl;
     }
 
     if (!inside_class)
-a.stream() << "    return(s);" << std::endl;
+ast.stream() << "    return(s);" << std::endl;
 }
 }

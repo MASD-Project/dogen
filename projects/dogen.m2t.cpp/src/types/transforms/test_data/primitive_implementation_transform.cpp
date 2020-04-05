@@ -92,81 +92,81 @@ std::list<std::string> primitive_implementation_transform::inclusion_dependencie
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods(p.name().qualified().dot());
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+ast.stream() << "namespace {" << std::endl;
+        ast.add_helper_methods(p.name().qualified().dot());
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         {
             const auto attr(p.value_attribute());
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 
             /*
              * Default constructor.
              */
-a.stream() << std::endl;
-a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" << std::endl;
             /*
              * Populate method.
              */
             if (!p.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << "void " << sn << "_generator::" << std::endl;
-a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
-a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "_generator::" << std::endl;
+ast.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
+ast.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
              * Create method.
              */
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type" << std::endl;
-a.stream() << sn << "_generator::create(const unsigned int position) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type" << std::endl;
+ast.stream() << sn << "_generator::create(const unsigned int position) {" << std::endl;
             if (p.is_immutable()) {
-a.stream() << "    return " << sn << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
+ast.stream() << "    return " << sn << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + 1));" << std::endl;
             } else {
-a.stream() << "    " << sn << " r;" << std::endl;
-a.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;
-a.stream() << "    return r;" << std::endl;
+ast.stream() << "    " << sn << " r;" << std::endl;
+ast.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;
+ast.stream() << "    return r;" << std::endl;
             }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             /*
              * Create method ptr.
              */
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type*" << std::endl;
-a.stream() << sn << "_generator::create_ptr(const unsigned int position) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type*" << std::endl;
+ast.stream() << sn << "_generator::create_ptr(const unsigned int position) {" << std::endl;
             if (p.is_immutable())
-a.stream() << "    return new " << sn << "(create(position));" << std::endl;
+ast.stream() << "    return new " << sn << "(create(position));" << std::endl;
             else {
-a.stream() << "    " << sn << "* r = new " << sn << "();" << std::endl;
-a.stream() << "    " << sn << "_generator::populate(position, *r);" << std::endl;
-a.stream() << "    return r;" << std::endl;
+ast.stream() << "    " << sn << "* r = new " << sn << "();" << std::endl;
+ast.stream() << "    " << sn << "_generator::populate(position, *r);" << std::endl;
+ast.stream() << "    return r;" << std::endl;
             }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             /*
              * Function operator
              */
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type" << std::endl;
-a.stream() << sn << "_generator::operator()() {" << std::endl;
-a.stream() << "    return create(position_++);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type" << std::endl;
+ast.stream() << sn << "_generator::operator()() {" << std::endl;
+ast.stream() << "    return create(position_++);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

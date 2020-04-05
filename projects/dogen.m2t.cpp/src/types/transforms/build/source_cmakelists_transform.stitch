@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::build #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
@@ -68,17 +68,17 @@ std::list<std::string> source_cmakelists_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact source_cmakelists_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void source_cmakelists_transform::apply(const context& ctx,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
-    const auto& c(a.as<cmakelists>(e));
+    const auto& c(ast.as<cmakelists>(e));
 
     {
         const auto ts(logical::entities::technical_space::cmake);
-        a.make_decoration_preamble(e, ts);
-        const auto model_name(a.get_dot_separated_model_name(c.name()));
-        const auto product_name(a.get_product_name(c.name()));
+        ast.make_decoration_preamble(e, ts);
+        const auto model_name(ast.get_dot_separated_model_name(c.name()));
+        const auto product_name(ast.get_product_name(c.name()));
 #>
 set(name "<#= model_name #>")
 set(lib_binary_name ${name})
@@ -90,7 +90,7 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
 
 <#+
-        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
+        if (ast.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
 #>
 set(odb_files "")
 file(GLOB_RECURSE odb_files RELATIVE
@@ -105,7 +105,7 @@ set(lib_files ${files})
 add_library(${lib_target_name} ${lib_files})
 set_target_properties(${lib_target_name} PROPERTIES
 <#+
-        if (a.is_cpp_standard_98()) {
+        if (ast.is_cpp_standard_98()) {
 #>
     CXX_STANDARD 98
 <#+
@@ -118,7 +118,7 @@ install(TARGETS ${lib_target_name}
     LIBRARY DESTINATION lib
     COMPONENT libraries)
 <#+
-        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
+        if (ast.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
             const auto targets(c.odb_targets());
 #>
 
@@ -161,6 +161,6 @@ endif()
 <#+
         }
     } // sbf
-        return a.make_artefact();
+    ast.update_artefact();
 }
 #>

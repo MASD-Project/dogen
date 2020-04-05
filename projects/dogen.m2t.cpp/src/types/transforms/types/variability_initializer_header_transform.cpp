@@ -82,30 +82,30 @@ std::list<std::string> variability_initializer_header_transform::inclusion_depen
     return builder.build();
 }
 
-physical::entities::artefact variability_initializer_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::variability::initializer>(e));
+void variability_initializer_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "/**" << std::endl;
-a.stream() << " * @brief Registers all of the available feature templates with registrar." << std::endl;
-a.stream() << " */" << std::endl;
-a.stream() << "class " << sn << " final {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    static void register_entities(variability::helpers::registrar& rg);" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "/**" << std::endl;
+ast.stream() << " * @brief Registers all of the available feature templates with registrar." << std::endl;
+ast.stream() << " */" << std::endl;
+ast.stream() << "class " << sn << " final {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static void register_entities(variability::helpers::registrar& rg);" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         }
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

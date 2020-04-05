@@ -64,25 +64,25 @@ bool path_helper::is_enabled(const assistant& /*a*/,
 }
 
 void path_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto nt_qn(d.name_tree_qualified());
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<class Archive>" << std::endl;
-a.stream() << "void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)" << std::endl;
-a.stream() << "{" << std::endl;
-a.stream() << "    std::string s;" << std::endl;
-a.stream() << "    if(Archive::is_saving::value)" << std::endl;
-a.stream() << "        s = p.generic_string();" << std::endl;
-a.stream() << "    ar & boost::serialization::make_nvp(\"path\", s);" << std::endl;
-a.stream() << "    if(Archive::is_loading::value)" << std::endl;
-a.stream() << "        p = s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<class Archive>" << std::endl;
+ast.stream() << "void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)" << std::endl;
+ast.stream() << "{" << std::endl;
+ast.stream() << "    std::string s;" << std::endl;
+ast.stream() << "    if(Archive::is_saving::value)" << std::endl;
+ast.stream() << "        s = p.generic_string();" << std::endl;
+ast.stream() << "    ar & boost::serialization::make_nvp(\"path\", s);" << std::endl;
+ast.stream() << "    if(Archive::is_loading::value)" << std::endl;
+ast.stream() << "        p = s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
     }
 }
 }

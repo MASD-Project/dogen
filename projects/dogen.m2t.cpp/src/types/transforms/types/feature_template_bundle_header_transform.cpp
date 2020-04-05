@@ -99,41 +99,41 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
     return builder.build();
 }
 
-physical::entities::artefact feature_template_bundle_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& fb(a.as<logical::entities::variability::feature_template_bundle>(e));
+void feature_template_bundle_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& fb(ast.as<logical::entities::variability::feature_template_bundle>(e));
 
     {
         const auto sn(fb.name().simple());
-        const auto qn(a.get_qualified_name(fb.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(fb));
-        a.add_helper_methods(fb.name().qualified().dot());
+        const auto qn(ast.get_qualified_name(fb.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(fb));
+        ast.add_helper_methods(fb.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(fb.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(fb.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             using utility::string::splitter;
-a.stream() << std::endl;
-            a.comment(fb.documentation());
-a.stream() << "class " << sn << " final {" << std::endl;
+ast.stream() << std::endl;
+            ast.comment(fb.documentation());
+ast.stream() << "class " << sn << " final {" << std::endl;
             if (fb.generate_static_configuration()) {
-a.stream() << "public:" << std::endl;
-a.stream() << "    struct feature_group {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    struct feature_group {" << std::endl;
                 for (const auto& fb_ft : fb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-a.stream() << "        variability::entities::feature " << simple_key << ";" << std::endl;
+ast.stream() << "        variability::entities::feature " << simple_key << ";" << std::endl;
                 }
-a.stream() << "    };" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    static feature_group" << std::endl;
-a.stream() << "    make_feature_group(const variability::entities::feature_model& fm);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    struct static_configuration {" << std::endl;
+ast.stream() << "    };" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    static feature_group" << std::endl;
+ast.stream() << "    make_feature_group(const variability::entities::feature_model& fm);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    struct static_configuration {" << std::endl;
                 for (const auto& fb_ft : fb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-a.stream() << "        " << a.get_qualified_name(fb_ft.parsed_type()) << " " << simple_key << ";" << std::endl;
+ast.stream() << "        " << ast.get_qualified_name(fb_ft.parsed_type()) << " " << simple_key << ";" << std::endl;
                 }
 
                 if (fb.requires_manual_default_constructor()) {
@@ -151,34 +151,34 @@ a.stream() << "        " << a.get_qualified_name(fb_ft.parsed_type()) << " " << 
                         ss << simple_key << "()";
                         is_first = false;
                     }
-a.stream() << std::endl;
-a.stream() << "        static_configuration() :" << std::endl;
-a.stream() << "            " << ss.str() << " {}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        static_configuration() :" << std::endl;
+ast.stream() << "            " << ss.str() << " {}" << std::endl;
                 }
-a.stream() << "    };" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
-a.stream() << "        const feature_group& fg," << std::endl;
-a.stream() << "        const variability::entities::configuration& cfg);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    template<typename Configurable>" << std::endl;
-a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
-a.stream() << "        const feature_group& fg, const Configurable& c) {" << std::endl;
-a.stream() << "        return make_static_configuration(fg, *c.configuration());" << std::endl;
-a.stream() << "    }" << std::endl;
+ast.stream() << "    };" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    static static_configuration make_static_configuration(" << std::endl;
+ast.stream() << "        const feature_group& fg," << std::endl;
+ast.stream() << "        const variability::entities::configuration& cfg);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    template<typename Configurable>" << std::endl;
+ast.stream() << "    static static_configuration make_static_configuration(" << std::endl;
+ast.stream() << "        const feature_group& fg, const Configurable& c) {" << std::endl;
+ast.stream() << "        return make_static_configuration(fg, *c.configuration());" << std::endl;
+ast.stream() << "    }" << std::endl;
             }
 
             if (fb.generate_registration()) {
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    static std::list<dogen::variability::entities::feature_template>" << std::endl;
-a.stream() << "    make_templates();" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static std::list<dogen::variability::entities::feature_template>" << std::endl;
+ast.stream() << "    make_templates();" << std::endl;
             }
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

@@ -90,38 +90,38 @@ std::list<std::string> primitive_odb_options_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact primitive_odb_options_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
         const auto ts(logical::entities::technical_space::odb);
-        a.make_decoration_preamble(e, ts);
+        ast.make_decoration_preamble(e, ts);
 
         if (!p.orm_properties()) {
-a.stream() << std::endl;
-a.stream() << "#" << std::endl;
-a.stream() << "# class has no ODB options defined." << std::endl;
-a.stream() << "#" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "#" << std::endl;
+ast.stream() << "# class has no ODB options defined." << std::endl;
+ast.stream() << "#" << std::endl;
         } else {
             const auto ooo(p.orm_properties()->odb_options());
-a.stream() << "# epilogue" << std::endl;
-a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
-a.stream() << std::endl;
+ast.stream() << "# epilogue" << std::endl;
+ast.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
+ast.stream() << std::endl;
             if (!ooo.include_regexes().empty()) {
-a.stream() << "# regexes" << std::endl;
+ast.stream() << "# regexes" << std::endl;
                 for (const auto& regex : ooo.include_regexes())
-a.stream() << "--include-regex " << regex << std::endl;
-a.stream() << std::endl;
-a.stream() << "# debug regexes" << std::endl;
-a.stream() << "# --include-regex-trace" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# make the header guards similar to dogen ones" << std::endl;
-a.stream() << "--guard-prefix " << ooo.header_guard_prefix() << std::endl;
+ast.stream() << "--include-regex " << regex << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# debug regexes" << std::endl;
+ast.stream() << "# --include-regex-trace" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "# make the header guards similar to dogen ones" << std::endl;
+ast.stream() << "--guard-prefix " << ooo.header_guard_prefix() << std::endl;
             }
         }
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

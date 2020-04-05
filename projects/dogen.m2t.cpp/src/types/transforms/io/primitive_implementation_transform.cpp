@@ -106,43 +106,43 @@ primitive_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(p.name().qualified().dot());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(p.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(p.name().simple());
-            const auto qn(a.get_qualified_name(p.name()));
+            const auto qn(ast.get_qualified_name(p.name()));
             const auto attr(p.value_attribute());
-a.stream() << std::endl;
-a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "& v) {" << std::endl;
-            if (a.requires_stream_manipulators()) {
-a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
-a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
-a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
-a.stream() << "    s.precision(6);" << std::endl;
-a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "& v) {" << std::endl;
+            if (ast.requires_stream_manipulators()) {
+ast.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+ast.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+ast.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+ast.stream() << "    s.precision(6);" << std::endl;
+ast.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
             }
 
             const std::string variable_name = "v." + attr.getter_setter_name() + "()";
-a.stream() << std::endl;
-a.stream() << "    s << \" { \"" << std::endl;
-a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\" << \", \"" << std::endl;
-a.stream() << "      << \"\\\"" << attr.name().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << std::endl;
-a.stream() << "      << \" }\";" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    s << \" { \"" << std::endl;
+ast.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\" << \", \"" << std::endl;
+ast.stream() << "      << \"\\\"" << attr.name().simple() << "\\\": \" << " << ast.streaming_for_type(attr.parsed_type().current(), variable_name) << std::endl;
+ast.stream() << "      << \" }\";" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

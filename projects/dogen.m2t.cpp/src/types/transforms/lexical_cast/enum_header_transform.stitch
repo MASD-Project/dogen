@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::lexical_cast #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
@@ -33,14 +33,14 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& enm(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& enm(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(enm));
-        const auto qn(a.get_qualified_name(enm.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(enm));
+        const auto qn(ast.get_qualified_name(enm.name()));
         const auto sn(enm.name().simple());
 #>
 
@@ -49,7 +49,7 @@ namespace boost {
 template<>
 inline std::string lexical_cast(const <#= qn #>& v) {
 <#+
-        if (!a.is_cpp_standard_98()) {
+        if (!ast.is_cpp_standard_98()) {
 #>
     using <#= qn #>;
 
@@ -61,8 +61,8 @@ inline std::string lexical_cast(const <#= qn #>& v) {
         for (const auto& enu : enm.enumerators()) {
             const auto enu_sn(enu.name().simple());
             std::string enu_qn;
-            if (a.is_cpp_standard_98())
-                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
             else
                 enu_qn = sn + "::" + enu_sn;
 #>
@@ -79,7 +79,7 @@ inline std::string lexical_cast(const <#= qn #>& v) {
 template<>
 inline <#= qn #> lexical_cast(const std::string & s) {
 <#+
-        if (!a.is_cpp_standard_98()) {
+        if (!ast.is_cpp_standard_98()) {
 #>
     using <#= qn #>;
 
@@ -89,8 +89,8 @@ inline <#= qn #> lexical_cast(const std::string & s) {
         for (const auto& enu : enm.enumerators()) {
            const auto enu_sn(enu.name().simple());
            std::string enu_qn;
-           if (a.is_cpp_standard_98())
-               enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+           if (ast.is_cpp_standard_98())
+               enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
            else
                enu_qn = sn + "::" + enu_sn;
 #>
@@ -106,7 +106,7 @@ inline <#= qn #> lexical_cast(const std::string & s) {
 
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

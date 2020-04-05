@@ -64,17 +64,17 @@ bool ptime_helper::is_enabled(const assistant& /*a*/,
 }
 
 void ptime_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
-a.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
-a.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+ast.stream() << "    std::size_t seed(0);" << std::endl;
+ast.stream() << "    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));" << std::endl;
+ast.stream() << "    boost::posix_time::time_duration d(v - epoch);" << std::endl;
+ast.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::endl;
+ast.stream() << "    return seed;" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

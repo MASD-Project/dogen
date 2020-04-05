@@ -92,46 +92,47 @@ primitive_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_implementation_transform::
+apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-a.stream() << std::endl;
-a.stream() << "namespace {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template <typename HashableType>" << std::endl;
-a.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
-a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
-a.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);" << std::endl;
-a.stream() << "}" << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+ast.stream() << std::endl;
+ast.stream() << "namespace {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template <typename HashableType>" << std::endl;
+ast.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
+ast.stream() << "    std::hash<HashableType> hasher;" << std::endl;
+ast.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);" << std::endl;
+ast.stream() << "}" << std::endl;
 
-        a.add_helper_methods(p.name().qualified().dot());
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        ast.add_helper_methods(p.name().qualified().dot());
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(p.name().simple());
-            const auto qn(a.get_qualified_name(p.name()));
+            const auto qn(ast.get_qualified_name(p.name()));
             const auto attr(p.value_attribute());
-a.stream() << std::endl;
-a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-            if (a.requires_hashing_helper_method(attr))
-a.stream() << "    combine(seed, hash_" << attr.parsed_type().qualified().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "& v) {" << std::endl;
+ast.stream() << "    std::size_t seed(0);" << std::endl;
+            if (ast.requires_hashing_helper_method(attr))
+ast.stream() << "    combine(seed, hash_" << attr.parsed_type().qualified().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
             else
-a.stream() << "    combine(seed, v." << attr.name().simple() << "());" << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    combine(seed, v." << attr.name().simple() << "());" << std::endl;
+ast.stream() << "    return seed;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

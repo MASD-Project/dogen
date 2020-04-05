@@ -63,15 +63,14 @@ bool char_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void char_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void char_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-a.stream() << std::endl;
-a.stream() << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    const auto num(((position % 95) + 32) == 34 ? 35 : ((position % 95) + 32));" << std::endl;
-a.stream() << "    return static_cast<" << qn << ">(num);" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
+ast.stream() << "    const auto num(((position % 95) + 32) == 34 ? 35 : ((position % 95) + 32));" << std::endl;
+ast.stream() << "    return static_cast<" << qn << ">(num);" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

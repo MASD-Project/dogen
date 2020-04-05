@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::build #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
@@ -70,19 +70,19 @@ std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact include_cmakelists_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void include_cmakelists_transform::apply(const context& ctx,
+    const logical::entities::element& e, physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
-    const auto& c(a.as<cmakelists>(e));
+    const auto& c(ast.as<cmakelists>(e));
 
     {
         const auto ts(logical::entities::technical_space::cmake);
-        a.make_decoration_preamble(e, ts);
+        ast.make_decoration_preamble(e, ts);
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
 <#+
-       if (a.is_tests_enabled()) {
+       if (ast.is_tests_enabled()) {
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.tests_directory_name() #>)
 <#+
@@ -96,6 +96,6 @@ install(
     FILES_MATCHING PATTERN "*.<#= c.header_file_extension() #>")
 <#+
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

@@ -122,27 +122,27 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 
             /*
              * Default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "()" << std::endl;
+            if (ast.requires_manual_default_constructor()) {
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "()" << std::endl;
                 // FIXME: this was just too hard to hack with a sequence.
                 // FIXME: indentation is all off too.
                 std::ostringstream ss;
@@ -157,22 +157,22 @@ a.stream() << sn << "::" << sn << "()" << std::endl;
                         ss << "," << std::endl << "      ";
 
                     ss << attr.member_variable_name()
-                       << "(static_cast<" << a.get_qualified_name(attr.parsed_type())
+                       << "(static_cast<" << ast.get_qualified_name(attr.parsed_type())
                        << ">(0))";
 
                     is_first = false;
                 }
                 ss << " { }";
                 const std::string out(ss.str());
-a.stream() << "    " << (found ? ": " : "") << out << std::endl;
+ast.stream() << "    " << (found ? ": " : "") << out << std::endl;
             }
 
             /*
              * Move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
+            if (ast.requires_manual_move_constructor()) {
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
                 const auto size(o.parents().size() + o.local_attributes().size());
 
                 m2t::formatters::sequence_formatter sf(size);
@@ -180,14 +180,14 @@ a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    " << sf.prefix() << pqn << "(" << std::endl;
-a.stream() << "        std::forward<" << pqn << ">(rhs))" << sf.postfix() << std::endl;
+                    const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    " << sf.prefix() << pqn << "(" << std::endl;
+ast.stream() << "        std::forward<" << pqn << ">(rhs))" << sf.postfix() << std::endl;
                     sf.next();
                 }
 
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(std::move(rhs." << attr.member_variable_name() << "))" << sf.postfix() << std::endl;
+ast.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(std::move(rhs." << attr.member_variable_name() << "))" << sf.postfix() << std::endl;
                     sf.next();
                 }
             }
@@ -199,16 +199,16 @@ a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(std::mov
                 const auto attr_count(o.all_attributes().size());
                 if (attr_count == 1) {
                      const auto attr(*o.all_attributes().begin());
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "(const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
                 } else {
-a.stream() << std::endl;
-a.stream() << sn << "::" << sn << "(" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "::" << sn << "(" << std::endl;
 
                     m2t::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
-a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
+ast.stream() << "    const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
                         sf.next();
                     }
                 }
@@ -223,13 +223,13 @@ a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto& pair : o.inherited_attributes()) {
-                    const auto pqn(a.get_qualified_name(pair.first));
+                    const auto pqn(ast.get_qualified_name(pair.first));
                     const auto& pattrs(pair.second);
                     if (pattrs.size() <= 1) {
-a.stream() << "    " << sf.prefix() << pqn << "(" << (pattrs.empty() ? "" : pattrs.front().name().simple()) << ")" << sf.postfix() << std::endl;
+ast.stream() << "    " << sf.prefix() << pqn << "(" << (pattrs.empty() ? "" : pattrs.front().name().simple()) << ")" << sf.postfix() << std::endl;
                         sf.next();
                     } else {
-a.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) << std::endl;
+ast.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) << std::endl;
                         sf.next();
                         m2t::formatters::sequence_formatter sf2(pattrs.size());
                         sf2.element_separator("");
@@ -237,7 +237,7 @@ a.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) <<
                         sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
                         for (const auto& attr : pattrs) {
-a.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() << sf.postfix() << std::endl;
+ast.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() << sf.postfix() << std::endl;
                             sf2.next();
                             sf.next();
                         }
@@ -245,7 +245,7 @@ a.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() <<
                 }
 
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(" << attr.name().simple() << ")" << sf.postfix() << std::endl;
+ast.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(" << attr.name().simple() << ")" << sf.postfix() << std::endl;
                     sf.next();
                 }
             }
@@ -258,68 +258,68 @@ a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(" << att
                 std::string dvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
-                    bvn = a.get_qualified_name(*o.base_visitor());
+                    bvn = ast.get_qualified_name(*o.base_visitor());
                     dvn = o.derived_visitor()->simple();
-                    rpn = a.get_qualified_name(o.root_parents().front());
+                    rpn = ast.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
                     rpn = o.root_parents().front().simple();
                 }
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::accept(const " << bvn << "& v) const {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::accept(const " << bvn << "& v) const {" << std::endl;
                 if (o.derived_visitor()) {
-a.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "    if (dv)" << std::endl;
-a.stream() << "        dv->visit(*this);" << std::endl;
+ast.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
+ast.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+ast.stream() << "    if (dv)" << std::endl;
+ast.stream() << "        dv->visit(*this);" << std::endl;
                 } else {
-a.stream() << "    v.visit(*this);" << std::endl;
+ast.stream() << "    v.visit(*this);" << std::endl;
                 }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::accept(" << bvn << "& v) const {" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::accept(" << bvn << "& v) const {" << std::endl;
                 if (o.derived_visitor()) {
-a.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "    if (dv)" << std::endl;
-a.stream() << "        dv->visit(*this);" << std::endl;
+ast.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
+ast.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+ast.stream() << "    if (dv)" << std::endl;
+ast.stream() << "        dv->visit(*this);" << std::endl;
                 } else {
-a.stream() << "    v.visit(*this);" << std::endl;
+ast.stream() << "    v.visit(*this);" << std::endl;
                 }
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::accept(const " << bvn << "& v) {" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::accept(const " << bvn << "& v) {" << std::endl;
                 if (o.derived_visitor()) {
-a.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "    if (dv)" << std::endl;
-a.stream() << "        dv->visit(*this);" << std::endl;
+ast.stream() << "    typedef const " << dvn << "* derived_ptr;" << std::endl;
+ast.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+ast.stream() << "    if (dv)" << std::endl;
+ast.stream() << "        dv->visit(*this);" << std::endl;
                 } else {
-a.stream() << "    v.visit(*this);" << std::endl;
+ast.stream() << "    v.visit(*this);" << std::endl;
                 }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::accept(" << bvn << "& v) {" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::accept(" << bvn << "& v) {" << std::endl;
                 if (o.derived_visitor()) {
-a.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
-a.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
-a.stream() << "    if (dv)" << std::endl;
-a.stream() << "        dv->visit(*this);" << std::endl;
+ast.stream() << "    typedef " << dvn << "* derived_ptr;" << std::endl;
+ast.stream() << "    const auto dv(dynamic_cast<derived_ptr>(&v));" << std::endl;
+ast.stream() << "    if (dv)" << std::endl;
+ast.stream() << "        dv->visit(*this);" << std::endl;
                 } else {
-a.stream() << "    v.visit(*this);" << std::endl;
+ast.stream() << "    v.visit(*this);" << std::endl;
                 }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
              * Streaming
              */
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 if (o.in_inheritance_relationship()) {
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::to_stream(std::ostream& s) const {" << std::endl;
-                io::inserter_implementation_helper(a, o, true/*inside_class*/);
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::to_stream(std::ostream& s) const {" << std::endl;
+                io::inserter_implementation_helper(ast, o, true/*inside_class*/);
+ast.stream() << "}" << std::endl;
                 }
             }
 
@@ -328,22 +328,22 @@ a.stream() << "}" << std::endl;
              */
             if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
                 const bool empty(o.all_attributes().empty() && o.parents().empty());
-a.stream() << std::endl;
-a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ")" << a.make_noexcept_keyword_text() << " {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ")" << ast.make_noexcept_keyword_text() << " {" << std::endl;
                if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    " << pqn << "::swap(other);" << std::endl;
-a.stream() << std::endl;
+                    const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    " << pqn << "::swap(other);" << std::endl;
+ast.stream() << std::endl;
 
                }
 
                if (!o.local_attributes().empty()) {
-a.stream() << "    using std::swap;" << std::endl;
+ast.stream() << "    using std::swap;" << std::endl;
                    for (const auto& attr : o.local_attributes())
-a.stream() << "    swap(" << attr.member_variable_name() << ", other." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "    swap(" << attr.member_variable_name() << ", other." << attr.member_variable_name() << ");" << std::endl;
                }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
@@ -353,12 +353,12 @@ a.stream() << "}" << std::endl;
             // FIXME: being processed atm.
             if (!o.is_parent() && !o.parents().empty() && !o.root_parents().empty()) {
                 const auto rpn(o.root_parents().front());
-a.stream() << std::endl;
-a.stream() << "bool " << sn << "::equals(const " << a.get_qualified_name(rpn) << "& other) const {" << std::endl;
-a.stream() << "    const " << sn << "* const p(dynamic_cast<const " << sn << "* const>(&other));" << std::endl;
-a.stream() << "    if (!p) return false;" << std::endl;
-a.stream() << "    return *this == *p;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "bool " << sn << "::equals(const " << ast.get_qualified_name(rpn) << "& other) const {" << std::endl;
+ast.stream() << "    const " << sn << "* const p(dynamic_cast<const " << sn << "* const>(&other));" << std::endl;
+ast.stream() << "    if (!p) return false;" << std::endl;
+ast.stream() << "    return *this == *p;" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
@@ -369,11 +369,11 @@ a.stream() << "}" << std::endl;
                 method_name = "compare";
             else
                 method_name = "operator==";
-a.stream() << std::endl;
-a.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " << (o.all_attributes().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " << (o.all_attributes().empty() ? "/*rhs*/" : "rhs") << ") const {" << std::endl;
 
             if (o.all_attributes().empty())
-a.stream() << "    return true;" << std::endl;
+ast.stream() << "    return true;" << std::endl;
             else {
                 m2t::formatters::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
@@ -386,8 +386,8 @@ a.stream() << "    return true;" << std::endl;
 
                 if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() << std::endl;
+                    const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() << std::endl;
                     sf.next();
                 }
                 sf.reset(o.local_attributes().size());
@@ -399,22 +399,22 @@ a.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() <
                 sf.prefix_configuration().not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    " << sf.prefix() << attr.member_variable_name() << " == rhs." << attr.member_variable_name() << sf.postfix() << std::endl;
+ast.stream() << "    " << sf.prefix() << attr.member_variable_name() << " == rhs." << attr.member_variable_name() << sf.postfix() << std::endl;
                     sf.next();
                 }
             }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
 
             /*
              * Assignment
              */
             if (!o.all_attributes().empty() && !o.is_parent() && !o.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
-a.stream() << "    using std::swap;" << std::endl;
-a.stream() << "    swap(*this, other);" << std::endl;
-a.stream() << "    return *this;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
+ast.stream() << "    using std::swap;" << std::endl;
+ast.stream() << "    swap(*this, other);" << std::endl;
+ast.stream() << "    return *this;" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
@@ -422,52 +422,52 @@ a.stream() << "}" << std::endl;
              */
              for (const auto& attr : o.local_attributes()) {
                  if (attr.parsed_type().is_current_simple_type()) {
-a.stream() << std::endl;
-a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << ast.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
                     if (!o.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << (attr.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << (attr.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
                         if (attr.is_fluent()) {
-a.stream() << "    return *this;" << std::endl;
+ast.stream() << "    return *this;" << std::endl;
                         }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
                     }
                 } else {
-a.stream() << std::endl;
-a.stream() << "const " << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "const " << ast.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
                     if (!o.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() {" << std::endl;
-a.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << ast.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() {" << std::endl;
+ast.stream() << "    return " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = v;" << std::endl;
                         if (o.is_fluent()) {
-a.stream() << "    return *this;" << std::endl;
+ast.stream() << "    return *this;" << std::endl;
                         }
-a.stream() << "}" << std::endl;
-                        if (a.supports_move_operator()) {
-a.stream() << std::endl;
-a.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
-a.stream() << "    " << attr.member_variable_name() << " = std::move(v);" << std::endl;
+ast.stream() << "}" << std::endl;
+                        if (ast.supports_move_operator()) {
+ast.stream() << std::endl;
+ast.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
+ast.stream() << "    " << attr.member_variable_name() << " = std::move(v);" << std::endl;
                             if (o.is_fluent()) {
-a.stream() << "    return *this;" << std::endl;
+ast.stream() << "    return *this;" << std::endl;
                             }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
                         }
                     }
                 }
             }
-a.stream() << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

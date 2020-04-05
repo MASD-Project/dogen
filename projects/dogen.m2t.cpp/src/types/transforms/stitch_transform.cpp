@@ -52,14 +52,14 @@ bool stitch_transform::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-physical::entities::artefact
-stitch_transform::apply(const model_to_text_transform& stock_transform,
-    const context& ctx, const logical::entities::element& e) const {
+void stitch_transform::apply(const model_to_text_transform& stock_transform,
+    const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
     const auto pn(stock_transform.physical_meta_name());
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
 
-    assistant a(ctx, e, pn, needs_guard);
-    const auto& fp(a.artefact_properties().file_path());
+    assistant ast(ctx, e, pn, needs_guard, a);
+    const auto& fp(ast.artefact_properties().file_path());
     auto stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);
 
@@ -73,18 +73,17 @@ stitch_transform::apply(const model_to_text_transform& stock_transform,
     if (!boost::filesystem::exists(stitch_template)) {
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
+        // ast.update_artefact();
 
-        physical::entities::artefact r;
         // FIXME: what is the name/path for the artefact?! This may
         // FIXME: explain empty artefacts!
-        r.overwrite(a.new_artefact_properties().overwrite());
+        a.overwrite(ast.new_artefact_properties().overwrite());
 
         physical::entities::operation op;
         using ot = physical::entities::operation_type;
-        op.type(r.overwrite() ? ot::write : ot::create_only);
-        r.operation(op);
-
-        return r;
+        op.type(a.overwrite() ? ot::write : ot::create_only);
+        a.operation(op);
+        return;
     }
 
     /*
@@ -102,16 +101,15 @@ stitch_transform::apply(const model_to_text_transform& stock_transform,
         }
     };
 
-    auto r(instantiator_.instantiate(stitch_template, external_keys));
-    r.overwrite(a.new_artefact_properties().overwrite());
+    a = instantiator_.instantiate(stitch_template, external_keys);
+    a.overwrite(ast.new_artefact_properties().overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;
-    op.type(r.overwrite() ? ot::write : ot::create_only);
-    r.operation(op);
+    op.type(a.overwrite() ? ot::write : ot::create_only);
+    a.operation(op);
 
-    r.dependencies().push_back(stitch_template);
-    return r;
+    a.dependencies().push_back(stitch_template);
 }
 
 }

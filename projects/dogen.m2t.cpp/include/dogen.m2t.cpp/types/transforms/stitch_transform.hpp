@@ -45,9 +45,9 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    physical::entities::artefact
-    apply(const model_to_text_transform& stock_transform,
-        const context& ctx, const logical::entities::element& e) const;
+    void apply(const model_to_text_transform& stock_transform,
+        const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const;
 
 private:
     const templating::stitch::instantiator instantiator_;

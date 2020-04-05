@@ -64,20 +64,20 @@ bool ptree_helper::is_enabled(const assistant& /*a*/,
 }
 
 void ptree_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-a.stream() << std::endl;
-a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
-a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    for (const auto& node : v) {" << std::endl;
-a.stream() << "        combine(seed, node.first);" << std::endl;
-a.stream() << "        combine(seed, node.second.data());" << std::endl;
-a.stream() << "        combine(seed, hash_" << ident << "(node.second));" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    return seed;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
+ast.stream() << "    std::size_t seed(0);" << std::endl;
+ast.stream() << "    for (const auto& node : v) {" << std::endl;
+ast.stream() << "        combine(seed, node.first);" << std::endl;
+ast.stream() << "        combine(seed, node.second.data());" << std::endl;
+ast.stream() << "        combine(seed, hash_" << ident << "(node.second));" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    return seed;" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

@@ -63,21 +63,20 @@ bool ptime_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void ptime_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void ptime_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
-a.stream() << std::endl;
-a.stream() << qn << std::endl;
-a.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    const auto day(static_cast<unsigned short>(1 + (position % 27)));" << std::endl;
-a.stream() << "    using boost::gregorian::date;" << std::endl;
-a.stream() << "    using boost::posix_time::ptime;" << std::endl;
-a.stream() << "    using boost::posix_time::time_duration;" << std::endl;
-a.stream() << "    date d(2002, 2, day);" << std::endl;
-a.stream() << "    ptime r(d, time_duration(1,2,3));" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << std::endl;
+ast.stream() << "create_" << ident << "(const unsigned int position) {" << std::endl;
+ast.stream() << "    const auto day(static_cast<unsigned short>(1 + (position % 27)));" << std::endl;
+ast.stream() << "    using boost::gregorian::date;" << std::endl;
+ast.stream() << "    using boost::posix_time::ptime;" << std::endl;
+ast.stream() << "    using boost::posix_time::time_duration;" << std::endl;
+ast.stream() << "    date d(2002, 2, day);" << std::endl;
+ast.stream() << "    ptime r(d, time_duration(1,2,3));" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

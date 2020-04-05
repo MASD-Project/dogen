@@ -108,91 +108,91 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
 
-        const auto qn(a.get_qualified_name(o.name()));
+        const auto qn(ast.get_qualified_name(o.name()));
         const bool has_attributes(!o.local_attributes().empty());
         const bool has_parent(!o.parents().empty());
         const bool has_attributes_or_parent(has_attributes || has_parent);
 
         if (o.is_parent() || !o.parents().empty()) {
-a.stream() << std::endl;
-a.stream() << "BOOST_CLASS_TRACKING(" << std::endl;
-a.stream() << "    " << qn << "," << std::endl;
-a.stream() << "    boost::serialization::track_selectively)" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "BOOST_CLASS_TRACKING(" << std::endl;
+ast.stream() << "    " << qn << "," << std::endl;
+ast.stream() << "    boost::serialization::track_selectively)" << std::endl;
         }
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
 
         /*
          * Save function
          */
-a.stream() << std::endl;
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void save(Archive& " << (has_attributes_or_parent ? "ar" : "/*ar*/") << "," << std::endl;
-a.stream() << "    const " << qn << "& " << (has_attributes_or_parent ? "v" : "/*v*/") << "," << std::endl;
-a.stream() << "    const unsigned int /*version*/) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "void save(Archive& " << (has_attributes_or_parent ? "ar" : "/*ar*/") << "," << std::endl;
+ast.stream() << "    const " << qn << "& " << (has_attributes_or_parent ? "v" : "/*v*/") << "," << std::endl;
+ast.stream() << "    const unsigned int /*version*/) {" << std::endl;
         if (!o.parents().empty()) {
             const auto& pn(o.parents().front());
-            const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    ar << make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
+            const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    ar << make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
         }
 
         if (has_attributes && has_parent)
-a.stream() << std::endl;
+ast.stream() << std::endl;
         for (const auto& attr : o.local_attributes()) {
-a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
         }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         /*
          * Load function
          */
-a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void load(Archive& " << (has_attributes_or_parent ? "ar," : "/*ar*/,") << std::endl;
-a.stream() << "    " << qn << "& " << (has_attributes_or_parent ? "v" : "/*v*/") << "," << std::endl;
-a.stream() << "    const unsigned int /*version*/) {" << std::endl;
+ast.stream() << "template<typename Archive>" << std::endl;
+ast.stream() << "void load(Archive& " << (has_attributes_or_parent ? "ar," : "/*ar*/,") << std::endl;
+ast.stream() << "    " << qn << "& " << (has_attributes_or_parent ? "v" : "/*v*/") << "," << std::endl;
+ast.stream() << "    const unsigned int /*version*/) {" << std::endl;
         if (!o.parents().empty()) {
             const auto& pn(o.parents().front());
-            const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    ar >> make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
+            const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    ar >> make_nvp(\"" << pn.simple() << "\", base_object<" << pqn << ">(v));" << std::endl;
             if (has_attributes && has_parent)
-a.stream() << std::endl;
+ast.stream() << std::endl;
         }
 
         for (const auto& attr : o.local_attributes()) {
-a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
+ast.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
         }
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "namespace boost {" << std::endl;
-a.stream() << "namespace serialization {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "} }" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace boost {" << std::endl;
+ast.stream() << "namespace serialization {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "} }" << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

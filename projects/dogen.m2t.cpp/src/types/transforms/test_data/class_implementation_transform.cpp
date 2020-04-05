@@ -96,33 +96,33 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         if (!o.local_attributes().empty()) {
-a.stream() << "namespace {" << std::endl;
-        a.add_helper_methods(o.name().qualified().dot());
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "namespace {" << std::endl;
+        ast.add_helper_methods(o.name().qualified().dot());
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         }
 
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 
             /*
              * Default constructor.
              */
             if (!o.is_parent()) {
-a.stream() << std::endl;
-a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" << std::endl;
             }
 
             /*
@@ -131,26 +131,26 @@ a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" <<
             if (!o.is_immutable()) {
                 bool no_args(o.local_attributes().empty() && o.parents().empty());
                 if (no_args) {
-a.stream() << std::endl;
-a.stream() << "void " << sn << "_generator::" << std::endl;
-a.stream() << "populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "_generator::" << std::endl;
+ast.stream() << "populate(const unsigned int /*position*/, result_type& /*v*/) {" << std::endl;
                 } else {
-a.stream() << std::endl;
-a.stream() << "void " << sn << "_generator::" << std::endl;
-a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void " << sn << "_generator::" << std::endl;
+ast.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
                 }
 
                 if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl;
+                    const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl;
                 }
                 unsigned int i(0);
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + " << i << "));" << std::endl;
+ast.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + " << i << "));" << std::endl;
                     ++i;
                 }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
@@ -158,43 +158,43 @@ a.stream() << "}" << std::endl;
              */
             if (!o.is_parent()) {
                  const bool no_arg(o.all_attributes().empty());
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type" << std::endl;
-a.stream() << sn << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type" << std::endl;
+ast.stream() << sn << "_generator::create(const unsigned int" << (no_arg ? "/*position*/" : " position") << ") {" << std::endl;
                 if (o.is_immutable()) {
-a.stream() << "    return " << sn << "(" << std::endl;
+ast.stream() << "    return " << sn << "(" << std::endl;
                     if (o.local_attributes().empty())
-a.stream() << std::endl;
+ast.stream() << std::endl;
                     else {
                         m2t::formatters::sequence_formatter sf(o.local_attributes().size());
                         for (const auto& attr : o.local_attributes()) {
-a.stream() << "        create_" << attr.parsed_type().qualified().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
+ast.stream() << "        create_" << attr.parsed_type().qualified().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();
                         }
                     }
-a.stream() << "        );" << std::endl;
+ast.stream() << "        );" << std::endl;
                 } else {
-a.stream() << "    " << sn << " r;" << std::endl;
+ast.stream() << "    " << sn << " r;" << std::endl;
                     if (!o.all_attributes().empty())
-a.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;
-a.stream() << "    return r;" << std::endl;
+ast.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;
+ast.stream() << "    return r;" << std::endl;
                 }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             }
 
             /*
              * Create method ptr.
              */
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type*" << std::endl;
-a.stream() << sn << "_generator::create_ptr(const unsigned int position) {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type*" << std::endl;
+ast.stream() << sn << "_generator::create_ptr(const unsigned int position) {" << std::endl;
             if (o.leaves().empty()) {
                 if (o.is_immutable())
-a.stream() << "    return new " << sn << "(create(position));" << std::endl;
+ast.stream() << "    return new " << sn << "(create(position));" << std::endl;
                 else {
-a.stream() << "    " << sn << "* p = new " << sn << "();" << std::endl;
-a.stream() << "    " << sn << "_generator::populate(position, *p);" << std::endl;
-a.stream() << "    return p;" << std::endl;
+ast.stream() << "    " << sn << "* p = new " << sn << "();" << std::endl;
+ast.stream() << "    " << sn << "_generator::populate(position, *p);" << std::endl;
+ast.stream() << "    return p;" << std::endl;
                 }
             } else {
                 auto leaves(o.leaves());
@@ -203,25 +203,25 @@ a.stream() << "    return p;" << std::endl;
                 unsigned int i(0);
                 const auto total(static_cast<unsigned int>(leaves.size()));
                 for (const auto& l : leaves) {
-a.stream() << "    if ((position % " << total << ") == " << i++ << ")" << std::endl;
-a.stream() << "        return " << a.get_qualified_name(l) << "_generator::create_ptr(position);" << std::endl;
+ast.stream() << "    if ((position % " << total << ") == " << i++ << ")" << std::endl;
+ast.stream() << "        return " << ast.get_qualified_name(l) << "_generator::create_ptr(position);" << std::endl;
                 }
-a.stream() << "    return " << a.get_qualified_name(front) << "_generator::create_ptr(position);" << std::endl;
+ast.stream() << "    return " << ast.get_qualified_name(front) << "_generator::create_ptr(position);" << std::endl;
             }
-a.stream() << "}" << std::endl;
+ast.stream() << "}" << std::endl;
             /*
              * Function operator
              */
              if (!o.is_parent()) {
-a.stream() << std::endl;
-a.stream() << sn << "_generator::result_type" << std::endl;
-a.stream() << sn << "_generator::operator()() {" << std::endl;
-a.stream() << "    return create(position_++);" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << sn << "_generator::result_type" << std::endl;
+ast.stream() << sn << "_generator::operator()() {" << std::endl;
+ast.stream() << "    return create(position_++);" << std::endl;
+ast.stream() << "}" << std::endl;
             }
-a.stream() << std::endl;
+ast.stream() << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

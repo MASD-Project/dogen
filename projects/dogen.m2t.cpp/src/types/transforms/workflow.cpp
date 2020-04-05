@@ -102,42 +102,42 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
+        BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
         using logical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters());
 
+        auto aptr(boost::make_shared<physical::entities::artefact>());
+        auto& a(*aptr);
         const auto fs(ap.formatting_style());
          if (fs == formatting_styles::stock) {
-            const auto id(fmt.id());
-            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
+             const auto id(fmt.id());
+             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
+             fmt.apply(ctx, e, a);
 
-            const auto a(fmt.apply(ctx, e));
-            const auto& p(a.name().qualified());
-
-            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(boost::make_shared<artefact>(a));
+             const auto& p(a.name().qualified());
+             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+             r.push_back(aptr);
         } else if (fs == formatting_styles::wale) {
-            BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
+             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
+             wale_transform f;
+             f.apply(locator_, fmt, ctx, e, a);
 
-            wale_transform f;
-            const auto a(f.apply(locator_, fmt, ctx, e));
-            const auto& p(a.name().qualified());
-
-            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(boost::make_shared<artefact>(a));
+             const auto& p(a.name().qualified());
+             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+             r.push_back(aptr);
         } else if (fs == formatting_styles::stitch) {
-            BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
+             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
+             stitch_formatter_.apply(fmt, ctx, e, a);
 
-            const auto a(stitch_formatter_.apply(fmt, ctx, e));
-            const auto& p(a.name().qualified());
-
-            BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(boost::make_shared<artefact>(a));
+             const auto& p(a.name().qualified());
+             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
+             r.push_back(aptr);
         } else {
-            BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
-            BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
+             BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
+             BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));
         }
     }
     return r;

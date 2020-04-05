@@ -1,15 +1,14 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
 <#+
 
-void inserter_implementation_helper(
-    assistant& a, const logical::entities::structural::object& o, const bool inside_class) {
+void inserter_implementation_helper(assistant& ast, const logical::entities::structural::object& o,
+    const bool inside_class) {
+    const auto qn(ast.get_qualified_name(o.name()));
 
-    const auto qn(a.get_qualified_name(o.name()));
-
-    if (a.requires_stream_manipulators()) {
+    if (ast.requires_stream_manipulators()) {
 #>
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
@@ -32,7 +31,7 @@ void inserter_implementation_helper(
     sf.element_separator("");
     if (!o.parents().empty()) {
         const auto& pn(o.parents().front());
-        const auto pqn(a.get_qualified_name(pn));
+        const auto pqn(ast.get_qualified_name(pn));
 #>
     <#= sf.prefix() #>"\"__parent_<#= sf.current_position() #>__\": "<#= sf.postfix() #>;
     <#= pqn #>::to_stream(s);
@@ -58,7 +57,7 @@ void inserter_implementation_helper(
             variable_name = "v." + attr.getter_setter_name() + "()";
 
 #>
-    <#= sf.prefix() #><< "\"<#= attr.name().simple() #>\": " << <#= a.streaming_for_type(attr.parsed_type().current(), variable_name) #><#= sf.postfix() #>
+    <#= sf.prefix() #><< "\"<#= attr.name().simple() #>\": " << <#= ast.streaming_for_type(attr.parsed_type().current(), variable_name) #><#= sf.postfix() #>
 <#+
         sf.next();
     }

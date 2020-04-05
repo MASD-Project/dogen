@@ -44,28 +44,27 @@ bool wale_transform::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-physical::entities::artefact
-wale_transform::apply(const formattables::locator& l,
+void wale_transform::apply(const formattables::locator& l,
     const model_to_text_transform& stock_transform, const context& ctx,
-    const logical::entities::element& e) const {
+    const logical::entities::element& e, physical::entities::artefact& a) const {
     const auto pn(stock_transform.physical_meta_name());
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
-    assistant a(ctx, e, pn, needs_guard);
+    assistant ast(ctx, e, pn, needs_guard, a);
 
     const auto kvps = std::unordered_map<std::string, std::string> {
         { "class.simple_name", e.name().simple() }
     };
 
-    utility::formatters::utility_formatter uf(a.stream());
+    utility::formatters::utility_formatter uf(ast.stream());
     {
         const auto& n(e.name());
-        const auto qn(a.get_qualified_name(n));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(n));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(n));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(n));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 
-            const auto fi(a.new_artefact_properties().formatting_input());
+            const auto fi(ast.new_artefact_properties().formatting_input());
             if (fi.empty()) {
                 BOOST_LOG_SEV(lg, error) << missing_input;
                 BOOST_THROW_EXCEPTION(formatting_error(missing_input));
@@ -77,12 +76,12 @@ wale_transform::apply(const formattables::locator& l,
 
             uf.insert_end_line();
             templating::wale::workflow w;
-            a.stream() << w.execute(p, kvps);
+            ast.stream() << w.execute(p, kvps);
             uf.insert_end_line();
         }
         uf.insert_end_line();
     }
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

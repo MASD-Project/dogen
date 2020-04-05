@@ -63,20 +63,19 @@ bool pair_helper::is_enabled(const assistant& /*a*/,
     return true;
 }
 
-void pair_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+void pair_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());
     const auto first(hp.direct_descendants().front());
     const auto second(hp.direct_descendants().back());
-a.stream() << std::endl;
-a.stream() << qn << std::endl;
-a.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
-a.stream() << "    " << qn << " r(" << std::endl;
-a.stream() << "        create_" << first.name_tree_identifiable() << "(position)," << std::endl;
-a.stream() << "        create_" << second.name_tree_identifiable() << "(position));" << std::endl;
-a.stream() << "    return r;" << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << qn << std::endl;
+ast.stream() << "create_" << ident << "(unsigned int position) {" << std::endl;
+ast.stream() << "    " << qn << " r(" << std::endl;
+ast.stream() << "        create_" << first.name_tree_identifiable() << "(position)," << std::endl;
+ast.stream() << "        create_" << second.name_tree_identifiable() << "(position));" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
 }
 }

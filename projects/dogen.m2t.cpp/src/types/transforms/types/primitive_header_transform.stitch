@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
@@ -41,22 +41,22 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact primitive_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::entities::structural::primitive>(e));
+void primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
+    const auto qn(ast.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto attr(p.value_attribute());
 
-            a.comment(p.documentation());
+            ast.comment(p.documentation());
 #>
 class <#= sn #> final {
 public:
@@ -64,12 +64,12 @@ public:
             /*
              * Compiler generated constructors and destructors.
              */
-            if (!a.requires_manual_default_constructor())
+            if (!ast.requires_manual_default_constructor())
 #>
     <#= sn #>() = default;
     <#= sn #>(const <#= sn #>&) = default;
 <#+
-            if (!a.requires_manual_move_constructor())
+            if (!ast.requires_manual_move_constructor())
 #>
     <#= sn #>(<#= sn #>&&) = default;
     ~<#= sn #>() = default;
@@ -81,7 +81,7 @@ public:
             /*
              * Manually generated default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
+            if (ast.requires_manual_default_constructor()) {
 #>
 public:
     <#= sn #>();
@@ -92,7 +92,7 @@ public:
             /*
              * Manually generated move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
+            if (ast.requires_manual_move_constructor()) {
 #>
 public:
     <#= sn #>(<#= sn #>&& rhs);
@@ -105,13 +105,13 @@ public:
              */
 #>
 public:
-    explicit <#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
+    explicit <#= sn #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
 
 <#+
             /*
              * Serialisaton Friends
              */
-            if (a.is_serialization_enabled()) {
+            if (ast.is_serialization_enabled()) {
 #>
 private:
     template<typename Archive>
@@ -129,10 +129,10 @@ private:
 #>
 public:
 <#+
-            a.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+            ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());
             if (attr.parsed_type().is_current_simple_type()) {
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
+    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
 <#+
                 if (attr.is_immutable()) {
 #>
@@ -141,12 +141,12 @@ public:
 
                 } else {
 #>
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);
 <#+
                 }
             } else {
 #>
-    const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
+    const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
 <#+
                 if (attr.is_immutable()) {
 #>
@@ -154,13 +154,13 @@ public:
 <#+
                 } else {
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
-    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v);
+    <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);
+    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>&& v);
 <#+
                 }
             }
-            a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+            ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());
 
             /*
              * Explicit cast.
@@ -168,7 +168,7 @@ public:
 #>
 
 public:
-    explicit operator <#= a.get_qualified_name(attr.parsed_type()) #>() const {
+    explicit operator <#= ast.get_qualified_name(attr.parsed_type()) #>() const {
         return <#= attr.member_variable_name() #>;
     }
 <#+
@@ -189,7 +189,7 @@ public:
              */
 #>
 public:
-    void swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #>;
+    void swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #>;
 <#+
             if (!p.is_immutable()) {
 #>
@@ -203,7 +203,7 @@ public:
 #>
 
 private:
-    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
+    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
 };
 
 <#+
@@ -228,7 +228,7 @@ inline void swap(
 
 <#+
     } //ah  sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

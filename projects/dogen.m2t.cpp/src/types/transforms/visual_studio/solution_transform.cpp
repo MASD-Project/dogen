@@ -90,34 +90,34 @@ std::list<std::string> solution_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact solution_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
+void solution_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::solution;
-    const auto& sln(a.as<solution>(e));
-a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
-a.stream() << "# Visual Studio 2012" << std::endl;
+    const auto& sln(ast.as<solution>(e));
+ast.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
+ast.stream() << "# Visual Studio 2012" << std::endl;
     for (const auto& ppb : sln.project_persistence_blocks()) {
-a.stream() << "Project(\"{" << ppb.type_guid() << "}\") = \"" << ppb.name() << "\", \"" << ppb.name() << ".csproj\", \"{" << ppb.guid() << "}\"" << std::endl;
-a.stream() << "EndProject" << std::endl;
+ast.stream() << "Project(\"{" << ppb.type_guid() << "}\") = \"" << ppb.name() << "\", \"" << ppb.name() << ".csproj\", \"{" << ppb.guid() << "}\"" << std::endl;
+ast.stream() << "EndProject" << std::endl;
     }
-a.stream() << "Global" << std::endl;
-a.stream() << "    GlobalSection(SolutionConfigurationPlatforms) = preSolution" << std::endl;
-a.stream() << "        Debug|Any CPU = Debug|Any CPU" << std::endl;
-a.stream() << "        Release|Any CPU = Release|Any CPU" << std::endl;
-a.stream() << "    EndGlobalSection" << std::endl;
-a.stream() << "    GlobalSection(ProjectConfigurationPlatforms) = postSolution" << std::endl;
+ast.stream() << "Global" << std::endl;
+ast.stream() << "    GlobalSection(SolutionConfigurationPlatforms) = preSolution" << std::endl;
+ast.stream() << "        Debug|Any CPU = Debug|Any CPU" << std::endl;
+ast.stream() << "        Release|Any CPU = Release|Any CPU" << std::endl;
+ast.stream() << "    EndGlobalSection" << std::endl;
+ast.stream() << "    GlobalSection(ProjectConfigurationPlatforms) = postSolution" << std::endl;
     for (const auto& ppb : sln.project_persistence_blocks()) {
-a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
-a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+ast.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
+ast.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
+ast.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
+ast.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
     }
-a.stream() << "    EndGlobalSection" << std::endl;
-a.stream() << "    GlobalSection(MonoDevelopProperties) = preSolution" << std::endl;
-a.stream() << "        StartupItem = CppModel.vcxroj" << std::endl;
-a.stream() << "    EndGlobalSection" << std::endl;
-a.stream() << "EndGlobal" << std::endl;
-    return a.make_artefact();
+ast.stream() << "    EndGlobalSection" << std::endl;
+ast.stream() << "    GlobalSection(MonoDevelopProperties) = preSolution" << std::endl;
+ast.stream() << "        StartupItem = CppModel.vcxroj" << std::endl;
+ast.stream() << "    EndGlobalSection" << std::endl;
+ast.stream() << "EndGlobal" << std::endl;
+    ast.update_artefact();
 }
 }

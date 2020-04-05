@@ -83,58 +83,58 @@ std::list<std::string> visitor_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact visitor_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& v(a.as<logical::entities::structural::visitor>(e));
+void visitor_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& v(ast.as<logical::entities::structural::visitor>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(v.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-            a.comment(v.documentation());
+            const auto ns(ast.make_namespaces(v.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+            ast.comment(v.documentation());
             if (!v.parent())
-a.stream() << "class " << v.name().simple() << " {" << std::endl;
+ast.stream() << "class " << v.name().simple() << " {" << std::endl;
             else {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));
-a.stream() << "class " << v.name().simple() << " : public " << pqn << " {" << std::endl;
+                const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "class " << v.name().simple() << " : public " << pqn << " {" << std::endl;
             }
-a.stream() << "public:" << std::endl;
-a.stream() << "    virtual ~" << v.name().simple() << "()" << a.make_noexcept_keyword_text() << " = 0;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "public:" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    virtual ~" << v.name().simple() << "()" << ast.make_noexcept_keyword_text() << " = 0;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
             if (v.parent()) {
                 const auto& pn(*v.parent());
-                const auto pqn(a.get_qualified_name(pn));
-a.stream() << "    using " << pqn << "::visit;" << std::endl;
-a.stream() << std::endl;
+                const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "    using " << pqn << "::visit;" << std::endl;
+ast.stream() << std::endl;
             }
 
             bool is_first(true);
             for (const auto& t : v.visits()) {
                 if (!is_first)
-a.stream() << std::endl;
-                const auto qn(a.get_qualified_name(t));
+ast.stream() << std::endl;
+                const auto qn(ast.get_qualified_name(t));
                 const auto doc("Accept visits for type " + qn);
-                a.comment_start_method_group(doc);
-a.stream() << "    virtual void visit(const " << qn << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(const " << qn << "&) { }" << std::endl;
-a.stream() << "    virtual void visit(" << qn << "&) const { }" << std::endl;
-a.stream() << "    virtual void visit(" << qn << "&) { }" << std::endl;
-                a.comment_end_method_group(doc);
+                ast.comment_start_method_group(doc);
+ast.stream() << "    virtual void visit(const " << qn << "&) const { }" << std::endl;
+ast.stream() << "    virtual void visit(const " << qn << "&) { }" << std::endl;
+ast.stream() << "    virtual void visit(" << qn << "&) const { }" << std::endl;
+ast.stream() << "    virtual void visit(" << qn << "&) { }" << std::endl;
+                ast.comment_end_method_group(doc);
                 is_first = false;
             }
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
-a.stream() << "inline " << v.name().simple() << "::~" << v.name().simple() << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inline " << v.name().simple() << "::~" << v.name().simple() << "()" << ast.make_noexcept_keyword_text() << " { }" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

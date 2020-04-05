@@ -66,15 +66,14 @@ bool string_helper::is_enabled(const assistant& a,
     return a.is_streaming_enabled(hp);
 }
 
-void string_helper::
-apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
-a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
-a.stream() << "    boost::replace_all(s, \"\\\\\", \"<backslash>\");" << std::endl;
-a.stream() << "    return s;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+ast.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
+ast.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
+ast.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;
+ast.stream() << "    boost::replace_all(s, \"\\\"\", \"<quote>\");" << std::endl;
+ast.stream() << "    boost::replace_all(s, \"\\\\\", \"<backslash>\");" << std::endl;
+ast.stream() << "    return s;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
 }
 }

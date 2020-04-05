@@ -81,25 +81,25 @@ std::list<std::string> main_transform::inclusion_dependencies(
     return r;
 }
 
-physical::entities::artefact main_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::entry_point>(e));
+void main_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::entry_point>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-a.stream() << "int main(int /*argc*/, char* /*argv*/[]) {" << std::endl;
-a.stream() << "    return 0;" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+ast.stream() << "int main(int /*argc*/, char* /*argv*/[]) {" << std::endl;
+ast.stream() << "    return 0;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

@@ -123,54 +123,54 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
-            a.comment(o.documentation());
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
+            ast.comment(o.documentation());
             if (o.parents().empty()) {
-a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << "{" << std::endl;
+ast.stream() << "class " << sn << " " << ast.make_final_keyword_text(o) << "{" << std::endl;
             } else {
                 const auto& pn(o.parents().front());
-                const auto pqn(a.get_qualified_name(pn));
-a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << ": public " << pqn << " {" << std::endl;
+                const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "class " << sn << " " << ast.make_final_keyword_text(o) << ": public " << pqn << " {" << std::endl;
             }
 
             /*
              * Compiler generated constructors and destructors.
              */
-            if (a.supports_defaulted_functions()) {
-a.stream() << "public:" << std::endl;
-                if (!a.requires_manual_default_constructor())
-a.stream() << "    " << sn << "() = default;" << std::endl;
-a.stream() << "    " << sn << "(const " << sn << "&) = default;" << std::endl;
-                if (!a.requires_manual_move_constructor())
-a.stream() << "    " << sn << "(" << sn << "&&) = default;" << std::endl;
+            if (ast.supports_defaulted_functions()) {
+ast.stream() << "public:" << std::endl;
+                if (!ast.requires_manual_default_constructor())
+ast.stream() << "    " << sn << "() = default;" << std::endl;
+ast.stream() << "    " << sn << "(const " << sn << "&) = default;" << std::endl;
+                if (!ast.requires_manual_move_constructor())
+ast.stream() << "    " << sn << "(" << sn << "&&) = default;" << std::endl;
                 if (!o.in_inheritance_relationship())
-a.stream() << "    ~" << sn << "() = default;" << std::endl;
+ast.stream() << "    ~" << sn << "() = default;" << std::endl;
                 if (o.is_immutable())
-a.stream() << "    " << sn << "& operator=(const " << sn << "&) = delete;" << std::endl;
+ast.stream() << "    " << sn << "& operator=(const " << sn << "&) = delete;" << std::endl;
                 else if (o.all_attributes().empty())
-a.stream() << "    " << sn << "& operator=(const " << sn << "&) = default;" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    " << sn << "& operator=(const " << sn << "&) = default;" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Manually generated default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
-a.stream() << "public:" << std::endl;
-a.stream() << "    " << sn << "();" << std::endl;
-a.stream() << std::endl;
+            if (ast.requires_manual_default_constructor()) {
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    " << sn << "();" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
@@ -184,54 +184,54 @@ a.stream() << std::endl;
              * undefined reference to `vtable.
              */
             if (o.is_parent()) {
-a.stream() << "    virtual ~" << sn << "()" << a.make_noexcept_keyword_text() << " = 0;" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    virtual ~" << sn << "()" << ast.make_noexcept_keyword_text() << " = 0;" << std::endl;
+ast.stream() << std::endl;
             } else if (o.is_child() != 0) {
-a.stream() << "    virtual ~" << sn << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "    virtual ~" << sn << "()" << ast.make_noexcept_keyword_text() << " { }" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Manually generated move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
-a.stream() << "public:" << std::endl;
-a.stream() << "    " << sn << "(" << sn << "&& rhs);" << std::endl;
-a.stream() << std::endl;
+            if (ast.requires_manual_move_constructor()) {
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    " << sn << "(" << sn << "&& rhs);" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Manually generated complete constructor.
              */
             if (!o.all_attributes().empty()) {
-a.stream() << "public:" << std::endl;
+ast.stream() << "public:" << std::endl;
                 const auto attr_count(o.all_attributes().size());
                 if (attr_count == 1) {
                     const auto attr(*o.all_attributes().begin());
-a.stream() << "    explicit " << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
+ast.stream() << "    explicit " << sn << "(const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
                 } else {
-a.stream() << "    " << sn << "(" << std::endl;
+ast.stream() << "    " << sn << "(" << std::endl;
                     m2t::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(");");
                     for (const auto& attr : o.all_attributes()) {
-a.stream() << "        const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
+ast.stream() << "        const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
                         sf.next();
                     }
                 }
-a.stream() << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Serialisaton Friends
              */
-            if (a.is_serialization_enabled()) {
-a.stream() << "private:" << std::endl;
-a.stream() << "    template<typename Archive>" << std::endl;
-a.stream() << "    friend void boost::serialization::save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    template<typename Archive>" << std::endl;
-a.stream() << "    friend void boost::serialization::load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
-a.stream() << std::endl;
+            if (ast.is_serialization_enabled()) {
+ast.stream() << "private:" << std::endl;
+ast.stream() << "    template<typename Archive>" << std::endl;
+ast.stream() << "    friend void boost::serialization::save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    template<typename Archive>" << std::endl;
+ast.stream() << "    friend void boost::serialization::load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
@@ -239,43 +239,43 @@ a.stream() << std::endl;
              */
             if (o.is_visitation_root()) {
                 const auto vsn(o.base_visitor()->simple());
-a.stream() << "public:" << std::endl;
-a.stream() << "    virtual void accept(const " << vsn << "& v) const = 0;" << std::endl;
-a.stream() << "    virtual void accept(" << vsn << "& v) const = 0;" << std::endl;
-a.stream() << "    virtual void accept(const " << vsn << "& v) = 0;" << std::endl;
-a.stream() << "    virtual void accept(" << vsn << "& v) = 0;" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    virtual void accept(const " << vsn << "& v) const = 0;" << std::endl;
+ast.stream() << "    virtual void accept(" << vsn << "& v) const = 0;" << std::endl;
+ast.stream() << "    virtual void accept(const " << vsn << "& v) = 0;" << std::endl;
+ast.stream() << "    virtual void accept(" << vsn << "& v) = 0;" << std::endl;
+ast.stream() << std::endl;
             } else if (o.is_visitation_leaf()) {
                 std::string bvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
-                    bvn = a.get_qualified_name(*o.base_visitor());
-                    rpn = a.get_qualified_name(o.root_parents().front());
+                    bvn = ast.get_qualified_name(*o.base_visitor());
+                    rpn = ast.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
                     rpn = o.root_parents().front().simple();
                 }
-a.stream() << "public:" << std::endl;
-a.stream() << "    using " << rpn << "::accept;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) const" << a.make_override_keyword_text() << ";" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) const" << a.make_override_keyword_text() << ";" << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v)" << a.make_override_keyword_text() << ";" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v)" << a.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    using " << rpn << "::accept;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    virtual void accept(const " << bvn << "& v) const" << ast.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << "    virtual void accept(" << bvn << "& v) const" << ast.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << "    virtual void accept(const " << bvn << "& v)" << ast.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << "    virtual void accept(" << bvn << "& v)" << ast.make_override_keyword_text() << ";" << std::endl;
             }
 
             /*
              * Streaming
              */
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 if (o.is_parent()) {
-a.stream() << "public:" << std::endl;
-a.stream() << "    virtual void to_stream(std::ostream& s) const;" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    virtual void to_stream(std::ostream& s) const;" << std::endl;
+ast.stream() << std::endl;
                 } else if (!o.parents().empty()) {
-a.stream() << "public:" << std::endl;
-a.stream() << "    void to_stream(std::ostream& s) const" << a.make_override_keyword_text() << ";" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    void to_stream(std::ostream& s) const" << ast.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << std::endl;
                 }
             }
 
@@ -283,31 +283,31 @@ a.stream() << std::endl;
              * Getters and setters.
              */
             if (!o.local_attributes().empty()) {
-a.stream() << "public:" << std::endl;
+ast.stream() << "public:" << std::endl;
                 for (const auto& attr : o.local_attributes()) {
-                    a.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+                    ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());
 
                     if (attr.parsed_type().is_current_simple_type()) {
-a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << "() const;" << std::endl;
+ast.stream() << "    " << ast.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << "() const;" << std::endl;
                         if (attr.is_immutable()) {
-a.stream() << std::endl;
+ast.stream() << std::endl;
                             continue;
                         }
-a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
+ast.stream() << "    " << ast.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " v);" << std::endl;
                     } else {
-a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << "& " << attr.name().simple() << "() const;" << std::endl;
+ast.stream() << "    const " << ast.get_qualified_name(attr.parsed_type()) << "& " << attr.name().simple() << "() const;" << std::endl;
                         if (attr.is_immutable()) {
-a.stream() << std::endl;
+ast.stream() << std::endl;
                             continue;
                         }
-a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
-a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
-                        if (a.supports_move_operator()) {
-a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v);" << std::endl;
+ast.stream() << "    " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
+ast.stream() << "    " << ast.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " v);" << std::endl;
+                        if (ast.supports_move_operator()) {
+ast.stream() << "    " << ast.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << ast.get_qualified_name(attr.parsed_type()) << "&& v);" << std::endl;
                         }
                     }
-                    a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
-a.stream() << std::endl;
+                    ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+ast.stream() << std::endl;
                 }
             }
 
@@ -317,29 +317,29 @@ a.stream() << std::endl;
              * Equality is only public in leaf classes - MEC++-33.
              */
             if (o.is_parent()) {
-a.stream() << "protected:" << std::endl;
-a.stream() << "    bool compare(const " << sn << "& rhs) const;" << std::endl;
+ast.stream() << "protected:" << std::endl;
+ast.stream() << "    bool compare(const " << sn << "& rhs) const;" << std::endl;
             } else {
-a.stream() << "public:" << std::endl;
-a.stream() << "    bool operator==(const " << sn << "& rhs) const;" << std::endl;
-a.stream() << "    bool operator!=(const " << sn << "& rhs) const {" << std::endl;
-a.stream() << "        return !this->operator==(rhs);" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    bool operator==(const " << sn << "& rhs) const;" << std::endl;
+ast.stream() << "    bool operator!=(const " << sn << "& rhs) const {" << std::endl;
+ast.stream() << "        return !this->operator==(rhs);" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << std::endl;
             }
 
             if (o.in_inheritance_relationship()) {
-a.stream() << "public:" << std::endl;
+ast.stream() << "public:" << std::endl;
                 if (o.is_parent() && !o.is_child()) {
-a.stream() << "    virtual bool equals(const " << sn << "& other) const = 0;" << std::endl;
+ast.stream() << "    virtual bool equals(const " << sn << "& other) const = 0;" << std::endl;
                 } else if (o.is_parent()) {
                     const auto rpn(o.root_parents().front());
-a.stream() << "    virtual bool equals(const " << a.get_qualified_name(rpn) << "& other) const = 0;" << std::endl;
+ast.stream() << "    virtual bool equals(const " << ast.get_qualified_name(rpn) << "& other) const = 0;" << std::endl;
                 } else if (!o.root_parents().empty()) {
                     const auto rpn(o.root_parents().front());
-a.stream() << "    bool equals(const " << a.get_qualified_name(rpn) << "& other) const" << a.make_override_keyword_text() << ";" << std::endl;
+ast.stream() << "    bool equals(const " << ast.get_qualified_name(rpn) << "& other) const" << ast.make_override_keyword_text() << ";" << std::endl;
                 }
-a.stream() << std::endl;
+ast.stream() << std::endl;
              }
 
             /*
@@ -349,62 +349,62 @@ a.stream() << std::endl;
              */
             if ((!o.all_attributes().empty() || o.is_parent()) && !o.is_immutable()) {
                 if (o.is_parent()) {
-a.stream() << "protected:" << std::endl;
+ast.stream() << "protected:" << std::endl;
                 } else {
-a.stream() << "public:" << std::endl;
+ast.stream() << "public:" << std::endl;
                 }
-a.stream() << "    void swap(" << sn << "& other)" << a.make_noexcept_keyword_text() << ";" << std::endl;
+ast.stream() << "    void swap(" << sn << "& other)" << ast.make_noexcept_keyword_text() << ";" << std::endl;
                 if (!o.is_parent() && !o.is_immutable()) {
-a.stream() << "    " << sn << "& operator=(" << sn << " other);" << std::endl;
+ast.stream() << "    " << sn << "& operator=(" << sn << " other);" << std::endl;
                 }
-a.stream() << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Member variables.
              */
             if (!o.local_attributes().empty()) {
-a.stream() << "private:" << std::endl;
+ast.stream() << "private:" << std::endl;
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << attr.member_variable_name() << ";" << std::endl;
+ast.stream() << "    " << ast.get_qualified_name(attr.parsed_type()) << " " << attr.member_variable_name() << ";" << std::endl;
                 }
             }
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
             /*
              * Destructor implementation.
              */
             if (o.is_parent()) {
-a.stream() << "inline " << sn << "::~" << sn << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "inline " << sn << "::~" << sn << "()" << ast.make_noexcept_keyword_text() << " { }" << std::endl;
+ast.stream() << std::endl;
             }
 
             /*
              * Global equality operator implementation.
              */
             if (o.is_parent()) {
-a.stream() << "inline bool operator==(const " << sn << "& lhs, const " << sn << "& rhs) {" << std::endl;
-a.stream() << "    return lhs.equals(rhs);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+ast.stream() << "inline bool operator==(const " << sn << "& lhs, const " << sn << "& rhs) {" << std::endl;
+ast.stream() << "    return lhs.equals(rhs);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
             }
         }
 
         if (!o.all_attributes().empty() && !o.is_parent() && !o.is_immutable()) {
-a.stream() << std::endl;
-a.stream() << "namespace std {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<>" << std::endl;
-a.stream() << "inline void swap(" << std::endl;
-a.stream() << "    " << qn << "& lhs," << std::endl;
-a.stream() << "    " << qn << "& rhs) {" << std::endl;
-a.stream() << "    lhs.swap(rhs);" << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "namespace std {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<>" << std::endl;
+ast.stream() << "inline void swap(" << std::endl;
+ast.stream() << "    " << qn << "& lhs," << std::endl;
+ast.stream() << "    " << qn << "& rhs) {" << std::endl;
+ast.stream() << "    lhs.swap(rhs);" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
         }
-a.stream() << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

@@ -77,28 +77,28 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact enum_header_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-a.stream() << std::endl;
-a.stream() << "namespace std {" << std::endl;
-a.stream() << std::endl;
-a.stream() << "template<>" << std::endl;
-a.stream() << "struct hash<" << a.get_qualified_name(ye.name()) << "> {" << std::endl;
-a.stream() << "public:" << std::endl;
-a.stream() << "    size_t operator()(const " << a.get_qualified_name(ye.name()) << "& v) const {" << std::endl;
-a.stream() << "        return std::hash<unsigned int>()(static_cast<unsigned int>(v));" << std::endl;
-a.stream() << "    }" << std::endl;
-a.stream() << "};" << std::endl;
-a.stream() << std::endl;
-a.stream() << "}" << std::endl;
-a.stream() << std::endl;
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+ast.stream() << std::endl;
+ast.stream() << "namespace std {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "template<>" << std::endl;
+ast.stream() << "struct hash<" << ast.get_qualified_name(ye.name()) << "> {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    size_t operator()(const " << ast.get_qualified_name(ye.name()) << "& v) const {" << std::endl;
+ast.stream() << "        return std::hash<unsigned int>()(static_cast<unsigned int>(v));" << std::endl;
+ast.stream() << "    }" << std::endl;
+ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 }

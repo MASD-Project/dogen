@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
@@ -67,25 +67,25 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     return builder.build();
 }
 
-physical::entities::artefact class_implementation_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::entities::structural::object>(e));
+void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());
-        const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
-        a.add_helper_methods(o.name().qualified().dot());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        ast.add_helper_methods(o.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 
             /*
              * Default constructor.
              */
-            if (a.requires_manual_default_constructor()) {
+            if (ast.requires_manual_default_constructor()) {
 #>
 
 <#= sn #>::<#= sn #>()
@@ -104,7 +104,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
                         ss << "," << std::endl << "      ";
 
                     ss << attr.member_variable_name()
-                       << "(static_cast<" << a.get_qualified_name(attr.parsed_type())
+                       << "(static_cast<" << ast.get_qualified_name(attr.parsed_type())
                        << ">(0))";
 
                     is_first = false;
@@ -119,7 +119,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
             /*
              * Move constructor.
              */
-            if (a.requires_manual_move_constructor()) {
+            if (ast.requires_manual_move_constructor()) {
 #>
 
 <#= sn #>::<#= sn #>(<#= sn #>&& rhs)
@@ -131,7 +131,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
+                    const auto pqn(ast.get_qualified_name(pn));
 #>
     <#= sf.prefix() #><#= pqn #>(
         std::forward<<#= pqn #>>(rhs))<#= sf.postfix() #>
@@ -156,7 +156,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
                      const auto attr(*o.all_attributes().begin());
 #>
 
-<#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
+<#= sn #>::<#= sn #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
 <#+
                 } else {
 #>
@@ -168,7 +168,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
 #>
-    const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
+    const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
 <#+
                         sf.next();
                     }
@@ -184,7 +184,7 @@ apply(const context& ctx, const logical::entities::element& e) const {
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto& pair : o.inherited_attributes()) {
-                    const auto pqn(a.get_qualified_name(pair.first));
+                    const auto pqn(ast.get_qualified_name(pair.first));
                     const auto& pattrs(pair.second);
                     if (pattrs.size() <= 1) {
 #>
@@ -227,9 +227,9 @@ apply(const context& ctx, const logical::entities::element& e) const {
                 std::string dvn;
                 std::string rpn;
                 if (o.derived_visitor()) {
-                    bvn = a.get_qualified_name(*o.base_visitor());
+                    bvn = ast.get_qualified_name(*o.base_visitor());
                     dvn = o.derived_visitor()->simple();
-                    rpn = a.get_qualified_name(o.root_parents().front());
+                    rpn = ast.get_qualified_name(o.root_parents().front());
                 } else {
                     bvn = o.base_visitor()->simple();
                     rpn = o.root_parents().front().simple();
@@ -309,13 +309,13 @@ void <#= sn #>::accept(<#= bvn #>& v) {
             /*
              * Streaming
              */
-            if (a.is_io_enabled()) {
+            if (ast.is_io_enabled()) {
                 if (o.in_inheritance_relationship()) {
 #>
 
 void <#= sn #>::to_stream(std::ostream& s) const {
 <#+
-                io::inserter_implementation_helper(a, o, true/*inside_class*/);
+                io::inserter_implementation_helper(ast, o, true/*inside_class*/);
 #>
 }
 <#+
@@ -329,11 +329,11 @@ void <#= sn #>::to_stream(std::ostream& s) const {
                 const bool empty(o.all_attributes().empty() && o.parents().empty());
 #>
 
-void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>)<#= a.make_noexcept_keyword_text() #> {
+void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>)<#= ast.make_noexcept_keyword_text() #> {
 <#+
                if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
+                    const auto pqn(ast.get_qualified_name(pn));
 #>
     <#= pqn #>::swap(other);
 
@@ -364,7 +364,7 @@ void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>)<#= a.make_noexcep
                 const auto rpn(o.root_parents().front());
 #>
 
-bool <#= sn #>::equals(const <#= a.get_qualified_name(rpn) #>& other) const {
+bool <#= sn #>::equals(const <#= ast.get_qualified_name(rpn) #>& other) const {
     const <#= sn #>* const p(dynamic_cast<const <#= sn #>* const>(&other));
     if (!p) return false;
     return *this == *p;
@@ -401,7 +401,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
 
                 if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
-                    const auto pqn(a.get_qualified_name(pn));
+                    const auto pqn(ast.get_qualified_name(pn));
 #>
     <#= sf.prefix() #><#= pqn #>::compare(rhs)<#= sf.postfix() #>
 <#+
@@ -447,14 +447,14 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
                  if (attr.parsed_type().is_current_simple_type()) {
 #>
 
-<#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
+<#= ast.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
     return <#= attr.member_variable_name() #>;
 }
 <#+
                     if (!o.is_immutable()) {
 #>
 
-<#= (attr.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
+<#= (attr.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #> v) {
     <#= attr.member_variable_name() #> = v;
 <#+
                         if (attr.is_fluent()) {
@@ -469,18 +469,18 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
                 } else {
 #>
 
-const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
+const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
     return <#= attr.member_variable_name() #>;
 }
 <#+
                     if (!o.is_immutable()) {
 #>
 
-<#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
+<#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
     return <#= attr.member_variable_name() #>;
 }
 
-<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
+<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>& v) {
     <#= attr.member_variable_name() #> = v;
 <#+
                         if (o.is_fluent()) {
@@ -491,10 +491,10 @@ const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name(
 #>
 }
 <#+
-                        if (a.supports_move_operator()) {
+                        if (ast.supports_move_operator()) {
 #>
 
-<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
+<#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>&& v) {
     <#= attr.member_variable_name() #> = std::move(v);
 <#+
                             if (o.is_fluent()) {
@@ -514,7 +514,7 @@ const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name(
 <#+
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 
 #>

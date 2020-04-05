@@ -23,6 +23,6 @@ public:
         const logical::entities::name& n) const override;
 
 public:
-    physical::entities::artefact apply(const context& ctx,
-        const logical::entities::element& e) const override;
+    void apply(const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const override;
 };
