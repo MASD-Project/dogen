@@ -676,11 +676,13 @@ std::ostream& assistant::stream() {
 }
 
 void assistant::update_artefact() const {
-    artefact_.content(stream_.str());
+    const auto fp(artefact_properties_.file_path());
+    artefact_.name().simple(fp.filename().generic_string());
     artefact_.name().qualified(artefact_properties_.file_path());
     artefact_.logical_name().simple(element_.name().simple());
     artefact_.logical_name().qualified(element_.name().qualified().dot());
     artefact_.origin_sha1_hash(element_.origin_sha1_hash());
+    artefact_.content(stream_.str());
 
     const auto& ap(element_.artefact_properties());
     const auto arch(physical_meta_name_.qualified());
