@@ -33,7 +33,7 @@
 
 namespace dogen::physical::helpers {
 
-class name_repository_builder final {
+class meta_name_repository_builder final {
 private:
     void validate(const std::list<entities::meta_name>& mns) const;
     void populate_names(const std::list<entities::meta_name>& mns);

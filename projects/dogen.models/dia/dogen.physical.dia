@@ -1344,13 +1344,13 @@ available backends, facets and archetypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="230,-88"/>
+        <dia:point val="223,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="229.95,-88.05;248.26,-83.55"/>
+        <dia:rectangle val="222.95,-88.05;241.26,-83.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="230,-88"/>
+        <dia:point val="223,-88"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -1359,7 +1359,7 @@ available backends, facets and archetypes.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#name_repository_builder#</dia:string>
+        <dia:string>#meta_name_repository_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1534,13 +1534,13 @@ available backends, facets and archetypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="223,-94"/>
+        <dia:point val="217,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="222.95,-94.05;230.865,-90.95"/>
+        <dia:rectangle val="216.95,-94.05;224.865,-90.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="223,-94"/>
+        <dia:point val="217,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -1681,19 +1681,19 @@ available backends, facets and archetypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="239.105,-88"/>
+        <dia:point val="232.105,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="230.765,-91.05;239.855,-87.2"/>
+        <dia:rectangle val="224.765,-91.05;232.855,-87.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="239.105,-88"/>
-        <dia:point val="239.105,-90"/>
-        <dia:point val="230.815,-90"/>
-        <dia:point val="230.815,-91"/>
+        <dia:point val="232.105,-88"/>
+        <dia:point val="232.105,-90"/>
+        <dia:point val="224.815,-90"/>
+        <dia:point val="224.815,-91"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4632,7 +4632,7 @@ user choices.#</dia:string>
         <dia:point val="136.062,-91.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.013,-91.45;136.912,-87.95"/>
+        <dia:rectangle val="123.012,-91.45;136.912,-87.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5455,7 +5455,7 @@ user choices.#</dia:string>
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the generated files will overwrite existing files. 
+            <dia:string>#If true, the generated files will overwrite existing files.
 
 #DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
@@ -5621,7 +5621,7 @@ user choices.#</dia:string>
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the generated files will overwrite existing files. 
+            <dia:string>#If true, the generated files will overwrite existing files.
 
 #DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
@@ -6760,7 +6760,7 @@ user choices.#</dia:string>
         <dia:point val="135.025,-98.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.175,-98.85;153.113,-94.95"/>
+        <dia:rectangle val="134.175,-98.85;153.112,-94.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14066,17 +14066,17 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="223,-91"/>
+        <dia:point val="217,-91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="208.66,-91.05;223.2,-87.2"/>
+        <dia:rectangle val="208.66,-91.05;217.2,-87.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="223,-91"/>
-        <dia:point val="223,-90"/>
+        <dia:point val="217,-91"/>
+        <dia:point val="217,-90"/>
         <dia:point val="209.41,-90"/>
         <dia:point val="209.41,-88"/>
       </dia:attribute>
@@ -15219,7 +15219,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="159.605,-65.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.855,-66.95;163.05,-63.7"/>
+        <dia:rectangle val="158.855,-67.7;163.05,-64.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15452,7 +15452,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="149,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.25,-82.05;157.492,-77.4"/>
+        <dia:rectangle val="148.25,-82.05;157.492,-78.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15524,7 +15524,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="159.125,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.375,-82.05;170.492,-77.4"/>
+        <dia:rectangle val="158.375,-82.05;170.492,-78.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15731,7 +15731,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="173.062,-113.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.938,-115.05;173.812,-111.4"/>
+        <dia:rectangle val="158.938,-115.8;173.812,-112.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15845,7 +15845,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="159.605,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.012,-75.3999;160.355,-66.4"/>
+        <dia:rectangle val="154.012,-75.3999;160.355,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

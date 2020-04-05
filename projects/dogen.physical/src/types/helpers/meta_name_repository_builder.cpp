@@ -23,13 +23,13 @@
 #include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 #include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
-#include "dogen.physical/types/helpers/name_repository_builder.hpp"
+#include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("physical.helpers.name_repository_builder"));
+lg(logger_factory("physical.helpers.meta_name_repository_builder"));
 
 const std::string empty_backend("Backend name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
@@ -41,7 +41,7 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 
 namespace dogen::physical::helpers {
 
-void name_repository_builder::
+void meta_name_repository_builder::
 validate(const std::list<entities::meta_name>& mns) const {
     BOOST_LOG_SEV(lg, debug) << "Validating physical names.";
 
@@ -70,13 +70,13 @@ validate(const std::list<entities::meta_name>& mns) const {
     BOOST_LOG_SEV(lg, debug) << "Physical names are valid.";
 }
 
-void name_repository_builder::
+void meta_name_repository_builder::
 populate_names(const std::list<entities::meta_name>& mns) {
     for(const auto& mn : mns)
         repository_.all().push_back(mn);
 }
 
-void name_repository_builder::populate_facet_names_by_backend_name() {
+void meta_name_repository_builder::populate_facet_names_by_backend_name() {
     auto& fnbkn(repository_.facet_names_by_backend_name());
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& n : repository_.all()) {
@@ -86,7 +86,7 @@ void name_repository_builder::populate_facet_names_by_backend_name() {
     }
 }
 
-void name_repository_builder::populate_formatter_names_by_backend_name() {
+void meta_name_repository_builder::populate_formatter_names_by_backend_name() {
     auto& fnbkn(repository_.formatter_names_by_backend_name());
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& n : repository_.all()) {
@@ -95,7 +95,7 @@ void name_repository_builder::populate_formatter_names_by_backend_name() {
     }
 }
 
-void name_repository_builder::populate_archetypes_by_facet_by_backend() {
+void meta_name_repository_builder::populate_archetypes_by_facet_by_backend() {
     auto& abbbf(repository_.by_backend_by_facet());
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& n : repository_.all()) {
@@ -105,7 +105,7 @@ void name_repository_builder::populate_archetypes_by_facet_by_backend() {
     }
 }
 
-void name_repository_builder::add(const std::list<entities::meta_name>& mns) {
+void meta_name_repository_builder::add(const std::list<entities::meta_name>& mns) {
     BOOST_LOG_SEV(lg, debug) << "Adding list of physical meta-names.";
 
     validate(mns);
@@ -114,7 +114,7 @@ void name_repository_builder::add(const std::list<entities::meta_name>& mns) {
     BOOST_LOG_SEV(lg, debug) << "Added list of physical names. ";
 }
 
-void name_repository_builder::add(const std::unordered_map<std::string,
+void meta_name_repository_builder::add(const std::unordered_map<std::string,
     entities::meta_name_group>& by_logical_meta_name) {
     auto& lmn(repository_.by_logical_meta_name());
     for (const auto& pair : by_logical_meta_name) {
@@ -159,13 +159,13 @@ void name_repository_builder::add(const std::unordered_map<std::string,
     }
 }
 
-void name_repository_builder::
+void meta_name_repository_builder::
 add(const entities::meta_name_repository_parts& parts) {
     add(parts.all());
     add(parts.by_logical_meta_name());
 }
 
-const entities::meta_name_repository& name_repository_builder::build() {
+const entities::meta_name_repository& meta_name_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();
     populate_archetypes_by_facet_by_backend();

@@ -27,7 +27,7 @@
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.physical/io/entities/meta_name_repository_io.hpp"
-#include "dogen.physical/types/helpers/name_repository_builder.hpp"
+#include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
@@ -68,7 +68,7 @@ boost::shared_ptr<physical::entities::meta_model>
 create_physical_meta_model(
     const model_to_text_technical_space_chain_registrar& rg) {
 
-    physical::helpers::name_repository_builder b;
+    physical::helpers::meta_name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.physical_names_by_meta_name());

@@ -129,7 +129,7 @@ make_overwrite() {
     using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("overwrite");
-    r.description(R"(If true, the generated files will overwrite existing files. 
+    r.description(R"(If true, the generated files will overwrite existing files.
 
 )");
     const auto vt(value_type::boolean);

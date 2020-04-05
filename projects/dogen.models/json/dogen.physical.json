@@ -140,7 +140,7 @@
       ]
     },
     {
-      "name": "helpers::name_repository_builder",
+      "name": "helpers::meta_name_repository_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -560,7 +560,7 @@
           "name": "overwrite",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
-          "documentation": "If true, the generated files will overwrite existing files. \n",
+          "documentation": "If true, the generated files will overwrite existing files.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
@@ -592,7 +592,7 @@
           "name": "overwrite",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
-          "documentation": "If true, the generated files will overwrite existing files. \n",
+          "documentation": "If true, the generated files will overwrite existing files.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element"
           }
