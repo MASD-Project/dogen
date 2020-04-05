@@ -23,12 +23,12 @@
 #include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
-#include "dogen.physical/types/helpers/name_builder.hpp"
+#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("physical.helpers.name_builder"));
+auto lg(logger_factory("physical.helpers.meta_name_builder"));
 
 const std::string kernel_name("masd");
 
@@ -41,22 +41,22 @@ const std::string empty_archetype(
 
 namespace dogen::physical::helpers {
 
-name_builder& name_builder::backend(const std::string& s) {
+meta_name_builder& meta_name_builder::backend(const std::string& s) {
     meta_name_.location().backend(s);
     return *this;
 }
 
-name_builder& name_builder::facet(const std::string& s) {
+meta_name_builder& meta_name_builder::facet(const std::string& s) {
     meta_name_.location().facet(s);
     return *this;
 }
 
-name_builder& name_builder::archetype(const std::string& s) {
+meta_name_builder& meta_name_builder::archetype(const std::string& s) {
     meta_name_.location().archetype(s);
     return *this;
 }
 
-entities::meta_name name_builder::build() {
+entities::meta_name meta_name_builder::build() {
     /*
      * Kernel is always hard-coded to MASD.
      */

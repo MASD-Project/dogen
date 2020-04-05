@@ -13639,7 +13639,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#name_builder#</dia:string>
+        <dia:string>#meta_name_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_NAME_BUILDER_HPP
-#define DOGEN_PHYSICAL_TYPES_HELPERS_NAME_BUILDER_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_BUILDER_HPP
+#define DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,22 +33,22 @@ namespace dogen::physical::helpers {
 /**
  * @brief Builds a physical name.
  */
-class name_builder final {
+class meta_name_builder final {
 public:
     /**
      * @brief Adds a backend to the name.
      */
-    name_builder& backend(const std::string& s);
+    meta_name_builder& backend(const std::string& s);
 
     /**
      * @brief Adds a facet to the name.
      */
-    name_builder& facet(const std::string& s);
+    meta_name_builder& facet(const std::string& s);
 
     /**
      * @brief Adds an archetype to the name.
      */
-    name_builder& archetype(const std::string& s);
+    meta_name_builder& archetype(const std::string& s);
 
 public:
     entities::meta_name build();
