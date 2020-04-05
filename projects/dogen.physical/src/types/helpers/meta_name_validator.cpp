@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/validation_error.hpp"
-#include "dogen.physical/types/helpers/name_validator.hpp"
+#include "dogen.physical/types/helpers/meta_name_validator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("physical.helpers.name_validator"));
+static logger lg(logger_factory("physical.helpers.meta_name_validator"));
 
 const std::string empty_simple("Simple name is empty.");
 const std::string empty_qualified("Qualified name is empty.");
@@ -41,7 +41,7 @@ const std::string non_empty_archetype("Archetype is not empty.");
 
 namespace dogen::physical::helpers {
 
-void name_validator::common_validation(const entities::meta_name& mn) {
+void meta_name_validator::common_validation(const entities::meta_name& mn) {
     /*
      * Simple name must be populated.
      */
@@ -76,7 +76,7 @@ void name_validator::common_validation(const entities::meta_name& mn) {
     }
 }
 
-void name_validator::validate_backend_name(const entities::meta_name& mn) {
+void meta_name_validator::validate_backend_name(const entities::meta_name& mn) {
     common_validation(mn);
 
     /*
@@ -97,7 +97,7 @@ void name_validator::validate_backend_name(const entities::meta_name& mn) {
     }
 }
 
-void name_validator::validate_facet_name(const entities::meta_name& mn) {
+void meta_name_validator::validate_facet_name(const entities::meta_name& mn) {
     common_validation(mn);
 
     /*
@@ -118,7 +118,7 @@ void name_validator::validate_facet_name(const entities::meta_name& mn) {
     }
 }
 
-void name_validator::validate_archetype_name(const entities::meta_name& mn) {
+void meta_name_validator::validate_archetype_name(const entities::meta_name& mn) {
     common_validation(mn);
 
     /*

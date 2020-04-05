@@ -1181,7 +1181,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::name_validator",
+      "name": "helpers::meta_name_validator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

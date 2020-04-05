@@ -26,7 +26,7 @@
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/types/helpers/name_validator.hpp"
+#include "dogen.physical/types/helpers/meta_name_validator.hpp"
 #include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"
@@ -67,7 +67,7 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
      * Validate the physical meta-name.
      */
     const auto& mn(t->physical_name());
-    physical::helpers::name_validator::validate_archetype_name(mn);
+    physical::helpers::meta_name_validator::validate_archetype_name(mn);
 }
 
 void registrar::validate(std::shared_ptr<helper_transform> ht) const {

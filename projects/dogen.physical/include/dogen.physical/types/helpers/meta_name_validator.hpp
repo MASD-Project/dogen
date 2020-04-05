@@ -36,7 +36,7 @@ namespace dogen::physical::helpers {
  * archetypes require a backend, part and facet and parts require a
  * backend. The exception is facet, which does not require a part.
  */
-class name_validator final {
+class meta_name_validator final {
 private:
     /**
      * @brief Validation rules that are common to all types of names.

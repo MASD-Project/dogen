@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/types/helpers/name_validator.hpp"
+#include "dogen.physical/types/helpers/meta_name_validator.hpp"
 #include "dogen.physical/types/helpers/meta_name_builder.hpp"
 
 namespace {
@@ -72,15 +72,15 @@ entities::meta_name meta_name_builder::build() {
     if (has_archetype) {
         mn.simple(l.archetype());
         mn.qualified(qualified_meta_name_builder::build_archetype(l));
-        name_validator::validate_archetype_name(mn);
+        meta_name_validator::validate_archetype_name(mn);
     } else if (has_facet) {
         mn.simple(l.facet());
         mn.qualified(qualified_meta_name_builder::build_facet(l));
-        name_validator::validate_facet_name(mn);
+        meta_name_validator::validate_facet_name(mn);
     } else {
         mn.simple(l.backend());
         mn.qualified(qualified_meta_name_builder::build_backend(l));
-        name_validator::validate_backend_name(mn);
+        meta_name_validator::validate_backend_name(mn);
     }
     return mn;
 }

@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/types/helpers/name_validator.hpp"
+#include "dogen.physical/types/helpers/meta_name_validator.hpp"
 #include "dogen.m2t.csharp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar_error.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar.hpp"
@@ -80,7 +80,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * Validate the physical name.
      */
     const auto& n(t->physical_name());
-    physical::helpers::name_validator::validate_archetype_name(n);
+    physical::helpers::meta_name_validator::validate_archetype_name(n);
 
     /*
      * Insert it into the main collection of stock transforms.
