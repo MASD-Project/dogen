@@ -12,46 +12,46 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-05 Sun 11:48]
+#+CAPTION: Clock summary at [2020-04-05 Sun 17:28]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *77:50* |       |       | 100.0 |
+| *Total time*                                              | *79:53* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 77:50   |       |       | 100.0 |
-| Active                                                    |         | 77:50 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  7:27 |   9.6 |
+| Stories                                                   | 79:53   |       |       | 100.0 |
+| Active                                                    |         | 79:53 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  7:27 |   9.3 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  6:21 |   8.2 |
+| Sprint and product backlog grooming                       |         |       |  6:21 |   7.9 |
 | Rename archetypes model to physical model                 |         |       |  0:28 |   0.6 |
 | Rename assets model to logical model                      |         |       |  0:29 |   0.6 |
 | Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.8 |
-| Rename engine to orchestration                            |         |       |  1:04 |   1.4 |
-| Merge extraction model with physical model                |         |       |  4:35 |   5.9 |
+| Rename engine to orchestration                            |         |       |  1:04 |   1.3 |
+| Merge extraction model with physical model                |         |       |  4:35 |   5.7 |
 | Remove manual feature in profile merge transform          |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity         |         |       |  0:12 |   0.3 |
 | Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.1 |
-| Analysis on designing and implement physical types        |         |       |  6:52 |   8.8 |
+| Analysis on designing and implement physical types        |         |       |  6:52 |   8.6 |
 | Remove =element= from the modeling location               |         |       |  0:02 |   0.0 |
-| Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.4 |
+| Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.3 |
 | Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.1 |
-| Rename generation models to =m2t=                         |         |       |  1:04 |   1.4 |
+| Rename generation models to =m2t=                         |         |       |  1:04 |   1.3 |
 | Move all generation features away from generation         |         |       |  0:17 |   0.4 |
-| Rename generation transforms                              |         |       |  4:49 |   6.2 |
+| Rename generation transforms                              |         |       |  4:49 |   6.0 |
 | Remove kernel from models                                 |         |       |  0:36 |   0.8 |
 | Rename the default MASD kernel                            |         |       |  0:44 |   0.9 |
-| Consider removing archetype location by family            |         |       |  0:40 |   0.9 |
+| Consider removing archetype location by family            |         |       |  0:40 |   0.8 |
 | Add part to physical location                             |         |       |  1:16 |   1.6 |
 | Add names to logical model                                |         |       |  1:48 |   2.3 |
-| Consider generating a colour palette procedurally         |         |       |  2:48 |   3.6 |
+| Consider generating a colour palette procedurally         |         |       |  2:48 |   3.5 |
 | Add support for clang-10                                  |         |       |  0:44 |   0.9 |
-| Make physical location entries simple names               |         |       | 20:37 |  26.5 |
+| Make physical location entries simple names               |         |       | 20:37 |  25.8 |
 | Consider upgrading to clang 10 on windows                 |         |       |  0:08 |   0.2 |
 | Make m2t interfaces header only                           |         |       |  0:18 |   0.4 |
-| Rename physical names to meta-names                       |         |       |  3:42 |   4.8 |
-| Implement archetype locations from physical meta-model    |         |       |  5:37 |   7.2 |
+| Rename physical names to meta-names                       |         |       |  3:42 |   4.6 |
+| Supply artefacts to formatters                            |         |       |  2:30 |   3.1 |
+| Implement archetype locations from physical meta-model    |         |       |  5:37 |   7.0 |
 | Implement the generation model in terms of "formattables" |         |       |  0:42 |   0.9 |
-| Supply artefacts to formatters                            |         |       |  0:27 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -865,6 +865,25 @@ Notes:
   - assistant: physical name. *Done*
 - change model artefacts: =std::list<boost::shared_ptr<artefact>>=. *Done*
 
+*** COMPLETED Supply artefacts to formatters                          :story:
+    CLOSED: [2020-04-05 Sun 17:25]
+    :LOGBOOK:
+    CLOCK: [2020-04-05 Sun 17:26]--[2020-04-05 Sun 17:28] =>  0:02
+    CLOCK: [2020-04-05 Sun 15:30]--[2020-04-05 Sun 17:25] =>  1:55
+    CLOCK: [2020-04-05 Sun 11:49]--[2020-04-05 Sun 11:55] =>  0:06
+    CLOCK: [2020-04-05 Sun 11:21]--[2020-04-05 Sun 11:48] =>  0:27
+    :END:
+
+Instead of generating artefacts inside of the formatter, we need to
+supply them as references.
+
+Notes:
+
+- do a check that the physical name of the artefact and formatter
+  match.
+- rename the model generation chains in orchestration.
+- rename the generation context in orchestration.
+
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
     CLOCK: [2020-04-04 Sat 14:54]--[2020-04-04 Sat 16:55] =>  2:01
@@ -943,18 +962,44 @@ Notes:
  - we need to add artefacts to formatters and get them to populate
    them.
 
-*** STARTED Supply artefacts to formatters                            :story:
-    :LOGBOOK:
-    CLOCK: [2020-04-05 Sun 11:21]--[2020-04-05 Sun 11:48] =>  0:27
-    :END:
+*** Handling of non-existent stitch templates is dodgy                :story:
 
-Instead of generating artefacts inside of the formatter, we need to
-supply them as references.
+At present when we do not find a stitch template we seem to create an
+artefact with an empty path:
 
-Notes:
+:    /*
+:     * If the template does not yet exist, we should just create an
+:     * empty artefact.
+:     *
+:     * This scenario happens when creating a new model or when adding
+:     * a new artefact formatter for the first time.
+:     */
+:    if (!boost::filesystem::exists(stitch_template)) {
+:        BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
+:                                 << fp.generic_string();
+:        // ast.update_artefact();
+:
+:        // FIXME: what is the name/path for the artefact?! This may
+:        // FIXME: explain empty artefacts!
+:        a.overwrite(ast.new_artefact_properties().overwrite());
+:
+:        physical::entities::operation op;
+:        using ot = physical::entities::operation_type;
+:        op.type(a.overwrite() ? ot::write : ot::create_only);
+:        a.operation(op);
+:        return;
+:    }
 
-- do a check that the physical name of the artefact and formatter
-  match.
+What we should really be doing instead is setting up the path and
+using a default stitch template. We have a story for this. For now
+this is causing artefacts with blank paths which is causing issues in
+the physical pipeline. We need to address this and then remove those hacks.
+
+In addition, stitch transform is still generating its own artefact.
+
+*** Replace all formatting styles with the ones in physical model     :story:
+
+We still have a number of copies of this enumeration.
 
 *** Replace artefact properties with artefacts                        :story:
 
