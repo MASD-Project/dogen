@@ -52,9 +52,25 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::artefact>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::artefact>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

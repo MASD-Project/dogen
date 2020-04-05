@@ -19,6 +19,7 @@
  *
  */
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
@@ -51,7 +52,8 @@ apply(const context& ctx, entities::model& m) {
         "mock content filler transform", transform_id, m.name().simple(),
         *ctx.tracer());
 
-    for (auto& a : m.artefacts()) {
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         if (!a.content().empty())
             continue;
 

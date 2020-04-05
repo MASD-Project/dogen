@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include <memory>
+#include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar.hpp"
@@ -45,7 +45,7 @@ public:
     static csharp::transforms::registrar& registrar();
 
 public:
-    std::list<physical::entities::artefact>
+    std::list<boost::shared_ptr<physical::entities::artefact>>
     execute(const formattables::model& fm) const;
 
 private:

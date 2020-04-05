@@ -30,6 +30,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
@@ -87,7 +88,7 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<physical::entities::artefact>
+    std::list<boost::shared_ptr<physical::entities::artefact>>
     apply(const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::locator& l,
         const variability::entities::feature_model& feature_model,

@@ -3902,7 +3902,7 @@ user choices.#</dia:string>
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;artefact&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;artefact&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

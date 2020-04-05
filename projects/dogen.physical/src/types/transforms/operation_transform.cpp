@@ -28,6 +28,7 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/operation_type_io.hpp"
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/helpers/file_status_collector.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/operation_transform.hpp"
@@ -134,8 +135,10 @@ void operation_transform::apply(const context& ctx, entities::model& m) {
         "operation transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
-    for (auto& a : m.artefacts())
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         apply(a, m.outputting_properties().force_write());
+    }
 
     stp.end_transform(m);
 }

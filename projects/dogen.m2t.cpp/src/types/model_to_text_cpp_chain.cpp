@@ -89,7 +89,7 @@ std::string model_to_text_cpp_chain::description() const {
     return ::description;
 }
 
-std::list<physical::entities::artefact>
+std::list<boost::shared_ptr<physical::entities::artefact>>
 model_to_text_cpp_chain::
 apply(const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,

@@ -26,6 +26,7 @@
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
 #include "dogen.physical/types/helpers/file_status_collector.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/helpers/unified_differ.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/generate_diffs_transform.hpp"
@@ -74,7 +75,8 @@ apply(const context& ctx, entities::model& m) {
     }
 
     const auto md(m.managed_directories().front());
-    for (auto& a : m.artefacts()) {
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         const auto& p(a.name().qualified());
         if (p.empty()) {
             // FIXME: throw

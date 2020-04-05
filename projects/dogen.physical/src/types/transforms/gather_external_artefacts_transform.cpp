@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
@@ -43,15 +44,16 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-entities::artefact gather_external_artefacts_transform::make_artefact(
+boost::shared_ptr<entities::artefact>
+gather_external_artefacts_transform::make_artefact(
     const boost::filesystem::path& p,
     const entities::operation_type ot,
     const entities::operation_reason rsn) {
 
-    entities::artefact r;
-    r.name().qualified(p);
-    r.operation().type(ot);
-    r.operation().reason(rsn);
+    auto r(boost::make_shared<entities::artefact>());
+    r->name().qualified(p);
+    r->operation().type(ot);
+    r->operation().reason(rsn);
 
     return r;
 }

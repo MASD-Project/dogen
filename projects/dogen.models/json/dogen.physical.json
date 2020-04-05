@@ -393,7 +393,7 @@
         },
         {
           "name": "artefacts",
-          "type": "std::list<artefact>",
+          "type": "std::list<boost::shared_ptr<artefact>>",
           "documentation": "All artefacts that make up this physical model.\n"
         },
         {

@@ -65,7 +65,7 @@ std::string model_to_text_csharp_chain::description() const {
     return ::description;
 }
 
-std::list<physical::entities::artefact>
+std::list<boost::shared_ptr<physical::entities::artefact>>
 model_to_text_csharp_chain::
 apply(const formattables::model& fm) const {
     transforms::workflow wf;

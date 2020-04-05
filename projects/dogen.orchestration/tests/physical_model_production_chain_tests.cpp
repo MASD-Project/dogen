@@ -30,6 +30,7 @@
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/operation_reason_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
@@ -112,7 +113,8 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
 
     unsigned int diffs_found(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
         using namespace dogen::physical::entities;
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
@@ -180,7 +182,9 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
 bool check_for_delete_extra(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
+
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
@@ -242,7 +246,9 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
 bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
+
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
@@ -304,7 +310,9 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
 bool check_for_force_write(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
+
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
@@ -357,7 +365,9 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
 bool check_out_of_sync(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
+
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now

@@ -28,6 +28,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/hash/entities/operation_type_hash.hpp"
 #include "dogen.physical/hash/entities/operation_reason_hash.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
@@ -151,7 +152,8 @@ void print_operation_reason(const bool add_brackets,
 void print_plain_report(std::ostream& s,
     const dogen::physical::entities::model& m) {
     const auto base(m.managed_directories().front());
-    for (auto& a : m.artefacts()) {
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         // FIXME: HACK: we seemt to have some blank artefacts atm.
         const auto p(a.name().qualified());
         if (p.empty())
@@ -180,7 +182,8 @@ void print_org_mode_report(std::ostream& s,
                        > map;
 
     const auto base(m.managed_directories().front());
-    for (auto& a : m.artefacts()) {
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         // FIXME: HACK: we seemt to have some blank artefacts atm.
         const auto p(a.name().qualified());
         if (p.empty())

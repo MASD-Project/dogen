@@ -31,8 +31,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/name.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
@@ -57,7 +57,7 @@ public:
         const dogen::physical::entities::meta_name& physical_meta_name,
         const dogen::physical::entities::name& name,
         const std::string& technical_space,
-        const std::list<dogen::physical::entities::artefact>& artefacts,
+        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties);
 
@@ -126,10 +126,10 @@ public:
      * @brief All artefacts that make up this physical model.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::artefact>& artefacts() const;
-    std::list<dogen::physical::entities::artefact>& artefacts();
-    void artefacts(const std::list<dogen::physical::entities::artefact>& v);
-    void artefacts(const std::list<dogen::physical::entities::artefact>&& v);
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
+    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v);
+    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
     /**@}*/
 
     const std::list<boost::filesystem::path>& managed_directories() const;
@@ -159,7 +159,7 @@ private:
     dogen::physical::entities::meta_name physical_meta_name_;
     dogen::physical::entities::name name_;
     std::string technical_space_;
-    std::list<dogen::physical::entities::artefact> artefacts_;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
 };

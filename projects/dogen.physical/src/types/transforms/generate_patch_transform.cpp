@@ -28,6 +28,7 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/generate_patch_transform.hpp"
 
@@ -66,7 +67,8 @@ apply(const context& ctx, const entities::model& m) {
     }
 
     std::ostringstream ss;
-    for (auto& a : m.artefacts()) {
+    for (auto& ptr : m.artefacts()) {
+        auto& a(*ptr);
         BOOST_LOG_SEV(lg, trace) << "Processing arefact: "
                                  << a.name().qualified().filename();
 

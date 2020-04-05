@@ -24,6 +24,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/operation_type_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/transforms/write_artefacts_transform.hpp"
 
 namespace {
@@ -79,7 +80,8 @@ apply(const context& ctx, const entities::model& m) {
      * operation to the filesystem. Ignore all other artefacts.
      */
     unsigned int files_written(0);
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
         const auto p(a.name().qualified());
         const auto gs(p.generic_string());
         BOOST_LOG_SEV(lg, trace) << "Processing file: " << p;

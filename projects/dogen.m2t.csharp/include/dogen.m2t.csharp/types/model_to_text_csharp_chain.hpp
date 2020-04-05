@@ -30,6 +30,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
@@ -61,7 +62,7 @@ private:
         const transforms::repository& frp, const formattables::locator & l,
         const m2t::entities::model& m) const;
 
-    std::list<physical::entities::artefact>
+    std::list<boost::shared_ptr<physical::entities::artefact>>
     apply(const formattables::model& fm) const;
 
 public:

@@ -31,6 +31,7 @@
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
 #include "dogen.physical/types/helpers/file_status_collector.hpp"
 
@@ -46,7 +47,8 @@ namespace dogen::physical::helpers {
 std::set<boost::filesystem::path> file_status_collector::
 obtain_expected_files(const entities::model& m) {
     std::set<boost::filesystem::path> r;
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
         r.insert(a.name().qualified().generic_string());
         for (const auto& d : a.dependencies())
             r.insert(d.generic_string());

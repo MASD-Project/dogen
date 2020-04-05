@@ -21,6 +21,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/remove_files_transform.hpp"
 
@@ -48,7 +50,8 @@ void remove_files_transform::delete_extra_files(const entities::model& m) {
      * Collect all the files to remove across the model.
      */
     std::list<boost::filesystem::path> unexpected;
-    for (const auto& a : m.artefacts()) {
+    for (const auto& ptr : m.artefacts()) {
+        const auto& a(*ptr);
         using physical::entities::operation_type;
         if (a.operation().type() == operation_type::remove)
             unexpected.push_back(a.name().qualified());

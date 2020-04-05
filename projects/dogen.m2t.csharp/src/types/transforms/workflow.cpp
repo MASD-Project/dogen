@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.m2t.csharp/types/transforms/context.hpp"
 #include "dogen.m2t.csharp/types/transforms/workflow.hpp"
@@ -44,13 +45,13 @@ csharp::transforms::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::list<physical::entities::artefact>
+std::list<boost::shared_ptr<physical::entities::artefact>>
 workflow::execute(const formattables::model& fm) const {
-
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
 
-    std::list<physical::entities::artefact> r;
+    using physical::entities::artefact;
+    std::list<boost::shared_ptr<physical::entities::artefact>> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
 
@@ -76,11 +77,11 @@ workflow::execute(const formattables::model& fm) const {
             const auto& fmt(*fmt_ptr);
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
 
-            const auto artefact(fmt.apply(ctx, e));
-            const auto& p(artefact.name().qualified());
+            const auto a(fmt.apply(ctx, e));
+            const auto& p(a.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(artefact);
+            r.push_back(boost::make_shared<artefact>(a));
         }
     }
 

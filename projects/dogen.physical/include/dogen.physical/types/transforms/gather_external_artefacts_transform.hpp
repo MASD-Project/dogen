@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/operation_reason.hpp"
 #include "dogen.physical/types/entities/operation_type.hpp"
@@ -37,7 +38,14 @@ namespace dogen::physical::transforms {
  */
 class gather_external_artefacts_transform final {
 private:
-    static entities::artefact make_artefact(const boost::filesystem::path& p,
+    /**
+     * @brief Generates a new bare-bones artefact.
+     *
+     * Note that, at present we are not loading the contents of
+     * extraneous artefacts.
+     */
+    static boost::shared_ptr<entities::artefact>
+    make_artefact(const boost::filesystem::path& p,
         const entities::operation_type ot,
         const entities::operation_reason rsn);
 
