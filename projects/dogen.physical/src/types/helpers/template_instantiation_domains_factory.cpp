@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 
 namespace {
@@ -69,8 +69,8 @@ make(const std::list<entities::meta_name>& mns) {
         /*
          * Kernel
          */
-        const auto bqn(qualified_name_builder::build_backend(mn));
-        const auto fqn(qualified_name_builder::build_facet(mn));
+        const auto bqn(qualified_meta_name_builder::build_backend(mn));
+        const auto fqn(qualified_meta_name_builder::build_facet(mn));
         const auto qn(mn.qualified());
 
         sorted[masd_kernel].insert(bqn);

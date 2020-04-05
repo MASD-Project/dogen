@@ -29,7 +29,7 @@
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.logical/types/transforms/extraction_properties_transform.hpp"
 
 namespace {
@@ -58,7 +58,7 @@ extraction_properties_transform::make_feature_group(
     r.enable_backend_directories = s.get_by_name(ekd);
 
     const auto en(traits::enabled());
-    using qnb = physical::helpers::qualified_name_builder;
+    using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& mn : mns) {
         const auto b(qnb::build_backend(mn));
         r.enabled[b] = s.get_by_name(b, en);

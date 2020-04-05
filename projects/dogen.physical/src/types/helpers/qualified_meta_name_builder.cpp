@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("physical.helpers.qualified_name_builder"));
+auto lg(logger_factory("physical.helpers.qualified_meta_name_builder"));
 
 const std::string kernel_name("masd");
 const std::string canonical_name("canonical_archetype");
@@ -42,7 +42,7 @@ const std::string empty_archetype(
 
 namespace dogen::physical::helpers {
 
-std::string qualified_name_builder::build_kernel(const entities::location& l) {
+std::string qualified_meta_name_builder::build_kernel(const entities::location& l) {
     const auto& k(l.kernel());
     if (k.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_kernel;
@@ -51,11 +51,11 @@ std::string qualified_name_builder::build_kernel(const entities::location& l) {
     return k;
 }
 
-std::string qualified_name_builder::build_kernel(const entities::meta_name& mn) {
+std::string qualified_meta_name_builder::build_kernel(const entities::meta_name& mn) {
     return build_kernel(mn.location());
 }
 
-std::string qualified_name_builder::build_backend(const entities::location& l) {
+std::string qualified_meta_name_builder::build_backend(const entities::location& l) {
     const auto& b(l.backend());
     if (b.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_backend;
@@ -65,11 +65,11 @@ std::string qualified_name_builder::build_backend(const entities::location& l) {
     return build_kernel(l) + dot + b;
 }
 
-std::string qualified_name_builder::build_backend(const entities::meta_name& mn) {
+std::string qualified_meta_name_builder::build_backend(const entities::meta_name& mn) {
     return build_backend(mn.location());
 }
 
-std::string qualified_name_builder::build_facet(const entities::location& l,
+std::string qualified_meta_name_builder::build_facet(const entities::location& l,
     const bool add_canonical) {
 
     const auto& f(l.facet());
@@ -87,13 +87,13 @@ std::string qualified_name_builder::build_facet(const entities::location& l,
     return r;
 }
 
-std::string qualified_name_builder::build_facet(const entities::meta_name& mn,
+std::string qualified_meta_name_builder::build_facet(const entities::meta_name& mn,
     const bool add_canonical) {
     return build_facet(mn.location(), add_canonical);
 }
 
 std::string
-qualified_name_builder::build_archetype(const entities::location& l) {
+qualified_meta_name_builder::build_archetype(const entities::location& l) {
     std::string r(build_backend(l));
     const bool has_facet(!l.facet().empty());
     if (has_facet)
@@ -106,7 +106,7 @@ qualified_name_builder::build_archetype(const entities::location& l) {
     return r;
 }
 
-std::string qualified_name_builder::
+std::string qualified_meta_name_builder::
 build_archetype(const entities::meta_name& mn) {
     return build_archetype(mn.location());
 }

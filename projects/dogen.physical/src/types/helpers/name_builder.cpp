@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.physical/types/helpers/name_builder.hpp"
@@ -71,15 +71,15 @@ entities::meta_name name_builder::build() {
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
         mn.simple(l.archetype());
-        mn.qualified(qualified_name_builder::build_archetype(l));
+        mn.qualified(qualified_meta_name_builder::build_archetype(l));
         name_validator::validate_archetype_name(mn);
     } else if (has_facet) {
         mn.simple(l.facet());
-        mn.qualified(qualified_name_builder::build_facet(l));
+        mn.qualified(qualified_meta_name_builder::build_facet(l));
         name_validator::validate_facet_name(mn);
     } else {
         mn.simple(l.backend());
-        mn.qualified(qualified_name_builder::build_backend(l));
+        mn.qualified(qualified_meta_name_builder::build_backend(l));
         name_validator::validate_backend_name(mn);
     }
     return mn;

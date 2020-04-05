@@ -27,7 +27,7 @@
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/registrar_error.hpp"
@@ -110,7 +110,7 @@ void registrar::validate() const {
         const auto& transforms(pair.second);
         std::set<std::string> facets_found;
         std::set<std::string> all_facets;
-        using qnb = physical::helpers::qualified_name_builder;
+        using qnb = physical::helpers::qualified_meta_name_builder;
         for (const auto& ptr : transforms) {
             const auto& transform(*ptr);
             const auto pn(transform.physical_name());
@@ -191,7 +191,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
      */
     auto& cal(g.canonical_locations());
     const auto qn(pmn.qualified());
-    using qnb = physical::helpers::qualified_name_builder;
+    using qnb = physical::helpers::qualified_meta_name_builder;
     const auto cs(inclusion_support_types::canonical_support);
     if (f->inclusion_support_type() == cs) {
         const auto fct(qnb::build_facet(pmn));

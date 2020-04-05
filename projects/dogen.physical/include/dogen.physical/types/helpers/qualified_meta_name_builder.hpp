@@ -38,7 +38,7 @@ namespace dogen::physical::helpers {
  * If the names and locations are not valid for the requests in
  * question, we throw.
  */
-class qualified_name_builder final {
+class qualified_meta_name_builder final {
 public:
     /**
      * @brief Builds a qualified name for the kernel region in

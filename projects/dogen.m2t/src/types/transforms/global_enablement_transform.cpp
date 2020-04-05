@@ -26,7 +26,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
@@ -131,7 +131,7 @@ global_enablement_transform::make_local_archetype_feature_group(
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    using qnb = physical::helpers::qualified_name_builder;
+    using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& n : nrp.all()) {
         local_archetype_feature_group latg;
         const auto qn(n.qualified());

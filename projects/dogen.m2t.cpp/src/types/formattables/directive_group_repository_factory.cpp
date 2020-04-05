@@ -26,7 +26,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
@@ -289,7 +289,7 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                using qnb = physical::helpers::qualified_name_builder;
+                using qnb = physical::helpers::qualified_meta_name_builder;
                 const auto fct(qnb::build_facet(pn));
                 const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, dg, dgrp);
@@ -320,7 +320,7 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                using qnb = physical::helpers::qualified_name_builder;
+                using qnb = physical::helpers::qualified_meta_name_builder;
                 const auto fct(qnb::build_facet(pn));
                 const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, *dg, dgrp);
