@@ -43,7 +43,7 @@ public:
     model_to_text_transform() = default;
     model_to_text_transform(model_to_text_transform&&) = default;
     model_to_text_transform(const model_to_text_transform&) = delete;
-    virtual ~model_to_text_transform() noexcept = 0;
+    virtual ~model_to_text_transform() noexcept {}
 
 public:
     /**

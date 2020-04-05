@@ -46,7 +46,7 @@
     {
       "name": "transforms::model_to_text_transform",
       "stereotypes": [
-        "dogen::handcrafted::typeable"
+        "dogen::handcrafted::typeable::header_only"
       ],
       "tagged_values": {
         "masd.cpp.types.class_forward_declarations.enabled": "true"

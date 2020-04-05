@@ -378,7 +378,7 @@
         <dia:string>#model_to_text_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
@@ -420,7 +420,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#e5e8ff"/>
+        <dia:color val="#c6ccff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
