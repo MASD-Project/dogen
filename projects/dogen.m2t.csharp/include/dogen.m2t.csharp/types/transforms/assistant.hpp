@@ -153,7 +153,7 @@ private:
     const logical::entities::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    const physical::entities::meta_name physical_name_;
+    const physical::entities::meta_name physical_meta_name_;
 };
 
 }

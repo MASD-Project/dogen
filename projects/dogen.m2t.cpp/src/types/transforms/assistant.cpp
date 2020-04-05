@@ -92,12 +92,12 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
             pmn.qualified())),
       new_artefact_properties_(
           obtain_new_artefact_properties(e, pmn.qualified())),
-      physical_name_(pmn), requires_header_guard_(requires_header_guard) {
+      physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()
                              << " for archetype: "
-                             << physical_name_.qualified();
+                             << physical_meta_name_.qualified();
 
     m2t::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -106,7 +106,7 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
 }
 
 void assistant::validate() const {
-    const auto& fn(physical_name_.qualified());
+    const auto& fn(physical_meta_name_.qualified());
     const auto& fp(artefact_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
@@ -506,20 +506,20 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
-    const auto j(i->second.find(physical_name_.qualified()));
+    const auto j(i->second.find(physical_meta_name_.qualified()));
     if (j != i->second.end()) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << physical_name_.qualified();
+                                 << physical_meta_name_.qualified();
         return j->second;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_name_.qualified();
+                             << physical_meta_name_.qualified();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
 bool assistant::is_io() const {
-    const auto fn(physical_name_.location().facet());
+    const auto fn(physical_meta_name_.location().facet());
     return transforms::io::traits::facet_sn()  == fn;
 }
 
@@ -544,7 +544,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      */
     using tt = transforms::types::traits;
     const auto cifn(tt::class_implementation_archetype_qn());
-    const auto arch(physical_name_.qualified());
+    const auto arch(physical_meta_name_.qualified());
     bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }
@@ -683,7 +683,7 @@ physical::entities::artefact assistant::make_artefact() const {
     r.origin_sha1_hash(element_.origin_sha1_hash());
 
     const auto& ap(element_.artefact_properties());
-    const auto arch(physical_name_.qualified());
+    const auto arch(physical_meta_name_.qualified());
     const auto i(ap.find(arch));
     if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;

@@ -398,7 +398,7 @@ private:
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     logical::entities::artefact_properties new_artefact_properties_;
-    const physical::entities::meta_name physical_name_;
+    const physical::entities::meta_name physical_meta_name_;
     const bool requires_header_guard_;
 };
 
