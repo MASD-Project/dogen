@@ -53,10 +53,11 @@ namespace dogen::physical::transforms {
 void generate_diffs_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "generate diffs transform", transform_id, m.name(),
+        "generate diffs transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Finding diffs for model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Finding diffs for model: "
+                             << m.name().simple();
 
     /*
      * If the user did not request diffing, there is nothing to do.
@@ -74,7 +75,7 @@ apply(const context& ctx, entities::model& m) {
 
     const auto md(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
-        const auto& p(a.paths().absolute());
+        const auto& p(a.name().qualified());
         if (p.empty()) {
             // FIXME: throw
             BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";

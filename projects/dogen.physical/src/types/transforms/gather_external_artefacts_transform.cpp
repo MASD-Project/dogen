@@ -24,6 +24,9 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/operation_reason.hpp"
+#include "dogen.physical/types/entities/operation_type.hpp"
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
 #include "dogen.physical/types/helpers/file_status_collector.hpp"
 #include "dogen.physical/types/transforms/gather_external_artefacts_transform.hpp"
@@ -46,7 +49,7 @@ entities::artefact gather_external_artefacts_transform::make_artefact(
     const entities::operation_reason rsn) {
 
     entities::artefact r;
-    r.paths().absolute(p);
+    r.name().qualified(p);
     r.operation().type(ot);
     r.operation().reason(rsn);
 
@@ -56,7 +59,7 @@ entities::artefact gather_external_artefacts_transform::make_artefact(
 void gather_external_artefacts_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "gather external artefacts transform", transform_id, m.name(),
+        "gather external artefacts transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
     /*

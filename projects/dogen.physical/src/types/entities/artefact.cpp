@@ -42,10 +42,11 @@ artefact::artefact(
     const std::string& origin_sha1_hash,
     const dogen::physical::entities::logical_name& logical_name,
     const dogen::physical::entities::meta_name& physical_meta_name,
-    const dogen::physical::entities::paths& paths,
+    const dogen::physical::entities::name& name,
     const std::string& content,
     const bool enabled,
     const bool overwrite,
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
     const std::vector<boost::filesystem::path>& dependencies,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
@@ -56,10 +57,11 @@ artefact::artefact(
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
       physical_meta_name_(physical_meta_name),
-      paths_(paths),
+      name_(name),
       content_(content),
       enabled_(enabled),
       overwrite_(overwrite),
+      relative_paths_(relative_paths),
       dependencies_(dependencies),
       unified_diff_(unified_diff),
       operation_(operation),
@@ -73,10 +75,11 @@ void artefact::swap(artefact& other) noexcept {
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(logical_name_, other.logical_name_);
     swap(physical_meta_name_, other.physical_meta_name_);
-    swap(paths_, other.paths_);
+    swap(name_, other.name_);
     swap(content_, other.content_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
+    swap(relative_paths_, other.relative_paths_);
     swap(dependencies_, other.dependencies_);
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
@@ -90,10 +93,11 @@ bool artefact::operator==(const artefact& rhs) const {
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         logical_name_ == rhs.logical_name_ &&
         physical_meta_name_ == rhs.physical_meta_name_ &&
-        paths_ == rhs.paths_ &&
+        name_ == rhs.name_ &&
         content_ == rhs.content_ &&
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
+        relative_paths_ == rhs.relative_paths_ &&
         dependencies_ == rhs.dependencies_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
@@ -172,20 +176,20 @@ void artefact::physical_meta_name(const dogen::physical::entities::meta_name&& v
     physical_meta_name_ = std::move(v);
 }
 
-const dogen::physical::entities::paths& artefact::paths() const {
-    return paths_;
+const dogen::physical::entities::name& artefact::name() const {
+    return name_;
 }
 
-dogen::physical::entities::paths& artefact::paths() {
-    return paths_;
+dogen::physical::entities::name& artefact::name() {
+    return name_;
 }
 
-void artefact::paths(const dogen::physical::entities::paths& v) {
-    paths_ = v;
+void artefact::name(const dogen::physical::entities::name& v) {
+    name_ = v;
 }
 
-void artefact::paths(const dogen::physical::entities::paths&& v) {
-    paths_ = std::move(v);
+void artefact::name(const dogen::physical::entities::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::string& artefact::content() const {
@@ -218,6 +222,22 @@ bool artefact::overwrite() const {
 
 void artefact::overwrite(const bool v) {
     overwrite_ = v;
+}
+
+const std::unordered_map<std::string, boost::filesystem::path>& artefact::relative_paths() const {
+    return relative_paths_;
+}
+
+std::unordered_map<std::string, boost::filesystem::path>& artefact::relative_paths() {
+    return relative_paths_;
+}
+
+void artefact::relative_paths(const std::unordered_map<std::string, boost::filesystem::path>& v) {
+    relative_paths_ = v;
+}
+
+void artefact::relative_paths(const std::unordered_map<std::string, boost::filesystem::path>&& v) {
+    relative_paths_ = std::move(v);
 }
 
 const std::vector<boost::filesystem::path>& artefact::dependencies() const {

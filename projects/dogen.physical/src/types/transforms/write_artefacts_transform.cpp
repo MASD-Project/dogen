@@ -56,7 +56,7 @@ void write_artefacts_transform::create_directories(
 void write_artefacts_transform::
 apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
      * If we don't have any artefacts then we're done.
@@ -80,10 +80,11 @@ apply(const context& ctx, const entities::model& m) {
      */
     unsigned int files_written(0);
     for (const auto& a : m.artefacts()) {
-        const auto gs(a.paths().absolute().generic_string());
-        BOOST_LOG_SEV(lg, trace) << "Processing file: " << gs;
+        const auto p(a.name().qualified());
+        const auto gs(p.generic_string());
+        BOOST_LOG_SEV(lg, trace) << "Processing file: " << p;
 
-        if (a.paths().absolute().empty()) {
+        if (gs.empty()) {
             // FIXME: throw
             BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
             continue;
@@ -98,9 +99,9 @@ apply(const context& ctx, const entities::model& m) {
 
         ++files_written;
         BOOST_LOG_SEV(lg, trace) << "Writing file.";
-        create_directories(a.paths().absolute());
+        create_directories(p);
         using dogen::utility::filesystem::write_file_content;
-        write_file_content(a.paths().absolute(), a.content());
+        write_file_content(p, a.content());
     }
 
     BOOST_LOG_SEV(lg, info) << "Total files written: " << files_written;

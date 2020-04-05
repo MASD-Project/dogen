@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/paths_io.hpp"
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
@@ -56,6 +56,24 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::filesystem::path>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << "\"" << i->second.generic_string() << "\"";
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesystem::path>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -83,10 +101,11 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"logical_name\": " << v.logical_name() << ", "
       << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
-      << "\"paths\": " << v.paths() << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"relative_paths\": " << v.relative_paths() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "

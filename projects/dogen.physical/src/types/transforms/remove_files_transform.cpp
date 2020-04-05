@@ -51,7 +51,7 @@ void remove_files_transform::delete_extra_files(const entities::model& m) {
     for (const auto& a : m.artefacts()) {
         using physical::entities::operation_type;
         if (a.operation().type() == operation_type::remove)
-            unexpected.push_back(a.paths().absolute());
+            unexpected.push_back(a.name().qualified());
     }
 
     /*
@@ -93,8 +93,8 @@ delete_empty_directories(const entities::model& m) {
 
 void remove_files_transform::
 apply(const context& ctx, const entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg,
-        "remove files transform", transform_id, m.name(), *ctx.tracer());
+    tracing::scoped_transform_tracer stp(lg, "remove files transform",
+        transform_id, m.name().simple(), *ctx.tracer());
 
     /*
      * If we don't have any artefacts then we're done.

@@ -51,10 +51,11 @@ namespace dogen::physical::transforms {
 void generate_patch_transform::
 apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "generate patch transform", transform_id, m.name(),
+        "generate patch transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Creating patch for model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Creating patch for model: "
+                             << m.name().simple();
 
     /*
      * If the user did not request diffing, there is nothing to do.
@@ -67,7 +68,7 @@ apply(const context& ctx, const entities::model& m) {
     std::ostringstream ss;
     for (auto& a : m.artefacts()) {
         BOOST_LOG_SEV(lg, trace) << "Processing arefact: "
-                                 << a.paths().absolute().filename();
+                                 << a.name().qualified().filename();
 
         if (a.unified_diff().empty()) {
             BOOST_LOG_SEV(lg, trace) << "Arefact has no diff.";
@@ -92,7 +93,7 @@ apply(const context& ctx, const entities::model& m) {
         create_directories(cfg.output_directory());
 
         boost::filesystem::path p(cfg.output_directory());
-        p /= m.name() + ".patch";
+        p /= m.name().simple() + ".patch";
 
         BOOST_LOG_SEV(lg, debug) << "Writing patch file: " << p.generic()
                                  << ". Size: " << c.size();

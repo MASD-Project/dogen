@@ -18,32 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_GATHER_EXTERNAL_ARTEFACTS_TRANSFORM_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_GATHER_EXTERNAL_ARTEFACTS_TRANSFORM_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_FWD_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.physical/types/transforms/context.hpp"
-#include "dogen.physical/types/entities/operation_reason.hpp"
-#include "dogen.physical/types/entities/operation_type.hpp"
-#include "dogen.physical/types/entities/model.hpp"
+namespace dogen::physical::entities {
 
-namespace dogen::physical::transforms {
-
-/**
- * @brief Handles any extraneous files which should be removed.
- */
-class gather_external_artefacts_transform final {
-private:
-    static entities::artefact make_artefact(const boost::filesystem::path& p,
-        const entities::operation_type ot,
-        const entities::operation_reason rsn);
-
-public:
-    static void apply(const context& ctx, entities::model& m);
-};
+class name;
 
 }
 

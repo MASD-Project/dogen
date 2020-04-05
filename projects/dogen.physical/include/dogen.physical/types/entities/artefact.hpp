@@ -28,9 +28,10 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/paths.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
@@ -58,10 +59,11 @@ public:
         const std::string& origin_sha1_hash,
         const dogen::physical::entities::logical_name& logical_name,
         const dogen::physical::entities::meta_name& physical_meta_name,
-        const dogen::physical::entities::paths& paths,
+        const dogen::physical::entities::name& name,
         const std::string& content,
         const bool enabled,
         const bool overwrite,
+        const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
         const std::vector<boost::filesystem::path>& dependencies,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
@@ -110,10 +112,15 @@ public:
     void physical_meta_name(const dogen::physical::entities::meta_name&& v);
     /**@}*/
 
-    const dogen::physical::entities::paths& paths() const;
-    dogen::physical::entities::paths& paths();
-    void paths(const dogen::physical::entities::paths& v);
-    void paths(const dogen::physical::entities::paths&& v);
+    /**
+     * @brief Name of the physical element.
+     */
+    /**@{*/
+    const dogen::physical::entities::name& name() const;
+    dogen::physical::entities::name& name();
+    void name(const dogen::physical::entities::name& v);
+    void name(const dogen::physical::entities::name&& v);
+    /**@}*/
 
     /**
      * @brief Content of the file.
@@ -130,6 +137,16 @@ public:
 
     bool overwrite() const;
     void overwrite(const bool v);
+
+    /**
+     * @brief Paths relative to the path ID that keys the container.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, boost::filesystem::path>& relative_paths() const;
+    std::unordered_map<std::string, boost::filesystem::path>& relative_paths();
+    void relative_paths(const std::unordered_map<std::string, boost::filesystem::path>& v);
+    void relative_paths(const std::unordered_map<std::string, boost::filesystem::path>&& v);
+    /**@}*/
 
     /**
      * @brief Files in the project directory that this file depends on, but which are not generated.
@@ -189,10 +206,11 @@ private:
     std::string origin_sha1_hash_;
     dogen::physical::entities::logical_name logical_name_;
     dogen::physical::entities::meta_name physical_meta_name_;
-    dogen::physical::entities::paths paths_;
+    dogen::physical::entities::name name_;
     std::string content_;
     bool enabled_;
     bool overwrite_;
+    std::unordered_map<std::string, boost::filesystem::path> relative_paths_;
     std::vector<boost::filesystem::path> dependencies_;
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;

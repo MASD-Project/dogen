@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_PATHS_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_PATHS_FWD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::physical::entities {
 
-class paths;
-
+std::ostream& operator<<(std::ostream& s, const name& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::physical::entities::name\"" << ", "
+      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"qualified\": " << "\"" << v.qualified().generic_string() << "\""
+      << " }";
+    return(s);
 }
 
-#endif
+}

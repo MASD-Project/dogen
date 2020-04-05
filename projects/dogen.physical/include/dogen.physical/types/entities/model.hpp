@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
@@ -39,7 +40,7 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Collection of entities that need placing in physical space.
+ * @brief Collection of entities representing objects in physical space.
  */
 class model final {
 public:
@@ -54,7 +55,7 @@ public:
         const std::string& origin_sha1_hash,
         const dogen::physical::entities::logical_name& logical_name,
         const dogen::physical::entities::meta_name& physical_meta_name,
-        const std::string& name,
+        const dogen::physical::entities::name& name,
         const std::string& technical_space,
         const std::list<dogen::physical::entities::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
@@ -101,10 +102,15 @@ public:
     void physical_meta_name(const dogen::physical::entities::meta_name&& v);
     /**@}*/
 
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    /**
+     * @brief Name of the physical element.
+     */
+    /**@{*/
+    const dogen::physical::entities::name& name() const;
+    dogen::physical::entities::name& name();
+    void name(const dogen::physical::entities::name& v);
+    void name(const dogen::physical::entities::name&& v);
+    /**@}*/
 
     /**
      * @brief Primary technical space that this model belongs to.
@@ -116,10 +122,15 @@ public:
     void technical_space(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief All artefacts that make up this physical model.
+     */
+    /**@{*/
     const std::list<dogen::physical::entities::artefact>& artefacts() const;
     std::list<dogen::physical::entities::artefact>& artefacts();
     void artefacts(const std::list<dogen::physical::entities::artefact>& v);
     void artefacts(const std::list<dogen::physical::entities::artefact>&& v);
+    /**@}*/
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -146,7 +157,7 @@ private:
     std::string origin_sha1_hash_;
     dogen::physical::entities::logical_name logical_name_;
     dogen::physical::entities::meta_name physical_meta_name_;
-    std::string name_;
+    dogen::physical::entities::name name_;
     std::string technical_space_;
     std::list<dogen::physical::entities::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;

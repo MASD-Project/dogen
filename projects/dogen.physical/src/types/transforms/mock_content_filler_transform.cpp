@@ -48,13 +48,14 @@ namespace dogen::physical::transforms {
 void mock_content_filler_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "mock content filler transform", transform_id, m.name(), *ctx.tracer());
+        "mock content filler transform", transform_id, m.name().simple(),
+        *ctx.tracer());
 
     for (auto& a : m.artefacts()) {
         if (!a.content().empty())
             continue;
 
-        const auto p(a.paths().absolute());
+        const auto p(a.name().qualified());
         const auto gs(p.generic_string());
         if (!boost::ends_with(gs, ".cpp"))
             continue;

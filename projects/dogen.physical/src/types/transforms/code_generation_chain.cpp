@@ -39,7 +39,7 @@ namespace dogen::physical::transforms {
 void code_generation_chain::
 apply(const context& ctx, const entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "code generation chain",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
      * Write all of the artefacts that require writing.

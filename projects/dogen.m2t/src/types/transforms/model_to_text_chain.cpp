@@ -151,7 +151,7 @@ apply(const m2t::transforms::context& ctx,
      * the processing pipeline.
      */
     const auto ep(ms.front().extraction_properties());
-    r.name(ms.front().name().simple());
+    r.name().simple(ms.front().name().simple());
     r.configuration(ms.front().root_module()->configuration());
 
     /*

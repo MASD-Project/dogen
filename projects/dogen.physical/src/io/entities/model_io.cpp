@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
@@ -88,7 +89,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"logical_name\": " << v.logical_name() << ", "
       << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "

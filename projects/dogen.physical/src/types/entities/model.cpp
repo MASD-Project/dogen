@@ -37,7 +37,7 @@ model::model(
     const std::string& origin_sha1_hash,
     const dogen::physical::entities::logical_name& logical_name,
     const dogen::physical::entities::meta_name& physical_meta_name,
-    const std::string& name,
+    const dogen::physical::entities::name& name,
     const std::string& technical_space,
     const std::list<dogen::physical::entities::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
@@ -147,19 +147,19 @@ void model::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
     physical_meta_name_ = std::move(v);
 }
 
-const std::string& model::name() const {
+const dogen::physical::entities::name& model::name() const {
     return name_;
 }
 
-std::string& model::name() {
+dogen::physical::entities::name& model::name() {
     return name_;
 }
 
-void model::name(const std::string& v) {
+void model::name(const dogen::physical::entities::name& v) {
     name_ = v;
 }
 
-void model::name(const std::string&& v) {
+void model::name(const dogen::physical::entities::name&& v) {
     name_ = std::move(v);
 }
 

@@ -43,7 +43,7 @@ namespace dogen::physical::transforms {
 void model_production_chain::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
      * We start by reading the outputting properties. We don't need

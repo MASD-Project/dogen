@@ -49,7 +49,7 @@ namespace dogen::physical::transforms {
 
 void operation_transform::
 apply(entities::artefact& a, const bool force_write) {
-    const auto p(a.paths().absolute());
+    const auto p(a.name().qualified());
     const auto gs(p.generic());
     BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
 
@@ -131,7 +131,7 @@ apply(entities::artefact& a, const bool force_write) {
 
 void operation_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "operation transform", transform_id, m.name(),
+        "operation transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
     for (auto& a : m.artefacts())

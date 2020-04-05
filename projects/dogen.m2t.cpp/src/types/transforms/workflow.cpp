@@ -112,7 +112,7 @@ std::list<physical::entities::artefact> workflow::execute(
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
 
             const auto artefact(fmt.apply(ctx, e));
-            const auto& p(artefact.paths().absolute());
+            const auto& p(artefact.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);
@@ -121,7 +121,7 @@ std::list<physical::entities::artefact> workflow::execute(
 
             wale_transform f;
             const auto artefact(f.apply(locator_, fmt, ctx, e));
-            const auto& p(artefact.paths().absolute());
+            const auto& p(artefact.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);
@@ -129,7 +129,7 @@ std::list<physical::entities::artefact> workflow::execute(
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
             const auto artefact(stitch_formatter_.apply(fmt, ctx, e));
-            const auto& p(artefact.paths().absolute());
+            const auto& p(artefact.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);

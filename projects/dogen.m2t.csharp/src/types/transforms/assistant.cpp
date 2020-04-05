@@ -288,7 +288,7 @@ std::ostream& assistant::stream() {
 physical::entities::artefact assistant::make_artefact() const {
     physical::entities::artefact r;
     r.content(stream_.str());
-    r.paths().absolute(artefact_properties_.file_path());
+    r.name().qualified(artefact_properties_.file_path());
 
     const auto& ap(element_.artefact_properties());
     const auto arch(physical_name_.qualified());

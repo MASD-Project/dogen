@@ -677,7 +677,7 @@ std::ostream& assistant::stream() {
 physical::entities::artefact assistant::make_artefact() const {
     physical::entities::artefact r;
     r.content(stream_.str());
-    r.paths().absolute(artefact_properties_.file_path());
+    r.name().qualified(artefact_properties_.file_path());
     r.logical_name().simple(element_.name().simple());
     r.logical_name().qualified(element_.name().qualified().dot());
     r.origin_sha1_hash(element_.origin_sha1_hash());

@@ -380,16 +380,12 @@
     },
     {
       "name": "entities::model",
-      "documentation": "Collection of entities that need placing in physical space.\n",
+      "documentation": "Collection of entities representing objects in physical space.\n",
       "stereotypes": [
         "Element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "name",
-          "type": "std::string"
-        },
         {
           "name": "technical_space",
           "type": "std::string",
@@ -397,7 +393,8 @@
         },
         {
           "name": "artefacts",
-          "type": "std::list<artefact>"
+          "type": "std::list<artefact>",
+          "documentation": "All artefacts that make up this physical model.\n"
         },
         {
           "name": "managed_directories",
@@ -406,23 +403,6 @@
         {
           "name": "outputting_properties",
           "type": "outputting_properties"
-        }
-      ]
-    },
-    {
-      "name": "entities::paths",
-      "documentation": "Path information for a given element.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "absolute",
-          "type": "boost::filesystem::path",
-          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be\n written.\n"
-        },
-        {
-          "name": "relative",
-          "type": "std::unordered_map<std::string, boost::filesystem::path>",
-          "documentation": "Path relative to parts, which required it.\n"
         }
       ]
     },
@@ -642,10 +622,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "paths",
-          "type": "paths"
-        },
-        {
           "name": "content",
           "type": "std::string",
           "documentation": "Content of the file.\n"
@@ -657,6 +633,11 @@
         {
           "name": "overwrite",
           "type": "bool"
+        },
+        {
+          "name": "relative_paths",
+          "type": "std::unordered_map<std::string, boost::filesystem::path>",
+          "documentation": "Paths relative to the path ID that keys the container.\n"
         },
         {
           "name": "dependencies",
@@ -728,10 +709,26 @@
       ]
     },
     {
+      "name": "entities::Nameable",
+      "documentation": "Ability to have a name.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name",
+          "documentation": "Name of the physical element.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::Element",
       "parents": [
         "entities::Configurable",
-        "entities::DeterminableOrigin"
+        "entities::DeterminableOrigin",
+        "entities::Nameable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -1216,6 +1213,22 @@
         {
           "name": "stitch",
           "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::name",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "simple",
+          "type": "std::string",
+          "documentation": "File or directory simple name.\n"
+        },
+        {
+          "name": "qualified",
+          "type": "boost::filesystem::path",
+          "documentation": "Absolute path to the file or directory.\n\nThe qualified name indicates the location in the filesystem where it will be\nwritten or where it was sourced from.\n"
         }
       ]
     }

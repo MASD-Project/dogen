@@ -193,7 +193,7 @@ physical::entities::artefact formatter::format(const text_template& tt) const {
     r.overwrite(true);
     r.content(s.str());
     if (!tt.output_path().empty())
-        r.paths().absolute(tt.output_path());
+        r.name().qualified(tt.output_path());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted template.";
 

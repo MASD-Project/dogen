@@ -153,7 +153,7 @@ void print_plain_report(std::ostream& s,
     const auto base(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
         // FIXME: HACK: we seemt to have some blank artefacts atm.
-        const auto p(a.paths().absolute());
+        const auto p(a.name().qualified());
         if (p.empty())
             continue;
 
@@ -182,7 +182,7 @@ void print_org_mode_report(std::ostream& s,
     const auto base(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
         // FIXME: HACK: we seemt to have some blank artefacts atm.
-        const auto p(a.paths().absolute());
+        const auto p(a.name().qualified());
         if (p.empty())
             continue;
 
@@ -240,7 +240,7 @@ namespace dogen::physical::transforms {
 void generate_report_transform::
 apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "generate operation report transform", transform_id, m.name(),
+        "generate operation report transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
     /*
@@ -251,7 +251,8 @@ apply(const context& ctx, const entities::model& m) {
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Creating report for model: " << m.name();
+    BOOST_LOG_SEV(lg, debug) << "Creating report for model: "
+                             << m.name().simple();
     std::ostringstream ss;
     const auto& cfg(*ctx.reporting_configuration());
     BOOST_LOG_SEV(lg, debug) << "Style requested: " << cfg.style();
@@ -274,7 +275,7 @@ apply(const context& ctx, const entities::model& m) {
     } }
 
     const auto c(ss.str());
-    write_report(c, m.name(), extension, cfg.output_directory());
+    write_report(c, m.name().simple(), extension, cfg.output_directory());
 
     BOOST_LOG_SEV(lg, debug) << "Finished generating operational report.";
 }

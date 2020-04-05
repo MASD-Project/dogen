@@ -47,7 +47,7 @@ std::set<boost::filesystem::path> file_status_collector::
 obtain_expected_files(const entities::model& m) {
     std::set<boost::filesystem::path> r;
     for (const auto& a : m.artefacts()) {
-        r.insert(a.paths().absolute().generic_string());
+        r.insert(a.name().qualified().generic_string());
         for (const auto& d : a.dependencies())
             r.insert(d.generic_string());
     }
@@ -126,7 +126,7 @@ bucket_by_status(const std::vector<std::string>& patterns,
 files_by_status
 file_status_collector::collect(const entities::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started collecting status for model: "
-                            << m.name();
+                            << m.name().simple();
     BOOST_LOG_SEV(lg, debug) << "Initial directories: "
                              << m.managed_directories();
 
