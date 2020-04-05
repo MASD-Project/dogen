@@ -37,8 +37,7 @@ public:
     std::list<std::string> owning_formatters() const override;
     std::list<std::string> owning_facets() const override;
     std::string helper_name() const override;
-    void apply(assistant& a,
-        const formattables::helper_properties& hc) const override;
+    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
 };
 
 }

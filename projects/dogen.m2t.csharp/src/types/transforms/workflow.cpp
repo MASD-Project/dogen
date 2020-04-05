@@ -20,6 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t.csharp/types/transforms/context.hpp"
 #include "dogen.m2t.csharp/types/transforms/workflow.hpp"
 
@@ -77,11 +78,13 @@ workflow::execute(const formattables::model& fm) const {
             const auto& fmt(*fmt_ptr);
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
 
-            const auto a(fmt.apply(ctx, e));
+            auto ptr(boost::make_shared<physical::entities::artefact>());
+            auto& a(*ptr);
+            fmt.apply(ctx, e, a);
             const auto& p(a.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(boost::make_shared<artefact>(a));
+            r.push_back(ptr);
         }
     }
 

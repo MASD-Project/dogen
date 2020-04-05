@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
@@ -17,31 +17,31 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-physical::entities::artefact class_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
+void class_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
     const auto id(e.name().qualified().dot());
-    assistant a(ctx, e, physical_meta_name());
-    const auto& o(a.as<logical::entities::structural::object>(static_id(), e));
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
 #>
 using System;
 
 <#+
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-            a.comment(e.documentation(), 1/*indent*/);
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
             if (!o.in_inheritance_relationship() || !o.is_child()) {
 #>
-    public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #>
+    public <#= ast.make_inheritance_keyword_text(o) #>class <#= sn #>
 <#+
             } else {
                 const auto& pn(o.parents().front());
-                const auto pqn(a.get_qualified_name(pn));
+                const auto pqn(ast.get_qualified_name(pn));
 #>
-    public <#= a.make_inheritance_keyword_text(o) #>class <#= sn #> : <#= pqn #>
+    public <#= ast.make_inheritance_keyword_text(o) #>class <#= sn #> : <#= pqn #>
 <#+
             }
 #>
@@ -49,7 +49,7 @@ using System;
 <#+
             if (!o.local_attributes().empty()) {
                 if (!ctx.element_properties().helper_properties().empty())
-                    a.add_helper_methods(id);
+                    ast.add_helper_methods(id);
 
                 /*
                 * Properties
@@ -58,9 +58,9 @@ using System;
         #region Properties
 <#+
                 for (const auto& attr : o.local_attributes()) {
-                    a.comment(attr.documentation(), 2/*indent*/);
+                    ast.comment(attr.documentation(), 2/*indent*/);
 #>
-        public <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (o.is_immutable() ? "internal " : "") #>set; }
+        public <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (o.is_immutable() ? "internal " : "") #>set; }
 <#+
                 }
 #>
@@ -81,7 +81,7 @@ using System;
                 if (attr_count == 1) {
                      const auto attr(*o.all_attributes().begin());
 #>
-        public <#= sn #>(<#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_argument_name(attr) #>)
+        public <#= sn #>(<#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #>)
 <#+
                 } else {
 #>
@@ -92,7 +92,7 @@ using System;
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
 #>
-            <#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_argument_name(attr) #><#= sf.postfix() #>
+            <#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #><#= sf.postfix() #>
 <#+
                         sf.next();
                     }
@@ -109,7 +109,7 @@ using System;
 <#+
                     } else if (size == 1) {
 #>
-            : base(<#= a.make_argument_name(pattrs.front()) #>)
+            : base(<#= ast.make_argument_name(pattrs.front()) #>)
 <#+
                     } else {
                         m2t::formatters::sequence_formatter sf(size);
@@ -120,7 +120,7 @@ using System;
 <#+
                         for (const auto& pattr : pattrs) {
 #>
-                <#= a.make_argument_name(pattr) #><#= sf.postfix() #>
+                <#= ast.make_argument_name(pattr) #><#= sf.postfix() #>
 <#+
                             sf.next();
                         }
@@ -136,7 +136,7 @@ using System;
                 } else {
                     for (const auto& attr : o.local_attributes()) {
 #>
-            <#= attr.name().simple() #> = <#= a.make_argument_name(attr) #>;
+            <#= attr.name().simple() #> = <#= ast.make_argument_name(attr) #>;
 <#+
                     }
                 }
@@ -250,7 +250,7 @@ using System;
                     } else {
 #>
                 hash = (hash * HashingMultiplier) ^
-                    (!<#= a.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+                    (!<#= ast.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
 <#+
                     }
                 }
@@ -290,6 +290,6 @@ using System;
 <#+
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

@@ -62,55 +62,56 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-physical::entities::artefact enum_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name());
-    const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+   physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        const auto qn(a.get_qualified_name(e.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << "    /// <summary>" << std::endl;
-a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
-a.stream() << "    /// </summary>" << std::endl;
-a.stream() << "    public static class " << sn << "Dumper" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        static internal void Dump(AssistantDumper assistant, " << sn << " value, bool withSeparator = false)" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            assistant.IncrementDepth();" << std::endl;
-a.stream() << "            if (assistant.MaximumDepthExceeded())" << std::endl;
-a.stream() << "                return;" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            assistant.AddStartObject();" << std::endl;
-a.stream() << "            assistant.AddType(\"" << qn << "\", true/*withSeparator*/);" << std::endl;
-a.stream() << "            string valueAsString = \"Unsupported Value\";" << std::endl;
-a.stream() << "            switch (value)" << std::endl;
-a.stream() << "            {" << std::endl;
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << "    /// <summary>" << std::endl;
+ast.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
+ast.stream() << "    /// </summary>" << std::endl;
+ast.stream() << "    public static class " << sn << "Dumper" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        static internal void Dump(AssistantDumper assistant, " << sn << " value, bool withSeparator = false)" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            assistant.IncrementDepth();" << std::endl;
+ast.stream() << "            if (assistant.MaximumDepthExceeded())" << std::endl;
+ast.stream() << "                return;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            assistant.AddStartObject();" << std::endl;
+ast.stream() << "            assistant.AddType(\"" << qn << "\", true/*withSeparator*/);" << std::endl;
+ast.stream() << "            string valueAsString = \"Unsupported Value\";" << std::endl;
+ast.stream() << "            switch (value)" << std::endl;
+ast.stream() << "            {" << std::endl;
             for (const auto& en : ye.enumerators()) {
-a.stream() << "                case " << ye.name().simple() << "." << en.name().simple() << ":" << std::endl;
-a.stream() << "                    valueAsString = \"" << en.name().simple() << "\";" << std::endl;
-a.stream() << "                    break;" << std::endl;
+ast.stream() << "                case " << ye.name().simple() << "." << en.name().simple() << ":" << std::endl;
+ast.stream() << "                    valueAsString = \"" << en.name().simple() << "\";" << std::endl;
+ast.stream() << "                    break;" << std::endl;
             }
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            assistant.Add(\"value\", valueAsString);" << std::endl;
-a.stream() << "            assistant.AddEndObject();" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            assistant.DecrementDepth();" << std::endl;
-a.stream() << "        }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        public static string Dump(" << sn << " value)" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            var assistant = new AssistantDumper();" << std::endl;
-a.stream() << "            Dump(assistant, value);" << std::endl;
-a.stream() << "            return assistant.ToString();" << std::endl;
-a.stream() << "        }" << std::endl;
-a.stream() << "    }" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            assistant.Add(\"value\", valueAsString);" << std::endl;
+ast.stream() << "            assistant.AddEndObject();" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            assistant.DecrementDepth();" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        public static string Dump(" << sn << " value)" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            var assistant = new AssistantDumper();" << std::endl;
+ast.stream() << "            Dump(assistant, value);" << std::endl;
+ast.stream() << "            return assistant.ToString();" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    }" << std::endl;
         }
     } // sbf
-    return a.make_artefact();
+
+    ast.update_artefact();
 }
 }

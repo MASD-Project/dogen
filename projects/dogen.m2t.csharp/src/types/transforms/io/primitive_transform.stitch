@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
@@ -17,21 +17,21 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-physical::entities::artefact primitive_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name());
-    const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
+void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        const auto qn(a.get_qualified_name(e.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
 #>
 using System;
 
 <#+
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
     /// <summary>
     /// Generates sequences of <#= sn #>.
@@ -58,13 +58,13 @@ using System;
             assistant.AddStartObject();
 <#+
             const auto attr(p.value_attribute());
-            const auto oap(a.get_assistant_properties(attr));
+            const auto oap(ast.get_assistant_properties(attr));
             if (oap && oap->requires_assistance()) {
 #>
             assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #>);
 <#+
             } else {
-                const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
 #>
             assistant.AddKey("<#= attr.name().simple() #>");
             assistant.AddPairSeparator();
@@ -89,6 +89,7 @@ using System;
 <#+
         }
     } // sbf
-    return a.make_artefact();
+
+    ast.update_artefact();
 }
 #>

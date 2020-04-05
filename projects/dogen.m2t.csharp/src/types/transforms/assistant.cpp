@@ -56,11 +56,11 @@ namespace dogen::m2t::csharp::transforms {
 
 assistant::
 assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::meta_name& mn) :
-    element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
-    artefact_properties_(
-        obtain_artefact_properties(mn.qualified())),
-    physical_meta_name_(mn) {
+    const physical::entities::meta_name& mn,
+    physical::entities::artefact& a) :
+    element_id_(e.name().qualified().dot()), element_(e), artefact_(a),
+    context_(ctx), artefact_properties_(
+        obtain_artefact_properties(mn.qualified())), physical_meta_name_(mn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: "
@@ -285,10 +285,9 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-physical::entities::artefact assistant::make_artefact() const {
-    physical::entities::artefact r;
-    r.content(stream_.str());
-    r.name().qualified(artefact_properties_.file_path());
+void assistant::update_artefact() {
+    artefact_.content(stream_.str());
+    artefact_.name().qualified(artefact_properties_.file_path());
 
     const auto& ap(element_.artefact_properties());
     const auto arch(physical_meta_name_.qualified());
@@ -298,14 +297,12 @@ physical::entities::artefact assistant::make_artefact() const {
         BOOST_THROW_EXCEPTION(
             formatting_error(artefact_properties_missing + arch));
     }
-    r.overwrite(i->second.overwrite());
+    artefact_.overwrite(i->second.overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;
-    op.type(r.overwrite() ? ot::write : ot::create_only);
-    r.operation(op);
-
-    return r;
+    op.type(artefact_.overwrite() ? ot::write : ot::create_only);
+    artefact_.operation(op);
 }
 
 }

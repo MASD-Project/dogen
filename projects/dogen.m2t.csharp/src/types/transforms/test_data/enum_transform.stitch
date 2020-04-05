@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
@@ -17,13 +17,13 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-physical::entities::artefact enum_transform::apply(
-    const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name());
-    const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
 #>
 using System;
@@ -31,8 +31,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 <#+
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
 #>
     /// <summary>
     /// Generates sequences of <#= sn #>.
@@ -126,6 +126,6 @@ using System.Collections.Generic;
 <#+
         }
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

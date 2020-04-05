@@ -62,36 +62,36 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-physical::entities::artefact enum_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name());
-    const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        const auto qn(a.get_qualified_name(e.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-a.stream() << "using System;" << std::endl;
-a.stream() << std::endl;
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-            a.comment(e.documentation(), 1/*indent*/);
+ast.stream() << "using System;" << std::endl;
+ast.stream() << std::endl;
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
             if (ye.use_implementation_defined_underlying_element())
-a.stream() << "    public enum " << sn << std::endl;
+ast.stream() << "    public enum " << sn << std::endl;
             else
-a.stream() << "    public enum " << sn << " : " << a.get_qualified_name(ye.underlying_element()) << std::endl;
-a.stream() << "    {" << std::endl;
+ast.stream() << "    public enum " << sn << " : " << ast.get_qualified_name(ye.underlying_element()) << std::endl;
+ast.stream() << "    {" << std::endl;
             m2t::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
-a.stream() << "        " << en.name().simple() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
+ast.stream() << "        " << en.name().simple() << sf.postfix() << ast.comment_inline(en.documentation()) << std::endl;
                 else
-a.stream() << "        " << en.name().simple() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
+ast.stream() << "        " << en.name().simple() << " = " << en.value() << sf.postfix() << ast.comment_inline(en.documentation()) << std::endl;
                 sf.next();
             }
-a.stream() << "    }" << std::endl;
+ast.stream() << "    }" << std::endl;
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

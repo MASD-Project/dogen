@@ -59,16 +59,16 @@ std::string floating_point_number_helper::helper_name() const {
 }
 
 void floating_point_number_helper::
-apply(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& ast, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
-a.stream() << "        /// <summary>" << std::endl;
-a.stream() << "        /// Compare floating point numbers, taking precision into account (" << qn << " version)." << std::endl;
-a.stream() << "        /// </summary>" << std::endl;
-a.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;
-a.stream() << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
-a.stream() << "        }" << std::endl;
+ast.stream() << "        /// <summary>" << std::endl;
+ast.stream() << "        /// Compare floating point numbers, taking precision into account (" << qn << " version)." << std::endl;
+ast.stream() << "        /// </summary>" << std::endl;
+ast.stream() << "        static private bool NearlyEqual(" << qn << " lhs, " << qn << " rhs)" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.Abs(rhs)) * " << qn << ".Epsilon;" << std::endl;
+ast.stream() << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
+ast.stream() << "        }" << std::endl;
 }
 }

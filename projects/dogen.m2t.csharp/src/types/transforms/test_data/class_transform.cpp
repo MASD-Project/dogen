@@ -62,61 +62,61 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-physical::entities::artefact class_transform::apply(
-    const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_meta_name());
-    const auto& o(a.as<logical::entities::structural::object>(static_id(), e));
+void class_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        const auto qn(a.get_qualified_name(e.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
-a.stream() << "using System;" << std::endl;
-a.stream() << "using System.Collections;" << std::endl;
-a.stream() << "using System.Collections.Generic;" << std::endl;
-a.stream() << std::endl;
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+ast.stream() << "using System;" << std::endl;
+ast.stream() << "using System.Collections;" << std::endl;
+ast.stream() << "using System.Collections.Generic;" << std::endl;
+ast.stream() << std::endl;
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
             const bool has_attributes(!o.all_attributes().empty());
             const bool is_parent_or_has_attributes(
                 !o.parents().empty() || has_attributes);
-a.stream() << "    /// <summary>" << std::endl;
-a.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
-a.stream() << "    /// </summary>" << std::endl;
-a.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
-a.stream() << "    {" << std::endl;
-a.stream() << "        static internal void Populate(" << sn << " value, uint position)" << std::endl;
-a.stream() << "        {" << std::endl;
+ast.stream() << "    /// <summary>" << std::endl;
+ast.stream() << "    /// Generates sequences of " << sn << "." << std::endl;
+ast.stream() << "    /// </summary>" << std::endl;
+ast.stream() << "    public static class " << sn << "SequenceGenerator" << std::endl;
+ast.stream() << "    {" << std::endl;
+ast.stream() << "        static internal void Populate(" << sn << " value, uint position)" << std::endl;
+ast.stream() << "        {" << std::endl;
                 if (!is_parent_or_has_attributes) {
-a.stream() << "            // nothing to populate" << std::endl;
+ast.stream() << "            // nothing to populate" << std::endl;
                 } else {
                     unsigned int count(0);
                     if (!o.parents().empty()) {
                         const auto& pn(o.parents().front());
-                        const auto pqn(a.get_qualified_name(pn));
-a.stream() << "            " << pqn << "SequenceGenerator.Populate(value, position);" << std::endl;
+                        const auto pqn(ast.get_qualified_name(pn));
+ast.stream() << "            " << pqn << "SequenceGenerator.Populate(value, position);" << std::endl;
                     }
 
                     for (const auto& attr : o.local_attributes()) {
-                        const auto oap(a.get_assistant_properties(attr));
+                        const auto oap(ast.get_assistant_properties(attr));
                         if (oap && oap->requires_assistance()) {
-a.stream() << "            value." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
+ast.stream() << "            value." << attr.name().simple() << " = AssistantSequenceGenerator.Create" << oap->method_postfix() << "(position + " << count++ << ");" << std::endl;
                         } else {
-                            const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
-a.stream() << "            value." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
+                            const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+ast.stream() << "            value." << attr.name().simple() << " = " << attr_qn << "SequenceGenerator.Create(position + " << count++ << ");" << std::endl;
                         }
                     }
                 }
-a.stream() << "        }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        static internal " << sn << " Create(uint position)" << std::endl;
-a.stream() << "        {" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        static internal " << sn << " Create(uint position)" << std::endl;
+ast.stream() << "        {" << std::endl;
             if (!o.is_parent()) {
-a.stream() << "            var result = new " << sn << "();" << std::endl;
+ast.stream() << "            var result = new " << sn << "();" << std::endl;
                 if (has_attributes) {
-a.stream() << "            Populate(result, position);" << std::endl;
+ast.stream() << "            Populate(result, position);" << std::endl;
                 }
-a.stream() << "            return result;" << std::endl;
+ast.stream() << "            return result;" << std::endl;
             } else {
                 auto leaves(o.leaves());
                 const auto front(leaves.front());
@@ -124,93 +124,93 @@ a.stream() << "            return result;" << std::endl;
                 unsigned int i(0);
                 const auto total(static_cast<unsigned int>(leaves.size()));
                 for (const auto& l : leaves) {
-a.stream() << "            if ((position % " << total << ") == " << i++ << ")" << std::endl;
-a.stream() << "                return " << a.get_qualified_name(l) << "SequenceGenerator.Create(position);" << std::endl;
+ast.stream() << "            if ((position % " << total << ") == " << i++ << ")" << std::endl;
+ast.stream() << "                return " << ast.get_qualified_name(l) << "SequenceGenerator.Create(position);" << std::endl;
                 }
-a.stream() << "            return " << a.get_qualified_name(front) << "SequenceGenerator.Create(position);" << std::endl;
+ast.stream() << "            return " << ast.get_qualified_name(front) << "SequenceGenerator.Create(position);" << std::endl;
             }
-a.stream() << "        }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        #region Enumerator" << std::endl;
-a.stream() << "        private class " << sn << "Enumerator : IEnumerator, IEnumerator<" << sn << ">, IDisposable" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            #region Properties" << std::endl;
-a.stream() << "            private uint _position;" << std::endl;
-a.stream() << "            private " << sn << " _current;" << std::endl;
-a.stream() << "            #endregion" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            private void PopulateCurrent()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                _current = " << sn << "SequenceGenerator.Create(_position);" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            #region IDisposable" << std::endl;
-a.stream() << "            public void Dispose()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << "            #endregion" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            #region IEnumerator implementation" << std::endl;
-a.stream() << "            public bool MoveNext()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                ++_position;" << std::endl;
-a.stream() << "                PopulateCurrent();" << std::endl;
-a.stream() << "                return true;" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            public void Reset()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                _position = 0;" << std::endl;
-a.stream() << "                PopulateCurrent();" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            public object Current {" << std::endl;
-a.stream() << "                get" << std::endl;
-a.stream() << "                {" << std::endl;
-a.stream() << "                    return _current;" << std::endl;
-a.stream() << "                }" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            " << sn << " IEnumerator<" << sn << ">.Current" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                get" << std::endl;
-a.stream() << "                {" << std::endl;
-a.stream() << "                    return _current;" << std::endl;
-a.stream() << "                }" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << "            #endregion" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            public " << sn << "Enumerator()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                PopulateCurrent();" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << "        }" << std::endl;
-a.stream() << "        #endregion" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        #region Enumerable" << std::endl;
-a.stream() << "        private class " << sn << "Enumerable : IEnumerable, IEnumerable<" << sn << ">" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            #region IEnumerable implementation" << std::endl;
-a.stream() << "            public IEnumerator GetEnumerator()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                return new " << sn << "Enumerator();" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << std::endl;
-a.stream() << "            IEnumerator<" << sn << "> IEnumerable<" << sn << ">.GetEnumerator()" << std::endl;
-a.stream() << "            {" << std::endl;
-a.stream() << "                return new " << sn << "Enumerator();" << std::endl;
-a.stream() << "            }" << std::endl;
-a.stream() << "            #endregion" << std::endl;
-a.stream() << "        }" << std::endl;
-a.stream() << "        #endregion" << std::endl;
-a.stream() << std::endl;
-a.stream() << "        static public IEnumerable<" << sn << "> Sequence()" << std::endl;
-a.stream() << "        {" << std::endl;
-a.stream() << "            return new " << sn << "Enumerable();" << std::endl;
-a.stream() << "        }" << std::endl;
-a.stream() << "    }" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        #region Enumerator" << std::endl;
+ast.stream() << "        private class " << sn << "Enumerator : IEnumerator, IEnumerator<" << sn << ">, IDisposable" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            #region Properties" << std::endl;
+ast.stream() << "            private uint _position;" << std::endl;
+ast.stream() << "            private " << sn << " _current;" << std::endl;
+ast.stream() << "            #endregion" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            private void PopulateCurrent()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                _current = " << sn << "SequenceGenerator.Create(_position);" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            #region IDisposable" << std::endl;
+ast.stream() << "            public void Dispose()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << "            #endregion" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            #region IEnumerator implementation" << std::endl;
+ast.stream() << "            public bool MoveNext()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                ++_position;" << std::endl;
+ast.stream() << "                PopulateCurrent();" << std::endl;
+ast.stream() << "                return true;" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            public void Reset()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                _position = 0;" << std::endl;
+ast.stream() << "                PopulateCurrent();" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            public object Current {" << std::endl;
+ast.stream() << "                get" << std::endl;
+ast.stream() << "                {" << std::endl;
+ast.stream() << "                    return _current;" << std::endl;
+ast.stream() << "                }" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            " << sn << " IEnumerator<" << sn << ">.Current" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                get" << std::endl;
+ast.stream() << "                {" << std::endl;
+ast.stream() << "                    return _current;" << std::endl;
+ast.stream() << "                }" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << "            #endregion" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            public " << sn << "Enumerator()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                PopulateCurrent();" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "        #endregion" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        #region Enumerable" << std::endl;
+ast.stream() << "        private class " << sn << "Enumerable : IEnumerable, IEnumerable<" << sn << ">" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            #region IEnumerable implementation" << std::endl;
+ast.stream() << "            public IEnumerator GetEnumerator()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                return new " << sn << "Enumerator();" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "            IEnumerator<" << sn << "> IEnumerable<" << sn << ">.GetEnumerator()" << std::endl;
+ast.stream() << "            {" << std::endl;
+ast.stream() << "                return new " << sn << "Enumerator();" << std::endl;
+ast.stream() << "            }" << std::endl;
+ast.stream() << "            #endregion" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "        #endregion" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "        static public IEnumerable<" << sn << "> Sequence()" << std::endl;
+ast.stream() << "        {" << std::endl;
+ast.stream() << "            return new " << sn << "Enumerable();" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    }" << std::endl;
         }
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 }

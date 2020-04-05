@@ -79,10 +79,11 @@ public:
 
 public:
     /**
-     * @brief Generate a file representation for the element.
+     * @brief Generate a physical representation of the logical
+     * element.
      */
-    virtual physical::entities::artefact
-    apply(const context& ctx, const logical::entities::element& e) const = 0;
+    virtual void apply(const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const = 0;
 };
 
 }

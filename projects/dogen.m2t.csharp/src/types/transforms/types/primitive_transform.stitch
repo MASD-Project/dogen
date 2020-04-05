@@ -1,4 +1,4 @@
-<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency=<iostream> #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
@@ -18,28 +18,28 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-physical::entities::artefact primitive_transform::
-apply(const context& ctx, const logical::entities::element& e) const {
+void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
     const auto id(e.name().qualified().dot());
-    assistant a(ctx, e, physical_meta_name());
-    const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
+    assistant ast(ctx, e, physical_meta_name(), a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
         {
 #>
 using System;
 
 <#+
-            const auto ns(a.make_namespaces(e.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-            a.comment(e.documentation(), 1/*indent*/);
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
 #>
     public sealed class <#= sn #>
     {
 <#+
             if (!ctx.element_properties().helper_properties().empty())
-                a.add_helper_methods(id);
+                ast.add_helper_methods(id);
 
             /*
              * Properties
@@ -48,9 +48,9 @@ using System;
         #region Properties
 <#+
             const auto& attr(p.value_attribute());
-            a.comment(attr.documentation(), 2/*indent*/);
+            ast.comment(attr.documentation(), 2/*indent*/);
 #>
-        public <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (p.is_immutable() ? "internal " : "") #>set; }
+        public <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (p.is_immutable() ? "internal " : "") #>set; }
         #endregion
 
 <#+
@@ -60,9 +60,9 @@ using System;
 #>
         #region Constructors
         public <#= sn #>() { }
-        public <#= sn #>(<#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_argument_name(attr) #>)
+        public <#= sn #>(<#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #>)
         {
-            <#= attr.name().simple() #> = <#= a.make_argument_name(attr) #>;
+            <#= attr.name().simple() #> = <#= ast.make_argument_name(attr) #>;
         }
         #endregion
 
@@ -131,7 +131,7 @@ using System;
                 } else {
 #>
                 hash = (hash * HashingMultiplier) ^
-                    (!<#= a.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+                    (!<#= ast.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
 <#+
                 }
 #>
@@ -143,6 +143,6 @@ using System;
 <#+
         } // snf
     } // sbf
-    return a.make_artefact();
+    ast.update_artefact();
 }
 #>

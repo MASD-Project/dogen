@@ -61,10 +61,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-physical::entities::artefact builtin_transform::
-apply(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
-    physical::entities::artefact r;
-    return r;
-}
+void builtin_transform::apply(const context& /*ctx*/, const logical::entities::element& /*e*/,
+    physical::entities::artefact& /*a*/) const {}
 
 }
