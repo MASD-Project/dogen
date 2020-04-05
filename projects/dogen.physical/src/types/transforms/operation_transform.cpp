@@ -43,6 +43,7 @@ auto lg(logger_factory(transform_id));
 
 const std::string unexpected_operation(
     "Operation not expected by transform: ");
+const std::string empty_file_name("Empty file name supplied.");
 
 }
 
@@ -54,9 +55,10 @@ apply(entities::artefact& a, const bool force_write) {
     const auto gs(p.generic());
     BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
 
-    // FIXME: HACK: we seemt to have some blank artefacts atm.
-    if (p.empty())
-        return;
+    if (p.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_file_name;
+        BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
+    }
 
     /*
      * We only expect artefacts with a limited range of operation

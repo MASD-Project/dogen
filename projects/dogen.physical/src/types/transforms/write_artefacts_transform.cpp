@@ -25,6 +25,7 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/operation_type_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/write_artefacts_transform.hpp"
 
 namespace {
@@ -37,6 +38,7 @@ auto lg(logger_factory(transform_id));
 
 const std::string using_dir_message("Using directory: ");
 const std::string created_dir_message("Created directory: ");
+const std::string empty_file_name("Empty file name supplied.");
 
 }
 
@@ -87,9 +89,8 @@ apply(const context& ctx, const entities::model& m) {
         BOOST_LOG_SEV(lg, trace) << "Processing file: " << p;
 
         if (gs.empty()) {
-            // FIXME: throw
-            BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
-            continue;
+            BOOST_LOG_SEV(lg, error) << empty_file_name;
+            BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
         }
 
         using physical::entities::operation_type;

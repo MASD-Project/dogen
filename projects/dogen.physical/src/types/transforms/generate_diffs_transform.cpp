@@ -46,6 +46,7 @@ const std::string reason_unexpected("Reason: unexpected file.");
 const std::string reason_force_write("Reason: Force write requested.");
 const std::string reason_other("Reason: Other.");
 const std::string empty_managed_dirs("No managed directories supplied.");
+const std::string empty_file_name("Empty file name supplied.");
 
 }
 
@@ -79,9 +80,8 @@ apply(const context& ctx, entities::model& m) {
         auto& a(*ptr);
         const auto& p(a.name().qualified());
         if (p.empty()) {
-            // FIXME: throw
-            BOOST_LOG_SEV(lg, error) << "Empty file name supplied.";
-            continue;
+            BOOST_LOG_SEV(lg, error) << empty_file_name;
+            BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
         }
 
         BOOST_LOG_SEV(lg, trace) << "Processing arefact: "

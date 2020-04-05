@@ -64,6 +64,7 @@ const std::string unexpected_destination(
     "Destination is invalid or unsupported: ");
 const std::string unexpected_reporting_style(
     "Reporting style is invalid or unsupported: ");
+const std::string empty_file_name("Empty file name supplied.");
 
 const std::string org_extension(".org");
 const std::string text_extension(".txt");
@@ -154,10 +155,11 @@ void print_plain_report(std::ostream& s,
     const auto base(m.managed_directories().front());
     for (auto& ptr : m.artefacts()) {
         auto& a(*ptr);
-        // FIXME: HACK: we seemt to have some blank artefacts atm.
         const auto p(a.name().qualified());
-        if (p.empty())
-            continue;
+        if (p.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_file_name;
+            BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
+        }
 
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
                                  << p.filename();
@@ -184,10 +186,11 @@ void print_org_mode_report(std::ostream& s,
     const auto base(m.managed_directories().front());
     for (auto& ptr : m.artefacts()) {
         auto& a(*ptr);
-        // FIXME: HACK: we seemt to have some blank artefacts atm.
         const auto p(a.name().qualified());
-        if (p.empty())
-            continue;
+        if (p.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_file_name;
+            BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
+        }
 
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: " << p.filename();
 
