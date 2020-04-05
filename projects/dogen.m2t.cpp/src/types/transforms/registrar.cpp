@@ -160,7 +160,7 @@ void registrar::validate() const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is valid. Repository: " << trp;
-    BOOST_LOG_SEV(lg, debug) << "Physical names: " << physical_names_;
+    BOOST_LOG_SEV(lg, debug) << "Physical names: " << physical_meta_names_;
 }
 
 void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
@@ -176,13 +176,13 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
      * Add the transform to the physical names stores.
      */
     const auto& pmn(f->physical_name());
-    physical_names_.push_front(pmn);
+    physical_meta_names_.push_front(pmn);
 
     /*
      * Handle the meta-type collection of physical names.
      */
     const auto mn(f->meta_name().qualified().dot());
-    auto& g(physical_names_by_meta_name_[mn]);
+    auto& g(physical_meta_names_by_logical_meta_name_[mn]);
     g.meta_names().push_back(pmn);
 
     /*
@@ -244,23 +244,23 @@ const repository& registrar::formatter_repository() const {
 }
 
 const std::forward_list<physical::entities::meta_name>&
-registrar::physical_names() const {
-    return physical_names_;
+registrar::physical_meta_names() const {
+    return physical_meta_names_;
 }
 
 const std::unordered_map<std::string, physical::entities::meta_name_group>&
-registrar::physical_names_by_meta_name() const {
-    return physical_names_by_meta_name_;
+registrar::physical_meta_names_by_logical_meta_name() const {
+    return physical_meta_names_by_logical_meta_name_;
 }
 
 const std::unordered_map<std::string, std::list<physical::entities::meta_name>>&
-registrar::physical_names_by_family() const {
-    return physical_names_by_family_;
+registrar::physical_meta_names_by_family() const {
+    return physical_meta_names_by_family_;
 }
 
 const physical::entities::meta_name_repository_parts&
-registrar::physical_name_repository_parts() const {
-    return physical_name_repository_parts_;
+registrar::physical_meta_name_repository_parts() const {
+    return physical_meta_name_repository_parts_;
 }
 
 const std::unordered_map<
