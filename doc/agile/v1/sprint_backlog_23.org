@@ -12,44 +12,46 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-05 Sun 08:35]
+#+CAPTION: Clock summary at [2020-04-05 Sun 11:48]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *75:16* |       |       | 100.0 |
+| *Total time*                                              | *77:50* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 75:16   |       |       | 100.0 |
-| Active                                                    |         | 75:16 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  7:27 |   9.9 |
+| Stories                                                   | 77:50   |       |       | 100.0 |
+| Active                                                    |         | 77:50 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  7:27 |   9.6 |
 | Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.6 |
-| Sprint and product backlog grooming                       |         |       |  6:21 |   8.4 |
+| Sprint and product backlog grooming                       |         |       |  6:21 |   8.2 |
 | Rename archetypes model to physical model                 |         |       |  0:28 |   0.6 |
 | Rename assets model to logical model                      |         |       |  0:29 |   0.6 |
 | Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.8 |
 | Rename engine to orchestration                            |         |       |  1:04 |   1.4 |
-| Merge extraction model with physical model                |         |       |  4:35 |   6.1 |
+| Merge extraction model with physical model                |         |       |  4:35 |   5.9 |
 | Remove manual feature in profile merge transform          |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity         |         |       |  0:12 |   0.3 |
-| Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.2 |
-| Analysis on designing and implement physical types        |         |       |  6:52 |   9.1 |
+| Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.1 |
+| Analysis on designing and implement physical types        |         |       |  6:52 |   8.8 |
 | Remove =element= from the modeling location               |         |       |  0:02 |   0.0 |
 | Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.4 |
-| Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.2 |
+| Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.1 |
 | Rename generation models to =m2t=                         |         |       |  1:04 |   1.4 |
 | Move all generation features away from generation         |         |       |  0:17 |   0.4 |
-| Rename generation transforms                              |         |       |  4:49 |   6.4 |
+| Rename generation transforms                              |         |       |  4:49 |   6.2 |
 | Remove kernel from models                                 |         |       |  0:36 |   0.8 |
-| Rename the default MASD kernel                            |         |       |  0:44 |   1.0 |
+| Rename the default MASD kernel                            |         |       |  0:44 |   0.9 |
 | Consider removing archetype location by family            |         |       |  0:40 |   0.9 |
-| Add part to physical location                             |         |       |  1:16 |   1.7 |
-| Add names to logical model                                |         |       |  1:48 |   2.4 |
-| Consider generating a colour palette procedurally         |         |       |  2:48 |   3.7 |
-| Add support for clang-10                                  |         |       |  0:44 |   1.0 |
-| Make physical location entries simple names               |         |       | 20:37 |  27.4 |
+| Add part to physical location                             |         |       |  1:16 |   1.6 |
+| Add names to logical model                                |         |       |  1:48 |   2.3 |
+| Consider generating a colour palette procedurally         |         |       |  2:48 |   3.6 |
+| Add support for clang-10                                  |         |       |  0:44 |   0.9 |
+| Make physical location entries simple names               |         |       | 20:37 |  26.5 |
 | Consider upgrading to clang 10 on windows                 |         |       |  0:08 |   0.2 |
-| Implement archetype locations from physical meta-model    |         |       |  5:37 |   7.5 |
-| Rename physical names to meta-names                       |         |       |  1:53 |   2.5 |
+| Make m2t interfaces header only                           |         |       |  0:18 |   0.4 |
+| Rename physical names to meta-names                       |         |       |  3:42 |   4.8 |
+| Implement archetype locations from physical meta-model    |         |       |  5:37 |   7.2 |
 | Implement the generation model in terms of "formattables" |         |       |  0:42 |   0.9 |
+| Supply artefacts to formatters                            |         |       |  0:27 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -828,6 +830,41 @@ explain. May be worth seeing if latest clang fixes them.
 Actually we are using the appvetor supplied clang so its probably not
 a good idea.
 
+*** COMPLETED Make m2t interfaces header only                         :story:
+    CLOSED: [2020-04-05 Sun 10:58]
+    :LOGBOOK:
+    CLOCK: [2020-04-05 Sun 10:40]--[2020-04-05 Sun 10:58] =>  0:18
+    :END:
+
+It seems we have implementation files on this at present.
+
+*** COMPLETED Rename physical names to meta-names                     :story:
+    CLOSED: [2020-04-05 Sun 11:20]
+    :LOGBOOK:
+    CLOCK: [2020-04-05 Sun 10:58]--[2020-04-05 Sun 11:20] =>  0:22
+    CLOCK: [2020-04-05 Sun 09:13]--[2020-04-05 Sun 10:40] =>  1:34
+    CLOCK: [2020-04-05 Sun 07:48]--[2020-04-05 Sun 08:35] =>  0:47
+    CLOCK: [2020-04-04 Sat 20:51]--[2020-04-04 Sat 21:57] =>  1:06
+    :END:
+
+We made a modeling error: we called the physical names "names". These
+are not really names. Physical names are file names. What we really
+mean is physical meta-names. We need to rename this type to avoid
+confusion.
+
+Notes:
+
+- passes:
+  - name repository, name repository parts, name group. *Done*.
+  - name builder, qualified name builder, name validator, name
+    factory. *Done*
+  - model to text chains. *Done*
+  - registrar: member variables. *Done*
+  - model to text interface and implementations physical name,
+    meta-name should be logical meta-name. *Done*
+  - assistant: physical name. *Done*
+- change model artefacts: =std::list<boost::shared_ptr<artefact>>=. *Done*
+
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
     CLOCK: [2020-04-04 Sat 14:54]--[2020-04-04 Sat 16:55] =>  2:01
@@ -882,55 +919,42 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
-*** STARTED Rename physical names to meta-names                       :story:
-    :LOGBOOK:
-    CLOCK: [2020-04-05 Sun 07:48]--[2020-04-05 Sun 08:35] =>  0:47
-    CLOCK: [2020-04-04 Sat 20:51]--[2020-04-04 Sat 21:57] =>  1:06
-    :END:
-
-We made a modeling error: we called the physical names "names". These
-are not really names. Physical names are file names. What we really
-mean is physical meta-names. We need to rename this type to avoid
-confusion.
-
-Notes:
-
-- passes:
-  - name repository, name repository parts, name group. *Done*.
-  - name builder, qualified name builder, name validator, name factory
-  - model to text interface and implementations physical name,
-    meta-name should be logical meta-name.
-  - assistant: physical name
-  - registrar: name repository parts member
-- change model artefacts: =std::list<boost::shared_ptr<artefact>>=
-
 *** STARTED Implement the generation model in terms of "formattables" :story:
+     :LOGBOOK:
+     CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
+     :END:
+
+ We need to find a way to expand the generation model into a pair of:
+
+ - element
+ - artefact
+
+ In effect, a formattable. Then we need to update the backends to stop
+ expanding across physical space and instead use the expansion created
+ by the generation model. We then need to update formattables to have
+ an artefact, and supply the artefact to all formatters.
+
+ Notes:
+
+ - next task is to use the artefact from pair inside c++ and c# instead
+   of creating one inside each formatter.
+ - we need to also perform the archetype expansion within =m2t= not
+   logical model.
+ - we need to add artefacts to formatters and get them to populate
+   them.
+
+*** STARTED Supply artefacts to formatters                            :story:
     :LOGBOOK:
-    CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
+    CLOCK: [2020-04-05 Sun 11:21]--[2020-04-05 Sun 11:48] =>  0:27
     :END:
 
-We need to find a way to expand the generation model into a pair of:
-
-- element
-- artefact
-
-In effect, a formattable. Then we need to update the backends to stop
-expanding across physical space and instead use the expansion created
-by the generation model. We then need to update formattables to have
-an artefact, and supply the artefact to all formatters.
+Instead of generating artefacts inside of the formatter, we need to
+supply them as references.
 
 Notes:
 
-- next task is to use the artefact from pair inside c++ and c# instead
-  of creating one inside each formatter.
-- we need to also perform the archetype expansion within =m2t= not
-  logical model.
-- we need to add artefacts to formatters and get them to populate
-  them.
-
-*** Make m2t interfaces header only                                   :story:
-
-It seems we have implementation files on this at present.
+- do a check that the physical name of the artefact and formatter
+  match.
 
 *** Replace artefact properties with artefacts                        :story:
 
