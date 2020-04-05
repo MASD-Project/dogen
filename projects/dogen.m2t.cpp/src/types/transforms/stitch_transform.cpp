@@ -73,10 +73,10 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
     if (!boost::filesystem::exists(stitch_template)) {
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
-        // ast.update_artefact();
 
         // FIXME: what is the name/path for the artefact?! This may
         // FIXME: explain empty artefacts!
+        a.name().qualified(fp);
         a.overwrite(ast.new_artefact_properties().overwrite());
 
         physical::entities::operation op;
