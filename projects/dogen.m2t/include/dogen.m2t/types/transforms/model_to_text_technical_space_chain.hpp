@@ -59,48 +59,51 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief All physical names for the archetypes owned by this
-     * transform, listing all available backends, facets and
-     * archetypes.
-     */
-    virtual const std::forward_list<physical::entities::meta_name>&
-    physical_names() const = 0;
-
-    /**
      * @brief Returns a human readable description of this transform.
      */
     virtual std::string description() const = 0;
 
+public:
     /**
-     * @brief Returns the physical names for each meta name.
+     * @brief All physical meta-names for the archetypes owned by this
+     * transform, listing all available backends, facets and
+     * archetypes.
+     */
+    virtual const std::forward_list<physical::entities::meta_name>&
+    physical_meta_names() const = 0;
+
+    /**
+     * @brief Returns the physical meta-names for each logical
+     * meta-name.
      */
     virtual const std::unordered_map<std::string,
                                      physical::entities::meta_name_group>&
-    physical_names_by_meta_name() const = 0;
+    physical_meta_names_by_logical_meta_name() const = 0;
 
     /**
-     * @brief Returns the archetype locations for each family.
+     * @brief Returns the physical meta-names for each family.
      */
     virtual const std::unordered_map<std::string,
                                      std::list<physical::entities::meta_name>
                                      >&
-    physical_names_by_family() const = 0;
+    physical_meta_names_by_family() const = 0;
 
     /**
      * @brief Returns this backend's part of the repository of
-     * archetype locations.
+     * physical meta-names.
      */
     virtual const physical::entities::meta_name_repository_parts&
-    physical_name_repository_parts() const = 0;
+    physical_meta_name_repository_parts() const = 0;
 
+public:
     /**
-     * @brief Technical space supported by this transform.
+     * @brief Technical space targeted by this transform.
      */
     virtual logical::entities::technical_space technical_space() const = 0;
 
     /**
-     * @brief Generates the text model representation for this
-     * transform.
+     * @brief Generates a text model representation for this technical
+     * space.
      */
     virtual physical::entities::model
     apply(const m2t::transforms::context& ctx,

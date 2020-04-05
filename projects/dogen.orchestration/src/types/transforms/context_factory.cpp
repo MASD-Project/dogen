@@ -71,8 +71,8 @@ create_physical_meta_model(
     physical::helpers::meta_name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
-        b.add(t.physical_names_by_meta_name());
-        b.add(t.physical_name_repository_parts());
+        b.add(t.physical_meta_names_by_logical_meta_name());
+        b.add(t.physical_meta_name_repository_parts());
     }
 
     using physical::entities::meta_model;

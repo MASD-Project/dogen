@@ -102,23 +102,25 @@ private:
     managed_directories(const formattables::locator& l) const;
 
 public:
-    std::string description() const override;
     std::string id() const override;
+    std::string description() const override;
 
+public:
     const std::forward_list<physical::entities::meta_name>&
-    physical_names() const override;
+    physical_meta_names() const override;
 
     const std::unordered_map<std::string,
                              physical::entities::meta_name_group>&
-    physical_names_by_meta_name() const override;
+    physical_meta_names_by_logical_meta_name() const override;
 
     const std::unordered_map<std::string,
                              std::list<physical::entities::meta_name>>&
-    physical_names_by_family() const override;
+    physical_meta_names_by_family() const override;
 
     const physical::entities::meta_name_repository_parts&
-    physical_name_repository_parts() const override;
+    physical_meta_name_repository_parts() const override;
 
+public:
     logical::entities::technical_space technical_space() const override;
 
     physical::entities::model

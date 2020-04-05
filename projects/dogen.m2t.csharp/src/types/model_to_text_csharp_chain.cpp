@@ -73,28 +73,28 @@ apply(const formattables::model& fm) const {
 }
 
 const std::forward_list<physical::entities::meta_name>&
-model_to_text_csharp_chain::physical_names() const {
+model_to_text_csharp_chain::physical_meta_names() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::meta_name_group>&
-model_to_text_csharp_chain::physical_names_by_meta_name() const {
+model_to_text_csharp_chain::physical_meta_names_by_logical_meta_name() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names_by_meta_name();
 }
 
 const std::unordered_map<std::string,
                          std::list<physical::entities::meta_name>>&
-model_to_text_csharp_chain::physical_names_by_family() const {
+model_to_text_csharp_chain::physical_meta_names_by_family() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_names_by_family();
 }
 
 const physical::entities::meta_name_repository_parts&
 model_to_text_csharp_chain::
-physical_name_repository_parts() const {
+physical_meta_name_repository_parts() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.physical_name_repository_parts();
 }
