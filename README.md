@@ -18,8 +18,8 @@
 [![codecov](https://codecov.io/gh/MASD-Project/dogen/branch/master/graph/badge.svg)](https://codecov.io/gh/MASD-Project/dogen)
 [![Coverity](https://img.shields.io/coverity/scan/16865.svg)](https://scan.coverity.com/projects/masd-project-dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
-[![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.22) ](https://bintray.com/masd-project/main/dogen/1.0.22/link)
-[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.22.svg)](https://github.com/MASD-Project/dogen/commits/master)
+[![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.23) ](https://bintray.com/masd-project/main/dogen/1.0.23/link)
+[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.23.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
 [![Language](https://img.shields.io/badge/Language-C++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-C++17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
@@ -28,6 +28,30 @@
 [![msvc2017](https://img.shields.io/badge/MSVC-2017-blue.svg)](https://visualstudio.microsoft.com/vs/whatsnew/)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 [![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=https://github.com/masd-project/dogen)](http://clayallsopp.github.io/readme-score?url=https://github.com/masd-project/dogen)
+
+# Binary Packages
+
+Binary packages are available for each release on
+[BinTray](https://bintray.com/masd-project/main/dogen), covering
+Debian Linux, OSX and Windows - 64-bit only. Packages are generated
+for each commit. Development is done from git master, so latest should
+always be greatest, but you may want to use packages from the previous
+sprint rather than what is currently under development (see badges
+above).
+
+---
+**Notes**
+
+- The OSX installer provides you with a DMG. Once you open it in Finder,
+it mounts under ```/Volumes/```, e.g.:
+
+```
+/Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
+```
+
+Where ```${VERSION}``` is your Dogen version such as ```1.0.23```.
+
+----
 
 # Overview
 
@@ -70,30 +94,6 @@ available as a separate git repo:
 
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
-
-# Binary Packages
-
-Binary packages are available for each release on
-[BinTray](https://bintray.com/masd-project/main/dogen), covering
-Debian Linux, OSX and Windows - 64-bit only. Packages are generated
-for each commit. Development is done from git master, so latest should
-always be greatest, but you may want to use packages from the previous
-sprint rather than what is currently under development (see badges
-above).
-
----
-**Notes**
-
-- The OSX installer provides you with a DMG. Once you open it in Finder,
-it mounts under ```/Volumes/```, e.g.:
-
-```
-/Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
-```
-
-Where ```${VERSION}``` is your Dogen version such as ```1.0.22```.
-
-----
 
 # Building From Source
 
