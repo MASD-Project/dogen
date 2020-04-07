@@ -12,42 +12,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-06 Mon 23:05]
+#+CAPTION: Clock summary at [2020-04-07 Tue 22:35]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *1:04* |      |      | 100.0 |
+| *Total time*                           | *3:46* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 1:04   |      |      | 100.0 |
-| Active                                 |        | 1:04 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 0:55 |  85.9 |
-| Sprint and product backlog grooming    |        |      | 0:09 |  14.1 |
+| Stories                                | 3:46   |      |      | 100.0 |
+| Active                                 |        | 3:46 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 3:08 |  83.2 |
+| Sprint and product backlog grooming    |        |      | 0:38 |  16.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-07 Tue 20:32]--[2020-04-07 Tue 22:35] =>  2:03
     CLOCK: [2020-04-06 Mon 23:06]--[2020-04-06 Mon 23:16] =>  0:10
     CLOCK: [2020-04-06 Mon 22:10]--[2020-04-06 Mon 23:05] =>  0:55
     :END:
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.23, "Cine Teatro Namibe"
+Title: Dogen v1.0.23, "Docas de Moçamedes"
 
 #+BEGIN_SRC markdown
-![Porto do Namibe](https://pbs.twimg.com/media/CpAcgYpWIAEGmCF?format=jpg&name=medium)
-_Namibe Port, Moçamedes, Angola. (C) 2016 Ampe Rogério - [Rede Angola](http://www.redeangola.info/namibe-volta-a-assinalar-dia-de-mocamedes)_
-
 **NOTE: Release notes under construction**
+
+![Docas de Moçamedes](https://pbs.twimg.com/media/CpAcgYpWIAEGmCF?format=jpg&name=medium)
+_Docks in Moçamedes, Namibe, Angola. (C) 2016 Ampe Rogério - [Rede Angola](http://www.redeangola.info/namibe-volta-a-assinalar-dia-de-mocamedes)_
 
 # Introduction
 
-Welcome to the first release of Dogen under quarantine. Productivity was not yet impacted by all of the chaos unfolding all around us, but these are clearly trying times for us all. Whilst clearly unimportant in the big scheme of things, hopefully this release and associated release notes can provide some momentary respite for those in search of something else to focus their attention on. As far as the sprint itself went, well, overall it was a rather positive one, if somewhat quiet on the user-facing front. With it, we have _finally_ made major inroads made on the fabled "generation" refactoring, so we have some rather geeky [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) stories in store for you.
+Welcome to the first release of Dogen under quarantine. I hope you have been able to stay home and stay safe, in what are very trying times for us all. This release is obviously unimportant in the grand scheme of things, but hopefully it is able to provide a momentary respite to those of us searching for _something else_ to focus our attention on. The sprint itself was a rather positive one,  if somewhat quiet on the user-facing front. Of particular note is the fact that we have _finally_ made major inroads on the fabled "generation" refactoring, which we shall cover at length. So get ready for some geeky [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) stories.
 
 # User visible changes
 
-This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there are no user visible changes, we have used the video to chat a little bit about the internal changes.
+This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there are no user visible changes, we have used the video to chat a little bit about the internal changes.
 
 [![Sprint 1.0.23 Demo](https://img.youtube.com/vi/RysjvA2eZ4o/0.jpg)](https://youtu.be/RysjvA2eZ4o)
 _Video 1: Sprint 23 Demo._
@@ -65,22 +66,36 @@ _Figure 1: 11,000th commit for Dogen on GitHub._
 
 ## Significant Internal Stories
 
-The sprint was completely dominated by a small number of stories that make up the "generation" refactor. We've grouped some of these stories into a handful of "headline themes", which allows us to cover the refactor in some detail - though it is difficult to provide all the context required in order to fully understand the rationale for the work.
+The sprint was dominated by smattering of small and medium-sized stories that, collectively, made up the "generation" refactor work. We've grouped the most significant of them into a handful of "themes", allowing us to cover the refactor in some detail. To be fair, it is difficult to provide all of the required context  in order to fully understand the rationale for the work, but we shall try our best.
 
-### Create the ```physical``` model
+### Towards a ```physical``` model
 
-The processing pipeline for Dogen has remained more or less unchanged since its early days. Figure 2 provides an image from sprint 12 describing the pipeline and the associated models.However, what has changed in quite dramatic fashion is our understanding of the _conceptual role_ of these models. Over time, what has emerged is the picture of a logical-physical space; as elements travel through the pipeline, they are also traveling through this space, and ultimately emerge as artefacts. In the previous sprint we had already finished transitioning the logical model to this new world, and this sprint we turned our attention to the physical model.
+The processing pipeline for Dogen remained largely unchanged since its early days. Figure 2 is a diagram from [sprint 12](https://github.com/MASD-Project/dogen/releases/tag/v1.0.12) describing the pipeline and associated models; other than the name changes, it is largely applicable to the code as it stands today. However, what has changed in quite dramatic fashion is our understanding of the _conceptual role_ of these models. Over time, a picture of a sparse _logical-physical_ space emerged; as elements travel through the pipeline, they are also traveling through this space, transformed by projections that are parameterised by variability, and ultimately materializing as fully-formed artefacts, ready to be written to the filesystem. Beneath those small name changes lies a leap in conceptual understanding of the domain, and posts such as the [The Refactoring Quagmire](https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html) give you a feel for just how long and windy this road has been.
 
 ![Processing pipeline](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/orchestration_pipeline.png)
 _Figure 2: Dogen's processing pipeline._
 
-There were three separate lines of attack in this problem:
+For the past few sprints, we have been trying to get the code to behave according to this newly found knowledge. The [previous sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.22) saw us transition the ```logical``` and ```variability``` models to this brave new world, and this sprint we have turned our attention to the ```physical``` model. It is a much bigger task than any thus far because the models are so far away from their desired state, but we had to start somewhere. We decided to go for three distinct lines of attack as our starting salvo:
 
-- **Refactor the ```archetypes``` _modelet_**: we realised that the small ```archetypes``` model was nothing but a meta-model for the physical dimension of the logical-physical space. In effect, it is a _metaphysical_ model though, sadly, the name would probably not be well accepted in academic terms so we refrained from using it. At any rate, we took the existing ```archetypes``` model and refactored it into the core of the ```physical``` model.
-- more surprisingly, we eventually realised that the ```extraction``` model was actually representing instances of the physical meta-model and as such should be combined into one model. This was rather difficult to wrap our heads around, and it certainly required quite a few whiteboard sessions to clarify, but eventually once it was understood much of the design became immediately clear.
-- last but not least, we finally resolved a long standing problem of having elements of the physical dimension present in the ```logical``` model. As it was with the ```variability``` model [last sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.22), we have been extremely keen to decouple these two models into well-understood responsibilities. With this sprint we have finally achieved this goal, although the tidy-up is still ongoing.
+- **Refactor the ```archetypes``` _modelet_**. The first moment of enlightenment was when we realised that the small ```archetypes``` model was nothing but a disguised meta-model of the physical dimension for the logical-physical space. In effect, it is a _metaphysical_ model though such a name (and associated pun) would probably not be viewed well in academic circles, so we had to refrain from using it. Nonetheless, we took the existing ```archetypes``` model and refactored it into the core of the ```physical``` model. Types such as ```archetype_location``` became the basis of the physical meta-model, populated with entities such as ```backend```, ```facet``` and ```kernel```.
+- **Merge the ```extraction``` model into the ```physical``` model**. More surprisingly, we eventually realised that the ```extraction``` model was actually representing _instances_ of the physical meta-model, and as such should be merged into it. It was rather difficult to wrap our heads around this concept; to do so, we had to let go of the idea that ```artefacts``` are representations of files in memory, and instead started to view them as elements travelling in the logical-physical space towards their ultimate destination. After a great many whiteboard sessions,  these ideas were eventually clarified and then much of the conceptual design fell into place.
+- **Move physical aspects in the ```logical``` model to the ```physical``` model**. The last step of our three-pronged approach was to figure out that the proliferation of types with names such as ```artefact_properties```, ```enablement_properties``` and the like was just a leakage of physical concepts into the logical model. This happened because we did not have a strong conceptual framework, and so never quite knew where to place things. As the physical model started to take shape with the two changes above, we finally resolved this long standing problem, as it suddenly became clear that most of the physical properties we had been associating with logical elements were more adequately modeled as _part of the artefacts themselves_. This then allows us to cleanly separate the ```logical``` and ```physical``` models, very much in keeping with the decoupling performed [last sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.22) for the ```variability``` and ```physical``` models (the latter known then as ```archetypes```, of course). The sprint saw us modeling the required types have correctly in the ```physical``` model, but the entire tidy-up will be long in completing as the code in question is very fiddly.
 
-What this means, in practice, is that artefacts no longer emerge fully formed as we move from the generation phase of the pipeline into the extraction phase; instead, generation is now responsible for projecting the logical elements from the physical dimension into the physical dimension, informed by the physical meta-model and the user choices captured by the variability model. This means that some of the physical properties we had been associating with logical elements are more adequately modeled as part of the artefacts themselves.
+FIXME: flatten names
+
+### Rename the ```generation``` models to ```m2t```
+
+It has long been understood that "formatters" are nothing but model-to-text (M2T) transforms, as per standard  [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) terminology. With this sprint, we finally had the time to rename the generation models to their rightful name:
+
+- ```generation``` became ```m2t```
+- ```generation.cpp``` became ```m2t.cpp```
+- ```generation.csharp``` became ```m2t.csharp```
+
+In addition, as per the previous story,  the new role of the ```m2t``` model is now to perform the expansion of the logical model into physical space. With this sprint we begun this exercise, but sadly only scratched the surface as we ran out of time. Nonetheless, the direction of travel seems very much clear, and much of the code that is at present duplicated between ```m2t.cpp`` and ```m2t.csharp``` should find its new home within ```m2t```, in a generalised form making use of the shiny new ```physical``` meta-model.
+
+### Rename the ```meta-model``` namespace to ```entities```
+
+One of the terms that can become very confusing very fast is ```meta-model```. When you are thick in the domain of [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering), pretty much everything you touch is a meta-something, so much so that calling things "meta-models" should be done only sparingly and when it can provide some form of enlightenment to the reader. So it was that we decided to deprecate the widely used namespace ```meta-model``` in favour of the much blander ```entities```.
 #+END_SRC markdown
 
 - [[https://twitter.com/MarcoCraveiro/status/1240728672128172033][twitter]]
