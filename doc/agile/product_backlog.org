@@ -5,12 +5,36 @@
 
 This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/product-backlog][product backlog]] for Dogen.
 
-* Required for V2
+* Product Vision
+
+Here we define what we consider to be the [[http://www.scaledagileframework.com/vision/][the vision]] for Dogen; what
+guides us when we think about the product and what can and cannot go
+into the product backlog.
+
+** Vision Statement
+
+The vision for Dogen is:
+
+- to create a suite of code generation tools targeting component and
+  product generation, according to a well-specified product line;
+- for these tools to have the potential to be useful to developers in
+  multiple programming languages, and to be designed to be integrated
+  with IDEs and text editors;
+- to make the suite extensible, such that users can come up with
+  modifications suited to their particular domain.
+
+** Vision Quotes
+
+- code that can be reduced to an heuristic must be codegened; code
+  that cannot, must be helped.
+
+* V2 Release
 
 Stories that need to be implemented in order to complete the V2
 vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
-such as profiles, licences etc.
+such as profiles, licences etc. We also expected to define the
+logical-physical conceptual model.
 
 ** Core work
 
@@ -18,78 +42,79 @@ The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
 *** Add additional reference directories                              :story:
+     CLOSED: [2020-04-07 Tue 08:51]
 
-At present we expect the reference models to be either on the data
-directory (for system models) or on the same directory as the
-target. Presumably, users may also want to have models on other
-directories. For example, if one were to extend Dogen with a different
-project, it would be required to load models from the dogen
-directory.
+ At present we expect the reference models to be either on the data
+ directory (for system models) or on the same directory as the
+ target. Presumably, users may also want to have models on other
+ directories. For example, if one were to extend Dogen with a different
+ project, it would be required to load models from the dogen
+ directory.
 
-We could simply add a command line argument for reference directories;
-if the reference is not found in the target model directory, we would
-then try all available reference directories.
+ We could simply add a command line argument for reference directories;
+ if the reference is not found in the target model directory, we would
+ then try all available reference directories.
 
-We should implement this as a =-I= parameter akin to compilers. We
-should also have a command to output the current include path - check
-GCC to see what command they use for this.
+ We should implement this as a =-I= parameter akin to compilers. We
+ should also have a command to output the current include path - check
+ GCC to see what command they use for this.
 
-This will be a requirement in order to support PDMs because we shall
-have many directories with models. We will need the concept of "system
-include directories" for this. We need to look into how compilers do
-this. We must also dump these in dumpspecs.
+ This will be a requirement in order to support PDMs because we shall
+ have many directories with models. We will need the concept of "system
+ include directories" for this. We need to look into how compilers do
+ this. We must also dump these in dumpspecs.
 
-Merged Stories:
+ Merged Stories:
 
-*Add additional data files directories*
+ *Add additional data files directories*
 
-#+begin_quote
-*Story*: As a dogen user, I want dogen to use my own private data
-libraries so that I don't have to supply them as diagrams.
-#+end_quote
+ #+begin_quote
+ *Story*: As a dogen user, I want dogen to use my own private data
+ libraries so that I don't have to supply them as diagrams.
+ #+end_quote
 
-Users should be able to provide directories for their own JSON
-models. We just need to add a new parameter to the knitter and
-transport it all the way to OM's workflow.
+ Users should be able to provide directories for their own JSON
+ models. We just need to add a new parameter to the knitter and
+ transport it all the way to OM's workflow.
 
-In the future, when everything is a model, data file directories and
-reference directories will become one and the same.
+ In the future, when everything is a model, data file directories and
+ reference directories will become one and the same.
 
-*** Add version support                                               :story:
+*** Add version support                                              :story:
 
-At present we are generating the product version file as part of some
-CMake hackery. In reality, this is really a property of a MASD product
-and possibly component. We could even consider it to be a meta-model
-element.
+ At present we are generating the product version file as part of some
+ CMake hackery. In reality, this is really a property of a MASD product
+ and possibly component. We could even consider it to be a meta-model
+ element.
 
-Notes:
+ Notes:
 
-- there should be a meta-model element for version. It should be
-  usable in either product or component models. In product models, we
-  still need to figure out where the file with the details should be
-  placed.
-- version can then be used for details such as travis/appveyor
-  version, CMake version, DLL/SO version, assembly properties, etc.
-- however, we need to figure out how components will be able to see
-  product level elements.
-- this can also be used for [[*Add versioning support][serialisation versioning]].
-- the version is a property of the product itself, so perhaps we
-  should just make it a meta-data element. Then, if you would like the
-  version to come out as a header file you need to create a "product
-  version" element. This will use the product version (in a yet to be
-  defined manner). This would allow users to decide where they want
-  the header file to be created. A similar approach can be taken for
-  components as well.
+ - there should be a meta-model element for version. It should be
+   usable in either product or component models. In product models, we
+   still need to figure out where the file with the details should be
+   placed.
+ - version can then be used for details such as travis/appveyor
+   version, CMake version, DLL/SO version, assembly properties, etc.
+ - however, we need to figure out how components will be able to see
+   product level elements.
+ - this can also be used for [[*Add versioning support][serialisation versioning]].
+ - the version is a property of the product itself, so perhaps we
+   should just make it a meta-data element. Then, if you would like the
+   version to come out as a header file you need to create a "product
+   version" element. This will use the product version (in a yet to be
+   defined manner). This would allow users to decide where they want
+   the header file to be created. A similar approach can be taken for
+   components as well.
 
-Merged stories:
+ Merged stories:
 
-*Supply dogen version as a configuration parameter*
+ *Supply dogen version as a configuration parameter*
 
-At present we are using the =config.hpp= file in several places in
-dogen to determine the dogen version. This makes things complicated
-when we don't actually care about the particular version such as in
-tests. We should supply the version as part of the initial
-configuration and then reuse it from there.
+ At present we are using the =config.hpp= file in several places in
+ dogen to determine the dogen version. This makes things complicated
+ when we don't actually care about the particular version such as in
+ tests. We should supply the version as part of the initial
+ configuration and then reuse it from there.
 
 *** Allow dropping facet postfix for an element                       :story:
 
@@ -6327,10 +6352,241 @@ Notes:
 - nice idea to create text files with all of the dependencies for the
   different OSs (packages and repositories).
 
+* V3 Release
+
+The vision for V3 is around the Dogen ecosystem. This involves all the
+tooling around Dogen, including LSP support for both stitch and all
+supported injectors (Dia, JSON, org-mode?).
+
+** Core Work
+
+*** Org-mode schemas                                                  :story:
+
+Check to see if there is any concept of an org-mode schema, whereby
+certain outlines, etc are mandatory in order for the document to be
+compliant.
+
+*** Dogen Modeling Studio                                              :epic:
+
+Assorted set of ideas of what an "integrated environment" for modeling
+within Dogen would look like. Very random.
+
+- model management, concept of projects.
+- integration with git in order to link model versioning with version
+  control. References should point to specific versions (tags or
+  commits).
+- ability to view revisions for a given model set. That is, at model
+  version X, code looks like Y. Linkage between generated code and
+  model.
+- configuration for all models and for each models - e.g. product
+  families, component families.
+- load all revisions with model changes: given a git repo, show me all
+  the commits that changed a model and see these as a log for the
+  model. We should also be able to see the comments on the
+  commit. We can then visualise the model and see the diffs across
+  revisions somehow.
+- ability to config the git repo, model location, output
+  directory. Performs a clone of up to X depth. Then reads history of
+  model files.
+- it should be possible to select branches for a git repo as well.
+- for injectors with text formats, it would be nice to be able to edit
+  the models within the IDE.
+- ability to download a zip with generated code for the model at a
+  specified version.
+- support for tracing within the IDE so that we can browse and
+  navigate all of the generated tracing information. Visualisation of
+  JSON as a expandable tree.
+- ability to load/save models into a relational database.
+- it would be nice to have endpoints with different versions of
+  Dogen. That way we could generate code and diff it. We can also
+  check if a model will error in the future/past versions of
+  Dogen. There should also be an endpoint of "latest" which is always
+  the latest version.
+- once we have warnings and validation, we can generate github
+  badges. Perhaps a =.dogen= file at the top could be used to describe
+  the settings (API tokens, location of models, etc). Then we could
+  provide the following information:
+
+  - is the model green (no errors, no warnings).
+  - if its not green, what warnings and errors is it generating.
+  - is the code out of sync with the model?
+  - model health reports, based on complexity measures, etc.
+
+  The idea is that we would provide feedback with each commit so that
+  users can be on top of it. Also, users can choose to point to latest
+  just to see whenever their models break with latest changes.
+- this story has a lot in common with [[*Consider adding a wt frontend][Consider adding a wt frontend]].
+
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
+- with the addition of overrides, we can also have another check:
+  build with overrides. When setting up the project, the user can
+  define the override profile to use. The report will also provide
+  details on what fails with overrides.
+
+Links:
+
+- [[https://report.ci/][report.ci]]
+
+*** LSP as a form of roundtrip support                                :story:
+
+Once we have LSP delegation, one thing we could consider doing is use
+this information for roundtripping. It would not be a complete
+roundtrip support, but instead a "localised" roundtrip:
+
+- for hand-crafted elements, we could keep track of any operations
+  that the user may have defined on the model elment. We could also
+  warn if the user did not define an operation. The problem with this
+  is that we do not want to issue a lot of warnings. If we had an
+  injection model for which we were confident we could make changes
+  without breaking anything (such as org-mode), we could try to
+  automatically inject the properties and operations into the element
+  but we need to make sure this is not going to generate a lot of
+  noise and/or result in losing user data. It would be nicer to have
+  this as a controlled operation (e.g. run dogen on
+  "update"/"roundtrip" mode) so that we could bring in the diffs
+  manually and inspect them.
+- for elements which are mainly generated (but may or may not have
+  merge support), this is not very useful. This is because we only
+  expect
+
+*** LSP damemon for Dogen                                              :epic:
+
+We should be able to create a simple LSP daemon that helps with dogen
+models and stitch templates. For dogen models:
+
+- provide completion of meta-data keys
+- model validation (flycheck)
+- completion of model elements, context sensitive.
+- completion of references (assuming a "reference directory"
+  parameter)
+- help hints for meta-data features: description of the feature and
+  example usage. This should be added to every feature.
+- help hints for types based on their documentation.
+
+See also the MOP story for more ideas. In terms of implementation, we
+probably need to know the current line of the model so that we can
+figure out what modeling element we are sitting on. With this context,
+we can build an assets model and extract all of the required
+information.
+
+For stitch templates:
+
+- mainly meta-data hints and help.
+- find a way to call the LSP daemon for c++ with the expanded
+  template, and then interpret the resulting errors in terms of
+  template lines (we have a story for this).
+- find a way to call the LSP daemon for c++ and obtain its view of
+  completion etc. This is slightly harder because we need to map the
+  current line to the expanded template line. It may be even
+  impossible if in a for loop etc.
+
+Notes:
+
+- we should consider "LSP delegation". That is, our LSP could call a
+  technical space specific LSP for the stitch fragments and for model
+  fragments. We just need to figure out if its possible to send the
+  current file contents to the LSP server rather than have it read
+  from the filesystem because otherwise we would have to regenerate
+  the model every time the user changes a fragment or a
+  template. Ideally we should regenerate in memory (in the LSP server
+  itself) and then send the new file to the LSP server such that the
+  actual file in the filesystem is not touched.
+- LSP delegation would work extremely well when combined with an
+  org-mode front-end. We could then allow users to edit fragments of
+  code, but map these to the LSP errors and completion coming out of
+  the delegated server. For errors in lines coming outside of this
+  fragment we could map these to some other location.
+- LSP delegation also means we can intercept *any* errors coming out
+  of the remote LSP server and use them to highlight model
+  elements. However, its not clear how this would work as normally we
+  need to notify the LSP server that we are working on a given
+  file. Perhaps here we need to integrate with the plain LSP server
+  somehow. However, we do have a list of files in the model so we can
+  easily filter for those and if there is a match, use that to display
+  an error. The error could be just pointing out to the model element
+  in question and stating there is an error. If the element is not
+  code-generated we could tell the user to go to the file.
+- we could also consider adding LSP for Dia. There is nothing about
+  LSP that makes it text-mode specific. We could easily monitor a dia
+  XML file from Dogen, resolve it into a model and then provide
+  answers for requests on the Dia front-end:
+  - completion of types
+  - errors and warnings (make font or backgroun red?)
+  - documentation on hover
+  - etc.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/eov5fh/critique_my_project_libclsp_a_c17_library/][Critique my project. Libclsp, a C++17 library]]
+= [[https://github.com/otreblan/libclsp][libclsp]]: A C++17 library for language servers.
+
+*** Org-mode as a carrier format for modeling                         :story:
+
+This is a bit of a weird idea, but may just work; this story is a
+placeholder to capture ideas in this space. Consider a org-mode
+file as a model. Ideas:
+
+- the top-level properties are all model properties. For example, if
+  you add text at the top, that is a model comment.
+- We could add a org-mode file link for each file element so that we
+  could easily move from model to implementation. The file format
+  should have a section for this (files by facet?), with all of the
+  bookmarks. However, its a bit painful to do this manually, so we
+  need some form of round-tripping.
+- we can also make use of the exact same format for Dogen comments as
+  we do in Dia, with =#DOGEN= markers.
+- stereotypes and other meta-data can be conveyed using org-mode
+  properties. In addition, due to org-babel, we can include code
+  snippets on any programming language, with some (minimal) IDE-like
+  integration.
+- we could also include the GUIDs for merging as org-mode properties.
+- once we create a C++ stand-alone product to represent org-mode
+  documents, we can just create an adapter for it as an injector.
+- there already is some support for creating state-machines in
+  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
+  dot and tables]]
+
+Links:
+
+- [[https://github.com/mirkoboehm/OrgModeParser][OrgModeParser]]: requires QT.
+- [[https://www.reddit.com/r/emacs/comments/bciwiz/does_orgmode_have_a_formal_grammar_or_some_subset/][Does orgmode have a formal grammar, or some subset of it?]]
+- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
+- [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
+- [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
+- [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
 * Future Releases
 
-Stories that will not be handled on the current major release.
+Stories that have not yet been allocated a release.
 
 ** Technical debt
 
@@ -12728,57 +12984,6 @@ Links:
 
 - https://llvm.org/docs/TableGen/
 
-*** Dogen Modeling Studio                                             :story:
-
-Assorted set of ideas of what an "integrated environment" for modeling
-within Dogen would look like. Very random.
-
-- model management, concept of projects.
-- integration with git in order to link model versioning with version
-  control. References should point to specific versions (tags or
-  commits).
-- ability to view revisions for a given model set. That is, at model
-  version X, code looks like Y. Linkage between generated code and
-  model.
-- configuration for all models and for each models - e.g. product
-  families, component families.
-- load all revisions with model changes: given a git repo, show me all
-  the commits that changed a model and see these as a log for the
-  model. We should also be able to see the comments on the
-  commit. We can then visualise the model and see the diffs across
-  revisions somehow.
-- ability to config the git repo, model location, output
-  directory. Performs a clone of up to X depth. Then reads history of
-  model files.
-- it should be possible to select branches for a git repo as well.
-- for injectors with text formats, it would be nice to be able to edit
-  the models within the IDE.
-- ability to download a zip with generated code for the model at a
-  specified version.
-- support for tracing within the IDE so that we can browse and
-  navigate all of the generated tracing information. Visualisation of
-  JSON as a expandable tree.
-- ability to load/save models into a relational database.
-- it would be nice to have endpoints with different versions of
-  Dogen. That way we could generate code and diff it. We can also
-  check if a model will error in the future/past versions of
-  Dogen. There should also be an endpoint of "latest" which is always
-  the latest version.
-- once we have warnings and validation, we can generate github
-  badges. Perhaps a =.dogen= file at the top could be used to describe
-  the settings (API tokens, location of models, etc). Then we could
-  provide the following information:
-
-  - is the model green (no errors, no warnings).
-  - if its not green, what warnings and errors is it generating.
-  - is the code out of sync with the model?
-  - model health reports, based on complexity measures, etc.
-
-  The idea is that we would provide feedback with each commit so that
-  users can be on top of it. Also, users can choose to point to latest
-  just to see whenever their models break with latest changes.
-- this story has a lot in common with [[*Consider adding a wt frontend][Consider adding a wt frontend]].
-
 *** Consider adding support for TOML                                  :story:
 
 Links:
@@ -12841,71 +13046,6 @@ Links:
 - [[https://www.terraform.io/docs/configuration/syntax.html][Terraform: Configuration Syntax]]
 - [[https://www.terraform.io/docs/configuration/index.html][Configuration Language]]
 - [[https://github.com/syohex/emacs-terraform-mode][terraform emacs mode]]
-
-*** dogen as a github integration                                     :story:
-
-Perhaps there are some useful services dogen could provide to users in
-terms of dogen integration. If, with every commit, we could regenerate
-the model and read the current state in github, we could then provide
-a status report:
-
-- the model does not build; red emblem. Some changes were made to the
-  model (or to dogen) that make the model invalid. User should take
-  action.
-- the model builds but generates files that are different from what's
-  checked in on github. yellow emblem. Provide a report with the
-  diffs. This can either be because the code generator has changed or
-  the user changed the model.
-- the model builds and generates exactly the same code; green emblem.
-
-With this approach we have two advantages:
-
-- we do not need to add projects as part of the dogen tests; the
-  service takes its place. We can still add a few as the core tests,
-  but we don't need to expand it much beyond reference implementation
-  and dogen itself.
-- we exercise dogen itself as well as the rest endpoint generation
-  code in a way that is actually useful to end users; it would be nice
-  to know immediately when something breaks.
-
-Notes:
-
-- we'll need some kind of way of dealing with tokens and secrets in
-  order to support private GH projects.
-- with the addition of overrides, we can also have another check:
-  build with overrides. When setting up the project, the user can
-  define the override profile to use. The report will also provide
-  details on what fails with overrides.
-
-*** Org-mode as a carrier format for modeling                         :story:
-
-This is a bit of a weird idea, but may just work; this story is a
-placeholder to capture ideas in this space. Consider a org-mode
-file as a model. Ideas:
-
-- the top-level properties are all model properties. For example, if
-  you add text at the top, that is a model comment.
-- we can also make use of the exact same format for Dogen comments as
-  we do in Dia, with =#DOGEN= markers.
-- stereotypes and other meta-data can be conveyed using org-mode
-  properties. In addition, due to org-babel, we can include code
-  snippets on any programming language, with some (minimal) IDE-like
-  integration.
-- we could also include the GUIDs for merging as org-mode properties.
-- once we create a C++ stand-alone product to represent org-mode
-  documents, we can just create an adapter for it as an injector.
-- there already is some support for creating state-machines in
-  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
-  dot and tables]]
-
-Links:
-
-- [[https://github.com/mirkoboehm/OrgModeParser][OrgModeParser]]: requires QT.
-- [[https://www.reddit.com/r/emacs/comments/bciwiz/does_orgmode_have_a_formal_grammar_or_some_subset/][Does orgmode have a formal grammar, or some subset of it?]]
-- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
-- [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
-- [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
-- [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
 *** Consider using ditaa                                              :story:
 
@@ -13032,54 +13172,6 @@ It seems this is yet another RPC framework.
 Links:
 
 - [[http://bert-rpc.org/][specification]]
-
-*** LSP damemon for Dogen                                             :story:
-
-We should be able to create a simple LSP daemon that helps with dogen
-models and stitch templates. For dogen models:
-
-- provide completion of meta-data keys
-- model validation (flycheck)
-- completion of model elements, context sensitive.
-- completion of references (assuming a "reference directory"
-  parameter)
-- help hints for meta-data features: description of the feature and
-  example usage. This should be added to every feature.
-- help hints for types based on their documentation.
-
-See also the MOP story for more ideas. In terms of implementation, we
-probably need to know the current line of the model so that we can
-figure out what modeling element we are sitting on. With this context,
-we can build an assets model and extract all of the required
-information.
-
-For stitch templates:
-
-- mainly meta-data hints and help.
-- find a way to call the LSP daemon for c++ with the expanded
-  template, and then interpret the resulting errors in terms of
-  template lines (we have a story for this).
-- find a way to call the LSP daemon for c++ and obtain its view of
-  completion etc. This is slightly harder because we need to map the
-  current line to the expanded template line. It may be even
-  impossible if in a for loop etc.
-
-Notes:
-
-- we should consider "LSP delegation". That is, our LSP could call a
-  technical space specific LSP for the stitch fragments and for model
-  fragments. We just need to figure out if its possible to send the
-  current file contents to the LSP server rather than have it read
-  from the filesystem because otherwise we would have to regenerate
-  the model every time the user changes a fragment or a
-  template. Ideally we should regenerate in memory (in the LSP server
-  itself) and then send the new file to the LSP server such that the
-  actual file in the filesystem is not touched.
-
-Links:
-
-- [[https://www.reddit.com/r/cpp/comments/eov5fh/critique_my_project_libclsp_a_c17_library/][Critique my project. Libclsp, a C++17 library]]
-= [[https://github.com/otreblan/libclsp][libclsp]]: A C++17 library for language servers.
 
 *** LSP daemon for MOP                                                :story:
 
