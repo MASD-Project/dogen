@@ -19,78 +19,58 @@ task juggler installed:
 
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   12d
-   :BLOCKER:  previous-sibling
-   :allocate: s23
+   :EFFORT:   13d
+   :BLOCKER:  start
+   :allocate: s24
    :END:
 
 - remove all types that are in coding but are related to generation
   space to generation, making sure they are properly copied across.
-
-*** Formattables clean-up
-   :PROPERTIES:
-   :EFFORT:   12d
-   :BLOCKER:  previous-sibling
-   :allocate: s24
-   :END:
-
 - move formattables concepts into generation, generalising them. This
   includes dependencies, etc.
 
-*** Generation extraction model
-   :PROPERTIES:
-   :EFFORT:   8d
-   :BLOCKER:  previous-sibling
-   :allocate: s25
-   :END:
-
-- when C++ and C# models only have formatters, merge them into one
-  model.
-
-*** Makefiles clean up
-   :PROPERTIES:
-   :EFFORT:   5d
-   :BLOCKER:  previous-sibling
-   :allocate: s26
-   :END:
-
-- update all CMake templates with latest layout from hand-crafted
-  files.
-
-*** Product generation
-   :PROPERTIES:
-   :EFFORT:   12d
-   :BLOCKER:  previous-sibling
-   :allocate: s27
-   :END:
-
-- add proudct and product family level entities to coding.
-
 *** PDMs generation
    :PROPERTIES:
-   :EFFORT:   12d
+   :EFFORT:   13d
    :BLOCKER:  previous-sibling
-   :allocate: s28
+   :allocate: s25
    :END:
 
 - create PDMs
 - remove all of the helper code.
 
+*** Product generation
+   :PROPERTIES:
+   :EFFORT:   13d
+   :BLOCKER:  previous-sibling
+   :allocate: s26
+   :END:
+
+- add proudct and product family level entities to coding.
+
+*** Productionisation
+   :PROPERTIES:
+   :EFFORT:   13d
+   :BLOCKER:  previous-sibling
+   :allocate: s27
+   :END:
+
+- add warning and errors infrastructure
+- add org-mode support
+- update all CMake templates with latest layout from hand-crafted
+  files.
+
 ** Milestones
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-03-19
+    :start: 2020-04-09
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 23
-   :PROPERTIES:
-   :resource_id: s23
-   :END:
 ** Sprint 24
    :PROPERTIES:
    :resource_id: s24

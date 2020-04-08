@@ -442,7 +442,7 @@ even though we have generated code for it.
 At present we have no way of knowing what the valid variability
 domains are. We should dump them when we dump the specs.
 
-*** COMPLETED Add org-mode option to dumpspacs                        :story:
+*** COMPLETED Add org-mode option to dumpspecs                        :story:
     CLOSED: [2020-03-20 Fri 10:04]
     :LOGBOOK:
     CLOCK: [2020-03-20 Fri 10:05]--[2020-03-20 Fri 10:08] =>  0:03

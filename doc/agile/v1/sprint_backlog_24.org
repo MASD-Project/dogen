@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-08 Wed 20:13]
+#+CAPTION: Clock summary at [2020-04-08 Wed 22:46]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *4:44* |      |      | 100.0 |
+| *Total time*                           | *5:39* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 4:44   |      |      | 100.0 |
-| Active                                 |        | 4:44 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 4:06 |  86.6 |
-| Sprint and product backlog grooming    |        |      | 0:38 |  13.4 |
+| Stories                                | 5:39   |      |      | 100.0 |
+| Active                                 |        | 5:39 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 5:01 |  88.8 |
+| Sprint and product backlog grooming    |        |      | 0:38 |  11.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-08 Wed 21:51]--[2020-04-08 Wed 22:46] =>  0:55
     CLOCK: [2020-04-08 Wed 19:15]--[2020-04-08 Wed 20:13] =>  0:58
     CLOCK: [2020-04-07 Tue 20:32]--[2020-04-07 Tue 22:35] =>  2:03
     CLOCK: [2020-04-06 Mon 23:06]--[2020-04-06 Mon 23:16] =>  0:10
