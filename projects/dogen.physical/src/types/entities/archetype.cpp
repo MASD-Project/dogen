@@ -23,7 +23,6 @@
 namespace dogen::physical::entities {
 
 archetype::archetype(
-    const dogen::physical::entities::location& location,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::string& default_postfix,
@@ -31,8 +30,7 @@ archetype::archetype(
     const std::string& archetype_kind_id,
     const std::string& meta_element_id,
     const std::string& part)
-    : location_(location),
-      description_(description),
+    : description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
@@ -42,7 +40,6 @@ archetype::archetype(
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
-    swap(location_, other.location_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(default_postfix_, other.default_postfix_);
@@ -53,8 +50,7 @@ void archetype::swap(archetype& other) noexcept {
 }
 
 bool archetype::operator==(const archetype& rhs) const {
-    return location_ == rhs.location_ &&
-        description_ == rhs.description_ &&
+    return description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
@@ -67,22 +63,6 @@ archetype& archetype::operator=(archetype other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::physical::entities::location& archetype::location() const {
-    return location_;
-}
-
-dogen::physical::entities::location& archetype::location() {
-    return location_;
-}
-
-void archetype::location(const dogen::physical::entities::location& v) {
-    location_ = v;
-}
-
-void archetype::location(const dogen::physical::entities::location&& v) {
-    location_ = std::move(v);
 }
 
 const std::string& archetype::description() const {

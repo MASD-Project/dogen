@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/location_io.hpp"
 #include "dogen.physical/io/entities/archetype_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 
@@ -37,7 +36,6 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const archetype& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::archetype\"" << ", "
-      << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "

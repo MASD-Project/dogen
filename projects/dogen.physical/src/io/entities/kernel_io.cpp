@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/kernel_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
-#include "dogen.physical/io/entities/location_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/meta_name_repository_io.hpp"
 
@@ -53,7 +52,6 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const kernel& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::kernel\"" << ", "
-      << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"backends\": " << v.backends() << ", "

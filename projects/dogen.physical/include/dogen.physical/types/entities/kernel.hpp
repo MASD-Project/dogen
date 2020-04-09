@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.physical/types/entities/backend.hpp"
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/meta_name_repository.hpp"
 
@@ -44,23 +43,12 @@ public:
 
 public:
     kernel(
-        const dogen::physical::entities::location& location,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::list<dogen::physical::entities::backend>& backends,
         const dogen::physical::entities::meta_name_repository& names);
 
 public:
-    /**
-     * @brief Position of this entity in physical space.
-     */
-    /**@{*/
-    const dogen::physical::entities::location& location() const;
-    dogen::physical::entities::location& location();
-    void location(const dogen::physical::entities::location& v);
-    void location(const dogen::physical::entities::location&& v);
-    /**@}*/
-
     /**
      * @brief Human readable description of the entity.
      */
@@ -107,7 +95,6 @@ public:
     kernel& operator=(kernel other);
 
 private:
-    dogen::physical::entities::location location_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::list<dogen::physical::entities::backend> backends_;

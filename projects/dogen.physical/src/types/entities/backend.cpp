@@ -25,7 +25,6 @@ namespace dogen::physical::entities {
 backend::backend(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
-    const dogen::physical::entities::location& location,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::unordered_map<std::string, dogen::physical::entities::part>& parts,
@@ -34,7 +33,6 @@ backend::backend(
     const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& archetype_kinds)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
-      location_(location),
       description_(description),
       meta_name_(meta_name),
       parts_(parts),
@@ -46,7 +44,6 @@ void backend::swap(backend& other) noexcept {
     using std::swap;
     swap(default_directory_name_, other.default_directory_name_);
     swap(override_directory_name_, other.override_directory_name_);
-    swap(location_, other.location_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(parts_, other.parts_);
@@ -58,7 +55,6 @@ void backend::swap(backend& other) noexcept {
 bool backend::operator==(const backend& rhs) const {
     return default_directory_name_ == rhs.default_directory_name_ &&
         override_directory_name_ == rhs.override_directory_name_ &&
-        location_ == rhs.location_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         parts_ == rhs.parts_ &&
@@ -103,22 +99,6 @@ void backend::override_directory_name(const std::string& v) {
 
 void backend::override_directory_name(const std::string&& v) {
     override_directory_name_ = std::move(v);
-}
-
-const dogen::physical::entities::location& backend::location() const {
-    return location_;
-}
-
-dogen::physical::entities::location& backend::location() {
-    return location_;
-}
-
-void backend::location(const dogen::physical::entities::location& v) {
-    location_ = v;
-}
-
-void backend::location(const dogen::physical::entities::location&& v) {
-    location_ = std::move(v);
 }
 
 const std::string& backend::description() const {

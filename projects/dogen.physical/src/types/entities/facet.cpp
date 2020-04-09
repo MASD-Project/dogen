@@ -25,7 +25,6 @@ namespace dogen::physical::entities {
 facet::facet(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
-    const dogen::physical::entities::location& location,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::string& default_postfix,
@@ -33,7 +32,6 @@ facet::facet(
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
-      location_(location),
       description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
@@ -44,7 +42,6 @@ void facet::swap(facet& other) noexcept {
     using std::swap;
     swap(default_directory_name_, other.default_directory_name_);
     swap(override_directory_name_, other.override_directory_name_);
-    swap(location_, other.location_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(default_postfix_, other.default_postfix_);
@@ -55,7 +52,6 @@ void facet::swap(facet& other) noexcept {
 bool facet::operator==(const facet& rhs) const {
     return default_directory_name_ == rhs.default_directory_name_ &&
         override_directory_name_ == rhs.override_directory_name_ &&
-        location_ == rhs.location_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         default_postfix_ == rhs.default_postfix_ &&
@@ -99,22 +95,6 @@ void facet::override_directory_name(const std::string& v) {
 
 void facet::override_directory_name(const std::string&& v) {
     override_directory_name_ = std::move(v);
-}
-
-const dogen::physical::entities::location& facet::location() const {
-    return location_;
-}
-
-dogen::physical::entities::location& facet::location() {
-    return location_;
-}
-
-void facet::location(const dogen::physical::entities::location& v) {
-    location_ = v;
-}
-
-void facet::location(const dogen::physical::entities::location&& v) {
-    location_ = std::move(v);
 }
 
 const std::string& facet::description() const {

@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/facet_io.hpp"
-#include "dogen.physical/io/entities/location_io.hpp"
 #include "dogen.physical/io/entities/archetype_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 
@@ -58,7 +57,6 @@ std::ostream& operator<<(std::ostream& s, const facet& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::facet\"" << ", "
       << "\"default_directory_name\": " << "\"" << tidy_up_string(v.default_directory_name()) << "\"" << ", "
       << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
-      << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "

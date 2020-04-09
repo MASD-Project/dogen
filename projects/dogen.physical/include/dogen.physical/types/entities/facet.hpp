@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 
@@ -45,7 +44,6 @@ public:
     facet(
         const std::string& default_directory_name,
         const std::string& override_directory_name,
-        const dogen::physical::entities::location& location,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::string& default_postfix,
@@ -71,16 +69,6 @@ public:
     std::string& override_directory_name();
     void override_directory_name(const std::string& v);
     void override_directory_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Position of this entity in physical space.
-     */
-    /**@{*/
-    const dogen::physical::entities::location& location() const;
-    dogen::physical::entities::location& location();
-    void location(const dogen::physical::entities::location& v);
-    void location(const dogen::physical::entities::location&& v);
     /**@}*/
 
     /**
@@ -141,7 +129,6 @@ public:
 private:
     std::string default_directory_name_;
     std::string override_directory_name_;
-    dogen::physical::entities::location location_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::string default_postfix_;

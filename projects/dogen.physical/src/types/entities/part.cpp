@@ -28,7 +28,6 @@ part::part()
 part::part(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
-    const dogen::physical::entities::location& location,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const dogen::physical::entities::path_configuration& path_configuration,
@@ -37,7 +36,6 @@ part::part(
     const bool requires_relative_path)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
-      location_(location),
       description_(description),
       meta_name_(meta_name),
       path_configuration_(path_configuration),
@@ -49,7 +47,6 @@ void part::swap(part& other) noexcept {
     using std::swap;
     swap(default_directory_name_, other.default_directory_name_);
     swap(override_directory_name_, other.override_directory_name_);
-    swap(location_, other.location_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(path_configuration_, other.path_configuration_);
@@ -61,7 +58,6 @@ void part::swap(part& other) noexcept {
 bool part::operator==(const part& rhs) const {
     return default_directory_name_ == rhs.default_directory_name_ &&
         override_directory_name_ == rhs.override_directory_name_ &&
-        location_ == rhs.location_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         path_configuration_ == rhs.path_configuration_ &&
@@ -106,22 +102,6 @@ void part::override_directory_name(const std::string& v) {
 
 void part::override_directory_name(const std::string&& v) {
     override_directory_name_ = std::move(v);
-}
-
-const dogen::physical::entities::location& part::location() const {
-    return location_;
-}
-
-dogen::physical::entities::location& part::location() {
-    return location_;
-}
-
-void part::location(const dogen::physical::entities::location& v) {
-    location_ = v;
-}
-
-void part::location(const dogen::physical::entities::location&& v) {
-    location_ = std::move(v);
 }
 
 const std::string& part::description() const {

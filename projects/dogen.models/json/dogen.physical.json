@@ -407,20 +407,6 @@
       ]
     },
     {
-      "name": "entities::Locatable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "location",
-          "type": "location",
-          "documentation": "Position of this entity in physical space.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::Describable",
       "stereotypes": [
         "masd::object_template"
@@ -452,7 +438,6 @@
     {
       "name": "entities::MetaElement",
       "parents": [
-        "entities::Locatable",
         "entities::Describable",
         "entities::MetaNameable"
       ],

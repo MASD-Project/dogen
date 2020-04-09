@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 
 namespace dogen::physical::entities {
@@ -41,7 +40,6 @@ public:
 
 public:
     archetype(
-        const dogen::physical::entities::location& location,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::string& default_postfix,
@@ -51,16 +49,6 @@ public:
         const std::string& part);
 
 public:
-    /**
-     * @brief Position of this entity in physical space.
-     */
-    /**@{*/
-    const dogen::physical::entities::location& location() const;
-    dogen::physical::entities::location& location();
-    void location(const dogen::physical::entities::location& v);
-    void location(const dogen::physical::entities::location&& v);
-    /**@}*/
-
     /**
      * @brief Human readable description of the entity.
      */
@@ -137,7 +125,6 @@ public:
     archetype& operator=(archetype other);
 
 private:
-    dogen::physical::entities::location location_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::string default_postfix_;
