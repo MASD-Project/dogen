@@ -858,7 +858,7 @@ handle_command(const std::string& command_name, const bool has_help,
     } else if (command_name == dumpspecs_command_name) {
         const auto d(make_dumpspecs_options_description());
         if (has_help) {
-            print_help_command(convert_command_name, d, info);
+            print_help_command(dumpspecs_command_name, d, info);
             return empty_config();
         }
         store(command_line_parser(options).options(d).run(), vm);
