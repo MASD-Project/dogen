@@ -746,6 +746,10 @@
         {
           "name": "element_properties",
           "type": "formattables::element_properties"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>"
         }
       ]
     },

@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t.cpp/types/formattables/formattable.hpp"
 
 namespace boost {
@@ -30,23 +31,36 @@ const boost::shared_ptr<dogen::logical::entities::element>& rhs) {
 
 }
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::physical::entities::artefact>& lhs,
+const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
 namespace dogen::m2t::cpp::formattables {
 
 formattable::formattable(
     const boost::shared_ptr<dogen::logical::entities::element>& element,
-    const dogen::m2t::cpp::formattables::element_properties& element_properties)
+    const dogen::m2t::cpp::formattables::element_properties& element_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts)
     : element_(element),
-      element_properties_(element_properties) { }
+      element_properties_(element_properties),
+      artefacts_(artefacts) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
     swap(element_, other.element_);
     swap(element_properties_, other.element_properties_);
+    swap(artefacts_, other.artefacts_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
     return element_ == rhs.element_ &&
-        element_properties_ == rhs.element_properties_;
+        element_properties_ == rhs.element_properties_ &&
+        artefacts_ == rhs.artefacts_;
 }
 
 formattable& formattable::operator=(formattable other) {
@@ -85,6 +99,22 @@ void formattable::element_properties(const dogen::m2t::cpp::formattables::elemen
 
 void formattable::element_properties(const dogen::m2t::cpp::formattables::element_properties&& v) {
     element_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& formattable::artefacts() const {
+    return artefacts_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& formattable::artefacts() {
+    return artefacts_;
+}
+
+void formattable::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+    artefacts_ = v;
+}
+
+void formattable::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
+    artefacts_ = std::move(v);
 }
 
 }
