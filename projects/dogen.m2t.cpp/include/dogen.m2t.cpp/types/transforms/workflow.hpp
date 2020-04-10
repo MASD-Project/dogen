@@ -70,16 +70,13 @@ private:
         const std::string& archetype) const;
 
 private:
-    std::list<boost::shared_ptr<physical::entities::artefact>>
-    execute(const std::unordered_set<m2t::entities::element_archetype>&
+    void execute(const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
-        const logical::entities::element& e,
-        const formattables::element_properties& ep) const;
+        formattables::formattable& fbl) const;
 
 public:
-    std::list<boost::shared_ptr<physical::entities::artefact>>
-    execute(const std::unordered_set<m2t::entities::element_archetype>&
-        enabled_archetype_for_element, const formattables::model& fm) const;
+    void execute(const std::unordered_set<m2t::entities::element_archetype>&
+        enabled_archetype_for_element, formattables::model& fm) const;
 
 private:
     static std::shared_ptr<cpp::transforms::registrar> registrar_;

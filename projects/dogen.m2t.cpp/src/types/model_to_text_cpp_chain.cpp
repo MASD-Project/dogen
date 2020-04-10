@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream> // FIXME
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
@@ -89,15 +90,14 @@ std::string model_to_text_cpp_chain::description() const {
     return ::description;
 }
 
-std::list<boost::shared_ptr<physical::entities::artefact>>
-model_to_text_cpp_chain::
+void model_to_text_cpp_chain::
 apply(const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
     const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
-    const formattables::model& fm) const {
+    formattables::model& fm) const {
     transforms::workflow wf(l, feature_model, cf);
-    return wf.execute(enabled_archetype_for_element, fm);
+    wf.execute(enabled_archetype_for_element, fm);
 }
 
 std::list<boost::filesystem::path> model_to_text_cpp_chain::
@@ -140,13 +140,11 @@ model_to_text_cpp_chain::technical_space() const {
     return logical::entities::technical_space::cpp;
 }
 
-physical::entities::model model_to_text_cpp_chain::apply(
-    const m2t::transforms::context& ctx,
-    const bool enable_backend_directories,
-    const m2t::entities::model& m) const {
-    tracing::scoped_transform_tracer stp(lg,
-        "C++ model to text transform", transform_id, m.name().qualified().dot(),
-        *ctx.tracer());
+physical::entities::model
+model_to_text_cpp_chain::apply(const m2t::transforms::context& ctx,
+    const bool enable_backend_directories, const m2t::entities::model& m) const {
+    tracing::scoped_transform_tracer stp(lg, "C++ model to text transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
@@ -163,18 +161,31 @@ physical::entities::model model_to_text_cpp_chain::apply(
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(feature_model, rcfg, frp, l, m));
+    auto fm(create_formattables_model(feature_model, rcfg, frp, l, m));
 
     /*
      * Code-generate all artefacts.
      */
-    physical::entities::model r;
     const auto& eafe(m.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
+    apply(eafe, l, feature_model, cf, fm);
 
-    r.artefacts(apply(eafe, l, feature_model, cf, fm));
+    /*
+     * Copy them across into the physical model.
+     */
+    physical::entities::model r;
     r.managed_directories(managed_directories(l));
+    for (const auto& fbl_pair : fm.formattables()) {
+        for (const auto& art_pair : fbl_pair.second.artefacts()) {
+            auto& ptr(art_pair.second);
+
+            // FIXME: mega-hack: prune empty artefacts
+            const auto& p(ptr->name().qualified());
+            if (!p.empty())
+                r.artefacts().push_back(art_pair.second);
+        }
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;

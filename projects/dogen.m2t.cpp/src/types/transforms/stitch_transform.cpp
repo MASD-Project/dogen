@@ -74,9 +74,10 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
 
-        // FIXME: what is the name/path for the artefact?! This may
-        // FIXME: explain empty artefacts!
-        a.name().qualified(fp);
+        // FIXME: mega-hack: do not populate the path if the
+        // artchetype is going to be empty. This will trigger
+        // filtering later.
+        // a.name().qualified(fp);
         a.overwrite(ast.new_artefact_properties().overwrite());
 
         physical::entities::operation op;

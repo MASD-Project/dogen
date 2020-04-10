@@ -88,12 +88,11 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<boost::shared_ptr<physical::entities::artefact>>
-    apply(const std::unordered_set<m2t::entities::element_archetype>&
+    void apply(const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::locator& l,
         const variability::entities::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,
-        const formattables::model& fm) const;
+        formattables::model& fm) const;
 
     /**
      * @brief Creates a list of all the managed directories.
