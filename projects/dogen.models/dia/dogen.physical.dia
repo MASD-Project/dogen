@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="27,-117"/>
+        <dia:point val="27,-118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.95,-117.05;53.745,-101.65"/>
+        <dia:rectangle val="26.95,-118.05;53.745,-102.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="27,-117"/>
+        <dia:point val="27,-118"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.695"/>
@@ -120,7 +120,7 @@ physical dimension of MASD conceptual space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.35,-115.755"/>
+            <dia:point val="27.35,-116.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
