@@ -65,11 +65,9 @@ std::string model_to_text_csharp_chain::description() const {
     return ::description;
 }
 
-std::list<boost::shared_ptr<physical::entities::artefact>>
-model_to_text_csharp_chain::
-apply(const formattables::model& fm) const {
+void model_to_text_csharp_chain::apply(formattables::model& fm) const {
     transforms::workflow wf;
-    return wf.execute(fm);
+    wf.execute(fm);
 }
 
 const std::forward_list<physical::entities::meta_name>&
@@ -130,14 +128,28 @@ model_to_text_csharp_chain::apply(
     /*
      * Generate the formattables model.
      */
-    const auto fm(create_formattables_model(feature_model, frp, l, m));
+    auto fm(create_formattables_model(feature_model, frp, l, m));
 
     /*
      * Code-generate all artefacts.
      */
+    apply(fm);
+
+    /*
+     * Copy them across into the physical model.
+     */
     physical::entities::model r;
-    r.artefacts(apply(fm));
     r.managed_directories().push_back(l.project_path());
+    for (const auto& fbl_pair : fm.formattables()) {
+        for (const auto& art_pair : fbl_pair.second.artefacts()) {
+            auto& ptr(art_pair.second);
+
+            // FIXME: mega-hack: prune empty artefacts
+            const auto& p(ptr->name().qualified());
+            if (!p.empty())
+                r.artefacts().push_back(art_pair.second);
+        }
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;

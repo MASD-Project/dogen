@@ -62,8 +62,7 @@ private:
         const transforms::repository& frp, const formattables::locator & l,
         const m2t::entities::model& m) const;
 
-    std::list<boost::shared_ptr<physical::entities::artefact>>
-    apply(const formattables::model& fm) const;
+    void apply(formattables::model& fm) const;
 
 public:
     std::string description() const override;

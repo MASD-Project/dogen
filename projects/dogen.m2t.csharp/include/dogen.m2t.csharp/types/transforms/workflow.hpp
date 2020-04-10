@@ -44,9 +44,14 @@ public:
      */
     static csharp::transforms::registrar& registrar();
 
+private:
+    boost::shared_ptr<physical::entities::artefact>
+    get_artefact(const std::unordered_map<std::string,
+        boost::shared_ptr<physical::entities::artefact>>& artefacts,
+        const std::string& archetype) const;
+
 public:
-    std::list<boost::shared_ptr<physical::entities::artefact>>
-    execute(const formattables::model& fm) const;
+    void execute(const formattables::model& fm) const;
 
 private:
     static std::shared_ptr<csharp::transforms::registrar> registrar_;

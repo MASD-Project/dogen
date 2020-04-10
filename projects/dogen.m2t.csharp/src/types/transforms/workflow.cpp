@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.m2t.csharp/types/workflow_error.hpp"
 #include "dogen.m2t.csharp/types/transforms/context.hpp"
 #include "dogen.m2t.csharp/types/transforms/workflow.hpp"
 
@@ -28,6 +29,8 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("m2t.csharp.transforms.workflow"));
+
+const std::string archetype_not_found("Archetype not found: ");
 
 }
 
@@ -46,13 +49,23 @@ csharp::transforms::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::list<boost::shared_ptr<physical::entities::artefact>>
-workflow::execute(const formattables::model& fm) const {
+boost::shared_ptr<physical::entities::artefact>
+workflow::get_artefact(const std::unordered_map<std::string,
+    boost::shared_ptr<physical::entities::artefact>>& artefacts,
+    const std::string& archetype) const {
+
+    const auto i(artefacts.find(archetype));
+    if (i == artefacts.end()) {
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+    }
+    return i->second;
+}
+
+void workflow::execute(const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
 
-    using physical::entities::artefact;
-    std::list<boost::shared_ptr<physical::entities::artefact>> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
 
@@ -67,7 +80,6 @@ workflow::execute(const formattables::model& fm) const {
         const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
         if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "No formatters for meta name: " << mn;
-            return r;
         }
 
         const auto& eprops(formattable.element_properties());
@@ -76,20 +88,21 @@ workflow::execute(const formattables::model& fm) const {
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
+            const auto pn(fmt.physical_meta_name());
+            const auto arch(pn.qualified());
+            auto aptr(get_artefact(formattable.artefacts(), arch));
+
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
 
-            auto ptr(boost::make_shared<physical::entities::artefact>());
-            auto& a(*ptr);
+            auto& a(*aptr);
             fmt.apply(ctx, e, a);
             const auto& p(a.name().qualified());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_back(ptr);
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
-    return r;
 }
 
 }
