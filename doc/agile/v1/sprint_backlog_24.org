@@ -12,22 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-09 Thu 21:06]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *9:21* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 9:21   |      |      | 100.0 |
-| Active                                 |        | 9:21 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 8:43 |  93.2 |
-| Sprint and product backlog grooming    |        |      | 0:38 |   6.8 |
+#+CAPTION: Clock summary at [2020-04-10 Fri 12:36]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *13:24* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 13:24   |       |      | 100.0 |
+| Active                                             |         | 13:24 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 9:07 |  68.0 |
+| Create a demo and presentation for previous sprint |         |       | 0:25 |   3.1 |
+| Sprint and product backlog grooming                |         |       | 0:54 |   6.7 |
+| Replace artefact properties with artefacts         |         |       | 2:58 |  22.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2020-04-09 Thu 20:55]
     :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 08:44]--[2020-04-10 Fri 09:05] =>  0:21
+    CLOCK: [2020-04-10 Fri 08:40]--[2020-04-10 Fri 08:43] =>  0:03
     CLOCK: [2020-04-09 Thu 20:56]--[2020-04-09 Thu 21:06] =>  0:10
     CLOCK: [2020-04-09 Thu 19:02]--[2020-04-09 Thu 20:55] =>  1:53
     CLOCK: [2020-04-09 Thu 07:40]--[2020-04-09 Thu 08:49] =>  1:09
@@ -43,18 +47,18 @@ Add github release notes for previous sprint.
 
 Release Announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1240728672128172033][twitter]]
+- [[https://twitter.com/MarcoCraveiro/status/1248358530245148677][twitter]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6646494675207278592/][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 **** Dogen v1.0.23, "Docas de Moçamedes"
 
-**NOTE: Release notes under construction**
+*NOTE: Release notes under construction*
 
 #+caption: Docas de Moçamedes
 [[https://pbs.twimg.com/media/CpAcgYpWIAEGmCF?format=jpg]]
 
-/Docks in Moçamedes, Namibe, Angola. (C) 2016 Ampe Rogério - [[http://www.redeangola.info/namibe-volta-a-assinalar-dia-de-mocamedes/][Rede Angola]]
+/Docks in Moçamedes, Namibe, Angola. (C) 2016 Ampe Rogério - [[http://www.redeangola.info/namibe-volta-a-assinalar-dia-de-mocamedes/][Rede Angola]]/
 
 ***** Introduction
 
@@ -74,11 +78,11 @@ stories.
 This section covers stories that affect end users, with the video
 providing a quick demonstration of the new features, and the sections
 below describing them in more detail. Since there were only a couple
-of minor user facing changes, we've used the video mostly to chat
-about the internal changes.
+of minor user facing changes, we've used the video to chat about the
+internal work as well.
 
 #+caption: Sprint 1.0.23 Demo
-[[https://youtu.be/RysjvA2eZ4o][https://img.youtube.com/vi/RysjvA2eZ4o/0.jpg]]
+[[https://youtu.be/GFjBXArR6Jk][https://img.youtube.com/vi/GFjBXArR6Jk/0.jpg]]
 
 /Video 1: Sprint 23 Demo./
 
@@ -188,7 +192,8 @@ this release.
 
 The Dogen build is now completely warning and error free, across all
 supported configurations - pleasing to the eye for the OCD'ers amongst
-us.
+us. Of course, now the valgrind defects on the nightly become even
+more visible, so we'll have to sort those out soon.
 
 #+caption: CDash Builds
 [[https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_build_no_warnings.png]]
@@ -217,7 +222,7 @@ as depicted on Table 1.
 |---------+-------------+------------+---------------------------------------------------------------------+-----------------------------------------------------------------------------|
 | v0.0.20 | 16 Nov 2012 | =sml=      | The Simplified Modeling Language.                                   | It was never really a "language".                                           |
 | v0.0.71 | 10 Aug 2015 | =tack=     | Random sewing term.                                                 | No one knew what it meant.                                                  |
-| v0.0.72 | 21 Oct 2015 | =yarn=     | Slightly less random sewing term.                                   | Term already used by a popular project; Dogen moves away from sewing terms. |
+| v0.0.72 | 21 Oct 2015 | =yarn=     | Slightly less random sewing term.                                   | Term already used by a popular project; Dogen [[https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html][moves away from sewing terms]]. |
 | v1.0.07 | 1 Jan 2018  | =modeling= | Main point of the model.                                            | Too generic a term; used everywhere in both Dogen and MDE.                  |
 | v1.0.10 | 29 Oct 2018 | =coding=   | Name reflects entities better.                                      | Model is not just about coding elements.                                    |
 | v1.0.18 | 2 Jun 2019  | =assets=   | Literature seems to imply this is a better name.                    | Name is somewhat vague; anything can be an asset.                           |
@@ -256,10 +261,10 @@ For the last few sprints, we have been trying to get the code to
 behave according to this newly found knowledge. The [[https://github.com/MASD-Project/dogen/releases/tag/v1.0.22][previous sprint]]
 saw us transition the =variability= model to this brave new world, and
 this sprint we have turned our attention to the =logical= and
-=physical= models. Whilst the =logical= was just a trivial rename
-(narrated above), the =physical= model was a much bigger task than any
-thus far because all we had was an assortment of unrelated models,
-very far away from their desired state.
+=physical= models. Whilst the =logical= model work was just a trivial
+rename (narrated above), the =physical= model was a much bigger task
+than any thus far because all we had was an assortment of unrelated
+models, very far away from their desired state.
 
 Our starting salvo was composed of three distinct lines of attack:
 
@@ -433,19 +438,67 @@ now not quite as apt given all the model renaming. We are hopeful -
 but not _too_ hopeful - of completing this work next sprint. Famous
 last words.
 
-That's all for this release! Happy Modeling!
+That's all for this release. Happy Modeling!
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-04-09 Thu 22:09]
+    :LOGBOOK:
+    CLOCK: [2020-04-09 Thu 21:44]--[2020-04-09 Thu 22:09] =>  0:25
+    :END:
 
-Time spent creating the demo and presentation. Use the demo project:
+Time spent creating the demo and presentation.
+
+#+caption: Sprint 1.0.23 Demo
+[[https://youtu.be/GFjBXArR6Jk][https://img.youtube.com/vi/GFjBXArR6Jk/0.jpg]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 09:30]--[2020-04-10 Fri 09:37] =>  0:07
+    CLOCK: [2020-04-10 Fri 09:20]--[2020-04-10 Fri 09:29] =>  0:09
     CLOCK: [2020-04-07 Tue 08:02]--[2020-04-07 Tue 08:31] =>  0:29
     CLOCK: [2020-04-06 Mon 22:00]--[2020-04-06 Mon 22:09] =>  0:09
     :END:
 
 Updates to sprint and product backlog.
+
+*** STARTED Replace artefact properties with artefacts                :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 09:38]--[2020-04-10 Fri 12:36] =>  2:58
+    :END:
+
+Now that we understand the role of the physical model, we need to get
+rid of all the failed attempts at representing physical data across
+other models such as the logical model, =m2t= etc. We need to use the
+artefact itself and supply it to the formatters.
+
+Notes:
+
+- these attributes need to be migrated from the logical model into the
+  physical model:
+  - artefact level: artefact_properties, enablement_properties
+  - model level: extraction_properties
+- we need to understand what the pair =element_archetype= does. If
+  necessary, it needs to be moved to the physical model or to the
+  logical/physical mapping (see also =enabled_archetype_for_element=
+  set).
+- at present we are creating new artefacts in the workflows. We need
+  to copy them across from =m2t=.
+- at present we are expanding the physical model without regards for
+  enablement. This means that we generate a lot of artefacts that are
+  not going to be used. We then added a number of hacks to filter
+  those out. The right solution would be to have enablement done just
+  after expansion, and then remove all artefacts that are not
+  enabled. We could add a "prune" transform for this. This needs to be
+  done after enablement is moved to the physical model.
+
+*** Add enablement test in C#                                         :story:
+
+At present we have probably broken enablement in C# due to the hackery
+around physical space expansion. However all tests are green. We need
+to define a profile in C# that disables a facet in order to ensure we
+test enablement before we start hacking around with the enablement
+transforms. It will most likely be red - we need to add the pruning
+hack to get rid of disabled artefacts as we do in C++.
 
 *** Implement archetype locations from physical meta-model            :story:
 
@@ -464,8 +517,8 @@ Tasks:
 Notes:
 
 - template instantiation domains should be a part of the physical
-  meta-model. Create a transform to compute these.
-- remove Locatable from Element?
+  meta-model. Create a transform to compute these. *done*
+- remove Locatable from Element? *done*
 
 Merged stories:
 
@@ -493,65 +546,20 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
-*** Implement the generation model in terms of "formattables"         :story:
+*** Implement formatting styles in physical model                     :story:
 
- We need to find a way to expand the generation model into a pair of:
+We need to move the types related to formatting styles into physical
+model, and transfors as well.
 
- - element
- - artefact
+Merged stories:
 
- In effect, a formattable. Then we need to update the backends to stop
- expanding across physical space and instead use the expansion created
- by the generation model. We then need to update formattables to have
- an artefact, and supply the artefact to all formatters.
+*Move formatting styles into generation*
 
- Notes:
+We need to support the formatting styles at the meta-model level.
 
- - next task is to use the artefact from pair inside c++ and c# instead
-   of creating one inside each formatter.
- - we need to also perform the archetype expansion within =m2t= not
-   logical model.
- - we need to add artefacts to formatters and get them to populate
-   them.
-
-*** Stitch formatter updates                                          :story:
-
-There are a number of issues with stitch formatters at present:
-
-- stitch transform is still generating its own artefact.
-
-*** Replace all formatting styles with the ones in physical model     :story:
+*Replace all formatting styles with the ones in physical model*
 
 We still have a number of copies of this enumeration.
-
-*** Replace artefact properties with artefacts                        :story:
-
-Now that we understand the role of the physical model, we need to get
-rid of all the failed attempts at representing physical data across
-other models such as the logical model, =m2t= etc. We need to use the
-artefact itself and supply it to the formatters.
-
-Notes:
-
-- these attributes need to be migrated from the logical model into the
-  physical model:
-  - artefact level: artefact_properties, enablement_properties
-  - model level: extraction_properties
-- we need to understand what the pair =element_archetype= does. If
-  necessary, it needs to be moved to the physical model or to the
-  logical/physical mapping (see also =enabled_archetype_for_element=
-  set).
-
-*** Move decorations to their "final" resting place                   :story:
-
-At present we are handling decorations in the generation model but
-these are really logical concerns. The main reason why is because we
-are not expanding the decoration across physical space, but instead we
-expand them depending on the used technical spaces. However, since the
-technical spaces are obtained from the formatters, there is an
-argument to say that archetypes should have an associated technical
-space. We need to decouple these concepts in order to figure out where
-they belong.
 
 *** Implement enablement in physical model                            :story:
 
@@ -666,17 +674,6 @@ Merged stories:
 We need to understand how file paths are being generated at present;
 they should be a transform inside generation.
 
-*** Implement formatting styles in physical model                     :story:
-
-We need to move the types related to formatting styles into physical
-model, and transfors as well.
-
-Merged stories:
-
-*Move formatting styles into generation*
-
-We need to support the formatting styles at the meta-model level.
-
 *** Implement dependencies in terms of new physical types             :story:
 
 - add dependency types to physical model.
@@ -777,12 +774,6 @@ Random notes:
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
 
-*** Make physical model name a qualified name                         :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
 *** Create a common formatter interface                               :story:
 
 Once all language specific properties have been moved into their
@@ -791,6 +782,34 @@ that is suitable for both c++ and c# in generation. We should then
 also be able to move all of the registration code into generation. We
 then need to look at all containers of formatters etc to see what
 should be done at generation level.
+
+Once we have a common formatter interface, we can add the formatters
+themselves to the =element_artefacts= tuple. Then we can just iterate
+through the tuples and call the formatter instead having to do
+look-ups.
+
+*** Move decorations to their "final" resting place                   :story:
+
+At present we are handling decorations in the generation model but
+these are really logical concerns. The main reason why is because we
+are not expanding the decoration across physical space, but instead we
+expand them depending on the used technical spaces. However, since the
+technical spaces are obtained from the formatters, there is an
+argument to say that archetypes should have an associated technical
+space. We need to decouple these concepts in order to figure out where
+they belong.
+
+*** Stitch formatter updates                                          :story:
+
+There are a number of issues with stitch formatters at present:
+
+- stitch transform is still generating its own artefact.
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
 
 *** Consider moving compatibility mode to feature model               :story:
 
