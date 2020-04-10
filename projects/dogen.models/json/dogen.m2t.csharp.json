@@ -296,6 +296,10 @@
         {
           "name": "element",
           "type": "boost::shared_ptr<logical::entities::element>"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>"
         }
       ]
     },

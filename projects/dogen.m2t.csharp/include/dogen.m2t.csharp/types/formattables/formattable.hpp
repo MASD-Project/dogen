@@ -25,9 +25,12 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/element_fwd.hpp"
+#include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.m2t.csharp/types/formattables/element_properties.hpp"
 
 namespace dogen::m2t::csharp::formattables {
@@ -42,7 +45,8 @@ public:
 public:
     formattable(
         const dogen::m2t::csharp::formattables::element_properties& element_properties,
-        const boost::shared_ptr<dogen::logical::entities::element>& element);
+        const boost::shared_ptr<dogen::logical::entities::element>& element,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts);
 
 public:
     const dogen::m2t::csharp::formattables::element_properties& element_properties() const;
@@ -54,6 +58,11 @@ public:
     boost::shared_ptr<dogen::logical::entities::element>& element();
     void element(const boost::shared_ptr<dogen::logical::entities::element>& v);
     void element(const boost::shared_ptr<dogen::logical::entities::element>&& v);
+
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
+    void artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v);
+    void artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -68,6 +77,7 @@ public:
 private:
     dogen::m2t::csharp::formattables::element_properties element_properties_;
     boost::shared_ptr<dogen::logical::entities::element> element_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
 };
 
 }
