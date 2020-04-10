@@ -1085,58 +1085,6 @@ model.
 
 This story is directly connected to "model types".
 
-*** Ignore ODB files automatically                                    :story:
-
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
-
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
-
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
-
-: foreign_key_pragmas.hpp
-
-We will also have the following ODB files:
-
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ixx
-
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
-
-In addition, on a multi-database environment we also have:
-
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-This also means we can add the ODB files to the visual studio project
-even before they get generated.
-
-We should have meta-data configuration that describes the ODB files:
-
-- their extension
-- the location of headers and implementation
-- the need to move the files
-
-We should generalise this problem so that when we are using other
-cartridges such as protobuf/grpc, we can extend it for these use
-cases - expected cartridge files?
-
 *** Add =ignore= meta-model element for VCS ignore files              :story:
 
 It would be nice if we had a meta-model element to represent ignore
@@ -1216,47 +1164,6 @@ code, but also no meta-model complexity. Conceptually, these are just
 facets, but at the implementation level they are implemented
 differently. This also means we do not violate the rule of making
 implicit meta-model elements explicit.
-
-*** Intrinsic non-generatable types                                   :story:
-
-In the decoration transform we have this hack:
-
-: bool decoration_transform::
-: is_generatable(const assets::meta_model::name& meta_name) {
-:     // FIXME: massive hack for now.
-:     using mnf = assets::helpers::meta_name_factory;
-:     static const auto otn(mnf::make_object_template_name());
-:     static const auto ln(mnf::make_licence_name());
-:     static const auto mln(mnf::make_modeline_name());
-:     static const auto mgn(mnf::make_modeline_group_name());
-:     static const auto gmn(mnf::make_generation_marker_name());
-:
-:     const auto id(meta_name.qualified().dot());
-:     return
-:         id != otn.qualified().dot() &&
-:         id != ln.qualified().dot() &&
-:         id != mln.qualified().dot() &&
-:         id != mgn.qualified().dot() &&
-:         id != gmn.qualified().dot();
-: }
-
-This is done because we know up front that some elements in the assets
-meta-model cannot be generated. We need a way to tag this elements
-statically. This should be done when the elements are code
-generated. It is not yet clear how this should be done though.
-
-Notes:
-
-- one possible approach is to have a constant that is code generated
-  which states if a type is meant for generation or not.
-- however, it would be even better if we could determine if a type has
-  formatters or not. This would mean we would cover two possible
-  scenarios: types that are intrinsically non-generatable and types
-  that are not yet generatable. It may be that there is no need to
-  distinguish between these two.
-- when we have meta-model elements for logical meta-elements we just
-  need to add this as a property (e.g. generatable). If a user tries
-  to add a formatter to a non-generatable type we error.
 
 *** Make vistor a proper meta-model element                           :story:
 

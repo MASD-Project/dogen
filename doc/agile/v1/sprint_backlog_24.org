@@ -12,18 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-10 Fri 12:36]
+#+CAPTION: Clock summary at [2020-04-10 Fri 16:56]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *13:24* |       |      | 100.0 |
+| *Total time*                                       | *15:49* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 13:24   |       |      | 100.0 |
-| Active                                             |         | 13:24 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 9:07 |  68.0 |
-| Create a demo and presentation for previous sprint |         |       | 0:25 |   3.1 |
-| Sprint and product backlog grooming                |         |       | 0:54 |   6.7 |
-| Replace artefact properties with artefacts         |         |       | 2:58 |  22.1 |
+| Stories                                            | 15:49   |       |      | 100.0 |
+| Active                                             |         | 15:49 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 9:07 |  57.6 |
+| Create a demo and presentation for previous sprint |         |       | 0:25 |   2.6 |
+| Sprint and product backlog grooming                |         |       | 1:03 |   6.6 |
+| Emacs issues and improvements                      |         |       | 0:18 |   1.9 |
+| Replace artefact properties with artefacts         |         |       | 4:06 |  25.9 |
+| Implement enablement in physical model             |         |       | 0:50 |   5.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -453,6 +455,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 15:40]--[2020-04-10 Fri 15:49] =>  0:09
     CLOCK: [2020-04-10 Fri 09:30]--[2020-04-10 Fri 09:37] =>  0:07
     CLOCK: [2020-04-10 Fri 09:20]--[2020-04-10 Fri 09:29] =>  0:09
     CLOCK: [2020-04-07 Tue 08:02]--[2020-04-07 Tue 08:31] =>  0:29
@@ -461,8 +464,19 @@ Time spent creating the demo and presentation.
 
 Updates to sprint and product backlog.
 
+*** STARTED Emacs issues and improvements                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 15:50]--[2020-04-10 Fri 16:08] =>  0:18
+    :END:
+
+Time spent faffing around with Emacs.
+
+- modeline is flashing. Seems like this is an issue with treemacs, but
+  not quite sure.
+
 *** STARTED Replace artefact properties with artefacts                :story:
     :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 14:31]--[2020-04-10 Fri 15:39] =>  1:08
     CLOCK: [2020-04-10 Fri 09:38]--[2020-04-10 Fri 12:36] =>  2:58
     :END:
 
@@ -490,6 +504,197 @@ Notes:
   after expansion, and then remove all artefacts that are not
   enabled. We could add a "prune" transform for this. This needs to be
   done after enablement is moved to the physical model.
+
+*** STARTED Implement enablement in physical model                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 16:25]--[2020-04-10 Fri 17:00] =>  0:35
+    CLOCK: [2020-04-10 Fri 16:09]--[2020-04-10 Fri 16:24] =>  0:15
+    :END:
+
+We need to move the types in generation model related to enablement
+into the physical model. We also need to move the types in the logical
+model related to enablement into the physical model. We need to create
+the enablement transform in the physical model. These are then called
+from the generation model.
+
+Notes:
+
+- split enablement features by facet, backend, kernel etc.
+- add code generation support for static configuration on templates.
+- our current logic for enablement is far too complex. We can simplify
+  it quite a lot with a few small changes:
+
+  - logical types which cannot be generated should be removed prior to
+    physical expansion.
+  - disabled backend should be detected before any work is carried
+    out. The cost should be very close to zero. We don't need to do
+    any checks for this afterwards.
+  - disabled facets (remember these can only be done globally) and
+    globally disabled archetypes should result in these formatters
+    being removed from the set of generatable formatters and not
+    taking any part on the physical expansion at all.
+
+  Therefore, by the time we are computing enablement, it is, by
+  definition, only a local concern. All other global cases have
+  already been handled. Then, we can simply go through the expanded
+  archetypes and check local enablement.
+- another thing we could do as well is to remove all of the disabled
+  archetypes from the physical model. Therefore enablement is not even
+  a boolean but its determined by existence (i.e. if you exist you are
+  enabled). This may be a bit too radical, but we can at least prune
+  any artefacts which are not enabled post-enablement transform.
+- if we take this to its logical conclusion, perhaps formatters are
+  not "global" at all. Perhaps we should check the pool of available
+  formatters at the very start of processing and then immediately read
+  the enablement status of the archetypes - this can be part of the
+  physical meta-model - and then only work on the archetypes that are
+  enabled. This includes template instantiation as well. However, we
+  need to be careful that this is all done within some kind of
+  context. If the library processes two requests, they should both
+  work even though one may be for C++ and the other for C#. Therefore
+  we need to be careful on how we are creating the context. In
+  summary: global enablement (backend, facet, archetype) is part of
+  the physical meta-model transforms. It should execute when creating
+  the context. Anything which is disabled should be removed.
+- at present we are instantiating the =enabled= feature across the
+  entire =masd= template instantiation domain. This is a very
+  "efficient" way to do it because we only define one
+  feature. However, it also means its now possible to disable a facet
+  or backend at the element level. And worse, the binding point is
+  global:
+
+: #DOGEN masd.variability.default_binding_point=any
+: #DOGEN masd.variability.generate_static_configuration=false
+: #DOGEN masd.variability.instantiation_domain_name=masd
+
+  The right thing to do is to create four separate features, one for
+  the backend, one for the features and one for the archetype
+  (global). Then another one for the archetype, locally. Each with the
+  correct binding point.
+
+Tasks:
+
+- split out enablement features.
+- add enablement transform for the physical meta-model that removes
+  disabled archetypes globally (backend, facet, archetype).
+- change template instantiation code to use the physical meta-model.
+- add a generatable flag in logical model elements with associated
+  transform.
+- add a pruning transform that filters out all non-generatable types
+  from logical model.
+
+Merged stories:
+
+*Refactor enablement types*
+
+These types all have historical names.
+
+Tasks:
+
+- =local_archetype_location_properties=: these are just enablement
+  properties. We need to also add =backend_enabled=, at which point
+  the type in the logical model is identical to the one in the
+  generation model.
+- =global_archetype_location_properties=: with the exception of
+  =denormalised_archetype_properties=, these types are just used to
+  read the meta-data for enablement. They could be private to a helper
+  that generates =enablement_properties= and could be used for both
+  global and local.
+- the enablement transform (probably) has no dependencies and could be
+  lifted into the physical model.
+
+*** Intrinsic non-generatable types                                   :story:
+
+In the decoration transform we have this hack:
+
+: bool decoration_transform::
+: is_generatable(const assets::meta_model::name& meta_name) {
+:     // FIXME: massive hack for now.
+:     using mnf = assets::helpers::meta_name_factory;
+:     static const auto otn(mnf::make_object_template_name());
+:     static const auto ln(mnf::make_licence_name());
+:     static const auto mln(mnf::make_modeline_name());
+:     static const auto mgn(mnf::make_modeline_group_name());
+:     static const auto gmn(mnf::make_generation_marker_name());
+:
+:     const auto id(meta_name.qualified().dot());
+:     return
+:         id != otn.qualified().dot() &&
+:         id != ln.qualified().dot() &&
+:         id != mln.qualified().dot() &&
+:         id != mgn.qualified().dot() &&
+:         id != gmn.qualified().dot();
+: }
+
+This is done because we know up front that some elements in the assets
+meta-model cannot be generated. We need a way to tag this elements
+statically. This should be done when the elements are code
+generated. It is not yet clear how this should be done though.
+
+Notes:
+
+- one possible approach is to have a constant that is code generated
+  which states if a type is meant for generation or not.
+- however, it would be even better if we could determine if a type has
+  formatters or not. This would mean we would cover two possible
+  scenarios: types that are intrinsically non-generatable and types
+  that are not yet generatable. It may be that there is no need to
+  distinguish between these two.
+- when we have meta-model elements for logical meta-elements we just
+  need to add this as a property (e.g. generatable). If a user tries
+  to add a formatter to a non-generatable type we error.
+
+*** Ignore ODB files automatically                                    :story:
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
+
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
+
+This also means we can add the ODB files to the visual studio project
+even before they get generated.
+
+We should have meta-data configuration that describes the ODB files:
+
+- their extension
+- the location of headers and implementation
+- the need to move the files
+
+We should generalise this problem so that when we are using other
+cartridges such as protobuf/grpc, we can extend it for these use
+cases - expected cartridge files?
 
 *** Add enablement test in C#                                         :story:
 
@@ -560,39 +765,6 @@ We need to support the formatting styles at the meta-model level.
 *Replace all formatting styles with the ones in physical model*
 
 We still have a number of copies of this enumeration.
-
-*** Implement enablement in physical model                            :story:
-
-We need to move the types in generation model related to enablement
-into the physical model. We also need to move the types in the logical
-model related to enablement into the physical model. We need to create
-the enablement transform in the physical model. These are then called
-from the generation model.
-
-Notes:
-
-- split enablement features by facet, backend, kernel etc.
-- add code generation support for static configuration on templates.
-
-Merged stories:
-
-*Refactor enablement types*
-
-These types all have historical names.
-
-Tasks:
-
-- =local_archetype_location_properties=: these are just enablement
-  properties. We need to also add =backend_enabled=, at which point
-  the type in the logical model is identical to the one in the
-  generation model.
-- =global_archetype_location_properties=: with the exception of
-  =denormalised_archetype_properties=, these types are just used to
-  read the meta-data for enablement. They could be private to a helper
-  that generates =enablement_properties= and could be used for both
-  global and local.
-- the enablement transform (probably) has no dependencies and could be
-  lifted into the physical model.
 
 *** Implement locator in physical model                               :story:
 
