@@ -29,30 +29,6 @@
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 [![Readme Score](http://readme-score-api.herokuapp.com/score.svg?url=https://github.com/masd-project/dogen)](http://clayallsopp.github.io/readme-score?url=https://github.com/masd-project/dogen)
 
-# Binary Packages
-
-Binary packages are available for each release on
-[BinTray](https://bintray.com/masd-project/main/dogen), covering
-Debian Linux, OSX and Windows - 64-bit only. Packages are generated
-for each commit. Development is done from git master, so latest should
-always be greatest, but you may want to use packages from the previous
-sprint rather than what is currently under development (see badges
-above).
-
----
-**Notes**
-
-- The OSX installer provides you with a DMG. Once you open it in Finder,
-it mounts under ```/Volumes/```, e.g.:
-
-```
-/Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
-```
-
-Where ```${VERSION}``` is your Dogen version such as ```1.0.23```.
-
-----
-
 # Overview
 
 **Dogen** is the reference implementation of the MASD Project code
@@ -94,6 +70,30 @@ available as a separate git repo:
 
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
+
+# Binary Packages
+
+Binary packages are available for each release on
+[BinTray](https://bintray.com/masd-project/main/dogen), covering
+Debian Linux, OSX and Windows - 64-bit only. Packages are generated
+for each commit. Development is done from git master, so latest should
+always be greatest, but you may want to use packages from the previous
+sprint rather than what is currently under development (see badges
+above).
+
+---
+**Notes**
+
+- The OSX installer provides you with a DMG. Once you open it in Finder,
+it mounts under ```/Volumes/```, e.g.:
+
+```
+/Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
+```
+
+Where ```${VERSION}``` is your Dogen version such as ```1.0.23```.
+
+----
 
 # Building From Source
 
@@ -306,6 +306,10 @@ Dogen, mainly covering its development process:
 - **[Nerd Food: Dogen: The Package Management Saga](http://mcraveiro.blogspot.co.uk/2015/12/nerd-food-dogen-package-management-saga.html)**: Dogen's attempt at finding a package management for C++.
 - **[Nerd Food: Pull Request Driven Development](http://mcraveiro.blogspot.co.uk/2015/12/nerd-food-pull-request-driven.html)**: Not directly related to Dogen as we don't get many PRs, but may be of interest; reflections on the importance of a Pull-Request Driven Development approach.
 - **[Nerd Food: Dogen: Lessons in Incremental Coding](http://mcraveiro.blogspot.co.uk/2014/09/nerd-food-dogen-lessons-in-incremental.html)**: How the Dogen development process works, via very small, incremental changes.
+
+The [release notes](https://github.com/MASD-Project/dogen/releases)
+are also worth perusing as contain quite a lot of material about
+Dogen's internals.
 
 # Reporting Problems
 
