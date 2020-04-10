@@ -99,7 +99,7 @@ make_databases(const logical::entities::orm::model_properties& omp) const {
 
 model adapter::adapt(const transforms::repository& frp,
     const m2t::entities::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Adapting logical to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Adapting logical model to formattables."
                              << " Elements in model: " << m.elements().size();
 
     model r;
@@ -148,7 +148,8 @@ model adapter::adapt(const transforms::repository& frp,
             BOOST_LOG_SEV(lg, error) << duplicate_master << id;
             BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
         }
-        fbl.element(ptr);
+        fbl.element(ea.element());
+        fbl.artefacts(ea.artefacts());
 
         /*
          * Check to see if the element has any formatters. Some

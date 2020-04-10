@@ -44,7 +44,9 @@ adapter::adapt(const transforms::repository& frp,
     for (const auto& ea : m.elements()) {
         auto ptr(ea.element());
         formattable fbl;
-        fbl.element(ptr);
+        fbl.element(ea.element());
+        fbl.artefacts(ea.artefacts());
+
 
         const auto& e(*ptr);
         const auto id(e.name().qualified().dot());
