@@ -70,6 +70,19 @@ workflow::get_artefact_properties(const logical::entities::element& e,
     return i->second;
 }
 
+boost::shared_ptr<physical::entities::artefact>
+workflow::get_artefact(const std::unordered_map<std::string,
+    boost::shared_ptr<physical::entities::artefact>>& artefacts,
+    const std::string& archetype) const {
+
+    const auto i(artefacts.find(archetype));
+    if (i == artefacts.end()) {
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+    }
+    return i->second;
+}
+
 std::list<boost::shared_ptr<physical::entities::artefact>>
 workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
@@ -97,6 +110,7 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
         const auto pn(fmt.physical_meta_name());
         const auto arch(pn.qualified());
         const auto& ap(get_artefact_properties(e, arch));
+        // auto& aptr(get_artefact())
 
         if (!ap.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;

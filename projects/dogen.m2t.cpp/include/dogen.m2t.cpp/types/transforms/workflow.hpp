@@ -64,6 +64,11 @@ private:
     get_artefact_properties(const logical::entities::element& e,
         const std::string& archetype) const;
 
+    boost::shared_ptr<physical::entities::artefact>
+    get_artefact(const std::unordered_map<std::string,
+        boost::shared_ptr<physical::entities::artefact>>& artefacts,
+        const std::string& archetype) const;
+
 private:
     std::list<boost::shared_ptr<physical::entities::artefact>>
     execute(const std::unordered_set<m2t::entities::element_archetype>&
