@@ -961,6 +961,31 @@ We just did a quick hack to avoid adding artefacts after stitch
 template expansion when content is empty. With this we managed to
 reinstate the checks for empty paths so that is good enough for now.
 
+*** COMPLETED Implement the generation model in terms of "formattables" :story:
+    CLOSED: [2020-04-10 Fri 09:33]
+     :LOGBOOK:
+     CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
+     :END:
+
+ We need to find a way to expand the generation model into a pair of:
+
+ - element
+ - artefact
+
+ In effect, a formattable. Then we need to update the backends to stop
+ expanding across physical space and instead use the expansion created
+ by the generation model. We then need to update formattables to have
+ an artefact, and supply the artefact to all formatters.
+
+ Notes:
+
+ - next task is to use the artefact from pair inside c++ and c# instead
+   of creating one inside each formatter.
+ - we need to also perform the archetype expansion within =m2t= not
+   logical model.
+ - we need to add artefacts to formatters and get them to populate
+   them.
+
 *** POSTPONED Implement archetype locations from physical meta-model  :story:
     CLOSED: [2020-04-05 Sun 21:26]
     :LOGBOOK:
@@ -1016,31 +1041,6 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
-
-*** POSTPONED Implement the generation model in terms of "formattables" :story:
-    CLOSED: [2020-04-05 Sun 21:26]
-     :LOGBOOK:
-     CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
-     :END:
-
- We need to find a way to expand the generation model into a pair of:
-
- - element
- - artefact
-
- In effect, a formattable. Then we need to update the backends to stop
- expanding across physical space and instead use the expansion created
- by the generation model. We then need to update formattables to have
- an artefact, and supply the artefact to all formatters.
-
- Notes:
-
- - next task is to use the artefact from pair inside c++ and c# instead
-   of creating one inside each formatter.
- - we need to also perform the archetype expansion within =m2t= not
-   logical model.
- - we need to add artefacts to formatters and get them to populate
-   them.
 
 ** Deprecated
 *** CANCELLED Consider adding =artefact_set= to extraction model      :story:
