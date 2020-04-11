@@ -13283,7 +13283,7 @@ code: identation and dividers.#</dia:string>
         <dia:point val="85.3825,47.5359"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.6325,46.7859;88.16,58.5497"/>
+        <dia:rectangle val="84.6325,46.7859;88.16,57.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
