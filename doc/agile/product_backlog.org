@@ -77,6 +77,25 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Add support for the static/dynamic pattern                        :story:
+
+A common use case in Dogen is the "static/dynamic" pattern. It must
+exist somewhere in a pattern catalogue. It is as follows:
+
+- base class has a virtual method, say =id()=.
+- descendants implement the virtual method, but we know at compile
+  time what the values should be. So we create a =static_id()= and
+  then implement =id()= in terms of =static_id()=.
+
+Ideally we want to code-generate this infrastructure. A twist to this
+is when we have some elements where the descendant may not have a
+static ID.
+
+Use cases:
+
+- meta-model names.
+- formatter names.
+
 *** Investigate the use of solvers for enablement                     :story:
 
 A long standing problem we've had in Dogen is how to solve enablement
@@ -109,6 +128,7 @@ Links:
   2.2, this repository aims at providing a production-ready version of
   the famous library.
 - [[https://github.com/dobrichev/fsss2][fsss2 GitHub repo]]: Fast Simple Sudoku Solver 2.
+- [[https://www.reddit.com/r/cpp/comments/94dkme/modern_sat_solvers_fast_neat_and_underused_part_1/][reddit: Modern SAT solvers: fast, neat and underused (part 1 of N)]]
 
 *** Add additional reference directories                              :story:
      CLOSED: [2020-04-07 Tue 08:51]

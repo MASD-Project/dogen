@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-11 Sat 08:43]
+#+CAPTION: Clock summary at [2020-04-11 Sat 10:00]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *16:52* |       |      | 100.0 |
+| *Total time*                                       | *17:16* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 16:52   |       |      | 100.0 |
-| Active                                             |         | 16:52 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 9:22 |  55.5 |
-| Create a demo and presentation for previous sprint |         |       | 0:25 |   2.5 |
-| Sprint and product backlog grooming                |         |       | 1:38 |   9.7 |
-| Emacs issues and improvements                      |         |       | 0:18 |   1.8 |
-| Replace artefact properties with artefacts         |         |       | 4:06 |  24.3 |
-| Implement enablement in physical model             |         |       | 1:03 |   6.2 |
+| Stories                                            | 17:16   |       |      | 100.0 |
+| Active                                             |         | 17:16 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 9:22 |  54.2 |
+| Create a demo and presentation for previous sprint |         |       | 0:25 |   2.4 |
+| Sprint and product backlog grooming                |         |       | 1:54 |  11.0 |
+| Emacs issues and improvements                      |         |       | 0:18 |   1.7 |
+| Replace artefact properties with artefacts         |         |       | 4:06 |  23.7 |
+| Implement enablement in physical model             |         |       | 1:11 |   6.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -456,6 +456,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-11 Sat 09:44]--[2020-04-11 Sat 10:00] =>  0:16
     CLOCK: [2020-04-11 Sat 07:55]--[2020-04-11 Sat 08:30] =>  0:35
     CLOCK: [2020-04-10 Fri 15:40]--[2020-04-10 Fri 15:49] =>  0:09
     CLOCK: [2020-04-10 Fri 09:30]--[2020-04-10 Fri 09:37] =>  0:07
@@ -509,6 +510,7 @@ Notes:
 
 *** STARTED Implement enablement in physical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-11 Sat 09:35]--[2020-04-11 Sat 09:43] =>  0:08
     CLOCK: [2020-04-11 Sat 08:30]--[2020-04-11 Sat 08:43] =>  0:13
     CLOCK: [2020-04-10 Fri 16:25]--[2020-04-10 Fri 17:00] =>  0:35
     CLOCK: [2020-04-10 Fri 16:09]--[2020-04-10 Fri 16:24] =>  0:15
@@ -606,9 +608,10 @@ Notes:
 Tasks:
 
 - split out enablement features.
-- add enablement transform for the physical meta-model that removes
-  disabled archetypes globally (backend, facet, archetype).
+- add enabled attributes for all PMM elements.
+- add enablement transform for the PMM that reads global enablement.
 - change template instantiation code to use the physical meta-model.
+- add enablement transform for the PM that uses the
 - add a generatable flag in logical model elements with associated
   transform.
 - add a pruning transform that filters out all non-generatable types
@@ -633,6 +636,67 @@ Tasks:
   global and local.
 - the enablement transform (probably) has no dependencies and could be
   lifted into the physical model.
+
+*** Split enablement features                                         :story:
+
+At present we are instantiating the =enabled= feature across the
+entire =masd= template instantiation domain. This is a very
+"efficient" way to do it because we only define one feature. However,
+it also means its now possible to disable a facet or backend at the
+element level. And worse, the binding point is global:
+
+: #DOGEN masd.variability.default_binding_point=any
+: #DOGEN masd.variability.generate_static_configuration=false
+: #DOGEN masd.variability.instantiation_domain_name=masd
+
+The right thing to do is to create four separate features, one for
+the backend, one for the features and one for the archetype
+(global). Then another one for the archetype, locally. Each with the
+correct binding point.
+
+*** Inject backend and facets into PMM                                :story:
+
+At present we only have artefacts in the PMM. We need to inject all
+other missing elements. We also need to create a transform which
+builds the PMM. Finally while we're at it we should add enablement
+properties and associated transform.
+
+Notes:
+
+- we should also change template instantiation code to use the PMM.
+- once we have a flag, we can detect disabled backends before any work
+  is carried out. The cost should be very close to zero. We don't need
+  to do any checks for this afterwards.
+
+*** Prune disabled artefacts                                          :story:
+
+We must first start by expanding the physical space into all possible
+points. Once enablement is performed though we can prune all artefacts
+that are disabled. Note that we cannot prune based on global
+information because archetypes may be enabled locally. However, once
+all of the local information has been processed and the enabled flag
+has been set, we can then remove all of those with the flag set to
+false.
+
+In a world with solving, we just need to make sure solving is slotted
+in after enablement and before pruning. It should just work.
+
+*** Add =is_generatable= to logical model                             :story:
+
+Logical types which cannot be generated should be removed prior to
+physical expansion. There are two types:
+
+- intrinsically non-generatable types such as object templates, etc.
+- types that may not be generated depending on state: modules.
+
+In the future, when we support the static / dynamic pattern,
+
+Tasks:
+
+- add a generatable flag in logical model elements with associated
+  transform.
+- add a pruning transform that filters out all non-generatable types
+  from logical model.
 
 *** Intrinsic non-generatable types                                   :story:
 
