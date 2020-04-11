@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-11 Sat 10:00]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *17:16* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 17:16   |       |      | 100.0 |
-| Active                                             |         | 17:16 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 9:22 |  54.2 |
-| Create a demo and presentation for previous sprint |         |       | 0:25 |   2.4 |
-| Sprint and product backlog grooming                |         |       | 1:54 |  11.0 |
-| Emacs issues and improvements                      |         |       | 0:18 |   1.7 |
-| Replace artefact properties with artefacts         |         |       | 4:06 |  23.7 |
-| Implement enablement in physical model             |         |       | 1:11 |   6.9 |
+#+CAPTION: Clock summary at [2020-04-11 Sat 13:04]
+| <75>                                                  |         |       |      |       |
+| Headline                                              | Time    |       |      |     % |
+|-------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                          | *18:39* |       |      | 100.0 |
+|-------------------------------------------------------+---------+-------+------+-------|
+| Stories                                               | 18:39   |       |      | 100.0 |
+| Active                                                |         | 18:39 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 9:22 |  50.2 |
+| Create a demo and presentation for previous sprint    |         |       | 0:25 |   2.2 |
+| Sprint and product backlog grooming                   |         |       | 1:54 |  10.2 |
+| Emacs issues and improvements                         |         |       | 0:18 |   1.6 |
+| Replace artefact properties with artefacts            |         |       | 4:06 |  22.0 |
+| Analysis on implementing enablement in physical model |         |       | 2:34 |  13.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -508,8 +508,9 @@ Notes:
   enabled. We could add a "prune" transform for this. This needs to be
   done after enablement is moved to the physical model.
 
-*** STARTED Implement enablement in physical model                    :story:
+*** STARTED Analysis on implementing enablement in physical model     :story:
     :LOGBOOK:
+    CLOCK: [2020-04-11 Sat 11:40]--[2020-04-11 Sat 13:03] =>  1:23
     CLOCK: [2020-04-11 Sat 09:35]--[2020-04-11 Sat 09:43] =>  0:08
     CLOCK: [2020-04-11 Sat 08:30]--[2020-04-11 Sat 08:43] =>  0:13
     CLOCK: [2020-04-10 Fri 16:25]--[2020-04-10 Fri 17:00] =>  0:35
@@ -604,6 +605,28 @@ Notes:
   4. PM solving. Take into account both element level enablement as
      well as the relationships between elements to solve
      enablement. =--fix-unsatisfiability= also applies.
+- actually, one mistake we made was to generate dependencies over the
+  logical model. At present we have a function on each formatter that
+  determines the includes. This is the wrong way of doing things. We
+  should transform the dependencies at the logical model level into
+  dependencies at the physical model level, adequately classified
+  according to dependency type. For this we can rely on the same
+  approach (e.g. =inclusion_dependencies=) but instead of creating
+  inclusion dependencies, we are just creating dependencies. These
+  dependencies then have multiple uses:
+
+  - enablement solving: either via multiple passes, a DAG or SATs.
+  - for C/C++: inclusion files.
+  - for C#: usings. we need to capture model and namespace level
+    dependencies; that is, we need a container that takes into account
+    only unique module paths (across all module paths).
+
+  Now the inclusion transform will be very simple. We just need to
+  create relative paths - relative to a well-known part, and that's ok
+  because we are inside the major technical space so we can hard-code
+  the part - for each dependency, according to the dependency
+  types. We need to figure out if the transform should be inside of
+  the TS or not. Probably should because its TS specific.
 
 Tasks:
 
@@ -636,6 +659,14 @@ Tasks:
   global and local.
 - the enablement transform (probably) has no dependencies and could be
   lifted into the physical model.
+
+*** Add the notion of a major and a minor technical space             :story:
+
+When we move visual studio and other elements out of the current
+technical spaces, we will need some way of distinguishing between a
+"primary" technical space (e.g. C++, C# etc) and a "secondary"
+technical space (e.g. visual studio, etc). We could use emacs'
+convention and call these major and minor technical spaces.
 
 *** Split enablement features                                         :story:
 
