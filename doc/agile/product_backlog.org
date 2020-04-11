@@ -28,6 +28,42 @@ The vision for Dogen is:
 - code that can be reduced to an heuristic must be codegened; code
   that cannot, must be helped.
 
+* Release Checklist
+
+Steps to create a new release.
+
+** Close previous sprint
+
+To be done on the last Sunday of the sprint.
+
+1. Make a copy of current sprint backlog and name it current
+   sprint + 1 but don't check it in.
+2. Move all untouched stories into product backlog.
+3. Close current sprint: close all open tasks, delete tasks we did not
+   work on, update clocks.
+4. Push commit and wait for builds. This ensures that if there are any
+   failures you can fix them before the release tag.
+4. Tag commit and sign it with key.
+5. Push tag. You can generate new builds overnight.
+
+** Open new sprint
+
+To be done on the Monday morning of the new sprint.
+
+1. Open new sprint, updating CMake version, README, appveyor version
+   and decoration formatter tests. This should all be in one
+   commit. *DO NOT PUSH*.
+2. Regenerate the LAM models for C# and C++ with the new version, and
+   commit the changed files. Push the commit. (Ensure there are no
+   pending builds still running or tests will fail due to version
+   change).
+3. Create a demo. Publish it on youtube.
+4. Write up release notes, publish them in github.
+5. Download the binaries from bin tray and manually upload them to github.
+6. Update bintray with the correct release notes.
+7. When tag build is finished, announce on gitter, twitter and linked
+   in.
+
 * V2 Release
 
 Stories that need to be implemented in order to complete the V2
