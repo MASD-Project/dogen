@@ -1304,7 +1304,7 @@ Notes:
   works. We should also keep in mind that there are two bootstrapping
   cases: the product case and the component case. Since the product
   itself will have a model, we need to make sure these are
-  consistent. See [[*Add support for product skeleton generation][Add support for product skeleton generation]].
+  consistent. See [[*Introduce dogen projects][Introduce dogen projects]].
 
 Merged stories:
 
@@ -8374,7 +8374,7 @@ Yet another serialisation format.
 Links:
 - https://github.com/apache/arrow/tree/master/cpp/src/arrow/ipc
 
-*** Consider adding c++ attributes                                    :story:
+*** Consider adding C#/C++ attributes                                 :story:
 
 It may be a good idea to have attributes for generated and hand
 crafted code, e.g.:
@@ -8386,7 +8386,11 @@ This would allow us to build some clang tool that determines if all
 generated code is used from handcrafted code or not. Presumably
 something similar can be done for C# and Java.
 
-We need to compile with some kind of ignore flag (=-Wattributes=).
+We need to compile with some kind of ignore flag
+(=-Wattributes=). Once these attributes are in, we could do queries in
+LSP to determine what types are used. For example, we could
+find-references for a given type and then build some kind of DAG and
+determine if any of that code is accessed by non-generated code.
 
 Links:
 
@@ -8969,7 +8973,7 @@ Merged stories:
 
 *Remote method invocation*
 
-See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
+Look for type framing, Model and type enums stories.
 
 It seems fairly straightforward to add remote method invocation to a
 few select types. The following would have to be done:
@@ -11004,7 +11008,7 @@ dogen so that I don't have to create it manually.
 
 We should have a dynamic extension flag that generates enumerators
 with values that are powers of two. These can then be used for flags,
-as per the [[*Add%20support%20for%20bitsets][bitset story]].
+as per the bitset story.
 
 The metamodel element should reflect the enumeration type (flag or
 not). The computation of the flags should take place as part of the
@@ -11237,7 +11241,7 @@ Validation rules:
 - The model version is a human level concept and has no direct
   relation to class versioning. It will be implemented as an
   implementation specific parameter in the Dia model and as a string
-  in the yarn model class. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
+  in the yarn model class. See "improve code generation marker story".
 - Model version will be used for the following:
   - stamped on doxygen documentation for the model namespace;
   - stamped on DLLs, etc.
@@ -11254,7 +11258,7 @@ support.
 
 Before we can do this, we need a way of stamping a model version into
 models. This can easily be done via implementation specific
-parameters. See [[*Improve%20OM's%20code%20generation%20marker][this story]].
+parameters. See "improve code generation marker story".
 
 We then need to create some kind of strategy for version number
 management:
@@ -11506,7 +11510,7 @@ comparison order.
 
 Validation:
 
-- objects marked as is comparable must follow the [[*Add%20is%20comparable%20to%20yarn][comparison rules]].
+- objects marked as is comparable must follow the [[*Add is comparable to coding][comparison rules]].
 
 Notes:
 
@@ -11535,7 +11539,8 @@ assumption. The alternatives are:
   applies. This would allow users to provide any number of comparison
   operations.
 
-Either approach requires [[Ignore%20files%20and%20folders%20based%20on%20regex][Ignore files and folders based on regex]].
+Either approach requires support for ignoring files and folders based
+on regex.
 
 Another way of generating comparators is explained here:
 
@@ -12709,6 +12714,37 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding a =--dump-stats= option                           :story:
+
+It would be nice if one could know some stats for a given run:
+
+- total models loaded.
+- total elements processed.
+- total files generated.
+- total files written to the filesystem.
+- total files that have not changed.
+- total files ignored via regexes.
+- time spent on each part of the pipeline. Percentages of the overall
+  cost.
+
+Users could supply a command line option such as =--dump-stats= and
+then Dogen would output all of the stats to the console.
+
+Data should be dumped in a way that would facilitate the creation of
+timeseries and plots. For example, we should be able to do a dump for
+each release of dogen and then create a timeseries. We could have a
+=--reporting-style= of =csv= for instance.
+
+Merged stories:
+
+*Dump model stats and metrics*
+
+It would be nice to be able to get some information about a model. We
+already have a dumpspecs command but that is more for the system
+itself. What we also need is to dump stats on the model such as number
+of objects, whether the generated code is up-to-date, etc. We could
+also link this story with [[*Add support for dependency graphs and complexity data][measurements of complexity]].
+
 *** Feature toggles and code generation                               :story:
 
 This article by Fowler has some interesting ideas:
@@ -12760,7 +12796,7 @@ after the section on authoring diagrams. Or maybe we should try to
 build all of the missing features in Dogen as part of this
 exercise. This could form the basis of the Dogen manual.
 
-*** Investigate CLAFER                                      :reviewing:story:
+*** Investigate CLAFER                                                :story:
 
 As per their site:
 
@@ -12795,13 +12831,14 @@ This is a very speculative story. Once we are able to generate
 services with messages, etc., it would make sense to have a "replay"
 mode. This basically recalls a session with requests and responses so
 that users can replay a session. The messages should be stored on a
-database. We should also have an interface with an history of requests
-and responses and allow users to re-submit a request, switching on
-logging for that particular request. Logging is also written to a
-database table, allowing one to correlate the request processing with
-the logging. Even better would be if any request made to downstream
-systems would also enable those flags so that we could follow through
-with the logging.
+database (or perhaps the filesystem? maybe it should be a meta-data
+variable). We should also have an interface with an history of
+requests and responses and allow users to re-submit a request,
+switching on logging for that particular request. Logging is also
+written to a database table, allowing one to correlate the request
+processing with the logging. Even better would be if any request made
+to downstream systems would also enable those flags so that we could
+follow through with the logging.
 
 Links:
 
@@ -12810,9 +12847,9 @@ Links:
 
 *** Consider adding support for binary logging                        :story:
 
-Dogen logs are very large when we log at high-level such as debug and
-trace. It also takes a bit longer to run. This means its not very
-practical to enable logging all the time, only when we are
+Dogen logs are very large when we log at high-level such as =debug=
+and =trace=. It also takes a bit longer to run. This means its not
+very practical to enable logging all the time, only when we are
 troubleshooting. However, for "dogen as a service" we probably will
 end up using logging a lot more often so it would be nice to have a
 more efficient way of logging. One possibility is to use binary logs.
@@ -12867,6 +12904,9 @@ mode" which does a number of things at the same time:
 - COGRE displaying UML diagram.
 - preview of file which updates when model is regenerated.
 
+Similarly, if we had a "dogen studio", the UI could contain a
+visualisation for this.
+
 Links:
 
 - [[https://www.youtube.com/watch?v=Cfu6f0uyzc8][SourceTrail demo]]
@@ -12874,19 +12914,15 @@ Links:
 - [[https://www.youtube.com/watch?v=Un0ZRXTzufo][org-noter demo]]
 - [[http://cedet.sourceforge.net/uml.shtml][CEDET COGRE]]: Emacs mode for UML diagrams.
 
-*** Dump model stats and metrics                                      :story:
-
-It would be nice to be able to get some information about a model. We
-already have a dumpspecs command but that is more for the system
-itself. What we also need is to dump stats on the model such as number
-of objects, whether the generated code is up-to-date, etc. We could
-also link this story with [[*Add support for dependency graphs and complexity data][measurements of complexity]].
-
 *** Create some basic naming guidelines                               :story:
 
 As per Framework Design Guidelines, we need some basic guidelines for
 naming in Dogen. We don't need to go overboard, we just need something
 to get us started and evolve it as we go along.
+
+For extra bonus points, it would be nice to integrate these with
+Dogen, such that one would get warnings or errors when processing a
+diagram.
 
 Links:
 
@@ -12907,7 +12943,7 @@ the exception error.
 
 *** Add GraphViz/Dot export support                                   :story:
 
-At present we assume the extraction model is the only destination for
+At present we assume the physical model is the only destination for
 models. However, once we start moving to text based injectors, it may
 be useful to generate UML diagrams. This could be achieved via dot.
 
@@ -12968,6 +13004,9 @@ a bit of thinking:
 - this also means we may end up with lots of errors from other
   templates. We need to avoid this.
 
+This should be implemented via LSP delegation (look for story on
+this).
+
 *** Consider adding TableGen                                          :story:
 
 Its not entirely clear how one would use this but since its code
@@ -12996,6 +13035,9 @@ Links:
 
 *** Consider adding support for TOML                                  :story:
 
+[[https://github.com/toml-lang/toml][TOML]] (Tom's Obvious, Minimal Language) is a configuration file
+format. Its very similar to INI files.
+
 Links:
 
 - [[https://github.com/marzer/tomlplusplus/][toml++]]: header-only toml parser and serializer for C++17, C++20 and
@@ -13007,7 +13049,9 @@ Links:
 *** Consider integration with GNU plot library                        :story:
 
 For certain models which produce time-series data, it may make sense
-to integrate with GNU plot to generate graphs.
+to integrate with GNU plot to generate graphs. In fact, in general, it
+would be nice if one could decide to serialise a type into a GNU Plot
+graph. We need to find specific examples.
 
 Links:
 
@@ -13036,7 +13080,8 @@ Links:
 
 When creating an HTTPS service, one needs to have certificates,
 etc. It would be nice if dogen could create self-signed certificates,
-or added support for Lets encrypt.
+or added support for Lets encrypt. This could be done via integration
+with OpenSSL library.
 
 *** Add support for terraform                                         :story:
 
@@ -13059,7 +13104,9 @@ Links:
 
 *** Consider using ditaa                                              :story:
 
-Ditaa is a diagramming tool that takes ascii art and creates diagrams.
+Ditaa is a diagramming tool that takes ascii art and creates
+diagrams. It could be useful as an injector or as an output technical
+space.
 
 Links:
 
@@ -13126,6 +13173,22 @@ Ideas:
   and extraction elements that are associated with selected injection
   elements are displayed. This would make troubleshooting much easier.
 
+Merged stories:
+
+*Charts in site*
+
+When we have a dogen site with code-generation functionality, we could
+allow users to produce transform probe data. This could be stored in
+redis. We could then have a json diff in the site. We could also have
+a visualisation like baobab with a tree on one side and a graph
+breaking down the time. And even more ideal would be if we could see
+all log lines from the start and end transform.
+
+Links:
+
+- [[https://github.com/nlohmann/json][JSON]]: C++ JSON library that supports the json diff spec.
+- [[https://wiki.gnome.org/Apps/Baobab][baobab screenshot]]
+
 *** Consider using typedefs for variants                              :story:
 
 When we create types that have variants, the generated code is really
@@ -13142,10 +13205,10 @@ According to their project:
 Seamless (CMLS) is a brand-spanking new experimental web framework. It
 includes:
 
-  • A C++20 template engine that allows you to write C++ and markup in the same file, just
-    like you would with Laravel's blade engine for PHP, or ASP.NET Razor. The file
-    extension for these files is .cmls.
-...
+- A C++20 template engine that allows you to write C++ and markup in
+  the same file, just like you would with Laravel's blade engine for
+  PHP, or ASP.NET Razor. The file extension for these files is .cmls.
+  ...
 #+end_quote
 
 Links:
@@ -13153,6 +13216,20 @@ Links:
 - [[https://github.com/haikarainen/cmls][cmls]]
 
 *** Consider adding support for OData                                 :story:
+
+OData is defined as follows:
+
+#+begin_quote
+OData (Open Data Protocol) is an ISO/IEC approved, OASIS
+standard that defines a set of best practices for building and
+consuming RESTful APIs. OData helps you focus on your business logic
+while building RESTful APIs without having to worry about the various
+approaches to define request and response headers, status codes, HTTP
+methods, URL conventions, media types, payload formats, query options,
+etc. OData also provides guidance for tracking changes, defining
+functions/actions for reusable procedures, and sending
+asynchronous/batch requests.
+#+end_quote
 
 Dogen could generate the schema, the entities in the expected formats
 and the end-points. It could also be used to generate the client code
@@ -13177,7 +13254,14 @@ Links:
 
 *** Consider adding support for BERT                                  :story:
 
-It seems this is yet another RPC framework.
+It seems this is yet another RPC framework:
+
+#+begin_quote
+BERT and BERT-RPC are an attempt to specify a flexible binary
+serialization and RPC protocol that are compatible with the
+philosophies of dynamic languages such as Ruby, Python, PERL,
+JavaScript, Erlang, Lua, etc.
+#+end_quote
 
 Links:
 
@@ -13191,7 +13275,7 @@ JSON or Dia, this is more or less expected - though conceivably, one
 can imagine some python extensions into Dia to make the modelers' life
 easier. In the future, when we finally settle on a MOP frontend such
 as text UML, what would be ideal is a full blown LSP mode (we already
-have a story for MOP).
+have [[*Model Oriented Programming][a story for MOP]]).
 
 LSP use cases:
 
@@ -13310,6 +13394,29 @@ code-generate this org-mode file:
 - for extra bonus points we could insert file links that take you to
   the original c++ file for the test, test suite etc.
 
+Actually a much easier way to do this does not involve dogen at
+all. We could simply create a transform from the XML output of test
+unit frameworks into org-mode. You could call the "dumper" against the
+output of the tool and it would produce an org-mode file which is able
+to execute the tests and get the output of the tests. It should also
+be able to mark tests as pass or fail. Dogen could then also comply
+with this format, if required, but this is more or less
+orthogonal. This could be its own product, where the domain of the
+product is a uniform format for unit testing data:
+
+- injector models: boost test, nunit, etc.
+- core model: models unit test frameworks in generat.
+- extraction: org-mode.
+
+Then, from emacs you could call this utility the first time to build
+the org-mode files per unit test framework. The interesting thing
+about this is that you could use the org-mode document as
+documentation for the unit tests. These could then generate HTML/Latex
+files without the test results. The key thing is that check-ins to git
+should be done without the output of the unit tests. We should also
+have variables pointing to the different output locations (it should
+integrated with the build system).
+
 Links:
 
 - [[http://fgiasson.com/blog/index.php/2016/05/30/creating-and-running-unit-tests-directly-in-source-files-with-org-mode/][Creating and Running Unit Tests Directly in Source Files with Org-mode]]
@@ -13393,16 +13500,17 @@ However, we are very far from this at present.
 
 *** Support for locations other than filesystems                      :story:
 
-It would be nice to be able to point to a yarn intermediate model
-anywhere, such as for example in github and generate it. For this we
-just need to detect the protocol in the path and if supported, read in
-the file; the frontend implementations should take in a stream rather
-than a file path. For cases such as LibXML, we may need to read up all
-of the data first and then create a stringstream for it.
+It would be nice to be able to point to an injection model anywhere,
+such as for example in github and generate it. For this we just need
+to detect the protocol in the path and if supported, read in the file;
+the frontend implementations should take in a stream rather than a
+file path. For cases such as LibXML, we may need to read up all of the
+data first and then create a stringstream for it.
 
 We should not implement this story unless we need it such as for
 example when we have a site/service. At that point it would be nice to
-allow users to just point to their models in github.
+allow users to just point to their models in github. This could be
+done when we add support for =-I= to Dogen.
 
 *** HTTP API support                                                  :story:
 
@@ -13508,6 +13616,7 @@ Notes:
 Links:
 
 - [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
+- [[https://unix.stackexchange.com/questions/494595/how-can-i-search-a-specific-list-of-files-with-ripgrep][How can I search a specific list of files with ripgrep?]]
 
 *** Add support for data anonymisation                                :story:
 
@@ -13660,16 +13769,24 @@ Notes:
   component itself. There is a nice symmetry with source code.
 - MOP then becomes the DSL for the methodology which is nice from a
   MDE perspective.
+- its not clear there are advantages over org-mode. The latter would
+  be much more flexible for code-merging for example. Or perhaps we
+  could still call it MOP - but the AST is org-mode.
 
 Links:
 
 - [[https://cruise.eecs.uottawa.ca/umple/][UMPLE Home]]
+- [[https://github.com/umple/umple][GitHub repo]]
+- [[https://cruise.eecs.uottawa.ca/umple/GettingStarted.html][UMPLE manual]]
 
 *** Interactive interface to models                                    :epic:
 
 There are a number of interactive interfaces available such as
 Jupiter. It may be interesting to think of ways to generate the
-interactive interface automatically from a model.
+interactive interface automatically from a model. Its not quite clear
+what that interface would do: are we updating the model or the
+entities it generates? We need to have a much clearer use case before
+we start to look into this.
 
 Links:
 
@@ -13831,6 +13948,11 @@ out data structures that are more suitable for this. We should also
 measure the cache hits / misses before and after the changes, as well
 as the memory sizes.
 
+Links:
+
+- [[https://www.boost.org/doc/libs/1_72_0/libs/beast/doc/html/beast/ref/boost__beast__static_string.html][boost static_string]]: fixed size string with no dynamic
+  allocation. We could probably convert these to string views as well.
+
 *** Add support for field renaming in annotations                     :story:
 
 At present if a field changes its name between dogen releases,
@@ -13849,23 +13971,10 @@ still work.
 *** Transform tracing "coordinates"                                   :story:
 
 Allow users to supply coordinates to transforms in some form so that
-we only dump a subset of the transform data.
+we only dump a subset of the transform data. This could be the ID of
+the transform.
 
-*** Charts in site                                                    :story:
-
-When we have a dogen site with code-generation functionality, we could
-allow users to produce transform probe data. This could be stored in
-redis. We could then have a json diff in the site. We could also have
-a visualisation like baobab with a tree on one side and a graph
-breaking down the time. And even more ideal would be if we could see
-all log lines from the start and end transform.
-
-Links:
-
-- [[https://github.com/nlohmann/json][JSON]]: C++ JSON library that supports the json diff spec.
-- [[https://wiki.gnome.org/Apps/Baobab][baobab screenshot]]
-
-*** Travis builds and binaries for users                              :story:
+*** Travis builds and binaries for users                    :reviewing:story:
 
 It would be nice if when a user code-generates a model in the site, we
 could do a travis build with the generated code. The build would then
