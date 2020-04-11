@@ -77,6 +77,93 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Analysis on the Modeling of generated files                       :story:
+
+We have a principle that states that any file that is a part of a
+project must have a meta-model element that models it. However, there
+are cases where this break down:
+
+1. stitch templates. In this case we have one stitch template per
+   =.cpp= file we generate. It would be cumbersome to have to have 2
+   model elements, one for the template and one for the output file
+   since they will be near identical. However, if we did have it then
+   we could allow associating stitch templates with *any* facet, which
+   would be very convenient - not that we have a use case for this,
+   mind you. In this scenario, you would create a stitch template as a
+   proper template and then create the meta-model element and then
+   within the element you would associate the template with the
+   element on a given archetype. This is 100% correct, but then we
+   will end up with 2N elements. For models such as =m2t.cpp= and
+   =m2t.csharp=, this could mean more than 50 additional elements. A
+   different way to look at this is to say that there is only one
+   modeling element and then there are multiple facets; the stitch
+   template is itself a facet. Or perhaps to allow files to live in
+   the same directory, we could say there are multiple archetypes. In
+   this case, we are saying that an archetype a0 could generate
+   another a1 via a function f0. This could also be generalised so
+   that we could generate a set A rather than just one file. If this
+   could be an external process, we could then call ODB directly
+   inside of Dogen. Though not sure this is a good idea.
+2. wale templates.
+3. ODB files.
+
+Merged stories.
+
+*Ignore ODB files automatically*
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
+
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
+
+This also means we can add the ODB files to the visual studio project
+even before they get generated.
+
+We should have meta-data configuration that describes the ODB files:
+
+- their extension
+- the location of headers and implementation
+- the need to move the files
+
+We should generalise this problem so that when we are using other
+cartridges such as protobuf/grpc, we can extend it for these use
+cases - expected cartridge files?
+
+
+
+
 *** Add support for the static/dynamic pattern                        :story:
 
 A common use case in Dogen is the "static/dynamic" pattern. It must

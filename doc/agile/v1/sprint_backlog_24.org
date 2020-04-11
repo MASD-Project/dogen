@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-11 Sat 16:12]
+#+CAPTION: Clock summary at [2020-04-11 Sat 17:11]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *19:41* |       |      | 100.0 |
+| *Total time*                                          | *20:27* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 19:41   |       |      | 100.0 |
-| Active                                                |         | 19:41 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 9:22 |  47.6 |
-| Create a demo and presentation for previous sprint    |         |       | 0:25 |   2.1 |
-| Sprint and product backlog grooming                   |         |       | 2:56 |  14.9 |
+| Stories                                               | 20:27   |       |      | 100.0 |
+| Active                                                |         | 20:27 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 9:22 |  45.8 |
+| Create a demo and presentation for previous sprint    |         |       | 0:25 |   2.0 |
+| Sprint and product backlog grooming                   |         |       | 3:31 |  17.2 |
 | Emacs issues and improvements                         |         |       | 0:18 |   1.5 |
-| Replace artefact properties with artefacts            |         |       | 4:06 |  20.8 |
-| Analysis on implementing enablement in physical model |         |       | 2:34 |  13.0 |
+| Analysis on implementing enablement in physical model |         |       | 2:45 |  13.4 |
+| Replace artefact properties with artefacts            |         |       | 4:06 |  20.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -456,6 +456,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-11 Sat 16:59]--[2020-04-11 Sat 17:10] =>  0:11
+    CLOCK: [2020-04-11 Sat 16:25]--[2020-04-11 Sat 16:49] =>  0:34
     CLOCK: [2020-04-11 Sat 15:10]--[2020-04-11 Sat 16:12] =>  1:02
     CLOCK: [2020-04-11 Sat 09:44]--[2020-04-11 Sat 10:00] =>  0:16
     CLOCK: [2020-04-11 Sat 07:55]--[2020-04-11 Sat 08:30] =>  0:35
@@ -478,39 +480,10 @@ Time spent faffing around with Emacs.
 - modeline is flashing. Seems like this is an issue with treemacs, but
   not quite sure.
 
-*** STARTED Replace artefact properties with artefacts                :story:
+*** COMPLETED Analysis on implementing enablement in physical model   :story:
+    CLOSED: [2020-04-11 Sat 17:11]
     :LOGBOOK:
-    CLOCK: [2020-04-10 Fri 14:31]--[2020-04-10 Fri 15:39] =>  1:08
-    CLOCK: [2020-04-10 Fri 09:38]--[2020-04-10 Fri 12:36] =>  2:58
-    :END:
-
-Now that we understand the role of the physical model, we need to get
-rid of all the failed attempts at representing physical data across
-other models such as the logical model, =m2t= etc. We need to use the
-artefact itself and supply it to the formatters.
-
-Notes:
-
-- these attributes need to be migrated from the logical model into the
-  physical model:
-  - artefact level: artefact_properties, enablement_properties
-  - model level: extraction_properties
-- we need to understand what the pair =element_archetype= does. If
-  necessary, it needs to be moved to the physical model or to the
-  logical/physical mapping (see also =enabled_archetype_for_element=
-  set).
-- at present we are creating new artefacts in the workflows. We need
-  to copy them across from =m2t=.
-- at present we are expanding the physical model without regards for
-  enablement. This means that we generate a lot of artefacts that are
-  not going to be used. We then added a number of hacks to filter
-  those out. The right solution would be to have enablement done just
-  after expansion, and then remove all artefacts that are not
-  enabled. We could add a "prune" transform for this. This needs to be
-  done after enablement is moved to the physical model.
-
-*** STARTED Analysis on implementing enablement in physical model     :story:
-    :LOGBOOK:
+    CLOCK: [2020-04-11 Sat 16:14]--[2020-04-11 Sat 16:25] =>  0:11
     CLOCK: [2020-04-11 Sat 11:40]--[2020-04-11 Sat 13:03] =>  1:23
     CLOCK: [2020-04-11 Sat 09:35]--[2020-04-11 Sat 09:43] =>  0:08
     CLOCK: [2020-04-11 Sat 08:30]--[2020-04-11 Sat 08:43] =>  0:13
@@ -661,57 +634,36 @@ Tasks:
 - the enablement transform (probably) has no dependencies and could be
   lifted into the physical model.
 
-*** Add the notion of a major and a minor technical space             :story:
+*** STARTED Replace artefact properties with artefacts                :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-10 Fri 14:31]--[2020-04-10 Fri 15:39] =>  1:08
+    CLOCK: [2020-04-10 Fri 09:38]--[2020-04-10 Fri 12:36] =>  2:58
+    :END:
 
-When we move visual studio and other elements out of the current
-technical spaces, we will need some way of distinguishing between a
-"primary" technical space (e.g. C++, C# etc) and a "secondary"
-technical space (e.g. visual studio, etc). We could use emacs'
-convention and call these major and minor technical spaces.
-
-*** Split enablement features                                         :story:
-
-At present we are instantiating the =enabled= feature across the
-entire =masd= template instantiation domain. This is a very
-"efficient" way to do it because we only define one feature. However,
-it also means its now possible to disable a facet or backend at the
-element level. And worse, the binding point is global:
-
-: #DOGEN masd.variability.default_binding_point=any
-: #DOGEN masd.variability.generate_static_configuration=false
-: #DOGEN masd.variability.instantiation_domain_name=masd
-
-The right thing to do is to create four separate features, one for
-the backend, one for the features and one for the archetype
-(global). Then another one for the archetype, locally. Each with the
-correct binding point.
-
-*** Inject backend and facets into PMM                                :story:
-
-At present we only have artefacts in the PMM. We need to inject all
-other missing elements. We also need to create a transform which
-builds the PMM. Finally while we're at it we should add enablement
-properties and associated transform.
+Now that we understand the role of the physical model, we need to get
+rid of all the failed attempts at representing physical data across
+other models such as the logical model, =m2t= etc. We need to use the
+artefact itself and supply it to the formatters.
 
 Notes:
 
-- we should also change template instantiation code to use the PMM.
-- once we have a flag, we can detect disabled backends before any work
-  is carried out. The cost should be very close to zero. We don't need
-  to do any checks for this afterwards.
-
-*** Prune disabled artefacts                                          :story:
-
-We must first start by expanding the physical space into all possible
-points. Once enablement is performed though we can prune all artefacts
-that are disabled. Note that we cannot prune based on global
-information because archetypes may be enabled locally. However, once
-all of the local information has been processed and the enabled flag
-has been set, we can then remove all of those with the flag set to
-false.
-
-In a world with solving, we just need to make sure solving is slotted
-in after enablement and before pruning. It should just work.
+- these attributes need to be migrated from the logical model into the
+  physical model:
+  - artefact level: artefact_properties, enablement_properties
+  - model level: extraction_properties
+- we need to understand what the pair =element_archetype= does. If
+  necessary, it needs to be moved to the physical model or to the
+  logical/physical mapping (see also =enabled_archetype_for_element=
+  set).
+- at present we are creating new artefacts in the workflows. We need
+  to copy them across from =m2t=.
+- at present we are expanding the physical model without regards for
+  enablement. This means that we generate a lot of artefacts that are
+  not going to be used. We then added a number of hacks to filter
+  those out. The right solution would be to have enablement done just
+  after expansion, and then remove all artefacts that are not
+  enabled. We could add a "prune" transform for this. This needs to be
+  done after enablement is moved to the physical model.
 
 *** Add =is_generatable= to logical model                             :story:
 
@@ -730,7 +682,9 @@ Tasks:
 - add a pruning transform that filters out all non-generatable types
   from logical model.
 
-*** Intrinsic non-generatable types                                   :story:
+Merged stories:
+
+*Intrinsic non-generatable types
 
 In the decoration transform we have this hack:
 
@@ -771,68 +725,43 @@ Notes:
   need to add this as a property (e.g. generatable). If a user tries
   to add a formatter to a non-generatable type we error.
 
-*** Ignore ODB files automatically                                    :story:
+*** Split enablement features                                         :story:
 
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
+At present we are instantiating the =enabled= feature across the
+entire =masd= template instantiation domain. This is a very
+"efficient" way to do it because we only define one feature. However,
+it also means its now possible to disable a facet or backend at the
+element level. And worse, the binding point is global:
 
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
+: #DOGEN masd.variability.default_binding_point=any
+: #DOGEN masd.variability.generate_static_configuration=false
+: #DOGEN masd.variability.instantiation_domain_name=masd
 
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
+The right thing to do is to create four separate features, one for
+the backend, one for the features and one for the archetype
+(global). Then another one for the archetype, locally. Each with the
+correct binding point.
 
-: foreign_key_pragmas.hpp
+*** Inject backend, facets and archetypes into PMM                    :story:
 
-We will also have the following ODB files:
+At present we only have artefacts in the PMM. We need to inject all
+other missing elements. We also need to create a transform which
+builds the PMM. Finally while we're at it we should add enablement
+properties and associated transform.
 
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ixx
+Notes:
 
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
+- we should also change template instantiation code to use the PMM.
+- once we have a flag, we can detect disabled backends before any work
+  is carried out. The cost should be very close to zero. We don't need
+  to do any checks for this afterwards.
+- we need to add a list of archetypes that each archetype depends
+  on. We need to update the formatters to return archetypes rather
+  than names and have the dependencies there.
 
-In addition, on a multi-database environment we also have:
+Merged stories:
 
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-This also means we can add the ODB files to the visual studio project
-even before they get generated.
-
-We should have meta-data configuration that describes the ODB files:
-
-- their extension
-- the location of headers and implementation
-- the need to move the files
-
-We should generalise this problem so that when we are using other
-cartridges such as protobuf/grpc, we can extend it for these use
-cases - expected cartridge files?
-
-*** Add enablement test in C#                                         :story:
-
-At present we have probably broken enablement in C# due to the hackery
-around physical space expansion. However all tests are green. We need
-to define a profile in C# that disables a facet in order to ensure we
-test enablement before we start hacking around with the enablement
-transforms. It will most likely be red - we need to add the pruning
-hack to get rid of disabled artefacts as we do in C++.
-
-*** Implement archetype locations from physical meta-model            :story:
+*Implement archetype locations from physical meta-model*
 
 We need to use the new physical meta-model to obtain information about
 the layout of physical space, replacing the archetype locations.
@@ -877,6 +806,107 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** Add PMM enablement transform                                      :story:
+
+This transform reads the global enablement flags for backend, facet
+and archetype. It is done as part of the chain to produce the PMM.
+
+*** Add a PMM enablement satisfiability transform                     :story:
+
+For now this transform can simply check that there are no enabled
+archetypes that depend on disabled archetypes. In the future we could
+have a flag that enables archetypes as required.
+
+*** Create a physical ID in logical-physical space                    :story:
+
+Artefacts are points in logical-physical space. They should have an ID
+which is composed by both logical and physical location. We could
+create a very simple builder that concatenates both, for example:
+
+: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
+
+The use of =|= would make it really easy to split out IDs as required,
+and to visually figure out which part is which. Note though that the
+ID is an opaque identifier and the splitting happens for
+troubleshooting purposes only, not in the code. With the physical
+model, all references are done using these IDs. So for example, if an
+artefact =a0= depends on artefact =a1=, the dependency is recorded as
+the ID of =a1=. The physical model should also be indexed by ID
+instead of being a list of artefacts.
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Add enablement test in C#                                         :story:
+
+At present we have probably broken enablement in C# due to the hackery
+around physical space expansion. However all tests are green. We need
+to define a profile in C# that disables a facet in order to ensure we
+test enablement before we start hacking around with the enablement
+transforms. It will most likely be red - we need to add the pruning
+hack to get rid of disabled artefacts as we do in C++.
+
+*** Add dependencies to artefacts                                     :story:
+
+We need to propagate the dependencies between logical model elements
+into the physical model. We still need to distinguish between "types"
+of dependencies:
+
+- transparent_associations
+- opaque_associations
+- associative_container_keys
+- parents
+
+Basically, anything which we refer to when we are building the
+dependencies for inclusion needs to be represented. We could create a
+data structure for this purpose such as "dependencies". We should also
+include "namespace" dependencies. These can be obtained by =sort |
+uniq= of all of the namespaces for which there are dependencies. These
+are then used for C#.
+
+Note however that all dependencies are recorded as logical-physical
+IDs.
+
+We also need a way to populate the dependencies as a transform. This
+must be done in =m2t= because we need the formatters. We can rely on
+the same approach as =inclusion_dependencies= but instead of creating
+/inclusion dependencies/, we are just creating /dependencies/.
+
+*** Add a PM enablement and overwrite transform                       :story:
+
+This relies on PMM enablement flags. Also, it reads the local
+archetype enablement and overwrite flags and has the logic to set it
+as per current enablement transform.
+
+Once this transform is implemented, we should try disabling the
+existing enablement transform and see what breaks.
+
+*** Add a PM enablement satisfiability transform                      :story:
+
+To start with, this should just check to see if any of the
+dependencies are disabled. If so it throws. In the future we can add
+solving.
+
+*** Add a PM transform to prune disabled artefacts                    :story:
+
+We must first start by expanding the physical space into all possible
+points. Once enablement is performed though we can prune all artefacts
+that are disabled. Note that we cannot prune based on global
+information because archetypes may be enabled locally. However, once
+all of the local information has been processed and the enabled flag
+has been set, we can then remove all of those with the flag set to
+false.
+
+In a world with solving, we just need to make sure solving is slotted
+in after enablement and before pruning. It should just work.
+
+This transform is done within the =m2t= model, not the =physical=
+model, because we need to remove the artefacts from the =m2t=
+collection.
 
 *** Implement formatting styles in physical model                     :story:
 
@@ -1073,6 +1103,27 @@ Random notes:
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
 
+*** Add the notion of a major and a minor technical space             :story:
+
+When we move visual studio and other elements out of the current
+technical spaces, we will need some way of distinguishing between a
+"primary" technical space (e.g. C++, C# etc) and a "secondary"
+technical space (e.g. visual studio, etc). We could use emacs'
+convention and call these major and minor technical spaces.
+
+This should be a property of the backend.
+
+*** Move decorations to their "final" resting place                   :story:
+
+At present we are handling decorations in the generation model but
+these are really logical concerns. The main reason why is because we
+are not expanding the decoration across physical space, but instead we
+expand them depending on the used technical spaces. However, since the
+technical spaces are obtained from the formatters, there is an
+argument to say that archetypes should have an associated technical
+space. We need to decouple these concepts in order to figure out where
+they belong.
+
 *** Create a common formatter interface                               :story:
 
 Once all language specific properties have been moved into their
@@ -1087,28 +1138,11 @@ themselves to the =element_artefacts= tuple. Then we can just iterate
 through the tuples and call the formatter instead having to do
 look-ups.
 
-*** Move decorations to their "final" resting place                   :story:
-
-At present we are handling decorations in the generation model but
-these are really logical concerns. The main reason why is because we
-are not expanding the decoration across physical space, but instead we
-expand them depending on the used technical spaces. However, since the
-technical spaces are obtained from the formatters, there is an
-argument to say that archetypes should have an associated technical
-space. We need to decouple these concepts in order to figure out where
-they belong.
-
 *** Stitch formatter updates                                          :story:
 
 There are a number of issues with stitch formatters at present:
 
 - stitch transform is still generating its own artefact.
-
-*** Make physical model name a qualified name                         :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
 
 *** Consider moving compatibility mode to feature model               :story:
 
