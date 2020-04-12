@@ -77,6 +77,59 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider renaming profiles                                        :story:
+
+The correct MDE terminology for feature selection is configuration. We
+have used this term within the variability model with a similar
+meaning. We tried to avoid reusing the name so that its meaning is not
+dependent on context, but it seems its worthwhile giving end users the
+canonical MDE term and using something else internally.
+
+In "Systems variability modeling : a textual model mixing class and
+feature concepts", the authors describe the following concepts:
+
+1. Meta-Features Model. Previous researches did not mention the
+  Meta-Models Clearly; they mentioned it as features that may contain
+  more than one sub features.
+2. Features Meta-Model; this model is predefined and domain
+   independent. It defines different domain features with their
+   relations.
+3. Feature Model: Compact model of features diagram and feature
+   constrains. It is an instance of the Features Meta Model.
+4. Feature diagram; Graphical representation showing each feature and
+   its relations with its subs. And
+5. Feature’s configuration; Set of selected features producing a
+   release in SPL. Configuration is permitted with feature model and
+   preserves features’ constrains.
+
+This may mean that we should have a features meta-model and a features
+model, therefore resolving the issue of the naming; we are in the
+meta-model dimension within the variability model, and in the model
+dimension when instantiating a user model.
+
+One way to understand features in Dogen is as follows:
+
+- the variability model is a features meta-model because it defines
+  the shape of all features that can be created within Dogen.
+- feature bundles and templates are a feature model - that is, they
+  are instances of the feature meta-model.
+- the configuration model is an instance of the feature model and is
+  implemented as profiles and profile templates. From a SPL
+  perspective, the configuration model is associated with a product.
+- the product component models makes use of the configuration model
+  defined for a product. All products must follow dogen's product
+  meta-model.
+
+*** Consider renaming feature bundles                                 :story:
+
+It seems that the approach used by OOFM could be used to improve the
+terminology in the variability model. We need to read this paper:
+
+V. T. Sarinho and A. L. Apolinario (2010), “Combining feature modeling
+and Object Oriented concepts to manage the software variability”, IEEE
+International Conference on Information Reuse and Integration (IRI),
+pp. 344-349.
+
 *** Consider generating dependency injection code                      :epic:
 
 If one could mark constructors as =injectable= in a diagram, we could
