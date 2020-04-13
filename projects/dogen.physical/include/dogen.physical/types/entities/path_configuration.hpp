@@ -30,6 +30,9 @@
 
 namespace dogen::physical::entities {
 
+/**
+ * @brief Describes how paths are handled within a part.
+ */
 class path_configuration final {
 public:
     path_configuration(const path_configuration&) = default;
@@ -71,8 +74,13 @@ public:
     void facet(const dogen::physical::entities::path_contribution_type v);
     /**@}*/
 
+    /**
+     * @brief What kind of contribution do the internal modules make to the final path.
+     */
+    /**@{*/
     dogen::physical::entities::path_contribution_type internal_modules() const;
     void internal_modules(const dogen::physical::entities::path_contribution_type v);
+    /**@}*/
 
 public:
     bool operator==(const path_configuration& rhs) const;

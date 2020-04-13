@@ -248,6 +248,7 @@
     },
     {
       "name": "entities::path_configuration",
+      "documentation": "Describes how paths are handled within a part.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -267,7 +268,8 @@
         },
         {
           "name": "internal_modules",
-          "type": "path_contribution_type"
+          "type": "path_contribution_type",
+          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
         }
       ]
     },
@@ -320,12 +322,13 @@
       "attributes": [
         {
           "name": "archetype_kind_id",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "ID for the archetype kind that this archetype is an instance of.\n"
         },
         {
-          "name": "meta_element_id",
+          "name": "logical_meta_element_id",
           "type": "std::string",
-          "documentation": "Which types of the logical model this archetype supports.\n"
+          "documentation": "ID of the meta-element in the logical model this archetype binds to.\n"
         },
         {
           "name": "part",
@@ -353,7 +356,7 @@
     },
     {
       "name": "entities::logical_name",
-      "documentation": "Represents a point in logical space.\n",
+      "documentation": "Physical representation of a logical name.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

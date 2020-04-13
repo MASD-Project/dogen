@@ -32,7 +32,7 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Represents a point in logical space.
+ * @brief Physical representation of a logical name.
  */
 class logical_name final {
 public:

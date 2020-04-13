@@ -41,7 +41,7 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
       << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
-      << "\"meta_element_id\": " << "\"" << tidy_up_string(v.meta_element_id()) << "\"" << ", "
+      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\""
       << " }";
     return(s);

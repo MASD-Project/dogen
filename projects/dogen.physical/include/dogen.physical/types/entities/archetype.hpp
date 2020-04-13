@@ -45,7 +45,7 @@ public:
         const std::string& default_postfix,
         const std::string& override_postfix,
         const std::string& archetype_kind_id,
-        const std::string& meta_element_id,
+        const std::string& logical_meta_element_id,
         const std::string& part);
 
 public:
@@ -89,19 +89,24 @@ public:
     void override_postfix(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief ID for the archetype kind that this archetype is an instance of.
+     */
+    /**@{*/
     const std::string& archetype_kind_id() const;
     std::string& archetype_kind_id();
     void archetype_kind_id(const std::string& v);
     void archetype_kind_id(const std::string&& v);
+    /**@}*/
 
     /**
-     * @brief Which types of the logical model this archetype supports.
+     * @brief ID of the meta-element in the logical model this archetype binds to.
      */
     /**@{*/
-    const std::string& meta_element_id() const;
-    std::string& meta_element_id();
-    void meta_element_id(const std::string& v);
-    void meta_element_id(const std::string&& v);
+    const std::string& logical_meta_element_id() const;
+    std::string& logical_meta_element_id();
+    void logical_meta_element_id(const std::string& v);
+    void logical_meta_element_id(const std::string&& v);
     /**@}*/
 
     /**
@@ -130,7 +135,7 @@ private:
     std::string default_postfix_;
     std::string override_postfix_;
     std::string archetype_kind_id_;
-    std::string meta_element_id_;
+    std::string logical_meta_element_id_;
     std::string part_;
 };
 

@@ -28,14 +28,14 @@ archetype::archetype(
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::string& archetype_kind_id,
-    const std::string& meta_element_id,
+    const std::string& logical_meta_element_id,
     const std::string& part)
     : description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
       archetype_kind_id_(archetype_kind_id),
-      meta_element_id_(meta_element_id),
+      logical_meta_element_id_(logical_meta_element_id),
       part_(part) { }
 
 void archetype::swap(archetype& other) noexcept {
@@ -45,7 +45,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(default_postfix_, other.default_postfix_);
     swap(override_postfix_, other.override_postfix_);
     swap(archetype_kind_id_, other.archetype_kind_id_);
-    swap(meta_element_id_, other.meta_element_id_);
+    swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
 }
 
@@ -55,7 +55,7 @@ bool archetype::operator==(const archetype& rhs) const {
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
-        meta_element_id_ == rhs.meta_element_id_ &&
+        logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_;
 }
 
@@ -145,20 +145,20 @@ void archetype::archetype_kind_id(const std::string&& v) {
     archetype_kind_id_ = std::move(v);
 }
 
-const std::string& archetype::meta_element_id() const {
-    return meta_element_id_;
+const std::string& archetype::logical_meta_element_id() const {
+    return logical_meta_element_id_;
 }
 
-std::string& archetype::meta_element_id() {
-    return meta_element_id_;
+std::string& archetype::logical_meta_element_id() {
+    return logical_meta_element_id_;
 }
 
-void archetype::meta_element_id(const std::string& v) {
-    meta_element_id_ = v;
+void archetype::logical_meta_element_id(const std::string& v) {
+    logical_meta_element_id_ = v;
 }
 
-void archetype::meta_element_id(const std::string&& v) {
-    meta_element_id_ = std::move(v);
+void archetype::logical_meta_element_id(const std::string&& v) {
+    logical_meta_element_id_ = std::move(v);
 }
 
 const std::string& archetype::part() const {
