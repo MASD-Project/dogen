@@ -83,8 +83,15 @@ const std::string stereotype_visual_studio_msbuild_targets(
     "masd::visual_studio::msbuild_targets");
 const std::string stereotype_orm_common_odb_options(
     "masd::orm::common_odb_options");
-const std::string stereotype_build_cmakelists(
-    "masd::build::cmakelists");
+const std::string stereotype_build_cmakelists("masd::build::cmakelists");
+const std::string stereotype_physical_backend("masd::physical::backend");
+const std::string stereotype_physical_facet("masd::physical::facet");
+const std::string stereotype_physical_archetype("masd::physical::archetype");
+const std::string stereotype_physical_archetype_kind(
+    "masd::physical::archetype_kind");
+const std::string stereotype_physical_part("masd::physical::part");
+
+
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -160,6 +167,16 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::orm_common_odb_options;
     else if (s == stereotype_build_cmakelists)
         return static_stereotypes::build_cmakelists;
+    else if (s == stereotype_physical_backend)
+        return static_stereotypes::physical_backend;
+    else if (s == stereotype_physical_facet)
+        return static_stereotypes::physical_facet;
+    else if (s == stereotype_physical_archetype)
+        return static_stereotypes::physical_archetype;
+    else if (s == stereotype_physical_archetype_kind)
+        return static_stereotypes::physical_archetype_kind;
+    else if (s == stereotype_physical_part)
+        return static_stereotypes::physical_part;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
                              << " Assuming dynamic.";
@@ -236,7 +253,7 @@ to_string(const static_stereotypes ss) const {
         return stereotype_variability_feature_template_bundle;
     case static_stereotypes::variability_feature_bundle:
         return stereotype_variability_feature_bundle;
-case static_stereotypes::variability_initializer:
+    case static_stereotypes::variability_initializer:
         return stereotype_variability_initializer;
     case static_stereotypes::mapping_fixed_mappable:
         return stereotype_mapping_fixed_mappable;
@@ -256,6 +273,16 @@ case static_stereotypes::variability_initializer:
         return stereotype_orm_common_odb_options;
     case static_stereotypes::build_cmakelists:
         return stereotype_build_cmakelists;
+    case static_stereotypes::physical_backend:
+        return stereotype_physical_backend;
+    case static_stereotypes::physical_facet:
+        return stereotype_physical_facet;
+    case static_stereotypes::physical_archetype:
+        return stereotype_physical_archetype;
+    case static_stereotypes::physical_archetype_kind:
+        return stereotype_physical_archetype_kind;
+    case static_stereotypes::physical_part:
+        return stereotype_physical_part;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -294,7 +321,12 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::visual_studio_project ||
         ss == static_stereotypes::visual_studio_msbuild_targets ||
         ss == static_stereotypes::orm_common_odb_options ||
-        ss == static_stereotypes::build_cmakelists;
+        ss == static_stereotypes::build_cmakelists ||
+        ss == static_stereotypes::physical_backend ||
+        ss == static_stereotypes::physical_facet ||
+        ss == static_stereotypes::physical_archetype ||
+        ss == static_stereotypes::physical_archetype_kind ||
+        ss == static_stereotypes::physical_part;
 }
 
 std::list<static_stereotypes> stereotypes_helper::
