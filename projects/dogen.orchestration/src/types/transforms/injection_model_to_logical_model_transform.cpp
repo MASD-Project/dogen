@@ -284,6 +284,26 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_build_cmakelists(l, scr, e),
             m.build_elements().cmakelists());
         break;
+    case static_stereotypes::physical_backend:
+        insert(ad.to_physical_backend(l, scr, e),
+            m.physical_elements().backends());
+        break;
+    case static_stereotypes::physical_facet:
+        insert(ad.to_physical_facet(l, scr, e),
+            m.physical_elements().facets());
+        break;
+    case static_stereotypes::physical_archetype:
+        insert(ad.to_physical_archetype(l, scr, e),
+            m.physical_elements().archetypes());
+        break;
+    case static_stereotypes::physical_archetype_kind:
+        insert(ad.to_physical_archetype_kind(l, scr, e),
+            m.physical_elements().archetype_kinds());
+        break;
+    case static_stereotypes::physical_part:
+        insert(ad.to_physical_part(l, scr, e),
+            m.physical_elements().parts());
+        break;
 
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
