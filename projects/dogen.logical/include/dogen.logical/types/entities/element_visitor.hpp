@@ -25,10 +25,14 @@
 #pragma once
 #endif
 
+#include "dogen.logical/types/entities/physical/part_fwd.hpp"
+#include "dogen.logical/types/entities/physical/facet_fwd.hpp"
 #include "dogen.logical/types/entities/build/cmakelists_fwd.hpp"
+#include "dogen.logical/types/entities/physical/backend_fwd.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.logical/types/entities/structural/object_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/licence_fwd.hpp"
+#include "dogen.logical/types/entities/physical/archetype_fwd.hpp"
 #include "dogen.logical/types/entities/structural/builtin_fwd.hpp"
 #include "dogen.logical/types/entities/structural/visitor_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_fwd.hpp"
@@ -42,6 +46,7 @@
 #include "dogen.logical/types/entities/structural/entry_point_fwd.hpp"
 #include "dogen.logical/types/entities/structural/enumeration_fwd.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution_fwd.hpp"
+#include "dogen.logical/types/entities/physical/archetype_kind_fwd.hpp"
 #include "dogen.logical/types/entities/variability/initializer_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group_fwd.hpp"
 #include "dogen.logical/types/entities/structural/object_template_fwd.hpp"
@@ -142,6 +147,56 @@ public:
     virtual void visit(const dogen::logical::entities::orm::common_odb_options&) { }
     virtual void visit(dogen::logical::entities::orm::common_odb_options&) const { }
     virtual void visit(dogen::logical::entities::orm::common_odb_options&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::archetype
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::archetype&) const { }
+    virtual void visit(const dogen::logical::entities::physical::archetype&) { }
+    virtual void visit(dogen::logical::entities::physical::archetype&) const { }
+    virtual void visit(dogen::logical::entities::physical::archetype&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::archetype_kind
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::archetype_kind&) const { }
+    virtual void visit(const dogen::logical::entities::physical::archetype_kind&) { }
+    virtual void visit(dogen::logical::entities::physical::archetype_kind&) const { }
+    virtual void visit(dogen::logical::entities::physical::archetype_kind&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::backend
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::backend&) const { }
+    virtual void visit(const dogen::logical::entities::physical::backend&) { }
+    virtual void visit(dogen::logical::entities::physical::backend&) const { }
+    virtual void visit(dogen::logical::entities::physical::backend&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::facet
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::facet&) const { }
+    virtual void visit(const dogen::logical::entities::physical::facet&) { }
+    virtual void visit(dogen::logical::entities::physical::facet&) const { }
+    virtual void visit(dogen::logical::entities::physical::facet&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::logical::entities::physical::part
+     */
+    /**@{*/
+    virtual void visit(const dogen::logical::entities::physical::part&) const { }
+    virtual void visit(const dogen::logical::entities::physical::part&) { }
+    virtual void visit(dogen::logical::entities::physical::part&) const { }
+    virtual void visit(dogen::logical::entities::physical::part&) { }
     /**@}*/
 
     /**

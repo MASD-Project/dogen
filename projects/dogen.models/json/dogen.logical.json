@@ -3925,6 +3925,214 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "entities::physical",
+      "documentation": "Logical representation of elements in the physical dimension.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::physical::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backends",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<backend>>"
+        },
+        {
+          "name": "facets",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<facet>>"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<archetype>>"
+        },
+        {
+          "name": "parts",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<part>>"
+        },
+        {
+          "name": "archetype_kinds",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<archetype_kind>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::archetype",
+      "documentation": "Represents an archetype within a facet.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "kernel_name",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_name",
+          "type": "std::string"
+        },
+        {
+          "name": "part_id",
+          "type": "std::string",
+          "documentation": "ID for the part this archetype belongs to.\n"
+        },
+        {
+          "name": "logical_meta_element_id",
+          "type": "std::string",
+          "documentation": "ID of the meta-element in the logical model this archetype binds to.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::backend",
+      "documentation": "Represents a physical backend, targetting a major technical space such as C++ or C#.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "kernel_name",
+          "type": "std::string",
+          "documentation": "Kernel that owns this backend.\n"
+        },
+        {
+          "name": "facets",
+          "type": "std::list<name>",
+          "documentation": "All facets within this backend.\n"
+        },
+        {
+          "name": "parts",
+          "type": "std::list<name>",
+          "documentation": "All parts within this backend.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::facet",
+      "documentation": "Represents a facet within a backend, such as type definitions.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "kernel_name",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::list<name>",
+          "documentation": "All archetypes in this facet.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::part",
+      "documentation": "Part whithin a backend.\n",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "kernel_name",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string"
+        },
+        {
+          "name": "external_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": "model_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        },
+        {
+          "name": "facet_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution does the facet make to the final path.\n"
+        },
+        {
+          "name": "internal_modules_path_contribution",
+          "type": "std::string",
+          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
+        },
+        {
+          "name": "requires_relative_path",
+          "type": "bool",
+          "documentation": "If true, a relative path should be generated for this part.\n"
+        },
+        {
+          "name": "facets",
+          "type": "std::list<name>",
+          "documentation": "All facets in this part.\n"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::list<name>",
+          "documentation": "All archetypes in this part.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::archetype_kind",
+      "stereotypes": [
+        "logical::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "kernel_name",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string"
+        },
+        {
+          "name": "file_extension",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }
