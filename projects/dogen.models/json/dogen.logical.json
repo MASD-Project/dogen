@@ -484,6 +484,10 @@
         {
           "name": "build_elements",
           "type": "build::element_repository"
+        },
+        {
+          "name": "physical_elements",
+          "type": "physical::element_repository"
         }
       ]
     },

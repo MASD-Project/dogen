@@ -42,6 +42,7 @@
 #include "dogen.logical/types/entities/orm/element_repository.hpp"
 #include "dogen.logical/types/entities/build/element_repository.hpp"
 #include "dogen.logical/types/entities/mapping/element_repository.hpp"
+#include "dogen.logical/types/entities/physical/element_repository.hpp"
 #include "dogen.logical/types/entities/decoration/element_repository.hpp"
 #include "dogen.logical/types/entities/structural/element_repository.hpp"
 #include "dogen.logical/types/entities/templating/element_repository.hpp"
@@ -86,7 +87,8 @@ public:
         const dogen::logical::entities::serialization::element_repository& serialization_elements,
         const dogen::logical::entities::visual_studio::element_repository& visual_studio_elements,
         const dogen::logical::entities::orm::element_repository& orm_elements,
-        const dogen::logical::entities::build::element_repository& build_elements);
+        const dogen::logical::entities::build::element_repository& build_elements,
+        const dogen::logical::entities::physical::element_repository& physical_elements);
 
 public:
     /**
@@ -258,6 +260,11 @@ public:
     void build_elements(const dogen::logical::entities::build::element_repository& v);
     void build_elements(const dogen::logical::entities::build::element_repository&& v);
 
+    const dogen::logical::entities::physical::element_repository& physical_elements() const;
+    dogen::logical::entities::physical::element_repository& physical_elements();
+    void physical_elements(const dogen::logical::entities::physical::element_repository& v);
+    void physical_elements(const dogen::logical::entities::physical::element_repository&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -289,6 +296,7 @@ private:
     dogen::logical::entities::visual_studio::element_repository visual_studio_elements_;
     dogen::logical::entities::orm::element_repository orm_elements_;
     dogen::logical::entities::build::element_repository build_elements_;
+    dogen::logical::entities::physical::element_repository physical_elements_;
 };
 
 }

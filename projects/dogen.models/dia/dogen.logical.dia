@@ -3013,7 +3013,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:point val="-219,-22.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-219.05,-22.9786;-196.12,-7.2786"/>
+        <dia:rectangle val="-219.05,-22.9786;-196.12,-6.4786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-219,-22.9286"/>
@@ -3022,7 +3022,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.600000000000003"/>
+        <dia:real val="16.400000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -3466,6 +3466,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#build::element_repository#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#physical_elements#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#physical::element_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -22939,13 +22962,13 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O151">
       <dia:attribute name="obj_pos">
-        <dia:point val="-212,-3"/>
+        <dia:point val="-209,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-212.05,-3.05;-190.66,1.45"/>
+        <dia:rectangle val="-209.05,-2.05;-187.66,2.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-212,-3"/>
+        <dia:point val="-209,-2"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -23369,13 +23392,13 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O154">
       <dia:attribute name="obj_pos">
-        <dia:point val="-239,-3"/>
+        <dia:point val="-239,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-239.05,-3.05;-214.965,1.45"/>
+        <dia:rectangle val="-239.05,-2.05;-214.965,2.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-239,-3"/>
+        <dia:point val="-239,-2"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -30616,19 +30639,19 @@ as a modeline.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-227.007,-3"/>
+        <dia:point val="-227.007,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-227.757,-7.3786;-218.8,-2.2"/>
+        <dia:rectangle val="-227.757,-6.5786;-218.8,-1.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-227.007,-3"/>
-        <dia:point val="-227.007,-5"/>
-        <dia:point val="-219,-5"/>
-        <dia:point val="-219,-7.3286"/>
+        <dia:point val="-227.007,-2"/>
+        <dia:point val="-227.007,-4"/>
+        <dia:point val="-219,-4"/>
+        <dia:point val="-219,-6.5286"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30760,19 +30783,19 @@ as a modeline.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-196.17,-7.3286"/>
+        <dia:point val="-196.17,-6.5286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.405,-8.0786;-195.42,-2.2"/>
+        <dia:rectangle val="-198.405,-7.2786;-195.42,-1.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-196.17,-7.3286"/>
-        <dia:point val="-196.17,-5"/>
-        <dia:point val="-201.355,-5"/>
-        <dia:point val="-201.355,-3"/>
+        <dia:point val="-196.17,-6.5286"/>
+        <dia:point val="-196.17,-4"/>
+        <dia:point val="-198.355,-4"/>
+        <dia:point val="-198.355,-2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -56,7 +56,8 @@ model::model(model&& rhs)
       serialization_elements_(std::move(rhs.serialization_elements_)),
       visual_studio_elements_(std::move(rhs.visual_studio_elements_)),
       orm_elements_(std::move(rhs.orm_elements_)),
-      build_elements_(std::move(rhs.build_elements_)) { }
+      build_elements_(std::move(rhs.build_elements_)),
+      physical_elements_(std::move(rhs.physical_elements_)) { }
 
 model::model(
     const dogen::logical::entities::name& name,
@@ -78,7 +79,8 @@ model::model(
     const dogen::logical::entities::serialization::element_repository& serialization_elements,
     const dogen::logical::entities::visual_studio::element_repository& visual_studio_elements,
     const dogen::logical::entities::orm::element_repository& orm_elements,
-    const dogen::logical::entities::build::element_repository& build_elements)
+    const dogen::logical::entities::build::element_repository& build_elements,
+    const dogen::logical::entities::physical::element_repository& physical_elements)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -98,7 +100,8 @@ model::model(
       serialization_elements_(serialization_elements),
       visual_studio_elements_(visual_studio_elements),
       orm_elements_(orm_elements),
-      build_elements_(build_elements) { }
+      build_elements_(build_elements),
+      physical_elements_(physical_elements) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -122,6 +125,7 @@ void model::swap(model& other) noexcept {
     swap(visual_studio_elements_, other.visual_studio_elements_);
     swap(orm_elements_, other.orm_elements_);
     swap(build_elements_, other.build_elements_);
+    swap(physical_elements_, other.physical_elements_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -144,7 +148,8 @@ bool model::operator==(const model& rhs) const {
         serialization_elements_ == rhs.serialization_elements_ &&
         visual_studio_elements_ == rhs.visual_studio_elements_ &&
         orm_elements_ == rhs.orm_elements_ &&
-        build_elements_ == rhs.build_elements_;
+        build_elements_ == rhs.build_elements_ &&
+        physical_elements_ == rhs.physical_elements_;
 }
 
 model& model::operator=(model other) {
@@ -455,6 +460,22 @@ void model::build_elements(const dogen::logical::entities::build::element_reposi
 
 void model::build_elements(const dogen::logical::entities::build::element_repository&& v) {
     build_elements_ = std::move(v);
+}
+
+const dogen::logical::entities::physical::element_repository& model::physical_elements() const {
+    return physical_elements_;
+}
+
+dogen::logical::entities::physical::element_repository& model::physical_elements() {
+    return physical_elements_;
+}
+
+void model::physical_elements(const dogen::logical::entities::physical::element_repository& v) {
+    physical_elements_ = v;
+}
+
+void model::physical_elements(const dogen::logical::entities::physical::element_repository&& v) {
+    physical_elements_ = std::move(v);
 }
 
 }
