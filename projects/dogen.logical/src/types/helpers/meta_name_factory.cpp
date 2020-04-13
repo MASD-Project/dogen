@@ -185,4 +185,34 @@ entities::name meta_name_factory::make_build_cmakelists_name() {
     return r;
 }
 
+entities::name meta_name_factory::make_physical_backend_name() {
+    static const auto r(
+        make_name("physical_backend"));
+    return r;
+}
+
+entities::name meta_name_factory::make_physical_facet_name() {
+    static const auto r(
+        make_name("physical_facet"));
+    return r;
+}
+
+entities::name meta_name_factory::make_physical_archetype_name() {
+    static const auto r(
+        make_name("physical_archetype"));
+    return r;
+}
+
+entities::name meta_name_factory::make_physical_archetype_kind_name() {
+    static const auto r(
+        make_name("physical_archetype_kind"));
+    return r;
+}
+
+entities::name meta_name_factory::make_physical_part_name() {
+    static const auto r(
+        make_name("physical_part"));
+    return r;
+}
+
 }

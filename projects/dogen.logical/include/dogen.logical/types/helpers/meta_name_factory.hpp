@@ -64,6 +64,11 @@ public:
     static entities::name make_visual_studio_msbuild_targets_name();
     static entities::name make_orm_common_odb_options_name();
     static entities::name make_build_cmakelists_name();
+    static entities::name make_physical_backend_name();
+    static entities::name make_physical_facet_name();
+    static entities::name make_physical_archetype_name();
+    static entities::name make_physical_archetype_kind_name();
+    static entities::name make_physical_part_name();
 };
 
 }

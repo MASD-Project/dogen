@@ -181,6 +181,31 @@ public:
         static const auto n(mnf::make_build_cmakelists_name());
         v.meta_name(n);
     }
+
+    void operator()(logical::entities::physical::backend& v) {
+        static const auto n(mnf::make_physical_backend_name());
+        v.meta_name(n);
+    }
+
+    void operator()(logical::entities::physical::facet& v) {
+        static const auto n(mnf::make_physical_facet_name());
+        v.meta_name(n);
+    }
+
+    void operator()(logical::entities::physical::archetype& v) {
+        static const auto n(mnf::make_physical_archetype_name());
+        v.meta_name(n);
+    }
+
+    void operator()(logical::entities::physical::archetype_kind& v) {
+        static const auto n(mnf::make_physical_archetype_kind_name());
+        v.meta_name(n);
+    }
+
+    void operator()(logical::entities::physical::part& v) {
+        static const auto n(mnf::make_physical_part_name());
+        v.meta_name(n);
+    }
 };
 
 void meta_naming_transform::
