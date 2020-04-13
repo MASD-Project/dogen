@@ -95,7 +95,17 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         << " ORM common ODB options: "
         << src.orm_elements().common_odb_options().size()
         << " build cmakelists: "
-        << src.build_elements().cmakelists().size();
+        << src.build_elements().cmakelists().size()
+        << " physical backends: "
+        << src.physical_elements().backends().size()
+        << " physical facets: "
+        << src.physical_elements().facets().size()
+        << " physical archetypes: "
+        << src.physical_elements().archetypes().size()
+        << " physical archetype kinds: "
+        << src.physical_elements().archetype_kinds().size()
+        << " physical parts: "
+        << src.physical_elements().parts().size();
 
     /*
      * Note that we are ignoring some elements, which do not require
@@ -145,6 +155,16 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         dst.orm_elements().common_odb_options());
     copy(src.build_elements().cmakelists(),
         dst.build_elements().cmakelists());
+    copy(src.physical_elements().backends(),
+        dst.physical_elements().backends());
+    copy(src.physical_elements().facets(),
+        dst.physical_elements().facets());
+    copy(src.physical_elements().archetypes(),
+        dst.physical_elements().archetypes());
+    copy(src.physical_elements().archetype_kinds(),
+        dst.physical_elements().archetype_kinds());
+    copy(src.physical_elements().parts(),
+        dst.physical_elements().parts());
 
     /*
      * Update the references of the merged model.
