@@ -12,21 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-12 Sun 22:20]
+#+CAPTION: Clock summary at [2020-04-13 Mon 18:30]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *23:51* |       |      | 100.0 |
+| *Total time*                                          | *27:55* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 23:51   |       |      | 100.0 |
-| Active                                                |         | 23:51 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 9:22 |  39.3 |
-| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.7 |
-| Sprint and product backlog grooming                   |         |       | 4:08 |  17.3 |
-| Emacs issues and improvements                         |         |       | 0:47 |   3.3 |
-| Analysis on implementing enablement in physical model |         |       | 3:10 |  13.3 |
-| Replace artefact properties with artefacts            |         |       | 4:06 |  17.2 |
-| Papers: Systems variability modeling                  |         |       | 1:53 |   7.9 |
+| Stories                                               | 27:55   |       |      | 100.0 |
+| Active                                                |         | 27:55 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 9:22 |  33.6 |
+| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.5 |
+| Sprint and product backlog grooming                   |         |       | 4:08 |  14.8 |
+| Emacs issues and improvements                         |         |       | 0:47 |   2.8 |
+| Nightly nursing                                       |         |       | 0:17 |   1.0 |
+| Analysis on implementing enablement in physical model |         |       | 3:10 |  11.3 |
+| Replace artefact properties with artefacts            |         |       | 4:06 |  14.7 |
+| Papers: Systems variability modeling                  |         |       | 2:55 |  10.4 |
+| Add physical entities to logical model                |         |       | 2:45 |   9.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -484,6 +486,15 @@ Time spent faffing around with Emacs.
   not quite sure.
 - get pdf-tools to work correctly.
 
+*** STARTED Nightly nursing                                           :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-13 Mon 09:40]--[2020-04-13 Mon 09:57] =>  0:17
+    :END:
+
+Time spent fixing issues with nightly builds, daily checks etc.
+
+- reached maximum builds on CDash.
+
 *** COMPLETED Analysis on implementing enablement in physical model   :story:
     CLOSED: [2020-04-11 Sat 17:11]
     :LOGBOOK:
@@ -675,15 +686,24 @@ Notes:
   enabled. We could add a "prune" transform for this. This needs to be
   done after enablement is moved to the physical model.
 
-*** STARTED Papers: Systems variability modeling                      :story:
+*** COMPLETED Papers: Systems variability modeling                    :story:
+    CLOSED: [2020-04-13 Mon 11:03]
     :LOGBOOK:
+    CLOCK: [2020-04-13 Mon 10:22]--[2020-04-13 Mon 11:03] =>  0:41
+    CLOCK: [2020-04-13 Mon 09:58]--[2020-04-13 Mon 10:09] =>  0:11
+    CLOCK: [2020-04-12 Sun 18:21]--[2020-04-12 Sun 18:31] =>  0:10
     CLOCK: [2020-04-12 Sun 18:12]--[2020-04-12 Sun 18:20] =>  0:08
     CLOCK: [2020-04-12 Sun 16:26]--[2020-04-12 Sun 18:11] =>  1:45
     :END:
 
 Read paper and create "journal club" video.
 
-*** Add physical entities to logical model                            :story:
+*** STARTED Add physical entities to logical model                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-13 Mon 17:00]--[2020-04-13 Mon 18:29] =>  1:29
+    CLOCK: [2020-04-13 Mon 16:22]--[2020-04-13 Mon 16:38] =>  0:16
+    CLOCK: [2020-04-13 Mon 11:04]--[2020-04-13 Mon 12:04] =>  1:00
+    :END:
 
 Whilst we wanted to first generate the files manually for the physical
 entities, it seems it may even be easier to start immediately by
@@ -740,6 +760,11 @@ vs multiple logical elements. For example:
   this is different from the visitor in order to ensure the conceptual
   model remains consistent. Intuitively we are trying to say that
   these elements are instantiating physical meta-model elements.
+
+Notes:
+
+- followed all the steps in [[file:sprint_backlog_21.org::*How to add new meta-model elements][sprint 21]] for adding new elements, the
+  only thing missing is adding the formatters.
 
 Merged stories:
 
