@@ -52,6 +52,11 @@
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
+#include "dogen.logical/types/entities/physical/backend.hpp"
+#include "dogen.logical/types/entities/physical/facet.hpp"
+#include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/types/entities/physical/archetype_kind.hpp"
+#include "dogen.logical/types/entities/physical/part.hpp"
 
 namespace dogen::logical::entities {
 
@@ -140,6 +145,21 @@ inline void elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.build_elements().cmakelists())
         v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -222,6 +242,22 @@ inline void elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.build_elements().cmakelists())
         v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
+        v(*pair.second);
+
 }
 
 template<typename TraversalVisitor>
@@ -303,6 +339,21 @@ inline void elements_traversal(entities::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.build_elements().cmakelists())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(*pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
         v(*pair.second);
 }
 /**@}*/
@@ -392,6 +443,21 @@ inline void shared_elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.build_elements().cmakelists())
         v(pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -474,6 +540,21 @@ inline void shared_elements_traversal(const entities::model& m,
 
     for (const auto& pair : m.build_elements().cmakelists())
         v(pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -555,6 +636,21 @@ inline void shared_elements_traversal(entities::model& m,
         v(pair.second);
 
     for (const auto& pair : m.build_elements().cmakelists())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().backends())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().facets())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetypes())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().archetype_kinds())
+        v(pair.second);
+
+    for (const auto& pair : m.physical_elements().parts())
         v(pair.second);
 }
 /**@}*/
