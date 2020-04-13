@@ -697,4 +697,54 @@ adapter::to_build_cmakelists(const logical::entities::location& l,
     return r;
 }
 
+boost::shared_ptr<logical::entities::physical::backend>
+adapter::to_physical_backend(const logical::entities::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::entities::element& ie) const {
+    using logical::entities::physical::backend;
+    auto r(boost::make_shared<backend>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<logical::entities::physical::facet>
+adapter::to_physical_facet(const logical::entities::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::entities::element& ie) const {
+    using logical::entities::physical::facet;
+    auto r(boost::make_shared<facet>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<logical::entities::physical::archetype>
+adapter::to_physical_archetype(const logical::entities::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::entities::element& ie) const {
+    using logical::entities::physical::archetype;
+    auto r(boost::make_shared<archetype>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<logical::entities::physical::archetype_kind>
+adapter::to_physical_archetype_kind(const logical::entities::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::entities::element& ie) const {
+    using logical::entities::physical::archetype_kind;
+    auto r(boost::make_shared<archetype_kind>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<logical::entities::physical::part>
+adapter::to_physical_part(const logical::entities::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::entities::element& ie) const {
+    using logical::entities::physical::part;
+    auto r(boost::make_shared<part>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 }

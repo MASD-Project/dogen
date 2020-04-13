@@ -64,6 +64,11 @@
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
+#include "dogen.logical/types/entities/physical/backend.hpp"
+#include "dogen.logical/types/entities/physical/facet.hpp"
+#include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/types/entities/physical/archetype_kind.hpp"
+#include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::orchestration::helpers {
@@ -421,6 +426,52 @@ public:
      */
     boost::shared_ptr<logical::entities::build::cmakelists>
     to_build_cmakelists(const logical::entities::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::entities::element& ie) const;
+
+public:
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::physical::backend.
+     */
+    boost::shared_ptr<logical::entities::physical::backend>
+    to_physical_backend(const logical::entities::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::entities::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::physical::facet.
+     */
+    boost::shared_ptr<logical::entities::physical::facet>
+    to_physical_facet(const logical::entities::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::entities::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::physical::archetype.
+     */
+    boost::shared_ptr<logical::entities::physical::archetype>
+    to_physical_archetype(const logical::entities::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::entities::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::physical::archetype_kind.
+     */
+    boost::shared_ptr<logical::entities::physical::archetype_kind>
+    to_physical_archetype_kind(const logical::entities::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::entities::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::physical::part.
+     */
+    boost::shared_ptr<logical::entities::physical::part>
+    to_physical_part(const logical::entities::location& l,
         const stereotypes_conversion_result& scr,
         const injection::entities::element& ie) const;
 };
