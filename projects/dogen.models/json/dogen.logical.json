@@ -1561,6 +1561,26 @@
         {
           "name": "build_cmakelists",
           "type": ""
+        },
+        {
+          "name": "physical_backend",
+          "type": ""
+        },
+        {
+          "name": "physical_facet",
+          "type": ""
+        },
+        {
+          "name": "physical_archetype",
+          "type": ""
+        },
+        {
+          "name": "physical_archetype_kind",
+          "type": ""
+        },
+        {
+          "name": "physical_part",
+          "type": ""
         }
       ]
     },

@@ -129,6 +129,21 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::build_cmakelists:
         attr = "\"build_cmakelists\"";
         break;
+    case static_stereotypes::physical_backend:
+        attr = "\"physical_backend\"";
+        break;
+    case static_stereotypes::physical_facet:
+        attr = "\"physical_facet\"";
+        break;
+    case static_stereotypes::physical_archetype:
+        attr = "\"physical_archetype\"";
+        break;
+    case static_stereotypes::physical_archetype_kind:
+        attr = "\"physical_archetype_kind\"";
+        break;
+    case static_stereotypes::physical_part:
+        attr = "\"physical_part\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

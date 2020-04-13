@@ -63,7 +63,12 @@ enum class static_stereotypes : unsigned int {
     visual_studio_project = 29,
     visual_studio_msbuild_targets = 30,
     orm_common_odb_options = 31,
-    build_cmakelists = 32
+    build_cmakelists = 32,
+    physical_backend = 33,
+    physical_facet = 34,
+    physical_archetype = 35,
+    physical_archetype_kind = 36,
+    physical_part = 37
 };
 
 }
