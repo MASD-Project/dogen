@@ -77,6 +77,77 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Replace meta-model naming with stereotypes                        :story:
+
+At present we are using meta-names for binding formatters to logical
+meta-model elements. This is not a very good way of doing things. We
+should bind them directly at the stereotype level. This would allow us
+to decomission a lot of code:
+
+1. =meta_naming_transform=, =meta_name_factory=.
+2. =stereotypes_helper=
+3. =static_stereotypes= enumeration
+
+*** Consider creating a meta-element for logical elements             :story:
+
+We probably either have a story for this or these ideas are scattered
+over a few stories. At present we have a number of properties
+associated with assets (i.e. logical) model elements which we set
+manually (each of these probably has a separate story):
+
+- meta-name
+- stereotype
+- whether a type is intrinsically generatable or not
+- RGB colour
+
+There are probably more. These are all functions of the meta-type we
+are modeling. Just like we need "formatters" as a meta-type, we also
+need a way to express these within the model itself. The ideal
+solution would be to have a meta-type for these elements such that
+when we code-generate, we can add the additional elements that are
+specific to the logical model meta-types. However, the snag with that
+approach is that these elements have all attributes of an =object=
+plus these additional fields. We would have to create templates that
+intersperse object functionality with this meta-data, resulting on a
+lot of code duplication.
+
+A better approach is to copy what we did for ORM. We can have
+additional stereotypes associated with a meta-type, and those would
+result in the population of meta-data information. If those are
+present then we emit code for it (seems a bit much to create a facet
+for it as we did with ORM).
+
+Notes:
+
+- we probably don't need the meta-name. We just use it to bind
+  formatters to meta-types. We can use the "intrinsic stereotype" for
+  this.
+- we could use the same ORM-like approach for formatters and just
+  extend object.
+- we probably need a namespace for masd types. At present we have
+  =templating= but these are actually masd/dogen specific templates,
+  so they should also be in the same namespace.
+
+Merged stories:
+
+*Investigate use of =is_element_type= in stereotypes*
+
+We seem to only be considering a subset of the elements when doing the
+stereotype transform, yet its all working. Need to figure out why, and
+if this is no longer required, remove this method.
+
+*Add logical entity for meta-model elements*
+
+We now have a clear pattern for all logical model elements: they need
+a stereotype and an associated description, which must be registered
+somewhere (to avoid duplication and for documentation purposes). This
+is known at compile time - i.e. static.
+
+We could easily create a logical model representation of these
+elements and then allow users to annotate types with it. However, they
+must still remain =objects= because we still need to be able to model
+regular OO relationships.
+
 *** Consider renaming profiles                                        :story:
 
 The correct MDE terminology for feature selection is configuration. We
@@ -677,7 +748,6 @@ We should have meta-data configuration that describes the ODB files:
 We should generalise this problem so that when we are using other
 cartridges such as protobuf/grpc, we can extend it for these use
 cases - expected cartridge files?
-
 
 *** Add support for the static/dynamic pattern                        :story:
 
@@ -1619,46 +1689,6 @@ Ideas:
 
 - configuration
 
-*** Consider creating a meta-element for logical elements             :story:
-
-We probably either have a story for this or these ideas are scattered
-over a few stories. At present we have a number of properties
-associated with assets (i.e. logical) model elements which we set
-manually (each of these probably has a separate story):
-
-- meta-name
-- stereotype
-- whether a type is intrinsically generatable or not
-- RGB colour
-
-There are probably more. These are all functions of the meta-type we
-are modeling. Just like we need "formatters" as a meta-type, we also
-need a way to express these within the model itself. The ideal
-solution would be to have a meta-type for these elements such that
-when we code-generate, we can add the additional elements that are
-specific to the logical model meta-types. However, the snag with that
-approach is that these elements have all attributes of an =object=
-plus these additional fields. We would have to create templates that
-intersperse object functionality with this meta-data, resulting on a
-lot of code duplication.
-
-A better approach is to copy what we did for ORM. We can have
-additional stereotypes associated with a meta-type, and those would
-result in the population of meta-data information. If those are
-present then we emit code for it (seems a bit much to create a facet
-for it as we did with ORM).
-
-Notes:
-
-- we probably don't need the meta-name. We just use it to bind
-  formatters to meta-types. We can use the "intrinsic stereotype" for
-  this.
-- we could use the same ORM-like approach for formatters and just
-  extend object.
-- we probably need a namespace for masd types. At present we have
-  =templating= but these are actually masd/dogen specific templates,
-  so they should also be in the same namespace.
-
 *** Correct implementation of templates in meta-model                 :story:
 
 At present we have a number of hacks to get stitch and wale to
@@ -1723,18 +1753,6 @@ support in the adaptor transform, but:
 - we did not add it to the profile template and profile classes;
 - consequently we are missing all of the validation logic defined
   above.
-
-*** Consider creating a =modeling= folder                             :story:
-
-At present we were thinking about having several folders related to
-modeling, for each component:
-
-- templates
-- models
-- etc
-
-It may make more sense to gather them all under =modeling=. We could
-also have a product level folder with the same name.
 
 *** Model types and element binding                                   :story:
 
@@ -1909,6 +1927,20 @@ Notes:
   consistent. See [[*Introduce dogen projects][Introduce dogen projects]].
 
 Merged stories:
+
+*Consider creating a =modeling= folder/part*
+
+At present we were thinking about having several folders related to
+modeling, for each component:
+
+- templates
+- models
+- etc
+
+It may make more sense to gather them all under =modeling=. We could
+also have a product level folder with the same name.
+
+So =modeling= is the part, and =templates=, =models= etc are facets.
 
 *Consider creating a "model" meta-model element*
 
@@ -4749,12 +4781,6 @@ doing for boilerplate formatter:
   brackets.
 - c# dependencies are expected to be valid identifiers.
 
-*** Investigate use of =is_element_type= in stereotypes               :story:
-
-We seem to only be considering a subset of the elements when doing the
-stereotype transform, yet its all working. Need to figure out why, and
-if this is no longer required, remove this method.
-
 *** Operations to add when we have code merging support               :story:
 
 This story lists all of the operations that should be added to objects
@@ -6956,7 +6982,56 @@ The vision for V3 is around the Dogen ecosystem. This involves all the
 tooling around Dogen, including LSP support for both stitch and all
 supported injectors (Dia, JSON, org-mode?).
 
-** Core Work
+** Candidates
+
+*** Implement wale in terms of existing template libraries            :story:
+
+Originally we implemented wale as a quick hack, but we stated:
+
+#+begin_quote
+A second point is the use of [[https://github.com/DomainDrivenConsulting/bustache][bustache]] vs rolling our own trivial
+mustache-like implementation:
+
+- if we use bustache we can, in the future, start to make use of
+  complex mustache templates. We don't have a use case for this now,
+  but there is no reason to preclude it either.
+- however, with bustache as a third-party dependency we now have to
+  worry about generating OSX and windows binaries for the
+  library. Until we do, the builds will break.
+
+For now, to make life easier we will roll our own. As soon as we have
+a stable windows environment we will move to bustache.
+#+end_quote
+
+We should really move to one of these mustache implementations. Inja
+seems to be the most sensible one, even though it depends on a JSON
+library. We will need JSON internally anyway, so it may be the time to
+add a dependency. We should also have a way to associate an arbitrary
+JSON document with a formatter so that users can create their own
+templates with their own parameters and the model is merely used for
+pass-through.
+
+We should also start to create a standard set of variables that dogen
+exports into inja such as object name, namespaces, etc. These are
+"system variables" and do not require any action from the user. In
+fact, if we use the JSON based approach, we could define a JSON schema
+for meta-model elements which is MASD specific. These are used by the
+templates.
+
+Note that stitch only makes sense when we are creating a code
+generator (at least given the use cases we have so far) whereas inja
+makes sense even for regular models and can be applied to items in any
+technical space.
+
+Links:
+
+- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
+- [[https://github.com/no1msd/mstch][mstch]]
+- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
+- [[https://github.com/melpon/ginger][ginger]]
+- [[https://github.com/qicosmos/render][render]]
+- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library.
+- [[https://github.com/jrziviani/amps][amps]]
 
 *** Org-mode schemas                                                  :story:
 
@@ -7181,6 +7256,89 @@ Links:
 - [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+
+*** Dogen studio: builds and binaries for users                       :story:
+
+It would be nice if when a user code-generates a model in the dogen
+studio site, we could do a travis build with the generated code. The
+build would then produce static/shared libraries, assemblies, etc so
+that the model is ready to use. We could even generate a debian
+package. Dogen would produce all the required plumbing (CMake,
+msbuild, etc).
+
+We could even get away with having a single project in github/travis,
+and doing a single commit that erases all previous state and instates
+the new model. We would also need a queue telling users where they
+are, so that all builds are serialised. For C#, it would be even
+cooler if we could directly upload the model into nuget after the
+build and supply the user with the nuget commands required to get the
+model. However, the only problem may be that we'd end up with a lot of
+dodgy code in nuget, so maybe this is not ideal.
+
+Actually given we want to move away from Travis, it makes sense for
+this to be done using regular cloud functionality (e.g. docker, etc).
+
+*** Add support for element renaming                                  :story:
+
+This story is still in its early days. We could probably create a
+simple tool that renames types. There are several things we may want
+to achieve from this:
+
+- dia updating tool that receives new and old name and updates the
+  diagram. This makes renames easier because we keep missing places
+  where types are used.
+- dogen support: with access to new name and old name we can now
+  rename files which are not code generated. This avoids the usual
+  loss of work, git reverts etc.
+
+The problem we have is that if we do not update the diagram
+automatically, the rename is not that useful. However, updating the
+diagram is not entirely trivial. We probably could record XPaths
+against elements and then use those XPaths to update the XML
+tree. This would be a multi-step process:
+
+- first we'd generate the final Yarn model;
+- then use the old ID to locate the element to rename and all of its
+  usages;
+- then update the XML based on the XPaths obtained from the renamed
+  elements and save it to file (maybe as =.new=?).
+- we can then reload the yarn model from the new and generate from
+  there.
+
+A slightly more useful approach would be to integrate clang with
+dogen. It would be a multi-step process:
+
+- update the input format (JSON, DIA)
+- run clang rename across all affected models; for this, we need to
+  know the references. This is more problematic across products, so
+  for now lets just imagine an update within a product. We would read
+  all models in a product to create a model dependency graph, then use
+  that to obtain a list of files that depend on the item to be
+  renamed. This is done by separating the generated and non-generated
+  files. The generated files we can infer dependencies from the
+  metamodel. The non-generated files we can infer dependencies from
+  the list of includes (for C++).
+- then we'd generate clang tool code to rename all of the dependent
+  files.
+- finally we'd code generate.
+
+This process shares a lot of commonalities with finding deprecated
+(not used) elements.
+
+We should also take into account model renaming. This is probably
+easier; we could add a renaming activity to CLI. This requires a bit
+of thinking.
+
+*Automatic Renames*
+
+This could be potentially done automatically if we could access say
+the existing version of the diagram and the new version; we could load
+both models and then do a diff. This could be a bit dangerous though
+if there are other changes, etc.
+
+*Attribute Renames*
+
+Another useful use case, is the renaming of attributes.
 
 * Future Releases
 
@@ -14614,25 +14772,14 @@ Allow users to supply coordinates to transforms in some form so that
 we only dump a subset of the transform data. This could be the ID of
 the transform.
 
-*** Travis builds and binaries for users                    :reviewing:story:
-
-It would be nice if when a user code-generates a model in the site, we
-could do a travis build with the generated code. The build would then
-produce static/shared libraries, assemblies, etc so that the model is
-ready to use. We could even generate a debian package.
-
-Darter would produce all the required plumbing (CMake, msbuild, etc).
-
-We could even get away with having a single project in github/travis,
-and doing a single commit that erases all previous state and instates
-the new model. We would also need a queue telling users where they
-are, so that all builds are serialised. For C#, it would be even
-cooler if we could directly upload the model into nuget after the
-build and supply the user with the nuget commands required to get the
-model. However, the only problem may be that we'd end up with a lot of
-dodgy code in nuget, so maybe this is not ideal.
-
 *** Add support for UML profiles and XMI                               :epic:
+
+In order to communicate with external tools, we should try to support
+XMI as an injector. For this we could use the XSD for XMI as the basis
+for the injector. We also need to create the MASD UML profile with
+full support for all of the logical model elements.
+
+Previous understanding:
 
 We now understand most of the picture of how UML is related to
 Dogen. eCore is an implementation of UML's meta-model - it diverges
@@ -14645,14 +14792,14 @@ to inherit from say =Class= and create a new meta-class that extends
 =Class= in some way (in eCore terms, =eClass=).
 
 For instance, we could create a meta-class called =visitor=. In fact,
-all meta-types in =yarn= can be redone as extensions to the UML
-meta-model. It just so happens that we did not understand the UML
-meta-model properly so we created a completely separate meta-model and
-then we mapped the Dia representation of the UML meta-model into
-yarn. But this muddles things because we are using Dia's diagram
-meta-model, which contains an incomplete representation of UML's
-meta-model (since it exists purely for drawing diagrams). A better way
-to go about this is:
+all meta-types in =masd= can be redone as extensions to the UML
+meta-model (e.g. MASD profile). It just so happens that we did not
+understand the UML meta-model properly so we created a completely
+separate meta-model and then we mapped the Dia representation of the
+UML meta-model into yarn. But this muddles things because we are using
+Dia's diagram meta-model, which contains an incomplete representation
+of UML's meta-model (since it exists purely for drawing diagrams). A
+better way to go about this is:
 
 - create a c++ implementation of the ecore model. Use exactly the same
   terminology - e.g. =eclass= etc.
@@ -14892,55 +15039,6 @@ Links:
 
 - [[http://www.learncpp.com/cpp-tutorial/125-the-virtual-table/][12.5 — The virtual table]]
 
-*** Implement wale in terms of existing template libraries            :story:
-
-Originally we implemented wale as a quick hack, but we stated:
-
-#+begin_quote
-A second point is the use of [[https://github.com/DomainDrivenConsulting/bustache][bustache]] vs rolling our own trivial
-mustache-like implementation:
-
-- if we use bustache we can, in the future, start to make use of
-  complex mustache templates. We don't have a use case for this now,
-  but there is no reason to preclude it either.
-- however, with bustache as a third-party dependency we now have to
-  worry about generating OSX and windows binaries for the
-  library. Until we do, the builds will break.
-
-For now, to make life easier we will roll our own. As soon as we have
-a stable windows environment we will move to bustache.
-#+end_quote
-
-We should really move to one of these mustache implementations. Inja
-seems to be the most sensible one, even though it depends on a JSON
-library. We will need JSON internally anyway, so it may be the time to
-add a dependency. We should also have a way to associate an arbitrary
-JSON document with a formatter so that users can create their own
-templates with their own parameters and the model is merely used for
-pass-through.
-
-We should also start to create a standard set of variables that dogen
-exports into inja such as object name, namespaces, etc. These are
-"system variables" and do not require any action from the user. In
-fact, if we use the JSON based approach, we could define a JSON schema
-for meta-model elements which is MASD specific. These are used by the
-templates.
-
-Note that stitch only makes sense when we are creating a code
-generator (at least given the use cases we have so far) whereas inja
-makes sense even for regular models and can be applied to items in any
-technical space.
-
-Links:
-
-- [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
-- [[https://github.com/no1msd/mstch][mstch]]
-- [[https://github.com/mrtazz/plustache][plustache]] (in vcpkg)
-- [[https://github.com/melpon/ginger][ginger]]
-- [[https://github.com/qicosmos/render][render]]
-- [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library.
-- [[https://github.com/jrziviani/amps][amps]]
-
 *** Model anonymiser and slicer                                       :story:
 
 A user may create a model which triggers a problem in dogen. For
@@ -15023,67 +15121,12 @@ Interestingly, we could use this to produce a weighted list of usages
 that if we are trying to remove it we can figure out how used the type
 is and where.
 
+See also the story about language attributes: [[*Consider adding C#/C++ attributes][Consider adding C#/C++
+attributes]].
+
 Links:
 
 - [[https://github.com/llvm-mirror/clang-tools-extra][clang tools extra]]: including clangd, a LSP-based code indexer.
-
-*** Add support for element renaming                                  :story:
-
-This story is still in its early days. We could probably create a
-simple tool that renames types. There are several things we may want
-to achieve from this:
-
-- dia updating tool that receives new and old name and updates the
-  diagram. This makes renames easier because we keep missing places
-  where types are used.
-- dogen support: with access to new name and old name we can now
-  rename files which are not code generated. This avoids the usual
-  loss of work, git reverts etc.
-
-The problem we have is that if we do not update the diagram
-automatically, the rename is not that useful. However, updating the
-diagram is not entirely trivial. We probably could record XPaths
-against elements and then use those XPaths to update the XML
-tree. This would be a multi-step process:
-
-- first we'd generate the final Yarn model;
-- then use the old ID to locate the element to rename and all of its
-  usages;
-- then update the XML based on the XPaths obtained from the renamed
-  elements and save it to file (maybe as =.new=?).
-- we can then reload the yarn model from the new and generate from
-  there.
-
-A slightly more useful approach would be to integrate clang with
-dogen. It would be a multi-step process:
-
-- update the input format (JSON, DIA)
-- run clang rename across all affected models; for this, we need to
-  know the references. This is more problematic across products, so
-  for now lets just imagine an update within a product. We would read
-  all models in a product to create a model dependency graph, then use
-  that to obtain a list of files that depend on the item to be
-  renamed. This is done by separating the generated and non-generated
-  files. The generated files we can infer dependencies from the
-  metamodel. The non-generated files we can infer dependencies from
-  the list of includes (for C++).
-- then we'd generate clang tool code to rename all of the dependent
-  files.
-- finally we'd code generate.
-
-This process shares a lot of commonalities with finding deprecated
-(not used) elements.
-
-*Automatic Renames*
-
-This could be potentially done automatically if we could access say
-the existing version of the diagram and the new version; we could load
-both models and then do a diff. This could be a bit dangerous though
-if there are other changes, etc.
-
-*Attribute Renames*
-
-Another useful use case, is the renaming of attributes.
 
 *** Overuse of =std::set=, =std::map=, etc                            :story:
 
@@ -15095,14 +15138,15 @@ need sets/etc or if there are other alternatives:
 In cases where we know upfront the number of elements we require and
 we already have them sorted, we may not need a set.
 
-*** Add support for multiple backends                                  :epic:
+*** Add support for multiple kernels                                   :epic:
 
 #+begin_quote
 This story is a very vague story that keeps track of ideas on making
 dogen useful for code generators of other kinds.
 #+end_quote
 
-One of the stories in the backlog covers other targets of code generation:
+One of the stories in the backlog covers other targets of code
+generation:
 
 [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-thrift-and-protocol-buffers][Add support for thrift and protocol buffers]]
 
@@ -15225,7 +15269,7 @@ its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
 
-*** Create a visitor interface with multiple implementations          :story:
+*** Create a visitor interface with multiple implementations :reviewing:story:
 
 #+begin_quote
 *Story*: As a dogen user, I need multiple visitor interfaces so that I
