@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-14 Tue 21:28]
+#+CAPTION: Clock summary at [2020-04-15 Wed 08:55]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *28:21* |       |      | 100.0 |
+| *Total time*                                          | *28:54* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 28:21   |       |      | 100.0 |
-| Active                                                |         | 28:21 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 9:22 |  33.0 |
-| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.5 |
-| Sprint and product backlog grooming                   |         |       | 4:34 |  16.1 |
-| Emacs issues and improvements                         |         |       | 0:47 |   2.8 |
+| Stories                                               | 28:54   |       |      | 100.0 |
+| Active                                                |         | 28:54 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 9:22 |  32.4 |
+| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.4 |
+| Sprint and product backlog grooming                   |         |       | 5:07 |  17.7 |
+| Emacs issues and improvements                         |         |       | 0:47 |   2.7 |
 | Nightly nursing                                       |         |       | 0:17 |   1.0 |
-| Analysis on implementing enablement in physical model |         |       | 3:10 |  11.2 |
-| Replace artefact properties with artefacts            |         |       | 4:06 |  14.5 |
-| Papers: Systems variability modeling                  |         |       | 2:55 |  10.3 |
-| Add physical entities to logical model                |         |       | 2:45 |   9.7 |
+| Analysis on implementing enablement in physical model |         |       | 3:10 |  11.0 |
+| Replace artefact properties with artefacts            |         |       | 4:06 |  14.2 |
+| Papers: Systems variability modeling                  |         |       | 2:55 |  10.1 |
+| Add physical entities to logical model                |         |       | 2:45 |   9.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -459,6 +459,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-15 Wed 08:22]--[2020-04-15 Wed 08:55] =>  0:33
     CLOCK: [2020-04-14 Tue 08:20]--[2020-04-14 Tue 08:46] =>  0:26
     CLOCK: [2020-04-11 Sat 21:50]--[2020-04-11 Sat 22:27] =>  0:37
     CLOCK: [2020-04-11 Sat 16:59]--[2020-04-11 Sat 17:10] =>  0:11
@@ -1254,6 +1255,55 @@ We also need a way to populate the dependencies as a transform. This
 must be done in =m2t= because we need the formatters. We can rely on
 the same approach as =inclusion_dependencies= but instead of creating
 /inclusion dependencies/, we are just creating /dependencies/.
+
+*** Consider allowing representation of namespaces in file names      :story:
+
+Languages like .Net represent namespacing using dots rather than
+separate folders. Perhaps we should support a mode of operation where
+all files are placed in a single folder but have the namespacing
+encoded in the file name. For example:
+
+: /a_project/types/a.cpp
+: /a_project/io/a_io.cpp
+
+would become:
+
+: /a_project/types_a.cpp
+: /a_project/io_a_io.cpp
+
+or, using dot notation, so we can distinguish namespaces from
+"composite" names:
+
+: /a_project/types.a.cpp
+: /a_project/io.a_io.cpp
+
+We do not have a use case for this yet, but it should be fairly
+straight forward to add it. We just need meta-data support to enable
+the feature and then take it into account when generating the file
+names (e.g. instead of using =/= as a separator, use =.=).
+
+Actually this is _almost_ already possible: we provide a facet folder
+meta-data that is always used to generate a new folder. If however
+there was a way for it to not generate a folder we could achieve
+this. For example, say we had to supply:
+
+: /types/
+
+as the facet folder. Then the user could simply supply instead:
+
+: types_
+: types.
+
+And no folder would be created.
+
+Notes:
+
+- see also the story on destinations.
+- consider splitting this story into two: one is about how folder
+  layout (physical) may need to match namespace layout (logical);
+  another is related to allowing users to flatten facet
+  directories. They have some connection, but its not obvious how much
+  they overlap.
 
 *** Add a PM enablement and overwrite transform                       :story:
 

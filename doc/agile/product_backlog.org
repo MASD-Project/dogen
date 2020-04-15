@@ -77,6 +77,208 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Rename main Dogen package in Debian                               :story:
+
+At present we seem to have called our package =dogen-applications=:
+
+: $ apt-cache search dogen-applications
+: dogen-applications - The Domain Generator - Generates source code for domain driven development.
+
+We should try to call it just =dogen=.
+
+Merged stories:
+
+*Rename debian package*
+
+At present our package is called =dogen-applcations=. Since there will
+only be one dogen application/package, this is a confusion name. We
+should rename it. Names:
+
+- masd-dogen
+
+*** Rename facets                                                     :story:
+
+We originally called our support for =std::hash= just =hash= and our
+support for =boost::serialization= just =serialization=. The problem
+is:
+
+- we may want to also support =boost::hash=.
+- we may want to support other serialisation types.
+
+We should rename these. Perhaps:
+
+- =std_hash=
+- =boost_serialization=: a tad verbose, but quite explicit.
+
+In addition, =io= is very misleading as the facet is not supposed to
+do I/O proper (e.g. serialisation) but more pretty-printing or debug
+dumping. So perhaps =pretty_print=.
+
+Test data is a strange name. We need something slightly more idiomatic
+such as perhaps sequence? We need to look into STL generator
+terminology. We should also look into Rx and transducers - these
+should be pluggable into these. Ranges also come to mind.
+
+Merged stories:
+
+*Rename the =io= facet*
+
+IO is a very bad name for this facet. Everyone knows this as
+"pretty-printing". We should call it pretty-printing and use =pp= as
+the short name (folders, etc).
+
+*** Add merging code generation support                                :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to manually change some code in
+generated files so that I can add functionality that is missing in
+dogen.
+#+end_quote
+
+At present it is not possible to manually add methods to a class that
+was code generated; one must stop code generating the class and
+maintain the whole class manually. This is made even more painful by
+the fact that one cannot add support for IO etc for these types
+manually.
+
+However, in a lot of cases it makes sense to have a combination of
+manually generated and code generated code:
+
+- value objects need helper methods such as for example boolean
+  properties (e.g. =is_empty=) that make use of other properties, or
+  simple methods such as population etc that really belong in the
+  object rather than an external service;
+- services sometimes need state and it would be good if we could
+  manage that via code generation.
+
+For this we need a merging code generator: that is, a code generator
+that is aware of code that was crafted manually and does not overwrite
+it - but instead "intelligently" merges manual with code generated
+code.
+
+From the beginning we avoided this because we thought it would be too
+complicated for dogen. However, its becoming apparent that this is a
+needed feature for the real world - there are many cases where we are
+working around this deficiency. A few solutions are possible:
+
+- let the code generator manage the header file and create two types
+  of CPP files, one which includes the other: a manual and an
+  "automatic" one. This would effectively separate the two types of
+  code. For this dogen would have to be able to generate complex types
+  in operations (e.g. we'd have to solve the lack of support for
+  =const std::string&=).
+- use clang to do the merging. this probably means adding some kind of
+  attribute to every method - possibly using C++ attribute support
+  (e.g. =[ [generated ] ]= and/or =[ [ manual ] ]= (spaces due to org
+  mode). We could then say to clang: read current state of the file,
+  grab every non-generated method and copy them across to the newly
+  code generated file. Merging could be the final stage before
+  writing. In addition, we should also have some dynamic extensions to
+  determine which files require merging. The dynamic extension could
+  be populated automatically (e.g. grep for the manual attribute) or
+  manually. Note that using clang to do merging will make things a lot
+  slower so we probably want to know up front which files need to be
+  merged to avoid doing spurious work.
+
+Notes:
+
+- include management would be a mix of manual versus automatically
+  generated. This is not possible because there will be no way to
+  determine which one is which. To solve this problem we need to allow
+  users to add include files from the dynamic extensions and get those
+  processed like all the other includes. In the new world this means
+  adding includes to the formatter settings. These are local
+  settings. As at present, we cannot identify a use case for adding an
+  include file for all types, so there is no need to support this
+  feature at the global settings level. Thus this fits nicely with the
+  existing settings infrastructure.
+- merging could be done without needing clang, which would also make
+  it cross language. All that is required is for the language to
+  support some kind of meta-data to mark a method as "manually
+  generated". This could even be done using comments but this is not
+  ideal. The process would then be: dogen would open up an existing
+  source file and locate the attribute; then look for a open brackets
+  to indicate the start of the method (={=) and then find the matching
+  close brackets (=}=). We could keep a counter and increment it when
+  a new open bracket is found and decrement it when a close bracket is
+  found. When its zero we are done. All the code from the attribute to
+  the close brackets would be lifted. A very simple regex matching
+  would be done to find the method name - or perhaps some trivial
+  parsing could be done, but it should be kept as simple as
+  possible. The objective is simply to figure out the method name. The
+  method is copied across and stored in the =cpp= model, in the
+  correct method. When code generating, if a method is marked as
+  "manually generated" and if there is implementation content, we dump
+  that; otherwise we generate the skeleton of the method as if it was
+  not "manually generated". We could also create a very simple spirit
+  parser that only knows of comments, function names and function
+  bodies.
+- merging could be done as part of yarn, in meta-data. That is, we
+  could annotate the merged method into language specific properties
+  in the meta-data and then query those in the language specific model
+  generation. We could have another yarn workflow to look for files;
+  it could use the meta-data for file path. The extension will tell it
+  what "function parser" to use. We could literally look through the
+  meta-data extensions looking for file path, and for each run the
+  "function parser"; it will return a set of "manual" functions. These
+  we can then slot into the meta-data and reuse later on. Actually, we
+  can't use meta-data for this given the existing convention that
+  meta-data is constant. However, nothing stops us from adding the
+  required properties to yarn directly (e.g. we could have an
+  =operation= which has a language specific container of
+  implementations), to be used by formatters. Interestingly, this then
+  seems to share some logic with method helpers. That is, if we could
+  supply the stitch template as an operation (per facet, per
+  language) and if we could annotate the operation somehow as
+  "external" to the object, helper methods could use the same
+  infrastructure. But perhaps this doesn't make a lot of sense since
+  for helper methods we need to run the formatter whereas for merging
+  we already have the final form of the code and we just need to carry
+  it along to dump it in the formatter.
+- the proper technical name for methods that can be manually edited is
+  "protected regions". Merging is not a technical term according to
+  MDSD at least.
+- the act of checking the generated files vs the user edited files is
+  called "model synchronisation" and its part of incremental
+  transformation (according to [[https://pdfs.semanticscholar.org/7eca/ca8db190608dc4482999e19b1593cc6ad4e5.pdf][Czarnecki and Helsen]])
+
+We should also address the MDSD comment:
+
+#+begin_quote
+If, for performance reasons, or because the target language doesn’t
+offer any options for consolidating different artifacts, handwritten
+code must be inserted into generated code directly, the introduction
+of protected areas is inevitable. Please do this only if such
+exceptional conditions require this approach!
+#+end_quote
+
+- We will need to support multiple merging strategies, depending on
+  the use case:
+  - simple extension: when we just want to add a method or two to an
+    otherwise generated object. For this, protected regions at the
+    function level is probably enough.
+  - large extensions: when we want to add lots of functionality but
+    there is a small component of code generation. For this we want
+    some large blocks of protected regions that the user manages
+    (includes, anonymous namespace, class, etc. The user can then put
+    whatever it wants in those).
+  - private inheritance: we could create a private/internal base class
+    with all of the generated code and then inherit privately from it
+    in a hand-crafted file. Only available on C++.
+  - partial classes: one definition is code generated, the other
+    hand-crafted. Only available in C#.
+
+- interestingly, it seems that merging is a variation of a wale
+  template. Basically we can generate the file, slot in the GUIDs for
+  the protected regions as wale keys, then read the protected regions
+  from the file system into a wale KVP container and then instantiate
+  the generated file as if it was a wale template.
+
+Links:
+
+- [[https://arxiv.org/pdf/1509.04498.pdf][A comparison of mechanisms for integrating handwritten and generated
+  code for object-oriented programming languages]]
+
 *** Replace meta-model naming with stereotypes                        :story:
 
 At present we are using meta-names for binding formatters to logical
@@ -355,6 +557,53 @@ Notes:
 
 - the binding should be done at the streotype level, not model
   element.
+
+Merged stories:
+
+*Model types and element binding*
+
+Once we introduce the concept of model types (e.g. product, component,
+possibly different types of components), we should also take into
+account that some model types don't support some model elements. It
+should be possible to declare which model types support which element
+types such that if a user tries to use an invalid model type, we get a
+sensible error. In effect, this is a binding problem at the meta-model
+level.
+
+One of the component model types should be "generative
+components". These are used to augment the code generator. We need to
+look at the thesis on generative development to look for terminology.
+
+We should also have model types for terraform, etc.
+
+One way to implement this is to add a feature at the element (once we
+have a way of expressing dogen meta-elements) that lists the supported
+model types for a given element.
+
+*logical models could have a model classification*
+
+Consider creating an enumeration for model classification (e.g. type
+of the model):
+
+- relational model
+- core domain model
+- generic sub-domain model
+- segregated core model
+
+This still requires a lot of analysis work. This is kind of a model
+level stereotype which can be used by the code generator for example
+to determine which models are compatible. It could also be used to
+determine what facets can be enabled/disabled.
+
+*Merged with modes of operation story:*
+
+Create "modes" of operation: relational, object-oriented and
+procedural. they limit the types available in yarn. relational only
+allows built-ins plus relational commands (FK and PK; FK is when
+using a model type, PK is a marker on a property). procedural only
+allows built-ins plus model types. we will need pointer support for
+this. object oriented is the current mode. the modes are validated in
+the middle end.
 
 *** Project layout analysis                                           :story:
 
@@ -1754,26 +2003,6 @@ support in the adaptor transform, but:
 - consequently we are missing all of the validation logic defined
   above.
 
-*** Model types and element binding                                   :story:
-
-Once we introduce the concept of model types (e.g. product, component,
-possibly different types of components), we should also take into
-account that some model types don't support some model elements. It
-should be possible to declare which model types support which element
-types such that if a user tries to use an invalid model type, we get a
-sensible error. In effect, this is a binding problem at the meta-model
-level.
-
-One of the component model types should be "generative
-components". These are used to augment the code generator. We need to
-look at the thesis on generative development to look for terminology.
-
-We should also have model types for terraform, etc.
-
-One way to implement this is to add a feature at the element (once we
-have a way of expressing dogen meta-elements) that lists the supported
-model types for a given element.
-
 *** Investigate current implementation of the origin transform        :story:
 
 Do we need to have the origin transform? can we not just supply the
@@ -2260,29 +2489,6 @@ we need to disable CMake generation and do it by hand. However:
 - for user level dependencies we should add dynamic extensions at the
   model level. Also, references provide sufficient information to link
   against other dogen models.
-
-*** Rename facets                                                     :story:
-
-We originally called our support for =std::hash= just =hash= and our
-support for =boost::serialization= just =serialization=. The problem
-is:
-
-- we may want to also support =boost::hash=.
-- we may want to support other serialisation types.
-
-We should rename these. Perhaps:
-
-- =std_hash=
-- =boost_serialization=: a tad verbose, but quite explicit.
-
-In addition, =io= is very misleading as the facet is not supposed to
-do I/O proper (e.g. serialisation) but more pretty-printing or debug
-dumping. So perhaps =pretty_print=.
-
-Test data is a strange name. We need something slightly more idiomatic
-such as perhaps sequence? We need to look into STL generator
-terminology. We should also look into Rx and transducers - these
-should be pluggable into these. Ranges also come to mind.
 
 *** Add support for object templates that work cross-model            :story:
 
@@ -7339,6 +7545,34 @@ if there are other changes, etc.
 *Attribute Renames*
 
 Another useful use case, is the renaming of attributes.
+
+Merged stories:
+
+*Detect moved files*
+
+It would be nice if we could detect files that are non-generatable and
+have been moved, so we could move them across. For this we need to
+know:
+
+- that the file is not generatable: e.g. service, etc.
+- that the new file name is equal to the previous file name, just in a
+  different directory.
+
+We could then just replace the empty file with the contents of the
+previous file. Of course, we would still need updating namespaces,
+etc.
+
+Another way of doing this is to have UUIDs associated with each
+type. The UUID is preserved into the file (ideally into a language
+attribute, queryable by clang but could also be a comment). Before we
+write the file we check to see if a file already exists with the same
+UUID. If it does, we simply rename it to the new name matching the
+UUID.
+
+We should also issue an error if a file hasn't got a matching UUID and
+at least to start off with force users to manually update it. Ideally
+we should be able to use clang to update the UUID but for this we need
+merging code generation support.
 
 * Future Releases
 
@@ -12819,15 +13053,6 @@ There are several problems with the debian package:
 - no hello world sample; need json and dia versions
 - package name is =dogen-applications=, should be masd...
 
-*** Rename main Dogen package in Debian                               :story:
-
-At present we seem to have called our package =dogen-applications=:
-
-: $ apt-cache search dogen-applications
-: dogen-applications - The Domain Generator - Generates source code for domain driven development.
-
-We should try to call it just =dogen=.
-
 *** Add stitch section in manual                                      :story:
 
 We need to document stitch:
@@ -12876,14 +13101,6 @@ Users should be able to follow the examples in the manual by using a
 set of diagrams supplied in the dogen package. However, to ensure
 these samples are actually working we need to test them as part of
 sanity. This means we need the same diagrams packaged twice.
-
-*** Rename debian package                                             :story:
-
-At present our package is called =dogen-applcations=. Since there will
-only be one dogen application/package, this is a confusion name. We
-should rename it. Names:
-
-- masd-dogen
 
 *** Tidy-up dogen windows package                                     :story:
 
@@ -15269,7 +15486,7 @@ its properties a set of =std::function= which match the signature of
 the visit functions; then the visit functions would just check that
 the functions have been assigned and call them. If not, throw.
 
-*** Create a visitor interface with multiple implementations :reviewing:story:
+*** Create a visitor interface with multiple implementations          :story:
 
 #+begin_quote
 *Story*: As a dogen user, I need multiple visitor interfaces so that I
@@ -15304,6 +15521,10 @@ start using worktrees we could also have a simple script that copies
 across these into the website. This can be done manually for now at
 the end of each script (running the script).
 
+The manual needs to be moved over to org-mode format. However, this
+story still applies. We just need to figure out how to use emacs in
+batch process to generate all of the targets.
+
 *** Investigate the possibility of creating a mock facet              :story:
 
 #+begin_quote
@@ -15332,216 +15553,24 @@ Links:
 - [[https://github.com/rollbear/trompeloeil][trompeloeil]]: Header only C++14 mocking framework
 - [[http://turtle.sourceforge.net/index.html][Turtle]]: A C++ mock object library for Boost
 
-*** Consider representing namespaces in file names rather than directories :story:
-
-Languages like .Net represent namespacing using dots rather than
-separate folders. Perhaps we should support a mode of operation where
-all files are placed in a single folder but have the namespacing
-encoded in the file name. For example:
-
-: /a_project/types/a.cpp
-: /a_project/io/a_io.cpp
-
-would become:
-
-: /a_project/types_a.cpp
-: /a_project/io_a_io.cpp
-
-or, using dot notation, so we can distinguish namespaces from
-"composite" names:
-
-: /a_project/types.a.cpp
-: /a_project/io.a_io.cpp
-
-We do not have a use case for this yet, but it should be fairly
-straight forward to add it. We just need meta-data support to enable
-the feature and then take it into account when generating the file
-names (e.g. instead of using =/= as a separator, use =.=).
-
-Actually this is _almost_ already possible: we provide a facet folder
-meta-data that is always used to generate a new folder. If however
-there was a way for it to not generate a folder we could achieve
-this. For example, say we had to supply:
-
-: /types/
-
-as the facet folder. Then the user could simply supply instead:
-
-: types_
-: types.
-
-And no folder would be created.
-
-Notes:
-
-- see also the story on destinations.
-- consider splitting this story into two: one is about how folder
-  layout (physical) may need to match namespace layout (logical);
-  another is related to allowing users to flatten facet
-  directories. They have some connection, but its not obvious how much
-  they overlap.
-
 *** Investigate ribosome for ideas                                    :story:
 
 Ribosome seems like a templating tool with a simple syntax. May have
 some ideas useful for stitch.
 
+#+begin_quote
+In 50 words
+
+ 1. You write standard JavaScript, Ruby or Python scripts.
+ 2. However, lines starting with a dot (.) go straight to the output.
+ 3. To expand JavaScript/Ruby/Python expressions within dotted lines
+    use @{expr} construct.
+#+end_quote
+
 Links:
 
 - http://sustrik.github.io/ribosome/: website
-- https://github.com/sustrik/ribosome
-
-*** Add merging code generation support                                :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to manually change some code in
-generated files so that I can add functionality that is missing in
-dogen.
-#+end_quote
-
-At present it is not possible to manually add methods to a class that
-was code generated; one must stop code generating the class and
-maintain the whole class manually. This is made even more painful by
-the fact that one cannot add support for IO etc for these types
-manually.
-
-However, in a lot of cases it makes sense to have a combination of
-manually generated and code generated code:
-
-- value objects need helper methods such as for example boolean
-  properties (e.g. =is_empty=) that make use of other properties, or
-  simple methods such as population etc that really belong in the
-  object rather than an external service;
-- services sometimes need state and it would be good if we could
-  manage that via code generation.
-
-For this we need a merging code generator: that is, a code generator
-that is aware of code that was crafted manually and does not overwrite
-it - but instead "intelligently" merges manual with code generated
-code.
-
-From the beginning we avoided this because we thought it would be too
-complicated for dogen. However, its becoming apparent that this is a
-needed feature for the real world - there are many cases where we are
-working around this deficiency. A few solutions are possible:
-
-- let the code generator manage the header file and create two types
-  of CPP files, one which includes the other: a manual and an
-  "automatic" one. This would effectively separate the two types of
-  code. For this dogen would have to be able to generate complex types
-  in operations (e.g. we'd have to solve the lack of support for
-  =const std::string&=).
-- use clang to do the merging. this probably means adding some kind of
-  attribute to every method - possibly using C++ attribute support
-  (e.g. =[ [generated ] ]= and/or =[ [ manual ] ]= (spaces due to org
-  mode). We could then say to clang: read current state of the file,
-  grab every non-generated method and copy them across to the newly
-  code generated file. Merging could be the final stage before
-  writing. In addition, we should also have some dynamic extensions to
-  determine which files require merging. The dynamic extension could
-  be populated automatically (e.g. grep for the manual attribute) or
-  manually. Note that using clang to do merging will make things a lot
-  slower so we probably want to know up front which files need to be
-  merged to avoid doing spurious work.
-
-Notes:
-
-- include management would be a mix of manual versus automatically
-  generated. This is not possible because there will be no way to
-  determine which one is which. To solve this problem we need to allow
-  users to add include files from the dynamic extensions and get those
-  processed like all the other includes. In the new world this means
-  adding includes to the formatter settings. These are local
-  settings. As at present, we cannot identify a use case for adding an
-  include file for all types, so there is no need to support this
-  feature at the global settings level. Thus this fits nicely with the
-  existing settings infrastructure.
-- merging could be done without needing clang, which would also make
-  it cross language. All that is required is for the language to
-  support some kind of meta-data to mark a method as "manually
-  generated". This could even be done using comments but this is not
-  ideal. The process would then be: dogen would open up an existing
-  source file and locate the attribute; then look for a open brackets
-  to indicate the start of the method (={=) and then find the matching
-  close brackets (=}=). We could keep a counter and increment it when
-  a new open bracket is found and decrement it when a close bracket is
-  found. When its zero we are done. All the code from the attribute to
-  the close brackets would be lifted. A very simple regex matching
-  would be done to find the method name - or perhaps some trivial
-  parsing could be done, but it should be kept as simple as
-  possible. The objective is simply to figure out the method name. The
-  method is copied across and stored in the =cpp= model, in the
-  correct method. When code generating, if a method is marked as
-  "manually generated" and if there is implementation content, we dump
-  that; otherwise we generate the skeleton of the method as if it was
-  not "manually generated". We could also create a very simple spirit
-  parser that only knows of comments, function names and function
-  bodies.
-- merging could be done as part of yarn, in meta-data. That is, we
-  could annotate the merged method into language specific properties
-  in the meta-data and then query those in the language specific model
-  generation. We could have another yarn workflow to look for files;
-  it could use the meta-data for file path. The extension will tell it
-  what "function parser" to use. We could literally look through the
-  meta-data extensions looking for file path, and for each run the
-  "function parser"; it will return a set of "manual" functions. These
-  we can then slot into the meta-data and reuse later on. Actually, we
-  can't use meta-data for this given the existing convention that
-  meta-data is constant. However, nothing stops us from adding the
-  required properties to yarn directly (e.g. we could have an
-  =operation= which has a language specific container of
-  implementations), to be used by formatters. Interestingly, this then
-  seems to share some logic with method helpers. That is, if we could
-  supply the stitch template as an operation (per facet, per
-  language) and if we could annotate the operation somehow as
-  "external" to the object, helper methods could use the same
-  infrastructure. But perhaps this doesn't make a lot of sense since
-  for helper methods we need to run the formatter whereas for merging
-  we already have the final form of the code and we just need to carry
-  it along to dump it in the formatter.
-- the proper technical name for methods that can be manually edited is
-  "protected regions". Merging is not a technical term according to
-  MDSD at least.
-- the act of checking the generated files vs the user edited files is
-  called "model synchronisation" and its part of incremental
-  transformation (according to [[https://pdfs.semanticscholar.org/7eca/ca8db190608dc4482999e19b1593cc6ad4e5.pdf][Czarnecki and Helsen]])
-
-We should also address the MDSD comment:
-
-#+begin_quote
-If, for performance reasons, or because the target language doesn’t
-offer any options for consolidating different artifacts, handwritten
-code must be inserted into generated code directly, the introduction
-of protected areas is inevitable. Please do this only if such
-exceptional conditions require this approach!
-#+end_quote
-
-- We will need to support multiple merging strategies, depending on
-  the use case:
-  - simple extension: when we just want to add a method or two to an
-    otherwise generated object. For this, protected regions at the
-    function level is probably enough.
-  - large extensions: when we want to add lots of functionality but
-    there is a small component of code generation. For this we want
-    some large blocks of protected regions that the user manages
-    (includes, anonymous namespace, class, etc. The user can then put
-    whatever it wants in those).
-  - private inheritance: we could create a private/internal base class
-    with all of the generated code and then inherit privately from it
-    in a hand-crafted file. Only available on C++.
-  - partial classes: one definition is code generated, the other
-    hand-crafted. Only available in C#.
-
-- interestingly, it seems that merging is a variation of a wale
-  template. Basically we can generate the file, slot in the GUIDs for
-  the protected regions as wale keys, then read the protected regions
-  from the file system into a wale KVP container and then instantiate
-  the generated file as if it was a wale template.
-
-Links:
-
-- [[https://arxiv.org/pdf/1509.04498.pdf][A comparison of mechanisms for integrating handwritten and generated
-  code for object-oriented programming languages]]
+- [[https://github.com/sustrik/ribosome][GitHub project]]
 
 *** Add support for languages available in Dia2Code                    :epic:
 
@@ -15570,7 +15599,7 @@ Insane idea: one could point knit to a database from a supported
 vendor and generate the C++ code needed to represent those
 tables. This could be filtered by the user. Idea came from here:
 
-[[https://msdn.microsoft.com/en-us/data/gg558520.aspx][T4 Templates and the Entity Framework]]
+- [[https://msdn.microsoft.com/en-us/data/gg558520.aspx][T4 Templates and the Entity Framework]]
 
 All we need is a "database frontend" responsible for connecting to the
 database and performing the mapping between the database types and the
@@ -15627,11 +15656,39 @@ spreadsheet and generate a model from it that is able to at least read
 data from the spreadsheet. With this we can then easily convert the
 data from this format to any other supported formats.
 
-*** Add serialisation support from spreadsheets                       :story:
+Links:
+
+- [[https://github.com/troldal/OpenXLSX][OpenXLSX GitHub]]: "OpenXLSX is a C++ library for reading, writing,
+  creating and modifying Microsoft Excel® files, with the .xlsx
+  format."
+- [[https://sourceforge.net/projects/libxls/][libxls GitHub]]: "The libxls library is a C library for reading
+  files in the legacy Excel file format, .xls. It cannot be used for
+  writing or modifying Excel files."
+- [[https://sourceforge.net/projects/xlslib/][xlslib GitHub]]: "The xlslib library is a C/C++ library for creating
+  files in the legacy Excel file format, .xls. It cannot be used for
+  reading or modifying Excel files."
+- [[https://libxlsxwriter.github.io][libxlsxwriter GitHub]]: "The libxlsxwriter library is a C library
+  for creating .xlsx files. It cannot be used for reading or modifying
+  Excel files."
+- [[http://www.libxl.com][LibXL GitHub]]: "The LibXL library can read, write, create and
+  modify Excel files, in both the .xls and .xlsx formats. It is the
+  most feature complete library available and has interfaces for C,
+  C++, C# and Delphi. It is only available for purchase, however.
+- [[https://github.com/dbzhang800/QtXlsxWriter][QtXlsx GitHub]]: Of the open source libraries, the QtXlsx library
+  is the most feature complete. It is, however, based on the Qt
+  framework. While I'm a big fan of Qt for application programming
+  purposes, I don't believe it is the best option for lower-level
+  libraries.
+- [[https://github.com/tfussell/xlnt][XLNT GitHub]]: Recently, I found the XLNT library on GitHub. It was
+  not available when I began developing OpenXLSX.
+
+*** Add serialisation support to and from spreadsheets                :story:
 
 This is probably mainly useful for reading, though it may also be
 useful for writing if we want to say generate graphs. It would be nice
 if we could dump a list of objects into a spreadsheet.
+
+See also [[*Generate model from Excel files][Generate model from Excel files]].
 
 Links:
 
@@ -15674,42 +15731,18 @@ GDB so that I debug more easily programs using dogen models.
 
 It would be great if the code generator created GDB visualisers for
 the types in a generated models such that one could inspect values of
-STL containers with types of that model.
+STL containers with types of that model. It should hook into the
+pretty-printing facet.
 
 - [[http://sourceware.org/gdb/onlinedocs/gdb/Pretty-Printing.html][Pretty printing]]
 - [[https://github.com/ruediger/Boost-Pretty-Printer][Boost pretty printer]]
 - [[https://groups.google.com/group/boost-list/browse_thread/thread/ff232ac626bf41cf/18fbf516ceb091da?pli%3D1][Example for multi-index]]
 
-*** yarn models could have a model classification                       :epic:
-
-Consider creating an enumeration for model classification (e.g. type
-of the model):
-
-- relational model
-- core domain model
-- generic sub-domain model
-- segregated core model
-
-This still requires a lot of analysis work. This is kind of a model
-level stereotype which can be used by the code generator for example
-to determine which models are compatible. It could also be used to
-determine what facets can be enabled/disabled.
-
-*Merged with modes of operation story:*
-
-Create "modes" of operation: relational, object-oriented and
-procedural. they limit the types available in yarn. relational only
-allows built-ins plus relational commands (FK and PK; FK is when
-using a model type, PK is a marker on a property). procedural only
-allows built-ins plus model types. we will need pointer support for
-this. object oriented is the current mode. the modes are validated in
-the middle end.
-
 *** Add memory measurements support                                   :story:
 
 Firefox has an interesting approach to estimating memory usage:
 
-[[http://njn.valgrind.org/measuring.html][Measuring data structures: Firefox (C++) vs. Servo (Rust)]]
+- [[http://njn.valgrind.org/measuring.html][Measuring data structures: Firefox (C++) vs. Servo (Rust)]]
 
 The gist of it is to add code like this:
 
@@ -15739,7 +15772,9 @@ Once we got the size information, the next thing should be a way to
 dump a size report and make it visualisable in a tool such as baobab
 (or in a manner similar to baobab) so that users can, at any time, get
 a break down of where the objects are. Of course this would imply we
-need a top-level object that contains all objects.
+need a top-level object that contains all objects or some kind of way
+of registering sizes. This could be done on construction and
+destruction perhaps.
 
 *** Add cling support                                                 :story:
 
@@ -15751,35 +15786,12 @@ The script simply loads up the SO/static library and all of the
 includes of the SO. It also loads up all of the scripts of its
 dependencies.
 
-*** Detect moved files                                                :story:
-
-It would be nice if we could detect files that are non-generatable and
-have been moved, so we could move them across. For this we need to
-know:
-
-- that the file is not generatable: e.g. service, etc.
-- that the new file name is equal to the previous file name, just in a
-  different directory.
-
-We could then just replace the empty file with the contents of the
-previous file. Of course, we would still need updating namespaces,
-etc.
-
-Another way of doing this is to have UUIDs associated with each
-type. The UUID is preserved into the file (ideally into a language
-attribute, queryable by clang but could also be a comment). Before we
-write the file we check to see if a file already exists with the same
-UUID. If it does, we simply rename it to the new name matching the
-UUID.
-
-We should also issue an error if a file hasn't got a matching UUID and
-at least to start off with force users to manually update it. Ideally
-we should be able to use clang to update the UUID but for this we need
-merging code generation support.
+We need to generate SOs for models first.
 
 *** Consider adding support for spelling on comments                  :story:
 
-It would be nice if we could spell-check comments on models.
+It would be nice if we could spell-check comments on models. This
+could come up as warnings once we have warning/error support.
 
 Links:
 
@@ -15813,7 +15825,7 @@ failed.
 
 We should also do this for command line options.
 
-*** Consider C++ itself as a front-end                                 :epic:
+*** Consider C++ itself as a front-end                       :reviewing:epic:
 
 One can imagine a clang-based front-end that reads C++ code suitably
 annotated, perhaps with =Generatable= or some such attributes -
