@@ -77,6 +77,107 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider making a separation between userspace and masd space     :story:
+
+Userspace is actually quite a good name to represent the users of MASD
+(copied from kernel land). However, we don't really have a
+kernel-space. We need an equivalent (and it can't be modeling-space
+because user space is also about modeling.
+
+*** Integration of configuration and variability                      :story:
+
+There are several threads going on in different stories that can be
+unified. These are related to variability and configuration. We need
+to find all of these stories and merge them at some point. The key
+finding seems to be that the variability we are experiencing in dogen
+as configuration is the same as the configuration all applications
+require - e.g. app.config, INI files, etc. Because Dogen has
+configuration embedded into models, its not very obvious that we are
+doing the same thing. What this means is the following:
+
+- we could, very easily, create a serialisation format for
+  features. These would look a bit like the JSON format we had some
+  sprints ago. However the key difference is that this time /we would
+  generate the JSON files from models/. We would have a new part for
+  Dogen: =configuration=. Under this part, we would store the
+  serialised format for feature models. Note that these are the
+  features, not their instances. The file names could be something
+  really simple such as =[MODEL_name].features.[FORMAT]=,
+  e.g. =dogen.variability.features.json= or
+  =dogen.variability.features.ini= (probably not INI as I think its
+  not rich enough to carry the features). We could then aggregate all
+  of these files and place them in the dogen package. At start up
+  Dogen would look for this directory and if found would load all of
+  the features from there. This is exactly the same as having the
+  features in code.
+- the second aspect is access to configurations. Now, for dogen, the
+  configurations live in dynamic instances of variability
+  objects. This is fine. We could create a wrapper, very similar to
+  what we are doing at present, that reads data from these objects and
+  presents the developer with a c++ object. However, the key thing is
+  that this is a very special case. In almost all cases, what we
+  really have is a config file such as =app.config=, INI etc. The
+  profile (as we call it at present) is the instance of the config
+  file. The feature model is the type information required to generate
+  a class that can read the config file and present an idiomatic
+  object to the consuming user. Nothing stops us from allowing users
+  to define feature bundles, then using those to generate classes that
+  know how to read those features from config sources; and then
+  serialising profiles into config sources. Finally, at run time, the
+  code would merely read the serialised config source.
+- all of this, of course, sounds extremely convoluted for the simple
+  case. But the power of it is the more complex cases. We can now
+  quite trivially create a consul loader that takes a config file and
+  populates the KVP store. Similarly, we could also create a consul
+  client that retrieves the config from the KVP store, always getting
+  latest. We could even support both, depending on environment
+  variables.
+- configuration sources allow us to support many configuration
+  backends: boost property tree, environment variables, etc. However,
+  we can't have these as facets. We probably need to define an
+  interface and then multiple implementations, with associated
+  factories.
+- note that the generation of JSON/INI files for the features is also
+  only a dogen requirement. For the "userspace" cases we can define
+  the features in a diagram and then create the instantiations in the
+  same diagram as profiles and then code-generate the profiles as both
+  INI files and c++ code to read the files (e.g. we only need to code
+  generate the configuration). However, for dogen this is not possible
+  (by design).
+- while we're at it, we should also create the notion of
+  "configuration sets". These are multiple instantiations of the
+  feature model and could be used to model environments.
+- one way to flatten and aggregate both features and profiles to make
+  them suitable for code generation on a single file is the creation
+  of a meta-model element that gathers them. We could create a
+  transform that finds all features in a model and populates the new
+  meta-model elements with them (like say a feature initialiser at
+  present). This would also allow for a clean way to distinguish
+  between models that use features without code generation and models
+  that require code generation.
+- configuration is strictly a KVP model. It should not support object
+  graphs.
+
+With this approach we can finally unify the world of code generation
+variability with the world of application variability.
+
+Links:
+
+- [[https://github.com/oliora/ppconsul][ppconsul GitHub]]: C++ client for Consul (http://consul.io)
+- [[https://github.com/david-antiteum/consulcpp][consulcpp GitHub]]: A C++ library that implements the Consul API
+- [[https://github.com/oatpp/oatpp-consul][oatpp-consul GitHub]]: oatpp client for consul https://oatpp.io/
+- [[https://www.consul.io/api/libraries-and-sdks.html][Consul - Client Libraries & SDKs]]
+
+*** Update the contributing to dogen doco                             :story:
+
+The MSSQL tools project has a great set of points on contributing. We
+should merge most of them into our contributing doco. We should also
+port it to org-mode.
+
+Links:
+
+- https://github.com/microsoft/sqltoolsservice
+
 *** Rename main Dogen package in Debian                               :story:
 
 At present we seem to have called our package =dogen-applications=:
@@ -14593,7 +14694,7 @@ Links:
 
 - [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
 - See also the story on Swagger/OpenAPI
-- [[https://docs.microsoft.com/en-gb/teamblog/announcing-rest-improvements?WT.mc_id=docsmsft-twitter][Announcing Updates to the REST API Experience]]: microsoft has created
+- [[https://docs.microsoft.com/en-gb/teamblog/announcing-rest-improvements][Announcing Updates to the REST API Experience]]: microsoft has created
   a centralised place to try all REST APIs. We should be able to code
   generate something similar. However, we need a way to create a
   single site with all APIs - this is not so easy because we'd have to
@@ -14608,6 +14709,22 @@ Links:
   documentation from the types and their attributes. The graph is
   expanded to aggregate types so that there is a link to the aggregate
   type. Primitive types have their documentation inline.
+- [[https://docs.microsoft.com/en-gb/rest/api/?WT.mc_id=docsmsft-blog&view=Azure][REST API browser]]
+- [[https://docs.microsoft.com/en-gb/rest/api/appservice/webapps/list][Web Apps - List]]
+- [[https://github.com/cpp-netlib/cpp-netlib][cpp-netlib GitHub]]
+- [[https://github.com/boostorg/beast][Boost.Beast GitHub]]
+- [[https://github.com/microsoft/cpprestsdk][C++ Rest SDK]]
+
+*** Consider generating consul service discovery code                 :story:
+
+Once we support services, we should also generate service discovery
+code. We could use an implementation such as consul for this. There
+are several C++ libraries that support consul, see other story on
+consul.
+
+Links:
+
+- [[https://www.consul.io/discovery.html][Consul - Service discovery made easy]]
 
 *** Grepping non-generated code                                       :story:
 
@@ -15611,6 +15728,19 @@ should use ODB or at least the ODB database specific libraries to
 access the DML. We should also investigate existing ODB support for
 this.
 
+If we think about this in more generic terms, what we need is
+something like a LSP for SQL, built using ODB libraries (or some other
+libraries that support multiple databases). The entire database schema
+is loaded into memory into a database agnostic representation. That
+could then be useful for things such as answering LSP queries and also
+converting this information into a generatable dogen model. There are
+a lot of similarities between these two problems.
+
+Links:
+
+- https://github.com/emacs-lsp/lsp-mssql
+- https://github.com/microsoft/sqltoolsservice
+
 *** Generate model from CSV files                                     :story:
 
 Following on from the idea of using database tables, another
@@ -15829,9 +15959,10 @@ We should also do this for command line options.
 
 One can imagine a clang-based front-end that reads C++ code suitably
 annotated, perhaps with =Generatable= or some such attributes -
-basically all attributes required to build a sensible yarn model. The
-frontend will parse the code and generate yarn. We can then generate
-serialisation, hashing etc for the hand-crafted code.
+basically all attributes required to build a sensible logical
+model. The frontend will parse the code and generate an injector
+format. We can then generate serialisation, hashing etc for the
+hand-crafted code.
 
 One very good use case for this is for legacy code bases. One could
 benefit from adding serialisation and IO support to an existing legacy
