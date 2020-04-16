@@ -4157,6 +4157,13 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "transforms::physical_entities_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
