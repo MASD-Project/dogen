@@ -271,4 +271,93 @@ entities::name name_factory::build_attribute_name(
     return b.build();
 }
 
+boost::optional<entities::name> name_factory::
+build_containing_element_name(const entities::name& n) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating containing element name for: "
+                             << n.qualified().dot();
+
+    /*
+     * First we determine if the element is placed in the global
+     * namespace. If it is, we will deal with it (much) later on, in
+     * the global module transform.
+     */
+    const bool in_global_namespace(n.location().model_modules().empty());
+    if (in_global_namespace) {
+        BOOST_LOG_SEV(lg, debug) << "Element is in global module so, it has"
+                                 << " no containing module yet. Type: "
+                                 << n.qualified().dot();
+        return boost::optional<entities::name>();
+    }
+
+    /*
+     * Next, check to see if the element we are processing is the
+     * model's module itself. If it is, we should not do anything and
+     * again let the global module transform handle it.
+     *
+     * FIXME: this means we cannot have an element with the same name
+     * as the model.
+     */
+    const bool at_model_level(n.location().internal_modules().empty());
+    const auto mn(n.location().model_modules().back());
+    if (at_model_level && n.simple() == mn) {
+        BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
+                                 << "module will be handled later. Type: "
+                                 << n.qualified().dot();
+        return boost::optional<entities::name>();
+    }
+
+    /*
+     * Now, deal with the case where the element has been placed
+     * inside another element - most likely a module. It is either:
+     *
+     * - the model module;
+     * - some other internal module;
+     * - another element capable of containment (e.g. modeline group).
+     *
+     * Regardless of the source of containment, we need to build the
+     * name for the containing element.
+     */
+    helpers::name_builder b;
+
+    /*
+     * We can always take the external modules regardless because
+     * these do not contribute to the modules in the model.
+     */
+    b.external_modules(n.location().external_modules());
+
+    auto imp(n.location().internal_modules());
+    if (imp.empty()) {
+        /*
+         * If there are no internal modules, we must be at the
+         * top-level, so take the model name.
+         */
+        b.simple_name(mn);
+
+        /*
+         * The model name may be composite. If so, we need to make
+         * sure we add the remaining components.
+         */
+        if (!n.location().model_modules().empty()) {
+            auto remaining_model_modules(n.location().model_modules());
+            remaining_model_modules.pop_back();
+            b.model_modules(remaining_model_modules);
+        }
+
+        return b.build();
+    }
+
+    /*
+     * If we are an internal element capable of containment
+     * (e.g. module, modeline group, etc), we can take the element
+     * name and use that as our simple name. We need to add the
+     * remaining internal module names to our location.
+     */
+    b.model_modules(n.location().model_modules());
+    b.simple_name(imp.back());
+    imp.pop_back();
+    b.internal_modules(imp);
+    return b.build();
+}
+
+
 }

@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 
 namespace dogen::logical::helpers {
@@ -122,6 +123,21 @@ public:
      */
     entities::name build_attribute_name(const entities::name& owner_name,
         const std::string& simple_name) const;
+
+    /**
+     * @brief Creates the name of the containing element, derived from
+     * the element's name.
+     *
+     * A containing name is the name of an element that is able to
+     * contain other elements. This is typically a module, but not
+     * always.
+     *
+     * If the supplying name does not represent a valid containment,
+     * returns null. At present there are two cases of "invalid"
+     * containment: the global module and the model's module.
+     */
+    boost::optional<entities::name>
+    build_containing_element_name(const entities::name& n) const;
 };
 
 }
