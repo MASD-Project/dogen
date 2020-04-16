@@ -15673,6 +15673,7 @@ Links:
 
 - [[https://github.com/rollbear/trompeloeil][trompeloeil]]: Header only C++14 mocking framework
 - [[http://turtle.sourceforge.net/index.html][Turtle]]: A C++ mock object library for Boost
+- [[https://enterprisecraftsmanship.com/posts/when-to-mock/][Article: When to mock]]
 
 *** Investigate ribosome for ideas                                    :story:
 
