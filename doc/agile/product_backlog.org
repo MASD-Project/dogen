@@ -14708,7 +14708,11 @@ Links:
   well as the input parameters and the return codes. These contain
   documentation from the types and their attributes. The graph is
   expanded to aggregate types so that there is a link to the aggregate
-  type. Primitive types have their documentation inline.
+  type. Primitive types have their documentation inline. We have two
+  options for the API browser: either have a product that is
+  responsible for it and each product has a serialised description of
+  their APIs, or have a =webapi.browser.PRODUCT= for each product that
+  is code-generated.
 - [[https://docs.microsoft.com/en-gb/rest/api/?WT.mc_id=docsmsft-blog&view=Azure][REST API browser]]
 - [[https://docs.microsoft.com/en-gb/rest/api/appservice/webapps/list][Web Apps - List]]
 - [[https://github.com/cpp-netlib/cpp-netlib][cpp-netlib GitHub]]
