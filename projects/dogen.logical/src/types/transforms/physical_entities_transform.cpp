@@ -18,12 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/physical_entities_transform.hpp"
+
+namespace {
+
+const std::string transform_id("logical.transforms.physical_entities_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::logical::transforms {
 
-bool physical_entities_transform::operator==(const physical_entities_transform& /*rhs*/) const {
-    return true;
+void physical_entities_transform::
+process_backends(entities::model& /*m*/) {
+
+
+}
+
+void physical_entities_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "physical entities transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    process_backends(m);
 }
 
 }

@@ -25,24 +25,26 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Transforms all physical entities in the logical model.
+ */
 class physical_entities_transform final {
-public:
-    physical_entities_transform() = default;
-    physical_entities_transform(const physical_entities_transform&) = default;
-    physical_entities_transform(physical_entities_transform&&) = default;
-    ~physical_entities_transform() = default;
-    physical_entities_transform& operator=(const physical_entities_transform&) = default;
+private:
+    /**
+     * @brief Processes all of the logical backends.
+     */
+    static void process_backends(entities::model& m);
 
 public:
-    bool operator==(const physical_entities_transform& rhs) const;
-    bool operator!=(const physical_entities_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Execute the transform against the model.
+     */
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
