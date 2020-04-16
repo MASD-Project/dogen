@@ -26,13 +26,10 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
-#include "dogen.logical/types/entities/structural/primitive.hpp"
-#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -44,7 +41,7 @@ namespace dogen::logical::transforms {
  * As an example, all local attributes have unparsed types - strings
  * following a well defined notation - that need to be parsed into
  * name trees. All such forms of encodings are processed by this
- * expander.
+ * transform.
  *
  * It is also responsible for reading all meta-data that requires
  * parsing such as parent names, enumeration underlying types and so
@@ -53,20 +50,20 @@ namespace dogen::logical::transforms {
 class parsing_transform final {
 private:
     /**
-     * @brief Parses all attributes in the supplied attribute list..
+     * @brief Parses all attributes in the supplied attribute list.
      */
     static void parse_attributes(const entities::technical_space ts,
         std::list<entities::attribute>& attrs);
 
     /**
-     * @brief Parses underlying element in the supplied primitive.
+     * @brief Parses the underlying element in the supplied primitive.
      */
     static void parse_underlying_element(const entities::technical_space ts,
         entities::structural::primitive& p);
 
 public:
     /**
-     * Execute the property expansion against the model.
+     * Execute the transform against the model.
      */
     static void apply(const context& ctx, entities::model& m);
 };
