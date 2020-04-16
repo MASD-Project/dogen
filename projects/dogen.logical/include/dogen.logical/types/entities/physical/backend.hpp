@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 
@@ -61,6 +62,7 @@ public:
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::unordered_set<std::string>& contains,
         const std::string& id,
         const std::string& kernel_name,
         const std::list<dogen::logical::entities::name>& facets,
@@ -77,6 +79,11 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    const std::unordered_set<std::string>& contains() const;
+    std::unordered_set<std::string>& contains();
+    void contains(const std::unordered_set<std::string>& v);
+    void contains(const std::unordered_set<std::string>&& v);
+
     const std::string& id() const;
     std::string& id();
     void id(const std::string& v);
@@ -126,6 +133,7 @@ public:
     backend& operator=(backend other);
 
 private:
+    std::unordered_set<std::string> contains_;
     std::string id_;
     std::string kernel_name_;
     std::list<dogen::logical::entities::name> facets_;

@@ -35,6 +35,20 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -64,6 +78,7 @@ facet::facet(
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::unordered_set<std::string>& contains,
     const std::string& id,
     const std::string& kernel_name,
     const std::string& backend_name,
@@ -83,6 +98,7 @@ facet::facet(
       artefact_properties,
       enablement_properties,
       decoration),
+      contains_(contains),
       id_(id),
       kernel_name_(kernel_name),
       backend_name_(backend_name),
@@ -110,6 +126,7 @@ void facet::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::logical::entities::element::to_stream(s);
     s << ", "
+      << "\"contains\": " << contains_ << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
@@ -121,6 +138,7 @@ void facet::swap(facet& other) noexcept {
     dogen::logical::entities::element::swap(other);
 
     using std::swap;
+    swap(contains_, other.contains_);
     swap(id_, other.id_);
     swap(kernel_name_, other.kernel_name_);
     swap(backend_name_, other.backend_name_);
@@ -135,6 +153,7 @@ bool facet::equals(const dogen::logical::entities::element& other) const {
 
 bool facet::operator==(const facet& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
+        contains_ == rhs.contains_ &&
         id_ == rhs.id_ &&
         kernel_name_ == rhs.kernel_name_ &&
         backend_name_ == rhs.backend_name_ &&
@@ -145,6 +164,22 @@ facet& facet::operator=(facet other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::unordered_set<std::string>& facet::contains() const {
+    return contains_;
+}
+
+std::unordered_set<std::string>& facet::contains() {
+    return contains_;
+}
+
+void facet::contains(const std::unordered_set<std::string>& v) {
+    contains_ = v;
+}
+
+void facet::contains(const std::unordered_set<std::string>&& v) {
+    contains_ = std::move(v);
 }
 
 const std::string& facet::id() const {

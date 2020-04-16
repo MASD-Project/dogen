@@ -4024,7 +4024,8 @@
       "name": "entities::physical::backend",
       "documentation": "Represents a physical backend, targetting a major technical space such as C++ or C#.\n",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "Container"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4053,7 +4054,8 @@
       "name": "entities::physical::facet",
       "documentation": "Represents a facet within a backend, such as type definitions.\n",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "Container"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

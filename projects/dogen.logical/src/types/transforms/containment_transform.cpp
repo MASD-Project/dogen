@@ -139,7 +139,8 @@ void updater::update_containing_element(const entities::name& container,
     BOOST_LOG_SEV(lg, trace) << "Could not find module: '"
                              << container_id << "'. "
                              << "Trying as a modeline group.";
-    inserted = try_insert(model_.decoration_elements().modeline_groups(), container_id, containee_id);
+    inserted = try_insert(model_.decoration_elements().modeline_groups(),
+        container_id, containee_id);
     if (inserted)
         return;
 
