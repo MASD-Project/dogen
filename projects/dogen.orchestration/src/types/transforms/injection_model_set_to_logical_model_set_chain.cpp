@@ -27,7 +27,7 @@
 namespace {
 
 const std::string transform_id(
-    "engine.transforms.injection_model_set_to_logical_model_set_chain");
+    "orchestration.transforms.injection_model_set_to_logical_model_set_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

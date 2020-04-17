@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("engine.generator"));
+auto lg(logger_factory("orchestration.generator"));
 
 const std::string generation_activity("generation");
 

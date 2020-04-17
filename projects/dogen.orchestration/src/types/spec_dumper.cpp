@@ -39,7 +39,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("engine.spec_dumper"));
+auto lg(logger_factory("orchestration.spec_dumper"));
 
 const std::string empty_output_directory;
 const std::string activity("dumpspecs");

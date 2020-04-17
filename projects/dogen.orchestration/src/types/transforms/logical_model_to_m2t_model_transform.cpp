@@ -38,7 +38,7 @@
 namespace {
 
 const std::string transform_id(
-    "engine.transforms.logical_model_to_m2t_model_transform");
+    "orchestration.transforms.logical_model_to_m2t_model_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

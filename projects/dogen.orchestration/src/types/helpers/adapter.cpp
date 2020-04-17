@@ -34,7 +34,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("engine.helpers.adapter"));
+static logger lg(logger_factory("orchestration.helpers.adapter"));
 
 const std::string member_variable_postfix("_");
 const std::string short_form_attr_name("short_form");

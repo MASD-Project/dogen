@@ -51,7 +51,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("engine.transforms.context_factory"));
+auto lg(logger_factory("orchestration.transforms.context_factory"));
 
 const std::string nrp_input_id("physical_name_repository");
 const std::string fm_input_id("feature_model");

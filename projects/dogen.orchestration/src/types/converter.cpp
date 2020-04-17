@@ -28,7 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("engine.converter"));
+auto lg(logger_factory("orchestration.converter"));
 
 const std::string conversion_activity("conversion");
 

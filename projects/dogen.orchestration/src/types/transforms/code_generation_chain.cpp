@@ -29,7 +29,7 @@
 namespace {
 
 const std::string
-transform_id("engine.transforms.code_generation_chain");
+transform_id("orchestration.transforms.code_generation_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

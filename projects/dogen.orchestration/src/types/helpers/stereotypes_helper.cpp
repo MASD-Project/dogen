@@ -32,7 +32,7 @@
 namespace {
 
 const std::string
-transform_id("engine.helpers.stereotypes_helper");
+transform_id("orchestration.helpers.stereotypes_helper");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
