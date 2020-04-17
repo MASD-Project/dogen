@@ -173,20 +173,6 @@ void file_backend::ensure_transform_position_not_empty() const {
 }
 
 boost::filesystem::path
-file_backend::full_path_for_writing(const std::string& filename) const {
-    std::ostringstream s;
-    s << std::setfill(zero) << std::setw(leading_zeros)
-      << transform_position_.top();
-
-    if (!configuration_.use_short_names())
-        s << delimiter << filename;
-
-    s << extension;
-
-    return current_directory_ / s.str();
-}
-
-boost::filesystem::path
 file_backend::full_path_for_writing(const std::string& transform_id,
     const std::string& type, const std::string& model_id) const {
     ensure_transform_position_not_empty();
@@ -207,7 +193,11 @@ file_backend::full_path_for_writing(const std::string& transform_id,
 
     s << delimiter << type << extension;
 
-    return current_directory_ / s.str();
+    const auto r(current_directory_ / s.str());
+    BOOST_LOG_SEV(lg, debug) << "Computed full path for writing: "
+                             << r.generic_string()
+                             << " CRAP: " << model_id;
+    return r;
 }
 
 boost::filesystem::path
@@ -339,13 +329,12 @@ void file_backend::end_chain(const std::string& /*parent_transform_instance_id*/
 }
 
 void file_backend::end_chain(const std::string& parent_transform_instance_id,
-    const std::string& transform_id,
-    const std::string& transform_instance_id,
-    const std::string& output) const {
+    const std::string& transform_id, const std::string& transform_instance_id,
+    const std::string& model_id, const std::string& output) const {
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
         const auto id(builder_.current()->transform_id());
-        const auto p(full_path_for_writing(id, "output"));
+        const auto p(full_path_for_writing(id, "output", model_id));
         utility::filesystem::write(p, output);
     }
     end_chain(parent_transform_instance_id,
@@ -398,13 +387,12 @@ void file_backend::end_transform(
 
 void file_backend::
 end_transform(const std::string& parent_transform_instance_id,
-    const std::string& transform_id,
-    const std::string& transform_instance_id,
-    const std::string& output) const {
+    const std::string& transform_id, const std::string& transform_instance_id,
+    const std::string& model_id, const std::string& output) const {
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
         const auto id(builder_.current()->transform_id());
-        const auto p(full_path_for_writing(id, "output"));
+        const auto p(full_path_for_writing(id, "output", model_id));
         utility::filesystem::write(p, output);
         ++transform_position_.top();
     }

@@ -140,11 +140,12 @@ public:
     template<typename Ioable>
     void end_chain(const std::string& transform_id,
         const std::string& transform_instance_id,
+        const std::string& model_id,
         const Ioable& output) const {
         if (backend_) {
             pop_parent_id();
-            backend_->end_chain(last_transform_instance_id(),
-                transform_id, transform_instance_id, to_string(output));
+            backend_->end_chain(last_transform_instance_id(), transform_id,
+                transform_instance_id, model_id, to_string(output));
         }
     }
     /**@}*/
@@ -157,11 +158,11 @@ public:
         const std::string& transform_instance_id) const;
     template<typename Ioable>
     void end_transform(const std::string& transform_id,
-        const std::string& transform_instance_id,
+        const std::string& transform_instance_id, const std::string& model_id,
         const Ioable& output) const {
         if (backend_) {
-            backend_->end_transform(last_transform_instance_id(),
-                transform_id, transform_instance_id, to_string(output));
+            backend_->end_transform(last_transform_instance_id(), transform_id,
+                transform_instance_id, model_id, to_string(output));
         }
     }
     /**@}*/

@@ -86,7 +86,7 @@ public:
         const std::string& transform_instance_id) const override;
     void end_chain(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
-        const std::string& transform_instance_id,
+        const std::string& transform_instance_id, const std::string& model_id,
         const std::string& output) const override;
 
 public:
@@ -108,7 +108,7 @@ public:
         const std::string& transform_instance_id) const override;
     void end_transform(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
-        const std::string& transform_instance_id,
+        const std::string& transform_instance_id, const std::string& model_id,
         const std::string& output) const override;
 
 private:

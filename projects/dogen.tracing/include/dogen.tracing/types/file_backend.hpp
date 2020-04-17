@@ -64,9 +64,6 @@ private:
     full_path_for_writing(const std::string& transform_id,
         const std::string& type, const std::string& model_id = "") const;
 
-    boost::filesystem::path
-    full_path_for_writing(const std::string& filename) const;
-
     boost::filesystem::path make_path(const boost::filesystem::path& dir,
         const std::string& fn, const tracing_format tf) const;
 
@@ -103,6 +100,7 @@ public:
     void end_chain(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
         const std::string& transform_instance_id,
+        const std::string& model_id,
         const std::string& output) const override;
 
 public:
@@ -126,6 +124,7 @@ public:
     void end_transform(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
         const std::string& transform_instance_id,
+        const std::string& model_id,
         const std::string& output) const override;
 
 public:

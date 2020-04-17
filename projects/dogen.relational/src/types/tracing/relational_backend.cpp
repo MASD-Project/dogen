@@ -252,9 +252,8 @@ end_chain(const std::string& parent_transform_instance_id,
 
 void relational_backend::
 end_chain(const std::string& parent_transform_instance_id,
-    const std::string& transform_id,
-    const std::string& transform_instance_id,
-    const std::string& output) const {
+    const std::string& transform_id, const std::string& transform_instance_id,
+    const std::string& /*model_id*/, const std::string& output) const {
     transform_event_key k;
     k.transform_instance_id(
         tracing::transform_instance_id(transform_instance_id));
@@ -378,9 +377,8 @@ end_transform(const std::string& parent_transform_instance_id,
 
 void relational_backend::end_transform(
     const std::string& parent_transform_instance_id,
-    const std::string& transform_id,
-    const std::string& transform_instance_id,
-    const std::string& output) const {
+    const std::string& transform_id, const std::string& transform_instance_id,
+    const std::string& /*model_id*/, const std::string& output) const {
     transform_event_key k;
     k.transform_instance_id(
         tracing::transform_instance_id(transform_instance_id));

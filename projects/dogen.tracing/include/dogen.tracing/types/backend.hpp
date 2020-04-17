@@ -109,7 +109,7 @@ public:
         const std::string& transform_instance_id) const = 0;
     virtual void end_chain(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
-        const std::string& transform_instance_id,
+        const std::string& transform_instance_id, const std::string& model_id,
         const std::string& output) const = 0;
     /**@}*/
 
@@ -145,7 +145,7 @@ public:
         const std::string& transform_instance_id) const = 0;
     virtual void end_transform(const std::string& parent_transform_instance_id,
         const std::string& transform_id,
-        const std::string& transform_instance_id,
+        const std::string& transform_instance_id, const std::string& model_id,
         const std::string& output) const = 0;
     /**@}*/
 };
