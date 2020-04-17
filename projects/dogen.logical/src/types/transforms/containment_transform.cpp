@@ -86,7 +86,7 @@ private:
         if (inserted) {
             BOOST_LOG_SEV(lg, debug) << "Added element. Containee: '"
                                      << containee_id
-                                     << "' Container: '" << container_id;
+                                     << "' Container: '" << container_id << "'";
             return true;
         }
 
@@ -136,6 +136,7 @@ void updater::update_containing_element(const entities::name& container,
      */
     const auto container_id(container.qualified().dot());
     const auto containee_id(containee.qualified().dot());
+    BOOST_LOG_SEV(lg, debug) << "Looking for container: " << container_id;
 
     /*
      * Modules.
@@ -167,8 +168,8 @@ void updater::update_containing_element(const entities::name& container,
     /*
      * Facets.
      */
-    BOOST_LOG_SEV(lg, debug) << "Trying backend as the container.";
-    auto& fcts(model_.physical_elements().backends());
+    BOOST_LOG_SEV(lg, debug) << "Trying facets as the container.";
+    auto& fcts(model_.physical_elements().facets());
     inserted = try_insert(fcts, container_id, containee_id);
     if (inserted)
         return;
@@ -212,7 +213,7 @@ void updater::update(entities::element& e) {
     const auto container_id(container_name->qualified().dot());
     update_containing_element(*container_name, e.name());
     e.contained_by(container_id);
-    BOOST_LOG_SEV(lg, debug) << "Element is contained by: " << container_id;
+    BOOST_LOG_SEV(lg, debug) << "Element added to container: " << container_id;
 }
 
 }
