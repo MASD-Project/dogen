@@ -83,6 +83,7 @@ private:
          * Element IDs are expected to be processed exactly only once.
          */
         const auto id(e->name().qualified().dot());
+        BOOST_LOG_SEV(lg, debug) << "Adding element: " << id;
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
 
@@ -117,6 +118,8 @@ private:
             auto& arts(ea.artefacts());
             for (const auto& pmn : physical_meta_names) {
                 const auto pqn(pmn.qualified());
+                BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
+
                 auto art(boost::make_shared<physical::entities::artefact>());
                 const auto pair(std::make_pair(pqn, art));
                 const auto inserted(arts.insert(pair).second);
