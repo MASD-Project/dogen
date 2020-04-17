@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
 
 namespace {
@@ -34,21 +37,36 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string unexpected_stereotypes("Unexpected dynamic stereotypes:");
+
 }
 
 namespace dogen::logical::transforms {
 
 namespace {
 
+/**
+ * @brief Updates all dynamic stereotypes for model elements which
+ * require them.
+ */
 class updater {
 private:
+    /**
+     * @brief Obtains all stereotype names that were not realised as
+     * profile bindings.
+     */
     template<typename Configurable>
-    std::list<std::string> extract(Configurable& c) {
+    std::list<std::string> obtain_non_realised_bindings(Configurable &c) {
         const auto& n(c.configuration()->name());
         const auto& qn(n.qualified());
         BOOST_LOG_SEV(lg, trace) << "Extracting: " << n.simple()
                                  << " (" << qn << ") ";
 
+        /*
+         * A non-realised binding means we could not find a profile
+         * that matched the name. In that case, we consider it to be a
+         * dynamic stereotype, to be used elsewhere.
+         */
         std::list<std::string> r;
         const auto& pbs(c.configuration()->profile_bindings());
         for (const auto& pb : pbs) {
@@ -58,34 +76,100 @@ private:
         return r;
     }
 
+    /**
+     * @brief Update the dynamic stereotypes for the supplied element.
+     */
     void update(logical::entities::element& e) {
-        e.dynamic_stereotypes(extract(e));
+        e.dynamic_stereotypes(obtain_non_realised_bindings(e));
+    }
+
+    /**
+     * @brief Ensures there are no dynamic stereotypes for this
+     * modeling element.
+     */
+    void ensure_none(logical::entities::element& e) {
+        const auto ds(obtain_non_realised_bindings(e));
+        if (ds.empty())
+            return;
+
+        const auto id(e.name().qualified().dot());
+        BOOST_LOG_SEV(lg, error) << unexpected_stereotypes << id
+                                 << " Values: " << ds;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(unexpected_stereotypes + id));
     }
 
 public:
+    /*
+     * Elements that may have dynamic stereotypes.
+     */
     void operator()(logical::entities::element& e) { update(e); }
-    void operator()(logical::entities::structural::object_template &ot) {
-        update(ot);
-        for (auto& attr : ot.local_attributes())
-            attr.dynamic_stereotypes(extract(attr));
+    void operator()(logical::entities::structural::object_template &v) {
+        update(v);
+        for (auto& attr : v.local_attributes())
+            attr.dynamic_stereotypes(obtain_non_realised_bindings(attr));
     }
-    void operator()(logical::entities::structural::enumeration& e) {
-        update(e);
-        for (auto& enm : e.enumerators())
-            enm.dynamic_stereotypes(extract(enm));
+    void operator()(logical::entities::structural::enumeration& v) {
+        update(v);
+        for (auto& enm : v.enumerators())
+            enm.dynamic_stereotypes(obtain_non_realised_bindings(enm));
     }
-    void operator()(logical::entities::structural::object& o) {
-        update(o);
-        for (auto& attr : o.local_attributes())
-            attr.dynamic_stereotypes(extract(attr));
+    void operator()(logical::entities::structural::object& v) {
+        update(v);
+        for (auto& attr : v.local_attributes())
+            attr.dynamic_stereotypes(obtain_non_realised_bindings(attr));
     }
+
+    /*
+     * Elements that are not expected to have dynamic stereotypes.
+     */
+    void operator()(entities::structural::module& v) { ensure_none(v); }
+    void operator()(entities::structural::builtin& v) { ensure_none(v); }
+    void operator()(entities::structural::primitive& v) { ensure_none(v); }
+    void operator()(entities::structural::exception& v) { ensure_none(v); }
+    void operator()(entities::structural::visitor& v) { ensure_none(v); }
+    void operator()(entities::structural::assistant& v) { ensure_none(v); }
+    void operator()(entities::structural::entry_point& v) { ensure_none(v); }
+    void operator()(entities::decoration::modeline& v) { ensure_none(v); }
+    void operator()(entities::decoration::licence& v) { ensure_none(v); }
+    void operator()(entities::decoration::modeline_group& v) { ensure_none(v); }
+    void operator()(entities::decoration::generation_marker& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::variability::profile& v) { ensure_none(v); }
+    void operator()(entities::variability::profile_template& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::variability::feature_template_bundle& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::variability::feature_bundle& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::variability::initializer& v) { ensure_none(v); }
+    void operator()(entities::templating::logic_less_template& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::serialization::type_registrar& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::visual_studio::solution& v) { ensure_none(v); }
+    void operator()(entities::visual_studio::project& v) { ensure_none(v); }
+    void operator()(entities::visual_studio::msbuild_targets& v) {
+        ensure_none(v);
+    }
+    void operator()(entities::orm::common_odb_options& v) { ensure_none(v); }
+    void operator()(entities::build::cmakelists& v) { ensure_none(v); }
+    void operator()(entities::physical::backend& v) { ensure_none(v); }
+    void operator()(entities::physical::facet& v) { ensure_none(v); }
+    void operator()(entities::physical::archetype& v) { ensure_none(v); }
+    void operator()(entities::physical::part& v) { ensure_none(v); }
 };
 
 }
 
-void
-dynamic_stereotypes_transform::apply(const logical::transforms::context& ctx,
-    logical::entities::model_set& ms) {
+void dynamic_stereotypes_transform::
+apply(const transforms::context& ctx, entities::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes transform",
         transform_id, *ctx.tracer(), ms);
 
