@@ -109,15 +109,19 @@ private:
 
 public:
     void operator()(entities::element&) { }
-    void operator()(entities::structural::module& m) { update(m); }
-    void operator()(entities::structural::object_template& ot) { update(ot); }
-    void operator()(entities::structural::builtin& b) { update(b); }
-    void operator()(entities::structural::enumeration& e) { update(e); }
-    void operator()(entities::structural::primitive& p) { update(p); }
-    void operator()(entities::structural::object& o) { update(o); }
-    void operator()(entities::structural::exception& e) { update(e); }
+    void operator()(entities::structural::module& v) { update(v); }
+    void operator()(entities::structural::object_template& v) { update(v); }
+    void operator()(entities::structural::builtin& v) { update(v); }
+    void operator()(entities::structural::enumeration& v) { update(v); }
+    void operator()(entities::structural::primitive& v) { update(v); }
+    void operator()(entities::structural::object& v) { update(v); }
+    void operator()(entities::structural::exception& v) { update(v); }
     void operator()(entities::structural::visitor& v) { update(v); }
-    void operator()(entities::decoration::modeline& ml) { update(ml); }
+    void operator()(entities::decoration::modeline& v) { update(v); }
+    void operator()(entities::physical::backend& v) { update(v); }
+    void operator()(entities::physical::facet& v) { update(v); }
+    void operator()(entities::physical::archetype& v) { update(v); }
+    void operator()(entities::physical::part& v) { update(v); }
 
 public:
     entities::model& model_;
@@ -126,30 +130,53 @@ public:
 void updater::update_containing_element(const entities::name& container,
     const entities::name& containee) {
     /*
-     * First check to see if the container is a module (most obvious
-     * case). If it is, update the module membership list.
+     * Check all of the elements which can contain other elements to
+     * see if they are the designated container. If it is, we update
+     * the membership list.
      */
-    BOOST_LOG_SEV(lg, debug) << "Trying module as the container.";
     const auto container_id(container.qualified().dot());
     const auto containee_id(containee.qualified().dot());
+
+    /*
+     * Modules.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Trying module as the container.";
     auto& mods(model_.structural_elements().modules());
     bool inserted = try_insert(mods, container_id, containee_id);
     if (inserted)
         return;
 
     /*
-     * Now we check to see if it is a modeline group.
+     * Modeline groups.
      */
-    BOOST_LOG_SEV(lg, debug) << "Trying as a modeline group.";
+    BOOST_LOG_SEV(lg, debug) << "Trying modeline group as the container.";
     auto& mgs(model_.decoration_elements().modeline_groups());
     inserted = try_insert(mgs, container_id, containee_id);
     if (inserted)
         return;
 
     /*
-     * If we could not find the containing element in any of the
-     * expected containers, we need to throw. The model has some kind
-     * of logical inconsistency.
+     * Backends.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Trying backend as the container.";
+    auto& bs(model_.physical_elements().backends());
+    inserted = try_insert(bs, container_id, containee_id);
+    if (inserted)
+        return;
+
+    /*
+     * Facets.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Trying backend as the container.";
+    auto& fcts(model_.physical_elements().backends());
+    inserted = try_insert(fcts, container_id, containee_id);
+    if (inserted)
+        return;
+
+    /*
+     * We could not find the containing element in any of the expected
+     * containers, so we need to throw. The model has some kind of
+     * logical inconsistency.
      */
     BOOST_LOG_SEV(lg, error) << missing_container << container_id;
     BOOST_THROW_EXCEPTION(
@@ -157,23 +184,23 @@ void updater::update_containing_element(const entities::name& container,
 }
 
 void updater::update(entities::element& e) {
-    BOOST_LOG_SEV(lg, trace) << "Processing element: "
-                             << e.name().qualified().dot();
+    const auto id(e.name().qualified().dot());
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
     /*
      * First we must determine what the containing element should look
      * like - or if it should even exist at all.
      */
     helpers::name_factory nf;
-    const auto n(nf.build_containing_element_name(e.name()));
-    if (!n) {
+    const auto container_name(nf.build_containing_element_name(e.name()));
+    if (!container_name) {
         /*
          * The element does not appear to be contained anywhere. There
          * are only two special cases caught by this: global module
          * and model module. All other elements should have some form
          * of containment.
          */
-        BOOST_LOG_SEV(lg, trace) << "Element is not contained.";
+        BOOST_LOG_SEV(lg, debug) << "Element is not contained.";
         return;
     }
 
@@ -182,10 +209,10 @@ void updater::update(entities::element& e) {
      * containment relationship with that element and also its
      * reciprocal.
      */
-    const auto container_id(n->qualified().dot());
-    update_containing_element(*n, e.name());
+    const auto container_id(container_name->qualified().dot());
+    update_containing_element(*container_name, e.name());
     e.contained_by(container_id);
-    BOOST_LOG_SEV(lg, trace) << "Element is contained by: " << container_id;
+    BOOST_LOG_SEV(lg, debug) << "Element is contained by: " << container_id;
 }
 
 }

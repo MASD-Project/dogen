@@ -32,6 +32,8 @@ namespace dogen::logical::transforms {
 
 /**
  * @brief Transforms all physical entities in the logical model.
+ *
+ * Must execute after the containment transform.
  */
 class physical_entities_transform final {
 private:
