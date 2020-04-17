@@ -159,7 +159,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-78.65,34.245"/>
+            <dia:point val="-78.65,34.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3410,7 +3410,7 @@ grammar of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-44.65,176.245"/>
+            <dia:point val="-44.65,176.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3465,7 +3465,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-43.65,244.245"/>
+            <dia:point val="-43.65,244.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3520,7 +3520,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="8.13571,244.245"/>
+            <dia:point val="8.13571,244.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3575,7 +3575,7 @@ of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="104.35,244.245"/>
+            <dia:point val="104.35,244.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3630,7 +3630,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="53.1357,244.245"/>
+            <dia:point val="53.1357,244.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3685,7 +3685,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="8.35,327.245"/>
+            <dia:point val="8.35,327.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3740,7 +3740,7 @@ facet of the C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="104.35,330.245"/>
+            <dia:point val="104.35,330.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5479,7 +5479,7 @@ for a given C++ entity.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="95.1357,179.245"/>
+            <dia:point val="95.1357,179.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6123,7 +6123,7 @@ and those used to generate them.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-45.65,35.245"/>
+            <dia:point val="-45.65,35.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6176,7 +6176,7 @@ registry of all available formatters.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="138.136,179.245"/>
+            <dia:point val="138.136,179.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6264,7 +6264,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="163.375,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.625,178.117;176.894,184.8"/>
+        <dia:rectangle val="162.625,178.172;176.894,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6336,7 +6336,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="122.765,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.015,178.117;134.2,184.8"/>
+        <dia:rectangle val="122.015,178.172;134.2,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6550,7 +6550,7 @@ registry of all available formatters.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="36.35,156.245"/>
+            <dia:point val="36.35,156.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6888,7 +6888,7 @@ main, or from another initialiser.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="21.35,150.459"/>
+            <dia:point val="21.35,150.458"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -13490,7 +13490,7 @@ and element.#</dia:string>
         <dia:point val="132.755,89.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.005,88.65;150.695,100.598"/>
+        <dia:rectangle val="132.005,88.65;150.695,100.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14427,7 +14427,7 @@ and element.#</dia:string>
         <dia:point val="28,137.614"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.94,134.15;28.75,140.598"/>
+        <dia:rectangle val="20.94,134.15;28.75,140.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14925,7 +14925,7 @@ and element.#</dia:string>
         <dia:point val="144.82,117.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.07,104.564;168.535,124.598"/>
+        <dia:rectangle val="144.07,104.564;168.535,124.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15301,7 +15301,7 @@ and element.#</dia:string>
         <dia:point val="71.68,120.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.93,117.55;132.2,124.598"/>
+        <dia:rectangle val="70.93,117.55;132.2,124.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15484,7 +15484,7 @@ and element.#</dia:string>
         <dia:point val="-8,134.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.9988,132.164;-7.25,140.598"/>
+        <dia:rectangle val="-16.9988,132.164;-7.25,140.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16356,7 +16356,7 @@ and element.#</dia:string>
         <dia:point val="55.065,137.614"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.315,76.5643;180.2,140.598"/>
+        <dia:rectangle val="54.315,76.5643;180.2,140.603"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17187,7 +17187,7 @@ and element.#</dia:string>
         <dia:point val="182,53.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.55,45.4143;182.2,68.8"/>
+        <dia:rectangle val="68.55,45.4693;182.2,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17872,7 +17872,7 @@ and element.#</dia:string>
         <dia:point val="190.406,88.7928"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.656,88.0428;210.878,99.5977"/>
+        <dia:rectangle val="189.656,88.0428;210.878,99.6027"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19185,7 +19185,7 @@ and element.#</dia:string>
         <dia:point val="71.68,117.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.93,103.55;111.61,117.9"/>
+        <dia:rectangle val="70.93,103.55;111.61,117.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19255,7 +19255,7 @@ and element.#</dia:string>
         <dia:point val="45,117.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.515,116.3;45.75,120.014"/>
+        <dia:rectangle val="8.515,116.35;45.75,120.014"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24005,7 +24005,7 @@ not a regular" helper.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="64.35,284.245"/>
+            <dia:point val="64.35,284.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -26519,7 +26519,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="50.11,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.0275,40.7477;50.86,47.8"/>
+        <dia:rectangle val="11.0275,40.8027;50.86,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26591,7 +26591,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="31.155,49.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.745,49.05;31.905,60.5977"/>
+        <dia:rectangle val="4.745,49.05;31.905,60.6027"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27099,7 +27099,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="215.15,70.9143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="214.4,68.5143;223.05,71.7143"/>
+        <dia:rectangle val="214.4,68.5693;223.05,71.7693"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27331,7 +27331,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="45,120.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.77,119.514;45.75,121.6"/>
+        <dia:rectangle val="33.77,119.569;45.75,121.655"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27721,7 +27721,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="152.92,69.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.17,68.1143;161.05,70.7"/>
+        <dia:rectangle val="152.17,68.1693;161.05,70.755"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27953,7 +27953,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="71.68,120.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.93,117.55;122.435,121.6"/>
+        <dia:rectangle val="70.93,117.55;122.435,121.655"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28272,7 +28272,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="113.612,210.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.862,209.65;162.362,216.05"/>
+        <dia:rectangle val="112.862,209.65;162.362,216.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28385,7 +28385,7 @@ code.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-43.65,327.245"/>
+            <dia:point val="-43.65,327.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -28802,7 +28802,7 @@ code.
         <dia:point val="22.365,86.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.615,85.3;66.05,89.5143"/>
+        <dia:rectangle val="21.615,85.35;66.05,89.5693"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30424,7 +30424,7 @@ string.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-43.65,358.245"/>
+            <dia:point val="-43.65,358.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -31510,7 +31510,7 @@ string.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="8.35,364.245"/>
+            <dia:point val="8.35,364.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -32823,7 +32823,7 @@ string.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="53.35,327.245"/>
+            <dia:point val="53.35,327.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -34358,7 +34358,7 @@ string.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="53.35,366.245"/>
+            <dia:point val="53.35,366.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
