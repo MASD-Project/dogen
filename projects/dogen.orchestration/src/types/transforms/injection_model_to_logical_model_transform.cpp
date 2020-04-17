@@ -123,37 +123,38 @@ create_location(const context& ctx, const injection::entities::model& m) {
 
 logical::entities::static_stereotypes
 injection_model_to_logical_model_transform::
-compute_element_type(
-    const std::list<logical::entities::static_stereotypes>& st,
+compute_element_type(const std::list<logical::entities::static_stereotypes>& st,
     const std::string& fallback_element_type) {
-
     /*
      * Extract the element type information from the supplied static
-     * stereotypes. If we have exactly one, we're go to go.
+     * stereotypes, and determine the course of action based on how
+     * many we got back.
      */
     helpers::stereotypes_helper h;
     const auto et(h.extract_element_types(st));
-    if (et.size() == 1)
+    switch (et.size()) {
+    case 0:
+        /*
+         * If no masd element type came up, attempt to use the
+         * fallback stereotype suggested by the frontend. If none was
+         * suggested, well, we tried out best. Just return invalid.
+         */
+        if (!fallback_element_type.empty())
+            return h.from_string(fallback_element_type);
+        return logical::entities::static_stereotypes::invalid;
+    case 1:
+        /*
+         *  If we have exactly one, we're go to go.
+         */
         return et.front();
-
-    /*
-     * If we've got more than one element type, there is a user error
-     * so bomb out.
-     */
-    if (et.size() > 1) {
+    default:
+        /*
+         * If we've got more than one element type, there is a user
+         * error so bomb out.
+         */
         BOOST_LOG_SEV(lg, warn) << too_many_element_types;
         BOOST_THROW_EXCEPTION(transform_exception(too_many_element_types));
     }
-
-    /*
-     * If no masd element type came up, attempt to use the fallback
-     * stereotype suggested by the frontend. If none was suggested
-     * just return invalid.
-     */
-    if (fallback_element_type.empty())
-        return logical::entities::static_stereotypes::invalid;
-
-    return h.from_string(fallback_element_type);
 }
 
 void injection_model_to_logical_model_transform::
