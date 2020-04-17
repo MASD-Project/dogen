@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-17 Fri 10:51]
+#+CAPTION: Clock summary at [2020-04-17 Fri 12:11]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *33:17* |       |      | 100.0 |
+| *Total time*                                          | *34:37* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 33:17   |       |      | 100.0 |
-| Active                                                |         | 33:17 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 9:22 |  28.1 |
-| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.3 |
-| Sprint and product backlog grooming                   |         |       | 7:23 |  22.2 |
-| Emacs issues and improvements                         |         |       | 0:47 |   2.4 |
-| Nightly nursing                                       |         |       | 0:17 |   0.9 |
-| Analysis on implementing enablement in physical model |         |       | 3:10 |   9.5 |
-| Replace artefact properties with artefacts            |         |       | 4:06 |  12.3 |
-| Papers: Systems variability modeling                  |         |       | 2:55 |   8.8 |
-| Add physical entities to logical model                |         |       | 4:52 |  14.6 |
+| Stories                                               | 34:37   |       |      | 100.0 |
+| Active                                                |         | 34:37 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 9:22 |  27.1 |
+| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.2 |
+| Sprint and product backlog grooming                   |         |       | 7:23 |  21.3 |
+| Emacs issues and improvements                         |         |       | 0:47 |   2.3 |
+| Nightly nursing                                       |         |       | 0:17 |   0.8 |
+| Analysis on implementing enablement in physical model |         |       | 3:10 |   9.1 |
+| Replace artefact properties with artefacts            |         |       | 4:06 |  11.8 |
+| Papers: Systems variability modeling                  |         |       | 2:55 |   8.4 |
+| Add physical entities to logical model                |         |       | 6:12 |  17.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -708,6 +708,7 @@ Read paper and create "journal club" video.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-17 Fri 10:51]--[2020-04-17 Fri 12:11] =>  1:20
     CLOCK: [2020-04-17 Fri 07:27]--[2020-04-17 Fri 08:24] =>  0:57
     CLOCK: [2020-04-16 Thu 21:58]--[2020-04-16 Thu 22:17] =>  0:19
     CLOCK: [2020-04-16 Thu 08:07]--[2020-04-16 Thu 08:44] =>  0:37

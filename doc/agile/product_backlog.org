@@ -2513,6 +2513,14 @@ that this could have important ramifications in resolution:
 
 Needs some more thinking.
 
+Notes:
+
+- utility model must be split into multiple models: the PDMs should go
+  with their own models. The real utilities should stay on a utility
+  product. This can then be reused by dogen (for example, if logging
+  is enabled it uses the logging setup from this model). Users should
+  be able to switch it off though.
+
 Merged stories:
 
 *Platform description models*
