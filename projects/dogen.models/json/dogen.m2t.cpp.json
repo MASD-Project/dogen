@@ -2116,6 +2116,22 @@
         "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::types::test_archetype",
+      "documentation": "A comment.\n",
+      "stereotypes": [
+        "masd::physical::archetype"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::public_headers",
+      "documentation": "Contains the header files that are publicly visible.\n",
+      "stereotypes": [
+        "masd::physical::part"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
