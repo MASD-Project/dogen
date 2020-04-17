@@ -29,7 +29,7 @@ const std::string references_graph_graphviz_fn("references_graph.dot");
 const std::string physical_name_prefix("000-physical_name_repository-");
 const std::string physical_name_postfix("-initial_input.json");
 const std::string injection_transform_prefix(
-    "000-injection.dia.decoding_transform-");
+    "000-injection.dia.decoding_transform-dogen-");
 const std::string first_short_name("000-initial_input.json");
 const std::string second_short_name("001-input.json");
 const std::string injection_transform_postfix("-input.json");
@@ -233,20 +233,19 @@ bool are_tracing_files_healthy(const configuration& cfg,
                 auto guid(fn);
                 boost::erase_first(guid, injection_transform_prefix);
                 boost::erase_first(guid, injection_transform_postfix);
-                BOOST_LOG_SEV(lg, debug) << "guid:" << guid;
+                BOOST_LOG_SEV(lg, debug) << "guid: " << guid;
 
-                // FIXME: broken due to model name change
-                // if (guid.size() != 36) {
-                //     BOOST_LOG_SEV(lg, error) << "GUID is too small. Expected: "
-                //                              << 36 << " Size: " << guid.size();
-                //     return false;
-                // }
+                if (guid.size() != 36) {
+                    BOOST_LOG_SEV(lg, error) << "GUID is too small. Expected: "
+                                             << 36 << " Size: " << guid.size();
+                    return false;
+                }
 
-                // BOOST_LOG_SEV(lg, debug) << "before regex match.";
-                // if (!std::regex_match(guid, guid_regex)) {
-                //     BOOST_LOG_SEV(lg, error) << "GUID does not match regex.";
-                //     return false;
-                // }
+                BOOST_LOG_SEV(lg, debug) << "before regex match.";
+                if (!std::regex_match(guid, guid_regex)) {
+                    BOOST_LOG_SEV(lg, error) << "GUID does not match regex.";
+                    return false;
+                }
 
                 BOOST_LOG_SEV(lg, debug) << "after regex match.";
             }
