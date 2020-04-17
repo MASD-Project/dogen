@@ -32,9 +32,21 @@ namespace dogen::logical::transforms {
 
 /**
  * @brief Update element containment relationships.
+ *
+ * Model elements which can contain other model elements have a
+ * property called @e contains. This transform looks at the names of
+ * each element, and infers what its expected container should be. It
+ * then locates the container, and updates its @e contains
+ * property. There are several types of objects capable of
+ * containment, so the transform takes that into account. However, at
+ * present we do not have a way to check if a container can contain
+ * objects of a given type.
  */
 class containment_transform final {
 public:
+    /**
+     * @brief Execute the transform against the supplied model.
+     */
     static void apply(const context& ctx, entities::model& m);
 };
 

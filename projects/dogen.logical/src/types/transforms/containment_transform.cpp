@@ -69,10 +69,18 @@ private:
     /**
      * @brief Try to insert containee ID into the container, if one
      * can be located in the container map.
+     *
+     * @return True if inserted, false otherwise.
+     * @pre Element must not already exist in the container.
      */
     template<typename Container>
     bool try_insert(std::unordered_map<std::string, Container>& cm,
         const std::string& container_id, const std::string& containee_id) {
+        /*
+         * First we check to see if the container exists in the
+         * supplied collection. It may not exist if it is of a
+         * different logical type.
+         */
         const auto i(cm.find(container_id));
         if (i == cm.end()) {
             BOOST_LOG_SEV(lg, debug) << "Could not find container: '"
@@ -80,14 +88,21 @@ private:
             return false;
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Adding element.  Containee: '"
-                                 << containee_id
-                                 << "' Container: '" << container_id;
+        /*
+         * If it does exist, we expect the insertion to work cleanly.
+         */
         auto& container(*i->second);
         const bool inserted(container.contains().insert(containee_id).second);
-        if (inserted)
+        if (inserted) {
+            BOOST_LOG_SEV(lg, debug) << "Added element. Containee: '"
+                                     << containee_id
+                                     << "' Container: '" << container_id;
             return true;
+        }
 
+        /*
+         * It seems we already contained an element with that name.
+         */
         BOOST_LOG_SEV(lg, error) << duplicate_element << containee_id;
         BOOST_THROW_EXCEPTION(
             transformation_error(duplicate_element + containee_id));
@@ -120,32 +135,31 @@ public:
 
 void updater::update_containing_element(const entities::name& container,
     const entities::name& containee) {
-
+    /*
+     * First check to see if the container is a module (most obvious
+     * case). If it is, update the module membership list.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Trying module as the container.";
     const auto container_id(container.qualified().dot());
     const auto containee_id(containee.qualified().dot());
-
-    /*
-     * First we check to see if the container is a module. If it is,
-     * update the module membership list.
-     */
-    bool inserted = try_insert(model_.structural_elements().modules(),
-        container_id, containee_id);
+    auto& mods(model_.structural_elements().modules());
+    bool inserted = try_insert(mods, container_id, containee_id);
     if (inserted)
         return;
 
     /*
      * Now we check to see if it is a modeline group.
      */
-    BOOST_LOG_SEV(lg, trace) << "Could not find module: '"
-                             << container_id << "'. "
-                             << "Trying as a modeline group.";
-    inserted = try_insert(model_.decoration_elements().modeline_groups(),
-        container_id, containee_id);
+    BOOST_LOG_SEV(lg, debug) << "Trying as a modeline group.";
+    auto& mgs(model_.decoration_elements().modeline_groups());
+    inserted = try_insert(mgs, container_id, containee_id);
     if (inserted)
         return;
 
     /*
-     * If we could not find the containing element, we need to throw.
+     * If we could not find the containing element in any of the
+     * expected containers, we need to throw. The model has some kind
+     * of logical inconsistency.
      */
     BOOST_LOG_SEV(lg, error) << missing_container << container_id;
     BOOST_THROW_EXCEPTION(
@@ -163,6 +177,12 @@ void updater::update(entities::element& e) {
     helpers::name_factory nf;
     const auto n(nf.build_containing_element_name(e.name()));
     if (!n) {
+        /*
+         * The element does not appear to be contained anywhere. There
+         * are only two special cases caught by this: global module
+         * and model module. All other elements should have some form
+         * of containment.
+         */
         BOOST_LOG_SEV(lg, trace) << "Element is not contained.";
         return;
     }
@@ -175,8 +195,7 @@ void updater::update(entities::element& e) {
     const auto container_id(n->qualified().dot());
     update_containing_element(*n, e.name());
     e.contained_by(container_id);
-    BOOST_LOG_SEV(lg, trace) << "Element is contained by: "
-                             << container_id;
+    BOOST_LOG_SEV(lg, trace) << "Element is contained by: " << container_id;
 }
 
 }
