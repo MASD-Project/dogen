@@ -42,7 +42,8 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string separator(".");
-const std::string missing_module("Could not find module: ");
+const std::string too_many_containers(
+    "Found more than one container for ID: ");
 
 }
 
@@ -117,9 +118,34 @@ gather_internal_modules(entities::model& m) {
 bool modules_transform::containing_element_exists(const std::string& id,
     const entities::model& m) {
 
-    const auto i(m.structural_elements().modules().find(id));
-    bool r(i != m.structural_elements().modules().end());
-    return r;
+    const auto lambda([&](const auto& container) -> bool {
+            const auto i(container.find(id));
+            return i != container.end();
+        });
+
+    /*
+     * Check across all of the containers for this ID.
+     */
+    const bool mod(lambda(m.structural_elements().modules()));
+    const bool mg(lambda(m.decoration_elements().modeline_groups()));
+    const bool b(lambda(m.physical_elements().backends()));
+    const bool f(lambda(m.physical_elements().facets()));
+
+    /*
+     * Count the numbers of matches and ensure we have at most one.
+     */
+    int found(0);
+    if (mod) ++found;
+    if (mg) ++found;
+    if (b) ++found;
+    if (f) ++found;
+
+    if (found > 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_containers << id;
+        BOOST_THROW_EXCEPTION(transformation_error(too_many_containers + id));
+    }
+
+    return found == 1;
 }
 
 void modules_transform::create_modules(const std::unordered_map<std::string,
