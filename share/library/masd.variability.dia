@@ -117,7 +117,7 @@ space; keep it technical space agnostic.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="6.35,6.245"/>
+            <dia:point val="6.35,6.24406"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -190,7 +190,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -300,7 +300,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -410,7 +410,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -520,7 +520,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -630,7 +630,7 @@ space; keep it technical space agnostic.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
