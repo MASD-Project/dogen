@@ -588,6 +588,7 @@ It seems clear that we will have different "types" of models:
   it may make more sense to place them in the product model, since its
   shared across components?
 - PDMs: these describe platforms.
+- generative models: generate extensions to code generators.
 
 At present there is no concept of model types, so any meta-model
 element can be placed in any model. This is convenient, but in the
@@ -906,6 +907,16 @@ Notes:
 - user to enter copyright, github URL.
 - we probably need to create a kernel for dart due to the
   peculiarities of the directory structure.
+
+We should copy the approach from =dotnet=:
+
+- [[https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new][dotnet new]]: we could have an equivalent dogen new. We could also
+  copy the approach of templates (e.g. CMake template, Visual Studio
+  template, etc). We could also supply the packaging sources (though
+  this needs better modeling).
+- [[https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-sln][dotnet sln]]: we need an equivalent option to specify
+  components. List, add, remove.
+- we should search predefined directories (=modeling= etc).
 
 *Directory Themes*
 
@@ -3962,6 +3973,17 @@ We should be able to set a model-wide property that tells dogen to
 generate inline methods for properties. We could be more flexible and
 allow inlining at class level or just for a single property. We don't
 have any use cases for these at present.
+
+*** Create org-mode documentation for =cli=                           :story:
+
+We need a way to associate documentation with a model. The ideal
+output is something like =dotnet=:
+
+- https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-sln
+
+In an org-mode world, it would be really nice if we could have the
+documentation and the definition of the command line options next to
+each other, in the same org-mode model.
 
 *** Consider generating program options code                          :story:
 
@@ -7285,11 +7307,250 @@ Notes:
 
 * V3 Release
 
-The vision for V3 is around the Dogen ecosystem. This involves all the
-tooling around Dogen, including LSP support for both stitch and all
-supported injectors (Dia, JSON, org-mode?).
+The vision for V3 is around the Dogen ecosystem: /better
+tooling/. This involves all the tooling around Dogen, including LSP
+support for both stitch and all supported injectors (Dia, JSON,
+org-mode?).
 
 ** Candidates
+
+*** Tighter integration of Dogen and Emacs                            :story:
+
+There are a couple of areas where we could take advantage of code
+generation and emacs:
+
+- running of tests: generate a org-mode test file which has a tree for
+  all configurations (Debug, Release) and compilers (gcc8, clang7,
+  etc). Then, for each of these we could have the test suites and the
+  tests. It runs all the tests and builds org-tables with the total
+  times. The runs are babel snippets. It updates the entries with the
+  status of passed, failed or not run. We need to find out how to run
+  all code snippets for a given subsection. We can use org properties
+  to supply the boost test variables such as log level etc. Because
+  Dogen knows of all of the test suites (e.g. these are declared as
+  model elements), it can parse them. We can also mark tests and test
+  suites as "generated" or "handcrafted".
+- files: Dogen could also output a generation model set for all types
+  in a product using a lisp like serialisation format. This could
+  somehow be read by emacs to give it visibility of all files dogen
+  knows off. Its still not clear what we'd do with it though. Some
+  kind of integration with projectile?
+- bookmarks: we could generate a org-mode file of bookmarks for all
+  key directories in a product such as say "coding include types",
+  etc. This can also use traditional emacs bookmarking format.
+- run affected test suites: create a graph of includes per file such
+  that when you change a file, you can ask to run affected test
+  suites. This is computed based on the include graph. Won't work for
+  all technical spaces though.
+- build: it would be great if we could have the build scripts as
+  babel. However, instead of executing inside of org-mode, we want to
+  call the compilation buffer with it. This means we could have
+  bookmerks for all of the usual targets and even target combos such
+  as generate, convert and indent. For extra bonus points, once we
+  have code merging, we could have our own compilation targets added
+  manually.
+
+Links:
+
+- [[https://www.youtube.com/watch?v=dljNabciEGg][Literate Devops with Emacs]]
+- [[https://github.com/wlbr/cl-marshal][cl-marshal]]: Simple and fast marshalling of Lisp datastructures.
+- [[https://www.cliki.net/serialization][cliki]]: Libraries to translate data structures to/from a format which
+  can be stored/retrieved
+
+*** User interface generation                                          :epic:
+
+we have not really thought about it that deeply but it should be
+possible to use dogen to generate some basic uis, for example for wt.
+
+It would be extremely interesting to see if we could encode these
+meta-model elements within a org-mode document.
+
+The gist of the approach is to add new meta-model elements to logic
+that are on the UI domain. User models then instantiate those. We need
+to look at the
+
+links:
+
+- [[http://plantuml.com/salt][salt]]: plantuml wireframe language.
+- [[https://en.wikipedia.org/wiki/Glade_Interface_Designer][Wikipedia: Glade Interface Designer]]: GtkBuilder is the XML format
+  that the Glade Interface Designer uses to save its forms.
+- [[https://gitlab.gnome.org/GNOME/gtk/blob/7601bca7587dd29bde3d1554e644a10ae6dafc18/gtk/gtkbuilder.rnc][RelaxNG schema for GTK builder XML]]
+
+Merged stories:
+
+*Add support for GtkBuilder / Glade XML files*
+
+There is nothing stopping us from using a GtkBuilder / Glade XML file
+to do the boiler plate setup of the UI. With a bit more work one could
+potentially even generate the bindings for a presentation model.
+
+*** Investigate support for automatic diagram updates                  :epic:
+
+For classes that are manually generated, it would be really nice if we
+could update the properties of the class in the diagram from the
+source code. This would work as follows:
+
+- user creates a class =x= and marks it as non-generatable; executes
+  dogen.
+- dogen creates the initial file and adds as much boilerplate as
+  possible. For instance if the user manually added properties or
+  operations to the class, dogen generates skeletons for these.
+- once the file exists, dogen will no longer touch it (see also the
+  merging code generation story, for a different take on this).
+- the user runs a second tool (the diagram updator, in need of a name)
+  which uses clang internally; it reads the diagram and looks for all
+  of the non-generatable classes; for each of these, it updates the
+  dia class with the properties found in the source file. Everything
+  else is left untouched.
+
+This feature would be extremely powerful when in presence of many
+other features such as mocking, remote method invocation, etc - the
+user would have no effort at all in generating the
+code. Implementation-wise we'd have to:
+
+- create an XML writer;
+- add write support for the dia model and ensure we generate valid dia
+  models;
+- integrate clang libraries with dogen;
+- create tool - or perhaps we should just have an "update diagram"
+  mode in dogen?
+*** Code generation as a service                                       :epic:
+
+*Latest Understanding*
+
+- create a website using Wt: single screen with a few radio buttons to
+  upload files or edit/paste JSON input; command line options
+  available as text boxes.
+- create a service that receives requests for code generation and
+  returns a tarball/zip with the generated code: =jersey=. Archiving
+  libraries:
+  - https://github.com/libarchive/libarchive
+  - https://github.com/saboorian/moor
+  - https://github.com/do-m-en/libarchive_cpp_wrapper/
+- consider creating a simple HTTP wrapper around =jersey= just to see
+  how it works. =hem=.
+- two modes of operation: 1) upload a set of files, marking one as the
+  target 2) simple input box where user can type in JSON and code
+  generate.
+- tick boxes for main options.
+- potentially display a sample of one of the types.
+- =jersey= receives a code generation request with the files as part of
+  the payload. This means we need to either save them down to a temp
+  directory and then pass paths over to knitter or we should have
+  support for different kinds of inputs such as streams in knitter.
+- save all requests and responses to a Postgres database for analysis
+  later (performance, bugs, etc). It would also be nice to have user
+  comments/complaints, perhaps linked to a user voice-like interface.
+- a more useful version of this service would allow: 1) ability add
+  types to existing models such as std and boost, or even create new
+  system models altogether. Some minimal UI for model editing would be
+  required, including meta-data support (includes, etc). Ideally, each
+  of these models should have an associated test model which would
+  automatically be updated with the new types so users could get
+  compilation feedback on their changes. 2) the ability to edit stitch
+  templates on the site or even the ability to add new facets or new
+  features for existing facets, and to code generate using those. Also
+  the ability to add helper methods for a given facet to a given
+  type. The testing for this could be achieved via a docker container
+  with an incremental build and simple validation (time out, etc). If
+  the user submits dodgy changes only the container would be
+  affected. Once built, the container is used for code generation. It
+  would be really nice to be able to test the template as one is
+  editing it, perhaps by choosing a type in a model; the user could
+  press "generate" at any time and see the file for that feature and
+  facet. Behind the scenes this is stitching, building, code
+  generating and then displaying the result for that one type. 3) the
+  ability to submit PR from within the site. Users log in using their
+  github accounts. They make their changes to a remote git repo. Using
+  github magic - in a similar way to how gitter forks and creates
+  PRs - when the user is happy enough with its changes, their are
+  submitted as a PR.
+- note that this advanced version would probably require having the
+  test models in JSON so that we could edit them via the site; it
+  would be cumbersome to add new types to a dia model
+  programmatically.
+- for extra bonus points, we should integrate with clang-format
+  generation sites such as [[http://zed0.co.uk/clang-format-configurator/][this one]] and allow users to add their own
+  styles dynamically.
+- it should be possible to add more modelines/modeline groups,
+  licences, and even fields. This only makes sense if the fields are
+  totally dynamic such that the formatter could make use of the new
+  field directly. For this we would have to supply the ownership
+  hierarchy from within the stitch template.
+- we should create interesting end points such as: dia to json
+  conversion; merged model generation; merged model to code
+  generation, with language options; formatting; etc. Each is a
+  distinct end point.
+
+Notes:
+
+- we must cache system models so we don't reload them for every
+  request.
+- we should load per language (references?)
+- we need to verify the JSON input to avoid large blobs, buffer
+  overruns, etc.
+- support for workspaces so that users can save references.
+- system data: load once, reload on changes. Data "dirs" can be
+  stored/cached on redis or DB.
+- we need to move XML reader to memory.
+- hydrators need a data store scoped to the user.
+
+*Previous Understanding*
+
+One way of testing new functionality added to dogen is to try to
+exercise it as part of the code generation itself. We have been doing
+this with the bootstrapping, but there were limitations on
+functionality such as ODB and EOS where we couldn't see any obvious
+use for it in code generation. However, there is one way of exercising
+this and a lot more of these sort of features: to create a Web-based code
+generation service, along the lines of Web Sequence Diagrams or
+YUML. We could create a simple bootstrap based website that forwards
+requests to a set of end-points, all done within the dogen project.
+
+We'd create a casablanca REST layer with a simple interface, with
+functionality such:
+
+- create workspace: returns a UUID and creates some kind of internal
+  storage area.
+- upload target: uploads a Dia or JSON model to be used as the code
+  generation target.
+- upload reference: uploads a Dia or JSON model to be used as a
+  reference.
+- set options: which facets to generate, which languages, etc.
+- codegen: runs the code generation and returns a tarball with
+  generated files and the log file; or returns a set of code
+  generation errors.
+- we could integrate with google drive to load the files from there.
+
+As a further layer we could create an ASIO service that is queried by
+the casablanca REST. This would exercise all of the messaging
+infrastructure. Internally it would create the engine and run code
+generation. It could also exercise ODB by writing session information
+to a database and keeping track of the historical usage of the
+service, log files etc.
+
+This stack would allow us to continuously exercise pretty much every
+feature we need out of dogen. As an added bonus, when we get to the UI
+we could also exercise that (Wt, GTK).
+
+Finally, this would also allow us to play with Docker, and place each
+service in their own container, create load balancing etc.
+
+Links:
+
+- [[http://codeplanet.io/principles-good-restful-api-design/][REST API Design]]
+- [[http://www.drdobbs.com/tools/json-and-the-microsoft-c-rest-sdk/240164821][Using Microsoft REST SDK]]
+- [[https://git.gnome.org/browse/dia/tree/doc/diagram.dtd][Dia DTD]]: make sure all dia diagrams are valid according to DTD. Same
+  for JSON documents. Make sure there are size limits for names,
+  locations, documents, etc. See also [[https://security.stackexchange.com/questions/416/if-an-xml-document-is-not-validated-as-well-formed-or-checked-against-a-schema][If an XML document is not
+  validated as “Well Formed” or checked against a schema, what are the
+  risks?]]
+
+*** Consider replacing out libxml bindings with RapidXML              :story:
+
+We rolled our own libxml bindings for reading the dia XML. However, it
+may make more sense to use [[https://github.com/dwd/rapidxml][RapidXML]] instead. It seems basic but our
+needs are also very basic.
 
 *** Implement wale in terms of existing template libraries            :story:
 
@@ -7675,9 +7936,147 @@ at least to start off with force users to manually update it. Ideally
 we should be able to use clang to update the UUID but for this we need
 merging code generation support.
 
+*** Consider C++ itself as a front-end                                 :epic:
+
+One can imagine a clang-based front-end that reads C++ code suitably
+annotated, perhaps with =masd::generatable= or some such attributes -
+basically all attributes required to build a sensible logical
+model. The frontend will parse the code and generate an injector
+format. We can then generate serialisation, hashing etc for the
+hand-crafted code.
+
+One very good use case for this is for legacy code bases. One could
+benefit from adding serialisation and IO support to an existing legacy
+code base. This raises the interesting problem that we would need to:
+
+- disable the types facet;
+- inject types created from the c++ code with the types facet
+  properties populated (namely include and file path).
+- to be totally non-intrusive: generate a shared library that provides
+  dogen code and requires the presence of the user code library.
+- we may also need to somehow add a whole load of supporting types in
+  order to be able to resolve references. So there would be a "target
+  model" that we need to somehow identify but there would also be the
+  supporting libraries (all other types the model references that we
+  do not wish to code generate). This will probably be tricky. If the
+  user needs to add these types manually it will not be
+  practical. However, it may not be trivial to distinguish between the
+  two.
+
+This feature requires a bit of thinking as the architecture does not
+support any of these.
+
+The c++ frontend would also open some interesting possibilities:
+
+- *read c++ and generate JSON*. This is a great way to import types into
+  dogen; given a set of libraries returns a basic JSON model for dogen
+  for them, with as much filled in as possible such as include
+  directories, etc. This would save us a lot of time instead of
+  manually adding these. The story for this was: As a dogen user, I
+  want to generate system models automatically so that I don't have to
+  create them manually.
+- *read c++ and generate dia*. This would allow creating diagrams of
+  existing code bases. Not trivial because the layout of the diagram
+  would be quite hard to get right. We should create a separate tool
+  for this.
+- *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
+
+It would be important to be able to filter the classes. This could be
+achieved by either having to supply the header files to read or
+probably better by supplying a list of class names one is interested
+in. We will probably need a compilation database to instantiate clang
+so this would mean we'd have visibility of the entire project.
+
+Actually the right way to do this is to have an LSP-to-Dogen
+approach. This would also allow us to support any LSP-compliant
+lanugage in one go.
+
+Links:
+
+- For clang source code transforms, see [[https://github.com/flexferrum/flex_lib][flex_lib]] and this
+  presentation: [[https://www.youtube.com/watch?v%3DaPTyatTI42k][Automatic C++ source code generation with clang -
+  Sergei Sadovnikov]]
+
+*** Consider compiling generated code with clang                      :story:
+
+It make sense to perform some kind of minimal sanity checks on the
+code generated by =knit= to provide a heads up to users. A full
+compilation may be beyond the scope (database compilation may not be
+setup, etc) but it would be nice to pickup basic syntax errors.
+
+This story needs to be updated in light of LSP.
+
+*** Compile stitch template output with clang                         :story:
+
+Once we have integrated clang for formatting stitch output, it would
+be great to also integrate it for compilation. It would work as
+follows:
+
+- start creating compilation databases when we do a regular build with
+  clang;
+- within stitch, get clang to detect the compilation database "near"
+  the template; presumably clang has some infrastructure to do so
+  already - if not we could perform a file look up. Actually we should
+  just have a stitch command line parameter for the compilation
+  database as well as for the clang-format settings.
+- create a mapping of template lines to output lines during output
+  generation.
+- run clang with the compilation database options against the template
+  output. Use the mapping to provide a cross reference between the
+  template output and the template. We could use a scheme similar to
+  GCC (included from, etc).
+- apparently its possible to compile from a memory buffer. See [[http://lists.cs.uiuc.edu/pipermail/cfe-dev/2015-July/044029.html][this]]
+  thread.
+
+This story needs to be updated in light of LSP.
+
+*** Splitting facets out of a component                               :story:
+
+It is not always desirable to generate a facet as part of the main
+model. For example, say we want to support coherence, or a relational
+representation. We don't want to generate a single shared object with
+the model and also include coherence in it because this means everyone
+will have to link against the coherence libraries. Instead, one would
+like to create "project facets"; that is, to be able to somehow create
+a top-level project just for that facet (or perhaps group of facets)
+such that they would end up in a different project and thus different
+shared object. For example:
+
+: project_a/cpp/types
+: project_a/cpp/coherence
+
+would become
+
+: project_a/cpp/types
+: project_a.coherence/cpp/coherence
+
+Or some such approach. Now that we have support for dot model names,
+this is easier to do. We should have a meta-data element that
+determines if a given facet is "built-in" ("shared"?) or if it is
+"external".
+
+This is not exclusive to facets like coherence. For example, we may
+not need test data in production, particularly when we start
+supporting test data types because we would then include a lot of data
+in the binary (or start requiring data files to be distributed with
+the model). This is useful to create system tests, but not ideal for
+the production binary.
+
+We may not need separate projects. Having different directories
+complicates facet management a great deal. If we take the [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][build2
+approach]], in that a single project can create multiple binaries, this
+would make life *much* easier: we could then simply generate static or
+dynamic libraries if the facet is not built-in. We could also
+automatically add the dependency between the facet library and the
+main library, or even between facet libraries because we have access
+to the facet dependency graph. The user should just classify the facet
+as "external"; it is up to CMake to determine if its a static or
+shared library.
+
+
 * Future Releases
 
-Stories that have not yet been allocated a release.
+Stories that have not yet been allocated a release, by broad themes.
 
 ** Technical debt
 
@@ -8574,6 +8973,18 @@ Links:
 
 - [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
 - [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
+
+** Injection
+
+Changes to injection.
+
+** Logical Model
+
+Changes to the core.
+
+** Extraction
+
+Changes to facets, formatters, etc.
 
 ** Feature Heap
 
@@ -14614,6 +15025,33 @@ once for all types in a facet.
 
 However, we are very far from this at present.
 
+Merged stories:
+
+*Evaluate all of our data structures based on usage*
+
+This presentation is very interesting:
+
+- [[https://www.youtube.com/watch?v%3DrX0ItVEVjHc][CppCon 2014: Mike Acton "Data-Oriented Design and C++"]]
+
+The presenter makes a lot of points that are directly applicable to
+Dogen. The main one is that we need to look at all the data structures
+to see how they are used, and to try to extract deeply nested if's
+that in many cases can easily be extracted from the bottom and moved
+to the top. There are many other excellent points, we probably need to
+watch the presentation again and write each of them down.
+
+The key point though is that the re-engineering exercise should only
+be done after we finished all of the current refactorings - we must
+make sure the code does all that it is intended to do first and then
+tackle the Acton's suggestions. This is to ensure that we have
+captured all the main use cases. Data analysis can be done after this.
+
+Links:
+
+- [[https://www.youtube.com/watch?v=yy8jQgmhbAU][CppCon 2018: Stoyan Nikolov “OOP Is Dead, Long Live Data-oriented
+  Design”]]
+- [[https://en.wikipedia.org/wiki/Data-oriented_design][Data-oriented design]]
+
 *** Support for locations other than filesystems                      :story:
 
 It would be nice to be able to point to an injection model anywhere,
@@ -15960,92 +16398,6 @@ failed.
 
 We should also do this for command line options.
 
-*** Consider C++ itself as a front-end                       :reviewing:epic:
-
-One can imagine a clang-based front-end that reads C++ code suitably
-annotated, perhaps with =Generatable= or some such attributes -
-basically all attributes required to build a sensible logical
-model. The frontend will parse the code and generate an injector
-format. We can then generate serialisation, hashing etc for the
-hand-crafted code.
-
-One very good use case for this is for legacy code bases. One could
-benefit from adding serialisation and IO support to an existing legacy
-code base. This raises the interesting problem that we would need to:
-
-- disable the types facet;
-- inject types created from the c++ code with the types facet
-  properties populated (namely include and file path).
-- to be totally non-intrusive: generate a shared library that provides
-  dogen code and requires the presence of the user code library.
-- we may also need to somehow add a whole load of supporting types in
-  order to be able to resolve references. So there would be a "target
-  model" that we need to somehow identify but there would also be the
-  supporting libraries (all other types the model references that we
-  do not wish to code generate). This will probably be tricky. If the
-  user needs to add these types manually it will not be
-  practical. However, it may not be trivial to distinguish between the
-  two.
-
-This feature requires a bit of thinking as the architecture does not
-support any of these.
-
-The c++ frontend would also open some interesting possibilities:
-
-- *read c++ and generate JSON*. This is a great way to import types into
-  dogen; given a set of libraries returns a basic JSON model for dogen
-  for them, with as much filled in as possible such as include
-  directories, etc. This would save us a lot of time instead of
-  manually adding these. The story for this was: As a dogen user, I
-  want to generate system models automatically so that I don't have to
-  create them manually.
-- *read c++ and generate dia*. This would allow creating diagrams of
-  existing code bases. Not trivial because the layout of the diagram
-  would be quite hard to get right. We should create a separate tool
-  for this.
-- *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
-
-It would be important to be able to filter the classes. This could be
-achieved by either having to supply the header files to read or
-probably better by supplying a list of class names one is interested
-in. We will probably need a compilation database to instantiate clang
-so this would mean we'd have visibility of the entire project.
-
-Links:
-
-- For clang source code transforms, see [[https://github.com/flexferrum/flex_lib][flex_lib]] and this
-  presentation: [[https://www.youtube.com/watch?v%3DaPTyatTI42k][Automatic C++ source code generation with clang -
-  Sergei Sadovnikov]]
-
-*** Consider compiling knit output with clang                         :story:
-
-It make sense to perform some kind of minimal sanity checks on the
-code generated by =knit= to provide a heads up to users. A full
-compilation may be beyond the scope (database compilation may not be
-setup, etc) but it would be nice to pickup basic syntax errors.
-
-*** Compile stitch template output with clang                         :story:
-
-Once we have integrated clang for formatting stitch output, it would
-be great to also integrate it for compilation. It would work as
-follows:
-
-- start creating compilation databases when we do a regular build with
-  clang;
-- within stitch, get clang to detect the compilation database "near"
-  the template; presumably clang has some infrastructure to do so
-  already - if not we could perform a file look up. Actually we should
-  just have a stitch command line parameter for the compilation
-  database as well as for the clang-format settings.
-- create a mapping of template lines to output lines during output
-  generation.
-- run clang with the compilation database options against the template
-  output. Use the mapping to provide a cross reference between the
-  template output and the template. We could use a scheme similar to
-  GCC (included from, etc).
-- apparently its possible to compile from a memory buffer. See [[http://lists.cs.uiuc.edu/pipermail/cfe-dev/2015-July/044029.html][this]]
-  thread.
-
 *** Add support for type "labels" or "tags"                           :story:
 
 It may be useful to "tag" a number of types with a "label", and to
@@ -16054,58 +16406,6 @@ context of reflection. This story needs a bit more fleshing out. We
 don't yet have a use case for this.
 
 This would allow for example to list all objects with a given tag.
-
-*** Splitting facets into their own projects                          :story:
-
-It is not always desirable to generate a facet as part of the main
-model. For example, say we want to support coherence. We don't want to
-generate a single shared object with the model and also include
-coherence in it because this means everyone will have to link against
-the coherence libraries. Instead, one would like to create "project
-facets"; that is, to be able to somehow create a top-level project
-just for that facet (or perhaps group of facets) such that they would
-end up in a different project and thus different shared object. For
-example:
-
-: project_a/cpp/types
-: project_a/cpp/coherence
-
-would become
-
-: project_a/cpp/types
-: project_a.coherence/cpp/coherence
-
-Or some such approach. Now that we have support for dot model names,
-this is easier to do. We should have a meta-data element that
-determines if a given facet is "built-in" ("shared"?) or if it is
-"external".
-
-This is not exclusive to facets like coherence. For example, we may
-not need test data in production, particularly when we start
-supporting test data types because we would then include a lot of data
-in the binary (or start requiring data files to be distributed with
-the model). This is useful to create system tests, but not ideal for
-the production binary.
-
-We may not need separate projects. Having different directories
-complicates facet management a great deal. If we take the [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][build2
-approach]], in that a single project can create multiple binaries, this
-would make life *much* easier: we could then simply generate static or
-dynamic libraries if the facet is not built-in. We could also
-automatically add the dependency between the facet library and the
-main library, or even between facet libraries because we have access
-to the facet dependency graph. The user should just classify the facet
-as "external"; it is up to CMake to determine if its a static or
-shared library.
-
-*** Support for platform specific code                                :story:
-
-There are some features which may only make sense on a given platform,
-or may have different expressions depending on a platform. For
-example, [[https://msdn.microsoft.com/en-us/library/aa370448%2528v%3Dvs.85%2529.aspx][DLL Main]] is required on Windows but not on UNIX. These files
-must be correctly handled by CMake such that they are excluded on UNIX
-and added on Windows. Same with [[http://en.wikipedia.org/wiki/Precompiled_header][StdAfx.h]] and cpp, which will require
-looking into pre-compiled headers support in CMake.
 
 *** Add support for plugins                                           :story:
 
@@ -16143,7 +16443,12 @@ dependencies, including compiler and so on.
 
 We can either extend dogen or create a new utility for this.
 
-*** Improving test data generation via yarn "reflection"              :story:
+Notes:
+
+- [[https://github.com/GNOME/libpeas][libpeas GitHub]]: gnome extensibility library. We should mine it for
+  ideas.
+
+*** Improving test data generation via "reflection"                   :story:
 
 A really random but perhaps implementable idea: to create a
 description of test data as JSON objects. For example, one could
@@ -16211,7 +16516,7 @@ the existence of counters (special values for strings perhaps such as
 
 *Notes*
 
-- See also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#make-test-data-generator-more-configurable][Make test data generator more configurable]]
+- see also [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#make-test-data-generator-more-configurable][Make test data generator more configurable]]
 - this idea stems from the need to generate [[http://www.neuron.yale.edu/neuron/static/docs/refman/hoc.html][Hoc]] files from a neuron
   model described yarn. For that particular use case we would have a
   language model (=hoc=) that uses the instantiation description
@@ -16219,16 +16524,18 @@ the existence of counters (special values for strings perhaps such as
   appropriate solution for this use case; it would be far too limited
   to deal with this problem in general. We need to find a use case for
   this other than just generalising test data.
-- We need a better name than YIDL ("yarn instantiation description
+- we need a better name than YIDL ("yarn instantiation description
   language"). Perhaps something that reflects the nature of this being
   a test data templating engine.
+- this is really complicated. The fountains approach gives us many of
+  the benefits and it is much simpler.
 
 *** Consider using bounded integers                                   :story:
 
 This library seems to improve static error checking with integers,
 etc:
 
-https://bitbucket.org/davidstone/bounded_integer
+- https://bitbucket.org/davidstone/bounded_integer
 
 However, off the top of my head, there are no cases for bounded
 integers in dogen yet.
@@ -16242,31 +16549,6 @@ approach compares to ours, see if we can learn any lessons from it:
 to access RDBMS database/tables (only MySQL supported for now).
 
 ModelQ: https://github.com/mijia/modelq
-
-*** Evaluate all of our data structures based on usage                 :epic:
-
-This presentation is very interesting:
-
-[[https://www.youtube.com/watch?v%3DrX0ItVEVjHc][CppCon 2014: Mike Acton "Data-Oriented Design and C++"]]
-
-The presenter makes a lot of points that are directly applicable to
-Dogen. The main one is that we need to look at all the data structures
-to see how they are used, and to try to extract deeply nested if's
-that in many cases can easily be extracted from the bottom and moved
-to the top. There are many other excellent points, we probably need to
-watch the presentation again and write each of them down.
-
-The key point though is that the re-engineering exercise should only
-be done after we finished all of the current refactorings - we must
-make sure the code does all that it is intended to do first and then
-tackle the Acton's suggestions. This is to ensure that we have
-captured all the main use cases. Data analysis can be done after this.
-
-Links:
-
-- [[https://www.youtube.com/watch?v=yy8jQgmhbAU][CppCon 2018: Stoyan Nikolov “OOP Is Dead, Long Live Data-oriented
-  Design”]]
-- [[https://en.wikipedia.org/wiki/Data-oriented_design][Data-oriented design]]
 
 *** Use =observer_ptr= in factory methods                             :story:
 
@@ -16348,12 +16630,6 @@ handling all of the use cases (reorder columns, remove columns, add
 columns, updating rows, etc). All of this code can be inferred from
 the type hierarchy.
 
-*** Consider replacing out libxml bindings with RapidXML              :story:
-
-We rolled our own libxml bindings for reading the dia XML. However, it
-may make more sense to use [[https://github.com/dwd/rapidxml][RapidXML]] instead. It seems basic but our
-needs are also very basic.
-
 *** Consider adding SWIG and Boost.Python support                      :epic:
 
 #+begin_quote
@@ -16416,7 +16692,7 @@ a file using their markup language and generates an yarn model from it.
 
 It would be nice to support PlantUML as a frontend:
 
-http://plantuml.com/
+- http://plantuml.com/
 
 It would also be nice to be able to export models into PlantUML for
 visualisation. This would make JSON models more compelling.
@@ -16427,138 +16703,6 @@ Links:
 - https://github.com/plantuml/plantuml
 - [[http://plantuml.com/class-diagram][Class Diagrams]]
 - [[https://github.com/skuro/plantuml-mode][plantuml-mode]]: emacs mode for plantuml.
-
-*** Code generation as a service                                       :epic:
-
-*Latest Understanding*
-
-- create a website using Wt: single screen with a few radio buttons to
-  upload files or edit/paste JSON input; command line options
-  available as text boxes.
-- create a service that receives requests for code generation and
-  returns a tarball/zip with the generated code: =jersey=. Archiving
-  libraries:
-  - https://github.com/libarchive/libarchive
-  - https://github.com/saboorian/moor
-  - https://github.com/do-m-en/libarchive_cpp_wrapper/
-- consider creating a simple HTTP wrapper around =jersey= just to see
-  how it works. =hem=.
-- two modes of operation: 1) upload a set of files, marking one as the
-  target 2) simple input box where user can type in JSON and code
-  generate.
-- tick boxes for main options.
-- potentially display a sample of one of the types.
-- =jersey= receives a code generation request with the files as part of
-  the payload. This means we need to either save them down to a temp
-  directory and then pass paths over to knitter or we should have
-  support for different kinds of inputs such as streams in knitter.
-- save all requests and responses to a Postgres database for analysis
-  later (performance, bugs, etc). It would also be nice to have user
-  comments/complaints, perhaps linked to a user voice-like interface.
-- a more useful version of this service would allow: 1) ability add
-  types to existing models such as std and boost, or even create new
-  system models altogether. Some minimal UI for model editing would be
-  required, including meta-data support (includes, etc). Ideally, each
-  of these models should have an associated test model which would
-  automatically be updated with the new types so users could get
-  compilation feedback on their changes. 2) the ability to edit stitch
-  templates on the site or even the ability to add new facets or new
-  features for existing facets, and to code generate using those. Also
-  the ability to add helper methods for a given facet to a given
-  type. The testing for this could be achieved via a docker container
-  with an incremental build and simple validation (time out, etc). If
-  the user submits dodgy changes only the container would be
-  affected. Once built, the container is used for code generation. It
-  would be really nice to be able to test the template as one is
-  editing it, perhaps by choosing a type in a model; the user could
-  press "generate" at any time and see the file for that feature and
-  facet. Behind the scenes this is stitching, building, code
-  generating and then displaying the result for that one type. 3) the
-  ability to submit PR from within the site. Users log in using their
-  github accounts. They make their changes to a remote git repo. Using
-  github magic - in a similar way to how gitter forks and creates
-  PRs - when the user is happy enough with its changes, their are
-  submitted as a PR.
-- note that this advanced version would probably require having the
-  test models in JSON so that we could edit them via the site; it
-  would be cumbersome to add new types to a dia model
-  programmatically.
-- for extra bonus points, we should integrate with clang-format
-  generation sites such as [[http://zed0.co.uk/clang-format-configurator/][this one]] and allow users to add their own
-  styles dynamically.
-- it should be possible to add more modelines/modeline groups,
-  licences, and even fields. This only makes sense if the fields are
-  totally dynamic such that the formatter could make use of the new
-  field directly. For this we would have to supply the ownership
-  hierarchy from within the stitch template.
-- we should create interesting end points such as: dia to json
-  conversion; merged model generation; merged model to code
-  generation, with language options; formatting; etc. Each is a
-  distinct end point.
-
-Notes:
-
-- we must cache system models so we don't reload them for every
-  request.
-- we should load per language (references?)
-- we need to verify the JSON input to avoid large blobs, buffer
-  overruns, etc.
-- support for workspaces so that users can save references.
-- system data: load once, reload on changes. Data "dirs" can be
-  stored/cached on redis or DB.
-- we need to move XML reader to memory.
-- hydrators need a data store scoped to the user.
-
-*Previous Understanding*
-
-One way of testing new functionality added to dogen is to try to
-exercise it as part of the code generation itself. We have been doing
-this with the bootstrapping, but there were limitations on
-functionality such as ODB and EOS where we couldn't see any obvious
-use for it in code generation. However, there is one way of exercising
-this and a lot more of these sort of features: to create a Web-based code
-generation service, along the lines of Web Sequence Diagrams or
-YUML. We could create a simple bootstrap based website that forwards
-requests to a set of end-points, all done within the dogen project.
-
-We'd create a casablanca REST layer with a simple interface, with
-functionality such:
-
-- create workspace: returns a UUID and creates some kind of internal
-  storage area.
-- upload target: uploads a Dia or JSON model to be used as the code
-  generation target.
-- upload reference: uploads a Dia or JSON model to be used as a
-  reference.
-- set options: which facets to generate, which languages, etc.
-- codegen: runs the code generation and returns a tarball with
-  generated files and the log file; or returns a set of code
-  generation errors.
-- we could integrate with google drive to load the files from there.
-
-As a further layer we could create an ASIO service that is queried by
-the casablanca REST. This would exercise all of the messaging
-infrastructure. Internally it would create the engine and run code
-generation. It could also exercise ODB by writing session information
-to a database and keeping track of the historical usage of the
-service, log files etc.
-
-This stack would allow us to continuously exercise pretty much every
-feature we need out of dogen. As an added bonus, when we get to the UI
-we could also exercise that (Wt, GTK).
-
-Finally, this would also allow us to play with Docker, and place each
-service in their own container, create load balancing etc.
-
-Links:
-
-- [[http://codeplanet.io/principles-good-restful-api-design/][REST API Design]]
-- [[http://www.drdobbs.com/tools/json-and-the-microsoft-c-rest-sdk/240164821][Using Microsoft REST SDK]]
-- [[https://git.gnome.org/browse/dia/tree/doc/diagram.dtd][Dia DTD]]: make sure all dia diagrams are valid according to DTD. Same
-  for JSON documents. Make sure there are size limits for names,
-  locations, documents, etc. See also [[https://security.stackexchange.com/questions/416/if-an-xml-document-is-not-validated-as-well-formed-or-checked-against-a-schema][If an XML document is not
-  validated as “Well Formed” or checked against a schema, what are the
-  risks?]]
 
 *** Automatic generation of C interfaces for C++ code                  :epic:
 
@@ -16599,7 +16743,7 @@ Related stories:
 - [[*Improvements to dia model][Improvements to dia model]]
 - [[*Investigate support for automatic diagram updates][Investigate support for automatic diagram updates]]
 
-*** Improvements to dia model                                         :story:
+*** Improvements to Dogen's dia model                                 :story:
 
 Assorted notes on cleaning-up the dia model:
 
@@ -16632,37 +16776,6 @@ Assorted notes on cleaning-up the dia model:
 - alternative: create an XML schema from the DTD and use it with the
   XSD tool to create the model.
 
-*** Investigate support for automatic diagram updates                  :epic:
-
-For classes that are manually generated, it would be really nice if we
-could update the properties of the class in the diagram from the
-source code. This would work as follows:
-
-- user creates a class =x= and marks it as non-generatable; executes
-  dogen.
-- dogen creates the initial file and adds as much boilerplate as
-  possible. For instance if the user manually added properties or
-  operations to the class, dogen generates skeletons for these.
-- once the file exists, dogen will no longer touch it (see also the
-  merging code generation story, for a different take on this).
-- the user runs a second tool (the diagram updator, in need of a name)
-  which uses clang internally; it reads the diagram and looks for all
-  of the non-generatable classes; for each of these, it updates the
-  dia class with the properties found in the source file. Everything
-  else is left untouched.
-
-This feature would be extremely powerful when in presence of many
-other features such as mocking, remote method invocation, etc - the
-user would have no effort at all in generating the
-code. Implementation-wise we'd have to:
-
-- create an XML writer;
-- add write support for the dia model and ensure we generate valid dia
-  models;
-- integrate clang libraries with dogen;
-- create tool - or perhaps we should just have an "update diagram"
-  mode in dogen?
-
 *** Add support for XSD tool                                          :story:
 
 Similar to what we've done with ODB, it would be nice to be able to
@@ -16673,7 +16786,7 @@ integrate the XSD tool with dogen:
 - generate CMake targets that execute the XSD tool and place the
   output in appropriate locations.
 
-*** Add POF serialisation support                                      :epic:
+*** Add Coherence POF serialisation support                            :epic:
 
 If coherence has open source C++ libraries, we should add support for
 serialisation to and from POF.
@@ -16737,7 +16850,8 @@ it in anger with dogen:
 
 It seems like dia is also using GitHub these days:
 
-https://github.com/GNOME/dia
+- https://github.com/GNOME/dia
+- https://gitlab.gnome.org/GNOME/dia
 
 If we have a go at creating any patches for the above ideas we should
 submit a PR. This repo cannot be used to submit PRs.
@@ -16768,6 +16882,11 @@ take one of those schemas and generate an yarn representation for them.
 More generally, it would be great if dogen was able to create a domain
 model off of an XML schema. However, we already have the Code
 Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so maybe this is just scope creep.
+
+Links:
+
+- https://yuilibrary.com/yui/docs/yql/
+- [[https://en.wikipedia.org/wiki/Yahoo!_Query_Language][Wikipedia: Yahoo! Query Language]]
 
 *** Generate state diagrams                                            :epic:
 
@@ -16837,7 +16956,7 @@ Links:
 
 - [[https://github.com/rttrorg/rttr][GitHub Page]]
 
-*** Add diff support                                                   :epic:
+*** Add model diff support                                             :epic:
 
 One very useful feature we need to implement is the ability to compare
 objects (even composite objects such as an entire model) and to obtain
@@ -16904,24 +17023,24 @@ users what chances to make to their templates. Some people advocate
 automating the changes to the templates (paper below) but this seems
 like quite a hard thing to implement. However, it is conceivable that
 we could end up with a fixed set of commands to apply (e.g. rename
-class, rename method, etc). These could be thought of as clang
-transformations. Of course, stitch template are not visible to clang
+class, rename method, etc). these could be thought of as clang
+transformations. of course, stitch template are not visible to clang
 transformations so they would have to be updated by some other
-means. On top of that, its not clear that you can apply the clang
+means. on top of that, its not clear that you can apply the clang
 transforms when the code does not compile, so the transforms would
 have to be applied prior to running dogen; the actual metamodel code
 would be first updated by the transform and then regenerated.
 
-In order for the stitch templates refactoring to work, we'd need some
+in order for the stitch templates refactoring to work, we'd need some
 kind of way of relating the sources back to the templates, much like
 protected regions; then we would have to generate a graph
 representation in memory of the generated code that resembles the
 fragments of the template, and update the template from the generated
 code.
 
-This whole problem can be seen as a variation of the "rename problem",
+this whole problem can be seen as a variation of the "rename problem",
 which we captured elsewhere: if a model element is renamed, how do we
-propagate that change to all of the dependent code? One possibility is
+propagate that change to all of the dependent code? one possibility is
 to split it into several steps:
 
 - change the model. users should only do one change at a time to make
@@ -16930,179 +17049,70 @@ to split it into several steps:
   both the old and the new model.
 - compute the diffs between the two and come up with a set of
   diffs.
-- convert the diffs into clang refactor commands. Apply those commands
+- convert the diffs into clang refactor commands. apply those commands
   to the *entire* code base.
 - perform reverse mapping to the stitch templates, and update them.
 - user then inspects the diffs to make sure it looks above board and
-  signs them off. Code generator is rebuilt and all models are
+  signs them off. code generator is rebuilt and all models are
   regenerated.
 
-Its not clear if this kind of work (diffs, etc) is not more suitable
-to domodl, with an eCore based metamodel.
+its not clear if this kind of work (diffs, etc) is not more suitable
+to domodl, with an ecore based metamodel.
 
-Links:
+links:
 
-- [[http://www.academia.edu/download/41278180/Dealing_with_the_coupled_evolution_of_me20160116-11059-1d1j84g.pdf][Dealing with the coupled evolution of metamodels and model-to-text
+- [[http://www.academia.edu/download/41278180/dealing_with_the_coupled_evolution_of_me20160116-11059-1d1j84g.pdf][dealing with the coupled evolution of metamodels and model-to-text
   transforms]].
-- [[https://dl.acm.org/citation.cfm?id=2523603][Bridging state-based differencing and co-evolution]]
-- [[https://ieeexplore.ieee.org/abstract/document/4634773/][Automating Co-evolution in Model-Driven Engineering]]
-- [[https://s3.amazonaws.com/academia.edu.documents/30769313/paper9.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1526902206&Signature=hUQoUssMBwZ%252FYLfQuVUmqmZ66Nc%253D&response-content-disposition=inline%253B%2520filename%253DA_metamodel_independent_approach_to_diff.pdf][A Metamodel Independent Approach to Difference Representation]]
-- [[https://www.eclipse.org/emf/compare/][EMF Compare]]
+- [[https://dl.acm.org/citation.cfm?id=2523603][bridging state-based differencing and co-evolution]]
+- [[https://ieeexplore.ieee.org/abstract/document/4634773/][automating co-evolution in model-driven engineering]]
+- [[https://s3.amazonaws.com/academia.edu.documents/30769313/paper9.pdf?awsaccesskeyid=akiaiwowyygz2y53ul3a&expires=1526902206&signature=huqoussmbwz%252fylfquvumqmz66nc%253d&response-content-disposition=inline%253b%2520filename%253da_metamodel_independent_approach_to_diff.pdf][a metamodel independent approach to difference representation]]
+- [[https://www.eclipse.org/emf/compare/][emf compare]]
 
-*** Add SQL support to Dogen                                           :epic:
+*** Add sql support to dogen                                           :epic:
 
-It would be nice to generate all of the tables required to store a
+it would be nice to generate all of the tables required to store a
 model as well as the stored procs to read and write instances of the
 model.
 
-Notes:
+notes:
 
-- use an attribute with the type to determine if we want only the ID
-  of the foreign key in C++ code or if we want a whole type.
+- use an attribute with the type to determine if we want only the id
+  of the foreign key in c++ code or if we want a whole type.
 - file names are: "qualified name-entity", e.g. model_type.
 - drop/create statements: schema, table, load, save, erase, test data
   generators, test.
 - ability to drop/create all: table, procs, etc.
-- CMake deployment support: targets such as deploy_database,
+- cmake deployment support: targets such as deploy_database,
   undeploy_database
-- testing/CI: target that deploys all the SQL to a clean database,
-  runs all SQL tests and un-deploys all the SQL.
+- testing/ci: target that deploys all the sql to a clean database,
+  runs all sql tests and un-deploys all the sql.
 - database connection settings: use pgpass.
-- must cope with the test/development database separation. At present
+- must cope with the test/development database separation. at present
   there is a massive hack required to populate both databases
   (changing makefile manually and then reverting the change).
 - there should be a way of passing in the database name as an
-  environment variable into the CMake
-*** User interface generation                                          :epic:
+  environment variable into the cmake
+- note that the objective is not to make something like odb. the sql
+  is generated specifically for dogen types, not general purpose.
 
-We have not really thought about it that deeply but it should be
-possible to use dogen to generate some basic UIs, for example for Wt.
+*** Consider adding support for =sandbox-api=                         :story:
 
-Links:
+From their site:
 
-- [[http://plantuml.com/salt][Salt]]: plantuml wireframe language.
+#+begin_quote
+What is Sandboxed API?
 
-Merged stories:
+The Sandboxed API project (SAPI) aims to make sandboxing of C/C++
+libraries less burdensome: after initial setup of security policies
+and generation of library interfaces, an almost-identical stub API is
+generated, transparently forwarding calls using a custom RPC layer to
+the real library running inside a sandboxed environment.
 
-*Add support for GtkBuilder / Glade XML files*
-
-There is nothing stopping us from using a GtkBuilder / Glade XML file
-to do the boiler plate setup of the UI. With a bit more work one could
-potentially even generate the bindings for a presentation model.
-*** Generative models                                                  :epic:
-
-We started by conflating two very different kinds of models:
-
-- models that generate models
-- models that generate code for the end user.
-
-These models appeared similar because we needed to generate some
-"helper types" in order to perform the generative parts; we had things
-like fabric, formattables and so forth. However, now that we have
-started to remove all of the helper parts, the main thing that is left
-in generative models is just the formatters. Another way of thinking
-about this problem is to imagine that a generative model could
-register what it offers:
-
-- the dominant technical space;
-- all of the available facets;
-- all of the available formatters;
-- all aspects within each formatter.
-
-Then, from a non-generative model - assuming some kind of plugin
-mechanism which would load the generative models - we could then make
-use of all that was defined in the generative model. In order for this
-to work (and assuming all classes for technical spaces, etc exist),
-the code generator would have to generate all of the infrastructure
-needed for a generative model:
-
-- some kind of top-level transform (e.g. "model to extraction model
-  transform"), and associated machinery to register the transform.
-- stereotypes to declare facets and formatters. The formatter elements
-  need to have a meta-model element as meta-data.
-- for the first generation, we'd use wale templates to initialise the
-  stitch templates for each element. Once these exist, we'd simply
-  expand them.
-
-We need to decide if the generative model is still in the same space
-as the non-generative model, or if it exists on a separate
-dimension. If it is in the same space, then facets, etc will come out
-of types. We could easily suppress IO, hashing etc as required. The
-advantage of this approach is that we can now mix non-generative types
-with generative types, so that we could provide helper classes etc
-easily. However, the folder structure will be confusing; this is
-exactly the current problem we have with say generation.cpp, with
-folders like =types/formaters/types= and the like. In this case, we'd
-have =types/types=, =types/hash= and so forth.
-
-The other downside is the current approach where we need to associate
-a "formatter style" with the model element and facet (e.g. stitch,
-stock, etc). However, as we do at present, we can perform the
-association via profiles, so that users need not be aware of this
-mapping. Nonetheless, its good to force users to declare up front if
-they are creating a generative model so that there are no
-surprises. In fact, a much better way to handle this is to create
-different meta-model elements to represent these entities: facet,
-formatter etc. These then bind to the wale and stitch templates rather
-than to c++ code. This then means that the formatting style now
-becomes bound at the meta-model level rather than allowing users to
-manually bind it (likely causing hard to debug problems). In addition,
-we should make it so that all meta-model elements that are not
-code-generated can have a wale template associated. This means that
-stitch is no longer special. It also means that "overwrite" may not be
-a good name for the flag that determines if something is hand-crafted
-or not. Check for stories on this flag.
-
-Variations:
-
-- additive generative model: we want to add facets to an existing
-  technical space.
-- new generative model: we want to create a new technical space.
-
-Notes:
-
-- the generative models are always going to generate C++ code.
-- once we have support for products, we could create a product type of
-  "dogen plugin", which generates all of the infrastructure to make
-  the plugin (e.g. vcpkg to fetch dogen headers, etc). This could even
-  include the targets that call dogen, registering the plugin and
-  generating the "test models" - i.e. models created by the user to
-  exercise the generative model.
-- this approach closely mirrors the injection model. If we call these
-  "extractors" we could have a registrar against the technical space
-  which produces the extraction model. The only difference is that we
-  need access to the generation model in order to call the
-  extractor. This makes it unsuitable to live in the extraction model
-  itself.
-- once we are able to generate annotations machinery, the creation of
-  aspects will be easy; we can just bind against the annotation and
-  extract the configuration.
-- note that we have two uses for meta-model elements such as technical
-  space, facet etc. The first use is as a "validator". They bind to
-  the configuration of the model, so if there are no generators
-  exporting the expected values for these meta-model elements,
-  generation will fail. The second role is generative; if the user
-  declared a facet in the target model, we will then project the facet
-  through the types facet for facets and generate the code needed to
-  register the facet as part of a generative model (a
-  generator). Similarly with all other types such as formatters,
-  technical spaces etc. We can look at the "generatable" flag to
-  determine if generation is needed or not. We need to make sure that
-  when we inject these, they are marked as non-generatable. Problem:
-  what happens when you are generating the generating model for a
-  technical space? There is a conflict; we will add the same facets,
-  technical spaces etc twice: once from the model itself and then a
-  second time from the generator. We need to somehow split these two
-  roles into different meta-model elements to make it really clear
-  they represent different roles. In fact, from the perspective of
-  registration/checks, we could even argue that these are no longer
-  meta-model elements - the point of the meta-model is to generate
-  code. By the same token, elements such as decoration would also be
-  incongruent though. We need to make sure we do not create a loop
-  when we are changing an existing generator, whereby we can no longer
-  generate code because the new state is not valid.
-
-*** Consider adding support for sandbox-api                           :story:
+Additionally, each SAPI library utilizes a tightly defined security
+policy, in contrast to the typical sandboxed project, where security
+policies must cover the total syscall/resource footprint of all
+utilized libraries.
+#+end_quote
 
 It is not entirely clear how this works or how it would be integrated
 with Dogen, but it would be nice to have a top-level flag that would
@@ -17110,13 +17120,15 @@ generate the glue code for sandbox-api.
 
 Links:
 
-- https://github.com/google/sandboxed-api
+- [[https://github.com/google/sandboxed-api][GitHub repo]]: Sandboxed API automatically generates sandboxes for
+  C/C++ libraries
+
 *** Consider adding support for draw.io                               :story:
 
 As pointed out by Klemens Morgenstern, this is a web-based diagramming
 tool:
 
-https://draw.io
+- https://draw.io
 
 It can export into XML, but the XML seems to be at a very low-level:
 
@@ -17130,6 +17142,7 @@ cleverness to assemble the objects into UML elements.
 Links:
 
 - https://about.draw.io/features/import-export/
+
 *** Consider adding "sidecar" service functionality                   :story:
 
 A new trend emerging for HTTP based services is to have "sidecars"
@@ -17147,6 +17160,7 @@ Links:
 - [[https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6][KONG - The Microservice API Gateway]]
 - [[https://docs.konghq.com/hub/kong-inc/oauth2/][kong oauth2 plugin]]
 - [[https://docs.konghq.com/hub/kong-inc/jwt/][kong jwt plugin]]
+- [[https://github.com/envoyproxy/envoy][envoy GitHub]]
 
 *** Consider generating code for RAII wrapper                         :story:
 
@@ -17158,48 +17172,28 @@ operations as "start RAII" and "end RAII". Then we'd generate a class
 with a constructor that matches the signature of these operations, and
 constructs an instance of the owning class.
 
-*** Tighter integration of Dogen and Emacs                            :story:
+Actually this is very similar to make shared. We need to see what
+approach they have taken on the constructor of this function. Example
+[[https://gcc.gnu.org/onlinedocs/gcc-4.6.0/libstdc++/api/a01033_source.html][for GCC]]:
 
-There are a couple of areas where we could take advantage of code
-generation and emacs:
+#+begin_src c++
+/**
+ *  @brief  Create an object that is owned by a shared_ptr.
+ *  @param  __args  Arguments for the @a _Tp object's constructor.
+ *  @return A shared_ptr that owns the newly created object.
+ *  @throw  std::bad_alloc, or an exception thrown from the
+ *          constructor of @a _Tp.
+ */
+template<typename _Tp, typename... _Args>
+inline shared_ptr<_Tp>
+make_shared(_Args&&... __args)
+{
+    typedef typename std::remove_const<_Tp>::type _Tp_nc;
+    return allocate_shared<_Tp>(std::allocator<_Tp_nc>(),
+        std::forward<_Args>(__args)...);
+}
+#+end_src
 
-- running of tests: generate a org-mode test file which has a tree for
-  all configurations (Debug, Release) and compilers (gcc8, clang7,
-  etc). Then, for each of these we could have the test suites and the
-  tests. It runs all the tests and builds org-tables with the total
-  times. The runs are babel snippets. It updates the entries with the
-  status of passed, failed or not run. We need to find out how to run
-  all code snippets for a given subsection. We can use org properties
-  to supply the boost test variables such as log level etc. Because
-  Dogen knows of all of the test suites (e.g. these are declared as
-  model elements), it can parse them. We can also mark tests and test
-  suites as "generated" or "handcrafted".
-- files: Dogen could also output a generation model set for all types
-  in a product using a lisp like serialisation format. This could
-  somehow be read by emacs to give it visibility of all files dogen
-  knows off. Its still not clear what we'd do with it though. Some
-  kind of integration with projectile?
-- bookmarks: we could generate a org-mode file of bookmarks for all
-  key directories in a product such as say "coding include types",
-  etc. This can also use traditional emacs bookmarking format.
-- run affected test suites: create a graph of includes per file such
-  that when you change a file, you can ask to run affected test
-  suites. This is computed based on the include graph. Won't work for
-  all technical spaces though.
-- build: it would be great if we could have the build scripts as
-  babel. However, instead of executing inside of org-mode, we want to
-  call the compilation buffer with it. This means we could have
-  bookmerks for all of the usual targets and even target combos such
-  as generate, convert and indent. For extra bonus points, once we
-  have code merging, we could have our own compilation targets added
-  manually.
-
-Links:
-
-- [[https://www.youtube.com/watch?v=dljNabciEGg][Literate Devops with Emacs]]
-- [[https://github.com/wlbr/cl-marshal][cl-marshal]]: Simple and fast marshalling of Lisp datastructures.
-- [[https://www.cliki.net/serialization][cliki]]: Libraries to translate data structures to/from a format which
-  can be stored/retrieved
 *** Add jailer like functionality to ORM support                      :story:
 
 Jailer is a Java tool that allows exporting subsets of a relational
@@ -17240,6 +17234,7 @@ require some experience with the framework.
 Links:
 
 - [[https://actor-framework.readthedocs.io/en/latest/TypeInspection.html][Type Inspection (Serialization and String Conversion)]]
+
 *** Add sonar cloud checks to project                                 :story:
 
 Sonar cloud seems to provide a set of security etc checks for open
@@ -17251,7 +17246,8 @@ Links
   [[https://sonarcloud.io/dashboard?id=libtorrent][project page]].
 - [[https://sonarcloud.io/dashboard?id=MASD-Project_dogen][MASD-Project_dogen]]
 - [[https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner][Analyzing with SonarQube Scanner]]
-*** Consider adding weaving support as a command                      :story:
+
+*** Consider adding weaving support as a command            :reviewing:story:
 
 With the refactorings, we removed top-level weaving support in sprint
 16 (around [[https://github.com/MASD-Project/dogen/commits/master?after=28ea047b0ee64e00f8d0f9df817194e83422419b+139][Apr 27 2019]]). Weaving made sense originally because stitch
