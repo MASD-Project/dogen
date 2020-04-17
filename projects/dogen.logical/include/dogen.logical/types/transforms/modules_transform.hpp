@@ -45,6 +45,13 @@ private:
     gather_internal_modules(entities::model& m);
 
     /**
+     * @brief Returns true if there is a containing element in the
+     * model, across all containers, for this ID.
+     */
+    static bool containing_element_exists(const std::string& id,
+        const entities::model& m);
+
+    /**
      * @brief Creates modules for the internal modules which are not
      * yet in model.
      */

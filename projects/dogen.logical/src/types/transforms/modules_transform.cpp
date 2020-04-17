@@ -114,26 +114,48 @@ gather_internal_modules(entities::model& m) {
     return img.result();
 }
 
+bool modules_transform::containing_element_exists(const std::string& id,
+    const entities::model& m) {
+
+    const auto i(m.structural_elements().modules().find(id));
+    bool r(i != m.structural_elements().modules().end());
+    return r;
+}
+
 void modules_transform::create_modules(const std::unordered_map<std::string,
     std::list<std::string>>& internal_modules, entities::model& m) {
 
     helpers::name_factory f;
     for (const auto& pair : internal_modules) {
-        const auto& ipp(pair.second);
-        const auto n(f.build_module_name(m.name(), ipp));
-        const auto i(m.structural_elements().modules().find(
-                n.qualified().dot()));
-        if (i == m.structural_elements().modules().end()) {
-            auto mod(boost::make_shared<entities::structural::module>());
-            mod->name(n);
-            mod->origin_type(m.origin_type());
-            mod->configuration(
-                boost::make_shared<variability::entities::configuration>());
-            mod->configuration()->name().simple(n.simple());
-            mod->configuration()->name().qualified(n.qualified().dot());
-            m.structural_elements().modules().insert(
-                std::make_pair(n.qualified().dot(), mod));
-        }
+        /*
+         * For each of the internal module paths, create the
+         * corresponding element name .
+         */
+        const auto& im(pair.second);
+        const auto n(f.build_module_name(m.name(), im));
+        const auto qn(n.qualified().dot());
+
+        /*
+         * Check to see if the element name matches any of the
+         * possible containing elements in the model. If so, nothing
+         * for us to do.
+         */
+        if (containing_element_exists(qn, m))
+            continue;
+
+        /*
+         * There are no matches. Create a module for it.
+         */
+        using entities::structural::module;
+        auto mod(boost::make_shared<module>());
+        mod->name(n);
+        mod->origin_type(m.origin_type());
+
+        using variability::entities::configuration;
+        mod->configuration(boost::make_shared<configuration>());
+        mod->configuration()->name().simple(n.simple());
+        mod->configuration()->name().qualified(n.qualified().dot());
+        m.structural_elements().modules().insert(std::make_pair(qn, mod));
     }
 }
 
