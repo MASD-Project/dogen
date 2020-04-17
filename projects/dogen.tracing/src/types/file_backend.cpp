@@ -186,8 +186,9 @@ file_backend::full_path_for_writing(const std::string& filename) const {
     return current_directory_ / s.str();
 }
 
-boost::filesystem::path file_backend::full_path_for_writing(
-    const std::string& transform_id, const std::string& type) const {
+boost::filesystem::path
+file_backend::full_path_for_writing(const std::string& transform_id,
+    const std::string& type, const std::string& model_id) const {
     ensure_transform_position_not_empty();
 
     std::ostringstream s;
@@ -195,8 +196,13 @@ boost::filesystem::path file_backend::full_path_for_writing(
       << transform_position_.top();
 
     if (!configuration_.use_short_names()) {
-        s << delimiter << transform_id << delimiter
-          << builder_.current()->guid();
+        s << delimiter << transform_id << delimiter;
+
+        if (!model_id.empty())
+            s << model_id << delimiter;
+
+        s << builder_.current()->guid();
+
     }
 
     s << delimiter << type << extension;
@@ -301,10 +307,8 @@ void file_backend::start_chain(
 }
 
 void file_backend::start_chain(const std::string& parent_transform_instance_id,
-    const std::string& transform_id,
-    const std::string& transform_instance_id,
-    const std::string& model_id,
-    const std::string& input) const {
+    const std::string& transform_id, const std::string& transform_instance_id,
+    const std::string& model_id, const std::string& input) const {
     start_chain(parent_transform_instance_id,
         transform_id, transform_instance_id, model_id);
 
@@ -312,7 +316,7 @@ void file_backend::start_chain(const std::string& parent_transform_instance_id,
         return;
 
     ensure_transform_position_not_empty();
-    const auto p(full_path_for_writing(transform_id, "input"));
+    const auto p(full_path_for_writing(transform_id, "input", model_id));
     utility::filesystem::write(p, input);
     ++transform_position_.top();
 }
@@ -377,7 +381,7 @@ void file_backend::start_transform(
 
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
-        const auto p(full_path_for_writing(transform_id, "input"));
+        const auto p(full_path_for_writing(transform_id, "input", model_id));
         utility::filesystem::write(p, input);
         ++transform_position_.top();
     }

@@ -62,7 +62,7 @@ private:
 
     boost::filesystem::path
     full_path_for_writing(const std::string& transform_id,
-        const std::string& type) const;
+        const std::string& type, const std::string& model_id = "") const;
 
     boost::filesystem::path
     full_path_for_writing(const std::string& filename) const;

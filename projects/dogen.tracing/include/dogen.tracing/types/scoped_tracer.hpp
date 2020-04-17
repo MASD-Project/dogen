@@ -49,10 +49,11 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_id_(id), transform_instance_id_(generate_guid()) {
+          transform_id_(id), model_id_(model_id),
+          transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
-        tracer_.start_chain(id, transform_instance_id_, model_id);
+        tracer_.start_chain(id, transform_instance_id_, model_id_);
     }
 
     template<typename Input>
@@ -60,11 +61,12 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_id_(id), transform_instance_id_(generate_guid()) {
+          transform_id_(id), model_id_(model_id),
+          transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
-                                  << " [" << model_id << "]";
-        tracer_.start_chain(id, transform_instance_id_, model_id, input);
+                                  << " [" << model_id_ << "]";
+        tracer_.start_chain(id, transform_instance_id_, model_id_, input);
     }
 
     template<typename Output>
@@ -92,6 +94,7 @@ private:
     bool dismiss_;
     const tracer& tracer_;
     const std::string transform_id_;
+    const std::string model_id_;
     const std::string transform_instance_id_;
 };
 
