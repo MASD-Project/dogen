@@ -166,75 +166,75 @@ process_element(const helpers::adapter& ad,
     const auto& st(scr.static_stereotypes());
     const auto et(compute_element_type(st, e.fallback_element_type()));
 
+    /*
+     * Short-hand names for all element containers.
+     */
+    auto& se(m.structural_elements());
+    auto& de(m.decoration_elements());
+    auto& ve(m.variability_elements());
+    auto& me(m.mapping_elements());
+    auto& te(m.templating_elements());
+    auto& sere(m.serialization_elements());
+    auto& vse(m.visual_studio_elements());
+    auto& oe(m.orm_elements());
+    auto& be(m.build_elements());
+    auto& pe(m.physical_elements());
+
     using logical::entities::static_stereotypes;
     switch (et) {
     case static_stereotypes::structural_object:
-        insert(ad.to_object(l, scr, e),
-            m.structural_elements().objects());
+        insert(ad.to_object(l, scr, e), se.objects());
         break;
     case static_stereotypes::structural_object_template:
-        insert(ad.to_object_template(l, scr, e),
-            m.structural_elements().object_templates());
+        insert(ad.to_object_template(l, scr, e), se.object_templates());
         break;
     case static_stereotypes::structural_exception:
-        insert(ad.to_exception(l, scr, e),
-            m.structural_elements().exceptions());
+        insert(ad.to_exception(l, scr, e), se.exceptions());
         break;
     case static_stereotypes::structural_primitive:
-        insert(ad.to_primitive(l, scr, e),
-            m.structural_elements().primitives());
+        insert(ad.to_primitive(l, scr, e), se.primitives());
         break;
     case static_stereotypes::structural_enumeration:
-        insert(ad.to_enumeration(l, scr, e),
-            m.structural_elements().enumerations());
+        insert(ad.to_enumeration(l, scr, e), se.enumerations());
         break;
     case static_stereotypes::structural_module:
-        insert(ad.to_module(l, scr, e),
-            m.structural_elements().modules());
+        insert(ad.to_module(l, scr, e), se.modules());
         break;
     case static_stereotypes::structural_builtin:
-        insert(ad.to_builtin(l, scr, e),
-            m.structural_elements().builtins());
+        insert(ad.to_builtin(l, scr, e), se.builtins());
         break;
     case static_stereotypes::structural_entry_point:
-        insert(ad.to_entry_point(l, scr, e),
-            m.structural_elements().entry_points());
+        insert(ad.to_entry_point(l, scr, e), se.entry_points());
         break;
     case static_stereotypes::structural_assistant:
-        insert(ad.to_assistant(l, scr, e),
-            m.structural_elements().assistants());
+        insert(ad.to_assistant(l, scr, e), se.assistants());
         break;
    case static_stereotypes::decoration_modeline_group:
-        insert(ad.to_modeline_group(l, scr, e),
-            m.decoration_elements().modeline_groups());
+        insert(ad.to_modeline_group(l, scr, e), de.modeline_groups());
         break;
     case static_stereotypes::decoration_modeline:
-        insert(ad.to_modeline(l, scr, e),
-            m.decoration_elements().modelines());
+        insert(ad.to_modeline(l, scr, e), de.modelines());
         break;
     case static_stereotypes::decoration_generation_marker:
-        insert(ad.to_generation_marker(l, scr, e),
-            m.decoration_elements().generation_markers());
+        insert(ad.to_generation_marker(l, scr, e), de.generation_markers());
         break;
     case static_stereotypes::decoration_licence:
-        insert(ad.to_licence(l, scr, e),
-            m.decoration_elements().licences());
+        insert(ad.to_licence(l, scr, e), de.licences());
         break;
     case static_stereotypes::variability_profile:
-        insert(ad.to_variability_profile(l, scr, e),
-            m.variability_elements().profiles());
+        insert(ad.to_variability_profile(l, scr, e), ve.profiles());
         break;
     case static_stereotypes::variability_profile_template:
         insert(ad.to_variability_profile_template(l, scr, e),
-            m.variability_elements().profile_templates());
+            ve.profile_templates());
         break;
     case static_stereotypes::variability_feature_template_bundle:
         insert(ad.to_variability_feature_template_bundle(l, scr, e),
-            m.variability_elements().feature_template_bundles());
+            ve.feature_template_bundles());
         break;
     case static_stereotypes::variability_feature_bundle:
         insert(ad.to_variability_feature_bundle(l, scr, e),
-            m.variability_elements().feature_bundles());
+            ve.feature_bundles());
         break;
     case static_stereotypes::variability_initializer:
         /*
@@ -245,64 +245,50 @@ process_element(const helpers::adapter& ad,
             BOOST_LOG_SEV(lg, error) << too_many_initializers;
             BOOST_THROW_EXCEPTION(transform_exception(too_many_initializers));
         }
-        m.variability_elements().
-            initializer(ad.to_variability_initializer(l, scr, e));
+        ve.initializer(ad.to_variability_initializer(l, scr, e));
         break;
     case static_stereotypes::mapping_fixed_mappable:
-        insert(ad.to_fixed_mappable(l, scr, e),
-            m.mapping_elements().fixed_mappables());
+        insert(ad.to_fixed_mappable(l, scr, e), me.fixed_mappables());
         break;
     case static_stereotypes::mapping_extensible_mappable:
-        insert(ad.to_extensible_mappable(l, scr, e),
-            m.mapping_elements().extensible_mappables());
+        insert(ad.to_extensible_mappable(l, scr, e), me.extensible_mappables());
         break;
     case static_stereotypes::templating_logic_less_template:
-        insert(ad.to_logic_less_template(l, scr, e),
-            m.templating_elements().logic_less_templates());
+        insert(ad.to_logic_less_template(l, scr, e), te.logic_less_templates());
         break;
     case static_stereotypes::serialization_type_registrar:
-        insert(ad.to_type_registrar(l, scr, e),
-            m.serialization_elements().type_registrars());
+        insert(ad.to_type_registrar(l, scr, e), sere.type_registrars());
         break;
     case static_stereotypes::visual_studio_solution:
-        insert(ad.to_visual_studio_solution(l, scr, e),
-            m.visual_studio_elements().solutions());
+        insert(ad.to_visual_studio_solution(l, scr, e), vse.solutions());
         break;
     case static_stereotypes::visual_studio_project:
-        insert(ad.to_visual_studio_project(l, scr, e),
-            m.visual_studio_elements().projects());
+        insert(ad.to_visual_studio_project(l, scr, e), vse.projects());
         break;
     case static_stereotypes::visual_studio_msbuild_targets:
         insert(ad.to_visual_studio_msbuild_targets(l, scr, e),
-            m.visual_studio_elements().msbuild_targets());
+            vse.msbuild_targets());
         break;
     case static_stereotypes::orm_common_odb_options:
-        insert(ad.to_orm_common_odb_options(l, scr, e),
-            m.orm_elements().common_odb_options());
+        insert(ad.to_orm_common_odb_options(l, scr, e), oe.common_odb_options());
         break;
     case static_stereotypes::build_cmakelists:
-        insert(ad.to_build_cmakelists(l, scr, e),
-            m.build_elements().cmakelists());
+        insert(ad.to_build_cmakelists(l, scr, e), be.cmakelists());
         break;
     case static_stereotypes::physical_backend:
-        insert(ad.to_physical_backend(l, scr, e),
-            m.physical_elements().backends());
+        insert(ad.to_physical_backend(l, scr, e), pe.backends());
         break;
     case static_stereotypes::physical_facet:
-        insert(ad.to_physical_facet(l, scr, e),
-            m.physical_elements().facets());
+        insert(ad.to_physical_facet(l, scr, e), pe.facets());
         break;
     case static_stereotypes::physical_archetype:
-        insert(ad.to_physical_archetype(l, scr, e),
-            m.physical_elements().archetypes());
+        insert(ad.to_physical_archetype(l, scr, e), pe.archetypes());
         break;
     case static_stereotypes::physical_archetype_kind:
-        insert(ad.to_physical_archetype_kind(l, scr, e),
-            m.physical_elements().archetype_kinds());
+        insert(ad.to_physical_archetype_kind(l, scr, e), pe.archetype_kinds());
         break;
     case static_stereotypes::physical_part:
-        insert(ad.to_physical_part(l, scr, e),
-            m.physical_elements().parts());
+        insert(ad.to_physical_part(l, scr, e), pe.parts());
         break;
 
     default: {
