@@ -29,6 +29,7 @@ templating_palette =  ['#fff3e5', '#ffc072', '#ff8c00']
 serialization_palette =  ['#e5ffe5', '#00ff00']
 visual_studio_palette =  ['#e5ffe5', '#cceecc', '#b3ddb3', '#99cb99', '#80ba80', '#66a966', '#4d984d', '#328632', '#197519', '#006400']
 core_palette =  ['#f7e5ff', '#f2dafd', '#edcefb', '#e8c2f8', '#e3b6f6', '#dda9f3', '#d89ef1', '#d391ef', '#ce85ed', '#c879ea', '#c36de8', '#be60e5', '#b955e3', '#b348e1', '#ae3cdf', '#a930dc', '#a424da', '#9e17d7', '#990cd5', '#9400d3']
+physical_palette =  ['#ebfaf1', '#d8f5e5', '#c6f0d8', '#b3ebcc', '#a0e6bf', '#8de1b2', '#7bdca6', '#68d799', '#55d28c', '#43cd80']
 
 for layer in dia.active_display().diagram.data.layers:
     for object in layer.objects:
@@ -48,6 +49,10 @@ for layer in dia.active_display().diagram.data.layers:
             stereotype = object.properties["stereotype"].value
             if "masd::decoration::modeline_group" in stereotype:
                 object.properties["fill_colour"] = package_palette[6]
+            elif "masd::physical::backend" in stereotype:
+                object.properties["fill_colour"] = physical_palette[0]
+            elif "masd::physical::facet" in stereotype:
+                object.properties["fill_colour"] = physical_palette[2]
             else:
                 object.properties["fill_colour"] = package_palette[0]
             continue;
@@ -168,6 +173,15 @@ for layer in dia.active_display().diagram.data.layers:
         #
         elif "masd::build::cmakelists" in stereotype:
             object.properties["fill_colour"] = visual_studio_palette[3]
+
+        #
+        # Theme: Physical
+        #
+        elif "masd::physical::archetype" in stereotype:
+            object.properties["fill_colour"] = physical_palette[7]
+        elif "masd::physical::part" in stereotype:
+            object.properties["fill_colour"] = physical_palette[8]
+
 
         #
         # Theme: Core meta-elements

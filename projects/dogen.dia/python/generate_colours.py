@@ -35,3 +35,6 @@ print("visual_studio_palette = ", palette.as_hex())
 
 palette = sns.light_palette("#9400d3", 20)
 print("core_palette = ", palette.as_hex())
+
+palette = sns.light_palette("#43cd80", 10)
+print("physical_palette = ", palette.as_hex())
