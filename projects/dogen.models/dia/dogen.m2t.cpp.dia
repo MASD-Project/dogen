@@ -175,7 +175,7 @@
         <dia:point val="-49,171"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,169.95;235.05,386.05"/>
+        <dia:rectangle val="-49.05,169.15;235.05,386.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -202,7 +202,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::physical::backend#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#transforms#</dia:string>
@@ -5496,7 +5496,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="101.588,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.517,180.429;105.69,184.328"/>
+        <dia:rectangle val="101.518,180.429;105.69,184.328"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6193,7 +6193,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.287,180.429;149.012,184.312"/>
+        <dia:rectangle val="145.288,180.429;149.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6264,7 +6264,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="163.375,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.625,178.172;176.894,184.8"/>
+        <dia:rectangle val="162.625,178.172;176.893,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24022,7 +24022,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="75.0375,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.1469,285.429;75.1082,287.324"/>
+        <dia:rectangle val="73.147,285.429;75.1082,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

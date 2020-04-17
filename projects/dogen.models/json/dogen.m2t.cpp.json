@@ -23,6 +23,9 @@
     {
       "name": "transforms",
       "documentation": "Formatters for the C++ model.\n\nTakes types in the C++ model and creates a file\nrepresentation of these types according to the\ngrammar of the C++ technical space.\n",
+      "stereotypes": [
+        "masd::physical::backend"
+      ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },
