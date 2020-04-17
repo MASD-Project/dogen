@@ -51573,19 +51573,19 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O403">
       <dia:attribute name="obj_pos">
-        <dia:point val="176,-64"/>
+        <dia:point val="176,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="175.95,-64.05;190.41,-57.95"/>
+        <dia:rectangle val="175.95,-65.05;190.41,-58.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="176,-64"/>
+        <dia:point val="176,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend#</dia:string>
@@ -51767,6 +51767,29 @@ just to avoid problems.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#backend_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#FIXME: temporary attribute until we can rename the top-level namespaces.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -51777,13 +51800,13 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O404">
       <dia:attribute name="obj_pos">
-        <dia:point val="143,-64"/>
+        <dia:point val="143,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.95,-64.05;157.41,-57.95"/>
+        <dia:rectangle val="142.95,-65.05;157.41,-58.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="143,-64"/>
+        <dia:point val="143,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.359999999999999"/>
@@ -52416,7 +52439,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="180.84,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="180.09,-58.05;183.38,-54.2"/>
+        <dia:rectangle val="180.09,-58.25;183.38,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -52425,7 +52448,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="180.84,-55"/>
         <dia:point val="180.84,-57"/>
         <dia:point val="183.18,-57"/>
-        <dia:point val="183.18,-58"/>
+        <dia:point val="183.18,-58.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -52488,7 +52511,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="148,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.25,-58.05;150.38,-54.2"/>
+        <dia:rectangle val="147.25,-59.05;150.38,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -52497,7 +52520,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="148,-55"/>
         <dia:point val="148,-57"/>
         <dia:point val="150.18,-57"/>
-        <dia:point val="150.18,-58"/>
+        <dia:point val="150.18,-59"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -52665,13 +52688,13 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O411">
       <dia:attribute name="obj_pos">
-        <dia:point val="162,-64"/>
+        <dia:point val="162,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.95,-64.05;173.33,-57.95"/>
+        <dia:rectangle val="161.95,-65.05;173.33,-58.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="162,-64"/>
+        <dia:point val="162,-65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.279999999999999"/>
@@ -52908,7 +52931,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="164.42,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.67,-58.0012;167.84,-54.2"/>
+        <dia:rectangle val="163.67,-59.0001;167.84,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -52917,7 +52940,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="164.42,-55"/>
         <dia:point val="164.42,-57"/>
         <dia:point val="167.64,-57"/>
-        <dia:point val="167.64,-57.9512"/>
+        <dia:point val="167.64,-58.9501"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

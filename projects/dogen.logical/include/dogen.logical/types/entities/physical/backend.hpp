@@ -66,7 +66,8 @@ public:
         const std::string& id,
         const std::string& kernel_name,
         const std::list<dogen::logical::entities::name>& facets,
-        const std::list<dogen::logical::entities::name>& parts);
+        const std::list<dogen::logical::entities::name>& parts,
+        const std::string& backend_name);
 
 public:
     using element::accept;
@@ -119,6 +120,16 @@ public:
     void parts(const std::list<dogen::logical::entities::name>&& v);
     /**@}*/
 
+    /**
+     * @brief FIXME: temporary attribute until we can rename the top-level namespaces.
+     */
+    /**@{*/
+    const std::string& backend_name() const;
+    std::string& backend_name();
+    void backend_name(const std::string& v);
+    void backend_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const backend& rhs) const;
     bool operator!=(const backend& rhs) const {
@@ -138,6 +149,7 @@ private:
     std::string kernel_name_;
     std::list<dogen::logical::entities::name> facets_;
     std::list<dogen::logical::entities::name> parts_;
+    std::string backend_name_;
 };
 
 }

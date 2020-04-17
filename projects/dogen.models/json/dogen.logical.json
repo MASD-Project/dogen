@@ -4047,6 +4047,11 @@
           "name": "parts",
           "type": "std::list<name>",
           "documentation": "All parts within this backend.\n"
+        },
+        {
+          "name": "backend_name",
+          "type": "std::string",
+          "documentation": "FIXME: temporary attribute until we can rename the top-level namespaces.\n"
         }
       ]
     },

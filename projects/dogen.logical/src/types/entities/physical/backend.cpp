@@ -82,7 +82,8 @@ backend::backend(
     const std::string& id,
     const std::string& kernel_name,
     const std::list<dogen::logical::entities::name>& facets,
-    const std::list<dogen::logical::entities::name>& parts)
+    const std::list<dogen::logical::entities::name>& parts,
+    const std::string& backend_name)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -102,7 +103,8 @@ backend::backend(
       id_(id),
       kernel_name_(kernel_name),
       facets_(facets),
-      parts_(parts) { }
+      parts_(parts),
+      backend_name_(backend_name) { }
 
 void backend::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -130,7 +132,8 @@ void backend::to_stream(std::ostream& s) const {
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
-      << "\"parts\": " << parts_
+      << "\"parts\": " << parts_ << ", "
+      << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\""
       << " }";
 }
 
@@ -143,6 +146,7 @@ void backend::swap(backend& other) noexcept {
     swap(kernel_name_, other.kernel_name_);
     swap(facets_, other.facets_);
     swap(parts_, other.parts_);
+    swap(backend_name_, other.backend_name_);
 }
 
 bool backend::equals(const dogen::logical::entities::element& other) const {
@@ -157,7 +161,8 @@ bool backend::operator==(const backend& rhs) const {
         id_ == rhs.id_ &&
         kernel_name_ == rhs.kernel_name_ &&
         facets_ == rhs.facets_ &&
-        parts_ == rhs.parts_;
+        parts_ == rhs.parts_ &&
+        backend_name_ == rhs.backend_name_;
 }
 
 backend& backend::operator=(backend other) {
@@ -244,6 +249,22 @@ void backend::parts(const std::list<dogen::logical::entities::name>& v) {
 
 void backend::parts(const std::list<dogen::logical::entities::name>&& v) {
     parts_ = std::move(v);
+}
+
+const std::string& backend::backend_name() const {
+    return backend_name_;
+}
+
+std::string& backend::backend_name() {
+    return backend_name_;
+}
+
+void backend::backend_name(const std::string& v) {
+    backend_name_ = v;
+}
+
+void backend::backend_name(const std::string&& v) {
+    backend_name_ = std::move(v);
 }
 
 }
