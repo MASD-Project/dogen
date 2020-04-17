@@ -402,6 +402,7 @@ manually (each of these probably has a separate story):
 - stereotype
 - whether a type is intrinsically generatable or not
 - RGB colour
+- whether the element supports dynamic stereotypes or not.
 
 There are probably more. These are all functions of the meta-type we
 are modeling. Just like we need "formatters" as a meta-type, we also
@@ -2331,12 +2332,6 @@ declarations.
 In light of the change related to primary and secondary technical
 spaces, we should really create a technical space for stitch and move
 the formatters there.
-
-*** Add model name to tracing dumps                                   :story:
-
-At present we are dumping just the transform name and GUID. This makes
-it really hard to figure out which model is in each transform. If the
-model name is not blank we should add it to the file name.
 
 *** Create a README meta-type                                         :story:
 
