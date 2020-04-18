@@ -2140,24 +2140,27 @@
         {
           "name": "external_modules_path_contribution",
           "type": "",
-          "value": "\"none\""
+          "value": "none"
         },
         {
           "name": "model_modules_path_contribution",
-          "type": "\"as_path_components\""
+          "type": "",
+          "value": "as_path_components"
         },
         {
           "name": "facet_path_contribution",
-          "type": "\"as_directories\""
+          "type": "",
+          "value": "as_directories"
         },
         {
           "name": "internal_modules_path_contribution",
-          "type": "\"as_directories\""
+          "type": "",
+          "value": "as_directories"
         },
         {
           "name": "requires_relative_path",
           "type": "",
-          "value": "\"true\""
+          "value": "true"
         }
       ]
     },
@@ -2170,9 +2173,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "extension",
+          "name": "file_extension",
           "type": "",
-          "value": "\"hpp\""
+          "value": "hpp"
         }
       ]
     }
