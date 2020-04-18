@@ -61,6 +61,23 @@ FIXME: optional for now.
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_physical_logical_meta_element_id() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("logical_meta_element_id");
+    r.name().qualified("masd.physical.logical_meta_element_id");
+    r.description(R"(Fully qualified name of the logical model element.
+
+FIXME: optional for now.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
 }
 
 physical::feature_group
@@ -70,6 +87,7 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
 
     r.backend_name = s.get_by_name("masd.physical.backend_name");
     r.part_id = s.get_by_name("masd.physical.part_id");
+    r.logical_meta_element_id = s.get_by_name("masd.physical.logical_meta_element_id");
 
     return r;
 }
@@ -84,6 +102,8 @@ physical::static_configuration physical::make_static_configuration(
         r.backend_name = s.get_text_content(fg.backend_name);
     if (s.has_configuration_point(fg.part_id))
         r.part_id = s.get_text_content(fg.part_id);
+    if (s.has_configuration_point(fg.logical_meta_element_id))
+        r.logical_meta_element_id = s.get_text_content(fg.logical_meta_element_id);
     return r;
 }
 
@@ -93,6 +113,7 @@ physical::make_features() {
     std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_physical_backend_name());
     r.push_back(make_masd_physical_part_id());
+    r.push_back(make_masd_physical_logical_meta_element_id());
     return r;
 }
 

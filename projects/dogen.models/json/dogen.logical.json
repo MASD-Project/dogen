@@ -4201,6 +4201,14 @@
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "logical_meta_element_id",
+          "type": "masd::variability::text",
+          "documentation": "Fully qualified name of the logical model element.\n\nFIXME: optional for now.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     }

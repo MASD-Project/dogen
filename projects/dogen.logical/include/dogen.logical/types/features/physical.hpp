@@ -41,6 +41,7 @@ public:
     struct feature_group {
         variability::entities::feature backend_name;
         variability::entities::feature part_id;
+        variability::entities::feature logical_meta_element_id;
     };
 
     static feature_group
@@ -50,6 +51,7 @@ public:
     struct static_configuration {
         std::string backend_name;
         std::string part_id;
+        std::string logical_meta_element_id;
     };
 
     static static_configuration make_static_configuration(
