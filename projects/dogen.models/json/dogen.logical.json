@@ -4171,6 +4171,30 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::physical",
+      "documentation": "Features required for physical elements.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_name",
+          "type": "masd::variability::text",
+          "documentation": "Simple name of the backend.\n\nFIXME: temporary until we rename the namespaces.\n"
+        },
+        {
+          "name": "part_id",
+          "type": "masd::variability::text",
+          "documentation": "Fully qualified physical name of the part this artefact belongs to.\n"
+        }
+      ]
     }
   ]
 }

@@ -21,6 +21,7 @@
 #include "dogen.logical/types/features/orm.hpp"
 #include "dogen.logical/types/features/origin.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
+#include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
 #include "dogen.logical/types/features/enumerator.hpp"
 #include "dogen.logical/types/features/enumeration.hpp"
@@ -44,6 +45,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::logical::features::origin::make_features());
     rg.register_features(dogen::logical::features::orm::make_features());
     rg.register_features(dogen::logical::features::output_technical_space::make_features());
+    rg.register_features(dogen::logical::features::physical::make_features());
     rg.register_features(dogen::logical::features::primitive::make_features());
     rg.register_features(dogen::logical::features::type_parameters::make_features());
     rg.register_features(dogen::logical::features::variability_bundle::make_features());
