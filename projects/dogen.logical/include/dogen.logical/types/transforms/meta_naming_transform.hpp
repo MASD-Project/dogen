@@ -34,6 +34,12 @@ namespace dogen::logical::transforms {
  * @brief Updates the meta-names of all of the logical model elements.
  */
 class meta_naming_transform final {
+private:
+    /**
+     * @brief Populate meta-names collection in model.
+     */
+    static void populate_model_meta_names(entities::model& m);
+
 public:
     /**
      * @brief Performs the transform on the model.

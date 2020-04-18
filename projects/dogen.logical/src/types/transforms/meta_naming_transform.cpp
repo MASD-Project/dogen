@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
-#include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
+#include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/meta_naming_transform.hpp"
 
@@ -35,6 +36,8 @@ const std::string transform_id("logical.transforms.meta_naming_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
+
+const std::string duplicate_id("Duplicate meta-name ID: ");
 
 }
 
@@ -208,6 +211,52 @@ public:
     }
 };
 
+void meta_naming_transform::populate_model_meta_names(entities::model& m) {
+    auto& mnc(m.meta_names());
+    const auto insert([&](const auto& n) {
+            const auto qn(n.qualified().dot());
+            const auto pair(std::make_pair(qn, n));
+            const auto inserted(mnc.insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_id << qn;
+                BOOST_THROW_EXCEPTION(transformation_error(duplicate_id + qn));
+
+            }
+        });
+
+    insert(mnf::make_module_name());
+    insert(mnf::make_object_template_name());
+    insert(mnf::make_builtin_name());
+    insert(mnf::make_enumeration_name());
+    insert(mnf::make_primitive_name());
+    insert(mnf::make_object_name());
+    insert(mnf::make_exception_name());
+    insert(mnf::make_visitor_name());
+    insert(mnf::make_entry_point_name());
+    insert(mnf::make_assistant_name());
+    insert(mnf::make_licence_name());
+    insert(mnf::make_modeline_name());
+    insert(mnf::make_modeline_group_name());
+    insert(mnf::make_generation_marker_name());
+    insert(mnf::make_variability_profile_name());
+    insert(mnf::make_variability_profile_template_name());
+    insert(mnf::make_variability_feature_template_bundle_name());
+    insert(mnf::make_variability_feature_bundle_name());
+    insert(mnf::make_variability_initializer_name());
+    insert(mnf::make_templating_logic_less_templates_name());
+    insert(mnf::make_serialization_type_registrar_name());
+    insert(mnf::make_visual_studio_solution_name());
+    insert(mnf::make_visual_studio_project_name());
+    insert(mnf::make_visual_studio_msbuild_targets_name());
+    insert(mnf::make_orm_common_odb_options_name());
+    insert(mnf::make_build_cmakelists_name());
+    insert(mnf::make_physical_backend_name());
+    insert(mnf::make_physical_facet_name());
+    insert(mnf::make_physical_archetype_name());
+    insert(mnf::make_physical_archetype_kind_name());
+    insert(mnf::make_physical_part_name());
+}
+
 void meta_naming_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
@@ -217,6 +266,7 @@ apply(const context& ctx, entities::model& m) {
 
     updater u;
     entities::elements_traversal(m, u);
+    populate_model_meta_names(m);
 
     stp.end_transform(m);
 }
