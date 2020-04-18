@@ -2612,12 +2612,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "element"
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.key_prefix": "masd.generalization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generalization.is_final",
+          "name": "is_final",
           "type": "masd::variability::boolean",
           "documentation": "Whether to mark a type as final or not.\n",
           "tagged_values": {
@@ -2625,7 +2626,7 @@
           }
         },
         {
-          "name": "masd.generalization.parent",
+          "name": "parent",
           "type": "masd::variability::text",
           "documentation": "Name of the parent of the current element.\n",
           "tagged_values": {
@@ -2828,12 +2829,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "any"
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.decoration.modeline"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.decoration.modeline.editor",
+          "name": "editor",
           "type": "masd::variability::text",
           "documentation": "Editor to use in this modeline.\n",
           "tagged_values": {
@@ -2841,7 +2843,7 @@
           }
         },
         {
-          "name": "masd.decoration.modeline.location",
+          "name": "location",
           "type": "masd::variability::text",
           "documentation": "Where to place the modeline.\n",
           "tagged_values": {
@@ -2849,7 +2851,7 @@
           }
         },
         {
-          "name": "masd.decoration.modeline.technical_space",
+          "name": "technical_space",
           "type": "masd::variability::text",
           "documentation": "Technical space targeted by the modeline.\n",
           "tagged_values": {
