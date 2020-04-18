@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-18 Sat 18:07]
+#+CAPTION: Clock summary at [2020-04-18 Sat 18:55]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *43:57* |       |       | 100.0 |
+| *Total time*                                          | *44:35* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 43:57   |       |       | 100.0 |
-| Active                                                |         | 43:57 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  9:22 |  21.3 |
+| Stories                                               | 44:35   |       |       | 100.0 |
+| Active                                                |         | 44:35 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  21.0 |
 | Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.9 |
-| Sprint and product backlog grooming                   |         |       |  7:57 |  18.1 |
+| Sprint and product backlog grooming                   |         |       |  7:57 |  17.8 |
 | Emacs issues and improvements                         |         |       |  0:47 |   1.8 |
 | Nightly nursing                                       |         |       |  0:37 |   1.4 |
-| Analysis on implementing enablement in physical model |         |       |  3:10 |   7.2 |
-| Replace artefact properties with artefacts            |         |       |  4:06 |   9.3 |
-| Papers: Systems variability modeling                  |         |       |  2:55 |   6.6 |
-| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.6 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   7.1 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   9.2 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   6.5 |
+| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.5 |
 | Add model name to tracing dumps                       |         |       |  1:35 |   3.6 |
-| Add physical entities to logical model                |         |       | 11:55 |  27.1 |
+| Add physical entities to logical model                |         |       | 12:33 |  28.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -749,6 +749,8 @@ model name is not blank we should add it to the file name.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-18 Sat 18:45]--[2020-04-18 Sat 18:55] =>  0:10
+    CLOCK: [2020-04-18 Sat 18:16]--[2020-04-18 Sat 18:44] =>  0:28
     CLOCK: [2020-04-18 Sat 17:09]--[2020-04-18 Sat 18:05] =>  0:56
     CLOCK: [2020-04-18 Sat 15:17]--[2020-04-18 Sat 16:49] =>  1:32
     CLOCK: [2020-04-18 Sat 11:26]--[2020-04-18 Sat 11:51] =>  0:25
@@ -781,7 +783,7 @@ entities projected across multiple archetypes:
 
 - the element definition. This is a simple factory that creates a
   backend, facet or archetype.
-- the model-to text transform. For backends and formatters, and
+- the model-to-text transform. For backends and formatters, and
   possibly even for facets too; once all the interfaces have been
   worked out, the role of the transform will be well-defined;
   something like the backend calls all facets and the facets calls all
@@ -824,7 +826,9 @@ vs multiple logical elements. For example:
   backend logical element. We need to provide a good rationale for why
   this is different from the visitor in order to ensure the conceptual
   model remains consistent. Intuitively we are trying to say that
-  these elements are instantiating physical meta-model elements.
+  these elements are instantiating physical meta-model elements. The
+  easiest way is not to make a factory but instead use a factory
+  method.
 - we need to declare backend and facet as containers, and follow the
   existing pattern. This is not brilliant because we then need to do a
   second look-up to figure out the types of the contained elements,
@@ -842,6 +846,11 @@ Notes:
   containing is determined as we already do for modules. This code
   needs to be factored out into a helper. Name factory is a good
   candidate.
+- at present we are generating modules when we can't find them. We now
+  need to check on all containers before we create the module (modules
+  transform).
+- we are still missing the adaption of attributes for both archetype
+  kinds and parts.
 
 Merged stories:
 
@@ -1119,11 +1128,6 @@ Notes:
   elements apart from the file name from locator. And also perhaps
   have facets that do not have a facet directory so that we can place
   types above the facet directories such as SLNs, CMakeLists, etc.
-- at present we are generating modules when we can't find them. We now
-  need to check on all containers before we create the module (modules
-  transform).
-- we are still missing the adaption of attributes for both archetype
-  kinds and parts.
 
 *** COMPLETED Generative models                                        :epic:
     CLOSED: [2020-04-17 Fri 09:11]
