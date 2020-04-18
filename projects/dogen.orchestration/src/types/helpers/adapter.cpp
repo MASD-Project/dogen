@@ -50,6 +50,19 @@ const std::string true_value("true");
 const std::string false_value("false");
 
 const std::string guid_attr_name("guid");
+const std::string external_modules_path_contribution_name(
+    "external_modules_path_contribution");
+const std::string model_modules_path_contribution_name(
+    "model_modules_path_contribution");
+const std::string facet_path_contribution_name("facet_path_contribution");
+const std::string internal_modules_path_contribution_name(
+    "internal_modules_path_contribution");
+const std::string requires_relative_path_name("requires_relative_path");
+const std::string file_extension_name("file_extension");
+
+const std::string path_contribution_none("none");
+const std::string path_contribution_as_directories("as_directories");
+const std::string path_contribution_as_path_components("as_path_components");
 
 const std::string empty_string("String is empty but expected value.");
 const std::string non_empty_string(
@@ -68,6 +81,12 @@ using logical::entities::decoration::modeline;
 using logical::entities::decoration::generation_marker;
 using logical::entities::decoration::licence;
 
+bool str_to_bool(const std::string& s) {
+    if (s == true_value) return true;
+    if (s == false_value) return false;
+    BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+    BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
+}
 
 void adapter::ensure_not_empty(const std::string& s) const {
     if (s.empty()) {
@@ -77,7 +96,7 @@ void adapter::ensure_not_empty(const std::string& s) const {
 }
 
 void adapter::ensure_empty(const std::string& s) const {
-    if (s.empty()) {
+    if (!s.empty()) {
         BOOST_LOG_SEV(lg, error) << non_empty_string << s;
         BOOST_THROW_EXCEPTION(adaptation_exception(non_empty_string + s));
     }
@@ -368,17 +387,12 @@ adapter::to_generation_marker(const logical::entities::location& l,
     auto r(boost::make_shared<generation_marker>());
     populate_element(l, scr, ie, *r);
 
-    const auto str_to_bool(
-        [](const std::string& s) {
-            if (s == true_value) return true;
-            if (s == false_value) return false;
-            BOOST_LOG_SEV(lg, error) << unsupported_value << s;
-            BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
-        });
-
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
+
+        const auto t(attr.type());
+        ensure_empty(t);
 
         const auto v(attr.value());
         if (n == add_date_time_attr_name)
@@ -734,6 +748,22 @@ adapter::to_physical_archetype_kind(const logical::entities::location& l,
     using logical::entities::physical::archetype_kind;
     auto r(boost::make_shared<archetype_kind>());
     populate_element(l, scr, ie, *r);
+
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        const auto v(attr.value());
+        if (n == file_extension_name)
+            r->file_extension(v);
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
     return r;
 }
 
@@ -744,6 +774,58 @@ adapter::to_physical_part(const logical::entities::location& l,
     using logical::entities::physical::part;
     auto r(boost::make_shared<part>());
     populate_element(l, scr, ie, *r);
+
+    const std::string path_contribution_none("none");
+    const std::string path_contribution_as_directories("as_directories");
+    const std::string path_contribution_as_path_components("as_path_components");
+
+    const auto is_valid_path_contribution([&](const std::string& s) {
+            const bool is_valid(s == path_contribution_none ||
+                s == path_contribution_as_directories ||
+                s == path_contribution_as_path_components);
+
+            if (is_valid)
+                return;
+
+            BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+            BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
+        });
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        const auto t(attr.type());
+        ensure_empty(t);
+
+        const auto v(attr.value());
+        if (n == external_modules_path_contribution_name) {
+            ensure_not_empty(v);
+            is_valid_path_contribution(v);
+            r->external_modules_path_contribution(v);
+        } else if (n == model_modules_path_contribution_name) {
+            ensure_not_empty(v);
+            is_valid_path_contribution(v);
+            r->model_modules_path_contribution(v);
+        } else if (n == facet_path_contribution_name) {
+            ensure_not_empty(v);
+            is_valid_path_contribution(v);
+            r->facet_path_contribution(v);
+        } else if (n == internal_modules_path_contribution_name) {
+            ensure_not_empty(v);
+            is_valid_path_contribution(v);
+            r->internal_modules_path_contribution(v);
+        } else if (n == requires_relative_path_name) {
+            ensure_not_empty(v);
+            r->requires_relative_path(str_to_bool(v));
+        } else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
+
     return r;
 }
 
