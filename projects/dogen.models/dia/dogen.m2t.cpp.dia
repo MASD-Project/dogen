@@ -35208,7 +35208,7 @@ string.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#55d28c"/>
+        <dia:color val="#43cd80"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
