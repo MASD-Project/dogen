@@ -46,7 +46,7 @@ const std::string kernel_name("masd");
 const std::string ambiguous_name("Name maps to more than one element type:");
 const std::string unsupported_composition(
     "Physical element composition is not supported: ");
-const std::string duplicate_part_id("Duplicate part ID: ");;
+const std::string duplicate_part_id("Duplicate part ID: ");
 const std::string missing_part("Part could not be located: ");
 
 }
