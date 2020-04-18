@@ -31,6 +31,7 @@
 #include "dogen.logical/types/transforms/parsing_transform.hpp"
 #include "dogen.logical/types/transforms/primitives_transform.hpp"
 #include "dogen.logical/types/transforms/containment_transform.hpp"
+#include "dogen.logical/types/transforms/physical_entities_transform.hpp"
 #include "dogen.logical/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.logical/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.logical/types/transforms/variability_features_transform.hpp"
@@ -61,6 +62,12 @@ void pre_assembly_chain::apply(const context& ctx,
      */
     modules_transform::apply(ctx, m);
     containment_transform::apply(ctx, m);
+
+    /*
+     * Physical transform must be done before containment transform as
+     * we rely on @e contains being populated.
+     */
+    physical_entities_transform::apply(ctx, m);
 
     /*
      * Modelines transform must be done after the containment
