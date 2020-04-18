@@ -57,7 +57,8 @@ model::model(model&& rhs)
       visual_studio_elements_(std::move(rhs.visual_studio_elements_)),
       orm_elements_(std::move(rhs.orm_elements_)),
       build_elements_(std::move(rhs.build_elements_)),
-      physical_elements_(std::move(rhs.physical_elements_)) { }
+      physical_elements_(std::move(rhs.physical_elements_)),
+      meta_names_(std::move(rhs.meta_names_)) { }
 
 model::model(
     const dogen::logical::entities::name& name,
@@ -80,7 +81,8 @@ model::model(
     const dogen::logical::entities::visual_studio::element_repository& visual_studio_elements,
     const dogen::logical::entities::orm::element_repository& orm_elements,
     const dogen::logical::entities::build::element_repository& build_elements,
-    const dogen::logical::entities::physical::element_repository& physical_elements)
+    const dogen::logical::entities::physical::element_repository& physical_elements,
+    const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -101,7 +103,8 @@ model::model(
       visual_studio_elements_(visual_studio_elements),
       orm_elements_(orm_elements),
       build_elements_(build_elements),
-      physical_elements_(physical_elements) { }
+      physical_elements_(physical_elements),
+      meta_names_(meta_names) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -126,6 +129,7 @@ void model::swap(model& other) noexcept {
     swap(orm_elements_, other.orm_elements_);
     swap(build_elements_, other.build_elements_);
     swap(physical_elements_, other.physical_elements_);
+    swap(meta_names_, other.meta_names_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -149,7 +153,8 @@ bool model::operator==(const model& rhs) const {
         visual_studio_elements_ == rhs.visual_studio_elements_ &&
         orm_elements_ == rhs.orm_elements_ &&
         build_elements_ == rhs.build_elements_ &&
-        physical_elements_ == rhs.physical_elements_;
+        physical_elements_ == rhs.physical_elements_ &&
+        meta_names_ == rhs.meta_names_;
 }
 
 model& model::operator=(model other) {
@@ -476,6 +481,22 @@ void model::physical_elements(const dogen::logical::entities::physical::element_
 
 void model::physical_elements(const dogen::logical::entities::physical::element_repository&& v) {
     physical_elements_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::logical::entities::name>& model::meta_names() const {
+    return meta_names_;
+}
+
+std::unordered_map<std::string, dogen::logical::entities::name>& model::meta_names() {
+    return meta_names_;
+}
+
+void model::meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>& v) {
+    meta_names_ = v;
+}
+
+void model::meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>&& v) {
+    meta_names_ = std::move(v);
 }
 
 }

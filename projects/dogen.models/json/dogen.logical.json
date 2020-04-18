@@ -488,6 +488,11 @@
         {
           "name": "physical_elements",
           "type": "physical::element_repository"
+        },
+        {
+          "name": "meta_names",
+          "type": "std::unordered_map<std::string, name>",
+          "documentation": "All meta-names by qualified name.\n"
         }
       ]
     },

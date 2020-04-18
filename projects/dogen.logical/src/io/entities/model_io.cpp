@@ -123,6 +123,24 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::name>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -148,7 +166,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"visual_studio_elements\": " << v.visual_studio_elements() << ", "
       << "\"orm_elements\": " << v.orm_elements() << ", "
       << "\"build_elements\": " << v.build_elements() << ", "
-      << "\"physical_elements\": " << v.physical_elements()
+      << "\"physical_elements\": " << v.physical_elements() << ", "
+      << "\"meta_names\": " << v.meta_names()
       << " }";
     return(s);
 }

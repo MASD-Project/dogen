@@ -88,7 +88,8 @@ public:
         const dogen::logical::entities::visual_studio::element_repository& visual_studio_elements,
         const dogen::logical::entities::orm::element_repository& orm_elements,
         const dogen::logical::entities::build::element_repository& build_elements,
-        const dogen::logical::entities::physical::element_repository& physical_elements);
+        const dogen::logical::entities::physical::element_repository& physical_elements,
+        const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names);
 
 public:
     /**
@@ -265,6 +266,16 @@ public:
     void physical_elements(const dogen::logical::entities::physical::element_repository& v);
     void physical_elements(const dogen::logical::entities::physical::element_repository&& v);
 
+    /**
+     * @brief All meta-names by qualified name.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names() const;
+    std::unordered_map<std::string, dogen::logical::entities::name>& meta_names();
+    void meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>& v);
+    void meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -297,6 +308,7 @@ private:
     dogen::logical::entities::orm::element_repository orm_elements_;
     dogen::logical::entities::build::element_repository build_elements_;
     dogen::logical::entities::physical::element_repository physical_elements_;
+    std::unordered_map<std::string, dogen::logical::entities::name> meta_names_;
 };
 
 }
