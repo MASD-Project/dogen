@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-18 Sat 11:25]
-| <75>                                                  |         |       |      |       |
-| Headline                                              | Time    |       |      |     % |
-|-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *41:04* |       |      | 100.0 |
-|-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 41:04   |       |      | 100.0 |
-| Active                                                |         | 41:04 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 9:22 |  22.8 |
-| Create a demo and presentation for previous sprint    |         |       | 0:25 |   1.0 |
-| Sprint and product backlog grooming                   |         |       | 7:57 |  19.4 |
-| Emacs issues and improvements                         |         |       | 0:47 |   1.9 |
-| Nightly nursing                                       |         |       | 0:37 |   1.5 |
-| Analysis on implementing enablement in physical model |         |       | 3:10 |   7.7 |
-| Replace artefact properties with artefacts            |         |       | 4:06 |  10.0 |
-| Papers: Systems variability modeling                  |         |       | 2:55 |   7.1 |
-| Throw on unexpected dynamic stereotypes               |         |       | 1:08 |   2.8 |
-| Add model name to tracing dumps                       |         |       | 1:35 |   3.9 |
-| Add physical entities to logical model                |         |       | 9:02 |  22.0 |
+#+CAPTION: Clock summary at [2020-04-18 Sat 18:07]
+| <75>                                                  |         |       |       |       |
+| Headline                                              | Time    |       |       |     % |
+|-------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                          | *43:57* |       |       | 100.0 |
+|-------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                               | 43:57   |       |       | 100.0 |
+| Active                                                |         | 43:57 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  21.3 |
+| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.9 |
+| Sprint and product backlog grooming                   |         |       |  7:57 |  18.1 |
+| Emacs issues and improvements                         |         |       |  0:47 |   1.8 |
+| Nightly nursing                                       |         |       |  0:37 |   1.4 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   7.2 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   9.3 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   6.6 |
+| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.6 |
+| Add model name to tracing dumps                       |         |       |  1:35 |   3.6 |
+| Add physical entities to logical model                |         |       | 11:55 |  27.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -749,6 +749,9 @@ model name is not blank we should add it to the file name.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-18 Sat 17:09]--[2020-04-18 Sat 18:05] =>  0:56
+    CLOCK: [2020-04-18 Sat 15:17]--[2020-04-18 Sat 16:49] =>  1:32
+    CLOCK: [2020-04-18 Sat 11:26]--[2020-04-18 Sat 11:51] =>  0:25
     CLOCK: [2020-04-18 Sat 11:12]--[2020-04-18 Sat 11:19] =>  0:07
     CLOCK: [2020-04-18 Sat 09:45]--[2020-04-18 Sat 10:12] =>  0:27
     CLOCK: [2020-04-17 Fri 21:52]--[2020-04-17 Fri 22:20] =>  0:28
@@ -1119,6 +1122,8 @@ Notes:
 - at present we are generating modules when we can't find them. We now
   need to check on all containers before we create the module (modules
   transform).
+- we are still missing the adaption of attributes for both archetype
+  kinds and parts.
 
 *** COMPLETED Generative models                                        :epic:
     CLOSED: [2020-04-17 Fri 09:11]
