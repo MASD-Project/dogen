@@ -77,6 +77,85 @@ logical-physical conceptual model.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Configuration binds to element types                              :story:
+
+At present we can check bindings for at most the "kinds" of elements
+in the logical meta-model. However, in many cases we have features
+that only make sense for certain meta-model elements. We could do this
+fairly simply:
+
+- add a "tag" to configurations that tell us what meta-model elements
+  we have.
+- add a "tag" to features that tell us what meta-model elements they
+  support.
+
+This approach could be generalised to support all binding types. It
+just requires some thinking: =all= must match any tag, =global= must
+match only one specific element, etc. We could perhaps have two levels
+of tagging, or - even better - have multiple tags. So if all elements
+are tagged with all, we could match on all. So effectively the binding
+point becomes just a series of strings. This is very powerful because
+now we do not have to know anything about the geometry of logical
+space and yet we still are able to have very fine-grained checks on
+bindings.
+
+*** Consider adding cartridge formatters                              :story:
+
+At present we are creating CMake scripts to call ODB. This kind of
+makes sense because we see ODB as an external code generator. However,
+we then have several issues:
+
+- ODB files are not known to dogen. We could create some expectations
+  of what these files are and where they will be located, but if the
+  user changes anything problems will occur.
+- if the user chooses a different build system, we need to add more
+  targets to run ODB.
+
+One can imagine that these problems will be common to all external
+code generators we add in the future (e.g. protobuf, XSD tool etc). A
+slightly different take on this would be to call the external tools
+from within dogen. We would add meta-model concepts for these (not
+exactly clear what those should be, to be fair). The gist of it is
+that we would have a "cartridge formatter", with the following
+responsibilities:
+
+- shelling out and calling the tool with the correct environment
+  setup;
+- gather the generated files and place then in the right directories;
+- gather the errors and report them back to the user.
+
+The advantage of this approach is that we can then run other parts of
+the pipeline on the generated files (e.g. perform any formatting that
+may be required). For each cartridge we would have to teach dogen on
+how to invoke it and what the expectations are.
+
+Notes:
+
+- config file should tell dogen about the application location if not
+  in path.
+- extensions should be registered as archetype kinds in the
+  meta-model.
+- we could probably decomission the ODB options files, which would be
+  nice as they are a bit awkward. We could either generate them on the
+  fly or not even bother to generate them at all and supply the
+  options directly to ODB's command line. Basically we would need
+  meta-model elements to capture the command line invocation for each
+  element. We could even allow users to supply overrides to command
+  line such as =--include-regex-trace=.
+- we could also detect when files need to be rebuilt, although this is
+  probably not trivial. Basically, by following the element
+  dependencies we could determine if there is a need to call ODB or
+  not. Alternatively, we could follow the include graph. Either way we
+  need to make sure we rebuild when we should and this is like
+  replicating a make inside of dogen. This is where a deep integration
+  with build2 would be nice (e.g. via =libbuild2=).
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_72_0/doc/html/process.html][Boost.Process]]: we could use this library to start external
+  processes.
+- https://github.com/build2/build2
+
 *** Consider making a separation between userspace and masd space     :story:
 
 Userspace is actually quite a good name to represent the users of MASD
