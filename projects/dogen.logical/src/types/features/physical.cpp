@@ -52,6 +52,8 @@ make_masd_physical_part_id() {
     r.name().qualified("masd.physical.part_id");
     r.description(R"(Fully qualified physical name of the part this artefact belongs to.
 
+FIXME: optional for now.
+
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -78,8 +80,10 @@ physical::static_configuration physical::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.backend_name = s.get_text_content(fg.backend_name);
-    r.part_id = s.get_text_content(fg.part_id);
+    if (s.has_configuration_point(fg.backend_name))
+        r.backend_name = s.get_text_content(fg.backend_name);
+    if (s.has_configuration_point(fg.part_id))
+        r.part_id = s.get_text_content(fg.part_id);
     return r;
 }
 

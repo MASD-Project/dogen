@@ -4189,12 +4189,18 @@
         {
           "name": "backend_name",
           "type": "masd::variability::text",
-          "documentation": "Simple name of the backend.\n\nFIXME: temporary until we rename the namespaces.\n"
+          "documentation": "Simple name of the backend.\n\nFIXME: temporary until we rename the namespaces.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         },
         {
           "name": "part_id",
           "type": "masd::variability::text",
-          "documentation": "Fully qualified physical name of the part this artefact belongs to.\n"
+          "documentation": "Fully qualified physical name of the part this artefact belongs to.\n\nFIXME: optional for now.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     }

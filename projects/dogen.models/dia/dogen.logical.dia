@@ -53333,7 +53333,8 @@ just to avoid problems.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Simple name of the backend.
 
-FIXME: temporary until we rename the namespaces.#</dia:string>
+FIXME: temporary until we rename the namespaces.
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -53356,7 +53357,11 @@ FIXME: temporary until we rename the namespaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Fully qualified physical name of the part this artefact belongs to.#</dia:string>
+            <dia:string>#Fully qualified physical name of the part this artefact belongs to.
+
+FIXME: optional for now.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
