@@ -67,6 +67,7 @@ public:
         const std::string& kernel_name,
         const std::list<dogen::logical::entities::name>& facets,
         const std::list<dogen::logical::entities::name>& parts,
+        const std::list<dogen::logical::entities::name>& archetype_kinds,
         const std::string& backend_name);
 
 public:
@@ -121,6 +122,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Kinds of archetypes defined in this backend.
+     */
+    /**@{*/
+    const std::list<dogen::logical::entities::name>& archetype_kinds() const;
+    std::list<dogen::logical::entities::name>& archetype_kinds();
+    void archetype_kinds(const std::list<dogen::logical::entities::name>& v);
+    void archetype_kinds(const std::list<dogen::logical::entities::name>&& v);
+    /**@}*/
+
+    /**
      * @brief FIXME: temporary attribute until we can rename the top-level namespaces.
      */
     /**@{*/
@@ -149,6 +160,7 @@ private:
     std::string kernel_name_;
     std::list<dogen::logical::entities::name> facets_;
     std::list<dogen::logical::entities::name> parts_;
+    std::list<dogen::logical::entities::name> archetype_kinds_;
     std::string backend_name_;
 };
 

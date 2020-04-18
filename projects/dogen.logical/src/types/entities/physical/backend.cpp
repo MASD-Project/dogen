@@ -83,6 +83,7 @@ backend::backend(
     const std::string& kernel_name,
     const std::list<dogen::logical::entities::name>& facets,
     const std::list<dogen::logical::entities::name>& parts,
+    const std::list<dogen::logical::entities::name>& archetype_kinds,
     const std::string& backend_name)
     : dogen::logical::entities::element(
       name,
@@ -104,6 +105,7 @@ backend::backend(
       kernel_name_(kernel_name),
       facets_(facets),
       parts_(parts),
+      archetype_kinds_(archetype_kinds),
       backend_name_(backend_name) { }
 
 void backend::accept(const element_visitor& v) const {
@@ -133,6 +135,7 @@ void backend::to_stream(std::ostream& s) const {
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
+      << "\"archetype_kinds\": " << archetype_kinds_ << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\""
       << " }";
 }
@@ -146,6 +149,7 @@ void backend::swap(backend& other) noexcept {
     swap(kernel_name_, other.kernel_name_);
     swap(facets_, other.facets_);
     swap(parts_, other.parts_);
+    swap(archetype_kinds_, other.archetype_kinds_);
     swap(backend_name_, other.backend_name_);
 }
 
@@ -162,6 +166,7 @@ bool backend::operator==(const backend& rhs) const {
         kernel_name_ == rhs.kernel_name_ &&
         facets_ == rhs.facets_ &&
         parts_ == rhs.parts_ &&
+        archetype_kinds_ == rhs.archetype_kinds_ &&
         backend_name_ == rhs.backend_name_;
 }
 
@@ -249,6 +254,22 @@ void backend::parts(const std::list<dogen::logical::entities::name>& v) {
 
 void backend::parts(const std::list<dogen::logical::entities::name>&& v) {
     parts_ = std::move(v);
+}
+
+const std::list<dogen::logical::entities::name>& backend::archetype_kinds() const {
+    return archetype_kinds_;
+}
+
+std::list<dogen::logical::entities::name>& backend::archetype_kinds() {
+    return archetype_kinds_;
+}
+
+void backend::archetype_kinds(const std::list<dogen::logical::entities::name>& v) {
+    archetype_kinds_ = v;
+}
+
+void backend::archetype_kinds(const std::list<dogen::logical::entities::name>&& v) {
+    archetype_kinds_ = std::move(v);
 }
 
 const std::string& backend::backend_name() const {

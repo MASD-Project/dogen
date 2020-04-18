@@ -4051,6 +4051,11 @@
           "documentation": "All parts within this backend.\n"
         },
         {
+          "name": "archetype_kinds",
+          "type": "std::list<name>",
+          "documentation": "Kinds of archetypes defined in this backend.\n"
+        },
+        {
           "name": "backend_name",
           "type": "std::string",
           "documentation": "FIXME: temporary attribute until we can rename the top-level namespaces.\n"
