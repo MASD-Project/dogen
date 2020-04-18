@@ -108,20 +108,7 @@ private:
     void update(entities::element& e);
 
 public:
-    void operator()(entities::element&) { }
-    void operator()(entities::structural::module& v) { update(v); }
-    void operator()(entities::structural::object_template& v) { update(v); }
-    void operator()(entities::structural::builtin& v) { update(v); }
-    void operator()(entities::structural::enumeration& v) { update(v); }
-    void operator()(entities::structural::primitive& v) { update(v); }
-    void operator()(entities::structural::object& v) { update(v); }
-    void operator()(entities::structural::exception& v) { update(v); }
-    void operator()(entities::structural::visitor& v) { update(v); }
-    void operator()(entities::decoration::modeline& v) { update(v); }
-    void operator()(entities::physical::backend& v) { update(v); }
-    void operator()(entities::physical::facet& v) { update(v); }
-    void operator()(entities::physical::archetype& v) { update(v); }
-    void operator()(entities::physical::part& v) { update(v); }
+    void operator()(entities::element& v) { update(v); }
 
 public:
     entities::model& model_;
