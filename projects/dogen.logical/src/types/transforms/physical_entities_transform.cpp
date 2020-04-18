@@ -253,6 +253,7 @@ process_archetypes(const context& ctx, entities::model& m) {
 
         const auto scfg(physical::make_static_configuration(fg, arch));
         arch.part_id(scfg.part_id);
+        arch.logical_meta_element_id(scfg.logical_meta_element_id);
 
         std::ostringstream os;
         const auto sn(arch.name().simple());
