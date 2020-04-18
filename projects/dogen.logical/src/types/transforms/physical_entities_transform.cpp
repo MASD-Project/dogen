@@ -77,6 +77,7 @@ process_backends(const context& ctx, entities::model& m) {
              * Check to see if the contained element is a facet, and
              * if so add it to the facets container.
              */
+            found = false;
             const auto& fcts(pe.facets());
             const auto i(fcts.find(qn));
             if (i != fcts.end()) {
