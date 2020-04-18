@@ -38,9 +38,32 @@ namespace dogen::logical::transforms {
 class physical_entities_transform final {
 private:
     /**
-     * @brief Processes all of the logical backends.
+     * @brief Processes all of the logical representations of
+     * backends.
      */
-    static void process_backends(entities::model& m);
+    static void process_backends(const context& ctx, entities::model& m);
+
+    /**
+     * @brief Processes all of the logical representations of facets.
+     */
+    static void process_facets(entities::model& m);
+
+    /**
+     * @brief Processes all of the logical representations of
+     * archetype kinds.
+     */
+    static void process_archetype_kinds(entities::model& m);
+
+    /**
+     * @brief Processes all of the logical representations of parts.
+     */
+    static void process_parts(entities::model& m);
+
+    /**
+     * @brief Processes all of the logical representations of
+     * archetypes.
+     */
+    static void process_archetypes(const context& ctx, entities::model& m);
 
 public:
     /**
