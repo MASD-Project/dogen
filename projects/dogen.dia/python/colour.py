@@ -177,10 +177,12 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Physical
         #
+        elif "masd::physical::archetype_kind" in stereotype:
+            object.properties["fill_colour"] = physical_palette[4]
         elif "masd::physical::archetype" in stereotype:
             object.properties["fill_colour"] = physical_palette[7]
         elif "masd::physical::part" in stereotype:
-            object.properties["fill_colour"] = physical_palette[8]
+            object.properties["fill_colour"] = physical_palette[9]
 
 
         #
