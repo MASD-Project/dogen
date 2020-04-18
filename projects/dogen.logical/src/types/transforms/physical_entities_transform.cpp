@@ -156,7 +156,6 @@ void physical_entities_transform::process_facets(entities::model& m) {
            << fct.name().simple();
         fct.id(os.str());
 
-        bool found(false);
         for (const auto& qn : fct.contains()) {
             /*
              * Check to see if the contained element is an archetype,
@@ -168,7 +167,6 @@ void physical_entities_transform::process_facets(entities::model& m) {
                 auto& arch(*i->second);
                 fct.archetypes().push_back(arch.name());
                 arch.facet_name(fct.name().simple());
-                found = true;
             }
 
             /*
