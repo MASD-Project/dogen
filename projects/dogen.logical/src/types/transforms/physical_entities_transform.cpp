@@ -46,6 +46,8 @@ const std::string kernel_name("masd");
 const std::string ambiguous_name("Name maps to more than one element type:");
 const std::string unsupported_composition(
     "Physical element composition is not supported: ");
+const std::string duplicate_part_id("Duplicate part ID: ");;
+const std::string missing_part("Part could not be located: ");
 
 }
 
@@ -222,6 +224,21 @@ process_archetypes(const context& ctx, entities::model& m) {
     const auto& fm(*ctx.feature_model());
     const auto fg(physical::make_feature_group(fm));
 
+    const auto& parts(pe.parts());
+    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
+        parts_by_ids;
+    for (const auto& pair : parts) {
+        const auto& part(*pair.second);
+        const auto id(part.id());
+        const auto new_pair(std::make_pair(id, pair.second));
+        const auto inserted(parts_by_ids.insert(new_pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_part_id << part.id();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_part_id + part.id()));
+        }
+    }
+
     auto& archs(pe.archetypes());
     for (auto& pair : archs) {
         auto& arch(*pair.second);
@@ -235,12 +252,15 @@ process_archetypes(const context& ctx, entities::model& m) {
         arch.id(os.str());
 
         const auto qn(arch.name().qualified().dot());
-        const auto& parts(pe.parts());
-        const auto i(parts.find(qn));
-        if (i != parts.end()) {
-            auto& part(*i->second);
-            part.archetypes().push_back(arch.name());
+        const auto pid(arch.part_id());
+        const auto i(parts_by_ids.find(pid));
+        if (i == parts_by_ids.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_part << pid;
+            BOOST_THROW_EXCEPTION(transformation_error(missing_part + pid));
         }
+
+        auto& part(*i->second);
+        part.archetypes().push_back(arch.name());
     }
 }
 
