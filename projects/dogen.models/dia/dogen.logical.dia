@@ -52086,7 +52086,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="170,-44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="169.95,-44.05;189.03,-33.15"/>
+        <dia:rectangle val="169.95,-44.05;189.03,-33.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="170,-44"/>
@@ -52095,7 +52095,7 @@ just to avoid problems.#</dia:string>
         <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.799999999999999"/>
+        <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#part#</dia:string>
@@ -52358,29 +52358,6 @@ just to avoid problems.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, a relative path should be generated for this part.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#facets#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All facets in this part.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52680,7 +52657,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="180.84,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="179.44,-48.75;181.59,-43.2497"/>
+        <dia:rectangle val="179.44,-48.75;181.59,-43.2492"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -52689,7 +52666,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="180.84,-48"/>
         <dia:point val="180.84,-46"/>
         <dia:point val="179.49,-46"/>
-        <dia:point val="179.49,-44.0497"/>
+        <dia:point val="179.49,-44.0492"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -52707,7 +52684,7 @@ just to avoid problems.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O401" connection="7"/>
-        <dia:connection handle="1" to="O406" connection="28"/>
+        <dia:connection handle="1" to="O406" connection="26"/>
       </dia:connections>
       <dia:childnode parent="O400"/>
     </dia:object>

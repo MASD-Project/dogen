@@ -4136,11 +4136,6 @@
           "documentation": "If true, a relative path should be generated for this part.\n"
         },
         {
-          "name": "facets",
-          "type": "std::list<name>",
-          "documentation": "All facets in this part.\n"
-        },
-        {
           "name": "archetypes",
           "type": "std::list<name>",
           "documentation": "All archetypes in this part.\n"

@@ -76,7 +76,6 @@ part::part(
     const std::string& facet_path_contribution,
     const std::string& internal_modules_path_contribution,
     const bool requires_relative_path,
-    const std::list<dogen::logical::entities::name>& facets,
     const std::list<dogen::logical::entities::name>& archetypes)
     : dogen::logical::entities::element(
       name,
@@ -101,7 +100,6 @@ part::part(
       facet_path_contribution_(facet_path_contribution),
       internal_modules_path_contribution_(internal_modules_path_contribution),
       requires_relative_path_(requires_relative_path),
-      facets_(facets),
       archetypes_(archetypes) { }
 
 void part::accept(const element_visitor& v) const {
@@ -140,7 +138,6 @@ void part::to_stream(std::ostream& s) const {
       << "\"facet_path_contribution\": " << "\"" << tidy_up_string(facet_path_contribution_) << "\"" << ", "
       << "\"internal_modules_path_contribution\": " << "\"" << tidy_up_string(internal_modules_path_contribution_) << "\"" << ", "
       << "\"requires_relative_path\": " << requires_relative_path_ << ", "
-      << "\"facets\": " << facets_ << ", "
       << "\"archetypes\": " << archetypes_
       << " }";
 }
@@ -157,7 +154,6 @@ void part::swap(part& other) noexcept {
     swap(facet_path_contribution_, other.facet_path_contribution_);
     swap(internal_modules_path_contribution_, other.internal_modules_path_contribution_);
     swap(requires_relative_path_, other.requires_relative_path_);
-    swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
 }
 
@@ -177,7 +173,6 @@ bool part::operator==(const part& rhs) const {
         facet_path_contribution_ == rhs.facet_path_contribution_ &&
         internal_modules_path_contribution_ == rhs.internal_modules_path_contribution_ &&
         requires_relative_path_ == rhs.requires_relative_path_ &&
-        facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_;
 }
 
@@ -305,22 +300,6 @@ bool part::requires_relative_path() const {
 
 void part::requires_relative_path(const bool v) {
     requires_relative_path_ = v;
-}
-
-const std::list<dogen::logical::entities::name>& part::facets() const {
-    return facets_;
-}
-
-std::list<dogen::logical::entities::name>& part::facets() {
-    return facets_;
-}
-
-void part::facets(const std::list<dogen::logical::entities::name>& v) {
-    facets_ = v;
-}
-
-void part::facets(const std::list<dogen::logical::entities::name>&& v) {
-    facets_ = std::move(v);
 }
 
 const std::list<dogen::logical::entities::name>& part::archetypes() const {

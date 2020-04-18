@@ -71,7 +71,6 @@ public:
         const std::string& facet_path_contribution,
         const std::string& internal_modules_path_contribution,
         const bool requires_relative_path,
-        const std::list<dogen::logical::entities::name>& facets,
         const std::list<dogen::logical::entities::name>& archetypes);
 
 public:
@@ -149,16 +148,6 @@ public:
     /**@}*/
 
     /**
-     * @brief All facets in this part.
-     */
-    /**@{*/
-    const std::list<dogen::logical::entities::name>& facets() const;
-    std::list<dogen::logical::entities::name>& facets();
-    void facets(const std::list<dogen::logical::entities::name>& v);
-    void facets(const std::list<dogen::logical::entities::name>&& v);
-    /**@}*/
-
-    /**
      * @brief All archetypes in this part.
      */
     /**@{*/
@@ -190,7 +179,6 @@ private:
     std::string facet_path_contribution_;
     std::string internal_modules_path_contribution_;
     bool requires_relative_path_;
-    std::list<dogen::logical::entities::name> facets_;
     std::list<dogen::logical::entities::name> archetypes_;
 };
 
