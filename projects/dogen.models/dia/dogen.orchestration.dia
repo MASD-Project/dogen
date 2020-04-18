@@ -123,7 +123,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-1.65,1.245"/>
+            <dia:point val="-1.65,1.24406"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4148,7 +4148,7 @@ logical types.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="84.35,66.245"/>
+            <dia:point val="84.35,66.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4165,7 +4165,7 @@ logical types.#</dia:string>
         <dia:point val="90.3669,64.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.2989,57.0883;92.3742,65.0184"/>
+        <dia:rectangle val="90.2989,57.0943;92.3742,65.0184"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4554,7 +4554,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="116.35,60.245"/>
+            <dia:point val="116.35,60.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4899,7 +4899,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
         <dia:point val="112.91,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.16,22.25;124.2,26.05"/>
+        <dia:rectangle val="112.16,22.25;124.2,26.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
