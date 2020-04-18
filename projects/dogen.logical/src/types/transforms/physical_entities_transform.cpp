@@ -100,7 +100,7 @@ process_backends(const context& ctx, entities::model& m) {
                 }
 
                 auto& part(*j->second);
-                b.facets().push_back(part.name());
+                b.parts().push_back(part.name());
                 part.backend_name(b.backend_name());
                 found = true;
             }
@@ -214,6 +214,12 @@ void physical_entities_transform::process_parts(entities::model& m) {
     for (auto& pair : parts) {
         auto& part(*pair.second);
         part.kernel_name(kernel_name);
+
+        std::ostringstream os;
+        os << kernel_name << separator
+           << part.backend_name() << separator
+           << part.name().simple();
+        part.id(os.str());
     }
 }
 
@@ -243,6 +249,9 @@ process_archetypes(const context& ctx, entities::model& m) {
     for (auto& pair : archs) {
         auto& arch(*pair.second);
         arch.kernel_name(kernel_name);
+
+        const auto scfg(physical::make_static_configuration(fg, arch));
+        arch.part_id(scfg.part_id);
 
         std::ostringstream os;
         const auto sn(arch.name().simple());
@@ -274,6 +283,8 @@ apply(const context& ctx, entities::model& m) {
     process_archetype_kinds(m);
     process_parts(m);
     process_archetypes(ctx, m);
+
+    stp.end_transform(m);
 }
 
 }
