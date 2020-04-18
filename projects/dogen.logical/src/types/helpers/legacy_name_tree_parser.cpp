@@ -21,6 +21,8 @@
 #define BOOST_SPIRIT_USE_PHOENIX_V3
 //#define BOOST_SPIRIT_DEBUG
 #include <functional>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/spirit/include/qi.hpp>
@@ -89,7 +91,7 @@ using dogen::logical::helpers::parsing_error;
 
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
-    std::shared_ptr<name_tree_builder> builder;
+    boost::shared_ptr<name_tree_builder> builder;
     qi::rule<Iterator> match_signable_builtin;
     qi::rule<Iterator, std::string()> name_tree, name, nondigit, alphanum,
         builtin;
@@ -128,7 +130,7 @@ struct grammar : qi::grammar<Iterator> {
         } }
     }
 
-    grammar(std::shared_ptr<name_tree_builder> b,
+    grammar(boost::shared_ptr<name_tree_builder> b,
         const technical_space ts)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
@@ -214,7 +216,7 @@ entities::name_tree
 legacy_name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
-    auto builder(std::make_shared<name_tree_builder>());
+    auto builder(boost::make_shared<name_tree_builder>());
     grammar<std::string::const_iterator> g(builder, technical_space_);
 
     std::string::const_iterator i(s.begin());

@@ -44,7 +44,7 @@ auto lg(logger_factory("logical.helpers.name_tree_builder"));
 namespace dogen::logical::helpers {
 
 name_tree_builder::name_tree_builder()
-    : root_(new node), current_(root_) {}
+    : root_(boost::make_shared<node>()), current_(root_) {}
 
 void name_tree_builder::add_name(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "Pushing back name: '" << s << "'";
