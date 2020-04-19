@@ -2125,7 +2125,8 @@
         "masd::physical::archetype"
       ],
       "tagged_values": {
-        "masd.physical.part_id": "masd.cpp.public_headers"
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object"
       },
       "fallback_element_type": "masd::object"
     },

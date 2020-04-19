@@ -35061,7 +35061,8 @@ string.
       <dia:attribute name="comment">
         <dia:string>#A comment.
 
-#DOGEN masd.physical.part_id=masd.cpp.public_headers#</dia:string>
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
