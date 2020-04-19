@@ -48,6 +48,8 @@ const std::string unsupported_composition(
     "Physical element composition is not supported: ");
 const std::string duplicate_part_id("Duplicate part ID: ");
 const std::string missing_part("Part could not be located: ");
+const std::string missing_logical_meta_element(
+    "Meta-element name not supplied.");
 
 }
 
@@ -251,7 +253,14 @@ process_archetypes(const context& ctx, entities::model& m) {
 
         const auto scfg(physical::make_static_configuration(fg, arch));
         arch.part_id(scfg.part_id);
-        arch.logical_meta_element_id(scfg.logical_meta_element_id);
+        const auto lmen(scfg.logical_meta_element_id);
+        if (lmen.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_logical_meta_element));
+        }
+
+        arch.logical_meta_element_id(lmen);
 
         std::ostringstream os;
         const auto sn(arch.name().simple());
@@ -262,13 +271,13 @@ process_archetypes(const context& ctx, entities::model& m) {
 
         const auto qn(arch.name().qualified().dot());
         const auto pid(arch.part_id());
-        const auto i(parts_by_ids.find(pid));
-        if (i == parts_by_ids.end()) {
+        const auto j(parts_by_ids.find(pid));
+        if (j == parts_by_ids.end()) {
             BOOST_LOG_SEV(lg, error) << missing_part << pid;
             BOOST_THROW_EXCEPTION(transformation_error(missing_part + pid));
         }
 
-        auto& part(*i->second);
+        auto& part(*j->second);
         part.archetypes().push_back(arch.name());
     }
 }
