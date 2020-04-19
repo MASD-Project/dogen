@@ -118,7 +118,7 @@ space; keep it technical space agnostic.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-13.65,-51.755"/>
+            <dia:point val="-13.65,-51.7559"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -250,7 +250,7 @@ other layers can then configure features.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="15.35,-49.755"/>
+            <dia:point val="15.35,-49.7559"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3853,7 +3853,7 @@ for the element.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="16.35,-6.755"/>
+            <dia:point val="16.35,-6.75594"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
