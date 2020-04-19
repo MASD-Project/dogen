@@ -39,6 +39,9 @@
 #include "dogen.m2t.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp"
 #include "dogen.m2t.cpp/types/transforms/types/variability_initializer_header_transform.hpp"
 #include "dogen.m2t.cpp/types/transforms/types/variability_initializer_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/types/archetype_class_header_transform_old.hpp"
+#include "dogen.m2t.cpp/types/transforms/types/archetype_class_implementation_transform_old.hpp"
+#include "dogen.m2t.cpp/types/transforms/types/archetype_stitch_transform_old.hpp"
 #include "dogen.m2t.cpp/types/transforms/types/initializer.hpp"
 
 namespace dogen::m2t::cpp::transforms::types {
@@ -63,6 +66,9 @@ void initializer::initialize(registrar& rg) {
     register_formatter<variability_initializer_header_transform>(rg);
     register_formatter<variability_initializer_implementation_transform>(rg);
     register_formatter<main_transform>(rg);
+    register_formatter<archetype_class_header_transform_old>(rg);
+    register_formatter<archetype_class_implementation_transform_old>(rg);
+    register_formatter<archetype_stitch_transform_old>(rg);
 
     register_helper_formatter<smart_pointer_helper>(rg);
 }
