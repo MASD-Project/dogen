@@ -120,7 +120,7 @@ physical dimension of MASD conceptual space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.35,-116.755"/>
+            <dia:point val="27.35,-116.756"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2653,7 +2653,7 @@ user choices.#</dia:string>
         <dia:point val="81,-73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.625,-79.05;81.75,-70.95"/>
+        <dia:rectangle val="79.625,-79.05;81.75,-70.945"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4821,7 +4821,7 @@ user choices.#</dia:string>
         <dia:point val="116.918,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.905,-115.8;117.668,-112.2"/>
+        <dia:rectangle val="87.905,-115.745;117.668,-112.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7880,7 +7880,7 @@ user choices.#</dia:string>
         <dia:point val="100.85,-101.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.1,-104.1;104.05,-100.5"/>
+        <dia:rectangle val="100.1,-104.045;104.05,-100.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8323,7 +8323,7 @@ user choices.#</dia:string>
         <dia:point val="66.1425,-62.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.3925,-63.55;81.6762,-59.95"/>
+        <dia:rectangle val="65.3925,-63.55;81.6762,-59.945"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8571,7 +8571,7 @@ user choices.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="190.35,-113.755"/>
+            <dia:point val="190.35,-113.756"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -11973,7 +11973,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="84,-29.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.16,-30.7;84.75,-27.1"/>
+        <dia:rectangle val="81.16,-30.65;84.75,-27.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12189,7 +12189,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="102.21,-29.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.46,-30.7;105.05,-27.1"/>
+        <dia:rectangle val="101.46,-30.65;105.05,-27.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13140,7 +13140,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="117,-103.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.305,-104.1;117.75,-99.7"/>
+        <dia:rectangle val="113.305,-104.05;117.75,-99.645"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13748,7 +13748,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="194.41,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="193.66,-90.55;203.2,-87.2"/>
+        <dia:rectangle val="193.66,-90.495;203.2,-87.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14970,7 +14970,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="159.605,-65.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.855,-67.7;163.05,-64.5"/>
+        <dia:rectangle val="158.855,-67.645;163.05,-64.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15482,7 +15482,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="173.062,-113.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.938,-115.8;173.812,-112.2"/>
+        <dia:rectangle val="158.938,-115.745;173.812,-112.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
