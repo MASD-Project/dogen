@@ -54,6 +54,25 @@ struct traits {
     static std::string class_forward_declarations_archetype_sn();
 
     /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string archetype_class_header_archetype_qn();
+    static std::string archetype_class_header_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string archetype_class_implementation_archetype_qn();
+    static std::string archetype_class_implementation_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the stitch archetype.
+     */
+    static std::string archetype_stitch_archetype_qn();
+    static std::string archetype_stitch_archetype_sn();
+
+    /**
      * @brief Name of the forward declaration's archetype.
      */
     static std::string visitor_forward_declarations_archetype_qn();

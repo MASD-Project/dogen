@@ -59,6 +59,36 @@ std::string traits::class_forward_declarations_archetype_sn() {
     return r;
 }
 
+std::string traits::archetype_class_header_archetype_qn(){
+    static std::string r(traits::facet_qn() + ".archetype_class_header");
+    return r;
+}
+
+std::string traits::archetype_class_header_archetype_sn(){
+    static std::string r("archetype_class_header");
+    return r;
+}
+
+std::string traits::archetype_class_implementation_archetype_qn(){
+    static std::string r(traits::facet_qn() + ".archetype_class_implementation");
+    return r;
+}
+
+std::string traits::archetype_class_implementation_archetype_sn(){
+    static std::string r("archetype_class_implementation");
+    return r;
+}
+
+std::string traits::archetype_stitch_archetype_qn() {
+    static std::string r(traits::facet_qn() + ".archetype_stitch");
+    return r;
+}
+
+std::string traits::archetype_stitch_archetype_sn() {
+    static std::string r("archetype_stitch");
+    return r;
+}
+
 std::string traits::visitor_forward_declarations_archetype_qn() {
     static std::string r(traits::facet_qn() + ".visitor_forward_declarations");
     return r;
