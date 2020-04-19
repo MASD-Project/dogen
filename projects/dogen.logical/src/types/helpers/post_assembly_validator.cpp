@@ -29,6 +29,7 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/types/helpers/decomposer.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
+#include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/post_assembly_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
@@ -115,6 +116,7 @@ const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
 const std::string invalid_empty_id("Name must have a non-empty id.");
+const std::string invalid_logical_meta_element("Meta-element name not found: ");
 
 }
 
@@ -348,6 +350,22 @@ void post_assembly_validator::validate_name_trees(
 }
 
 void post_assembly_validator::
+validate_physical_archetypes(const entities::model& m) {
+    const auto& mns(m.meta_names());
+    const auto& archs(m.physical_elements().archetypes());
+    for (const auto& pair : archs) {
+        const auto& arch(*pair.second);
+        const auto lmeid(arch.logical_meta_element_id());
+        const auto i(mns.find(lmeid));
+        if (i == mns.end()) {
+            BOOST_LOG_SEV(lg, error) << invalid_logical_meta_element << lmeid;
+            BOOST_THROW_EXCEPTION(
+                validation_error(invalid_logical_meta_element + lmeid));
+        }
+    }
+}
+
+void post_assembly_validator::
 validate(const indices& idx, const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
                              << m.name().qualified().dot();
@@ -357,6 +375,7 @@ validate(const indices& idx, const entities::model& m) {
     validate_names(dr.names(), ts);
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), ts, dr.name_trees());
+    validate_physical_archetypes(m);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

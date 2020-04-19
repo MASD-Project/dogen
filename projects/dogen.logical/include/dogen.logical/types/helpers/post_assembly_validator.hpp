@@ -65,6 +65,8 @@ private:
         const entities::technical_space ts,
         const std::list<std::pair<std::string, entities::name_tree>>& nts);
 
+    static void validate_physical_archetypes(const entities::model& m);
+
 public:
     static void validate(const indices& idx, const entities::model& m);
 };
