@@ -66,11 +66,12 @@ To be done on the Monday morning of the new sprint.
 
 * V2 Release
 
-Stories that need to be implemented in order to complete the V2
-vision. The V2 vision is to finish the dogen API and implement all
-functionality in terms of metamodel elements - e.g. no special cases
-such as profiles, licences etc. We also expected to define the
-logical-physical conceptual model.
+Release Goals:
+
+- finish the dogen API and implement all functionality in terms of
+  metamodel elements - e.g. no special cases such as profiles,
+  licences etc.
+- we also expected to define the logical-physical conceptual model.
 
 ** Core work
 
@@ -7389,10 +7390,11 @@ Notes:
 
 * V3 Release
 
-The vision for V3 is around the Dogen ecosystem: /better
-tooling/. This involves all the tooling around Dogen, including LSP
-support for both stitch and all supported injectors (Dia, JSON,
-org-mode?).
+Release goals:
+
+- define the Dogen ecosystem: /better tooling/. This involves all the
+  tooling around Dogen, including LSP support for both stitch and all
+  supported injectors (Dia, JSON, org-mode?).
 
 ** Candidates
 
@@ -8154,7 +8156,6 @@ main library, or even between facet libraries because we have access
 to the facet dependency graph. The user should just classify the facet
 as "external"; it is up to CMake to determine if its a static or
 shared library.
-
 
 * Future Releases
 
@@ -14284,6 +14285,16 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding suppot for SeqAn
+
+This is a very interesting library, though its not clear how we'd use
+it.
+
+Links:
+
+- [[https://github.com/seqan/seqan3][seqan3 GitHub]]: The modern C++ library for sequence
+  analysis. Contains version 3 of the library and API docs
 
 *** Use static registration with initialisers                         :story:
 

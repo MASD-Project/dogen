@@ -3,7 +3,7 @@
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) spike(p) }
 
-* Mission Statement
+* Sprint Goals
 
 - Complete the work on the physical meta-model and model.
 
@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-19 Sun 11:56]
+#+CAPTION: Clock summary at [2020-04-20 Mon 23:07]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *47:18* |       |       | 100.0 |
+| *Total time*                                          | *48:05* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 47:18   |       |       | 100.0 |
-| Active                                                |         | 47:18 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  9:22 |  19.8 |
+| Stories                                               | 48:05   |       |       | 100.0 |
+| Active                                                |         | 48:05 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  19.5 |
 | Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.9 |
-| Sprint and product backlog grooming                   |         |       |  7:57 |  16.8 |
-| Emacs issues and improvements                         |         |       |  0:47 |   1.7 |
+| Sprint and product backlog grooming                   |         |       |  7:57 |  16.5 |
+| Emacs issues and improvements                         |         |       |  0:47 |   1.6 |
 | Nightly nursing                                       |         |       |  0:37 |   1.3 |
-| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.7 |
-| Replace artefact properties with artefacts            |         |       |  4:06 |   8.7 |
-| Papers: Systems variability modeling                  |         |       |  2:55 |   6.2 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.6 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   8.5 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   6.1 |
 | Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.4 |
 | Add model name to tracing dumps                       |         |       |  1:35 |   3.3 |
-| Add physical entities to logical model                |         |       | 15:16 |  32.3 |
+| Add physical entities to logical model                |         |       | 16:03 |  33.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -749,6 +749,8 @@ model name is not blank we should add it to the file name.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-20 Mon 22:55]--[2020-04-20 Mon 23:07] =>  0:12
+    CLOCK: [2020-04-19 Sun 19:00]--[2020-04-19 Sun 19:35] =>  0:35
     CLOCK: [2020-04-19 Sun 11:24]--[2020-04-19 Sun 11:57] =>  0:33
     CLOCK: [2020-04-19 Sun 09:41]--[2020-04-19 Sun 11:10] =>  1:29
     CLOCK: [2020-04-18 Sat 22:03]--[2020-04-18 Sat 22:36] =>  0:33
@@ -839,11 +841,6 @@ vs multiple logical elements. For example:
   but at least the design is consistent. If we invent another
   containment approach its going to be difficult to remember how it
   works.
-- we need to bootstrap the generation of archetypes. First we need to
-  generate them using the old machinery. We need to do this with a
-  "old" and a "new" version of archetypes. We won't plug in the new
-  until they are generating exactly the same code as the old. Then we
-  delete the old, rename the new and plug them in.
 
 Notes:
 
@@ -866,6 +863,19 @@ Notes:
 - meta-naming transform must move to pre-assembly stage. Actually this
   won't work due to dependencies. Instead we have to rely on the
   post-assembly validator.
+- we need to bootstrap the generation of archetypes. First we need to
+  generate them using the old machinery. We need to do this with a
+  "old" and a "new" version of archetypes. We won't plug in the new
+  until they are generating exactly the same code as the old. Then we
+  delete the old, rename the new and plug them in.
+- at present all formatters are generating files with the same
+  name. This is because we copied the header file for forward
+  declarations for all three. So when we change one formatter, the
+  others could possibly overwrite the contents. This was not a problem
+  before because they were all the same. However, what is not clear is
+  why it works for the code generator itself but not for the
+  tests. But a quick way to find out is to fix the paths so that we
+  generate three different files.
 
 Merged stories:
 
