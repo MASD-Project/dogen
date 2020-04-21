@@ -25,10 +25,37 @@
 #pragma once
 #endif
 
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
+
 namespace dogen::m2t::cpp::transforms::types {
+class archetype_class_implementation_transform_new final : public model_to_text_transform {
+public:
+    static std::string static_id();
 
-class archetype_class_implementation_transform_new;
+public:
+    std::string id() const override;
+    physical::entities::meta_name physical_meta_name() const override;
+    const logical::entities::name& logical_meta_name() const override;
 
+public:
+    std::list<std::string> inclusion_dependencies(
+        const formattables::dependencies_builder_factory& f,
+        const logical::entities::element& e) const override;
+
+    inclusion_support_types inclusion_support_type() const override;
+
+    boost::filesystem::path inclusion_path(
+        const formattables::locator& l,
+        const logical::entities::name& n) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator& l,
+        const logical::entities::name& n) const override;
+
+public:
+    void apply(const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const override;
+};
 }
 
 #endif

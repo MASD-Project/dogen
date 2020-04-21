@@ -65,10 +65,14 @@ boost::filesystem::path archetype_class_header_transform_old::full_path(
 }
 
 std::list<std::string> archetype_class_header_transform_old::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
+    const formattables::dependencies_builder_factory& f,
     const logical::entities::element& /*e*/) const {
     static std::list<std::string> r;
-    return r;
+
+    auto builder(f.make());
+    builder.add("\"dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp\"");
+
+    return builder.build();
 }
 
 void archetype_class_header_transform_old::apply(const context& ctx, const logical::entities::element& e,
@@ -81,9 +85,34 @@ void archetype_class_header_transform_old::apply(const context& ctx, const logic
         {
             const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << "class " << o.name().simple() << " final : public model_to_text_transform {" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static std::string static_id();" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "class " << o.name().simple() << ";" << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    std::string id() const override;" << std::endl;
+ast.stream() << "    physical::entities::meta_name physical_meta_name() const override;" << std::endl;
+ast.stream() << "    const logical::entities::name& logical_meta_name() const override;" << std::endl;
 ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
+ast.stream() << "        const formattables::dependencies_builder_factory& f," << std::endl;
+ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    inclusion_support_types inclusion_support_type() const override;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::filesystem::path inclusion_path(" << std::endl;
+ast.stream() << "        const formattables::locator& l," << std::endl;
+ast.stream() << "        const logical::entities::name& n) const override;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::filesystem::path full_path(" << std::endl;
+ast.stream() << "        const formattables::locator& l," << std::endl;
+ast.stream() << "        const logical::entities::name& n) const override;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    void apply(const context& ctx, const logical::entities::element& e," << std::endl;
+ast.stream() << "        physical::entities::artefact& a) const override;" << std::endl;
+ast.stream() << "};" << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf

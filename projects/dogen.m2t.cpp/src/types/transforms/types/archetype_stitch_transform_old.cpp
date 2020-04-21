@@ -51,7 +51,7 @@ const logical::entities::name& archetype_stitch_transform_old::logical_meta_name
 }
 
 inclusion_support_types archetype_stitch_transform_old::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
+    return inclusion_support_types::not_supported;
 }
 
 boost::filesystem::path archetype_stitch_transform_old::inclusion_path(
@@ -61,7 +61,9 @@ boost::filesystem::path archetype_stitch_transform_old::inclusion_path(
 
 boost::filesystem::path archetype_stitch_transform_old::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_id());
+    auto r(l.make_full_path_for_cpp_implementation(n, static_id()));
+    r.replace_extension(".stitch");
+    return r;
 }
 
 std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(
@@ -73,7 +75,7 @@ std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(
 
 void archetype_stitch_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
     {
