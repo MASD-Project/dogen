@@ -78,6 +78,24 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Stitch templates should be bound to Dogen M2T transforms          :story:
+
+At present we have tried to create some kind of generic implementation
+of a templating engine. However in practice we only need it for the
+implementation of the apply method of a M2T transform. We could take
+advantage of this in order to simplify templates; we could assume that
+the only thing we could code-generate in a stitch template is the
+inside of the apply method. We need to check but T4 does something
+similar. This would mean that many things would be hard-coded such as
+the name of the stream variable etc.
+
+Everything else should be supplied as meta-data parameters to the
+modeling element for archetypes: includes, etc. This means the
+templates would be much simpler. This can only be done once we use the
+PMM to compute paths. Also, we probably require a way to inject the
+dependencies. This will probably require merging code generation as
+well.
+
 *** Configuration binds to element types                              :story:
 
 At present we can check bindings for at most the "kinds" of elements
