@@ -25,24 +25,62 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <ostream>
 
 namespace dogen::templating::helpers {
 
+/**
+ * @brief Helper class to generate stitch templates.
+ */
 class stitch_template_builder final {
 public:
-    stitch_template_builder() = default;
-    stitch_template_builder(const stitch_template_builder&) = default;
-    stitch_template_builder(stitch_template_builder&&) = default;
-    ~stitch_template_builder() = default;
-    stitch_template_builder& operator=(const stitch_template_builder&) = default;
+    stitch_template_builder(std::ostream& os);
 
 public:
-    bool operator==(const stitch_template_builder& rhs) const;
-    bool operator!=(const stitch_template_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Adds a directive block to the stream.
+     *
+     * Directive blocks take the form of:
+     *
+     *     <#@ NAME = VALUE #>
+     *
+     * They must be at the start of the template.
+     */
+    void add_directive_block(const std::string& name, const std::string& value);
 
+    /**
+     * @brief Adds a variable expansion block to the stream.
+     *
+     * Variable expansion blocks take the form of:
+     *
+     *    <#$ NAME #>
+     *
+     * Variable name must have been defined as a wale template.
+     */
+    void add_variable_block(const std::string& name);
+
+    /**
+     * @brief Adds an expression block to the stream.
+     *
+     * Variable expansion blocks take the form of:
+     *
+     *    <#= EXPRESSION #>
+     */
+    void add_expression_block(const std::string& expression);
+
+    /**
+     * @brief Starts a standard control block, e.g. @e <#+.
+     */
+    void add_start_standard_control_block();
+
+    /**
+     * @brief Ends a standard control block, e.g. @e #>.
+     */
+    void add_end_standard_control_block();
+
+private:
+    std::ostream& stream_;
 };
 
 }
