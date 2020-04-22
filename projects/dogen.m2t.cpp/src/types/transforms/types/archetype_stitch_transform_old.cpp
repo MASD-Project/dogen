@@ -23,6 +23,7 @@
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.cpp/types/transforms/assistant.hpp"
 #include "dogen.m2t.cpp/types/transforms/types/archetype_stitch_transform_old.hpp"
+#include "dogen.templating/types/helpers/stitch_template_builder.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/types/traits.hpp"
 
@@ -76,19 +77,73 @@ std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(
 void archetype_stitch_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
-    const auto& o(ast.as<logical::entities::physical::archetype>(e));
+    // const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
-    {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(ast.make_namespaces(o.name()));
-            auto snf(ast.make_scoped_namespace_formatter(ns));
+    dogen::templating::helpers::stitch_template_builder b(ast.stream());
+    b.add_directive_block("masd.stitch.stream_variable_name", "ast.stream()");
+    b.add_directive_block("masd.stitch.containing_namespaces", "dogen::m2t::cpp::transforms::types");
+
+    const auto dep("masd.stitch.inclusion_dependency");
+    b.add_directive_block(dep, "dogen.physical/types/helpers/meta_name_factory.hpp");
+    b.add_directive_block(dep, "dogen.logical/types/entities/physical/archetype.hpp");
+    b.add_directive_block(dep, "dogen.logical/types/helpers/meta_name_factory.hpp");
+    b.add_directive_block(dep, "dogen.m2t.cpp/types/transforms/assistant.hpp");
+    b.add_directive_block(dep, "dogen.m2t.cpp/types/transforms/types/archetype_stitch_transform_old.hpp");
+    b.add_directive_block(dep, "dogen.templating/types/helpers/stitch_template_builder.hpp");
+    b.add_directive_block(dep, "dogen.m2t.cpp/types/traits.hpp");
+    b.add_directive_block(dep, "dogen.m2t.cpp/types/transforms/types/traits.hpp");
+    b.add_start_standard_control_block();
+ast.stream() << "std::string archetype_stitch_transform_old::static_id() {" << std::endl;
+ast.stream() << "    return traits::archetype_stitch_archetype_qn();" << std::endl;
+ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "class " << o.name().simple() << ";" << std::endl;
+ast.stream() << "std::string archetype_stitch_transform_old::id() const {" << std::endl;
+ast.stream() << "    return static_id();" << std::endl;
+ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
-        } // snf
+ast.stream() << "physical::entities::meta_name" << std::endl;
+ast.stream() << "archetype_stitch_transform_old::physical_meta_name() const {" << std::endl;
+ast.stream() << "    using physical::helpers::meta_name_factory;" << std::endl;
+ast.stream() << "    static auto r(meta_name_factory::make(cpp::traits::backend_sn()," << std::endl;
+ast.stream() << "        traits::facet_sn(), traits::archetype_stitch_archetype_sn()));" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
-    } // sbf
+ast.stream() << "const logical::entities::name& archetype_stitch_transform_old::logical_meta_name() const {" << std::endl;
+ast.stream() << "    using logical::helpers::meta_name_factory;" << std::endl;
+ast.stream() << "    static auto r(meta_name_factory::make_physical_archetype_name());" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "inclusion_support_types archetype_stitch_transform_old::inclusion_support_type() const {" << std::endl;
+ast.stream() << "    return inclusion_support_types::not_supported;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "boost::filesystem::path archetype_stitch_transform_old::inclusion_path(" << std::endl;
+ast.stream() << "    const formattables::locator& l, const logical::entities::name& n) const {" << std::endl;
+ast.stream() << "    return l.make_inclusion_path_for_cpp_header(n, static_id());" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "boost::filesystem::path archetype_stitch_transform_old::full_path(" << std::endl;
+ast.stream() << "    const formattables::locator& l, const logical::entities::name& n) const {" << std::endl;
+ast.stream() << "    auto r(l.make_full_path_for_cpp_implementation(n, static_id()));" << std::endl;
+ast.stream() << "    r.replace_extension(\".stitch\");" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(" << std::endl;
+ast.stream() << "    const formattables::dependencies_builder_factory& /*f*/," << std::endl;
+ast.stream() << "    const logical::entities::element& /*e*/) const {" << std::endl;
+ast.stream() << "    static std::list<std::string> r;" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "void archetype_stitch_transform_old::apply(const context& ctx, const logical::entities::element& e," << std::endl;
+ast.stream() << "    physical::entities::artefact& a) const {" << std::endl;
+ast.stream() << "    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);" << std::endl;
+ast.stream() << "    const auto& o(ast.as<logical::entities::physical::archetype>(e));" << std::endl;
+ast.stream() << "    ast.update_artefact();" << std::endl;
+ast.stream() << "}" << std::endl;
     ast.update_artefact();
 }
 
