@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-22 Wed 08:52]
+#+CAPTION: Clock summary at [2020-04-22 Wed 22:24]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *49:01* |       |       | 100.0 |
+| *Total time*                                          | *49:38* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 49:01   |       |       | 100.0 |
-| Active                                                |         | 49:01 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  9:22 |  19.1 |
-| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.9 |
-| Sprint and product backlog grooming                   |         |       |  7:57 |  16.2 |
+| Stories                                               | 49:38   |       |       | 100.0 |
+| Active                                                |         | 49:38 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  18.9 |
+| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.8 |
+| Sprint and product backlog grooming                   |         |       |  7:57 |  16.0 |
 | Emacs issues and improvements                         |         |       |  0:47 |   1.6 |
-| Nightly nursing                                       |         |       |  0:37 |   1.3 |
-| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.5 |
-| Replace artefact properties with artefacts            |         |       |  4:06 |   8.4 |
-| Papers: Systems variability modeling                  |         |       |  2:55 |   6.0 |
+| Nightly nursing                                       |         |       |  0:37 |   1.2 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.4 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   8.3 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   5.9 |
 | Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.3 |
 | Add model name to tracing dumps                       |         |       |  1:35 |   3.2 |
-| Add physical entities to logical model                |         |       | 16:59 |  34.6 |
+| Add physical entities to logical model                |         |       | 17:36 |  35.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -749,6 +749,7 @@ model name is not blank we should add it to the file name.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-22 Wed 21:47]--[2020-04-22 Wed 22:24] =>  0:37
     CLOCK: [2020-04-22 Wed 08:29]--[2020-04-22 Wed 08:52] =>  0:23
     CLOCK: [2020-04-21 Tue 21:26]--[2020-04-21 Tue 21:59] =>  0:33
     CLOCK: [2020-04-20 Mon 22:55]--[2020-04-20 Mon 23:07] =>  0:12
