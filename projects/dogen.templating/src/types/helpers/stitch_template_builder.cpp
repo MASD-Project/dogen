@@ -26,13 +26,13 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("templating.stitch.parser"));
 
-constexpr std::string_view equals("=");
-constexpr std::string_view space(" ");
-constexpr std::string_view start_expression_block_marker("<#=");
-constexpr std::string_view start_standard_control_block_marker("<#+");
-constexpr std::string_view start_directive_marker("<#@");
-constexpr std::string_view start_variable_marker("<#$");
-constexpr std::string_view end_block_marker("#>");
+const std::string equals("=");
+const std::string space(" ");
+const std::string start_expression_block_marker("<#=");
+const std::string start_standard_control_block_marker("<#+");
+const std::string start_directive_marker("<#@");
+const std::string start_variable_marker("<#$");
+const std::string end_block_marker("#>");
 
 }
 
