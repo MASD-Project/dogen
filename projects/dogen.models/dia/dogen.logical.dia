@@ -16791,7 +16791,7 @@ space.#</dia:string>
         <dia:string>#node#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::untestable#</dia:string>
+        <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Node in a tree of names.
@@ -16882,7 +16882,7 @@ Temporary data structure used to build trees of names.#</dia:string>
             <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;node&gt;#</dia:string>
+            <dia:string>#boost::weak_ptr&lt;node&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -52608,7 +52608,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="148,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.25,-48.75;153.572,-43.2"/>
+        <dia:rectangle val="147.25,-48.75;153.573,-43.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -53205,7 +53205,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="-189,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-223.945,37.55;-188.25,52.6"/>
+        <dia:rectangle val="-223.945,37.55;-188.25,51.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

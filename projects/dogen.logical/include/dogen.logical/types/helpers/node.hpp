@@ -27,9 +27,10 @@
 
 #include <list>
 #include <algorithm>
+#include <boost/weak_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/helpers/node_fwd.hpp"
+// #include "dogen.logical/types/helpers/node_fwd.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -47,7 +48,7 @@ public:
 
 public:
     node(
-        const boost::shared_ptr<dogen::logical::helpers::node>& parent,
+        const boost::weak_ptr<dogen::logical::helpers::node>& parent,
         const dogen::logical::entities::name& data,
         const std::list<boost::shared_ptr<dogen::logical::helpers::node> >& children);
 
@@ -56,10 +57,10 @@ public:
      * @brief Parent in a tree.
      */
     /**@{*/
-    const boost::shared_ptr<dogen::logical::helpers::node>& parent() const;
-    boost::shared_ptr<dogen::logical::helpers::node>& parent();
-    void parent(const boost::shared_ptr<dogen::logical::helpers::node>& v);
-    void parent(const boost::shared_ptr<dogen::logical::helpers::node>&& v);
+    const boost::weak_ptr<dogen::logical::helpers::node>& parent() const;
+    boost::weak_ptr<dogen::logical::helpers::node>& parent();
+    void parent(const boost::weak_ptr<dogen::logical::helpers::node>& v);
+    void parent(const boost::weak_ptr<dogen::logical::helpers::node>&& v);
     /**@}*/
 
     /**
@@ -83,6 +84,7 @@ public:
     /**@}*/
 
 public:
+    /*
     bool operator==(const node& rhs) const;
     bool operator!=(const node& rhs) const {
         return !this->operator==(rhs);
@@ -91,15 +93,15 @@ public:
 public:
     void swap(node& other) noexcept;
     node& operator=(node other);
-
+    */
 private:
-    boost::shared_ptr<dogen::logical::helpers::node> parent_;
+    boost::weak_ptr<dogen::logical::helpers::node> parent_;
     dogen::logical::entities::name data_;
     std::list<boost::shared_ptr<dogen::logical::helpers::node> > children_;
 };
 
 }
-
+/*
 namespace std {
 
 template<>
@@ -110,5 +112,5 @@ inline void swap(
 }
 
 }
-
+*/
 #endif

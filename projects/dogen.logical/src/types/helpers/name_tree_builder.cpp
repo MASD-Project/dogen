@@ -104,7 +104,7 @@ void name_tree_builder::next_child() {
      * the parent and link the parent to the child; finally, make the
      * new child the current node.
      */
-    current_ = current_->parent();
+    current_ = current_->parent().lock();
     auto child(boost::make_shared<node>());
     child->parent(current_);
     current_->children().push_back(child);
@@ -122,7 +122,7 @@ void name_tree_builder::end_children() {
     /*
      * All the children are done, so move back up to the parent.
      */
-    current_ = current_->parent();
+    current_ = current_->parent().lock();
 }
 
 entities::name_tree name_tree_builder::make_name_tree(const node& n) {

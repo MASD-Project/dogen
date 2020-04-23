@@ -1247,13 +1247,13 @@
       "name": "helpers::node",
       "documentation": "Node in a tree of names.\n\nTemporary data structure used to build trees of names.\n",
       "stereotypes": [
-        "dogen::untestable"
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "parent",
-          "type": "boost::shared_ptr<node>",
+          "type": "boost::weak_ptr<node>",
           "documentation": "Parent in a tree.\n"
         },
         {
