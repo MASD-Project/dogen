@@ -12,25 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-24 Fri 12:16]
+#+CAPTION: Clock summary at [2020-04-24 Fri 18:23]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *53:11* |       |       | 100.0 |
+| *Total time*                                          | *56:16* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 53:11   |       |       | 100.0 |
-| Active                                                |         | 53:11 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  9:22 |  17.6 |
-| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.8 |
-| Sprint and product backlog grooming                   |         |       |  8:21 |  15.7 |
-| Emacs issues and improvements                         |         |       |  0:59 |   1.8 |
-| Nightly nursing                                       |         |       |  1:59 |   3.7 |
-| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.0 |
-| Replace artefact properties with artefacts            |         |       |  4:06 |   7.7 |
-| Papers: Systems variability modeling                  |         |       |  2:55 |   5.5 |
-| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.1 |
-| Add model name to tracing dumps                       |         |       |  1:35 |   3.0 |
-| Add physical entities to logical model                |         |       | 19:11 |  36.1 |
+| Stories                                               | 56:16   |       |       | 100.0 |
+| Active                                                |         | 56:16 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  16.6 |
+| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.7 |
+| Sprint and product backlog grooming                   |         |       |  8:40 |  15.4 |
+| Emacs issues and improvements                         |         |       |  0:59 |   1.7 |
+| Nightly nursing                                       |         |       |  1:59 |   3.5 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   5.6 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   7.3 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   5.2 |
+| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.0 |
+| Add model name to tracing dumps                       |         |       |  1:35 |   2.8 |
+| Add physical entities to logical model                |         |       | 20:08 |  35.8 |
+| Create the concept of Text-to-Text transforms         |         |       |  0:52 |   1.5 |
+| Move code coverage to CDash                           |         |       |  0:57 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -461,6 +463,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 13:49]--[2020-04-24 Fri 14:08] =>  0:19
     CLOCK: [2020-04-24 Fri 10:51]--[2020-04-24 Fri 11:02] =>  0:11
     CLOCK: [2020-04-24 Fri 09:56]--[2020-04-24 Fri 10:09] =>  0:13
     CLOCK: [2020-04-18 Sat 11:20]--[2020-04-18 Sat 11:25] =>  0:05
@@ -771,8 +774,131 @@ At present we are dumping just the transform name and GUID. This makes
 it really hard to figure out which model is in each transform. If the
 model name is not blank we should add it to the file name.
 
+*** COMPLETED Generative models                                        :epic:
+    CLOSED: [2020-04-17 Fri 09:11]
+
+*Rationale*: the latest physical model approach solves all of the
+problems highlighted in this story in a way that is consistent with
+the conceptual model. However we probably should add "generative" to
+model kinds once that is implemented.
+
+We started by conflating two very different kinds of models:
+
+- models that generate models
+- models that generate code for the end user.
+
+These models appeared similar because we needed to generate some
+"helper types" in order to perform the generative parts; we had things
+like fabric, formattables and so forth. However, now that we have
+started to remove all of the helper parts, the main thing that is left
+in generative models is just the formatters. Another way of thinking
+about this problem is to imagine that a generative model could
+register what it offers:
+
+- the dominant technical space;
+- all of the available facets;
+- all of the available formatters;
+- all aspects within each formatter.
+
+Then, from a non-generative model - assuming some kind of plugin
+mechanism which would load the generative models - we could then make
+use of all that was defined in the generative model. In order for this
+to work (and assuming all classes for technical spaces, etc exist),
+the code generator would have to generate all of the infrastructure
+needed for a generative model:
+
+- some kind of top-level transform (e.g. "model to extraction model
+  transform"), and associated machinery to register the transform.
+- stereotypes to declare facets and formatters. The formatter elements
+  need to have a meta-model element as meta-data.
+- for the first generation, we'd use wale templates to initialise the
+  stitch templates for each element. Once these exist, we'd simply
+  expand them.
+
+We need to decide if the generative model is still in the same space
+as the non-generative model, or if it exists on a separate
+dimension. If it is in the same space, then facets, etc will come out
+of types. We could easily suppress IO, hashing etc as required. The
+advantage of this approach is that we can now mix non-generative types
+with generative types, so that we could provide helper classes etc
+easily. However, the folder structure will be confusing; this is
+exactly the current problem we have with say generation.cpp, with
+folders like =types/formaters/types= and the like. In this case, we'd
+have =types/types=, =types/hash= and so forth.
+
+The other downside is the current approach where we need to associate
+a "formatter style" with the model element and facet (e.g. stitch,
+stock, etc). However, as we do at present, we can perform the
+association via profiles, so that users need not be aware of this
+mapping. Nonetheless, its good to force users to declare up front if
+they are creating a generative model so that there are no
+surprises. In fact, a much better way to handle this is to create
+different meta-model elements to represent these entities: facet,
+formatter etc. These then bind to the wale and stitch templates rather
+than to c++ code. This then means that the formatting style now
+becomes bound at the meta-model level rather than allowing users to
+manually bind it (likely causing hard to debug problems). In addition,
+we should make it so that all meta-model elements that are not
+code-generated can have a wale template associated. This means that
+stitch is no longer special. It also means that "overwrite" may not be
+a good name for the flag that determines if something is hand-crafted
+or not. Check for stories on this flag.
+
+Variations:
+
+- additive generative model: we want to add facets to an existing
+  technical space.
+- new generative model: we want to create a new technical space.
+
+Notes:
+
+- the generative models are always going to generate C++ code.
+- once we have support for products, we could create a product type of
+  "dogen plugin", which generates all of the infrastructure to make
+  the plugin (e.g. vcpkg to fetch dogen headers, etc). This could even
+  include the targets that call dogen, registering the plugin and
+  generating the "test models" - i.e. models created by the user to
+  exercise the generative model.
+- this approach closely mirrors the injection model. If we call these
+  "extractors" we could have a registrar against the technical space
+  which produces the extraction model. The only difference is that we
+  need access to the generation model in order to call the
+  extractor. This makes it unsuitable to live in the extraction model
+  itself.
+- once we are able to generate annotations machinery, the creation of
+  aspects will be easy; we can just bind against the annotation and
+  extract the configuration.
+- note that we have two uses for meta-model elements such as technical
+  space, facet etc. The first use is as a "validator". They bind to
+  the configuration of the model, so if there are no generators
+  exporting the expected values for these meta-model elements,
+  generation will fail. The second role is generative; if the user
+  declared a facet in the target model, we will then project the facet
+  through the types facet for facets and generate the code needed to
+  register the facet as part of a generative model (a
+  generator). Similarly with all other types such as formatters,
+  technical spaces etc. We can look at the "generatable" flag to
+  determine if generation is needed or not. We need to make sure that
+  when we inject these, they are marked as non-generatable. Problem:
+  what happens when you are generating the generating model for a
+  technical space? There is a conflict; we will add the same facets,
+  technical spaces etc twice: once from the model itself and then a
+  second time from the generator. We need to somehow split these two
+  roles into different meta-model elements to make it really clear
+  they represent different roles. In fact, from the perspective of
+  registration/checks, we could even argue that these are no longer
+  meta-model elements - the point of the meta-model is to generate
+  code. By the same token, elements such as decoration would also be
+  incongruent though. We need to make sure we do not create a loop
+  when we are changing an existing generator, whereby we can no longer
+  generate code because the new state is not valid.
+
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 14:54]--[2020-04-24 Fri 15:00] =>  0:06
+    CLOCK: [2020-04-24 Fri 13:49]--[2020-04-24 Fri 14:28] =>  0:39
+    CLOCK: [2020-04-24 Fri 13:38]--[2020-04-24 Fri 13:48] =>  0:10
+    CLOCK: [2020-04-24 Fri 12:17]--[2020-04-24 Fri 12:19] =>  0:02
     CLOCK: [2020-04-24 Fri 11:52]--[2020-04-24 Fri 12:16] =>  0:24
     CLOCK: [2020-04-24 Fri 11:02]--[2020-04-24 Fri 11:42] =>  0:40
     CLOCK: [2020-04-24 Fri 10:19]--[2020-04-24 Fri 10:50] =>  0:31
@@ -928,6 +1054,57 @@ Notes:
   default to "invalid" post-processing. Or we can set them to
   "none". We then filter those set to "stitch". In the future we can
   have other types of post-processing (e.g. ODB).
+- we need to add the new workflow to post-process artefacts. We can
+  try to add it in the =m2t= model as a transform and see what breaks.
+- actually its not entirely accurate to remove the formatter for the
+  implementation. It is true that we do not have a formatter, but we
+  still need to populate the physical space with the representation of
+  the archetype. In addition the notion of "post-processing" is
+  slightly misleading: we are just saying that there are formatter
+  dependencies more than anything else. Besides we will have archetype
+  dependencies sooner or later. We can do this in two passes:
+
+  - for now, ignore dependencies. You need to generate twice if you
+    add a new formatter. After that it will just work.
+  - in the future, add a dag for the physical model and make sure
+    generation is done via a DFS of that DAG. Create archetype
+    dependencies to build the DAG.
+- however, one slightly disconcerting problem with this approach is
+  that we are still lying at the interface level. We are saying that
+  our inputs are the logical element and the current state of the
+  artefact. We are omitting the fact that we are loading another
+  artefact from the filesystem. This is not great. If for example we
+  were running using a different storage mechanism this would not
+  work. We should explicitly supply the input artefact. So for this we
+  need two things: the dependency between artefacts and the notion
+  that some formatters have a set of artefacts as inputs. One possible
+  way to map this to the existing conceptual model is to imagine some
+  kind of "composite formatters". This then also bumps into the
+  cartridge story. To recap, up to know we had the behaviour that one
+  formatter was associated with one model element and generated one
+  artefact. With cartridges this is no longer true; ODB can generate N
+  artefacts. In addition, we need to use another artefact as
+  input. However we do know what N is upfront and we do want the shape
+  of physical space to take into account these new files. We just need
+  to solve the impedance mismatch. This can be achieved by somehow
+  "tagging" the input and output artefacts and then creating a
+  "composite formatter" that receives all of the artefacts tagged as
+  input and output as its arguments (rather than a single input/output
+  artefact). Then the cartridge can use the temp directory idea
+  explained above to generate the files and populate each artefact
+  with the contents. The filenames must match. The ODB configuration
+  could be a meta-model element (or it could be part of a profile) but
+  it will not be directly related to this formatter. Its likely that
+  we don't even need the logical element for this formatter. When we
+  are expanding the logical model, we could immediately classify the
+  artefacts into those that are tagged and those that are not. Then we
+  just loop through them.
+- actually we don't even need any form of tagging: the dependencies
+  will tell us. We just need different types of dependencies: input,
+  output, input/output. We need a notion of a formatter with a
+  "different" kind of archetype which does not itself generate an
+  artefact. This is where having post-processing formatters would
+  really help because they could be "different".
 
 Merged stories:
 
@@ -1206,124 +1383,94 @@ Notes:
   have facets that do not have a facet directory so that we can place
   types above the facet directories such as SLNs, CMakeLists, etc.
 
-*** COMPLETED Generative models                                        :epic:
-    CLOSED: [2020-04-17 Fri 09:11]
+*** STARTED Create the concept of Text-to-Text transforms             :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 17:09]--[2020-04-24 Fri 17:25] =>  0:16
+    CLOCK: [2020-04-24 Fri 16:33]--[2020-04-24 Fri 17:09] =>  0:36
+    :END:
 
-*Rationale*: the latest physical model approach solves all of the
-problems highlighted in this story in a way that is consistent with
-the conceptual model. However we probably should add "generative" to
-model kinds once that is implemented.
+Whilst trying to understand how stitch transforms fit on the existing
+framework, we realised that there is a kind of transform that is not
+particularly well defined in MDE terms: T2T transforms. We need to
+check the literature for these. The idea is that we've already gone
+from a model transformation into text but we need to subsequently
+mutate that text. This is a very helpful concept for adding cartridges
+to the MASD framework:
 
-We started by conflating two very different kinds of models:
+- clang format: input is the artefact, output is the artefact.
+- stitch template: input is the model element, and the artefact of the
+  template, output is a second artefact.
+- ODB: input is a model element with ODB configuration and an artefact
+  (pragmas), output are N well-defined artefacts.
+- protobuf: input is an artefact (possibly plus a model element for
+  configuration), output is N well-defined artefacts.
 
-- models that generate models
-- models that generate code for the end user.
+And so forth. To generalise this, we could say that there are T2T
+transforms that can take inputs (model element, artefact) and are
+associated with outputs. For the text transforms we should use lists
+of shared pointers to artefacts instead of references (because of the
+N thing).
 
-These models appeared similar because we needed to generate some
-"helper types" in order to perform the generative parts; we had things
-like fabric, formattables and so forth. However, now that we have
-started to remove all of the helper parts, the main thing that is left
-in generative models is just the formatters. Another way of thinking
-about this problem is to imagine that a generative model could
-register what it offers:
+T2T transforms are declared with archetypes (inputs and outputs) and
+against a model element. The T2T chain is simply to go through all the
+registered T2T transforms, locate their meta-model element, locate the
+archetypes then execute the transform. They should all live in
+=m2t=. Actually because they are archetype dependent, they must live
+with the technical space.
 
-- the dominant technical space;
-- all of the available facets;
-- all of the available formatters;
-- all aspects within each formatter.
+We should also make sure the skeleton for formatters generates a
+simple empty artefact that is suitable for modeling the outputs of a
+T2T transform.
 
-Then, from a non-generative model - assuming some kind of plugin
-mechanism which would load the generative models - we could then make
-use of all that was defined in the generative model. In order for this
-to work (and assuming all classes for technical spaces, etc exist),
-the code generator would have to generate all of the infrastructure
-needed for a generative model:
+*** STARTED Move code coverage to CDash                               :story:
+    :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 17:26]--[2020-04-24 Fri 18:23] =>  0:57
+    :END:
 
-- some kind of top-level transform (e.g. "model to extraction model
-  transform"), and associated machinery to register the transform.
-- stereotypes to declare facets and formatters. The formatter elements
-  need to have a meta-model element as meta-data.
-- for the first generation, we'd use wale templates to initialise the
-  stitch templates for each element. Once these exist, we'd simply
-  expand them.
+We've had nothing but problems with both coveralls and CodeCov. We
+should investigate how to move code coverage to plain CDash. We should
+also investigate if some of our problems are not related to kcov
+(though I very much doubt it). However its not clear if kcov will work
+with CDash. We should try to see if we can get it to work given that
+kcov is so simple to setup.
 
-We need to decide if the generative model is still in the same space
-as the non-generative model, or if it exists on a separate
-dimension. If it is in the same space, then facets, etc will come out
-of types. We could easily suppress IO, hashing etc as required. The
-advantage of this approach is that we can now mix non-generative types
-with generative types, so that we could provide helper classes etc
-easily. However, the folder structure will be confusing; this is
-exactly the current problem we have with say generation.cpp, with
-folders like =types/formaters/types= and the like. In this case, we'd
-have =types/types=, =types/hash= and so forth.
+We need to setup coverage for the debug clang build and the nightly
+clang build.
 
-The other downside is the current approach where we need to associate
-a "formatter style" with the model element and facet (e.g. stitch,
-stock, etc). However, as we do at present, we can perform the
-association via profiles, so that users need not be aware of this
-mapping. Nonetheless, its good to force users to declare up front if
-they are creating a generative model so that there are no
-surprises. In fact, a much better way to handle this is to create
-different meta-model elements to represent these entities: facet,
-formatter etc. These then bind to the wale and stitch templates rather
-than to c++ code. This then means that the formatting style now
-becomes bound at the meta-model level rather than allowing users to
-manually bind it (likely causing hard to debug problems). In addition,
-we should make it so that all meta-model elements that are not
-code-generated can have a wale template associated. This means that
-stitch is no longer special. It also means that "overwrite" may not be
-a good name for the flag that determines if something is hand-crafted
-or not. Check for stories on this flag.
+It seems pretty straightforward to enable llvm-cov:
 
-Variations:
+: set(CTEST_COVERAGE_COMMAND "llvm-cov-8")
+: set(CTEST_COVERAGE_EXTRA_FLAGS "gcov")
+:   "-DCMAKE_CXX_FLAGS=-g -O0 --coverage"
+:     "-DCMAKE_C_FLAGS=-g -O0 --coverage"
+:     "-DCMAKE_EXE_LINKER_FLAGS=--coverage"
 
-- additive generative model: we want to add facets to an existing
-  technical space.
-- new generative model: we want to create a new technical space.
+Notes from previous implementation:
 
-Notes:
+: if(WITH_PROFILING)
+:    # enable code profiling options
+:    set(profiling_flags "-fprofile-arcs -ftest-coverage")
+: endif()
 
-- the generative models are always going to generate C++ code.
-- once we have support for products, we could create a product type of
-  "dogen plugin", which generates all of the infrastructure to make
-  the plugin (e.g. vcpkg to fetch dogen headers, etc). This could even
-  include the targets that call dogen, registering the plugin and
-  generating the "test models" - i.e. models created by the user to
-  exercise the generative model.
-- this approach closely mirrors the injection model. If we call these
-  "extractors" we could have a registrar against the technical space
-  which produces the extraction model. The only difference is that we
-  need access to the generation model in order to call the
-  extractor. This makes it unsuitable to live in the extraction model
-  itself.
-- once we are able to generate annotations machinery, the creation of
-  aspects will be easy; we can just bind against the annotation and
-  extract the configuration.
-- note that we have two uses for meta-model elements such as technical
-  space, facet etc. The first use is as a "validator". They bind to
-  the configuration of the model, so if there are no generators
-  exporting the expected values for these meta-model elements,
-  generation will fail. The second role is generative; if the user
-  declared a facet in the target model, we will then project the facet
-  through the types facet for facets and generate the code needed to
-  register the facet as part of a generative model (a
-  generator). Similarly with all other types such as formatters,
-  technical spaces etc. We can look at the "generatable" flag to
-  determine if generation is needed or not. We need to make sure that
-  when we inject these, they are marked as non-generatable. Problem:
-  what happens when you are generating the generating model for a
-  technical space? There is a conflict; we will add the same facets,
-  technical spaces etc twice: once from the model itself and then a
-  second time from the generator. We need to somehow split these two
-  roles into different meta-model elements to make it really clear
-  they represent different roles. In fact, from the perspective of
-  registration/checks, we could even argue that these are no longer
-  meta-model elements - the point of the meta-model is to generate
-  code. By the same token, elements such as decoration would also be
-  incongruent though. We need to make sure we do not create a loop
-  when we are changing an existing generator, whereby we can no longer
-  generate code because the new state is not valid.
+:    # setup gcov
+:    find_program(CTEST_COVERAGE_COMMAND NAMES gcov-4.7 gcov)
+:    if(NOT CTEST_COVERAGE_COMMAND)
+:        message("gcov not found, disabling coverage.")
+:        set(WITH_COVERAGE false)
+:    else()
+:        message("Found gcov (${CTEST_COVERAGE_COMMAND})...")
+:        set(WITH_COVERAGE true)
+:    endif()
+
+:                if(WITH_COVERAGE AND CTEST_COVERAGE_COMMAND)
+:                    ctest_coverage()
+:                endif()
+
+
+Links:
+
+- [[https://llvm.org/docs/CommandGuide/llvm-cov.html][llvm-cov]]
+- [[https://gitlab.kitware.com/cmake/cmake/issues/20052][CTest with clang+llvm-cov fails with "Cannot find file" when AUTOMOC is used]]
 
 *** Primitives are using compiler generated default constructors      :story:
 
@@ -2128,3 +2275,32 @@ example, [[https://msdn.microsoft.com/en-us/library/aa370448%2528v%3Dvs.85%2529.
 must be correctly handled by CMake such that they are excluded on UNIX
 and added on Windows. Same with [[http://en.wikipedia.org/wiki/Precompiled_header][StdAfx.h]] and cpp, which will require
 looking into pre-compiled headers support in CMake.
+*** CANCELLED Cannot see source file in coveralls                     :story:
+    CLOSED: [2020-04-24 Fri 18:22]
+
+*Rationale*: we're moving back to CDash/CTest for coverage.
+
+ At present the path of source files in coveralls is incorrect:
+
+ : /cpp_ref_impl.boost_model/src/types/class_a.cpp
+
+ : SOURCE NOT AVAILABLE
+ : The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
+
+ We have the same problem in codecove, only there is worse because we
+ also can't see the fake commit we did.
+
+*** CANCELLED Code coverage does not show file level results          :story:
+    CLOSED: [2020-04-24 Fri 18:22]
+
+*Rationale*: we're moving back to CDash/CTest for coverage.
+
+We seem to be pointing to a incorrect location on github to find the
+source code. Example:
+
+- [[https://coveralls.io/builds/27018488/source?filename=dogen/include/dogen/types/configuration.hpp][configuration.hpp]]
+
+For coveralls, we do seem to be able to see the file itself, but not
+the lines covered:
+
+- [[https://codecov.io/gh/MASD-Project/dogen/src/master/projects/dogen/src/types/configuration.cpp][configuration.cpp]]

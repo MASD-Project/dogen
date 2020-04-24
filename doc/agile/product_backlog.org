@@ -7185,18 +7185,6 @@ are not running ODB. This means that if we have broken ODB pragma
 generation, we will not find out until we manually run it. We should
 run it as part of the "generate everything" approach in nightly.
 
-*** Cannot see source file in coveralls                               :story:
-
- At present the path of source files in coveralls is incorrect:
-
- : /cpp_ref_impl.boost_model/src/types/class_a.cpp
-
- : SOURCE NOT AVAILABLE
- : The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
-
- We have the same problem in codecove, only there is worse because we
- also can't see the fake commit we did.
-
 *** Check OSX packages                                                :story:
 
 We need to ensure OSX packages are still working. At present, the
@@ -7367,18 +7355,6 @@ Links:
 
 - [[https://www.technovelty.org/linux/stripping-shared-libraries.html][Stripping shared libraries]]
 - [[https://cmake.org/pipermail/cmake/2012-March/049741.html][make install/strip does not strip static libraries]]
-
-*** Code coverage does not show file level results                    :story:
-
-We seem to be pointing to a incorrect location on github to find the
-source code. Example:
-
-- [[https://coveralls.io/builds/27018488/source?filename=dogen/include/dogen/types/configuration.hpp][configuration.hpp]]
-
-For coveralls, we do seem to be able to see the file itself, but not
-the lines covered:
-
-- [[https://codecov.io/gh/MASD-Project/dogen/src/master/projects/dogen/src/types/configuration.cpp][configuration.cpp]]
 
 *** Code coverage does not include odb files                          :story:
 
