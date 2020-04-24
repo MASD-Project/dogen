@@ -78,6 +78,21 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider adding valgrind suppressions to PDMs                     :story:
+
+We have a number of suppressions that are coming from boost log. Its a
+bit painful to have to add the same suppressions to all products. It
+would be nice if we could supply the suppressions as part of the
+utility PDM and then have all products that depend on utility
+automatically include it. Valgrind supports multiple suppression
+files:
+
+: --suppressions=/path/to/file.supp one or more times.
+
+Links:
+
+- [[http://valgrind.org/docs/manual/manual-core.html#manual-core.suppress][Suppressing errors]]
+
 *** Stitch templates should be bound to Dogen M2T transforms          :story:
 
 At present we have tried to create some kind of generic implementation
