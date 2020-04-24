@@ -18,21 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_FORMATTING_STYLES_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_FORMATTING_STYLES_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_POST_PROCESSOR_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_POST_PROCESSOR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.physical/types/entities/post_processor.hpp"
+
 namespace dogen::physical::entities {
 
-enum class formatting_styles : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    stock = 1,
-    wale = 2,
-    stitch = 3
-};
+std::ostream& operator<<(std::ostream& s, const post_processor& v);
 
 }
 

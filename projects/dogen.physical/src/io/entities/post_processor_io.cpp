@@ -21,29 +21,26 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.physical/io/entities/formatting_styles_io.hpp"
+#include "dogen.physical/io/entities/post_processor_io.hpp"
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const formatting_styles& v) {
-    s << "{ " << "\"__type__\": " << "\"formatting_styles\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const post_processor& v) {
+    s << "{ " << "\"__type__\": " << "\"post_processor\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case formatting_styles::invalid:
+    case post_processor::invalid:
         attr = "\"invalid\"";
         break;
-    case formatting_styles::stock:
-        attr = "\"stock\"";
+    case post_processor::none:
+        attr = "\"none\"";
         break;
-    case formatting_styles::wale:
-        attr = "\"wale\"";
-        break;
-    case formatting_styles::stitch:
+    case post_processor::stitch:
         attr = "\"stitch\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for formatting_styles");
+        throw std::invalid_argument("Invalid value for post_processor");
     }
     s << attr << " }";
     return s;

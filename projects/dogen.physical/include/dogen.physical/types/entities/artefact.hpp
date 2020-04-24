@@ -35,8 +35,8 @@
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
+#include "dogen.physical/types/entities/post_processor.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
-#include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::physical::entities {
@@ -68,8 +68,7 @@ public:
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
         const dogen::physical::entities::enablement_flags& enablement_flags,
-        const dogen::physical::entities::formatting_styles formatting_style,
-        const std::string& formatting_input);
+        const dogen::physical::entities::post_processor post_processor);
 
 public:
     /**
@@ -183,13 +182,13 @@ public:
     void enablement_flags(const dogen::physical::entities::enablement_flags&& v);
     /**@}*/
 
-    dogen::physical::entities::formatting_styles formatting_style() const;
-    void formatting_style(const dogen::physical::entities::formatting_styles v);
-
-    const std::string& formatting_input() const;
-    std::string& formatting_input();
-    void formatting_input(const std::string& v);
-    void formatting_input(const std::string&& v);
+    /**
+     * @brief What post-processor to apply to this artefact.
+     */
+    /**@{*/
+    dogen::physical::entities::post_processor post_processor() const;
+    void post_processor(const dogen::physical::entities::post_processor v);
+    /**@}*/
 
 public:
     bool operator==(const artefact& rhs) const;
@@ -215,8 +214,7 @@ private:
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
     dogen::physical::entities::enablement_flags enablement_flags_;
-    dogen::physical::entities::formatting_styles formatting_style_;
-    std::string formatting_input_;
+    dogen::physical::entities::post_processor post_processor_;
 };
 
 }

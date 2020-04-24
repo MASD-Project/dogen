@@ -18,19 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_FORMATTING_STYLES_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_FORMATTING_STYLES_IO_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_POST_PROCESSOR_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_POST_PROCESSOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.physical/types/entities/formatting_styles.hpp"
-
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const formatting_styles& v);
+/**
+ * @brief Types of post-processors that can be applied to artefacts.
+ */
+enum class post_processor : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    none = 1, ///< No post-processor is applied to this artefact.
+    stitch = 2 ///< The artefact is post-processed as a stitch template.
+};
 
 }
 
