@@ -154,6 +154,15 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
         set(other_flags "${other_flags} -fvisibility=hidden")
     endif()
 
+    set(profiling_flags "")
+    if(WITH_PROFILING)
+        if (CMAKE_COMPILER_IS_CLANGXX)
+            set(profiling_flags "--coverage")
+        else()
+            message(STATUS "Profiling only supported on clang.")
+        endif()
+    endif()
+
     # set the flags
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warning_flags}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${other_flags}")

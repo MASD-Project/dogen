@@ -106,6 +106,7 @@ option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
 option(WITH_BOOST_TEST_REPORTING "Create boost test reports." off)
 option(WITH_RELATIONAL_SUPPORT "Add support for relational data." off)
 option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
+option(WITH_PROFILING "Generate profiling information for code coverage.." off)
 
 #
 # check for dependencies
@@ -181,6 +182,24 @@ if (WITH_MINIMAL_PACKAGING)
 else()
     message(STATUS "Packaging everything main application")
 endif()
+
+# profiling
+if(WITH_PROFILING)
+    if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+        if (CMAKE_COMPILER_IS_CLANGXX)
+            message(STATUS "Profiling enabled...")
+        else()
+            message(STATUS "Profiling only supported for clang.")
+            set(WITH_PROFILING off)
+        endif()
+    else()
+        message(STATUS "Ignoring attempt to enable profiling without debug...")
+        set(WITH_PROFILING off)
+    endif()
+else()
+    message(STATUS "Profiling NOT enabled...")
+endif()
+
 
 #
 # Test models
