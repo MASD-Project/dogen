@@ -186,7 +186,8 @@ endif()
 # profiling
 if(WITH_PROFILING)
     if(CMAKE_BUILD_TYPE MATCHES Debug)
-        if (CMAKE_COMPILER_IS_CLANGXX)
+        if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"
+                AND NOT "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC")
             message(STATUS "Profiling enabled...")
         else()
             message(STATUS "Profiling only supported for clang.")
