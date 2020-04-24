@@ -185,7 +185,7 @@ endif()
 
 # profiling
 if(WITH_PROFILING)
-    if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+    if(CMAKE_BUILD_TYPE MATCHES Debug)
         if (CMAKE_COMPILER_IS_CLANGXX)
             message(STATUS "Profiling enabled...")
         else()
