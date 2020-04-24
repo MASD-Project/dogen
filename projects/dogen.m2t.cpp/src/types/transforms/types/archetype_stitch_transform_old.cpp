@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
+#include <boost/filesystem/operations.hpp>
+#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -77,6 +80,27 @@ std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(
 void archetype_stitch_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+
+    /*
+     * If the stitch template already exists, load it. Note that we do not do any
+     * checks at this point (is it empty, is it valid etc). We leave that to the
+     * post-processing step.
+     */
+    // FIXME: must update the artefact to get the path.
+    ast.update_artefact();
+    const auto p(a.name().qualified());
+    if (boost::filesystem::exists(p)) {
+        using utility::filesystem::read_file_content;
+        const auto c(read_file_content(p));
+        a.content(c);
+        a.overwrite(false);
+        return;
+    }
+
+    /*
+     * The template does not yet exist, so we need to provide a basic skeleton
+     * for the user.
+     */
     // const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
     dogen::templating::helpers::stitch_template_builder b(ast.stream());
