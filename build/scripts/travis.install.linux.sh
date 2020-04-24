@@ -61,7 +61,7 @@ if [ "$CXX" == "clang++" ]; then
     sudo apt-get update -qq
 
     sudo apt-get install --allow-unauthenticated -qq clang-${version}
-    which clang-${version}
+    which clang-${version} llvm-toolchain-${version}
     export CXX="clang++-${version}" CC="clang-${version}"
 
     # Need to update GCC in order to get headers for clang.
