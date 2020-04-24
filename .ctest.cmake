@@ -156,6 +156,20 @@ if(DEFINED relational_support)
     set(cmake_defines ${cmake_defines} "-DWITH_RELATIONAL_SUPPORT=On")
 endif()
 
+set(WITH_COVERAGE false)
+if(DEFINED code_coverage AND ${code_coverage} EQUALS 1)
+    find_program(CTEST_COVERAGE_COMMAND NAMES llvm-cov-9)
+    if(NOT CTEST_COVERAGE_COMMAND)
+        message("llvm-cov not found, disabling coverage.")
+        set(WITH_COVERAGE false)
+    else()
+        message("Found llvm-cov (${CTEST_COVERAGE_COMMAND})...")
+        set(cmake_defines ${cmake_defines} "-DWITH_PROFILING=On")
+        set(CTEST_COVERAGE_EXTRA_FLAGS "gcov")
+        set(WITH_COVERAGE true)
+    endif()
+endif()
+
 # only run these for Nightly.
 set(WITH_MEMCHECK false)
 
@@ -246,6 +260,13 @@ ctest_build()
 # weather the build and packaging steps have worked or failed.
 #
 ctest_test(RETURN_VALUE retval)
+
+#
+# Step: code coverage
+#
+if(WITH_COVERAGE)
+    ctest_coverage()
+endif()
 
 #
 # Step: memcheck.
