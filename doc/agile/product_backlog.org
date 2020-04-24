@@ -7107,6 +7107,16 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Upload release to github                                          :story:
+
+At present we are manually uploading binaries on a release to
+github. It would be nice to integrate this with CI.
+
+Links:
+
+- [[https://gist.github.com/stefanbuck/ce788fee19ab6eb0b4447a85fc99f447][upload-github-release-asset.sh]]
+- [[https://developer.github.com/v3/repos/releases/#upload-a-release-asset][Upload a release asset]]
+
 *** Consider adding support for kcov                                  :story:
 
 In the past we used kcov and were very happy with it. However,
