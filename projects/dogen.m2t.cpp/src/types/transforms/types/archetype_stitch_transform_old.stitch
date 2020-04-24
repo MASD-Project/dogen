@@ -62,6 +62,9 @@ void archetype_stitch_transform_old::apply(const context& ctx, const logical::en
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
 
+    using physical::entities::post_processor;
+    a.post_processor(post_processor::stitch);
+
     /*
      * If the stitch template already exists, load it. Note that we do not do any
      * checks at this point (is it empty, is it valid etc). We leave that to the
