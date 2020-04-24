@@ -24,6 +24,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.m2t.cpp/types/formattables/aspect_expander.hpp"
@@ -177,25 +178,30 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * be build prior to reduction or else we will not get aspects
      * for referenced models.
      */
-    if (ms->origin_type() != logical::entities::origin_types::target)
+    using logical::entities::origin_types;
+    if (ms->origin_type() != origin_types::target)
         return;
 
     /*
-     * We are only interested in yarn objects; all other element
-     * types do not need helpers.
+     * We are only interested in objects or primitives; all other
+     * element types do not need aspect properties.
      */
-    const auto ptr(dynamic_cast<const logical::entities::structural::object*>(ms.get()));
-    if (ptr == nullptr)
-        return;
-
-    const auto& o(*ptr) ;
-
-    /*
-     * Update the aspect properties.
-     */
-    const auto& attrs(o.local_attributes());
-    const auto element_ap(compute_aspect_properties(element_aps, attrs));
-    eprops.aspect_properties(element_ap);
+    using logical::entities::structural::object;
+    const auto optr(dynamic_cast<const object*>(ms.get()));
+    using logical::entities::structural::primitive;
+    const auto pptr(dynamic_cast<const primitive*>(ms.get()));
+    if (optr != nullptr) {
+        const auto& o(*optr) ;
+        const auto& attrs(o.local_attributes());
+        const auto element_ap(compute_aspect_properties(element_aps, attrs));
+        eprops.aspect_properties(element_ap);
+    } else if (pptr != nullptr) {
+        const auto& p(*pptr) ;
+        using logical::entities::attribute;
+        const std::list<attribute> attrs{ p.value_attribute() };
+        const auto element_ap(compute_aspect_properties(element_aps, attrs));
+        eprops.aspect_properties(element_ap);
+    }
 }
 
 void aspect_expander::
