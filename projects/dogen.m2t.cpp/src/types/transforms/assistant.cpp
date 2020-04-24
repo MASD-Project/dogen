@@ -677,20 +677,12 @@ std::ostream& assistant::stream() {
 
 void assistant::update_artefact() const {
     const auto fp(artefact_properties_.file_path());
-
     artefact_.name().simple(fp.filename().generic_string());
     artefact_.name().qualified(artefact_properties_.file_path());
     artefact_.logical_name().simple(element_.name().simple());
     artefact_.logical_name().qualified(element_.name().qualified().dot());
     artefact_.origin_sha1_hash(element_.origin_sha1_hash());
     artefact_.content(stream_.str());
-
-    /*
-     * By default we assume no post-processing is required. It is then
-     * up to the formatters that require it to set it accordingly.
-     */
-    using physical::entities::post_processor;
-    artefact_.post_processor(post_processor::none);
 
     const auto& ap(element_.artefact_properties());
     const auto arch(physical_meta_name_.qualified());
