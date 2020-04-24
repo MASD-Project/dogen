@@ -168,6 +168,12 @@ Notes:
   need to make sure we rebuild when we should and this is like
   replicating a make inside of dogen. This is where a deep integration
   with build2 would be nice (e.g. via =libbuild2=).
+- we can also add this to the new post-processing framework. In this
+  case, the ODB post-processor (formatter) will run ODB, generate the
+  files in the simplest possible way (e.g. all in the same directory)
+  then load them up into the artefact for further processing. These
+  files can be generated in a temp directory somewhere. The
+  post-processor will generate N artefacts for one file.
 
 Links:
 
@@ -7416,6 +7422,76 @@ Release goals:
 
 ** Candidates
 
+*** Tight integration of Dogen and =build2=                           :story:
+
+In an ideal world, we should have a single command for managing the
+entire life-cycle for a product. As luck would have it, all of the
+packaging and building are already taken care of by Build2:
+
+- https://build2.org/doc.xhtml
+
+Build2 has support for both the build system as well as the package
+management. Were we to consume it as a library, we could integrate
+this functionality into Dogen such that we wouldn't even create build
+files at all. We would have dogen commands such as:
+
+: dogen new
+: dogen build
+: dogen test
+: dogen package
+
+And so on. We should copy these from =dotnet=. Then, internally, we
+would call all of the required build2 commands to execute these. Dogen
+would merely orchestrate build2 using the meta-information about the
+product. Since not all libraries are on build2, we would only place
+dogen libraries in build2 and use =vcpkg= as the supplier of all other
+libraries. Actually, the disto could also supply these. The general
+idea is that there are external packages in system directories. You
+need to tell dogen about these. Everything else comes from Dogen's
+integration with build2 (PDMs, etc). This also has the advantage that
+build2 has support for modules.
+
+The product transforms would then involve calls to download packages,
+build, publish etc. Build2 does not know how to generate MSIs, DEBs
+etc so there is still some work required to handle the final
+packaging. Perhaps these can be encoded as post-processors within
+Dogen. We could copy the code from CMake for this. Ideally you want a
+C++ library for each type of package. We also need to take into
+account the docker use case. Alternatively we could simply look at the
+commands one runs to generate packages normally and literally encode
+these into dogen as shell commands via boost process. Finally we
+should publish the result into GitHub. The API keys etc should be
+supplied to Dogen as environment variables. This approach is very
+specific to C++ so we need to be careful we are not hard-coding too
+many things that will not work for other languages.
+
+Notes:
+
+- we should also include building the documentation.
+- it should be possible to build docker images that have nothing
+  installed on it other than the product.
+- the build steps should take care to regenerate the components when
+  requested or to warn if the model is out of date if regeneration is
+  not requested.
+
+Links:
+
+- [[https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new][dotnet new]]
+- [[https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates][Custom templates for dotnet new]]
+
+*** Tighter vcpkg integration                                         :story:
+
+If the user requests, we should also generate a vcpkg project that is
+a clone of vcpkg but builds all of the base dependencies and pushes
+them to a known location (e.g. GCS). Then, the build steps should
+first download from that known location and put it on the path. It
+should be trivial to update the vcpkg clone, e.g.: user adds new vcpkg
+dependency to the model; dogen updates the data file, user commits the
+update, new vcpkg build is triggered and generates new vcpkg zip, with
+a stamp. User updates model to point to the new stamp and pushes. Next
+build will use new vcpkg libraries. Ideally vcpkg builds for all
+supported platforms (this is requested in the product model).
+
 *** Tighter integration of Dogen and Emacs                            :story:
 
 There are a couple of areas where we could take advantage of code
@@ -14241,12 +14317,14 @@ Patches:
 :        return;
 :      }
 
-*** Add support for Thread and Address Sanitizer (asan, tsan)         :story:
+*** Add support for clang sanitizers                                  :story:
 
 This seems like another interest dynamic analysis tool:
 
 - [[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
 - [[https://clang.llvm.org/docs/ThreadSanitizer.html][Thread Sanitizer]]
+- [[https://clang.llvm.org/docs/MemorySanitizer.html][MemorySanitizer]]
+- [[https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html][UndefinedBehaviorSanitizer]]
 
 *** Add support for CPPCheck                                          :story:
 

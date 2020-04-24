@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-23 Thu 22:20]
-| <75>                                                  |           |         |       |       |
-| Headline                                              | Time      |         |       |     % |
-|-------------------------------------------------------+-----------+---------+-------+-------|
-| *Total time*                                          | *2d 2:10* |         |       |   0.0 |
-|-------------------------------------------------------+-----------+---------+-------+-------|
-| Stories                                               | 2d 2:10   |         |       |   0.0 |
-| Active                                                |           | 2d 2:10 |       |   0.0 |
-| Edit release notes for previous sprint                |           |         |  9:22 |   0.0 |
-| Create a demo and presentation for previous sprint    |           |         |  0:25 |   0.0 |
-| Sprint and product backlog grooming                   |           |         |  7:57 |   0.0 |
-| Emacs issues and improvements                         |           |         |  0:47 |   0.0 |
-| Nightly nursing                                       |           |         |  1:09 |   0.0 |
-| Analysis on implementing enablement in physical model |           |         |  3:10 |   0.0 |
-| Replace artefact properties with artefacts            |           |         |  4:06 |   0.0 |
-| Papers: Systems variability modeling                  |           |         |  2:55 |   0.0 |
-| Throw on unexpected dynamic stereotypes               |           |         |  1:08 |   0.0 |
-| Add model name to tracing dumps                       |           |         |  1:35 |   0.0 |
-| Add physical entities to logical model                |           |         | 17:36 |   0.0 |
+#+CAPTION: Clock summary at [2020-04-24 Fri 11:02]
+| <75>                                                  |         |       |       |       |
+| Headline                                              | Time    |       |       |     % |
+|-------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                          | *52:07* |       |       | 100.0 |
+|-------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                               | 52:07   |       |       | 100.0 |
+| Active                                                |         | 52:07 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  9:22 |  18.0 |
+| Create a demo and presentation for previous sprint    |         |       |  0:25 |   0.8 |
+| Sprint and product backlog grooming                   |         |       |  8:21 |  16.0 |
+| Emacs issues and improvements                         |         |       |  0:59 |   1.9 |
+| Nightly nursing                                       |         |       |  1:59 |   3.8 |
+| Analysis on implementing enablement in physical model |         |       |  3:10 |   6.1 |
+| Replace artefact properties with artefacts            |         |       |  4:06 |   7.9 |
+| Papers: Systems variability modeling                  |         |       |  2:55 |   5.6 |
+| Throw on unexpected dynamic stereotypes               |         |       |  1:08 |   2.2 |
+| Add model name to tracing dumps                       |         |       |  1:35 |   3.0 |
+| Add physical entities to logical model                |         |       | 18:07 |  34.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -461,6 +461,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 10:51]--[2020-04-24 Fri 11:02] =>  0:11
+    CLOCK: [2020-04-24 Fri 09:56]--[2020-04-24 Fri 10:09] =>  0:13
     CLOCK: [2020-04-18 Sat 11:20]--[2020-04-18 Sat 11:25] =>  0:05
     CLOCK: [2020-04-18 Sat 10:40]--[2020-04-18 Sat 10:47] =>  0:07
     CLOCK: [2020-04-18 Sat 10:13]--[2020-04-18 Sat 10:30] =>  0:27
@@ -495,6 +497,7 @@ Notes:
 
 *** STARTED Emacs issues and improvements                             :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 09:15]--[2020-04-24 Fri 09:27] =>  0:12
     CLOCK: [2020-04-12 Sun 15:56]--[2020-04-12 Sun 16:25] =>  0:29
     CLOCK: [2020-04-10 Fri 15:50]--[2020-04-10 Fri 16:08] =>  0:18
     :END:
@@ -504,9 +507,13 @@ Time spent faffing around with Emacs.
 - modeline is flashing. Seems like this is an issue with treemacs, but
   not quite sure.
 - get pdf-tools to work correctly.
+- issues with centaur tabs and restart.
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 09:35]--[2020-04-24 Fri 09:55] =>  0:20
+    CLOCK: [2020-04-24 Fri 09:28]--[2020-04-24 Fri 09:35] =>  0:07
+    CLOCK: [2020-04-24 Fri 08:41]--[2020-04-24 Fri 09:04] =>  0:23
     CLOCK: [2020-04-23 Thu 21:58]--[2020-04-23 Thu 22:18] =>  0:20
     CLOCK: [2020-04-23 Thu 08:40]--[2020-04-23 Thu 08:43] =>  0:03
     CLOCK: [2020-04-23 Thu 08:30]--[2020-04-23 Thu 08:39] =>  0:09
@@ -519,6 +526,13 @@ Time spent fixing issues with nightly builds, daily checks etc.
 - reached maximum builds on CDash.
 - we have a shared pointer cycle in node. This is what valgrind has
   been trying to tell us. Try to use weak pointer to see if it helps.
+
+We seem to have problems with reference model:
+
+#+begin_src cpp
+at 0x68113B: cpp_ref_impl::northwind::categories::operator==(cpp_ref_impl::northwind::categories const&) const (categories.cpp:44)
+==1220045==    by 0x58A21C: cpp_ref_impl::northwind::categories::operator!=(cpp_ref_impl::northwind::categories const&) const (categories.hpp:80)
+#+end_src cpp
 
 Links:
 
@@ -759,6 +773,7 @@ model name is not blank we should add it to the file name.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-24 Fri 10:19]--[2020-04-24 Fri 10:50] =>  0:31
     CLOCK: [2020-04-22 Wed 21:47]--[2020-04-22 Wed 22:24] =>  0:37
     CLOCK: [2020-04-22 Wed 08:29]--[2020-04-22 Wed 08:52] =>  0:23
     CLOCK: [2020-04-21 Tue 21:26]--[2020-04-21 Tue 21:59] =>  0:33
@@ -893,6 +908,24 @@ Notes:
   be part of stitch itself (template builder?). The template builder
   takes in a stream and executes commands on it. Or perhaps it just
   returns a string in the correct shape?
+- we incorrectly thought we needed a CPP formatter. In reality, the
+  stitch formatter is responsible for the following things:
+
+  - if the template does not yet exist, create a template for it.
+  - if it exists, load it.
+  - mark the artefact as requiring /post-processing/ with stitch.
+
+  Then we can loop through all the artefacts, find those needing
+  stitch post-processing and apply the stitch formatter to them. Note
+  that are two very distinct stitch formatters:
+
+  - the one that generates templates or loads them;
+  - the one that transforms them into C++ code.
+
+  This can all work in parallel with existing code; artefacts will
+  default to "invalid" post-processing. Or we can set them to
+  "none". We then filter those set to "stitch". In the future we can
+  have other types of post-processing (e.g. ODB).
 
 Merged stories:
 
@@ -1289,6 +1322,14 @@ Notes:
   incongruent though. We need to make sure we do not create a loop
   when we are changing an existing generator, whereby we can no longer
   generate code because the new state is not valid.
+
+*** Primitives are using compiler generated default constructors      :story:
+
+As spotted by Ian and Indranil, the default constructor of primitives
+should be generated when these are built-in types. At present we are
+always relying on compiler supplied default constructors. We already
+have code for this in object so we can copy and paste it to the
+primitive.
 
 *** Inject backend, facets and archetypes into PMM                    :story:
 
