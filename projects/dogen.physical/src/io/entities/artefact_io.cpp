@@ -26,7 +26,6 @@
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/logical_name_io.hpp"
-#include "dogen.physical/io/entities/post_processor_io.hpp"
 #include "dogen.physical/io/entities/enablement_flags_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 
@@ -109,8 +108,7 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "
-      << "\"enablement_flags\": " << v.enablement_flags() << ", "
-      << "\"post_processor\": " << v.post_processor()
+      << "\"enablement_flags\": " << v.enablement_flags()
       << " }";
     return(s);
 }

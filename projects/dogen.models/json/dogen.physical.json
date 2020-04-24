@@ -645,11 +645,6 @@
           "name": "enablement_flags",
           "type": "enablement_flags",
           "documentation": "Local enablement flags.\n"
-        },
-        {
-          "name": "post_processor",
-          "type": "post_processor",
-          "documentation": "What post-processor to apply to this artefact.\n"
         }
       ]
     },
@@ -1179,26 +1174,6 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "entities::post_processor",
-      "documentation": "Types of post-processors that can be applied to artefacts.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "none",
-          "type": "",
-          "documentation": "No post-processor is applied to this artefact.\n"
-        },
-        {
-          "name": "stitch",
-          "type": "",
-          "documentation": "The artefact is post-processed as a stitch template.\n"
-        }
-      ]
     },
     {
       "name": "entities::name",

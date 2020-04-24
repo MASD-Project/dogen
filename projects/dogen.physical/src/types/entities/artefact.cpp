@@ -34,8 +34,7 @@ namespace dogen::physical::entities {
 
 artefact::artefact()
     : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)),
-      post_processor_(static_cast<dogen::physical::entities::post_processor>(0)) { }
+      overwrite_(static_cast<bool>(0)) { }
 
 artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -50,8 +49,7 @@ artefact::artefact(
     const std::vector<boost::filesystem::path>& dependencies,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
-    const dogen::physical::entities::enablement_flags& enablement_flags,
-    const dogen::physical::entities::post_processor post_processor)
+    const dogen::physical::entities::enablement_flags& enablement_flags)
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
@@ -64,8 +62,7 @@ artefact::artefact(
       dependencies_(dependencies),
       unified_diff_(unified_diff),
       operation_(operation),
-      enablement_flags_(enablement_flags),
-      post_processor_(post_processor) { }
+      enablement_flags_(enablement_flags) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -82,7 +79,6 @@ void artefact::swap(artefact& other) noexcept {
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_flags_, other.enablement_flags_);
-    swap(post_processor_, other.post_processor_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -98,8 +94,7 @@ bool artefact::operator==(const artefact& rhs) const {
         dependencies_ == rhs.dependencies_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
-        enablement_flags_ == rhs.enablement_flags_ &&
-        post_processor_ == rhs.post_processor_;
+        enablement_flags_ == rhs.enablement_flags_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -298,14 +293,6 @@ void artefact::enablement_flags(const dogen::physical::entities::enablement_flag
 
 void artefact::enablement_flags(const dogen::physical::entities::enablement_flags&& v) {
     enablement_flags_ = std::move(v);
-}
-
-dogen::physical::entities::post_processor artefact::post_processor() const {
-    return post_processor_;
-}
-
-void artefact::post_processor(const dogen::physical::entities::post_processor v) {
-    post_processor_ = v;
 }
 
 }

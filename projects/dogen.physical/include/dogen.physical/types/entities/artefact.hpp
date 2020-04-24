@@ -35,7 +35,6 @@
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
-#include "dogen.physical/types/entities/post_processor.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
@@ -67,8 +66,7 @@ public:
         const std::vector<boost::filesystem::path>& dependencies,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
-        const dogen::physical::entities::enablement_flags& enablement_flags,
-        const dogen::physical::entities::post_processor post_processor);
+        const dogen::physical::entities::enablement_flags& enablement_flags);
 
 public:
     /**
@@ -182,14 +180,6 @@ public:
     void enablement_flags(const dogen::physical::entities::enablement_flags&& v);
     /**@}*/
 
-    /**
-     * @brief What post-processor to apply to this artefact.
-     */
-    /**@{*/
-    dogen::physical::entities::post_processor post_processor() const;
-    void post_processor(const dogen::physical::entities::post_processor v);
-    /**@}*/
-
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -214,7 +204,6 @@ private:
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
     dogen::physical::entities::enablement_flags enablement_flags_;
-    dogen::physical::entities::post_processor post_processor_;
 };
 
 }
