@@ -55,7 +55,7 @@ matrix:
       env: deploy="1" configuration=Release compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     - os: linux
       compiler: clang
-      env: coverage=1 configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug" code_coverage="1"
+      env: configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug" code_coverage="1"
 
 addons:
   apt:
@@ -87,11 +87,6 @@ script:
 
 after_script:
   - curl -s https://report.ci/upload.py | python - --name "${report_name}"
-
-after_success:
-  - if [[ "x${coverage}" == "x1" ]]; then
-       ${SCRIPTS_DIR}/coverage.linux.sh ${STAGE_DIR} /tmp/kcov ${TRAVIS_JOB_ID};
-    fi
 
 notifications:
   email:
