@@ -60,8 +60,9 @@ if [ "$CXX" == "clang++" ]; then
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-get update -qq
 
-    sudo apt-get install --allow-unauthenticated -qq clang-${version}
-    which clang-${version} llvm-${version}
+    sudo apt-get install --allow-unauthenticated -qq clang-${version} llvm-${version}
+    which clang-${version}
+    which llvm-cov-${version}
     export CXX="clang++-${version}" CC="clang-${version}"
 
     # Need to update GCC in order to get headers for clang.
