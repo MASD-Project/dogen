@@ -28,16 +28,14 @@ git:
 matrix:
   include:
     #
-    # OSX Clang
+    # Linux Clang
     #
-    - os: osx
+    - os: linux
       compiler: clang
-      osx_image: xcode10
-      env: deploy="1" configuration=Release compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Release"
-    - os: osx
+      env: configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug" code_coverage="1"
+    - os: linux
       compiler: clang
-      osx_image: xcode10
-      env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Debug"
+      env: deploy="1" configuration=Release compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     #
     # Linux GCC
     #
@@ -48,14 +46,16 @@ matrix:
       compiler: gcc
       env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
     #
-    # Linux Clang
+    # OSX Clang
     #
-    - os: linux
+    - os: osx
       compiler: clang
-      env: deploy="1" configuration=Release compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
-    - os: linux
+      osx_image: xcode10
+      env: deploy="1" configuration=Release compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Release"
+    - os: osx
       compiler: clang
-      env: configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug" code_coverage="1"
+      osx_image: xcode10
+      env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Debug"
 
 addons:
   apt:
