@@ -202,7 +202,7 @@
         <dia:point val="6,-19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,-19.05;36.21,-2.85"/>
+        <dia:rectangle val="5.95,-19.05;36.21,-5.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -214,7 +214,7 @@
         <dia:real val="30.160000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.100000000000001"/>
+        <dia:real val="13.700000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -243,9 +243,6 @@ level.
 #DOGEN masd.physical.delete_empty_directories=true
 #DOGEN masd.cpp.enabled=true
 #DOGEN masd.cpp.standard=c++-17
-#DOGEN masd.cpp.msbuild.enabled=false
-#DOGEN masd.cpp.visual_studio.project.enabled=false
-#DOGEN masd.cpp.visual_studio.solution.enabled=false
 #DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -255,7 +252,7 @@ level.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="6.35,-17.755"/>
+            <dia:point val="6.35,-17.7559"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
