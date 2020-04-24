@@ -7107,6 +7107,13 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Consider adding support for kcov                                  :story:
+
+In the past we used kcov and were very happy with it. However,
+coveralls and codecov gave us a few problems so we ended up going to
+llvm-cov. If we do decide to go back to kcov, look at commit
+6cb01a132d.
+
 *** Add support for stack traces                                      :story:
 
 At present when we throw we have very little context around the
@@ -13863,6 +13870,10 @@ travis for this.
 - [[https://github.com/d-led/picojson_serializer/blob/master/.travis.yml][example .travis.yml]]
 
 We should upload a build whenever we tag a release.
+
+Badge:
+
+: [![Coverity](https://img.shields.io/coverity/scan/16865.svg)](https://scan.coverity.com/projects/masd-project-dogen)
 
 Patch:
 
