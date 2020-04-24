@@ -158,7 +158,7 @@ endif()
 
 set(WITH_COVERAGE false)
 if(DEFINED code_coverage)
-    if (${code_coverage} EQUALS 1)
+    if (code_coverage EQUALS 1)
         find_program(CTEST_COVERAGE_COMMAND NAMES llvm-cov-9)
         if(NOT CTEST_COVERAGE_COMMAND)
             message("llvm-cov not found, disabling coverage.")
