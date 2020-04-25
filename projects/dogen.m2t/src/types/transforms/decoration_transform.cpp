@@ -421,7 +421,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
         const auto gd(make_global_decoration(drp, root_dc, gt, h, ts));
         root_decorations[ts] = gd;
 
-        if (ts == mts) {
+        if (ts == mts && gd) {
             BOOST_LOG_SEV(lg, trace) << "Populating the root module "
                                      <<  "decoration.";
 
@@ -493,13 +493,16 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
                 const auto& gd(i->second);
                 const auto ld(
                     make_local_decoration(drp, root_dc, gd, dc, gt, h, nts));
-                auto pair(std::make_pair(nts, *ld));
-                const auto inserted(e.decoration().insert(pair).second);
-                if (!inserted) {
-                    const auto s(boost::lexical_cast<std::string>(nts));
-                    BOOST_LOG_SEV(lg, error) << duplicate_technical_space << s;
-                    BOOST_THROW_EXCEPTION(
-                        transformation_error(duplicate_technical_space + s ));
+                if (ld) {
+                    auto pair(std::make_pair(nts, *ld));
+                    const auto inserted(e.decoration().insert(pair).second);
+                    if (!inserted) {
+                        const auto s(boost::lexical_cast<std::string>(nts));
+                        BOOST_LOG_SEV(lg, error) << duplicate_technical_space
+                                                 << s;
+                        BOOST_THROW_EXCEPTION(transformation_error(
+                                duplicate_technical_space + s));
+                    }
                 }
             });
 
