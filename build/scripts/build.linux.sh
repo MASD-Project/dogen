@@ -143,9 +143,8 @@ if [ "${build_type}" = "Debug" ]; then
     cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
 fi
 
-if [ "${COVERALLS}" = "1" ]; then
+if [ "${COVERAGE}" = "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_PROFILING=ON"
-    cmake_defines="${cmake_defines} -DWITH_COVERALLS=ON"
 fi
 
 #
