@@ -12,28 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-24 Fri 23:25]
+#+CAPTION: Clock summary at [2020-04-25 Sat 09:05]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *57:55* |       |       | 100.0 |
+| *Total time*                                                 | *58:39* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 57:55   |       |       | 100.0 |
-| Active                                                       |         | 57:55 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  16.2 |
+| Stories                                                      | 58:39   |       |       | 100.0 |
+| Active                                                       |         | 58:39 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  16.0 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.7 |
-| Sprint and product backlog grooming                          |         |       |  8:49 |  15.2 |
-| Emacs issues and improvements                                |         |       |  0:59 |   1.7 |
-| Nightly nursing                                              |         |       |  1:59 |   3.4 |
-| Analysis on implementing enablement in physical model        |         |       |  3:10 |   5.5 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   7.1 |
+| Sprint and product backlog grooming                          |         |       |  8:49 |  15.0 |
+| Emacs issues and improvements                                |         |       |  1:16 |   2.2 |
+| Nightly nursing                                              |         |       |  2:16 |   3.9 |
+| Analysis on implementing enablement in physical model        |         |       |  3:10 |   5.4 |
+| Replace artefact properties with artefacts                   |         |       |  4:06 |   7.0 |
 | Papers: Systems variability modeling                         |         |       |  2:55 |   5.0 |
-| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   2.0 |
+| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.9 |
 | Add model name to tracing dumps                              |         |       |  1:35 |   2.7 |
 | Primitives are using compiler generated default constructors |         |       |  0:17 |   0.5 |
-| Add physical entities to logical model                       |         |       | 20:08 |  34.8 |
+| Add physical entities to logical model                       |         |       | 20:08 |  34.3 |
 | Create the concept of Text-to-Text transforms                |         |       |  0:52 |   1.5 |
-| Move code coverage to CDash                                  |         |       |  2:10 |   3.7 |
+| Move code coverage to CDash                                  |         |       |  2:20 |   4.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -503,6 +503,7 @@ Notes:
 
 *** STARTED Emacs issues and improvements                             :story:
     :LOGBOOK:
+    CLOCK: [2020-04-25 Sat 07:48]--[2020-04-25 Sat 08:05] =>  0:17
     CLOCK: [2020-04-24 Fri 09:15]--[2020-04-24 Fri 09:27] =>  0:12
     CLOCK: [2020-04-12 Sun 15:56]--[2020-04-12 Sun 16:25] =>  0:29
     CLOCK: [2020-04-10 Fri 15:50]--[2020-04-10 Fri 16:08] =>  0:18
@@ -514,9 +515,11 @@ Time spent faffing around with Emacs.
   not quite sure.
 - get pdf-tools to work correctly.
 - issues with centaur tabs and restart.
+- setup elfeed
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
+    CLOCK: [2020-04-25 Sat 07:30]--[2020-04-25 Sat 07:47] =>  0:17
     CLOCK: [2020-04-24 Fri 09:35]--[2020-04-24 Fri 09:55] =>  0:20
     CLOCK: [2020-04-24 Fri 09:28]--[2020-04-24 Fri 09:35] =>  0:07
     CLOCK: [2020-04-24 Fri 08:41]--[2020-04-24 Fri 09:04] =>  0:23
@@ -532,6 +535,7 @@ Time spent fixing issues with nightly builds, daily checks etc.
 - reached maximum builds on CDash.
 - we have a shared pointer cycle in node. This is what valgrind has
   been trying to tell us. Try to use weak pointer to see if it helps.
+- added RSS feeds for GitHub and CDash
 
 We seem to have problems with reference model:
 
@@ -544,6 +548,7 @@ Links:
 
 - [[https://stackoverflow.com/questions/2036182/boost-shared-ptr-vs-weak-ptr-which-to-use-when][boost, shared ptr Vs weak ptr? Which to use when?]]
 - [[https://theboostcpplibraries.com/boost.smartpointers-special-smart-pointers][Boost book: smart pointers]]
+- [[https://github.community/t5/How-to-use-Git-and-GitHub/RSS-feeds-for-GitHub-projects/m-p/298#M99][RSS feeds for GitHub projects]]
 
 *** COMPLETED Analysis on implementing enablement in physical model   :story:
     CLOSED: [2020-04-11 Sat 17:11]
@@ -1449,6 +1454,7 @@ T2T transform.
 
 *** STARTED Move code coverage to CDash                               :story:
     :LOGBOOK:
+    CLOCK: [2020-04-25 Sat 08:55]--[2020-04-25 Sat 09:05] =>  0:10
     CLOCK: [2020-04-24 Fri 23:20]--[2020-04-24 Fri 23:25] =>  0:05
     CLOCK: [2020-04-24 Fri 22:19]--[2020-04-24 Fri 22:26] =>  0:07
     CLOCK: [2020-04-24 Fri 22:04]--[2020-04-24 Fri 22:15] =>  0:11
@@ -1502,6 +1508,7 @@ Notes from previous implementation:
 Notes:
 
 - we need to add coverage to c++ ref impl as well.
+- all done except we are not producing coverage files atm.
 
 Links:
 
