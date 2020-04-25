@@ -47,9 +47,8 @@ elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
 elif [ "${compiler}" = "clang8" ]; then
     echo "* Compiler: ${compiler}"
-# FIXME: whilst hello world segfaults
-# elif [ "${compiler}" = "clang9" ]; then
-#     echo "* Compiler: ${compiler}"
+elif [ "${compiler}" = "clang9" ]; then
+    echo "* Compiler: ${compiler}"
 elif [ "${compiler}" = "clang10" ]; then
     echo "* Compiler: ${compiler}"
 else
