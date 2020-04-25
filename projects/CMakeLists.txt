@@ -156,9 +156,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
 
     set(profiling_flags "")
     if(WITH_PROFILING)
-        # set absolute path to avoid problems with relative path
-        set(profiling_flags "-fprofile-abs-path")
-
         # do not use --coverage to support both gcc and clang.
         set(profiling_flags "${profiling_flags} -fprofile-arcs")
         set(profiling_flags "${profiling_flags} -ftest-coverage")
