@@ -80,7 +80,7 @@ script:
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
     fi
-  - ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},minimal_packaging=1,boost_test_reporting=1,code_coverage=${code_coverage}";
+  - ctest --quiet --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},minimal_packaging=1,boost_test_reporting=1,code_coverage=${code_coverage}";
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         ${SCRIPTS_DIR}/test_package.linux.sh ${configuration} ${compiler};
     fi
