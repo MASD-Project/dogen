@@ -290,6 +290,8 @@ A number of videos are now available discussing Dogen, gathered under
 - [MASD - Dogen Coding: Relational Model for
   Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6):
   Narrates the design and implementation of the relational model for tracing.
+- [MASD - MDE Paper of the
+  Week](https://www.youtube.com/playlist?list=PLwfrwe216gF0wbLBkiOmpCpdaeAU66634)
 
 # Blog Posts
 
