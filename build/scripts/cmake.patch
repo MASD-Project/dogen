@@ -1,0 +1,12 @@
+--- /usr/share/cmake-3.16/Modules/CTestCoverageCollectGCOV.cmake	2020-01-21 15:17:47.000000000 +0000
++++ /tmp/CTestCoverageCollectGCOV.cmake	2020-04-25 12:31:44.307608383 +0100
+@@ -139,7 +139,8 @@
+   endif()
+   execute_process(COMMAND
+     ${gcov_command} ${GCOV_GCOV_OPTIONS} ${gcda_files}
+-    OUTPUT_VARIABLE out
++    OUTPUT_FILE "${coverage_dir}/gcov.log"
++    ERROR_FILE  "${coverage_dir}/gcov.log"
+     RESULT_VARIABLE res
+     WORKING_DIRECTORY ${coverage_dir})
+ 
