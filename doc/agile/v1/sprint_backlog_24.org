@@ -12,29 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-25 Sat 12:41]
+#+CAPTION: Clock summary at [2020-04-25 Sat 16:07]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *60:14* |       |       | 100.0 |
+| *Total time*                                                 | *60:50* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 60:14   |       |       | 100.0 |
-| Active                                                       |         | 60:14 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  15.6 |
+| Stories                                                      | 60:50   |       |       | 100.0 |
+| Active                                                       |         | 60:50 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  15.4 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.7 |
-| Sprint and product backlog grooming                          |         |       |  8:49 |  14.6 |
+| Sprint and product backlog grooming                          |         |       |  8:49 |  14.5 |
 | Emacs issues and improvements                                |         |       |  1:16 |   2.1 |
-| Nightly nursing                                              |         |       |  2:16 |   3.8 |
-| Analysis on implementing enablement in physical model        |         |       |  3:10 |   5.3 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.8 |
+| Nightly nursing                                              |         |       |  2:16 |   3.7 |
+| Analysis on implementing enablement in physical model        |         |       |  3:10 |   5.2 |
+| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.7 |
 | Papers: Systems variability modeling                         |         |       |  2:55 |   4.8 |
 | Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.9 |
 | Add model name to tracing dumps                              |         |       |  1:35 |   2.6 |
 | Primitives are using compiler generated default constructors |         |       |  0:17 |   0.5 |
 | Hello world segfaults                                        |         |       |  0:55 |   1.5 |
-| Add physical entities to logical model                       |         |       | 20:08 |  33.4 |
+| Add physical entities to logical model                       |         |       | 20:08 |  33.1 |
 | Create the concept of Text-to-Text transforms                |         |       |  0:52 |   1.4 |
-| Move code coverage to CDash                                  |         |       |  3:00 |   5.0 |
+| Move code coverage to CDash                                  |         |       |  3:36 |   5.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1470,6 +1470,8 @@ T2T transform.
 
 *** STARTED Move code coverage to CDash                               :story:
     :LOGBOOK:
+    CLOCK: [2020-04-25 Sat 15:50]--[2020-04-25 Sat 16:07] =>  0:17
+    CLOCK: [2020-04-25 Sat 13:50]--[2020-04-25 Sat 14:09] =>  0:19
     CLOCK: [2020-04-25 Sat 12:01]--[2020-04-25 Sat 12:41] =>  0:40
     CLOCK: [2020-04-25 Sat 08:55]--[2020-04-25 Sat 09:05] =>  0:10
     CLOCK: [2020-04-24 Fri 23:20]--[2020-04-24 Fri 23:25] =>  0:05
