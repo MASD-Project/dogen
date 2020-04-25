@@ -291,7 +291,11 @@ A number of videos are now available discussing Dogen, gathered under
   Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6):
   Narrates the design and implementation of the relational model for tracing.
 - [MASD - MDE Paper of the
-  Week](https://www.youtube.com/playlist?list=PLwfrwe216gF0wbLBkiOmpCpdaeAU66634)
+  Week](https://www.youtube.com/playlist?list=PLwfrwe216gF0wbLBkiOmpCpdaeAU66634):
+  Series of relevant
+  [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) papers
+  that have been read to get a better understanding of the field. We
+  try to read one of these a week, but we don't always succeed.
 
 # Blog Posts
 
