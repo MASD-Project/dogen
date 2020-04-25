@@ -101,7 +101,6 @@ cmake_input="https://cmake.org/files/v3.15/${cmake_tar}"
 cmake_output="/tmp/${cmake_tar}"
 wget --no-check-certificate ${cmake_input} -O ${cmake_output}
 tar xf ${cmake_output} -C /tmp
-patch /tmp/cmake-3.15.3-Linux-x86_64/share/cmake-3.15/Modules/CTestCoverageCollectGCOV.cmake ${script_dir}/cmake.patch
 sudo cp -r /tmp/${cmake_name}/* /usr
 which cmake
 cmake --version
