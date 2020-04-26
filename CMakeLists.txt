@@ -195,7 +195,6 @@ else()
     message(STATUS "Profiling NOT enabled...")
 endif()
 
-
 #
 # Test models
 #
