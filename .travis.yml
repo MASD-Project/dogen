@@ -28,23 +28,23 @@ git:
 matrix:
   include:
     #
-    # Linux Clang
-    #
-    - os: linux
-      compiler: clang
-      env: configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug" code_coverage="1"
-    - os: linux
-      compiler: clang
-      env: deploy="1" configuration=Release compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
-    #
     # Linux GCC
     #
     - os: linux
       compiler: gcc
-      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug" code_coverage="1"
     - os: linux
       compiler: gcc
-      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
+      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+    #
+    # Linux Clang
+    #
+    - os: linux
+      compiler: clang
+      env: configuration=Debug compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Debug"
+    - os: linux
+      compiler: clang
+      env: deploy="1" configuration=Release compiler="clang9" generator="Ninja" build_group="Continuous" report_name="Linux Clang Release"
     #
     # OSX Clang
     #
