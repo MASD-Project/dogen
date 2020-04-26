@@ -112,7 +112,7 @@ set(SITE "${CTEST_SITE}")
 set(CTEST_CMAKE_GENERATOR "${generator}")
 set(CTEST_CONFIGURATION_TYPE "${configuration_type}")
 set(CTEST_BUILD_NAME
-    "${compiler}-${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
+    "${compiler}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
 set(CTEST_BUILD_TARGET "package")
 set(CTEST_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
