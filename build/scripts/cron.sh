@@ -16,6 +16,7 @@ build_group=Nightly
 logs_dir=../logs
 clang_compiler=clang9
 gcc_compiler=gcc9
+verbosity=--progress
 
 #
 # C# Ref Impl
@@ -46,10 +47,10 @@ cd ${git_dir}
 git pull origin master
 
 compiler=${clang_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 compiler=${gcc_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
@@ -78,9 +79,9 @@ git add -A > ${logs_dir}/git_add.log
 git commit -m "Generated code." > ${logs_dir}/git_add.log
 
 compiler=${clang_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1,code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 STAGE_DIR=build/output/${compiler}/${configuration}/stage
 
 compiler=${gcc_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1,relational_support=1,code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
