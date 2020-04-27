@@ -43,6 +43,8 @@ if [[ "x${compiler}" = "x" ]]; then
     echo "* Compiler: ${compiler} (default)"
 elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
+elif [ "${compiler}" = "gcc9" ]; then
+    echo "* Compiler: ${compiler}"
 elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
 elif [ "${compiler}" = "clang8" ]; then
