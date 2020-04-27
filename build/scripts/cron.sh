@@ -47,10 +47,10 @@ cd ${git_dir}
 git pull origin master
 
 compiler=${clang_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 compiler=${gcc_compiler}
-ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+ctest ${verbosity} --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group},code_coverage=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
