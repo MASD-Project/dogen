@@ -78,6 +78,44 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Product family projects                                           :story:
+
+Just like it makes sense to operate at the product level (e.g. add
+components, packaging, building, etc) there are certain operations
+that may make sense at the product family level. For example, take the
+Dogen product family:
+
+- dogen
+- C++ and C# reference models
+- PDMs (possibly 3 or 4 products at present)
+
+And so forth. A typical use case is that we make a change to one
+product such as:
+
+- updates to README structure
+- updates to valgrind rules (however, remember that we want to be able
+  to compose valgrind rules in the future)
+- update to CMakeFiles (for example changing code coverage flags,
+  spanning across CMake, CTest and scripts)
+
+In this case we want to be able to make this change, test it in a
+product and then regenerate the product family. One way to achieve
+this is to say that we have a special git repo that houses the product
+family. This has the product family model. When we load the product
+family model, we can them operate on all products in one go. This
+could be done by having relative product paths:
+
+: product_family_repo
+: product_a
+: product_b
+: ...
+
+Alternatively we could support git modules in the product family
+repo. This would allow us to do one single checkout for the entire
+family. The downside is that we then start building inside of the
+sub-repos (we never want to build at the product family level). This
+may not necessarily be a bad thing.
+
 *** Consider adding valgrind suppressions to PDMs                     :story:
 
 We have a number of suppressions that are coming from boost log. Its a
