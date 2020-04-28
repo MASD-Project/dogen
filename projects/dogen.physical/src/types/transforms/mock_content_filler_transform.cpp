@@ -63,6 +63,7 @@ apply(const context& ctx, entities::model& m) {
             continue;
 
         // FIXME: massive hack to deal with ranlib warnings on OSX
+        BOOST_LOG_SEV(lg, debug) << "File requires mock content: " << gs;
         const auto fn(p.stem().generic_string());
         a.content(create_hacked_contents(fn));
     }
