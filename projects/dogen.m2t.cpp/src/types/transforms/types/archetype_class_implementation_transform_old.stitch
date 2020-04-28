@@ -55,23 +55,9 @@ std::list<std::string> archetype_class_implementation_transform_old::inclusion_d
 void archetype_class_implementation_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
-    const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
-    {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(ast.make_namespaces(o.name()));
-            auto snf(ast.make_scoped_namespace_formatter(ns));
-#>
-
-class <#= o.name().simple() #>;
-
-<#+
-        } // snf
-#>
-
-<#+
-    } // sbf
+    // no content by design.
+    a.overwrite(true);
     ast.update_artefact();
 }
 
