@@ -78,7 +78,7 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Product family projects                                           :story:
+*** Product family projects                                 :reviewing:story:
 
 Just like it makes sense to operate at the product level (e.g. add
 components, packaging, building, etc) there are certain operations
@@ -17486,7 +17486,7 @@ Links
 - [[https://sonarcloud.io/dashboard?id=MASD-Project_dogen][MASD-Project_dogen]]
 - [[https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner][Analyzing with SonarQube Scanner]]
 
-*** Consider adding weaving support as a command            :reviewing:story:
+*** Consider adding weaving support as a command                      :story:
 
 With the refactorings, we removed top-level weaving support in sprint
 16 (around [[https://github.com/MASD-Project/dogen/commits/master?after=28ea047b0ee64e00f8d0f9df817194e83422419b+139][Apr 27 2019]]). Weaving made sense originally because stitch
@@ -17551,6 +17551,7 @@ there are many different languages that implement textual UML:
 - [[https://www.eclipse.org/epsilon/doc/articles/hutn-basic/][Using the Human-Usable Textual Notation (HUTN) in Epsilon]]
 - [[https://www.cooperate-project.de/images/publications/MODELSWARD2016.pdf][Survey on Textual Notations for the Unified Modeling Language]]:
   academic paper.
+
 *** Consider implementing a "mock server" for HTTP                    :story:
 
 This project looks very interesting: [[https://www.mock-server.com/][MockServer]].
@@ -17558,7 +17559,6 @@ This project looks very interesting: [[https://www.mock-server.com/][MockServer]
 From the docs:
 
 #+begin_quote
-
 For any system you integrate with via HTTP or HTTPS MockServer can be
 used as:
 
@@ -17600,12 +17600,24 @@ Links:
 
 *** Consider adding support for RAFT protocol                         :story:
 
-It may be useful to add RAFT as a meta-model concept.
+It may be useful to add RAFT as a meta-model concept. From wikipedia:
+
+#+begin_quote
+Raft is a consensus algorithm designed as an alternative to the Paxos
+family of algorithms. It was meant to be more understandable than
+Paxos by means of separation of logic, but it is also formally proven
+safe and offers some additional features.
+#+end_quote
 
 Links:
 
-- https://github.com/eBay/NuRaft
-- https://github.com/datatechnology/cornerstone
+- [[https://en.wikipedia.org/wiki/Raft_(computer_science)][Wikipedia: Raft]]
+- [[https://github.com/eBay/NuRaft][NuRaft GitHub]]: Raft implementation derived from the cornerstone
+  project, which is a very lightweight C++ implementation with minimum
+  dependencies, originally written by Andy Chen.
+- [[https://github.com/datatechnology/cornerstone][cornerstone GitHub]]: A very lightweight but complete Raft Consensus
+  C++ implementation, the original implementation was published by
+  Andy Chen.
 
 *** Consider adding support for static site generators                :story:
 
@@ -17614,10 +17626,35 @@ to describe a site at the meta-model level and then use an existing
 generator to output the code as a cartridge. This could also be an
 interesting way to document an API a-la OpenAPI.
 
+The second link here is org-mode. If we had a library that could
+convert org-mode documents into static HTML, then this would be a
+natural thing to do. For good measure, if models were themselves
+org-mode documents we could then generate the documentation for a
+model in this way. We could also augment it via images (UML diagrams,
+etc). For extra bonus points, we could integrate the documentation
+generator for the source code; for example, it would be nice to have
+links from a given model element to all the files it generates and all
+of the associated documentation. We could use standardese for this as
+a library.
+
 Links:
 
 - [[https://github.com/nifty-site-manager/nsm][Nift]]: Nift is a cross-platform open source framework for managing
   and generating websites. See also [[https://www.nift.cc/index.html][homepage]].
+- [[https://github.com/standardese/standardese][standardese GitHub]]: Standardese aims to be a nextgen Doxygen. It
+  consists of two parts: a library and a command line tool.
+
+*** Consider adding support for Boost.Pool                            :story:
+
+The basic idea is to integrate Boost.Pool with the generated code such
+that we could generate objects that are instantiated inside a pool or
+an arena. This will be helpful when we finally move to a data driven
+approach.
+
+Links:
+
+- [[https://theboostcpplibraries.com/boost.pool][Chapter 4. Boost.Pool]]
+
 *** Unmaintained emblem                                               :story:
 
 If we ever reach a point where Dogen is complete according to the
