@@ -27,6 +27,7 @@
 #include "dogen.physical/types/transforms/generate_diffs_transform.hpp"
 #include "dogen.physical/types/transforms/generate_patch_transform.hpp"
 #include "dogen.physical/types/transforms/generate_report_transform.hpp"
+#include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -51,6 +52,12 @@ apply(const context& ctx, entities::model& m) {
      * out of the way first.
      */
     update_outputting_properties_transform::apply(ctx, m);
+
+    /*
+     * Fill in any empty files with mock content. Must be done before
+     * the operation transform.
+     */
+    mock_content_filler_transform::apply(ctx, m);
 
     /*
      * Update the operations on all artefacts so that subsequent
@@ -84,6 +91,7 @@ apply(const context& ctx, entities::model& m) {
      * the operations for this set of artefacts.
      */
     generate_report_transform::apply(ctx, m);
+
 }
 
 }
