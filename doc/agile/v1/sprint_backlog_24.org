@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-28 Tue 08:51]
+#+CAPTION: Clock summary at [2020-04-29 Wed 22:41]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *64:09* |       |       | 100.0 |
+| *Total time*                                                 | *64:57* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 64:09   |       |       | 100.0 |
-| Active                                                       |         | 64:09 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  14.6 |
+| Stories                                                      | 64:57   |       |       | 100.0 |
+| Active                                                       |         | 64:57 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  14.4 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.6 |
-| Sprint and product backlog grooming                          |         |       |  9:12 |  14.3 |
+| Sprint and product backlog grooming                          |         |       |  9:22 |  14.4 |
 | Emacs issues and improvements                                |         |       |  1:16 |   2.0 |
-| Nightly nursing                                              |         |       |  3:01 |   4.7 |
+| Nightly nursing                                              |         |       |  3:10 |   4.9 |
 | Analysis on implementing enablement in physical model        |         |       |  3:10 |   4.9 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.4 |
+| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.3 |
 | Papers: Systems variability modeling                         |         |       |  2:55 |   4.5 |
 | Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.4 |
-| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.8 |
-| Add model name to tracing dumps                              |         |       |  1:35 |   2.5 |
+| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.7 |
+| Add model name to tracing dumps                              |         |       |  1:35 |   2.4 |
 | Primitives are using compiler generated default constructors |         |       |  0:17 |   0.4 |
 | Hello world segfaults                                        |         |       |  0:55 |   1.4 |
-| Move code coverage to CDash                                  |         |       |  4:53 |   7.6 |
-| Add physical entities to logical model                       |         |       | 20:08 |  31.4 |
-| Create the concept of Text-to-Text transforms                |         |       |  0:52 |   1.4 |
+| Move code coverage to CDash                                  |         |       |  4:53 |   7.5 |
+| Add physical entities to logical model                       |         |       | 20:37 |  31.7 |
+| Create the concept of Text-to-Text transforms                |         |       |  0:52 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -466,6 +466,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-29 Wed 22:31]--[2020-04-29 Wed 22:41] =>  0:10
     CLOCK: [2020-04-28 Tue 08:36]--[2020-04-28 Tue 08:50] =>  0:14
     CLOCK: [2020-04-27 Mon 19:12]--[2020-04-27 Mon 19:21] =>  0:09
     CLOCK: [2020-04-24 Fri 22:15]--[2020-04-24 Fri 22:18] =>  0:03
@@ -523,6 +524,7 @@ Time spent faffing around with Emacs.
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
+    CLOCK: [2020-04-28 Tue 21:45]--[2020-04-28 Tue 21:54] =>  0:09
     CLOCK: [2020-04-28 Tue 08:29]--[2020-04-28 Tue 08:35] =>  0:06
     CLOCK: [2020-04-26 Sun 22:35]--[2020-04-26 Sun 22:41] =>  0:06
     CLOCK: [2020-04-26 Sun 08:02]--[2020-04-26 Sun 08:35] =>  0:33
@@ -1077,6 +1079,7 @@ Links:
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-04-28 Tue 22:02]--[2020-04-28 Tue 22:31] =>  0:29
     CLOCK: [2020-04-24 Fri 14:54]--[2020-04-24 Fri 15:00] =>  0:06
     CLOCK: [2020-04-24 Fri 13:49]--[2020-04-24 Fri 14:28] =>  0:39
     CLOCK: [2020-04-24 Fri 13:38]--[2020-04-24 Fri 13:48] =>  0:10
