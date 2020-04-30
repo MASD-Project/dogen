@@ -7275,52 +7275,6 @@ if Dogen still works. If it does, remove this.
 :       message(FATAL "could not find C++ runtime")
 :   endif()
 
-*** Setup laptop to work on dogen                                     :story:
-
-We haven't used the laptop for dogen for quite a bit so its behind the
-main machine. Get it in a shape to do development again.
-
-Items missing:
-
-- dir locals for projects
-- polymode
-- build2
-- odb
-
-*** Upgrade to boost 1.70                                             :story:
-
-We should try to upgrade to latest boost.
-
-Notes:
-
-- the problem appears to be that with OSX we do not have a compiler
-  installed that can compile vcpkg. It is not clear how we did it
-  before. The installed XCode compiler is too old and we do not have
-  homebrew for gcc.
-- installed LLVM 7. Ninja then went on a strange loop, regenerating
-  CMake files. This was because NTP had not been working on OSX for
-  some reason, and the clock was in the past.
-- compiling with clang 7 causes the =-lc++fs= linking error. Tried
-  compiling with clang 8.
-- Compilation required setting LDFLAGS -L to point to the lib
-  directory of the download, else the static library for filesystem
-  could not be location.
-- We may have linking problems now that we are using XCode 10 in
-  travis and clang 8 to build vcpkg dependencies.
-- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
-  that would be but the object we were referencing no longer exists in
-  code synthesis git repo.
-- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
-  repo any longer. Due to this, the OSX build is failing. For now we
-  shall try to update excluding that dependency, given we are not even
-  using it.
-- boost regex fails to build. The problem is that we are picking up
-  the system compiler instead of CXX. It is not clear why that
-  is. Maybe we got lucky in the past because we were using c++14 but
-  now with c++17 system clang fails to compile because it does not
-  have c++ 17 support.
-- nightlies are now failing with a missing reference to SQL lite.
-
 *** Move from doxygen to standardese                                  :story:
 
 We should try to use standardese to generate the documentation for

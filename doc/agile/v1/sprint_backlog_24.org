@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-29 Wed 22:41]
+#+CAPTION: Clock summary at [2020-04-30 Thu 22:33]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *64:57* |       |       | 100.0 |
+| *Total time*                                                 | *65:08* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 64:57   |       |       | 100.0 |
-| Active                                                       |         | 64:57 |       | 100.0 |
+| Stories                                                      | 65:08   |       |       | 100.0 |
+| Active                                                       |         | 65:08 |       | 100.0 |
 | Edit release notes for previous sprint                       |         |       |  9:22 |  14.4 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.6 |
-| Sprint and product backlog grooming                          |         |       |  9:22 |  14.4 |
-| Emacs issues and improvements                                |         |       |  1:16 |   2.0 |
+| Sprint and product backlog grooming                          |         |       |  9:33 |  14.7 |
+| Emacs issues and improvements                                |         |       |  1:16 |   1.9 |
 | Nightly nursing                                              |         |       |  3:10 |   4.9 |
 | Analysis on implementing enablement in physical model        |         |       |  3:10 |   4.9 |
 | Replace artefact properties with artefacts                   |         |       |  4:06 |   6.3 |
@@ -466,6 +466,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-30 Thu 22:22]--[2020-04-30 Thu 22:33] =>  0:11
     CLOCK: [2020-04-29 Wed 22:31]--[2020-04-29 Wed 22:41] =>  0:10
     CLOCK: [2020-04-28 Tue 08:36]--[2020-04-28 Tue 08:50] =>  0:14
     CLOCK: [2020-04-27 Mon 19:12]--[2020-04-27 Mon 19:21] =>  0:09
@@ -2431,3 +2432,55 @@ For coveralls, we do seem to be able to see the file itself, but not
 the lines covered:
 
 - [[https://codecov.io/gh/MASD-Project/dogen/src/master/projects/dogen/src/types/configuration.cpp][configuration.cpp]]
+*** CANCELLED Setup laptop to work on dogen                           :story:
+    CLOSED: [2020-04-30 Thu 22:31]
+
+*Rationale*: we don't really need it for now.
+
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- dir locals for projects
+- polymode
+- build2
+- odb
+
+*** CANCELLED Upgrade to boost 1.70                                   :story:
+    CLOSED: [2020-04-30 Thu 22:32]
+
+*Rationale*: boost has moved on to 1.73. We should worry about this
+when we have the time to move to latest boost.
+
+We should try to upgrade to latest boost.
+
+Notes:
+
+- the problem appears to be that with OSX we do not have a compiler
+  installed that can compile vcpkg. It is not clear how we did it
+  before. The installed XCode compiler is too old and we do not have
+  homebrew for gcc.
+- installed LLVM 7. Ninja then went on a strange loop, regenerating
+  CMake files. This was because NTP had not been working on OSX for
+  some reason, and the clock was in the past.
+- compiling with clang 7 causes the =-lc++fs= linking error. Tried
+  compiling with clang 8.
+- Compilation required setting LDFLAGS -L to point to the lib
+  directory of the download, else the static library for filesystem
+  could not be location.
+- We may have linking problems now that we are using XCode 10 in
+  travis and clang 8 to build vcpkg dependencies.
+- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
+  that would be but the object we were referencing no longer exists in
+  code synthesis git repo.
+- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
+  repo any longer. Due to this, the OSX build is failing. For now we
+  shall try to update excluding that dependency, given we are not even
+  using it.
+- boost regex fails to build. The problem is that we are picking up
+  the system compiler instead of CXX. It is not clear why that
+  is. Maybe we got lucky in the past because we were using c++14 but
+  now with c++17 system clang fails to compile because it does not
+  have c++ 17 support.
+- nightlies are now failing with a missing reference to SQL lite.
