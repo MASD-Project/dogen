@@ -58,8 +58,8 @@ model_to_text_chain::registrar() {
 
 void model_to_text_chain::apply(const m2t::transforms::context& ctx,
     m2t::entities::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming model: "
-                             << m.name().qualified().dot();
+    tracing::scoped_chain_tracer stp(lg, "model to text chain", transform_id,
+        m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*
      * No point in proceeding if the model has not types to
@@ -110,20 +110,8 @@ void model_to_text_chain::apply(const m2t::transforms::context& ctx,
     const bool ekd(m.extraction_properties().enable_backend_directories());
     t.apply(ctx, ekd, m);
 
-    BOOST_LOG_SEV(lg, debug) << "Updated artefacts for : " << id;
-}
-
-void model_to_text_chain::apply(const m2t::transforms::context& ctx,
-    std::list<m2t::entities::model>& ms) {
-    tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
-        transform_id, "FIXME", *ctx.tracer(), ms);
-
-    BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
-
-    for (auto& m : ms)
-        apply(ctx, m);
-
-    stp.end_chain(ms);
+    BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << id;
+    stp.end_chain(m);
 }
 
 }

@@ -23,7 +23,6 @@
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.m2t/types/transforms/model_generation_chain.hpp"
-#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
@@ -82,12 +81,10 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.generation_context(), lms));
 
     /*
-     * Run all the M2T transforms against the models.
+     * Run all the M2T chain against the models.
      */
     m2t::transforms::model_generation_chain::
         apply(ctx.generation_context(), m2tms);
-    using m2t::transforms::model_to_text_chain;
-    model_to_text_chain::apply(ctx.generation_context(), m2tms);
 
     /*
      * Obtain the physical models.

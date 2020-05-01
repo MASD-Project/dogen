@@ -41,13 +41,9 @@ public:
      */
     static model_to_text_technical_space_chain_registrar& registrar();
 
-private:
-    static void apply(const m2t::transforms::context& ctx,
-        m2t::entities::model& m);
-
 public:
     static void apply(const m2t::transforms::context& ctx,
-        std::list<m2t::entities::model>& ms);
+        m2t::entities::model& m);
 
 private:
     static std::shared_ptr<model_to_text_technical_space_chain_registrar>

@@ -29,6 +29,7 @@
 #include "dogen.m2t/types/transforms/global_enablement_transform.hpp"
 #include "dogen.m2t/types/transforms/technical_space_transform.hpp"
 #include "dogen.m2t/types/transforms/decoration_transform.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 #include "dogen.m2t/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -107,6 +108,11 @@ void model_generation_chain::apply(const context& ctx,
          * have no dependencies in the post-processing chain.
          */
         formatting_transform::apply(ctx, m);
+
+        /*
+         * Run all M2T transforms against the model.
+         */
+        model_to_text_chain::apply(ctx, m);
     }
 
     stp.end_chain(ms);
