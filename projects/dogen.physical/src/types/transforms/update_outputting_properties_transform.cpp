@@ -39,8 +39,8 @@ namespace dogen::physical::transforms {
 void update_outputting_properties_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "gather external artefacts transform", transform_id, m.name().simple(),
-        *ctx.tracer(), m);
+        "update outputting properties transform", transform_id,
+        m.name().simple(), *ctx.tracer(), m);
 
     const auto fm(*ctx.feature_model());
     const auto fg(features::filesystem::make_feature_group(fm));
