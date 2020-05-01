@@ -830,6 +830,21 @@
           "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
         }
       ]
+    },
+    {
+      "name": "entities::model_set",
+      "documentation": "Represents a set of related models.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<model>",
+          "documentation": "Models that belong to this set.\n"
+        }
+      ]
     }
   ]
 }
