@@ -21,6 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/m2t_model_to_physical_model.hpp"
 
@@ -43,6 +44,22 @@ m2t_model_to_physical_model::apply(const m2t::transforms::context& ctx,
         transform_id, *ctx.tracer(), ms);
 
     std::list<physical::entities::model> r;
+    for (const auto& m : ms) {
+        physical::entities::model pm;
+        pm.name().simple(m.name().simple());
+        pm.name().qualified(m.name().qualified().dot());
+        for (const auto& element : m.elements()) {
+            for (const auto& pair : element.artefacts()) {
+                const auto aptr(pair.second);
+                // FIXME: mega-hack: prune empty artefacts.
+                const auto& p(aptr->name().qualified());
+                if (!p.empty())
+                    pm.artefacts().push_back(aptr);
+            }
+        }
+        r.push_back(pm);
+    }
+
     return r;
 }
 

@@ -139,9 +139,9 @@ model_to_text_cpp_chain::technical_space() const {
     return logical::entities::technical_space::cpp;
 }
 
-physical::entities::model
-model_to_text_cpp_chain::apply(const m2t::transforms::context& ctx,
-    const bool enable_backend_directories, const m2t::entities::model& m) const {
+physical::entities::model model_to_text_cpp_chain::apply(
+    const m2t::transforms::context& ctx, const bool enable_backend_directories,
+    const m2t::entities::model& m) const {
     tracing::scoped_transform_tracer stp(lg, "C++ model to text transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer());
 
