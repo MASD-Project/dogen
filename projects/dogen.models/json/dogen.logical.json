@@ -4217,6 +4217,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "entities::output_model_set",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<model>",
+          "documentation": "All models in this model set.\n"
+        }
+      ]
     }
   ]
 }
