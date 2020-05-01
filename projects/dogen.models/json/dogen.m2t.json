@@ -830,13 +830,6 @@
           "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
         }
       ]
-    },
-    {
-      "name": "transforms::managed_directories_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }
