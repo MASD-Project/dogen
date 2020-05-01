@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_LOGICAL_MODEL_SET_CHAIN_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_LOGICAL_MODEL_SET_CHAIN_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_LOGICAL_INPUT_MODEL_SET_CHAIN_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_SET_TO_LOGICAL_INPUT_MODEL_SET_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@ namespace dogen::orchestration::transforms {
  * @pre all injection transforms must have been applied to the
  * injection model set.
  */
-class injection_model_set_to_logical_model_set_chain final {
+class injection_model_set_to_logical_input_model_set_chain final {
 public:
     static logical::entities::input_model_set
     apply(const context& ctx, const injection::entities::model_set& ms);

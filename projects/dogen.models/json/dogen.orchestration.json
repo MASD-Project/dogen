@@ -116,7 +116,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_set_to_logical_model_set_chain",
+      "name": "transforms::injection_model_set_to_logical_input_model_set_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

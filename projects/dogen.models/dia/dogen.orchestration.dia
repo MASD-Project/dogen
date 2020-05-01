@@ -1705,7 +1705,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_set_to_logical_model_set_chain#</dia:string>
+        <dia:string>#injection_model_set_to_logical_input_model_set_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

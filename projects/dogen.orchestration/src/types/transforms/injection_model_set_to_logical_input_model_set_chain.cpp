@@ -22,12 +22,12 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_to_logical_model_transform.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_input_model_set_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "orchestration.transforms.injection_model_set_to_logical_model_set_chain");
+    "orchestration.transforms.injection_model_set_to_logical_input_model_set_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -36,7 +36,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::orchestration::transforms {
 
 logical::entities::input_model_set
-injection_model_set_to_logical_model_set_chain::
+injection_model_set_to_logical_input_model_set_chain::
 apply(const context& ctx, const injection::entities::model_set& ms) {
     const auto model_name(ms.target().name());
     tracing::scoped_chain_tracer stp(lg,

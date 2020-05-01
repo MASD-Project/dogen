@@ -25,7 +25,7 @@
 #include "dogen.m2t/types/transforms/model_generation_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_input_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
@@ -64,7 +64,7 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Convert the injection model set into a logical model set.
      */
-    const auto lmset(injection_model_set_to_logical_model_set_chain::
+    const auto lmset(injection_model_set_to_logical_input_model_set_chain::
         apply(ctx, ims));
 
     /*
