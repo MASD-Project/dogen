@@ -1216,6 +1216,13 @@
           "documentation": "Meta-element used to generate this meta-element, if any.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::merge_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
