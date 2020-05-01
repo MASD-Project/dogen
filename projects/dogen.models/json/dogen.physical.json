@@ -1223,6 +1223,21 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::model_set",
+      "documentation": "Represents a set of related physical models.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<model>",
+          "documentation": "All models that are a member of this set.\n"
+        }
+      ]
     }
   ]
 }
