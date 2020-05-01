@@ -24,7 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
@@ -192,12 +192,12 @@ logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
 
 std::list<m2t::entities::model>
 logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
-    const std::list<logical::entities::model>& lms) {
-    tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
-        transform_id, *ctx.tracer(), lms);
+    const logical::entities::output_model_set& loms) {
+    tracing::scoped_transform_tracer stp(lg, "logical model to m2t model transform",
+        transform_id, loms.name().qualified().dot(), *ctx.tracer(), loms);
 
     std::list<m2t::entities::model> r;
-    for(const auto& lm : lms)
+    for(const auto& lm : loms.models())
         r.push_back(apply(ctx, lm));
 
     stp.end_transform(r);

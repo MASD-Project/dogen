@@ -24,9 +24,8 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/assembly_chain.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
@@ -44,7 +43,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-std::list<entities::model>
+entities::output_model_set
 model_production_chain::apply(const context& ctx,
     logical::entities::input_model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "logical model production chain",
@@ -55,6 +54,14 @@ model_production_chain::apply(const context& ctx,
      * model set, in order to get it into shape for assembly.
      */
     pre_assembly_chain::apply(ctx, ms);
+
+    /*
+     * Setup the output model set. Its name is always the target
+     * model. All models in the output model set are just different
+     * representations of the target model.
+     */
+    entities::output_model_set r;
+    r.name(ms.target().name());
 
     /*
      * Note that we've obtained the target given the user options;
@@ -84,7 +91,6 @@ model_production_chain::apply(const context& ctx,
      * The below code takes into account all of these permutations,
      * performing mapping as required.
      */
-    std::list<entities::model> r;
     for (const auto ots : ms.target().output_technical_spaces()) {
         /*
          * Execute the assembly chain for each of the requested output
@@ -97,7 +103,7 @@ model_production_chain::apply(const context& ctx,
          * assembled model.
          */
         post_assembly_chain::apply(ctx, m);
-        r.push_back(m);
+        r.models().push_back(m);
     }
 
     stp.end_chain(r);

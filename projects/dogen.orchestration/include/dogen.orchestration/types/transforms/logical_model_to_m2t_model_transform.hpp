@@ -27,6 +27,7 @@
 
 #include <list>
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/output_model_set.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 
@@ -51,7 +52,7 @@ public:
      */
     static std::list<m2t::entities::model>
     apply(const m2t::transforms::context& ctx,
-        const std::list<logical::entities::model>& lms);
+        const logical::entities::output_model_set& loms);
 };
 
 }

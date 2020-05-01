@@ -28,6 +28,7 @@
 #include <list>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/input_model_set.hpp"
+#include "dogen.logical/types/entities/output_model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -39,7 +40,7 @@ namespace dogen::logical::transforms {
  */
 class model_production_chain final {
 public:
-    static std::list<entities::model>
+    static entities::output_model_set
     apply(const context& ctx, logical::entities::input_model_set ms);
 };
 
