@@ -18,17 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_FWD_HPP
-#define DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen.m2t/types/transforms/text_to_text_chain.hpp"
 
 namespace dogen::m2t::transforms {
 
-class model_to_text_technical_space_chain;
-
+bool text_to_text_chain::operator==(const text_to_text_chain& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

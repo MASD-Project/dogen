@@ -270,21 +270,17 @@
     {
       "name": "transforms::model_to_text_technical_space_chain",
       "stereotypes": [
-        "dogen::handcrafted::typeable::header_only"
+        "dogen::handcrafted::typeable::header_only",
+        "dogen::forward_declarable"
       ],
-      "tagged_values": {
-        "masd.cpp.types.class_forward_declarations.enabled": "true"
-      },
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_text_technical_space_chain_registrar",
       "stereotypes": [
-        "dogen::handcrafted::typeable"
+        "dogen::handcrafted::typeable",
+        "dogen::forward_declarable"
       ],
-      "tagged_values": {
-        "masd.cpp.types.class_forward_declarations.enabled": "true"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -789,6 +785,45 @@
           "name": "artefacts",
           "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>",
           "documentation": "Physical artefact that will be produced from the logical element.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::text_to_text_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_text_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::text_to_text_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::text_to_text_transform_registrar",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transforms_for_logical_element_",
+          "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
         }
       ]
     }
