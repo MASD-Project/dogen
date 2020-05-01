@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 
 namespace std {
 
@@ -65,9 +65,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::logical::entities {
 
-std::ostream& operator<<(std::ostream& s, const model_set& v) {
+std::ostream& operator<<(std::ostream& s, const input_model_set& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::logical::entities::model_set\"" << ", "
+      << "\"__type__\": " << "\"dogen::logical::entities::input_model_set\"" << ", "
       << "\"target\": " << v.target() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"fixed_mappings\": " << v.fixed_mappings()

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.injection/types/entities/model_set.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -39,7 +39,7 @@ namespace dogen::orchestration::transforms {
  */
 class injection_model_set_to_logical_model_set_chain final {
 public:
-    static logical::entities::model_set
+    static logical::entities::input_model_set
     apply(const context& ctx, const injection::entities::model_set& ms);
 };
 

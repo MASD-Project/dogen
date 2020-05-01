@@ -27,7 +27,7 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
     const auto tg(origin_types::target);
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     ms.target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     const auto tg(origin_types::target);
     ms.target(factory.make_empty_model(tg));
 

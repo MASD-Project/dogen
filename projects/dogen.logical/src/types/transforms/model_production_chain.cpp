@@ -25,7 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/assembly_chain.hpp"
@@ -46,7 +46,7 @@ namespace dogen::logical::transforms {
 
 std::list<entities::model>
 model_production_chain::apply(const context& ctx,
-    logical::entities::model_set ms) {
+    logical::entities::input_model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "logical model production chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_MODEL_SET_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_MODEL_SET_HPP
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_INPUT_MODEL_SET_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_INPUT_MODEL_SET_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,17 +34,17 @@
 namespace dogen::logical::entities {
 
 /**
- * @brief Represents a set of related logical models.
+ * @brief Represents a set of related logical models used as an input to the logical model chains.
  */
-class model_set final {
+class input_model_set final {
 public:
-    model_set() = default;
-    model_set(const model_set&) = default;
-    model_set(model_set&&) = default;
-    ~model_set() = default;
+    input_model_set() = default;
+    input_model_set(const input_model_set&) = default;
+    input_model_set(input_model_set&&) = default;
+    ~input_model_set() = default;
 
 public:
-    model_set(
+    input_model_set(
         const dogen::logical::entities::model& target,
         const std::list<dogen::logical::entities::model>& references,
         const std::unordered_map<std::string, std::string>& fixed_mappings);
@@ -71,14 +71,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const model_set& rhs) const;
-    bool operator!=(const model_set& rhs) const {
+    bool operator==(const input_model_set& rhs) const;
+    bool operator!=(const input_model_set& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(model_set& other) noexcept;
-    model_set& operator=(model_set other);
+    void swap(input_model_set& other) noexcept;
+    input_model_set& operator=(input_model_set other);
 
 private:
     dogen::logical::entities::model target_;
@@ -92,8 +92,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::logical::entities::model_set& lhs,
-    dogen::logical::entities::model_set& rhs) {
+    dogen::logical::entities::input_model_set& lhs,
+    dogen::logical::entities::input_model_set& rhs) {
     lhs.swap(rhs);
 }
 

@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -192,7 +192,7 @@ entities::model merge_transform::merge(const entities::model& target,
 }
 
 entities::model merge_transform::apply(const context &ctx,
-    const logical::entities::model_set &ms) {
+    const logical::entities::input_model_set &ms) {
     const auto id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "merge transform",
         transform_id, id, *ctx.tracer(), ms);

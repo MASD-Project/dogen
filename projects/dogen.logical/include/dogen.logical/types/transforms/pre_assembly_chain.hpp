@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -51,7 +51,7 @@ public:
     /**
      * @brief Transform the supplied model set.
      */
-    static void apply(const context& ctx, entities::model_set& ms);
+    static void apply(const context& ctx, entities::input_model_set& ms);
 };
 
 }

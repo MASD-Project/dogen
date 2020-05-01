@@ -128,7 +128,7 @@ profile_adapter::adapt(const variability::entities::feature_model& fm,
 }
 
 std::list<variability::entities::profile_template> profile_adapter::
-adapt_profile_templates(const logical::entities::model_set& ms) {
+adapt_profile_templates(const logical::entities::input_model_set& ms) {
     std::list<variability::entities::profile_template> r;
 
     const auto lambda(
@@ -146,7 +146,7 @@ adapt_profile_templates(const logical::entities::model_set& ms) {
 
 std::list<variability::entities::profile> profile_adapter::
 adapt_profiles(const variability::entities::feature_model& fm,
-    const logical::entities::model_set& ms) {
+    const logical::entities::input_model_set& ms) {
     std::list<variability::entities::profile> r;
 
     const auto lambda(
@@ -164,7 +164,7 @@ adapt_profiles(const variability::entities::feature_model& fm,
 
 variability::transforms::profile_repository_inputs
 profile_adapter::adapt(const variability::entities::feature_model& fm,
-    const entities::model_set& ms) {
+    const entities::input_model_set& ms) {
     variability::transforms::profile_repository_inputs r;
     r.profiles(adapt_profiles(fm, ms));
     r.templates(adapt_profile_templates(ms));

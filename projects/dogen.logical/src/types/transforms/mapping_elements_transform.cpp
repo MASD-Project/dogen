@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -120,7 +120,7 @@ std::unordered_map<std::string,
                    >
 mapping_elements_transform::
 make_destinations(const variability::entities::feature_model &fm,
-    const logical::entities::model_set &ms) {
+    const logical::entities::input_model_set &ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     destination_gatherer dg(fg);
     dg.technical_space(ms.target().input_technical_space());
@@ -139,7 +139,7 @@ make_destinations(const variability::entities::feature_model &fm,
 void mapping_elements_transform::populate_extensible_mappables(
     const std::unordered_map<std::string,
     std::list<logical::entities::mapping::destination>>&
-    destinations_for_target, logical::entities::model_set& ms) {
+    destinations_for_target, logical::entities::input_model_set& ms) {
 
     using logical::entities::mapping::destination;
     const auto lambda(
@@ -166,7 +166,7 @@ void mapping_elements_transform::populate_extensible_mappables(
 
 void mapping_elements_transform::
 populate_fixed_mappables(const variability::entities::feature_model& fm,
-    logical::entities::model_set& ms) {
+    logical::entities::input_model_set& ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     const auto lambda(
         [&](logical::entities::model& m) {
@@ -194,7 +194,7 @@ populate_fixed_mappables(const variability::entities::feature_model& fm,
 }
 
 void mapping_elements_transform::
-apply(const context& ctx, logical::entities::model_set& ms) {
+apply(const context& ctx, logical::entities::input_model_set& ms) {
     const auto& id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping elements transform",
         transform_id, id, *ctx.tracer(), ms);

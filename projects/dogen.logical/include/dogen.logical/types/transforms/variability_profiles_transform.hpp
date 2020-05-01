@@ -27,7 +27,7 @@
 
 #include "dogen.logical/types/features/variability_entry.hpp"
 #include "dogen.logical/types/features/variability_profile.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 #include "dogen.logical/types/entities/variability/abstract_profile.hpp"
 #include "dogen.logical/types/entities/variability/abstract_profile_entry.hpp"
@@ -76,7 +76,7 @@ public:
     /**
      * @brief Applies the transform to the entire model set.
      */
-    static void apply(const context& ctx, entities::model_set& ms);
+    static void apply(const context& ctx, entities::input_model_set& ms);
 };
 
 }

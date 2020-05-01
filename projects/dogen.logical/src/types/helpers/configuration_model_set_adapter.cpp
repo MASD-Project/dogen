@@ -107,7 +107,7 @@ configuration_model_set_adapter::adapt(const entities::model& m) {
 }
 
 variability::entities::configuration_model_set
-configuration_model_set_adapter::adapt(const entities::model_set& ms) {
+configuration_model_set_adapter::adapt(const entities::input_model_set& ms) {
     variability::entities::configuration_model_set r;
     r.models().push_back(adapt(ms.target()));
 

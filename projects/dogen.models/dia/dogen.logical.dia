@@ -23545,13 +23545,13 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_set#</dia:string>
+        <dia:string>#input_model_set#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a set of related logical models.#</dia:string>
+        <dia:string>#Represents a set of related logical models used as an input to the logical model chains.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -53454,7 +53454,7 @@ FIXME: optional for now.
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a set of related logical models produced as ouput of the logical model chains.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

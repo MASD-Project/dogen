@@ -1617,8 +1617,8 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::model_set",
-      "documentation": "Represents a set of related logical models.\n",
+      "name": "entities::input_model_set",
+      "documentation": "Represents a set of related logical models used as an input to the logical model chains.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -4220,6 +4220,7 @@
     },
     {
       "name": "entities::output_model_set",
+      "documentation": "Represents a set of related logical models produced as ouput of the logical model chains.\n",
       "stereotypes": [
         "Nameable"
       ],

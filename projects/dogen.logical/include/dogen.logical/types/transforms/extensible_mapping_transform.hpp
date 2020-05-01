@@ -33,7 +33,7 @@
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -48,7 +48,7 @@ private:
                        boost::shared_ptr<
                            entities::mapping::extensible_mappable>
                        >
-    obtain_mappables(const logical::entities::model_set& ms);
+    obtain_mappables(const logical::entities::input_model_set& ms);
 
     /**
      * @brief Creates all of the element id mappings from the
@@ -84,8 +84,8 @@ private:
         const entities::model& src, const entities::technical_space to);
 
 public:
-    static logical::entities::model_set apply(const context& ctx,
-        const logical::entities::model_set& src,
+    static logical::entities::input_model_set apply(const context& ctx,
+        const logical::entities::input_model_set& src,
         const entities::technical_space to);
 };
 

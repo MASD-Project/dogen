@@ -25,7 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/entities/mapping/extensible_mappable.hpp"
 #include "dogen.logical/io/helpers/mapping_io.hpp"
 #include "dogen.logical/io/helpers/mapping_set_io.hpp"
@@ -59,7 +59,7 @@ std::unordered_map<std::string,
                        entities::mapping::extensible_mappable>
                    >
 extensible_mapping_transform::
-obtain_mappables(const logical::entities::model_set& ms) {
+obtain_mappables(const logical::entities::input_model_set& ms) {
     auto r(ms.target().mapping_elements().extensible_mappables());
     for (const auto& ref : ms.references()) {
         for (const auto& pair : ref.mapping_elements().extensible_mappables()) {
@@ -200,9 +200,9 @@ extensible_mapping_transform::map(const helpers::mapping_set_repository& msrp,
     return r;
 }
 
-logical::entities::model_set
+logical::entities::input_model_set
 extensible_mapping_transform::apply(const context& ctx,
-    const logical::entities::model_set& src,
+    const logical::entities::input_model_set& src,
     const entities::technical_space to) {
     const auto id(src.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
@@ -232,7 +232,7 @@ extensible_mapping_transform::apply(const context& ctx,
      * Perform all the technical space mapping required for the target
      * model.
      */
-    logical::entities::model_set r;
+    logical::entities::input_model_set r;
     r.target(map(msrp, src.target(), to));
 
     /*

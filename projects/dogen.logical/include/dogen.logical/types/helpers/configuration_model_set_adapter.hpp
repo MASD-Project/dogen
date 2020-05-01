@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/entities/configuration_model_set.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -47,7 +47,7 @@ public:
      * @brief Adapts all models in a model set.
      */
     static variability::entities::configuration_model_set
-    adapt(const entities::model_set& ms);
+    adapt(const entities::input_model_set& ms);
 };
 
 }

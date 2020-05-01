@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -66,7 +66,7 @@ private:
 
 public:
     static entities::model apply(const context& ctx,
-        const logical::entities::model_set& ms);
+        const logical::entities::input_model_set& ms);
 };
 
 }

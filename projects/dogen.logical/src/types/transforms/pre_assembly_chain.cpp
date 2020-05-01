@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/helpers/pre_assembly_validator.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/modelines_transform.hpp"
@@ -104,7 +104,7 @@ void pre_assembly_chain::apply(const context& ctx,
     helpers::pre_assembly_validator::validate(m);
 }
 
-void pre_assembly_chain::apply(const context& ctx, entities::model_set& ms) {
+void pre_assembly_chain::apply(const context& ctx, entities::input_model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "pre-assembly chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 

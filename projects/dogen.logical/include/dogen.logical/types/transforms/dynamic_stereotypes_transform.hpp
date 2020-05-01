@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -48,7 +48,7 @@ namespace dogen::logical::transforms {
 class dynamic_stereotypes_transform final {
 public:
     static void apply(const logical::transforms::context& ctx,
-        logical::entities::model_set& ms);
+        logical::entities::input_model_set& ms);
 };
 
 }

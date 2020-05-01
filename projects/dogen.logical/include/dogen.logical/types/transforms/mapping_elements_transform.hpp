@@ -28,7 +28,7 @@
 #include <list>
 #include <unordered_map>
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/entities/mapping/destination.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
@@ -42,21 +42,21 @@ private:
                                   logical::entities::mapping::destination>
                               >
     make_destinations(const variability::entities::feature_model& fm,
-        const logical::entities::model_set& ms);
+        const logical::entities::input_model_set& ms);
 
     static void populate_extensible_mappables(
         const std::unordered_map<std::string,
         std::list<logical::entities::mapping::destination>>&
-        destinations_for_target, logical::entities::model_set& ms);
+        destinations_for_target, logical::entities::input_model_set& ms);
 
 private:
     static void populate_fixed_mappables(
         const variability::entities::feature_model& fm,
-        logical::entities::model_set& ms);
+        logical::entities::input_model_set& ms);
 
 public:
     static void
-    apply(const context& ctx, logical::entities::model_set& ms);
+    apply(const context& ctx, logical::entities::input_model_set& ms);
 };
 
 }

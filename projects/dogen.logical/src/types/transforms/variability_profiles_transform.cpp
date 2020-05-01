@@ -25,7 +25,7 @@
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/entities/variability/profile.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/variability/profile_template.hpp"
@@ -175,7 +175,7 @@ void variability_profiles_transform::process_profiles(
 }
 
 void variability_profiles_transform::
-apply(const context& ctx, logical::entities::model_set& ms) {
+apply(const context& ctx, logical::entities::input_model_set& ms) {
     const auto model_name(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "variability profiles",
         transform_id, model_name, *ctx.tracer());

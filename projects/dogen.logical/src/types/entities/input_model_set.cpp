@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 
 namespace dogen::logical::entities {
 
-model_set::model_set(
+input_model_set::input_model_set(
     const dogen::logical::entities::model& target,
     const std::list<dogen::logical::entities::model>& references,
     const std::unordered_map<std::string, std::string>& fixed_mappings)
@@ -30,70 +30,70 @@ model_set::model_set(
       references_(references),
       fixed_mappings_(fixed_mappings) { }
 
-void model_set::swap(model_set& other) noexcept {
+void input_model_set::swap(input_model_set& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(references_, other.references_);
     swap(fixed_mappings_, other.fixed_mappings_);
 }
 
-bool model_set::operator==(const model_set& rhs) const {
+bool input_model_set::operator==(const input_model_set& rhs) const {
     return target_ == rhs.target_ &&
         references_ == rhs.references_ &&
         fixed_mappings_ == rhs.fixed_mappings_;
 }
 
-model_set& model_set::operator=(model_set other) {
+input_model_set& input_model_set::operator=(input_model_set other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::logical::entities::model& model_set::target() const {
+const dogen::logical::entities::model& input_model_set::target() const {
     return target_;
 }
 
-dogen::logical::entities::model& model_set::target() {
+dogen::logical::entities::model& input_model_set::target() {
     return target_;
 }
 
-void model_set::target(const dogen::logical::entities::model& v) {
+void input_model_set::target(const dogen::logical::entities::model& v) {
     target_ = v;
 }
 
-void model_set::target(const dogen::logical::entities::model&& v) {
+void input_model_set::target(const dogen::logical::entities::model&& v) {
     target_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::model>& model_set::references() const {
+const std::list<dogen::logical::entities::model>& input_model_set::references() const {
     return references_;
 }
 
-std::list<dogen::logical::entities::model>& model_set::references() {
+std::list<dogen::logical::entities::model>& input_model_set::references() {
     return references_;
 }
 
-void model_set::references(const std::list<dogen::logical::entities::model>& v) {
+void input_model_set::references(const std::list<dogen::logical::entities::model>& v) {
     references_ = v;
 }
 
-void model_set::references(const std::list<dogen::logical::entities::model>&& v) {
+void input_model_set::references(const std::list<dogen::logical::entities::model>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& model_set::fixed_mappings() const {
+const std::unordered_map<std::string, std::string>& input_model_set::fixed_mappings() const {
     return fixed_mappings_;
 }
 
-std::unordered_map<std::string, std::string>& model_set::fixed_mappings() {
+std::unordered_map<std::string, std::string>& input_model_set::fixed_mappings() {
     return fixed_mappings_;
 }
 
-void model_set::fixed_mappings(const std::unordered_map<std::string, std::string>& v) {
+void input_model_set::fixed_mappings(const std::unordered_map<std::string, std::string>& v) {
     fixed_mappings_ = v;
 }
 
-void model_set::fixed_mappings(const std::unordered_map<std::string, std::string>&& v) {
+void input_model_set::fixed_mappings(const std::unordered_map<std::string, std::string>&& v) {
     fixed_mappings_ = std::move(v);
 }
 

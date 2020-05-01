@@ -35,7 +35,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-logical::entities::model_set
+logical::entities::input_model_set
 injection_model_set_to_logical_model_set_chain::
 apply(const context& ctx, const injection::entities::model_set& ms) {
     const auto model_name(ms.target().name());
@@ -49,7 +49,7 @@ apply(const context& ctx, const injection::entities::model_set& ms) {
      * that further transforms can be applied such as the origin
      * transform.
      */
-    logical::entities::model_set r;
+    logical::entities::input_model_set r;
     using tf = injection_model_to_logical_model_transform;
     r.target(tf::apply(ctx, ms.target()));
     r.target().origin_type(logical::entities::origin_types::target);

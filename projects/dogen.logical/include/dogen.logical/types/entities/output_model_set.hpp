@@ -32,6 +32,9 @@
 
 namespace dogen::logical::entities {
 
+/**
+ * @brief Represents a set of related logical models produced as ouput of the logical model chains.
+ */
 class output_model_set final {
 public:
     output_model_set() = default;

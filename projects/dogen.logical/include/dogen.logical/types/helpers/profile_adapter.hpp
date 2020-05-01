@@ -29,7 +29,7 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/profile_template.hpp"
 #include "dogen.variability/types/transforms/profile_repository_inputs.hpp"
-#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/entities/variability/profile.hpp"
 #include "dogen.logical/types/entities/variability/profile_template.hpp"
 
@@ -61,14 +61,14 @@ public:
      * @brief Adapt all profile templates.
      */
     static std::list<variability::entities::profile_template>
-    adapt_profile_templates(const entities::model_set& ms);
+    adapt_profile_templates(const entities::input_model_set& ms);
 
     /**
      * @brief Adapt all profiles.
      */
     static std::list<variability::entities::profile>
     adapt_profiles(const variability::entities::feature_model& fm,
-        const entities::model_set& ms);
+        const entities::input_model_set& ms);
 
     /**
      * @brief Adapts a model set into the inputs required to build a
@@ -76,7 +76,7 @@ public:
      */
     static variability::transforms::profile_repository_inputs
     adapt(const variability::entities::feature_model& fm,
-        const entities::model_set& ms);
+        const entities::input_model_set& ms);
 };
 
 }

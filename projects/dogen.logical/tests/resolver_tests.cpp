@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
 BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_successful_merge) {
     SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_different_model_results_in_successful_merge");
 
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     const auto m(factory.object_with_attribute_type_in_different_model());
     ms.target(m[0]);
     ms.references().push_back(m[1]);
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
 
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     ms.target(factory.object_with_parent_in_the_same_model());
 
     const auto ctx(mock_context_factory::make());
@@ -210,7 +210,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_different_models_resolves_successfully");
 
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     const auto m(factory.object_with_parent_in_different_models());
     ms.target(m[0]);
     ms.references().push_back(m[1]);
@@ -241,7 +241,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     ms.target(factory.object_with_third_degree_parent_in_same_model());
 
     const auto ctx(mock_context_factory::make());
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     const auto a(factory.object_with_third_degree_parent_in_different_models());
     ms.target(a[0]);
     ms.references().push_back(a[1]);
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
 BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("object_with_missing_third_degree_parent_in_different_models_throws");
-    dogen::logical::entities::model_set ms;
+    dogen::logical::entities::input_model_set ms;
     const auto a(
         factory.object_with_missing_third_degree_parent_in_different_models());
     ms.target(a[0]);

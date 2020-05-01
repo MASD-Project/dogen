@@ -24,7 +24,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
@@ -169,7 +169,7 @@ public:
 }
 
 void dynamic_stereotypes_transform::
-apply(const transforms::context& ctx, entities::model_set& ms) {
+apply(const transforms::context& ctx, entities::input_model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes transform",
         transform_id, *ctx.tracer(), ms);
 
