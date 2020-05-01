@@ -1618,6 +1618,7 @@
     },
     {
       "name": "entities::model_set",
+      "documentation": "Represents a set of related logical models.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

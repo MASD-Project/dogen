@@ -23551,7 +23551,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a set of related logical models.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

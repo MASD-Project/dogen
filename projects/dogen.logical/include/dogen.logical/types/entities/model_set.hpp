@@ -33,6 +33,9 @@
 
 namespace dogen::logical::entities {
 
+/**
+ * @brief Represents a set of related logical models.
+ */
 class model_set final {
 public:
     model_set() = default;
