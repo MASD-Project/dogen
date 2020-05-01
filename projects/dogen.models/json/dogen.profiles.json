@@ -834,6 +834,26 @@
           "value": "false"
         }
       ]
+    },
+    {
+      "name": "composable::forward_declarable",
+      "documentation": "Element has forward declarations.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.stereotype": "dogen::forward_declarable",
+        "masd.variability.key_prefix": "masd.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "class_forward_declarations.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
     }
   ]
 }
