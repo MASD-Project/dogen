@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-30 Thu 22:33]
+#+CAPTION: Clock summary at [2020-05-01 Fri 12:12]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *65:08* |       |       | 100.0 |
+| *Total time*                                                 | *68:08* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 65:08   |       |       | 100.0 |
-| Active                                                       |         | 65:08 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  14.4 |
+| Stories                                                      | 68:08   |       |       | 100.0 |
+| Active                                                       |         | 68:08 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  13.7 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.6 |
-| Sprint and product backlog grooming                          |         |       |  9:33 |  14.7 |
+| Sprint and product backlog grooming                          |         |       |  9:33 |  14.0 |
 | Emacs issues and improvements                                |         |       |  1:16 |   1.9 |
-| Nightly nursing                                              |         |       |  3:10 |   4.9 |
-| Analysis on implementing enablement in physical model        |         |       |  3:10 |   4.9 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.3 |
-| Papers: Systems variability modeling                         |         |       |  2:55 |   4.5 |
-| Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.4 |
+| Nightly nursing                                              |         |       |  3:10 |   4.6 |
+| Analysis on implementing enablement in physical model        |         |       |  3:10 |   4.6 |
+| Replace artefact properties with artefacts                   |         |       |  4:06 |   6.0 |
+| Papers: Systems variability modeling                         |         |       |  2:55 |   4.3 |
+| Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.3 |
 | Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.7 |
-| Add model name to tracing dumps                              |         |       |  1:35 |   2.4 |
+| Add model name to tracing dumps                              |         |       |  1:35 |   2.3 |
 | Primitives are using compiler generated default constructors |         |       |  0:17 |   0.4 |
-| Hello world segfaults                                        |         |       |  0:55 |   1.4 |
-| Move code coverage to CDash                                  |         |       |  4:53 |   7.5 |
-| Add physical entities to logical model                       |         |       | 20:37 |  31.7 |
-| Create the concept of Text-to-Text transforms                |         |       |  0:52 |   1.3 |
+| Hello world segfaults                                        |         |       |  0:55 |   1.3 |
+| Move code coverage to CDash                                  |         |       |  4:53 |   7.2 |
+| Add physical entities to logical model                       |         |       | 20:37 |  30.3 |
+| Create the concept of Text-to-Text transforms                |         |       |  3:52 |   5.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1571,6 +1571,8 @@ Notes:
 
 *** STARTED Create the concept of Text-to-Text transforms             :story:
     :LOGBOOK:
+    CLOCK: [2020-05-01 Fri 09:57]--[2020-05-01 Fri 12:12] =>  2:15
+    CLOCK: [2020-05-01 Fri 09:12]--[2020-05-01 Fri 09:57] =>  0:45
     CLOCK: [2020-04-24 Fri 17:09]--[2020-04-24 Fri 17:25] =>  0:16
     CLOCK: [2020-04-24 Fri 16:33]--[2020-04-24 Fri 17:09] =>  0:36
     :END:
@@ -1607,6 +1609,30 @@ with the technical space.
 We should also make sure the skeleton for formatters generates a
 simple empty artefact that is suitable for modeling the outputs of a
 T2T transform.
+
+Notes:
+
+- we originally implied that there was an archetype for "stitch
+  templates". This was careless; there cannot be such an
+  archetype. The archetype must be specific to the /kind/ of stitch
+  template. This is because we may use stitch templates for pretty
+  much any purpose (to generate header files, config files,
+  implementation files, etc). These will have their own archetypes
+  because they are different /kinds/ of files. If all stitch templates
+  belonged to the same archetype we would not be able to know what the
+  output should be. We can of course have a common stitch formatter
+  for all of these (when needed) but we must always have distinct T2T
+  transforms for each archetype.
+- our model to text chains are wrong. At present they are generating
+  directly the physical model; in reality they should just be working
+  on the m2t model, updating the artefacts. We should then have a
+  final step for physical model generation which is distinct from M2T
+  chains. In order to keep the existing symmetry, the final conversion
+  should be placed in the orchestration model - though of course given
+  that the m2t model is already a bridge between logical and physical
+  space, it could be argued it could also do the final
+  transform. Nonetheless, it will be much easier to find this
+  transform if it follows the same logic as all others.
 
 *** Inject backend, facets and archetypes into PMM                    :story:
 
