@@ -5159,7 +5159,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#m2t_model_to_physical_model#</dia:string>
+        <dia:string>#m2t_model_to_physical_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

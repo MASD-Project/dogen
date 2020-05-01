@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_M2T_MODEL_TO_PHYSICAL_MODEL_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_M2T_MODEL_TO_PHYSICAL_MODEL_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_M2T_MODEL_TO_PHYSICAL_MODEL_TRANSFORM_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_M2T_MODEL_TO_PHYSICAL_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace dogen::orchestration::transforms {
 /**
  * @brief Converts M2T models into physical models.
  */
-class m2t_model_to_physical_model final {
+class m2t_model_to_physical_model_transform final {
 public:
     /**
      * @brief Applies the transform to the input model set.

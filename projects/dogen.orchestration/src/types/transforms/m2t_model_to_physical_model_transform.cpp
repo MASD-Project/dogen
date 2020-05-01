@@ -21,14 +21,15 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
-#include "dogen.orchestration/types/transforms/m2t_model_to_physical_model.hpp"
+#include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "orchestration.transforms.m2t_model_to_physical_model");
+    "orchestration.transforms.m2t_model_to_physical_model_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -38,7 +39,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::orchestration::transforms {
 
 std::list<physical::entities::model>
-m2t_model_to_physical_model::apply(const m2t::transforms::context& ctx,
+m2t_model_to_physical_model_transform::apply(const m2t::transforms::context& ctx,
     const std::list<m2t::entities::model>& ms) {
     tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
         transform_id, *ctx.tracer(), ms);
@@ -46,8 +47,14 @@ m2t_model_to_physical_model::apply(const m2t::transforms::context& ctx,
     std::list<physical::entities::model> r;
     for (const auto& m : ms) {
         physical::entities::model pm;
+        pm.logical_name().simple(m.name().simple());
+        pm.logical_name().qualified(m.name().qualified().dot());
+        pm.origin_sha1_hash(m.origin_sha1_hash());
         pm.name().simple(m.name().simple());
         pm.name().qualified(m.name().qualified().dot());
+        pm.configuration(m.root_module()->configuration());
+        pm.managed_directories(m.managed_directories());
+
         for (const auto& element : m.elements()) {
             for (const auto& pair : element.artefacts()) {
                 const auto aptr(pair.second);

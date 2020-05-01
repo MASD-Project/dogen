@@ -259,7 +259,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::m2t_model_to_physical_model",
+      "name": "transforms::m2t_model_to_physical_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
