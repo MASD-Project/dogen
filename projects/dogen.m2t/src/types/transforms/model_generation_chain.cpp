@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.m2t/io/entities/model_io.hpp"
+#include "dogen.m2t/io/entities/model_set_io.hpp"
 #include "dogen.m2t/types/transforms/generability_transform.hpp"
 #include "dogen.m2t/types/transforms/artefact_properties_transform.hpp"
 #include "dogen.m2t/types/transforms/local_enablement_transform.hpp"
@@ -44,26 +44,15 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::m2t::transforms {
 
-void model_generation_chain::apply(const context& ctx,
-    std::list<entities::model>& ms) {
-
-    /*
-     * If we don't have any models in the set, there is nothing to
-     * do. Don't even bother setup the tracer.
-     */
-    if (ms.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Model set is empty, nothing to do.";
-        return;
-    }
-
-    const auto id(ms.front().name().qualified().dot());
+void model_generation_chain::
+apply(const context& ctx, entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, id, *ctx.tracer(), ms);
+        transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
      * Apply all of the post-processing transforms to the model.
      */
-    for (auto& m : ms) {
+    for (auto& m : ms.models()) {
         /*
          * Technical spaces transform must be done after the dynamic
          * transform but before decorations.

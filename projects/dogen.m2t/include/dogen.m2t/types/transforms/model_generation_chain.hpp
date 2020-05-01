@@ -26,14 +26,14 @@
 #endif
 
 #include <list>
-#include "dogen.m2t/types/entities/model.hpp"
+#include "dogen.m2t/types/entities/model_set.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 
 namespace dogen::m2t::transforms {
 
 class model_generation_chain final {
 public:
-    static void apply(const context& ctx, std::list<entities::model>& ms);
+    static void apply(const context& ctx, entities::model_set& ms);
 };
 
 }

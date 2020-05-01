@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.m2t/io/entities/model_io.hpp"
+#include "dogen.m2t/io/entities/model_set_io.hpp"
 #include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
 
 namespace {
@@ -40,12 +40,12 @@ namespace dogen::orchestration::transforms {
 
 std::list<physical::entities::model>
 m2t_model_to_physical_model_transform::apply(const m2t::transforms::context& ctx,
-    const std::list<m2t::entities::model>& ms) {
+    const m2t::entities::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
-        transform_id, *ctx.tracer(), ms);
+        transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
 
     std::list<physical::entities::model> r;
-    for (const auto& m : ms) {
+    for (const auto& m : ms.models()) {
         physical::entities::model pm;
         pm.logical_name().simple(m.name().simple());
         pm.logical_name().qualified(m.name().qualified().dot());

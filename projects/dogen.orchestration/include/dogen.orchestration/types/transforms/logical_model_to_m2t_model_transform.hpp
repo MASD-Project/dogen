@@ -28,7 +28,7 @@
 #include <list>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/output_model_set.hpp"
-#include "dogen.m2t/types/entities/model.hpp"
+#include "dogen.m2t/types/entities/model_set.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -50,8 +50,7 @@ public:
     /**
      * @brief Transform logical models into its m2t counterparts.
      */
-    static std::list<m2t::entities::model>
-    apply(const m2t::transforms::context& ctx,
+    static m2t::entities::model_set apply(const m2t::transforms::context& ctx,
         const logical::entities::output_model_set& loms);
 };
 

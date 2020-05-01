@@ -27,7 +27,7 @@
 
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
-#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model_set.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -41,7 +41,7 @@ public:
      */
     static std::list<physical::entities::model>
     apply(const m2t::transforms::context& ctx,
-        const std::list<m2t::entities::model>& ms);
+        const m2t::entities::model_set& ms);
 };
 
 }

@@ -30,7 +30,7 @@
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.m2t/io/entities/model_io.hpp"
+#include "dogen.m2t/io/entities/model_set_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
 
@@ -190,15 +190,16 @@ logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
     return r;
 }
 
-std::list<m2t::entities::model>
-logical_model_to_m2t_model_transform::apply(const m2t::transforms::context& ctx,
+m2t::entities::model_set logical_model_to_m2t_model_transform::
+apply(const m2t::transforms::context& ctx,
     const logical::entities::output_model_set& loms) {
-    tracing::scoped_transform_tracer stp(lg, "logical model to m2t model transform",
+    tracing::scoped_transform_tracer stp(lg,
+        "logical model to m2t model transform",
         transform_id, loms.name().qualified().dot(), *ctx.tracer(), loms);
 
-    std::list<m2t::entities::model> r;
+    m2t::entities::model_set r;
     for(const auto& lm : loms.models())
-        r.push_back(apply(ctx, lm));
+        r.models().push_back(apply(ctx, lm));
 
     stp.end_transform(r);
     return r;
