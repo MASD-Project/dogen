@@ -145,6 +145,8 @@ fi
 
 if [ "${COVERAGE}" = "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_PROFILING=ON"
+else
+    cmake_defines="${cmake_defines} -DWITH_PROFILING=OFF"
 fi
 
 #
