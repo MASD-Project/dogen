@@ -36,7 +36,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 entities::model merge_transform::apply(const physical::transforms::context& ctx,
-    std::list<physical::entities::model>& ms) {
+    const std::list<physical::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "merge transform",
         transform_id, "FIXME", *ctx.tracer(), ms);
 

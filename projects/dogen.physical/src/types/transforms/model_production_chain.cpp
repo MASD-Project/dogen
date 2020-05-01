@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/transforms/merge_transform.hpp"
 #include "dogen.physical/types/transforms/update_outputting_properties_transform.hpp"
 #include "dogen.physical/types/transforms/operation_transform.hpp"
 #include "dogen.physical/types/transforms/gather_external_artefacts_transform.hpp"
@@ -41,36 +43,42 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void model_production_chain::
-apply(const context& ctx, entities::model& m) {
+entities::model model_production_chain::
+apply(const context& ctx, const std::list<entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
-        transform_id, m.name().simple(), *ctx.tracer(), m);
+        transform_id, "FIXME", *ctx.tracer(), ms);
 
     /*
-     * We start by reading the outputting properties. We don't need
-     * this until later on but its probably wise to get the meta-data
-     * out of the way first.
+     * Before we do anything, we might as well merge all models into
+     * one.
      */
-    update_outputting_properties_transform::apply(ctx, m);
+    auto r(physical::transforms::merge_transform::apply(ctx, ms));
+
+    /*
+     * Now we start the processing proper. We start by reading the
+     * outputting properties. We don't need this until later on but
+     * its probably wise to get the meta-data out of the way first.
+     */
+    update_outputting_properties_transform::apply(ctx, r);
 
     /*
      * Fill in any empty files with mock content. Must be done before
      * the operation transform.
      */
-    mock_content_filler_transform::apply(ctx, m);
+    mock_content_filler_transform::apply(ctx, r);
 
     /*
      * Update the operations on all artefacts so that subsequent
      * transforms know what to do with them.
      */
-    operation_transform::apply(ctx, m);
+    operation_transform::apply(ctx, r);
 
     /*
      * Now find all the external artefacts in the filesystem and
      * figure out which ones are not expected. This must be done
      * before we generate diffs.
      */
-    gather_external_artefacts_transform::apply(ctx, m);
+    gather_external_artefacts_transform::apply(ctx, r);
 
     /*
      * If diffing is enabled and the user requested unified diffs, we
@@ -78,20 +86,22 @@ apply(const context& ctx, entities::model& m) {
      * filesystem and the generated artefacts. This must be done
      * before writing and generating a patch.
      */
-    generate_diffs_transform::apply(ctx, m);
+    generate_diffs_transform::apply(ctx, r);
 
     /*
      * If unified diffs were generated, we can now create a patch
      * file.
      */
-    generate_patch_transform::apply(ctx, m);
+    generate_patch_transform::apply(ctx, r);
 
     /*
      * If brief diffs were requested, we will generate a report of all
      * the operations for this set of artefacts.
      */
-    generate_report_transform::apply(ctx, m);
+    generate_report_transform::apply(ctx, r);
 
+    stp.end_chain(r);
+    return r;
 }
 
 }

@@ -29,7 +29,6 @@
 #include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
-#include "dogen.physical/types/transforms/merge_transform.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace {
@@ -89,16 +88,14 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Obtain the physical models.
      */
-    auto pms(transforms::m2t_model_to_physical_model_transform::
+    const auto pms(transforms::m2t_model_to_physical_model_transform::
         apply(ctx.generation_context(), m2tms));
-    auto r(physical::transforms::merge_transform::apply(ctx.physical_context(),
-            pms));
 
     /*
      * Run all of the physical transforms against the physical models.
      */
-    physical::transforms::model_production_chain::
-        apply(ctx.physical_context(), r);
+    const auto r(physical::transforms::model_production_chain::
+        apply(ctx.physical_context(), pms));
 
     stp.end_chain(r);
     BOOST_LOG_SEV(lg, info) << "Finished physical model production.";

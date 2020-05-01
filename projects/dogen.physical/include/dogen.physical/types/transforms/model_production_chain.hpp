@@ -25,14 +25,23 @@
 #pragma once
 #endif
 
+#include <list>
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Applies all of the physical model transforms against the
+ * supplied set of models.
+ */
 class model_production_chain final {
 public:
-    static void apply(const context& ctx, entities::model& m);
+    /**
+     * @brief Execute the transform.
+     */
+    static entities::model apply(const context& ctx,
+        const std::list<entities::model>& ms);
 };
 
 }

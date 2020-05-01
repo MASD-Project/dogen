@@ -36,8 +36,11 @@ namespace dogen::physical::transforms {
  */
 class merge_transform final {
 public:
+    /**
+     * @brief Apply the transform to the list of input models.
+     */
     static entities::model apply(const physical::transforms::context& ctx,
-        std::list<physical::entities::model>& ms);
+        const std::list<physical::entities::model>& ms);
 };
 
 }
