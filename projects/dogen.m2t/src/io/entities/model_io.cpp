@@ -159,6 +159,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << (*i).generic_string() << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::m2t::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -185,7 +199,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties()
+      << "\"extraction_properties\": " << v.extraction_properties() << ", "
+      << "\"managed_directories\": " << v.managed_directories()
       << " }";
     return(s);
 }

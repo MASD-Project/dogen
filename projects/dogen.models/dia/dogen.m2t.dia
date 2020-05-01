@@ -106,7 +106,7 @@
         <dia:point val="68,34.2857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,34.2357;102.815,47.5357"/>
+        <dia:rectangle val="67.95,34.2357;102.815,48.3357"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="68,34.2857"/>
@@ -115,7 +115,7 @@
         <dia:real val="34.765000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -493,6 +493,29 @@ spaces.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#logical::entities::extraction_properties#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#managed_directories#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;boost::filesystem::path&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1378,16 +1401,16 @@ spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="68,47.4857"/>
+        <dia:point val="68,48.2857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.25,46.7357;70.8775,52.8"/>
+        <dia:rectangle val="67.25,47.5357;70.8775,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="68,47.4857"/>
+        <dia:point val="68,48.2857"/>
         <dia:point val="68,50"/>
         <dia:point val="70.6775,50"/>
         <dia:point val="70.6775,52"/>
@@ -12651,7 +12674,7 @@ code: identation and dividers.#</dia:string>
         <dia:point val="98.025,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.275,47.4357;102.965,52.8"/>
+        <dia:rectangle val="97.275,48.2357;102.965,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12660,7 +12683,7 @@ code: identation and dividers.#</dia:string>
         <dia:point val="98.025,52"/>
         <dia:point val="98.025,50"/>
         <dia:point val="102.765,50"/>
-        <dia:point val="102.765,47.4857"/>
+        <dia:point val="102.765,48.2857"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13208,16 +13231,16 @@ code: identation and dividers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="85.3825,47.5359"/>
+        <dia:point val="85.3825,48.3342"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.6325,46.7859;88.16,57.7497"/>
+        <dia:rectangle val="84.6325,47.5842;88.16,57.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="85.3825,47.5359"/>
+        <dia:point val="85.3825,48.3342"/>
         <dia:point val="85.3825,50"/>
         <dia:point val="87.96,50"/>
         <dia:point val="87.96,56.9497"/>
@@ -13237,7 +13260,7 @@ code: identation and dividers.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O1" connection="34"/>
+        <dia:connection handle="0" to="O1" connection="36"/>
         <dia:connection handle="1" to="O93" connection="12"/>
       </dia:connections>
       <dia:childnode parent="O0"/>

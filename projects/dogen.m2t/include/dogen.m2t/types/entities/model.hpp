@@ -32,6 +32,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/origin_types.hpp"
@@ -78,7 +79,8 @@ public:
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
         const std::unordered_set<dogen::m2t::entities::element_archetype>& enabled_archetype_for_element,
         const dogen::m2t::entities::global_enablement_properties& global_enablement_properties,
-        const dogen::logical::entities::extraction_properties& extraction_properties);
+        const dogen::logical::entities::extraction_properties& extraction_properties,
+        const std::list<boost::filesystem::path>& managed_directories);
 
 public:
     const dogen::logical::entities::name& name() const;
@@ -206,6 +208,11 @@ public:
     void extraction_properties(const dogen::logical::entities::extraction_properties& v);
     void extraction_properties(const dogen::logical::entities::extraction_properties&& v);
 
+    const std::list<boost::filesystem::path>& managed_directories() const;
+    std::list<boost::filesystem::path>& managed_directories();
+    void managed_directories(const std::list<boost::filesystem::path>& v);
+    void managed_directories(const std::list<boost::filesystem::path>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -233,6 +240,7 @@ private:
     std::unordered_set<dogen::m2t::entities::element_archetype> enabled_archetype_for_element_;
     dogen::m2t::entities::global_enablement_properties global_enablement_properties_;
     dogen::logical::entities::extraction_properties extraction_properties_;
+    std::list<boost::filesystem::path> managed_directories_;
 };
 
 }

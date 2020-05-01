@@ -53,7 +53,8 @@ model::model(model&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       global_enablement_properties_(std::move(rhs.global_enablement_properties_)),
-      extraction_properties_(std::move(rhs.extraction_properties_)) { }
+      extraction_properties_(std::move(rhs.extraction_properties_)),
+      managed_directories_(std::move(rhs.managed_directories_)) { }
 
 model::model(
     const dogen::logical::entities::name& name,
@@ -71,7 +72,8 @@ model::model(
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::m2t::entities::element_archetype>& enabled_archetype_for_element,
     const dogen::m2t::entities::global_enablement_properties& global_enablement_properties,
-    const dogen::logical::entities::extraction_properties& extraction_properties)
+    const dogen::logical::entities::extraction_properties& extraction_properties,
+    const std::list<boost::filesystem::path>& managed_directories)
     : name_(name),
       meta_name_(meta_name),
       origin_sha1_hash_(origin_sha1_hash),
@@ -87,7 +89,8 @@ model::model(
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       global_enablement_properties_(global_enablement_properties),
-      extraction_properties_(extraction_properties) { }
+      extraction_properties_(extraction_properties),
+      managed_directories_(managed_directories) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -107,6 +110,7 @@ void model::swap(model& other) noexcept {
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(extraction_properties_, other.extraction_properties_);
+    swap(managed_directories_, other.managed_directories_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -125,7 +129,8 @@ bool model::operator==(const model& rhs) const {
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         global_enablement_properties_ == rhs.global_enablement_properties_ &&
-        extraction_properties_ == rhs.extraction_properties_;
+        extraction_properties_ == rhs.extraction_properties_ &&
+        managed_directories_ == rhs.managed_directories_;
 }
 
 model& model::operator=(model other) {
@@ -364,6 +369,22 @@ void model::extraction_properties(const dogen::logical::entities::extraction_pro
 
 void model::extraction_properties(const dogen::logical::entities::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
+}
+
+const std::list<boost::filesystem::path>& model::managed_directories() const {
+    return managed_directories_;
+}
+
+std::list<boost::filesystem::path>& model::managed_directories() {
+    return managed_directories_;
+}
+
+void model::managed_directories(const std::list<boost::filesystem::path>& v) {
+    managed_directories_ = v;
+}
+
+void model::managed_directories(const std::list<boost::filesystem::path>&& v) {
+    managed_directories_ = std::move(v);
 }
 
 }
