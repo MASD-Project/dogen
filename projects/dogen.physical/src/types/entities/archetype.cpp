@@ -27,6 +27,9 @@ archetype::archetype(
     const dogen::physical::entities::meta_name& meta_name,
     const std::string& default_postfix,
     const std::string& override_postfix,
+    const std::list<std::string>& depends,
+    const std::list<std::string>& generates,
+    const std::string& generated_by,
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
     const std::string& part)
@@ -34,6 +37,9 @@ archetype::archetype(
       meta_name_(meta_name),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
+      depends_(depends),
+      generates_(generates),
+      generated_by_(generated_by),
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part) { }
@@ -44,6 +50,9 @@ void archetype::swap(archetype& other) noexcept {
     swap(meta_name_, other.meta_name_);
     swap(default_postfix_, other.default_postfix_);
     swap(override_postfix_, other.override_postfix_);
+    swap(depends_, other.depends_);
+    swap(generates_, other.generates_);
+    swap(generated_by_, other.generated_by_);
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
@@ -54,6 +63,9 @@ bool archetype::operator==(const archetype& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
+        depends_ == rhs.depends_ &&
+        generates_ == rhs.generates_ &&
+        generated_by_ == rhs.generated_by_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_;
@@ -127,6 +139,54 @@ void archetype::override_postfix(const std::string& v) {
 
 void archetype::override_postfix(const std::string&& v) {
     override_postfix_ = std::move(v);
+}
+
+const std::list<std::string>& archetype::depends() const {
+    return depends_;
+}
+
+std::list<std::string>& archetype::depends() {
+    return depends_;
+}
+
+void archetype::depends(const std::list<std::string>& v) {
+    depends_ = v;
+}
+
+void archetype::depends(const std::list<std::string>&& v) {
+    depends_ = std::move(v);
+}
+
+const std::list<std::string>& archetype::generates() const {
+    return generates_;
+}
+
+std::list<std::string>& archetype::generates() {
+    return generates_;
+}
+
+void archetype::generates(const std::list<std::string>& v) {
+    generates_ = v;
+}
+
+void archetype::generates(const std::list<std::string>&& v) {
+    generates_ = std::move(v);
+}
+
+const std::string& archetype::generated_by() const {
+    return generated_by_;
+}
+
+std::string& archetype::generated_by() {
+    return generated_by_;
+}
+
+void archetype::generated_by(const std::string& v) {
+    generated_by_ = v;
+}
+
+void archetype::generated_by(const std::string&& v) {
+    generated_by_ = std::move(v);
 }
 
 const std::string& archetype::archetype_kind_id() const {

@@ -316,7 +316,8 @@
       "name": "entities::archetype",
       "stereotypes": [
         "MetaElement",
-        "Postfixable"
+        "Postfixable",
+        "Associatable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1188,6 +1189,31 @@
           "name": "qualified",
           "type": "boost::filesystem::path",
           "documentation": "Absolute path to the file or directory.\n\nThe qualified name indicates the location in the filesystem where it will be\nwritten or where it was sourced from.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Associatable",
+      "documentation": "The meta-element is associated with other meta-elements\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "depends",
+          "type": "std::list<std::string>",
+          "documentation": "List of meta-elements this meta-element depends upon, if any.\n"
+        },
+        {
+          "name": "generates",
+          "type": "std::list<std::string>",
+          "documentation": "List of meta-elements this meta-element is used to generate, if any.\n"
+        },
+        {
+          "name": "generated_by",
+          "type": "std::string",
+          "documentation": "Meta-element used to generate this meta-element, if any.\n"
         }
       ]
     }

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include "dogen.physical/types/entities/meta_name.hpp"
@@ -44,6 +45,9 @@ public:
         const dogen::physical::entities::meta_name& meta_name,
         const std::string& default_postfix,
         const std::string& override_postfix,
+        const std::list<std::string>& depends,
+        const std::list<std::string>& generates,
+        const std::string& generated_by,
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
         const std::string& part);
@@ -87,6 +91,36 @@ public:
     std::string& override_postfix();
     void override_postfix(const std::string& v);
     void override_postfix(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief List of meta-elements this meta-element depends upon, if any.
+     */
+    /**@{*/
+    const std::list<std::string>& depends() const;
+    std::list<std::string>& depends();
+    void depends(const std::list<std::string>& v);
+    void depends(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief List of meta-elements this meta-element is used to generate, if any.
+     */
+    /**@{*/
+    const std::list<std::string>& generates() const;
+    std::list<std::string>& generates();
+    void generates(const std::list<std::string>& v);
+    void generates(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Meta-element used to generate this meta-element, if any.
+     */
+    /**@{*/
+    const std::string& generated_by() const;
+    std::string& generated_by();
+    void generated_by(const std::string& v);
+    void generated_by(const std::string&& v);
     /**@}*/
 
     /**
@@ -134,6 +168,9 @@ private:
     dogen::physical::entities::meta_name meta_name_;
     std::string default_postfix_;
     std::string override_postfix_;
+    std::list<std::string> depends_;
+    std::list<std::string> generates_;
+    std::string generated_by_;
     std::string archetype_kind_id_;
     std::string logical_meta_element_id_;
     std::string part_;
