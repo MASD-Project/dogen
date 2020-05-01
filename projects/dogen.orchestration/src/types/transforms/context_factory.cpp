@@ -208,7 +208,7 @@ make_context(const configuration& cfg, const std::string& activity,
     const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
     r.injection_context().feature_model(fm);
     r.logical_context().feature_model(fm);
-    r.generation_context().feature_model(fm);
+    r.m2t_context().feature_model(fm);
     r.physical_context().feature_model(fm);
 
     /*
@@ -219,21 +219,21 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Populate the output directory.
      */
-    r.generation_context().output_directory_path(output_directory);
+    r.m2t_context().output_directory_path(output_directory);
 
     /*
      * Setup the archetype location repository.
      */
     r.injection_context().physical_meta_model(pmm);
     r.logical_context().physical_meta_model(pmm);
-    r.generation_context().physical_meta_model(pmm);
+    r.m2t_context().physical_meta_model(pmm);
 
     /*
      * Setup the tracer.
      */
     r.injection_context().tracer(tracer);
     r.logical_context().tracer(tracer);
-    r.generation_context().tracer(tracer);
+    r.m2t_context().tracer(tracer);
     r.physical_context().tracer(tracer);
 
     /*
@@ -260,7 +260,7 @@ make_context(const configuration& cfg, const std::string& activity,
     using namespace boost::posix_time;
     std::ostringstream s;
     s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
-    r.generation_context().generation_timestamp(s.str());
+    r.m2t_context().generation_timestamp(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Generated context. Result: " << r;
     return r;

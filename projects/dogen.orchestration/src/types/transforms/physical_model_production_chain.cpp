@@ -77,19 +77,19 @@ physical_model_production_chain::apply(const context& ctx,
      * Obtain the M2T model set
      */
     auto m2tms(logical_model_to_m2t_model_transform::
-        apply(ctx.generation_context(), lms));
+        apply(ctx.m2t_context(), lms));
 
     /*
      * Run all the M2T chain against the models.
      */
     m2t::transforms::model_generation_chain::
-        apply(ctx.generation_context(), m2tms);
+        apply(ctx.m2t_context(), m2tms);
 
     /*
      * Obtain the physical models.
      */
     const auto pms(transforms::m2t_model_to_physical_model_transform::
-        apply(ctx.generation_context(), m2tms));
+        apply(ctx.m2t_context(), m2tms));
 
     /*
      * Run all of the physical transforms against the physical models.

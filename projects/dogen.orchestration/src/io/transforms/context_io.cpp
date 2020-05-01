@@ -34,7 +34,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"variability_context\": " << v.variability_context() << ", "
       << "\"injection_context\": " << v.injection_context() << ", "
       << "\"logical_context\": " << v.logical_context() << ", "
-      << "\"generation_context\": " << v.generation_context() << ", "
+      << "\"m2t_context\": " << v.m2t_context() << ", "
       << "\"physical_context\": " << v.physical_context()
       << " }";
     return(s);

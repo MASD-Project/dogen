@@ -84,7 +84,7 @@
           "type": "logical::transforms::context"
         },
         {
-          "name": "generation_context",
+          "name": "m2t_context",
           "type": "m2t::transforms::context"
         },
         {

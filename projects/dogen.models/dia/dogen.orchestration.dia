@@ -1034,7 +1034,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#generation_context#</dia:string>
+            <dia:string>#m2t_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#m2t::transforms::context#</dia:string>
@@ -1693,13 +1693,13 @@
         <dia:point val="33,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.95,35.95;62.425,40.45"/>
+        <dia:rectangle val="32.95,35.95;64.735,40.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="33,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.375"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -1801,7 +1801,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical::entities::model_set#</dia:string>
+            <dia:string>#logical::entities::input_model_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3718,7 +3718,7 @@ user defined stereotypes.#</dia:string>
         <dia:point val="53,31.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.6375,30.35;53.75,36.8"/>
+        <dia:rectangle val="48.7925,30.35;53.75,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3726,8 +3726,8 @@ user defined stereotypes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="53,31.1"/>
         <dia:point val="53,34"/>
-        <dia:point val="47.6875,34"/>
-        <dia:point val="47.6875,36"/>
+        <dia:point val="48.8425,34"/>
+        <dia:point val="48.8425,36"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3931,17 +3931,17 @@ user defined stereotypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="47.6875,40.4"/>
+        <dia:point val="48.8425,40.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.9375,39.65;71.9625,45.8"/>
+        <dia:rectangle val="48.0925,39.65;71.9625,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="47.6875,40.4"/>
-        <dia:point val="47.6875,43"/>
+        <dia:point val="48.8425,40.4"/>
+        <dia:point val="48.8425,43"/>
         <dia:point val="71.7625,43"/>
         <dia:point val="71.7625,45"/>
       </dia:attribute>
@@ -5144,13 +5144,13 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,36"/>
+        <dia:point val="68,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,35.95;102.97,39.65"/>
+        <dia:rectangle val="67.95,35.95;103.97,39.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,36"/>
+        <dia:point val="68,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.920000000000002"/>
@@ -5360,7 +5360,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
         <dia:point val="73.135,31.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.385,30.85;85.16,37.6"/>
+        <dia:rectangle val="72.385,30.85;86.16,37.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5368,8 +5368,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
       <dia:attribute name="orth_points">
         <dia:point val="73.135,31.6"/>
         <dia:point val="73.135,34"/>
-        <dia:point val="84.96,34"/>
-        <dia:point val="84.96,36"/>
+        <dia:point val="85.96,34"/>
+        <dia:point val="85.96,36"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
