@@ -18,12 +18,54 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/merge_transform.hpp"
+
+namespace {
+
+const std::string transform_id("m2t.transforms.merge_transform");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool merge_transform::operator==(const merge_transform& /*rhs*/) const {
-    return true;
+entities::model merge_transform::apply(const physical::transforms::context& ctx,
+    std::list<physical::entities::model>& ms) {
+    tracing::scoped_chain_tracer stp(lg, "merge transform",
+        transform_id, "FIXME", *ctx.tracer(), ms);
+
+    bool first(true);
+    physical::entities::model r;
+    for (const auto& m : ms) {
+        /*
+         * Bit of a hack: we initialise these properties from the
+         * first model in the list. They should all be identical
+         * anyway.
+         */
+        if (first) {
+            r.logical_name(m.logical_name());
+            r.origin_sha1_hash(m.origin_sha1_hash());
+            r.name(m.name());
+            r.configuration(m.configuration());
+            first = false;
+        }
+
+        /*
+         * Now we copy the stuff that actually matters.
+         */
+        for (const auto& a : m.artefacts())
+            r.artefacts().push_back(a);
+
+        for (const auto& md : m.managed_directories())
+            r.managed_directories().push_back(md);
+    }
+    return r;
 }
 
 }

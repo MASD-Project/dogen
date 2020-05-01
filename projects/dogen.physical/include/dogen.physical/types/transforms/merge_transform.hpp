@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen.physical/types/transforms/context_fwd.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Merges a set of physical models into one.
+ */
 class merge_transform final {
 public:
-    merge_transform() = default;
-    merge_transform(const merge_transform&) = default;
-    merge_transform(merge_transform&&) = default;
-    ~merge_transform() = default;
-    merge_transform& operator=(const merge_transform&) = default;
-
-public:
-    bool operator==(const merge_transform& rhs) const;
-    bool operator!=(const merge_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::model apply(const physical::transforms::context& ctx,
+        std::list<physical::entities::model>& ms);
 };
 
 }
