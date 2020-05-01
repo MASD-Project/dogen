@@ -58,7 +58,14 @@ m2t_model_to_physical_model_transform::apply(const m2t::transforms::context& ctx
         for (const auto& element : m.elements()) {
             for (const auto& pair : element.artefacts()) {
                 const auto aptr(pair.second);
-                // FIXME: mega-hack: prune empty artefacts.
+                /*
+                 * FIXME: mega-hack: prune empty artefacts. This is
+                 * needed for now because of how stitch templates are
+                 * handled; if we do not have a template, we are
+                 * producing blank artefacts with empty path and
+                 * contents. This will be addressed with T2T
+                 * transforms.
+                 */
                 const auto& p(aptr->name().qualified());
                 if (!p.empty())
                     pm.artefacts().push_back(aptr);
