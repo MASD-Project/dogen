@@ -18,11 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
-#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/model_set_io.hpp"
 #include "dogen.physical/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -36,13 +35,13 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 entities::model merge_transform::apply(const physical::transforms::context& ctx,
-    const std::list<physical::entities::model>& ms) {
+    const physical::entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "merge transform",
-        transform_id, "FIXME", *ctx.tracer(), ms);
+        transform_id, ms.name().simple(), *ctx.tracer(), ms);
 
     bool first(true);
     physical::entities::model r;
-    for (const auto& m : ms) {
+    for (const auto& m : ms.models()) {
         /*
          * Bit of a hack: we initialise these properties from the
          * first model in the list. They should all be identical

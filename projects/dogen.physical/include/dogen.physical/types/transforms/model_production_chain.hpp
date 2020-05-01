@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model_set.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
@@ -40,8 +40,8 @@ public:
     /**
      * @brief Execute the transform.
      */
-    static entities::model apply(const context& ctx,
-        const std::list<entities::model>& ms);
+    static entities::model
+    apply(const context& ctx, const entities::model_set& ms);
 };
 
 }

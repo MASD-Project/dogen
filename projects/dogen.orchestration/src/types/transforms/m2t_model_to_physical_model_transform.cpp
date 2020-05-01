@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -38,13 +37,13 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-std::list<physical::entities::model>
+physical::entities::model_set
 m2t_model_to_physical_model_transform::apply(const m2t::transforms::context& ctx,
     const m2t::entities::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
         transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
 
-    std::list<physical::entities::model> r;
+    physical::entities::model_set r;
     for (const auto& m : ms.models()) {
         physical::entities::model pm;
         pm.logical_name().simple(m.name().simple());
@@ -71,9 +70,8 @@ m2t_model_to_physical_model_transform::apply(const m2t::transforms::context& ctx
                     pm.artefacts().push_back(aptr);
             }
         }
-        r.push_back(pm);
+        r.models().push_back(pm);
     }
-
     return r;
 }
 

@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
+#include "dogen.m2t/types/entities/model_set.hpp"
 #include "dogen.physical/types/entities/model_set.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -39,7 +39,7 @@ public:
     /**
      * @brief Applies the transform to the input model set.
      */
-    static std::list<physical::entities::model>
+    static physical::entities::model_set
     apply(const m2t::transforms::context& ctx,
         const m2t::entities::model_set& ms);
 };

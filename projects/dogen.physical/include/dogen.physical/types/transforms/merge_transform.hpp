@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen.physical/types/transforms/context_fwd.hpp"
-#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model_set.hpp"
 
 namespace dogen::physical::transforms {
 
@@ -40,7 +40,7 @@ public:
      * @brief Apply the transform to the list of input models.
      */
     static entities::model apply(const physical::transforms::context& ctx,
-        const std::list<physical::entities::model>& ms);
+        const physical::entities::model_set& ms);
 };
 
 }

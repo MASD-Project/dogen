@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/model_set_io.hpp"
 #include "dogen.physical/types/transforms/merge_transform.hpp"
 #include "dogen.physical/types/transforms/update_outputting_properties_transform.hpp"
 #include "dogen.physical/types/transforms/operation_transform.hpp"
@@ -44,9 +44,9 @@ auto lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 entities::model model_production_chain::
-apply(const context& ctx, const std::list<entities::model>& ms) {
+apply(const context& ctx, const entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
-        transform_id, "FIXME", *ctx.tracer(), ms);
+        transform_id, ms.name().simple(), *ctx.tracer(), ms);
 
     /*
      * Before we do anything, we might as well merge all models into
