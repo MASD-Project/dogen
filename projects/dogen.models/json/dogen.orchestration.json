@@ -257,6 +257,13 @@
         "masd.generalization.parent": "dogen::spec_dumper"
       },
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::m2t_model_to_physical_model",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
