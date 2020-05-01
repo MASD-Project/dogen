@@ -86,10 +86,9 @@ public:
 public:
     logical::entities::technical_space technical_space() const override;
 
-    physical::entities::model
-    apply(const m2t::transforms::context& ctx,
+    void apply(const m2t::transforms::context& ctx,
         const bool enable_backend_directories,
-        const m2t::entities::model& m) const override;
+        m2t::entities::model& m) const override;
 };
 
 }

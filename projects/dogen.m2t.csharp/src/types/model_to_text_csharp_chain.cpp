@@ -102,17 +102,11 @@ model_to_text_csharp_chain::technical_space() const {
     return logical::entities::technical_space::csharp;
 }
 
-physical::entities::model
-model_to_text_csharp_chain::apply(
-    const m2t::transforms::context& ctx,
-    const bool enable_backend_directories,
-    const m2t::entities::model& m) const {
+void model_to_text_csharp_chain::apply(const m2t::transforms::context& ctx,
+    const bool enable_backend_directories,  m2t::entities::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C# model to text transform", transform_id, m.name().qualified().dot(),
         *ctx.tracer());
-
-    BOOST_LOG_SEV(lg, debug) << "Started backend.";
-
     /*
      * Create the locator.
      */
@@ -129,30 +123,8 @@ model_to_text_csharp_chain::apply(
      * Generate the formattables model.
      */
     auto fm(create_formattables_model(feature_model, frp, l, m));
-
-    /*
-     * Code-generate all artefacts.
-     */
     apply(fm);
-
-    /*
-     * Copy them across into the physical model.
-     */
-    physical::entities::model r;
-    r.managed_directories().push_back(l.project_path());
-    for (const auto& fbl_pair : fm.formattables()) {
-        for (const auto& art_pair : fbl_pair.second.artefacts()) {
-            auto& ptr(art_pair.second);
-
-            // FIXME: mega-hack: prune empty artefacts
-            const auto& p(ptr->name().qualified());
-            if (!p.empty())
-                r.artefacts().push_back(art_pair.second);
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
-    return r;
+    m.managed_directories().push_back(l.project_path());
 }
 
 }

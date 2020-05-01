@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.m2t/types/transforms/context_fwd.hpp"
 #include "dogen.physical/types/entities/model.hpp"
+#include "dogen.m2t/types/transforms/context_fwd.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
 namespace dogen::m2t::transforms {
@@ -42,19 +42,12 @@ public:
     static model_to_text_technical_space_chain_registrar& registrar();
 
 private:
-    /*
-     * Merges source into destination.
-     */
-    static void merge(physical::entities::model&& src,
-        physical::entities::model& dst);
+    static void apply(const m2t::transforms::context& ctx,
+        m2t::entities::model& m);
 
 public:
-    static physical::entities::model
-    apply(const m2t::transforms::context& ctx,
-        const m2t::entities::model& m);
-    static physical::entities::model
-    apply(const m2t::transforms::context& ctx,
-        const std::list<m2t::entities::model>& ms);
+    static void apply(const m2t::transforms::context& ctx,
+        std::list<m2t::entities::model>& ms);
 
 private:
     static std::shared_ptr<model_to_text_technical_space_chain_registrar>

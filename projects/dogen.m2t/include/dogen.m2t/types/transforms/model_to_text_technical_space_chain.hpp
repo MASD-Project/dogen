@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_HPP
-#define DOGEN_M2T_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_HPP
+#ifndef DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_HPP
+#define DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,6 @@
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
-#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::m2t::transforms {
 
@@ -102,13 +101,12 @@ public:
     virtual logical::entities::technical_space technical_space() const = 0;
 
     /**
-     * @brief Generates a text model representation for this technical
-     * space.
+     * @brief Updates all artefacts with a text representation for
+     * this technical space.
      */
-    virtual physical::entities::model
-    apply(const m2t::transforms::context& ctx,
+    virtual void apply(const m2t::transforms::context& ctx,
         const bool requires_backend_directory,
-        const m2t::entities::model& m) const = 0;
+        m2t::entities::model& m) const = 0;
 };
 
 }

@@ -22,7 +22,6 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
@@ -57,18 +56,8 @@ model_to_text_chain::registrar() {
     return *registrar_;
 }
 
-void model_to_text_chain::
-merge(physical::entities::model&& src, physical::entities::model& dst) {
-    dst.logical_name().simple(src.logical_name().simple());
-    dst.logical_name().qualified(src.logical_name().qualified());
-    dst.origin_sha1_hash(src.origin_sha1_hash());
-    dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
-    dst.managed_directories().splice(dst.managed_directories().end(),
-        src.managed_directories());
-}
-
-physical::entities::model model_to_text_chain::
-apply(const m2t::transforms::context& ctx, const m2t::entities::model& m) {
+void model_to_text_chain::apply(const m2t::transforms::context& ctx,
+    m2t::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
                              << m.name().qualified().dot();
 
@@ -78,7 +67,7 @@ apply(const m2t::transforms::context& ctx, const m2t::entities::model& m) {
      */
     if (!m.has_generatable_types()) {
         BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-        return physical::entities::model();
+        return;
     }
 
     /*
@@ -119,48 +108,22 @@ apply(const m2t::transforms::context& ctx, const m2t::entities::model& m) {
      * Generate artefacts for all elements in model.
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
-    auto r(t.apply(ctx, ekd, m));
-    r.logical_name().simple(m.name().simple());
-    r.logical_name().qualified(m.name().qualified().dot());
-    r.origin_sha1_hash(m.origin_sha1_hash());
+    t.apply(ctx, ekd, m);
 
-    BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
-                             << ". Total artefacts: " << r.artefacts().size();
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed model.";
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Updated artefacts for : " << id;
 }
 
-physical::entities::model model_to_text_chain::
-apply(const m2t::transforms::context& ctx,
-    const std::list<m2t::entities::model>& ms) {
+void model_to_text_chain::apply(const m2t::transforms::context& ctx,
+    std::list<m2t::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
         transform_id, "FIXME", *ctx.tracer(), ms);
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
 
-    physical::entities::model r;
-    if (ms.empty())
-        return r;
+    for (auto& m : ms)
+        apply(ctx, m);
 
-    /*
-     * Copy across the extraction properties. We can use any of the
-     * models in the list as they must all share the same properties
-     * from the original target. This will be cleaned up when we fix
-     * the processing pipeline.
-     */
-    const auto ep(ms.front().extraction_properties());
-    r.name().simple(ms.front().name().simple());
-    r.configuration(ms.front().root_module()->configuration());
-
-    /*
-     * Now transform the models into artefacts.
-     */
-    for (const auto& m : ms)
-        merge(apply(ctx, m), r);
-
-    stp.end_chain(r);
-    return r;
+    stp.end_chain(ms);
 }
 
 }

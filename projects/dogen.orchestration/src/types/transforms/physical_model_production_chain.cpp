@@ -29,6 +29,8 @@
 #include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
+#include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
+#include "dogen.physical/types/transforms/merge_transform.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace {
@@ -64,35 +66,39 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Convert the injection model set into a logical model set.
      */
-    const auto cmset(injection_model_set_to_logical_model_set_chain::
+    const auto lmset(injection_model_set_to_logical_model_set_chain::
         apply(ctx, ims));
 
     /*
      * Run all the logical transforms against the model set.
      */
-    const auto cms(logical::transforms::model_production_chain::
-        apply(ctx.logical_context(), cmset));
+    const auto lms(logical::transforms::model_production_chain::
+        apply(ctx.logical_context(), lmset));
 
     /*
-     * Obtain the generation model set.
+     * Obtain the M2T model set
      */
-    auto gms(transforms::logical_model_to_m2t_model_transform::
-        apply(ctx.generation_context(), cms));
+    auto m2tms(logical_model_to_m2t_model_transform::
+        apply(ctx.generation_context(), lms));
 
     /*
-     * Run all the generation transforms agains the generation models.
+     * Run all the M2T transforms against the models.
      */
     m2t::transforms::model_generation_chain::
-        apply(ctx.generation_context(), gms);
+        apply(ctx.generation_context(), m2tms);
+    using m2t::transforms::model_to_text_chain;
+    model_to_text_chain::apply(ctx.generation_context(), m2tms);
 
     /*
      * Obtain the physical models.
      */
-    using m2t::transforms::model_to_text_chain;
-    auto r(model_to_text_chain::apply(ctx.generation_context(), gms));
+    auto pms(transforms::m2t_model_to_physical_model_transform::
+        apply(ctx.generation_context(), m2tms));
+    auto r(physical::transforms::merge_transform::apply(ctx.physical_context(),
+            pms));
 
     /*
-     * Runn all of the physical transforms against the physical models.
+     * Run all of the physical transforms against the physical models.
      */
     physical::transforms::model_production_chain::
         apply(ctx.physical_context(), r);
