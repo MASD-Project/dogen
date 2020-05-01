@@ -872,13 +872,13 @@
         <dia:point val="54,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,153.95;78.805,159.25"/>
+        <dia:rectangle val="53.95,153.95;71.875,159.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="54,154"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -980,7 +980,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#extraction::entities::model#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1040,7 +1040,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#logical::entities::model#</dia:string>
+                <dia:string>#m2t::entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1049,7 +1049,7 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="kind">
-                <dia:enum val="0"/>
+                <dia:enum val="3"/>
               </dia:attribute>
             </dia:composite>
           </dia:attribute>
@@ -5676,17 +5676,17 @@ for a given C++ entity.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="66.3775,159.2"/>
+        <dia:point val="62.9125,159.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.6275,158.45;88.2,184.8"/>
+        <dia:rectangle val="62.1625,158.45;88.2,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="66.3775,159.2"/>
-        <dia:point val="66.3775,168.214"/>
+        <dia:point val="62.9125,159.2"/>
+        <dia:point val="62.9125,168.214"/>
         <dia:point val="88,168.214"/>
         <dia:point val="88,184"/>
       </dia:attribute>
@@ -6478,17 +6478,17 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="66.3775,154"/>
+        <dia:point val="62.9125,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.4825,137.564;67.1275,154.8"/>
+        <dia:rectangle val="41.4825,137.564;63.6625,154.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="66.3775,154"/>
-        <dia:point val="66.3775,150"/>
+        <dia:point val="62.9125,154"/>
+        <dia:point val="62.9125,150"/>
         <dia:point val="41.5325,150"/>
         <dia:point val="41.5325,137.614"/>
       </dia:attribute>
