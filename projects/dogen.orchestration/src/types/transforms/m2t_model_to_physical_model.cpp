@@ -18,12 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/m2t_model_to_physical_model.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "orchestration.transforms.m2t_model_to_physical_model");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::orchestration::transforms {
 
-bool m2t_model_to_physical_model::operator==(const m2t_model_to_physical_model& /*rhs*/) const {
-    return true;
+std::list<physical::entities::model>
+m2t_model_to_physical_model::apply(const m2t::transforms::context& ctx,
+    const std::list<m2t::entities::model>& ms) {
+    tracing::scoped_transform_tracer stp(lg, "logical to m2t model transform",
+        transform_id, *ctx.tracer(), ms);
+
+    std::list<physical::entities::model> r;
+    return r;
 }
 
 }

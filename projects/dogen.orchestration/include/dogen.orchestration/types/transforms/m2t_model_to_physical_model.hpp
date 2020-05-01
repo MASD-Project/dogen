@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.m2t/types/entities/model.hpp"
+#include "dogen.m2t/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Converts M2T models into physical models.
+ */
 class m2t_model_to_physical_model final {
 public:
-    m2t_model_to_physical_model() = default;
-    m2t_model_to_physical_model(const m2t_model_to_physical_model&) = default;
-    m2t_model_to_physical_model(m2t_model_to_physical_model&&) = default;
-    ~m2t_model_to_physical_model() = default;
-    m2t_model_to_physical_model& operator=(const m2t_model_to_physical_model&) = default;
-
-public:
-    bool operator==(const m2t_model_to_physical_model& rhs) const;
-    bool operator!=(const m2t_model_to_physical_model& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Applies the transform to the input model set.
+     */
+    static std::list<physical::entities::model>
+    apply(const m2t::transforms::context& ctx,
+        const std::list<m2t::entities::model>& ms);
 };
 
 }
