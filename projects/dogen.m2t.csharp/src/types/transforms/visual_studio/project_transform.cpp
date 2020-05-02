@@ -55,6 +55,17 @@ project_transform::logical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype project_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::project_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 boost::filesystem::path project_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);

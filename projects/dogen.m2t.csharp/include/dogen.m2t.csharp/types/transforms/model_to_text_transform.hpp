@@ -34,11 +34,12 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/transforms/context.hpp"
 
 namespace dogen::m2t::csharp::transforms {
 
-class model_to_text_transform {
+class model_to_text_transform : m2t::transforms::model_to_text_transform {
 public:
     model_to_text_transform() = default;
     model_to_text_transform(model_to_text_transform&&) = default;

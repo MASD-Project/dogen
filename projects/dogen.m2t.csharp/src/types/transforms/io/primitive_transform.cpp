@@ -45,6 +45,17 @@ primitive_transform::physical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype primitive_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::primitive_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 const logical::entities::name& primitive_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());

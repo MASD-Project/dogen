@@ -15,6 +15,17 @@ physical::entities::meta_name
     return r;
 }
 
+physical::entities::archetype {{class.simple_name}}::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 const logical::entities::name& {{class.simple_name}}::logical_meta_name() const {
     using {{meta_name_factory}};
     static auto r(meta_name_factory::make_{{meta_element}}_name());

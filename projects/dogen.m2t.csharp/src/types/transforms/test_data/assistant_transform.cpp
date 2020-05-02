@@ -45,6 +45,17 @@ assistant_transform::physical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype assistant_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::assistant_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 const logical::entities::name& assistant_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_assistant_name());

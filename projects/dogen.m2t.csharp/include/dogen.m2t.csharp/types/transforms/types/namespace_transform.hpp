@@ -40,6 +40,9 @@ public:
     const logical::entities::name& logical_meta_name() const override;
 
 public:
+    physical::entities::archetype archetype() const override;
+
+public:
     std::list<std::string> inclusion_dependencies(
         const logical::entities::element& e) const override;
 
