@@ -25,24 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/archetype.hpp"
 
 namespace dogen::m2t::transforms {
 
-class model_to_text_transform final {
+/**
+ * @brief Common interface to all M2T transforms.
+ */
+class model_to_text_transform {
 public:
     model_to_text_transform() = default;
-    model_to_text_transform(const model_to_text_transform&) = default;
+    model_to_text_transform(const model_to_text_transform&) = delete;
     model_to_text_transform(model_to_text_transform&&) = default;
-    ~model_to_text_transform() = default;
-    model_to_text_transform& operator=(const model_to_text_transform&) = default;
+    virtual ~model_to_text_transform() noexcept = default;
 
 public:
-    bool operator==(const model_to_text_transform& rhs) const;
-    bool operator!=(const model_to_text_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Physical archetype to which this M2T transforms binds to.
+     */
+    virtual physical::entities::archetype archetype() const = 0;
 };
 
 }
