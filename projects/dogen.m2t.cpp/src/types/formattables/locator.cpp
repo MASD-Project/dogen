@@ -93,7 +93,7 @@ locator::make_feature_group(const variability::entities::feature_model& fm,
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto pn(fmt.physical_meta_name());
+        const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.qualified());
         const auto fct(qnb::build_facet(pn));
         const auto pf(traits::postfix());

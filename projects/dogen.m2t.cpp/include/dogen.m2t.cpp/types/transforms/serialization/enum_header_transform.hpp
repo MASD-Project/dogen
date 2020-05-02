@@ -32,14 +32,7 @@ namespace dogen::m2t::cpp::transforms::serialization {
 
 class enum_header_transform final : public model_to_text_transform {
 public:
-    static std::string static_id();
-
-public:
-    std::string id() const override;
-    physical::entities::meta_name physical_meta_name() const override;
-    const logical::entities::name& logical_meta_name() const override;
-
-public:
+    physical::entities::archetype static_archetype() const;
     physical::entities::archetype archetype() const override;
 
 public:

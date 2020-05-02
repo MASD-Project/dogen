@@ -18,7 +18,7 @@ std::string archetype_stitch_transform_old::id() const {
 }
 
 physical::entities::meta_name
-archetype_stitch_transform_old::physical_meta_name() const {
+archetype_stitch_transform_old::archetype().meta_name() const {
     using physical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
         traits::facet_sn(), traits::archetype_stitch_archetype_sn()));
@@ -56,7 +56,7 @@ std::list<std::string> archetype_stitch_transform_old::inclusion_dependencies(
 
 void archetype_stitch_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::physical::archetype>(e));
     ast.update_artefact();
 }

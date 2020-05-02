@@ -137,10 +137,11 @@ inclusion_expander::compute_inclusion_dependencies(
     }
 
     for (const auto& fmt : i->second) {
-        const auto n(fmt->physical_meta_name());
+        const auto n(fmt->archetype().meta_name());
         const auto arch(n.qualified());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
-                                 << " using formatter: " << fmt->id();
+                                 << " using formatter: "
+                                 << fmt->archetype().meta_name().qualified();
 
         /*
          * Obtain the formatter's list of inclusion dependencies. If

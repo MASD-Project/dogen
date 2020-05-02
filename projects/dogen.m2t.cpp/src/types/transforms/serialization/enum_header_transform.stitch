@@ -32,7 +32,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
 
 void enum_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& ye(ast.as<logical::entities::structural::enumeration>(e));
 
     {

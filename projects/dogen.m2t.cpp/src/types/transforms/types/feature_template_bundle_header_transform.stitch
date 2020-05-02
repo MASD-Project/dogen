@@ -54,7 +54,7 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
 
 void feature_template_bundle_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& fb(ast.as<logical::entities::variability::feature_template_bundle>(e));
 
     {

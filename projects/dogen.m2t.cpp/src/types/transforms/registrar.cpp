@@ -66,7 +66,7 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     /*
      * Validate the physical meta-name.
      */
-    const auto& mn(t->physical_meta_name());
+    const auto& mn(t->archetype().meta_name());
     physical::helpers::meta_name_validator::validate_archetype_name(mn);
 }
 
@@ -113,7 +113,7 @@ void registrar::validate() const {
         using qnb = physical::helpers::qualified_meta_name_builder;
         for (const auto& ptr : transforms) {
             const auto& transform(*ptr);
-            const auto pn(transform.physical_meta_name());
+            const auto pn(transform.archetype().meta_name());
             const auto fct(qnb::build_facet(pn));
             all_facets.insert(fct);
             if (transform.inclusion_support_type() != cs)
@@ -175,13 +175,13 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
     /*
      * Add the transform to the physical names stores.
      */
-    const auto& pmn(f->physical_meta_name());
+    const auto pmn(f->archetype().meta_name());
     physical_meta_names_.push_front(pmn);
 
     /*
      * Handle the meta-type collection of physical names.
      */
-    const auto mn(f->logical_meta_name().qualified().dot());
+    const auto mn(f->archetype().logical_meta_element_id());
     auto& g(physical_meta_names_by_logical_meta_name_[mn]);
     g.meta_names().push_back(pmn);
 
@@ -224,7 +224,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + qn));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered transform: '" << f->id()
+    BOOST_LOG_SEV(lg, debug) << "Registrered transform: '"
+                             << f->archetype().meta_name().qualified()
                              << "' against meta name: '" << mn << "'";
 }
 

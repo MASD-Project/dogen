@@ -106,7 +106,7 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
     const auto& fmts(i->second);
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
-        const auto pn(fmt.physical_meta_name());
+        const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.qualified());
         const auto& ap(get_artefact_properties(e, arch));
         auto aptr(get_artefact(fbl.artefacts(), arch));
@@ -125,7 +125,7 @@ workflow::execute(const std::unordered_set<m2t::entities::element_archetype>&
         auto& a(*aptr);
         const auto fs(ap.formatting_style());
          if (fs == formatting_styles::stock) {
-             const auto id(fmt.id());
+             const auto id(fmt.archetype().meta_name().qualified());
              BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
              fmt.apply(ctx, e, a);
 

@@ -37,37 +37,21 @@
 
 namespace dogen::m2t::cpp::transforms::build {
 
-std::string include_cmakelists_transform::static_id() {
-    return traits::include_cmakelists_archetype_qn();
-}
-
-std::string include_cmakelists_transform::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-include_cmakelists_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
-        traits::facet_sn(), traits::include_cmakelists_archetype_sn()));
-    return r;
-}
-
-const logical::entities::name& include_cmakelists_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_build_cmakelists_name());
+physical::entities::archetype include_cmakelists_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::include_cmakelists_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_build_cmakelists_name().qualified().dot());
+        return r;
+    }());
     return r;
 }
 
 physical::entities::archetype include_cmakelists_transform::archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::include_cmakelists_archetype_sn()));
-        return r;
-    }());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types include_cmakelists_transform::
@@ -80,7 +64,7 @@ boost::filesystem::path include_cmakelists_transform::inclusion_path(
 
     using namespace dogen::utility::log;
     using namespace dogen::m2t::cpp::transforms;
-    static logger lg(logger_factory(include_cmakelists_transform::static_id()));
+    static logger lg(logger_factory(archetype().meta_name().qualified()));
 
     static const std::string not_supported("Inclusion path is not supported: ");
 
@@ -90,7 +74,7 @@ boost::filesystem::path include_cmakelists_transform::inclusion_path(
 
 boost::filesystem::path include_cmakelists_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_include_cmakelists(n, static_id());
+    return l.make_full_path_for_include_cmakelists(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
@@ -102,7 +86,7 @@ std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
 
 void include_cmakelists_transform::apply(const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto& c(ast.as<cmakelists>(e));
 

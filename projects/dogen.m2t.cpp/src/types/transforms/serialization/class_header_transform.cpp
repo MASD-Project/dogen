@@ -32,37 +32,21 @@
 
 namespace dogen::m2t::cpp::transforms::serialization {
 
-std::string class_header_transform::static_id() {
-    return traits::class_header_archetype_qn();
-}
-
-std::string class_header_transform::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-class_header_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
-        traits::facet_sn(), traits::class_header_archetype_sn()));
-    return r;
-}
-
-const logical::entities::name& class_header_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_object_name());
+physical::entities::archetype class_header_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::class_header_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
+        return r;
+    }());
     return r;
 }
 
 physical::entities::archetype class_header_transform::archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::class_header_archetype_sn()));
-        return r;
-    }());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types class_header_transform::inclusion_support_type() const {
@@ -71,12 +55,12 @@ inclusion_support_types class_header_transform::inclusion_support_type() const {
 
 boost::filesystem::path class_header_transform::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_id());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
 }
 
 boost::filesystem::path class_header_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_id());
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> class_header_transform::inclusion_dependencies(
@@ -102,7 +86,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
 
 void class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), true/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {

@@ -36,37 +36,21 @@
 
 namespace dogen::m2t::cpp::transforms::test_data {
 
-std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype_qn();
-}
-
-std::string class_implementation_transform::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-class_implementation_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
-        traits::facet_sn(), traits::class_implementation_archetype_sn()));
-    return r;
-}
-
-physical::entities::archetype class_implementation_transform::archetype() const {
+physical::entities::archetype class_implementation_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
             traits::facet_sn(), traits::class_implementation_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
         return r;
     }());
     return r;
 }
 
-const logical::entities::name& class_implementation_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_object_name());
-    return r;
+physical::entities::archetype class_implementation_transform::archetype() const {
+    return static_archetype();
 }
 
 inclusion_support_types class_implementation_transform::inclusion_support_type() const {
@@ -77,8 +61,7 @@ boost::filesystem::path class_implementation_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(
-        logger_factory(class_implementation_transform::static_id()));
+    static logger lg(logger_factory(archetype().meta_name().qualified()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -87,7 +70,7 @@ boost::filesystem::path class_implementation_transform::inclusion_path(
 
 boost::filesystem::path class_implementation_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_id());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> class_implementation_transform::inclusion_dependencies(
@@ -109,7 +92,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
 
 void class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {

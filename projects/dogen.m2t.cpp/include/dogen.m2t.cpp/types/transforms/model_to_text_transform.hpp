@@ -39,30 +39,12 @@
 
 namespace dogen::m2t::cpp::transforms {
 
-class model_to_text_transform : m2t::transforms::model_to_text_transform {
+class model_to_text_transform : public m2t::transforms::model_to_text_transform {
 public:
     model_to_text_transform() = default;
     model_to_text_transform(model_to_text_transform&&) = default;
     model_to_text_transform(const model_to_text_transform&) = delete;
     virtual ~model_to_text_transform() noexcept = default;
-
-public:
-    /**
-     * @brief Unique identifier for the formatter in formatter space.
-     */
-    virtual std::string id() const = 0;
-
-    /**
-     * @brief Physical meta-name that the physical elements generated
-     * by this formatter belong to.
-     */
-    virtual physical::entities::meta_name physical_meta_name() const = 0;
-
-    /**
-     * @brief Logical meta-name of the types of entities consumed by
-     * this formatter.
-     */
-    virtual const logical::entities::name& logical_meta_name() const = 0;
 
 public:
     /**

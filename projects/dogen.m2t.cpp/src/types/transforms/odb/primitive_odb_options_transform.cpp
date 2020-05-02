@@ -37,39 +37,21 @@
 
 namespace dogen::m2t::cpp::transforms::odb {
 
-std::string primitive_odb_options_transform::static_id() {
-    return traits::primitive_odb_options_archetype_qn();
-}
-
-std::string primitive_odb_options_transform::id() const {
-    static auto r(static_id());
-    return r;
-}
-
-physical::entities::meta_name
-primitive_odb_options_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make(cpp::traits::backend_sn(),
-        traits::facet_sn(), traits::primitive_odb_options_archetype_sn()));
-    return r;
-}
-
-const logical::entities::name&
-primitive_odb_options_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_primitive_name());
+physical::entities::archetype primitive_odb_options_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::primitive_odb_options_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_primitive_name().qualified().dot());
+        return r;
+    }());
     return r;
 }
 
 physical::entities::archetype primitive_odb_options_transform::archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::primitive_odb_options_archetype_sn()));
-        return r;
-    }());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types
@@ -91,7 +73,7 @@ boost::filesystem::path primitive_odb_options_transform::inclusion_path(
 
 boost::filesystem::path primitive_odb_options_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_odb_options(n, static_id());
+    return l.make_full_path_for_odb_options(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> primitive_odb_options_transform::inclusion_dependencies(
@@ -103,7 +85,7 @@ std::list<std::string> primitive_odb_options_transform::inclusion_dependencies(
 
 void primitive_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), false/*requires_header_guard*/, a);
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {

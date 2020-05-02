@@ -55,7 +55,7 @@ bool stitch_transform::is_header(const inclusion_support_types ist) const {
 void stitch_transform::apply(const model_to_text_transform& stock_transform,
     const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    const auto pn(stock_transform.physical_meta_name());
+    const auto pn(stock_transform.archetype().meta_name());
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
 
     assistant ast(ctx, e, pn, needs_guard, a);

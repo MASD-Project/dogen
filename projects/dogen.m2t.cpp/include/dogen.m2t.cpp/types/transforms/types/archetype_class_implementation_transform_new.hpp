@@ -30,12 +30,8 @@
 namespace dogen::m2t::cpp::transforms::types {
 class archetype_class_implementation_transform_new final : public model_to_text_transform {
 public:
-    static std::string static_id();
-
-public:
-    std::string id() const override;
-    physical::entities::meta_name physical_meta_name() const override;
-    const logical::entities::name& logical_meta_name() const override;
+    physical::entities::archetype static_archetype() const;
+    physical::entities::archetype archetype() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(
