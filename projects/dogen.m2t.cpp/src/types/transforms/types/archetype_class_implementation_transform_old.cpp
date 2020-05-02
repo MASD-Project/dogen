@@ -50,6 +50,17 @@ const logical::entities::name& archetype_class_implementation_transform_old::log
     return r;
 }
 
+physical::entities::archetype archetype_class_implementation_transform_old::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::archetype_class_implementation_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types archetype_class_implementation_transform_old::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

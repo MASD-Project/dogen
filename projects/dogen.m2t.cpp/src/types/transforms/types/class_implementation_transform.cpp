@@ -52,6 +52,17 @@ class_implementation_transform::physical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype class_implementation_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::class_implementation_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 const logical::entities::name& class_implementation_transform::logical_meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());

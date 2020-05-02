@@ -54,6 +54,17 @@ const logical::entities::name& archetype_stitch_class_implementation_transform_o
     return r;
 }
 
+physical::entities::archetype archetype_stitch_class_implementation_transform_old::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::archetype_stitch_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types archetype_stitch_class_implementation_transform_old::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
@@ -93,7 +104,7 @@ void archetype_stitch_class_implementation_transform_old::apply(const context& c
         using utility::filesystem::read_file_content;
         const auto c(read_file_content(p));
         a.content(c);
-        a.overwrite(false);
+        a.overwrite(true); // FIXME: hack for now to make life easier during development
         return;
     }
 
@@ -130,6 +141,17 @@ ast.stream() << "archetype_stitch_class_implementation_transform_old::physical_m
 ast.stream() << "    using physical::helpers::meta_name_factory;" << std::endl;
 ast.stream() << "    static auto r(meta_name_factory::make(cpp::traits::backend_sn()," << std::endl;
 ast.stream() << "        traits::facet_sn(), traits::archetype_stitch_archetype_sn()));" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "physical::entities::archetype archetype_stitch_class_implementation_transform_old::archetype() const {" << std::endl;
+ast.stream() << "    static physical::entities::archetype r([]() {" << std::endl;
+ast.stream() << "        physical::entities::archetype r;" << std::endl;
+ast.stream() << "        using physical::helpers::meta_name_factory;" << std::endl;
+ast.stream() << "        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn()," << std::endl;
+ast.stream() << "            traits::facet_sn(), traits::archetype_stitch_class_implementation_archetype_sn()));" << std::endl;
+ast.stream() << "        return r;" << std::endl;
+ast.stream() << "    }());" << std::endl;
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;

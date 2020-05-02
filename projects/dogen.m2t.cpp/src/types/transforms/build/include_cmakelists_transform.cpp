@@ -59,6 +59,17 @@ const logical::entities::name& include_cmakelists_transform::logical_meta_name()
     return r;
 }
 
+physical::entities::archetype include_cmakelists_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::include_cmakelists_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types include_cmakelists_transform::
 inclusion_support_type() const {
     return inclusion_support_types::not_supported;

@@ -57,6 +57,17 @@ logic_less_template_transform::logical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype logic_less_template_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::logic_less_template_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types logic_less_template_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

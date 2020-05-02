@@ -61,6 +61,17 @@ primitive_odb_options_transform::logical_meta_name() const {
     return r;
 }
 
+physical::entities::archetype primitive_odb_options_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::primitive_odb_options_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types
 primitive_odb_options_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

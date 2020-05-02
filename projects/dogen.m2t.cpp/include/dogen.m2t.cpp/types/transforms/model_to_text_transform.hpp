@@ -31,6 +31,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.m2t.cpp/types/transforms/inclusion_support_types.hpp"
@@ -38,7 +39,7 @@
 
 namespace dogen::m2t::cpp::transforms {
 
-class model_to_text_transform {
+class model_to_text_transform : m2t::transforms::model_to_text_transform {
 public:
     model_to_text_transform() = default;
     model_to_text_transform(model_to_text_transform&&) = default;

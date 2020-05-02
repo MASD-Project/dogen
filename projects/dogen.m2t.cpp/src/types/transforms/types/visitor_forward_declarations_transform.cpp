@@ -50,6 +50,17 @@ const logical::entities::name& visitor_forward_declarations_transform::logical_m
     return r;
 }
 
+physical::entities::archetype visitor_forward_declarations_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::visitor_forward_declarations_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types visitor_forward_declarations_transform::inclusion_support_type() const {
     return inclusion_support_types::regular_support;
 }

@@ -53,6 +53,17 @@ const logical::entities::name& enum_header_transform::logical_meta_name() const 
     return r;
 }
 
+physical::entities::archetype enum_header_transform::archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using physical::helpers::meta_name_factory;
+        r.meta_name(meta_name_factory::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::enum_header_archetype_sn()));
+        return r;
+    }());
+    return r;
+}
+
 inclusion_support_types enum_header_transform::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
