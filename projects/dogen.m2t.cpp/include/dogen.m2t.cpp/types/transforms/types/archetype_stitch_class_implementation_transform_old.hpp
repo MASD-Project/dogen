@@ -18,17 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_STITCH_TRANSFORM_NEW_HPP
-#define DOGEN_M2T_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_STITCH_TRANSFORM_NEW_HPP
+#ifndef DOGEN_M2T_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_STITCH_CLASS_IMPLEMENTATION_TRANSFORM_OLD_HPP
+#define DOGEN_M2T_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_STITCH_CLASS_IMPLEMENTATION_TRANSFORM_OLD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
 #include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::m2t::cpp::transforms::types {
-class archetype_stitch_transform_new final : public model_to_text_transform {
+
+class archetype_stitch_class_implementation_transform_old final : public model_to_text_transform {
 public:
     static std::string static_id();
 
@@ -56,6 +58,7 @@ public:
     void apply(const context& ctx, const logical::entities::element& e,
         physical::entities::artefact& a) const override;
 };
+
 }
 
 #endif

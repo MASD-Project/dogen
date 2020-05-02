@@ -35038,13 +35038,13 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O296">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,314"/>
+        <dia:point val="-44,330"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,313.95;-2.565,317.05"/>
+        <dia:rectangle val="-44.05,329.95;-25.565,333.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,314"/>
+        <dia:point val="-44,330"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.384999999999998"/>
@@ -35739,19 +35739,19 @@ string.
         <dia:point val="-44,319"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,318.95;-29.2625,322.05"/>
+        <dia:rectangle val="-44.05,318.95;-19.08,322.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,319"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.6875"/>
+        <dia:real val="24.869999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_stitch_transform_old#</dia:string>
+        <dia:string>#archetype_stitch_class_implementation_transform_old#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_transform#</dia:string>
@@ -35847,22 +35847,22 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,319"/>
+        <dia:point val="-44,335"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,318.95;-5.8075,322.05"/>
+        <dia:rectangle val="-44.05,334.95;-18.625,338.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,319"/>
+        <dia:point val="-44,335"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.142500000000002"/>
+        <dia:real val="25.324999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_stitch_transform_new#</dia:string>
+        <dia:string>#archetype_stitch_class_implementation_transform_new#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -35961,13 +35961,13 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O303">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,324"/>
+        <dia:point val="-44,340"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,323.95;1.415,327.05"/>
+        <dia:rectangle val="-44.05,339.95;-21.585,343.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,324"/>
+        <dia:point val="-44,340"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.365000000000002"/>

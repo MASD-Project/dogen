@@ -2195,14 +2195,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::types::archetype_stitch_transform_old",
+      "name": "transforms::types::archetype_stitch_class_implementation_transform_old",
       "stereotypes": [
         "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::types::archetype_stitch_transform_new",
+      "name": "transforms::types::archetype_stitch_class_implementation_transform_new",
       "documentation": "A comment.\n",
       "stereotypes": [
         "masd::physical::archetype"
