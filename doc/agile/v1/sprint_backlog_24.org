@@ -12,15 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-02 Sat 18:54]
+#+CAPTION: Clock summary at [2020-05-02 Sat 22:25]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *77:20* |       |       | 100.0 |
+| *Total time*                                                 | *77:44* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 77:20   |       |       | 100.0 |
-| Active                                                       |         | 77:20 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  12.1 |
+| Stories                                                      | 77:44   |       |       | 100.0 |
+| Active                                                       |         | 77:44 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  12.0 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.5 |
 | Sprint and product backlog grooming                          |         |       |  9:33 |  12.3 |
 | Emacs issues and improvements                                |         |       |  1:16 |   1.6 |
@@ -34,8 +34,8 @@
 | Primitives are using compiler generated default constructors |         |       |  0:17 |   0.4 |
 | Hello world segfaults                                        |         |       |  0:55 |   1.2 |
 | Move code coverage to CDash                                  |         |       |  4:53 |   6.3 |
-| Add physical entities to logical model                       |         |       | 25:06 |  32.5 |
-| Create the concept of Text-to-Text transforms                |         |       |  8:35 |  11.1 |
+| Add physical entities to logical model                       |         |       | 25:30 |  32.8 |
+| Create the concept of Text-to-Text transforms                |         |       |  8:35 |  11.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1080,6 +1080,7 @@ Links:
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
+    CLOCK: [2020-05-02 Sat 22:00]--[2020-05-02 Sat 22:24] =>  0:24
     CLOCK: [2020-05-02 Sat 18:33]--[2020-05-02 Sat 18:54] =>  0:21
     CLOCK: [2020-05-02 Sat 15:01]--[2020-05-02 Sat 16:49] =>  1:48
     CLOCK: [2020-05-02 Sat 11:52]--[2020-05-02 Sat 14:02] =>  2:10
@@ -1298,6 +1299,11 @@ Notes:
 - traits must be different for new and old else we will have problems
   when we add new to registrar (duplicate archetypes).
 - need to update trait for stitch template.
+- consider adding some kind of tagging to archetypes to indicate the
+  type of t2t transform to apply. This way we can move the transform
+  over to the m2t model. Also, ideally we want to handle wale in the
+  same way as we do stitch. And it would be nice if we could handle
+  stitch in a generic manner instead of hard-coding it.
 
 Merged stories:
 
