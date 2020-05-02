@@ -79,7 +79,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     /*
      * Validate the physical name.
      */
-    const auto& n(t->physical_meta_name());
+    const auto n(t->archetype().meta_name());
     physical::helpers::meta_name_validator::validate_archetype_name(n);
 
     /*
@@ -93,7 +93,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * does not require them.
      */
     physical_meta_names_.push_front(n);
-    const auto mn(t->logical_meta_name().qualified().dot());
+    const auto mn(t->archetype().logical_meta_element_id());
     auto& g(physical_meta_names_by_logical_meta_name_[mn]);
     g.meta_names().push_back(n);
 
@@ -117,7 +117,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + qn));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id()
+    BOOST_LOG_SEV(lg, debug) << "Registrered transform: "
+                             << t->archetype().meta_name().qualified()
                              << " against meta name: " << mn;
 }
 

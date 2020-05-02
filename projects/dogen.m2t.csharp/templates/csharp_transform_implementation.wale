@@ -1,40 +1,24 @@
 
-std::string {{class.simple_name}}::static_id() {
-    return traits::{{archetype.simple_name}}_archetype_qn();
-}
-
-std::string {{class.simple_name}}::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-{{class.simple_name}}::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
-        traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-    return r;
-}
-
-physical::entities::archetype {{class.simple_name}}::archetype() const {
+physical::entities::archetype {{class.simple_name}}::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+        using lmnf = {{meta_name_factory}};
+        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
         return r;
     }());
     return r;
 }
 
-const logical::entities::name& {{class.simple_name}}::logical_meta_name() const {
-    using {{meta_name_factory}};
-    static auto r(meta_name_factory::make_{{meta_element}}_name());
-    return r;
+physical::entities::archetype {{class.simple_name}}::archetype() const {
+    return static_archetype();
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, static_id());
+    return l.make_full_path(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> {{class.simple_name}}::

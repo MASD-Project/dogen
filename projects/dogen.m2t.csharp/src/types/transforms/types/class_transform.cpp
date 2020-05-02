@@ -29,42 +29,26 @@
 
 namespace dogen::m2t::csharp::transforms::types {
 
-std::string class_transform::static_id() {
-    return traits::class_archetype_qn();
-}
-
-std::string class_transform::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-class_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
-        traits::facet_sn(), traits::class_archetype_sn()));
-    return r;
-}
-
-physical::entities::archetype class_transform::archetype() const {
+physical::entities::archetype class_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
             traits::facet_sn(), traits::class_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
         return r;
     }());
     return r;
 }
 
-const logical::entities::name& class_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_object_name());
-    return r;
+physical::entities::archetype class_transform::archetype() const {
+    return static_archetype();
 }
 
 boost::filesystem::path class_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, static_id());
+    return l.make_full_path(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> class_transform::
@@ -76,8 +60,8 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 void class_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     const auto id(e.name().qualified().dot());
-    assistant ast(ctx, e, physical_meta_name(), a);
-    const auto& o(ast.as<logical::entities::structural::object>(static_id(), e));
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));

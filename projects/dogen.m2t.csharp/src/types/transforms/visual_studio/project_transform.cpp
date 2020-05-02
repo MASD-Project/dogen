@@ -31,46 +31,28 @@
 
 namespace dogen::m2t::csharp::transforms::visual_studio {
 
-std::string project_transform::static_id() {
-    return traits::project_archetype_qn();
-}
-
-std::string project_transform::id() const {
-    static auto r(physical_meta_name().qualified());
-    return r;
-}
-
-physical::entities::meta_name
-project_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
-        traits::facet_sn(), traits::project_archetype_sn()));
-    return r;
-}
-
-const logical::entities::name&
-project_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_visual_studio_project_name());
+physical::entities::archetype project_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::project_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_visual_studio_project_name().qualified().dot());
+        return r;
+    }());
     return r;
 }
 
 physical::entities::archetype project_transform::archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
-            traits::facet_sn(), traits::project_archetype_sn()));
-        return r;
-    }());
-    return r;
+    return static_archetype();
 }
 
 boost::filesystem::path project_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);
     temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".csproj");
-    return l.make_full_path_for_project(temp, static_id());
+    return l.make_full_path_for_project(temp, archetype().meta_name().qualified());
 }
 
 std::list<std::string> project_transform::
@@ -81,9 +63,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void project_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), a);
+    assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
-    const auto& proj(ast.as<project>(static_id(), e));
+    const auto& proj(ast.as<project>(archetype().meta_name().qualified(), e));
 
 ast.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 ast.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;

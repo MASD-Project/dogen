@@ -69,7 +69,7 @@ adapter::adapt(const transforms::repository& frp,
          */
         auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
-            const auto n(fmt->physical_meta_name());
+            const auto n(fmt->archetype().meta_name());
             const auto arch(n.qualified());
             art_props[arch] = artefact_properties();
 

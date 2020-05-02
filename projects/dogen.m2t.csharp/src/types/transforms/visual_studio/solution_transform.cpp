@@ -32,46 +32,28 @@
 
 namespace dogen::m2t::csharp::transforms::visual_studio {
 
-std::string solution_transform::static_id() {
-    return traits::solution_archetype_qn();
-}
-
-std::string solution_transform::id() const {
-    static auto r(physical_meta_name().qualified());
-    return r;
-}
-
-physical::entities::meta_name
-solution_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
-        traits::facet_sn(), traits::solution_archetype_sn()));
-    return r;
-}
-
-const logical::entities::name&
-solution_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_visual_studio_solution_name());
+physical::entities::archetype solution_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::solution_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_visual_studio_solution_name().qualified().dot());
+        return r;
+    }());
     return r;
 }
 
 physical::entities::archetype solution_transform::archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
-            traits::facet_sn(), traits::solution_archetype_sn()));
-        return r;
-    }());
-    return r;
+    return static_archetype();
 }
 
 boost::filesystem::path solution_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);
     temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
-    return l.make_full_path_for_project(temp, static_id());
+    return l.make_full_path_for_project(temp, archetype().meta_name().qualified());
 }
 
 std::list<std::string> solution_transform::
@@ -82,9 +64,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void solution_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), a);
+    assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
-    const auto& sln(ast.as<solution>(static_id(), e));
+    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
 ast.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 ast.stream() << "# Visual Studio 2012" << std::endl;
     for (const auto& ppb : sln.project_persistence_blocks()) {

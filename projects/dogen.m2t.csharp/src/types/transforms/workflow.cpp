@@ -88,11 +88,12 @@ void workflow::execute(const formattables::model& fm) const {
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
-            const auto pn(fmt.physical_meta_name());
+            const auto pn(fmt.archetype().meta_name());
             const auto arch(pn.qualified());
             auto aptr(get_artefact(formattable.artefacts(), arch));
 
-            BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
+            BOOST_LOG_SEV(lg, debug) << "Using formatter: "
+                                     << fmt.archetype().meta_name().qualified();
 
             auto& a(*aptr);
             fmt.apply(ctx, e, a);

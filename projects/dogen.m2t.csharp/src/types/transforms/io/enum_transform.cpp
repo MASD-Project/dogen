@@ -29,42 +29,26 @@
 
 namespace dogen::m2t::csharp::transforms::io {
 
-std::string enum_transform::static_id() {
-    return traits::enum_archetype_qn();
-}
-
-std::string enum_transform::id() const {
-    return static_id();
-}
-
-physical::entities::meta_name
-enum_transform::physical_meta_name() const {
-    using physical::helpers::meta_name_factory;
-    static const auto r(meta_name_factory::make(csharp::traits::backend_sn(),
-        traits::facet_sn(), traits::enum_archetype_sn()));
-    return r;
-}
-
-physical::entities::archetype enum_transform::archetype() const {
+physical::entities::archetype enum_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
-        using physical::helpers::meta_name_factory;
-        r.meta_name(meta_name_factory::make(csharp::traits::backend_sn(),
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
             traits::facet_sn(), traits::enum_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_enumeration_name().qualified().dot());
         return r;
     }());
     return r;
 }
 
-const logical::entities::name& enum_transform::logical_meta_name() const {
-    using logical::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_enumeration_name());
-    return r;
+physical::entities::archetype enum_transform::archetype() const {
+    return static_archetype();
 }
 
 boost::filesystem::path enum_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, static_id());
+    return l.make_full_path(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> enum_transform::
@@ -75,8 +59,8 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void enum_transform::apply(const context& ctx, const logical::entities::element& e,
    physical::entities::artefact& a) const {
-    assistant ast(ctx, e, physical_meta_name(), a);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(static_id(), e));
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
