@@ -66,7 +66,7 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     /*
      * Validate the physical meta-name.
      */
-    const auto& mn(t->archetype().meta_name());
+    const auto mn(t->archetype().meta_name());
     physical::helpers::meta_name_validator::validate_archetype_name(mn);
 }
 
