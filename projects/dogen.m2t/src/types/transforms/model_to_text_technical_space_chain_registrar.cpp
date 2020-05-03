@@ -29,7 +29,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.entities.model_to_text_technical_space_chain_registrar"));
+        "m2t.transforms.model_to_text_technical_space_chain_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null.");

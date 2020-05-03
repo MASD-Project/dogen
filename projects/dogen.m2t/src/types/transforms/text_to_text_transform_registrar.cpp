@@ -18,52 +18,59 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.m2t/types/transforms/registrar_error.hpp"
 #include "dogen.m2t/types/transforms/text_to_text_transform.hpp"
 #include "dogen.m2t/types/transforms/text_to_text_transform_registrar.hpp"
 
-namespace std {
+namespace {
 
-inline bool operator==(const std::shared_ptr<dogen::m2t::transforms::text_to_text_transform>& lhs,
-const std::shared_ptr<dogen::m2t::transforms::text_to_text_transform>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
+using namespace dogen::utility::log;
+static logger
+lg(logger_factory("m2t.transforms.text_to_text_transform_registrar"));
+
+const std::string no_transforms("No text to text transforms provided.");
+const std::string null_transform("Transform supplied is null.");
+const std::string duplicate_id("Transform already registered with ID: ");
 
 }
 
 namespace dogen::m2t::transforms {
 
-text_to_text_transform_registrar::text_to_text_transform_registrar(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& transforms_for_logical_element_)
-    : transforms_for_logical_element__(transforms_for_logical_element_) { }
+void text_to_text_transform_registrar::
+register_transform(std::shared_ptr<text_to_text_transform> t) {
+    if (!t) {
+        BOOST_LOG_SEV(lg, error) << null_transform;
+        BOOST_THROW_EXCEPTION(registrar_error(null_transform));
+    }
 
-void text_to_text_transform_registrar::swap(text_to_text_transform_registrar& other) noexcept {
-    using std::swap;
-    swap(transforms_for_logical_element__, other.transforms_for_logical_element__);
+    const auto id(t->id());
+    const auto pair(std::make_pair(id, t));
+    const auto inserted(transforms_by_id_.insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_id + id));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registered transform: " << id;
 }
 
-bool text_to_text_transform_registrar::operator==(const text_to_text_transform_registrar& rhs) const {
-    return transforms_for_logical_element__ == rhs.transforms_for_logical_element__;
+void text_to_text_transform_registrar::validate() const {
+    if (transforms_by_id_.empty()) {
+        BOOST_LOG_SEV(lg, error) << no_transforms;
+        BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-text_to_text_transform_registrar& text_to_text_transform_registrar::operator=(text_to_text_transform_registrar other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
+std::shared_ptr<text_to_text_transform>text_to_text_transform_registrar::
+transforms_for_id(const std::string& id) const {
+    const auto i(transforms_by_id_.find(id));
+    if (i == transforms_by_id_.end())
+        return std::shared_ptr<text_to_text_transform>();
 
-const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& text_to_text_transform_registrar::transforms_for_logical_element_() const {
-    return transforms_for_logical_element__;
-}
-
-std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& text_to_text_transform_registrar::transforms_for_logical_element_() {
-    return transforms_for_logical_element__;
-}
-
-void text_to_text_transform_registrar::transforms_for_logical_element_(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& v) {
-    transforms_for_logical_element__ = v;
-}
-
-void text_to_text_transform_registrar::transforms_for_logical_element_(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >&& v) {
-    transforms_for_logical_element__ = std::move(v);
+    return i->second;
 }
 
 }

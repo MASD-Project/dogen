@@ -25,24 +25,41 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.m2t/types/transforms/context.hpp"
 
 namespace dogen::m2t::transforms {
 
-class text_to_text_transform final {
+/**
+ * @brief Transforms one artefact into one or more artefacts.
+ */
+class text_to_text_transform {
 public:
     text_to_text_transform() = default;
-    text_to_text_transform(const text_to_text_transform&) = default;
+    text_to_text_transform(const text_to_text_transform&) = delete;
     text_to_text_transform(text_to_text_transform&&) = default;
-    ~text_to_text_transform() = default;
-    text_to_text_transform& operator=(const text_to_text_transform&) = default;
+    virtual ~text_to_text_transform() noexcept = default;
 
 public:
-    bool operator==(const text_to_text_transform& rhs) const;
-    bool operator!=(const text_to_text_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Returns the identity of this transform.
+     */
+    virtual std::string id() const = 0;
 
+    /**
+     * @brief Returns a human readable description of this transform.
+     */
+    virtual std::string description() const = 0;
+
+public:
+    /**
+     * @brief Executes the transform.
+     */
+    virtual void apply(const context& ctx,
+        const boost::shared_ptr<physical::entities::artefact> input, std::list<
+        boost::shared_ptr<physical::entities::artefact>>& outputs) const = 0;
 };
 
 }

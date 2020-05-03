@@ -25,53 +25,34 @@
 #pragma once
 #endif
 
-#include <memory>
 #include <string>
-#include <algorithm>
+#include <memory>
 #include <unordered_map>
+#include "dogen.m2t/types/transforms/text_to_text_transform.hpp"
 
 namespace dogen::m2t::transforms {
 
 class text_to_text_transform_registrar final {
 public:
-    text_to_text_transform_registrar() = default;
-    text_to_text_transform_registrar(const text_to_text_transform_registrar&) = default;
-    text_to_text_transform_registrar(text_to_text_transform_registrar&&) = default;
-    ~text_to_text_transform_registrar() = default;
+    /**
+     * @brief Registers a text to text transform.
+     */
+    void register_transform(std::shared_ptr<text_to_text_transform> t);
 
 public:
-    explicit text_to_text_transform_registrar(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& transforms_for_logical_element_);
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
 public:
-    const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& transforms_for_logical_element_() const;
-    std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& transforms_for_logical_element_();
-    void transforms_for_logical_element_(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >& v);
-    void transforms_for_logical_element_(const std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> >&& v);
-
-public:
-    bool operator==(const text_to_text_transform_registrar& rhs) const;
-    bool operator!=(const text_to_text_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(text_to_text_transform_registrar& other) noexcept;
-    text_to_text_transform_registrar& operator=(text_to_text_transform_registrar other);
+    std::shared_ptr<text_to_text_transform>
+    transforms_for_id(const std::string& id) const;
 
 private:
-    std::unordered_map<std::string, std::shared_ptr<dogen::m2t::transforms::text_to_text_transform> > transforms_for_logical_element__;
+    std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>
+    transforms_by_id_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::m2t::transforms::text_to_text_transform_registrar& lhs,
-    dogen::m2t::transforms::text_to_text_transform_registrar& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

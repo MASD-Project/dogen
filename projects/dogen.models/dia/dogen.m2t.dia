@@ -3296,7 +3296,7 @@ spaces.#</dia:string>
             <dia:enum val="0"/>
           </dia:attribute>
           <dia:attribute name="query">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -3326,7 +3326,7 @@ spaces.#</dia:string>
             <dia:enum val="0"/>
           </dia:attribute>
           <dia:attribute name="query">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -13126,7 +13126,7 @@ code: identation and dividers.#</dia:string>
         <dia:point val="138,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="137.95,127.95;172.815,134.85"/>
+        <dia:rectangle val="137.95,127.95;172.815,134.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="138,128"/>
@@ -13135,7 +13135,7 @@ code: identation and dividers.#</dia:string>
         <dia:real val="34.765000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#text_to_text_transform#</dia:string>
@@ -13320,7 +13320,7 @@ code: identation and dividers.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#logical::entities::context#</dia:string>
+                <dia:string>#context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
