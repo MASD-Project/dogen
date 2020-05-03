@@ -1,0 +1,86 @@
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp" #>
+<#+
+
+physical::entities::archetype solution_transform::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
+            traits::facet_sn(), traits::solution_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_visual_studio_solution_name().qualified().dot());
+        return r;
+    }());
+    return r;
+}
+
+physical::entities::archetype solution_transform::archetype() const {
+    return static_archetype();
+}
+
+boost::filesystem::path solution_transform::
+full_path(const formattables::locator& l, const logical::entities::name& n) const {
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
+    return l.make_full_path_for_project(temp, archetype().meta_name().qualified());
+}
+
+std::list<std::string> solution_transform::
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+void solution_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    using logical::entities::visual_studio::solution;
+    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
+#>
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+Project("{<#= ppb.type_guid() #>}") = "<#= ppb.name() #>", "<#= ppb.name() #>.csproj", "{<#= ppb.guid() #>}"
+EndProject
+<#+
+    }
+#>
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+        {<#= ppb.guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {<#= ppb.guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU
+<#+
+    }
+#>
+    EndGlobalSection
+    GlobalSection(MonoDevelopProperties) = preSolution
+        StartupItem = CSharpModel.csproj
+    EndGlobalSection
+EndGlobal
+<#+
+    ast.update_artefact();
+}
+#>

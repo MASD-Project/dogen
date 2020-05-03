@@ -1,0 +1,26 @@
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/string_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=String #>
+<#@ masd.stitch.wale.kvp.class.simple_name=string_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void string_helper::apply(assistant& ast, const formattables::helper_properties& /*hp*/) const {
+#>
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+<#+
+}
+#>

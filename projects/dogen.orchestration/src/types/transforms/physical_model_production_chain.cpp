@@ -22,13 +22,13 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
-#include "dogen.m2t/types/transforms/model_generation_chain.hpp"
+#include "dogen.text/types/transforms/model_generation_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_logical_input_model_set_chain.hpp"
-#include "dogen.orchestration/types/transforms/logical_model_to_m2t_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
-#include "dogen.orchestration/types/transforms/m2t_model_to_physical_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/text_model_to_physical_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace {
@@ -74,22 +74,22 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.logical_context(), lmset));
 
     /*
-     * Obtain the M2T model set
+     * Obtain the TEXT model set
      */
-    auto m2tms(logical_model_to_m2t_model_transform::
-        apply(ctx.m2t_context(), lms));
+    auto textms(logical_model_to_text_model_transform::
+        apply(ctx.text_context(), lms));
 
     /*
-     * Run all the M2T chain against the models.
+     * Run all the TEXT chain against the models.
      */
-    m2t::transforms::model_generation_chain::
-        apply(ctx.m2t_context(), m2tms);
+    text::transforms::model_generation_chain::
+        apply(ctx.text_context(), textms);
 
     /*
      * Obtain the physical models.
      */
-    const auto pms(transforms::m2t_model_to_physical_model_transform::
-        apply(ctx.m2t_context(), m2tms));
+    const auto pms(transforms::text_model_to_physical_model_transform::
+        apply(ctx.text_context(), textms));
 
     /*
      * Run all of the physical transforms against the physical models.

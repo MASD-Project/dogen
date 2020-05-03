@@ -26,7 +26,7 @@
 
 namespace {
 
-const std::string transform_id("m2t.transforms.merge_transform");
+const std::string transform_id("text.transforms.merge_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen.m2t/types/transforms/context.hpp"
+#include "dogen.text/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
@@ -46,7 +46,7 @@ public:
         const dogen::variability::transforms::context& variability_context,
         const dogen::injection::transforms::context& injection_context,
         const dogen::logical::transforms::context& logical_context,
-        const dogen::m2t::transforms::context& m2t_context,
+        const dogen::text::transforms::context& text_context,
         const dogen::physical::transforms::context& physical_context);
 
 public:
@@ -65,10 +65,10 @@ public:
     void logical_context(const dogen::logical::transforms::context& v);
     void logical_context(const dogen::logical::transforms::context&& v);
 
-    const dogen::m2t::transforms::context& m2t_context() const;
-    dogen::m2t::transforms::context& m2t_context();
-    void m2t_context(const dogen::m2t::transforms::context& v);
-    void m2t_context(const dogen::m2t::transforms::context&& v);
+    const dogen::text::transforms::context& text_context() const;
+    dogen::text::transforms::context& text_context();
+    void text_context(const dogen::text::transforms::context& v);
+    void text_context(const dogen::text::transforms::context&& v);
 
     const dogen::physical::transforms::context& physical_context() const;
     dogen::physical::transforms::context& physical_context();
@@ -89,7 +89,7 @@ private:
     dogen::variability::transforms::context variability_context_;
     dogen::injection::transforms::context injection_context_;
     dogen::logical::transforms::context logical_context_;
-    dogen::m2t::transforms::context m2t_context_;
+    dogen::text::transforms::context text_context_;
     dogen::physical::transforms::context physical_context_;
 };
 

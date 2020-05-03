@@ -1,0 +1,850 @@
+{
+  "tagged_values": {
+    "masd.injection.dia.comment": "true",
+    "masd.injection.model_modules": "dogen.text",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "dogen.logical",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.variability",
+    "masd.injection.reference": "dogen.profiles",
+    "masd.injection.input_technical_space": "cpp",
+    "masd.physical.ignore_files_matching_regex": ".*/test/.*",
+    "masd.physical.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "entities",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "entities::model",
+      "documentation": "Yarn model.\n",
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable",
+        "DeterminableOrigin"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "references",
+          "type": "std::unordered_map<logical::entities::name, logical::entities::origin_types>",
+          "documentation": "All other models that this model depends on, mapped to their origin.\n"
+        },
+        {
+          "name": "leaves",
+          "type": "std::unordered_set<logical::entities::name>",
+          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
+        },
+        {
+          "name": "elements",
+          "type": "std::list<element_artefacts>"
+        },
+        {
+          "name": "root_module",
+          "type": "boost::shared_ptr<logical::entities::structural::module>",
+          "documentation": "The module that represents the model.\n"
+        },
+        {
+          "name": "module_ids",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "IDs of all of the model elements which are modules.\n"
+        },
+        {
+          "name": "has_generatable_types",
+          "type": "bool",
+          "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
+        },
+        {
+          "name": "input_technical_space",
+          "type": "logical::entities::technical_space",
+          "documentation": "Technical space which this model used originally.\n"
+        },
+        {
+          "name": "output_technical_space",
+          "type": "logical::entities::technical_space",
+          "documentation": "Technical space into which to output the model.\n"
+        },
+        {
+          "name": "all_technical_spaces",
+          "type": "std::unordered_set<logical::entities::technical_space>",
+          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
+        },
+        {
+          "name": "orm_properties",
+          "type": "boost::optional<logical::entities::orm::model_properties>"
+        },
+        {
+          "name": "enabled_archetype_for_element",
+          "type": "std::unordered_set<element_archetype>"
+        },
+        {
+          "name": "global_enablement_properties",
+          "type": "global_enablement_properties"
+        },
+        {
+          "name": "extraction_properties",
+          "type": "logical::entities::extraction_properties"
+        },
+        {
+          "name": "managed_directories",
+          "type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": "entities::formatting_styles",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stock",
+          "type": ""
+        },
+        {
+          "name": "wale",
+          "type": ""
+        },
+        {
+          "name": "stitch",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::element_archetype",
+      "tagged_values": {
+        "masd.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "element",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::backend_properties",
+      "documentation": "Properties related to the backend.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this backend is enabled.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::global_enablement_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_properties",
+          "type": "std::unordered_map<std::string, backend_properties>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": "archetype_properties",
+          "type": "std::unordered_map<std::string, archetype_properties>"
+        },
+        {
+          "name": "denormalised_archetype_properties",
+          "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::denormalised_archetype_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "entities::facet_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this facet is enabled.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype_properties",
+      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If false, will disable all instances of this archetype.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "entities::Nameable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "logical::entities::name"
+        }
+      ]
+    },
+    {
+      "name": "entities::MetaNameable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "meta_name",
+          "type": "logical::entities::name"
+        }
+      ]
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::generability_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_text_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_text_technical_space_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_text_technical_space_chain_registrar",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transforms_by_technical_space_",
+          "type": "std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::local_enablement_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::artefact_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::formatting_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::formatting_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "entities::formatting_styles"
+        },
+        {
+          "name": "input",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "transforms::model_generation_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::global_enablement_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::technical_space_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "dogen::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "physical_meta_model",
+          "type": "boost::shared_ptr<physical::entities::meta_model>",
+          "documentation": "Meta-model for the physical dimension.\n"
+        },
+        {
+          "name": "output_directory_path",
+          "type": "boost::filesystem::path",
+          "documentation": "FIXME: to be removed\n"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "generation_timestamp",
+          "type": "std::string",
+          "documentation": "Human readable timestamp of when the generation took place.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transformation_error",
+      "documentation": "An error occurred whilst applying a transformation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::registrar_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::decoration_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "std::string"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "std::string"
+        },
+        {
+          "name": "marker_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::comment_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error has occurred while formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::comment_style",
+      "documentation": "Supported styles of comments.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "c_style",
+          "type": "",
+          "documentation": "Original C programming language style.\n"
+        },
+        {
+          "name": "cpp_style",
+          "type": "",
+          "documentation": "One line, C++ style.\n"
+        },
+        {
+          "name": "csharp_style",
+          "type": "",
+          "documentation": "C# programming language style.\n"
+        },
+        {
+          "name": "shell_style",
+          "type": "",
+          "documentation": "UNIX shell scripting comments.\n"
+        },
+        {
+          "name": "sql_style",
+          "type": "",
+          "documentation": "Comments start with a double-dash.\n"
+        },
+        {
+          "name": "xml_style",
+          "type": "",
+          "documentation": "Comments using XML syntax.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::decoration_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "modelines_by_modeline_group_by_technical_space",
+          "type": "std::unordered_map<std::string, std::unordered_map<logical::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
+        },
+        {
+          "name": "licences_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::licence>>"
+        },
+        {
+          "name": "generation_markers_by_name",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::generation_marker>>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::decoration_repository_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::decoration_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::modeline_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::generation_marker_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::infix_configuration",
+      "documentation": "Configuration to use for a given infix in sequence formatter.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "first",
+          "type": "std::string",
+          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\nthan one element.\n"
+        },
+        {
+          "name": "not_first",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the first.\n"
+        },
+        {
+          "name": "not_last",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the last.\n"
+        },
+        {
+          "name": "last",
+          "type": "std::string",
+          "documentation": "Only applicable to the last element of a sequence.\n"
+        }
+      ]
+    },
+    {
+      "name": "formatters::sequence_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::indent_filter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::namespace_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_namespace_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::scoped_boilerplate_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::dependencies_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::header_guard_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::boilerplate_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "preamble",
+          "type": "std::string"
+        },
+        {
+          "name": "postamble",
+          "type": "std::string"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard",
+          "type": "std::string"
+        },
+        {
+          "name": "technical_space",
+          "type": "logical::entities::technical_space"
+        },
+        {
+          "name": "generate_preamble",
+          "type": "bool"
+        },
+        {
+          "name": "generate_header_guards",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "features",
+      "documentation": "Features used by the generation model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::decoration",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.decoration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "masd::variability::boolean",
+          "documentation": "If true, decorations are enabled on this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "copyright_notice",
+          "type": "masd::variability::text_collection",
+          "documentation": "Copyright notices for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "licence_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the licence to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the modeline group for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "marker_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the decoration marker to use for this modeling element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::DeterminableOrigin",
+      "documentation": "A unit of logical that can be code generated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "origin_sha1_hash",
+          "type": "std::string",
+          "documentation": "SHA1 key of the original injection model.\n"
+        }
+      ]
+    },
+    {
+      "name": "registrar",
+      "stereotypes": [
+        "masd::serialization::type_registrar"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::element_artefacts",
+      "documentation": "Maps logical elements with the physical artefacts that will be produced from them.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "element",
+          "type": "boost::shared_ptr<logical::entities::element>",
+          "documentation": "Logical element that gives rise to the artefact.\n"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>",
+          "documentation": "Physical artefact that will be produced from the logical element.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::text_to_text_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_to_text_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "tagged_values": {
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::text_to_text_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::text_to_text_transform_registrar",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transforms_for_logical_element_",
+          "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
+        }
+      ]
+    },
+    {
+      "name": "entities::model_set",
+      "documentation": "Represents a set of related models.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "models",
+          "type": "std::list<model>",
+          "documentation": "Models that belong to this set.\n"
+        }
+      ]
+    }
+  ]
+}

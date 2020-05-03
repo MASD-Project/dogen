@@ -26,12 +26,12 @@ context::context(
     const dogen::variability::transforms::context& variability_context,
     const dogen::injection::transforms::context& injection_context,
     const dogen::logical::transforms::context& logical_context,
-    const dogen::m2t::transforms::context& m2t_context,
+    const dogen::text::transforms::context& text_context,
     const dogen::physical::transforms::context& physical_context)
     : variability_context_(variability_context),
       injection_context_(injection_context),
       logical_context_(logical_context),
-      m2t_context_(m2t_context),
+      text_context_(text_context),
       physical_context_(physical_context) { }
 
 void context::swap(context& other) noexcept {
@@ -39,7 +39,7 @@ void context::swap(context& other) noexcept {
     swap(variability_context_, other.variability_context_);
     swap(injection_context_, other.injection_context_);
     swap(logical_context_, other.logical_context_);
-    swap(m2t_context_, other.m2t_context_);
+    swap(text_context_, other.text_context_);
     swap(physical_context_, other.physical_context_);
 }
 
@@ -47,7 +47,7 @@ bool context::operator==(const context& rhs) const {
     return variability_context_ == rhs.variability_context_ &&
         injection_context_ == rhs.injection_context_ &&
         logical_context_ == rhs.logical_context_ &&
-        m2t_context_ == rhs.m2t_context_ &&
+        text_context_ == rhs.text_context_ &&
         physical_context_ == rhs.physical_context_;
 }
 
@@ -105,20 +105,20 @@ void context::logical_context(const dogen::logical::transforms::context&& v) {
     logical_context_ = std::move(v);
 }
 
-const dogen::m2t::transforms::context& context::m2t_context() const {
-    return m2t_context_;
+const dogen::text::transforms::context& context::text_context() const {
+    return text_context_;
 }
 
-dogen::m2t::transforms::context& context::m2t_context() {
-    return m2t_context_;
+dogen::text::transforms::context& context::text_context() {
+    return text_context_;
 }
 
-void context::m2t_context(const dogen::m2t::transforms::context& v) {
-    m2t_context_ = v;
+void context::text_context(const dogen::text::transforms::context& v) {
+    text_context_ = v;
 }
 
-void context::m2t_context(const dogen::m2t::transforms::context&& v) {
-    m2t_context_ = std::move(v);
+void context::text_context(const dogen::text::transforms::context&& v) {
+    text_context_ = std::move(v);
 }
 
 const dogen::physical::transforms::context& context::physical_context() const {

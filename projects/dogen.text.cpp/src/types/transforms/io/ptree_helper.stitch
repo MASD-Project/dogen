@@ -1,0 +1,39 @@
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/ptree_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=BoostPTree #>
+<#@ masd.stitch.wale.kvp.class.simple_name=ptree_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void ptree_helper::apply(assistant& ast, const formattables::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        auto snf(ast.make_scoped_namespace_formatter(d.namespaces()));
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    std::ostringstream ss;
+    boost::property_tree::write_json(ss, v);
+
+    std::string content(ss.str());
+    boost::replace_all(content, "\r\n", "");
+    boost::replace_all(content, "\n", "");
+
+    s << content;
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>

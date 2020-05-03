@@ -38,11 +38,11 @@
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
-#include "dogen.m2t/types/features/initializer.hpp"
-#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
-#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
-#include "dogen.m2t.cpp/types/feature_initializer.hpp"
-#include "dogen.m2t.csharp/types/feature_initializer.hpp"
+#include "dogen.text/types/features/initializer.hpp"
+#include "dogen.text/types/transforms/model_to_text_chain.hpp"
+#include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
+#include "dogen.text.cpp/types/feature_initializer.hpp"
+#include "dogen.text.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.orchestration/types/transforms/factory_exception.hpp"
@@ -62,7 +62,7 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 namespace dogen::orchestration::transforms {
 
-using m2t::transforms::model_to_text_technical_space_chain_registrar;
+using text::transforms::model_to_text_technical_space_chain_registrar;
 
 boost::shared_ptr<physical::entities::meta_model>
 create_physical_meta_model(
@@ -93,11 +93,11 @@ register_variability_entities(variability::helpers::registrar& rg) {
     physical::features::initializer::register_entities(rg);
     injection::features::initializer::register_entities(rg);
     logical::features::initializer::register_entities(rg);
-    m2t::features::initializer::register_entities(rg);
+    text::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
-    m2t::cpp::feature_initializer::register_entities(rg);
-    m2t::csharp::feature_initializer::register_entities(rg);
+    text::cpp::feature_initializer::register_entities(rg);
+    text::csharp::feature_initializer::register_entities(rg);
     features::initializer::register_entities(rg);
 }
 
@@ -109,7 +109,7 @@ make_injection_context(const configuration& cfg,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using m2t::transforms::model_to_text_chain;
+    using text::transforms::model_to_text_chain;
     const auto& rg = model_to_text_chain::registrar();
     rg.validate();
 
@@ -153,7 +153,7 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using m2t::transforms::model_to_text_chain;
+    using text::transforms::model_to_text_chain;
     const auto& rg = model_to_text_chain::registrar();
     rg.validate();
 
@@ -208,7 +208,7 @@ make_context(const configuration& cfg, const std::string& activity,
     const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
     r.injection_context().feature_model(fm);
     r.logical_context().feature_model(fm);
-    r.m2t_context().feature_model(fm);
+    r.text_context().feature_model(fm);
     r.physical_context().feature_model(fm);
 
     /*
@@ -219,21 +219,21 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Populate the output directory.
      */
-    r.m2t_context().output_directory_path(output_directory);
+    r.text_context().output_directory_path(output_directory);
 
     /*
      * Setup the archetype location repository.
      */
     r.injection_context().physical_meta_model(pmm);
     r.logical_context().physical_meta_model(pmm);
-    r.m2t_context().physical_meta_model(pmm);
+    r.text_context().physical_meta_model(pmm);
 
     /*
      * Setup the tracer.
      */
     r.injection_context().tracer(tracer);
     r.logical_context().tracer(tracer);
-    r.m2t_context().tracer(tracer);
+    r.text_context().tracer(tracer);
     r.physical_context().tracer(tracer);
 
     /*
@@ -260,7 +260,7 @@ make_context(const configuration& cfg, const std::string& activity,
     using namespace boost::posix_time;
     std::ostringstream s;
     s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
-    r.m2t_context().generation_timestamp(s.str());
+    r.text_context().generation_timestamp(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Generated context. Result: " << r;
     return r;

@@ -11,7 +11,7 @@
     "masd.injection.reference": "dogen.tracing",
     "masd.injection.reference": "dogen.injection",
     "masd.injection.reference": "dogen.logical",
-    "masd.injection.reference": "dogen.m2t",
+    "masd.injection.reference": "dogen.text",
     "masd.injection.reference": "dogen.physical",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.variability",
@@ -84,8 +84,8 @@
           "type": "logical::transforms::context"
         },
         {
-          "name": "m2t_context",
-          "type": "m2t::transforms::context"
+          "name": "text_context",
+          "type": "text::transforms::context"
         },
         {
           "name": "physical_context",
@@ -170,7 +170,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::logical_model_to_m2t_model_transform",
+      "name": "transforms::logical_model_to_text_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -259,7 +259,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::m2t_model_to_physical_model_transform",
+      "name": "transforms::text_model_to_physical_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

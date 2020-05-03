@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.m2t/io/transforms/context_io.hpp"
+#include "dogen.text/io/transforms/context_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.physical/io/transforms/context_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
@@ -34,7 +34,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"variability_context\": " << v.variability_context() << ", "
       << "\"injection_context\": " << v.injection_context() << ", "
       << "\"logical_context\": " << v.logical_context() << ", "
-      << "\"m2t_context\": " << v.m2t_context() << ", "
+      << "\"text_context\": " << v.text_context() << ", "
       << "\"physical_context\": " << v.physical_context()
       << " }";
     return(s);
