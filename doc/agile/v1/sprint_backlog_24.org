@@ -12,30 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-02 Sat 22:25]
+#+CAPTION: Clock summary at [2020-05-03 Sun 13:15]
 | <75>                                                         |         |       |       |       |
 | Headline                                                     | Time    |       |       |     % |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *77:44* |       |       | 100.0 |
+| *Total time*                                                 | *81:11* |       |       | 100.0 |
 |--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 77:44   |       |       | 100.0 |
-| Active                                                       |         | 77:44 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  12.0 |
+| Stories                                                      | 81:11   |       |       | 100.0 |
+| Active                                                       |         | 81:11 |       | 100.0 |
+| Edit release notes for previous sprint                       |         |       |  9:22 |  11.5 |
 | Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.5 |
-| Sprint and product backlog grooming                          |         |       |  9:33 |  12.3 |
+| Sprint and product backlog grooming                          |         |       | 10:11 |  12.5 |
 | Emacs issues and improvements                                |         |       |  1:16 |   1.6 |
-| Nightly nursing                                              |         |       |  3:10 |   4.1 |
-| Analysis on implementing enablement in physical model        |         |       |  3:10 |   4.1 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   5.3 |
-| Papers: Systems variability modeling                         |         |       |  2:55 |   3.8 |
-| Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.2 |
-| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.5 |
+| Nightly nursing                                              |         |       |  3:24 |   4.2 |
+| Analysis on implementing enablement in physical model        |         |       |  3:10 |   3.9 |
+| Replace artefact properties with artefacts                   |         |       |  4:06 |   5.1 |
+| Papers: Systems variability modeling                         |         |       |  2:55 |   3.6 |
+| Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.1 |
+| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.4 |
 | Add model name to tracing dumps                              |         |       |  1:35 |   2.0 |
-| Primitives are using compiler generated default constructors |         |       |  0:17 |   0.4 |
-| Hello world segfaults                                        |         |       |  0:55 |   1.2 |
-| Move code coverage to CDash                                  |         |       |  4:53 |   6.3 |
-| Add physical entities to logical model                       |         |       | 25:30 |  32.8 |
-| Create the concept of Text-to-Text transforms                |         |       |  8:35 |  11.0 |
+| Primitives use compiler generated default constructors       |         |       |  0:17 |   0.3 |
+| Hello world segfaults                                        |         |       |  0:55 |   1.1 |
+| Move code coverage to CDash                                  |         |       |  4:53 |   6.0 |
+| Rename =m2t= to =text=                                       |         |       |  0:17 |   0.3 |
+| Add physical entities to logical model                       |         |       | 25:30 |  31.4 |
+| Create the concept of Text-to-Text transforms                |         |       | 10:53 |  13.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -466,6 +467,9 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 13:12]--[2020-05-03 Sun 13:15] =>  0:03
+    CLOCK: [2020-05-03 Sun 13:08]--[2020-05-03 Sun 13:11] =>  0:03
+    CLOCK: [2020-05-03 Sun 12:35]--[2020-05-03 Sun 13:07] =>  0:32
     CLOCK: [2020-04-30 Thu 22:22]--[2020-04-30 Thu 22:33] =>  0:11
     CLOCK: [2020-04-29 Wed 22:31]--[2020-04-29 Wed 22:41] =>  0:10
     CLOCK: [2020-04-28 Tue 08:36]--[2020-04-28 Tue 08:50] =>  0:14
@@ -525,6 +529,7 @@ Time spent faffing around with Emacs.
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 09:42]--[2020-05-03 Sun 09:56] =>  0:14
     CLOCK: [2020-04-28 Tue 21:45]--[2020-04-28 Tue 21:54] =>  0:09
     CLOCK: [2020-04-28 Tue 08:29]--[2020-04-28 Tue 08:35] =>  0:06
     CLOCK: [2020-04-26 Sun 22:35]--[2020-04-26 Sun 22:41] =>  0:06
@@ -919,7 +924,7 @@ Notes:
   when we are changing an existing generator, whereby we can no longer
   generate code because the new state is not valid.
 
-*** COMPLETED Primitives are using compiler generated default constructors :story:
+*** COMPLETED Primitives use compiler generated default constructors  :story:
     CLOSED: [2020-04-24 Fri 18:51]
     :LOGBOOK:
     CLOCK: [2020-04-24 Fri 18:52]--[2020-04-24 Fri 18:55] =>  0:03
@@ -1077,6 +1082,19 @@ Links:
   multiple source files
 - [[https://marco-c.github.io/2018/01/09/code-coverage-with-clang-on-windows.html][How to collect code coverage on Windows with Clang]]
 -
+
+*** COMPLETED Rename =m2t= to =text=                                  :story:
+    CLOSED: [2020-05-03 Sun 11:15]
+    :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 10:57]--[2020-05-03 Sun 11:14] =>  0:17
+    :END:
+
+With the rise of text-to-text transforms, it became clear that the
+=m2t= model is not just dealing with model-to-text transforms; it is
+in effect the border of the textual processing. In the future, when we
+support cartridges we may add many more text transforms. We should
+rename the model to =text= to make it consistent with the conceptual
+model.
 
 *** STARTED Add physical entities to logical model                    :story:
     :LOGBOOK:
@@ -1584,6 +1602,9 @@ Notes:
 
 *** STARTED Create the concept of Text-to-Text transforms             :story:
     :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 11:15]--[2020-05-03 Sun 12:34] =>  1:51
+    CLOCK: [2020-05-03 Sun 10:11]--[2020-05-03 Sun 10:57] =>  0:46
+    CLOCK: [2020-05-03 Sun 09:57]--[2020-05-03 Sun 10:10] =>  0:13
     CLOCK: [2020-05-02 Sat 09:15]--[2020-05-02 Sat 09:35] =>  0:20
     CLOCK: [2020-05-01 Fri 13:40]--[2020-05-01 Fri 18:03] =>  4:23
     CLOCK: [2020-05-01 Fri 09:57]--[2020-05-01 Fri 12:12] =>  2:15
@@ -1650,6 +1671,86 @@ Notes:
   transform if it follows the same logic as all others.
 - rename generation context to m2t context. Done.
 - rename stitch formatters to have class implementation on the name.
+
+*** Wale templates must be bound to logical archetypes                :story:
+
+A stitch template may make use of a wale template. At present we are
+loading these from the file system, thus requiring the
+locator. However, since we already have the templates in memory, we
+could model these a bit better.
+
+Notes:
+
+- we could easily add a wale template meta-data parameter to the
+  logical archetype. The problem is, at this point all we are saying
+  is that there are logical associations between elements. We then
+  need to somehow load up the artefact corresponding to the wale
+  template into the element artefacts of all logical archetypes which
+  refer to that template. We could have a =text= transform that does
+  this. Finally we could add a dependency between the stitch artefact
+  and the wale artefact. However, for this to work, we need to supply
+  the entire =element_artefacts= into the text transform and let the
+  stitch transform locate whatever it needs.
+- a second problem is that we need to load the wale templates from the
+  file system before we reach the physical model. This could be done
+  as part of the wale template. We already do something similar for
+  stitch; if it exists load it, if not create it. We need a similar
+  logic.
+
+*** =templating= should not depend on =physical=                      :story:
+
+For some random reason we implemented the =templating= model in terms
+of artefacts of the physical model. There is no need for this in the
+new world, so we should try to decouple these models. Templating
+should not even know of files; it should receive a string and return a
+string.
+
+*** Extend tracing to M2T transforms                                  :story:
+
+There is nothing stopping us from having a context with the tracer,
+and doing a dump of the artefact before and after a M2T transform.
+
+*** Rename "model-to-X" to TLAs                                       :story:
+
+Given that model-to-text and text-to-model (to a lesser extent) are
+well known TLAs in MDE we should make use of these in class names. The
+names we have at present are very long. The additional size is not
+providing any benefits.
+
+*** Replace initialisers with facet-based initialisation              :story:
+
+Now that we have facets, archetypes, etc as proper meta-model
+elements, it is becoming clear that the initialiser is just a facet in
+disguise. We have enough information to generate all initialisers as
+part of the code generation of facets and backends. Once we do this,
+we have reached the point where it is possible to create a new
+meta-model element and add a formatter for it and code will be
+automatically generated without any manual intervention. Similarly,
+deleting formatters will delete all traces of it from the code
+generator.
+
+*** Consider making technical spaces a core concept                   :story:
+
+At present we are trying to instantiate a stitch template. It requires
+knowing the technical space that the original archetype belongs to so
+that we can locate the appropriate decoration. However, because we are
+in the text model and the archetype is a physical concept, we have no
+way of knowing what the original TS was for a given archetype. We
+could of course locate the associated M2T transform etc - but this
+perhaps hints at a bigger problem with the conceptual model: technical
+spaces are much more of a pervasive concept than just logical model:
+
+- injectors belong to technical spaces.
+- logical model entities belong to technical spaces.
+- text transforms belong to technical spaces.
+- physical model entities such as archetypes and artefacts belong to
+  technical spaces.
+
+It would be nice if we could have this modeled correctly, in some kind
+of shared model. At present, the only model which does this is
+=variability= but it does not make a lot of sense to put TS'
+there. Perhaps we should wait until we have enough entities to see
+what the name of this "core" model should be.
 
 *** Inject backend, facets and archetypes into PMM                    :story:
 
