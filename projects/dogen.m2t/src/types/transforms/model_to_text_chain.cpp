@@ -23,7 +23,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
@@ -46,6 +45,7 @@ namespace dogen::m2t::transforms {
 std::shared_ptr<
     model_to_text_technical_space_chain_registrar>
 model_to_text_chain::registrar_;
+
 model_to_text_technical_space_chain_registrar&
 model_to_text_chain::registrar() {
     if (!registrar_) {

@@ -25,15 +25,16 @@
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_set>
-#include "dogen.physical/types/entities/model.hpp"
+#include <memory>
+#include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context_fwd.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
 namespace dogen::m2t::transforms {
 
+/**
+ * @brief Chain responsible for orchestrating all M2T transforms.
+ */
 class model_to_text_chain final {
 public:
     /**
