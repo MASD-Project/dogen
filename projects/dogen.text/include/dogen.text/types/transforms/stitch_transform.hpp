@@ -30,13 +30,18 @@
 
 namespace dogen::text::transforms {
 
-class stitch_transform : public dogen::text::transforms::text_to_text_transform {
+/**
+ * @brief Transforms artefacts that contain stitch templates into the
+ * expanded output of the template.
+ */
+class stitch_transform final : public text_to_text_transform {
 public:
-    bool operator==(const stitch_transform& rhs) const;
-    bool operator!=(const stitch_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string id() const override;
+    std::string description() const override;
+    void apply(const context& ctx, const logical::entities::element& e,
+        const boost::shared_ptr<physical::entities::artefact> input,
+        std::list<boost::shared_ptr<physical::entities::artefact>>& outputs)
+        const override;
 };
 
 }
