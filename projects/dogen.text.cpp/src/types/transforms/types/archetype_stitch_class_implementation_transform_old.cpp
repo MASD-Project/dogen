@@ -40,6 +40,8 @@ physical::entities::archetype archetype_stitch_class_implementation_transform_ol
             traits::facet_sn(), traits::archetype_stitch_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_physical_archetype_name().qualified().dot());
+        r.text_to_text_transform("dogen.text.transforms.stitch_transform");
+        r.generates().push_back(traits::archetype_class_implementation_archetype_sn());
         return r;
     }());
     return r;
