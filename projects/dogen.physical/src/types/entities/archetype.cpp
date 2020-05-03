@@ -32,7 +32,8 @@ archetype::archetype(
     const std::string& generated_by,
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
-    const std::string& part)
+    const std::string& part,
+    const std::string& text_to_text_transform)
     : description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
@@ -42,7 +43,8 @@ archetype::archetype(
       generated_by_(generated_by),
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
-      part_(part) { }
+      part_(part),
+      text_to_text_transform_(text_to_text_transform) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -56,6 +58,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
+    swap(text_to_text_transform_, other.text_to_text_transform_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -68,7 +71,8 @@ bool archetype::operator==(const archetype& rhs) const {
         generated_by_ == rhs.generated_by_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
-        part_ == rhs.part_;
+        part_ == rhs.part_ &&
+        text_to_text_transform_ == rhs.text_to_text_transform_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -235,6 +239,22 @@ void archetype::part(const std::string& v) {
 
 void archetype::part(const std::string&& v) {
     part_ = std::move(v);
+}
+
+const std::string& archetype::text_to_text_transform() const {
+    return text_to_text_transform_;
+}
+
+std::string& archetype::text_to_text_transform() {
+    return text_to_text_transform_;
+}
+
+void archetype::text_to_text_transform(const std::string& v) {
+    text_to_text_transform_ = v;
+}
+
+void archetype::text_to_text_transform(const std::string&& v) {
+    text_to_text_transform_ = std::move(v);
 }
 
 }

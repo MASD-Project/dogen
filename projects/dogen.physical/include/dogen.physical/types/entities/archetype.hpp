@@ -50,7 +50,8 @@ public:
         const std::string& generated_by,
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
-        const std::string& part);
+        const std::string& part,
+        const std::string& text_to_text_transform);
 
 public:
     /**
@@ -153,6 +154,16 @@ public:
     void part(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Name of the Text-to-Text transform to apply to artefacts of this archetype, if any.
+     */
+    /**@{*/
+    const std::string& text_to_text_transform() const;
+    std::string& text_to_text_transform();
+    void text_to_text_transform(const std::string& v);
+    void text_to_text_transform(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -174,6 +185,7 @@ private:
     std::string archetype_kind_id_;
     std::string logical_meta_element_id_;
     std::string part_;
+    std::string text_to_text_transform_;
 };
 
 }
