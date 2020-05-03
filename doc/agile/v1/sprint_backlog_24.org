@@ -12,31 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-03 Sun 13:15]
-| <75>                                                         |         |       |       |       |
-| Headline                                                     | Time    |       |       |     % |
-|--------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                 | *81:11* |       |       | 100.0 |
-|--------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                      | 81:11   |       |       | 100.0 |
-| Active                                                       |         | 81:11 |       | 100.0 |
-| Edit release notes for previous sprint                       |         |       |  9:22 |  11.5 |
-| Create a demo and presentation for previous sprint           |         |       |  0:25 |   0.5 |
-| Sprint and product backlog grooming                          |         |       | 10:11 |  12.5 |
-| Emacs issues and improvements                                |         |       |  1:16 |   1.6 |
-| Nightly nursing                                              |         |       |  3:24 |   4.2 |
-| Analysis on implementing enablement in physical model        |         |       |  3:10 |   3.9 |
-| Replace artefact properties with artefacts                   |         |       |  4:06 |   5.1 |
-| Papers: Systems variability modeling                         |         |       |  2:55 |   3.6 |
-| Papers: A Lightweight MDSD Process Applied in Small Projects |         |       |  0:54 |   1.1 |
-| Throw on unexpected dynamic stereotypes                      |         |       |  1:08 |   1.4 |
-| Add model name to tracing dumps                              |         |       |  1:35 |   2.0 |
-| Primitives use compiler generated default constructors       |         |       |  0:17 |   0.3 |
-| Hello world segfaults                                        |         |       |  0:55 |   1.1 |
-| Move code coverage to CDash                                  |         |       |  4:53 |   6.0 |
-| Rename =m2t= to =text=                                       |         |       |  0:17 |   0.3 |
-| Add physical entities to logical model                       |         |       | 25:30 |  31.4 |
-| Create the concept of Text-to-Text transforms                |         |       | 10:53 |  13.4 |
+#+CAPTION: Clock summary at [2020-05-03 Sun 19:20]
+| <75>                                                   |         |       |       |       |
+| Headline                                               | Time    |       |       |     % |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                           | *83:14* |       |       | 100.0 |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                | 83:14   |       |       | 100.0 |
+| Active                                                 |         | 83:14 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  9:22 |  11.3 |
+| Create a demo and presentation for previous sprint     |         |       |  0:25 |   0.5 |
+| Sprint and product backlog grooming                    |         |       | 10:36 |  12.7 |
+| Emacs issues and improvements                          |         |       |  1:16 |   1.5 |
+| Nightly nursing                                        |         |       |  3:24 |   4.1 |
+| Analysis on implementing enablement in physical model  |         |       |  3:10 |   3.8 |
+| Replace artefact properties with artefacts             |         |       |  4:06 |   4.9 |
+| Papers: Systems variability modeling                   |         |       |  2:55 |   3.5 |
+| Papers: A Lightweight MDSD Process                     |         |       |  0:54 |   1.1 |
+| Papers: Un estudio comparativo de dos herramientas MDA |         |       |  1:38 |   2.0 |
+| Throw on unexpected dynamic stereotypes                |         |       |  1:08 |   1.4 |
+| Add model name to tracing dumps                        |         |       |  1:35 |   1.9 |
+| Primitives use compiler generated default constructors |         |       |  0:17 |   0.3 |
+| Hello world segfaults                                  |         |       |  0:55 |   1.1 |
+| Move code coverage to CDash                            |         |       |  4:53 |   5.9 |
+| Rename =m2t= to =text=                                 |         |       |  0:17 |   0.3 |
+| Add physical entities to logical model                 |         |       | 25:30 |  30.6 |
+| Create the concept of Text-to-Text transforms          |         |       | 10:53 |  13.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -465,8 +466,10 @@ Time spent creating the demo and presentation.
 #+caption: Sprint 1.0.23 Demo
 [[https://youtu.be/GFjBXArR6Jk][https://img.youtube.com/vi/GFjBXArR6Jk/0.jpg]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2020-05-03 Sun 19:19]
     :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 15:01]--[2020-05-03 Sun 15:26] =>  0:25
     CLOCK: [2020-05-03 Sun 13:12]--[2020-05-03 Sun 13:15] =>  0:03
     CLOCK: [2020-05-03 Sun 13:08]--[2020-05-03 Sun 13:11] =>  0:03
     CLOCK: [2020-05-03 Sun 12:35]--[2020-05-03 Sun 13:07] =>  0:32
@@ -511,7 +514,8 @@ Notes:
 - rename milestones to ephemerides, given that we are not actually
   achieving a milestone (PM-wise).
 
-*** STARTED Emacs issues and improvements                             :story:
+*** COMPLETED Emacs issues and improvements                           :story:
+    CLOSED: [2020-05-03 Sun 19:19]
     :LOGBOOK:
     CLOCK: [2020-04-25 Sat 07:48]--[2020-04-25 Sat 08:05] =>  0:17
     CLOCK: [2020-04-24 Fri 09:15]--[2020-04-24 Fri 09:27] =>  0:12
@@ -527,7 +531,8 @@ Time spent faffing around with Emacs.
 - issues with centaur tabs and restart.
 - setup elfeed
 
-*** STARTED Nightly nursing                                           :story:
+*** COMPLETED Nightly nursing                                         :story:
+    CLOSED: [2020-05-03 Sun 19:19]
     :LOGBOOK:
     CLOCK: [2020-05-03 Sun 09:42]--[2020-05-03 Sun 09:56] =>  0:14
     CLOCK: [2020-04-28 Tue 21:45]--[2020-04-28 Tue 21:54] =>  0:09
@@ -768,10 +773,18 @@ Notes:
 
 Read paper and create "journal club" video.
 
-*** COMPLETED Papers: A Lightweight MDSD Process Applied in Small Projects
+*** COMPLETED Papers: A Lightweight MDSD Process                      :story:
     CLOSED: [2020-04-26 Sun 22:34]
     :LOGBOOK:
     CLOCK: [2020-04-26 Sun 21:40]--[2020-04-26 Sun 22:34] =>  0:54
+    :END:
+
+Read paper and create "journal club" video.
+
+*** COMPLETED Papers: Un estudio comparativo de dos herramientas MDA  :story:
+    CLOSED: [2020-05-03 Sun 19:18]
+    :LOGBOOK:
+    CLOCK: [2020-05-03 Sun 17:40]--[2020-05-03 Sun 19:18] =>  1:38
     :END:
 
 Read paper and create "journal club" video.
@@ -1096,7 +1109,8 @@ support cartridges we may add many more text transforms. We should
 rename the model to =text= to make it consistent with the conceptual
 model.
 
-*** STARTED Add physical entities to logical model                    :story:
+*** COMPLETED Add physical entities to logical model                  :story:
+    CLOSED: [2020-05-03 Sun 19:19]
     :LOGBOOK:
     CLOCK: [2020-05-02 Sat 22:00]--[2020-05-02 Sat 22:24] =>  0:24
     CLOCK: [2020-05-02 Sat 18:33]--[2020-05-02 Sat 18:54] =>  0:21
@@ -1439,9 +1453,9 @@ another pattern:
 Up to recently, there was a belief that the archetypes model was
 distinct from the assets model. The idea was that the projection of
 assets into archetype space could be done without knowledge of the
-things we are projecting. However, that is demonstrably false: n order
-to project we need a name. That name contains a location. The location
-is a point on a one-dimensional asset space.
+things we are projecting. However, that is demonstrably false: in
+order to project we need a name. That name contains a location. The
+location is a point on a one-dimensional asset space.
 
 In reality, what we always had is:
 
@@ -1600,7 +1614,8 @@ Notes:
   have facets that do not have a facet directory so that we can place
   types above the facet directories such as SLNs, CMakeLists, etc.
 
-*** STARTED Create the concept of Text-to-Text transforms             :story:
+*** COMPLETED Create the concept of Text-to-Text transforms           :story:
+    CLOSED: [2020-05-03 Sun 19:19]
     :LOGBOOK:
     CLOCK: [2020-05-03 Sun 11:15]--[2020-05-03 Sun 12:34] =>  1:51
     CLOCK: [2020-05-03 Sun 10:11]--[2020-05-03 Sun 10:57] =>  0:46
@@ -1671,868 +1686,6 @@ Notes:
   transform if it follows the same logic as all others.
 - rename generation context to m2t context. Done.
 - rename stitch formatters to have class implementation on the name.
-
-*** Wale templates must be bound to logical archetypes                :story:
-
-A stitch template may make use of a wale template. At present we are
-loading these from the file system, thus requiring the
-locator. However, since we already have the templates in memory, we
-could model these a bit better.
-
-Notes:
-
-- we could easily add a wale template meta-data parameter to the
-  logical archetype. The problem is, at this point all we are saying
-  is that there are logical associations between elements. We then
-  need to somehow load up the artefact corresponding to the wale
-  template into the element artefacts of all logical archetypes which
-  refer to that template. We could have a =text= transform that does
-  this. Finally we could add a dependency between the stitch artefact
-  and the wale artefact. However, for this to work, we need to supply
-  the entire =element_artefacts= into the text transform and let the
-  stitch transform locate whatever it needs.
-- a second problem is that we need to load the wale templates from the
-  file system before we reach the physical model. This could be done
-  as part of the wale template. We already do something similar for
-  stitch; if it exists load it, if not create it. We need a similar
-  logic.
-
-*** =templating= should not depend on =physical=                      :story:
-
-For some random reason we implemented the =templating= model in terms
-of artefacts of the physical model. There is no need for this in the
-new world, so we should try to decouple these models. Templating
-should not even know of files; it should receive a string and return a
-string.
-
-*** Extend tracing to M2T transforms                                  :story:
-
-There is nothing stopping us from having a context with the tracer,
-and doing a dump of the artefact before and after a M2T transform.
-
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text and text-to-model (to a lesser extent) are
-well known TLAs in MDE we should make use of these in class names. The
-names we have at present are very long. The additional size is not
-providing any benefits.
-
-*** Replace initialisers with facet-based initialisation              :story:
-
-Now that we have facets, archetypes, etc as proper meta-model
-elements, it is becoming clear that the initialiser is just a facet in
-disguise. We have enough information to generate all initialisers as
-part of the code generation of facets and backends. Once we do this,
-we have reached the point where it is possible to create a new
-meta-model element and add a formatter for it and code will be
-automatically generated without any manual intervention. Similarly,
-deleting formatters will delete all traces of it from the code
-generator.
-
-*** Consider making technical spaces a core concept                   :story:
-
-At present we are trying to instantiate a stitch template. It requires
-knowing the technical space that the original archetype belongs to so
-that we can locate the appropriate decoration. However, because we are
-in the text model and the archetype is a physical concept, we have no
-way of knowing what the original TS was for a given archetype. We
-could of course locate the associated M2T transform etc - but this
-perhaps hints at a bigger problem with the conceptual model: technical
-spaces are much more of a pervasive concept than just logical model:
-
-- injectors belong to technical spaces.
-- logical model entities belong to technical spaces.
-- text transforms belong to technical spaces.
-- physical model entities such as archetypes and artefacts belong to
-  technical spaces.
-
-It would be nice if we could have this modeled correctly, in some kind
-of shared model. At present, the only model which does this is
-=variability= but it does not make a lot of sense to put TS'
-there. Perhaps we should wait until we have enough entities to see
-what the name of this "core" model should be.
-
-*** Inject backend, facets and archetypes into PMM                    :story:
-
-At present we only have artefacts in the PMM. We need to inject all
-other missing elements. We also need to create a transform which
-builds the PMM. Finally while we're at it we should add enablement
-properties and associated transform.
-
-Notes:
-
-- we should also change template instantiation code to use the PMM.
-- once we have a flag, we can detect disabled backends before any work
-  is carried out. The cost should be very close to zero. We don't need
-  to do any checks for this afterwards.
-- we need to add a list of archetypes that each archetype depends
-  on. We need to update the formatters to return archetypes rather
-  than names and have the dependencies there.
-
-Merged stories:
-
-*Implement archetype locations from physical meta-model*
-
-We need to use the new physical meta-model to obtain information about
-the layout of physical space, replacing the archetype locations.
-
-Tasks:
-
-- make the existing backend interface return the layout of physical
-  space.
-- create a transform that populates all of the data structures needed
-  by the current code base (archetype locations).
-- replace the existing archetype locations with a physical meta-model.
-- remove all the archetype locations data structures.
-
-Notes:
-
-- template instantiation domains should be a part of the physical
-  meta-model. Create a transform to compute these. *done*
-- remove Locatable from Element? *done*
-
-Merged stories:
-
-*Clean-up archetype locations modeling*
-
-We now have a large number of containers with different aspects of
-archetype locations data. We need to look through all of the usages of
-archetype locations and see if we can make the data structures a bit
-more sensible. For example, we should use archetype location id's
-where possible and only use the full type where required.
-
-Notes:
-
-- formatters could return id's?
-- add an ID to archetype location; create a builder like name builder
-  and populate ID as part of the build process.
-
-*Implement the physical meta-model*
-
-We need to replace the existing classes around archetype locations
-with the new meta-model types.
-
-Notes:
-
-- formatters should add their data to a registrar that lives in the
-  physical model rather than expose it via an interface.
-
-*** Split enablement features                                         :story:
-
-At present we are instantiating the =enabled= feature across the
-entire =masd= template instantiation domain. This is a very
-"efficient" way to do it because we only define one feature. However,
-it also means its now possible to disable a facet or backend at the
-element level. And worse, the binding point is global:
-
-: #DOGEN masd.variability.default_binding_point=any
-: #DOGEN masd.variability.generate_static_configuration=false
-: #DOGEN masd.variability.instantiation_domain_name=masd
-
-The right thing to do is to create four separate features, one for
-the backend, one for the features and one for the archetype
-(global). Then another one for the archetype, locally. Each with the
-correct binding point.
-
-*** Add PMM enablement transform                                      :story:
-
-This transform reads the global enablement flags for backend, facet
-and archetype. It is done as part of the chain to produce the PMM.
-
-*** Add a PMM enablement satisfiability transform                     :story:
-
-For now this transform can simply check that there are no enabled
-archetypes that depend on disabled archetypes. In the future we could
-have a flag that enables archetypes as required.
-
-*** Add =is_generatable= to logical model                             :story:
-
-Logical types which cannot be generated should be removed prior to
-physical expansion. There are two types:
-
-- intrinsically non-generatable types such as object templates, etc.
-- types that may not be generated depending on state: modules.
-
-In the future, when we support the static / dynamic pattern,
-
-Tasks:
-
-- add a generatable flag in logical model elements with associated
-  transform.
-- add a pruning transform that filters out all non-generatable types
-  from logical model.
-
-Merged stories:
-
-*Intrinsic non-generatable types
-
-In the decoration transform we have this hack:
-
-: bool decoration_transform::
-: is_generatable(const assets::meta_model::name& meta_name) {
-:     // FIXME: massive hack for now.
-:     using mnf = assets::helpers::meta_name_factory;
-:     static const auto otn(mnf::make_object_template_name());
-:     static const auto ln(mnf::make_licence_name());
-:     static const auto mln(mnf::make_modeline_name());
-:     static const auto mgn(mnf::make_modeline_group_name());
-:     static const auto gmn(mnf::make_generation_marker_name());
-:
-:     const auto id(meta_name.qualified().dot());
-:     return
-:         id != otn.qualified().dot() &&
-:         id != ln.qualified().dot() &&
-:         id != mln.qualified().dot() &&
-:         id != mgn.qualified().dot() &&
-:         id != gmn.qualified().dot();
-: }
-
-This is done because we know up front that some elements in the assets
-meta-model cannot be generated. We need a way to tag this elements
-statically. This should be done when the elements are code
-generated. It is not yet clear how this should be done though.
-
-Notes:
-
-- one possible approach is to have a constant that is code generated
-  which states if a type is meant for generation or not.
-- however, it would be even better if we could determine if a type has
-  formatters or not. This would mean we would cover two possible
-  scenarios: types that are intrinsically non-generatable and types
-  that are not yet generatable. It may be that there is no need to
-  distinguish between these two.
-- when we have meta-model elements for logical meta-elements we just
-  need to add this as a property (e.g. generatable). If a user tries
-  to add a formatter to a non-generatable type we error.
-
-*** Create a physical ID in logical-physical space                    :story:
-
-Artefacts are points in logical-physical space. They should have an ID
-which is composed by both logical and physical location. We could
-create a very simple builder that concatenates both, for example:
-
-: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
-
-The use of =|= would make it really easy to split out IDs as required,
-and to visually figure out which part is which. Note though that the
-ID is an opaque identifier and the splitting happens for
-troubleshooting purposes only, not in the code. With the physical
-model, all references are done using these IDs. So for example, if an
-artefact =a0= depends on artefact =a1=, the dependency is recorded as
-the ID of =a1=. The physical model should also be indexed by ID
-instead of being a list of artefacts.
-
-*** Make physical model name a qualified name                         :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
-*** Add enablement test in C#                                         :story:
-
-At present we have probably broken enablement in C# due to the hackery
-around physical space expansion. However all tests are green. We need
-to define a profile in C# that disables a facet in order to ensure we
-test enablement before we start hacking around with the enablement
-transforms. It will most likely be red - we need to add the pruning
-hack to get rid of disabled artefacts as we do in C++.
-
-*** Add dependencies to artefacts                                     :story:
-
-We need to propagate the dependencies between logical model elements
-into the physical model. We still need to distinguish between "types"
-of dependencies:
-
-- transparent_associations
-- opaque_associations
-- associative_container_keys
-- parents
-
-Basically, anything which we refer to when we are building the
-dependencies for inclusion needs to be represented. We could create a
-data structure for this purpose such as "dependencies". We should also
-include "namespace" dependencies. These can be obtained by =sort |
-uniq= of all of the namespaces for which there are dependencies. These
-are then used for C#.
-
-Note however that all dependencies are recorded as logical-physical
-IDs.
-
-We also need a way to populate the dependencies as a transform. This
-must be done in =m2t= because we need the formatters. We can rely on
-the same approach as =inclusion_dependencies= but instead of creating
-/inclusion dependencies/, we are just creating /dependencies/.
-
-*** Consider allowing representation of namespaces in file names      :story:
-
-Languages like .Net represent namespacing using dots rather than
-separate folders. Perhaps we should support a mode of operation where
-all files are placed in a single folder but have the namespacing
-encoded in the file name. For example:
-
-: /a_project/types/a.cpp
-: /a_project/io/a_io.cpp
-
-would become:
-
-: /a_project/types_a.cpp
-: /a_project/io_a_io.cpp
-
-or, using dot notation, so we can distinguish namespaces from
-"composite" names:
-
-: /a_project/types.a.cpp
-: /a_project/io.a_io.cpp
-
-We do not have a use case for this yet, but it should be fairly
-straight forward to add it. We just need meta-data support to enable
-the feature and then take it into account when generating the file
-names (e.g. instead of using =/= as a separator, use =.=).
-
-Actually this is _almost_ already possible: we provide a facet folder
-meta-data that is always used to generate a new folder. If however
-there was a way for it to not generate a folder we could achieve
-this. For example, say we had to supply:
-
-: /types/
-
-as the facet folder. Then the user could simply supply instead:
-
-: types_
-: types.
-
-And no folder would be created.
-
-Notes:
-
-- see also the story on destinations.
-- consider splitting this story into two: one is about how folder
-  layout (physical) may need to match namespace layout (logical);
-  another is related to allowing users to flatten facet
-  directories. They have some connection, but its not obvious how much
-  they overlap.
-
-*** Add a PM enablement and overwrite transform                       :story:
-
-This relies on PMM enablement flags. Also, it reads the local
-archetype enablement and overwrite flags and has the logic to set it
-as per current enablement transform.
-
-Once this transform is implemented, we should try disabling the
-existing enablement transform and see what breaks.
-
-*** Add a PM enablement satisfiability transform                      :story:
-
-To start with, this should just check to see if any of the
-dependencies are disabled. If so it throws. In the future we can add
-solving.
-
-*** Add a PM transform to prune disabled artefacts                    :story:
-
-We must first start by expanding the physical space into all possible
-points. Once enablement is performed though we can prune all artefacts
-that are disabled. Note that we cannot prune based on global
-information because archetypes may be enabled locally. However, once
-all of the local information has been processed and the enabled flag
-has been set, we can then remove all of those with the flag set to
-false.
-
-In a world with solving, we just need to make sure solving is slotted
-in after enablement and before pruning. It should just work.
-
-This transform is done within the =m2t= model, not the =physical=
-model, because we need to remove the artefacts from the =m2t=
-collection.
-
-*** Implement formatting styles in physical model                     :story:
-
-We need to move the types related to formatting styles into physical
-model, and transfors as well. WE should also address formatting input.
-
-Merged stories:
-
-*Move formatting styles into generation*
-
-We need to support the formatting styles at the meta-model level.
-
-*Replace all formatting styles with the ones in physical model*
-
-We still have a number of copies of this enumeration.
-
-*** Implement locator in physical model                               :story:
-
-Use PMM entities to generate artefact paths, within =m2t=.
-
-Merged stories:
-
-*Create a archetypes locator*
-
-We need to move all functionality which is not kernel specific into
-yarn for the locator. This will exist in the helpers namespace. We
-then need to implement the C++ locator as a composite of yarn
-locator.
-
-*Other Notes*
-
-At present we have multiple calls in locator, which are a bit
-ad-hoc. We could potentially create a pattern. Say for C++, we have
-the following parameters:
-
-- relative or full path
-- include or implementation: this is simultaneously used to determine
-  the placement (below) and the extension.
-- meta-model element:
-- "placement": top-level project directory, source directory or
-  "natural" location inside of facet.
-- archetype location: used to determine the facet and archetype
-  postfixes.
-
-E.g.:
-
-: make_full_path_for_enumeration_implementation
-
-Interestingly, the "placement" is a function of the archetype location
-(a given artefact has a fixed placement). So a naive approach to this
-seems to imply one could create a data driven locator, that works for
-all languages if supplied suitable configuration data. To generalise:
-
-- project directory is common to all languages.
-- source or include directories become "project
-  sub-directories". There is a mapping between the artefact location
-  and a project sub-directory.
-- there is a mapping between the artefact location and the facet and
-  artefact postfixes.
-- extensions are a slight complication: a) we want to allow users to
-  override header/implementation extensions, but to do it so for the
-  entire project (except maybe for ODB files). However, what yarn's
-  locator needs is a mapping of artefact location to  extension. It
-  would be a tad cumbersome to have to specify extensions one artefact
-  location at a time. So someone has to read a kernel level
-  configuration parameter with the artefact extensions and expand it
-  to the required mappings. Whilst dealing with this we also have the
-  issue of elements which have extension in their names such as visual
-  studio projects and solutions. The correct solution is to implement
-  these using element extensions, and to remove the extension from the
-  element name.
-- each kernel can supply its configuration to yarn's locator via the
-  kernel interface. This is fairly static so it can be supplied early
-  on during initialisation.
-- there is still something not quite right. We are performing a
-  mapping between some logical space (the modeling space) and the
-  physical space (paths in the filesystem). Some modeling elements
-  such as the various CMakeLists.txt do not have enough information at
-  the logical level to tell us about their location; at present the
-  formatter itself gives us this hint ("include cmakelists" or "source
-  cmakelists"?). It would be annoying to have to split these into
-  multiple archetypes just so we can have a function between the
-  archetype location and the physical space. Although, if this is the
-  only case of a modeling element not mapping uniquely, perhaps we
-  should do exactly this.
-- However, we still have inclusion paths to worry about. As we done
-  with the source/include directories, we need to somehow create a
-  concept of inclusion path which is not language specific; "relative
-  path" and "requires relative path" perhaps? These could be a
-  function of archetype location.
-
-Merged stories:
-
-*Generate file paths as a transform*
-
-We need to understand how file paths are being generated at present;
-they should be a transform inside generation.
-
-*Create the notion of project destinations*
-
-At present we have conflated the notion of a facet, which is a logical
-concept, with the notion of the folders in which files are placed - a
-physical concept. We started thinking about addressing this problem by
-adding the "intra-backend segment properties", but as the name
-indicates, we were not thinking about this the right way. In truth,
-what we really need is to map facets (better: archetype locations) to
-"destinations".
-
-For example, we could define a few project destinations:
-
-: masd.generation.destination.name="types_headers"
-: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
-: masd.generation.destination.name=top_level (global?)
-: masd.generation.destination.folder=""
-: masd.generation.destination.name="types_src"
-: masd.generation.destination.folder="src/types"
-: masd.generation.destination.name="tests"
-: masd.generation.destination.folder="tests"
-
-And so on. Then we can associate each formatter with a destination:
-
-: masd.generation.cpp.types.class_header.destination=types_headers
-
-Notes:
-
-- these should be in archetypes models.
-- with this we can now map any formatter to any folder, particularly
-  if this is done at the element level. That is, you can easily define
-  a global mapping for all formatters, and then override it
-  locally. This solves the long standing problem of creating say types
-  in tests and so forth. With this approach you can create anything
-  anywhere.
-- we need to have some tests that ensure we don't end up with multiple
-  files with the same name at the same destination. This is a
-  particular problem for CMake. One alternative is to allow the
-  merging of CMake files, but we don't yet have a use case for
-  this. The solution would be to have a "merged file flag" and then
-  disable all other facets.
-- this will work very nicely with profiles: we can create a few out of
-  the box profiles for users such as flat project, common facets and
-  so on. Users can simply apply the stereotype to their models. These
-  are akin to "destination themes". However, we will also need some
-  kind of "variable replacement" so we can support cases like
-  =include/masd.cpp_ref_impl.northwind/types=. In fact, we also have
-  the same problem when it comes to modules. A proper path is
-  something like:
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
-  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
-
-  This is *extremely* flexible. The user can now create a folder
-  structure that depends on package names etc or choose to flatten it
-  and can do so for one or all facets. This means for example that we
-  could use nested folders for =include=, not use model modules for
-  =src= and then flatten it all for =tests=.
-- actually it is a bit of a mistake to think of these destinations as
-  purely physical. In reality, we may also need them to contribute to
-  namespaces. For example, in java the folders and namespaces must
-  match. We could solve this by having a "module contribution" in the
-  destination. These would then be used to construct the namespace for
-  a given facet. Look for java story on backlog for this.
-- this also addresses the issue of having multiple serialisation
-  formats and choosing one, but having sensible folder names. For
-  example, we could have boost serialisation mapped to a destination
-  called =serialisation=. Or we could map it to say RapidJSON
-  serialisation. Or we could support two methods of serialisation for
-  the same project. The user chooses where to place them.
-
-*** Implement dependencies in terms of new physical types             :story:
-
-- add dependency types to physical model.
-- add dependency types to logical model, as required.
-- compute dependencies in generation. We need a way to express
-  dependencies as a file dependency as well as a model
-  dependency. This caters for both C++ and C#/Java.
-- remove dependency code from C++ and C# model.
-
-Notes:
-
-- in light of the new physical model, we need a transform that calls
-  the formatter to obtain dependencies. The right way to do this is to
-  have another registrar (=dependencies_transform=?) and to have the
-  formatters implement both interfaces. This means we can simply not
-  implement the interface (and not register) when we have no
-  dependencies - though of course given the existing wale
-  infrastructure, we will then need yet another template for
-  formatters which do not need d
-
-Merged stories:
-
-*Formatter dependencies and model processing*
-
-At present we are manually adding the includes required by a formatter
-as part of the "inclusion_dependencies" building. There are several
-disadvantages to this approach:
-
-- we are quite far down the pipeline. We've already passed all the
-  model building checks, etc. Thus, there is no way of knowing what
-  the formatter dependencies are. At present this is not a huge
-  problem because we have so few formatters and their dependencies are
-  mainly on the standard library and a few core boost models. However,
-  as we add more formatters this will become a bigger problem. For
-  example, we've added formatters now that require access to
-  variability headers; in an ideal world, we should now need to have a
-  reference to this model (for example, so that when we integrate
-  package management we get the right dependencies, etc).
-- we are hard-coding the header files. At present this is not a big
-  problem. To be honest, we can't see when this would be a big
-  problem, short of models changing their file names and/or
-  locations. Nonetheless, it seems "unclean" to depend on the header
-  file directly.
-- the dependency is on c++ code rather than expressed via a model.
-
-In an ideal world, we would have some kind of way of declaring a
-formatter meta-model element, with a set of dependencies declared via
-meta-data. These are on the model itself. They must be declared
-against a specific archetype. We then would process these as part of
-resolution. We would then map the header files as part of the existing
-machinery for header files.
-
-However one problem with this approach is that we are generating the
-formatter code using stitch at present. For this to work we would need
-to inject a fragment of code into the stitch template somehow with the
-dependencies. Whilst this is not exactly ideal, the advantage is that
-we could piggy-back on this mechanism to inject the postfix fields as
-well, so that we don't need to define these manually in each
-model. However, this needs some thinking because the complexity of
-defining a formatter will increase yet again. When there are problems,
-it will be hard to troubleshoot.
-
-*Move dependencies into archetypes*
-
-Actually the dependencies will be generated at the kernel level
-because 99% of the code is kernel specific. However, we need to make
-it an external transform. We need to figure out an interface that
-supplies archetypes with the data needed to create the dependencies
-container.
-
-Tasks:
-
-- create the locator in the C++ external transform
-- create a dependencies transform that uses the existing include
-  generation code.
-
-*Previous understanding*
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*Tidy-up of inclusion terminology*
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
-
-*** Merge C++ and C# model into =m2t=                                 :story:
-
-Once we remove all of formatables and helpers from each technical
-space and once we remove all of the transforms in =m2t= that don't
-really belong there, we can probably merge all of these models into
-one. We would then have a =transforms= namespace, with sub-namespaces
-per language. Each of the namespaces is declared as a backend.
-
-*** Top-level "inclusion required" should be "tribool"                :story:
-
-One of the most common use cases for inclusion required is to have it
-set to true for all types where we provide an override, but false for
-all other cases. This makes sense in terms of use cases:
-
-- either we need to supply some includes; in which case where we do
-  not supply includes we do not want the system to automatically
-  compute include paths;
-- or we don't supply any includes, in which case:
-  - we either don't require any includes at all (hardware built-ins);
-  - or we want all includes to be computed by the system.
-
-The problem is that we do not have a way to express this logic in the
-meta-data. The only way would be to convert the top-level
-=requires_includes= to an enumeration:
-
-- yes, compute them
-- yes, where supplied
-- no
-
-We need to figure out how to implement this. For now we are manually
-adding flags.
-
-*** Add the notion of a major and a minor technical space             :story:
-
-When we move visual studio and other elements out of the current
-technical spaces, we will need some way of distinguishing between a
-"primary" technical space (e.g. C++, C# etc) and a "secondary"
-technical space (e.g. visual studio, etc). We could use emacs'
-convention and call these major and minor technical spaces.
-
-This should be a property of the backend.
-
-*** Move decorations to their "final" resting place                   :story:
-
-At present we are handling decorations in the generation model but
-these are really logical concerns. The main reason why is because we
-are not expanding the decoration across physical space, but instead we
-expand them depending on the used technical spaces. However, since the
-technical spaces are obtained from the formatters, there is an
-argument to say that archetypes should have an associated technical
-space. We need to decouple these concepts in order to figure out where
-they belong.
-
-*** Create a common formatter interface                               :story:
-
-Once all language specific properties have been moved into their
-rightful places, we should be able to define a formatter interface
-that is suitable for both c++ and c# in generation. We should then
-also be able to move all of the registration code into generation. We
-then need to look at all containers of formatters etc to see what
-should be done at generation level.
-
-Once we have a common formatter interface, we can add the formatters
-themselves to the =element_artefacts= tuple. Then we can just iterate
-through the tuples and call the formatter instead having to do
-look-ups.
-
-Also, at this point we can then update the physical elements generated
-code to generate the transform code for backend and facet
-(e.g. delegation and aggregation of the result).
-
-*** Stitch formatter updates                                          :story:
-
-There are a number of issues with stitch formatters at present:
-
-- stitch transform is still generating its own artefact.
-
-*** Order of headers is hard-coded                                    :story:
-
-In inclusion expander, we have hacked the sorting:
-
-:        // FIXME: hacks for headers that must be last
-:        const bool lhs_is_gregorian(
-:            lhs.find_first_of(boost_serialization_gregorian) != npos);
-:        const bool rhs_is_gregorian(
-:            rhs.find_first_of(boost_serialization_gregorian) != npos);
-:        if (lhs_is_gregorian && !rhs_is_gregorian)
-:            return true;
-
-This could be handled via meta-data, supplying some kind of flag (sort
-last?). We should try to generate the code in the "natural order" and
-see if the code compiles with latest boost.
-
-*** Move technical space and generability transforms                  :story:
-
-At present these transforms are in generation, but we don't think
-that's the right place. We need some analysis to understand what they
-do and why they are not in the logical model.
-
-*** Consider bucketing elements by meta-type in generation model      :story:
-
-At the moment we have a flat container of elements in the main
-model. However, it seems like one of its use cases will be to bucket
-the elements by meta-type before processing: formatters will want to
-locate all formatters for a given meta-type and apply them all. At
-present we are asking for the formatters for meta-name
-repeatedly. This makes no sense, we should just ask for them once and
-apply all formatters in one go.
-
-For this we could simply group elements by meta-name in the model
-itself and then use that container at formatting time. However, there
-may be cases where looping through the whole model is more convenient
-(during transforms) so this is not without its downsides.
-
-Alternatively we could consider just bucketing in the formatters'
-workflow itself.
-
-This work will only be useful once we get rid of the formattables
-model.
-
-This can be done in the generation model, as part of the generation
-clean up.
-
-*** Dimension vs view vs perspective                                  :story:
-
-We need to find the definition for how these terms are used within
-UML and see which one is more appropriate for MASD.
-
-*** Private and public includes                                       :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to hide some internal types from
-users so that I don't increase coupling for no reason.
-#+end_quote
-
-NOTE: We should use the terms =internal= and =external= to avoid
-confusion with C++ scopes. This follows Microsoft terminology for C#
-assemblies.
-
-At present we are making all headers in a model public. However, for
-models such as cpp this doesn't make any sense since only one type
-should be available to the outside world. What we really need is a
-separation between public and private headers, a functionality similar
-to =internal= in C#. In conjunction with using shared objects, this
-should improve build times.
-
-In order to do this:
-
-- add a new config parameter: default visibility to private or default
-  visibility to public. This is just so we don't have to mark all
-  types manually - instead we just need to mark the exceptions.
-- add two new stereotypes: =public= and =private=.
-- add enum to sml: =visibility_type= (check with .Net for
-  names). Valid values are =public=, =private=. Objects, enumerations,
-  etc will have this enum.
-- locator will now respect this value when producing an absolute file
-  path. If public files go under =include/public=, if private files go
-  under =include/private=.
-- CMakelists for the component will add to the include path the
-  private directory. Same for the spec CMakelists. Need to check that
-  this not add to the global include path.
-- CMakelists for the include files will only package the public
-  headers.
-- mark all the types accordingly in all our models. fix all the
-  ensuing breakage. we will probably need to move forward on the IoC
-  front in order for this to work as we don't want to expose
-  implementations - e.g. =workflow_interface= will be public but
-  =workflow= will be private; this means we need some kind of factory
-  to generate =workflow_interface=.
-
-More thoughts on this:
-
-- we don't really need to have different directories for this; we
-  could just put all the include files in the same directory. At
-  packaging time, we should only package the public files (this would
-  have to be done using CPack).
-- also the GCC/MSVC visibility pragmas should take into account these
-  options and only export public types.
-- the slight problem with this is that we need some tests to ensure
-  the packages we create are actually exporting all public types; we
-  could easily have a public type that depends on a private type
-  etc. We should also validate yarn to ensure this does not
-  happen. This can be done by ensuring that a type marked as external
-  only depends on types also marked as external and so forth.
-- this could also just be a packaging artefact - we would only package
-  public headers. Layout of source code would remain the same.
-- when module support is available, we could use this to determine
-  what is exported on the module interfaces.
-
-*** Replace traits with calls to the PMM elements                     :story:
-
-Where we are using these traits classes, we should really be including
-the formatter and calling for its static name - at least within each
-backend.
-
-*** Associate includes with model elements                            :story:
-
-The right solution for the formatter includes is to supply them as
-meta-data in the model element. This has the advantage that we can
-then make use of profiles. At present we have one way to supply
-includes: the primary and secondary includes:
-
-: "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-: "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
-
-This does a part of the job: we can associate up to two include
-directives with one facet and element. However:
-
-- by using this machinery we are effectively replacing the original
-  include.
-- the includes will occur for anyone who references the type. Though
-  however, since the includes are applicable only to the class
-  implementation this is less of a problem. Technically its still
-  incorrect though because these are not the includes needed to use
-  the type but the includes needed to define the type.
-
-For formatters, we kind of need to make the includes only happen when
-we are building the formatter. If we could have a similar machinery,
-but without adding to types referencing the type, this would give us a
-way to declare all of the formatters dependencies. Then, we could
-switch to building all of the stitch boilerplate outside of stitch and
-supplying it as a KVP.
 
 ** Deprecated
 *** CANCELLED Support for platform specific code                      :story:
