@@ -25,25 +25,40 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <memory>
+#include "dogen.m2t/types/entities/model.hpp"
+#include "dogen.m2t/types/transforms/context_fwd.hpp"
+#include "dogen.m2t/types/transforms/text_to_text_transform_registrar.hpp"
 
 namespace dogen::m2t::transforms {
 
+/**
+ * @brief Chain responsible for orchestrating all T2T transforms.
+ */
 class text_to_text_chain final {
 public:
-    text_to_text_chain() = default;
-    text_to_text_chain(const text_to_text_chain&) = default;
-    text_to_text_chain(text_to_text_chain&&) = default;
-    ~text_to_text_chain() = default;
-    text_to_text_chain& operator=(const text_to_text_chain&) = default;
+    /**
+     * @brief Registrar that keeps track of the available transforms.
+     */
+    static text_to_text_transform_registrar& registrar();
 
 public:
-    bool operator==(const text_to_text_chain& rhs) const;
-    bool operator!=(const text_to_text_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static void apply(const m2t::transforms::context& ctx,
+        m2t::entities::model& m);
 
+private:
+    static std::shared_ptr<text_to_text_transform_registrar> registrar_;
 };
+
+/*
+ * Helper method to register transforms.
+ */
+template<typename Transform>
+inline void register_transform() {
+    auto t(std::make_shared<Transform>());
+    auto& rg(text_to_text_chain::registrar());
+    rg.register_transform(t);
+}
 
 }
 

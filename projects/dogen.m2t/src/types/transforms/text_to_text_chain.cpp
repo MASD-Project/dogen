@@ -18,12 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.m2t/io/entities/model_io.hpp"
+#include "dogen.m2t/types/transforms/transformation_error.hpp"
 #include "dogen.m2t/types/transforms/text_to_text_chain.hpp"
+
+namespace {
+
+const std::string transform_id("m2t.transforms.text_to_text_chain");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string unsupported_technical_space(
+    "Could not find transform for technical space: ");
+const std::string disabled_transform(
+    "Transform for requested technical space is disabled: ");
+
+}
 
 namespace dogen::m2t::transforms {
 
-bool text_to_text_chain::operator==(const text_to_text_chain& /*rhs*/) const {
-    return true;
+std::shared_ptr<text_to_text_transform_registrar>
+text_to_text_chain::registrar_;
+
+text_to_text_transform_registrar&
+text_to_text_chain::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<text_to_text_transform_registrar>();
+
+    return *registrar_;
+}
+
+void text_to_text_chain::apply(const m2t::transforms::context& ctx,
+    m2t::entities::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "text to text chain", transform_id,
+        m.name().qualified().dot(), *ctx.tracer(), m);
+
+    stp.end_chain(m);
 }
 
 }
