@@ -28,6 +28,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 
 namespace dogen::text::transforms {
@@ -57,7 +58,7 @@ public:
     /**
      * @brief Executes the transform.
      */
-    virtual void apply(const context& ctx,
+    virtual void apply(const context& ctx, const logical::entities::element& e,
         const boost::shared_ptr<physical::entities::artefact> input, std::list<
         boost::shared_ptr<physical::entities::artefact>>& outputs) const = 0;
 };
