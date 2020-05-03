@@ -44129,13 +44129,13 @@ Maps to a well known MSBuild target.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O333">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-48"/>
+        <dia:point val="-277,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-48.05;-261.435,-44.95"/>
+        <dia:rectangle val="-277.05,-53.05;-261.435,-49.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-48"/>
+        <dia:point val="-277,-53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -46298,13 +46298,13 @@ namespace.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O351">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-43"/>
+        <dia:point val="-277,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-43.05;-255.66,-39.95"/>
+        <dia:rectangle val="-277.05,-48.05;-255.66,-44.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-43"/>
+        <dia:point val="-277,-48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
