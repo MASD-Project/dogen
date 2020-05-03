@@ -793,14 +793,6 @@
       ]
     },
     {
-      "name": "transforms::text_to_text_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only",
-        "dogen::forward_declarable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::model_to_text_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable::header_only"
@@ -826,7 +818,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "transforms_for_logical_element_",
+          "name": "transforms_by_id_",
           "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
         }
       ]
@@ -845,6 +837,24 @@
           "documentation": "Models that belong to this set.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::text_to_text_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only",
+        "dogen::forward_declarable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::stitch_transform",
+      "parents": [
+        "transforms::text_to_text_transform"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
