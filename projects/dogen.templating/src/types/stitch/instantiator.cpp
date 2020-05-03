@@ -257,6 +257,23 @@ instantiator::format_text_template(const text_template& tt) const {
     return r;
 }
 
+std::string instantiator::instantiate(const std::string& input,
+    const std::unordered_map<std::string, std::string>& kvps) const {
+    BOOST_LOG_SEV(lg, debug) << "Instantiating string.";
+
+    /*
+     * FIXME: major hackery here just to pretend we read the template
+     * from a file. This is needed until we excise the dependency
+     * against the physical model.
+     */
+    const boost::filesystem::path input_path;
+    const auto tt(create_text_template(input_path, input, kvps));
+    const auto a(format_text_template(tt));
+
+    BOOST_LOG_SEV(lg, debug) << "Instantiated.";
+    return a.content();
+}
+
 physical::entities::artefact
 instantiator::instantiate(const boost::filesystem::path& input_path,
     const std::unordered_map<std::string, std::string>& kvps) const {

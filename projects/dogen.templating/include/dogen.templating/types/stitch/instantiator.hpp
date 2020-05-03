@@ -104,6 +104,17 @@ private:
     format_text_template(const text_template& tt) const;
 
 public:
+    /**
+     * @brief Instantiate the template from a string, using the
+     * supplied KVPs.
+     */
+    std::string instantiate(const std::string& input,
+        const std::unordered_map<std::string, std::string>& kvps) const;
+
+    /**
+     * @brief Instantiate the template from a file, using the supplied
+     * KVPs.
+     */
     physical::entities::artefact
     instantiate(const boost::filesystem::path& input_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
