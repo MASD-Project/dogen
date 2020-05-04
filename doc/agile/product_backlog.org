@@ -51,8 +51,8 @@ To be done on the last Sunday of the sprint.
 To be done on the Monday morning of the new sprint.
 
 1. Open new sprint, updating CMake version, README, appveyor version
-   and decoration formatter tests. This should all be in one
-   commit. *DO NOT PUSH*.
+   and decoration formatter tests. Build all and run tests (some will
+   fail). This should all be in one commit. *DO NOT PUSH*.
 2. Regenerate the LAM models for C# and C++ with the new version, and
    commit the changed files. Push the commit. (Ensure there are no
    pending builds still running or tests will fail due to version
@@ -77,6 +77,16 @@ Release Goals:
 
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
+
+*** Throw on invalid stereotypes for all model elements               :story:
+
+At present we seem to throw on invalid stereotypes but not for all
+modeling elements. We need to ensure we check this for all model
+elements. For example, add the following to a =masd::enumeration=:
+
+: some::crap
+
+This will not throw.
 
 *** Product family projects                                 :reviewing:story:
 

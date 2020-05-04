@@ -806,7 +806,7 @@ This was spotted by adding the following to a package:
 
 : masd::physical::facets
 
-Typo on "facets".
+Typo on "facets" (should have been "facet").
 
 *** COMPLETED Add model name to tracing dumps                         :story:
     CLOSED: [2020-04-17 Fri 17:45]
