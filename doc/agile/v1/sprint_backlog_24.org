@@ -187,7 +187,7 @@ provides an example of visualising the output in Emacs.
 
 /Figure 3: Using Emacs to visualise the output of =dumpspecs= in =org-mode= format./
 
-*****  Development Matters
+***** Development Matters
 
 This section cover topics that are mainly of interest if you follow
 Dogen development, such as details on internal stories that consumed
@@ -446,7 +446,7 @@ are larger than they should be. We have [[https://github.com/MASD-Project/dogen/
 address this issue, but sadly CMake does not make this a trivial
 undertaking.
 
-*****  Next Sprint
+***** Next Sprint
 
 We shall continue work on the "generation" refactor - a name that is
 now not quite as apt given all the model renaming. We are hopeful -

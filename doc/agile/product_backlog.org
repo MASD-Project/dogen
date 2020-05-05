@@ -78,16 +78,6 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Throw on invalid stereotypes for all model elements               :story:
-
-At present we seem to throw on invalid stereotypes but not for all
-modeling elements. We need to ensure we check this for all model
-elements. For example, add the following to a =masd::enumeration=:
-
-: some::crap
-
-This will not throw.
-
 *** Product family projects                                 :reviewing:story:
 
 Just like it makes sense to operate at the product level (e.g. add
@@ -125,6 +115,34 @@ repo. This would allow us to do one single checkout for the entire
 family. The downside is that we then start building inside of the
 sub-repos (we never want to build at the product family level). This
 may not necessarily be a bad thing.
+
+*** Investigate goxygen's functionality                               :story:
+
+Seems like an interesting project:
+
+#+begin_quote
+Goxygen aims at saving your time while setting up a new project. It
+creates a skeleton of an application with all configuration done for
+you. You can start implementing your business logic straight
+away. Goxygen generates back end Go code, connects it with front end
+components, provides a Dockerfile for the application and creates
+docker-compose files for convenient run in development and production
+environments.
+#+end_quote
+
+Links:
+
+- [[https://github.com/Shpota/goxygen][GitHub]]
+
+*** Throw on invalid stereotypes for all model elements               :story:
+
+At present we seem to throw on invalid stereotypes but not for all
+modeling elements. We need to ensure we check this for all model
+elements. For example, add the following to a =masd::enumeration=:
+
+: some::crap
+
+This will not throw.
 
 *** Consider adding valgrind suppressions to PDMs                     :story:
 
@@ -14637,12 +14655,15 @@ mode" which does a number of things at the same time:
 Similarly, if we had a "dogen studio", the UI could contain a
 visualisation for this.
 
+We should also see C++ Depend.
+
 Links:
 
 - [[https://www.youtube.com/watch?v=Cfu6f0uyzc8][SourceTrail demo]]
 - [[https://github.com/weirdNox/org-noter][org-noter github]]
 - [[https://www.youtube.com/watch?v=Un0ZRXTzufo][org-noter demo]]
 - [[http://cedet.sourceforge.net/uml.shtml][CEDET COGRE]]: Emacs mode for UML diagrams.
+- [[https://www.cppdepend.com/cppdependv2020][C++ Depend]]
 
 *** Create some basic naming guidelines                               :story:
 
@@ -16386,6 +16407,7 @@ Links:
 
 - https://github.com/emacs-lsp/lsp-mssql
 - https://github.com/microsoft/sqltoolsservice
+- [[https://github.com/kristiandupont/kanel][kanel]]: Generate Typescript types from Postgres
 
 *** Generate model from CSV files                                     :story:
 
