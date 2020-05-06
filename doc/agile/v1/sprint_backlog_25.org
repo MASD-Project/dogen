@@ -12,21 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-05 Tue 22:01]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *3:59* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 3:59   |      |      | 100.0 |
-| Active                                 |        | 3:59 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 3:59 | 100.0 |
+#+CAPTION: Clock summary at [2020-05-06 Wed 22:17]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *6:10* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 6:10   |      |      | 100.0 |
+| Active                                             |        | 6:10 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 5:33 |  90.0 |
+| Create a demo and presentation for previous sprint |        |      | 0:34 |   9.2 |
+| Sprint and product backlog grooming                |        |      | 0:03 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2020-05-05 Tue 22:01]
     :LOGBOOK:
+    CLOCK: [2020-05-06 Wed 20:03]--[2020-05-06 Wed 21:37] =>  1:34
     CLOCK: [2020-05-05 Tue 21:45]--[2020-05-05 Tue 22:00] =>  0:15
     CLOCK: [2020-05-05 Tue 19:03]--[2020-05-05 Tue 21:44] =>  2:34
     CLOCK: [2020-05-04 Mon 21:02]--[2020-05-04 Mon 22:05] =>  1:03
@@ -36,34 +39,30 @@ Add github release notes for previous sprint.
 
 Release Announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1248358530245148677][twitter]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6646494675207278592/][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1258142736571564032][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6663907059412545536-NdxP][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 **** Dogen v1.0.24, "Imbondeiro no Iona"
 
-*NOTE: Release notes under construction*
-
-#+caption: Baobab tree in Iona
+#+caption: Imbondeiro no Iona
 [[https://pbs.twimg.com/media/CpAcgYpWIAEGmCF?format=jpg]]
 /A baobab tree in Iona national park, Namib, Angola. (C) 2011 [[https://commons.wikimedia.org/wiki/File:Imbondeiro_Tree.jpg][Alfred Weidinger]]/
-
-**NOTE: Release notes under construction**
 
 ***** Introduction
 
 Welcome to the second release of Dogen under quarantine. As with most
-people, we have now converged to the new normal - or at least adjusted
-best one can to these sorts of
-world-changing-types-of-circumstances. Development continued to
-proceed at a steady clip, if somewhat slower than the previous
-sprint's, and delivered a fair bit of internal changes. Most
-significantly, with this release we may have finally broken the back
-of the fabled generation model refactor - though, to be fair, we'll
-only know for sure next sprint. We've also used some of our [[http://www.catb.org/~esr/jargon/html/C/copious-free-time.html][copious
-free time]] to make key improvements to infrastructure, fixing a number
-of long-standing annoyances. So, grab yourself a hot cup of coffee and
-get ready for yet another exciting Dogen sprint review!
+people, we have now converged to the new normal - or, at least,
+adjusted best one can to these sorts of world-changing
+circumstances. Development continued to proceed at a steady clip, if
+somewhat slower than the previous sprint's, and delivered a fair bit
+of internal changes. Most significantly, with this release we may have
+finally broken the back of the fabled generation model refactor -
+though, to be fair, we'll only know for sure next sprint. We've also
+used some of our [[http://www.catb.org/~esr/jargon/html/C/copious-free-time.html][copious free time]] to make key improvements to
+infrastructure, fixing a number of long-standing annoyances. So, grab
+yourself a hot =${beverage_of_choice}= and get ready for yet another
+exciting Dogen sprint review!
 
 ***** User visible changes
 
@@ -73,8 +72,10 @@ below describing them in more detail. As there have only been a small
 number of user facing changes, we've also used the video to discuss
 the internal work.
 
-[![Sprint 1.0.24 Demo](https://img.youtube.com/vi/RysjvA2eZ4o/0.jpg)](https://youtu.be/RysjvA2eZ4o)
-_Video 1: Sprint 24 Demo._
+#+caption: Sprint 1.0.24 Demo
+[[https://youtu.be/pUAZb6e52gI][https://img.youtube.com/vi/pUAZb6e52gI/0.jpg]]
+
+/Video 1: Sprint 24 Demo./
 
 ****** Add model name to tracing dumps
 
@@ -101,7 +102,7 @@ With this release, we fixed a long standing annoyance with the file
 backend, which is to name the trace files according to the model the
 transform is operating on. This is best demonstrated by means of an
 example. Say we take an arbitrary file from a tracing dump of the
-injection subsystem. Previously, the file names were named like so:
+injection subsystem. Previously, files were named like so:
 
 #+begin_example
 000-injection.dia.decoding_transform-c040099b-858a-4a3d-af5b-df74f1c7f52c-input.json
@@ -110,8 +111,9 @@ injection subsystem. Previously, the file names were named like so:
 
 This made it quite difficult to find out which model was being
 processed with this transform, particularly when there are large
-numbers of similar files. With this release we've added the model name
-to the tracing file name for the transform (/e.g./, =dogen.logical=):
+numbers of similarly named files. With this release we've added the
+model name to the tracing file name for the transform (/e.g./,
+=dogen.logical=):
 
 #+begin_example
 000-injection.dia.decoding_transform-dogen.logical-c040099b-858a-4a3d-af5b-df74f1c7f52c-input.json
@@ -124,13 +126,13 @@ development.
 
 ****** Primitives use compiler generated default constructors
 
-A bug was detected in generated code by two sharp-eyed individuals -
-Indranil and Ian - and a lifesaving tool - valgrind. Up to know our
-valgrind output had been so noisy that we weren't really paying too
-much attention to it. However, with this release we finally tidied it
-up - as we shall see later on in these release notes.. Lo-and-behold,
-as soon as we did that, an obvious bug was spotted the generated
-code. Turns out we were generating primitives that used the compiler
+Up to now our valgrind output had been so noisy that we weren't really
+paying too much attention to it. However, with this release we finally
+tidied it up - as we shall see later on in these release notes - and,
+would you believe it, as soon as we did that, obvious bugs started to
+get uncovered. This particular one was detected with the help of two
+sharp-eyed individuals - Indranil and Ian - as well as valgrind. So,
+it turns out we were generating primitives that used the compiler
 generated default constructor even when the underlying type was a
 primitive type. Taking an example for the [[https://github.com/MASD-Project/cpp_ref_impl][C++ reference model]]:
 
@@ -141,7 +143,7 @@ public:
 ...
 private:
     bool value_;
-#+end_src
+#+end_src cpp
 
 This of course resulted in uninitialised member variables. With this
 release the generated code now creates a manual default constructor:
@@ -152,32 +154,64 @@ class bool_primitive final {
 public:
     bool_primitive();
 ...
-#+end_src
+#+end_src cpp
 
 Which does the appropriate initialisation (do forgive the
-=static_cast=, these will be cleaned up at some point in the future):
+=static_cast=, these will be cleaned up at some point in the
+future):
 
 #+begin_src cpp
 bool_primitive::bool_primitive()
     : value_(static_cast<bool>(0)) { }
-#+end_src
+#+end_src cpp
 
 This fix illustrates the importance of static and dynamic analysis
 tools, forcing us to refresh [[https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-clang-sanitizers][the story on the missing LLVM/Clang
 tools]]. Sadly there aren't enough hours of the day to tackle all of
 these but we must get to them sooner rather than later.
 
+****** Circular references with =boost::shared_ptr=
+
+Another valgrind catch was the detection of a circular reference when
+using =boost::shared_ptr=. We did the classic school-boy error of
+having a data structure with a child pointing to its parent, and the
+parent pointing to the child. This is all fine and dandy but we did so
+using =boost::shared_ptr= for both pointers (in =node.hpp=):
+
+#+begin_src cpp
+    boost::shared_ptr<dogen::logical::helpers::node> parent_;
+    ...
+    std::list<boost::shared_ptr<dogen::logical::helpers::node> > children_;
+#+end_src cpp
+
+In these cases, [[https://theboostcpplibraries.com/boost.smartpointers-special-smart-pointers][the literature]] advises one to use =weak_ptr=, so
+that's what we did:
+
+#+begin_src cpp
+    boost::weak_ptr<dogen::logical::helpers::node> parent_;
+    ...
+    std::list<boost::shared_ptr<dogen::logical::helpers::node> > children_;
+#+end_src cpp
+
+With this the valgrind warning went away. Of course, the alert reader
+will point out that we probably should be using [[https://www.boost.org/doc/libs/1_73_0/libs/ptr_container/doc/ptr_container.html][pointer containers]] for
+the children but I'm afraid that's one for another story.
+
 ****** Allow creating models with no decorations
 
-Since we're on the topic of [[http://www.catb.org/~esr/jargon/html/B/brown-paper-bag-bug.html][brown-paper-bag bugs]], another interesting
-one was fix this sprint: our "sanity check model" which we use to make
-sure our packages generate a minimally usable Dogen binary was causing
-Dogen to segfault. This is in truth a veritable comedy of errors. The
-problem started with the fact that our [[https://github.com/MASD-Project/dogen/blob/master/build/scripts/test_package.linux.sh][test packaging script]] needs to
-know the version of the compiler for which the package was built in
-order that we can find the files in the filesystem. This is of course
-not ideal, but it is what it is and we have more pressing matters to
-look at, sadly. The code is like so:
+While we're on the subject of [[http://www.catb.org/~esr/jargon/html/B/brown-paper-bag-bug.html][brown-paper-bag bugs]], another
+interesting one was fixed this sprint: our "sanity check model", which
+we use to make sure our packages produce a minimally usable Dogen
+binary, was causing Dogen to segfault. This is, in truth, a veritable
+comedy of errors, so its worth recapping the series of events that led
+to its discovery. It all started with our [[https://github.com/MASD-Project/dogen/blob/master/build/scripts/test_package.linux.sh][test packaging script]], who
+needs to know the version of the compiler for which the package was
+built, so that it can look for the binaries in the filesystem. This
+is, of course, less than ideal, but it is what it is and sadly we have
+other more pressing matters to look at so it will remain this way for
+some time.
+
+The code in question is like so:
 
 #+begin_src sh
 #
@@ -197,7 +231,7 @@ else
     echo "* Unrecognised compiler: ${compiler}"
     exit
 fi
-#+end_src
+#+end_src cpp
 
 However, we forgot to update the script when we moved to
 =clang-9=. Now, normally this would have been picked up by travis as a
@@ -207,9 +241,9 @@ while. To make matters interesting, we did introduce a bad bug over
 time; we changed the handling of default decorations. The problem is
 that all test models use the test profile, and the test profile
 contains decorations. The only model that did not contain any
-decorations was, you guessed it, the hello world model. So once we
-fixed the package testing script we then had to fix the code that
-handles default decorations.
+decorations was - you guessed it - the hello world model that is used
+in the package sanity tests. So once we fixed the package testing
+script we then had to fix the code that handles default decorations.
 
 ***** Development Matters
 
@@ -223,8 +257,10 @@ all the gory details of the work carried out this sprint, see the
 
 The 11,111th commit was reached during this release.
 
-![11111th commit](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_11111_commits.png)
-_Figure 1: 11,111th commit in the Dogen git repository._
+#+caption: 11111th commit
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_11111_commits.png
+
+/Figure 1: 11,111th commit in the Dogen git repository./
 
 ****** Milestones
 
@@ -232,51 +268,51 @@ The first set of completely green builds have been obtained for
 Dogen - both nightlies and continuous builds. This includes tests,
 dynamic analysis and code coverage.
 
-![Dogen CDash](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_green_build.png)
-_Figure 2: Builds for Dogen in CDash's dashboard._
+#+caption: Dogen CDash
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_green_build.png
+/Figure 2: Builds for Dogen in CDash's dashboard./
 
 The first set of completely green nightly builds have been obtained
 for the C++ Reference Model. Work still remains on continuous builds
 for OSX and Windows, with 4 and 2 test failures respectively.
 
-![C++ Reference Implementation CDash](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_cpp_ref_impl_green_build.png)
-_Figure 3: Builds for C++ reference model in CDash's dashboard._
+#+caption: C++ Reference Implementation CDash
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_cpp_ref_impl_green_build.png
+/Figure 3: Builds for C++ reference model in CDash's dashboard./
 
 ****** Significant Internal Stories
 
-The sprint was mostly dominated by a large number of small refactors
-that changed the internals of Dogen dramatically - though in many
-cases, mainly with regards to naming and location of classes. We've
-aggregated all of these stories under two themes.
+There were several stories connected to the generation model refactor,
+which we have aggregated under one sundry umbrella to make our life
+easier.
 
 ******* Generation model refactor
 
-There were several stories connected to the generation model refactor,
-which we have aggregated under the sundry umbrella of the current
-section. In all honesty, we did not do a brilliant job of sizing tasks
-this sprint. Instead, we ended up with a couple of gigantic,
-_epic-like_ stories - XXXL? - rather than a number of small, focused
-and roughly equally sized stories that we prefer - L and X, in [[https://www.c-sharpcorner.com/article/agile-story-point-estimation-techniques-t-shirt-sizing/][t-shirt
-sizes]]. Yet another great opportunity for improvement is clearly
-presenting itself here. To make things more understandable for this
-/post-mortem/, we decided to paper over the cracks and provide a
-slightly more granular view - rather than the coarse-grained way in
-which it was originally recorded on the sprint backlog.
+We probably should start by admitting that we did not do a
+particularly brilliant job of sizing tasks this sprint. Instead, we
+ended up with a couple of gigantic, /epic-like/ stories - XXXL? -
+rather than a number of small, focused and roughly equally sized
+stories that we prefer - L and X, in [[https://www.c-sharpcorner.com/article/agile-story-point-estimation-techniques-t-shirt-sizing/][t-shirt sizes]]. Yet another great
+opportunity for improvement is clearly presenting itself here. To make
+things more understandable for this /post-mortem/, we decided to paper
+over the cracks and provide a slightly more granular view - rather
+than the coarse-grained way in which it was originally recorded on the
+sprint backlog.
 
 The core of the work was divided as follows:
 
-- *Adding physical entities to the logical model*: this story was
+- **Adding physical entities to the logical model**: this story was
   continued from the previous sprint. The entities themselves had
-  already been added to the logical model, so the work was mainly on
-  creating the required transforms to ensure they had the right data
-  by the time we hit the M2T (Model-to-Text) transforms.
-- *Generating physical model entities from =m2t= classes*: we finally
-  go to the point where the top-level M2T transforms are generating
-  the physical archetypes, which means the complete generation of the
-  physical meta-model is not far now. The remaining physical
-  meta-model entities (backend, facet, parts) are not quite as fiddly,
-  hopefully.
-- *Bootstrapping of physical entities*: we continued the work on
+  already been added to the logical model, so the work consisted
+  mainly on creating the required transforms to ensure they had the
+  right data by the time we hit the M2T (Model-to-Text) transforms.
+- **Generating physical model entities from =m2t= classes**: we
+  finally go to the point where the top-level M2T transforms are
+  generating the physical archetypes, which means the complete
+  generation of the physical meta-model is not far now. The remaining
+  physical meta-model entities (backend, facet, parts) are not quite
+  as fiddly, hopefully.
+- **Bootstrapping of physical entities**: we continued the work on
   generation of physical entities via the logical model elements that
   represent them. This is very fiddly work because we are trying to
   bootstrap the existing templates - that is, generate code that
@@ -285,7 +321,7 @@ The core of the work was divided as follows:
   and break everything, and we done so a few times this sprint,
   costing us a fair bit of time in tracking back the errors. There is
   hope that this work is almost complete though.
-- *Add T2T (Text-to-Text) transforms*: As usual, a great deal of
+- **Add T2T (Text-to-Text) transforms**: As usual, a great deal of
   effort was spent on making sure that the code is consistent with the
   current understanding of the conceptual model. One aspect that had
   been rather illusive is the handling of templates; these are in
@@ -293,19 +329,19 @@ The core of the work was divided as follows:
   representation. With this sprint we arrived at T2T (Text-to-Text)
   transforms, which are a surprisingly good fit for both types of
   logic-less templates we have in Dogen (stitch and wale) but also
-  have the potential to model _cartridges_ such as [[https://www.codesynthesis.com/products/odb/][ODB]], [[https://www.codesynthesis.com/products/xsd/][XSD tool]] and
+  have the potential to model /cartridges/ such as [[https://www.codesynthesis.com/products/odb/][ODB]], [[https://www.codesynthesis.com/products/xsd/][XSD tool]] and
   many other types of code generators. More work on this remains next
   sprint, but the direction of travel is very promising.
-- *Rename the =m2t= model to =text=*: following on from the previous
+- **Rename the =m2t= model to =text=**: following on from the previous
   entry, given that we now had two different types of transforms in
-  this model (_e.g._, M2T and T2T) we could not longer call it the
+  this model (/e.g./, M2T and T2T) we could not longer call it the
   =m2t= model, and thus decided to rename it to just =text=. As it
   turns out, this is a much better fit for the conceptual model and
   prepares ourselves for the coming work on cartridges, which now have
   a very suitable location in which to be placed.
 
-As you can probably gather from what is written on these topics [in
-the [[https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_24.org#add-physical-entities-to-logical-model][sprint backlog]], these few bullet points do little justice to the
+As you can probably gather from what is written on these topics [[https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_24.org#add-physical-entities-to-logical-model][in the
+sprint backlog]], these few bullet points do little justice to the
 immense amount of mental effort that was spent on them. Sadly, we do
 not have the time - and I dare say, the inclination - to explain in
 the required detail how all of these issues contribute to the overall
@@ -337,8 +373,9 @@ the code coverage numbers to make important decisions, I had no option
 but to move back to good old [[https://blog.kitware.com/additional-coverage-features-in-cdash/][CDash]] - a tool that had proven reliable
 in the past for this.
 
-![CDash continuous coverage](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_continuous_code_coverage.png)
-_Figure 4: Code coverage for Dogen, continuous builds, after moving back to CDash._
+#+caption: CDash continuous coverage
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_continuous_code_coverage.png
+/Figure 4: Code coverage for Dogen, continuous builds, after moving back to CDash./
 
 I must confess that it was with a heavy heart that I even begun to
 contemplate moving away from =kcov=, as I quite like the tool;
@@ -354,8 +391,9 @@ any such tales interesting - but it suffices to say that, after a
 great deal of pain and [[https://github.com/MASD-Project/dogen/commits/master?after=074076edbb18cbcbf5ab4179edd40beb19edfd0b+69][many, many failed builds]] later we eventually
 managed to get =gcov= to produce the desired information.
 
-![CDash nightly coverage](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_nightly_coverage.png)
-_Figure 5: Code coverage for Dogen, nightly builds, after moving back to CDash._
+#+caption: CDash nightly coverage
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_nightly_coverage.png
+/Figure 5: Code coverage for Dogen, nightly builds, after moving back to CDash./
 
 Figure 4 illustrates the progress of code coverage on Dogen's
 continuous builds over time, whereas Figure 5 looks at coverage in
@@ -375,8 +413,9 @@ doubt it). As an added bonus, we no longer have red builds due to
 "failed checks" in GitHub due to [[https://coveralls.io/builds/30280785][stochastic decreases in coverage]], as
 we had far too many times in the past.
 
-![Nightly build duration](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_nightly_build_time.png)
-_Figure 6: Dogen nightly build duration over time._
+#+caption: Nightly build duration
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_nightly_build_time.png
+/Figure 6: Dogen nightly build duration over time./
 
 A very important aspect when adding code coverage to already busy
 nightlies was the impact on build duration. We first started by trying
@@ -388,22 +427,23 @@ experiment, we decided instead to move over to =gcov= and gcc debug
 builds. Figures 6 and 7 show the impact to the build time to both
 Dogen and the C++ Reference Model. These were deemed acceptable.
 
-![Nightly build duration](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_cpp_ref_impl_nightly_build_time.png)
-_Figure 7: C++ reference model build duration over time._
+#+caption: Nightly build duration
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_cpp_ref_impl_nightly_build_time.png
+/Figure 7: C++ reference model build duration over time./
 
 ******* Dynamic Analysis
 
 As with code coverage, we've been making use of CDash to keep track of
-data produced by [[https://valgrind.org][valgrind]]. However, we let the reports bit-rot
+data produced by [[https://valgrind.org/][valgrind]]. However, we let the reports bit-rot
 somewhat, with lots of false positives clouding the view (or at least
 we hope they are false positives). With this release we took the time
 to update our suppression files, removing the majority of false
-positives. We then immediately located a couple of issues in the code
-(circular use of =boost::shared_ptr= and the problems with
-uninitialised member variables explained above.
+positives. We then immediately located a couple of issues in the code,
+as explained above.
 
-![Valgrind errors over time](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_dynamic_analysis.png)
-_Figure 8: Valgrind errors over time in CDash._
+#+caption: Valgrind errors over time
+https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_dogen_dynamic_analysis.png
+/Figure 8: Valgrind errors over time in CDash./
 
 I don't think we need any additional incentives to keep the board nice
 and clean as far as dynamic analysis is concerned. Figure 8 shows the
@@ -423,19 +463,23 @@ to understand more difficult parts. Its also a place where you can see
 what everybody else is up to across your lab. At any rate, with the
 move back to gainful employment I no longer get the chance to
 participate in my lab's journal club. In addition, I found that many
-of the papers I had read during the years had lots of useful
-information that now makes a lot more sense so a re-read was required.
+of the papers I had read over the years had lots of useful information
+that makes a lot more sense /now/ than it did when i first read
+them. Thus, a re-read was required.
 
 So I combined these two ideas and come up with the somewhat sad idea
-of a "self-journal club", where I read and discuss the papers of
-interest . These are available in YouTube, should you for whatever
-unfathomable reason find these interesting. Four papers have been read
-thus far:
+of a "self-journal club", the "MDE Paper of the Week (PofW)", where I
+read and discuss the papers of interest . These are available in
+YouTube, should you, for whatever unfathomable reason, find them
+interesting. Four papers have been read thus far:
 
-- [[https://www.youtube.com/watch?v=SRnQgrvq7Cg][MDE PotW 01: Systems Variability Modeling: A Textual Model Mixing Class and Feature Concepts]]
-- [[https://www.youtube.com/watch?v=cJ1J5Evz3mg][MDE PotW 02:A Code Generation Metamodel for ULF-Ware Generating Code for SDL]]
+- [[https://www.youtube.com/watch?v=SRnQgrvq7Cg][MDE PotW 01: Systems Variability Modeling: A Textual Model Mixing
+  Class and Feature Concepts]]
+- [[https://www.youtube.com/watch?v=cJ1J5Evz3mg][MDE PotW 02:A Code Generation Metamodel for ULF-Ware Generating Code
+  for SDL]]
 - [[https://www.youtube.com/watch?v=QFlnn4Mbchs][MDE PotW 03: A Lightweight MDSD Process Applied in Small Projects]]
-- [[https://www.youtube.com/watch?v=Z24mT64j0po][MDE PotW 04: Un estudio comparativo de dos herramientas MDA: OptimalJ y ArcStyler]]
+- [[https://www.youtube.com/watch?v=Z24mT64j0po][MDE PotW 04: Un estudio comparativo de dos herramientas MDA:
+  OptimalJ y ArcStyler]]
 
 The last paper was more experimental than usual, what with it being in
 Spanish, but it worked better than we expected, so from now on we
@@ -446,44 +490,47 @@ is motivational; I now find that I must re-read a paper a week even
 when I don't feel like it purely because of the fact that I publish
 them online. Lets see how long the YouTube effect will last though...
 
-****** Resourcing
+***** Resourcing
 
 Weighing in at around 280 commits and with 83 hours of commitment,
-this sprint was by traditional measurements a success. To be fair, we
-did return to the more regular duration of around four weeks rather
+this sprint was, by traditional measurements, a success. To be fair,
+we did return to the more regular duration of around four weeks rather
 than the three of the previous sprint, resulting in a utilisation rate
 of precisely 50% -a decrease of 16% from the previous sprint. On the
 other hand, this slower velocity seems far more sustainable than the
 break neck pace we attempted previously; our aim will continue to be
 around 50%, which effectively means part-time work.
 
-![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_pie_chart.jpg)
-_Figure 9: Cost of stories for sprint 24._
+#+caption: Story Pie Chart
+https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_pie_chart.jpg
+/Figure 9: Cost of stories for sprint 24./
 
-Where things become a bit muddier is when we break down the stories by
-"type". We spent around 56% of the overall ask on stories directly
-connected to the sprint goal, which may appear to be a bit low. The
-bulk of the remaining 44% were spent largely on process (24.5%), and
-infrastructure (11.5%) with a notable mention for the almost 6% spent
-moving code coverage into CDash. Another 6.6% was spent on reading MDE
-papers, which is of course time well spent from a strategic
-perspective but it does eat into the coding time. Of the 24.5% spent
-on process, a notable mention is the 11.3% spent editing the release
-notes. These are becoming a bit too expensive for our liking so next
-sprint we need to speed these along.
+ Where the waters become a bit murkier is when we break down the
+ stories by "type". We spent around 56% of the overall ask on stories
+ directly connected to the sprint goal, which may appear to be a bit
+ low. The bulk of the remaining 44% were spent largely on process
+ (24.5%), and infrastructure (11.5%) with a notable mention for the
+ almost 6% spent moving code coverage into CDash. Another 6.6% was
+ spent on reading MDE papers, which is of course time well spent from
+ a strategic perspective but it does eat into the coding time. Of the
+ 24.5% spent on process, a notable mention is the 11.3% spent editing
+ the release notes. These are becoming a bit too expensive for our
+ liking so next sprint we need to speed these along.
 
-****** Roadmap
+***** Roadmap
 
-The roadmap remains more or less unchanged, except our goal continues
-to be finishing the generation refactor. But now that the problem is
-understood a bit better, there is some faint hope that next sprint
-could bring it to a close.
+The roadmap remains more or less unchanged, other than the fact that
+it was projected forward by one sprint; much like [[https://en.wikiquote.org/wiki/Pinky_and_the_Brain][Pinky and the Brain]],
+our proximal goal remains the same: to finish the generation
+refactor. Its not entirely clear whether we're Pinky or the Brain, but
+we do feel that the problem is understood a bit better, so there is
+some faint hope that next sprint could bring it to a close.
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_project_plan.png)
+https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_project_plan.png
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_resource_allocation_graph.png)
+https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_24_resource_allocation_graph.png
 
-****** Binaries
+***** Binaries
 
 You can download binaries from either [[https://bintray.com/masd-project/main/dogen/1.0.23][Bintray]] or GitHub, as per
 Table 2. All binaries are 64-bit. For all other architectures and/or
@@ -496,14 +543,14 @@ downloads are available in [[https://github.com/MASD-Project/dogen/archive/v1.0.
 | OSX                 | DMG    | [[https://dl.bintray.com/masd-project/main/1.0.23/DOGEN-1.0.23-Darwin-x86_64.dmg][DOGEN-1.0.23-Darwin-x86_64.dmg]]      | [[https://github.com/MASD-Project/dogen/releases/download/v1.0.23/DOGEN-1.0.23-Darwin-x86_64.dmg][DOGEN-1.0.23-Darwin-x86_64.dmg]]      |
 | Windows             | MSI    | [[https://dl.bintray.com/masd-project/main/DOGEN-1.0.23-Windows-AMD64.msi][DOGEN-1.0.23-Windows-AMD64.msi]]      | [[https://github.com/MASD-Project/dogen/releases/download/v1.0.23/DOGEN-1.0.23-Windows-AMD64.msi][DOGEN-1.0.23-Windows-AMD64.msi]]      |
 
-/Table 2: Binary packages for Dogen./
+/Table 1: Binary packages for Dogen./
 
 *Note:* The OSX and Linux binaries are not stripped at present and so
 are larger than they should be. We have [[https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped][an outstanding story]] to
 address this issue, but sadly CMake does not make this a trivial
 undertaking.
 
-****** Next Sprint
+***** Next Sprint
 
 The goal for the next sprint is to complete most of the work on the
 generation refactor. It is unlikely we shall finish it in its entirety
@@ -511,6 +558,30 @@ as they are quite a few fiddly bits, but we shall aim to get most of
 it out of the way.
 
 That's all for this release. Happy Modeling!
+
+***
+
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-06 Wed 22:05]--[2020-05-06 Wed 22:13] =>  0:08
+    CLOCK: [2020-05-06 Wed 21:38]--[2020-05-06 Wed 22:04] =>  0:26
+    :END:
+
+Time spent creating the demo and presentation.
+
+#+caption: Sprint 1.0.24 Demo
+[[https://youtu.be/pUAZb6e52gI][https://img.youtube.com/vi/pUAZb6e52gI/0.jpg]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-06 Wed 22:14]--[2020-05-06 Wed 22:17] =>  0:03
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Check name of model for variability transform                     :story:
+
+: 000-variability.transforms.feature_template_instantiation_transform-variability.transforms.feature_template_instantiation_transform
 
 *** Wale templates must be bound to logical archetypes                :story:
 
