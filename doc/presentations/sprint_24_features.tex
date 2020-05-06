@@ -1,0 +1,53 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.24, \enquote{Imbondeiro no Iona}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_23_features}
+\begin{document}
+
+\begin{frame}
+\titlepage{}
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+  \pause{}
+\item Add model name to tracing dumps
+  \pause{}
+\item Primitives use compiler generated default constructors
+  \pause{}
+\item Circular references with \texttt{boost::shared\_ptr}
+  \pause{}
+\item Allow creating models with no decorations
+  \pause{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fin}
+\end{frame}
+
+\end{document}
