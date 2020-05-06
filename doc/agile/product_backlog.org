@@ -14414,6 +14414,25 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider implementing transforms as dataflow graphs               :story:
+
+Transforms are very similar data structures to the elements of a data
+flow pipeline: it would probably not require huge amounts of mapping
+to create a data flow pipeline that represents the transforms and
+transform chains in Dogen. We also now have a very good idea of what
+the interfaces for transforms should be in each model. We should
+probably wait until we have sorted out the story around error messages
+but once that is done its worth investigating if transforms can be
+implemented as a graph in a data flow library. Performance may benefit
+a little - there are a few things we can do in parallel such as
+injection - but its not the key objective here.
+
+Links:
+
+- [[http://flowbasedprogramming.com/docs/html/index.html][DSPatch]]: The Refreshingly Simple C++ Dataflow Framework
+- [[https://github.com/RaftLib/RaftLib][RaftLib GitHub]]: The RaftLib C++ library, streaming/dataflow
+  concurrency via C++ iostream-like operators. See also [[http://raftlib.io][home page]].
+
 *** Consider adding suppot for SeqAn
 
 This is a very interesting library, though its not clear how we'd use
