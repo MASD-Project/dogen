@@ -43,8 +43,7 @@ feature_template_instantiation_transform::apply(const context& ctx,
     const entities::feature_template_repository& ftrp) {
     tracing::scoped_transform_tracer stp(lg,
         "feature template instantiation transform",
-        transform_id, transform_id, *ctx.tracer(), ftrp);
-
+        transform_id, "feature_repository", *ctx.tracer(), ftrp);
 
     unsigned int counter(0);
     std::list<entities::feature> r;
