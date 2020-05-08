@@ -72,6 +72,9 @@ indices indexer::index(entities::model& m) {
             r.primitive_underliers().insert(id);
     }
 
+    for (const auto& pair : m.templating_elements().logic_less_templates())
+        r.elements_referable_by_attributes().insert(pair.first);
+
     BOOST_LOG_SEV(lg, debug) << "Indices: " << r;
     return r;
 }
