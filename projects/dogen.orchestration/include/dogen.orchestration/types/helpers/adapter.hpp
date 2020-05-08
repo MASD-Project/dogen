@@ -81,12 +81,20 @@ private:
     /**
      * @brief Ensure the string is not empty.
      */
-    void ensure_not_empty(const std::string& s) const;
+    void ensure_not_empty(const std::string& element_id,
+        const std::string& s) const;
 
     /**
      * @brief Ensure the string is empty.
      */
-    void ensure_empty(const std::string& s) const;
+    void ensure_empty(const std::string& element_id,
+        const std::string& s) const;
+
+    /**
+     * @brief Ensure the attributes are empty.
+     */
+    void ensure_empty(const std::string& element_id,
+        const std::list<injection::entities::attribute>& ias) const;
 
 private:
     /**
@@ -117,7 +125,8 @@ private:
      * @pre value of the injector attribute must be empty.
      */
     logical::entities::decoration::modeline_field
-    to_modeline_field(const injection::entities::attribute& ia) const;
+    to_modeline_field(const logical::entities::name& owner,
+        const injection::entities::attribute& ia) const;
 
     /**
      * @brief Converts an injection attribute to an logical attribute.

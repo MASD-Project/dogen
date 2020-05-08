@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
@@ -64,9 +65,12 @@ const std::string path_contribution_none("none");
 const std::string path_contribution_as_directories("as_directories");
 const std::string path_contribution_as_path_components("as_path_components");
 
+const std::string content_attr_name("content");
+
 const std::string empty_string("String is empty but expected value.");
 const std::string non_empty_string(
     "String is not empty but did not expect value: ");
+const std::string non_empty_attributes("Element does not support attributes: ");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
 const std::string unsupported_attribute("Attribute is not supported: ");
 const std::string unsupported_value("Unsupported attribute value: ");
@@ -88,18 +92,43 @@ bool str_to_bool(const std::string& s) {
     BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
 }
 
-void adapter::ensure_not_empty(const std::string& s) const {
-    if (s.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_string;
-        BOOST_THROW_EXCEPTION(adaptation_exception(empty_string));
-    }
+void adapter::ensure_not_empty(const std::string& element_id,
+    const std::string& s) const {
+    if (!s.empty())
+        return;
+
+    std::ostringstream os;
+    os << empty_string << " Element: " << element_id;
+
+    const std::string msg(os.str());
+    BOOST_LOG_SEV(lg, error) << msg;
+    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
 }
 
-void adapter::ensure_empty(const std::string& s) const {
-    if (!s.empty()) {
-        BOOST_LOG_SEV(lg, error) << non_empty_string << s;
-        BOOST_THROW_EXCEPTION(adaptation_exception(non_empty_string + s));
-    }
+void adapter::ensure_empty(const std::string& element_id,
+    const std::string& s) const {
+    if (s.empty())
+        return;
+
+    std::ostringstream os;
+    os << non_empty_string << "'" << s << "' Element: " << element_id;
+
+    const std::string msg(os.str());
+    BOOST_LOG_SEV(lg, error) << msg;
+    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
+}
+
+void adapter::ensure_empty(const std::string& element_id,
+    const std::list<injection::entities::attribute>& ias) const {
+    if (ias.empty())
+        return;
+
+    std::ostringstream os;
+    os << non_empty_attributes << " Element: " << element_id;
+
+    const std::string msg(os.str());
+    BOOST_LOG_SEV(lg, error) << msg;
+    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
 }
 
 std::list<variability::entities::potential_binding> adapter::
@@ -121,7 +150,7 @@ logical::entities::name adapter::to_name(const logical::entities::location& l,
      * Names are expected to be delimited by the scope operator,
      * denoting internal modules.
      */
-    ensure_not_empty(n);
+    ensure_not_empty("Element name", n);
     auto tokens(utility::string::splitter::split_scoped(n));
     using logical::helpers::name_builder;
     name_builder b;
@@ -136,9 +165,9 @@ logical::entities::name adapter::to_name(const logical::entities::location& l,
     return b.build();
 }
 
-modeline_field
-adapter::to_modeline_field(const injection::entities::attribute& ia) const {
-    ensure_not_empty(ia.name());
+modeline_field adapter::to_modeline_field(const logical::entities::name& owner,
+    const injection::entities::attribute& ia) const {
+    ensure_not_empty(owner.qualified().dot(), ia.name());
 
     modeline_field r;
     r.name(ia.name());
@@ -149,7 +178,7 @@ adapter::to_modeline_field(const injection::entities::attribute& ia) const {
 logical::entities::attribute
 adapter::to_attribute(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
-    ensure_not_empty(ia.name());
+    ensure_not_empty(owner.qualified().dot(), ia.name());
 
     logical::helpers::name_factory f;
     logical::entities::attribute r;
@@ -174,7 +203,7 @@ adapter::to_attribute(const logical::entities::name& owner,
 logical::entities::structural::enumerator
 adapter::to_enumerator(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
-    ensure_not_empty(ia.name());
+    ensure_not_empty(owner.qualified().dot(), ia.name());
 
     if (!ia.type().empty()) {
         const auto t(ia.type());
@@ -375,7 +404,7 @@ adapter::to_modeline(const logical::entities::location& l,
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
-        r->fields().push_back(to_modeline_field(attr));
+        r->fields().push_back(to_modeline_field(r->name(), attr));
 
     return r;
 }
@@ -389,10 +418,10 @@ adapter::to_generation_marker(const logical::entities::location& l,
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto t(attr.type());
-        ensure_empty(t);
+        ensure_empty(r->name().qualified().dot(), t);
 
         const auto v(attr.value());
         if (n == add_date_time_attr_name)
@@ -426,7 +455,7 @@ adapter::to_licence(const logical::entities::location& l,
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(r->name().qualified().dot(), n);
 
         if (n == short_form_attr_name)
             r->short_form(attr.documentation());
@@ -454,7 +483,7 @@ void adapter::populate_abstract_feature(
     const injection::entities::attribute& ia,
     logical::entities::variability::abstract_feature& af) const {
     const auto n(ia.name());
-    ensure_not_empty(n);
+    ensure_not_empty("Feature name", n);
 
     logical::helpers::name_factory f;
     af.name(f.build_attribute_name(bundle_name, n));
@@ -475,7 +504,7 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
     logical::helpers::name_factory f;
 
     const auto n(attr.name());
-    ensure_not_empty(n);
+    ensure_not_empty(pn.qualified().dot(), n);
 
     /*
      * The conventions for naming profile entries are somewhat
@@ -641,7 +670,7 @@ adapter::to_visual_studio_solution(const logical::entities::location& l,
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
         if (n == guid_attr_name)
@@ -666,7 +695,7 @@ adapter::to_visual_studio_project(const logical::entities::location& l,
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
         if (n == guid_attr_name)
@@ -752,7 +781,7 @@ adapter::to_physical_archetype_kind(const logical::entities::location& l,
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
         if (n == file_extension_name)
@@ -791,32 +820,33 @@ adapter::to_physical_part(const logical::entities::location& l,
             BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
         });
 
+    const auto qn(r->name().qualified().dot());
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
-        ensure_not_empty(n);
+        ensure_not_empty(qn, n);
 
         const auto t(attr.type());
-        ensure_empty(t);
+        ensure_empty(qn, t);
 
         const auto v(attr.value());
         if (n == external_modules_path_contribution_name) {
-            ensure_not_empty(v);
+            ensure_not_empty(qn, v);
             is_valid_path_contribution(v);
             r->external_modules_path_contribution(v);
         } else if (n == model_modules_path_contribution_name) {
-            ensure_not_empty(v);
+            ensure_not_empty(qn, v);
             is_valid_path_contribution(v);
             r->model_modules_path_contribution(v);
         } else if (n == facet_path_contribution_name) {
-            ensure_not_empty(v);
+            ensure_not_empty(qn, v);
             is_valid_path_contribution(v);
             r->facet_path_contribution(v);
         } else if (n == internal_modules_path_contribution_name) {
-            ensure_not_empty(v);
+            ensure_not_empty(qn, v);
             is_valid_path_contribution(v);
             r->internal_modules_path_contribution(v);
         } else if (n == requires_relative_path_name) {
-            ensure_not_empty(v);
+            ensure_not_empty(qn, v);
             r->requires_relative_path(str_to_bool(v));
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
@@ -824,7 +854,6 @@ adapter::to_physical_part(const logical::entities::location& l,
                 adaptation_exception(unsupported_attribute + n));
         }
     }
-
 
     return r;
 }
