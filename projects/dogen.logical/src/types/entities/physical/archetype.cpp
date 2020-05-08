@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
@@ -32,7 +33,35 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::name>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities::physical {
+
+archetype::archetype(archetype&& rhs)
+    : dogen::logical::entities::element(
+        std::forward<dogen::logical::entities::element>(rhs)),
+      id_(std::move(rhs.id_)),
+      kernel_name_(std::move(rhs.kernel_name_)),
+      backend_name_(std::move(rhs.backend_name_)),
+      facet_name_(std::move(rhs.facet_name_)),
+      part_id_(std::move(rhs.part_id_)),
+      logical_meta_element_id_(std::move(rhs.logical_meta_element_id_)),
+      stitch_template_content_(std::move(rhs.stitch_template_content_)),
+      wale_template_(std::move(rhs.wale_template_)),
+      wale_template_content_(std::move(rhs.wale_template_content_)) { }
 
 archetype::archetype(
     const dogen::logical::entities::name& name,
@@ -54,7 +83,10 @@ archetype::archetype(
     const std::string& backend_name,
     const std::string& facet_name,
     const std::string& part_id,
-    const std::string& logical_meta_element_id)
+    const std::string& logical_meta_element_id,
+    const std::string& stitch_template_content,
+    const boost::optional<dogen::logical::entities::name>& wale_template,
+    const std::string& wale_template_content)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -75,7 +107,10 @@ archetype::archetype(
       backend_name_(backend_name),
       facet_name_(facet_name),
       part_id_(part_id),
-      logical_meta_element_id_(logical_meta_element_id) { }
+      logical_meta_element_id_(logical_meta_element_id),
+      stitch_template_content_(stitch_template_content),
+      wale_template_(wale_template),
+      wale_template_content_(wale_template_content) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -104,7 +139,10 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
-      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(logical_meta_element_id_) << "\""
+      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(logical_meta_element_id_) << "\"" << ", "
+      << "\"stitch_template_content\": " << "\"" << tidy_up_string(stitch_template_content_) << "\"" << ", "
+      << "\"wale_template\": " << wale_template_ << ", "
+      << "\"wale_template_content\": " << "\"" << tidy_up_string(wale_template_content_) << "\""
       << " }";
 }
 
@@ -118,6 +156,9 @@ void archetype::swap(archetype& other) noexcept {
     swap(facet_name_, other.facet_name_);
     swap(part_id_, other.part_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
+    swap(stitch_template_content_, other.stitch_template_content_);
+    swap(wale_template_, other.wale_template_);
+    swap(wale_template_content_, other.wale_template_content_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -133,7 +174,10 @@ bool archetype::operator==(const archetype& rhs) const {
         backend_name_ == rhs.backend_name_ &&
         facet_name_ == rhs.facet_name_ &&
         part_id_ == rhs.part_id_ &&
-        logical_meta_element_id_ == rhs.logical_meta_element_id_;
+        logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
+        stitch_template_content_ == rhs.stitch_template_content_ &&
+        wale_template_ == rhs.wale_template_ &&
+        wale_template_content_ == rhs.wale_template_content_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -236,6 +280,54 @@ void archetype::logical_meta_element_id(const std::string& v) {
 
 void archetype::logical_meta_element_id(const std::string&& v) {
     logical_meta_element_id_ = std::move(v);
+}
+
+const std::string& archetype::stitch_template_content() const {
+    return stitch_template_content_;
+}
+
+std::string& archetype::stitch_template_content() {
+    return stitch_template_content_;
+}
+
+void archetype::stitch_template_content(const std::string& v) {
+    stitch_template_content_ = v;
+}
+
+void archetype::stitch_template_content(const std::string&& v) {
+    stitch_template_content_ = std::move(v);
+}
+
+const boost::optional<dogen::logical::entities::name>& archetype::wale_template() const {
+    return wale_template_;
+}
+
+boost::optional<dogen::logical::entities::name>& archetype::wale_template() {
+    return wale_template_;
+}
+
+void archetype::wale_template(const boost::optional<dogen::logical::entities::name>& v) {
+    wale_template_ = v;
+}
+
+void archetype::wale_template(const boost::optional<dogen::logical::entities::name>&& v) {
+    wale_template_ = std::move(v);
+}
+
+const std::string& archetype::wale_template_content() const {
+    return wale_template_content_;
+}
+
+std::string& archetype::wale_template_content() {
+    return wale_template_content_;
+}
+
+void archetype::wale_template_content(const std::string& v) {
+    wale_template_content_ = v;
+}
+
+void archetype::wale_template_content(const std::string&& v) {
+    wale_template_content_ = std::move(v);
 }
 
 }
