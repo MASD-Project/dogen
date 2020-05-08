@@ -54,9 +54,7 @@ public:
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
         const std::string& part,
-        const std::string& text_to_text_transform,
-        const std::string& stitch_template_content,
-        const std::string& wale_template_content);
+        const std::string& text_to_text_transform);
 
 public:
     /**
@@ -169,26 +167,6 @@ public:
     void text_to_text_transform(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Content of the stitch template associated with this archetype, if any exists.
-     */
-    /**@{*/
-    const std::string& stitch_template_content() const;
-    std::string& stitch_template_content();
-    void stitch_template_content(const std::string& v);
-    void stitch_template_content(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Content of the wale template associated with this archetype, if any exists.
-     */
-    /**@{*/
-    const std::string& wale_template_content() const;
-    std::string& wale_template_content();
-    void wale_template_content(const std::string& v);
-    void wale_template_content(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -211,8 +189,6 @@ private:
     std::string logical_meta_element_id_;
     std::string part_;
     std::string text_to_text_transform_;
-    std::string stitch_template_content_;
-    std::string wale_template_content_;
 };
 
 }
