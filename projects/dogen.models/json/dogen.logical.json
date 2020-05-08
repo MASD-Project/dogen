@@ -3033,7 +3033,14 @@
       "stereotypes": [
         "logical::meta_element"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Content of the logic-less template.\n"
+        }
+      ]
     },
     {
       "name": "entities::templating::element_repository",

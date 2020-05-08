@@ -19,9 +19,18 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::logical::entities::templating {
 
@@ -39,7 +48,8 @@ logic_less_template::logic_less_template(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
-    const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
+    const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::string& content)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -54,7 +64,8 @@ logic_less_template::logic_less_template(
       configuration,
       artefact_properties,
       enablement_properties,
-      decoration) { }
+      decoration),
+      content_(content) { }
 
 void logic_less_template::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -77,12 +88,16 @@ void logic_less_template::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::logical::entities::templating::logic_less_template\"" << ", "
       << "\"__parent_0__\": ";
     dogen::logical::entities::element::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"content\": " << "\"" << tidy_up_string(content_) << "\""
+      << " }";
 }
 
 void logic_less_template::swap(logic_less_template& other) noexcept {
     dogen::logical::entities::element::swap(other);
 
+    using std::swap;
+    swap(content_, other.content_);
 }
 
 bool logic_less_template::equals(const dogen::logical::entities::element& other) const {
@@ -92,13 +107,30 @@ bool logic_less_template::equals(const dogen::logical::entities::element& other)
 }
 
 bool logic_less_template::operator==(const logic_less_template& rhs) const {
-    return dogen::logical::entities::element::compare(rhs);
+    return dogen::logical::entities::element::compare(rhs) &&
+        content_ == rhs.content_;
 }
 
 logic_less_template& logic_less_template::operator=(logic_less_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& logic_less_template::content() const {
+    return content_;
+}
+
+std::string& logic_less_template::content() {
+    return content_;
+}
+
+void logic_less_template::content(const std::string& v) {
+    content_ = v;
+}
+
+void logic_less_template::content(const std::string&& v) {
+    content_ = std::move(v);
 }
 
 }

@@ -38196,7 +38196,7 @@ variability types.#</dia:string>
         <dia:point val="149,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.95,-84.05;159.175,-80.95"/>
+        <dia:rectangle val="148.95,-84.05;159.175,-80.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="149,-84"/>
@@ -38205,7 +38205,7 @@ variability types.#</dia:string>
         <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#logic_less_template#</dia:string>
@@ -38296,7 +38296,31 @@ At present the system only supports wale templates.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Content of the logic-less template.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -38534,7 +38558,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="166.345,-89.1513"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.012,-89.9013;167.095,-83.2492"/>
+        <dia:rectangle val="154.012,-89.9013;167.095,-83.2504"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38543,7 +38567,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="166.345,-89.1513"/>
         <dia:point val="166.345,-86"/>
         <dia:point val="154.062,-86"/>
-        <dia:point val="154.062,-84.0492"/>
+        <dia:point val="154.062,-84.0504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38561,7 +38585,7 @@ At present the system only supports wale templates.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O276" connection="10"/>
-        <dia:connection handle="1" to="O274" connection="8"/>
+        <dia:connection handle="1" to="O274" connection="10"/>
       </dia:connections>
       <dia:childnode parent="O273"/>
     </dia:object>

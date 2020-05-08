@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
 
@@ -59,7 +60,8 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
-        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
+        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::string& content);
 
 public:
     using element::accept;
@@ -70,6 +72,17 @@ public:
     virtual void accept(element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
+
+public:
+    /**
+     * @brief Content of the logic-less template.
+     */
+    /**@{*/
+    const std::string& content() const;
+    std::string& content();
+    void content(const std::string& v);
+    void content(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const logic_less_template& rhs) const;
@@ -84,6 +97,8 @@ public:
     void swap(logic_less_template& other) noexcept;
     logic_less_template& operator=(logic_less_template other);
 
+private:
+    std::string content_;
 };
 
 }
