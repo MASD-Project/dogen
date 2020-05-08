@@ -124,7 +124,7 @@ void adapter::ensure_empty(const std::string& element_id,
         return;
 
     std::ostringstream os;
-    os << non_empty_attributes << " Element: " << element_id;
+    os << non_empty_attributes << element_id;
 
     const std::string msg(os.str());
     BOOST_LOG_SEV(lg, error) << msg;
@@ -302,6 +302,7 @@ adapter::to_exception(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::exception>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -314,6 +315,7 @@ adapter::to_primitive(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::primitive>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -342,6 +344,7 @@ to_module(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::module>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -354,6 +357,7 @@ adapter::to_builtin(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::builtin>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
 
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
     r->is_default_enumeration_type(ie.is_default_enumeration_type());
@@ -372,6 +376,7 @@ adapter::to_entry_point(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::entry_point>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -384,6 +389,7 @@ adapter::to_assistant(const logical::entities::location& l,
 
     auto r(boost::make_shared<logical::entities::structural::assistant>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -393,6 +399,7 @@ adapter::to_modeline_group(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline_group>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -617,6 +624,7 @@ adapter::to_variability_initializer(const logical::entities::location &l,
     using logical::entities::variability::initializer;
     auto r(boost::make_shared<initializer>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -627,6 +635,7 @@ adapter::to_fixed_mappable(const logical::entities::location& l,
     using logical::entities::mapping::fixed_mappable;
     auto r(boost::make_shared<fixed_mappable>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -637,6 +646,7 @@ adapter::to_extensible_mappable(const logical::entities::location& l,
     using logical::entities::mapping::extensible_mappable;
     auto r(boost::make_shared<extensible_mappable>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -657,6 +667,7 @@ adapter::to_type_registrar(const logical::entities::location& l,
     using logical::entities::serialization::type_registrar;
     auto r(boost::make_shared<type_registrar>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -717,6 +728,7 @@ adapter::to_visual_studio_msbuild_targets(const logical::entities::location& l,
     using logical::entities::visual_studio::msbuild_targets;
     auto r(boost::make_shared<msbuild_targets>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -727,6 +739,7 @@ adapter::to_orm_common_odb_options(const logical::entities::location& l,
     using logical::entities::orm::common_odb_options;
     auto r(boost::make_shared<common_odb_options>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -737,6 +750,7 @@ adapter::to_build_cmakelists(const logical::entities::location& l,
     using logical::entities::build::cmakelists;
     auto r(boost::make_shared<cmakelists>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -747,6 +761,7 @@ adapter::to_physical_backend(const logical::entities::location& l,
     using logical::entities::physical::backend;
     auto r(boost::make_shared<backend>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
@@ -757,6 +772,7 @@ adapter::to_physical_facet(const logical::entities::location& l,
     using logical::entities::physical::facet;
     auto r(boost::make_shared<facet>());
     populate_element(l, scr, ie, *r);
+    ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
