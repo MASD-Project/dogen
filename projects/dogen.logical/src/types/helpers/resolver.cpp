@@ -722,6 +722,7 @@ void resolver::resolve_archetypes(const indices& idx, entities::model& m) {
         BOOST_LOG_SEV(lg, debug) << "Resolved name: "
                                  << original.qualified().dot()
                                  << " to: " << resolved.qualified().dot();
+        arch.wale_template(resolved);
     }
 }
 
