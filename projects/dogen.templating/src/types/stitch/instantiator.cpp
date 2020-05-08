@@ -39,7 +39,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("templating.stitch.instantiator"));
 
-const std::string stitch_postfix(".cpp");
 const std::string wale_key("stitch.wale.template_instantiation_result");
 
 const std::string empty_template("Template has no content: ");
@@ -56,26 +55,6 @@ instantiator(const boost::filesystem::path& wale_templates_directory,
     const variability::helpers::configuration_factory& cf)
     : wale_templates_directory_(wale_templates_directory),
       configuration_factory_(cf), feature_model_(fm) {}
-
-boost::filesystem::path
-instantiator::compute_output_path(const boost::filesystem::path& input_path,
-    const properties& props) const {
-
-    boost::filesystem::path r;
-    if (!props.relative_output_directory().empty()) {
-        using namespace boost::filesystem;
-        path rel_dir(props.relative_output_directory());
-        r = absolute(rel_dir, input_path.parent_path());
-    } else
-        r = input_path.parent_path();
-
-    std::string output_filename(input_path.stem().generic_string());
-    // FIXME: compute extension based on properties
-    output_filename += stitch_postfix;
-    r /= output_filename;
-
-    return r;
-}
 
 std::string instantiator::
 read_text_template(const boost::filesystem::path& input_path) const {
@@ -162,7 +141,6 @@ properties instantiator::create_properties(
 
     properties r;
     r.stream_variable_name(scfg.stream_variable_name);
-    r.relative_output_directory(scfg.relative_output_directory);
     r.inclusion_dependencies(scfg.inclusion_dependency);
 
     using utility::string::splitter;
@@ -177,81 +155,60 @@ properties instantiator::create_properties(
 }
 
 text_template
-instantiator::create_text_template(const boost::filesystem::path& input_path,
-    const std::string& text_template_as_string,
+instantiator::create_text_template(const std::string& text_template_as_string,
     const std::unordered_map<std::string, std::string>& kvps) const {
 
-    BOOST_LOG_SEV(lg, debug) << "Processing: " << input_path.generic_string();
+    BOOST_LOG_SEV(lg, debug) << "Processing template.";
 
-    try {
-        /*
-         * We first start by parsing the raw text templates into their
-         * domain representation. This only populates the lines and
-         * tagged values portions of the text template.
-         */
-        parser p;
-        text_template r;
-        r.body(p.parse(text_template_as_string));
+    /*
+     * We first start by parsing the raw text templates into their
+     * domain representation. This only populates the lines and
+     * tagged values portions of the text template.
+     */
+    parser p;
+    text_template r;
+    r.body(p.parse(text_template_as_string));
 
-        /*
-         * Merge in all of the externally supplied KVPs, if any.
-         */
-        if (!kvps.empty())
-            merge_kvps(kvps, r);
+    /*
+     * Merge in all of the externally supplied KVPs, if any.
+     */
+    if (!kvps.empty())
+        merge_kvps(kvps, r);
 
-        /*
-         * Get all of the variables used by the template.
-         */
-        update_expected_keys(r);
+    /*
+     * Get all of the variables used by the template.
+     */
+    update_expected_keys(r);
 
-        /*
-         * The input path is the location from where we read the
-         * template.
-         */
-        r.input_path(input_path);
+    /*
+     * Convert the tagged values into an annotation, which
+     * performs a profile expansion as required. We then take that
+     * annotation object and use it to generate the properties.
+     *
+     * Note that we do not support configuration overrides on
+     * stitch templates at present, so we just default them to
+     * empty.
+     */
+    const auto& tv(r.body().tagged_values());
+    const std::list<std::pair<std::string, std::string>> otv;
+    const auto bp(variability::entities::binding_point::global);
+    const auto cfg(configuration_factory_.make(tv, otv, bp));
+    r.properties(create_properties(cfg));
 
-        /*
-         * Convert the tagged values into an annotation, which
-         * performs a profile expansion as required. We then take that
-         * annotation object and use it to generate the properties.
-         *
-         * Note that we do not support configuration overrides on
-         * stitch templates at present, so we just default them to
-         * empty.
-         */
-        const auto& tv(r.body().tagged_values());
-        const std::list<std::pair<std::string, std::string>> otv;
-        const auto bp(variability::entities::binding_point::global);
-        const auto cfg(configuration_factory_.make(tv, otv, bp));
-        r.properties(create_properties(cfg));
+    /*
+     * Perform the required processing for wale templates.
+     */
+    handle_wale_template(r);
 
-        /*
-         * Perform the required processing for wale templates.
-         */
-        handle_wale_template(r);
-
-        /*
-         * Ensure that all referenced variables are present in the KVP
-         * map.
-         */
-        validate_kvps(r);
-
-        /*
-         * Finally, we compute an output path for our template,
-         * taking into account its input path and any relevant
-         * options set by the user.
-         */
-        r.output_path(compute_output_path(input_path, r.properties()));
-
-        return r;
-    } catch(boost::exception& e) {
-        e << error_in_file(input_path.generic_string());
-        throw;
-    }
+    /*
+     * Ensure that all referenced variables are present in the KVP
+     * map.
+     */
+    validate_kvps(r);
+    return r;
 }
 
-physical::entities::artefact
-instantiator::format_text_template(const text_template& tt) const {
+std::string instantiator::format_text_template(const text_template& tt) const {
     formatter fmt;
     const auto r(fmt.format(tt));
     return r;
@@ -261,32 +218,30 @@ std::string instantiator::instantiate(const std::string& input,
     const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating string.";
 
-    /*
-     * FIXME: major hackery here just to pretend we read the template
-     * from a file. This is needed until we excise the dependency
-     * against the physical model.
-     */
-    const boost::filesystem::path input_path;
-    const auto tt(create_text_template(input_path, input, kvps));
-    const auto a(format_text_template(tt));
+    const auto tt(create_text_template(input, kvps));
+    const auto r(format_text_template(tt));
 
     BOOST_LOG_SEV(lg, debug) << "Instantiated.";
-    return a.content();
+    return r;
 }
 
-physical::entities::artefact
-instantiator::instantiate(const boost::filesystem::path& input_path,
+std::string instantiator::instantiate(const boost::filesystem::path& input_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "
                              << input_path.generic_string();
 
-    const auto s(read_text_template(input_path));
-    const auto tt(create_text_template(input_path, s, kvps));
-    const auto r(format_text_template(tt));
+    try {
+        const auto s(read_text_template(input_path));
+        const auto tt(create_text_template(s, kvps));
+        const auto r(format_text_template(tt));
 
-    BOOST_LOG_SEV(lg, debug) << "Instantiated.";
-
-    return r;
+        BOOST_LOG_SEV(lg, debug) << "Instantiated. Path: "
+                                 <<  input_path.generic_string();
+        return r;
+    } catch(boost::exception& e) {
+        e << error_in_file(input_path.generic_string());
+        throw;
+    }
 }
 
 }

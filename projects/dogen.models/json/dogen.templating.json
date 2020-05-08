@@ -105,16 +105,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "input_path",
-          "type": "boost::filesystem::path",
-          "documentation": "Path where the template was read out from, if any.\n"
-        },
-        {
-          "name": "output_path",
-          "type": "boost::filesystem::path",
-          "documentation": "Path where the template should be outputted to, if any.\n"
-        },
-        {
           "name": "properties",
           "type": "properties",
           "documentation": "Properties of the template.\n"
@@ -156,10 +146,6 @@
         {
           "name": "stream_variable_name",
           "type": "std::string"
-        },
-        {
-          "name": "relative_output_directory",
-          "type": "boost::filesystem::path"
         },
         {
           "name": "inclusion_dependencies",

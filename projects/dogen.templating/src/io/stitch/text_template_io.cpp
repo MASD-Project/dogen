@@ -71,8 +71,6 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
       << "\"__type__\": " << "\"dogen::templating::stitch::text_template\"" << ", "
       << "\"expected_keys\": " << v.expected_keys() << ", "
       << "\"supplied_kvps\": " << v.supplied_kvps() << ", "
-      << "\"input_path\": " << "\"" << v.input_path().generic_string() << "\"" << ", "
-      << "\"output_path\": " << "\"" << v.output_path().generic_string() << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "
       << "\"body\": " << v.body()
       << " }";

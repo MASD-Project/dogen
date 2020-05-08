@@ -141,7 +141,7 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
     }
 }
 
-physical::entities::artefact formatter::format(const text_template& tt) const {
+std::string formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
     const auto& props(tt.properties());
@@ -189,11 +189,7 @@ physical::entities::artefact formatter::format(const text_template& tt) const {
             s << "}" << std::endl;
     }
 
-    physical::entities::artefact r;
-    r.overwrite(true);
-    r.content(s.str());
-    if (!tt.output_path().empty())
-        r.name().qualified(tt.output_path());
+    const auto r(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Formatted template.";
 

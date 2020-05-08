@@ -25,10 +25,8 @@
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "dogen.templating/types/stitch/line.hpp"
+#include "dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen::templating::stitch {
@@ -81,7 +79,7 @@ public:
     /**
      * @brief Formats the template into an artefact.
      */
-    physical::entities::artefact format(const text_template& tt) const;
+    std::string format(const text_template& tt) const;
 };
 
 }

@@ -68,7 +68,6 @@ std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::templating::stitch::properties\"" << ", "
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
-      << "\"relative_output_directory\": " << "\"" << v.relative_output_directory().generic_string() << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
       << "\"containing_namespaces\": " << v.containing_namespaces() << ", "
       << "\"wale_template\": " << "\"" << tidy_up_string(v.wale_template()) << "\"" << ", "

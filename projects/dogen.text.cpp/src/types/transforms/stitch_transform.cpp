@@ -102,7 +102,8 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
         }
     };
 
-    a = instantiator_.instantiate(stitch_template, external_keys);
+    a.name().qualified(fp);
+    a.content(instantiator_.instantiate(stitch_template, external_keys));
     a.overwrite(ast.new_artefact_properties().overwrite());
 
     physical::entities::operation op;

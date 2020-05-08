@@ -22,23 +22,13 @@
 
 namespace dogen::templating::stitch {
 
-properties::properties(properties&& rhs)
-    : stream_variable_name_(std::move(rhs.stream_variable_name_)),
-      relative_output_directory_(std::move(rhs.relative_output_directory_)),
-      inclusion_dependencies_(std::move(rhs.inclusion_dependencies_)),
-      containing_namespaces_(std::move(rhs.containing_namespaces_)),
-      wale_template_(std::move(rhs.wale_template_)),
-      wale_kvps_(std::move(rhs.wale_kvps_)) { }
-
 properties::properties(
     const std::string& stream_variable_name,
-    const boost::filesystem::path& relative_output_directory,
     const std::list<std::string>& inclusion_dependencies,
     const std::list<std::string>& containing_namespaces,
     const std::string& wale_template,
     const std::unordered_map<std::string, std::string>& wale_kvps)
     : stream_variable_name_(stream_variable_name),
-      relative_output_directory_(relative_output_directory),
       inclusion_dependencies_(inclusion_dependencies),
       containing_namespaces_(containing_namespaces),
       wale_template_(wale_template),
@@ -47,7 +37,6 @@ properties::properties(
 void properties::swap(properties& other) noexcept {
     using std::swap;
     swap(stream_variable_name_, other.stream_variable_name_);
-    swap(relative_output_directory_, other.relative_output_directory_);
     swap(inclusion_dependencies_, other.inclusion_dependencies_);
     swap(containing_namespaces_, other.containing_namespaces_);
     swap(wale_template_, other.wale_template_);
@@ -56,7 +45,6 @@ void properties::swap(properties& other) noexcept {
 
 bool properties::operator==(const properties& rhs) const {
     return stream_variable_name_ == rhs.stream_variable_name_ &&
-        relative_output_directory_ == rhs.relative_output_directory_ &&
         inclusion_dependencies_ == rhs.inclusion_dependencies_ &&
         containing_namespaces_ == rhs.containing_namespaces_ &&
         wale_template_ == rhs.wale_template_ &&
@@ -83,22 +71,6 @@ void properties::stream_variable_name(const std::string& v) {
 
 void properties::stream_variable_name(const std::string&& v) {
     stream_variable_name_ = std::move(v);
-}
-
-const boost::filesystem::path& properties::relative_output_directory() const {
-    return relative_output_directory_;
-}
-
-boost::filesystem::path& properties::relative_output_directory() {
-    return relative_output_directory_;
-}
-
-void properties::relative_output_directory(const boost::filesystem::path& v) {
-    relative_output_directory_ = v;
-}
-
-void properties::relative_output_directory(const boost::filesystem::path&& v) {
-    relative_output_directory_ = std::move(v);
 }
 
 const std::list<std::string>& properties::inclusion_dependencies() const {

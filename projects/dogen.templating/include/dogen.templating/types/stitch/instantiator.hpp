@@ -49,13 +49,6 @@ public:
 
 private:
     /**
-     * @brief Computes the output path, given the template input path.
-     */
-    boost::filesystem::path
-    compute_output_path(const boost::filesystem::path& input_path,
-        const properties& props) const;
-
-    /**
      * @brief Reads the supplied stitch text template into memory as a
      * raw string.
      */
@@ -93,15 +86,13 @@ private:
      * @brief Creates the text template.
      */
     text_template create_text_template(
-        const boost::filesystem::path& input_path,
         const std::string& text_template_as_string,
         const std::unordered_map<std::string, std::string>& kvps) const;
 
     /**
      * @brief Formats the supplied text template.
      */
-    physical::entities::artefact
-    format_text_template(const text_template& tt) const;
+    std::string format_text_template(const text_template& tt) const;
 
 public:
     /**
@@ -115,8 +106,7 @@ public:
      * @brief Instantiate the template from a file, using the supplied
      * KVPs.
      */
-    physical::entities::artefact
-    instantiate(const boost::filesystem::path& input_path,
+    std::string instantiate(const boost::filesystem::path& input_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:

@@ -22,7 +22,6 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.templating/test/mock_text_template_factory.hpp"
 #include "dogen.templating/io/stitch/text_template_io.hpp"
 #include "dogen.templating/types/helpers/resolution_error.hpp"
@@ -178,8 +177,7 @@ line 2
 
 const std::string unmapped_variable("Key not found:");
 
-dogen::physical::entities::artefact
-format(const dogen::templating::stitch::text_template& tt) {
+std::string format(const dogen::templating::stitch::text_template& tt) {
     dogen::templating::stitch::formatter f;
     return f.format(tt);
 }
@@ -203,7 +201,7 @@ BOOST_AUTO_TEST_CASE(empty_text_template_results_in_empty_file) {
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "result: " << r;
-    BOOST_CHECK(r.content().empty());
+    BOOST_CHECK(r.empty());
 }
 
 BOOST_AUTO_TEST_CASE(single_text_line_results_in_expected_template) {
@@ -215,7 +213,7 @@ BOOST_AUTO_TEST_CASE(single_text_line_results_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(single_text_line_content);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -229,7 +227,7 @@ BOOST_AUTO_TEST_CASE(multiple_text_lines_results_in_expected_template) {
     const auto r(format((tt)));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(multiple_text_lines_content);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -243,7 +241,7 @@ BOOST_AUTO_TEST_CASE(single_expression_block_line_results_in_expected_template) 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(single_expression_block_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -257,7 +255,7 @@ BOOST_AUTO_TEST_CASE(multiple_expression_block_lines_results_in_expected_templat
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(multiple_expression_block_lines);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -271,7 +269,7 @@ BOOST_AUTO_TEST_CASE(single_standard_control_block_line_results_in_expected_temp
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(single_standard_control_block_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -285,7 +283,7 @@ BOOST_AUTO_TEST_CASE(multiple_standard_control_block_lines_results_in_expected_t
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto& actual(r.content());
+    const auto& actual(r);
     const auto expected(multiple_standard_control_block_lines);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -299,7 +297,7 @@ BOOST_AUTO_TEST_CASE(text_expression_text_single_line_results_in_expected_templa
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(text_expression_text_single_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -313,7 +311,7 @@ BOOST_AUTO_TEST_CASE(expression_text_expression_single_line_results_in_expected_
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto& actual(r.content());
+    const auto& actual(r);
     const auto expected(expression_text_expression_single_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -327,7 +325,7 @@ BOOST_AUTO_TEST_CASE(text_expression_text_multi_line_results_in_expected_templat
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(text_expression_text_multi_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -341,7 +339,7 @@ BOOST_AUTO_TEST_CASE(expression_text_expression_multi_line_results_in_expected_t
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(expression_text_expression_multi_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -354,7 +352,7 @@ BOOST_AUTO_TEST_CASE(text_standard_control_text_single_line_results_in_expected_
 
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(text_standard_control_text_single_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -369,7 +367,7 @@ BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(standard_control_text_standard_control_single_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -383,7 +381,7 @@ BOOST_AUTO_TEST_CASE(text_standard_control_text_multi_line_results_in_expected_t
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(text_standard_control_text_multi_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -398,7 +396,7 @@ BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_multi_line_results_i
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(standard_control_text_standard_control_multi_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -412,7 +410,7 @@ BOOST_AUTO_TEST_CASE(mixed_content_single_line_results_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(mixed_content_single_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -426,7 +424,7 @@ BOOST_AUTO_TEST_CASE(mixed_content_multi_line_results_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(mixed_content_multi_line);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -440,7 +438,7 @@ BOOST_AUTO_TEST_CASE(complex_structure_results_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(complex_structure);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -455,7 +453,7 @@ BOOST_AUTO_TEST_CASE(decoration_properties_result_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(with_decoration_properties);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -469,7 +467,7 @@ BOOST_AUTO_TEST_CASE(containing_namespaces_result_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(with_containing_namespaces);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -483,7 +481,7 @@ BOOST_AUTO_TEST_CASE(empty_lines_result_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(empty_lines);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -497,7 +495,7 @@ BOOST_AUTO_TEST_CASE(line_with_quotes_result_in_expected_template) {
     const auto r(format(tt));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r;
 
-    const auto actual(r.content());
+    const auto actual(r);
     const auto expected(text_line_with_quotes_content);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }
@@ -512,7 +510,7 @@ BOOST_AUTO_TEST_CASE(line_with_mapped_variable_result_in_expected_template) {
     const auto r0(format(tt0));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r0;
 
-    auto actual(r0.content());
+    auto actual(r0);
     auto expected(single_line_variable_value);
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 
@@ -523,7 +521,7 @@ BOOST_AUTO_TEST_CASE(line_with_mapped_variable_result_in_expected_template) {
     const auto r1(format(tt1));
     BOOST_LOG_SEV(lg, debug) << "Result: " << r1;
 
-    actual = r1.content();
+    actual = r1;
     expected = multi_line_varialbe_value;
     BOOST_CHECK(asserter::assert_equals(expected, actual));
 }

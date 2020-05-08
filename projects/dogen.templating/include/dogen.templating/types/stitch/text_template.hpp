@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include <boost/filesystem/path.hpp>
 #include "dogen.templating/types/stitch/properties.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"
 
@@ -42,17 +41,13 @@ class text_template final {
 public:
     text_template() = default;
     text_template(const text_template&) = default;
+    text_template(text_template&&) = default;
     ~text_template() = default;
-
-public:
-    text_template(text_template&& rhs);
 
 public:
     text_template(
         const std::unordered_set<std::string>& expected_keys,
         const std::unordered_map<std::string, std::string>& supplied_kvps,
-        const boost::filesystem::path& input_path,
-        const boost::filesystem::path& output_path,
         const dogen::templating::stitch::properties& properties,
         const dogen::templating::stitch::text_template_body& body);
 
@@ -75,26 +70,6 @@ public:
     std::unordered_map<std::string, std::string>& supplied_kvps();
     void supplied_kvps(const std::unordered_map<std::string, std::string>& v);
     void supplied_kvps(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
-    /**
-     * @brief Path where the template was read out from, if any.
-     */
-    /**@{*/
-    const boost::filesystem::path& input_path() const;
-    boost::filesystem::path& input_path();
-    void input_path(const boost::filesystem::path& v);
-    void input_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Path where the template should be outputted to, if any.
-     */
-    /**@{*/
-    const boost::filesystem::path& output_path() const;
-    boost::filesystem::path& output_path();
-    void output_path(const boost::filesystem::path& v);
-    void output_path(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -130,8 +105,6 @@ public:
 private:
     std::unordered_set<std::string> expected_keys_;
     std::unordered_map<std::string, std::string> supplied_kvps_;
-    boost::filesystem::path input_path_;
-    boost::filesystem::path output_path_;
     dogen::templating::stitch::properties properties_;
     dogen::templating::stitch::text_template_body body_;
 };

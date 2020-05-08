@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/filesystem/path.hpp>
 
 namespace dogen::templating::stitch {
 
@@ -37,15 +36,12 @@ class properties final {
 public:
     properties() = default;
     properties(const properties&) = default;
+    properties(properties&&) = default;
     ~properties() = default;
-
-public:
-    properties(properties&& rhs);
 
 public:
     properties(
         const std::string& stream_variable_name,
-        const boost::filesystem::path& relative_output_directory,
         const std::list<std::string>& inclusion_dependencies,
         const std::list<std::string>& containing_namespaces,
         const std::string& wale_template,
@@ -56,11 +52,6 @@ public:
     std::string& stream_variable_name();
     void stream_variable_name(const std::string& v);
     void stream_variable_name(const std::string&& v);
-
-    const boost::filesystem::path& relative_output_directory() const;
-    boost::filesystem::path& relative_output_directory();
-    void relative_output_directory(const boost::filesystem::path& v);
-    void relative_output_directory(const boost::filesystem::path&& v);
 
     const std::list<std::string>& inclusion_dependencies() const;
     std::list<std::string>& inclusion_dependencies();
@@ -94,7 +85,6 @@ public:
 
 private:
     std::string stream_variable_name_;
-    boost::filesystem::path relative_output_directory_;
     std::list<std::string> inclusion_dependencies_;
     std::list<std::string> containing_namespaces_;
     std::string wale_template_;

@@ -22,25 +22,13 @@
 
 namespace dogen::templating::stitch {
 
-text_template::text_template(text_template&& rhs)
-    : expected_keys_(std::move(rhs.expected_keys_)),
-      supplied_kvps_(std::move(rhs.supplied_kvps_)),
-      input_path_(std::move(rhs.input_path_)),
-      output_path_(std::move(rhs.output_path_)),
-      properties_(std::move(rhs.properties_)),
-      body_(std::move(rhs.body_)) { }
-
 text_template::text_template(
     const std::unordered_set<std::string>& expected_keys,
     const std::unordered_map<std::string, std::string>& supplied_kvps,
-    const boost::filesystem::path& input_path,
-    const boost::filesystem::path& output_path,
     const dogen::templating::stitch::properties& properties,
     const dogen::templating::stitch::text_template_body& body)
     : expected_keys_(expected_keys),
       supplied_kvps_(supplied_kvps),
-      input_path_(input_path),
-      output_path_(output_path),
       properties_(properties),
       body_(body) { }
 
@@ -48,8 +36,6 @@ void text_template::swap(text_template& other) noexcept {
     using std::swap;
     swap(expected_keys_, other.expected_keys_);
     swap(supplied_kvps_, other.supplied_kvps_);
-    swap(input_path_, other.input_path_);
-    swap(output_path_, other.output_path_);
     swap(properties_, other.properties_);
     swap(body_, other.body_);
 }
@@ -57,8 +43,6 @@ void text_template::swap(text_template& other) noexcept {
 bool text_template::operator==(const text_template& rhs) const {
     return expected_keys_ == rhs.expected_keys_ &&
         supplied_kvps_ == rhs.supplied_kvps_ &&
-        input_path_ == rhs.input_path_ &&
-        output_path_ == rhs.output_path_ &&
         properties_ == rhs.properties_ &&
         body_ == rhs.body_;
 }
@@ -99,38 +83,6 @@ void text_template::supplied_kvps(const std::unordered_map<std::string, std::str
 
 void text_template::supplied_kvps(const std::unordered_map<std::string, std::string>&& v) {
     supplied_kvps_ = std::move(v);
-}
-
-const boost::filesystem::path& text_template::input_path() const {
-    return input_path_;
-}
-
-boost::filesystem::path& text_template::input_path() {
-    return input_path_;
-}
-
-void text_template::input_path(const boost::filesystem::path& v) {
-    input_path_ = v;
-}
-
-void text_template::input_path(const boost::filesystem::path&& v) {
-    input_path_ = std::move(v);
-}
-
-const boost::filesystem::path& text_template::output_path() const {
-    return output_path_;
-}
-
-boost::filesystem::path& text_template::output_path() {
-    return output_path_;
-}
-
-void text_template::output_path(const boost::filesystem::path& v) {
-    output_path_ = v;
-}
-
-void text_template::output_path(const boost::filesystem::path&& v) {
-    output_path_ = std::move(v);
 }
 
 const dogen::templating::stitch::properties& text_template::properties() const {
