@@ -33,7 +33,9 @@ archetype::archetype(
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
     const std::string& part,
-    const std::string& text_to_text_transform)
+    const std::string& text_to_text_transform,
+    const std::string& stitch_template_content,
+    const std::string& wale_template_content)
     : description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
@@ -44,7 +46,9 @@ archetype::archetype(
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
-      text_to_text_transform_(text_to_text_transform) { }
+      text_to_text_transform_(text_to_text_transform),
+      stitch_template_content_(stitch_template_content),
+      wale_template_content_(wale_template_content) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -59,6 +63,8 @@ void archetype::swap(archetype& other) noexcept {
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
     swap(text_to_text_transform_, other.text_to_text_transform_);
+    swap(stitch_template_content_, other.stitch_template_content_);
+    swap(wale_template_content_, other.wale_template_content_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -72,7 +78,9 @@ bool archetype::operator==(const archetype& rhs) const {
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
-        text_to_text_transform_ == rhs.text_to_text_transform_;
+        text_to_text_transform_ == rhs.text_to_text_transform_ &&
+        stitch_template_content_ == rhs.stitch_template_content_ &&
+        wale_template_content_ == rhs.wale_template_content_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -255,6 +263,38 @@ void archetype::text_to_text_transform(const std::string& v) {
 
 void archetype::text_to_text_transform(const std::string&& v) {
     text_to_text_transform_ = std::move(v);
+}
+
+const std::string& archetype::stitch_template_content() const {
+    return stitch_template_content_;
+}
+
+std::string& archetype::stitch_template_content() {
+    return stitch_template_content_;
+}
+
+void archetype::stitch_template_content(const std::string& v) {
+    stitch_template_content_ = v;
+}
+
+void archetype::stitch_template_content(const std::string&& v) {
+    stitch_template_content_ = std::move(v);
+}
+
+const std::string& archetype::wale_template_content() const {
+    return wale_template_content_;
+}
+
+std::string& archetype::wale_template_content() {
+    return wale_template_content_;
+}
+
+void archetype::wale_template_content(const std::string& v) {
+    wale_template_content_ = v;
+}
+
+void archetype::wale_template_content(const std::string&& v) {
+    wale_template_content_ = std::move(v);
 }
 
 }

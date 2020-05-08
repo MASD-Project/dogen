@@ -3209,7 +3209,7 @@ user choices.#</dia:string>
         <dia:point val="113,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,-68.05;129.72,-61.95"/>
+        <dia:rectangle val="112.95,-68.05;129.72,-60.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="113,-68"/>
@@ -3218,7 +3218,7 @@ user choices.#</dia:string>
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype#</dia:string>
@@ -3227,7 +3227,7 @@ user choices.#</dia:string>
         <dia:string>#MetaElement, Postfixable, Associatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a meta-artefact.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3389,6 +3389,52 @@ user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Name of the Text-to-Text transform to apply to artefacts of this archetype, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Content of the stitch template associated with this archetype, if any exists.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Content of the wale template associated with this archetype, if any exists.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8565,7 +8611,7 @@ user choices.#</dia:string>
         <dia:point val="200.845,-113.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="200.776,-113.369;204.494,-110.641"/>
+        <dia:rectangle val="200.776,-113.369;204.493,-110.641"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15573,7 +15619,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="131.795,-73.7496"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.62,-74.4996;132.545,-66.4"/>
+        <dia:rectangle val="129.62,-74.4996;132.545,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15822,7 +15868,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="95.415,-27.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.4825,-28.15;96.165,-22.4"/>
+        <dia:rectangle val="92.4825,-28.15;96.165,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16029,7 +16075,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="161.062,-84.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.312,-85.15;163.26,-77.4"/>
+        <dia:rectangle val="160.312,-85.15;163.26,-78.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

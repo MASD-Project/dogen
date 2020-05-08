@@ -314,6 +314,7 @@
     },
     {
       "name": "entities::archetype",
+      "documentation": "Represents a meta-artefact.\n",
       "stereotypes": [
         "MetaElement",
         "Postfixable",
@@ -340,6 +341,16 @@
           "name": "text_to_text_transform",
           "type": "std::string",
           "documentation": "Name of the Text-to-Text transform to apply to artefacts of this archetype, if any.\n"
+        },
+        {
+          "name": "stitch_template_content",
+          "type": "std::string",
+          "documentation": "Content of the stitch template associated with this archetype, if any exists.\n"
+        },
+        {
+          "name": "wale_template_content",
+          "type": "std::string",
+          "documentation": "Content of the wale template associated with this archetype, if any exists.\n"
         }
       ]
     },
