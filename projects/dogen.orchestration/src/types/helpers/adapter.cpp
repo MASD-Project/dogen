@@ -167,6 +167,23 @@ logical::entities::name adapter::to_name(const logical::entities::location& l,
     return b.build();
 }
 
+logical::entities::name adapter::to_name(const std::string& n) const {
+    /*
+     * Names are expected to be delimited by the scope operator,
+     * denoting internal modules.
+     */
+    ensure_not_empty("Element name", n);
+    auto tokens(utility::string::splitter::split_scoped(n));
+    using logical::helpers::name_builder;
+    name_builder b;
+    b.simple_name(tokens.back());
+    tokens.pop_back();
+    if (!tokens.empty())
+        b.internal_modules(tokens);
+
+    return b.build();
+}
+
 modeline_field adapter::to_modeline_field(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
     ensure_not_empty(owner.qualified().dot(), ia.name());
@@ -809,7 +826,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         else if (n == wale_template_reference_attr_name) {
             const auto v(attr.value());
             ensure_not_empty(r->name().qualified().dot(), v);
-            r->wale_template_unparsed_name(v);
+            r->wale_template(to_name(v));
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(

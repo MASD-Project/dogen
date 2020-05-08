@@ -116,7 +116,16 @@ private:
      */
     logical::entities::name to_name(const logical::entities::location& l,
         const std::string& n) const;
-    /*}@*/
+
+    /**
+     * @brief Creates a logical name using the element name provided.
+     *
+     * @param n may be a simple name or a qualified name, via a scope
+     * operator.
+     *
+     * @pre n must not be empty.
+     */
+    logical::entities::name to_name(const std::string& n) const;
 
     /**
      * @brief Converts an injection attribute to a modeline field.
