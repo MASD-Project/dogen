@@ -387,13 +387,6 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::stitch_template_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }
