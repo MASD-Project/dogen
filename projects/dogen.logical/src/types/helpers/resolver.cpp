@@ -32,6 +32,7 @@
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
+#include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/io/entities/attribute_io.hpp"
@@ -709,6 +710,21 @@ void resolver::resolve_feature_bundles(const indices& idx,
     }
 }
 
+void resolver::resolve_archetypes(const indices& idx, entities::model& m) {
+    for (auto& pair : m.physical_elements().archetypes()) {
+        auto& arch(*pair.second);
+        const auto n(arch.name());
+        if (!arch.wale_template())
+            continue;
+
+        const auto original(*arch.wale_template());
+        const entities::name resolved(resolve_name(m, idx, n, original));
+        BOOST_LOG_SEV(lg, debug) << "Resolved name: "
+                                 << original.qualified().dot()
+                                 << " to: " << resolved.qualified().dot();
+    }
+}
+
 entities::name resolver::
 resolve(const entities::model& m, const indices& idx,
     const entities::name& ctx, const entities::name& n) {
@@ -796,6 +812,7 @@ void resolver::resolve(const indices& idx, entities::model& m) {
     resolve_primitives(idx, m);
     resolve_feature_template_bundles(idx, m);
     resolve_feature_bundles(idx, m);
+    resolve_archetypes(idx, m);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }

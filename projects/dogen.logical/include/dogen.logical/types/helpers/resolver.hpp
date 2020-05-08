@@ -172,6 +172,11 @@ private:
     static void resolve_feature_bundles(const indices& idx,
         entities::model& m);
 
+    /**
+     * @brief Resolve all archetypes.
+     */
+    static void resolve_archetypes(const indices& idx, entities::model& m);
+
 public:
     /**
      * @brief Resolves the name against the supplied model.
