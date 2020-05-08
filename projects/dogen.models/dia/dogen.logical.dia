@@ -51375,16 +51375,16 @@ just to avoid problems.#</dia:string>
         <dia:point val="146,-44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.95,-44.05;160.795,-33.95"/>
+        <dia:rectangle val="145.95,-44.05;162.335,-33.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="146,-44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="10.799999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype#</dia:string>
@@ -51637,6 +51637,29 @@ just to avoid problems.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#wale_template_unparsed_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Unparsed name of the wale template linked to this archetype, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#wale_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -51646,7 +51669,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the wale template linked to this archetype, if any.#</dia:string>
+            <dia:string>#Parsed name of the wale template linked to this archetype, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52701,7 +52724,7 @@ just to avoid problems.#</dia:string>
         <dia:point val="148,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.25,-48.75;153.572,-43.2"/>
+        <dia:rectangle val="147.25,-48.75;154.343,-43.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -52709,8 +52732,8 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="148,-48"/>
         <dia:point val="148,-46"/>
-        <dia:point val="153.373,-46"/>
-        <dia:point val="153.373,-44"/>
+        <dia:point val="154.143,-46"/>
+        <dia:point val="154.143,-44"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
