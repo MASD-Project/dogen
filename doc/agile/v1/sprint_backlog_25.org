@@ -13,21 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-08 Fri 13:34]
-| <75>                                                 |         |       |      |       |
-| Headline                                             | Time    |       |      |     % |
-|------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                         | *10:57* |       |      | 100.0 |
-|------------------------------------------------------+---------+-------+------+-------|
-| Stories                                              | 10:57   |       |      | 100.0 |
-| Active                                               |         | 10:57 |      | 100.0 |
-| Edit release notes for previous sprint               |         |       | 5:57 |  54.3 |
-| Create a demo and presentation for previous sprint   |         |       | 0:47 |   7.2 |
-| Sprint and product backlog grooming                  |         |       | 0:40 |   6.1 |
-| Check name of model for variability transform        |         |       | 0:19 |   2.9 |
-| Analysis on templating and logical model             |         |       | 1:09 |  10.5 |
-| Ensure stitch templates result in valid JSON         |         |       | 0:27 |   4.1 |
-| Add template related attributes to physical elements |         |       | 1:38 |  14.9 |
+#+CAPTION: Clock summary at [2020-05-08 Fri 17:30]
+| <75>                                                  |         |       |      |       |
+| Headline                                              | Time    |       |      |     % |
+|-------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                          | *13:22* |       |      | 100.0 |
+|-------------------------------------------------------+---------+-------+------+-------|
+| Stories                                               | 13:22   |       |      | 100.0 |
+| Active                                                |         | 13:22 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  44.5 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   5.9 |
+| Sprint and product backlog grooming                   |         |       | 0:40 |   5.0 |
+| Check name of model for variability transform         |         |       | 0:19 |   2.4 |
+| Analysis on templating and logical model              |         |       | 1:09 |   8.6 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   3.4 |
+| Remove stitch template builder                        |         |       | 0:09 |   1.1 |
+| Add template related attributes to physical elements  |         |       | 1:38 |  12.2 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |  12.3 |
+| =templating= should not depend on =physical=          |         |       | 0:37 |   4.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -753,7 +756,19 @@ Notes:
 
 - add user and system includes methods to include builder.
 
-*** STARTED Add template related attributes to physical elements      :story:
+*** COMPLETED Remove stitch template builder                          :story:
+    CLOSED: [2020-05-08 Fri 15:12]
+    :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 15:02]--[2020-05-08 Fri 15:11] =>  0:09
+    :END:
+
+This will no longer be needed. Record here the commit at which it was
+removed if we need to find it again.
+
+- Removed at commit 7d95e0db34.
+
+*** COMPLETED Add template related attributes to physical elements    :story:
+    CLOSED: [2020-05-08 Fri 16:50]
     :LOGBOOK:
     CLOCK: [2020-05-08 Fri 12:25]--[2020-05-08 Fri 13:33] =>  1:08
     CLOCK: [2020-05-08 Fri 11:35]--[2020-05-08 Fri 11:56] =>  0:21
@@ -763,28 +778,37 @@ Notes:
 We need to be able to capture the contents of the templates in the
 logical representation of the physical elements.
 
-*** Remove stitch template builder                                    :story:
+Notes:
 
-This will no longer be needed. Record here the commit at which it was
-removed if we need to find it again.
+- actually we made a modeling error: the contents of the templates
+  cannot be part of the physical model. They are only part of the
+  logical model because they are used to generate the code that
+  defines the physical entities. Once that code is generated and is
+  incorporated as part of dogen, we discard this information. Another
+  way to look at this is, we will not have access to =text.cpp= when
+  building any other model so it makes little sense to depend on
+  information that is in this model.
 
-*** Consider renaming logic-less templates                            :story:
-
-Originally we though this was a good name because it was used by some
-domain experts, but it seems it generates more confusion than
-anything. It may just be a term used by mustache and other niche
-template groups. We should probably rename it to text templates given
-most domain experts know what that means.
-
-In addition, the templates should be specific to their types; we need
-to know if its a mustache template or a stitch template because the
-processing will be very different. The templates should be named after
-their type in the logical model. Rename these to wale templates.
-
-*** Resolve references to wale templates in logical model             :story:
+*** COMPLETED Resolve references to wale templates in logical model   :story:
+    CLOSED: [2020-05-08 Fri 16:52]
+    :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 16:51]--[2020-05-08 Fri 16:52] =>  0:01
+    CLOCK: [2020-05-08 Fri 15:12]--[2020-05-08 Fri 16:50] =>  1:38
+    :END:
 
 We need to update the resolver to find the element referenced by an
 archetype. We should also copy across the contents of the wale template.
+
+*** STARTED =templating= should not depend on =physical=              :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 16:53]--[2020-05-08 Fri 17:30] =>  0:37
+    :END:
+
+For some random reason we implemented the =templating= model in terms
+of artefacts of the physical model. There is no need for this in the
+new world, so we should try to decouple these models. Templating
+should not even know of files; it should receive a string and return a
+string.
 
 *** Split wale out of stitch templates                                :story:
 
@@ -899,14 +923,6 @@ Notes:
   as part of the wale template. We already do something similar for
   stitch; if it exists load it, if not create it. We need a similar
   logic.
-
-*** =templating= should not depend on =physical=                      :story:
-
-For some random reason we implemented the =templating= model in terms
-of artefacts of the physical model. There is no need for this in the
-new world, so we should try to decouple these models. Templating
-should not even know of files; it should receive a string and return a
-string.
 
 *** Replace initialisers with facet-based initialisation              :story:
 
@@ -1034,6 +1050,23 @@ There is nothing stopping us from having a context with the tracer,
 and doing a dump of the artefact before and after a M2T
 transform. However its not clear how useful this will be given we
 shall only see an empty artefact and then a filled in artefact.
+
+*** Consider renaming logic-less templates                            :story:
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means.
+
+In addition, the templates should be specific to their types; we need
+to know if its a mustache template or a stitch template because the
+processing will be very different. The templates should be named after
+their type in the logical model. Rename these to wale templates.
+
+Actually its not yet clear if the existing logic could not be extended
+to other template types. We should wait until we implement it front to
+back and then make
 
 *** Add PMM enablement transform                                      :story:
 

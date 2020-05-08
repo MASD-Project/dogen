@@ -4404,6 +4404,34 @@ throw= should only show real problems and not "expected"
 circumstances. We need to clean up this code and any other that shows
 up when using this command.
 
+*** Resolution needs to segment names                                 :story:
+
+At present we are resolving any name in modeling space, regardless of
+modeling element type. This is not correct. For example:
+
+- PIM models should not refer to non-PIM types.
+- features should only refer to types in the =masd.variability= model.
+- archetypes should be able to only refer to logic-less templates.
+
+In addition:
+
+- resolution of licences, modeline groups etc is probably using some
+  bespoke logic or suffers from exactly the same problems.
+
+What we really need is to group "referrable names" by meta-model type
+(or groups of meta-model types, more accurately) and then resolve only
+using types in those groups. This should only be done after we
+simplified name resolution by moving to the [[*Rewrite name resolution in terms of lists][list-based approach]].
+
+Merged stories:
+
+*LAM name resolution should be PIM only*
+
+With the current approach, we are not resolving any names until after
+we've mapped LAM models into a PSM. This possibly means that users can
+provide a model with non-LAM types. Ideally we should not allow
+this. Check to see if we are validating this in the present mapping
+code.
 *** Rewrite name resolution in terms of lists                         :story:
 
 Even since we did the external modules / model modules change we broke
@@ -6507,14 +6535,6 @@ could relax the code in processor (object_types):
 
 We should also consider having a =strict= command line option to
 enable/disable this behaviour.
-
-*** LAM name resolution should be PIM only                            :story:
-
-With the current approach, we are not resolving any names until after
-we've mapped LAM models into a PSM. This possibly means that users can
-provide a model with non-LAM types. Ideally we should not allow
-this. Check to see if we are validating this in the present mapping
-code.
 
 *** Add warning for unused references                                 :story:
 
