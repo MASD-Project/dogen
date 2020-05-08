@@ -4039,11 +4039,6 @@
           "documentation": "Content of the stitch template associated with this archetype, if any exists.\n"
         },
         {
-          "name": "wale_template_unparsed_name",
-          "type": "std::string",
-          "documentation": "Unparsed name of the wale template linked to this archetype, if any.\n"
-        },
-        {
           "name": "wale_template",
           "type": "boost::optional<name>",
           "documentation": "Parsed name of the wale template linked to this archetype, if any.\n"

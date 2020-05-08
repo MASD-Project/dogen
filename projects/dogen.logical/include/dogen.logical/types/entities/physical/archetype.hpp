@@ -70,7 +70,6 @@ public:
         const std::string& part_id,
         const std::string& logical_meta_element_id,
         const std::string& stitch_template_content,
-        const std::string& wale_template_unparsed_name,
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content);
 
@@ -136,16 +135,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Unparsed name of the wale template linked to this archetype, if any.
-     */
-    /**@{*/
-    const std::string& wale_template_unparsed_name() const;
-    std::string& wale_template_unparsed_name();
-    void wale_template_unparsed_name(const std::string& v);
-    void wale_template_unparsed_name(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Parsed name of the wale template linked to this archetype, if any.
      */
     /**@{*/
@@ -186,7 +175,6 @@ private:
     std::string part_id_;
     std::string logical_meta_element_id_;
     std::string stitch_template_content_;
-    std::string wale_template_unparsed_name_;
     boost::optional<dogen::logical::entities::name> wale_template_;
     std::string wale_template_content_;
 };
