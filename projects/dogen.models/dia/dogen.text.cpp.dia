@@ -30685,7 +30685,7 @@ string.
         <dia:point val="-48,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,153.95;-31.28,157.05"/>
+        <dia:rectangle val="-48.05,153.95;-31.28,157.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,154"/>
@@ -30694,7 +30694,7 @@ string.
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_artefact_transform_header#</dia:string>
@@ -30783,7 +30783,55 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#class {{class.simple_name}} final : public model_to_text_transform {
+public:
+    physical::entities::archetype static_archetype() const;
+    physical::entities::archetype archetype() const override;
+
+public:
+    std::list&lt;std::string&gt; inclusion_dependencies(
+        const formattables::dependencies_builder_factory&amp; f,
+        const logical::entities::element&amp; e) const override;
+
+    inclusion_support_types inclusion_support_type() const override;
+
+    boost::filesystem::path inclusion_path(
+        const formattables::locator&amp; l,
+        const logical::entities::name&amp; n) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator&amp; l,
+        const logical::entities::name&amp; n) const override;
+
+public:
+    void apply(const context&amp; ctx, const logical::entities::element&amp; e,
+        physical::entities::artefact&amp; a) const override;
+};
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -30795,7 +30843,7 @@ string.
         <dia:point val="-29,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,153.95;-10.395,157.05"/>
+        <dia:rectangle val="-29.05,153.95;-10.395,157.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-29,154"/>
@@ -30804,7 +30852,7 @@ string.
         <dia:real val="18.555"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_artefact_transform_implementation#</dia:string>
@@ -30893,7 +30941,68 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#
+physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+        using lmnf = {{meta_name_factory}};
+        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        return r;
+    }());
+    return r;
+}
+
+physical::entities::archetype {{class.simple_name}}::archetype() const {
+    return static_archetype();
+}
+
+inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path {{class.simple_name}}::inclusion_path(
+    const formattables::locator&amp; /*l*/, const logical::entities::name&amp; n) const {
+
+    using namespace dogen::utility::log;
+    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) &lt;&lt; not_supported &lt;&lt; n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path {{class.simple_name}}::full_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+}
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -30905,7 +31014,7 @@ string.
         <dia:point val="-48,159"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,158.95;-25.8325,162.05"/>
+        <dia:rectangle val="-48.05,158.95;-25.8325,162.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,159"/>
@@ -30914,7 +31023,7 @@ string.
         <dia:real val="22.1175"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
@@ -31003,7 +31112,62 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#
+physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+        using lmnf = {{meta_name_factory}};
+        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        return r;
+    }());
+    return r;
+}
+
+physical::entities::archetype {{class.simple_name}}::archetype() const {
+    return static_archetype();
+}
+
+inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
+    return inclusion_support_types::{{class.inclusion_support_type}};
+}
+
+boost::filesystem::path {{class.simple_name}}::inclusion_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+}
+
+boost::filesystem::path {{class.simple_name}}::full_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+}
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -31015,7 +31179,7 @@ string.
         <dia:point val="-24,159"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,158.95;-7.28,162.05"/>
+        <dia:rectangle val="-24.05,158.95;-7.28,162.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-24,159"/>
@@ -31024,7 +31188,7 @@ string.
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_helper_transform_header#</dia:string>
@@ -31113,7 +31277,43 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#class {{class.simple_name}} : public helper_transform {
+public:
+    std::string id() const override;
+    std::string family() const override;
+    std::list&lt;std::string&gt; owning_formatters() const override;
+    std::list&lt;std::string&gt; owning_facets() const override;
+    std::string helper_name() const override;
+    bool is_enabled(const assistant&amp; a,
+        const formattables::helper_properties&amp; hc) const override;
+    void apply(assistant&amp; a,
+        const formattables::helper_properties&amp; hc) const override;
+};
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -31125,7 +31325,7 @@ string.
         <dia:point val="-48,164"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,163.95;-30.1025,167.05"/>
+        <dia:rectangle val="-48.05,163.95;-30.1025,167.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,164"/>
@@ -31134,7 +31334,7 @@ string.
         <dia:real val="17.8475"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_helper_transform_implementation#</dia:string>
@@ -31223,7 +31423,71 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("&lt;") + traits::facet_qn() + std::string("&gt;") +
+        std::string("&lt;") + helper_name() + std::string("&gt;"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list&lt;std::string&gt;
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list&lt;std::string&gt; {
+        io::traits::class_implementation_archetype_qn(),
+        io::traits::primitive_implementation_archetype_qn(),
+        types::traits::class_implementation_archetype_qn(),
+        types::traits::primitive_implementation_archetype_qn()
+    });
+    return r;
+}
+
+std::list&lt;std::string&gt;
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list&lt;std::string&gt; {
+        io::traits::facet_qn(), types::traits::facet_qn()
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+bool {{class.simple_name}}::is_enabled(const assistant&amp; a,
+    const formattables::helper_properties&amp; hp) const {
+    return a.is_streaming_enabled(hp);
+}
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -31235,7 +31499,7 @@ string.
         <dia:point val="-28,164"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,163.95;-6.0875,167.05"/>
+        <dia:rectangle val="-28.05,163.95;-6.0875,167.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-28,164"/>
@@ -31244,7 +31508,7 @@ string.
         <dia:real val="21.862500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cpp_helper_transform_implementation_enabled#</dia:string>
@@ -31333,7 +31597,69 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("&lt;") + traits::facet_qn() + std::string("&gt;") +
+        std::string("&lt;") + helper_name() + std::string("&gt;"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list&lt;std::string&gt;
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list&lt;std::string&gt; {
+        traits::class_implementation_archetype_qn(),
+        traits::primitive_implementation_archetype_qn()
+    });
+    return r;
+}
+
+std::list&lt;std::string&gt;
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list&lt;std::string&gt; {
+        traits::facet_qn()
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
+    const formattables::helper_properties&amp; /*hp*/) const {
+    return true;
+}
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
