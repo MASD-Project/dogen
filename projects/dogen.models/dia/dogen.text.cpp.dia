@@ -35064,7 +35064,105 @@ string.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_old.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#+
+
+physical::entities::archetype archetype_class_header_transform_old::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::archetype_class_header_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_physical_archetype_name().qualified().dot());
+        return r;
+    }());
+    return r;
+}
+
+physical::entities::archetype archetype_class_header_transform_old::archetype() const {
+    return static_archetype();
+}
+
+inclusion_support_types archetype_class_header_transform_old::inclusion_support_type() const {
+    return inclusion_support_types::regular_support;
+}
+
+boost::filesystem::path archetype_class_header_transform_old::inclusion_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+}
+
+boost::filesystem::path archetype_class_header_transform_old::full_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+}
+
+std::list&lt;std::string&gt; archetype_class_header_transform_old::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+
+    auto builder(f.make());
+    builder.add_as_user("dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
+
+    return builder.build();
+}
+
+void archetype_class_header_transform_old::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::physical::archetype&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+class &lt;#= o.name().simple() #&gt; final : public model_to_text_transform {
+public:
+    physical::entities::archetype static_archetype() const;
+    physical::entities::archetype archetype() const override;
+
+public:
+    std::list&lt;std::string&gt; inclusion_dependencies(
+        const formattables::dependencies_builder_factory&amp; f,
+        const logical::entities::element&amp; e) const override;
+
+    inclusion_support_types inclusion_support_type() const override;
+
+    boost::filesystem::path inclusion_path(
+        const formattables::locator&amp; l,
+        const logical::entities::name&amp; n) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator&amp; l,
+        const logical::entities::name&amp; n) const override;
+
+public:
+    void apply(const context&amp; ctx, const logical::entities::element&amp; e,
+        physical::entities::artefact&amp; a) const override;
+};
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;
+#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
