@@ -4254,6 +4254,13 @@
           "documentation": "All models in this model set.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::logic_less_templates_population_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

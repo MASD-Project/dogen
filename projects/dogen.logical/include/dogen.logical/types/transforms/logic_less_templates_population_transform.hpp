@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Populates all elements that require the contents of
+ * logic-less templates.
+ */
 class logic_less_templates_population_transform final {
 public:
-    logic_less_templates_population_transform() = default;
-    logic_less_templates_population_transform(const logic_less_templates_population_transform&) = default;
-    logic_less_templates_population_transform(logic_less_templates_population_transform&&) = default;
-    ~logic_less_templates_population_transform() = default;
-    logic_less_templates_population_transform& operator=(const logic_less_templates_population_transform&) = default;
-
-public:
-    bool operator==(const logic_less_templates_population_transform& rhs) const;
-    bool operator!=(const logic_less_templates_population_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Execute the transform against the model.
+     */
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
