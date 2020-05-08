@@ -105,7 +105,9 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         << " physical archetype kinds: "
         << src.physical_elements().archetype_kinds().size()
         << " physical parts: "
-        << src.physical_elements().parts().size();
+        << src.physical_elements().parts().size()
+        << " logic-less templates: "
+        << src.templating_elements().logic_less_templates().size();
 
     /*
      * Note that we are ignoring some elements, which do not require
@@ -165,6 +167,8 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
         dst.physical_elements().archetype_kinds());
     copy(src.physical_elements().parts(),
         dst.physical_elements().parts());
+    copy(src.templating_elements().logic_less_templates(),
+        dst.templating_elements().logic_less_templates());
 
     /*
      * Update the references of the merged model.
