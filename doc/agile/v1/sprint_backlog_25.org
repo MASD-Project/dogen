@@ -5,25 +5,28 @@
 
 * Sprint Goals
 
-- Complete the work on the physical meta-model and model.
+- Get the text subsystem to generate a cohesive physical meta-model.
+- Start the locator work.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-07 Thu 22:17]
+#+CAPTION: Clock summary at [2020-05-08 Fri 11:34]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *6:53* |      |      | 100.0 |
+| *Total time*                                       | *9:01* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 6:53   |      |      | 100.0 |
-| Active                                             |        | 6:53 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 5:57 |  86.4 |
-| Create a demo and presentation for previous sprint |        |      | 0:34 |   8.2 |
-| Sprint and product backlog grooming                |        |      | 0:03 |   0.7 |
-| Check name of model for variability transform      |        |      | 0:19 |   4.6 |
+| Stories                                            | 9:01   |      |      | 100.0 |
+| Active                                             |        | 9:01 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 5:57 |  66.0 |
+| Create a demo and presentation for previous sprint |        |      | 0:47 |   8.7 |
+| Sprint and product backlog grooming                |        |      | 0:40 |   7.4 |
+| Check name of model for variability transform      |        |      | 0:19 |   3.5 |
+| Analysis on templating and logical model           |        |      | 1:09 |  12.8 |
+| Ensure stitch templates result in valid JSON       |        |      | 0:09 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -575,6 +578,7 @@ That's all for this release. Happy Modeling!
 
 *** COMPLETED Create a demo and presentation for previous sprint      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-07 Thu 22:18]--[2020-05-07 Thu 22:31] =>  0:13
     CLOCK: [2020-05-06 Wed 22:05]--[2020-05-06 Wed 22:13] =>  0:08
     CLOCK: [2020-05-06 Wed 21:38]--[2020-05-06 Wed 22:04] =>  0:26
     :END:
@@ -586,6 +590,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 11:01]--[2020-05-08 Fri 11:24] =>  0:21
+    CLOCK: [2020-05-08 Fri 09:36]--[2020-05-08 Fri 09:50] =>  0:14
     CLOCK: [2020-05-06 Wed 22:14]--[2020-05-06 Wed 22:17] =>  0:03
     :END:
 
@@ -605,12 +611,247 @@ variability transform:
 Actually since we don't have a model as such we need to hard-code the
 model name.
 
-*** Wale templates must be bound to logical archetypes                :story:
+*** COMPLETED Stitch extension is hard-coded                          :story:
+    CLOSED: [2020-05-08 Fri 11:09]
+
+*Rationale*: this will be addressed with the new T2T transforms.
+
+At present we have hard-coded the file extension in the output of
+stitch templates as =cpp=. We should really supply it as part of the
+configuration. Ideally even the entire filename.
+
+*** COMPLETED Do logic-less templates belong in =generation.cpp=?     :story:
+    CLOSED: [2020-05-08 Fri 11:10]
+
+Rationale*: the current ones do. Dogen's text models are implemented
+in C++ and the transform of the logical representation of physical
+elements is done in C++. This is correct. It is also entirely possible
+to create logic-less templates in other technical spaces, but its not
+very useful (for now).
+
+For purely expediency purposes, we placed the logic-less templates
+formatter in the =generation.cpp= model. However, this means you
+cannot create logic-less templates in C# models. For now its fine as
+Dogen is the only user of these meta-model elements, but in the future
+when we create a JSON schema for model data, we will want to use these
+from any technical space. We need to either implement formatters on
+every technical space or find a way to create TS-neutral formatters.
+
+That is to say, we create a formatter for logic-less templates in the
+C++ generation model. This means that you can only use these in the
+C++ technical space. The easy solution is just to copy across the
+formatters into the C# technical space. However, this is not scalable
+as we add more backends. However, this may be the correct approach
+given our conceptual model - as we found out with forward
+declarations.
+
+In light of the change related to primary and secondary technical
+spaces, we should really create a technical space for stitch and move
+the formatters there.
+
+*** COMPLETED Analysis on templating and logical model                :story:
+    CLOSED: [2020-05-08 Fri 11:24]
+    :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 09:51]--[2020-05-08 Fri 11:00] =>  1:09
+    :END:
+
+We made a slight modeling error with templates. By allowing them to be
+read from the filesystem, we coupled the physical representation with
+the logical representation, which breaks the conceptual model and
+leads to strange coding problems: we now need to be aware of file
+locations in order to obtain properties of logical elements. This
+stems from a limitation of the injector format, which led us in the
+wrong direction. Templates are in fact not physical elements at all;
+they are logical elements and as such should be part of the model just
+like licences are. The trouble is, its very hard to edit templates
+when they are embedded in a UML diagram in dia (escaping etc), so it
+didn't appear obvious that this was the correct solution according to
+the conceptual model. Once we have a proper injector format (org-mode)
+this will not be a problem at all and embedding documents of any type
+will be treated as first class citizens. But for now we must endure
+the pain in order to make the logical model consistent with the
+conceptual model. This implies the following:
+
+- we must simplify stitch templates to the point that they are
+  embeddable in dia and representable in JSON. This must be done by
+  any means necessary and it will not be pretty.
+- we must update the physical representation of the logical model
+  elements to contain the template contents or references as the case
+  may be.
+- we must resolve references to wale templates into contents via
+  meta-model elements.
+- we must update the templating subsystem to work off of strings
+  rather than files. To start off with we need both, until the legacy
+  archetypes are decommissioned.
+- we could possibly also support "wale template content" and "stitch
+  template references" for symmetry or perhaps we should just add
+  stories for these into the backlog.
+
+Editing of templates for now will be very cumbersome: we need to copy
+the contents of the attribute into a text file, do whatever edits
+necessary, plug it back in to the model and generate it; rinse
+repeat. We must soldier on this way until org-mode. Note also that
+this will mean that in the future it will not be very practical to
+create models in Dia or JSON if those models include physical
+entities. For all other cases these injectors are as suitable as they
+are at present. This is not too bad a trade-off to make.
+
+Note also that for now we cannot supply a default stitch template. It
+would be rather difficult to update a Dia diagram with this
+content. However, once org-mode arrives, we can easily create a
+=yas/snippet= for stitch giving us exactly the same result as a
+skeleton template would. Note also that, as tempting as it is to want
+to do the org-mode refactor now, we must not look into it until we
+finish all the refactorings in course. This will lead into a worsening
+of the endless refactor loop.
+
+Merged stories:
+
+*Correct implementation of templates in meta-model*
+
+At present we have a number of hacks to get stitch and wale to
+work. However, it seems clear how this could be implemented in a more
+"natural" way. In order for this to happen we need to first clean up
+the archetypes model and the generation model though.
+
+- artefact properties should have a template element and a template
+  path. Template element is in the meta-data. It is an ID that points
+  to a meta-model element of type template (logic-less, for now). This
+  field supports the use case of 1-M on templates (a template that is
+  instantiated for multiple modeling elements). When this field is
+  present, in the coding model, we resolve the string into a modeling
+  element. We then add the modeling element name to the
+  properties. Then, when creating the templating path, we find the
+  modeling element and obtain its path.
+- for the 1-1 use case (that is, for a given archetype we have one and
+  only one template), we always resolve the template path to be equal
+  to the archetype path we are templating, and then update the
+  extension to match (e.g. =.wale= or =.stitch=). When creating
+  artefacts, if the template file does not exist, we create an empty
+  file. In this case, we need to inject all of the template names into
+  the list of artefacts so that we do not delete them.
+
+Whilst this is a much cleaner approach, we cannot implement it at
+present because we do not have access to name resolution in generation
+as things stand. Once we've cleaned up the archetypes model and the
+generation model, the hope is that coding will take over the archetype
+expansion (via a collaboration with the archetypes model). Then we
+could do name resolution inside of coding.
+
+*** STARTED Ensure stitch templates result in valid JSON              :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-08 Fri 11:25]--[2020-05-08 Fri 11:34] =>  0:09
+    :END:
+
+We need to update the stitch templates removing any manual escaping to
+make sure we can produce a valid JSON model from them. The models must
+round-trip in both formats.
+
+*** Add template related attributes to physical elements              :story:
+
+We need to be able to capture the contents of the templates in the
+logical representation of the physical elements.
+
+*** Resolve references to wale templates in logical model             :story:
+
+We need to update the resolver to find the element referenced by an
+archetype. We should also copy across the contents of the wale template.
+
+*** Split wale out of stitch templates                                :story:
+
+Stitch requires extra work in order to split out decoration. This is
+because in the past we relied on profiles to populate decoration. It
+worked because we were reading the same simple JSON files. Now we are
+relying on model references and meta-model entities, so this is no
+longer viable: they do not exist at the template level.
+
+One possible solution is to have a "reference" command line argument
+that loads up the user supplied model. We then need some kind of chain
+that applies the decoration transforms. The only solution is to create
+a temporary model that has some kind of coding element on it; this
+model is then supplied to the pipeline:
+
+- injection: needed to read the MASD model with decoration.
+- coding: needed to assemble the temp model with the MASD model and
+  to obtain the decoration.
+- generation: needed to populate the decoration properties.
+
+At this point we can then supply the annotations to the decoration
+formatter. This means that stitch now has a hard dependency on the
+rest of the dogen pipeline. Ideally we should try to split out
+weaving from stitching so that "weaving" becomes this complex
+pipeline but stitching just means the previous processing we did on
+templates. This could even mean we could remove annotations from
+stitching altogether and then have model to text transforms that
+join the stitch template output with the decoration.
+
+If we take this idea to the limit, what we are saying is that stitch
+templates can have KVPs associated with them, with multiple sources:
+
+- wale (as at present)
+- decorations. We need at least two: preamble and postamble.
+
+Note that operations (hand-crafted code to merge into the generated
+code) cannot be handled by the KVPs. This is because we are generating
+the stitch template itself, not the user facing code; we are
+generating the generator, so we are one level removed from the code
+generator. These can be handled as before, via a post-processing step
+that replaces guids with contents from the file system.
+
+To start off with we can just deprecate weaving for now. It is only
+used to quickly weave the model without code generation, but the
+generator is so quick that it does not make a lot of difference.
+
+It is important to note that we still have a two-level set of
+annotations:
+
+- the element annotations which contain the decoration. These are
+  processed prior to calling the stitch template instantiator to
+  generate the preamble and postamble KVPs (as well as the wale KVPs).
+- the annotation of the template itself. This contains the stitch
+  fields such as includes, etc. These will not contain any fields
+  related to decoration (e.g. it is no longer possible to decorate
+  from within stitch itself).
+
+This means that we need to remove all code from stitch that handles
+annotation expansion and just leave the annotation factory.
+
+We also need to look into how the wale keys were implemented - likely
+we've hard-coded it so that its always the same name:
+
+: <#$ stitch.wale.template_instantiation_result #>
+
+With a bit of luck its just a variable. If so we can then add at the
+top and bottom of each template:
+
+: <#$ stitch.decoration.preamble #>
+: ...
+: <#$ stitch.decoration.postamble #>
+
+It is *very important* to understand that this is the decoration of
+the output of the stitch template *itself*, not of the code it will
+generate. The decoration of the generated code will be handled as at
+present, by manually calling the decoration formatters.
+
+Notes:
+
+- we also need to split out the includes from the template. At present
+  it makes sense to supply it as a stitch KVP but in reality these are
+  parameters that should be inferred from the model. What we need is a
+  way to supply include dependencies in the meta-data. Then use that
+  information to build the include dependencies within
+  generation. Then use the list of includes to build the
+  boilerplate. The stitch template is just the core of the file.
+
+Merged stories:
+
+*Wale templates must be bound to logical archetypes*
 
 A stitch template may make use of a wale template. At present we are
 loading these from the file system, thus requiring the
 locator. However, since we already have the templates in memory, we
-could model these a bit better.
+could model these a bit better: we should supply them as values in the
+KVPs.
 
 Notes:
 
@@ -638,18 +879,6 @@ new world, so we should try to decouple these models. Templating
 should not even know of files; it should receive a string and return a
 string.
 
-*** Extend tracing to M2T transforms                                  :story:
-
-There is nothing stopping us from having a context with the tracer,
-and doing a dump of the artefact before and after a M2T transform.
-
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text and text-to-model (to a lesser extent) are
-well known TLAs in MDE we should make use of these in class names. The
-names we have at present are very long. The additional size is not
-providing any benefits.
-
 *** Replace initialisers with facet-based initialisation              :story:
 
 Now that we have facets, archetypes, etc as proper meta-model
@@ -662,28 +891,31 @@ automatically generated without any manual intervention. Similarly,
 deleting formatters will delete all traces of it from the code
 generator.
 
-*** Consider making technical spaces a core concept                   :story:
+*** Remove annotations from stitch templates                          :story:
 
-At present we are trying to instantiate a stitch template. It requires
-knowing the technical space that the original archetype belongs to so
-that we can locate the appropriate decoration. However, because we are
-in the text model and the archetype is a physical concept, we have no
-way of knowing what the original TS was for a given archetype. We
-could of course locate the associated M2T transform etc - but this
-perhaps hints at a bigger problem with the conceptual model: technical
-spaces are much more of a pervasive concept than just logical model:
+In the new world, stitch templates don't have all of the required
+information to build the boilerplate:
 
-- injectors belong to technical spaces.
-- logical model entities belong to technical spaces.
-- text transforms belong to technical spaces.
-- physical model entities such as archetypes and artefacts belong to
-  technical spaces.
+- they cannot expand wale templates because the KVPs will be in the
+  element itself, not the template. Strictly speaking this is not an
+  problem we have right now though.
+- more importantly, the include dependencies cannot be computed by the
+  template. This is because the dependencies are really a function of
+  the model type we are expressing on the template. Instead, we did a
+  quick hack and supplied the includes as KVPs. So they are kind of
+  parameters but kind of not really parameters because they are
+  hard-coded to the template. It solved the immediate problem of
+  having them formatted and placed in the right part of the file, but
+  now we can see this is not the right approach.
 
-It would be nice if we could have this modeled correctly, in some kind
-of shared model. At present, the only model which does this is
-=variability= but it does not make a lot of sense to put TS'
-there. Perhaps we should wait until we have enough entities to see
-what the name of this "core" model should be.
+In reality, we should not have any annotations at all in
+templates. The boilerplate and includes should be supplied as KVPs and
+applied as variables. They should be composed externally with access
+to data from the model element. Thus we then need a way to associate
+includes with model elements. This is captured as a separate story.
+
+We seem to be using features to read values out of the templates. We
+need to see if this adds any value.
 
 *** Inject backend, facets and archetypes into PMM                    :story:
 
@@ -767,10 +999,24 @@ the backend, one for the features and one for the archetype
 (global). Then another one for the archetype, locally. Each with the
 correct binding point.
 
+*** Extend tracing to M2T and T2T transforms                          :story:
+
+There is nothing stopping us from having a context with the tracer,
+and doing a dump of the artefact before and after a M2T
+transform. However its not clear how useful this will be given we
+shall only see an empty artefact and then a filled in artefact.
+
 *** Add PMM enablement transform                                      :story:
 
 This transform reads the global enablement flags for backend, facet
 and archetype. It is done as part of the chain to produce the PMM.
+
+*** Rename "model-to-X" to TLAs                                       :story:
+
+Given that model-to-text and text-to-model (to a lesser extent) are
+well known TLAs in MDE we should make use of these in class names. The
+names we have at present are very long. The additional size is not
+providing any benefits.
 
 *** Add a PMM enablement satisfiability transform                     :story:
 
@@ -778,65 +1024,23 @@ For now this transform can simply check that there are no enabled
 archetypes that depend on disabled archetypes. In the future we could
 have a flag that enables archetypes as required.
 
-*** Add =is_generatable= to logical model                             :story:
+*** Stitch templates should be bound to Dogen M2T transforms          :story:
 
-Logical types which cannot be generated should be removed prior to
-physical expansion. There are two types:
+At present we have tried to create some kind of generic implementation
+of a templating engine. However in practice we only need it for the
+implementation of the apply method of a M2T transform. We could take
+advantage of this in order to simplify templates; we could assume that
+the only thing we could code-generate in a stitch template is the
+inside of the apply method. We need to check but T4 does something
+similar. This would mean that many things would be hard-coded such as
+the name of the stream variable etc.
 
-- intrinsically non-generatable types such as object templates, etc.
-- types that may not be generated depending on state: modules.
-
-In the future, when we support the static / dynamic pattern,
-
-Tasks:
-
-- add a generatable flag in logical model elements with associated
-  transform.
-- add a pruning transform that filters out all non-generatable types
-  from logical model.
-
-Merged stories:
-
-*Intrinsic non-generatable types
-
-In the decoration transform we have this hack:
-
-: bool decoration_transform::
-: is_generatable(const assets::meta_model::name& meta_name) {
-:     // FIXME: massive hack for now.
-:     using mnf = assets::helpers::meta_name_factory;
-:     static const auto otn(mnf::make_object_template_name());
-:     static const auto ln(mnf::make_licence_name());
-:     static const auto mln(mnf::make_modeline_name());
-:     static const auto mgn(mnf::make_modeline_group_name());
-:     static const auto gmn(mnf::make_generation_marker_name());
-:
-:     const auto id(meta_name.qualified().dot());
-:     return
-:         id != otn.qualified().dot() &&
-:         id != ln.qualified().dot() &&
-:         id != mln.qualified().dot() &&
-:         id != mgn.qualified().dot() &&
-:         id != gmn.qualified().dot();
-: }
-
-This is done because we know up front that some elements in the assets
-meta-model cannot be generated. We need a way to tag this elements
-statically. This should be done when the elements are code
-generated. It is not yet clear how this should be done though.
-
-Notes:
-
-- one possible approach is to have a constant that is code generated
-  which states if a type is meant for generation or not.
-- however, it would be even better if we could determine if a type has
-  formatters or not. This would mean we would cover two possible
-  scenarios: types that are intrinsically non-generatable and types
-  that are not yet generatable. It may be that there is no need to
-  distinguish between these two.
-- when we have meta-model elements for logical meta-elements we just
-  need to add this as a property (e.g. generatable). If a user tries
-  to add a formatter to a non-generatable type we error.
+Everything else should be supplied as meta-data parameters to the
+modeling element for archetypes: includes, etc. This means the
+templates would be much simpler. This can only be done once we use the
+PMM to compute paths. Also, we probably require a way to inject the
+dependencies. This will probably require merging code generation as
+well.
 
 *** Create a physical ID in logical-physical space                    :story:
 
@@ -860,15 +1064,6 @@ instead of being a list of artefacts.
 At present we are setting up the extraction model name from the simple
 name of the model. It should really be the qualified name. Hopefully
 this will only affect tracing and diffing.
-
-*** Add enablement test in C#                                         :story:
-
-At present we have probably broken enablement in C# due to the hackery
-around physical space expansion. However all tests are green. We need
-to define a profile in C# that disables a facet in order to ensure we
-test enablement before we start hacking around with the enablement
-transforms. It will most likely be red - we need to add the pruning
-hack to get rid of disabled artefacts as we do in C++.
 
 *** Add dependencies to artefacts                                     :story:
 
@@ -895,6 +1090,53 @@ We also need a way to populate the dependencies as a transform. This
 must be done in =m2t= because we need the formatters. We can rely on
 the same approach as =inclusion_dependencies= but instead of creating
 /inclusion dependencies/, we are just creating /dependencies/.
+
+*** Add a PM enablement and overwrite transform                       :story:
+
+This relies on PMM enablement flags. Also, it reads the local
+archetype enablement and overwrite flags and has the logic to set it
+as per current enablement transform.
+
+Once this transform is implemented, we should try disabling the
+existing enablement transform and see what breaks.
+
+*** Add a PM enablement satisfiability transform                      :story:
+
+To start with, this should just check to see if any of the
+dependencies are disabled. If so it throws. In the future we can add
+solving.
+
+*** Add a PM transform to prune disabled artefacts                    :story:
+
+We must first start by expanding the physical space into all possible
+points. Once enablement is performed though we can prune all artefacts
+that are disabled. Note that we cannot prune based on global
+information because archetypes may be enabled locally. However, once
+all of the local information has been processed and the enabled flag
+has been set, we can then remove all of those with the flag set to
+false.
+
+In a world with solving, we just need to make sure solving is slotted
+in after enablement and before pruning. It should just work.
+
+This transform is done within the =m2t= model, not the =physical=
+model, because we need to remove the artefacts from the =m2t=
+collection.
+
+*** Implement formatting styles in physical model                     :story:
+
+We need to move the types related to formatting styles into physical
+model, and transfors as well. WE should also address formatting input.
+
+Merged stories:
+
+*Move formatting styles into generation*
+
+We need to support the formatting styles at the meta-model level.
+
+*Replace all formatting styles with the ones in physical model*
+
+We still have a number of copies of this enumeration.
 
 *** Consider allowing representation of namespaces in file names      :story:
 
@@ -944,54 +1186,6 @@ Notes:
   another is related to allowing users to flatten facet
   directories. They have some connection, but its not obvious how much
   they overlap.
-
-*** Add a PM enablement and overwrite transform                       :story:
-
-This relies on PMM enablement flags. Also, it reads the local
-archetype enablement and overwrite flags and has the logic to set it
-as per current enablement transform.
-
-Once this transform is implemented, we should try disabling the
-existing enablement transform and see what breaks.
-
-*** Add a PM enablement satisfiability transform                      :story:
-
-To start with, this should just check to see if any of the
-dependencies are disabled. If so it throws. In the future we can add
-solving.
-
-*** Add a PM transform to prune disabled artefacts                    :story:
-
-We must first start by expanding the physical space into all possible
-points. Once enablement is performed though we can prune all artefacts
-that are disabled. Note that we cannot prune based on global
-information because archetypes may be enabled locally. However, once
-all of the local information has been processed and the enabled flag
-has been set, we can then remove all of those with the flag set to
-false.
-
-In a world with solving, we just need to make sure solving is slotted
-in after enablement and before pruning. It should just work.
-
-This transform is done within the =m2t= model, not the =physical=
-model, because we need to remove the artefacts from the =m2t=
-collection.
-
-*** Implement formatting styles in physical model                     :story:
-
-We need to move the types related to formatting styles into physical
-model, and transfors as well. WE should also address formatting input.
-
-Merged stories:
-
-*Move formatting styles into generation*
-
-We need to support the formatting styles at the meta-model level.
-
-*Replace all formatting styles with the ones in physical model*
-
-We still have a number of copies of this enumeration.
-
 *** Implement locator in physical model                               :story:
 
 Use PMM entities to generate artefact paths, within =m2t=.

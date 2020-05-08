@@ -116,6 +116,95 @@ family. The downside is that we then start building inside of the
 sub-repos (we never want to build at the product family level). This
 may not necessarily be a bad thing.
 
+*** Consider making technical spaces a core concept                   :story:
+
+At present we are trying to instantiate a stitch template. It requires
+knowing the technical space that the original archetype belongs to so
+that we can locate the appropriate decoration. However, because we are
+in the text model and the archetype is a physical concept, we have no
+way of knowing what the original TS was for a given archetype. We
+could of course locate the associated M2T transform etc - but this
+perhaps hints at a bigger problem with the conceptual model: technical
+spaces are much more of a pervasive concept than just logical model:
+
+- injectors belong to technical spaces.
+- logical model entities belong to technical spaces.
+- text transforms belong to technical spaces.
+- physical model entities such as archetypes and artefacts belong to
+  technical spaces.
+
+It would be nice if we could have this modeled correctly, in some kind
+of shared model. At present, the only model which does this is
+=variability= but it does not make a lot of sense to put TS'
+there. Perhaps we should wait until we have enough entities to see
+what the name of this "core" model should be.
+*** Add =is_generatable= to logical model                             :story:
+
+Logical types which cannot be generated should be removed prior to
+physical expansion. There are two types:
+
+- intrinsically non-generatable types such as object templates, etc.
+- types that may not be generated depending on state: modules.
+
+In the future, when we support the static / dynamic pattern,
+
+Tasks:
+
+- add a generatable flag in logical model elements with associated
+  transform.
+- add a pruning transform that filters out all non-generatable types
+  from logical model.
+
+Merged stories:
+
+*Intrinsic non-generatable types
+
+In the decoration transform we have this hack:
+
+: bool decoration_transform::
+: is_generatable(const assets::meta_model::name& meta_name) {
+:     // FIXME: massive hack for now.
+:     using mnf = assets::helpers::meta_name_factory;
+:     static const auto otn(mnf::make_object_template_name());
+:     static const auto ln(mnf::make_licence_name());
+:     static const auto mln(mnf::make_modeline_name());
+:     static const auto mgn(mnf::make_modeline_group_name());
+:     static const auto gmn(mnf::make_generation_marker_name());
+:
+:     const auto id(meta_name.qualified().dot());
+:     return
+:         id != otn.qualified().dot() &&
+:         id != ln.qualified().dot() &&
+:         id != mln.qualified().dot() &&
+:         id != mgn.qualified().dot() &&
+:         id != gmn.qualified().dot();
+: }
+
+This is done because we know up front that some elements in the assets
+meta-model cannot be generated. We need a way to tag this elements
+statically. This should be done when the elements are code
+generated. It is not yet clear how this should be done though.
+
+Notes:
+
+- one possible approach is to have a constant that is code generated
+  which states if a type is meant for generation or not.
+- however, it would be even better if we could determine if a type has
+  formatters or not. This would mean we would cover two possible
+  scenarios: types that are intrinsically non-generatable and types
+  that are not yet generatable. It may be that there is no need to
+  distinguish between these two.
+- when we have meta-model elements for logical meta-elements we just
+  need to add this as a property (e.g. generatable). If a user tries
+  to add a formatter to a non-generatable type we error.
+*** Add enablement test in C#                                         :story:
+
+At present we have probably broken enablement in C# due to the hackery
+around physical space expansion. However all tests are green. We need
+to define a profile in C# that disables a facet in order to ensure we
+test enablement before we start hacking around with the enablement
+transforms. It will most likely be red - we need to add the pruning
+hack to get rid of disabled artefacts as we do in C++.
 *** Investigate goxygen's functionality                               :story:
 
 Seems like an interesting project:
@@ -158,24 +247,6 @@ files:
 Links:
 
 - [[http://valgrind.org/docs/manual/manual-core.html#manual-core.suppress][Suppressing errors]]
-
-*** Stitch templates should be bound to Dogen M2T transforms          :story:
-
-At present we have tried to create some kind of generic implementation
-of a templating engine. However in practice we only need it for the
-implementation of the apply method of a M2T transform. We could take
-advantage of this in order to simplify templates; we could assume that
-the only thing we could code-generate in a stitch template is the
-inside of the apply method. We need to check but T4 does something
-similar. This would mean that many things would be hard-coded such as
-the name of the stream variable etc.
-
-Everything else should be supplied as meta-data parameters to the
-modeling element for archetypes: includes, etc. This means the
-templates would be much simpler. This can only be done once we use the
-PMM to compute paths. Also, we probably require a way to inject the
-dependencies. This will probably require merging code generation as
-well.
 
 *** Configuration binds to element types                              :story:
 
@@ -2236,37 +2307,6 @@ Ideas:
 
 - configuration
 
-*** Correct implementation of templates in meta-model                 :story:
-
-At present we have a number of hacks to get stitch and wale to
-work. However, it seems clear how this could be implemented in a more
-"natural" way. In order for this to happen we need to first clean up
-the archetypes model and the generation model though.
-
-- artefact properties should have a template element and a template
-  path. Template element is in the meta-data. It is an ID that points
-  to a meta-model element of type template (logic-less, for now). This
-  field supports the use case of 1-M on templates (a template that is
-  instantiated for multiple modeling elements). When this field is
-  present, in the coding model, we resolve the string into a modeling
-  element. We then add the modeling element name to the
-  properties. Then, when creating the templating path, we find the
-  modeling element and obtain its path.
-- for the 1-1 use case (that is, for a given archetype we have one and
-  only one template), we always resolve the template path to be equal
-  to the archetype path we are templating, and then update the
-  extension to match (e.g. =.wale= or =.stitch=). When creating
-  artefacts, if the template file does not exist, we create an empty
-  file. In this case, we need to inject all of the template names into
-  the list of artefacts so that we do not delete them.
-
-Whilst this is a much cleaner approach, we cannot implement it at
-present because we do not have access to name resolution in generation
-as things stand. Once we've cleaned up the archetypes model and the
-generation model, the hope is that coding will take over the archetype
-expansion (via a collaboration with the archetypes model). Then we
-could do name resolution inside of coding.
-
 *** Use of binding points in profiles                                 :story:
 
 At present we have the concept of a binding point in a feature. This
@@ -2495,28 +2535,6 @@ already exists in the model itself, then we should either rely on the
 model meta-type or move those properties to the new meta-type. Seems a
 tad excessive having common ODB options just for a "post-processed"
 set of properties.
-
-*** Do logic-less templates belong in =generation.cpp=?               :story:
-
-For purely expediency purposes, we placed the logic-less templates
-formatter in the =generation.cpp= model. However, this means you
-cannot create logic-less templates in C# models. For now its fine as
-Dogen is the only user of these meta-model elements, but in the future
-when we create a JSON schema for model data, we will want to use these
-from any technical space. We need to either implement formatters on
-every technical space or find a way to create TS-neutral formatters.
-
-That is to say, we create a formatter for logic-less templates in the
-C++ generation model. This means that you can only use these in the
-C++ technical space. The easy solution is just to copy across the
-formatters into the C# technical space. However, this is not scalable
-as we add more backends. However, this may be the correct approach
-given our conceptual model - as we found out with forward
-declarations.
-
-In light of the change related to primary and secondary technical
-spaces, we should really create a technical space for stitch and move
-the formatters there.
 
 *** Create a README meta-type                                         :story:
 
@@ -3142,121 +3160,6 @@ indent could cope with our invalid JSON (not deleting duplicate keys).
 We could even expose it as an activity/command so that we could indent
 external files without going through conversion; this would be useful
 for library models.
-
-*** Split wale out of stitch templates                                :story:
-
-Stitch requires extra work in order to split out decoration. This is
-because in the past we relied on profiles to populate decoration. It
-worked because we were reading the same simple JSON files. Now we are
-relying on model references and meta-model entities, so this is no
-longer viable: they do not exist at the template level.
-
-One possible solution is to have a "reference" command line argument
-that loads up the user supplied model. We then need some kind of chain
-that applies the decoration transforms. The only solution is to create
-a temporary model that has some kind of coding element on it; this
-model is then supplied to the pipeline:
-
-- injection: needed to read the MASD model with decoration.
-- coding: needed to assemble the temp model with the MASD model and
-  to obtain the decoration.
-- generation: needed to populate the decoration properties.
-
-At this point we can then supply the annotations to the decoration
-formatter. This means that stitch now has a hard dependency on the
-rest of the dogen pipeline. Ideally we should try to split out
-weaving from stitching so that "weaving" becomes this complex
-pipeline but stitching just means the previous processing we did on
-templates. This could even mean we could remove annotations from
-stitching altogether and then have model to text transforms that
-join the stitch template output with the decoration.
-
-If we take this idea to the limit, what we are saying is that stitch
-templates can have KVPs associated with them, with multiple sources:
-
-- wale (as at present)
-- decorations. We need at least two: preamble and postamble.
-
-Note that operations (hand-crafted code to merge into the generated
-code) cannot be handled by the KVPs. This is because we are generating
-the stitch template itself, not the user facing code; we are
-generating the generator, so we are one level removed from the code
-generator. These can be handled as before, via a post-processing step
-that replaces guids with contents from the file system.
-
-To start off with we can just deprecate weaving for now. It is only
-used to quickly weave the model without code generation, but the
-generator is so quick that it does not make a lot of difference.
-
-It is important to note that we still have a two-level set of
-annotations:
-
-- the element annotations which contain the decoration. These are
-  processed prior to calling the stitch template instantiator to
-  generate the preamble and postamble KVPs (as well as the wale KVPs).
-- the annotation of the template itself. This contains the stitch
-  fields such as includes, etc. These will not contain any fields
-  related to decoration (e.g. it is no longer possible to decorate
-  from within stitch itself).
-
-This means that we need to remove all code from stitch that handles
-annotation expansion and just leave the annotation factory.
-
-We also need to look into how the wale keys were implemented - likely
-we've hard-coded it so that its always the same name:
-
-: <#$ stitch.wale.template_instantiation_result #>
-
-With a bit of luck its just a variable. If so we can then add at the
-top and bottom of each template:
-
-: <#$ stitch.decoration.preamble #>
-: ...
-: <#$ stitch.decoration.postamble #>
-
-It is *very important* to understand that this is the decoration of
-the output of the stitch template *itself*, not of the code it will
-generate. The decoration of the generated code will be handled as at
-present, by manually calling the decoration formatters.
-
-Notes:
-
-- we also need to split out the includes from the template. At present
-  it makes sense to supply it as a stitch KVP but in reality these are
-  parameters that should be inferred from the model. What we need is a
-  way to supply include dependencies in the meta-data. Then use that
-  information to build the include dependencies within
-  generation. Then use the list of includes to build the
-  boilerplate. The stitch template is just the core of the file.
-
-*** Remove annotations from stitch templates                          :story:
-
-In the new world, stitch templates don't have all of the required
-information to build the boilerplate:
-
-- they cannot expand wale templates because the KVPs will be in the
-  element itself, not the template. Strictly speaking this is not an
-  problem we have right now though.
-- more importantly, the include dependencies cannot be computed by the
-  template. This is because the dependencies are really a function of
-  the model type we are expressing on the template. Instead, we did a
-  quick hack and supplied the includes as KVPs. So they are kind of
-  parameters but kind of not really parameters because they are
-  hard-coded to the template. It solved the immediate problem of
-  having them formatted and placed in the right part of the file, but
-  now we can see this is not the right approach.
-
-In reality, we should not have any annotations at all in
-templates. The boilerplate and includes should be supplied as KVPs and
-applied as variables. They should be composed externally with access
-to data from the model element. Thus we then need a way to associate
-includes with model elements. This is captured as a separate story.
-
-*** Stitch extension is hard-coded                                    :story:
-
-At present we have hard-coded the file extension in the output of
-stitch templates as =cpp=. We should really supply it as part of the
-configuration. Ideally even the entire filename.
 
 *** Update copyright notices                                          :story:
 
@@ -14414,6 +14317,15 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider making =stitch_template_builder= a text template builder :story:
+
+At present we are manually crafting a stream in
+=stitch_template_builder= that resembles a stitch template. Perhaps we
+should be building the domain objects of a stitch template instead,
+and then have a formatter than renders the template as a string. This
+would be the "opposite" of the current formatter which instantiates
+the template.
+
 *** Consider implementing transforms as dataflow graphs               :story:
 
 Transforms are very similar data structures to the elements of a data
@@ -14433,7 +14345,7 @@ Links:
 - [[https://github.com/RaftLib/RaftLib][RaftLib GitHub]]: The RaftLib C++ library, streaming/dataflow
   concurrency via C++ iostream-like operators. See also [[http://raftlib.io][home page]].
 
-*** Consider adding suppot for SeqAn
+*** Consider adding suppot for SeqAn                                  :story:
 
 This is a very interesting library, though its not clear how we'd use
 it.
