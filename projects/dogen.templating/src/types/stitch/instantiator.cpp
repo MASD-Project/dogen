@@ -25,7 +25,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
+#include "dogen.templating/types/wale/instantiator.hpp"
 #include "dogen.templating/types/helpers/kvp_validator.hpp"
 #include "dogen.templating/types/stitch/instantiation_error.hpp"
 #include "dogen.templating/types/stitch/parser.hpp"
@@ -122,11 +122,11 @@ void instantiator::handle_wale_template(text_template& tt) const {
                              << props.wale_kvps();
 
     /*
-     * Execute the wale workflow and store the result as a stitch
+     * Execute the wale instantiation and store the result as a stitch
      * variable.
      */
-    wale::workflow wkf;
-    const auto wale_value(wkf.execute(p, props.wale_kvps()));
+    wale::instantiator inst;
+    const auto wale_value(inst.instantiate(p, props.wale_kvps()));
     const auto pair(std::make_pair(wale_key, wale_value));
     const auto inserted(tt.supplied_kvps().insert(pair).second);
     if (!inserted) {

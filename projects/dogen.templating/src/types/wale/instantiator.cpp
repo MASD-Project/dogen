@@ -26,18 +26,18 @@
 #include "dogen.templating/types/wale/key_extractor.hpp"
 #include "dogen.templating/types/wale/formatter.hpp"
 #include "dogen.templating/types/helpers/kvp_validator.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
+#include "dogen.templating/types/wale/instantiator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("templating.wale.workflow"));
+auto lg(logger_factory("templating.wale.instantiator"));
 
 }
 
 namespace dogen::templating::wale {
 
-properties workflow::create_properties(
+properties instantiator::create_properties(
     const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     properties r;
@@ -48,7 +48,7 @@ properties workflow::create_properties(
     return r;
 }
 
-std::string workflow::
+std::string instantiator::
 read_content(const boost::filesystem::path& template_path) const {
     BOOST_LOG_SEV(lg, debug) << "Reading content. Path: " << template_path;
     using utility::filesystem::read_file_content;
@@ -56,24 +56,25 @@ read_content(const boost::filesystem::path& template_path) const {
 }
 
 std::unordered_set<std::string>
-workflow::get_expected_keys(const std::string& s) const {
+instantiator::get_expected_keys(const std::string& s) const {
     key_extractor ke;
     const auto r(ke.extract(s));
     return r;
 }
 
-std::string workflow::format(const text_template& tt) const {
+std::string instantiator::format(const text_template& tt) const {
     formatter fmt;
     return fmt.format(tt);
 }
 
-void workflow::validate(const text_template& tt) const {
+void instantiator::validate(const text_template& tt) const {
     helpers::kvp_validator v;
     const auto& p(tt.properties());
     v.validate(p.expected_keys(), p.supplied_kvps());
 }
 
-text_template workflow::create_text_template(const properties& props) const {
+text_template
+instantiator::create_text_template(const properties& props) const {
     text_template r;
     r.properties(props);
     r.properties().template_path(props.template_path());
@@ -82,16 +83,17 @@ text_template workflow::create_text_template(const properties& props) const {
     return r;
 }
 
-std::string workflow::execute(const boost::filesystem::path& template_path,
+std::string instantiator::instantiate(const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
-    BOOST_LOG_SEV(lg, debug) << "Executing workflow.";
+    BOOST_LOG_SEV(lg, debug) << "Executing instantiator.";
 
     const auto props(create_properties(template_path, kvps));
     const auto tt(create_text_template(props));
     validate(tt);
     const auto r(format(tt));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished executing workflow. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished executing instantiator. Result: "
+                             << r;
     return r;
 }
 

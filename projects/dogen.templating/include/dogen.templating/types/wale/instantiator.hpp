@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
+#ifndef DOGEN_TEMPLATING_TYPES_WALE_INSTANTIATOR_HPP
+#define DOGEN_TEMPLATING_TYPES_WALE_INSTANTIATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 
 namespace dogen::templating::wale {
 
-class workflow final {
+class instantiator final {
 private:
     properties create_properties(const boost::filesystem::path& template_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
@@ -52,7 +52,7 @@ private:
     text_template create_text_template(const properties& props) const;
 
 public:
-    std::string execute(const boost::filesystem::path& template_path,
+    std::string instantiate(const boost::filesystem::path& template_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 };
 

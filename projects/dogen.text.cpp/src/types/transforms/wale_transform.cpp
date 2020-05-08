@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
+#include "dogen.templating/types/wale/instantiator.hpp"
 #include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -75,8 +75,8 @@ void wale_transform::apply(const formattables::locator& l,
                                      << p.generic_string();
 
             uf.insert_end_line();
-            templating::wale::workflow w;
-            ast.stream() << w.execute(p, kvps);
+            templating::wale::instantiator inst;
+            ast.stream() << inst.instantiate(p, kvps);
             uf.insert_end_line();
         }
         uf.insert_end_line();

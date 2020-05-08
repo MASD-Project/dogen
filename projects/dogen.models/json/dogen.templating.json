@@ -54,7 +54,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "wale::workflow",
+      "name": "wale::instantiator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
