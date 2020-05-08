@@ -56,17 +56,19 @@ apply(const context& ctx, entities::model& m) {
             continue;
 
         /*
-         * Resolve logic-less template references to its content.
+         * Resolve logic-less template references to its content. We
+         * expect to find the template since resolution already has
+         * taken place, but you never know.
          */
         const auto tid(arch.wale_template()->qualified().dot());
         const auto& llt(m.templating_elements().logic_less_templates());
         const auto k(llt.find(tid));
-        if (k != llt.end())
-            arch.wale_template_content(k->second->content());
-
-        BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_logic_less_template + tid));
+        if (k == llt.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_logic_less_template + tid));
+        }
+        arch.wale_template_content(k->second->content());
     }
 
     stp.end_transform(m);
