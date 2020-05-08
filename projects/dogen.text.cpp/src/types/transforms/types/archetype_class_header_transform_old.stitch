@@ -46,7 +46,7 @@ std::list<std::string> archetype_class_header_transform_old::inclusion_dependenc
     static std::list<std::string> r;
 
     auto builder(f.make());
-    builder.add("\"dogen.text.cpp/types/transforms/model_to_text_transform.hpp\"");
+    builder.add_as_user("dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
 
     return builder.build();
 }
