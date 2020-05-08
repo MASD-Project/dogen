@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
