@@ -5444,14 +5444,6 @@ We should consider having these in the dogen API and removing them
 from each project. However, we need to consider if end users should
 necessary know about these exceptions.
 
-*** Consider renaming logic-less templates                            :story:
-
-Originally we though this was a good name because it was used by some
-domain experts, but it seems it generates more confusion than
-anything. It may just be a term used by mustache and other niche
-template groups. We should probably rename it to text templates given
-most domain experts know what that means,
-
 *** Add dependency checks to transforms                               :story:
 
 Check the backlog as we may already have this story. At present we do
