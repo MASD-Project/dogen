@@ -2128,7 +2128,13 @@
         "masd.physical.part_id": "masd.cpp.public_headers",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": ""
+        }
+      ]
     },
     {
       "name": "transforms::public_headers",
@@ -2202,18 +2208,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::types::archetype_stitch_class_implementation_transform_new",
-      "documentation": "A comment.\n",
-      "stereotypes": [
-        "masd::physical::archetype"
-      ],
-      "tagged_values": {
-        "masd.physical.part_id": "masd.cpp.public_headers",
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::types::archetype_class_implementation_transform_new",
       "documentation": "A comment.\n",
       "stereotypes": [
@@ -2223,7 +2217,18 @@
         "masd.physical.part_id": "masd.cpp.public_headers",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": ""
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     }
   ]
 }
