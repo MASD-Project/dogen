@@ -23,19 +23,23 @@
 namespace dogen::templating::wale {
 
 text_template::text_template(
-    const dogen::templating::wale::properties& properties,
+    const std::unordered_set<std::string>& expected_keys,
+    const std::unordered_map<std::string, std::string>& supplied_kvps,
     const std::string& content)
-    : properties_(properties),
+    : expected_keys_(expected_keys),
+      supplied_kvps_(supplied_kvps),
       content_(content) { }
 
 void text_template::swap(text_template& other) noexcept {
     using std::swap;
-    swap(properties_, other.properties_);
+    swap(expected_keys_, other.expected_keys_);
+    swap(supplied_kvps_, other.supplied_kvps_);
     swap(content_, other.content_);
 }
 
 bool text_template::operator==(const text_template& rhs) const {
-    return properties_ == rhs.properties_ &&
+    return expected_keys_ == rhs.expected_keys_ &&
+        supplied_kvps_ == rhs.supplied_kvps_ &&
         content_ == rhs.content_;
 }
 
@@ -45,20 +49,36 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const dogen::templating::wale::properties& text_template::properties() const {
-    return properties_;
+const std::unordered_set<std::string>& text_template::expected_keys() const {
+    return expected_keys_;
 }
 
-dogen::templating::wale::properties& text_template::properties() {
-    return properties_;
+std::unordered_set<std::string>& text_template::expected_keys() {
+    return expected_keys_;
 }
 
-void text_template::properties(const dogen::templating::wale::properties& v) {
-    properties_ = v;
+void text_template::expected_keys(const std::unordered_set<std::string>& v) {
+    expected_keys_ = v;
 }
 
-void text_template::properties(const dogen::templating::wale::properties&& v) {
-    properties_ = std::move(v);
+void text_template::expected_keys(const std::unordered_set<std::string>&& v) {
+    expected_keys_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::string>& text_template::supplied_kvps() const {
+    return supplied_kvps_;
+}
+
+std::unordered_map<std::string, std::string>& text_template::supplied_kvps() {
+    return supplied_kvps_;
+}
+
+void text_template::supplied_kvps(const std::unordered_map<std::string, std::string>& v) {
+    supplied_kvps_ = v;
+}
+
+void text_template::supplied_kvps(const std::unordered_map<std::string, std::string>&& v) {
+    supplied_kvps_ = std::move(v);
 }
 
 const std::string& text_template::content() const {

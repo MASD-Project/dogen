@@ -29,16 +29,15 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.templating/types/wale/properties.hpp"
 #include "dogen.templating/types/wale/text_template.hpp"
 
 namespace dogen::templating::wale {
 
+/**
+ * @brief Instantiates wale templates by rendering them.
+ */
 class instantiator final {
 private:
-    properties create_properties(const boost::filesystem::path& template_path,
-        const std::unordered_map<std::string, std::string>& kvps) const;
-
     std::string
     read_content(const boost::filesystem::path& template_path) const;
 
@@ -49,9 +48,10 @@ private:
 
     void validate(const text_template& tt) const;
 
-    text_template create_text_template(const properties& props) const;
-
 public:
+    std::string instantiate(const std::string& template_content,
+        const std::unordered_map<std::string, std::string>& kvps) const;
+
     std::string instantiate(const boost::filesystem::path& template_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 };

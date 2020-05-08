@@ -21,28 +21,16 @@
     },
     {
       "name": "wale::text_template",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "properties",
-          "type": "properties"
-        },
-        {
-          "name": "content",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "wale::properties",
+      "documentation": "Represents a wale text template.\n",
       "stereotypes": [
         "ConfigurableViaKvps"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "template_path",
-          "type": "boost::filesystem::path"
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Textual content of the wale template.\n"
         }
       ]
     },

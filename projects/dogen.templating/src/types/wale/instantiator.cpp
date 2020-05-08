@@ -22,7 +22,6 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.templating/io/wale/properties_io.hpp"
 #include "dogen.templating/types/wale/key_extractor.hpp"
 #include "dogen.templating/types/wale/formatter.hpp"
 #include "dogen.templating/types/helpers/kvp_validator.hpp"
@@ -36,17 +35,6 @@ auto lg(logger_factory("templating.wale.instantiator"));
 }
 
 namespace dogen::templating::wale {
-
-properties instantiator::create_properties(
-    const boost::filesystem::path& template_path,
-    const std::unordered_map<std::string, std::string>& kvps) const {
-    properties r;
-    r.template_path(template_path);
-    r.supplied_kvps(kvps);
-
-    BOOST_LOG_SEV(lg, debug) << "Properties: " << r;
-    return r;
-}
 
 std::string instantiator::
 read_content(const boost::filesystem::path& template_path) const {
@@ -69,31 +57,41 @@ std::string instantiator::format(const text_template& tt) const {
 
 void instantiator::validate(const text_template& tt) const {
     helpers::kvp_validator v;
-    const auto& p(tt.properties());
-    v.validate(p.expected_keys(), p.supplied_kvps());
+    v.validate(tt.expected_keys(), tt.supplied_kvps());
 }
 
-text_template
-instantiator::create_text_template(const properties& props) const {
-    text_template r;
-    r.properties(props);
-    r.properties().template_path(props.template_path());
-    r.content(read_content(r.properties().template_path()));
-    r.properties().expected_keys(get_expected_keys(r.content()));
-    return r;
-}
+/*
+std::string instantiator::instantiate(const std::string& template_content,
+    const std::unordered_map<std::string, std::string>& kvps) const {
 
-std::string instantiator::instantiate(const boost::filesystem::path& template_path,
+
+
+
+}
+*/
+std::string
+instantiator::instantiate(const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Executing instantiator.";
 
-    const auto props(create_properties(template_path, kvps));
-    const auto tt(create_text_template(props));
-    validate(tt);
-    const auto r(format(tt));
+    /*
+     * Create the template for the supplied path.
+     */
+    text_template tt;
+    tt.supplied_kvps(kvps);
+    tt.content(read_content(template_path));
+    tt.expected_keys(get_expected_keys(tt.content()));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished executing instantiator. Result: "
-                             << r;
+    /*
+     * Validate the template
+     */
+    validate(tt);
+
+    /*
+     * Obtain the output of instantiation.
+     */
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Finished instantiation. Result: " << r;
     return r;
 }
 

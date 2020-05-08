@@ -27,10 +27,14 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.templating/types/wale/properties.hpp"
+#include <unordered_map>
+#include <unordered_set>
 
 namespace dogen::templating::wale {
 
+/**
+ * @brief Represents a wale text template.
+ */
 class text_template final {
 public:
     text_template() = default;
@@ -40,19 +44,40 @@ public:
 
 public:
     text_template(
-        const dogen::templating::wale::properties& properties,
+        const std::unordered_set<std::string>& expected_keys,
+        const std::unordered_map<std::string, std::string>& supplied_kvps,
         const std::string& content);
 
 public:
-    const dogen::templating::wale::properties& properties() const;
-    dogen::templating::wale::properties& properties();
-    void properties(const dogen::templating::wale::properties& v);
-    void properties(const dogen::templating::wale::properties&& v);
+    /**
+     * @brief Set of keys that are expected to be supplied.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& expected_keys() const;
+    std::unordered_set<std::string>& expected_keys();
+    void expected_keys(const std::unordered_set<std::string>& v);
+    void expected_keys(const std::unordered_set<std::string>&& v);
+    /**@}*/
 
+    /**
+     * @brief Key value pairs that were supplied for instantiation.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& supplied_kvps() const;
+    std::unordered_map<std::string, std::string>& supplied_kvps();
+    void supplied_kvps(const std::unordered_map<std::string, std::string>& v);
+    void supplied_kvps(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Textual content of the wale template.
+     */
+    /**@{*/
     const std::string& content() const;
     std::string& content();
     void content(const std::string& v);
     void content(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const text_template& rhs) const;
@@ -65,7 +90,8 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    dogen::templating::wale::properties properties_;
+    std::unordered_set<std::string> expected_keys_;
+    std::unordered_map<std::string, std::string> supplied_kvps_;
     std::string content_;
 };
 

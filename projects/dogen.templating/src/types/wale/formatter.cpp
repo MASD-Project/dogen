@@ -36,7 +36,7 @@ std::string formatter::wrap_key(const std::string& key) const {
 
 std::string formatter::format(const text_template& tt) const {
     std::string r(tt.content());
-    for (const auto& pair : tt.properties().supplied_kvps()) {
+    for (const auto& pair : tt.supplied_kvps()) {
         const auto key(wrap_key(pair.first));
         const auto& value(pair.second);
 

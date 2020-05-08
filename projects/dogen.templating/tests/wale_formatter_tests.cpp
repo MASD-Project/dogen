@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(trivial_template_formats_correctly) {
     SETUP_TEST_LOG_SOURCE("trivial_template_formats_correctly");
 
     dogen::templating::wale::text_template tt;
-    tt.properties().supplied_kvps(std::unordered_map<std::string, std::string> {
+    tt.supplied_kvps(std::unordered_map<std::string, std::string> {
             { "one", "um" },
             { "two", "dois" },
             { "three", "três" },
