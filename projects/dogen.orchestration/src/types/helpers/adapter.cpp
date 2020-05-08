@@ -66,6 +66,8 @@ const std::string path_contribution_as_directories("as_directories");
 const std::string path_contribution_as_path_components("as_path_components");
 
 const std::string content_attr_name("content");
+const std::string stitch_template_content_attr_name("stitch_template_content");
+const std::string wale_template_reference_attr_name("wale_template_reference");
 
 const std::string empty_string("String is empty but expected value.");
 const std::string non_empty_string(
@@ -657,6 +659,20 @@ adapter::to_logic_less_template(const logical::entities::location& l,
     using logical::entities::templating::logic_less_template;
     auto r(boost::make_shared<logic_less_template>());
     populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(r->name().qualified().dot(), n);
+
+        if (n == content_attr_name)
+            r->content(attr.documentation());
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
     return r;
 }
 
@@ -783,6 +799,23 @@ adapter::to_physical_archetype(const logical::entities::location& l,
     using logical::entities::physical::archetype;
     auto r(boost::make_shared<archetype>());
     populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(r->name().qualified().dot(), n);
+
+        if (n == stitch_template_content_attr_name)
+            r->stitch_template_content(attr.documentation());
+        else if (n == wale_template_reference_attr_name) {
+            // FIXME: record unparsed name.
+            // const auto v(attr.value());
+        } else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
     return r;
 }
 
