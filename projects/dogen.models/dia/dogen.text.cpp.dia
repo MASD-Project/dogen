@@ -35884,7 +35884,66 @@ public:
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_old.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#+
+
+physical::entities::archetype archetype_class_implementation_transform_old::static_archetype() const {
+    static physical::entities::archetype r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+            traits::facet_sn(), traits::archetype_class_implementation_archetype_sn()));
+        using lmnf = logical::helpers::meta_name_factory;
+        r.logical_meta_element_id(lmnf::make_physical_archetype_name().qualified().dot());
+        return r;
+    }());
+    return r;
+}
+
+physical::entities::archetype archetype_class_implementation_transform_old::archetype() const {
+    return static_archetype();
+}
+
+inclusion_support_types archetype_class_implementation_transform_old::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path archetype_class_implementation_transform_old::inclusion_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+}
+
+boost::filesystem::path archetype_class_implementation_transform_old::full_path(
+    const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+}
+
+std::list&lt;std::string&gt; archetype_class_implementation_transform_old::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void archetype_class_implementation_transform_old::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+
+    // no content by design.
+    a.overwrite(true);
+    ast.update_artefact();
+}
+
+#&gt;
+#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
