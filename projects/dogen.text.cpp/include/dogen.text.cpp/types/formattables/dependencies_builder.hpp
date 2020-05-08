@@ -73,8 +73,18 @@ public:
     /**@{*/
     void add(const std::string& directive);
     void add(const std::list<std::string>& directives);
-
     /**@{*/
+
+    /**
+     * @brief Adds include as a system include, i.e. with angle
+     * brackets.
+     */
+    void add_as_system(const std::string& directive);
+
+    /**
+     * @brief Adds include as a user include, i.e. with double quotes.
+     */
+    void add_as_user(const std::string& directive);
 
     /**
      * @brief Adds the inclusion directive for the supplied archetype

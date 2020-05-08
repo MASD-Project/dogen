@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
@@ -41,6 +42,11 @@ const std::string ptree_type("ptree");
 const std::string path_type("path");
 const std::string date_type("date");
 const std::string ptime_type("ptime");
+
+const std::string open_system("<");
+const std::string close_system(">");
+const std::string open_user("\"");
+const std::string close_user("\"");
 
 const std::string empty_directive("Cannot add empty include directive.");
 const std::string name_not_found("Cannot find name: ");
@@ -90,6 +96,18 @@ add(const std::string& inclusion_directive) {
         BOOST_THROW_EXCEPTION(building_error(empty_directive));
     }
     dependencies_.push_back(inclusion_directive);
+}
+
+void dependencies_builder::add_as_system(const std::string& directive) {
+    std::ostringstream os;
+    os << open_system << directive << close_system;
+    add(os.str());
+}
+
+void dependencies_builder::add_as_user(const std::string& directive) {
+    std::ostringstream os;
+    os << open_user << directive << close_user;
+    add(os.str());
 }
 
 void dependencies_builder::
