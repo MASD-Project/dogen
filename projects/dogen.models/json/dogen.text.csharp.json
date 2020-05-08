@@ -803,7 +803,14 @@
       "tagged_values": {
         "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "",
+          "documentation": "class {{class.simple_name}} final : public model_to_text_transform {\npublic:\n    physical::entities::archetype static_archetype() const;\n    physical::entities::archetype archetype() const override;\n\npublic:\n    std::list<std::string> inclusion_dependencies(\n        const logical::entities::element& e) const override;\n\n    boost::filesystem::path full_path(\n        const formattables::locator& l, const logical::entities::name& n) const override;\n\npublic:\n    void apply(const context& ctx, const logical::entities::element& e,\n        physical::entities::artefact& a) const override;\n};\n"
+        }
+      ]
     },
     {
       "name": "csharp_transform_implementation",
@@ -813,7 +820,14 @@
       "tagged_values": {
         "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "",
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(csharp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path(n, archetype().meta_name().qualified());\n}\n\nstd::list<std::string> {{class.simple_name}}::\ninclusion_dependencies(const logical::entities::element& /*e*/) const {\n    std::list<std::string> r;\n    return r;\n}\n"
+        }
+      ]
     },
     {
       "name": "csharp_helper_transform_header",
@@ -823,7 +837,14 @@
       "tagged_values": {
         "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "",
+          "documentation": "class {{class.simple_name}} : public helper_transform {\npublic:\n    std::string id() const override;\n    std::string family() const override;\n    std::list<std::string> owning_formatters() const override;\n    std::list<std::string> owning_facets() const override;\n    std::string helper_name() const override;\n    void apply(assistant& ast, const formattables::helper_properties& hc) const override;\n};\n"
+        }
+      ]
     },
     {
       "name": "csharp_helper_transform_implementation",
@@ -833,7 +854,14 @@
       "tagged_values": {
         "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "",
+          "documentation": "std::string {{class.simple_name}}::id() const {\n    static auto r(std::string(\"<\") + traits::facet_qn() + std::string(\">\") +\n        std::string(\"<\") + helper_name() + std::string(\">\"));\n    return r;\n}\n\nstd::string {{class.simple_name}}::family() const {\n    static std::string r(\"{{helper.family}}\");\n    return r;\n}\n\nstd::list<std::string>\n{{class.simple_name}}::owning_formatters() const {\n    static auto r(std::list<std::string> {\n        traits::class_archetype_qn(),\n        traits::primitive_archetype_qn()\n    });\n    return r;\n}\n\nstd::list<std::string>\n{{class.simple_name}}::owning_facets() const {\n    static auto r(std::list<std::string> {\n        traits::facet_qn()\n    });\n    return r;\n}\n\nstd::string {{class.simple_name}}::helper_name() const {\n    static std::string r(\"{{class.simple_name}}\");\n    return r;\n}\n"
+        }
+      ]
     },
     {
       "name": "registrar",
