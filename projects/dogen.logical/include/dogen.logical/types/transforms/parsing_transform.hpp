@@ -61,6 +61,33 @@ private:
     static void parse_underlying_element(const entities::technical_space ts,
         entities::structural::primitive& p);
 
+private:
+    /**
+     * @brief Parses all objects.
+     */
+    static void parse_objects(entities::model& m);
+
+    /**
+     * @brief Parses all object templates.
+     */
+    static void parse_object_templates(entities::model& m);
+
+    /**
+     * @brief Parses all primitives
+     */
+    static void parse_primitives(entities::model& m);
+
+    /**
+     * @brief Parses all feature template bundles.
+     */
+    static void parse_feature_template_bundles(entities::model& m);
+
+    /**
+     * @brief Parses all feature bundles.
+     */
+    static void parse_feature_bundles(entities::model& m);
+
+
 public:
     /**
      * Execute the transform against the model.

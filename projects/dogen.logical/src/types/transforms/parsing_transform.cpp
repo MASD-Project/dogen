@@ -89,10 +89,7 @@ parse_underlying_element(const entities::technical_space ts,
     p.value_attribute().parsed_type(nt);
 }
 
-void parsing_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "parsing transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
-
+void parsing_transform::parse_objects(entities::model& m) {
     const auto ts(m.input_technical_space());
     for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
@@ -105,19 +102,25 @@ void parsing_transform::apply(const context& ctx, entities::model& m) {
             throw;
         }
     }
+}
 
+void parsing_transform::parse_object_templates(entities::model& m) {
+    const auto ts(m.input_technical_space());
     for (auto& pair : m.structural_elements().object_templates()) {
-        auto& c(*pair.second);
-        const auto id(c.name().qualified().dot());
+        auto& ot(*pair.second);
+        const auto id(ot.name().qualified().dot());
 
         try {
-            parse_attributes(ts, c.local_attributes());
+            parse_attributes(ts, ot.local_attributes());
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
         }
     }
+}
 
+void parsing_transform::parse_primitives(entities::model& m) {
+    const auto ts(m.input_technical_space());
     for (auto& pair : m.structural_elements().primitives()) {
         auto& p(*pair.second);
         const auto id(p.name().qualified().dot());
@@ -129,7 +132,10 @@ void parsing_transform::apply(const context& ctx, entities::model& m) {
             throw;
         }
     }
+}
 
+void parsing_transform::parse_feature_template_bundles(entities::model& m) {
+    const auto ts(m.input_technical_space());
     for (auto& pair : m.variability_elements().feature_template_bundles()) {
         auto& fb(*pair.second);
         const auto id(fb.name().qualified().dot());
@@ -153,7 +159,10 @@ void parsing_transform::apply(const context& ctx, entities::model& m) {
             throw;
         }
     }
+}
 
+void parsing_transform::parse_feature_bundles(entities::model& m) {
+    const auto ts(m.input_technical_space());
     for (auto& pair : m.variability_elements().feature_bundles()) {
         auto& fb(*pair.second);
         const auto id(fb.name().qualified().dot());
@@ -177,6 +186,17 @@ void parsing_transform::apply(const context& ctx, entities::model& m) {
             throw;
         }
     }
+}
+
+void parsing_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "parsing transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    parse_objects(m);
+    parse_object_templates(m);
+    parse_primitives(m);
+    parse_feature_template_bundles(m);
+    parse_feature_bundles(m);
 
     stp.end_transform(m);
 }
