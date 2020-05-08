@@ -807,8 +807,9 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         if (n == stitch_template_content_attr_name)
             r->stitch_template_content(attr.documentation());
         else if (n == wale_template_reference_attr_name) {
-            // FIXME: record unparsed name.
-            // const auto v(attr.value());
+            const auto v(attr.value());
+            ensure_not_empty(r->name().qualified().dot(), v);
+            r->wale_template_unparsed_name(v);
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
