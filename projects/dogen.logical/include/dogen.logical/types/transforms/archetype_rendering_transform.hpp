@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Renders all templates in archetypes.
+ */
 class archetype_rendering_transform final {
 public:
-    archetype_rendering_transform() = default;
-    archetype_rendering_transform(const archetype_rendering_transform&) = default;
-    archetype_rendering_transform(archetype_rendering_transform&&) = default;
-    ~archetype_rendering_transform() = default;
-    archetype_rendering_transform& operator=(const archetype_rendering_transform&) = default;
-
-public:
-    bool operator==(const archetype_rendering_transform& rhs) const;
-    bool operator!=(const archetype_rendering_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Execute the transform against the model.
+     */
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

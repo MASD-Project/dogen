@@ -18,12 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
+#include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
+
+namespace {
+
+const std::string transform_id("logical.transforms.parsing_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::logical::transforms {
 
-bool archetype_rendering_transform::operator==(const archetype_rendering_transform& /*rhs*/) const {
-    return true;
+void archetype_rendering_transform::
+apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "parsing transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }
