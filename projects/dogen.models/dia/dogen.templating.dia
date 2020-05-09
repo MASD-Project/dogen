@@ -5302,7 +5302,7 @@
       <dia:attribute name="comment">
         <dia:string>#Stitch templating features.
 
-#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.default_binding_point=any
 #DOGEN masd.variability.key_prefix=masd.stitch#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">

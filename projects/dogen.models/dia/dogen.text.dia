@@ -14934,7 +14934,7 @@ code: identation and dividers.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Wale related features.
 
-#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.default_binding_point=any
 #DOGEN masd.variability.generate_registration=false
 #DOGEN masd.variability.key_prefix=masd.stitch#</dia:string>
       </dia:attribute>

@@ -38,7 +38,7 @@ make_masd_stitch_stream_variable_name() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "stream_" }));
     return r;
@@ -55,7 +55,7 @@ make_masd_stitch_relative_output_directory() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -70,7 +70,7 @@ make_masd_stitch_inclusion_dependency() {
 )");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -85,7 +85,7 @@ make_masd_stitch_containing_namespaces() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -100,7 +100,7 @@ make_masd_stitch_wale_text_template() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -116,7 +116,7 @@ make_masd_stitch_wale_kvp() {
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);
     r.is_partially_matchable(true);
-    r.binding_point(binding_point::global);
+    r.binding_point(binding_point::any);
     return r;
 }
 

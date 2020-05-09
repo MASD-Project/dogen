@@ -863,7 +863,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global",
+        "masd.variability.default_binding_point": "any",
         "masd.variability.generate_registration": "false",
         "masd.variability.key_prefix": "masd.stitch"
       },
