@@ -28,10 +28,9 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen::templating::stitch {
