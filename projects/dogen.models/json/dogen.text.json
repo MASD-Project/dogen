@@ -816,32 +816,6 @@
           "documentation": "Models that belong to this set.\n"
         }
       ]
-    },
-    {
-      "name": "helpers::text_to_text_transform_data",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string",
-          "documentation": "Name of the T2T transform.\n"
-        },
-        {
-          "name": "archetypes",
-          "type": "std::list<physical::entities::archetype>",
-          "documentation": "All of the archetypes that requested this T2T transform.\n"
-        },
-        {
-          "name": "logical_meta_model_ids",
-          "type": "std::unordered_set<std::string>",
-          "documentation": "All of the logical model IDs for this T2T transform.\n"
-        },
-        {
-          "name": "target_logical_elements",
-          "type": "std::list<entities::element_artefacts>",
-          "documentation": "All of the entities that the T2T transform needs to operate against.\n"
-        }
-      ]
     }
   ]
 }
