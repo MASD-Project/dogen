@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-09 Sat 09:23]
+#+CAPTION: Clock summary at [2020-05-09 Sat 13:39]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *14:52* |       |      | 100.0 |
+| *Total time*                                          | *17:45* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 14:52   |       |      | 100.0 |
-| Active                                                |         | 14:52 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  40.0 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   5.3 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   6.7 |
-| Check name of model for variability transform         |         |       | 0:19 |   2.1 |
-| Analysis on templating and logical model              |         |       | 1:09 |   7.7 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   3.0 |
-| Remove stitch template builder                        |         |       | 0:09 |   1.0 |
-| Add template related attributes to physical elements  |         |       | 1:38 |  11.0 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |  11.1 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   7.7 |
-| Split wale out of stitch templates                    |         |       | 0:38 |   4.3 |
+| Stories                                               | 17:45   |       |      | 100.0 |
+| Active                                                |         | 17:45 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  33.5 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   4.4 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   5.6 |
+| Check name of model for variability transform         |         |       | 0:19 |   1.8 |
+| Analysis on templating and logical model              |         |       | 1:09 |   6.5 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   2.5 |
+| Remove stitch template builder                        |         |       | 0:09 |   0.8 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   9.2 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   9.3 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   6.5 |
+| Split wale out of stitch templates                    |         |       | 3:31 |  19.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -817,6 +817,7 @@ string.
 
 *** STARTED Split wale out of stitch templates                        :story:
     :LOGBOOK:
+    CLOCK: [2020-05-09 Sat 10:46]--[2020-05-09 Sat 13:39] =>  2:53
     CLOCK: [2020-05-09 Sat 08:24]--[2020-05-09 Sat 09:02] =>  0:38
     :END:
 
@@ -863,6 +864,58 @@ Notes:
   With this in place, we can start to move all formatters to the new
   world. Then we can delete any references to wale in stitch, as well
   as any file loading.
+- existing "old" templates do not use wale. This was ok up to now
+  because we were just experimenting; however, we now need for these
+  templates to be as representative of normal templates as
+  possible. For this they must use wale as well.
+- "new" templates are copy and paste of "old" templates; they must have
+  the "old" replaced with new or else when we hook in the new Text to
+  Text transform they will generate duplicate/invalid code.
+- actually we made a tiny, teeny little modeling mistake by confusing
+  a physical implementation of stitch rendering with a logical
+  implementation. We kind of did half of both. In a physical
+  implementation, which is roughly what we have at present - but
+  manually rather than data-driven - there is an artefact for the
+  stitch template and an artefact for the output. We have already gone
+  past the logical model and we are now dealing with files. We load
+  the files (these can include the wale template, but we can ignore
+  this as it does not make a lot of difference to the main point) and
+  then we process them. Finally we produce an output. We started by
+  trying to convert this hard-coded approach into data; this meant we
+  started trying to teach artefacts about their dependencies in terms
+  of generation and so forth, and created a notion of a text to text
+  transform to take these artefacts and render them into a new
+  one. However - and this is where things got confusing - we then
+  figured out we could move the contents of the templates into logical
+  space. By doing this we no longer needed to read files and we could
+  map things as required during the logical transforms. _However_
+  since there are no files for templates, there are of course no
+  artefacts or archetypes (these are physical model concerns after
+  all) which means that the T2T chain now can't find anything inside
+  the physical containers. We are straddled between the logical and
+  the physical model. As it turns out, this is not entirely a
+  problem. Instead of focusing on the implementation technology
+  (e.g. stitch and wale) what we should focus instead is on the
+  purpose - that is, to create archetypes. Turns out these are very
+  special logical model entities, and we only have one of these. If we
+  can hard-code this one use case, we solve the core problem (a
+  generic way of creating generators). We don't allow any kind of
+  weird and wonderful generation of stitch templates but we do allow
+  the one we are really interested in. What is also very interesting
+  is that the T2T work is not invalid - it still seems perfectly
+  usable for cartridges because there the input-output relationship is
+  clear and the archetypes will exist. Its just not a good fit for
+  archetypes because of its peculiarities. We can resolve all of our
+  problems quite simply:
+
+  - add a "rendered template" field to archetypes.
+  - add a transform in the logical model which uses the templating
+    subsystem to render wale and stitch templates (render archetype
+    templates?)
+  - change the new archetype template to output the rendered template
+    into the artefact.
+
+  This way all of the hard work is done in the logical model.
 
 *Previous understanding*
 
@@ -949,6 +1002,14 @@ Notes:
   information to build the include dependencies within
   generation. Then use the list of includes to build the
   boilerplate. The stitch template is just the core of the file.
+
+*** Orchestration should have an initialiser                          :story:
+
+At present we are executing all initialisers from within orchestration
+tests and from within CLI. In reality, since orchestration is joining
+all the dots, it should have a top-level initialiser that sets
+everything up. It should then be called by the CLI initialiser and the
+tests initialiser, which has additional stuff to initialise.
 
 *** Factor out duplication in stitch and wale templates               :story:
 
