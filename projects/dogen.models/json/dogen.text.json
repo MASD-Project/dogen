@@ -803,27 +803,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::text_to_text_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::text_to_text_transform_registrar",
-      "stereotypes": [
-        "dogen::handcrafted::typeable",
-        "dogen::forward_declarable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "transforms_by_id_",
-          "type": "std::unordered_map<std::string, std::shared_ptr<text_to_text_transform>>"
-        }
-      ]
-    },
-    {
       "name": "entities::model_set",
       "documentation": "Represents a set of related models.\n",
       "stereotypes": [
@@ -837,38 +816,6 @@
           "documentation": "Models that belong to this set.\n"
         }
       ]
-    },
-    {
-      "name": "transforms::text_to_text_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only",
-        "dogen::forward_declarable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::stitch_transform",
-      "parents": [
-        "transforms::text_to_text_transform"
-      ],
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::text_to_text_transform_data",
