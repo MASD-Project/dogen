@@ -25,24 +25,50 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/decoration/licence.hpp"
+#include "dogen.logical/types/entities/decoration/generation_marker.hpp"
+#include "dogen.logical/types/entities/decoration/modeline_group.hpp"
+#include "dogen.logical/types/helpers/decoration_repository.hpp"
 
 namespace dogen::logical::helpers {
 
+/**
+ * @brief Builds the repository with all of the decoration
+ * information.
+ */
 class decoration_repository_factory final {
-public:
-    decoration_repository_factory() = default;
-    decoration_repository_factory(const decoration_repository_factory&) = default;
-    decoration_repository_factory(decoration_repository_factory&&) = default;
-    ~decoration_repository_factory() = default;
-    decoration_repository_factory& operator=(const decoration_repository_factory&) = default;
+private:
+    /**
+     * @brief Processes a licence.
+     */
+    void handle_licence(
+        const boost::shared_ptr<entities::decoration::licence> l,
+        decoration_repository& drp) const;
+
+    /**
+     * @brief Processes a generation marker.
+     */
+    void handle_generation_marker(
+        const boost::shared_ptr<entities::decoration::generation_marker> gm,
+        decoration_repository& drp) const;
+
+    /**
+     * @brief Organises all modelines by modeline group and by
+     * technical space.
+     */
+    void handle_modeline_group(
+        const boost::shared_ptr<entities::decoration::modeline_group> mg,
+        decoration_repository& drp) const;
 
 public:
-    bool operator==(const decoration_repository_factory& rhs) const;
-    bool operator!=(const decoration_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Applies the transform to all decoration entities in the
+     * model.
+     */
+    decoration_repository make(const entities::model& m) const;
 };
 
 }
