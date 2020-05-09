@@ -60,15 +60,31 @@ void instantiator::validate(const text_template& tt) const {
     v.validate(tt.expected_keys(), tt.supplied_kvps());
 }
 
-/*
 std::string instantiator::instantiate(const std::string& template_content,
     const std::unordered_map<std::string, std::string>& kvps) const {
+    BOOST_LOG_SEV(lg, debug) << "Executing instantiator.";
 
+    /*
+     * Create the template for the supplied path.
+     */
+    text_template tt;
+    tt.supplied_kvps(kvps);
+    tt.content(template_content);
+    tt.expected_keys(get_expected_keys(tt.content()));
 
+    /*
+     * Validate the template
+     */
+    validate(tt);
 
-
+    /*
+     * Obtain the output of instantiation.
+     */
+    const auto r(format(tt));
+    BOOST_LOG_SEV(lg, debug) << "Finished instantiation. Result: " << r;
+    return r;
 }
-*/
+
 std::string
 instantiator::instantiate(const boost::filesystem::path& template_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
