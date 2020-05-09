@@ -26,6 +26,8 @@
 #endif
 
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -34,6 +36,15 @@ namespace dogen::logical::transforms {
  * @brief Renders all templates in archetypes.
  */
 class archetype_rendering_transform final {
+private:
+    /**
+     * @brief Renders the wale template if any exists.
+     */
+    static std::string render_wale_template(
+        const variability::entities::feature_model& fm,
+        const entities::physical::archetype& arch);
+
+
 public:
     /**
      * Execute the transform against the model.
