@@ -11,7 +11,6 @@
 <#@ masd.stitch.wale.text_template=csharp_transform_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=primitive_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=primitive #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
 <#@ masd.stitch.wale.kvp.meta_element=primitive #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
