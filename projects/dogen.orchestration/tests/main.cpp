@@ -27,6 +27,7 @@
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
 #include "dogen.text.csharp/types/initializer.hpp"
+#include "dogen.text/types/initializer.hpp"
 #include "dogen.text.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
@@ -62,6 +63,7 @@ struct initializer {
         dogen::injection::json::initializer::initialize();
         dogen::injection::dia::initializer::initialize();
         dogen::text::csharp::initializer::initialize();
+        dogen::text::initializer::initialize();
         dogen::text::cpp::initializer::initialize();
         dogen::utility::test_data::dogen_product::initialize();
         dogen::tracing::initializer::initialize();
