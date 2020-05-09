@@ -7,38 +7,14 @@
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_old.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=archetype_class_header_transform_old #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=archetype_class_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
+<#@ masd.stitch.wale.kvp.meta_element=physical_archetype #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
 <#+
-
-physical::entities::archetype archetype_class_header_transform_old::static_archetype() const {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::archetype_class_header_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_physical_archetype_name().qualified().dot());
-        return r;
-    }());
-    return r;
-}
-
-physical::entities::archetype archetype_class_header_transform_old::archetype() const {
-    return static_archetype();
-}
-
-inclusion_support_types archetype_class_header_transform_old::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
-}
-
-boost::filesystem::path archetype_class_header_transform_old::inclusion_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
-}
-
-boost::filesystem::path archetype_class_header_transform_old::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
-}
 
 std::list<std::string> archetype_class_header_transform_old::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
