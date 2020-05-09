@@ -41,6 +41,7 @@ physical::entities::archetype visitor_header_transform::static_archetype() const
             traits::facet_sn(), traits::visitor_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_visitor_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;

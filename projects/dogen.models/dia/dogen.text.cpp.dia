@@ -30962,6 +30962,7 @@ physical::entities::archetype {{class.simple_name}}::static_archetype() const {
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
         using lmnf = {{meta_name_factory}};
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        r.text_to_text_transform({{text_to_text_transform}});
         return r;
     }());
     return r;
@@ -31133,6 +31134,7 @@ physical::entities::archetype {{class.simple_name}}::static_archetype() const {
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
         using lmnf = {{meta_name_factory}};
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        r.text_to_text_transform({{text_to_text_transform}});
         return r;
     }());
     return r;
@@ -35304,7 +35306,8 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.stitch.wale.kvp.archetype.simple_name=archetype_class_header
 #DOGEN masd.stitch.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.stitch.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.stitch.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_template"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36122,7 +36125,8 @@ public:
 #DOGEN masd.stitch.wale.kvp.class.simple_name=archetype_class_implementation_transform_old
 #DOGEN masd.stitch.wale.kvp.archetype.simple_name=archetype_class_implementation
 #DOGEN masd.stitch.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.stitch.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_template"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

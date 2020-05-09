@@ -22,6 +22,7 @@
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_feature_bundle #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.text_to_text_transform="" #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

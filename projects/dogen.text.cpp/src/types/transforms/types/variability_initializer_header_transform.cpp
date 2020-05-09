@@ -42,6 +42,7 @@ physical::entities::archetype variability_initializer_header_transform::static_a
             traits::facet_sn(), traits::variability_initializer_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_variability_initializer_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;

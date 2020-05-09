@@ -43,6 +43,7 @@ physical::entities::archetype type_registrar_implementation_transform::static_ar
             traits::facet_sn(), traits::type_registrar_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_serialization_type_registrar_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;

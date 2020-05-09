@@ -42,6 +42,7 @@ physical::entities::archetype primitive_implementation_transform::static_archety
             traits::facet_sn(), traits::primitive_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_primitive_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;

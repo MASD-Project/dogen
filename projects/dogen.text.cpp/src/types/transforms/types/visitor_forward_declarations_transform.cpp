@@ -36,6 +36,7 @@ physical::entities::archetype visitor_forward_declarations_transform::static_arc
             traits::facet_sn(), traits::visitor_forward_declarations_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_visitor_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;

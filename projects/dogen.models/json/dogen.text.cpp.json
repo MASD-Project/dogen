@@ -1852,7 +1852,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::not_supported;\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& /*l*/, const logical::entities::name& n) const {\n\n    using namespace dogen::utility::log;\n    static logger lg(logger_factory(archetype().meta_name().qualified()));\n    static const std::string not_supported(\"Inclusion path is not supported: \");\n\n    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();\n    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());\n}\n"
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        r.text_to_text_transform({{text_to_text_transform}});\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::not_supported;\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& /*l*/, const logical::entities::name& n) const {\n\n    using namespace dogen::utility::log;\n    static logger lg(logger_factory(archetype().meta_name().qualified()));\n    static const std::string not_supported(\"Inclusion path is not supported: \");\n\n    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();\n    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());\n}\n"
         }
       ]
     },
@@ -1869,7 +1869,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::{{class.inclusion_support_type}};\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n"
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        r.text_to_text_transform({{text_to_text_transform}});\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::{{class.inclusion_support_type}};\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n"
         }
       ]
     },
@@ -2174,7 +2174,8 @@
         "masd.stitch.wale.kvp.archetype.simple_name": "archetype_class_header",
         "masd.stitch.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.stitch.wale.kvp.meta_element": "physical_archetype",
-        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.stitch.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_template\""
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2267,7 +2268,8 @@
         "masd.stitch.wale.kvp.class.simple_name": "archetype_class_implementation_transform_old",
         "masd.stitch.wale.kvp.archetype.simple_name": "archetype_class_implementation",
         "masd.stitch.wale.kvp.meta_element": "physical_archetype",
-        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.stitch.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_template\""
       },
       "fallback_element_type": "masd::object",
       "attributes": [

@@ -39,6 +39,7 @@ physical::entities::archetype enum_header_transform::static_archetype() const {
             traits::facet_sn(), traits::enum_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_enumeration_name().qualified().dot());
+        r.text_to_text_transform("");
         return r;
     }());
     return r;
