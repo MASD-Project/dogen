@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/features/decoration.hpp"
+#include "dogen.logical/types/helpers/decoration_configuration.hpp"
 
 namespace dogen::logical::helpers {
 
 class decoration_configuration_factory final {
 public:
-    decoration_configuration_factory() = default;
-    decoration_configuration_factory(const decoration_configuration_factory&) = default;
-    decoration_configuration_factory(decoration_configuration_factory&&) = default;
-    ~decoration_configuration_factory() = default;
-    decoration_configuration_factory& operator=(const decoration_configuration_factory&) = default;
-
-public:
-    bool operator==(const decoration_configuration_factory& rhs) const;
-    bool operator!=(const decoration_configuration_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /*
+     * @brief Reads the decoration configuration from the supplied annotation.
+     */
+    static boost::optional<decoration_configuration>
+    make(const features::decoration::feature_group& fg,
+        const variability::entities::configuration& cfg);
 };
 
 }

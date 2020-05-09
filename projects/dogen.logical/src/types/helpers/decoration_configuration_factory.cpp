@@ -18,12 +18,60 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/helpers/decoration_configuration_factory.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "logical.helpers.decoration_configuration_factory");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::logical::helpers {
 
-bool decoration_configuration_factory::operator==(const decoration_configuration_factory& /*rhs*/) const {
-    return true;
+boost::optional<decoration_configuration>
+decoration_configuration_factory::
+make(const features::decoration::feature_group& fg,
+    const variability::entities::configuration& cfg) {
+
+    bool has_configuration(false);
+    const auto scfg(features::decoration::make_static_configuration(fg, cfg));
+    decoration_configuration r;
+    if (scfg.enabled) {
+        r.enabled(scfg.enabled);
+        has_configuration = true;
+    }
+
+    if (!scfg.copyright_notice.empty()) {
+        r.copyright_notices(scfg.copyright_notice);
+        has_configuration = true;
+    }
+
+    if (!scfg.licence_name.empty()) {
+        r.licence_name(scfg.licence_name);
+        has_configuration = true;
+    }
+
+    if (!scfg.modeline_group_name.empty()) {
+        r.modeline_group_name(scfg.modeline_group_name);
+        has_configuration = true;
+    }
+
+    if (!scfg.marker_name.empty()) {
+        r.marker_name(scfg.marker_name);
+        has_configuration = true;
+    }
+
+    if (has_configuration) {
+        BOOST_LOG_SEV(lg, debug) << "Read decoration configuration.";
+        return r;
+    }
+
+    return boost::optional<decoration_configuration>();
 }
 
 }
