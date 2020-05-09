@@ -4866,6 +4866,10 @@ are:
 - object templates;
 - profiles.
 
+Interestingly we seem to support a different kind of "inheritance" via
+ =masd.variability.profile=, e.g.:
+
+: masd.variability.profile = dogen.profiles.base.disable_all_facets
 *** Consider renaming =origin_types=                                  :story:
 
 We created an enumeration called =origin_types= to distinguish between

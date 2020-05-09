@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-09 Sat 08:23]
+#+CAPTION: Clock summary at [2020-05-09 Sat 09:23]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *13:54* |       |      | 100.0 |
+| *Total time*                                          | *14:52* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 13:54   |       |      | 100.0 |
-| Active                                                |         | 13:54 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  42.8 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   5.6 |
-| Sprint and product backlog grooming                   |         |       | 0:40 |   4.8 |
-| Check name of model for variability transform         |         |       | 0:19 |   2.3 |
-| Analysis on templating and logical model              |         |       | 1:09 |   8.3 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   3.2 |
-| Remove stitch template builder                        |         |       | 0:09 |   1.1 |
-| Add template related attributes to physical elements  |         |       | 1:38 |  11.8 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |  11.9 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   8.3 |
+| Stories                                               | 14:52   |       |      | 100.0 |
+| Active                                                |         | 14:52 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  40.0 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   5.3 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   6.7 |
+| Check name of model for variability transform         |         |       | 0:19 |   2.1 |
+| Analysis on templating and logical model              |         |       | 1:09 |   7.7 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   3.0 |
+| Remove stitch template builder                        |         |       | 0:09 |   1.0 |
+| Add template related attributes to physical elements  |         |       | 1:38 |  11.0 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |  11.1 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   7.7 |
+| Split wale out of stitch templates                    |         |       | 0:38 |   4.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -594,6 +595,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-09 Sat 09:03]--[2020-05-09 Sat 09:23] =>  0:20
     CLOCK: [2020-05-08 Fri 11:01]--[2020-05-08 Fri 11:24] =>  0:21
     CLOCK: [2020-05-08 Fri 09:36]--[2020-05-08 Fri 09:50] =>  0:14
     CLOCK: [2020-05-06 Wed 22:14]--[2020-05-06 Wed 22:17] =>  0:03
@@ -813,7 +815,56 @@ new world, so we should try to decouple these models. Templating
 should not even know of files; it should receive a string and return a
 string.
 
-*** Split wale out of stitch templates                                :story:
+*** STARTED Split wale out of stitch templates                        :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-09 Sat 08:24]--[2020-05-09 Sat 09:02] =>  0:38
+    :END:
+
+A stitch template may make use of a wale template. At present we are
+loading these from the file system, thus requiring the
+locator. However, since we already have the templates in memory, we
+could model these a bit better: we should supply them as values in the
+KVPs.
+
+Notes:
+
+- we could easily add a wale template meta-data parameter to the
+  logical archetype. The problem is, at this point all we are saying
+  is that there are logical associations between elements. We then
+  need to somehow load up the artefact corresponding to the wale
+  template into the element artefacts of all logical archetypes which
+  refer to that template. We could have a =text= transform that does
+  this. Finally we could add a dependency between the stitch artefact
+  and the wale artefact. However, for this to work, we need to supply
+  the entire =element_artefacts= into the text transform and let the
+  stitch transform locate whatever it needs. Done.
+- a second problem is that we need to load the wale templates from the
+  file system before we reach the physical model. This could be done
+  as part of the wale template. We already do something similar for
+  stitch; if it exists load it, if not create it. We need a similar
+  logic. Actually the right solution is to make the contents of all
+  templates part of the meta-model elements themselves. Done.
+- we can use the meta-data of the archetype to supply all of the wale
+  related keys for the new world stitch templates. This allows us to
+  have a backwards compatible way of handling wale templates outside
+  of stitch. For this we just need to:
+
+  - add the wale keys to the new archetypes themselves.
+  - add the features to the =text= model, but disable
+    injection. Ideally we should disable injection in templating and
+    move them into =text=, as that will be their final location.
+  - add code in the new stitch text to text transform to read wale
+    keys and instantiate wale template. Then inject it into the KVPs
+    as we do with decorations. It must have the variable name as
+    defined in stitch (is this a variable as well?).
+  - then execute stitch instantiation as usual, except we do it from
+    string rather than file.
+
+  With this in place, we can start to move all formatters to the new
+  world. Then we can delete any references to wale in stitch, as well
+  as any file loading.
+
+*Previous understanding*
 
 Stitch requires extra work in order to split out decoration. This is
 because in the past we relied on profiles to populate decoration. It
@@ -899,33 +950,71 @@ Notes:
   generation. Then use the list of includes to build the
   boilerplate. The stitch template is just the core of the file.
 
-Merged stories:
+*** Factor out duplication in stitch and wale templates               :story:
 
-*Wale templates must be bound to logical archetypes*
+At present we are duplicating a lot of stuff in stitch templates. If
+we look at the directives, we can group them as follows:
 
-A stitch template may make use of a wale template. At present we are
-loading these from the file system, thus requiring the
-locator. However, since we already have the templates in memory, we
-could model these a bit better: we should supply them as values in the
-KVPs.
+1. Hard-coded. These have the same value for all templates:
 
-Notes:
+: <#@ masd.stitch.stream_variable_name=ast.stream() #>
+: <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+: <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 
-- we could easily add a wale template meta-data parameter to the
-  logical archetype. The problem is, at this point all we are saying
-  is that there are logical associations between elements. We then
-  need to somehow load up the artefact corresponding to the wale
-  template into the element artefacts of all logical archetypes which
-  refer to that template. We could have a =text= transform that does
-  this. Finally we could add a dependency between the stitch artefact
-  and the wale artefact. However, for this to work, we need to supply
-  the entire =element_artefacts= into the text transform and let the
-  stitch transform locate whatever it needs.
-- a second problem is that we need to load the wale templates from the
-  file system before we reach the physical model. This could be done
-  as part of the wale template. We already do something similar for
-  stitch; if it exists load it, if not create it. We need a similar
-  logic.
+2. Facet-dependent. These have the same value for a given facet:
+
+: <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+
+3. Meta-element dependent. If we know who the meta-element is, we can
+   generate these:
+
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+: <#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
+: <#@ masd.stitch.wale.kvp.meta_element=object #>
+
+4. M2T transform dependent. If we know the name of the transform, we
+   can generate these:
+
+: <#@ masd.stitch.wale.kvp.class.simple_name=class_implementation_transform #>
+: <#@ masd.stitch.wale.kvp.archetype.simple_name=class_implementation #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp" #>
+
+5. Not needed in the new world:
+
+: <#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
+
+6. Are dependent on the content of the template and so must be added manually:
+
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
+
+We can address the first point and possibly the second point by
+creating profiles. For point 3 and 4 we could inject these values as
+part of transforms. Finally, we could so some simple filtering of
+meta-data: any key starting with =masd.stitch.= is added to the KVP
+container for the template. Some of these are injected manually.
+
+Sadly we cannot share profiles between C++ and C# because at present
+we cannot inherit across models. We could consider fixing this via
+meta-data. Actually having said that we need to be able to use:
+
+: masd.variability.profile = dogen.profiles.base.disable_all_facets
+
+In the same model; this may work across models as well (modulus
+possible problems with merging).
+
+At any rate the profiles should be kept within the =text*= models
+given they are used only for M2T transforms.
 
 *** Replace initialisers with facet-based initialisation              :story:
 
