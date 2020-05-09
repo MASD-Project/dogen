@@ -16,7 +16,6 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=class_implementation_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=class_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
 <#@ masd.stitch.wale.kvp.meta_element=object #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>

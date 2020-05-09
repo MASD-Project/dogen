@@ -12,7 +12,6 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=namespace_header_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=namespace_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::module #>
 <#@ masd.stitch.wale.kvp.meta_element=module #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>

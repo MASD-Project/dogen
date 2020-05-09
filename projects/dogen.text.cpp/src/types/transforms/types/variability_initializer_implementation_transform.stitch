@@ -18,7 +18,6 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_implementation_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::variability::initializer #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>

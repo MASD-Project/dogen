@@ -14,7 +14,6 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=main_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=main #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::entry_point #>
 <#@ masd.stitch.wale.kvp.meta_element=entry_point #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>

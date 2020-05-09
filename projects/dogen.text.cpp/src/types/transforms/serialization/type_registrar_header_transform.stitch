@@ -12,7 +12,6 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=type_registrar_header_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=type_registrar_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::serialization::type_registrar #>
 <#@ masd.stitch.wale.kvp.meta_element=serialization_type_registrar #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
