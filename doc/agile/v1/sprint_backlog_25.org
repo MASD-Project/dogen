@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-09 Sat 17:55]
+#+CAPTION: Clock summary at [2020-05-09 Sat 18:43]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *19:22* |       |      | 100.0 |
+| *Total time*                                          | *19:41* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 19:22   |       |      | 100.0 |
-| Active                                                |         | 19:22 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  30.7 |
+| Stories                                               | 19:41   |       |      | 100.0 |
+| Active                                                |         | 19:41 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  30.2 |
 | Create a demo and presentation for previous sprint    |         |       | 0:47 |   4.0 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   5.2 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   5.1 |
 | Check name of model for variability transform         |         |       | 0:19 |   1.6 |
-| Analysis on templating and logical model              |         |       | 1:09 |   5.9 |
+| Analysis on templating and logical model              |         |       | 1:09 |   5.8 |
 | Ensure stitch templates result in valid JSON          |         |       | 0:27 |   2.3 |
 | Remove stitch template builder                        |         |       | 0:09 |   0.8 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   8.4 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   8.5 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   5.9 |
-| Split wale out of stitch templates                    |         |       | 4:52 |  25.1 |
-| Move decoration transform into logical model          |         |       | 0:16 |   1.4 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   8.3 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   8.4 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   5.8 |
+| Split wale out of stitch templates                    |         |       | 4:52 |  24.7 |
+| Move decoration transform into logical model          |         |       | 0:35 |   3.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1008,11 +1008,20 @@ Notes:
 
 *** STARTED Move decoration transform into logical model              :story:
     :LOGBOOK:
+    CLOCK: [2020-05-09 Sat 18:24]--[2020-05-09 Sat 18:43] =>  0:19
     CLOCK: [2020-05-09 Sat 17:38]--[2020-05-09 Sat 17:54] =>  0:16
     :END:
 
 We need access to decoration in order to expand stitch
 templates. There is no need for it to live in the =text= model.
+
+Notes:
+
+- one slight snag, and a large one at that, was that we forgot that
+  decorations have huge amounts of associated paraphernalia:
+  formatters, etc. We need to figure out the right place for these and
+  its likely not the logical model. We could probably pull in a few of
+  these into the logical model. This requires further analysis.
 
 *** Orchestration should have an initialiser                          :story:
 
