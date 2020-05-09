@@ -101,6 +101,68 @@ std::string archetype_rendering_transform::render_wale_template(
     return r;
 }
 
+
+std::string archetype_rendering_transform::render_stitch_template(
+    const variability::entities::feature_model& fm,
+    const std::string& wale_template,
+    const entities::physical::archetype& arch) {
+
+    /*
+     * Stitch template cannot be empty.
+     */
+    const auto id(arch.name().qualified().dot());
+    const auto& st(arch.stitch_template_content());
+    if (st.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_stitch_template << id;
+        BOOST_THROW_EXCEPTION(transformation_error(empty_stitch_template + id));
+    }
+
+    /*
+     * Locate the decoration for this template. We have hard-coded it
+     * to c++ given that this is the only use case. We use the
+     * decoration to build up the KVP map that will be supplied to the
+     * template instantiator. The decoration must exist.
+     */
+    // FIXME: move decoration transform
+    // const auto ts(logical::entities::technical_space::cpp);
+    // const auto i(arch.decoration().find(ts));
+    // if (i == arch.decoration().end()) {
+    //     BOOST_LOG_SEV(lg, error) << missing_decoration << id;
+    //     BOOST_THROW_EXCEPTION(transformation_error(missing_decoration + id));
+    // }
+
+    /*
+     * Create the KVPs for the stitch template.
+     */
+    // auto dec(i->second);
+    const auto kvps = std::unordered_map<std::string, std::string> {
+        // {
+        //     decoration_preamble_key, dec ? dec->preamble() : empty
+        // },
+        // {
+        //     decoration_postamble_key, dec ? dec->postamble() : empty
+        // },
+        {
+            decoration_preamble_key, empty
+        },
+        {
+            decoration_postamble_key, empty
+        },
+        {
+            stitch_wale_key, wale_template
+        }
+    };
+
+    /*
+     * Render the stitch template.
+     */
+    using variability::helpers::configuration_factory;
+    const configuration_factory cf(fm, false/*compatibility_model*/);
+    templating::stitch::instantiator inst(""/*FIXME*/, fm, cf);
+    const auto r(inst.instantiate(st, kvps));
+    return r;
+}
+
 void archetype_rendering_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
@@ -109,65 +171,19 @@ apply(const context& ctx, entities::model& m) {
     auto& archs(m.physical_elements().archetypes());
     for (auto& pair : archs) {
         auto& arch(*pair.second);
-        const auto id(arch.name().qualified().dot());
 
         /*
          * We start by rendering the wale template. This may not
          * exist, in which case the string will be empty.
          */
         const auto& fm(*ctx.feature_model());
-        const auto rendered_wale_template(render_wale_template(fm, arch));
+        const auto rwt(render_wale_template(fm, arch));
 
         /*
-         * Stitch template cannot be empty.
+         * Now render the stitch template and update the archetype.
          */
-        const auto& st(arch.stitch_template_content());
-        if (st.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_stitch_template << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(empty_stitch_template + id));
-        }
-
-        /*
-         * Locate the decoration for this template. We have hard-coded it
-         * to c++ given that this is the only use case. We use the
-         * decoration to build up the KVP map that will be supplied to the
-         * template instantiator. The decoration must exist.
-         */
-        // const auto ts(logical::entities::technical_space::cpp);
-        // const auto i(arch.decoration().find(ts));
-        // if (i == arch.decoration().end()) {
-        //     BOOST_LOG_SEV(lg, error) << missing_decoration << id;
-        //     BOOST_THROW_EXCEPTION(
-        //         transformation_error(missing_decoration + id));
-        // }
-
-        /*
-         * Create the KVPs for the stitch template.
-         */
-        // auto dec(i->second);
-        const auto kvps = std::unordered_map<std::string, std::string> {
-            // {
-            //     decoration_preamble_key, dec ? dec->preamble() : empty
-            // },
-            // {
-            //     decoration_postamble_key, dec ? dec->postamble() : empty
-            // },
-            {
-                decoration_preamble_key, empty
-            },
-            {
-                decoration_postamble_key, empty
-            },
-            {
-                stitch_wale_key, rendered_wale_template
-            }
-        };
-
-        using variability::helpers::configuration_factory;
-        const configuration_factory cf(fm, false/*compatibility_model*/);
-        templating::stitch::instantiator inst(""/*FIXME*/, fm, cf);
-        arch.rendered_stitch_template(inst.instantiate(st, kvps));
+        const auto rst(render_stitch_template(fm, rwt, arch));
+        arch.rendered_stitch_template(rst);
     }
 
     stp.end_transform(m);

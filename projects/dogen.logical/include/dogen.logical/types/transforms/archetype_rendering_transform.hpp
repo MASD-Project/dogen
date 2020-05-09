@@ -44,6 +44,13 @@ private:
         const variability::entities::feature_model& fm,
         const entities::physical::archetype& arch);
 
+    /**
+     * @brief Render the stitch template, if any exists.
+     */
+    static std::string render_stitch_template(
+        const variability::entities::feature_model& fm,
+        const std::string& wale_template,
+        const entities::physical::archetype& arch);
 
 public:
     /**
