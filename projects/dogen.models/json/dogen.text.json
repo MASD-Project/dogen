@@ -857,37 +857,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "features::wale",
-      "documentation": "Wale related features.\n",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.generate_registration": "false",
-        "masd.variability.key_prefix": "masd.stitch"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "wale.text_template",
-          "type": "masd::variability::text",
-          "documentation": "Name of the wale text template to instantiate, if any.\n",
-          "tagged_values": {
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "wale.kvp",
-          "type": "masd::variability::key_value_pair",
-          "documentation": "Array of wale KVPs to use in template instantiation.\n",
-          "tagged_values": {
-            "masd.variability.is_optional": "true"
-          }
-        }
-      ]
-    },
-    {
       "name": "transforms::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -900,6 +869,32 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::text_to_text_transform_data",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the T2T transform.\n"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::list<physical::entities::archetype>",
+          "documentation": "All of the archetypes that requested this T2T transform.\n"
+        },
+        {
+          "name": "logical_meta_model_ids",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "All of the logical model IDs for this T2T transform.\n"
+        },
+        {
+          "name": "target_logical_elements",
+          "type": "std::list<entities::element_artefacts>",
+          "documentation": "All of the entities that the T2T transform needs to operate against.\n"
+        }
+      ]
     }
   ]
 }
