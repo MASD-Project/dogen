@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.logical/types/features/orm.hpp"
+#include "dogen.logical/types/features/wale.hpp"
 #include "dogen.logical/types/features/origin.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
 #include "dogen.logical/types/features/physical.hpp"
@@ -50,6 +51,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::logical::features::type_parameters::make_features());
     rg.register_features(dogen::logical::features::variability_bundle::make_features());
     rg.register_features(dogen::logical::features::variability_templates::make_features());
+    rg.register_features(dogen::logical::features::wale::make_features());
 }
 
 }

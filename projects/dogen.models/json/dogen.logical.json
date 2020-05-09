@@ -4268,6 +4268,36 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::wale",
+      "documentation": "Wale related features.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.wale"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "text_template",
+          "type": "masd::variability::text",
+          "documentation": "Name of the wale text template to instantiate, if any.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "kvp",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Array of wale KVPs to use in template instantiation.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
     }
   ]
 }
