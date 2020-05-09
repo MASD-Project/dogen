@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace dogen::text {
 
+/**
+ * @brief Initialises all of the static state in this model.
+ */
 class initializer final {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize();
 };
 
 }
