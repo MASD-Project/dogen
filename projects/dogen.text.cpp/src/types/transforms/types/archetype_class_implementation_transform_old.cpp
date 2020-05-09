@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -50,8 +53,14 @@ inclusion_support_types archetype_class_implementation_transform_old::inclusion_
 }
 
 boost::filesystem::path archetype_class_implementation_transform_old::inclusion_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+
+    using namespace dogen::utility::log;
+    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path archetype_class_implementation_transform_old::full_path(
