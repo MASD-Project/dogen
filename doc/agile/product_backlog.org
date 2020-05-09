@@ -14333,6 +14333,18 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Add support for T2T transforms                                    :story:
+
+We have done a lot of analysis work on text-to-text (T2T) transforms,
+and even implemented the key classes but it was not suitable for
+stitch and wale so it was removed. It should be usable for cartridges
+though such as ODB and XSD tool.
+
+Commits:
+
+: b9e7fe0263 text: remove text to text transforms
+: c4e1e092d6 text: remove t2t transform data
+
 *** Consider making =stitch_template_builder= a text template builder :story:
 
 At present we are manually crafting a stream in
