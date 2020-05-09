@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.text/types/transforms/text_to_text_chain.hpp"
+#include "dogen.text/types/transforms/stitch_transform.hpp"
 #include "dogen.text/types/transforms/initializer.hpp"
 
 namespace dogen::text::transforms {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    register_transform<stitch_transform>();
 }
 
 }
