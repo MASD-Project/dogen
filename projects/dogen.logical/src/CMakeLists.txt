@@ -38,6 +38,7 @@ target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
     dogen.tracing.lib
+    dogen.templating.lib
     dogen.variability.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
