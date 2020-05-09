@@ -38,6 +38,7 @@
 #include "dogen.logical/types/transforms/odb_options_transform.hpp"
 #include "dogen.logical/types/transforms/visual_studio_project_type_transform.hpp"
 #include "dogen.logical/types/transforms/logic_less_templates_population_transform.hpp"
+#include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -158,6 +159,12 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * elements of course.
      */
     logic_less_templates_population_transform::apply(ctx, m);
+
+    /*
+     * Render all archetype templates. Must be done after the
+     * logic-less template population.
+     */
+    archetype_rendering_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
