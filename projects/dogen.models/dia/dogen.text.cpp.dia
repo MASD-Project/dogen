@@ -35301,13 +35301,12 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale
-#DOGEN masd.stitch.wale.kvp.class.simple_name=archetype_class_header_transform_old
-#DOGEN masd.stitch.wale.kvp.archetype.simple_name=archetype_class_header
-#DOGEN masd.stitch.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.stitch.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.stitch.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_template"#</dia:string>
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_old
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
+#DOGEN masd.wale.kvp.meta_element=physical_archetype
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36121,12 +36120,11 @@ public:
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale
-#DOGEN masd.stitch.wale.kvp.class.simple_name=archetype_class_implementation_transform_old
-#DOGEN masd.stitch.wale.kvp.archetype.simple_name=archetype_class_implementation
-#DOGEN masd.stitch.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.stitch.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_template"#</dia:string>
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform_old
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
+#DOGEN masd.wale.kvp.meta_element=physical_archetype
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

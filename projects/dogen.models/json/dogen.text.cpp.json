@@ -2169,13 +2169,12 @@
       "tagged_values": {
         "masd.physical.part_id": "masd.cpp.public_headers",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
-        "masd.stitch.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
-        "masd.stitch.wale.kvp.class.simple_name": "archetype_class_header_transform_old",
-        "masd.stitch.wale.kvp.archetype.simple_name": "archetype_class_header",
-        "masd.stitch.wale.kvp.class.inclusion_support_type": "regular_support",
-        "masd.stitch.wale.kvp.meta_element": "physical_archetype",
-        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.stitch.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_template\""
+        "masd.wale.kvp.class.simple_name": "archetype_class_header_transform_old",
+        "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
+        "masd.wale.kvp.class.inclusion_support_type": "regular_support",
+        "masd.wale.kvp.meta_element": "physical_archetype",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_transform\""
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2264,12 +2263,11 @@
       "tagged_values": {
         "masd.physical.part_id": "masd.cpp.public_headers",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
-        "masd.stitch.wale.text_template": "cpp_artefact_transform_implementation.wale",
-        "masd.stitch.wale.kvp.class.simple_name": "archetype_class_implementation_transform_old",
-        "masd.stitch.wale.kvp.archetype.simple_name": "archetype_class_implementation",
-        "masd.stitch.wale.kvp.meta_element": "physical_archetype",
-        "masd.stitch.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.stitch.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_template\""
+        "masd.wale.kvp.class.simple_name": "archetype_class_implementation_transform_old",
+        "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation",
+        "masd.wale.kvp.meta_element": "physical_archetype",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_transform\""
       },
       "fallback_element_type": "masd::object",
       "attributes": [
