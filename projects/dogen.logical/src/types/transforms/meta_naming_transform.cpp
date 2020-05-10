@@ -45,7 +45,7 @@ namespace dogen::logical::transforms {
 
 using mnf = helpers::meta_name_factory;
 
-class updater {
+class meta_name_updater {
 public:
     void operator()(entities::element&) {
         /*
@@ -264,7 +264,7 @@ apply(const context& ctx, entities::model& m) {
 
     m.meta_name(mnf::make_model_name());
 
-    updater u;
+    meta_name_updater u;
     entities::elements_traversal(m, u);
     populate_model_meta_names(m);
 

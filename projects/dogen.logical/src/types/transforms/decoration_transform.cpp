@@ -74,9 +74,9 @@ typedef std::unordered_map<entities::technical_space,
 /**
  * @brief Updates the decorations of relevant elements.
  */
-class updater {
+class decoration_updater {
 public:
-    updater(const root_decorations_type& root_decorations,
+    decoration_updater(const root_decorations_type& root_decorations,
         const helpers::decoration_factory& df,
         const boost::optional<decoration_configuration>& root_dc,
         const std::string& root_id,
@@ -115,7 +115,7 @@ private:
     const entities::technical_space output_technical_space_;
 };
 
-updater::updater(const root_decorations_type& root_decorations,
+decoration_updater::decoration_updater(const root_decorations_type& root_decorations,
     const helpers::decoration_factory& df,
     const boost::optional<decoration_configuration>& root_dc,
     const std::string& root_id,
@@ -125,7 +125,7 @@ updater::updater(const root_decorations_type& root_decorations,
       root_dc_(root_dc), root_id_(root_id), feature_group_(fg),
       output_technical_space_(ots) {}
 
-bool updater::is_generatable(const entities::name& meta_name) const {
+bool decoration_updater::is_generatable(const entities::name& meta_name) const {
     // FIXME: massive hack for now.
     using mnf = helpers::meta_name_factory;
     static const auto otn(mnf::make_object_template_name());
@@ -143,7 +143,7 @@ bool updater::is_generatable(const entities::name& meta_name) const {
         id != gmn.qualified().dot();
 }
 
-bool updater::requires_decorations(entities::element& e) const {
+bool decoration_updater::requires_decorations(entities::element& e) const {
     /*
      * We don't need to generate decorations for any elements which
      * are not part of the target model.
@@ -175,7 +175,7 @@ bool updater::requires_decorations(entities::element& e) const {
     return true;
 }
 
-void updater::process_element(const entities::technical_space ts,
+void decoration_updater::process_element(const entities::technical_space ts,
     const boost::optional<decoration_configuration>& dc,
     entities::element& e) {
     const auto i(root_decorations_.find(ts));
@@ -201,7 +201,7 @@ void updater::process_element(const entities::technical_space ts,
     }
 }
 
-void updater::operator()(entities::element& e) {
+void decoration_updater::operator()(entities::element& e) {
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
@@ -345,7 +345,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      * root decoration configuration to build the elements decoration.
      */
     const auto root_id(rm.name().qualified().dot());
-    updater u(root_decorations, df, root_dc, root_id, fg, mts);
+    decoration_updater u(root_decorations, df, root_dc, root_id, fg, mts);
     entities::elements_traversal(m, u);
 
     stp.end_transform(m);
