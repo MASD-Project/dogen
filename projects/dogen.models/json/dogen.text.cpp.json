@@ -56,8 +56,7 @@
         "masd.wale.kvp.archetype.simple_name": "class_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_transform\""
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2196,8 +2195,7 @@
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_transform\""
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2275,8 +2273,7 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.wale.kvp.text_to_text_transform": "\"dogen.text.transforms.stitch_transform\""
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

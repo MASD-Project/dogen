@@ -278,8 +278,7 @@
 #DOGEN masd.wale.kvp.archetype.simple_name=class_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35817,8 +35816,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36415,8 +36413,7 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
