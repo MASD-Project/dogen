@@ -66,6 +66,9 @@ public:
         return make_static_configuration(fg, *c.configuration());
     }
 
+public:
+    static std::list<dogen::variability::entities::feature>
+    make_features();
 };
 
 }

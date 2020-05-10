@@ -55633,8 +55633,7 @@ FIXME: optional for now.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.key_prefix=masd.decoration
-#DOGEN masd.variability.generate_registration=false#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

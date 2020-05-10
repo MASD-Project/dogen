@@ -24,6 +24,86 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::logical::features {
+
+namespace {
+
+dogen::variability::entities::feature
+make_masd_decoration_enabled() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("enabled");
+    r.name().qualified("masd.decoration.enabled");
+    r.description(R"(If true, decorations are enabled on this modeling element.
+
+)");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_decoration_copyright_notice() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("copyright_notice");
+    r.name().qualified("masd.decoration.copyright_notice");
+    r.description(R"(Copyright notices for this modeling element.
+
+)");
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_decoration_licence_name() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("licence_name");
+    r.name().qualified("masd.decoration.licence_name");
+    r.description(R"(Name of the licence to use for this modeling element.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_decoration_modeline_group_name() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("modeline_group_name");
+    r.name().qualified("masd.decoration.modeline_group_name");
+    r.description(R"(Name of the modeline group for this modeling element.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_decoration_marker_name() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("marker_name");
+    r.name().qualified("masd.decoration.marker_name");
+    r.description(R"(Name of the decoration marker to use for this modeling element.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    return r;
+}
+
+}
+
 decoration::feature_group
 decoration::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
@@ -56,4 +136,17 @@ decoration::static_configuration decoration::make_static_configuration(
         r.marker_name = s.get_text_content(fg.marker_name);
     return r;
 }
+
+std::list<dogen::variability::entities::feature>
+decoration::make_features() {
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
+    r.push_back(make_masd_decoration_enabled());
+    r.push_back(make_masd_decoration_copyright_notice());
+    r.push_back(make_masd_decoration_licence_name());
+    r.push_back(make_masd_decoration_modeline_group_name());
+    r.push_back(make_masd_decoration_marker_name());
+    return r;
+}
+
 }

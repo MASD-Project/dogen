@@ -38,7 +38,6 @@
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
-#include "dogen.text/types/features/initializer.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 #include "dogen.text.cpp/types/feature_initializer.hpp"
@@ -93,7 +92,6 @@ register_variability_entities(variability::helpers::registrar& rg) {
     physical::features::initializer::register_entities(rg);
     injection::features::initializer::register_entities(rg);
     logical::features::initializer::register_entities(rg);
-    text::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
     text::cpp::feature_initializer::register_entities(rg);

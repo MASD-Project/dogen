@@ -24,6 +24,7 @@
 #include "dogen.logical/types/features/mapping.hpp"
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
+#include "dogen.logical/types/features/decoration.hpp"
 #include "dogen.logical/types/features/enumerator.hpp"
 #include "dogen.logical/types/features/enumeration.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
@@ -38,6 +39,7 @@ namespace dogen::logical::features {
 
 void initializer::
 register_entities(variability::helpers::registrar& rg) {
+    rg.register_features(dogen::logical::features::decoration::make_features());
     rg.register_features(dogen::logical::features::decoration_modeline::make_features());
     rg.register_features(dogen::logical::features::enumeration::make_features());
     rg.register_features(dogen::logical::features::enumerator::make_features());
