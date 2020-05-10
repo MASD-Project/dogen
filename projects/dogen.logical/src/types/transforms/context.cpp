@@ -70,12 +70,14 @@ context::context(
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
     const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
-    const boost::shared_ptr<dogen::tracing::tracer>& tracer)
+    const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+    const std::string& activity_timestamp)
     : compatibility_mode_(compatibility_mode),
       feature_model_(feature_model),
       physical_meta_model_(physical_meta_model),
       mapping_repository_(mapping_repository),
-      tracer_(tracer) { }
+      tracer_(tracer),
+      activity_timestamp_(activity_timestamp) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -84,6 +86,7 @@ void context::swap(context& other) noexcept {
     swap(physical_meta_model_, other.physical_meta_model_);
     swap(mapping_repository_, other.mapping_repository_);
     swap(tracer_, other.tracer_);
+    swap(activity_timestamp_, other.activity_timestamp_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -91,7 +94,8 @@ bool context::operator==(const context& rhs) const {
         feature_model_ == rhs.feature_model_ &&
         physical_meta_model_ == rhs.physical_meta_model_ &&
         mapping_repository_ == rhs.mapping_repository_ &&
-        tracer_ == rhs.tracer_;
+        tracer_ == rhs.tracer_ &&
+        activity_timestamp_ == rhs.activity_timestamp_;
 }
 
 context& context::operator=(context other) {
@@ -170,6 +174,22 @@ void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>& v) {
 
 void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v) {
     tracer_ = std::move(v);
+}
+
+const std::string& context::activity_timestamp() const {
+    return activity_timestamp_;
+}
+
+std::string& context::activity_timestamp() {
+    return activity_timestamp_;
+}
+
+void context::activity_timestamp(const std::string& v) {
+    activity_timestamp_ = v;
+}
+
+void context::activity_timestamp(const std::string&& v) {
+    activity_timestamp_ = std::move(v);
 }
 
 }

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
@@ -59,7 +60,8 @@ public:
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
         const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
-        const boost::shared_ptr<dogen::tracing::tracer>& tracer);
+        const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+        const std::string& activity_timestamp);
 
 public:
     bool compatibility_mode() const;
@@ -90,6 +92,16 @@ public:
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>& v);
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v);
 
+    /**
+     * @brief Human readable timestamp of when the activity took place.
+     */
+    /**@{*/
+    const std::string& activity_timestamp() const;
+    std::string& activity_timestamp();
+    void activity_timestamp(const std::string& v);
+    void activity_timestamp(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -106,6 +118,7 @@ private:
     boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
     boost::shared_ptr<dogen::logical::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
+    std::string activity_timestamp_;
 };
 
 }

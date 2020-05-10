@@ -815,6 +815,11 @@
         {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "activity_timestamp",
+          "type": "std::string",
+          "documentation": "Human readable timestamp of when the activity took place.\n"
         }
       ]
     },

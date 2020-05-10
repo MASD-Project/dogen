@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
@@ -90,6 +91,14 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace dogen::logical::transforms {
 
 std::ostream& operator<<(std::ostream& s, const context& v) {
@@ -105,7 +114,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
       << "\"mapping_repository\": " << v.mapping_repository() << ", "
-      << "\"tracer\": " << v.tracer()
+      << "\"tracer\": " << v.tracer() << ", "
+      << "\"activity_timestamp\": " << "\"" << tidy_up_string(v.activity_timestamp()) << "\""
       << " }";
     return(s);
 }
