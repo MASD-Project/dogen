@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"

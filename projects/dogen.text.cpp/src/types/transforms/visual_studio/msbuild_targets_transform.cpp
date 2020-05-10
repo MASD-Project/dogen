@@ -23,7 +23,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
@@ -110,7 +110,7 @@ ast.stream() << std::endl;
 ast.stream() << "        .OUTPUTS:" << std::endl;
 ast.stream() << "    ]-->" << std::endl;
 ast.stream() << "    <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
-            text::formatters::sequence_formatter sf(targets.targets().size());
+            utility::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                            ");
             sf.postfix_configuration().last("\">");

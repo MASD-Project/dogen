@@ -21,7 +21,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/io/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -102,7 +102,7 @@ ast.stream() << "            assistant.AddPairSeparator();" << std::endl;
 ast.stream() << "            " << pqn << "Dumper.Dump(assistant, value" << (has_attributes ? ", true/*withSeparator*/" : "") << ");" << std::endl;
                 }
 
-                text::formatters::sequence_formatter sf(o.local_attributes().size());
+                utility::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
                 sf.postfix_configuration().last("");

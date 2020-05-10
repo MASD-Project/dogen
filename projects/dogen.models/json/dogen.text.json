@@ -503,43 +503,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::infix_configuration",
-      "documentation": "Configuration to use for a given infix in sequence formatter.\n",
-      "stereotypes": [
-        "masd::fluent"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "first",
-          "type": "std::string",
-          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\nthan one element.\n"
-        },
-        {
-          "name": "not_first",
-          "type": "std::string",
-          "documentation": "Applicable to all elements other than the first.\n"
-        },
-        {
-          "name": "not_last",
-          "type": "std::string",
-          "documentation": "Applicable to all elements other than the last.\n"
-        },
-        {
-          "name": "last",
-          "type": "std::string",
-          "documentation": "Only applicable to the last element of a sequence.\n"
-        }
-      ]
-    },
-    {
-      "name": "formatters::sequence_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::namespace_formatter",
       "stereotypes": [
         "dogen::handcrafted::typeable"

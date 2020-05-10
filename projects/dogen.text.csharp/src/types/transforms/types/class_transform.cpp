@@ -21,7 +21,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -108,7 +108,7 @@ ast.stream() << "        public " << sn << "(" << ast.get_qualified_name(attr.pa
                 } else {
 ast.stream() << std::endl;
 ast.stream() << "        public " << sn << "(" << std::endl;
-                    text::formatters::sequence_formatter sf(attr_count);
+                    utility::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
 ast.stream() << "            " << ast.get_qualified_name(attr.parsed_type()) << " " << ast.make_argument_name(attr) << sf.postfix() << std::endl;
@@ -126,7 +126,7 @@ ast.stream() << "            : base()" << std::endl;
                     } else if (size == 1) {
 ast.stream() << "            : base(" << ast.make_argument_name(pattrs.front()) << ")" << std::endl;
                     } else {
-                        text::formatters::sequence_formatter sf(size);
+                        utility::formatters::sequence_formatter sf(size);
                         sf.postfix_configuration().last(")");
                         sf.prefix_configuration().first(",").not_first(",");
 ast.stream() << "            : base(" << std::endl;
@@ -173,7 +173,7 @@ ast.stream() << "            if (value == null) return false;" << std::endl;
                 }
 ast.stream() << std::endl;
 ast.stream() << "            return" << std::endl;
-                text::formatters::sequence_formatter sf(o.local_attributes().size());
+                utility::formatters::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");

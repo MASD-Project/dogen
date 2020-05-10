@@ -21,7 +21,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
@@ -96,7 +96,7 @@ ast.stream() << "enum class " << ye.name().simple() << " {" << std::endl;
 ast.stream() << "enum class " << ye.name().simple() << " : " << ast.get_qualified_name(ye.underlying_element()) << " {" << std::endl;
             }
 
-            text::formatters::sequence_formatter sf(ye.enumerators().size());
+            utility::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 ast.stream() << "    " << en.name().simple() << sf.postfix() << ast.comment_inline(en.documentation()) << std::endl;

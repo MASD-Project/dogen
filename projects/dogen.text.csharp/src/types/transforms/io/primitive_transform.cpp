@@ -21,7 +21,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/io/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"

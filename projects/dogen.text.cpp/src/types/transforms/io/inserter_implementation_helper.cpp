@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 
@@ -41,7 +41,7 @@ ast.stream() << std::endl;
 ast.stream() << "    s << \" { \"" << std::endl;
 ast.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
 
-    text::formatters::sequence_formatter sf(o.parents().size());
+    utility::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {

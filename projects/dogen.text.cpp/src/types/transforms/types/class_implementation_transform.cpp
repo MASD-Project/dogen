@@ -23,7 +23,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -170,7 +170,7 @@ ast.stream() << std::endl;
 ast.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
                 const auto size(o.parents().size() + o.local_attributes().size());
 
-                text::formatters::sequence_formatter sf(size);
+                utility::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
@@ -200,7 +200,7 @@ ast.stream() << sn << "::" << sn << "(const " << ast.get_qualified_name(attr.par
 ast.stream() << std::endl;
 ast.stream() << sn << "::" << sn << "(" << std::endl;
 
-                    text::formatters::sequence_formatter sf(attr_count);
+                    utility::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
 ast.stream() << "    const " << ast.get_qualified_name(attr.parsed_type()) << ast.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
@@ -214,7 +214,7 @@ ast.stream() << "    const " << ast.get_qualified_name(attr.parsed_type()) << as
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
                 }
 
-                text::formatters::sequence_formatter sf(sequence_size);
+                utility::formatters::sequence_formatter sf(sequence_size);
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto& pair : o.inherited_attributes()) {
@@ -226,7 +226,7 @@ ast.stream() << "    " << sf.prefix() << pqn << "(" << (pattrs.empty() ? "" : pa
                     } else {
 ast.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) << std::endl;
                         sf.next();
-                        text::formatters::sequence_formatter sf2(pattrs.size());
+                        utility::formatters::sequence_formatter sf2(pattrs.size());
                         sf2.element_separator("");
 
                         sf2.prefix_configuration().first("  ").not_first("  ");
@@ -370,7 +370,7 @@ ast.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " 
             if (o.all_attributes().empty())
 ast.stream() << "    return true;" << std::endl;
             else {
-                text::formatters::sequence_formatter sf(o.parents().size());
+                utility::formatters::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");

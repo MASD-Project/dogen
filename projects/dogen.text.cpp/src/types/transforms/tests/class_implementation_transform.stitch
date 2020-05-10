@@ -7,7 +7,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>

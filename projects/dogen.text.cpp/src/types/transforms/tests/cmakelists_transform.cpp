@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"

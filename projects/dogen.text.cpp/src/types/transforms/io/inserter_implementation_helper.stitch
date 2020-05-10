@@ -1,7 +1,7 @@
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#+
 
 void inserter_implementation_helper(assistant& ast, const logical::entities::structural::object& o,
@@ -26,7 +26,7 @@ void inserter_implementation_helper(assistant& ast, const logical::entities::str
       << "\"__type__\": " << "\"<#= qn #>\""<#= (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") #>
 <#+
 
-    text::formatters::sequence_formatter sf(o.parents().size());
+    utility::formatters::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {

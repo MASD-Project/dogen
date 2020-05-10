@@ -24,7 +24,7 @@
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -161,7 +161,7 @@ ast.stream() << "    return " << sn << "(" << std::endl;
                     if (o.local_attributes().empty())
 ast.stream() << std::endl;
                     else {
-                        text::formatters::sequence_formatter sf(o.local_attributes().size());
+                        utility::formatters::sequence_formatter sf(o.local_attributes().size());
                         for (const auto& attr : o.local_attributes()) {
 ast.stream() << "        create_" << attr.parsed_type().qualified().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();

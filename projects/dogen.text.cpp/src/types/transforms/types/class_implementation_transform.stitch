@@ -5,7 +5,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.text/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -126,7 +126,7 @@ void class_implementation_transform::apply(const context& ctx, const logical::en
 <#+
                 const auto size(o.parents().size() + o.local_attributes().size());
 
-                text::formatters::sequence_formatter sf(size);
+                utility::formatters::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
@@ -164,7 +164,7 @@ void class_implementation_transform::apply(const context& ctx, const logical::en
 <#= sn #>::<#= sn #>(
 <#+
 
-                    text::formatters::sequence_formatter sf(attr_count);
+                    utility::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto& attr : o.all_attributes()) {
 #>
@@ -180,7 +180,7 @@ void class_implementation_transform::apply(const context& ctx, const logical::en
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
                 }
 
-                text::formatters::sequence_formatter sf(sequence_size);
+                utility::formatters::sequence_formatter sf(sequence_size);
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto& pair : o.inherited_attributes()) {
@@ -196,7 +196,7 @@ void class_implementation_transform::apply(const context& ctx, const logical::en
     <#= sf.prefix() #><#= pqn #>(<#= sf.postfix(true/*skip*/) #>
 <#+
                         sf.next();
-                        text::formatters::sequence_formatter sf2(pattrs.size());
+                        utility::formatters::sequence_formatter sf2(pattrs.size());
                         sf2.element_separator("");
 
                         sf2.prefix_configuration().first("  ").not_first("  ");
@@ -390,7 +390,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
     return true;
 <#+
             else {
-                text::formatters::sequence_formatter sf(o.parents().size());
+                utility::formatters::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");
