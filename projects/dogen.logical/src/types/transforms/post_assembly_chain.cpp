@@ -40,6 +40,7 @@
 #include "dogen.logical/types/transforms/logic_less_templates_population_transform.hpp"
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
+#include "dogen.logical/types/transforms/decoration_transform.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -165,6 +166,11 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * Technical spaces must be updated prior to decoration.
      */
     all_technical_spaces_transform::apply(ctx, m);
+
+    /*
+     * Must be done after technical spaces are populated.
+     */
+    decoration_transform::apply(ctx, m);
 
     /*
      * Render all archetype templates. Must be done after the

@@ -56,7 +56,7 @@ apply(const context& ctx, entities::model_set& ms) {
          * Decoration transform must be applied after dynamic
          * transform because we need the new model elements.
          */
-        decoration_transform::apply(ctx, m);
+        // decoration_transform::apply(ctx, m);
 
         /*
          * Next we apply the generability transform. We do this after
