@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <string>
+#include "dogen.logical/types/entities/decoration/generation_marker.hpp"
 
 namespace dogen::logical::formatters {
 
+/**
+ * @brief Populates the generation marker, ready to be wrapped in
+ * comments.
+ */
 class generation_marker_formatter final {
 public:
-    generation_marker_formatter() = default;
-    generation_marker_formatter(const generation_marker_formatter&) = default;
-    generation_marker_formatter(generation_marker_formatter&&) = default;
-    ~generation_marker_formatter() = default;
-    generation_marker_formatter& operator=(const generation_marker_formatter&) = default;
-
-public:
-    bool operator==(const generation_marker_formatter& rhs) const;
-    bool operator!=(const generation_marker_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void format(std::ostream& s, const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
+        const entities::decoration::generation_marker& gm) const;
 };
 
 }

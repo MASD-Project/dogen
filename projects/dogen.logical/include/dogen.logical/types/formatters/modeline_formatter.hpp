@@ -25,24 +25,67 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <string>
+#include "dogen.logical/types/entities/decoration/modeline.hpp"
 
 namespace dogen::logical::formatters {
 
+/**
+ * @brief Creates a modeline, ready to be wrapped in comments.
+ *
+ * Note that the name modeline is slightly misleading because a bottom
+ * modeline may actually have more than one line. To wrap it into
+ * comments one must iterate through the lines.
+ *
+ */
 class modeline_formatter final {
-public:
-    modeline_formatter() = default;
-    modeline_formatter(const modeline_formatter&) = default;
-    modeline_formatter(modeline_formatter&&) = default;
-    ~modeline_formatter() = default;
-    modeline_formatter& operator=(const modeline_formatter&) = default;
+private:
+    /**
+     * @brief Returns true if the target editor is vim.
+     */
+    bool is_vim(const entities::decoration::modeline& ml) const;
+
+    /**
+     * @brief Returns true if the target editor is emacs.
+     */
+    bool is_emacs(const entities::decoration::modeline& m) const;
+
+    /**
+     * @brief Returns true if the modeline should be placed at the top
+     * of the file.
+     */
+    bool is_top_line(const entities::decoration::modeline& m) const;
+
+    /**
+     * @brief Returns true if the modeline should be placed at the
+     * bottom of the file.
+     */
+    bool is_bottom_line(
+        const entities::decoration::modeline& m) const;
+
+private:
+    /**
+     * @brief Creates a modeline for the vim editor.
+     */
+    void vim_modeline(std::ostream& s,
+        const entities::decoration::modeline& ml) const;
+
+    /**
+     * @brief Creates a modeline for the emacs editor, first line.
+     */
+    void emacs_top_modeline(std::ostream& s,
+        const entities::decoration::modeline& ml) const;
+
+    /**
+     * @brief Creates a modeline for the emacs editor, last lines.
+     */
+    void emacs_bottom_modeline(std::ostream& s,
+        const entities::decoration::modeline& ml) const;
 
 public:
-    bool operator==(const modeline_formatter& rhs) const;
-    bool operator!=(const modeline_formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void format(std::ostream& s,
+        const entities::decoration::modeline& m) const;
 };
 
 }
