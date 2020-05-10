@@ -25,24 +25,112 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.utility/types/formatters/infix_configuration.hpp"
 
 namespace dogen::utility::formatters {
 
-class sequence_formatter final {
+/**
+ * @brief Helper to format sequences.
+ */
+class sequence_formatter {
 public:
-    sequence_formatter() = default;
-    sequence_formatter(const sequence_formatter&) = default;
-    sequence_formatter(sequence_formatter&&) = default;
-    ~sequence_formatter() = default;
-    sequence_formatter& operator=(const sequence_formatter&) = default;
+    template <typename SequenceSize>
+    explicit sequence_formatter(const SequenceSize sequence_size)
+        : position_(0),
+          sequence_size_(static_cast<unsigned int>(sequence_size)),
+          element_separator_(",") {}
+
+private:
+    /**
+     * @brief Returns true if we are at the first position.
+     */
+    bool is_first() const;
+
+    /**
+     * @brief Returns true if we are at the last position.
+     */
+    bool is_last() const;
+
+    /**
+     * @brief Returns true if sequence has only one element.
+     */
+    bool is_single() const;
+
+    /**
+     * @brief Returns the string for the current position.
+     */
+    std::string value_for_position(const infix_configuration& ic) const;
 
 public:
-    bool operator==(const sequence_formatter& rhs) const;
-    bool operator!=(const sequence_formatter& rhs) const {
-        return !this->operator==(rhs);
+    /**
+     * @brief Configuration to use for the prefix.
+     */
+    infix_configuration& prefix_configuration();
+
+    /**
+     * @brief Configuration to use for the postfix.
+     */
+
+    infix_configuration& postfix_configuration();
+
+public:
+    /**
+     * @brief Gets the prefix for the current position.
+     */
+    std::string prefix() const;
+
+    /**
+     * @brief Gets the postfix for the current position and moves to
+     * the next position.
+     *
+     * @param skip if true, moves to the next position and returns an
+     * empty string. If false, returns the postfix for the current
+     * position and moves to the next position.
+     */
+    std::string postfix(const bool skip = false) const;
+
+public:
+    /**
+     * @brief Returns the current position.
+     */
+    unsigned int current_position() const;
+
+    /**
+     * @brief Logs the current state of the formatter to the log.
+     */
+    void log_current_state() const;
+
+public:
+    /**
+     * @brief Sets the value of the element separator. By default it
+     * is a comma.
+     */
+    void element_separator(const std::string& s);
+
+    /**
+     * @brief Moves to the next position.
+     */
+    void next();
+
+    /**
+     * @brief Resets the position and configurations.
+     */
+    /**@{*/
+    void reset();
+    template <typename SequenceSize>
+    void reset(const SequenceSize sequence_size) {
+        sequence_size_ = static_cast<unsigned int>(sequence_size);
+        reset();
     }
+    /**@}*/
 
+private:
+    unsigned int position_;
+    unsigned int sequence_size_;
+    std::string element_separator_;
+    infix_configuration prefix_configuration_;
+    infix_configuration postfix_configuration_;
 };
 
 }

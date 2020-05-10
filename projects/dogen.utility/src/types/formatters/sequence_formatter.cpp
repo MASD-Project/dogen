@@ -18,12 +18,121 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/io/formatters/infix_configuration_io.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("text.formatters.sequence_formatter"));
+
+const std::string empty;
+const std::string comma(",");
+
+}
 
 namespace dogen::utility::formatters {
 
-bool sequence_formatter::operator==(const sequence_formatter& /*rhs*/) const {
-    return true;
+bool sequence_formatter::is_first() const {
+    return position_ == 0;
+}
+
+bool sequence_formatter::is_last() const {
+    return position_ == sequence_size_ - 1;
+}
+
+bool sequence_formatter::is_single() const {
+    return is_first() && is_last();
+}
+
+std::string sequence_formatter::
+value_for_position(const infix_configuration& ic) const {
+    if (is_single()) {
+        if (!ic.first().empty()) {
+            // when we are single, first takes priority if supplied.
+            return ic.first();
+        }
+        return ic.last();
+    } else if (is_first() && !ic.first().empty()) {
+        // if is first and first has been supplied, it takes precedence.
+        return ic.first();
+    } else if (!is_last() && !ic.not_last().empty()) {
+        // if we are not last (including first) and not last has been
+        // supplied.
+        return ic.not_last();
+    } else if (!is_first() && (!is_last() || !ic.not_first().empty())) {
+        // when we are last, not first takes precedence if supplied.
+        return ic.not_first();
+    } else if (is_last())
+        return ic.last();
+
+    return empty;
+}
+
+infix_configuration& sequence_formatter::prefix_configuration() {
+    return prefix_configuration_;
+}
+
+infix_configuration& sequence_formatter::postfix_configuration() {
+    return postfix_configuration_;
+}
+
+std::string sequence_formatter::prefix() const {
+    log_current_state();
+    const auto r(value_for_position(prefix_configuration_));
+    BOOST_LOG_SEV(lg, trace) << "about to return: " << r;
+    return r;
+}
+
+std::string sequence_formatter::postfix(const bool skip) const {
+    if (skip)
+        return empty;
+
+    std::ostringstream s;
+    s << value_for_position(postfix_configuration_);
+    if (!is_last())
+        s << element_separator_;
+
+    return s.str();
+}
+
+unsigned int sequence_formatter::current_position() const {
+    return position_;
+}
+
+void sequence_formatter::log_current_state() const {
+    BOOST_LOG_SEV(lg, trace) << "Position: " << position_
+                             << " element separator: " << element_separator_
+                             << " is first: " << is_first()
+                             << " is last: " << is_last()
+                             << " is single: " << is_single();
+
+    BOOST_LOG_SEV(lg, trace) << "Prefix configuration: "
+                             << prefix_configuration_;
+    BOOST_LOG_SEV(lg, trace) << "Value for prefix position: "
+                             << value_for_position(prefix_configuration_);
+
+    BOOST_LOG_SEV(lg, trace) << "Postfix configuration: "
+                             << postfix_configuration_;
+    BOOST_LOG_SEV(lg, trace) << "Value for postfix position: "
+                             << value_for_position(postfix_configuration_);
+}
+
+void sequence_formatter::element_separator(const std::string& s) {
+    element_separator_ = s;
+}
+
+void sequence_formatter::next() {
+    ++position_;
+}
+
+void sequence_formatter::reset() {
+    position_ = 0;
+    element_separator_ = comma;
+    prefix_configuration_ = infix_configuration();
+    postfix_configuration_ = infix_configuration();
 }
 
 }
