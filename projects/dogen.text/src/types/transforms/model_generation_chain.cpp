@@ -27,7 +27,6 @@
 #include "dogen.text/types/transforms/local_enablement_transform.hpp"
 #include "dogen.text/types/transforms/formatting_transform.hpp"
 #include "dogen.text/types/transforms/global_enablement_transform.hpp"
-#include "dogen.text/types/transforms/technical_space_transform.hpp"
 #include "dogen.text/types/transforms/decoration_transform.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text/types/transforms/model_generation_chain.hpp"
@@ -53,12 +52,6 @@ apply(const context& ctx, entities::model_set& ms) {
      * Apply all of the post-processing transforms to the model.
      */
     for (auto& m : ms.models()) {
-        /*
-         * Technical spaces transform must be done after the dynamic
-         * transform but before decorations.
-         */
-        technical_space_transform::apply(ctx, m);
-
         /*
          * Decoration transform must be applied after dynamic
          * transform because we need the new model elements.
