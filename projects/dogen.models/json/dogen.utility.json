@@ -526,6 +526,10 @@
     },
     {
       "name": "formatters",
+      "documentation": "Contains all of the formatting primitives\nthat are not associated with any particular\nmodel.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -615,6 +619,97 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::indent_filter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::comment_style",
+      "documentation": "Supported styles of comments.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "c_style",
+          "type": "",
+          "documentation": "Original C programming language style.\n"
+        },
+        {
+          "name": "cpp_style",
+          "type": "",
+          "documentation": "One line, C++ style.\n"
+        },
+        {
+          "name": "csharp_style",
+          "type": "",
+          "documentation": "C# programming language style.\n"
+        },
+        {
+          "name": "shell_style",
+          "type": "",
+          "documentation": "UNIX shell scripting comments.\n"
+        },
+        {
+          "name": "sql_style",
+          "type": "",
+          "documentation": "Comments start with a double-dash.\n"
+        },
+        {
+          "name": "xml_style",
+          "type": "",
+          "documentation": "Comments using XML syntax.\n"
+        }
+      ]
+    },
+    {
+      "name": "formatters::comment_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::sequence_formatter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::infix_configuration",
+      "documentation": "Configuration to use for a given infix in sequence formatter.\n",
+      "stereotypes": [
+        "masd::fluent"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "first",
+          "type": "std::string",
+          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\nthan one element.\n"
+        },
+        {
+          "name": "not_first",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the first.\n"
+        },
+        {
+          "name": "not_last",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the last.\n"
+        },
+        {
+          "name": "last",
+          "type": "std::string",
+          "documentation": "Only applicable to the last element of a sequence.\n"
+        }
+      ]
     }
   ]
 }
