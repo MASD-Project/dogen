@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-10 Sun 09:43]
+#+CAPTION: Clock summary at [2020-05-10 Sun 13:44]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *20:23* |       |      | 100.0 |
+| *Total time*                                          | *23:23* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 20:23   |       |      | 100.0 |
-| Active                                                |         | 20:23 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  29.2 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   3.8 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   4.9 |
-| Check name of model for variability transform         |         |       | 0:19 |   1.6 |
-| Analysis on templating and logical model              |         |       | 1:09 |   5.6 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   2.2 |
-| Remove stitch template builder                        |         |       | 0:09 |   0.7 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   8.0 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   8.1 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   5.6 |
-| Split wale out of stitch templates                    |         |       | 4:52 |  23.9 |
-| Move decoration transform into logical model          |         |       | 1:17 |   6.3 |
+| Stories                                               | 23:23   |       |      | 100.0 |
+| Active                                                |         | 23:23 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  25.4 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   3.3 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   4.3 |
+| Check name of model for variability transform         |         |       | 0:19 |   1.4 |
+| Analysis on templating and logical model              |         |       | 1:09 |   4.9 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.9 |
+| Remove stitch template builder                        |         |       | 0:09 |   0.6 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   7.0 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   7.1 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   4.9 |
+| Split wale out of stitch templates                    |         |       | 4:52 |  20.8 |
+| Move decoration transform into logical model          |         |       | 4:17 |  18.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1008,6 +1008,7 @@ Notes:
 
 *** STARTED Move decoration transform into logical model              :story:
     :LOGBOOK:
+    CLOCK: [2020-05-10 Sun 10:43]--[2020-05-10 Sun 13:43] =>  3:00
     CLOCK: [2020-05-10 Sun 09:01]--[2020-05-10 Sun 09:43] =>  0:42
     CLOCK: [2020-05-09 Sat 18:24]--[2020-05-09 Sat 18:43] =>  0:19
     CLOCK: [2020-05-09 Sat 17:38]--[2020-05-09 Sat 17:54] =>  0:16
@@ -1023,6 +1024,9 @@ Notes:
   formatters, etc. We need to figure out the right place for these and
   its likely not the logical model. We could probably pull in a few of
   these into the logical model. This requires further analysis.
+- add all technical spaces transform with visitor based
+  implementation.
+- update decoration transform to use visitor too.
 
 *** Orchestration should have an initialiser                          :story:
 
