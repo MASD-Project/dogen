@@ -62,7 +62,9 @@ public:
     }
 
 public:
-    const std::unordered_set<logical::entities::technical_space>& result();
+    const std::unordered_set<logical::entities::technical_space>& result() {
+        return technical_spaces_;
+    }
 
 private:
     std::unordered_set<logical::entities::technical_space> technical_spaces_;
