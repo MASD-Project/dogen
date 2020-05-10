@@ -4451,6 +4451,14 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error has occurred while formatting.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
