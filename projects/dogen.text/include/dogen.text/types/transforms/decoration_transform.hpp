@@ -48,7 +48,6 @@ private:
      */
     static bool is_generatable(const logical::entities::name& meta_name);
 
-
 public:
     static void apply(const context& ctx, entities::model& m);
 };

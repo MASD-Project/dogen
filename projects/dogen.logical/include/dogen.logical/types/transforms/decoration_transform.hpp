@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/transforms/context.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Updates the decoration of all modeling elements.
+ */
 class decoration_transform final {
 public:
-    decoration_transform() = default;
-    decoration_transform(const decoration_transform&) = default;
-    decoration_transform(decoration_transform&&) = default;
-    ~decoration_transform() = default;
-    decoration_transform& operator=(const decoration_transform&) = default;
-
-public:
-    bool operator==(const decoration_transform& rhs) const;
-    bool operator!=(const decoration_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
