@@ -394,37 +394,12 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::decoration_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters",
       "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::formatting_error",
       "documentation": "An error has occurred while formatting.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers",
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "helpers::decoration_repository_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::building_exception",
       "stereotypes": [
         "masd::exception"
       ],
