@@ -88,7 +88,7 @@ private:
      * @brief Returns true the meta-model element is intrinsically
      * generatable false otherwise.
      */
-    bool is_generatable(const logical::entities::name& meta_name) const;
+    bool is_generatable(const entities::name& meta_name) const;
 
     /**
      * @brief Returns true if the type needs decorations.
@@ -108,15 +108,15 @@ public:
 
 private:
     const root_decorations_type& root_decorations_;
-    const logical::helpers::decoration_factory& decoration_factory_;
-    const boost::optional<decoration_configuration>& root_dc_;
+    const helpers::decoration_factory& decoration_factory_;
+    const boost::optional<decoration_configuration> root_dc_;
     const std::string root_id_;
     const features::decoration::feature_group& feature_group_;
     const entities::technical_space output_technical_space_;
 };
 
 updater::updater(const root_decorations_type& root_decorations,
-    const logical::helpers::decoration_factory& df,
+    const helpers::decoration_factory& df,
     const boost::optional<decoration_configuration>& root_dc,
     const std::string& root_id,
     const features::decoration::feature_group& fg,
@@ -125,9 +125,9 @@ updater::updater(const root_decorations_type& root_decorations,
       root_dc_(root_dc), root_id_(root_id), feature_group_(fg),
       output_technical_space_(ots) {}
 
-bool updater::is_generatable(const logical::entities::name& meta_name) const {
+bool updater::is_generatable(const entities::name& meta_name) const {
     // FIXME: massive hack for now.
-    using mnf = logical::helpers::meta_name_factory;
+    using mnf = helpers::meta_name_factory;
     static const auto otn(mnf::make_object_template_name());
     static const auto ln(mnf::make_licence_name());
     static const auto mln(mnf::make_modeline_name());
@@ -239,7 +239,7 @@ void updater::operator()(entities::element& e) {
      * so that when the formatters create the ODB options, it is
      * available.
      */
-    const auto odb_ts(logical::entities::technical_space::odb);
+    const auto odb_ts(entities::technical_space::odb);
     if (ts != odb_ts) {
         process_element(odb_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
@@ -249,7 +249,7 @@ void updater::operator()(entities::element& e) {
      * FIXME: hack for XML. We inject it regardless, just so that
      * that when the formatters need it, it is available.
      */
-    const auto xml_ts(logical::entities::technical_space::xml);
+    const auto xml_ts(entities::technical_space::xml);
     if (ts != xml_ts) {
         process_element(xml_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for XML.";
@@ -259,7 +259,7 @@ void updater::operator()(entities::element& e) {
      * FIXME: hack for CMake. We inject it regardless, just so
      * that when the formatters need it, it is available.
      */
-    const auto cmake_ts(logical::entities::technical_space::cmake);
+    const auto cmake_ts(entities::technical_space::cmake);
     if (ts != cmake_ts) {
         process_element(cmake_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for CMake.";
@@ -285,13 +285,12 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      * model elements.
      */
     const auto& fm(*ctx.feature_model());
-    const auto fg(logical::features::decoration::make_feature_group(fm));
+    const auto fg(features::decoration::make_feature_group(fm));
     auto& rm(*m.root_module());
-    const logical::helpers::decoration_configuration_factory dcf;
+    const helpers::decoration_configuration_factory dcf;
     const auto root_dc(dcf.make(fg, *rm.configuration()));
 
-    const auto mts(
-        [&]() {
+    const auto mts([&]() {
             const auto& ots(m.output_technical_spaces());
             const auto sz(ots.size());
             if (sz != 1) {
