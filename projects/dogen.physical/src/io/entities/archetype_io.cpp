@@ -59,8 +59,7 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"generated_by\": " << "\"" << tidy_up_string(v.generated_by()) << "\"" << ", "
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
-      << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\"" << ", "
-      << "\"text_to_text_transform\": " << "\"" << tidy_up_string(v.text_to_text_transform()) << "\""
+      << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\""
       << " }";
     return(s);
 }

@@ -46,7 +46,6 @@ physical::entities::archetype feature_bundle_implementation_transform::static_ar
             traits::facet_sn(), traits::feature_bundle_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_variability_feature_bundle_name().qualified().dot());
-        r.text_to_text_transform("");
         return r;
     }());
     return r;

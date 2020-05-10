@@ -39,7 +39,6 @@ physical::entities::archetype class_forward_declarations_transform::static_arche
             traits::facet_sn(), traits::class_forward_declarations_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
-        r.text_to_text_transform("");
         return r;
     }());
     return r;

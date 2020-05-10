@@ -3209,7 +3209,7 @@ user choices.#</dia:string>
         <dia:point val="113,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.95,-68.05;129.72,-61.95"/>
+        <dia:rectangle val="112.95,-68.05;129.72,-62.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="113,-68"/>
@@ -3218,7 +3218,7 @@ user choices.#</dia:string>
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype#</dia:string>
@@ -3366,29 +3366,6 @@ user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Part in which we are located.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#text_to_text_transform#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the Text-to-Text transform to apply to artefacts of this archetype, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

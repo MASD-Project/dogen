@@ -39,7 +39,6 @@ physical::entities::archetype primitive_header_transform::static_archetype() con
             traits::facet_sn(), traits::primitive_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_primitive_name().qualified().dot());
-        r.text_to_text_transform("");
         return r;
     }());
     return r;

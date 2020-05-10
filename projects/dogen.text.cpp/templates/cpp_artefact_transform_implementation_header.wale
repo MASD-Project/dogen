@@ -7,7 +7,6 @@ physical::entities::archetype {{class.simple_name}}::static_archetype() const {
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
         using lmnf = {{meta_name_factory}};
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
-        r.text_to_text_transform({{text_to_text_transform}});
         return r;
     }());
     return r;

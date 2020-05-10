@@ -37,7 +37,6 @@ physical::entities::archetype type_registrar_header_transform::static_archetype(
             traits::facet_sn(), traits::type_registrar_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_serialization_type_registrar_name().qualified().dot());
-        r.text_to_text_transform("");
         return r;
     }());
     return r;

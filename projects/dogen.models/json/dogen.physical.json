@@ -336,11 +336,6 @@
           "name": "part",
           "type": "std::string",
           "documentation": "Part in which we are located.\n"
-        },
-        {
-          "name": "text_to_text_transform",
-          "type": "std::string",
-          "documentation": "Name of the Text-to-Text transform to apply to artefacts of this archetype, if any.\n"
         }
       ]
     },
