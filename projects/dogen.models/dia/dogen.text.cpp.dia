@@ -252,25 +252,34 @@
         <dia:point val="-44,250"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,249.95;-30.36,253.05"/>
+        <dia:rectangle val="-44.05,249.95;-16.115,254.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,250"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
+#DOGEN masd.wale.kvp.class.simple_name=class_header_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=class_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.text_to_text_transform="dogen.text.transforms.stitch_transform"#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -309,7 +318,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -350,7 +359,512 @@
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    using logical::entities::structural::object;
+    const auto&amp; o(assistant::as&lt;object&gt;(e));
+    auto builder(f.make());
+
+    // algorithm: domain headers need it for the swap function.
+    builder.add(inclusion_constants::std::algorithm());
+
+    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
+    const bool in_inheritance(o.is_parent() || o.is_child());
+    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
+    const bool requires_io(io_enabled &amp;&amp; in_inheritance);
+
+    const auto ios(inclusion_constants::std::iosfwd());
+    if (requires_io)
+        builder.add(ios);
+
+    using ser = transforms::serialization::traits;
+    const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
+    builder.add(o.name(), ser_fwd_arch);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+
+    const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
+    builder.add(o.opaque_associations(), fwd_arch);
+
+    const auto self_arch(class_header_transform::static_archetype().meta_name().qualified());
+    builder.add(o.parents(), self_arch);
+
+    using hash = transforms::hash::traits;
+    const auto hash_carch(hash::traits::canonical_archetype());
+    builder.add(o.associative_container_keys(), hash_carch);
+
+    if (o.is_visitation_root()) {
+        /*
+         * On the header files of the visitation root we only care
+         * about the base visitor; as such we can get away with a
+         * forward declaration. For the visitation leaves, since we
+         * must include the parent we do not need any additional
+         * includes.
+         */
+        builder.add(o.opaque_associations(), fwd_arch);
+
+        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype_qn());
+        builder.add(*o.base_visitor(), visitor_fwd_arch);
+    }
+    return builder.build();
+}
+
+void class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        const auto sn(o.name().simple());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#+
+            ast.comment(o.documentation());
+            if (o.parents().empty()) {
+#&gt;
+class &lt;#= sn #&gt; &lt;#= ast.make_final_keyword_text(o) #&gt;{
+&lt;#+
+            } else {
+                const auto&amp; pn(o.parents().front());
+                const auto pqn(ast.get_qualified_name(pn));
+#&gt;
+class &lt;#= sn #&gt; &lt;#= ast.make_final_keyword_text(o) #&gt;: public &lt;#= pqn #&gt; {
+&lt;#+
+            }
+
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (ast.supports_defaulted_functions()) {
+#&gt;
+public:
+&lt;#+
+                if (!ast.requires_manual_default_constructor())
+#&gt;
+    &lt;#= sn #&gt;() = default;
+    &lt;#= sn #&gt;(const &lt;#= sn #&gt;&amp;) = default;
+&lt;#+
+                if (!ast.requires_manual_move_constructor())
+#&gt;
+    &lt;#= sn #&gt;(&lt;#= sn #&gt;&amp;&amp;) = default;
+&lt;#+
+                if (!o.in_inheritance_relationship())
+#&gt;
+    ~&lt;#= sn #&gt;() = default;
+&lt;#+
+                if (o.is_immutable())
+#&gt;
+    &lt;#= sn #&gt;&amp; operator=(const &lt;#= sn #&gt;&amp;) = delete;
+&lt;#+
+                else if (o.all_attributes().empty())
+#&gt;
+    &lt;#= sn #&gt;&amp; operator=(const &lt;#= sn #&gt;&amp;) = default;
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated default constructor.
+             */
+            if (ast.requires_manual_default_constructor()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;();
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated destructor.
+             *
+             * according to MEC++, item 33, base classes should always be
+             * abstract. this avoids all sorts of tricky problems with
+             * assignment and swap.
+             *
+             * incidentally, this also fixes some strange clang errors:
+             * undefined reference to `vtable.
+             */
+            if (o.is_parent()) {
+#&gt;
+    virtual ~&lt;#= sn #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; = 0;
+
+&lt;#+
+            } else if (o.is_child() != 0) {
+#&gt;
+    virtual ~&lt;#= sn #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; { }
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (ast.requires_manual_move_constructor()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;(&lt;#= sn #&gt;&amp;&amp; rhs);
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+            if (!o.all_attributes().empty()) {
+#&gt;
+public:
+&lt;#+
+                const auto attr_count(o.all_attributes().size());
+                if (attr_count == 1) {
+                    const auto attr(*o.all_attributes().begin());
+#&gt;
+    explicit &lt;#= sn #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;);
+&lt;#+
+                } else {
+#&gt;
+    &lt;#= sn #&gt;(
+&lt;#+
+                    utility::formatters::sequence_formatter sf(attr_count);
+                    sf.postfix_configuration().last(");");
+                    for (const auto&amp; attr : o.all_attributes()) {
+#&gt;
+        const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;&lt;#= sf.postfix() #&gt;
+&lt;#+
+                        sf.next();
+                    }
+                }
+#&gt;
+
+&lt;#+
+            }
+
+            /*
+             * Serialisaton Friends
+             */
+            if (ast.is_serialization_enabled()) {
+#&gt;
+private:
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::save(Archive&amp; ar, const &lt;#= qn #&gt;&amp; v, unsigned int version);
+
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
+
+&lt;#+
+            }
+
+            /*
+             * Visitation.
+             */
+            if (o.is_visitation_root()) {
+                const auto vsn(o.base_visitor()-&gt;simple());
+#&gt;
+public:
+    virtual void accept(const &lt;#= vsn #&gt;&amp; v) const = 0;
+    virtual void accept(&lt;#= vsn #&gt;&amp; v) const = 0;
+    virtual void accept(const &lt;#= vsn #&gt;&amp; v) = 0;
+    virtual void accept(&lt;#= vsn #&gt;&amp; v) = 0;
+
+&lt;#+
+            } else if (o.is_visitation_leaf()) {
+                std::string bvn;
+                std::string rpn;
+                if (o.derived_visitor()) {
+                    bvn = ast.get_qualified_name(*o.base_visitor());
+                    rpn = ast.get_qualified_name(o.root_parents().front());
+                } else {
+                    bvn = o.base_visitor()-&gt;simple();
+                    rpn = o.root_parents().front().simple();
+                }
+#&gt;
+public:
+    using &lt;#= rpn #&gt;::accept;
+
+    virtual void accept(const &lt;#= bvn #&gt;&amp; v) const&lt;#= ast.make_override_keyword_text() #&gt;;
+    virtual void accept(&lt;#= bvn #&gt;&amp; v) const&lt;#= ast.make_override_keyword_text() #&gt;;
+    virtual void accept(const &lt;#= bvn #&gt;&amp; v)&lt;#= ast.make_override_keyword_text() #&gt;;
+    virtual void accept(&lt;#= bvn #&gt;&amp; v)&lt;#= ast.make_override_keyword_text() #&gt;;
+&lt;#+
+            }
+
+            /*
+             * Streaming
+             */
+            if (ast.is_io_enabled()) {
+                if (o.is_parent()) {
+#&gt;
+public:
+    virtual void to_stream(std::ostream&amp; s) const;
+
+&lt;#+
+                } else if (!o.parents().empty()) {
+#&gt;
+public:
+    void to_stream(std::ostream&amp; s) const&lt;#= ast.make_override_keyword_text() #&gt;;
+
+&lt;#+
+                }
+            }
+
+            /*
+             * Getters and setters.
+             */
+            if (!o.local_attributes().empty()) {
+#&gt;
+public:
+&lt;#+
+                for (const auto&amp; attr : o.local_attributes()) {
+                    ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+
+                    if (attr.parsed_type().is_current_simple_type()) {
+#&gt;
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; &lt;#= attr.name().simple() #&gt;() const;
+&lt;#+
+                        if (attr.is_immutable()) {
+#&gt;
+
+&lt;#+
+                            continue;
+                        }
+#&gt;
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; v);
+&lt;#+
+                    } else {
+#&gt;
+    const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= attr.name().simple() #&gt;() const;
+&lt;#+
+                        if (attr.is_immutable()) {
+#&gt;
+
+&lt;#+
+                            continue;
+                        }
+#&gt;
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;();
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; v);
+&lt;#+
+                        if (ast.supports_move_operator()) {
+#&gt;
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp;&amp; v);
+&lt;#+
+                        }
+                    }
+                    ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+#&gt;
+
+&lt;#+
+                }
+            }
+
+            /*
+             * Equality.
+             *
+             * Equality is only public in leaf classes - MEC++-33.
+             */
+            if (o.is_parent()) {
+#&gt;
+protected:
+    bool compare(const &lt;#= sn #&gt;&amp; rhs) const;
+&lt;#+
+            } else {
+#&gt;
+public:
+    bool operator==(const &lt;#= sn #&gt;&amp; rhs) const;
+    bool operator!=(const &lt;#= sn #&gt;&amp; rhs) const {
+        return !this-&gt;operator==(rhs);
+    }
+
+&lt;#+
+            }
+
+            if (o.in_inheritance_relationship()) {
+#&gt;
+public:
+&lt;#+
+                if (o.is_parent() &amp;&amp; !o.is_child()) {
+#&gt;
+    virtual bool equals(const &lt;#= sn #&gt;&amp; other) const = 0;
+&lt;#+
+                } else if (o.is_parent()) {
+                    const auto rpn(o.root_parents().front());
+#&gt;
+    virtual bool equals(const &lt;#= ast.get_qualified_name(rpn) #&gt;&amp; other) const = 0;
+&lt;#+
+                } else if (!o.root_parents().empty()) {
+                    const auto rpn(o.root_parents().front());
+#&gt;
+    bool equals(const &lt;#= ast.get_qualified_name(rpn) #&gt;&amp; other) const&lt;#= ast.make_override_keyword_text() #&gt;;
+&lt;#+
+                }
+#&gt;
+
+&lt;#+
+             }
+
+            /*
+             * Swap and assignment.
+             *
+             * Swap and assignment are only public in leaf classes - MEC++-33
+             */
+            if ((!o.all_attributes().empty() || o.is_parent()) &amp;&amp; !o.is_immutable()) {
+                if (o.is_parent()) {
+#&gt;
+protected:
+&lt;#+
+                } else {
+#&gt;
+public:
+&lt;#+
+                }
+#&gt;
+    void swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_keyword_text() #&gt;;
+&lt;#+
+                if (!o.is_parent() &amp;&amp; !o.is_immutable()) {
+#&gt;
+    &lt;#= sn #&gt;&amp; operator=(&lt;#= sn #&gt; other);
+&lt;#+
+                }
+#&gt;
+
+&lt;#+
+            }
+
+            /*
+             * Member variables.
+             */
+            if (!o.local_attributes().empty()) {
+#&gt;
+private:
+&lt;#+
+                for (const auto&amp; attr : o.local_attributes()) {
+#&gt;
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; &lt;#= attr.member_variable_name() #&gt;;
+&lt;#+
+                }
+            }
+#&gt;
+};
+
+&lt;#+
+            /*
+             * Destructor implementation.
+             */
+            if (o.is_parent()) {
+#&gt;
+inline &lt;#= sn #&gt;::~&lt;#= sn #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; { }
+
+&lt;#+
+            }
+
+            /*
+             * Global equality operator implementation.
+             */
+            if (o.is_parent()) {
+#&gt;
+inline bool operator==(const &lt;#= sn #&gt;&amp; lhs, const &lt;#= sn #&gt;&amp; rhs) {
+    return lhs.equals(rhs);
+}
+
+&lt;#+
+            }
+        }
+
+        if (!o.all_attributes().empty() &amp;&amp; !o.is_parent() &amp;&amp; !o.is_immutable()) {
+#&gt;
+
+namespace std {
+
+template&lt;&gt;
+inline void swap(
+    &lt;#= qn #&gt;&amp; lhs,
+    &lt;#= qn #&gt;&amp; rhs) {
+    lhs.swap(rhs);
+}
+
+}
+&lt;#+
+        }
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -1233,13 +1747,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,255"/>
+        <dia:point val="-44,261"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,254.95;-30.36,258.05"/>
+        <dia:rectangle val="-44.05,260.95;-30.36,264.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,255"/>
+        <dia:point val="-44,261"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -1344,13 +1858,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,260"/>
+        <dia:point val="-44,266"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,259.95;-30.36,263.05"/>
+        <dia:rectangle val="-44.05,265.95;-30.36,269.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,260"/>
+        <dia:point val="-44,266"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -1455,13 +1969,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,265"/>
+        <dia:point val="-44,271"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,264.95;-29.91,268.05"/>
+        <dia:rectangle val="-44.05,270.95;-29.91,274.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,265"/>
+        <dia:point val="-44,271"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.040000000000001"/>
@@ -1566,13 +2080,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,255"/>
+        <dia:point val="-17,271"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,254.95;-4.36,258.05"/>
+        <dia:rectangle val="-17.05,270.95;-3.36,274.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,255"/>
+        <dia:point val="-17,271"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -1677,13 +2191,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,250"/>
+        <dia:point val="-17,266"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,249.95;-2.78,253.05"/>
+        <dia:rectangle val="-17.05,265.95;-1.78,269.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,250"/>
+        <dia:point val="-17,266"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.169999999999998"/>
@@ -12227,13 +12741,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,260"/>
+        <dia:point val="-17,276"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,259.95;-4.36,263.05"/>
+        <dia:rectangle val="-17.05,275.95;-3.36,279.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,260"/>
+        <dia:point val="-17,276"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -19657,13 +20171,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O156">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,307"/>
+        <dia:point val="-44,350"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,306.95;-31.13,310.05"/>
+        <dia:rectangle val="-44.05,349.95;-31.13,353.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,307"/>
+        <dia:point val="-44,350"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24450,13 +24964,13 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,270"/>
+        <dia:point val="-44,276"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,269.95;-30.36,273.05"/>
+        <dia:rectangle val="-44.05,275.95;-30.36,279.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,270"/>
+        <dia:point val="-44,276"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -25116,13 +25630,13 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O207">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,265"/>
+        <dia:point val="-17,281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,264.95;-0.9475,268.05"/>
+        <dia:rectangle val="-17.05,280.95;0.0525,284.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,265"/>
+        <dia:point val="-17,281"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.002500000000001"/>
@@ -28929,13 +29443,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,285"/>
+        <dia:point val="-44,291"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,284.95;-23.7075,288.05"/>
+        <dia:rectangle val="-44.05,290.95;-23.7075,294.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,285"/>
+        <dia:point val="-44,291"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.2425"/>
@@ -29040,13 +29554,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,290"/>
+        <dia:point val="-44,296"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,289.95;-19.7275,293.05"/>
+        <dia:rectangle val="-44.05,295.95;-19.7275,299.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,290"/>
+        <dia:point val="-44,296"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.2225"/>
@@ -29151,13 +29665,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,300"/>
+        <dia:point val="-44,306"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,299.95;-25.755,303.05"/>
+        <dia:rectangle val="-44.05,305.95;-25.755,309.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,300"/>
+        <dia:point val="-44,306"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.195"/>
@@ -32096,13 +32610,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O265">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,270"/>
+        <dia:point val="-17,286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,269.95;-0.39,273.05"/>
+        <dia:rectangle val="-17.05,285.95;0.61,289.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,270"/>
+        <dia:point val="-17,286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.559999999999999"/>
@@ -32207,13 +32721,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,275"/>
+        <dia:point val="-17,291"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,274.95;0.245,278.05"/>
+        <dia:rectangle val="-17.05,290.95;1.245,294.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,275"/>
+        <dia:point val="-17,291"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.195"/>
@@ -32429,13 +32943,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,275"/>
+        <dia:point val="-44,281"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,274.95;-24.5575,278.05"/>
+        <dia:rectangle val="-44.05,280.95;-24.5575,284.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,275"/>
+        <dia:point val="-44,281"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.392500000000002"/>
@@ -33853,13 +34367,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O282">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,280"/>
+        <dia:point val="-44,286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,279.95;-30.36,283.05"/>
+        <dia:rectangle val="-44.05,285.95;-30.36,289.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,280"/>
+        <dia:point val="-44,286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -35054,13 +35568,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,295"/>
+        <dia:point val="-44,301"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,294.95;-28.1775,298.05"/>
+        <dia:rectangle val="-44.05,300.95;-28.1775,304.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,295"/>
+        <dia:point val="-44,301"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.772499999999999"/>
@@ -35276,13 +35790,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O296">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,324"/>
+        <dia:point val="-44,313"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,323.95;-16.115,328.45"/>
+        <dia:rectangle val="-44.05,312.95;-16.115,317.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,324"/>
+        <dia:point val="-44,313"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -35432,6 +35946,7 @@ void archetype_class_header_transform::apply(const context&amp; ctx, const logic
             const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 #&gt;
+
 class &lt;#= o.name().simple() #&gt; final : public model_to_text_transform {
 public:
     physical::entities::archetype static_archetype() const;
@@ -35456,6 +35971,7 @@ public:
     void apply(const context&amp; ctx, const logical::entities::element&amp; e,
         physical::entities::artefact&amp; a) const override;
 };
+
 &lt;#+
         } // snf
 #&gt;
@@ -35873,13 +36389,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O299">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,330"/>
+        <dia:point val="-44,319"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,329.95;-18.81,334.45"/>
+        <dia:rectangle val="-44.05,318.95;-18.81,323.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,330"/>
+        <dia:point val="-44,319"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>

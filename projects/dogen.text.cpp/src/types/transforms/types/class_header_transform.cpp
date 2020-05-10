@@ -33,7 +33,6 @@
 #include "dogen.text.cpp/types/transforms/types/class_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-
 physical::entities::archetype class_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -42,7 +41,7 @@ physical::entities::archetype class_header_transform::static_archetype() const {
             traits::facet_sn(), traits::class_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
-        r.text_to_text_transform("");
+        r.text_to_text_transform("dogen.text.transforms.stitch_transform");
         return r;
     }());
     return r;

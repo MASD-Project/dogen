@@ -80,6 +80,7 @@ void archetype_class_header_transform::apply(const context& ctx, const logical::
         {
             const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
 ast.stream() << "class " << o.name().simple() << " final : public model_to_text_transform {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    physical::entities::archetype static_archetype() const;" << std::endl;
@@ -104,6 +105,7 @@ ast.stream() << "public:" << std::endl;
 ast.stream() << "    void apply(const context& ctx, const logical::entities::element& e," << std::endl;
 ast.stream() << "        physical::entities::artefact& a) const override;" << std::endl;
 ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf
