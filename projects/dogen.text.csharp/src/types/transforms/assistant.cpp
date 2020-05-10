@@ -21,7 +21,7 @@
 #include <cctype>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text/types/formatters/indent_filter.hpp"
-#include "dogen.text/types/formatters/comment_formatter.hpp"
+#include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
@@ -158,11 +158,11 @@ comment(const std::string& c, const unsigned int identation_level) {
     for (unsigned int i = 0; i < identation_level; ++i)
         stream() << text::formatters::indent_in;
 
-    text::formatters::comment_formatter f(
+    utility::formatters::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        text::formatters::comment_style::csharp_style,
+        utility::formatters::comment_style::csharp_style,
         !last_line_is_blank);
     f.format(stream(), c);
 
@@ -176,11 +176,11 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     std::ostringstream s;
     s << " ";
-    text::formatters::comment_formatter f(
+    utility::formatters::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        text::formatters::comment_style::csharp_style,
+        utility::formatters::comment_style::csharp_style,
         !last_line_is_blank);
 
     f.format(s, c);

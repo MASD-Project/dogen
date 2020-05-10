@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/generation_marker.hpp"
-#include "dogen.text/types/formatters/comment_style.hpp"
+#include "dogen.utility/types/formatters/comment_style.hpp"
 
 namespace dogen::text::formatters {
 
@@ -69,8 +69,8 @@ private:
         const std::string& licence_text) const;
 
 public:
-    void format_preamble(std::ostream& s, const comment_style& single_line_cs,
-        const comment_style& multi_line_cs, const std::string& licence_text,
+    void format_preamble(std::ostream& s, const utility::formatters::comment_style& single_line_cs,
+        const utility::formatters::comment_style& multi_line_cs, const std::string& licence_text,
         const std::list<std::string>& copyright_notices,
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
@@ -79,7 +79,7 @@ public:
         boost::shared_ptr<
         logical::entities::decoration::generation_marker> gm) const;
 
-    void format_preamble(std::ostream& s, const comment_style& cs,
+    void format_preamble(std::ostream& s, const utility::formatters::comment_style& cs,
         const std::string& licence_text,
         const std::list<std::string>& copyright_notices,
         const std::string& generation_timestamp,
@@ -89,7 +89,7 @@ public:
         boost::shared_ptr<
         logical::entities::decoration::generation_marker> gm) const;
 
-    void format_postamble(std::ostream& s, const comment_style& cs,
+    void format_postamble(std::ostream& s, const utility::formatters::comment_style& cs,
         const boost::shared_ptr<
         logical::entities::decoration::modeline> ml) const;
 };

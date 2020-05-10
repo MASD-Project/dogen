@@ -438,59 +438,12 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::comment_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::formatting_error",
       "documentation": "An error has occurred while formatting.\n",
       "stereotypes": [
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::comment_style",
-      "documentation": "Supported styles of comments.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "c_style",
-          "type": "",
-          "documentation": "Original C programming language style.\n"
-        },
-        {
-          "name": "cpp_style",
-          "type": "",
-          "documentation": "One line, C++ style.\n"
-        },
-        {
-          "name": "csharp_style",
-          "type": "",
-          "documentation": "C# programming language style.\n"
-        },
-        {
-          "name": "shell_style",
-          "type": "",
-          "documentation": "UNIX shell scripting comments.\n"
-        },
-        {
-          "name": "sql_style",
-          "type": "",
-          "documentation": "Comments start with a double-dash.\n"
-        },
-        {
-          "name": "xml_style",
-          "type": "",
-          "documentation": "Comments using XML syntax.\n"
-        }
-      ]
     },
     {
       "name": "helpers",

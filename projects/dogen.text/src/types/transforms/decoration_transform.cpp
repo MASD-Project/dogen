@@ -135,7 +135,7 @@ decoration_transform::make_decoration(const std::string& licence_text,
      * Create the preamble and postamble for the decoration, taking
      * into account the element's technical space.
      */
-    using formatters::comment_style;
+    using utility::formatters::comment_style;
     using logical::entities::technical_space;
 
     std::ostringstream preamble_stream;

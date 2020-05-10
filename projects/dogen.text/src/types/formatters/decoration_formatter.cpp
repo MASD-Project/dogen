@@ -23,8 +23,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_io.hpp"
-#include "dogen.text/io/formatters/comment_style_io.hpp"
-#include "dogen.text/types/formatters/comment_formatter.hpp"
+#include "dogen.utility/io/formatters/comment_style_io.hpp"
+#include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.text/types/formatters/modeline_formatter.hpp"
 #include "dogen.text/types/formatters/generation_marker_formatter.hpp"
 #include "dogen.text/types/formatters/decoration_formatter.hpp"
@@ -99,8 +99,8 @@ void decoration_formatter::add_licence(std::list<std::string>& content,
 }
 
 void decoration_formatter::format_preamble(
-    std::ostream& s, const comment_style& single_line_cs,
-    const comment_style& multi_line_cs, const std::string& licence_text,
+    std::ostream& s, const utility::formatters::comment_style& single_line_cs,
+    const utility::formatters::comment_style& multi_line_cs, const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
     const std::string& generation_timestamp,
     const std::string& origin_shah1_hash,
@@ -108,7 +108,7 @@ void decoration_formatter::format_preamble(
     const boost::shared_ptr<
     logical::entities::decoration::generation_marker> gm) const {
 
-    if (single_line_cs == comment_style::xml_style) {
+    if (single_line_cs == utility::formatters::comment_style::xml_style) {
         /*
          * If we're in XML, add the XML declaration.
          */
@@ -130,7 +130,7 @@ void decoration_formatter::format_preamble(
         return;
 
     if (has_modeline && is_top && content.size() == 1) {
-        comment_formatter cf(
+        utility::formatters::comment_formatter cf(
             start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
@@ -139,7 +139,7 @@ void decoration_formatter::format_preamble(
 
         cf.format(s, content, !line_between_blocks);
     } else {
-        comment_formatter cf(
+        utility::formatters::comment_formatter cf(
             is_top ? start_on_first_line : !start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,
@@ -151,7 +151,7 @@ void decoration_formatter::format_preamble(
 }
 
 void decoration_formatter::
-format_preamble(std::ostream& s, const comment_style& cs,
+format_preamble(std::ostream& s, const utility::formatters::comment_style& cs,
     const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
     const std::string& generation_timestamp,
@@ -166,7 +166,7 @@ format_preamble(std::ostream& s, const comment_style& cs,
 }
 
 void decoration_formatter::
-format_postamble(std::ostream& s, const comment_style& cs,
+format_postamble(std::ostream& s, const utility::formatters::comment_style& cs,
     const boost::shared_ptr<logical::entities::decoration::modeline> ml) const {
 
     if (!ml) {
@@ -179,7 +179,7 @@ format_postamble(std::ostream& s, const comment_style& cs,
         std::list<std::string> content;
         add_modeline(content, ml);
 
-        comment_formatter cf(
+        utility::formatters::comment_formatter cf(
             !start_on_first_line,
             !use_documentation_tool_markup,
             !documenting_previous_identifier,

@@ -301,6 +301,7 @@ make_copyright_notices(const bool with_multiple_holders = false) {
 
 using namespace dogen::logical::entities;
 using namespace dogen::logical::entities::decoration;
+using dogen::utility::formatters::comment_style;
 boost::shared_ptr<generation_marker> empty_marker;
 boost::shared_ptr<modeline> empty_modeline;
 
