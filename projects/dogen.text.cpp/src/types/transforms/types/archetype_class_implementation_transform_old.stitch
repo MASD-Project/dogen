@@ -29,10 +29,10 @@ std::list<std::string> archetype_class_implementation_transform_old::inclusion_d
 void archetype_class_implementation_transform_old::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-
-    // no content by design.
+    const auto& arch(ast.as<logical::entities::physical::archetype>(e));
     a.overwrite(true);
     ast.update_artefact();
+    a.content(arch.rendered_stitch_template());
 }
 
 #>
