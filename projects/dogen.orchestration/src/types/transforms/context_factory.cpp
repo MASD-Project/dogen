@@ -261,6 +261,7 @@ make_context(const configuration& cfg, const std::string& activity,
     std::ostringstream s;
     s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
     r.text_context().generation_timestamp(s.str());
+    r.logical_context().activity_timestamp(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Generated context. Result: " << r;
     return r;
