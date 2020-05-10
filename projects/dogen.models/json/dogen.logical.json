@@ -436,6 +436,11 @@
           "documentation": "Technical spaces into which to extract the final model.\n"
         },
         {
+          "name": "all_technical_spaces",
+          "type": "std::unordered_set<logical::entities::technical_space>",
+          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
+        },
+        {
           "name": "orm_properties",
           "type": "boost::optional<orm::model_properties>"
         },
@@ -4466,6 +4471,13 @@
     },
     {
       "name": "helpers::decoration_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::all_technical_spaces_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

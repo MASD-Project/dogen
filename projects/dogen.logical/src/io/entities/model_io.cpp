@@ -108,6 +108,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::logical::entities::technical_space>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::orm::model_properties>& v) {
@@ -155,6 +169,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_technical_space\": " << v.input_technical_space() << ", "
       << "\"output_technical_spaces\": " << v.output_technical_spaces() << ", "
+      << "\"all_technical_spaces\": " << v.all_technical_spaces() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"structural_elements\": " << v.structural_elements() << ", "

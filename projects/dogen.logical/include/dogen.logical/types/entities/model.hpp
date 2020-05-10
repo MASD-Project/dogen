@@ -36,6 +36,7 @@
 #include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/extraction_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
@@ -77,6 +78,7 @@ public:
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const dogen::logical::entities::technical_space input_technical_space,
         const std::list<dogen::logical::entities::technical_space>& output_technical_spaces,
+        const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
         const dogen::logical::entities::extraction_properties& extraction_properties,
         const dogen::logical::entities::structural::element_repository& structural_elements,
@@ -174,6 +176,20 @@ public:
     std::list<dogen::logical::entities::technical_space>& output_technical_spaces();
     void output_technical_spaces(const std::list<dogen::logical::entities::technical_space>& v);
     void output_technical_spaces(const std::list<dogen::logical::entities::technical_space>&& v);
+    /**@}*/
+
+    /**
+     * @brief Set of all technical concrete spaces involved in generating this model.
+     *
+     * Includes the primary technical space (e.g. the output technical space) as well as
+     * all of the secondary technical spaces. Does not include any abstract technical
+     * spaces.
+     */
+    /**@{*/
+    const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces() const;
+    std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces();
+    void all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>& v);
+    void all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>&& v);
     /**@}*/
 
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties() const;
@@ -296,6 +312,7 @@ private:
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     dogen::logical::entities::technical_space input_technical_space_;
     std::list<dogen::logical::entities::technical_space> output_technical_spaces_;
+    std::unordered_set<dogen::logical::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
     dogen::logical::entities::extraction_properties extraction_properties_;
     dogen::logical::entities::structural::element_repository structural_elements_;

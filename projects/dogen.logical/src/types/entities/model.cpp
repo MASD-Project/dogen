@@ -46,6 +46,7 @@ model::model(model&& rhs)
       root_module_(std::move(rhs.root_module_)),
       input_technical_space_(std::move(rhs.input_technical_space_)),
       output_technical_spaces_(std::move(rhs.output_technical_spaces_)),
+      all_technical_spaces_(std::move(rhs.all_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)),
       structural_elements_(std::move(rhs.structural_elements_)),
@@ -70,6 +71,7 @@ model::model(
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
     const dogen::logical::entities::technical_space input_technical_space,
     const std::list<dogen::logical::entities::technical_space>& output_technical_spaces,
+    const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const dogen::logical::entities::extraction_properties& extraction_properties,
     const dogen::logical::entities::structural::element_repository& structural_elements,
@@ -92,6 +94,7 @@ model::model(
       root_module_(root_module),
       input_technical_space_(input_technical_space),
       output_technical_spaces_(output_technical_spaces),
+      all_technical_spaces_(all_technical_spaces),
       orm_properties_(orm_properties),
       extraction_properties_(extraction_properties),
       structural_elements_(structural_elements),
@@ -117,6 +120,7 @@ void model::swap(model& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(output_technical_spaces_, other.output_technical_spaces_);
+    swap(all_technical_spaces_, other.all_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(extraction_properties_, other.extraction_properties_);
     swap(structural_elements_, other.structural_elements_);
@@ -142,6 +146,7 @@ bool model::operator==(const model& rhs) const {
         root_module_ == rhs.root_module_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         output_technical_spaces_ == rhs.output_technical_spaces_ &&
+        all_technical_spaces_ == rhs.all_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
         structural_elements_ == rhs.structural_elements_ &&
@@ -289,6 +294,22 @@ void model::output_technical_spaces(const std::list<dogen::logical::entities::te
 
 void model::output_technical_spaces(const std::list<dogen::logical::entities::technical_space>&& v) {
     output_technical_spaces_ = std::move(v);
+}
+
+const std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() const {
+    return all_technical_spaces_;
+}
+
+std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() {
+    return all_technical_spaces_;
+}
+
+void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>& v) {
+    all_technical_spaces_ = v;
+}
+
+void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>&& v) {
+    all_technical_spaces_ = std::move(v);
 }
 
 const boost::optional<dogen::logical::entities::orm::model_properties>& model::orm_properties() const {
