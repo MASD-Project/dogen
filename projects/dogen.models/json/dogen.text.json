@@ -482,27 +482,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::decoration_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::modeline_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::generation_marker_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::namespace_formatter",
       "stereotypes": [
         "dogen::handcrafted::typeable"

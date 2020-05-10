@@ -27,15 +27,15 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/generation_marker.hpp"
-#include "dogen.utility/types/formatters/indent_filter.hpp"
-#include "dogen.text/types/formatters/decoration_formatter.hpp"
+#include "dogen.logical/types/formatters/decoration_formatter.hpp"
 
 namespace {
 
-const std::string test_module("dogen.text.tests");
+const std::string test_module("dogen.logical.tests");
 const std::string test_suite("decoration_formatter_tests");
 
 const std::string empty;
@@ -334,7 +334,8 @@ make_generation_marker(
     return r;
 }
 
-using namespace dogen::text::formatters;
+using namespace dogen::logical::formatters;
+
 std::string format_preamble(
     const comment_style& cs,
     const std::string& licence_text,
@@ -354,7 +355,7 @@ std::string format_preamble(
 
 }
 
-using namespace dogen::text::formatters;
+using namespace dogen::logical::formatters;
 using namespace dogen::utility::test;
 using dogen::utility::test::asserter;
 

@@ -34,7 +34,7 @@
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/helpers/decoration_repository_factory.hpp"
-#include "dogen.text/types/formatters/decoration_formatter.hpp"
+#include "dogen.logical/types/formatters/decoration_formatter.hpp"
 #include "dogen.text/io/transforms/decoration_configuration_io.hpp"
 #include "dogen.text/types/transforms/decoration_transform.hpp"
 
@@ -139,7 +139,7 @@ decoration_transform::make_decoration(const std::string& licence_text,
     using logical::entities::technical_space;
 
     std::ostringstream preamble_stream;
-    formatters::decoration_formatter df;
+    logical::formatters::decoration_formatter df;
     if (ts == technical_space::cpp) {
         df.format_preamble(preamble_stream,
             comment_style::cpp_style/*single line*/,
