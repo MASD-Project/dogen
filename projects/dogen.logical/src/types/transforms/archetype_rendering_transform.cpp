@@ -123,30 +123,23 @@ std::string archetype_rendering_transform::render_stitch_template(
      * decoration to build up the KVP map that will be supplied to the
      * template instantiator. The decoration must exist.
      */
-    // FIXME: move decoration transform
-    // const auto ts(logical::entities::technical_space::cpp);
-    // const auto i(arch.decoration().find(ts));
-    // if (i == arch.decoration().end()) {
-    //     BOOST_LOG_SEV(lg, error) << missing_decoration << id;
-    //     BOOST_THROW_EXCEPTION(transformation_error(missing_decoration + id));
-    // }
+    const auto ts(logical::entities::technical_space::cpp);
+    const auto i(arch.decoration().find(ts));
+    if (i == arch.decoration().end()) {
+        BOOST_LOG_SEV(lg, error) << missing_decoration << id;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_decoration + id));
+    }
 
     /*
      * Create the KVPs for the stitch template.
      */
-    // auto dec(i->second);
+    auto dec(i->second);
     const auto kvps = std::unordered_map<std::string, std::string> {
-        // {
-        //     decoration_preamble_key, dec ? dec->preamble() : empty
-        // },
-        // {
-        //     decoration_postamble_key, dec ? dec->postamble() : empty
-        // },
         {
-            decoration_preamble_key, empty
+            decoration_preamble_key, dec ? dec->preamble() : empty
         },
         {
-            decoration_postamble_key, empty
+            decoration_postamble_key, dec ? dec->postamble() : empty
         },
         {
             stitch_wale_key, wale_template
