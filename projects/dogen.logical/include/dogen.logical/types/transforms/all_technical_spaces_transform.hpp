@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Populates technical space related information.
+ */
 class all_technical_spaces_transform final {
 public:
-    all_technical_spaces_transform() = default;
-    all_technical_spaces_transform(const all_technical_spaces_transform&) = default;
-    all_technical_spaces_transform(all_technical_spaces_transform&&) = default;
-    ~all_technical_spaces_transform() = default;
-    all_technical_spaces_transform& operator=(const all_technical_spaces_transform&) = default;
-
-public:
-    bool operator==(const all_technical_spaces_transform& rhs) const;
-    bool operator!=(const all_technical_spaces_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
