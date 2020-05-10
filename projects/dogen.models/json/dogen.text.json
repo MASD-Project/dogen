@@ -540,13 +540,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::indent_filter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::namespace_formatter",
       "stereotypes": [
         "dogen::handcrafted::typeable"

@@ -23,7 +23,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/header_guard_formatter.hpp"
 
 namespace {
@@ -46,7 +46,7 @@ const std::string with_guard(R"(#ifndef A_FILE_HPP
 
 }
 
-using dogen::text::formatters::indent_filter;
+using dogen::utility::formatters::indent_filter;
 using dogen::text::formatters::header_guard_formatter;
 using namespace dogen::utility::test;
 using dogen::utility::test::asserter;

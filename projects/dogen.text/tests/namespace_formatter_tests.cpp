@@ -24,7 +24,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/namespace_formatter.hpp"
 
 namespace {

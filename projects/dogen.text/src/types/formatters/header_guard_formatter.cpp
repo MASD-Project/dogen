@@ -21,7 +21,7 @@
 #include <ostream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/header_guard_formatter.hpp"
 
 namespace {
@@ -41,6 +41,8 @@ const std::string separator("_");
 }
 
 namespace dogen::text::formatters {
+
+using namespace dogen::utility::formatters;
 
 header_guard_formatter::
 header_guard_formatter(std::ostream& s, const std::string& header_guard)

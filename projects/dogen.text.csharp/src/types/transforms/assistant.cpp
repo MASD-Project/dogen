@@ -20,7 +20,7 @@
  */
 #include <cctype>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
@@ -66,7 +66,7 @@ assistant(const context& ctx, const logical::entities::element& e,
                              << " for archetype: "
                              << physical_meta_name_.qualified();
 
-    text::formatters::indent_filter::push(filtering_stream_, 4);
+    utility::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
 }
 
@@ -156,7 +156,7 @@ comment(const std::string& c, const unsigned int identation_level) {
         return;
 
     for (unsigned int i = 0; i < identation_level; ++i)
-        stream() << text::formatters::indent_in;
+        stream() << utility::formatters::indent_in;
 
     utility::formatters::comment_formatter f(
         start_on_first_line,
@@ -167,7 +167,7 @@ comment(const std::string& c, const unsigned int identation_level) {
     f.format(stream(), c);
 
     for (unsigned int i = 0; i < identation_level; ++i)
-        stream() << text::formatters::indent_out;
+        stream() << utility::formatters::indent_out;
 }
 
 std::string assistant::comment_inline(const std::string& c) const {

@@ -24,7 +24,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
@@ -100,7 +100,7 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
                              << " for archetype: "
                              << physical_meta_name_.qualified();
 
-    text::formatters::indent_filter::push(filtering_stream_, 4);
+    utility::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
 
     validate();
@@ -435,7 +435,7 @@ comment_start_method_group(const std::string& documentation,
         return;
 
     {
-        text::formatters::positive_indenter_scope pis(stream());
+        utility::formatters::positive_indenter_scope pis(stream());
         utility::formatters::comment_formatter f(
             !start_on_first_line,
             use_documentation_tool_markup,
@@ -457,7 +457,7 @@ void assistant::comment_end_method_group(const std::string& documentation,
         return;
 
     {
-        text::formatters::positive_indenter_scope pis(stream());
+        utility::formatters::positive_indenter_scope pis(stream());
         utility::formatters::comment_formatter f(
             start_on_first_line,
             use_documentation_tool_markup,

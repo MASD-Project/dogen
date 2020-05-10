@@ -24,7 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.text/types/formatters/formatting_error.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/dependencies_formatter.hpp"
 
 namespace {
@@ -75,6 +75,7 @@ void dependencies_formatter::format(std::ostream& s,
             formatting_error(unsupported_technical_space + s));
     }
 
+    using namespace dogen::utility::formatters;
     if (!dependencies.empty())
         s << manage_blank_lines << std::endl;
 }

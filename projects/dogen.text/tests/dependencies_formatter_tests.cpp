@@ -39,7 +39,7 @@
  *
  */
 #include "dogen.text/types/formatters/dependencies_formatter.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include <boost/test/unit_test.hpp>
@@ -66,7 +66,8 @@ const std::string cpp_includes_with_top_modeline(
 
 using dogen::logical::entities::technical_space;
 using dogen::text::formatters::dependencies_formatter;
-using dogen::text::formatters::indent_filter;
+using dogen::utility::formatters::indent_filter;
+
 std::string format(const technical_space ts,
                    const std::list<std::string> &deps) {
   dependencies_formatter f;

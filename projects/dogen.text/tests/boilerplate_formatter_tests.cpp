@@ -25,7 +25,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.text/io/formatters/boilerplate_properties_io.hpp"
 #include "dogen.text/types/formatters/boilerplate_formatter.hpp"
@@ -175,7 +175,7 @@ boilerplate_properties make_all_properties(const technical_space ts) {
 std::string format(const boilerplate_properties& bp) {
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::text::formatters::indent_filter::push(fo, 4);
+    dogen::utility::formatters::indent_filter::push(fo, 4);
     fo.push(s);
 
     dogen::text::formatters::boilerplate_formatter f(fo, bp);

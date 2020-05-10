@@ -30,7 +30,7 @@
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/generation_marker.hpp"
-#include "dogen.text/types/formatters/indent_filter.hpp"
+#include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/decoration_formatter.hpp"
 
 namespace {
