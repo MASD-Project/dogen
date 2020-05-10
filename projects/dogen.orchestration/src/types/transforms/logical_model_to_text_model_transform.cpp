@@ -183,6 +183,7 @@ logical_model_to_text_model_transform::apply(const text::transforms::context& ct
     r.orm_properties(m.orm_properties());
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
+    r.all_technical_spaces(m.all_technical_spaces());
 
     populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);
