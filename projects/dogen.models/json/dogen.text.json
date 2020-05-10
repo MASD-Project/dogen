@@ -343,13 +343,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::technical_space_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::context",
       "stereotypes": [
         "dogen::typeable",
