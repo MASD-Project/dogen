@@ -24,6 +24,9 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/types/features/decoration.hpp"
+#include "dogen.logical/types/helpers/decoration_repository.hpp"
+#include "dogen.logical/types/helpers/decoration_configuration.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/decoration/licence.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
@@ -31,11 +34,13 @@
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
-#include "dogen.text/io/entities/model_io.hpp"
-#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/helpers/decoration_repository_factory.hpp"
 #include "dogen.logical/types/formatters/decoration_formatter.hpp"
-#include "dogen.text/io/transforms/decoration_configuration_io.hpp"
+#include "dogen.logical/io/helpers/decoration_configuration_io.hpp"
+#include "dogen.logical/types/helpers/decoration_configuration_factory.hpp"
+#include "dogen.logical/types/helpers/decoration_factory.hpp"
+#include "dogen.text/io/entities/model_io.hpp"
+#include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/decoration_transform.hpp"
 
 namespace {
@@ -46,11 +51,6 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
-
-const std::string licence_not_found("Licence not found: ");
-const std::string modeline_group_not_found("Modeline group not found: ");
-const std::string modeline_not_found("Modeline not found: ");
-const std::string generation_marker_not_found("Generation marker not found: ");
 const std::string technical_space_not_found("Technical space not found: ");
 const std::string duplicate_technical_space(
     "Duplicate decoration for technical space: ");
@@ -61,47 +61,6 @@ namespace dogen::text::transforms {
 
 using logical::entities::decoration::generation_marker;
 using logical::entities::decoration::modeline;
-
-boost::optional<decoration_configuration>
-decoration_transform::read_decoration_configuration(
-    const features::decoration::feature_group& fg,
-    const variability::entities::configuration& cfg) {
-
-    bool has_configuration(false);
-    const auto scfg(features::decoration::make_static_configuration(fg, cfg));
-    decoration_configuration r;
-    if (scfg.enabled) {
-        r.enabled(scfg.enabled);
-        has_configuration = true;
-    }
-
-    if (!scfg.copyright_notice.empty()) {
-        r.copyright_notices(scfg.copyright_notice);
-        has_configuration = true;
-    }
-
-    if (!scfg.licence_name.empty()) {
-        r.licence_name(scfg.licence_name);
-        has_configuration = true;
-    }
-
-    if (!scfg.modeline_group_name.empty()) {
-        r.modeline_group_name(scfg.modeline_group_name);
-        has_configuration = true;
-    }
-
-    if (!scfg.marker_name.empty()) {
-        r.marker_name(scfg.marker_name);
-        has_configuration = true;
-    }
-
-    if (has_configuration) {
-        BOOST_LOG_SEV(lg, debug) << "Read decoration configuration.";
-        return r;
-    }
-
-    return boost::optional<decoration_configuration>();
-}
 
 bool decoration_transform::
 is_generatable(const logical::entities::name& meta_name) {
@@ -120,259 +79,6 @@ is_generatable(const logical::entities::name& meta_name) {
         id != mln.qualified().dot() &&
         id != mgn.qualified().dot() &&
         id != gmn.qualified().dot();
-}
-
-boost::optional<logical::entities::decoration::element_properties>
-decoration_transform::make_decoration(const std::string& licence_text,
-    const boost::shared_ptr<modeline> ml,
-    const boost::shared_ptr<generation_marker> gm,
-    const std::list<std::string>& copyright_notices,
-    const std::string& generation_timestamp,
-    const std::string& origin_shah1_hash,
-    const logical::entities::technical_space ts) {
-
-    /*
-     * Create the preamble and postamble for the decoration, taking
-     * into account the element's technical space.
-     */
-    using utility::formatters::comment_style;
-    using logical::entities::technical_space;
-
-    std::ostringstream preamble_stream;
-    logical::formatters::decoration_formatter df;
-    if (ts == technical_space::cpp) {
-        df.format_preamble(preamble_stream,
-            comment_style::cpp_style/*single line*/,
-            comment_style::c_style/*multi-line*/,
-            licence_text, copyright_notices,
-            generation_timestamp, origin_shah1_hash, ml, gm);
-    } else if (ts == technical_space::csharp) {
-        df.format_preamble(preamble_stream,
-            comment_style::csharp_style, licence_text, copyright_notices,
-            generation_timestamp, origin_shah1_hash, ml, gm);
-    } else if (ts == technical_space::cmake || ts == technical_space::odb) {
-        df.format_preamble(preamble_stream,
-            comment_style::shell_style, licence_text,
-            copyright_notices, generation_timestamp, origin_shah1_hash, ml, gm);
-    } else if (ts == technical_space::xml) {
-        df.format_preamble(preamble_stream,
-            comment_style::xml_style, licence_text,
-            copyright_notices, generation_timestamp, origin_shah1_hash, ml, gm);
-    }
-
-    std::ostringstream postamble_stream;
-    if (ts == technical_space::cpp)
-        df.format_postamble(postamble_stream, comment_style::c_style, ml);
-    else if (ts == technical_space::csharp)
-        df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
-
-    logical::entities::decoration::element_properties r;
-    r.preamble(preamble_stream.str());
-    r.postamble(postamble_stream.str());
-    return r;
-}
-
-std::string decoration_transform::
-get_short_form_licence(const helpers::decoration_repository drp,
-    const std::string& licence_name) {
-
-    if (licence_name.empty())
-        return empty;
-
-    const auto& map(drp.licences_by_name());
-    const auto i(map.find(licence_name));
-    if (i == map.end()) {
-        BOOST_LOG_SEV(lg, error) << licence_not_found << licence_name;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(licence_not_found + licence_name));
-    }
-    return i->second->short_form();
-}
-
-boost::shared_ptr<modeline>
-decoration_transform::get_modeline(const helpers::decoration_repository drp,
-    const std::string& modeline_group_name,
-    const logical::entities::technical_space ts) {
-
-    if (modeline_group_name.empty())
-        return boost::shared_ptr<modeline>();
-
-    const auto& mg_map(drp.modelines_by_modeline_group_by_technical_space());
-    const auto i(mg_map.find(modeline_group_name));
-    if (i == mg_map.end()) {
-        BOOST_LOG_SEV(lg, error) << modeline_group_not_found
-                                 << modeline_group_name;
-        BOOST_THROW_EXCEPTION(transformation_error(
-                modeline_group_not_found + modeline_group_name));
-    }
-
-    const auto& ts_map(i->second);
-    const auto j(ts_map.find(ts));
-    if (j == ts_map.end()) {
-        const auto s(boost::lexical_cast<std::string>(ts));
-        BOOST_LOG_SEV(lg, error) << technical_space_not_found
-                                 << s << " For modeline group: "
-                                 << modeline_group_name;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(technical_space_not_found + s));
-    }
-    return j->second;
-}
-
-boost::shared_ptr<generation_marker>
-decoration_transform::
-get_generation_marker(const helpers::decoration_repository drp,
-    const std::string& generation_marker_name) {
-
-    if (generation_marker_name.empty())
-        return boost::shared_ptr<generation_marker>();
-
-    const auto& map(drp.generation_markers_by_name());
-    const auto i(map.find(generation_marker_name));
-    if (i == map.end()) {
-        BOOST_LOG_SEV(lg, error) << generation_marker_not_found
-                                 << generation_marker_name;
-        BOOST_THROW_EXCEPTION(transformation_error(generation_marker_not_found
-                + generation_marker_name));
-    }
-    return i->second;
-}
-
-boost::optional<logical::entities::decoration::element_properties>
-decoration_transform::
-make_global_decoration(const helpers::decoration_repository drp,
-    const boost::optional<decoration_configuration> root_dc,
-    const std::string& generation_timestamp,
-    const std::string& origin_shah1_hash,
-    const logical::entities::technical_space ts) {
-    /*
-     * If there is no decoration configuration there shall be no
-     * decoration either.
-     */
-    typedef boost::optional<
-        logical::entities::decoration::element_properties> empty_decorations;
-    if (!root_dc)
-        return empty_decorations();
-
-    /*
-     * If the user did not specifically enable decoration in the
-     * configuration, there shall be no decoration. Its somewhat
-     * confusing that "enabled" is optional here. This makes no sense
-     * at the global level, since not supplying the flag is the same
-     * as set it to false. However, we also need to cater for the
-     * local usage, where we need to be able to distinguish between
-     * not supplying the flag versus supplying it and setting it to
-     * false.
-     */
-    const auto& dc(*root_dc);
-    if (!dc.enabled() || !(*dc.enabled()))
-        return empty_decorations();
-
-    /*
-     * Obtain all decoration inputs and create the decoration.
-     */
-    const auto l(get_short_form_licence(drp, dc.licence_name()));
-    const auto ml(get_modeline(drp, dc.modeline_group_name(), ts));
-    const auto gm(get_generation_marker(drp, dc.marker_name()));
-    const auto r(make_decoration(l, ml, gm, dc.copyright_notices(),
-            generation_timestamp, origin_shah1_hash, ts));
-
-    BOOST_LOG_SEV(lg, trace) << "Created global decoration: " << r;
-    return r;
-}
-
-boost::optional<logical::entities::decoration::element_properties>
-decoration_transform::make_local_decoration(
-    const helpers::decoration_repository drp,
-    const boost::optional<decoration_configuration> root_dc,
-    const boost::optional<logical::entities::decoration::element_properties>
-    global_decoration,
-    const boost::optional<decoration_configuration> element_dc,
-    const std::string& generation_timestamp,
-    const std::string& origin_shah1_hash,
-    const logical::entities::technical_space ts) {
-
-    BOOST_LOG_SEV(lg, trace) << "Creating local decoration.";
-
-    /*
-     * If there is no local decoration configuration, we just default
-     * to the global one whatever it may be - i.e. it may itself not
-     * exist either.
-     */
-    if (!element_dc) {
-        BOOST_LOG_SEV(lg, trace) << "No element decoration. "
-                                 << "Using global decoration.";
-        return global_decoration;
-    }
-
-    /*
-     * If the user specifically disabled decoration for this modeling
-     * element, or if decorations are not enabled locally or globally,
-     * there's nothing to do.
-     */
-    const auto& dc(*element_dc);
-    const bool enabled_locally(dc.enabled() && *dc.enabled());
-    const bool disabled_locally(dc.enabled() && !(*dc.enabled()));
-    const bool enabled_globally(root_dc && root_dc->enabled() &&
-        *root_dc->enabled());
-    if (disabled_locally || (!enabled_locally && !enabled_globally)) {
-        BOOST_LOG_SEV(lg, trace) << "Decoration not enabled. "
-                                 << " enabled_locally: " << enabled_locally
-                                 << " disabled_locally: " << disabled_locally
-                                 << " enabled_globally: " << enabled_globally;
-        return boost::optional<
-            logical::entities::decoration::element_properties>();
-    }
-
-    /*
-     * If there are no local overrides, then just use the global
-     * decoration. User just got confused.
-     */
-    if (dc.copyright_notices().empty() &&
-        dc.licence_name().empty() && dc.modeline_group_name().empty() &&
-        dc.marker_name().empty()) {
-        BOOST_LOG_SEV(lg, trace) << "No overiddes. Using global decoration.";
-        return global_decoration;
-    }
-
-    /*
-     * Retrieve the local decoration inputs.
-     */
-    const auto ol(get_short_form_licence(drp, dc.licence_name()));
-    const auto oml(get_modeline(drp, dc.modeline_group_name(), ts));
-    const auto ogm(get_generation_marker(drp, dc.marker_name()));
-
-    /*
-     * If we do not have a global decoration configuration, we do not
-     * have to worry about overrides, just with processing local
-     * decoration configuration.
-     */
-    if (!root_dc) {
-        const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(),
-                generation_timestamp, origin_shah1_hash, ts));
-        BOOST_LOG_SEV(lg, trace) << "Created local decoration without "
-                                 << "overrides: " << r;
-        return r;
-    }
-
-    /*
-     * Handle the global overrides.
-     */
-    const auto overriden_licence(!ol.empty() ? ol :
-        get_short_form_licence(drp, root_dc->licence_name()));
-    const auto overriden_modeline(oml ? oml :
-        get_modeline(drp, root_dc->modeline_group_name(), ts));
-    const auto overriden_marker(ogm ? ogm :
-        get_generation_marker(drp, root_dc->marker_name()));
-    const auto overriden_copyright_notices(!dc.copyright_notices().empty() ?
-        dc.copyright_notices() : root_dc->copyright_notices());
-    const auto r(make_decoration(overriden_licence, overriden_modeline,
-            overriden_marker, overriden_copyright_notices,
-            generation_timestamp, origin_shah1_hash, ts));
-
-    BOOST_LOG_SEV(lg, trace) << "Created local decoration with overrides: "
-                             << r;
-    return r;
 }
 
 void decoration_transform::apply(const context& ctx, entities::model& m) {
@@ -394,9 +100,10 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      * model elements.
      */
     const auto& fm(*ctx.feature_model());
-    const auto fg(features::decoration::make_feature_group(fm));
+    const auto fg(logical::features::decoration::make_feature_group(fm));
     auto& rm(*m.root_module());
-    const auto root_dc(read_decoration_configuration(fg, *rm.configuration()));
+    const logical::helpers::decoration_configuration_factory dcf;
+    const auto root_dc(dcf.make(fg, *rm.configuration()));
 
     /*
      * With the default configuration, we can create the global
@@ -409,16 +116,17 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
     const auto mts(m.output_technical_space());
     const auto gt(ctx.generation_timestamp());
     const auto h(m.origin_sha1_hash());
+    logical::helpers::decoration_factory df(drp, gt, h);
     std::unordered_map<logical::entities::technical_space,
                        boost::optional<
                            logical::entities::decoration::element_properties>
-                       > root_decorations;
+        > root_decorations;
     BOOST_LOG_SEV(lg, trace) << "Generating all global decorations";
     for (const auto ts : m.all_technical_spaces()) {
         BOOST_LOG_SEV(lg, trace) << "Generating global decoration for "
                                  <<  "technical space: " << ts;
 
-        const auto gd(make_global_decoration(drp, root_dc, gt, h, ts));
+        const auto gd(df.make_global_decoration(root_dc, ts));
         root_decorations[ts] = gd;
 
         if (ts == mts && gd) {
@@ -480,7 +188,8 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
          * the global configuration.
          */
         const auto& cfg(*e.configuration());
-        const auto dc(read_decoration_configuration(fg, cfg));
+        logical::helpers::decoration_configuration_factory dcf;
+        const auto dc(dcf.make(fg, cfg));
         auto lambda(
             [&](const logical::entities::technical_space nts) {
                 const auto i(root_decorations.find(nts));
@@ -491,8 +200,7 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
                         transformation_error(technical_space_not_found + s));
                 }
                 const auto& gd(i->second);
-                const auto ld(
-                    make_local_decoration(drp, root_dc, gd, dc, gt, h, nts));
+                const auto ld(df.make_local_decoration(gd, root_dc, dc, nts));
                 if (ld) {
                     auto pair(std::make_pair(nts, *ld));
                     const auto inserted(e.decoration().insert(pair).second);

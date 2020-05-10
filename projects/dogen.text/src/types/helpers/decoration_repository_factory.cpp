@@ -61,7 +61,7 @@ is_meta_element(const logical::entities::name& me,
 
 void decoration_repository_factory::handle_licence(
     const boost::shared_ptr<logical::entities::element> e,
-    decoration_repository& drp) const {
+    logical::helpers::decoration_repository& drp) const {
 
     BOOST_LOG_SEV(lg, trace) << "Processing licence.";
     const auto id(e->name().qualified().dot());
@@ -85,7 +85,7 @@ void decoration_repository_factory::handle_licence(
 
 void decoration_repository_factory::handle_generation_marker(
     const boost::shared_ptr<logical::entities::element> e,
-    decoration_repository& drp) const {
+    logical::helpers::decoration_repository& drp) const {
     BOOST_LOG_SEV(lg, trace) << "Processing generation marker.";
 
     const auto id(e->name().qualified().dot());
@@ -109,7 +109,7 @@ void decoration_repository_factory::handle_generation_marker(
 
 void decoration_repository_factory::handle_modeline_group(
     const boost::shared_ptr<logical::entities::element> e,
-    decoration_repository& drp) const {
+    logical::helpers::decoration_repository& drp) const {
 
     BOOST_LOG_SEV(lg, trace) << "Processing modeline group.";
 
@@ -155,7 +155,7 @@ void decoration_repository_factory::handle_modeline_group(
     BOOST_LOG_SEV(lg, trace) << "Finished processing modeline group.";
 }
 
-decoration_repository
+logical::helpers::decoration_repository
 decoration_repository_factory::make(const entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating decoration repository for model: "
                              << m.name().qualified().dot();
@@ -165,7 +165,7 @@ decoration_repository_factory::make(const entities::model& m) const {
     const auto generation_marker_name(mnf::make_generation_marker_name());
     const auto modeline_group_name(mnf::make_modeline_group_name());
 
-    decoration_repository r;
+    logical::helpers::decoration_repository r;
     for (const auto& ea : m.elements()) {
         auto& ptr(ea.element());
         const auto& e(*ptr);

@@ -27,8 +27,8 @@
 
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/helpers/decoration_repository.hpp"
 #include "dogen.text/types/entities/model.hpp"
-#include "dogen.text/types/helpers/decoration_repository.hpp"
 
 namespace dogen::text::helpers {
 
@@ -40,10 +40,10 @@ private:
 private:
     void handle_licence(
         const boost::shared_ptr<logical::entities::element> e,
-        decoration_repository& drp) const;
+        logical::helpers::decoration_repository& drp) const;
     void handle_generation_marker(
         const boost::shared_ptr<logical::entities::element> e,
-        decoration_repository& drp) const;
+        logical::helpers::decoration_repository& drp) const;
 
     /**
      * @brief Organises all modelines by modeline group and by
@@ -51,10 +51,11 @@ private:
      */
     void handle_modeline_group(
         const boost::shared_ptr<logical::entities::element> e,
-        decoration_repository& drp) const;
+        logical::helpers::decoration_repository& drp) const;
 
 public:
-    decoration_repository make(const entities::model& m) const;
+    logical::helpers::decoration_repository
+    make(const entities::model& m) const;
 };
 
 }
