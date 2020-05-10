@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_CLASS_HEADER_TRANSFORM_NEW_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_CLASS_HEADER_TRANSFORM_NEW_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_CLASS_HEADER_TRANSFORM_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_ARCHETYPE_CLASS_HEADER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-class archetype_class_header_transform_new final : public model_to_text_transform {
+class archetype_class_header_transform final : public model_to_text_transform {
 public:
     physical::entities::archetype static_archetype() const;
     physical::entities::archetype archetype() const override;

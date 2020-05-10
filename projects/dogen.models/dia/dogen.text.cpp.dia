@@ -35291,7 +35291,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_class_header_transform_new#</dia:string>
+        <dia:string>#archetype_class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -35301,7 +35301,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_new
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
@@ -35404,13 +35404,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_new.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_header_transform_new::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
@@ -35421,7 +35421,7 @@ std::list&lt;std::string&gt; archetype_class_header_transform_new::inclusion_dep
     return builder.build();
 }
 
-void archetype_class_header_transform_new::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::physical::archetype&gt;(e));
@@ -36110,7 +36110,7 @@ public:
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_class_implementation_transform_new#</dia:string>
+        <dia:string>#archetype_class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -36120,7 +36120,7 @@ public:
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform_new
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
@@ -36225,20 +36225,20 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_new.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_implementation_transform_new::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_implementation_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void archetype_class_implementation_transform_new::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; arch(ast.as&lt;logical::entities::physical::archetype&gt;(e));

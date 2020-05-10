@@ -25,12 +25,12 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_new.hpp"
+#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype archetype_class_implementation_transform_new::static_archetype() const {
+physical::entities::archetype archetype_class_implementation_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -44,15 +44,15 @@ physical::entities::archetype archetype_class_implementation_transform_new::stat
     return r;
 }
 
-physical::entities::archetype archetype_class_implementation_transform_new::archetype() const {
+physical::entities::archetype archetype_class_implementation_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types archetype_class_implementation_transform_new::inclusion_support_type() const {
+inclusion_support_types archetype_class_implementation_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path archetype_class_implementation_transform_new::inclusion_path(
+boost::filesystem::path archetype_class_implementation_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
@@ -63,19 +63,19 @@ boost::filesystem::path archetype_class_implementation_transform_new::inclusion_
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path archetype_class_implementation_transform_new::full_path(
+boost::filesystem::path archetype_class_implementation_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
 }
 
-std::list<std::string> archetype_class_implementation_transform_new::inclusion_dependencies(
+std::list<std::string> archetype_class_implementation_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const logical::entities::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-void archetype_class_implementation_transform_new::apply(const context& ctx, const logical::entities::element& e,
+void archetype_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::archetype>(e));
