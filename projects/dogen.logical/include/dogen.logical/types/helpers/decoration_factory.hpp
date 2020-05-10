@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
 #include "dogen.logical/types/helpers/decoration_repository.hpp"
 #include "dogen.logical/types/helpers/decoration_configuration.hpp"
@@ -40,12 +39,6 @@ public:
         const std::string& origin_sha1_hash);
 
 private:
-    /**
-     * @brief Returns true if the meta-model element can be generated,
-     * false otherwise.
-     */
-    bool is_generatable(const entities::name& meta_name);
-
     /**
      * @brief Obtains the short-form licence text for a given licence
      * name.

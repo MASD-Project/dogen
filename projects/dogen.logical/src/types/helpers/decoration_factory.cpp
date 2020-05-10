@@ -54,24 +54,6 @@ decoration_factory(const helpers::decoration_repository& drp,
     : decoration_repository_(drp), activity_timestamp_(activity_timestamp),
     origin_sha1_hash_(origin_sha1_hash) {}
 
-bool decoration_factory::is_generatable(const entities::name& meta_name) {
-    // FIXME: massive hack for now.
-    using mnf = logical::helpers::meta_name_factory;
-    static const auto otn(mnf::make_object_template_name());
-    static const auto ln(mnf::make_licence_name());
-    static const auto mln(mnf::make_modeline_name());
-    static const auto mgn(mnf::make_modeline_group_name());
-    static const auto gmn(mnf::make_generation_marker_name());
-
-    const auto id(meta_name.qualified().dot());
-    return
-        id != otn.qualified().dot() &&
-        id != ln.qualified().dot() &&
-        id != mln.qualified().dot() &&
-        id != mgn.qualified().dot() &&
-        id != gmn.qualified().dot();
-}
-
 std::string decoration_factory::
 get_short_form_licence(const std::string& licence_name) const {
     if (licence_name.empty())
