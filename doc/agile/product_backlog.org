@@ -14344,6 +14344,9 @@ Commits:
 
 : b9e7fe0263 text: remove text to text transforms
 : c4e1e092d6 text: remove t2t transform data
+: 9fcf0ec8fc integration text.cpp, physical: remove unused attribute for text to text transform
+: ceee85f654 text.cpp: remove used wale key for text template transform
+: 5bd2ea45b4 text.cpp: remove used functionality in wale for text template transform
 
 *** Consider making =stitch_template_builder= a text template builder :story:
 
