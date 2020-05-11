@@ -1,4 +1,5 @@
 #+title: dogen.assets
+#+options: ^:nil
 :dogen:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.assets
@@ -26,6 +27,70 @@
 :masd.generation.csharp.enabled: false
 :masd.variability.profile: dogen.profiles.base.default_profile
 :end:
+
+#+begin_src emacs-lisp
+
+(defun my-org-html-property-drawer (_property-drawer contents _info)
+  "Transcode a PROPERTY-DRAWER element from Org to HTML.
+CONTENTS holds the contents of the drawer.  INFO is a plist
+holding contextual information."
+  (when (org-string-nw-p contents)
+    (format "<div class=\"properties\">
+<ul>
+%s
+</ul>
+</div>" contents)))
+
+(defun my-org-html-node-property (node-property _contents _info)
+  "Transcode a NODE-PROPERTY element from Org to HTML.
+CONTENTS is nil.  INFO is a plist holding contextual
+information."
+  (format "<li>:%s:\t%s</li>"
+          (org-element-property :key node-property)
+          (let ((value (org-element-property :value node-property)))
+            (if value (concat " " value) ""))))
+
+(defun my-org-html-setup ()
+  "My modifications of the org-html exporter."
+  (advice-add 'org-html-property-drawer :override #'my-org-html-property-drawer)
+  (advice-add 'org-html-node-property :override #'my-org-html-node-property))
+
+(setq org-html-property-drawer 'my-org-html-property-drawer)
+(setq org-html-node-property 'my-org-html-node-property)
+
+(eval-after-load "ox-html" #'my-org-html-setup)
+
+(defun my-org-export-format-drawer (name content)
+  (concat "<div class=\"pre.src\">\n"
+          "<mark>Meta-data: " (capitalize name) "</mark>\n"
+ "<code>" (replace-regexp-in-string "\n" "<br>\n" content)  "</code>"
+          "\n</mark></div>"))
+(setq org-html-format-drawer-function 'my-org-export-format-drawer)
+
+  (defun my-org-export-format-drawer (name content backend)
+    "Export :NOTES: and :LOGBOOK: drawers to HTML class
+  or LaTeX command"
+    (cond
+     ((string-match "NOTES\\|LOGBOOK" name)
+      (cond
+       ((eq backend 'html)
+        (format "@<div class=\"notes\"> %s @</div>" content))
+       ((eq backend 'latex)   ; FIXME: This doesn't work
+        (format "#+BEGIN_LATEX:\n\note{%s}\n#+END_LATEX " content))
+       (t nil)))
+     (t nil)))
+
+  (setq org-export-format-drawer-function 'my-org-export-format-drawer)
+
+
+(defun jbd-org-export-format-drawer (name content)
+  "Export drawers to drawer HTML class."
+  (setq content (org-remove-indentation content))
+  (format "@<div class=\"drawer\">%s@</div>\n" content))
+
+(setq org-export-format-drawer-function 'jbd-org-export-format-drawer)
+#+end_src
+
 
 Assets is the core Dogen meta-model representing software entities.
 
@@ -60,7 +125,7 @@ The objectives of the assets model are:
 
 Contains the core meta-model entities that make up the assets mode.
 
-*** attribute                                                        :object:
+*** attribute                                                       :object:
     :dogen:
     :masd.injection.stereotypes: Documentable, Configurable, Nameable, Stereotypable
     :end:
@@ -73,7 +138,7 @@ Returns the identity of this object.
 
 ***** masd.generation.cpp.types.class_header                  :code_fragment:
 
-#+begin_src cpp
+#+begin_src c++
 int id();
 #+end_src
 
