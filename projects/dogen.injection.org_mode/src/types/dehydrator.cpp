@@ -41,7 +41,7 @@ void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("documentation");
     s << " : ";
-    uf.insert_quoted(tidy_up_string(d));
+    uf.insert_quoted(d);
 }
 
 void dehydrator::insert_tagged_values(std::ostream& s,

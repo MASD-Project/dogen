@@ -27,7 +27,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-const std::string transform_id("injection.json.encoding_transform");
+const std::string transform_id("injection.org_mode.encoding_transform");
 auto lg(logger_factory(transform_id));
 
 const std::string encoder_id("injection.org_mode");

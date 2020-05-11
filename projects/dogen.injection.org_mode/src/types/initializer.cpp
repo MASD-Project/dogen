@@ -19,13 +19,13 @@
  *
  */
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
-#include "dogen.injection.org_mode/types/decoding_transform.hpp"
+#include "dogen.injection.org_mode/types/encoding_transform.hpp"
 #include "dogen.injection.org_mode/types/initializer.hpp"
 
 namespace dogen::injection::org_mode {
 
 void initializer::initialize() {
-    transforms::register_decoding_transform<decoding_transform>();
+    transforms::register_encoding_transform<encoding_transform>();
 }
 
 }
