@@ -89,17 +89,17 @@ void dehydrator::insert_stereotypes(std::ostream& s,
 }
 
 void dehydrator::insert_parents(std::ostream& s,
-    const std::list<std::string>& st) {
+    const std::list<std::string>& parents) {
 
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("parents");
     s << " : [";
 
     bool is_first(true);
-    for (const auto& stereotype : st) {
+    for (const auto& p : parents) {
         if (!is_first)
             s << ", ";
-        uf.insert_quoted(stereotype);
+        uf.insert_quoted(p);
         is_first = false;
     }
     s << " ]";
