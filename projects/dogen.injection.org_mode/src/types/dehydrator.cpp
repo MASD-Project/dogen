@@ -47,67 +47,49 @@ void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
 void dehydrator::insert_tagged_values(std::ostream& s,
     const std::list<std::pair<std::string, std::string>>& tv) {
 
-    utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("tagged_values");
-    s << " : { ";
-
-    bool is_first(true);
-    for (const auto& pair : tv) {
-        if (!is_first)
-            s << ", ";
-
-        uf.insert_quoted(pair.first);
-        s << " : ";
-        uf.insert_quoted_escaped(pair.second);
-        is_first = false;
-    }
-    s << " }";
+    s << ":dogen:" << std::endl;
+    for (const auto& pair : tv)
+        s << ":" << pair.first << ": " << pair.second << std::endl;
+    s << ":end:" << std::endl << std::endl;
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
     const std::list<std::string>& st) {
 
-    utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("stereotypes");
-    s << " : [";
+    s << "stereotypes: ";
 
     bool is_first(true);
     for (const auto& stereotype : st) {
         if (!is_first)
             s << ", ";
-        uf.insert_quoted(stereotype);
+        s << stereotype;
         is_first = false;
     }
-    s << " ]";
+    s << std::endl;
 }
 
 void dehydrator::insert_parents(std::ostream& s,
     const std::list<std::string>& st) {
 
     utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("parents");
-    s << " : [";
+    s << "parents: ";
 
     bool is_first(true);
     for (const auto& stereotype : st) {
         if (!is_first)
             s << ", ";
-        uf.insert_quoted(stereotype);
+        s << stereotype;
         is_first = false;
     }
-    s << " ]";
+    s << std::endl;
 }
 
 void dehydrator::insert_attribute(std::ostream& s,
     const injection::entities::attribute& a) {
 
-    s << "{ ";
+    s << "** " << a.name() << std::endl;
 
     utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("name");
-    s << " : ";
-    uf.insert_quoted_escaped(a.name());
-    s << comma_space;
     uf.insert_quoted("type");
     s << " : ";
     uf.insert_quoted_escaped(a.type());
@@ -134,18 +116,14 @@ void dehydrator::insert_attribute(std::ostream& s,
         insert_tagged_values(s, a.tagged_values());
     }
 
-    s << " }";
+    s << " }" << std::endl;
 }
 
 void dehydrator::insert_element(std::ostream& s,
     const injection::entities::element& e) {
 
-    s << "{ ";
-
+    s << "* " << e.name() << std::endl;
     utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("name");
-    s << " : ";
-    uf.insert_quoted_escaped(e.name());
 
     if (!e.parents().empty()) {
         s << comma_space;
@@ -153,8 +131,7 @@ void dehydrator::insert_element(std::ostream& s,
     }
 
     if (!e.documentation().empty()) {
-        s << comma_space;
-        insert_documentation(s, e.documentation());
+        s << e.documentation() << std::endl;
     }
 
     if (!e.stereotypes().empty()) {
@@ -174,29 +151,20 @@ void dehydrator::insert_element(std::ostream& s,
         uf.insert_quoted_escaped(e.fallback_element_type());
     }
 
-    if (!e.attributes().empty()) {
-        s << comma_space;
-        uf.insert_quoted("attributes");
-        s << " : [ ";
-        bool is_first(true);
-        for (const auto& a : e.attributes()) {
-            if (!is_first)
-                s << comma_space;
-            insert_attribute(s, a);
-            is_first = false;
-        }
-        s << " ] ";
-    }
-
-    s << " }";
+    for (const auto& a : e.attributes())
+        insert_attribute(s, a);
 }
 
 std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::ostringstream s;
 
-    s << "{ ";
-    if (!m.documentation().empty())
-        insert_documentation(s, m.documentation());
+    s << "#+title: " << m.name() << std::endl
+      << "#+options: ^:nil" << std::endl;
+
+    if (!m.tagged_values().empty())
+        insert_tagged_values(s, m.tagged_values());
+
+    s << m.documentation() << std::endl;
 
     if (!m.stereotypes().empty()) {
         if (!m.documentation().empty())
@@ -204,29 +172,8 @@ std::string dehydrator::dehydrate(const injection::entities::model& m) {
         insert_stereotypes(s, m.stereotypes());
     }
 
-    if (!m.tagged_values().empty()) {
-        if (!m.documentation().empty() || !m.stereotypes().empty())
-            s << comma_space;
-        insert_tagged_values(s, m.tagged_values());
-    }
-
-    if (!m.documentation().empty() || !m.stereotypes().empty() ||
-        !m.tagged_values().empty()) {
-        s << comma_space;
-    }
-
-    utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("elements");
-    s << " : [ ";
-    bool is_first(true);
-    for (const auto& e : m.elements()) {
-        if (!is_first)
-            s << comma_space;
+    for (const auto& e : m.elements())
         insert_element(s, e);
-        is_first = false;
-    }
-    s << " ]";
-    s << " }";
 
     return s.str();
 }
