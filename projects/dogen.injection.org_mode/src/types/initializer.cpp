@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.injection/types/transforms/model_production_chain.hpp"
+#include "dogen.injection.org_mode/types/decoding_transform.hpp"
 #include "dogen.injection.org_mode/types/initializer.hpp"
 
 namespace dogen::injection::org_mode {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    transforms::register_decoding_transform<decoding_transform>();
 }
 
 }

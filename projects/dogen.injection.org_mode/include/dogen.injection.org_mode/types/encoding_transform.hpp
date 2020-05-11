@@ -25,24 +25,24 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.injection/types/entities/model.hpp"
+#include "dogen.injection/types/transforms/encoding_transform.hpp"
 
 namespace dogen::injection::org_mode {
 
-class encoding_transform final {
+class encoding_transform final : public transforms::encoding_transform {
 public:
     encoding_transform() = default;
-    encoding_transform(const encoding_transform&) = default;
-    encoding_transform(encoding_transform&&) = default;
-    ~encoding_transform() = default;
-    encoding_transform& operator=(const encoding_transform&) = default;
+    encoding_transform(const encoding_transform&) = delete;
+    ~encoding_transform() noexcept;
 
 public:
-    bool operator==(const encoding_transform& rhs) const;
-    bool operator!=(const encoding_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
+    virtual std::string id() const override;
+    virtual std::string description() const override;
+    std::string extension() const override;
 
+    void apply(const transforms::context& ctx,
+        const entities::model& m, const boost::filesystem::path& p) override;
 };
 
 }

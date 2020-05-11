@@ -25,24 +25,39 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <map>
+#include <string>
+#include <iosfwd>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen.injection/types/entities/element.hpp"
+#include "dogen.injection/types/entities/attribute.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 
 namespace dogen::injection::org_mode {
 
 class dehydrator final {
-public:
-    dehydrator() = default;
-    dehydrator(const dehydrator&) = default;
-    dehydrator(dehydrator&&) = default;
-    ~dehydrator() = default;
-    dehydrator& operator=(const dehydrator&) = default;
+private:
+    static std::string tidy_up_string(std::string s);
+
+private:
+    static void insert_documentation(std::ostream& s, const std::string& d);
+    static void insert_tagged_values(std::ostream& s,
+        const std::list<std::pair<std::string, std::string>>& tv);
+    static void insert_stereotypes(std::ostream& s,
+        const std::list<std::string>& st);
+    static void insert_parents(std::ostream& s,
+        const std::list<std::string>& parents);
+    static void insert_attribute(std::ostream& s,
+        const injection::entities::attribute& a);
+    static void insert_element(std::ostream& s,
+        const injection::entities::element& e);
 
 public:
-    bool operator==(const dehydrator& rhs) const;
-    bool operator!=(const dehydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string dehydrate(const injection::entities::model& m);
+    static void dehydrate(const injection::entities::model& m,
+        const boost::filesystem::path& p);
 };
 
 }
