@@ -42,3 +42,6 @@ doc/agile/reports
 
 # emacs
 .dir-locals.el
+
+# org-roam
+org-roam.db
