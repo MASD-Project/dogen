@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-10 Sun 20:06]
+#+CAPTION: Clock summary at [2020-05-11 Mon 22:41]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *26:38* |       |      | 100.0 |
+| *Total time*                                          | *27:46* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 26:38   |       |      | 100.0 |
-| Active                                                |         | 26:38 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  22.3 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.9 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   3.8 |
-| Check name of model for variability transform         |         |       | 0:19 |   1.2 |
-| Analysis on templating and logical model              |         |       | 1:09 |   4.3 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.7 |
-| Remove stitch template builder                        |         |       | 0:09 |   0.6 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   6.1 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   6.2 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   4.3 |
-| Move decoration transform into logical model          |         |       | 5:33 |  20.8 |
-| Split wale out of stitch templates                    |         |       | 3:31 |  13.2 |
-| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.9 |
-| Promote all formatters to archetypes                  |         |       | 2:18 |   8.6 |
+| Stories                                               | 27:46   |       |      | 100.0 |
+| Active                                                |         | 27:46 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  21.4 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.8 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   3.6 |
+| Check name of model for variability transform         |         |       | 0:19 |   1.1 |
+| Analysis on templating and logical model              |         |       | 1:09 |   4.1 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.6 |
+| Remove stitch template builder                        |         |       | 0:09 |   0.5 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   5.9 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   5.9 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   4.1 |
+| Move decoration transform into logical model          |         |       | 5:33 |  20.0 |
+| Split wale out of stitch templates                    |         |       | 3:31 |  12.7 |
+| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.7 |
+| Promote all formatters to archetypes                  |         |       | 2:18 |   8.3 |
+| Create an encoder for org-mode                        |         |       | 1:08 |   4.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1056,6 +1057,44 @@ Link: https://www.scitepress.org/Papers/2016/57448/57448.pdf
 Now that we have finally got the archetypes bootstrapping, we need to
 go through all the models and convert each formatter into an archetype
 without breaking anything.
+
+*** STARTED Create an encoder for org-mode                            :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-11 Mon 22:29]--[2020-05-11 Mon 22:40] =>  0:11
+    CLOCK: [2020-05-11 Mon 21:31]--[2020-05-11 Mon 22:28] =>  0:57
+    :END:
+
+We should start a small experiment in converting models into org-mode,
+just to see what problems we face. To start off with we should just
+create a very simple encoder without having a proper strongly type
+org-mode representation.
+
+Notes:
+
+- in order to output org-mode we need to have the containment
+  relationships at the injection level. That is, we need some kind of
+  way of knowing what packages contain which elements. We could make
+  the injection model reflect this (create the notion of a containing
+  element which is made of contained elements). Or we could do a quick
+  hack inside the org-mode injector: split strings and index elements
+  by containment. This would be a very dirty hack and likely to
+  fail. We could also just make a small change to the dia injector:
+  instead of appending the package name to the element name, create a
+  field for the containing type. This is sufficient to resolve the
+  indexing use case.
+
+*** Allow converting to =std::out=                                    :story:
+
+It would be nice to be able to supply the injector destination instead
+of a full path to destination, and dump the ouptut to =std::out=. Its
+painful when trying to create a new converter to have to deal with
+files.
+
+*** injection: Encoders and decoders should work in terms of strings  :story:
+
+We should only have strings (or perhaps streams) in the encoder and
+decoder interfaces. The handling of files should be the responsibility
+of the caller.
 
 *** Orchestration should have an initialiser                          :story:
 
