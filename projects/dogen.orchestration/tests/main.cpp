@@ -29,6 +29,7 @@
 #include "dogen.text.csharp/types/initializer.hpp"
 #include "dogen.text.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
+#include "dogen.injection.org_mode/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.relational/types/initializer.hpp"
@@ -59,6 +60,7 @@ struct initializer {
 #endif
 #endif
 
+        dogen::injection::org_mode::initializer::initialize();
         dogen::injection::json::initializer::initialize();
         dogen::injection::dia::initializer::initialize();
         dogen::text::csharp::initializer::initialize();

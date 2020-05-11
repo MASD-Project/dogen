@@ -53,6 +53,7 @@ target_link_libraries(${lib_target_name}
     dogen.dia.lib
     dogen.physical.lib
     dogen.injection.lib
+    dogen.injection.org_mode.lib
     dogen.injection.json.lib
     dogen.injection.dia.lib
     dogen.logical.lib

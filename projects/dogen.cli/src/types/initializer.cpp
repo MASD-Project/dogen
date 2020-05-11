@@ -22,6 +22,7 @@
 #include "dogen.text.csharp/types/initializer.hpp"
 #include "dogen.text.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
+#include "dogen.injection.org_mode/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
 #include "dogen.tracing/types/initializer.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
@@ -32,6 +33,7 @@
 namespace dogen::cli {
 
 void initializer::initialize() {
+    dogen::injection::org_mode::initializer::initialize();
     dogen::injection::json::initializer::initialize();
     dogen::injection::dia::initializer::initialize();
     dogen::text::csharp::initializer::initialize();
