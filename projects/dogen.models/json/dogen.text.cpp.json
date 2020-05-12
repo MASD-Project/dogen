@@ -113,10 +113,34 @@
     },
     {
       "name": "transforms::types::exception_header_transform",
+      "documentation": "Generates header files for exceptions.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.exception",
+        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
+        "masd.wale.kvp.class.simple_name": "exception_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "exception_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "exception",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.text_to_text_transform": "\"\" #>"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/exception.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/exception_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> exception_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& /*e*/) const {\n    auto builder(f.make());\n    builder.add(inclusion_constants::std::string());\n    builder.add(inclusion_constants::boost::exception::info());\n    return builder.build();\n}\n\nvoid exception_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& ye(ast.as<logical::entities::structural::exception>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(ye.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\n<#+\n            ast.comment(ye.documentation());\n#>\nclass <#= ye.name().simple() #> : public virtual std::exception, public virtual boost::exception {\npublic:\n<#+\n            if (ast.is_cpp_standard_98()) {\n#>\n    <#= ye.name().simple() #>() {}\n    ~<#= ye.name().simple() #>() {}\n<#+\n            } else {\n#>\n    <#= ye.name().simple() #>() = default;\n    ~<#= ye.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> = default;\n<#+\n            }\n#>\n\npublic:\n    explicit <#= ye.name().simple() #>(const std::string& message) : message_(message) { }\n\npublic:\n<#+\n            if (ast.is_cpp_standard_98()) {\n                // Note: we are using BOOST_NOEXCEPT here by design. The problem is\n                // users may include this header in a C++ 98 project or in a C++ > 11 project;\n                // and we need to have different behaviours. Depending on this inclusion.\n                // If we do not, we will cause compilation errors when including C++ 98 code\n                // on a C++ 11 project. This is because the standard library will have noexcept\n                // but we won't (as we were generated for C++ 98), so we'd be weakening the exception\n                // guarantees. By using the boost macro we will do the right thing hopefully.\n                // And since we already need boost for exception, we should be ok.\n#>\n    const char* what() const BOOST_NOEXCEPT { return(message_.c_str()); }\n<#+\n            } else {\n#>\n    const char* what() const<#= ast.make_noexcept_keyword_text() #> { return(message_.c_str()); }\n<#+\n            }\n#>\n\nprivate:\n    const std::string message_;\n};\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::types::enum_header_transform",

@@ -213,7 +213,7 @@
         <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,239.15;16.05,358.05"/>
+        <dia:rectangle val="-46.05,239.15;19.05,358.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -222,7 +222,7 @@
         <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="62"/>
+        <dia:real val="65"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="117"/>
@@ -1749,25 +1749,35 @@ inline void swap(
         <dia:point val="-12,261"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,260.95;1.64,264.05"/>
+        <dia:rectangle val="-12.05,260.95;15.885,265.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-12,261"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for exceptions.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.exception
+#DOGEN masd.wale.text_template=cpp_artefact_transform_implementation_header.wale
+#DOGEN masd.wale.kvp.class.simple_name=exception_header_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=exception_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
+#DOGEN masd.wale.kvp.meta_element=exception
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.text_to_text_transform="" #&gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1847,7 +1857,149 @@ inline void swap(
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; exception_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; /*e*/) const {
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::string());
+    builder.add(inclusion_constants::boost::exception::info());
+    return builder.build();
+}
+
+void exception_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::exception&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(ye.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#+
+            ast.comment(ye.documentation());
+#&gt;
+class &lt;#= ye.name().simple() #&gt; : public virtual std::exception, public virtual boost::exception {
+public:
+&lt;#+
+            if (ast.is_cpp_standard_98()) {
+#&gt;
+    &lt;#= ye.name().simple() #&gt;() {}
+    ~&lt;#= ye.name().simple() #&gt;() {}
+&lt;#+
+            } else {
+#&gt;
+    &lt;#= ye.name().simple() #&gt;() = default;
+    ~&lt;#= ye.name().simple() #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; = default;
+&lt;#+
+            }
+#&gt;
+
+public:
+    explicit &lt;#= ye.name().simple() #&gt;(const std::string&amp; message) : message_(message) { }
+
+public:
+&lt;#+
+            if (ast.is_cpp_standard_98()) {
+                // Note: we are using BOOST_NOEXCEPT here by design. The problem is
+                // users may include this header in a C++ 98 project or in a C++ &gt; 11 project;
+                // and we need to have different behaviours. Depending on this inclusion.
+                // If we do not, we will cause compilation errors when including C++ 98 code
+                // on a C++ 11 project. This is because the standard library will have noexcept
+                // but we won't (as we were generated for C++ 98), so we'd be weakening the exception
+                // guarantees. By using the boost macro we will do the right thing hopefully.
+                // And since we already need boost for exception, we should be ok.
+#&gt;
+    const char* what() const BOOST_NOEXCEPT { return(message_.c_str()); }
+&lt;#+
+            } else {
+#&gt;
+    const char* what() const&lt;#= ast.make_noexcept_keyword_text() #&gt; { return(message_.c_str()); }
+&lt;#+
+            }
+#&gt;
+
+private:
+    const std::string message_;
+};
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;
+#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
