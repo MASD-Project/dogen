@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-12 Tue 22:29]
+#+CAPTION: Clock summary at [2020-05-13 Wed 22:21]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *28:27* |       |      | 100.0 |
+| *Total time*                                          | *29:46* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 28:27   |       |      | 100.0 |
-| Active                                                |         | 28:27 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  20.9 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.8 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   3.5 |
+| Stories                                               | 29:46   |       |      | 100.0 |
+| Active                                                |         | 29:46 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  20.0 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.6 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   3.4 |
 | Check name of model for variability transform         |         |       | 0:19 |   1.1 |
-| Analysis on templating and logical model              |         |       | 1:09 |   4.0 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.6 |
+| Analysis on templating and logical model              |         |       | 1:09 |   3.9 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.5 |
 | Remove stitch template builder                        |         |       | 0:09 |   0.5 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   5.7 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   5.8 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   4.0 |
-| Move decoration transform into logical model          |         |       | 5:33 |  19.5 |
-| Split wale out of stitch templates                    |         |       | 3:31 |  12.4 |
-| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.6 |
-| Promote all formatters to archetypes                  |         |       | 2:59 |  10.5 |
-| Create an encoder for org-mode                        |         |       | 1:08 |   4.0 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   5.5 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   5.5 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   3.9 |
+| Move decoration transform into logical model          |         |       | 5:33 |  18.6 |
+| Split wale out of stitch templates                    |         |       | 3:31 |  11.8 |
+| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.5 |
+| Promote all formatters to archetypes                  |         |       | 4:18 |  14.4 |
+| Create an encoder for org-mode                        |         |       | 1:08 |   3.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1049,6 +1049,7 @@ Link: https://www.scitepress.org/Papers/2016/57448/57448.pdf
 
 *** STARTED Promote all formatters to archetypes                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-13 Wed 21:02]--[2020-05-13 Wed 22:21] =>  1:19
     CLOCK: [2020-05-12 Tue 21:48]--[2020-05-12 Tue 22:29] =>  0:41
     CLOCK: [2020-05-10 Sun 17:27]--[2020-05-10 Sun 18:24] =>  0:57
     CLOCK: [2020-05-09 Sat 17:28]--[2020-05-09 Sat 17:37] =>  0:09

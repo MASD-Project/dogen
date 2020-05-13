@@ -14333,6 +14333,27 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+
+*** Consider adding support for SignalR                               :story:
+
+SignalR:
+
+#+begin_quote
+SignalR is a free and open-source software library for Microsoft
+ASP.NET that allows server code to send asynchronous notifications to
+client-side web applications. The library includes server-side and
+client-side JavaScript components.
+#+end_quote
+
+Once we have support for Casablance, we can also consider adding
+support for SignalR.
+
+Links:
+
+- [[https://github.com/aspnet/SignalR-Client-Cpp][SignalR-Client-Cpp]]: C++ Client for ASP.NET Core SignalR
+- [[https://blog.3d-logic.com/2015/05/20/signalr-native-client/][SignalR c++ client]]: blog post on c++ client implementation.
+- [[https://github.com/SystemTera/signalr-cpp][signalr-cpp]]: SignalR C++ Implemenation (server)
+
 *** Add support for T2T transforms                                    :story:
 
 We have done a lot of analysis work on text-to-text (T2T) transforms,
