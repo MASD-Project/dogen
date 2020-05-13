@@ -2202,10 +2202,32 @@
     },
     {
       "name": "transforms::types::primitive_forward_declarations_transform",
+      "documentation": "Generates forward declarations for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.primitive",
+        "masd.wale.kvp.class.simple_name": "primitive_forward_declarations_transform",
+        "masd.wale.kvp.archetype.simple_name": "primitive_forward_declarations",
+        "masd.wale.kvp.class.inclusion_support_type": "regular_support",
+        "masd.wale.kvp.meta_element": "primitive",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(p));\n        {\n            const auto ns(ast.make_namespaces(p.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nclass <#= p.name().simple() #>;\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::serialization::primitive_forward_declarations_transform",
