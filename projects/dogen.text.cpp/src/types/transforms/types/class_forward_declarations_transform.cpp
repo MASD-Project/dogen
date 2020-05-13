@@ -27,7 +27,6 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-
 physical::entities::archetype class_forward_declarations_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

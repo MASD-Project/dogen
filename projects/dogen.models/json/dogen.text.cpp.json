@@ -204,10 +204,33 @@
     },
     {
       "name": "transforms::types::visitor_header_transform",
+      "documentation": "Generates header files for visitors.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.visitor",
+        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
+        "masd.wale.kvp.class.simple_name": "visitor_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "visitor_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "visitor",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/visitor.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/visitor_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> visitor_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    using logical::entities::structural::visitor;\n    const auto& v(assistant::as<visitor>(e));\n    auto builder(f.make());\n    builder.add(v.visits(), traits::class_forward_declarations_archetype_qn());\n\n    if (v.parent())\n        builder.add(*v.parent(), traits::visitor_header_archetype_qn());\n\n    return builder.build();\n}\n\nvoid visitor_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& v(ast.as<logical::entities::structural::visitor>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(v.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\n<#+\n            ast.comment(v.documentation());\n            if (!v.parent())\n#>\nclass <#= v.name().simple() #> {\n<#+\n            else {\n                const auto& pn(*v.parent());\n                const auto pqn(ast.get_qualified_name(pn));\n#>\nclass <#= v.name().simple() #> : public <#= pqn #> {\n<#+\n            }\n#>\npublic:\n    virtual ~<#= v.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> = 0;\n\npublic:\n<#+\n            if (v.parent()) {\n                const auto& pn(*v.parent());\n                const auto pqn(ast.get_qualified_name(pn));\n#>\n    using <#= pqn #>::visit;\n\n<#+\n            }\n\n            bool is_first(true);\n            for (const auto& t : v.visits()) {\n                if (!is_first)\n#>\n\n<#+\n                const auto qn(ast.get_qualified_name(t));\n                const auto doc(\"Accept visits for type \" + qn);\n                ast.comment_start_method_group(doc);\n#>\n    virtual void visit(const <#= qn #>&) const { }\n    virtual void visit(const <#= qn #>&) { }\n    virtual void visit(<#= qn #>&) const { }\n    virtual void visit(<#= qn #>&) { }\n<#+\n                ast.comment_end_method_group(doc);\n                is_first = false;\n            }\n#>\n};\n\ninline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcept_keyword_text() #> { }\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::types::class_implementation_transform",
@@ -1440,10 +1463,33 @@
     },
     {
       "name": "transforms::types::primitive_header_transform",
+      "documentation": "Generates header files for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.primitive",
+        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
+        "masd.wale.kvp.class.simple_name": "primitive_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "primitive_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "primitive",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/serialization/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> primitive_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    using logical::entities::structural::primitive;\n    const auto& p(assistant::as<primitive>(e));\n    auto builder(f.make());\n\n    // algorithm: domain headers need it for the swap function.\n    builder.add(inclusion_constants::std::algorithm());\n\n    using ser = transforms::serialization::traits;\n    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());\n    builder.add(p.name(), ser_fwd_arch);\n\n    const auto carch(traits::canonical_archetype());\n    builder.add(p.value_attribute().parsed_type().current(), carch);\n\n    return builder.build();\n}\n\nvoid primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    const auto sn(p.name().simple());\n    const auto qn(ast.get_qualified_name(p.name()));\n    {\n\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(p.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const auto attr(p.value_attribute());\n\n            ast.comment(p.documentation());\n#>\nclass <#= sn #> final {\npublic:\n<#+\n            /*\n             * Compiler generated constructors and destructors.\n             */\n            if (!ast.requires_manual_default_constructor())\n#>\n    <#= sn #>() = default;\n    <#= sn #>(const <#= sn #>&) = default;\n<#+\n            if (!ast.requires_manual_move_constructor())\n#>\n    <#= sn #>(<#= sn #>&&) = default;\n    ~<#= sn #>() = default;\n<#+\n            if (p.is_immutable())\n#>\n    <#= sn #>& operator=(const <#= sn #>&) = delete;\n<#+\n            /*\n             * Manually generated default constructor.\n             */\n            if (ast.requires_manual_default_constructor()) {\n#>\npublic:\n    <#= sn #>();\n\n<#+\n            }\n\n            /*\n             * Manually generated move constructor.\n             */\n            if (ast.requires_manual_move_constructor()) {\n#>\npublic:\n    <#= sn #>(<#= sn #>&& rhs);\n\n<#+\n            }\n\n            /*\n             * Manually generated complete constructor.\n             */\n#>\npublic:\n    explicit <#= sn #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>);\n\n<#+\n            /*\n             * Serialisaton Friends\n             */\n            if (ast.is_serialization_enabled()) {\n#>\nprivate:\n    template<typename Archive>\n    friend void boost::serialization::save(Archive& ar, const <#= qn #>& v, unsigned int version);\n\n    template<typename Archive>\n    friend void boost::serialization::load(Archive& ar, <#= qn #>& v, unsigned int version);\n\n<#+\n            }\n\n            /*\n             * Getters and setters.\n             */\n#>\npublic:\n<#+\n            ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());\n            if (attr.parsed_type().is_current_simple_type()) {\n#>\n    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;\n<#+\n                if (attr.is_immutable()) {\n#>\n\n<#+\n\n                } else {\n#>\n    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);\n<#+\n                }\n            } else {\n#>\n    const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;\n<#+\n                if (attr.is_immutable()) {\n#>\n\n<#+\n                } else {\n#>\n    <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> <#= attr.name().simple() #>();\n    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #><#= ast.make_by_ref_text(attr) #> v);\n    <#= ast.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= ast.get_qualified_name(attr.parsed_type()) #>&& v);\n<#+\n                }\n            }\n            ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());\n\n            /*\n             * Explicit cast.\n             */\n#>\n\npublic:\n    explicit operator <#= ast.get_qualified_name(attr.parsed_type()) #>() const {\n        return <#= attr.member_variable_name() #>;\n    }\n<#+\n            /*\n             * Equality.\n             */\n#>\n\npublic:\n    bool operator==(const <#= sn #>& rhs) const;\n    bool operator!=(const <#= sn #>& rhs) const {\n        return !this->operator==(rhs);\n    }\n\n<#+\n            /*\n             * Swap and assignment.\n             */\n#>\npublic:\n    void swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #>;\n<#+\n            if (!p.is_immutable()) {\n#>\n    <#= sn #>& operator=(<#= sn #> other);\n<#+\n            }\n\n            /*\n             * Member variables.\n             */\n#>\n\nprivate:\n    <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;\n};\n\n<#+\n        } // snf\n\n        if (!p.is_immutable()) {\n#>\n\nnamespace std {\n\ntemplate<>\ninline void swap(\n    <#= qn #>& lhs,\n    <#= qn #>& rhs) {\n    lhs.swap(rhs);\n}\n\n}\n<#+\n        }\n#>\n\n<#+\n    } //ah  sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::hash::primitive_header_transform",
@@ -2069,17 +2115,61 @@
     },
     {
       "name": "transforms::types::class_forward_declarations_transform",
+      "documentation": "Generates forward declarations for classes.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
+        "masd.wale.kvp.class.simple_name": "class_forward_declarations_transform",
+        "masd.wale.kvp.archetype.simple_name": "class_forward_declarations",
+        "masd.wale.kvp.class.inclusion_support_type": "regular_support",
+        "masd.wale.kvp.meta_element": "object",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/object.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> class_forward_declarations_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid class_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& o(ast.as<logical::entities::structural::object>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(o));\n        {\n            const auto ns(ast.make_namespaces(o.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nclass <#= o.name().simple() #>;\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::types::visitor_forward_declarations_transform",
+      "documentation": "Generates forward declarations for visitors.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.part_id": "masd.cpp.public_headers",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.visitor",
+        "masd.wale.kvp.class.simple_name": "visitor_forward_declarations_transform",
+        "masd.wale.kvp.archetype.simple_name": "visitor_forward_declarations",
+        "masd.wale.kvp.class.inclusion_support_type": "regular_support",
+        "masd.wale.kvp.meta_element": "visitor",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/visitor.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> visitor_forward_declarations_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid visitor_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& o(ast.as<logical::entities::structural::visitor>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(o));\n        {\n            const auto ns(ast.make_namespaces(o.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nclass <#= o.name().simple() #>;\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::serialization::class_forward_declarations_transform",

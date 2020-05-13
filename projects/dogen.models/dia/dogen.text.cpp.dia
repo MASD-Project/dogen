@@ -213,7 +213,7 @@
         <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,239.15;19.05,358.05"/>
+        <dia:rectangle val="-46.05,239.15;16.05,358.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -222,7 +222,7 @@
         <dia:point val="-46,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="65"/>
+        <dia:real val="62"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="117"/>
@@ -1746,13 +1746,13 @@ inline void swap(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,261"/>
+        <dia:point val="-14,261"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,260.95;15.885,265.45"/>
+        <dia:rectangle val="-14.05,260.95;13.885,265.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,261"/>
+        <dia:point val="-14,261"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -2009,13 +2009,13 @@ private:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,261"/>
+        <dia:point val="-14,267"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,260.95;-16.115,265.45"/>
+        <dia:rectangle val="-14.05,266.95;13.885,271.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,261"/>
+        <dia:point val="-14,267"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -2480,28 +2480,37 @@ namespace &lt;#= m.name().simple() #&gt; {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,267"/>
+        <dia:point val="-44,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,266.95;1.64,270.05"/>
+        <dia:rectangle val="-44.05,273.95;-16.115,278.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,267"/>
+        <dia:point val="-44,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for visitors.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visitor
+#DOGEN masd.wale.text_template=cpp_artefact_transform_implementation_header.wale
+#DOGEN masd.wale.kvp.class.simple_name=visitor_header_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=visitor_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
+#DOGEN masd.wale.kvp.meta_element=visitor
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2540,7 +2549,7 @@ namespace &lt;#= m.name().simple() #&gt; {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2581,7 +2590,157 @@ namespace &lt;#= m.name().simple() #&gt; {
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; visitor_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    using logical::entities::structural::visitor;
+    const auto&amp; v(assistant::as&lt;visitor&gt;(e));
+    auto builder(f.make());
+    builder.add(v.visits(), traits::class_forward_declarations_archetype_qn());
+
+    if (v.parent())
+        builder.add(*v.parent(), traits::visitor_header_archetype_qn());
+
+    return builder.build();
+}
+
+void visitor_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; v(ast.as&lt;logical::entities::structural::visitor&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(v.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#+
+            ast.comment(v.documentation());
+            if (!v.parent())
+#&gt;
+class &lt;#= v.name().simple() #&gt; {
+&lt;#+
+            else {
+                const auto&amp; pn(*v.parent());
+                const auto pqn(ast.get_qualified_name(pn));
+#&gt;
+class &lt;#= v.name().simple() #&gt; : public &lt;#= pqn #&gt; {
+&lt;#+
+            }
+#&gt;
+public:
+    virtual ~&lt;#= v.name().simple() #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; = 0;
+
+public:
+&lt;#+
+            if (v.parent()) {
+                const auto&amp; pn(*v.parent());
+                const auto pqn(ast.get_qualified_name(pn));
+#&gt;
+    using &lt;#= pqn #&gt;::visit;
+
+&lt;#+
+            }
+
+            bool is_first(true);
+            for (const auto&amp; t : v.visits()) {
+                if (!is_first)
+#&gt;
+
+&lt;#+
+                const auto qn(ast.get_qualified_name(t));
+                const auto doc("Accept visits for type " + qn);
+                ast.comment_start_method_group(doc);
+#&gt;
+    virtual void visit(const &lt;#= qn #&gt;&amp;) const { }
+    virtual void visit(const &lt;#= qn #&gt;&amp;) { }
+    virtual void visit(&lt;#= qn #&gt;&amp;) const { }
+    virtual void visit(&lt;#= qn #&gt;&amp;) { }
+&lt;#+
+                ast.comment_end_method_group(doc);
+                is_first = false;
+            }
+#&gt;
+};
+
+inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= ast.make_noexcept_keyword_text() #&gt; { }
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -2591,13 +2750,13 @@ namespace &lt;#= m.name().simple() #&gt; {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,255"/>
+        <dia:point val="-14,255"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,254.95;13.19,259.45"/>
+        <dia:rectangle val="-14.05,254.95;11.19,259.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,255"/>
+        <dia:point val="-14,255"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -6890,7 +7049,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="101.588,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.517,180.429;105.69,184.328"/>
+        <dia:rectangle val="101.518,180.429;105.69,184.328"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7587,7 +7746,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.287,180.429;149.012,184.312"/>
+        <dia:rectangle val="145.288,180.429;149.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7658,7 +7817,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="163.375,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.625,178.172;176.894,184.8"/>
+        <dia:rectangle val="162.625,178.172;176.893,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13710,13 +13869,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,276"/>
+        <dia:point val="-17,297"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,275.95;-3.36,279.05"/>
+        <dia:rectangle val="-17.05,296.95;-3.36,300.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,276"/>
+        <dia:point val="-17,297"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -25416,7 +25575,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="106.252,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.361,285.429;106.323,287.324"/>
+        <dia:rectangle val="104.361,285.429;106.322,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25933,28 +26092,37 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,276"/>
+        <dia:point val="-44,280"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,275.95;-30.36,279.05"/>
+        <dia:rectangle val="-44.05,279.95;-16.115,284.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,276"/>
+        <dia:point val="-44,280"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.primitive
+#DOGEN masd.wale.text_template=cpp_artefact_transform_implementation_header.wale
+#DOGEN masd.wale.kvp.class.simple_name=primitive_header_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=primitive_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
+#DOGEN masd.wale.kvp.meta_element=primitive
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -25993,7 +26161,7 @@ not a regular" helper.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -26034,7 +26202,280 @@ not a regular" helper.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; primitive_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    using logical::entities::structural::primitive;
+    const auto&amp; p(assistant::as&lt;primitive&gt;(e));
+    auto builder(f.make());
+
+    // algorithm: domain headers need it for the swap function.
+    builder.add(inclusion_constants::std::algorithm());
+
+    using ser = transforms::serialization::traits;
+    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
+    builder.add(p.name(), ser_fwd_arch);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(p.value_attribute().parsed_type().current(), carch);
+
+    return builder.build();
+}
+
+void primitive_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(ast.get_qualified_name(p.name()));
+    {
+
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto attr(p.value_attribute());
+
+            ast.comment(p.documentation());
+#&gt;
+class &lt;#= sn #&gt; final {
+public:
+&lt;#+
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (!ast.requires_manual_default_constructor())
+#&gt;
+    &lt;#= sn #&gt;() = default;
+    &lt;#= sn #&gt;(const &lt;#= sn #&gt;&amp;) = default;
+&lt;#+
+            if (!ast.requires_manual_move_constructor())
+#&gt;
+    &lt;#= sn #&gt;(&lt;#= sn #&gt;&amp;&amp;) = default;
+    ~&lt;#= sn #&gt;() = default;
+&lt;#+
+            if (p.is_immutable())
+#&gt;
+    &lt;#= sn #&gt;&amp; operator=(const &lt;#= sn #&gt;&amp;) = delete;
+&lt;#+
+            /*
+             * Manually generated default constructor.
+             */
+            if (ast.requires_manual_default_constructor()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;();
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (ast.requires_manual_move_constructor()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;(&lt;#= sn #&gt;&amp;&amp; rhs);
+
+&lt;#+
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+#&gt;
+public:
+    explicit &lt;#= sn #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;);
+
+&lt;#+
+            /*
+             * Serialisaton Friends
+             */
+            if (ast.is_serialization_enabled()) {
+#&gt;
+private:
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::save(Archive&amp; ar, const &lt;#= qn #&gt;&amp; v, unsigned int version);
+
+    template&lt;typename Archive&gt;
+    friend void boost::serialization::load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
+
+&lt;#+
+            }
+
+            /*
+             * Getters and setters.
+             */
+#&gt;
+public:
+&lt;#+
+            ast.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+            if (attr.parsed_type().is_current_simple_type()) {
+#&gt;
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; &lt;#= attr.name().simple() #&gt;() const;
+&lt;#+
+                if (attr.is_immutable()) {
+#&gt;
+
+&lt;#+
+
+                } else {
+#&gt;
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; v);
+&lt;#+
+                }
+            } else {
+#&gt;
+    const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= attr.name().simple() #&gt;() const;
+&lt;#+
+                if (attr.is_immutable()) {
+#&gt;
+
+&lt;#+
+                } else {
+#&gt;
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;();
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; v);
+    &lt;#= ast.make_setter_return_type(sn, attr) #&gt; &lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp;&amp; v);
+&lt;#+
+                }
+            }
+            ast.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+
+            /*
+             * Explicit cast.
+             */
+#&gt;
+
+public:
+    explicit operator &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;() const {
+        return &lt;#= attr.member_variable_name() #&gt;;
+    }
+&lt;#+
+            /*
+             * Equality.
+             */
+#&gt;
+
+public:
+    bool operator==(const &lt;#= sn #&gt;&amp; rhs) const;
+    bool operator!=(const &lt;#= sn #&gt;&amp; rhs) const {
+        return !this-&gt;operator==(rhs);
+    }
+
+&lt;#+
+            /*
+             * Swap and assignment.
+             */
+#&gt;
+public:
+    void swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_keyword_text() #&gt;;
+&lt;#+
+            if (!p.is_immutable()) {
+#&gt;
+    &lt;#= sn #&gt;&amp; operator=(&lt;#= sn #&gt; other);
+&lt;#+
+            }
+
+            /*
+             * Member variables.
+             */
+#&gt;
+
+private:
+    &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; &lt;#= attr.member_variable_name() #&gt;;
+};
+
+&lt;#+
+        } // snf
+
+        if (!p.is_immutable()) {
+#&gt;
+
+namespace std {
+
+template&lt;&gt;
+inline void swap(
+    &lt;#= qn #&gt;&amp; lhs,
+    &lt;#= qn #&gt;&amp; rhs) {
+    lhs.swap(rhs);
+}
+
+}
+&lt;#+
+        }
+#&gt;
+
+&lt;#+
+    } //ah  sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -26599,13 +27040,13 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O207">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,281"/>
+        <dia:point val="-14,280"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,280.95;0.0525,284.05"/>
+        <dia:rectangle val="-14.05,279.95;3.0525,283.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,281"/>
+        <dia:point val="-14,280"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.002500000000001"/>
@@ -30412,13 +30853,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,291"/>
+        <dia:point val="-40,312"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,290.95;-23.7075,294.05"/>
+        <dia:rectangle val="-40.05,311.95;-19.7075,315.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,291"/>
+        <dia:point val="-40,312"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.2425"/>
@@ -30523,13 +30964,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,296"/>
+        <dia:point val="-40,317"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,295.95;-19.7275,299.05"/>
+        <dia:rectangle val="-40.05,316.95;-15.7275,320.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,296"/>
+        <dia:point val="-40,317"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.2225"/>
@@ -30634,13 +31075,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,306"/>
+        <dia:point val="-40,327"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,305.95;-25.755,309.05"/>
+        <dia:rectangle val="-40.05,326.95;-21.755,330.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,306"/>
+        <dia:point val="-40,327"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.195"/>
@@ -30745,13 +31186,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="-21,301"/>
+        <dia:point val="-17,322"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,300.95;1.225,304.05"/>
+        <dia:rectangle val="-17.05,321.95;5.225,325.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-21,301"/>
+        <dia:point val="-17,322"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.175000000000001"/>
@@ -33577,28 +34018,36 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O265">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,286"/>
+        <dia:point val="-44,261"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,285.95;0.61,289.05"/>
+        <dia:rectangle val="-44.05,260.95;-16.115,265.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,286"/>
+        <dia:point val="-44,261"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.559999999999999"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates forward declarations for classes.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
+#DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
+#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33637,7 +34086,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -33678,7 +34127,96 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; class_forward_declarations_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void class_forward_declarations_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= o.name().simple() #&gt;;
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -33688,28 +34226,36 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,291"/>
+        <dia:point val="-14,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,290.95;1.245,294.05"/>
+        <dia:rectangle val="-14.05,273.95;13.885,278.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,291"/>
+        <dia:point val="-14,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.195"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates forward declarations for visitors.
+
+#DOGEN masd.physical.part_id=masd.cpp.public_headers
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visitor
+#DOGEN masd.wale.kvp.class.simple_name=visitor_forward_declarations_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=visitor_forward_declarations
+#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
+#DOGEN masd.wale.kvp.meta_element=visitor
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33748,7 +34294,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -33789,7 +34335,96 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; visitor_forward_declarations_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void visitor_forward_declarations_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::visitor&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= o.name().simple() #&gt;;
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -33910,13 +34545,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,281"/>
+        <dia:point val="-42,297"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,280.95;-24.5575,284.05"/>
+        <dia:rectangle val="-42.05,296.95;-22.5575,300.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,281"/>
+        <dia:point val="-42,297"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.392500000000002"/>
@@ -35334,13 +35969,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O282">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,286"/>
+        <dia:point val="-40,307"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,285.95;-30.36,289.05"/>
+        <dia:rectangle val="-40.05,306.95;-26.36,310.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,286"/>
+        <dia:point val="-40,307"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -36535,13 +37170,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,301"/>
+        <dia:point val="-40,322"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,300.95;-28.1775,304.05"/>
+        <dia:rectangle val="-40.05,321.95;-24.1775,325.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,301"/>
+        <dia:point val="-40,322"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.772499999999999"/>
@@ -36646,13 +37281,13 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,296"/>
+        <dia:point val="-14,317"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,295.95;1.8025,299.05"/>
+        <dia:rectangle val="-14.05,316.95;5.8025,320.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,296"/>
+        <dia:point val="-14,317"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.752500000000001"/>
@@ -37355,13 +37990,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O299">
       <dia:attribute name="obj_pos">
-        <dia:point val="-12,249"/>
+        <dia:point val="-14,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.05,248.95;13.19,253.45"/>
+        <dia:rectangle val="-14.05,248.95;11.19,253.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-12,249"/>
+        <dia:point val="-14,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
