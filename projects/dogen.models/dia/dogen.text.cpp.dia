@@ -27043,25 +27043,34 @@ inline void swap(
         <dia:point val="-14,280"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,279.95;3.0525,283.05"/>
+        <dia:rectangle val="-14.05,279.95;11.19,284.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,280"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.002500000000001"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.physical.part_id=masd.cpp.implementation
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.primitive
+#DOGEN masd.wale.text_template=cpp_artefact_transform_implementation.wale
+#DOGEN masd.wale.kvp.class.simple_name=primitive_implementation_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=primitive_implementation
+#DOGEN masd.wale.kvp.meta_element=primitive
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -27100,7 +27109,7 @@ inline void swap(
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -27141,7 +27150,206 @@ inline void swap(
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_implementation_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt;
+primitive_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    using logical::entities::structural::primitive;
+    const auto&amp; o(assistant::as&lt;primitive&gt;(e));
+    auto builder(f.make());
+
+    const auto ch_arch(traits::primitive_header_archetype_qn());
+    builder.add(o.name(), ch_arch);
+    return builder.build();
+}
+
+void primitive_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(ast.get_qualified_name(p.name()));
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(p.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto attr(p.value_attribute());
+
+            /*
+             * Default constructor.
+             */
+            if (ast.requires_manual_default_constructor()) {
+#&gt;
+
+&lt;#= sn #&gt;::&lt;#= sn #&gt;()
+    : &lt;#= attr.member_variable_name() #&gt;(static_cast&lt;&lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&gt;(0)) { }
+&lt;#+
+            }
+
+            /*
+             * Move constructor.
+             */
+            if (ast.requires_manual_move_constructor()) {
+#&gt;
+
+&lt;#= sn #&gt;::&lt;#= sn #&gt;(&lt;#= sn #&gt;&amp;&amp; rhs)
+    : &lt;#= attr.member_variable_name() #&gt;(std::move(rhs.&lt;#= attr.member_variable_name() #&gt;)) { }
+&lt;#+
+            }
+
+            /*
+             * Complete constructor.
+             */
+#&gt;
+
+&lt;#= sn #&gt;::&lt;#= sn #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&lt;#= ast.make_by_ref_text(attr) #&gt; &lt;#= attr.name().simple() #&gt;)
+    : &lt;#= attr.member_variable_name() #&gt;(&lt;#= attr.name().simple() #&gt;) { }
+
+&lt;#+
+            /*
+             * Getters and setters
+             */
+             if (attr.parsed_type().is_current_simple_type()) {
+#&gt;
+&lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;() const {
+    return &lt;#= attr.member_variable_name() #&gt;;
+}
+
+&lt;#+
+                if (!p.is_immutable()) {
+#&gt;
+void &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt; v) {
+    &lt;#= attr.member_variable_name() #&gt; = v;
+}
+
+&lt;#+
+                }
+            } else {
+#&gt;
+const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;() const {
+    return &lt;#= attr.member_variable_name() #&gt;;
+}
+&lt;#+
+                if (!p.is_immutable()) {
+#&gt;
+
+&lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;() {
+    return &lt;#= attr.member_variable_name() #&gt;;
+}
+
+void &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; v) {
+    &lt;#= attr.member_variable_name() #&gt; = v;
+}
+
+void &lt;#= sn #&gt;::&lt;#= attr.name().simple() #&gt;(const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp;&amp; v) {
+    &lt;#= attr.member_variable_name() #&gt; = std::move(v);
+}
+
+&lt;#+
+                }
+            }
+
+            /*
+             * Equality.
+             */
+#&gt;
+bool &lt;#= sn #&gt;::operator==(const &lt;#= sn #&gt;&amp; rhs) const {
+    return &lt;#= attr.member_variable_name() #&gt; == rhs.&lt;#= attr.member_variable_name() #&gt;;
+}
+
+&lt;#+
+            /*
+             * Swap and assignment.
+             */
+            if (!p.is_immutable()) {
+#&gt;
+void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_keyword_text() #&gt; {
+    using std::swap;
+    swap(&lt;#= attr.member_variable_name() #&gt;, other.&lt;#= attr.member_variable_name() #&gt;);
+}
+
+&lt;#= sn #&gt;&amp; &lt;#= sn #&gt;::operator=(&lt;#= sn #&gt; other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+&lt;#+
+            }
+        } // snf
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
