@@ -37,7 +37,6 @@
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-
 physical::entities::archetype feature_bundle_implementation_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -84,11 +83,11 @@ std::list<std::string> feature_bundle_implementation_transform::inclusion_depend
 
     const auto ch_arch(traits::feature_bundle_header_archetype_qn());
     builder.add(fb.name(), ch_arch);
-    builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
+    builder.add_as_user("dogen.variability/types/helpers/value_factory.hpp");
 
     if (fb.generate_static_configuration()) {
-        builder.add("\"dogen.variability/types/helpers/feature_selector.hpp\"");
-        builder.add("\"dogen.variability/types/helpers/configuration_selector.hpp\"");
+        builder.add_as_user("dogen.variability/types/helpers/feature_selector.hpp");
+        builder.add_as_user("dogen.variability/types/helpers/configuration_selector.hpp");
     }
 
     return builder.build();

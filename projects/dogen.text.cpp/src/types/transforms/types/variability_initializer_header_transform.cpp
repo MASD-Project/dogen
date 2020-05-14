@@ -33,7 +33,6 @@
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-
 physical::entities::archetype variability_initializer_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -71,8 +70,8 @@ std::list<std::string> variability_initializer_header_transform::inclusion_depen
 
     using logical::entities::variability::initializer;
     auto builder(f.make());
-    builder.add("\"dogen.variability/types/entities/feature_template.hpp\"");
-    builder.add("\"dogen.variability/types/helpers/registrar.hpp\"");
+    builder.add_as_user("dogen.variability/types/entities/feature_template.hpp");
+    builder.add_as_user("dogen.variability/types/helpers/registrar.hpp");
 
     return builder.build();
 }

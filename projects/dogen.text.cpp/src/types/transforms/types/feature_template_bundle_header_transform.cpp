@@ -36,7 +36,6 @@
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-
 physical::entities::archetype feature_template_bundle_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -77,12 +76,12 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::list());
-    builder.add("\"dogen.variability/types/entities/feature_template.hpp\"");
+    builder.add_as_user("dogen.variability/types/entities/feature_template.hpp");
 
     if (fb.generate_static_configuration()) {
-        builder.add("\"dogen.variability/types/entities/feature_model.hpp\"");
-        builder.add("\"dogen.variability/types/entities/configuration.hpp\"");
-        builder.add("\"dogen.variability/types/entities/feature.hpp\"");
+        builder.add_as_user("dogen.variability/types/entities/feature_model.hpp");
+        builder.add_as_user("dogen.variability/types/entities/configuration.hpp");
+        builder.add_as_user("dogen.variability/types/entities/feature.hpp");
 
         const auto ch_arch(traits::class_header_archetype_qn());
         builder.add(fb.transparent_associations(), ch_arch);

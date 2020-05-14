@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
