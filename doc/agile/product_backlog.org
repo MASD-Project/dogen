@@ -2562,29 +2562,6 @@ property to be set. AS it happens, it normally tends to be the schema
 name, because it makes sense to set it when defining a relational
 model. This is why we never bumped into this problem before.
 
-*** Create transforms for templating                                  :story:
-
-At present we are using workflows to convert stitch and wale
-templates. In reality, these are just tranforms. We need to figure out
-if there should just be a high-level transform in orchestrator that
-encapsulates these or if the templating model itself should follow the
-naming convention.
-
-In addition, we want to link the template as a modeling element with
-the instantiation of the template, at the meta-model level. There are
-several use cases:
-
-- for the template itself: generate a skeleton.
-- for a meta-model element which uses a template on a given
-  logical-physical point in space: instantiate the template with the
-  required arguments.
-
-*** Stitch does not have a force write flag                           :story:
-
-At present the stitch workflow is hardcoded not to force write. The
-correct solution is to allow the template to have a force write
-parameter.
-
 *** Assorted improvements to CMake files                               :epic:
 
 It seems we are not using proper CMake idioms to pick up compiler
@@ -2875,7 +2852,8 @@ Notes:
 
 - we did some work on this previously: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_00.org#concepts-cannot-be-placed-inside-of-packages][Concepts cannot be placed
   inside of packages]]. This solved some of the problems such as
-  allowing concepts to be placed in packages.
+  allowing concepts to be placed in packages. We just need to test
+  this. It may be that we are not merging object templates.
 
 *** Simplify argument parsing for operations                          :story:
 
@@ -7940,6 +7918,7 @@ file as a model. Ideas:
 - there already is some support for creating state-machines in
   org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
   dot and tables]]
+- we should also look at verb as an extension to org-mode.
 
 Links:
 
@@ -7949,6 +7928,8 @@ Links:
 - [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+- [[https://github.com/federicotdn/verb][verb]]: Verb is a package for Emacs which allows you to organize and
+  send HTTP requests.
 
 *** Dogen studio: builds and binaries for users                       :story:
 
@@ -8449,13 +8430,6 @@ Seems like the tests do not clean up after themselves. We need to add
 some clean up logic and re-enable the tests. We probably should just
 remove all of the benchmarks infrastructure, given we never use it and
 it has probably bit-rotted by now.
-
-*** Merge properties factory with stitching factory                   :story:
-
-In stitch we still have a few classes that are light on
-responsibilities. One case is the stitching properties factory, traits
-etc. We should merge all of this into a single class, properties
-factory.
 
 *** Clean up comment formatter                                        :story:
 
@@ -9801,17 +9775,6 @@ At present we are always adding =#pragrma once= to the header guard:
 
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
-
-*** Consider adding include directive to stitch                       :story:
-
-T4 supports including templates from templates. At present we are
-doing this via the helper methods. As these have all sorts of logic to
-determine what gets included, it is not possible to directly replace
-these with an include (we would need to recurse across all nested
-types in a class to figure out if the inclusion is needed or not).
-
-Nevertheless, this story is a placeholder for furhter investigation in
-case we can find a use case for this.
 
 *** Consider adding =with= support for fluent properties              :story:
 

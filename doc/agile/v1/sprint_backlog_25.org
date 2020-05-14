@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-13 Wed 22:21]
+#+CAPTION: Clock summary at [2020-05-14 Thu 22:24]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *29:46* |       |      | 100.0 |
+| *Total time*                                          | *30:09* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 29:46   |       |      | 100.0 |
-| Active                                                |         | 29:46 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  20.0 |
+| Stories                                               | 30:09   |       |      | 100.0 |
+| Active                                                |         | 30:09 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  19.7 |
 | Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.6 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   3.4 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   3.3 |
 | Check name of model for variability transform         |         |       | 0:19 |   1.1 |
-| Analysis on templating and logical model              |         |       | 1:09 |   3.9 |
+| Analysis on templating and logical model              |         |       | 1:09 |   3.8 |
 | Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.5 |
 | Remove stitch template builder                        |         |       | 0:09 |   0.5 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   5.5 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   5.4 |
 | Resolve references to wale templates in logical model |         |       | 1:39 |   5.5 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   3.9 |
-| Move decoration transform into logical model          |         |       | 5:33 |  18.6 |
-| Split wale out of stitch templates                    |         |       | 3:31 |  11.8 |
-| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.5 |
-| Promote all formatters to archetypes                  |         |       | 4:18 |  14.4 |
-| Create an encoder for org-mode                        |         |       | 1:08 |   3.8 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   3.8 |
+| Move decoration transform into logical model          |         |       | 5:33 |  18.4 |
+| Split wale out of stitch templates                    |         |       | 3:31 |  11.7 |
+| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.4 |
+| Promote all formatters to archetypes                  |         |       | 4:18 |  14.3 |
+| Create an encoder for org-mode                        |         |       | 1:31 |   5.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1068,6 +1068,7 @@ Notes:
 
 *** STARTED Create an encoder for org-mode                            :story:
     :LOGBOOK:
+    CLOCK: [2020-05-14 Thu 22:01]--[2020-05-14 Thu 22:24] =>  0:23
     CLOCK: [2020-05-11 Mon 22:29]--[2020-05-11 Mon 22:40] =>  0:11
     CLOCK: [2020-05-11 Mon 21:31]--[2020-05-11 Mon 22:28] =>  0:57
     :END:
@@ -1090,6 +1091,18 @@ Notes:
   instead of appending the package name to the element name, create a
   field for the containing type. This is sufficient to resolve the
   indexing use case.
+- remove traits; use the archetypes directly. Make sure we return
+  references first.
+- remove logic-less templates formatters. This can only be done once
+  we've finished converting all formatters including C#.
+- archetype initialiser will be implemented in terms of facets.
+
+*** Merge properties factory with stitching factory                   :story:
+
+In stitch we still have a few classes that are light on
+responsibilities. One case is the stitching properties factory, traits
+etc. We should merge all of this into a single class, properties
+factory.
 
 *** Allow converting to =std::out=                                    :story:
 
@@ -1978,3 +1991,47 @@ switch to building all of the stitch boilerplate outside of stitch and
 supplying it as a KVP.
 
 ** Deprecated
+*** CANCELLED Create transforms for templating                        :story:
+    CLOSED: [2020-05-14 Thu 16:26]
+
+*Rationale*: deprecated in the new world of templating.
+
+At present we are using workflows to convert stitch and wale
+templates. In reality, these are just tranforms. We need to figure out
+if there should just be a high-level transform in orchestrator that
+encapsulates these or if the templating model itself should follow the
+naming convention.
+
+In addition, we want to link the template as a modeling element with
+the instantiation of the template, at the meta-model level. There are
+several use cases:
+
+- for the template itself: generate a skeleton.
+- for a meta-model element which uses a template on a given
+  logical-physical point in space: instantiate the template with the
+  required arguments.
+
+*** CANCELLED Stitch does not have a force write flag                 :story:
+    CLOSED: [2020-05-14 Thu 16:27]
+
+*Rationale*: no longer required as stitch will not be writing files
+any longer.
+
+At present the stitch workflow is hardcoded not to force write. The
+correct solution is to allow the template to have a force write
+parameter.
+
+*** CANCELLED Consider adding include directive to stitch             :story:
+    CLOSED: [2020-05-14 Thu 16:32]
+
+*Rationale*: we want to keep stitch as simple as possible so that we
+can find an external replacement for it.
+
+T4 supports including templates from templates. At present we are
+doing this via the helper methods. As these have all sorts of logic to
+determine what gets included, it is not possible to directly replace
+these with an include (we would need to recurse across all nested
+types in a class to figure out if the inclusion is needed or not).
+
+Nevertheless, this story is a placeholder for furhter investigation in
+case we can find a use case for this.
