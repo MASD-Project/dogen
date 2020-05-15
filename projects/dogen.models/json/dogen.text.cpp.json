@@ -231,14 +231,8 @@
       "documentation": "Generates implementation files for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::implementation_configuration"
+        "dogen::object_implementation_configuration"
       ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
-        "masd.wale.kvp.class.simple_name": "class_implementation_transform",
-        "masd.wale.kvp.archetype.simple_name": "class_implementation",
-        "masd.wale.kvp.meta_element": "object"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2972,33 +2966,6 @@
       ]
     },
     {
-      "name": "transforms::implementation_configuration",
-      "parents": [
-        "transforms::common_archetype_configuration"
-      ],
-      "documentation": "Contains the configuration common to all c++ implementation archetypes.\n",
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "entity",
-        "masd.variability.stereotype": "dogen::implementation_configuration"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.physical.part_id",
-          "type": "",
-          "value": "masd.cpp.implementation"
-        },
-        {
-          "name": "masd.wale.kvp.locator_function",
-          "type": "",
-          "value": "make_full_path_for_cpp_implementation"
-        }
-      ]
-    },
-    {
       "name": "transforms::tests_configuration",
       "parents": [
         "transforms::common_archetype_configuration"
@@ -3133,6 +3100,69 @@
           "name": "masd.wale.kvp.meta_element",
           "type": "",
           "value": "enumeration"
+        }
+      ]
+    },
+    {
+      "name": "transforms::implementation_configuration",
+      "parents": [
+        "transforms::common_archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all c++ implementation archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::implementation_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.part_id",
+          "type": "",
+          "value": "masd.cpp.implementation"
+        },
+        {
+          "name": "masd.wale.kvp.locator_function",
+          "type": "",
+          "value": "make_full_path_for_cpp_implementation"
+        }
+      ]
+    },
+    {
+      "name": "transforms::object_implementation_configuration",
+      "parents": [
+        "transforms::implementation_configuration"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::object_implementation_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.logical_meta_element_id",
+          "type": "",
+          "value": "dogen.logical.entities.object"
+        },
+        {
+          "name": "masd.wale.kvp.class.simple_name",
+          "type": "",
+          "value": "class_implementation_transform"
+        },
+        {
+          "name": "masd.wale.kvp.archetype.simple_name",
+          "type": "",
+          "value": "class_implementation"
+        },
+        {
+          "name": "masd.wale.kvp.meta_element",
+          "type": "",
+          "value": "object"
         }
       ]
     }
