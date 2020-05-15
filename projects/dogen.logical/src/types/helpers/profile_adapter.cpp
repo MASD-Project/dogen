@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/configuration_points_factory.hpp"
 #include "dogen.logical/types/helpers/adaptation_exception.hpp"
@@ -73,58 +74,64 @@ profile_adapter::adapt(const entities::variability::profile_template& pt) {
 
 variability::entities::profile
 profile_adapter::adapt(const variability::entities::feature_model& fm,
-    const entities::variability::profile& p, const bool /*compatibility_mode*/) {
+    const entities::variability::profile& p, const bool compatibility_mode) {
     const auto sn(p.name().simple());
     const auto qn(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting profile: " << sn << " (" << qn << ")";
 
+    /*
+     * First, populate all the trivial attributes which are just copy
+     * and paste.
+     */
     variability::entities::profile r;
     r.name().simple(sn);
     r.name().qualified(qn);
     r.stereotype(p.stereotype());
 
+    /*
+     * Populate parents.
+     */
     for (const auto& n : p.parents())
         r.parents().push_back(n.qualified().dot());
 
+    /*
+     * Create an entries container in the expected format by the
+     * variability sub-system. Note that for collections we can have a
+     * single entry with multiple values to make logical
+     * representation more sensible; instead of having several
+     * attributes with the same name and differing values, users can
+     * associate multiple values with the same attribute
+     * name. However, here we need to project this representation back
+     * into a flat list with multiple KVP entries per attribute.
+     */
+    std::list<std::pair<std::string, std::string>> entries;
     for (const auto& e : p.entries()) {
-        const auto& k(e.key());
-        BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
-
-        /*
-         * Locate the feature for this configuration point template.
-         */
-        const auto& bn(fm.by_name());
-        BOOST_LOG_SEV(lg, trace) << "Feature qualified name: " << k;
-        const auto i(bn.find(k));
-        if (i == bn.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_feature << k;
-            BOOST_THROW_EXCEPTION(adaptation_exception(missing_feature + k));
-        }
-
-        /*
-         * Now we can populate the name of the point from the point
-         * template's associated feature, and, if supplied, the owner.
-         */
-        const auto& feature(i->second);
-        variability::entities::configuration_point cp;
-        cp.name().simple(feature.name().simple());
-        cp.name().qualified(feature.name().qualified());
-
-        /*
-         * Finally we can create the value.
-         */
-        variability::helpers::value_factory vf;
-        cp.value(vf.make(feature, e.value()));
-
-        const auto cpqn(cp.name().qualified());
-        const auto pair(std::make_pair(cpqn, cp));
-        const auto inserted(r.configuration_points().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_configuration_point << cpqn;
-            BOOST_THROW_EXCEPTION(adaptation_exception(
-                    duplicate_configuration_point + cpqn));
-        }
+        for (const auto& v : e.value())
+            entries.push_back(std::make_pair(e.key(), v));
     }
+
+    /*
+     * Now obtain the profile's binding point. This must be populated.
+     * it.
+     *
+     * FIXME: for now we don't actually make use of this. This is
+     * because we have not yet properly implemented biding points in
+     * profiles.
+     */
+    /*
+      using boost::lexical_cast;
+      using variability::entities::binding_point;
+      const auto bp(lexical_cast<binding_point>(p.binding_point()));
+    */
+
+    /*
+     * Finally, we can convert the list of entries into configuration
+     * points and slot it in to our profile.
+     */
+    using variability::helpers::configuration_points_factory;
+    configuration_points_factory cpf(fm, compatibility_mode);
+    r.configuration_points(cpf.make(entries));
+
     return r;
 }
 
