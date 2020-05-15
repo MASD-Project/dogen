@@ -89,6 +89,9 @@
     {
       "name": "transforms::hash",
       "documentation": "Formatters for the hash facet of the\nC++ technical space.\n",
+      "stereotypes": [
+        "masd::physical::facet"
+      ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },
@@ -96,10 +99,31 @@
     },
     {
       "name": "transforms::hash::class_header_transform",
+      "documentation": "Generates header files for objects.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
+        "masd.wale.kvp.class.simple_name": "class_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "class_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "object"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/object.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/formattables/helper_properties.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/class_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> class_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    auto builder(f.make());\n    builder.add(inclusion_constants::std::functional());\n    builder.add(e.name(), types::traits::canonical_archetype());\n    return builder.build();\n}\n\nvoid class_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& o(ast.as<logical::entities::structural::object>(e));\n\n    const auto sn(o.name().simple());\n    const auto qn(ast.get_qualified_name(o.name()));\n    {\n\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(o.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nstruct <#= sn #>_hasher {\npublic:\n    static std::size_t hash(const <#= sn #>& v);\n};\n\n<#+\n        } // snf\n#>\n\nnamespace std {\n\ntemplate<>\nstruct hash<<#= qn #>> {\npublic:\n    size_t operator()(const <#= qn #>& v) const {\n        return <#= qn #>_hasher::hash(v);\n    }\n};\n\n}\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::hash::class_implementation_transform",
