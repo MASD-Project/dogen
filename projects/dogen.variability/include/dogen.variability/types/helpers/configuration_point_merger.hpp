@@ -36,8 +36,8 @@ namespace dogen::variability::helpers {
  *
  * Merging works by taking all configuration points in lhs and rhs and
  * making a configuration with their superset. If a key exists in
- * both, rhs takes precedence. Note that this makes merging not
- * commutative, so the order of lhs/rhs matters.
+ * both, rhs takes precedence. Note that this makes merging
+ * non-commutative, so the order of lhs/rhs matters.
  */
 class configuration_point_merger final {
 public:
