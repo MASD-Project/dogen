@@ -54,9 +54,9 @@ private:
      */
     static variability::entities::profile
     adapt(const variability::entities::feature_model& fm,
-        const entities::variability::profile& p);
+        const entities::variability::profile& p, const bool compatibility_mode);
 
-public:
+private:
     /**
      * @brief Adapt all profile templates.
      */
@@ -68,15 +68,16 @@ public:
      */
     static std::list<variability::entities::profile>
     adapt_profiles(const variability::entities::feature_model& fm,
-        const entities::input_model_set& ms);
+        const entities::input_model_set& ms, const bool compatibility_mode);
 
+public:
     /**
      * @brief Adapts a model set into the inputs required to build a
      * profile repository.
      */
     static variability::transforms::profile_repository_inputs
     adapt(const variability::entities::feature_model& fm,
-        const entities::input_model_set& ms);
+        const entities::input_model_set& ms, const bool compatibility_mode);
 };
 
 }

@@ -72,8 +72,9 @@ apply(const context& ctx, logical::entities::input_model_set& ms) {
      * variability counterparts.
      */
     const auto& fm(*ctx.feature_model());
+    const auto cm(ctx.compatibility_mode());
     using logical::helpers::profile_adapter;
-    const auto inputs(profile_adapter::adapt(fm, ms));
+    const auto inputs(profile_adapter::adapt(fm, ms, cm));
 
     /*
      * If there are no profile-like elements, we have nothing to do.

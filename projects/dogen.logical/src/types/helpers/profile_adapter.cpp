@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/configuration_points_factory.hpp"
 #include "dogen.logical/types/helpers/adaptation_exception.hpp"
 #include "dogen.logical/types/helpers/profile_adapter.hpp"
 
@@ -72,7 +73,7 @@ profile_adapter::adapt(const entities::variability::profile_template& pt) {
 
 variability::entities::profile
 profile_adapter::adapt(const variability::entities::feature_model& fm,
-    const entities::variability::profile& p) {
+    const entities::variability::profile& p, const bool /*compatibility_mode*/) {
     const auto sn(p.name().simple());
     const auto qn(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting profile: " << sn << " (" << qn << ")";
@@ -144,15 +145,16 @@ adapt_profile_templates(const logical::entities::input_model_set& ms) {
     return r;
 }
 
-std::list<variability::entities::profile> profile_adapter::
-adapt_profiles(const variability::entities::feature_model& fm,
-    const logical::entities::input_model_set& ms) {
+std::list<variability::entities::profile>
+profile_adapter::adapt_profiles(const variability::entities::feature_model& fm,
+    const logical::entities::input_model_set& ms,
+    const bool compatibility_mode) {
     std::list<variability::entities::profile> r;
 
     const auto lambda(
         [&](auto& map) {
             for (const auto& pair : map)
-                r.push_back(adapt(fm, *pair.second));
+                r.push_back(adapt(fm, *pair.second, compatibility_mode));
         });
 
     lambda(ms.target().variability_elements().profiles());
@@ -164,9 +166,9 @@ adapt_profiles(const variability::entities::feature_model& fm,
 
 variability::transforms::profile_repository_inputs
 profile_adapter::adapt(const variability::entities::feature_model& fm,
-    const entities::input_model_set& ms) {
+    const entities::input_model_set& ms, const bool compatibility_mode) {
     variability::transforms::profile_repository_inputs r;
-    r.profiles(adapt_profiles(fm, ms));
+    r.profiles(adapt_profiles(fm, ms, compatibility_mode));
     r.templates(adapt_profile_templates(ms));
     return r;
 }
