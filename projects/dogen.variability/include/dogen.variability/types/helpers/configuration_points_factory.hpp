@@ -78,8 +78,7 @@ public:
         aggregated_override_entries) const;
 
     std::unordered_map<std::string, entities::configuration_point>
-    make(const entities::binding_point bp,
-        const std::list<std::pair<std::string, std::string>>& entries) const;
+    make(const std::list<std::pair<std::string, std::string>>& entries) const;
 
 private:
     const entities::feature_model& feature_model_;

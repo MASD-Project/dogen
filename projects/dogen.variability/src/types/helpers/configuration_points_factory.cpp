@@ -226,10 +226,15 @@ configuration_points_factory::make(const entities::binding_point bp,
             continue;
 
         /*
-         * Ensure the entry is valid with regards to the binding point.
+         * If the binding point is not set to the special case of any,
+         * ensure the entry is valid with regards to the binding
+         * point. If its set to any, ignore it. We use any at present
+         * for the case of profiles where binding points have not yet
+         * been properly implemented.
          */
         const auto& f(*of);
-        validate_binding(f, bp);
+        if (bp != entities::binding_point::any)
+            validate_binding(f, bp);
 
         /*
          * Check to see if we have any overrides for this entry,
@@ -321,9 +326,10 @@ configuration_points_factory::make(const entities::binding_point bp,
 }
 
 std::unordered_map<std::string, entities::configuration_point>
-configuration_points_factory::make(const entities::binding_point bp,
-    const std::list<std::pair<std::string, std::string>>& entries) const {
+configuration_points_factory::
+make(const std::list<std::pair<std::string, std::string>>& entries) const {
     std::unordered_map<std::string, std::list<std::string>> aoe;
+    const auto bp(entities::binding_point::any);
     return make(bp, entries, aoe);
 }
 
