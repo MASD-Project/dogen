@@ -58,9 +58,9 @@ public:
         const std::string& description,
         const boost::shared_ptr<dogen::variability::entities::value>& default_value,
         const dogen::variability::entities::value_type value_type,
-        const dogen::variability::entities::binding_point binding_point,
         const dogen::variability::entities::binding_action profile_binding_action,
         const dogen::variability::entities::binding_action configuration_binding_action,
+        const dogen::variability::entities::binding_point binding_point,
         const std::string& instantiation_domain_name,
         const std::list<dogen::variability::entities::default_value_override>& default_value_overrides);
 
@@ -86,6 +86,12 @@ public:
     void value_type(const dogen::variability::entities::value_type v);
     /**@}*/
 
+    dogen::variability::entities::binding_action profile_binding_action() const;
+    void profile_binding_action(const dogen::variability::entities::binding_action v);
+
+    dogen::variability::entities::binding_action configuration_binding_action() const;
+    void configuration_binding_action(const dogen::variability::entities::binding_action v);
+
     /**
      * @brief How the feature binds against other model elements.
      */
@@ -93,12 +99,6 @@ public:
     dogen::variability::entities::binding_point binding_point() const;
     void binding_point(const dogen::variability::entities::binding_point v);
     /**@}*/
-
-    dogen::variability::entities::binding_action profile_binding_action() const;
-    void profile_binding_action(const dogen::variability::entities::binding_action v);
-
-    dogen::variability::entities::binding_action configuration_binding_action() const;
-    void configuration_binding_action(const dogen::variability::entities::binding_action v);
 
     /**
      * @brief Name of the domain to use for template instantiation.
@@ -138,9 +138,9 @@ public:
 private:
     boost::shared_ptr<dogen::variability::entities::value> default_value_;
     dogen::variability::entities::value_type value_type_;
-    dogen::variability::entities::binding_point binding_point_;
     dogen::variability::entities::binding_action profile_binding_action_;
     dogen::variability::entities::binding_action configuration_binding_action_;
+    dogen::variability::entities::binding_point binding_point_;
     std::string instantiation_domain_name_;
     std::list<dogen::variability::entities::default_value_override> default_value_overrides_;
 };

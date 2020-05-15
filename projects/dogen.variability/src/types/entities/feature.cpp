@@ -57,9 +57,9 @@ namespace dogen::variability::entities {
 
 feature::feature()
     : value_type_(static_cast<dogen::variability::entities::value_type>(0)),
-      binding_point_(static_cast<dogen::variability::entities::binding_point>(0)),
       profile_binding_action_(static_cast<dogen::variability::entities::binding_action>(0)),
       configuration_binding_action_(static_cast<dogen::variability::entities::binding_action>(0)),
+      binding_point_(static_cast<dogen::variability::entities::binding_point>(0)),
       is_partially_matchable_(static_cast<bool>(0)) { }
 
 feature::feature(
@@ -67,18 +67,18 @@ feature::feature(
     const std::string& description,
     const boost::shared_ptr<dogen::variability::entities::value>& default_value,
     const dogen::variability::entities::value_type value_type,
-    const dogen::variability::entities::binding_point binding_point,
     const dogen::variability::entities::binding_action profile_binding_action,
     const dogen::variability::entities::binding_action configuration_binding_action,
+    const dogen::variability::entities::binding_point binding_point,
     const bool is_partially_matchable)
     : dogen::variability::entities::element(
       name,
       description),
       default_value_(default_value),
       value_type_(value_type),
-      binding_point_(binding_point),
       profile_binding_action_(profile_binding_action),
       configuration_binding_action_(configuration_binding_action),
+      binding_point_(binding_point),
       is_partially_matchable_(is_partially_matchable) { }
 
 void feature::to_stream(std::ostream& s) const {
@@ -95,9 +95,9 @@ void feature::to_stream(std::ostream& s) const {
     s << ", "
       << "\"default_value\": " << default_value_ << ", "
       << "\"value_type\": " << value_type_ << ", "
-      << "\"binding_point\": " << binding_point_ << ", "
       << "\"profile_binding_action\": " << profile_binding_action_ << ", "
       << "\"configuration_binding_action\": " << configuration_binding_action_ << ", "
+      << "\"binding_point\": " << binding_point_ << ", "
       << "\"is_partially_matchable\": " << is_partially_matchable_
       << " }";
 }
@@ -108,9 +108,9 @@ void feature::swap(feature& other) noexcept {
     using std::swap;
     swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
-    swap(binding_point_, other.binding_point_);
     swap(profile_binding_action_, other.profile_binding_action_);
     swap(configuration_binding_action_, other.configuration_binding_action_);
+    swap(binding_point_, other.binding_point_);
     swap(is_partially_matchable_, other.is_partially_matchable_);
 }
 
@@ -124,9 +124,9 @@ bool feature::operator==(const feature& rhs) const {
     return dogen::variability::entities::element::compare(rhs) &&
         default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
-        binding_point_ == rhs.binding_point_ &&
         profile_binding_action_ == rhs.profile_binding_action_ &&
         configuration_binding_action_ == rhs.configuration_binding_action_ &&
+        binding_point_ == rhs.binding_point_ &&
         is_partially_matchable_ == rhs.is_partially_matchable_;
 }
 
@@ -160,14 +160,6 @@ void feature::value_type(const dogen::variability::entities::value_type v) {
     value_type_ = v;
 }
 
-dogen::variability::entities::binding_point feature::binding_point() const {
-    return binding_point_;
-}
-
-void feature::binding_point(const dogen::variability::entities::binding_point v) {
-    binding_point_ = v;
-}
-
 dogen::variability::entities::binding_action feature::profile_binding_action() const {
     return profile_binding_action_;
 }
@@ -182,6 +174,14 @@ dogen::variability::entities::binding_action feature::configuration_binding_acti
 
 void feature::configuration_binding_action(const dogen::variability::entities::binding_action v) {
     configuration_binding_action_ = v;
+}
+
+dogen::variability::entities::binding_point feature::binding_point() const {
+    return binding_point_;
+}
+
+void feature::binding_point(const dogen::variability::entities::binding_point v) {
+    binding_point_ = v;
 }
 
 bool feature::is_partially_matchable() const {

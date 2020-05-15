@@ -80,18 +80,18 @@ namespace dogen::variability::entities {
 
 feature_template::feature_template()
     : value_type_(static_cast<dogen::variability::entities::value_type>(0)),
-      binding_point_(static_cast<dogen::variability::entities::binding_point>(0)),
       profile_binding_action_(static_cast<dogen::variability::entities::binding_action>(0)),
-      configuration_binding_action_(static_cast<dogen::variability::entities::binding_action>(0)) { }
+      configuration_binding_action_(static_cast<dogen::variability::entities::binding_action>(0)),
+      binding_point_(static_cast<dogen::variability::entities::binding_point>(0)) { }
 
 feature_template::feature_template(
     const dogen::variability::entities::name& name,
     const std::string& description,
     const boost::shared_ptr<dogen::variability::entities::value>& default_value,
     const dogen::variability::entities::value_type value_type,
-    const dogen::variability::entities::binding_point binding_point,
     const dogen::variability::entities::binding_action profile_binding_action,
     const dogen::variability::entities::binding_action configuration_binding_action,
+    const dogen::variability::entities::binding_point binding_point,
     const std::string& instantiation_domain_name,
     const std::list<dogen::variability::entities::default_value_override>& default_value_overrides)
     : dogen::variability::entities::element(
@@ -99,9 +99,9 @@ feature_template::feature_template(
       description),
       default_value_(default_value),
       value_type_(value_type),
-      binding_point_(binding_point),
       profile_binding_action_(profile_binding_action),
       configuration_binding_action_(configuration_binding_action),
+      binding_point_(binding_point),
       instantiation_domain_name_(instantiation_domain_name),
       default_value_overrides_(default_value_overrides) { }
 
@@ -113,9 +113,9 @@ void feature_template::to_stream(std::ostream& s) const {
     s << ", "
       << "\"default_value\": " << default_value_ << ", "
       << "\"value_type\": " << value_type_ << ", "
-      << "\"binding_point\": " << binding_point_ << ", "
       << "\"profile_binding_action\": " << profile_binding_action_ << ", "
       << "\"configuration_binding_action\": " << configuration_binding_action_ << ", "
+      << "\"binding_point\": " << binding_point_ << ", "
       << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\"" << ", "
       << "\"default_value_overrides\": " << default_value_overrides_
       << " }";
@@ -127,9 +127,9 @@ void feature_template::swap(feature_template& other) noexcept {
     using std::swap;
     swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
-    swap(binding_point_, other.binding_point_);
     swap(profile_binding_action_, other.profile_binding_action_);
     swap(configuration_binding_action_, other.configuration_binding_action_);
+    swap(binding_point_, other.binding_point_);
     swap(instantiation_domain_name_, other.instantiation_domain_name_);
     swap(default_value_overrides_, other.default_value_overrides_);
 }
@@ -144,9 +144,9 @@ bool feature_template::operator==(const feature_template& rhs) const {
     return dogen::variability::entities::element::compare(rhs) &&
         default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
-        binding_point_ == rhs.binding_point_ &&
         profile_binding_action_ == rhs.profile_binding_action_ &&
         configuration_binding_action_ == rhs.configuration_binding_action_ &&
+        binding_point_ == rhs.binding_point_ &&
         instantiation_domain_name_ == rhs.instantiation_domain_name_ &&
         default_value_overrides_ == rhs.default_value_overrides_;
 }
@@ -181,14 +181,6 @@ void feature_template::value_type(const dogen::variability::entities::value_type
     value_type_ = v;
 }
 
-dogen::variability::entities::binding_point feature_template::binding_point() const {
-    return binding_point_;
-}
-
-void feature_template::binding_point(const dogen::variability::entities::binding_point v) {
-    binding_point_ = v;
-}
-
 dogen::variability::entities::binding_action feature_template::profile_binding_action() const {
     return profile_binding_action_;
 }
@@ -203,6 +195,14 @@ dogen::variability::entities::binding_action feature_template::configuration_bin
 
 void feature_template::configuration_binding_action(const dogen::variability::entities::binding_action v) {
     configuration_binding_action_ = v;
+}
+
+dogen::variability::entities::binding_point feature_template::binding_point() const {
+    return binding_point_;
+}
+
+void feature_template::binding_point(const dogen::variability::entities::binding_point v) {
+    binding_point_ = v;
 }
 
 const std::string& feature_template::instantiation_domain_name() const {

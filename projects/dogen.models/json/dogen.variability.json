@@ -397,17 +397,12 @@
       ]
     },
     {
-      "name": "entities::Bindeable",
+      "name": "entities::BindActionable",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "binding_point",
-          "type": "binding_point",
-          "documentation": "How the feature binds against other model elements.\n"
-        },
         {
           "name": "profile_binding_action",
           "type": "binding_action"
@@ -419,12 +414,27 @@
       ]
     },
     {
+      "name": "entities::Bindable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "binding_point",
+          "type": "binding_point",
+          "documentation": "How the feature binds against other model elements.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::FeatureElement",
       "parents": [
         "entities::Element",
         "entities::Defaultable",
         "entities::Typeable",
-        "entities::Bindeable"
+        "entities::BindActionable",
+        "entities::Bindable"
       ],
       "stereotypes": [
         "masd::object_template"

@@ -55,9 +55,9 @@ public:
         const std::string& description,
         const boost::shared_ptr<dogen::variability::entities::value>& default_value,
         const dogen::variability::entities::value_type value_type,
-        const dogen::variability::entities::binding_point binding_point,
         const dogen::variability::entities::binding_action profile_binding_action,
         const dogen::variability::entities::binding_action configuration_binding_action,
+        const dogen::variability::entities::binding_point binding_point,
         const bool is_partially_matchable);
 
 public:
@@ -82,6 +82,12 @@ public:
     void value_type(const dogen::variability::entities::value_type v);
     /**@}*/
 
+    dogen::variability::entities::binding_action profile_binding_action() const;
+    void profile_binding_action(const dogen::variability::entities::binding_action v);
+
+    dogen::variability::entities::binding_action configuration_binding_action() const;
+    void configuration_binding_action(const dogen::variability::entities::binding_action v);
+
     /**
      * @brief How the feature binds against other model elements.
      */
@@ -89,12 +95,6 @@ public:
     dogen::variability::entities::binding_point binding_point() const;
     void binding_point(const dogen::variability::entities::binding_point v);
     /**@}*/
-
-    dogen::variability::entities::binding_action profile_binding_action() const;
-    void profile_binding_action(const dogen::variability::entities::binding_action v);
-
-    dogen::variability::entities::binding_action configuration_binding_action() const;
-    void configuration_binding_action(const dogen::variability::entities::binding_action v);
 
     /**
      * @brief Feature name can be matched partially.
@@ -120,9 +120,9 @@ public:
 private:
     boost::shared_ptr<dogen::variability::entities::value> default_value_;
     dogen::variability::entities::value_type value_type_;
-    dogen::variability::entities::binding_point binding_point_;
     dogen::variability::entities::binding_action profile_binding_action_;
     dogen::variability::entities::binding_action configuration_binding_action_;
+    dogen::variability::entities::binding_point binding_point_;
     bool is_partially_matchable_;
 };
 
