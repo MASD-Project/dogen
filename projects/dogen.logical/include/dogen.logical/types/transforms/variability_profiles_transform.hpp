@@ -48,12 +48,6 @@ private:
 
 private:
     /**
-     * @brief Reads configuration related to profiles.
-     */
-    static void update(const features::variability_profile::feature_group& fg,
-        entities::variability::abstract_profile& ap);
-
-    /**
      * @brief Reads configuration related to profile entries.
      */
     static void update(const features::variability_entry::feature_group& fg,

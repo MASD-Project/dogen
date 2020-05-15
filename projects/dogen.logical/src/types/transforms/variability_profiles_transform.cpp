@@ -63,15 +63,6 @@ compute_key(const std::string& key_prefix, const std::string& original_key) {
 }
 
 void variability_profiles_transform::
-update(const features::variability_profile::feature_group& fg,
-    entities::variability::abstract_profile& ap) {
-    using vp = logical::features::variability_profile;
-    const auto scfg(vp::make_static_configuration(fg, ap));
-    ap.stereotype(scfg.stereotype);
-    ap.key_prefix(scfg.key_prefix);
-}
-
-void variability_profiles_transform::
 update(const features::variability_entry::feature_group& fg,
     entities::variability::abstract_profile_entry& ape) {
     const auto& k(ape.key());
@@ -131,9 +122,12 @@ void variability_profiles_transform::process_profile_templates(
     /*
      * Process all profile templates and contained entries.
      */
+    using vp = logical::features::variability_profile;
     for (auto& pair : pts) {
         auto& pt(*pair.second);
-        update(fg1, pt);
+        const auto scfg(vp::make_static_configuration(fg1, pt));
+        pt.stereotype(scfg.stereotype);
+        pt.key_prefix(scfg.key_prefix);
 
         for (auto& e : pt.entries()) {
             e.key(compute_key(pt.key_prefix(), e.original_key()));
@@ -163,9 +157,13 @@ void variability_profiles_transform::process_profiles(
     /*
      * Process all profile templates and contained entries.
      */
+    using vp = logical::features::variability_profile;
     for (auto& pair : ps) {
         auto& p(*pair.second);
-        update(fg1, p);
+        const auto scfg(vp::make_static_configuration(fg1, p));
+        p.stereotype(scfg.stereotype);
+        p.key_prefix(scfg.key_prefix);
+        p.binding_point(scfg.binding_point);
 
         for (auto& e : p.entries()) {
             e.key(compute_key(p.key_prefix(), e.original_key()));
