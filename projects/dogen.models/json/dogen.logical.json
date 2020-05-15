@@ -3879,6 +3879,15 @@
             "masd.variability.binding_point": "element",
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this profile or profile template bind to.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },

@@ -41,6 +41,7 @@ public:
     struct feature_group {
         variability::entities::feature stereotype;
         variability::entities::feature key_prefix;
+        variability::entities::feature binding_point;
     };
 
     static feature_group
@@ -50,6 +51,7 @@ public:
     struct static_configuration {
         std::string stereotype;
         std::string key_prefix;
+        std::string binding_point;
     };
 
     static static_configuration make_static_configuration(

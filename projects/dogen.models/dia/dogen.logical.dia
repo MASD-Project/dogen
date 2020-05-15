@@ -48528,16 +48528,16 @@ the default value field if available.
         <dia:point val="66,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,83.95;80.795,88.45"/>
+        <dia:rectangle val="65.95,83.95;81.565,89.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="66,84"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_profile#</dia:string>
@@ -48670,6 +48670,32 @@ the default value field if available.
             <dia:string>#Prefix to apply to construct the qualified name, if any.
 
 #DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#binding_point#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Where does this profile or profile template bind to.
+
+#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -50878,14 +50904,14 @@ just to avoid problems.#</dia:string>
         <dia:point val="85.2675,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.4568,88.0559;85.3378,92.0703"/>
+        <dia:rectangle val="81.2357,88.8495;85.3375,92.07"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="85.2675,92"/>
-        <dia:point val="80.745,88.4"/>
+        <dia:point val="81.515,89.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50900,7 +50926,7 @@ just to avoid problems.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="83.0065,90.7"/>
+        <dia:point val="83.3915,91.1"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O393" connection="1"/>

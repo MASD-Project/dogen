@@ -31,6 +31,7 @@ variability_profile::make_feature_group(const dogen::variability::entities::feat
 
     r.stereotype = s.get_by_name("masd.variability.stereotype");
     r.key_prefix = s.get_by_name("masd.variability.key_prefix");
+    r.binding_point = s.get_by_name("masd.variability.binding_point");
 
     return r;
 }
@@ -45,6 +46,8 @@ variability_profile::static_configuration variability_profile::make_static_confi
         r.stereotype = s.get_text_content(fg.stereotype);
     if (s.has_configuration_point(fg.key_prefix))
         r.key_prefix = s.get_text_content(fg.key_prefix);
+    if (s.has_configuration_point(fg.binding_point))
+        r.binding_point = s.get_text_content(fg.binding_point);
     return r;
 }
 }
