@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
