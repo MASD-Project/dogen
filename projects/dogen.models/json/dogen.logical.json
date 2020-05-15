@@ -3794,11 +3794,18 @@
       "parents": [
         "entities::variability::abstract_profile"
       ],
+      "documentation": "Represents a profile from the variability subsystem.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "entries",
-          "type": "std::list<profile_entry>"
+          "type": "std::list<profile_entry>",
+          "documentation": "Configuration entries in this profile.\n"
+        },
+        {
+          "name": "binding_point",
+          "type": "std::string",
+          "documentation": "Binding point for the profile.\n"
         }
       ]
     },

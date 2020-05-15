@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/variability/profile_io.hpp"
 #include "dogen.logical/io/entities/variability/profile_entry_io.hpp"
 #include "dogen.logical/io/entities/variability/abstract_profile_io.hpp"

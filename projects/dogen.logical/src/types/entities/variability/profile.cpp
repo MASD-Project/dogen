@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/variability/profile.hpp"
 #include "dogen.logical/io/entities/variability/profile_entry_io.hpp"
@@ -36,6 +37,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
     return s;
 }
 
+}
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
 namespace dogen::logical::entities::variability {
@@ -58,7 +67,8 @@ profile::profile(
     const std::string& stereotype,
     const std::list<dogen::logical::entities::name>& parents,
     const std::string& key_prefix,
-    const std::list<dogen::logical::entities::variability::profile_entry>& entries)
+    const std::list<dogen::logical::entities::variability::profile_entry>& entries,
+    const std::string& binding_point)
     : dogen::logical::entities::variability::abstract_profile(
       name,
       documentation,
@@ -77,7 +87,8 @@ profile::profile(
       stereotype,
       parents,
       key_prefix),
-      entries_(entries) { }
+      entries_(entries),
+      binding_point_(binding_point) { }
 
 void profile::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -101,7 +112,8 @@ void profile::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::logical::entities::variability::abstract_profile::to_stream(s);
     s << ", "
-      << "\"entries\": " << entries_
+      << "\"entries\": " << entries_ << ", "
+      << "\"binding_point\": " << "\"" << tidy_up_string(binding_point_) << "\""
       << " }";
 }
 
@@ -110,6 +122,7 @@ void profile::swap(profile& other) noexcept {
 
     using std::swap;
     swap(entries_, other.entries_);
+    swap(binding_point_, other.binding_point_);
 }
 
 bool profile::equals(const dogen::logical::entities::element& other) const {
@@ -120,7 +133,8 @@ bool profile::equals(const dogen::logical::entities::element& other) const {
 
 bool profile::operator==(const profile& rhs) const {
     return dogen::logical::entities::variability::abstract_profile::compare(rhs) &&
-        entries_ == rhs.entries_;
+        entries_ == rhs.entries_ &&
+        binding_point_ == rhs.binding_point_;
 }
 
 profile& profile::operator=(profile other) {
@@ -143,6 +157,22 @@ void profile::entries(const std::list<dogen::logical::entities::variability::pro
 
 void profile::entries(const std::list<dogen::logical::entities::variability::profile_entry>&& v) {
     entries_ = std::move(v);
+}
+
+const std::string& profile::binding_point() const {
+    return binding_point_;
+}
+
+std::string& profile::binding_point() {
+    return binding_point_;
+}
+
+void profile::binding_point(const std::string& v) {
+    binding_point_ = v;
+}
+
+void profile::binding_point(const std::string&& v) {
+    binding_point_ = std::move(v);
 }
 
 }

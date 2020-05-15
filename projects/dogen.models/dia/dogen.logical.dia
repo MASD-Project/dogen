@@ -11880,7 +11880,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-100.317,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-111.903,21.35;-99.5675,26.8"/>
+        <dia:rectangle val="-111.903,21.35;-99.567,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44960,7 +44960,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:point val="-172.715,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.465,43.6004;-146.273,51.8"/>
+        <dia:rectangle val="-173.465,43.6004;-146.272,51.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48090,7 +48090,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         <dia:point val="56,-40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,-40.05;69.64,-37.15"/>
+        <dia:rectangle val="55.95,-40.05;69.64,-36.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="56,-40"/>
@@ -48099,7 +48099,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.7999999999999998"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile#</dia:string>
@@ -48108,7 +48108,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a profile from the variability subsystem.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -48200,7 +48200,30 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
+            <dia:string>#Configuration entries in this profile.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#binding_point#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Binding point for the profile.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -49178,16 +49201,16 @@ just to avoid problems.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="62.795,-37.2"/>
+        <dia:point val="62.795,-36.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.93,-37.95;63.545,-32.945"/>
+        <dia:rectangle val="-3.93,-37.85;63.545,-32.945"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="62.795,-37.2"/>
+        <dia:point val="62.795,-36.4"/>
         <dia:point val="62.795,-33"/>
         <dia:point val="-3.88,-33"/>
         <dia:point val="-3.88,-37.8"/>
@@ -54088,7 +54111,7 @@ FIXME: optional for now.
         <dia:point val="-178.895,82.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.645,81.85;-167.848,101.6"/>
+        <dia:rectangle val="-179.645,81.85;-167.848,100.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -54337,7 +54360,7 @@ FIXME: optional for now.
         <dia:point val="-178.895,82.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-180.945,81.85;-178.145,107.55"/>
+        <dia:rectangle val="-180.945,81.85;-178.145,106.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -54915,7 +54938,7 @@ FIXME: optional for now.
         <dia:point val="-115.125,97.6503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-125.05,96.9003;-114.375,103.6"/>
+        <dia:rectangle val="-125.05,96.9003;-114.375,102.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -55356,7 +55379,7 @@ FIXME: optional for now.
         <dia:point val="-5.29625,96.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.38,95.85;-4.54625,103.6"/>
+        <dia:rectangle val="-9.38,95.85;-4.54625,102.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -56599,7 +56622,7 @@ FIXME: optional for now.
         <dia:point val="167.725,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.975,25.55;174.117,31.6"/>
+        <dia:rectangle val="166.975,25.55;174.117,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -56671,7 +56694,7 @@ FIXME: optional for now.
         <dia:point val="167.725,38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.975,37.65;174.037,44.5496"/>
+        <dia:rectangle val="166.975,37.65;174.038,43.7496"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -57026,7 +57049,7 @@ FIXME: optional for now.
         <dia:point val="-54,97.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-54.75,96.65;-48.84,103.6"/>
+        <dia:rectangle val="-54.75,96.65;-48.84,102.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -57098,7 +57121,7 @@ FIXME: optional for now.
         <dia:point val="-20.775,97.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.05,96.65;-20.025,103.6"/>
+        <dia:rectangle val="-26.05,96.65;-20.025,102.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -57347,7 +57370,7 @@ FIXME: optional for now.
         <dia:point val="-178.895,82.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.945,81.85;-178.145,107.55"/>
+        <dia:rectangle val="-202.945,81.85;-178.145,106.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -57419,7 +57442,7 @@ FIXME: optional for now.
         <dia:point val="-178.895,82.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.645,81.85;-155.695,107.6"/>
+        <dia:rectangle val="-179.645,81.85;-155.695,106.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

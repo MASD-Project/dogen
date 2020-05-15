@@ -27,12 +27,16 @@
 
 #include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen.logical/types/entities/variability/profile_entry.hpp"
 #include "dogen.logical/types/entities/variability/abstract_profile.hpp"
 
 namespace dogen::logical::entities::variability {
 
+/**
+ * @brief Represents a profile from the variability subsystem.
+ */
 class profile final : public dogen::logical::entities::variability::abstract_profile {
 public:
     profile() = default;
@@ -60,7 +64,8 @@ public:
         const std::string& stereotype,
         const std::list<dogen::logical::entities::name>& parents,
         const std::string& key_prefix,
-        const std::list<dogen::logical::entities::variability::profile_entry>& entries);
+        const std::list<dogen::logical::entities::variability::profile_entry>& entries,
+        const std::string& binding_point);
 
 public:
     using element::accept;
@@ -73,10 +78,25 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief Configuration entries in this profile.
+     */
+    /**@{*/
     const std::list<dogen::logical::entities::variability::profile_entry>& entries() const;
     std::list<dogen::logical::entities::variability::profile_entry>& entries();
     void entries(const std::list<dogen::logical::entities::variability::profile_entry>& v);
     void entries(const std::list<dogen::logical::entities::variability::profile_entry>&& v);
+    /**@}*/
+
+    /**
+     * @brief Binding point for the profile.
+     */
+    /**@{*/
+    const std::string& binding_point() const;
+    std::string& binding_point();
+    void binding_point(const std::string& v);
+    void binding_point(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const profile& rhs) const;
@@ -93,6 +113,7 @@ public:
 
 private:
     std::list<dogen::logical::entities::variability::profile_entry> entries_;
+    std::string binding_point_;
 };
 
 }
