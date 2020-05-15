@@ -2638,10 +2638,32 @@
     },
     {
       "name": "transforms::odb::common_odb_options_transform",
+      "documentation": "Generates object options for odb.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.orm_common_odb_options",
+        "masd.wale.kvp.class.simple_name": "common_odb_options_transform",
+        "masd.wale.kvp.archetype.simple_name": "common_odb_options",
+        "masd.wale.kvp.meta_element": "orm_common_odb_options",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.cpp.implementation",
+        "masd.wale.kvp.locator_function": "make_full_path_for_odb_options"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/orm/common_odb_options.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/common_odb_options_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> common_odb_options_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid common_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    using logical::entities::orm::common_odb_options;\n    const auto& o(ast.as<common_odb_options>(e));\n\n    {\n        const auto ts(logical::entities::technical_space::odb);\n        ast.make_decoration_preamble(e, ts);\n\n        if (!ast.is_cpp_standard_98()) {\n#>\n# enable C++11\n--std c++11\n\n<#+\n        }\n\n        if (!o.sql_name_case().empty()) {\n#>\n# casing\n--sql-name-case <#= o.sql_name_case() #>\n\n<#+\n        }\n\n        if (o.databases().size() > 1) {\n#>\n# enable multi-database support\n--multi-database static\n\n<#+\n        }\n\n        if (!o.databases().empty()) {\n#>\n# target databases\n<#+\n\n            for (const auto& d : o.databases())\n#>\n--database <#= d #>\n\n<#+\n        }\n#>\n# use the boost profile\n--profile boost\n\n# generate queries and embedded schemas\n--generate-query\n--generate-schema\n--schema-format embedded\n\n# force odb extensions to be different from dogen ones just in case.\n--ixx-suffix .ixx\n--hxx-suffix .hxx\n--cxx-suffix .cxx\n\n# debug regexes\n# --include-regex-trace\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::visual_studio::msbuild_targets_transform",
