@@ -32,7 +32,7 @@
 
 namespace {
 
-const std::string transform_id("logical.transforms.parsing_transform");
+const std::string transform_id("archetype_rendering_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -54,6 +54,7 @@ namespace dogen::logical::transforms {
 std::string archetype_rendering_transform::render_wale_template(
     const variability::entities::feature_model& fm,
     const entities::physical::archetype& arch) {
+    BOOST_LOG_SEV(lg, debug) << "Rendering wale template.";
 
     /*
      * If there is no wale template there is nothing to do, return an
@@ -98,9 +99,9 @@ std::string archetype_rendering_transform::render_wale_template(
      */
     templating::wale::instantiator inst;
     const auto r(inst.instantiate(arch.wale_template_content(), kvps));
+    BOOST_LOG_SEV(lg, debug) << "Finished rendering wale template.";
     return r;
 }
-
 
 std::string archetype_rendering_transform::render_stitch_template(
     const variability::entities::feature_model& fm,
@@ -110,6 +111,7 @@ std::string archetype_rendering_transform::render_stitch_template(
     /*
      * Stitch template cannot be empty.
      */
+    BOOST_LOG_SEV(lg, debug) << "Rendering stitch template.";
     const auto id(arch.name().qualified().dot());
     const auto& st(arch.stitch_template_content());
     if (st.empty()) {
@@ -153,6 +155,7 @@ std::string archetype_rendering_transform::render_stitch_template(
     const configuration_factory cf(fm, false/*compatibility_model*/);
     templating::stitch::instantiator inst(""/*FIXME*/, fm, cf);
     const auto r(inst.instantiate(st, kvps));
+    BOOST_LOG_SEV(lg, debug) << "Finished rendering stitch template.";
     return r;
 }
 
@@ -164,6 +167,8 @@ apply(const context& ctx, entities::model& m) {
     auto& archs(m.physical_elements().archetypes());
     for (auto& pair : archs) {
         auto& arch(*pair.second);
+        BOOST_LOG_SEV(lg, debug) << "Processing: "
+                                 << arch.name().qualified().dot();
 
         /*
          * We start by rendering the wale template. This may not

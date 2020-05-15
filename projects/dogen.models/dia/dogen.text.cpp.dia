@@ -278,7 +278,8 @@
 #DOGEN masd.wale.kvp.archetype.simple_name=class_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1777,7 +1778,7 @@ inline void swap(
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=exception
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.wale.kvp.text_to_text_transform="" #&gt;#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2040,7 +2041,7 @@ private:
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=enumeration
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2288,7 +2289,8 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 #DOGEN masd.wale.kvp.archetype.simple_name=namespace_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=module
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2510,7 +2512,8 @@ namespace &lt;#= m.name().simple() #&gt; {
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=visitor
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2779,7 +2782,8 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
 #DOGEN masd.wale.kvp.class.simple_name=class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_implementation
 #DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7049,7 +7053,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="101.588,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.518,180.429;105.69,184.328"/>
+        <dia:rectangle val="101.517,180.429;105.69,184.328"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7746,7 +7750,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.288,180.429;149.012,184.312"/>
+        <dia:rectangle val="145.287,180.429;149.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7817,7 +7821,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="163.375,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.625,178.172;176.893,184.8"/>
+        <dia:rectangle val="162.625,178.172;176.894,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13898,7 +13902,8 @@ and element.#</dia:string>
 #DOGEN masd.wale.kvp.archetype.simple_name=builtin_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=builtin
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -25658,7 +25663,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="106.252,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.361,285.429;106.322,287.324"/>
+        <dia:rectangle val="104.361,285.429;106.323,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26205,7 +26210,8 @@ not a regular" helper.#</dia:string>
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=primitive
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -27152,7 +27158,8 @@ inline void swap(
 #DOGEN masd.wale.kvp.class.simple_name=primitive_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_implementation
 #DOGEN masd.wale.kvp.meta_element=primitive
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31172,7 +31179,8 @@ code.
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31489,7 +31497,8 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=feature_template_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_implementation
 #DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31845,7 +31854,8 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=variability_initializer
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -32071,7 +32081,8 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=variability_initializer_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_implementation
 #DOGEN masd.wale.kvp.meta_element=variability_initializer
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33900,7 +33911,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().qualified());
 }
 #</dia:string>
           </dia:attribute>
@@ -34065,7 +34076,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().qualified());
 }
 #</dia:string>
           </dia:attribute>
@@ -35035,7 +35046,8 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35243,7 +35255,8 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=visitor
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35562,7 +35575,8 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=primitive
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -37083,7 +37097,8 @@ class &lt;#= p.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.archetype.simple_name=main
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=entry_point
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38386,7 +38401,8 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
 #DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39056,7 +39072,8 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39653,7 +39670,8 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

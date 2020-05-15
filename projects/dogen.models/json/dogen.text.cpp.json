@@ -56,7 +56,8 @@
         "masd.wale.kvp.archetype.simple_name": "class_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -126,7 +127,7 @@
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "exception",
         "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.wale.kvp.text_to_text_transform": "\"\" #>"
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -156,7 +157,8 @@
         "masd.wale.kvp.archetype.simple_name": "enum_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "enumeration",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -186,7 +188,8 @@
         "masd.wale.kvp.archetype.simple_name": "namespace_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "module",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -216,7 +219,8 @@
         "masd.wale.kvp.archetype.simple_name": "visitor_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "visitor",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -245,7 +249,8 @@
         "masd.wale.kvp.class.simple_name": "class_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "class_implementation",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -850,7 +855,8 @@
         "masd.wale.kvp.archetype.simple_name": "builtin_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "builtin",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1497,7 +1503,8 @@
         "masd.wale.kvp.archetype.simple_name": "primitive_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "primitive",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1561,7 +1568,8 @@
         "masd.wale.kvp.class.simple_name": "primitive_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "primitive_implementation",
         "masd.wale.kvp.meta_element": "primitive",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1762,7 +1770,8 @@
         "masd.wale.kvp.archetype.simple_name": "feature_template_bundle_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "variability_feature_template_bundle",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1791,7 +1800,8 @@
         "masd.wale.kvp.class.simple_name": "feature_template_bundle_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "feature_template_bundle_implementation",
         "masd.wale.kvp.meta_element": "variability_feature_template_bundle",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1820,7 +1830,8 @@
         "masd.wale.kvp.archetype.simple_name": "variability_initializer_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "variability_initializer",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1849,7 +1860,8 @@
         "masd.wale.kvp.class.simple_name": "variability_initializer_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "variability_initializer_implementation",
         "masd.wale.kvp.meta_element": "variability_initializer",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2144,7 +2156,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::not_supported;\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& /*l*/, const logical::entities::name& n) const {\n\n    using namespace dogen::utility::log;\n    static logger lg(logger_factory(archetype().meta_name().qualified()));\n    static const std::string not_supported(\"Inclusion path is not supported: \");\n\n    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();\n    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());\n}\n"
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::not_supported;\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& /*l*/, const logical::entities::name& n) const {\n\n    using namespace dogen::utility::log;\n    static logger lg(logger_factory(archetype().meta_name().qualified()));\n    static const std::string not_supported(\"Inclusion path is not supported: \");\n\n    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();\n    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.{{locator_function}}(n, archetype().meta_name().qualified());\n}\n"
         }
       ]
     },
@@ -2161,7 +2173,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::{{class.inclusion_support_type}};\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n"
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(cpp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\ninclusion_support_types {{class.simple_name}}::inclusion_support_type() const {\n    return inclusion_support_types::{{class.inclusion_support_type}};\n}\n\nboost::filesystem::path {{class.simple_name}}::inclusion_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.{{locator_function}}(n, archetype().meta_name().qualified());\n}\n"
         }
       ]
     },
@@ -2258,7 +2270,8 @@
         "masd.wale.kvp.archetype.simple_name": "class_forward_declarations",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2287,7 +2300,8 @@
         "masd.wale.kvp.archetype.simple_name": "visitor_forward_declarations",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "visitor",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2323,7 +2337,8 @@
         "masd.wale.kvp.archetype.simple_name": "primitive_forward_declarations",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "primitive",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2437,7 +2452,8 @@
         "masd.wale.kvp.archetype.simple_name": "main",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "entry_point",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2539,7 +2555,8 @@
         "masd.wale.kvp.archetype.simple_name": "feature_bundle_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
         "masd.wale.kvp.meta_element": "variability_feature_bundle",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2597,7 +2614,8 @@
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2675,7 +2693,8 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
