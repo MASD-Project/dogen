@@ -39665,10 +39665,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
-#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_header#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40846,16 +40843,16 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="-25,221"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,220.95;-9.255,224.05"/>
+        <dia:rectangle val="-25.05,220.95;2.5,224.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-25,221"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.694999999999999"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#common_archetype_configuration#</dia:string>
@@ -40866,7 +40863,8 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
       <dia:attribute name="comment">
         <dia:string>#Contains the configuration common to all archetypes.
 
-#DOGEN masd.variability.binding_point=entity#</dia:string>
+#DOGEN masd.variability.binding_point=entity
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40946,7 +40944,31 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.wale.kvp.meta_name_factory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#logical::helpers::meta_name_factory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -40959,16 +40981,16 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="-37,229"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,228.95;-17.97,232.65"/>
+        <dia:rectangle val="-37.05,228.95;-12.195,234.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-37,229"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.98"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#header_configuration#</dia:string>
@@ -41084,6 +41106,52 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.wale.kvp.class.inclusion_support_type#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#regular_support#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.wale.kvp.locator_function#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#make_full_path_for_cpp_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -41094,19 +41162,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O304">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.1525,224"/>
+        <dia:point val="-11.275,224.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-27.56,223.95;-16.3025,229.05"/>
+        <dia:rectangle val="-24.6725,224.55;-10.425,229.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-17.1525,224"/>
-        <dia:point val="-17.1525,226.9"/>
-        <dia:point val="-27.51,226.9"/>
-        <dia:point val="-27.51,229"/>
+        <dia:point val="-11.275,224.6"/>
+        <dia:point val="-11.275,227"/>
+        <dia:point val="-24.6225,227"/>
+        <dia:point val="-24.6225,229"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -41114,7 +41182,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -41136,13 +41204,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O305">
       <dia:attribute name="obj_pos">
-        <dia:point val="-15,229"/>
+        <dia:point val="-8,229"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,228.95;4.03,232.65"/>
+        <dia:rectangle val="-8.05,228.95;11.03,232.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-15,229"/>
+        <dia:point val="-8,229"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
@@ -41274,19 +41342,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O306">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17.1525,224"/>
+        <dia:point val="-11.275,224.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.0025,223.95;-5.46,229.05"/>
+        <dia:rectangle val="-12.125,224.55;1.54,229.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-17.1525,224"/>
-        <dia:point val="-17.1525,226.9"/>
-        <dia:point val="-5.51,226.9"/>
-        <dia:point val="-5.51,229"/>
+        <dia:point val="-11.275,224.6"/>
+        <dia:point val="-11.275,227"/>
+        <dia:point val="1.49,227"/>
+        <dia:point val="1.49,229"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -41294,7 +41362,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>

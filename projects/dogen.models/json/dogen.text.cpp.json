@@ -2637,10 +2637,7 @@
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
         "masd.wale.kvp.class.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
-        "masd.wale.kvp.class.inclusion_support_type": "regular_support",
-        "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
-        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_header"
+        "masd.wale.kvp.meta_element": "physical_archetype"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2804,7 +2801,14 @@
       "tagged_values": {
         "masd.variability.binding_point": "entity"
       },
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.wale.kvp.meta_name_factory",
+          "type": "",
+          "value": "logical::helpers::meta_name_factory"
+        }
+      ]
     },
     {
       "name": "transforms::header_configuration",
@@ -2825,6 +2829,16 @@
           "name": "masd.physical.part_id",
           "type": "",
           "value": "masd.cpp.public_headers"
+        },
+        {
+          "name": "masd.wale.kvp.class.inclusion_support_type",
+          "type": "",
+          "value": "regular_support"
+        },
+        {
+          "name": "masd.wale.kvp.locator_function",
+          "type": "",
+          "value": "make_full_path_for_cpp_header"
         }
       ]
     },
