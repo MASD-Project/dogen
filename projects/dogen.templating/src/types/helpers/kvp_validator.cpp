@@ -43,8 +43,8 @@ validate(const std::unordered_set<std::string>& expected_keys,
     for (const auto& kvp : kvps)
         s.insert(kvp.first);
 
-    BOOST_LOG_SEV(lg, debug) << " Supplied keys: " << s;
-    BOOST_LOG_SEV(lg, debug) << " Expected keys: " << expected_keys;
+    BOOST_LOG_SEV(lg, debug) << "Supplied keys: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Expected keys: " << expected_keys;
 
     /*
      * Ensure that all expected keys have been supplied. We may have
