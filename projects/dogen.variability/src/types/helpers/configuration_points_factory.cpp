@@ -211,7 +211,7 @@ std::unordered_map<std::string, entities::configuration_point>
 configuration_points_factory::make(const entities::binding_point bp,
     const std::list<std::pair<std::string, std::string>>& entries,
     const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_override_entries) {
+    aggregated_override_entries) const {
 
     gatherer g;
     value_factory factory;
@@ -322,7 +322,7 @@ configuration_points_factory::make(const entities::binding_point bp,
 
 std::unordered_map<std::string, entities::configuration_point>
 configuration_points_factory::make(const entities::binding_point bp,
-    const std::list<std::pair<std::string, std::string>>& entries) {
+    const std::list<std::pair<std::string, std::string>>& entries) const {
     std::unordered_map<std::string, std::list<std::string>> aoe;
     return make(bp, entries, aoe);
 }
