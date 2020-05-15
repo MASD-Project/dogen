@@ -887,15 +887,8 @@
       "documentation": "Generates header files for builtins.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::header_configuration"
+        "dogen::builtin_header_configuration"
       ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.builtin",
-        "masd.wale.kvp.class.simple_name": "builtin_header_transform",
-        "masd.wale.kvp.archetype.simple_name": "builtin_header",
-        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
-        "masd.wale.kvp.meta_element": "builtin"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -936,15 +929,8 @@
       "documentation": "Generates header files for builtins.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::header_configuration"
+        "dogen::builtin_header_configuration"
       ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.builtin",
-        "masd.wale.kvp.class.simple_name": "builtin_header_transform",
-        "masd.wale.kvp.archetype.simple_name": "builtin_header",
-        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
-        "masd.wale.kvp.meta_element": "builtin"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3191,6 +3177,48 @@
           "name": "masd.wale.kvp.meta_element",
           "type": "",
           "value": "object"
+        }
+      ]
+    },
+    {
+      "name": "transforms::builtin_header_configuration",
+      "parents": [
+        "transforms::header_configuration"
+      ],
+      "documentation": "Contains the configuration common to all built header archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::builtin_header_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.logical_meta_element_id",
+          "type": "",
+          "value": "dogen.logical.entities.builtin"
+        },
+        {
+          "name": "masd.wale.kvp.class.simple_name",
+          "type": "",
+          "value": "builtin_header_transform"
+        },
+        {
+          "name": "masd.wale.kvp.archetype.simple_name",
+          "type": "",
+          "value": "builtin_header"
+        },
+        {
+          "name": "masd.wale.kvp.class.inclusion_support_type",
+          "type": "",
+          "value": "canonical_support"
+        },
+        {
+          "name": "masd.wale.kvp.meta_element",
+          "type": "",
+          "value": "builtin"
         }
       ]
     }
