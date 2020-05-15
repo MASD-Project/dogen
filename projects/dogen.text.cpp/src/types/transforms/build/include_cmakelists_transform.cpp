@@ -36,7 +36,6 @@
 #include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp"
 
 namespace dogen::text::cpp::transforms::build {
-
 physical::entities::archetype include_cmakelists_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -54,8 +53,7 @@ physical::entities::archetype include_cmakelists_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types include_cmakelists_transform::
-inclusion_support_type() const {
+inclusion_support_types include_cmakelists_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
@@ -63,9 +61,7 @@ boost::filesystem::path include_cmakelists_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    using namespace dogen::text::cpp::transforms;
     static logger lg(logger_factory(archetype().meta_name().qualified()));
-
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
