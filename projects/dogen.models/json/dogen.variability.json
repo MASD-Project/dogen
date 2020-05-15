@@ -181,8 +181,7 @@
       ],
       "documentation": "Holds a set of templates for configuration points.\n",
       "stereotypes": [
-        "Generalizable",
-        "Stereotypable"
+        "Profilable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -643,8 +642,7 @@
       ],
       "stereotypes": [
         "ConfigurationStore",
-        "Generalizable",
-        "Stereotypable"
+        "Profilable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -657,32 +655,6 @@
           "name": "base_layer_profile",
           "type": "std::string",
           "documentation": "Which base layer does this profile rely on, if any.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::Generalizable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "parents",
-          "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": "entities::Stereotypable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stereotype",
-          "type": "std::string"
         }
       ]
     },
@@ -935,6 +907,43 @@
           "type": "boost::shared_ptr<value>"
         }
       ]
+    },
+    {
+      "name": "entities::Generalizable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "entities::Stereotypable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stereotype",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::Profilable",
+      "parents": [
+        "entities::Generalizable",
+        "entities::Stereotypable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
