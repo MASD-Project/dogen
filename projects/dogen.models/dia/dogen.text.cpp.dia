@@ -38719,7 +38719,8 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=feature_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_implementation
 #DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
-#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory#</dia:string>
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_cpp_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

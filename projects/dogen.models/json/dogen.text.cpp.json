@@ -2585,7 +2585,8 @@
         "masd.wale.kvp.class.simple_name": "feature_bundle_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "feature_bundle_implementation",
         "masd.wale.kvp.meta_element": "variability_feature_bundle",
-        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory"
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.wale.kvp.locator_function": "make_full_path_for_cpp_implementation"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
