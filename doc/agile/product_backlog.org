@@ -2307,6 +2307,52 @@ Ideas:
 
 - configuration
 
+*** Use of binding points in profiles                                 :story:
+
+At present we have the concept of a binding point in a feature. This
+allows us to determine how a feature can be bound to a modeling
+element in a configuration. For example, take feature =X= with a binding
+point of =global=; this feature can only be configured in the root
+module because it does not make sense to exist anywhere else.
+
+This concept was already present in the old annotations model, where
+we checked that a "scope type" of a field matched the scope type of
+the element. However, this was present haphazardly in profiles; we had
+the notion of a "scope type" on a profile as a property but the
+profile hydrator never populated it; in addition, the profiler only
+set the annotation scope:
+
+: pc.annotation().scope(scope_types::not_applicable);
+
+We probably started thinking about this but stopped half-way. So, if
+we try to retrace our steps logically:
+
+- a profile could conceivably have a binding point. It would be used
+  to validate that all profiles it merges against also have the same
+  biding point (or similar; say =any= or =module= for =global=). It
+  could also be used to validate that the feature templates referred
+  to in its configuration point templates are also compatible.
+
+At present we have preserved the old logic of having a binding point
+in a profile as a feature, and left the initial feature processing
+support in the adaptor transform, but:
+
+- we did not add it to the profile template and profile classes;
+- consequently we are missing all of the validation logic defined
+  above.
+
+We did some work on this for sprint 25:
+
+- profiles now have binding points in the logical model, and meta-data
+  is now being read to obtain the value of the profile.
+- we did not hook in the profile conversion when adapting the logical
+  profile to the variability profile (in =profile_adapter=) because
+  when we tried, it caused all profiles to break. Apparently we have a
+  number of inconsistencies in the way we are using features in
+  profiles. This requires some investigation. However, this work
+  should way until we do the terminology clean up of the variability
+  model.
+
 *** Investigate current implementation of the origin transform        :story:
 
 Do we need to have the origin transform? can we not just supply the
