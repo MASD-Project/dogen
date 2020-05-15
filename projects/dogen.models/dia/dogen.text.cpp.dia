@@ -30410,7 +30410,7 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
         <dia:point val="-46,327"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,325.15;16.05,357.05"/>
+        <dia:rectangle val="-46.05,325.15;16.05,348.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30422,7 +30422,7 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
         <dia:real val="62"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="30"/>
+        <dia:real val="21"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -30775,7 +30775,7 @@ code.
         <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.
+        <dia:string>#Generates tests for objects.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=class_implementation_transform
@@ -37633,28 +37633,33 @@ class &lt;#= p.name().simple() #&gt;;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O279">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,344"/>
+        <dia:point val="-44,341"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,343.95;-10.36,347.05"/>
+        <dia:rectangle val="-44.05,340.95;-18.81,345.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,344"/>
+        <dia:point val="-44,341"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#main_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates entry point for tests.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.entry_point
+#DOGEN masd.wale.kvp.class.simple_name=main_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=main
+#DOGEN masd.wale.kvp.meta_element=entry_point#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -37693,7 +37698,7 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -37734,7 +37739,129 @@ class &lt;#= p.name().simple() #&gt;;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/main_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; main_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; /*e*/) const {
+
+    using logical::entities::structural::object;
+    auto builder(f.make());
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::test::unit_test());
+    builder.add(ic::boost::test::unit_test_monitor());
+    builder.add(ic::boost::exception::info());
+    builder.add(ic::std::iostream());
+    builder.add(ic::boost::exception::diagnostic_information());
+
+    return builder.build();
+}
+
+void main_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    using logical::entities::structural::entry_point;
+    const auto&amp; ep(ast.as&lt;entry_point&gt;(e));
+    const auto qn(ast.get_qualified_name(ep.name()));
+#&gt;
+#define BOOST_TEST_MODULE &lt;#= qn #&gt;
+
+&lt;#+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(ep));
+#&gt;
+
+namespace  {
+
+const std::string error_msg("Error during test.");
+
+inline void translate(const boost::exception&amp; e) {
+    std::cerr &lt;&lt; std::endl &lt;&lt; boost::diagnostic_information(e);
+    throw std::runtime_error(error_msg);
+}
+
+struct exception_fixture {
+    exception_fixture() {
+        using boost::exception;
+        using boost::unit_test::unit_test_monitor;
+        unit_test_monitor.register_exception_translator&lt;exception&gt;(&amp;translate);
+    }
+};
+
+}
+
+BOOST_GLOBAL_FIXTURE(exception_fixture);
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -39046,13 +39173,13 @@ int main(int /*argc*/, char* /*argv*/[]) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O292">
       <dia:attribute name="obj_pos">
-        <dia:point val="-7,344"/>
+        <dia:point val="-14,341"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,343.95;6.64,347.05"/>
+        <dia:rectangle val="-14.05,340.95;-0.36,344.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-7,344"/>
+        <dia:point val="-14,341"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>

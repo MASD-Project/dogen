@@ -1727,7 +1727,7 @@
     },
     {
       "name": "transforms::tests::class_implementation_transform",
-      "documentation": "Generates implementation files for objects.\n",
+      "documentation": "Generates tests for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
         "dogen::tests_configuration"
@@ -2428,10 +2428,30 @@
     },
     {
       "name": "transforms::tests::main_transform",
+      "documentation": "Generates entry point for tests.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::tests_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.entry_point",
+        "masd.wale.kvp.class.simple_name": "main_transform",
+        "masd.wale.kvp.archetype.simple_name": "main",
+        "masd.wale.kvp.meta_element": "entry_point"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/entry_point.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/tests/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/tests/main_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> main_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& /*e*/) const {\n\n    using logical::entities::structural::object;\n    auto builder(f.make());\n\n    using ic = inclusion_constants;\n    builder.add(ic::boost::test::unit_test());\n    builder.add(ic::boost::test::unit_test_monitor());\n    builder.add(ic::boost::exception::info());\n    builder.add(ic::std::iostream());\n    builder.add(ic::boost::exception::diagnostic_information());\n\n    return builder.build();\n}\n\nvoid main_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    using logical::entities::structural::entry_point;\n    const auto& ep(ast.as<entry_point>(e));\n    const auto qn(ast.get_qualified_name(ep.name()));\n#>\n#define BOOST_TEST_MODULE <#= qn #>\n\n<#+\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(ep));\n#>\n\nnamespace  {\n\nconst std::string error_msg(\"Error during test.\");\n\ninline void translate(const boost::exception& e) {\n    std::cerr << std::endl << boost::diagnostic_information(e);\n    throw std::runtime_error(error_msg);\n}\n\nstruct exception_fixture {\n    exception_fixture() {\n        using boost::exception;\n        using boost::unit_test::unit_test_monitor;\n        unit_test_monitor.register_exception_translator<exception>(&translate);\n    }\n};\n\n}\n\nBOOST_GLOBAL_FIXTURE(exception_fixture);\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::odb::object_odb_options_transform",

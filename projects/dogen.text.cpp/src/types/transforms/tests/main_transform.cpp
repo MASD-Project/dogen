@@ -35,7 +35,6 @@
 #include "dogen.text.cpp/types/transforms/tests/main_transform.hpp"
 
 namespace dogen::text::cpp::transforms::tests {
-
 physical::entities::archetype main_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
