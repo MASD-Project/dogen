@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
@@ -37,7 +38,7 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string unexpected_stereotypes("Unexpected dynamic stereotypes:");
+const std::string unexpected_stereotypes("Unexpected dynamic stereotypes: ");
 
 }
 
@@ -93,10 +94,11 @@ private:
             return;
 
         const auto id(e.name().qualified().dot());
-        BOOST_LOG_SEV(lg, error) << unexpected_stereotypes << id
-                                 << " Values: " << ds;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(unexpected_stereotypes + id));
+        std::ostringstream os;
+        os << unexpected_stereotypes << ds << " in element: " << id;
+        const auto msg(os.str());
+        BOOST_LOG_SEV(lg, error) << msg;
+        BOOST_THROW_EXCEPTION(transformation_error(msg));
     }
 
 public:
