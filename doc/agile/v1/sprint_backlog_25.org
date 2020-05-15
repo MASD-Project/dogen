@@ -13,30 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-15 Fri 17:57]
+#+CAPTION: Clock summary at [2020-05-15 Fri 19:30]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *38:16* |       |      | 100.0 |
+| *Total time*                                          | *38:55* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 38:16   |       |      | 100.0 |
-| Active                                                |         | 38:16 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  15.5 |
+| Stories                                               | 38:55   |       |      | 100.0 |
+| Active                                                |         | 38:55 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  15.3 |
 | Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.0 |
 | Sprint and product backlog grooming                   |         |       | 1:00 |   2.6 |
 | Check name of model for variability transform         |         |       | 0:19 |   0.8 |
 | Analysis on templating and logical model              |         |       | 1:09 |   3.0 |
 | Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.2 |
 | Remove stitch template builder                        |         |       | 0:09 |   0.4 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   4.3 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   4.3 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   4.2 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   4.2 |
 | =templating= should not depend on =physical=          |         |       | 1:09 |   3.0 |
-| Move decoration transform into logical model          |         |       | 5:33 |  14.5 |
-| Split wale out of stitch templates                    |         |       | 3:31 |   9.2 |
+| Move decoration transform into logical model          |         |       | 5:33 |  14.3 |
+| Split wale out of stitch templates                    |         |       | 3:31 |   9.0 |
 | Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   2.7 |
-| Profiles do not support collection types              |         |       | 4:13 |  11.0 |
-| Promote all formatters to archetypes                  |         |       | 8:12 |  21.4 |
-| Create an encoder for org-mode                        |         |       | 1:31 |   4.0 |
+| Profiles do not support collection types              |         |       | 4:13 |  10.8 |
+| Promote all formatters to archetypes                  |         |       | 8:51 |  22.7 |
+| Create an encoder for org-mode                        |         |       | 1:31 |   3.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1093,6 +1093,7 @@ finding the feature. We also have to visit the value first.
 
 *** STARTED Promote all formatters to archetypes                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-15 Fri 18:51]--[2020-05-15 Fri 19:30] =>  0:39
     CLOCK: [2020-05-15 Fri 16:12]--[2020-05-15 Fri 17:57] =>  1:45
     CLOCK: [2020-05-15 Fri 10:07]--[2020-05-15 Fri 11:33] =>  1:26
     CLOCK: [2020-05-15 Fri 09:32]--[2020-05-15 Fri 10:06] =>  0:34
