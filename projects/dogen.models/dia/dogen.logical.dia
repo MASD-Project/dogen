@@ -856,8 +856,6 @@ etc.).
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.injection.reference=dogen.physical
 #DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

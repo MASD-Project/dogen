@@ -96,11 +96,36 @@
       ]
     },
     {
+      "name": "base::ignores",
+      "documentation": "Regexes to ignore.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "",
+          "value": ".*/test/.*"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "",
+          "value": ".*/tests/.*"
+        }
+      ]
+    },
+    {
       "name": "base::base",
       "parents": [
         "base::decoration",
         "base::extraction",
-        "base::csharp"
+        "base::csharp",
+        "base::ignores"
       ],
       "stereotypes": [
         "masd::variability::profile"

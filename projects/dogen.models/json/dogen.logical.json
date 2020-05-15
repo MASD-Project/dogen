@@ -14,8 +14,6 @@
     "masd.injection.reference": "dogen.profiles",
     "masd.injection.reference": "dogen.physical",
     "masd.injection.input_technical_space": "cpp",
-    "masd.physical.ignore_files_matching_regex": ".*/test/.*",
-    "masd.physical.ignore_files_matching_regex": ".*/tests/.*",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
