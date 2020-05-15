@@ -38340,28 +38340,36 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
-        <dia:point val="-43,379"/>
+        <dia:point val="-44,371"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,378.95;-28.895,382.05"/>
+        <dia:rectangle val="-44.05,370.95;-18.81,375.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-43,379"/>
+        <dia:point val="-44,371"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.055000000000001"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates object options for odb.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
+#DOGEN masd.wale.kvp.class.simple_name=object_odb_options_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=object_odb_options
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.physical.part_id=masd.cpp.implementation
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38400,7 +38408,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -38441,7 +38449,124 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/object_odb_options_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; object_odb_options_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void object_odb_options_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        const auto ts(logical::entities::technical_space::odb);
+        ast.make_decoration_preamble(e, ts);
+
+        if (!o.orm_properties()) {
+#&gt;
+
+#
+# class has no ODB options defined.
+#
+&lt;#+
+        } else {
+            const auto ooo(o.orm_properties()-&gt;odb_options());
+#&gt;
+# epilogue
+--odb-epilogue &lt;#= ooo.epilogue() #&gt;
+
+&lt;#+
+            if (!ooo.include_regexes().empty()) {
+#&gt;
+# regexes
+&lt;#+
+                for (const auto&amp; regex : ooo.include_regexes())
+#&gt;
+--include-regex &lt;#= regex #&gt;
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix &lt;#= ooo.header_guard_prefix() #&gt;
+&lt;#+
+            }
+        }
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -38451,13 +38576,13 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O281">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,374"/>
+        <dia:point val="-14,371"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,373.95;-8.62,377.05"/>
+        <dia:rectangle val="-14.05,370.95;1.38,374.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,374"/>
+        <dia:point val="-14,371"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.330000000000002"/>
@@ -38883,13 +39008,13 @@ int main(int /*argc*/, char* /*argv*/[]) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O284">
       <dia:attribute name="obj_pos">
-        <dia:point val="-5,376"/>
+        <dia:point val="-44,377"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.05,375.95;10.1175,379.05"/>
+        <dia:rectangle val="-44.05,376.95;-28.8825,380.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-5,376"/>
+        <dia:point val="-44,377"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.067500000000001"/>
