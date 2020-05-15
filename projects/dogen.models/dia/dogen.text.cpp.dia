@@ -31602,28 +31602,33 @@ BOOST_AUTO_TEST_SUITE_END()
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
-        <dia:point val="-43,344"/>
+        <dia:point val="-14,335"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,343.95;-27.505,347.05"/>
+        <dia:rectangle val="-14.05,334.95;11.19,339.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-43,344"/>
+        <dia:point val="-14,335"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.444999999999999"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates tests for enumeration.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.enumeration
+#DOGEN masd.wale.kvp.class.simple_name=enum_implementation_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=enum_implementation
+#DOGEN masd.wale.kvp.meta_element=enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31662,7 +31667,7 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -31703,7 +31708,358 @@ BOOST_AUTO_TEST_SUITE_END()
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/predef.h&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/enum_implementation_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; enum_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::enum_header_archetype_qn());
+    builder.add(e.name(), test_data::traits::enum_header_archetype_qn());
+
+    using ic = inclusion_constants;
+    builder.add(ic::std::string());
+    builder.add(ic::boost::test::unit_test());
+    builder.add(ic::boost::predef());
+
+    const auto io_arch(io::traits::enum_header_archetype_qn());
+    const bool io_enabled(builder.is_enabled(e.name(), io_arch));
+    if (io_enabled) {
+        builder.add(e.name(), io_arch);
+        builder.add(ic::std::sstream());
+        builder.add(ic::boost::property_tree::ptree());
+        builder.add(ic::boost::property_tree::json_parser());
+    }
+
+    const auto lc_arch(lexical_cast::traits::enum_header_archetype_qn());
+    const bool lc_enabled(builder.is_enabled(e.name(), lc_arch));
+    if (lc_enabled) {
+        builder.add(e.name(), lc_arch);
+        builder.add(ic::boost::lexical_cast());
+    }
+
+    using ser = transforms::serialization::traits;
+    const auto ser_arch(ser::enum_header_archetype_qn());
+    const bool ser_enabled(builder.is_enabled(e.name(), ser_arch));
+    if (ser_enabled) {
+        builder.add(e.name(), ser_arch);
+
+        builder.add(ic::boost::archive::text_iarchive());
+        builder.add(ic::boost::archive::text_oarchive());
+        builder.add(ic::boost::archive::binary_iarchive());
+        builder.add(ic::boost::archive::binary_oarchive());
+        builder.add(ic::boost::archive::polymorphic_iarchive());
+        builder.add(ic::boost::archive::polymorphic_oarchive());
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+    }
+
+    using hash = transforms::hash::traits;
+    const auto hash_arch(hash::enum_header_archetype_qn());
+    const bool hash_enabled(builder.is_enabled(e.name(), hash_arch));
+    if (hash_enabled)
+        builder.add(e.name(), hash_arch);
+
+    return builder.build();
+}
+
+void enum_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        const auto qn(ast.get_qualified_name(e.name()));
+        const auto sn(e.name().simple());
+        std::string type_name("auto");
+        if (ast.is_cpp_standard_98())
+            type_name = qn;
+#&gt;
+BOOST_AUTO_TEST_SUITE(&lt;#= e.name().simple() #&gt;_tests)
+
+&lt;#+
+        /*
+         * If test data is not enabled, none of the tests can be
+         * generated. We need to insert a fake test for now. The real
+         * solution will be to filter based on element state.
+         */
+        if (!ast.is_test_data_enabled()) {
+            /*
+             * No tests.
+             */
+#&gt;
+BOOST_AUTO_TEST_CASE(fake_test) {
+    BOOST_CHECK(true);
+}
+
+&lt;#+
+        } else {
+            if (ast.is_io_enabled()) {
+                /*
+                 * IO tests.
+                 */
+#&gt;
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+    &lt;#= qn #&gt;_generator g;
+    const &lt;#= type_name #&gt; a(g());
+    std::stringstream s;
+    s &lt;&lt; a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+}
+
+&lt;#+
+            }
+
+            if (ast.is_lexical_cast_enabled()) {
+                /*
+                 * Lexical cast tests.
+                 */
+#&gt;
+BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
+    using &lt;#= qn #&gt;;
+    &lt;#= sn #&gt; r;
+&lt;#+
+        for (const auto&amp; enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+#&gt;
+
+    r = boost::lexical_cast&lt;&lt;#= sn #&gt;&gt;(std::string("&lt;#= enu_sn #&gt;"));
+    BOOST_CHECK(r == &lt;#= enu_qn #&gt;);
+    r = boost::lexical_cast&lt;&lt;#= sn #&gt;&gt;(std::string("&lt;#= sn + "::" + enu_sn #&gt;"));
+    BOOST_CHECK(r == &lt;#= enu_qn #&gt;);
+&lt;#+
+        }
+#&gt;
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
+    using &lt;#= qn #&gt;;
+    BOOST_CHECK_THROW(boost::lexical_cast&lt;&lt;#= sn #&gt;&gt;(std::string("DOGEN_THIS_IS_INVALID_DOGEN")),
+        boost::bad_lexical_cast);
+}
+
+BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
+    using &lt;#= qn #&gt;;
+    std::string r;
+&lt;#+
+        for (const auto&amp; enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+
+#&gt;
+
+    r = boost::lexical_cast&lt;std::string&gt;(&lt;#= enu_qn #&gt;);
+    BOOST_CHECK(r == "&lt;#= sn + "::" + enu_sn #&gt;");
+&lt;#+
+        }
+#&gt;
+}
+
+BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+#if BOOST_COMP_GNUC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    using &lt;#= qn #&gt;;
+    const &lt;#= sn #&gt; r(static_cast&lt;&lt;#= sn #&gt;&gt;(&lt;#= enm.enumerators().size() + 10 #&gt;));
+#if BOOST_COMP_GNUC
+#pragma GCC diagnostic pop
+#endif
+    BOOST_CHECK_THROW(boost::lexical_cast&lt;std::string&gt;(r),
+        boost::bad_lexical_cast);
+}
+
+&lt;#+
+            }
+
+            if (ast.is_serialization_enabled()) {
+                /*
+                 * Serialization tests.
+                 */
+#&gt;
+BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
+    &lt;#= qn #&gt;_generator g;
+    const &lt;#= type_name #&gt; a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        oa &lt;&lt; BOOST_SERIALIZATION_NVP(a);
+    }
+
+    &lt;#= qn #&gt; b = &lt;#= qn #&gt;();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        ia &gt;&gt; BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
+    &lt;#= qn #&gt;_generator g;
+    const &lt;#= type_name #&gt; a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+        oa &lt;&lt; BOOST_SERIALIZATION_NVP(a);
+    }
+
+    &lt;#= qn #&gt; b = &lt;#= qn #&gt;();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+        ia &gt;&gt; BOOST_SERIALIZATION_NVP(b);
+    }
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
+    &lt;#= qn #&gt;_generator g;
+    const &lt;#= type_name #&gt; a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        text_oarchive oa(os);
+        oa &lt;&lt; a;
+    }
+
+    &lt;#= qn #&gt; b = &lt;#= qn #&gt;();
+    std::istringstream is(os.str());
+    {
+        text_iarchive ia(is);
+        ia &gt;&gt; b;
+    }
+    BOOST_CHECK(a == b);
+}
+
+&lt;#+
+            }
+
+             if (ast.is_hash_enabled()) {
+                 /*
+                  * hash tests.
+                  */
+#&gt;
+BOOST_AUTO_TEST_CASE(equal_enums_generate_the_same_hash) {
+    &lt;#= qn #&gt;_generator g;
+    g();
+    const &lt;#= type_name #&gt; a(g());
+    const &lt;#= type_name #&gt; b(a);
+
+    std::hash&lt;&lt;#= qn #&gt;&gt; hasher;
+    BOOST_CHECK(hasher(a) == hasher(b));
+}
+
+BOOST_AUTO_TEST_CASE(different_enums_generate_different_hashes) {
+    &lt;#= qn #&gt;_generator g;
+    g();
+    const &lt;#= type_name #&gt; a(g());
+    const &lt;#= type_name #&gt; b(g());
+
+    std::hash&lt;&lt;#= qn #&gt;&gt; hasher;
+    BOOST_CHECK(hasher(a) != hasher(b));
+}
+
+&lt;#+
+            }
+        }
+#&gt;
+BOOST_AUTO_TEST_SUITE_END()
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -41320,16 +41676,16 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O307">
       <dia:attribute name="obj_pos">
-        <dia:point val="-43,212"/>
+        <dia:point val="-41,213"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,211.95;-29.73,216.95"/>
+        <dia:rectangle val="-41.05,212.95;-27.73,217.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-43,212"/>
+        <dia:point val="-41,213"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.220000000000001"/>
@@ -41362,7 +41718,7 @@ move them to these profiles.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-42.65,213.244"/>
+            <dia:point val="-40.65,214.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -41376,16 +41732,16 @@ move them to these profiles.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="-29.78,214.45"/>
+        <dia:point val="-27.78,215.45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.8363,214.394;-24.8966,215.503"/>
+        <dia:rectangle val="-27.8359,214.697;-24.9004,215.981"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-29.78,214.45"/>
+        <dia:point val="-27.78,215.45"/>
         <dia:point val="-25,215.1"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -41401,7 +41757,7 @@ move them to these profiles.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-27.39,215.275"/>
+        <dia:point val="-26.39,215.775"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O307" connection="4"/>
