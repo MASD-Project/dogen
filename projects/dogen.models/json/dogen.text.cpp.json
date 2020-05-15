@@ -95,15 +95,8 @@
       "documentation": "Generates header files for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::header_configuration"
+        "dogen::object_header_configuration"
       ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
-        "masd.wale.kvp.class.simple_name": "class_header_transform",
-        "masd.wale.kvp.archetype.simple_name": "class_header",
-        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
-        "masd.wale.kvp.meta_element": "object"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -385,15 +378,8 @@
       "documentation": "Generates header files for archetypes.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::header_configuration"
+        "dogen::object_header_configuration"
       ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
-        "masd.wale.kvp.class.simple_name": "class_header_transform",
-        "masd.wale.kvp.archetype.simple_name": "class_header",
-        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
-        "masd.wale.kvp.meta_element": "object"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {

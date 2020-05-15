@@ -1532,16 +1532,10 @@ inline void swap(
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.
-
-#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
-#DOGEN masd.wale.kvp.class.simple_name=class_header_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=class_header
-#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=object#</dia:string>
+        <dia:string>#Generates header files for objects.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4923,16 +4917,10 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for archetypes.
-
-#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
-#DOGEN masd.wale.kvp.class.simple_name=class_header_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=class_header
-#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=object#</dia:string>
+        <dia:string>#Generates header files for archetypes.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
