@@ -669,10 +669,32 @@
     },
     {
       "name": "transforms::odb::enum_header_transform",
+      "documentation": "Generates header files for enumerations.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.enumeration",
+        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
+        "masd.wale.kvp.class.simple_name": "enum_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "enum_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "enumeration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/enumeration.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/enum_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> enum_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    auto builder(f.make());\n    builder.add(e.name(), types::traits::enum_header_archetype_qn());\n    return builder.build();\n}\n\nvoid enum_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(ye.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\n#ifdef ODB_COMPILER\n\n#endif\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::context",
@@ -1562,10 +1584,32 @@
     },
     {
       "name": "transforms::odb::primitive_header_transform",
+      "documentation": "Generates header files for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.primitive",
+        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
+        "masd.wale.kvp.class.simple_name": "primitive_header_transform",
+        "masd.wale.kvp.archetype.simple_name": "primitive_header",
+        "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
+        "masd.wale.kvp.meta_element": "primitive"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/primitive_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> primitive_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    using logical::entities::structural::primitive;\n    const auto& p(assistant::as<primitive>(e));\n    auto builder(f.make());\n    builder.add(p.name(), types::traits::primitive_header_archetype_qn());\n\n    return builder.build();\n}\n\nvoid primitive_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    {\n        const auto sn(p.name().simple());\n        const auto qn(ast.get_qualified_name(p.name()));\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        const auto attr(p.value_attribute());\n\n        if (!p.orm_properties() || p.orm_properties()->odb_pragmas().empty()) {\n#>\n// class has no ODB pragmas defined.\n\n<#+\n        } else {\n            {\n                const auto ns(ast.make_namespaces(p.name()));\n                auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\n#ifdef ODB_COMPILER\n\n<#+\n                for (const auto& pg : p.orm_properties()->odb_pragmas())\n#>\n<#= pg #>\n<#+\n\n                bool is_first(true);\n                if (p.value_attribute().orm_properties() &&\n                    !p.value_attribute().orm_properties()->odb_pragmas().empty()) {\n                    for (const auto& pg : p.value_attribute().orm_properties()->odb_pragmas()) {\n                        if (is_first)\n#>\n\n<#+\n                            is_first = false;\n#>\n<#= pg #>\n<#+\n                    }\n#>\n\n#endif\n\n<#+\n                }\n            }\n#>\n\n<#+\n        }\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::test_data::primitive_header_transform",
