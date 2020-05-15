@@ -245,7 +245,6 @@
       "tagged_values": {
         "masd.physical.part_id": "masd.cpp.implementation",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.object",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation.wale",
         "masd.wale.kvp.class.simple_name": "class_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "class_implementation",
         "masd.wale.kvp.meta_element": "object",
@@ -2631,10 +2630,10 @@
       "name": "transforms::types::archetype_class_header_transform",
       "documentation": "Generates header files for archetypes.\n",
       "stereotypes": [
-        "masd::physical::archetype"
+        "masd::physical::archetype",
+        "dogen::header_configuration"
       ],
       "tagged_values": {
-        "masd.physical.part_id": "masd.cpp.public_headers",
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
         "masd.wale.kvp.class.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
@@ -2793,6 +2792,61 @@
           "name": "requires_relative_path",
           "type": "",
           "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "transforms::common_archetype_configuration",
+      "documentation": "Contains the configuration common to all archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::header_configuration",
+      "parents": [
+        "transforms::common_archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all c++ header archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::header_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.part_id",
+          "type": "",
+          "value": "masd.cpp.public_headers"
+        }
+      ]
+    },
+    {
+      "name": "transforms::implementation_configuration",
+      "parents": [
+        "transforms::common_archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all c++ implementation archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::implementation_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.part_id",
+          "type": "",
+          "value": "masd.cpp.implementation"
         }
       ]
     }
