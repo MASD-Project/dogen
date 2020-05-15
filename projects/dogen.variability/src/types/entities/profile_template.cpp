@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.variability/io/entities/element_io.hpp"
+#include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/types/entities/profile_template.hpp"
 #include "dogen.variability/io/entities/configuration_point_template_io.hpp"
 
@@ -62,15 +63,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variabil
 
 namespace dogen::variability::entities {
 
+profile_template::profile_template()
+    : binding_point_(static_cast<dogen::variability::entities::binding_point>(0)) { }
+
 profile_template::profile_template(
     const dogen::variability::entities::name& name,
     const std::string& description,
+    const dogen::variability::entities::binding_point binding_point,
     const std::list<std::string>& parents,
     const std::string& stereotype,
     const std::list<dogen::variability::entities::configuration_point_template>& templates)
     : dogen::variability::entities::element(
       name,
       description),
+      binding_point_(binding_point),
       parents_(parents),
       stereotype_(stereotype),
       templates_(templates) { }
@@ -81,6 +87,7 @@ void profile_template::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::variability::entities::element::to_stream(s);
     s << ", "
+      << "\"binding_point\": " << binding_point_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
       << "\"templates\": " << templates_
@@ -91,6 +98,7 @@ void profile_template::swap(profile_template& other) noexcept {
     dogen::variability::entities::element::swap(other);
 
     using std::swap;
+    swap(binding_point_, other.binding_point_);
     swap(parents_, other.parents_);
     swap(stereotype_, other.stereotype_);
     swap(templates_, other.templates_);
@@ -104,6 +112,7 @@ bool profile_template::equals(const dogen::variability::entities::element& other
 
 bool profile_template::operator==(const profile_template& rhs) const {
     return dogen::variability::entities::element::compare(rhs) &&
+        binding_point_ == rhs.binding_point_ &&
         parents_ == rhs.parents_ &&
         stereotype_ == rhs.stereotype_ &&
         templates_ == rhs.templates_;
@@ -113,6 +122,14 @@ profile_template& profile_template::operator=(profile_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+dogen::variability::entities::binding_point profile_template::binding_point() const {
+    return binding_point_;
+}
+
+void profile_template::binding_point(const dogen::variability::entities::binding_point v) {
+    binding_point_ = v;
 }
 
 const std::list<std::string>& profile_template::parents() const {

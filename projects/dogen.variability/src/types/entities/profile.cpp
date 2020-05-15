@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.variability/io/entities/element_io.hpp"
 #include "dogen.variability/types/entities/profile.hpp"
+#include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/io/entities/configuration_point_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -68,12 +69,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen::variability::entities {
 
 profile::profile()
-    : merged_(static_cast<bool>(0)) { }
+    : binding_point_(static_cast<dogen::variability::entities::binding_point>(0)),
+      merged_(static_cast<bool>(0)) { }
 
 profile::profile(
     const dogen::variability::entities::name& name,
     const std::string& description,
     const std::unordered_map<std::string, dogen::variability::entities::configuration_point>& configuration_points,
+    const dogen::variability::entities::binding_point binding_point,
     const std::list<std::string>& parents,
     const std::string& stereotype,
     const bool merged,
@@ -82,6 +85,7 @@ profile::profile(
       name,
       description),
       configuration_points_(configuration_points),
+      binding_point_(binding_point),
       parents_(parents),
       stereotype_(stereotype),
       merged_(merged),
@@ -100,6 +104,7 @@ void profile::to_stream(std::ostream& s) const {
     dogen::variability::entities::element::to_stream(s);
     s << ", "
       << "\"configuration_points\": " << configuration_points_ << ", "
+      << "\"binding_point\": " << binding_point_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
       << "\"merged\": " << merged_ << ", "
@@ -112,6 +117,7 @@ void profile::swap(profile& other) noexcept {
 
     using std::swap;
     swap(configuration_points_, other.configuration_points_);
+    swap(binding_point_, other.binding_point_);
     swap(parents_, other.parents_);
     swap(stereotype_, other.stereotype_);
     swap(merged_, other.merged_);
@@ -127,6 +133,7 @@ bool profile::equals(const dogen::variability::entities::element& other) const {
 bool profile::operator==(const profile& rhs) const {
     return dogen::variability::entities::element::compare(rhs) &&
         configuration_points_ == rhs.configuration_points_ &&
+        binding_point_ == rhs.binding_point_ &&
         parents_ == rhs.parents_ &&
         stereotype_ == rhs.stereotype_ &&
         merged_ == rhs.merged_ &&
@@ -153,6 +160,14 @@ void profile::configuration_points(const std::unordered_map<std::string, dogen::
 
 void profile::configuration_points(const std::unordered_map<std::string, dogen::variability::entities::configuration_point>&& v) {
     configuration_points_ = std::move(v);
+}
+
+dogen::variability::entities::binding_point profile::binding_point() const {
+    return binding_point_;
+}
+
+void profile::binding_point(const dogen::variability::entities::binding_point v) {
+    binding_point_ = v;
 }
 
 const std::list<std::string>& profile::parents() const {

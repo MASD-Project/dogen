@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.variability/io/entities/element_io.hpp"
 #include "dogen.variability/io/entities/profile_io.hpp"
+#include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/io/entities/configuration_point_io.hpp"
 
 namespace dogen::variability::entities {

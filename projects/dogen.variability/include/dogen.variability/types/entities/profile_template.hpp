@@ -30,6 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen.variability/types/entities/element.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 #include "dogen.variability/types/entities/configuration_point_template.hpp"
 
 namespace dogen::variability::entities {
@@ -39,9 +40,11 @@ namespace dogen::variability::entities {
  */
 class profile_template final : public dogen::variability::entities::element {
 public:
-    profile_template() = default;
     profile_template(const profile_template&) = default;
     profile_template(profile_template&&) = default;
+
+public:
+    profile_template();
 
     virtual ~profile_template() noexcept { }
 
@@ -49,6 +52,7 @@ public:
     profile_template(
         const dogen::variability::entities::name& name,
         const std::string& description,
+        const dogen::variability::entities::binding_point binding_point,
         const std::list<std::string>& parents,
         const std::string& stereotype,
         const std::list<dogen::variability::entities::configuration_point_template>& templates);
@@ -57,6 +61,14 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief How the feature binds against other model elements.
+     */
+    /**@{*/
+    dogen::variability::entities::binding_point binding_point() const;
+    void binding_point(const dogen::variability::entities::binding_point v);
+    /**@}*/
+
     const std::list<std::string>& parents() const;
     std::list<std::string>& parents();
     void parents(const std::list<std::string>& v);
@@ -86,6 +98,7 @@ public:
     profile_template& operator=(profile_template other);
 
 private:
+    dogen::variability::entities::binding_point binding_point_;
     std::list<std::string> parents_;
     std::string stereotype_;
     std::list<dogen::variability::entities::configuration_point_template> templates_;

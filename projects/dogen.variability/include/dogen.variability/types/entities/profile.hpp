@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.variability/types/entities/element.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 #include "dogen.variability/types/entities/configuration_point.hpp"
 
 namespace dogen::variability::entities {
@@ -50,6 +51,7 @@ public:
         const dogen::variability::entities::name& name,
         const std::string& description,
         const std::unordered_map<std::string, dogen::variability::entities::configuration_point>& configuration_points,
+        const dogen::variability::entities::binding_point binding_point,
         const std::list<std::string>& parents,
         const std::string& stereotype,
         const bool merged,
@@ -67,6 +69,14 @@ public:
     std::unordered_map<std::string, dogen::variability::entities::configuration_point>& configuration_points();
     void configuration_points(const std::unordered_map<std::string, dogen::variability::entities::configuration_point>& v);
     void configuration_points(const std::unordered_map<std::string, dogen::variability::entities::configuration_point>&& v);
+    /**@}*/
+
+    /**
+     * @brief How the feature binds against other model elements.
+     */
+    /**@{*/
+    dogen::variability::entities::binding_point binding_point() const;
+    void binding_point(const dogen::variability::entities::binding_point v);
     /**@}*/
 
     const std::list<std::string>& parents() const;
@@ -112,6 +122,7 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::variability::entities::configuration_point> configuration_points_;
+    dogen::variability::entities::binding_point binding_point_;
     std::list<std::string> parents_;
     std::string stereotype_;
     bool merged_;

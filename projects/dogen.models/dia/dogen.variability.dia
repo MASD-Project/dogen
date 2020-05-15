@@ -16146,16 +16146,16 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O124">
       <dia:attribute name="obj_pos">
-        <dia:point val="-4.1675,-15.3497"/>
+        <dia:point val="-4.1675,-15.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.925,-15.3997;-3.3175,-10.95"/>
+        <dia:rectangle val="-11.925,-15.45;-3.3175,-10.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-4.1675,-15.3497"/>
+        <dia:point val="-4.1675,-15.4"/>
         <dia:point val="-4.1675,-13"/>
         <dia:point val="-11.875,-13"/>
         <dia:point val="-11.875,-11"/>
@@ -16181,7 +16181,7 @@ alias.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O123" connection="10"/>
+        <dia:connection handle="0" to="O123" connection="6"/>
         <dia:connection handle="1" to="O41" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
@@ -16594,6 +16594,48 @@ alias.#</dia:string>
       <dia:connections>
         <dia:connection handle="0" to="O85" connection="6"/>
         <dia:connection handle="1" to="O128" connection="2"/>
+      </dia:connections>
+      <dia:childnode parent="O1"/>
+    </dia:object>
+    <dia:object type="UML - Generalization" version="1" id="O131">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-4.1675,-15.3497"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-5.0175,-15.3997;2.05,-10.95"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="-4.1675,-15.3497"/>
+        <dia:point val="-4.1675,-13"/>
+        <dia:point val="2,-13"/>
+        <dia:point val="2,-11"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O123" connection="10"/>
+        <dia:connection handle="1" to="O128" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
