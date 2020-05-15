@@ -36,6 +36,7 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.variability/types/helpers/configuration_points_factory.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -56,23 +57,6 @@ public:
 
 private:
     /**
-     * @brief Returns the feature for the given qualified name.
-     *
-     * If the feature could not be found and compatibility mode was
-     * requested, returns null. If compatibility mode was not
-     * requested throws.
-     */
-    boost::optional<entities::feature>
-    try_obtain_feature(const std::string& qn) const;
-
-    /**
-     * @brief Ensures the feature can be bound to the supplied binding
-     * type.
-     */
-    void validate_binding(const entities::feature& f,
-        const entities::binding_point bp) const;
-
-    /**
      * @brief Given a binding type, returns the well-known name of its
      * the default configuration.
      */
@@ -86,15 +70,6 @@ private:
     std::unordered_map<std::string, std::list<std::string>>
     aggregate_entries(const std::list<std::pair<std::string, std::string>>&
         entries) const;
-
-    /**
-     * @brief Uses the raw data to populate the configuration.
-     */
-    void
-    populate_configuration(const entities::binding_point bp,
-        const std::list<std::pair<std::string, std::string>>& entries,
-        const std::unordered_map<std::string, std::list<std::string>>&
-        aggregated_override_entries, entities::configuration& cfg) const;
 
 public:
     /**
@@ -115,8 +90,7 @@ public:
         tagged_values_overrides, const entities::binding_point bp) const;
 
 private:
-    const entities::feature_model& feature_model_;
-    const bool compatibility_mode_;
+    const configuration_points_factory configuration_points_factory_;
 };
 
 }
