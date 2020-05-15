@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-14 Thu 22:24]
+#+CAPTION: Clock summary at [2020-05-15 Fri 11:33]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *30:09* |       |      | 100.0 |
+| *Total time*                                          | *32:18* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 30:09   |       |      | 100.0 |
-| Active                                                |         | 30:09 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 5:57 |  19.7 |
-| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.6 |
-| Sprint and product backlog grooming                   |         |       | 1:00 |   3.3 |
-| Check name of model for variability transform         |         |       | 0:19 |   1.1 |
-| Analysis on templating and logical model              |         |       | 1:09 |   3.8 |
-| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.5 |
+| Stories                                               | 32:18   |       |      | 100.0 |
+| Active                                                |         | 32:18 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 5:57 |  18.4 |
+| Create a demo and presentation for previous sprint    |         |       | 0:47 |   2.4 |
+| Sprint and product backlog grooming                   |         |       | 1:00 |   3.1 |
+| Check name of model for variability transform         |         |       | 0:19 |   1.0 |
+| Analysis on templating and logical model              |         |       | 1:09 |   3.6 |
+| Ensure stitch templates result in valid JSON          |         |       | 0:27 |   1.4 |
 | Remove stitch template builder                        |         |       | 0:09 |   0.5 |
-| Add template related attributes to physical elements  |         |       | 1:38 |   5.4 |
-| Resolve references to wale templates in logical model |         |       | 1:39 |   5.5 |
-| =templating= should not depend on =physical=          |         |       | 1:09 |   3.8 |
-| Move decoration transform into logical model          |         |       | 5:33 |  18.4 |
-| Split wale out of stitch templates                    |         |       | 3:31 |  11.7 |
-| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.4 |
-| Promote all formatters to archetypes                  |         |       | 4:18 |  14.3 |
-| Create an encoder for org-mode                        |         |       | 1:31 |   5.0 |
+| Add template related attributes to physical elements  |         |       | 1:38 |   5.1 |
+| Resolve references to wale templates in logical model |         |       | 1:39 |   5.1 |
+| =templating= should not depend on =physical=          |         |       | 1:09 |   3.6 |
+| Move decoration transform into logical model          |         |       | 5:33 |  17.2 |
+| Split wale out of stitch templates                    |         |       | 3:31 |  10.9 |
+| Paper: An EMF-like UML generator for C++              |         |       | 1:02 |   3.2 |
+| Promote all formatters to archetypes                  |         |       | 6:27 |  20.0 |
+| Create an encoder for org-mode                        |         |       | 1:31 |   4.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1049,6 +1049,9 @@ Link: https://www.scitepress.org/Papers/2016/57448/57448.pdf
 
 *** STARTED Promote all formatters to archetypes                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-15 Fri 10:07]--[2020-05-15 Fri 11:33] =>  1:26
+    CLOCK: [2020-05-15 Fri 09:32]--[2020-05-15 Fri 10:06] =>  0:34
+    CLOCK: [2020-05-15 Fri 09:22]--[2020-05-15 Fri 09:31] =>  0:09
     CLOCK: [2020-05-13 Wed 21:02]--[2020-05-13 Wed 22:21] =>  1:19
     CLOCK: [2020-05-12 Tue 21:48]--[2020-05-12 Tue 22:29] =>  0:41
     CLOCK: [2020-05-10 Sun 17:27]--[2020-05-10 Sun 18:24] =>  0:57
@@ -1096,6 +1099,72 @@ Notes:
 - remove logic-less templates formatters. This can only be done once
   we've finished converting all formatters including C#.
 - archetype initialiser will be implemented in terms of facets.
+
+*** Remove wale instantiation from stitch                             :story:
+
+Though we've split wale out of stitch in the logical model, its still
+possible to instantiate a wale template within stitch. We should
+remove this as well.
+
+*** Remove =class.simple_name= variable                               :story:
+
+In the past we thought it was a good idea to separate the archetype
+name (e.g. ={{archetype.simple_name}}=) from the class name
+(e.g. =class.simple_name=). This was done so that the templates would
+be more "flexible" and more explicit. However, it turns out we don't
+want flexibility; we want structural consistency. That is to say we
+want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
+we should enforce this by deducing these parameters from the logical
+model element and other wale template parameters.
+
+*** Replace uses of traits in archetype initialisation                :story:
+
+At present we are relying on the traits class to initialise the
+archetype in the wale template:
+
+: physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+:    static physical::entities::archetype r([]() {
+:        physical::entities::archetype r;
+:        using pmnf = physical::helpers::meta_name_factory;
+:        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+:            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+:        using lmnf = {{meta_name_factory}};
+:        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+:        return r;
+:    }());
+:    return r;
+: }
+
+However, given that we now know this template is used only for
+archetypes and we want to enforce a structural consistency, we should
+start to initialise all of these variables as literal strings supplied
+as wale parameters. These should be deduced from the logical model
+element. It is fine to hard-code this because we are designing it
+explicitly for archetypes, not as a general purpose mechanism.
+
+*** Create a container for profiles                                   :story:
+
+At present we have placed all profiles in the profiles model and made
+it non-generatable. This means we can use regular packages. However,
+if we wanted to place profiles in a model which generates code and if
+those profiles were placed in a package we would generate an empty
+package. Ideally, we should be able to have a profile-specific
+container for profiles which does not have an expression at the
+physical level.
+
+*** Reduce number of required wale keys                               :story:
+
+We have a number of keys that can be derived:
+
+- the meta-name factory is fixed for all transforms.
+- the class simple name can be derived from the archetype name or even
+  from the class name itself.
+
+*** Add documentation to archetypes headers                           :story:
+
+At present we are ignoring the documentation we supply with the
+archetype. We need to populate the wale KVPs with it and make use of
+it in the wale template.
 
 *** Merge properties factory with stitching factory                   :story:
 

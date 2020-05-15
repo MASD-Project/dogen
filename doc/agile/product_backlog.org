@@ -4772,6 +4772,13 @@ And the element has:
 
 Only the element's entry will be taken into account.
 
+Similarly, if we try to use KVPs, we also get an error:
+
+: Error: Feature not found: masd.wale.kvp.locator_function
+
+This is because we are not taking into account the KVP logic when
+finding the feature. We also have to visit the value first.
+
 *** Improve error message for missing files                           :story:
 
 At present when we are expecting a file but the file is missing, the
