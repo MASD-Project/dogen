@@ -1655,10 +1655,24 @@
     },
     {
       "name": "transforms::hash::primitive_implementation_transform",
+      "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::primitive_implementation_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/primitive_implementation_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string>\nprimitive_implementation_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    using logical::entities::structural::primitive;\n    const auto& p(assistant::as<primitive>(e));\n    const auto carch(traits::canonical_archetype());\n    auto builder(f.make());\n    builder.add(p.name(), carch);\n\n    return builder.build();\n}\n\nvoid primitive_implementation_transform::\napply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    const auto sn(p.name().simple());\n    const auto qn(ast.get_qualified_name(p.name()));\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n#>\n\nnamespace {\n\ntemplate <typename HashableType>\ninline void combine(std::size_t& seed, const HashableType& value) {\n    std::hash<HashableType> hasher;\n    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);\n}\n<#+\n\n        ast.add_helper_methods(p.name().qualified().dot());\n#>\n\n}\n\n<#+\n        {\n            const auto ns(ast.make_namespaces(p.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const auto sn(p.name().simple());\n            const auto qn(ast.get_qualified_name(p.name()));\n            const auto attr(p.value_attribute());\n#>\n\nstd::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {\n    std::size_t seed(0);\n<#+\n            if (ast.requires_hashing_helper_method(attr))\n#>\n    combine(seed, hash_<#= attr.parsed_type().qualified().identifiable() #>(v.<#= attr.name().simple() #>()));\n<#+\n            else\n#>\n    combine(seed, v.<#= attr.name().simple() #>());\n    return seed;\n}\n\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::io::primitive_implementation_transform",
