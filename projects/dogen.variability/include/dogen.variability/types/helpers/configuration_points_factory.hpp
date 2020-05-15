@@ -25,24 +25,65 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <utility>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.variability/types/entities/configuration_point.hpp"
 
 namespace dogen::variability::helpers {
 
+/**
+ * @brief Makes configuration points.
+ */
 class configuration_points_factory final {
 public:
-    configuration_points_factory() = default;
-    configuration_points_factory(const configuration_points_factory&) = default;
-    configuration_points_factory(configuration_points_factory&&) = default;
-    ~configuration_points_factory() = default;
-    configuration_points_factory& operator=(const configuration_points_factory&) = default;
+    /**
+     * @brief Initialise the configuration points factory.
+     *
+     * @param fm the feature model.
+     * @param compatibility_mode if true, try to ignore some
+     * resolution errors.
+     */
+    configuration_points_factory(const entities::feature_model& fm,
+        const bool compatibility_mode);
+
+    /**
+     * @brief Ensures the feature can be bound to the supplied binding
+     * type.
+     */
+    void validate_binding(const entities::feature& f,
+        const entities::binding_point bp) const;
+
+private:
+    /**
+     * @brief Returns the feature for the given qualified name.
+     *
+     * If the feature could not be found and compatibility mode was
+     * requested, returns null. If compatibility mode was not
+     * requested throws.
+     */
+    boost::optional<entities::feature>
+    try_obtain_feature(const std::string& qn) const;
 
 public:
-    bool operator==(const configuration_points_factory& rhs) const;
-    bool operator!=(const configuration_points_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::unordered_map<std::string, entities::configuration_point>
+    make(const entities::binding_point bp,
+        const std::list<std::pair<std::string, std::string>>& entries,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        aggregated_override_entries);
 
+    std::unordered_map<std::string, entities::configuration_point>
+    make(const entities::binding_point bp,
+        const std::list<std::pair<std::string, std::string>>& entries);
+
+private:
+    const entities::feature_model& feature_model_;
+    const bool compatibility_mode_;
 };
 
 }
