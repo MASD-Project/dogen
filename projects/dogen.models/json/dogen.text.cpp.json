@@ -2586,7 +2586,7 @@
     },
     {
       "name": "transforms::types::archetype_class_header_transform",
-      "documentation": "A comment.\n",
+      "documentation": "Generates header files for archetypes.\n",
       "stereotypes": [
         "masd::physical::archetype"
       ],
@@ -2665,7 +2665,7 @@
     },
     {
       "name": "transforms::types::archetype_class_implementation_transform",
-      "documentation": "A comment.\n",
+      "documentation": "Generates implementation files for archetypes.\n",
       "stereotypes": [
         "masd::physical::archetype"
       ],

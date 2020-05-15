@@ -2480,13 +2480,13 @@ namespace &lt;#= m.name().simple() #&gt; {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,274"/>
+        <dia:point val="-44,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,273.95;-16.115,278.45"/>
+        <dia:rectangle val="-44.05,272.95;-16.115,277.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,274"/>
+        <dia:point val="-44,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -13869,13 +13869,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,286"/>
+        <dia:point val="-14,285"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,285.95;13.885,290.45"/>
+        <dia:rectangle val="-14.05,284.95;13.885,289.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,286"/>
+        <dia:point val="-14,285"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -21382,13 +21382,13 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O156">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,318"/>
+        <dia:point val="-2,318"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,317.95;-31.13,321.05"/>
+        <dia:rectangle val="-2.05,317.95;10.87,321.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,318"/>
+        <dia:point val="-2,318"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -26175,13 +26175,13 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,280"/>
+        <dia:point val="-44,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,279.95;-16.115,284.45"/>
+        <dia:rectangle val="-44.05,278.95;-16.115,283.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,280"/>
+        <dia:point val="-44,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -27123,13 +27123,13 @@ inline void swap(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O207">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,280"/>
+        <dia:point val="-14,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,279.95;11.19,284.45"/>
+        <dia:rectangle val="-14.05,278.95;11.19,283.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,280"/>
+        <dia:point val="-14,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -31143,13 +31143,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,298"/>
+        <dia:point val="-44,291"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,297.95;-16.115,302.45"/>
+        <dia:rectangle val="-44.05,290.95;-16.115,295.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,298"/>
+        <dia:point val="-44,291"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -31460,13 +31460,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,298"/>
+        <dia:point val="-14,291"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,297.95;11.19,302.45"/>
+        <dia:rectangle val="-14.05,290.95;11.19,295.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,298"/>
+        <dia:point val="-14,291"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -31816,13 +31816,13 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,311"/>
+        <dia:point val="-44,303"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,310.95;-16.115,315.45"/>
+        <dia:rectangle val="-44.05,302.95;-16.115,307.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,311"/>
+        <dia:point val="-44,303"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -32042,13 +32042,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,311"/>
+        <dia:point val="-14,303"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,310.95;11.19,315.45"/>
+        <dia:rectangle val="-14.05,302.95;11.19,307.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,311"/>
+        <dia:point val="-14,303"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -35214,13 +35214,13 @@ class &lt;#= o.name().simple() #&gt;;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,274"/>
+        <dia:point val="-14,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,273.95;13.885,278.45"/>
+        <dia:rectangle val="-14.05,272.95;13.885,277.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,274"/>
+        <dia:point val="-14,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -35533,13 +35533,13 @@ class &lt;#= o.name().simple() #&gt;;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,286"/>
+        <dia:point val="-44,285"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,285.95;-16.115,290.45"/>
+        <dia:rectangle val="-44.05,284.95;-16.115,289.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,286"/>
+        <dia:point val="-44,285"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -37054,13 +37054,13 @@ class &lt;#= p.name().simple() #&gt;;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O282">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,292"/>
+        <dia:point val="-44,309"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,291.95;-18.81,296.45"/>
+        <dia:rectangle val="-44.05,308.95;-18.81,313.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,292"/>
+        <dia:point val="-44,309"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -38357,13 +38357,13 @@ int main(int /*argc*/, char* /*argv*/[]) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,304"/>
+        <dia:point val="-44,297"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,303.95;-16.115,308.45"/>
+        <dia:rectangle val="-44.05,296.95;-16.115,301.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,304"/>
+        <dia:point val="-44,297"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -38674,13 +38674,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,304"/>
+        <dia:point val="-14,297"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,303.95;11.19,308.45"/>
+        <dia:rectangle val="-14.05,296.95;11.19,301.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,304"/>
+        <dia:point val="-14,297"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -39048,7 +39048,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
         <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A comment.
+        <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
@@ -39646,7 +39646,7 @@ public:
         <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A comment.
+        <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.part_id=masd.cpp.public_headers
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
