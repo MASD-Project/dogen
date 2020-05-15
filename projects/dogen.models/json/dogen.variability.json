@@ -945,6 +945,13 @@
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::configuration_points_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
