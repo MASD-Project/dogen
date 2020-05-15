@@ -29,7 +29,6 @@
 #include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::odb {
-
 physical::entities::archetype builtin_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

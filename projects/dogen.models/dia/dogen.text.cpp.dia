@@ -14527,25 +14527,31 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="-14,359"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,358.95;-0.36,362.05"/>
+        <dia:rectangle val="-14.05,358.95;13.885,363.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,359"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.builtin
+#DOGEN masd.wale.kvp.class.simple_name=builtin_header_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=builtin_header
+#DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
+#DOGEN masd.wale.kvp.meta_element=builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14584,7 +14590,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14625,7 +14631,82 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; builtin_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static const std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    a.logical_name().simple(e.name().simple());
+    a.logical_name().qualified(e.name().qualified().dot());
+    a.origin_sha1_hash(e.origin_sha1_hash());
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
