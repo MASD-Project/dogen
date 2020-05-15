@@ -39176,25 +39176,33 @@ int main(int /*argc*/, char* /*argv*/[]) {
         <dia:point val="-14,341"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,340.95;-0.36,344.05"/>
+        <dia:rectangle val="-14.05,340.95;11.19,345.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,341"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates cmakelists for tests.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.build_cmakelists
+#DOGEN masd.wale.kvp.class.simple_name=cmakelists_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=cmakelists
+#DOGEN masd.wale.kvp.meta_element=build_cmakelists
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.physical.part_id=masd.cpp.testing
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_tests_cmakelists#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39233,7 +39241,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -39274,7 +39282,161 @@ int main(int /*argc*/, char* /*argv*/[]) {
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; cmakelists_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void cmakelists_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    using logical::entities::build::cmakelists;
+    const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
+
+    {
+
+        const auto ts(logical::entities::technical_space::cmake);
+        ast.make_decoration_preamble(e, ts);
+        const auto model_name(ast.get_dot_separated_model_name(c.name()));
+        const auto product_name(ast.get_product_name(c.name()));
+#&gt;
+set(name "&lt;#= model_name #&gt;")
+set(lib_target_name ${name}.lib)
+set(tests_binary_name ${name}.&lt;#= c.tests_directory_name() #&gt;)
+set(tests_target_name ${name}.&lt;#= c.tests_directory_name() #&gt;)
+
+set(files "")
+file(GLOB_RECURSE files RELATIVE
+    "${CMAKE_CURRENT_SOURCE_DIR}/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.&lt;#= c.implementation_file_extension() #&gt;")
+
+add_executable(${tests_target_name} ${files})
+
+set_target_properties(${tests_target_name} PROPERTIES
+&lt;#+
+        if (ast.is_cpp_standard_98()) {
+#&gt;
+    CXX_STANDARD 98
+&lt;#+
+        }
+#&gt;
+    OUTPUT_NAME ${tests_binary_name})
+
+&lt;#+
+        if (ast.is_cpp_standard_98()) {
+#&gt;
+target_compile_options(${tests_target_name} PRIVATE
+    $&lt;$&lt;OR:$&lt;CXX_COMPILER_ID:Clang&gt;,$&lt;CXX_COMPILER_ID:AppleClang&gt;,$&lt;CXX_COMPILER_ID:GNU&gt;&gt;:
+    -Wno-c99-extensions&gt;)
+&lt;#+
+        }
+#&gt;
+
+target_link_libraries(${tests_target_name}
+    ${lib_target_name}
+    ${CMAKE_REQUIRED_LIBRARIES}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${Boost_LIBRARIES})
+
+set(command $&lt;TARGET_FILE:${tests_target_name}&gt; ${boost_test_parameters})
+
+add_custom_target(run_${tests_target_name}
+    COMMENT "Running ${tests_target_name}" VERBATIM
+    COMMAND ${command}
+    WORKING_DIRECTORY ${stage_bin_dir}
+    DEPENDS ${tests_target_name})
+
+add_dependencies(run_all_tests run_${tests_target_name})
+
+if(WITH_BENCHMARKS)
+    set(benchmark_file
+        ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)
+    add_custom_target(benchmark_${tests_target_name}
+        COMMENT "Benchmarking testing ${tests_target_name}" VERBATIM
+        COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}
+        ${command}
+        WORKING_DIRECTORY ${stage_bin_dir}
+        DEPENDS ${tests_target_name})
+
+    add_dependencies(benchmark_all benchmark_${tests_target_name})
+endif()
+
+add_boost_tests(${tests_binary_name} ${files})
+
+install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>

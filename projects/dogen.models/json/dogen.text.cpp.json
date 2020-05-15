@@ -2555,10 +2555,32 @@
     },
     {
       "name": "transforms::tests::cmakelists_transform",
+      "documentation": "Generates cmakelists for tests.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.build_cmakelists",
+        "masd.wale.kvp.class.simple_name": "cmakelists_transform",
+        "masd.wale.kvp.archetype.simple_name": "cmakelists",
+        "masd.wale.kvp.meta_element": "build_cmakelists",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.cpp.testing",
+        "masd.wale.kvp.locator_function": "make_full_path_for_tests_cmakelists"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/build/cmakelists.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/tests/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> cmakelists_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid cmakelists_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    using logical::entities::build::cmakelists;\n    const auto& c(ast.as<cmakelists>(e));\n\n    {\n\n        const auto ts(logical::entities::technical_space::cmake);\n        ast.make_decoration_preamble(e, ts);\n        const auto model_name(ast.get_dot_separated_model_name(c.name()));\n        const auto product_name(ast.get_product_name(c.name()));\n#>\nset(name \"<#= model_name #>\")\nset(lib_target_name ${name}.lib)\nset(tests_binary_name ${name}.<#= c.tests_directory_name() #>)\nset(tests_target_name ${name}.<#= c.tests_directory_name() #>)\n\nset(files \"\")\nfile(GLOB_RECURSE files RELATIVE\n    \"${CMAKE_CURRENT_SOURCE_DIR}/\"\n    \"${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>\")\n\nadd_executable(${tests_target_name} ${files})\n\nset_target_properties(${tests_target_name} PROPERTIES\n<#+\n        if (ast.is_cpp_standard_98()) {\n#>\n    CXX_STANDARD 98\n<#+\n        }\n#>\n    OUTPUT_NAME ${tests_binary_name})\n\n<#+\n        if (ast.is_cpp_standard_98()) {\n#>\ntarget_compile_options(${tests_target_name} PRIVATE\n    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:\n    -Wno-c99-extensions>)\n<#+\n        }\n#>\n\ntarget_link_libraries(${tests_target_name}\n    ${lib_target_name}\n    ${CMAKE_REQUIRED_LIBRARIES}\n    ${CMAKE_THREAD_LIBS_INIT}\n    ${Boost_LIBRARIES})\n\nset(command $<TARGET_FILE:${tests_target_name}> ${boost_test_parameters})\n\nadd_custom_target(run_${tests_target_name}\n    COMMENT \"Running ${tests_target_name}\" VERBATIM\n    COMMAND ${command}\n    WORKING_DIRECTORY ${stage_bin_dir}\n    DEPENDS ${tests_target_name})\n\nadd_dependencies(run_all_tests run_${tests_target_name})\n\nif(WITH_BENCHMARKS)\n    set(benchmark_file\n        ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)\n    add_custom_target(benchmark_${tests_target_name}\n        COMMENT \"Benchmarking testing ${tests_target_name}\" VERBATIM\n        COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}\n        ${command}\n        WORKING_DIRECTORY ${stage_bin_dir}\n        DEPENDS ${tests_target_name})\n\n    add_dependencies(benchmark_all benchmark_${tests_target_name})\nendif()\n\nadd_boost_tests(${tests_binary_name} ${files})\n\ninstall(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "CMakeLists",
