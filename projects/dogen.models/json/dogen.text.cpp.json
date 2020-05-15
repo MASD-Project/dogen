@@ -2573,10 +2573,32 @@
     },
     {
       "name": "transforms::odb::primitive_odb_options_transform",
+      "documentation": "Generates object options for odb.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.primitive",
+        "masd.wale.kvp.class.simple_name": "primitive_odb_options_transform",
+        "masd.wale.kvp.archetype.simple_name": "primitive_odb_options",
+        "masd.wale.kvp.meta_element": "primitive",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.cpp.implementation",
+        "masd.wale.kvp.locator_function": "make_full_path_for_odb_options"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> primitive_odb_options_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid primitive_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    {\n        const auto ts(logical::entities::technical_space::odb);\n        ast.make_decoration_preamble(e, ts);\n\n        if (!p.orm_properties()) {\n#>\n\n#\n# class has no ODB options defined.\n#\n<#+\n        } else {\n            const auto ooo(p.orm_properties()->odb_options());\n#>\n# epilogue\n--odb-epilogue <#= ooo.epilogue() #>\n\n<#+\n            if (!ooo.include_regexes().empty()) {\n#>\n# regexes\n<#+\n                for (const auto& regex : ooo.include_regexes())\n#>\n--include-regex <#= regex #>\n\n# debug regexes\n# --include-regex-trace\n\n# make the header guards similar to dogen ones\n--guard-prefix <#= ooo.header_guard_prefix() #>\n<#+\n            }\n        }\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::types::main_transform",
