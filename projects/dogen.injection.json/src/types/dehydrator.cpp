@@ -38,6 +38,7 @@ const std::string invalid_enumerator("invalid");
 namespace dogen::injection::json {
 
 std::string dehydrator::tidy_up_string(std::string s) {
+    boost::replace_all(s, "\\", "\\\\");
     boost::replace_all(s, "\r", "\\r");
     boost::replace_all(s, "\n", "\\n");
     boost::replace_all(s, "\"", "\\\"");
