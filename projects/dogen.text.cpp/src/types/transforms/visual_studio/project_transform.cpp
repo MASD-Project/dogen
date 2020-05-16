@@ -33,7 +33,6 @@
 #include "dogen.text.cpp/types/transforms/visual_studio/project_transform.hpp"
 
 namespace dogen::text::cpp::transforms::visual_studio {
-
 physical::entities::archetype project_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -51,8 +50,7 @@ physical::entities::archetype project_transform::archetype() const {
     return static_archetype();
 }
 
-inclusion_support_types
-project_transform::inclusion_support_type() const {
+inclusion_support_types project_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
@@ -60,17 +58,15 @@ boost::filesystem::path project_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    using namespace dogen::text::cpp::transforms;
     static logger lg(logger_factory(archetype().meta_name().qualified()));
-
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path project_transform::
-full_path(const formattables::locator& l, const logical::entities::name& n) const {
+boost::filesystem::path project_transform::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().qualified());
 }
 
