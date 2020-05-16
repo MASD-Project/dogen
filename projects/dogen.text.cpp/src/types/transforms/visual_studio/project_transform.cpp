@@ -71,9 +71,7 @@ boost::filesystem::path project_transform::inclusion_path(
 
 boost::filesystem::path project_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
-    auto temp(n);
-    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".vcxproj");
-    return l.make_full_path_for_project(temp, archetype().meta_name().qualified());
+    return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> project_transform::inclusion_dependencies(

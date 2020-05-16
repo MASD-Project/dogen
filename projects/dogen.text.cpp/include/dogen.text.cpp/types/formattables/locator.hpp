@@ -326,6 +326,12 @@ public:
     boost::filesystem::path make_full_path_for_solution(
         const logical::entities::name& n, const std::string& archetype) const;
 
+    boost::filesystem::path make_full_path_for_visual_studio_project(
+        const logical::entities::name& n, const std::string& archetype) const;
+
+    boost::filesystem::path make_full_path_for_visual_studio_solution(
+        const logical::entities::name& n, const std::string& archetype) const;
+
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;
 
