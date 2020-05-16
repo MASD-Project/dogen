@@ -38199,7 +38199,7 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:point val="21,306"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,304.95;86.05,324.05"/>
+        <dia:rectangle val="20.95,304.15;86.05,325.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38211,7 +38211,7 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:real val="65"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18"/>
+        <dia:real val="19"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -38220,13 +38220,13 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#f2f2f2"/>
+        <dia:color val="#c6f0d8"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>
@@ -38625,25 +38625,33 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:point val="24,313"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.95,312.95;37.64,316.05"/>
+        <dia:rectangle val="23.95,312.95;49.19,317.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="24,313"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="25.140000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#solution_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates visual studio solutions..
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visual_studio_solution
+#DOGEN masd.wale.kvp.class.simple_name=solution_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=solution
+#DOGEN masd.wale.kvp.meta_element=visual_studio_solution
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.physical.part_id=masd.cpp.project
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38682,7 +38690,7 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -38723,7 +38731,119 @@ class &lt;#= p.name().simple() #&gt;;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::visual_studio #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/solution_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; solution_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const logical::entities::element&amp; /*e*/) const {
+    static std::list&lt;std::string&gt; r;
+    return r;
+}
+
+void solution_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    using logical::entities::visual_studio::solution;
+    const auto&amp; sln(ast.as&lt;solution&gt;(e));
+#&gt;
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+&lt;#+
+    for (const auto&amp; ppb : sln.project_persistence_blocks()) {
+#&gt;
+Project("{&lt;#= ppb.type_guid() #&gt;}") = "&lt;#= ppb.name() #&gt;", "&lt;#= ppb.name() #&gt;.csproj", "{&lt;#= ppb.guid() #&gt;}"
+EndProject
+&lt;#+
+    }
+#&gt;
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+&lt;#+
+    for (const auto&amp; ppb : sln.project_persistence_blocks()) {
+#&gt;
+        {&lt;#= ppb.guid() #&gt;}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {&lt;#= ppb.guid() #&gt;}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {&lt;#= ppb.guid() #&gt;}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {&lt;#= ppb.guid() #&gt;}.Release|Any CPU.Build.0 = Release|Any CPU
+&lt;#+
+    }
+#&gt;
+    EndGlobalSection
+    GlobalSection(MonoDevelopProperties) = preSolution
+        StartupItem = CppModel.vcxroj
+    EndGlobalSection
+EndGlobal
+&lt;#+
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -40023,13 +40143,13 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O285">
       <dia:attribute name="obj_pos">
-        <dia:point val="24,318"/>
+        <dia:point val="24,319"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.95,317.95;37.64,321.05"/>
+        <dia:rectangle val="23.95,318.95;37.64,322.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="24,318"/>
+        <dia:point val="24,319"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
