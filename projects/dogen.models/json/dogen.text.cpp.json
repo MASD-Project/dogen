@@ -2728,10 +2728,32 @@
     },
     {
       "name": "transforms::visual_studio::msbuild_targets_transform",
+      "documentation": "Generates msbuild targets.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.visual_studio_msbuild_targets",
+        "masd.wale.kvp.class.simple_name": "msbuild_targets_transform",
+        "masd.wale.kvp.archetype.simple_name": "msbuild_targets",
+        "masd.wale.kvp.meta_element": "visual_studio_msbuild_targets",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.cpp.project",
+        "masd.wale.kvp.locator_function": "make_full_path_for_msbuild_targets"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::visual_studio #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/visual_studio/msbuild_targets.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/visual_studio/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> msbuild_targets_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid msbuild_targets_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    using logical::entities::visual_studio::msbuild_targets;\n    const auto& c(ast.as<msbuild_targets>(e));\n\n    {\n        const auto ts(logical::entities::technical_space::xml);\n        ast.make_decoration_preamble(e, ts);\n        const auto model_name(ast.get_identifiable_model_name(c.name()));\n        const auto product_name(ast.get_product_name(c.name()));\n        const auto targets(c.odb_targets());\n#>\n<Project DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\" ToolsVersion=\"4.0\">\n\n    <!--[\n        .NAME: odb.targets\n\n        .SYNOPSIS:\n            Generates all of the ODB files for this project.\n\n        .DESCRIPTION:\n            Calls the ODB compiler against each of the files in this Dogen model that require\n            ODB compilation. Also moves the generated files to their correct location.\n\n        .INPUTS:\n\n        .OUTPUTS:\n    ]-->\n    <Target Name=\"<#= targets.main_target_name() #>\"\n<#+\n            utility::formatters::sequence_formatter sf(targets.targets().size());\n            sf.prefix_configuration().first(\"          DependsOnTargets=\\\"\")\n                                     .not_first(\"                            \");\n            sf.postfix_configuration().last(\"\\\">\");\n            sf.element_separator(\";\");\n            for (const auto& target : targets.targets()) {\n#>\n<#= sf.prefix() #><#= target.name() #><#= sf.postfix() #>\n<#+\n                sf.next();\n            }\n#>\n        <Message Importance=\"high\" Text=\"ODB <#= model_name #> \"/>\n    </Target>\n\n<#+\n            for (const auto& target : targets.targets()) {\n#>\n    <Target Name=\"<#= target.name() #>\">\n        <Message Importance=\"high\" Text=\"<#= target.comment() #>\"/>\n        <Exec WorkingDirectory=\"$(OutputDirectory)\" Command=\"&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)<#= targets.common_odb_options() #> --options-file $(MSBuildThisFileDirectory)<#= target.object_odb_options() #> --output-dir $(MSBuildThisFileDirectory)<#= target.output_directory() #> $(MSBuildThisFileDirectory)<#= target.types_file() #>\" />\n<#+\n                for (const auto& pair : target.move_parameters()) {\n#>\n        <Move\n            SourceFiles=\"$(MSBuildThisFileDirectory)<#= pair.first #>\"\n            DestinationFolder=\"$(MSBuildThisFileDirectory)<#= pair.second #>\" />\n<#+\n                }\n#>\n    </Target>\n<#+\n            }\n#>\n</Project>\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::build",
