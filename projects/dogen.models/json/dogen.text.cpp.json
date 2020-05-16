@@ -1763,10 +1763,24 @@
     },
     {
       "name": "transforms::io::primitive_implementation_transform",
+      "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::primitive_implementation_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/hash/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string>\nprimitive_implementation_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    using logical::entities::structural::primitive;\n    const auto& p(assistant::as<primitive>(e));\n    auto builder(f.make());\n    const auto ph_fn(traits::primitive_header_archetype_qn());\n    builder.add(p.name(), ph_fn);\n\n    const auto io_carch(transforms::io::traits::canonical_archetype());\n    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().qualified());\n    const bool io_enabled(builder.is_enabled(p.name(), self_fn));\n\n    if (!io_enabled)\n        return builder.build();\n\n    const auto os(inclusion_constants::std::ostream());\n    builder.add(os);\n    builder.add(p.value_attribute().parsed_type().current(), io_carch);\n\n    return builder.build();\n}\n\nvoid primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        ast.add_helper_methods(p.name().qualified().dot());\n\n        {\n            const auto ns(ast.make_namespaces(p.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const auto sn(p.name().simple());\n            const auto qn(ast.get_qualified_name(p.name()));\n            const auto attr(p.value_attribute());\n#>\n\nstd::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {\n<#+\n            if (ast.requires_stream_manipulators()) {\n#>\n    boost::io::ios_flags_saver ifs(s);\n    s.setf(std::ios_base::boolalpha);\n    s.setf(std::ios::fixed, std::ios::floatfield);\n    s.precision(6);\n    s.setf(std::ios::showpoint);\n<#+\n            }\n\n            const std::string variable_name = \"v.\" + attr.getter_setter_name() + \"()\";\n#>\n\n    s << \" { \"\n      << \"\\\"__type__\\\": \" << \"\\\"<#= qn #>\\\"\" << \", \"\n      << \"\\\"<#= attr.name().simple() #>\\\": \" << <#= ast.streaming_for_type(attr.parsed_type().current(), variable_name) #>\n      << \" }\";\n\n    return s;\n}\n\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::test_data::primitive_implementation_transform",
