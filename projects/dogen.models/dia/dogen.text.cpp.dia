@@ -35185,22 +35185,22 @@ register_entities(variability::helpers::registrar&amp; rg) {
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O249">
       <dia:attribute name="obj_pos">
-        <dia:point val="21,331"/>
+        <dia:point val="21,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,329.95;85.05,344.05"/>
+        <dia:rectangle val="20.95,324.15;85.05,347.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="21,331"/>
+        <dia:point val="21,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="64"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13"/>
+        <dia:real val="21"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -35209,13 +35209,13 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#f2f2f2"/>
+        <dia:color val="#c6f0d8"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#lexical_cast#</dia:string>
@@ -35224,16 +35224,16 @@ register_entities(variability::helpers::registrar&amp; rg) {
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="23,333"/>
+        <dia:point val="23,328"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,332.95;41.275,337.15"/>
+        <dia:rectangle val="22.95,327.95;41.275,332.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="23,333"/>
+        <dia:point val="23,328"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.225000000000001"/>
@@ -35265,7 +35265,7 @@ string.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="23.35,334.244"/>
+            <dia:point val="23.35,329.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -35279,13 +35279,13 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
-        <dia:point val="49,333"/>
+        <dia:point val="49,328"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.95,332.95;61.87,336.05"/>
+        <dia:rectangle val="48.95,327.95;61.87,331.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="49,333"/>
+        <dia:point val="49,328"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -35390,13 +35390,13 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,333"/>
+        <dia:point val="66,328"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,332.95;78.87,336.05"/>
+        <dia:rectangle val="65.95,327.95;78.87,331.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,333"/>
+        <dia:point val="66,328"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -35501,28 +35501,28 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O253">
       <dia:attribute name="obj_pos">
-        <dia:point val="23,339"/>
+        <dia:point val="23,334"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,338.95;36.64,342.05"/>
+        <dia:rectangle val="22.95,333.95;50.885,338.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="23,339"/>
+        <dia:point val="23,334"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for enumerations.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35561,7 +35561,7 @@ string.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -35602,7 +35602,160 @@ string.
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::lexical_cast #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; enum_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    auto builder(f.make());
+
+    const auto eh_fn(types::traits::enum_header_archetype_qn());
+    builder.add(e.name(), eh_fn);
+    builder.add(inclusion_constants::boost::lexical_cast());
+
+    return builder.build();
+}
+
+void enum_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(enm));
+        const auto qn(ast.get_qualified_name(enm.name()));
+        const auto sn(enm.name().simple());
+#&gt;
+
+namespace boost {
+
+template&lt;&gt;
+inline std::string lexical_cast(const &lt;#= qn #&gt;&amp; v) {
+&lt;#+
+        if (!ast.is_cpp_standard_98()) {
+#&gt;
+    using &lt;#= qn #&gt;;
+
+&lt;#+
+        }
+#&gt;
+    switch (v) {
+&lt;#+
+        for (const auto&amp; enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (ast.is_cpp_standard_98())
+                enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+#&gt;
+    case &lt;#= enu_qn #&gt;:
+        return "&lt;#= sn + "::" + enu_sn #&gt;";
+&lt;#+
+        }
+#&gt;
+    default:
+        throw boost::bad_lexical_cast();
+    }
+}
+
+template&lt;&gt;
+inline &lt;#= qn #&gt; lexical_cast(const std::string &amp; s) {
+&lt;#+
+        if (!ast.is_cpp_standard_98()) {
+#&gt;
+    using &lt;#= qn #&gt;;
+
+&lt;#+
+        }
+
+        for (const auto&amp; enu : enm.enumerators()) {
+           const auto enu_sn(enu.name().simple());
+           std::string enu_qn;
+           if (ast.is_cpp_standard_98())
+               enu_qn = ast.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+           else
+               enu_qn = sn + "::" + enu_sn;
+#&gt;
+    if (s == "&lt;#= enu_sn #&gt;" || s == "&lt;#= sn + "::" + enu_sn #&gt;")
+        return &lt;#= enu_qn #&gt;;
+&lt;#+
+        }
+#&gt;
+    throw boost::bad_lexical_cast();
+}
+
+}
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>

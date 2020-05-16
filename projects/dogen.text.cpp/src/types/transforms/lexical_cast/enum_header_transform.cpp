@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -28,10 +29,10 @@
 #include "dogen.text.cpp/types/transforms/lexical_cast/traits.hpp"
 #include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
+#include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::lexical_cast {
-
 physical::entities::archetype enum_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
