@@ -334,10 +334,24 @@
     },
     {
       "name": "transforms::io::enum_header_transform",
+      "documentation": "Generates header files for enumerations.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::enumeration_header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/enumeration.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/io/enum_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> enum_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    auto builder(f.make());\n\n    builder.add(inclusion_constants::std::iosfwd());\n\n    const auto eh_fn(types::traits::enum_header_archetype_qn());\n    builder.add(e.name(), eh_fn);\n    return builder.build();\n}\n\nvoid enum_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& ye(ast.as<logical::entities::structural::enumeration>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto ns(ast.make_namespaces(ye.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nstd::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);\n\n<#+\n         } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::io::enum_implementation_transform",
