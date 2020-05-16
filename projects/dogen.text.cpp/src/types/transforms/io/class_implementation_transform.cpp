@@ -37,7 +37,6 @@
 #include "dogen.text.cpp/types/transforms/io/class_implementation_transform.hpp"
 
 namespace dogen::text::cpp::transforms::io {
-
 physical::entities::archetype class_implementation_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
