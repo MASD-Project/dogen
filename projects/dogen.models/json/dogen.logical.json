@@ -4251,6 +4251,14 @@
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "major_technical_space",
+          "type": "masd::variability::text",
+          "documentation": "Major technical space to which this element belongs to.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },

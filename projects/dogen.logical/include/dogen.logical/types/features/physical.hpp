@@ -42,6 +42,7 @@ public:
         variability::entities::feature backend_name;
         variability::entities::feature part_id;
         variability::entities::feature logical_meta_element_id;
+        variability::entities::feature major_technical_space;
     };
 
     static feature_group
@@ -52,6 +53,7 @@ public:
         std::string backend_name;
         std::string part_id;
         std::string logical_meta_element_id;
+        std::string major_technical_space;
     };
 
     static static_configuration make_static_configuration(
