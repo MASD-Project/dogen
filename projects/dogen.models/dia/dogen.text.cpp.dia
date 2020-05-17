@@ -9623,7 +9623,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="143.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.288,180.429;147.012,184.312"/>
+        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21940,7 +21940,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="161.335,90.6503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.585,89.9003;177.877,93.055"/>
+        <dia:rectangle val="160.585,89.9003;177.878,93.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23181,7 +23181,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="-44,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.75,86.35;-37.2737,90.8"/>
+        <dia:rectangle val="-44.75,86.35;-37.2738,90.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23395,7 +23395,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="183.15,83.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.627,82.65;183.9,87.8"/>
+        <dia:rectangle val="177.628,82.65;183.9,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28092,7 +28092,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="45.0375,365.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.258,365.435;45.1029,367.388"/>
+        <dia:rectangle val="41.2581,365.435;45.1029,367.388"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45777,11 +45777,20 @@ std::list&lt;dogen::variability::entities::feature&gt;
 
 std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
-    const logical::entities::element&amp; /*e*/) const {
+    const logical::entities::element&amp; e) const {
+    const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
+
     static std::list&lt;std::string&gt; r;
 
     auto builder(f.make());
-    builder.add_as_user("dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
+    using logical::entities::technical_space;
+    if (arch.major_technical_space() == technical_space::cpp) {
+        builder.add_as_user(
+            "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
+    } else if (arch.major_technical_space() == technical_space::csharp) {
+        builder.add_as_user(
+            "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
+    }
 
     return builder.build();
 }
@@ -45804,6 +45813,10 @@ public:
     physical::entities::archetype archetype() const override;
 
 public:
+&lt;#+
+            using logical::entities::technical_space;
+            if (o.major_technical_space() == technical_space::cpp) {
+#&gt;
     std::list&lt;std::string&gt; inclusion_dependencies(
         const formattables::dependencies_builder_factory&amp; f,
         const logical::entities::element&amp; e) const override;
@@ -45817,6 +45830,17 @@ public:
     boost::filesystem::path full_path(
         const formattables::locator&amp; l,
         const logical::entities::name&amp; n) const override;
+&lt;#+
+            } else if (o.major_technical_space() == technical_space::csharp) {
+#&gt;
+    std::list&lt;std::string&gt; inclusion_dependencies(
+        const logical::entities::element&amp; e) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator&amp; l, const logical::entities::name&amp; n) const override;
+&lt;#+
+            }
+#&gt;
 
 public:
     void apply(const context&amp; ctx, const logical::entities::element&amp; e,
@@ -45832,8 +45856,7 @@ public:
     ast.update_artefact();
 }
 
-#&gt;
-#</dia:string>
+#&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -48095,7 +48118,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="-11.6225,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.4725,215.35;13.7375,218.6"/>
+        <dia:rectangle val="-12.4725,215.35;13.7375,218.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48342,7 +48365,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="42.9175,215.45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.0675,215.4;45.775,218.6"/>
+        <dia:rectangle val="42.0675,215.4;45.775,218.001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

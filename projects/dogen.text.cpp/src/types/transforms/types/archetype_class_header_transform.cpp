@@ -60,11 +60,20 @@ boost::filesystem::path archetype_class_header_transform::full_path(
 
 std::list<std::string> archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::entities::element& /*e*/) const {
+    const logical::entities::element& e) const {
+    const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
+
     static std::list<std::string> r;
 
     auto builder(f.make());
-    builder.add_as_user("dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
+    using logical::entities::technical_space;
+    if (arch.major_technical_space() == technical_space::cpp) {
+        builder.add_as_user(
+            "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
+    } else if (arch.major_technical_space() == technical_space::csharp) {
+        builder.add_as_user(
+            "dogen.text.csharp/types/transforms/model_to_text_transform.hpp");
+    }
 
     return builder.build();
 }
@@ -86,6 +95,8 @@ ast.stream() << "    physical::entities::archetype static_archetype() const;" <<
 ast.stream() << "    physical::entities::archetype archetype() const override;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
+            using logical::entities::technical_space;
+            if (o.major_technical_space() == technical_space::cpp) {
 ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
 ast.stream() << "        const formattables::dependencies_builder_factory& f," << std::endl;
 ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
@@ -99,6 +110,13 @@ ast.stream() << std::endl;
 ast.stream() << "    boost::filesystem::path full_path(" << std::endl;
 ast.stream() << "        const formattables::locator& l," << std::endl;
 ast.stream() << "        const logical::entities::name& n) const override;" << std::endl;
+            } else if (o.major_technical_space() == technical_space::csharp) {
+ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
+ast.stream() << "        const logical::entities::element& e) const override;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    boost::filesystem::path full_path(" << std::endl;
+ast.stream() << "        const formattables::locator& l, const logical::entities::name& n) const override;" << std::endl;
+            }
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    void apply(const context& ctx, const logical::entities::element& e," << std::endl;
