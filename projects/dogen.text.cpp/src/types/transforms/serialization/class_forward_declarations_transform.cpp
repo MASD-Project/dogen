@@ -30,7 +30,6 @@
 #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
-
 physical::entities::archetype class_forward_declarations_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
