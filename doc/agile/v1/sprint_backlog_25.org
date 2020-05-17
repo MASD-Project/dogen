@@ -13,30 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-16 Sat 22:11]
+#+CAPTION: Clock summary at [2020-05-17 Sun 11:07]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *42:11* |       |       | 100.0 |
+| *Total time*                                          | *43:36* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 42:11   |       |       | 100.0 |
-| Active                                                |         | 42:11 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  14.1 |
-| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.9 |
-| Sprint and product backlog grooming                   |         |       |  1:00 |   2.4 |
-| Check name of model for variability transform         |         |       |  0:19 |   0.8 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.7 |
-| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   1.1 |
-| Remove stitch template builder                        |         |       |  0:09 |   0.4 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.9 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   3.9 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.7 |
-| Move decoration transform into logical model          |         |       |  5:33 |  13.2 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   8.3 |
+| Stories                                               | 43:36   |       |       | 100.0 |
+| Active                                                |         | 43:36 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  13.6 |
+| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.8 |
+| Sprint and product backlog grooming                   |         |       |  1:00 |   2.3 |
+| Nightly nursing                                       |         |       |  0:11 |   0.4 |
+| Check name of model for variability transform         |         |       |  0:19 |   0.7 |
+| Analysis on templating and logical model              |         |       |  1:09 |   2.6 |
+| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   1.0 |
+| Remove stitch template builder                        |         |       |  0:09 |   0.3 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   3.7 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   3.8 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   2.6 |
+| Move decoration transform into logical model          |         |       |  5:33 |  12.7 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   8.1 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   2.4 |
-| Profiles do not support collection types              |         |       |  4:13 |  10.0 |
-| Promote all formatters to archetypes                  |         |       | 12:07 |  28.7 |
-| Create an encoder for org-mode                        |         |       |  1:31 |   3.6 |
+| Profiles do not support collection types              |         |       |  4:13 |   9.7 |
+| Promote all formatters to archetypes                  |         |       | 13:21 |  30.6 |
+| Create an encoder for org-mode                        |         |       |  1:31 |   3.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -608,6 +609,15 @@ Time spent creating the demo and presentation.
 
 Updates to sprint and product backlog.
 
+*** STARTED Nightly nursing                                           :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-17 Sun 09:41]--[2020-05-17 Sun 09:52] =>  0:11
+    :END:
+
+Time spent fixing issues with nightly builds, daily checks etc.
+
+- reached maximum builds on CDash.
+
 *** COMPLETED Check name of model for variability transform           :story:
     CLOSED: [2020-05-07 Thu 22:17]
     :LOGBOOK:
@@ -1093,6 +1103,7 @@ finding the feature. We also have to visit the value first.
 
 *** STARTED Promote all formatters to archetypes                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-17 Sun 09:53]--[2020-05-17 Sun 11:07] =>  1:14
     CLOCK: [2020-05-16 Sat 21:48]--[2020-05-16 Sat 22:09] =>  0:21
     CLOCK: [2020-05-16 Sat 17:29]--[2020-05-16 Sat 18:23] =>  0:54
     CLOCK: [2020-05-16 Sat 12:45]--[2020-05-16 Sat 13:03] =>  0:18
