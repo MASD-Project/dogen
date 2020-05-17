@@ -41053,25 +41053,30 @@ static void register_types(Archive&amp; ar);
         <dia:point val="125,367"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="124.95,366.95;144.373,370.05"/>
+        <dia:rectangle val="124.95,366.95;150.96,371.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="125,367"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.322499999999998"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#type_registrar_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for feature bundles.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
+#DOGEN masd.wale.kvp.class.simple_name=type_registrar_implementation_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_implementation
+#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41151,7 +41156,164 @@ static void register_types(Archive&amp; ar);
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; type_registrar_implementation_transform::
+inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    const auto&amp; rg(assistant::as&lt;logical::entities::serialization::type_registrar&gt;(e));
+    auto builder(f.make());
+
+    const auto rh_fn(traits::type_registrar_header_archetype_qn());
+    builder.add(rg.name(), rh_fn);
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    // XML serialisation
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto ch_fn(traits::class_header_archetype_qn());
+    builder.add(rg.leaves(), ch_fn);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(rg.registrar_dependencies(), carch);
+    return builder.build();
+}
+
+void type_registrar_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+   physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; rg(ast.as&lt;logical::entities::serialization::type_registrar&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(rg.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto deps(rg.registrar_dependencies());
+            const auto carch(traits::canonical_archetype());
+            const auto leaves(ast.names_with_enabled_archetype(carch, rg.leaves()));
+            const bool has_types(!deps.empty() || !leaves.empty());
+            const std::string arg_name(has_types ? " ar" : "");
+            const auto sn(e.name().simple());
+#&gt;
+
+template&lt;typename Archive&gt;
+void &lt;#= sn #&gt;::register_types(Archive&amp;&lt;#= arg_name #&gt;) {
+&lt;#+
+            if (has_types) {
+                for (const auto&amp; d : deps) {
+                    const auto dqn(ast.get_qualified_name(d));
+#&gt;
+    &lt;#= dqn #&gt;::register_types(ar);
+&lt;#+
+                }
+
+                if (!deps.empty() &amp;&amp; !leaves.empty())
+#&gt;
+
+&lt;#+
+                for (const auto&amp; l : leaves) {
+                    const auto lqn(ast.get_qualified_name(l));
+#&gt;
+    ar.template register_type&lt;&lt;#= lqn #&gt;&gt;();
+&lt;#+
+                }
+            }
+#&gt;
+}
+
+template void &lt;#= sn #&gt;::register_types(boost::archive::polymorphic_oarchive&amp;&lt;#= arg_name #&gt;);
+template void &lt;#= sn #&gt;::register_types(boost::archive::polymorphic_iarchive&amp;&lt;#= arg_name #&gt;);
+
+template void &lt;#= sn #&gt;::register_types(boost::archive::text_oarchive&amp;&lt;#= arg_name #&gt;);
+template void &lt;#= sn #&gt;::register_types(boost::archive::text_iarchive&amp;&lt;#= arg_name #&gt;);
+
+template void &lt;#= sn #&gt;::register_types(boost::archive::binary_oarchive&amp;&lt;#= arg_name #&gt;);
+template void &lt;#= sn #&gt;::register_types(boost::archive::binary_iarchive&amp;&lt;#= arg_name #&gt;);
+
+template void &lt;#= sn #&gt;::register_types(boost::archive::xml_oarchive&amp;&lt;#= arg_name #&gt;);
+template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&lt;#= arg_name #&gt;);
+
+&lt;#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+}
+
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
