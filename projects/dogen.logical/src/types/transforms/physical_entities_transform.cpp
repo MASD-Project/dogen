@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
@@ -79,10 +80,22 @@ process_backends(const context& ctx, entities::model& m) {
         b.backend_name(scfg.backend_name);
         b.kernel_name(kernel_name);
 
+        /*
+         * Generate the ID for this backend.
+         */
         std::ostringstream os;
         os << kernel_name << separator << b.backend_name();
         b.id(os.str());
         BOOST_LOG_SEV(lg, debug) << "ID: " << b.id();
+
+        /*
+         * Read the technical space.
+         */
+        using boost::lexical_cast;
+        using entities::technical_space;
+        const auto mts(scfg.major_technical_space);
+        BOOST_LOG_SEV(lg, debug) << "Major technical space: " << mts;
+        b.major_technical_space(lexical_cast<technical_space>(mts));
 
         bool found(false);
         for (const auto& qn : b.contains()) {
@@ -97,6 +110,7 @@ process_backends(const context& ctx, entities::model& m) {
                 auto& fct(*i->second);
                 b.facets().push_back(fct.name());
                 fct.backend_name(b.backend_name());
+                fct.major_technical_space(b.major_technical_space());
                 found = true;
                 BOOST_LOG_SEV(lg, debug) << "Contains facet: "
                                          << fct.name().qualified().dot();
@@ -118,6 +132,7 @@ process_backends(const context& ctx, entities::model& m) {
                 auto& part(*j->second);
                 b.parts().push_back(part.name());
                 part.backend_name(b.backend_name());
+                part.major_technical_space(b.major_technical_space());
                 found = true;
                 BOOST_LOG_SEV(lg, debug) << "Contains part: "
                                          << part.name().qualified().dot();
@@ -139,6 +154,7 @@ process_backends(const context& ctx, entities::model& m) {
 
                 auto& ak(*k->second);
                 b.archetype_kinds().push_back(ak.name());
+                ak.major_technical_space(b.major_technical_space());
                 ak.backend_name(b.backend_name());
                 BOOST_LOG_SEV(lg, debug) << "Contains archetype kind: "
                                          << ak.name().qualified().dot();
@@ -211,6 +227,7 @@ void physical_entities_transform::process_facets(entities::model& m) {
                 fct.archetypes().push_back(arch.name());
                 arch.facet_name(fct.name().simple());
                 arch.backend_name(fct.backend_name());
+                arch.major_technical_space(fct.major_technical_space());
                 BOOST_LOG_SEV(lg, debug) << "Contains archetype: "
                                          << arch.name().qualified().dot();
             }
