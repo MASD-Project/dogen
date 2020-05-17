@@ -5079,7 +5079,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:point val="89,276"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,274.95;153.05,328.05"/>
+        <dia:rectangle val="88.95,274.15;153.05,328.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5100,13 +5100,13 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#f2f2f2"/>
+        <dia:color val="#c6f0d8"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -5118,25 +5118,25 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:point val="92,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.95,283.95;105.64,287.05"/>
+        <dia:rectangle val="91.95,283.95;119.885,288.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="92,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.59"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates header files for objects.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5175,7 +5175,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5216,7 +5216,133 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::class_header_archetype_qn());
+    return builder.build();
+}
+
+void class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto sn(o.name().simple());
+            const auto qn(ast.get_qualified_name(o.name()));
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+class &lt;#= sn #&gt;_generator {
+&lt;#+
+            if (!o.is_parent()) {
+#&gt;
+public:
+    &lt;#= sn #&gt;_generator();
+
+&lt;#+
+            }
+#&gt;
+public:
+    typedef &lt;#= qn #&gt; result_type;
+
+public:
+&lt;#+
+            if (!o.is_immutable())
+#&gt;
+    static void populate(const unsigned int position, result_type&amp; v);
+&lt;#+
+            if (!o.is_parent()) {
+#&gt;
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+&lt;#+
+            }
+#&gt;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -5226,13 +5352,13 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,285"/>
+        <dia:point val="126,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,284.95;137.22,288.05"/>
+        <dia:rectangle val="125.95,283.95;141.22,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,285"/>
+        <dia:point val="126,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.169999999999998"/>
@@ -5448,13 +5574,13 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,290"/>
+        <dia:point val="126,290"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,289.95;137.495,293.05"/>
+        <dia:rectangle val="125.95,289.95;141.495,293.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,290"/>
+        <dia:point val="126,290"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.444999999999999"/>
@@ -28484,13 +28610,13 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O205">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,296"/>
+        <dia:point val="126,296"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,295.95;135.64,299.05"/>
+        <dia:rectangle val="125.95,295.95;139.64,299.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,296"/>
+        <dia:point val="126,296"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>

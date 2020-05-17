@@ -402,6 +402,9 @@
     {
       "name": "transforms::test_data",
       "documentation": "Formatters for the test_data facet\nof the C++ technical space.\n",
+      "stereotypes": [
+        "masd::physical::facet"
+      ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },
@@ -409,10 +412,24 @@
     },
     {
       "name": "transforms::test_data::class_header_transform",
+      "documentation": "Generates header files for objects.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::object_header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/object.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> class_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    auto builder(f.make());\n    builder.add(e.name(), types::traits::class_header_archetype_qn());\n    return builder.build();\n}\n\nvoid class_header_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& o(ast.as<logical::entities::structural::object>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n            const auto sn(o.name().simple());\n            const auto qn(ast.get_qualified_name(o.name()));\n            const auto ns(ast.make_namespaces(o.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nclass <#= sn #>_generator {\n<#+\n            if (!o.is_parent()) {\n#>\npublic:\n    <#= sn #>_generator();\n\n<#+\n            }\n#>\npublic:\n    typedef <#= qn #> result_type;\n\npublic:\n<#+\n            if (!o.is_immutable())\n#>\n    static void populate(const unsigned int position, result_type& v);\n<#+\n            if (!o.is_parent()) {\n#>\n    static result_type create(const unsigned int position);\n    result_type operator()();\n\nprivate:\n    unsigned int position_;\n<#+\n            }\n#>\npublic:\n    static result_type* create_ptr(const unsigned int position);\n};\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::test_data::class_implementation_transform",
