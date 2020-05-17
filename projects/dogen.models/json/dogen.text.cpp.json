@@ -141,7 +141,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.exception",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
         "masd.wale.kvp.class.simple_name": "exception_header_transform",
         "masd.wale.kvp.archetype.simple_name": "exception_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
@@ -191,7 +190,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.module",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
         "masd.wale.kvp.class.simple_name": "namespace_header_transform",
         "masd.wale.kvp.archetype.simple_name": "namespace_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
@@ -220,7 +218,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.visitor",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation_header.wale",
         "masd.wale.kvp.class.simple_name": "visitor_header_transform",
         "masd.wale.kvp.archetype.simple_name": "visitor_header",
         "masd.wale.kvp.class.inclusion_support_type": "canonical_support",
@@ -2207,7 +2204,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.variability_feature_template_bundle",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation.wale",
         "masd.wale.kvp.class.simple_name": "feature_template_bundle_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "feature_template_bundle_implementation",
         "masd.wale.kvp.meta_element": "variability_feature_template_bundle"
@@ -2263,7 +2259,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.variability_initializer",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation.wale",
         "masd.wale.kvp.class.simple_name": "variability_initializer_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "variability_initializer_implementation",
         "masd.wale.kvp.meta_element": "variability_initializer"
@@ -3325,7 +3320,6 @@
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.variability_feature_bundle",
-        "masd.wale.text_template": "cpp_artefact_transform_implementation.wale",
         "masd.wale.kvp.class.simple_name": "feature_bundle_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "feature_bundle_implementation",
         "masd.wale.kvp.meta_element": "variability_feature_bundle"
