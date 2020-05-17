@@ -1043,10 +1043,24 @@
     },
     {
       "name": "transforms::test_data::builtin_header_transform",
+      "documentation": "Generates header files for builtins.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::builtin_header_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/builtin.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> builtin_header_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static const std::list<std::string> r;\n    return r;\n}\n\nvoid builtin_header_transform::apply(const context& /*ctx*/, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    a.logical_name().simple(e.name().simple());\n    a.logical_name().qualified(e.name().qualified().dot());\n    a.origin_sha1_hash(e.origin_sha1_hash());\n}\n\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation_header"
+        }
+      ]
     },
     {
       "name": "transforms::io::builtin_header_transform",
@@ -1856,10 +1870,24 @@
     },
     {
       "name": "transforms::test_data::primitive_implementation_transform",
+      "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
-        "dogen::cpp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::primitive_implementation_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/inclusion_constants.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> primitive_implementation_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n\n    const auto& p(assistant::as<logical::entities::structural::primitive>(e));\n    auto builder(f.make());\n    builder.add(p.name(), traits::primitive_header_archetype_qn());\n\n    const auto carch(traits::canonical_archetype());\n    builder.add(p.value_attribute().parsed_type().current(), carch);\n\n    return builder.build();\n}\n\nvoid primitive_implementation_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(e));\n\n    const auto sn(p.name().simple());\n    const auto qn(ast.get_qualified_name(p.name()));\n    {\n\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n#>\nnamespace {\n<#+\n        ast.add_helper_methods(p.name().qualified().dot());\n#>\n\n}\n\n<#+\n        {\n            const auto attr(p.value_attribute());\n            const auto ns(ast.make_namespaces(p.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n\n            /*\n             * Default constructor.\n             */\n#>\n\n<#= sn #>_generator::<#= sn #>_generator() : position_(0) { }\n<#+\n            /*\n             * Populate method.\n             */\n            if (!p.is_immutable()) {\n#>\n\nvoid <#= sn #>_generator::\npopulate(const unsigned int position, result_type& v) {\n    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().qualified().identifiable() #>(position + 1));\n}\n<#+\n            }\n\n            /*\n             * Create method.\n             */\n#>\n\n<#= sn #>_generator::result_type\n<#= sn #>_generator::create(const unsigned int position) {\n<#+\n            if (p.is_immutable()) {\n#>\n    return <#= sn #>(create_<#= attr.parsed_type().qualified().identifiable() #>(position + 1));\n<#+\n            } else {\n#>\n    <#= sn #> r;\n    <#= sn #>_generator::populate(position, r);\n    return r;\n<#+\n            }\n#>\n}\n<#+\n            /*\n             * Create method ptr.\n             */\n#>\n\n<#= sn #>_generator::result_type*\n<#= sn #>_generator::create_ptr(const unsigned int position) {\n<#+\n            if (p.is_immutable())\n#>\n    return new <#= sn #>(create(position));\n<#+\n            else {\n#>\n    <#= sn #>* r = new <#= sn #>();\n    <#= sn #>_generator::populate(position, *r);\n    return r;\n<#+\n            }\n#>\n}\n<#+\n            /*\n             * Function operator\n             */\n#>\n\n<#= sn #>_generator::result_type\n<#= sn #>_generator::operator()() {\n    return create(position_++);\n}\n\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "cpp_artefact_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::serialization::primitive_implementation_transform",
