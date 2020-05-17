@@ -50,6 +50,14 @@ const std::string duplicate_part_id("Duplicate part ID: ");
 const std::string missing_part("Part could not be located: ");
 const std::string missing_logical_meta_element(
     "Meta-element name not supplied.");
+const std::string uncontained_archetype(
+    "Archetype must be contained by a backend and a facet. Name: ");
+const std::string uncontained_facet(
+    "Facet must be contained by a backend. Name: ");
+const std::string uncontained_part(
+    "Parts must be contained by a backend. Name: ");
+const std::string uncontained_archetype_kind(
+    "Archetype kind must be contained by a backend. Name: ");
 
 }
 
@@ -57,6 +65,7 @@ namespace dogen::logical::transforms {
 
 void physical_entities_transform::
 process_backends(const context& ctx, entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing backends.";
     using features::physical;
     const auto& pe(m.physical_elements());
     const auto& fm(*ctx.feature_model());
@@ -64,6 +73,7 @@ process_backends(const context& ctx, entities::model& m) {
 
     auto& bs(pe.backends());
     for (auto& pair : bs) {
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << pair.first;
         auto& b(*pair.second);
         const auto scfg(physical::make_static_configuration(fg, b));
         b.backend_name(scfg.backend_name);
@@ -72,6 +82,7 @@ process_backends(const context& ctx, entities::model& m) {
         std::ostringstream os;
         os << kernel_name << separator << b.backend_name();
         b.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << b.id();
 
         bool found(false);
         for (const auto& qn : b.contains()) {
@@ -87,6 +98,8 @@ process_backends(const context& ctx, entities::model& m) {
                 b.facets().push_back(fct.name());
                 fct.backend_name(b.backend_name());
                 found = true;
+                BOOST_LOG_SEV(lg, debug) << "Contains facet: "
+                                         << fct.name().qualified().dot();
             }
 
             /*
@@ -106,6 +119,8 @@ process_backends(const context& ctx, entities::model& m) {
                 b.parts().push_back(part.name());
                 part.backend_name(b.backend_name());
                 found = true;
+                BOOST_LOG_SEV(lg, debug) << "Contains part: "
+                                         << part.name().qualified().dot();
             }
 
             /*
@@ -125,10 +140,16 @@ process_backends(const context& ctx, entities::model& m) {
                 auto& ak(*k->second);
                 b.archetype_kinds().push_back(ak.name());
                 ak.backend_name(b.backend_name());
+                BOOST_LOG_SEV(lg, debug) << "Contains archetype kind: "
+                                         << ak.name().qualified().dot();
             }
 
             /*
-             * Backends cannot contain backends or archetypes.
+             * Backends cannot contain backends or archetypes. Note
+             * also that we are letting through any other kind of
+             * meta-model element here. This is just to make our life
+             * easier - one can use all other regular types without
+             * being hindered.
              */
             const bool is_backend(bs.find(qn) != bs.end());
             const auto& archs(pe.archetypes());
@@ -142,21 +163,41 @@ process_backends(const context& ctx, entities::model& m) {
             }
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing backends.";
 }
 
 void physical_entities_transform::process_facets(entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing facets.";
     using features::physical;
     const auto& pe(m.physical_elements());
     auto& fcts(pe.facets());
     for (auto& pair : fcts) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& fct(*pair.second);
         fct.kernel_name(kernel_name);
 
+        /*
+         * Facets can only exist in the context of a backend.
+         */
+        if (fct.backend_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_facet << id;
+            BOOST_THROW_EXCEPTION(transformation_error(uncontained_facet + id));
+        }
+
+        /*
+         * Generate the ID for this facet.
+         */
         std::ostringstream os;
         os << kernel_name << separator
            << fct.backend_name() << separator
            << fct.name().simple();
         fct.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << fct.id();
+
+        /*
+         * Check all of the elements contained within this facet.
+         */
 
         for (const auto& qn : fct.contains()) {
             /*
@@ -169,11 +210,17 @@ void physical_entities_transform::process_facets(entities::model& m) {
                 auto& arch(*i->second);
                 fct.archetypes().push_back(arch.name());
                 arch.facet_name(fct.name().simple());
+                arch.backend_name(fct.backend_name());
+                BOOST_LOG_SEV(lg, debug) << "Contains archetype: "
+                                         << arch.name().qualified().dot();
             }
 
             /*
              * Facets cannot contain any other kind of physical
-             * elements.
+             * elements. As with backends, note that we are letting
+             * through any other kind of meta-model element here. This
+             * is just to make our life easier - one can use all other
+             * regular types without being hindered.
              */
             const auto& bs(pe.backends());
             const bool is_backend(bs.find(qn) != bs.end());
@@ -192,45 +239,85 @@ void physical_entities_transform::process_facets(entities::model& m) {
             }
         }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing facets.";
 }
 
 void physical_entities_transform::process_archetype_kinds(entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing archetype kinds.";
     const auto& pe(m.physical_elements());
     auto& aks(pe.archetype_kinds());
     for (auto& pair : aks) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& ak(*pair.second);
         ak.kernel_name(kernel_name);
 
+        /*
+         * Archetype kinds can only exist in the context of a backend.
+         */
+        if (ak.backend_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_archetype_kind << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_archetype_kind + id));
+        }
+
+        /*
+         * Generate the ID for this archetype kind.
+         */
         std::ostringstream os;
         os << kernel_name << separator
            << ak.backend_name() << separator
            << ak.name().simple();
         ak.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << ak.id();
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing archetype kinds.";
 }
 
 void physical_entities_transform::process_parts(entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing parts.";
     const auto& pe(m.physical_elements());
     auto& parts(pe.parts());
     for (auto& pair : parts) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& part(*pair.second);
         part.kernel_name(kernel_name);
 
+        /*
+         * Parts can only exist in the context of a backend.
+         */
+        if (part.backend_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_part << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_part + id));
+        }
+
+        /*
+         * Generate the ID for this part.
+         */
         std::ostringstream os;
         os << kernel_name << separator
            << part.backend_name() << separator
            << part.name().simple();
         part.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << part.id();
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing parts.";
 }
 
 void physical_entities_transform::
 process_archetypes(const context& ctx, entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
+
     using features::physical;
     const auto& pe(m.physical_elements());
     const auto& fm(*ctx.feature_model());
     const auto fg(physical::make_feature_group(fm));
 
+    /*
+     * First, we organise the parts by their IDs.
+     */
     const auto& parts(pe.parts());
     std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
         parts_by_ids;
@@ -246,11 +333,19 @@ process_archetypes(const context& ctx, entities::model& m) {
         }
     }
 
+    /*
+     * Now we can process the archetypes proper.
+     */
     auto& archs(pe.archetypes());
     for (auto& pair : archs) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& arch(*pair.second);
         arch.kernel_name(kernel_name);
 
+        /*
+         * Read all of the associated meta-data.
+         */
         const auto scfg(physical::make_static_configuration(fg, arch));
         arch.part_id(scfg.part_id);
         const auto lmen(scfg.logical_meta_element_id);
@@ -262,13 +357,30 @@ process_archetypes(const context& ctx, entities::model& m) {
 
         arch.logical_meta_element_id(lmen);
 
+        /*
+         * Archetypes can only exist in the context of a backend and a
+         * facet.
+         */
+        if (arch.backend_name().empty() || arch.facet_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_archetype << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_archetype + id));
+        }
+
+        /*
+         * Generate the ID for this archetype.
+         */
         std::ostringstream os;
         const auto sn(arch.name().simple());
         os << kernel_name << separator
            << arch.backend_name() << separator
            << arch.facet_name() << separator << sn;
         arch.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << arch.id();
 
+        /*
+         * Locate the containing part and update it.
+         */
         const auto qn(arch.name().qualified().dot());
         const auto pid(arch.part_id());
         const auto j(parts_by_ids.find(pid));
@@ -280,6 +392,7 @@ process_archetypes(const context& ctx, entities::model& m) {
         auto& part(*j->second);
         part.archetypes().push_back(arch.name());
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing archetypes.";
 }
 
 void physical_entities_transform::
