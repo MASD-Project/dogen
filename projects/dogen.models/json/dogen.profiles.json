@@ -490,48 +490,6 @@
       ]
     },
     {
-      "name": "composable::cpp_artefact_transform",
-      "parents": [
-        "composable::base_formatter"
-      ],
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::artefact_transform",
-        "masd.variability.key_prefix": "masd.cpp.types"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "class_header.formatting_style",
-          "type": "",
-          "value": "wale"
-        },
-        {
-          "name": "class_header.formatting_input",
-          "type": "",
-          "value": "cpp_artefact_transform_header.wale"
-        },
-        {
-          "name": "class_header.overwrite",
-          "type": "",
-          "value": "true"
-        },
-        {
-          "name": "class_implementation.formatting_style",
-          "type": "",
-          "value": "stitch"
-        },
-        {
-          "name": "class_implementation.overwrite",
-          "type": "",
-          "value": "true"
-        }
-      ]
-    },
-    {
       "name": "composable::csharp_artefact_transform",
       "parents": [
         "composable::base_formatter"
