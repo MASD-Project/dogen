@@ -31,7 +31,6 @@
 #include "dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
-
 physical::entities::archetype enum_header_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
