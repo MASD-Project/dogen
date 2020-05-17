@@ -5079,7 +5079,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:point val="89,276"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,274.15;153.05,328.05"/>
+        <dia:rectangle val="88.95,274.15;158.05,328.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5088,7 +5088,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:point val="89,276"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="64"/>
+        <dia:real val="69"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="52"/>
@@ -5355,25 +5355,25 @@ public:
         <dia:point val="126,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.95,283.95;141.22,287.05"/>
+        <dia:rectangle val="125.95,283.95;154.655,288.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="126,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.169999999999998"/>
+        <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for objects.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5412,7 +5412,7 @@ public:
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5453,7 +5453,267 @@ public:
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    const auto&amp; o(assistant::as&lt;logical::entities::structural::object&gt;(e));
+    auto builder(f.make());
+    builder.add(o.name(), traits::class_header_archetype_qn());
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+    builder.add(o.opaque_associations(), carch);
+    builder.add(o.parents(), carch);
+    builder.add(o.leaves(), carch);
+
+    return builder.build();
+}
+
+void class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
+
+    {
+        const auto sn(o.name().simple());
+        const auto qn(ast.get_qualified_name(o.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        if (!o.local_attributes().empty()) {
+#&gt;
+namespace {
+&lt;#+
+        ast.add_helper_methods(o.name().qualified().dot());
+#&gt;
+
+}
+
+&lt;#+
+        }
+
+        {
+            const auto ns(ast.make_namespaces(o.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+
+            /*
+             * Default constructor.
+             */
+            if (!o.is_parent()) {
+#&gt;
+
+&lt;#= sn #&gt;_generator::&lt;#= sn #&gt;_generator() : position_(0) { }
+&lt;#+
+            }
+
+            /*
+             * Populate method.
+             */
+            if (!o.is_immutable()) {
+                bool no_args(o.local_attributes().empty() &amp;&amp; o.parents().empty());
+                if (no_args) {
+#&gt;
+
+void &lt;#= sn #&gt;_generator::
+populate(const unsigned int /*position*/, result_type&amp; /*v*/) {
+&lt;#+
+                } else {
+#&gt;
+
+void &lt;#= sn #&gt;_generator::
+populate(const unsigned int position, result_type&amp; v) {
+&lt;#+
+                }
+
+                if (!o.parents().empty()) {
+                    const auto&amp; pn(o.parents().front());
+                    const auto pqn(ast.get_qualified_name(pn));
+#&gt;
+    &lt;#= pqn #&gt;_generator::populate(position, v);
+&lt;#+
+                }
+                unsigned int i(0);
+                for (const auto&amp; attr : o.local_attributes()) {
+#&gt;
+    v.&lt;#= attr.name().simple() #&gt;(create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + &lt;#= i #&gt;));
+&lt;#+
+                    ++i;
+                }
+#&gt;
+}
+&lt;#+
+            }
+
+            /*
+             * Create method.
+             */
+            if (!o.is_parent()) {
+                 const bool no_arg(o.all_attributes().empty());
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::create(const unsigned int&lt;#= (no_arg ? "/*position*/" : " position") #&gt;) {
+&lt;#+
+                if (o.is_immutable()) {
+#&gt;
+    return &lt;#= sn #&gt;(
+&lt;#+
+                    if (o.local_attributes().empty())
+#&gt;
+
+&lt;#+
+                    else {
+                        utility::formatters::sequence_formatter sf(o.local_attributes().size());
+                        for (const auto&amp; attr : o.local_attributes()) {
+#&gt;
+        create_&lt;#= attr.parsed_type().qualified().identifiable() #&gt;(position + &lt;#= sf.current_position() #&gt;)&lt;#= sf.postfix() #&gt;
+&lt;#+
+                            sf.next();
+                        }
+                    }
+#&gt;
+        );
+&lt;#+
+                } else {
+#&gt;
+    &lt;#= sn #&gt; r;
+&lt;#+
+                    if (!o.all_attributes().empty())
+#&gt;
+    &lt;#= sn #&gt;_generator::populate(position, r);
+    return r;
+&lt;#+
+                }
+#&gt;
+}
+&lt;#+
+            }
+
+            /*
+             * Create method ptr.
+             */
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type*
+&lt;#= sn #&gt;_generator::create_ptr(const unsigned int position) {
+&lt;#+
+            if (o.leaves().empty()) {
+                if (o.is_immutable())
+#&gt;
+    return new &lt;#= sn #&gt;(create(position));
+&lt;#+
+                else {
+#&gt;
+    &lt;#= sn #&gt;* p = new &lt;#= sn #&gt;();
+    &lt;#= sn #&gt;_generator::populate(position, *p);
+    return p;
+&lt;#+
+                }
+            } else {
+                auto leaves(o.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                const auto total(static_cast&lt;unsigned int&gt;(leaves.size()));
+                for (const auto&amp; l : leaves) {
+#&gt;
+    if ((position % &lt;#= total #&gt;) == &lt;#= i++ #&gt;)
+        return &lt;#= ast.get_qualified_name(l) #&gt;_generator::create_ptr(position);
+&lt;#+
+                }
+#&gt;
+    return &lt;#= ast.get_qualified_name(front) #&gt;_generator::create_ptr(position);
+&lt;#+
+            }
+#&gt;
+}
+&lt;#+
+            /*
+             * Function operator
+             */
+             if (!o.is_parent()) {
+#&gt;
+
+&lt;#= sn #&gt;_generator::result_type
+&lt;#= sn #&gt;_generator::operator()() {
+    return create(position_++);
+}
+&lt;#+
+            }
+#&gt;
+
+&lt;#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -36086,7 +36346,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="89,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,239.15;153.05,256.05"/>
+        <dia:rectangle val="88.95,239.15;158.05,256.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36095,7 +36355,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="89,241"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="64"/>
+        <dia:real val="69"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="15"/>
@@ -37652,7 +37912,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:point val="89,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,257.15;153.05,273.05"/>
+        <dia:rectangle val="88.95,257.15;158.05,273.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37661,7 +37921,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:point val="89,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="64"/>
+        <dia:real val="69"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="14"/>
