@@ -26,7 +26,8 @@
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true",
-        "masd.physical.backend_name": "cpp"
+        "masd.physical.backend_name": "cpp",
+        "masd.physical.major_technical_space": "cpp"
       },
       "fallback_element_type": "masd::module"
     },

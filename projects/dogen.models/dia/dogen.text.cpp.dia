@@ -6797,7 +6797,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:point val="-48,173"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,172.95;-28.955,180.35"/>
+        <dia:rectangle val="-48.05,172.95;-28.955,181.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6809,7 +6809,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.2999999999999998"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6830,7 +6830,8 @@ representation of these types according to the
 grammar of the C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN masd.physical.backend_name=cpp#</dia:string>
+#DOGEN masd.physical.backend_name=cpp
+#DOGEN masd.physical.major_technical_space=cpp#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -36929,13 +36930,13 @@ register_entities(variability::helpers::registrar&amp; rg) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,182"/>
+        <dia:point val="-48,183"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,181.95;-16.265,200.85"/>
+        <dia:rectangle val="-48.05,182.95;-16.265,201.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,182"/>
+        <dia:point val="-48,183"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="31.685000000000002"/>
@@ -37542,13 +37543,13 @@ register_entities(variability::helpers::registrar&amp; rg) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,203"/>
+        <dia:point val="-48,204"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,202.95;-22.04,207.45"/>
+        <dia:rectangle val="-48.05,203.95;-22.04,208.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,203"/>
+        <dia:point val="-48,204"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
