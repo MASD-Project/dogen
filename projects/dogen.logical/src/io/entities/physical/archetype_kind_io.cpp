@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/physical/archetype_kind_io.hpp"
 
 namespace dogen::logical::entities::physical {

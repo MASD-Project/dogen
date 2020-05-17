@@ -24,6 +24,7 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -51,7 +52,8 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::physical {
 
 part::part()
-    : requires_relative_path_(static_cast<bool>(0)) { }
+    : major_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)),
+      requires_relative_path_(static_cast<bool>(0)) { }
 
 part::part(
     const dogen::logical::entities::name& name,
@@ -69,6 +71,7 @@ part::part(
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
+    const dogen::logical::entities::technical_space major_technical_space,
     const std::string& kernel_name,
     const std::string& backend_name,
     const std::string& external_modules_path_contribution,
@@ -93,6 +96,7 @@ part::part(
       enablement_properties,
       decoration),
       id_(id),
+      major_technical_space_(major_technical_space),
       kernel_name_(kernel_name),
       backend_name_(backend_name),
       external_modules_path_contribution_(external_modules_path_contribution),
@@ -131,6 +135,7 @@ void part::to_stream(std::ostream& s) const {
     dogen::logical::entities::element::to_stream(s);
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
+      << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"external_modules_path_contribution\": " << "\"" << tidy_up_string(external_modules_path_contribution_) << "\"" << ", "
@@ -147,6 +152,7 @@ void part::swap(part& other) noexcept {
 
     using std::swap;
     swap(id_, other.id_);
+    swap(major_technical_space_, other.major_technical_space_);
     swap(kernel_name_, other.kernel_name_);
     swap(backend_name_, other.backend_name_);
     swap(external_modules_path_contribution_, other.external_modules_path_contribution_);
@@ -166,6 +172,7 @@ bool part::equals(const dogen::logical::entities::element& other) const {
 bool part::operator==(const part& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
+        major_technical_space_ == rhs.major_technical_space_ &&
         kernel_name_ == rhs.kernel_name_ &&
         backend_name_ == rhs.backend_name_ &&
         external_modules_path_contribution_ == rhs.external_modules_path_contribution_ &&
@@ -196,6 +203,14 @@ void part::id(const std::string& v) {
 
 void part::id(const std::string&& v) {
     id_ = std::move(v);
+}
+
+dogen::logical::entities::technical_space part::major_technical_space() const {
+    return major_technical_space_;
+}
+
+void part::major_technical_space(const dogen::logical::entities::technical_space v) {
+    major_technical_space_ = v;
 }
 
 const std::string& part::kernel_name() const {

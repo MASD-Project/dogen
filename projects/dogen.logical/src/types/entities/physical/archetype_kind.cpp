@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 
@@ -33,6 +34,9 @@ inline std::string tidy_up_string(std::string s) {
 }
 
 namespace dogen::logical::entities::physical {
+
+archetype_kind::archetype_kind()
+    : major_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
 
 archetype_kind::archetype_kind(
     const dogen::logical::entities::name& name,
@@ -50,6 +54,7 @@ archetype_kind::archetype_kind(
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
+    const dogen::logical::entities::technical_space major_technical_space,
     const std::string& kernel_name,
     const std::string& backend_name,
     const std::string& file_extension)
@@ -69,6 +74,7 @@ archetype_kind::archetype_kind(
       enablement_properties,
       decoration),
       id_(id),
+      major_technical_space_(major_technical_space),
       kernel_name_(kernel_name),
       backend_name_(backend_name),
       file_extension_(file_extension) { }
@@ -96,6 +102,7 @@ void archetype_kind::to_stream(std::ostream& s) const {
     dogen::logical::entities::element::to_stream(s);
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
+      << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"file_extension\": " << "\"" << tidy_up_string(file_extension_) << "\""
@@ -107,6 +114,7 @@ void archetype_kind::swap(archetype_kind& other) noexcept {
 
     using std::swap;
     swap(id_, other.id_);
+    swap(major_technical_space_, other.major_technical_space_);
     swap(kernel_name_, other.kernel_name_);
     swap(backend_name_, other.backend_name_);
     swap(file_extension_, other.file_extension_);
@@ -121,6 +129,7 @@ bool archetype_kind::equals(const dogen::logical::entities::element& other) cons
 bool archetype_kind::operator==(const archetype_kind& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
+        major_technical_space_ == rhs.major_technical_space_ &&
         kernel_name_ == rhs.kernel_name_ &&
         backend_name_ == rhs.backend_name_ &&
         file_extension_ == rhs.file_extension_;
@@ -146,6 +155,14 @@ void archetype_kind::id(const std::string& v) {
 
 void archetype_kind::id(const std::string&& v) {
     id_ = std::move(v);
+}
+
+dogen::logical::entities::technical_space archetype_kind::major_technical_space() const {
+    return major_technical_space_;
+}
+
+void archetype_kind::major_technical_space(const dogen::logical::entities::technical_space v) {
+    major_technical_space_ = v;
 }
 
 const std::string& archetype_kind::kernel_name() const {

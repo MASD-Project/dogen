@@ -32,6 +32,7 @@
 #include <unordered_set>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -40,9 +41,11 @@ namespace dogen::logical::entities::physical {
  */
 class facet final : public dogen::logical::entities::element {
 public:
-    facet() = default;
     facet(const facet&) = default;
     facet(facet&&) = default;
+
+public:
+    facet();
 
     virtual ~facet() noexcept { }
 
@@ -62,8 +65,9 @@ public:
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::unordered_set<std::string>& contains,
         const std::string& id,
+        const dogen::logical::entities::technical_space major_technical_space,
+        const std::unordered_set<std::string>& contains,
         const std::string& kernel_name,
         const std::string& backend_name,
         const std::list<dogen::logical::entities::name>& archetypes);
@@ -79,15 +83,28 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_set<std::string>& contains() const;
-    std::unordered_set<std::string>& contains();
-    void contains(const std::unordered_set<std::string>& v);
-    void contains(const std::unordered_set<std::string>&& v);
-
+    /**
+     * @brief Unique identifier in physical space for this element.
+     */
+    /**@{*/
     const std::string& id() const;
     std::string& id();
     void id(const std::string& v);
     void id(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Technical space to which this physical element belongs to.
+     */
+    /**@{*/
+    dogen::logical::entities::technical_space major_technical_space() const;
+    void major_technical_space(const dogen::logical::entities::technical_space v);
+    /**@}*/
+
+    const std::unordered_set<std::string>& contains() const;
+    std::unordered_set<std::string>& contains();
+    void contains(const std::unordered_set<std::string>& v);
+    void contains(const std::unordered_set<std::string>&& v);
 
     const std::string& kernel_name() const;
     std::string& kernel_name();
@@ -123,8 +140,9 @@ public:
     facet& operator=(facet other);
 
 private:
-    std::unordered_set<std::string> contains_;
     std::string id_;
+    dogen::logical::entities::technical_space major_technical_space_;
+    std::unordered_set<std::string> contains_;
     std::string kernel_name_;
     std::string backend_name_;
     std::list<dogen::logical::entities::name> archetypes_;

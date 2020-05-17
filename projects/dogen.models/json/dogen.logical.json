@@ -4027,14 +4027,11 @@
       "name": "entities::physical::archetype",
       "documentation": "Represents an archetype within a facet.\n",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "PhysicalElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "id",
-          "type": "std::string"
-        },
         {
           "name": "kernel_name",
           "type": "std::string"
@@ -4084,14 +4081,11 @@
       "documentation": "Represents a physical backend, targetting a major technical space such as C++ or C#.\n",
       "stereotypes": [
         "logical::meta_element",
+        "PhysicalElement",
         "Container"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "id",
-          "type": "std::string"
-        },
         {
           "name": "kernel_name",
           "type": "std::string",
@@ -4124,14 +4118,11 @@
       "documentation": "Represents a facet within a backend, such as type definitions.\n",
       "stereotypes": [
         "logical::meta_element",
+        "PhysicalElement",
         "Container"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "id",
-          "type": "std::string"
-        },
         {
           "name": "kernel_name",
           "type": "std::string"
@@ -4151,14 +4142,11 @@
       "name": "entities::physical::part",
       "documentation": "Part whithin a backend.\n",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "PhysicalElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "id",
-          "type": "std::string"
-        },
         {
           "name": "kernel_name",
           "type": "std::string"
@@ -4202,14 +4190,11 @@
     {
       "name": "entities::physical::archetype_kind",
       "stereotypes": [
-        "logical::meta_element"
+        "logical::meta_element",
+        "PhysicalElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "id",
-          "type": "std::string"
-        },
         {
           "name": "kernel_name",
           "type": "std::string"
@@ -4496,6 +4481,25 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::PhysicalElement",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string",
+          "documentation": "Unique identifier in physical space for this element.\n"
+        },
+        {
+          "name": "major_technical_space",
+          "type": "technical_space",
+          "documentation": "Technical space to which this physical element belongs to.\n"
+        }
+      ]
     }
   ]
 }

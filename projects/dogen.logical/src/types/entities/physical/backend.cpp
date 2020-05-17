@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 
@@ -63,6 +64,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 namespace dogen::logical::entities::physical {
 
+backend::backend()
+    : major_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+
 backend::backend(
     const dogen::logical::entities::name& name,
     const std::string& documentation,
@@ -78,8 +82,9 @@ backend::backend(
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::unordered_set<std::string>& contains,
     const std::string& id,
+    const dogen::logical::entities::technical_space major_technical_space,
+    const std::unordered_set<std::string>& contains,
     const std::string& kernel_name,
     const std::list<dogen::logical::entities::name>& facets,
     const std::list<dogen::logical::entities::name>& parts,
@@ -100,8 +105,9 @@ backend::backend(
       artefact_properties,
       enablement_properties,
       decoration),
-      contains_(contains),
       id_(id),
+      major_technical_space_(major_technical_space),
+      contains_(contains),
       kernel_name_(kernel_name),
       facets_(facets),
       parts_(parts),
@@ -130,8 +136,9 @@ void backend::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::logical::entities::element::to_stream(s);
     s << ", "
-      << "\"contains\": " << contains_ << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
+      << "\"major_technical_space\": " << major_technical_space_ << ", "
+      << "\"contains\": " << contains_ << ", "
       << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
@@ -144,8 +151,9 @@ void backend::swap(backend& other) noexcept {
     dogen::logical::entities::element::swap(other);
 
     using std::swap;
-    swap(contains_, other.contains_);
     swap(id_, other.id_);
+    swap(major_technical_space_, other.major_technical_space_);
+    swap(contains_, other.contains_);
     swap(kernel_name_, other.kernel_name_);
     swap(facets_, other.facets_);
     swap(parts_, other.parts_);
@@ -161,8 +169,9 @@ bool backend::equals(const dogen::logical::entities::element& other) const {
 
 bool backend::operator==(const backend& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
-        contains_ == rhs.contains_ &&
         id_ == rhs.id_ &&
+        major_technical_space_ == rhs.major_technical_space_ &&
+        contains_ == rhs.contains_ &&
         kernel_name_ == rhs.kernel_name_ &&
         facets_ == rhs.facets_ &&
         parts_ == rhs.parts_ &&
@@ -174,22 +183,6 @@ backend& backend::operator=(backend other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::unordered_set<std::string>& backend::contains() const {
-    return contains_;
-}
-
-std::unordered_set<std::string>& backend::contains() {
-    return contains_;
-}
-
-void backend::contains(const std::unordered_set<std::string>& v) {
-    contains_ = v;
-}
-
-void backend::contains(const std::unordered_set<std::string>&& v) {
-    contains_ = std::move(v);
 }
 
 const std::string& backend::id() const {
@@ -206,6 +199,30 @@ void backend::id(const std::string& v) {
 
 void backend::id(const std::string&& v) {
     id_ = std::move(v);
+}
+
+dogen::logical::entities::technical_space backend::major_technical_space() const {
+    return major_technical_space_;
+}
+
+void backend::major_technical_space(const dogen::logical::entities::technical_space v) {
+    major_technical_space_ = v;
+}
+
+const std::unordered_set<std::string>& backend::contains() const {
+    return contains_;
+}
+
+std::unordered_set<std::string>& backend::contains() {
+    return contains_;
+}
+
+void backend::contains(const std::unordered_set<std::string>& v) {
+    contains_ = v;
+}
+
+void backend::contains(const std::unordered_set<std::string>&& v) {
+    contains_ = std::move(v);
 }
 
 const std::string& backend::kernel_name() const {
