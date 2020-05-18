@@ -28,7 +28,6 @@
 #include "dogen.text.csharp/types/transforms/io/class_transform.hpp"
 
 namespace dogen::text::csharp::transforms::io {
-
 physical::entities::archetype class_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
