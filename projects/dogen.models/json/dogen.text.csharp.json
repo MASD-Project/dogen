@@ -772,10 +772,24 @@
     },
     {
       "name": "transforms::types::primitive_transform",
+      "documentation": "Generates implementation files for exceptions.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::primitive_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=<iostream> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/primitive_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid primitive_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    const auto id(e.name().qualified().dot());\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));\n    {\n        const auto sn(e.name().simple());\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            ast.comment(e.documentation(), 1/*indent*/);\n#>\n    public sealed class <#= sn #>\n    {\n<#+\n            if (!ctx.element_properties().helper_properties().empty())\n                ast.add_helper_methods(id);\n\n            /*\n             * Properties\n             */\n#>\n        #region Properties\n<#+\n            const auto& attr(p.value_attribute());\n            ast.comment(attr.documentation(), 2/*indent*/);\n#>\n        public <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (p.is_immutable() ? \"internal \" : \"\") #>set; }\n        #endregion\n\n<#+\n            /*\n             * Constructors.\n             */\n#>\n        #region Constructors\n        public <#= sn #>() { }\n        public <#= sn #>(<#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #>)\n        {\n            <#= attr.name().simple() #> = <#= ast.make_argument_name(attr) #>;\n        }\n        #endregion\n\n<#+\n            /*\n             * Equals\n             */\n#>\n        #region Equality\n        public override bool Equals(object obj)\n        {\n            if (ReferenceEquals(null, obj)) return false;\n            if (ReferenceEquals(this, obj)) return true;\n            if (obj.GetType() != GetType()) return false;\n\n            var value = obj as <#= sn #>;\n            if (value == null) return false;\n            return\n<#+\n             if (attr.parsed_type().is_current_simple_type()) {\n                if (attr.parsed_type().is_floating_point()) {\n#>\n                NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>);\n<#+\n                } else {\n#>\n                <#= attr.name().simple() #> == value.<#= attr.name().simple() #>;\n<#+\n                }\n           } else {\n#>\n                <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&\n                <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>);\n<#+\n            }\n#>\n        }\n\n        public static bool operator ==(<#= sn #> lhs, <#= sn #> rhs)\n        {\n            if (Object.ReferenceEquals(lhs, rhs))\n                return true;\n\n            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);\n        }\n\n        public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)\n        {\n            return !(lhs == rhs);\n        }\n\n        public override int GetHashCode()\n        {\n            unchecked\n            {\n                // Choose large primes to avoid hashing collisions\n                const int HashingBase = (int) 2166136261;\n                const int HashingMultiplier = 16777619;\n\n                int hash = HashingBase;\n<#+\n                if (attr.parsed_type().is_current_simple_type()) {\n#>\n                hash = (hash * HashingMultiplier) ^ <#= attr.name().simple() #>.GetHashCode();\n<#+\n                } else {\n#>\n                hash = (hash * HashingMultiplier) ^\n                    (!<#= ast.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);\n<#+\n                }\n#>\n                return hash;\n            }\n        }\n        #endregion\n    }\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::test_data::primitive_transform",
@@ -1156,6 +1170,43 @@
           "name": "masd.wale.kvp.meta_element",
           "type": "",
           "value": "exception"
+        }
+      ]
+    },
+    {
+      "name": "transforms::primitive_configuration",
+      "parents": [
+        "transforms::archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::primitive_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.logical_meta_element_id",
+          "type": "",
+          "value": "dogen.logical.entities.primitive"
+        },
+        {
+          "name": "masd.wale.kvp.class.simple_name",
+          "type": "",
+          "value": "primitive_transform"
+        },
+        {
+          "name": "masd.wale.kvp.archetype.simple_name",
+          "type": "",
+          "value": "primitive"
+        },
+        {
+          "name": "masd.wale.kvp.meta_element",
+          "type": "",
+          "value": "primitive"
         }
       ]
     }
