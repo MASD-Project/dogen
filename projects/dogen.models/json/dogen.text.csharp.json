@@ -217,10 +217,24 @@
     },
     {
       "name": "transforms::types::exception_transform",
+      "documentation": "Generates implementation files for exceptions.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::exception_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/exception.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/exception_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid exception_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    {\n        const auto sn(e.name().simple());\n        const auto qn(ast.get_qualified_name(e.name()));\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            ast.comment(e.documentation(), 1/*indent*/);\n#>\n    public class <#= sn #>  : Exception\n    {\n        public <#= sn #>() { }\n        public <#= sn #>(string message) : base(message) { }\n        public <#= sn #>(string message, Exception inner) : base(message, inner) { }\n    }\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::types::initializer",
@@ -1105,6 +1119,43 @@
           "name": "masd.wale.kvp.meta_element",
           "type": "",
           "value": "enumeration"
+        }
+      ]
+    },
+    {
+      "name": "transforms::exception_configuration",
+      "parents": [
+        "transforms::archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::exception_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.logical_meta_element_id",
+          "type": "",
+          "value": "dogen.logical.entities.exception"
+        },
+        {
+          "name": "masd.wale.kvp.class.simple_name",
+          "type": "",
+          "value": "exception_transform"
+        },
+        {
+          "name": "masd.wale.kvp.archetype.simple_name",
+          "type": "",
+          "value": "exception"
+        },
+        {
+          "name": "masd.wale.kvp.meta_element",
+          "type": "",
+          "value": "exception"
         }
       ]
     }
