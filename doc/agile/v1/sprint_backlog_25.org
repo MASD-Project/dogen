@@ -13,31 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-17 Sun 22:48]
+#+CAPTION: Clock summary at [2020-05-18 Mon 22:01]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *47:06* |       |       | 100.0 |
+| *Total time*                                          | *47:48* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 47:06   |       |       | 100.0 |
-| Active                                                |         | 47:06 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  12.6 |
-| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.7 |
+| Stories                                               | 47:48   |       |       | 100.0 |
+| Active                                                |         | 47:48 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  12.4 |
+| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.6 |
 | Sprint and product backlog grooming                   |         |       |  1:00 |   2.1 |
 | Nightly nursing                                       |         |       |  0:11 |   0.4 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.7 |
 | Analysis on templating and logical model              |         |       |  1:09 |   2.4 |
-| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   1.0 |
+| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.9 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.5 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   3.4 |
 | Resolve references to wale templates in logical model |         |       |  1:39 |   3.5 |
 | =templating= should not depend on =physical=          |         |       |  1:09 |   2.4 |
-| Move decoration transform into logical model          |         |       |  5:33 |  11.8 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   7.5 |
+| Move decoration transform into logical model          |         |       |  5:33 |  11.6 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   7.4 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   2.2 |
 | Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   2.0 |
-| Profiles do not support collection types              |         |       |  4:13 |   9.0 |
-| Promote all formatters to archetypes                  |         |       | 15:55 |  33.8 |
+| Profiles do not support collection types              |         |       |  4:13 |   8.8 |
+| Promote all formatters to archetypes                  |         |       | 16:37 |  34.8 |
 | Create an encoder for org-mode                        |         |       |  1:31 |   3.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -1117,6 +1117,7 @@ finding the feature. We also have to visit the value first.
 
 *** STARTED Promote all formatters to archetypes                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-18 Mon 21:19]--[2020-05-18 Mon 22:01] =>  0:42
     CLOCK: [2020-05-17 Sun 21:42]--[2020-05-17 Sun 21:52] =>  0:10
     CLOCK: [2020-05-17 Sun 18:24]--[2020-05-17 Sun 19:16] =>  0:52
     CLOCK: [2020-05-17 Sun 13:07]--[2020-05-17 Sun 13:27] =>  0:20
@@ -1185,6 +1186,27 @@ Notes:
 - remove logic-less templates formatters. This can only be done once
   we've finished converting all formatters including C#.
 - archetype initialiser will be implemented in terms of facets.
+
+*** Split =text= from the kernel                                      :story:
+
+At present we have conflated the MASD kernel with =text=. In reality
+these are two very different things, and its just not obvious because
+we keep referring to "the" MASD kernel. It would have been really
+obvious if we had more than one kernel. The best way to avoid this is:
+
+- give the "MASD kernel" a name, so that we future proof ourselves
+  against a second kernel (e.g. EMF/MOF). For example we could call it
+  =vanilla= or any such bland names. It would be nice to have a name
+  that reflects the purpose. The purpose of this kernel is to provide
+  a "native" programming language implementation. Perhaps =native=? Or
+  we could say its not an MDE kernel.
+- move all kernel specific code into the kernel. We should probably
+  even consider having a single model with all backends for the
+  kernel. Though perhaps this will only make sense when we finish the
+  generation refactor. At any rate, in this model we need to create
+  the kernel and call all backends.
+- leave all transforms which aren't kernel specific in =text=. It will
+  also contain all of the T2T infrastructure.
 
 *** Do not hard-code the kernel                                       :story:
 
