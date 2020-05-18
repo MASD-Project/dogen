@@ -147,10 +147,24 @@
     },
     {
       "name": "transforms::types::enum_transform",
+      "documentation": "Generates implementation files for enums.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::enumeration_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/enumeration.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/enum_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid enum_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));\n    {\n        const auto sn(e.name().simple());\n        const auto qn(ast.get_qualified_name(e.name()));\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            ast.comment(e.documentation(), 1/*indent*/);\n            if (ye.use_implementation_defined_underlying_element())\n#>\n    public enum <#= sn #>\n<#+\n            else\n#>\n    public enum <#= sn #> : <#= ast.get_qualified_name(ye.underlying_element()) #>\n    {\n<#+\n            utility::formatters::sequence_formatter sf(ye.enumerators().size());\n            for (const auto& en : ye.enumerators()) {\n                if (ye.use_implementation_defined_enumerator_values())\n#>\n        <#= en.name().simple() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>\n<#+\n                else\n#>\n        <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>\n<#+\n                sf.next();\n            }\n#>\n    }\n<#+\n        } // snf\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::types::visitor_transform",
@@ -1054,6 +1068,43 @@
           "name": "requires_relative_path",
           "type": "",
           "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "transforms::enumeration_configuration",
+      "parents": [
+        "transforms::archetype_configuration"
+      ],
+      "documentation": "Contains the configuration common to all archetypes.\n",
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "entity",
+        "masd.variability.stereotype": "dogen::enumeration_configuration"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.physical.logical_meta_element_id",
+          "type": "",
+          "value": "dogen.logical.entities.enumeration"
+        },
+        {
+          "name": "masd.wale.kvp.class.simple_name",
+          "type": "",
+          "value": "enum_transform"
+        },
+        {
+          "name": "masd.wale.kvp.archetype.simple_name",
+          "type": "",
+          "value": "enum"
+        },
+        {
+          "name": "masd.wale.kvp.meta_element",
+          "type": "",
+          "value": "enumeration"
         }
       ]
     }
