@@ -27,7 +27,6 @@
 #include "dogen.text.csharp/types/transforms/types/builtin_transform.hpp"
 
 namespace dogen::text::csharp::transforms::types {
-
 physical::entities::archetype builtin_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
