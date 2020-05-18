@@ -167,13 +167,6 @@
       ]
     },
     {
-      "name": "transforms::types::visitor_transform",
-      "stereotypes": [
-        "dogen::csharp::artefact_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::io",
       "stereotypes": [
         "masd::physical::facet"
