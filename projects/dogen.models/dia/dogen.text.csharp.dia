@@ -13501,7 +13501,7 @@ void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entitie
         <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for exceptions.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13890,28 +13890,28 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O107">
       <dia:attribute name="obj_pos">
-        <dia:point val="72,60"/>
+        <dia:point val="47,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,59.95;86.795,63.05"/>
+        <dia:rectangle val="46.95,59.95;71.035,64.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="72,60"/>
+        <dia:point val="47,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for primitives.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13950,7 +13950,7 @@ using System;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -13991,7 +13991,142 @@ using System;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/primitive_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#&gt;
+using System;
+
+&lt;#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+    /// &lt;summary&gt;
+    /// Generates sequences of &lt;#= sn #&gt;.
+    /// &lt;/summary&gt;
+    public static class &lt;#= sn #&gt;Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, &lt;#= sn #&gt; value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("&lt;#= qn #&gt;", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "&lt;null&gt;");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+&lt;#+
+            const auto attr(p.value_attribute());
+            const auto oap(ast.get_assistant_properties(attr));
+            if (oap &amp;&amp; oap-&gt;requires_assistance()) {
+#&gt;
+            assistant.Add("&lt;#= attr.name().simple() #&gt;", value.&lt;#= attr.name().simple() #&gt;);
+&lt;#+
+            } else {
+                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#&gt;
+            assistant.AddKey("&lt;#= attr.name().simple() #&gt;");
+            assistant.AddPairSeparator();
+            &lt;#= attr_qn #&gt;Dumper.Dump(assistant, value.&lt;#= attr.name().simple() #&gt;;
+&lt;#+
+            }
+#&gt;
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(&lt;#= sn #&gt; value)
+        {
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+        }
+    }
+&lt;#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>

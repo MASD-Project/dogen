@@ -804,7 +804,7 @@
     },
     {
       "name": "transforms::types::primitive_transform",
-      "documentation": "Generates implementation files for exceptions.\n",
+      "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
         "masd::physical::archetype",
         "dogen::primitive_configuration"
@@ -832,10 +832,24 @@
     },
     {
       "name": "transforms::io::primitive_transform",
+      "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::primitive_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/primitive.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/io/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/io/primitive_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid primitive_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));\n    {\n        const auto sn(e.name().simple());\n        const auto qn(ast.get_qualified_name(e.name()));\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n    /// <summary>\n    /// Generates sequences of <#= sn #>.\n    /// </summary>\n    public static class <#= sn #>Dumper\n    {\n        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)\n        {\n            assistant.IncrementDepth();\n            if (assistant.MaximumDepthExceeded())\n                return;\n\n            assistant.AddStartObject();\n            assistant.AddType(\"<#= qn #>\", true/*withSeparator*/);\n            if (value == null)\n            {\n                assistant.Add(\"data\", \"<null>\");\n                assistant.AddEndObject();\n                return;\n            }\n\n            assistant.AddKey(\"data\");\n            assistant.AddPairSeparator();\n            assistant.AddStartObject();\n<#+\n            const auto attr(p.value_attribute());\n            const auto oap(ast.get_assistant_properties(attr));\n            if (oap && oap->requires_assistance()) {\n#>\n            assistant.Add(\"<#= attr.name().simple() #>\", value.<#= attr.name().simple() #>);\n<#+\n            } else {\n                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));\n#>\n            assistant.AddKey(\"<#= attr.name().simple() #>\");\n            assistant.AddPairSeparator();\n            <#= attr_qn #>Dumper.Dump(assistant, value.<#= attr.name().simple() #>;\n<#+\n            }\n#>\n            assistant.AddEndObject(); // data\n            assistant.AddEndObject(); // main object\n            assistant.HandleMemberSeparator(withSeparator);\n\n            assistant.DecrementDepth();\n        }\n\n        public static string Dump(<#= sn #> value)\n        {\n            var assistant = new AssistantDumper();\n            Dump(assistant, value);\n            return assistant.ToString();\n        }\n    }\n<#+\n        }\n    } // sbf\n\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "feature_initializer",

@@ -28,7 +28,6 @@
 #include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
 
 namespace dogen::text::csharp::transforms::io {
-
 physical::entities::archetype primitive_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
