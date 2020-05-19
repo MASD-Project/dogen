@@ -253,10 +253,24 @@
     },
     {
       "name": "transforms::test_data::enum_transform",
+      "documentation": "Generates implementation files for enums.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::enumeration_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/enumeration.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/test_data/enum_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid enum_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));\n    {\n        const auto sn(e.name().simple());\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\nusing System.Collections;\nusing System.Collections.Generic;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n    /// <summary>\n    /// Generates sequences of <#= sn #>.\n    /// </summary>\n    public static class <#= sn #>SequenceGenerator\n    {\n        static internal <#= sn #> Create(uint position)\n        {\n            var result = (<#= sn #>)(position % <#= ye.enumerators().size() #>);\n            return result;\n        }\n\n        #region Enumerator\n        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable\n        {\n            #region Properties\n            private uint _position;\n            private <#= sn #> _current;\n            #endregion\n\n            private void PopulateCurrent()\n            {\n                _current = <#= sn #>SequenceGenerator.Create(_position);\n            }\n\n            #region IDisposable\n            public void Dispose()\n            {\n            }\n            #endregion\n\n            #region IEnumerator implementation\n            public bool MoveNext()\n            {\n                ++_position;\n                PopulateCurrent();\n                return true;\n            }\n\n            public void Reset()\n            {\n                _position = 0;\n                PopulateCurrent();\n            }\n\n            public object Current {\n                get\n                {\n                    return _current;\n                }\n            }\n\n            <#= sn #> IEnumerator<<#= sn #>>.Current\n            {\n                get\n                {\n                    return _current;\n                }\n            }\n            #endregion\n\n            public <#= sn #>Enumerator()\n            {\n                PopulateCurrent();\n            }\n        }\n        #endregion\n\n        #region Enumerable\n        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>\n        {\n            #region IEnumerable implementation\n            public IEnumerator GetEnumerator()\n            {\n                return new <#= sn #>Enumerator();\n            }\n\n            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()\n            {\n                return new <#= sn #>Enumerator();\n            }\n            #endregion\n        }\n        #endregion\n\n        static public IEnumerable<<#= sn #>> Sequence()\n        {\n            return new <#= sn #>Enumerable();\n        }\n    }\n<#+\n        }\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::types::exception_transform",
