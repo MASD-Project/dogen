@@ -134,7 +134,7 @@
         <dia:point val="-17,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,4.15;206.05,91.05"/>
+        <dia:rectangle val="-17.05,4.15;206.05,82.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -146,7 +146,7 @@
         <dia:real val="223"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="85"/>
+        <dia:real val="76"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1684,7 +1684,7 @@
         <dia:point val="-15,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,44.15;42.05,88.05"/>
+        <dia:rectangle val="-15.05,44.15;42.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1696,7 +1696,7 @@
         <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="42"/>
+        <dia:real val="34"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2381,22 +2381,22 @@ using System;
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="45,46"/>
+        <dia:point val="44,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.95,44.15;100.05,88.05"/>
+        <dia:rectangle val="43.95,44.15;100.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="45,46"/>
+        <dia:point val="44,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="55"/>
+        <dia:real val="56"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="42"/>
+        <dia:real val="34"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2420,13 +2420,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,54"/>
+        <dia:point val="46,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,53.95;69.88,58.45"/>
+        <dia:rectangle val="45.95,53.95;68.88,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,54"/>
+        <dia:point val="46,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.830000000000002"/>
@@ -2695,13 +2695,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="72,54"/>
+        <dia:point val="73,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,53.95;96.805,58.45"/>
+        <dia:rectangle val="72.95,53.95;97.805,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="72,54"/>
+        <dia:point val="73,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -2927,7 +2927,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="103,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,44.15;146.05,88.05"/>
+        <dia:rectangle val="102.95,44.15;146.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2939,7 +2939,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:real val="43"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="42"/>
+        <dia:real val="34"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2963,13 +2963,13 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,49"/>
+        <dia:point val="105,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,48.95;119.795,52.05"/>
+        <dia:rectangle val="104.95,53.95;119.795,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,49"/>
+        <dia:point val="105,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -3074,13 +3074,13 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,55"/>
+        <dia:point val="122,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,54.95;136.795,58.05"/>
+        <dia:rectangle val="121.95,59.95;136.795,63.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,55"/>
+        <dia:point val="122,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -3525,13 +3525,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,48"/>
+        <dia:point val="82,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,47.95;95.87,51.65"/>
+        <dia:rectangle val="81.95,47.95;94.87,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,48"/>
+        <dia:point val="82,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -3667,13 +3667,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,79"/>
+        <dia:point val="131,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,78.95;134.87,82.65"/>
+        <dia:rectangle val="130.95,46.95;143.87,50.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,79"/>
+        <dia:point val="131,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -3992,13 +3992,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,48"/>
+        <dia:point val="66,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,47.95;79.87,51.05"/>
+        <dia:rectangle val="65.95,47.95;78.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,48"/>
+        <dia:point val="66,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4103,13 +4103,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,79"/>
+        <dia:point val="116,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,78.95;117.87,82.05"/>
+        <dia:rectangle val="115.95,46.95;128.87,50.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,79"/>
+        <dia:point val="116,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -11638,13 +11638,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,81"/>
+        <dia:point val="-13,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,80.95;1.025,84.05"/>
+        <dia:rectangle val="-13.05,73.95;1.025,77.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,81"/>
+        <dia:point val="-13,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -12129,13 +12129,13 @@ void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entitie
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O93">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,49"/>
+        <dia:point val="122,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,48.95;136.795,52.05"/>
+        <dia:rectangle val="121.95,53.95;136.795,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,49"/>
+        <dia:point val="122,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -12702,13 +12702,13 @@ void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entitie
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O98">
       <dia:attribute name="obj_pos">
-        <dia:point val="81,82"/>
+        <dia:point val="46,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.95,81.95;95.025,85.05"/>
+        <dia:rectangle val="45.95,73.95;60.025,77.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="81,82"/>
+        <dia:point val="46,74"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -13779,13 +13779,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O106">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,61"/>
+        <dia:point val="105,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,60.95;119.795,64.05"/>
+        <dia:rectangle val="104.95,65.95;119.795,69.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,61"/>
+        <dia:point val="105,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -13890,13 +13890,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O107">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,60"/>
+        <dia:point val="46,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,59.95;71.035,64.45"/>
+        <dia:rectangle val="45.95,59.95;70.035,64.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,60"/>
+        <dia:point val="46,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -15283,7 +15283,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="149,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="148.95,44.15;191.05,88.05"/>
+        <dia:rectangle val="148.95,44.15;191.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15295,7 +15295,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:real val="42"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="42"/>
+        <dia:real val="34"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -15319,13 +15319,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="174,81"/>
+        <dia:point val="178,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.95,80.95;186.87,84.05"/>
+        <dia:rectangle val="177.95,47.95;190.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="174,81"/>
+        <dia:point val="178,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15430,13 +15430,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="153,81"/>
+        <dia:point val="163,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.95,80.95;165.87,84.05"/>
+        <dia:rectangle val="162.95,47.95;175.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="153,81"/>
+        <dia:point val="163,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15873,28 +15873,33 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O122">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,73"/>
+        <dia:point val="73,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,72.95;61.795,76.05"/>
+        <dia:rectangle val="72.95,59.95;97.035,64.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,73"/>
+        <dia:point val="73,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::archetype_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for assistants.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
+#DOGEN masd.wale.kvp.class.simple_name=assistant_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=assistant
+#DOGEN masd.wale.kvp.meta_element=assistant#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15933,7 +15938,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -15974,7 +15979,577 @@ std::string {{class.simple_name}}::helper_name() const {
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/assistant_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#&gt;
+using System;
+using System.Text;
+using System.Collections;
+
+&lt;#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+    class &lt;#= sn #&gt;Dumper
+    {
+        #region Properties
+        private readonly StringBuilder _stringBuilder;
+        private int _currentDepth;
+
+        private const uint MaxDepth = 1000;
+        private const string HashCode = "HashCode";
+        private const string Type = "__type__";
+        private const string StringType = "string";
+        private const string ByteType = "byte";
+        private const string SByteType = "sbyte";
+        private const string IntType = "int";
+        private const string UIntType = "uint";
+        private const string LongType = "long";
+        private const string ULongType = "ulong";
+        private const string FloatType = "float";
+        private const string DoubleType = "double";
+        private const string CharType = "char";
+        private const string DecimalType = "decimal";
+        private const string BoolType = "bool";
+        private const string NullValue = "&lt;null&gt;";
+        private const string SystemObjectType = "System.Object";
+        private const string KeyType = "key";
+        private const string ValueType = "value";
+        private const string DataKey = "data";
+        #endregion
+
+        #region Depth management
+        public void IncrementDepth()
+        {
+            ++_currentDepth;
+        }
+
+        public void DecrementDepth()
+        {
+            ++_currentDepth;
+        }
+
+        public bool MaximumDepthExceeded()
+        {
+            return _currentDepth &gt; MaxDepth;
+        }
+        #endregion
+
+        #region Adds for JSON syntax
+        public void AddStartObject()
+        {
+            _stringBuilder.Append("{ ");
+        }
+
+        public void AddEndObject()
+        {
+            _stringBuilder.Append(" }");
+        }
+
+        public void AddStartArray()
+        {
+            _stringBuilder.Append("[ ");
+        }
+
+        public void AddEndArray()
+        {
+            _stringBuilder.Append(" ]");
+        }
+
+        public void AddPairSeparator()
+        {
+            _stringBuilder.Append(" : ");
+        }
+
+        public void AddMemberSeparator()
+        {
+            _stringBuilder.Append(", ");
+        }
+
+        public void AddQuoted(string value)
+        {
+            if (value == null)
+                _stringBuilder.Append("\"&lt;null&gt;\"");
+            else
+                _stringBuilder.Append("\"" + value + "\"");
+        }
+
+        public void AddNonQuoted(int value)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+        }
+
+        public void AddKey(string k)
+        {
+            AddQuoted(k);
+        }
+
+        public void AddType(string typeName, bool withSeparator = false)
+        {
+            AddKey(Type);
+            AddPairSeparator();
+            AddQuoted(typeName);
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddKeyWithSeparator(string key)
+        {
+            AddKey(key);
+            AddPairSeparator();
+        }
+
+        public void HandleMemberSeparator(bool withSeparator)
+        {
+            if (withSeparator)
+                AddMemberSeparator();
+        }
+        #endregion
+
+        #region Add value for well known types
+        private bool HandleBoxedPrimitives(object value)
+        {
+            var type = value.GetType();
+            if (type == typeof(string))
+            {
+                AddStartObject();
+                AddType(StringType, true/*withSeparator*/);
+                Add(DataKey, value as string);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(byte))
+            {
+                AddStartObject();
+                AddType(ByteType, true/*withSeparator*/);
+                Add(DataKey, (byte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(sbyte))
+            {
+                AddStartObject();
+                AddType(SByteType, true/*withSeparator*/);
+                Add(DataKey, (sbyte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(int))
+            {
+                AddStartObject();
+                AddType(IntType, true/*withSeparator*/);
+                Add(DataKey, (int)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(uint))
+            {
+                AddStartObject();
+                AddType(UIntType, true/*withSeparator*/);
+                Add(DataKey, (uint)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(long))
+            {
+                AddStartObject();
+                AddType(LongType, true/*withSeparator*/);
+                Add(DataKey, (long)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(ulong))
+            {
+                AddStartObject();
+                AddType(ULongType, true/*withSeparator*/);
+                Add(DataKey, (ulong)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(float))
+            {
+                AddStartObject();
+                AddType(FloatType, true/*withSeparator*/);
+                Add(DataKey, (float)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(double))
+            {
+                AddStartObject();
+                AddType(DoubleType, true/*withSeparator*/);
+                Add(DataKey, (double)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(char))
+            {
+                AddStartObject();
+                AddType(CharType, true/*withSeparator*/);
+                Add(DataKey, (char)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(decimal))
+            {
+                AddStartObject();
+                AddType(DecimalType, true/*withSeparator*/);
+                Add(DataKey, (decimal)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(bool))
+            {
+                AddStartObject();
+                AddType(BoolType, true/*withSeparator*/);
+                Add(DataKey, (bool)value);
+                AddEndObject();
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AddValue(object value, bool withSeparator = false)
+        {
+            AddStartObject();
+            AddType(SystemObjectType, true/*withSeparator*/);
+
+            if (value == null)
+            {
+                Add(DataKey, NullValue);
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
+
+            AddKey(DataKey);
+            AddPairSeparator();
+            if (HandleBoxedPrimitives(value))
+            {
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
+
+            AddStartObject();
+            AddKey(HashCode);
+            AddPairSeparator();
+            AddNonQuoted(value.GetHashCode());
+
+            AddEndObject(); // data
+            AddEndObject();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(string value, bool withSeparator = false)
+        {
+            AddQuoted(value);
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(byte value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(sbyte value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(int value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(uint value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(long value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(ulong value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(float value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(double value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(char value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(decimal value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(bool value, bool withSeparator = false)
+        {
+            if (value)
+                _stringBuilder.Append("true");
+            else
+                _stringBuilder.Append("false");
+
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(IEnumerable value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (var item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddValue(item);
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(IDictionary value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (DictionaryEntry item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddStartArray();
+
+                AddStartObject();
+                AddType(KeyType, true/*withSeparator*/);
+                Add(DataKey, item.Key);
+                AddEndObject();
+
+                AddMemberSeparator();
+
+                AddStartObject();
+                AddType(ValueType, true/*withSeparator*/);
+                Add(DataKey, item.Value);
+                AddEndObject();
+
+                AddEndArray();
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+        #endregion
+
+        #region Add for well known types
+        public void Add(string key, object value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, string value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, byte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, sbyte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, int value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, uint value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, long value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, ulong value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, float value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, double value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, char value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, decimal value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, bool value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IEnumerable value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IDictionary value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+        #endregion
+
+        public AssistantDumper()
+        {
+            _stringBuilder = new StringBuilder();
+        }
+
+        public override string ToString()
+        {
+            return _stringBuilder.ToString();
+        }
+    }
+&lt;#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -15984,13 +16559,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O123">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,55"/>
+        <dia:point val="105,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,54.95;119.795,58.05"/>
+        <dia:rectangle val="104.95,59.95;119.795,63.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,55"/>
+        <dia:point val="105,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -16228,7 +16803,8 @@ std::string {{class.simple_name}}::helper_name() const {
       <dia:attribute name="comment">
         <dia:string>#Contains the configuration common to all archetypes.
 
-#DOGEN masd.variability.binding_point=entity#</dia:string>
+#DOGEN masd.variability.binding_point=entity
+#DOGEN masd.variability.stereotype=dogen::archetype_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17952,16 +18528,16 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O139">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,48"/>
+        <dia:point val="46,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,47.95;62.58,52.15"/>
+        <dia:rectangle val="45.95,47.95;61.58,52.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,48"/>
+        <dia:point val="46,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -17993,7 +18569,7 @@ the C# Technical Space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="47.35,49.2441"/>
+            <dia:point val="46.35,49.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
