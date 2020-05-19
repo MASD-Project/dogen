@@ -723,13 +723,6 @@
       ]
     },
     {
-      "name": "transforms::io::builtin_transform",
-      "stereotypes": [
-        "dogen::csharp::artefact_transform"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::test_data::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_transform"
