@@ -2927,7 +2927,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="103,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.95,44.15;158.05,80.05"/>
+        <dia:rectangle val="102.95,44.15;160.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2936,7 +2936,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="103,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="55"/>
+        <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="34"/>
@@ -3311,13 +3311,13 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="131,54"/>
+        <dia:point val="133,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.95,53.95;155.805,58.45"/>
+        <dia:rectangle val="132.95,53.95;157.805,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="131,54"/>
+        <dia:point val="133,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -14076,13 +14076,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,66"/>
+        <dia:point val="133,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,65.95;119.795,69.05"/>
+        <dia:rectangle val="132.95,59.95;147.795,63.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,66"/>
+        <dia:point val="133,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -15577,16 +15577,16 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O115">
       <dia:attribute name="obj_pos">
-        <dia:point val="162,46"/>
+        <dia:point val="163,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.95,44.15;204.05,80.05"/>
+        <dia:rectangle val="162.95,44.15;205.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="162,46"/>
+        <dia:point val="163,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="42"/>
@@ -15616,13 +15616,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="191,48"/>
+        <dia:point val="192,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.95,47.95;203.87,51.05"/>
+        <dia:rectangle val="191.95,47.95;204.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="191,48"/>
+        <dia:point val="192,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15727,13 +15727,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="176,48"/>
+        <dia:point val="177,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="175.95,47.95;188.87,51.05"/>
+        <dia:rectangle val="176.95,47.95;189.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="176,48"/>
+        <dia:point val="177,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15838,13 +15838,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="166,54"/>
+        <dia:point val="167,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.95,53.95;180.795,57.05"/>
+        <dia:rectangle val="166.95,53.95;181.795,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="166,54"/>
+        <dia:point val="167,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -15949,13 +15949,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O119">
       <dia:attribute name="obj_pos">
-        <dia:point val="185,54"/>
+        <dia:point val="186,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="184.95,53.95;199.795,57.05"/>
+        <dia:rectangle val="185.95,53.95;200.795,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="185,54"/>
+        <dia:point val="186,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -16859,25 +16859,30 @@ using System.Collections;
         <dia:point val="105,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,59.95;119.795,63.05"/>
+        <dia:rectangle val="104.95,59.95;129.035,64.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="105,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::archetype_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for assistants.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
+#DOGEN masd.wale.kvp.class.simple_name=assistant_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=assistant
+#DOGEN masd.wale.kvp.meta_element=assistant#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16916,7 +16921,7 @@ using System.Collections;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -16957,7 +16962,279 @@ using System.Collections;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    {
+        const auto sn(e.name().simple());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#&gt;
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+
+&lt;#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+    /// &lt;summary&gt;
+    /// Provides helper methods for the sequence generators.
+    /// &lt;/summary&gt;
+    static class &lt;#= sn #&gt;SequenceGenerator
+    {
+        private const int SequenceSize = 10;
+
+        public static object CreateObject(uint position)
+        {
+            return "this is an object: " + Convert.ToString(position);
+        }
+
+        public static string CreateString(uint position)
+        {
+            return "this is a string: " + Convert.ToString(position);
+        }
+
+        public static byte CreateByte(uint position)
+        {
+            return Convert.ToByte(position);
+        }
+
+        public static sbyte CreateShortByte(uint position)
+        {
+            return Convert.ToSByte(position);
+        }
+
+        public static int CreateInt(uint position)
+        {
+            return Convert.ToInt32(position);
+        }
+
+        public static uint CreateUInt(uint position)
+        {
+            return position;
+        }
+
+        public static short CreateShort(uint position)
+        {
+            return Convert.ToInt16(position);
+        }
+
+        public static ushort CreateUShort(uint position)
+        {
+            return Convert.ToUInt16(position);
+        }
+
+        public static long CreateLong(uint position)
+        {
+            return Convert.ToInt64(position);
+        }
+
+        public static ulong CreateULong(uint position)
+        {
+            return Convert.ToUInt64(position);
+        }
+
+        public static float CreateFloat(uint position)
+        {
+            return Convert.ToSingle(position);
+        }
+
+        public static double CreateDouble(uint position)
+        {
+            return Convert.ToDouble(position);
+        }
+
+        public static char CreateChar(uint position)
+        {
+            return Convert.ToChar(position);
+        }
+
+        public static bool CreateBool(uint position)
+        {
+            return position % 2 == 0;
+        }
+
+        public static decimal CreateDecimal(uint position)
+        {
+            return Convert.ToDecimal(position);
+        }
+
+        public static IEnumerable CreateIEnumerable(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static ICollection CreateICollection(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static IList CreateIList(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static ArrayList CreateArrayList(uint position)
+        {
+            var result = new ArrayList();
+            for (uint i = 0; i &lt; SequenceSize; i++)
+            {
+                switch((position + i) % 5)
+                {
+                case 0: result.Add(CreateString(position + i)); break;
+                case 1: result.Add(CreateByte(position + i)); break;
+                case 2: result.Add(CreateInt(position + i)); break;
+                case 3: result.Add(CreateLong(position + i)); break;
+                case 4: result.Add(CreateFloat(position + i)); break;
+                case 5: result.Add(CreateDecimal(position + i)); break;
+                default: result.Add(CreateBool(position + i)); break;
+                }
+            }
+            return result;
+        }
+
+        public static IDictionary CreateIDictionary(uint position)
+        {
+            return CreateHashtable(position);
+        }
+
+        public static Hashtable CreateHashtable(uint position)
+        {
+            var result = new Hashtable();
+            for (uint i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static HybridDictionary CreateHybridDictionary(uint position)
+        {
+            var result = new HybridDictionary();
+            for (uint i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static NameValueCollection CreateNameValueCollection(uint position)
+        {
+            var result = new NameValueCollection();
+            for (uint i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static BitArray CreateBitArray(uint position)
+        {
+            var result = new BitArray(SequenceSize);
+            for (int i = 0; i &lt; SequenceSize; i++)
+            {
+                result[i] = position % 2 == 0;
+            }
+            return result;
+        }
+
+        public static Queue CreateQueue(uint position)
+        {
+            var result = new Queue();
+            for (int i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Enqueue("value_" + position + i);
+            }
+            return result;
+        }
+
+        public static Stack CreateStack(uint position)
+        {
+            var result = new Stack();
+            for (int i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Push("value_" + position + i);
+            }
+            return result;
+        }
+
+        public static SortedList CreateSortedList(uint position)
+        {
+            var result = new SortedList();
+            for (int i = 0; i &lt; SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+    }
+&lt;#+
+        }
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
