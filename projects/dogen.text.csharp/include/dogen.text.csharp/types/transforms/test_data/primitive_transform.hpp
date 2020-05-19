@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen.text.csharp/types/transforms/model_to_text_transform.hpp"
 
 namespace dogen::text::csharp::transforms::test_data {

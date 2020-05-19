@@ -14079,25 +14079,25 @@ using System;
         <dia:point val="133,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.95,59.95;147.795,63.05"/>
+        <dia:rectangle val="132.95,59.95;157.035,64.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="133,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for primitives.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14136,7 +14136,7 @@ using System;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14177,7 +14177,199 @@ using System;
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#&gt;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+&lt;#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+
+#&gt;
+    /// &lt;summary&gt;
+    /// Generates sequences of &lt;#= sn #&gt;.
+    /// &lt;/summary&gt;
+    public static class &lt;#= sn #&gt;SequenceGenerator
+    {
+        static internal void Populate(&lt;#= sn #&gt; value, uint position)
+        {
+&lt;#+
+            const auto attr(p.value_attribute());
+            const auto oap(ast.get_assistant_properties(attr));
+            if (oap &amp;&amp; oap-&gt;requires_assistance()) {
+#&gt;
+            value.&lt;#= attr.name().simple() #&gt; = AssistantSequenceGenerator.Create&lt;#= oap-&gt;method_postfix() #&gt;(position);
+&lt;#+
+            } else {
+                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#&gt;
+            value.&lt;#= attr.name().simple() #&gt; = &lt;#= attr_qn #&gt;SequenceGenerator.Create(position);
+&lt;#+
+            }
+#&gt;
+        }
+
+        static internal &lt;#= sn #&gt; Create(uint position)
+        {
+            var result = new &lt;#= sn #&gt;();
+            Populate(result, position);
+            return result;
+        }
+
+        #region Enumerator
+        private class &lt;#= sn #&gt;Enumerator : IEnumerator, IEnumerator&lt;&lt;#= sn #&gt;&gt;, IDisposable
+        {
+            #region Properties
+            private uint _position;
+            private &lt;#= sn #&gt; _current;
+            #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = &lt;#= sn #&gt;SequenceGenerator.Create(_position);
+            }
+
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
+
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                PopulateCurrent();
+                return true;
+            }
+
+            public void Reset()
+            {
+                _position = 0;
+                PopulateCurrent();
+            }
+
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
+
+            &lt;#= sn #&gt; IEnumerator&lt;&lt;#= sn #&gt;&gt;.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
+            #endregion
+
+            public &lt;#= sn #&gt;Enumerator()
+            {
+                PopulateCurrent();
+            }
+        }
+        #endregion
+
+        #region Enumerable
+        private class &lt;#= sn #&gt;Enumerable : IEnumerable, IEnumerable&lt;&lt;#= sn #&gt;&gt;
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new &lt;#= sn #&gt;Enumerator();
+            }
+
+            IEnumerator&lt;&lt;#= sn #&gt;&gt; IEnumerable&lt;&lt;#= sn #&gt;&gt;.GetEnumerator()
+            {
+                return new &lt;#= sn #&gt;Enumerator();
+            }
+            #endregion
+        }
+        #endregion
+
+        static public IEnumerable&lt;&lt;#= sn #&gt;&gt; Sequence()
+        {
+            return new &lt;#= sn #&gt;Enumerable();
+        }
+    }
+&lt;#+
+        }
+    } // sbf
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
