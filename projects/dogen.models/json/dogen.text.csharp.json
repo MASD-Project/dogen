@@ -221,17 +221,35 @@
     },
     {
       "name": "transforms::test_data",
+      "documentation": "M2T transforms for the test data\nfacet of the C# Technical Space.\n",
       "stereotypes": [
         "masd::physical::facet"
       ],
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
       "name": "transforms::test_data::class_transform",
+      "documentation": "Generates implementation files for objects.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype",
+        "dogen::object_configuration"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/structural/object.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/test_data/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/test_data/class_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid class_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));\n    {\n        const auto sn(e.name().simple());\n        const auto qn(ast.get_qualified_name(e.name()));\n        auto sbf(ast.make_scoped_boilerplate_formatter(e));\n        {\n#>\nusing System;\nusing System.Collections;\nusing System.Collections.Generic;\n\n<#+\n            const auto ns(ast.make_namespaces(e.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const bool has_attributes(!o.all_attributes().empty());\n            const bool is_parent_or_has_attributes(\n                !o.parents().empty() || has_attributes);\n#>\n    /// <summary>\n    /// Generates sequences of <#= sn #>.\n    /// </summary>\n    public static class <#= sn #>SequenceGenerator\n    {\n        static internal void Populate(<#= sn #> value, uint position)\n        {\n<#+\n                if (!is_parent_or_has_attributes) {\n#>\n            // nothing to populate\n<#+\n                } else {\n                    unsigned int count(0);\n                    if (!o.parents().empty()) {\n                        const auto& pn(o.parents().front());\n                        const auto pqn(ast.get_qualified_name(pn));\n#>\n            <#= pqn #>SequenceGenerator.Populate(value, position);\n<#+\n                    }\n\n                    for (const auto& attr : o.local_attributes()) {\n                        const auto oap(ast.get_assistant_properties(attr));\n                        if (oap && oap->requires_assistance()) {\n#>\n            value.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);\n<#+\n                        } else {\n                            const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));\n#>\n            value.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position + <#= count++ #>);\n<#+\n                        }\n                    }\n                }\n#>\n        }\n\n        static internal <#= sn #> Create(uint position)\n        {\n<#+\n            if (!o.is_parent()) {\n#>\n            var result = new <#= sn #>();\n<#+\n                if (has_attributes) {\n#>\n            Populate(result, position);\n<#+\n                }\n#>\n            return result;\n<#+\n            } else {\n                auto leaves(o.leaves());\n                const auto front(leaves.front());\n                leaves.pop_front();\n                unsigned int i(0);\n                const auto total(static_cast<unsigned int>(leaves.size()));\n                for (const auto& l : leaves) {\n#>\n            if ((position % <#= total #>) == <#= i++ #>)\n                return <#= ast.get_qualified_name(l) #>SequenceGenerator.Create(position);\n<#+\n                }\n#>\n            return <#= ast.get_qualified_name(front) #>SequenceGenerator.Create(position);\n<#+\n            }\n#>\n        }\n\n        #region Enumerator\n        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable\n        {\n            #region Properties\n            private uint _position;\n            private <#= sn #> _current;\n            #endregion\n\n            private void PopulateCurrent()\n            {\n                _current = <#= sn #>SequenceGenerator.Create(_position);\n            }\n\n            #region IDisposable\n            public void Dispose()\n            {\n            }\n            #endregion\n\n            #region IEnumerator implementation\n            public bool MoveNext()\n            {\n                ++_position;\n                PopulateCurrent();\n                return true;\n            }\n\n            public void Reset()\n            {\n                _position = 0;\n                PopulateCurrent();\n            }\n\n            public object Current {\n                get\n                {\n                    return _current;\n                }\n            }\n\n            <#= sn #> IEnumerator<<#= sn #>>.Current\n            {\n                get\n                {\n                    return _current;\n                }\n            }\n            #endregion\n\n            public <#= sn #>Enumerator()\n            {\n                PopulateCurrent();\n            }\n        }\n        #endregion\n\n        #region Enumerable\n        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>\n        {\n            #region IEnumerable implementation\n            public IEnumerator GetEnumerator()\n            {\n                return new <#= sn #>Enumerator();\n            }\n\n            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()\n            {\n                return new <#= sn #>Enumerator();\n            }\n            #endregion\n        }\n        #endregion\n\n        static public IEnumerable<<#= sn #>> Sequence()\n        {\n            return new <#= sn #>Enumerable();\n        }\n    }\n<#+\n        }\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::test_data::enum_transform",
