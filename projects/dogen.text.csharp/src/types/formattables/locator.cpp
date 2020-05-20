@@ -279,4 +279,21 @@ boost::filesystem::path locator::make_full_path_for_solution(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_visual_studio_project(
+    const logical::entities::name& n, const std::string& archetype) const {
+    auto temp(n);
+    using boost::algorithm::join;
+    temp.simple(join(n.location().model_modules(), ".") + ".csproj");
+    return make_full_path_for_project(temp, archetype);
+}
+
+
+boost::filesystem::path locator::make_full_path_for_visual_studio_solution(
+    const logical::entities::name& n, const std::string& archetype) const {
+    auto temp(n);
+    using boost::algorithm::join;
+    temp.simple(join(n.location().model_modules(), ".") + ".sln");
+    return make_full_path_for_project(temp, archetype);
+}
+
 }

@@ -131,6 +131,12 @@ public:
     boost::filesystem::path make_full_path_for_solution(
         const logical::entities::name& n, const std::string& archetype) const;
 
+    boost::filesystem::path make_full_path_for_visual_studio_project(
+        const logical::entities::name& n, const std::string& archetype) const;
+
+    boost::filesystem::path make_full_path_for_visual_studio_solution(
+        const logical::entities::name& n, const std::string& archetype) const;
+
 private:
     const logical::entities::name& model_name_;
     const locator_configuration configuration_;
