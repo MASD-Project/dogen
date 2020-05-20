@@ -1080,10 +1080,32 @@
     },
     {
       "name": "transforms::visual_studio::solution_transform",
+      "documentation": "Generates visual studio solutions.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.visual_studio_solution",
+        "masd.wale.kvp.class.simple_name": "solution_transform",
+        "masd.wale.kvp.archetype.simple_name": "solution",
+        "masd.wale.kvp.meta_element": "visual_studio_solution",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.csharp.implementation",
+        "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_solution"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/visual_studio/solution.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/visual_studio/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid solution_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    using logical::entities::visual_studio::solution;\n    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));\n#>\nMicrosoft Visual Studio Solution File, Format Version 12.00\n# Visual Studio 2012\n<#+\n    for (const auto& ppb : sln.project_persistence_blocks()) {\n#>\nProject(\"{<#= ppb.type_guid() #>}\") = \"<#= ppb.name() #>\", \"<#= ppb.name() #>.csproj\", \"{<#= ppb.guid() #>}\"\nEndProject\n<#+\n    }\n#>\nGlobal\n    GlobalSection(SolutionConfigurationPlatforms) = preSolution\n        Debug|Any CPU = Debug|Any CPU\n        Release|Any CPU = Release|Any CPU\n    EndGlobalSection\n    GlobalSection(ProjectConfigurationPlatforms) = postSolution\n<#+\n    for (const auto& ppb : sln.project_persistence_blocks()) {\n#>\n        {<#= ppb.guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\n        {<#= ppb.guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU\n        {<#= ppb.guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU\n        {<#= ppb.guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU\n<#+\n    }\n#>\n    EndGlobalSection\n    GlobalSection(MonoDevelopProperties) = preSolution\n        StartupItem = CSharpModel.csproj\n    EndGlobalSection\nEndGlobal\n<#+\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "main",
