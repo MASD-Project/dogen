@@ -30,7 +30,6 @@
 #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
-
 physical::entities::archetype project_transform::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -48,8 +47,8 @@ physical::entities::archetype project_transform::archetype() const {
     return static_archetype();
 }
 
-boost::filesystem::path project_transform::
-full_path(const formattables::locator& l, const logical::entities::name& n) const {
+boost::filesystem::path project_transform::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().qualified());
 }
 

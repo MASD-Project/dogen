@@ -134,7 +134,7 @@
         <dia:point val="-17,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,4.15;206.05,82.05"/>
+        <dia:rectangle val="-17.05,4.15;219.05,82.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -143,7 +143,7 @@
         <dia:point val="-17,6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="223"/>
+        <dia:real val="236"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="76"/>
@@ -15320,7 +15320,7 @@ physical::entities::archetype {{class.simple_name}}::archetype() const {
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.make_full_path(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().qualified());
 }
 
 std::list&lt;std::string&gt; {{class.simple_name}}::
@@ -15772,7 +15772,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="163,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.95,44.15;205.05,80.05"/>
+        <dia:rectangle val="162.95,44.15;216.05,80.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15781,7 +15781,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="163,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="42"/>
+        <dia:real val="53"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="34"/>
@@ -15808,13 +15808,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="192,48"/>
+        <dia:point val="200,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="191.95,47.95;204.87,51.05"/>
+        <dia:rectangle val="199.95,47.95;212.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="192,48"/>
+        <dia:point val="200,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -15919,13 +15919,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="177,48"/>
+        <dia:point val="184,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="176.95,47.95;189.87,51.05"/>
+        <dia:rectangle val="183.95,47.95;196.87,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="177,48"/>
+        <dia:point val="184,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -16030,28 +16030,36 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="167,54"/>
+        <dia:point val="166,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="166.95,53.95;181.795,57.05"/>
+        <dia:rectangle val="165.95,53.95;188.88,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="167,54"/>
+        <dia:point val="166,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
+        <dia:string>#masd::physical::archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates visual studio project.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visual_studio_project
+#DOGEN masd.wale.kvp.class.simple_name=project_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=project
+#DOGEN masd.wale.kvp.meta_element=visual_studio_project
+#DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
+#DOGEN masd.physical.part_id=masd.csharp.implementation
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16090,7 +16098,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f7e5ff"/>
+        <dia:color val="#68d799"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -16131,7 +16139,124 @@ std::string {{class.simple_name}}::helper_name() const {
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+void project_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    using logical::entities::visual_studio::project;
+    const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().qualified(), e));
+
+#&gt;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;Configuration Condition=" '$(Configuration)' == '' "&gt;Debug&lt;/Configuration&gt;
+    &lt;Platform Condition=" '$(Platform)' == '' "&gt;AnyCPU&lt;/Platform&gt;
+    &lt;ProjectGuid&gt;{&lt;#= proj.guid() #&gt;}&lt;/ProjectGuid&gt;
+    &lt;OutputType&gt;Library&lt;/OutputType&gt;
+    &lt;RootNamespace&gt;&lt;#= proj.project_name() #&gt;&lt;/RootNamespace&gt;
+    &lt;AssemblyName&gt;&lt;#= proj.project_name() #&gt;&lt;/AssemblyName&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "&gt;
+    &lt;DebugSymbols&gt;true&lt;/DebugSymbols&gt;
+    &lt;DebugType&gt;full&lt;/DebugType&gt;
+    &lt;Optimize&gt;false&lt;/Optimize&gt;
+    &lt;OutputPath&gt;bin\Debug&lt;/OutputPath&gt;
+    &lt;DefineConstants&gt;DEBUG;&lt;/DefineConstants&gt;
+    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
+    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
+    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "&gt;
+    &lt;DebugType&gt;full&lt;/DebugType&gt;
+    &lt;Optimize&gt;true&lt;/Optimize&gt;
+    &lt;OutputPath&gt;bin\Release&lt;/OutputPath&gt;
+    &lt;ErrorReport&gt;prompt&lt;/ErrorReport&gt;
+    &lt;WarningLevel&gt;4&lt;/WarningLevel&gt;
+    &lt;ConsolePause&gt;false&lt;/ConsolePause&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;ItemGroup&gt;
+    &lt;Reference Include="System" /&gt;
+  &lt;/ItemGroup&gt;
+&lt;#+
+        for (const auto&amp; ig : proj.item_groups()) {
+#&gt;
+  &lt;ItemGroup&gt;
+&lt;#+
+            for (const auto&amp; i : ig.items())
+#&gt;
+    &lt;&lt;#= i.name() #&gt; Include="&lt;#= i.include() #&gt;" /&gt;
+  &lt;/ItemGroup&gt;
+&lt;#+
+        }
+#&gt;
+  &lt;Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /&gt;
+&lt;/Project&gt;
+&lt;#+
+    ast.update_artefact();
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -16141,13 +16266,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O119">
       <dia:attribute name="obj_pos">
-        <dia:point val="186,54"/>
+        <dia:point val="195,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="185.95,53.95;200.795,57.05"/>
+        <dia:rectangle val="194.95,53.95;209.795,57.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="186,54"/>
+        <dia:point val="195,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -17705,7 +17830,7 @@ using System.Collections.Specialized;
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#make_full_path_for_cpp_header#</dia:string>
+            <dia:string>#make_full_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -19401,6 +19526,61 @@ facet of the C# Technical Space.
         </dia:composite>
       </dia:attribute>
       <dia:childnode parent="O18"/>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O140">
+      <dia:attribute name="obj_pos">
+        <dia:point val="165,48"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="164.95,47.95;180.58,52.15"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="165,48"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="15.530000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="4.0999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#f0e68c"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#M2T transforms for the visual studio
+facet of the C# Technical Space.
+
+#DOGEN masd.injection.dia.comment=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="165.35,49.2441"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:childnode parent="O115"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

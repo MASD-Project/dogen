@@ -979,7 +979,7 @@
         {
           "name": "content",
           "type": "",
-          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(csharp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.make_full_path(n, archetype().meta_name().qualified());\n}\n\nstd::list<std::string> {{class.simple_name}}::\ninclusion_dependencies(const logical::entities::element& /*e*/) const {\n    std::list<std::string> r;\n    return r;\n}\n"
+          "documentation": "physical::entities::archetype {{class.simple_name}}::static_archetype() const {\n    static physical::entities::archetype r([]() {\n        physical::entities::archetype r;\n        using pmnf = physical::helpers::meta_name_factory;\n        r.meta_name(pmnf::make(csharp::traits::backend_sn(),\n            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));\n        using lmnf = {{meta_name_factory}};\n        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());\n        return r;\n    }());\n    return r;\n}\n\nphysical::entities::archetype {{class.simple_name}}::archetype() const {\n    return static_archetype();\n}\n\nboost::filesystem::path {{class.simple_name}}::full_path(\n    const formattables::locator& l, const logical::entities::name& n) const {\n    return l.{{locator_function}}(n, archetype().meta_name().qualified());\n}\n\nstd::list<std::string> {{class.simple_name}}::\ninclusion_dependencies(const logical::entities::element& /*e*/) const {\n    std::list<std::string> r;\n    return r;\n}\n"
         }
       ]
     },
@@ -1026,9 +1026,13 @@
     },
     {
       "name": "transforms::visual_studio",
+      "documentation": "M2T transforms for the visual studio\nfacet of the C# Technical Space.\n",
       "stereotypes": [
         "masd::physical::facet"
       ],
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -1047,10 +1051,32 @@
     },
     {
       "name": "transforms::visual_studio::project_transform",
+      "documentation": "Generates visual studio project.\n",
       "stereotypes": [
-        "dogen::csharp::artefact_transform"
+        "masd::physical::archetype"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.visual_studio_project",
+        "masd.wale.kvp.class.simple_name": "project_transform",
+        "masd.wale.kvp.archetype.simple_name": "project",
+        "masd.wale.kvp.meta_element": "visual_studio_project",
+        "masd.wale.kvp.meta_name_factory": "logical::helpers::meta_name_factory",
+        "masd.physical.part_id": "masd.csharp.implementation",
+        "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_project"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "",
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>\n<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>\n<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/formatters/sequence_formatter.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/visual_studio/project.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/visual_studio/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nvoid project_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), a);\n    using logical::entities::visual_studio::project;\n    const auto& proj(ast.as<project>(archetype().meta_name().qualified(), e));\n\n#>\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\n  <PropertyGroup>\n    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\n    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>\n    <ProjectGuid>{<#= proj.guid() #>}</ProjectGuid>\n    <OutputType>Library</OutputType>\n    <RootNamespace><#= proj.project_name() #></RootNamespace>\n    <AssemblyName><#= proj.project_name() #></AssemblyName>\n  </PropertyGroup>\n  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">\n    <DebugSymbols>true</DebugSymbols>\n    <DebugType>full</DebugType>\n    <Optimize>false</Optimize>\n    <OutputPath>bin\\Debug</OutputPath>\n    <DefineConstants>DEBUG;</DefineConstants>\n    <ErrorReport>prompt</ErrorReport>\n    <WarningLevel>4</WarningLevel>\n    <ConsolePause>false</ConsolePause>\n  </PropertyGroup>\n  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\n    <DebugType>full</DebugType>\n    <Optimize>true</Optimize>\n    <OutputPath>bin\\Release</OutputPath>\n    <ErrorReport>prompt</ErrorReport>\n    <WarningLevel>4</WarningLevel>\n    <ConsolePause>false</ConsolePause>\n  </PropertyGroup>\n  <ItemGroup>\n    <Reference Include=\"System\" />\n  </ItemGroup>\n<#+\n        for (const auto& ig : proj.item_groups()) {\n#>\n  <ItemGroup>\n<#+\n            for (const auto& i : ig.items())\n#>\n    <<#= i.name() #> Include=\"<#= i.include() #>\" />\n  </ItemGroup>\n<#+\n        }\n#>\n  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\n</Project>\n<#+\n    ast.update_artefact();\n}\n#>\n"
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "",
+          "value": "csharp_transform_implementation"
+        }
+      ]
     },
     {
       "name": "transforms::visual_studio::solution_transform",
@@ -1154,7 +1180,7 @@
         {
           "name": "masd.wale.kvp.locator_function",
           "type": "",
-          "value": "make_full_path_for_cpp_header"
+          "value": "make_full_path"
         }
       ]
     },
