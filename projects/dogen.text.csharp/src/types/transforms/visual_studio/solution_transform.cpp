@@ -51,9 +51,7 @@ physical::entities::archetype solution_transform::archetype() const {
 
 boost::filesystem::path solution_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
-    auto temp(n);
-    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
-    return l.make_full_path_for_project(temp, archetype().meta_name().qualified());
+    return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().qualified());
 }
 
 std::list<std::string> solution_transform::
