@@ -67,10 +67,56 @@ struct traits {
     static std::string archetype_class_implementation_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the stitch archetype.
+     * @brief Name of the archetype for the class header archetype.
      */
-    static std::string archetype_stitch_archetype_qn();
-    static std::string archetype_stitch_archetype_sn();
+    static std::string facet_class_header_archetype_qn();
+    static std::string facet_class_header_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string facet_class_implementation_archetype_qn();
+    static std::string facet_class_implementation_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string backend_class_header_archetype_qn();
+    static std::string backend_class_header_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string backend_class_implementation_archetype_qn();
+    static std::string backend_class_implementation_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string part_class_header_archetype_qn();
+    static std::string part_class_header_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string part_class_implementation_archetype_qn();
+    static std::string part_class_implementation_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string archetype_kind_class_header_archetype_qn();
+    static std::string archetype_kind_class_header_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string archetype_kind_class_implementation_archetype_qn();
+    static std::string archetype_kind_class_implementation_archetype_sn();
 
     /**
      * @brief Name of the forward declaration's archetype.
