@@ -13,32 +13,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-20 Wed 22:40]
+#+CAPTION: Clock summary at [2020-05-21 Thu 22:51]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *48:42* |       |       | 100.0 |
+| *Total time*                                          | *49:31* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 48:42   |       |       | 100.0 |
-| Active                                                |         | 48:42 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  12.2 |
+| Stories                                               | 49:31   |       |       | 100.0 |
+| Active                                                |         | 49:31 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  12.0 |
 | Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.6 |
-| Sprint and product backlog grooming                   |         |       |  1:00 |   2.1 |
+| Sprint and product backlog grooming                   |         |       |  1:10 |   2.4 |
 | Nightly nursing                                       |         |       |  0:11 |   0.4 |
-| Check name of model for variability transform         |         |       |  0:19 |   0.7 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.4 |
+| Check name of model for variability transform         |         |       |  0:19 |   0.6 |
+| Analysis on templating and logical model              |         |       |  1:09 |   2.3 |
 | Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.9 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.4 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   3.4 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.4 |
-| Move decoration transform into logical model          |         |       |  5:33 |  11.4 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   7.2 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   3.3 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   3.3 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   2.3 |
+| Move decoration transform into logical model          |         |       |  5:33 |  11.2 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   7.1 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   2.1 |
 | Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.9 |
-| Profiles do not support collection types              |         |       |  4:13 |   8.7 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  36.0 |
+| Profiles do not support collection types              |         |       |  4:13 |   8.5 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  35.4 |
 | Create an encoder for org-mode                        |         |       |  1:31 |   3.1 |
+| Create archetypes for all physical elements           |         |       |  0:39 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -602,6 +603,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-21 Thu 22:02]--[2020-05-21 Thu 22:12] =>  0:10
     CLOCK: [2020-05-09 Sat 09:03]--[2020-05-09 Sat 09:23] =>  0:20
     CLOCK: [2020-05-08 Fri 11:01]--[2020-05-08 Fri 11:24] =>  0:21
     CLOCK: [2020-05-08 Fri 09:36]--[2020-05-08 Fri 09:50] =>  0:14
@@ -1195,6 +1197,20 @@ Notes:
   we've finished converting all formatters including C#.
 - archetype initialiser will be implemented in terms of facets.
 
+*** STARTED Create archetypes for all physical elements               :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-21 Thu 22:12]--[2020-05-21 Thu 22:51] =>  0:39
+    :END:
+
+At present we are missing archetypes for:
+
+- facet
+- backend
+- part
+- archetype kind
+
+Add these.
+
 *** Split =text= from the kernel                                      :story:
 
 At present we have conflated the MASD kernel with =text=. In reality
@@ -1216,6 +1232,17 @@ obvious if we had more than one kernel. The best way to avoid this is:
 - leave all transforms which aren't kernel specific in =text=. It will
   also contain all of the T2T infrastructure.
 
+*** Consider renaming =wale= to =tangle=                              :story:
+
+Wale and stitch are remnant from the sewing days. Whilst stitch is
+still vaguely appropriate, we can't even remember what wale stands
+for. We should use a more domain-specific term such as weave or
+tangle. In fact, we probably should rename =stitch= to =weave= given
+it weaves text with code, and find a better name for wale. Its not
+"tangling" (given tangling, as we understand it from org-mode, is just
+another name for weaving). We need to look into logic-less templates
+terminology.
+
 *** Do not hard-code the kernel                                       :story:
 
 It seems quite obvious a EMF/MOF based kernel will come at some point
@@ -1230,17 +1257,6 @@ enough:
 Though we've split wale out of stitch in the logical model, its still
 possible to instantiate a wale template within stitch. We should
 remove this as well.
-
-*** Remove =class.simple_name= variable                               :story:
-
-In the past we thought it was a good idea to separate the archetype
-name (e.g. ={{archetype.simple_name}}=) from the class name
-(e.g. =class.simple_name=). This was done so that the templates would
-be more "flexible" and more explicit. However, it turns out we don't
-want flexibility; we want structural consistency. That is to say we
-want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
-we should enforce this by deducing these parameters from the logical
-model element and other wale template parameters.
 
 *** Replace uses of traits in archetype initialisation                :story:
 
@@ -1285,6 +1301,19 @@ We have a number of keys that can be derived:
 - the class simple name can be derived from the archetype name or even
   from the class name itself.
 
+Merged stories:
+
+*Remove =class.simple_name= variable*
+
+In the past we thought it was a good idea to separate the archetype
+name (e.g. ={{archetype.simple_name}}=) from the class name
+(e.g. =class.simple_name=). This was done so that the templates would
+be more "flexible" and more explicit. However, it turns out we don't
+want flexibility; we want structural consistency. That is to say we
+want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
+we should enforce this by deducing these parameters from the logical
+model element and other wale template parameters.
+
 *** Add documentation to archetypes headers                           :story:
 
 At present we are ignoring the documentation we supply with the
@@ -1298,7 +1327,7 @@ responsibilities. One case is the stitching properties factory, traits
 etc. We should merge all of this into a single class, properties
 factory.
 
-*** Allow converting to =std::out=                                    :story:
+*** Allow convert output to =std_out=                                 :story:
 
 It would be nice to be able to supply the injector destination instead
 of a full path to destination, and dump the ouptut to =std::out=. Its
@@ -1529,11 +1558,6 @@ Actually its not yet clear if the existing logic could not be extended
 to other template types. We should wait until we implement it front to
 back and then make
 
-*** Add PMM enablement transform                                      :story:
-
-This transform reads the global enablement flags for backend, facet
-and archetype. It is done as part of the chain to produce the PMM.
-
 *** Rename "model-to-X" to TLAs                                       :story:
 
 Given that model-to-text and text-to-model (to a lesser extent) are
@@ -1613,6 +1637,11 @@ We also need a way to populate the dependencies as a transform. This
 must be done in =m2t= because we need the formatters. We can rely on
 the same approach as =inclusion_dependencies= but instead of creating
 /inclusion dependencies/, we are just creating /dependencies/.
+
+*** Add PMM enablement transform                                      :story:
+
+This transform reads the global enablement flags for backend, facet
+and archetype. It is done as part of the chain to produce the PMM.
 
 *** Add a PM enablement and overwrite transform                       :story:
 
