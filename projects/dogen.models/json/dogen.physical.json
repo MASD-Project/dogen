@@ -1254,6 +1254,20 @@
           "documentation": "All models that are a member of this set.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::meta_model_production_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::index_kernel_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
