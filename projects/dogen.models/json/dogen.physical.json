@@ -34,6 +34,10 @@
     },
     {
       "name": "entities",
+      "documentation": "Defines the MASD physical space.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -65,6 +69,10 @@
     },
     {
       "name": "helpers",
+      "documentation": "Helpers for the physical model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -493,6 +501,10 @@
     },
     {
       "name": "features",
+      "documentation": "Features for the MASD physical model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -947,6 +959,10 @@
     },
     {
       "name": "transforms",
+      "documentation": "Contains all of the transforms needed to produce\nmodels and meta-models for the physical model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
