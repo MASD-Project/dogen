@@ -22,6 +22,10 @@
   "elements": [
     {
       "name": "transforms",
+      "documentation": "Top-level transforms for Dogen. These are\nthe entry points to all transformations.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -122,6 +126,10 @@
     },
     {
       "name": "helpers",
+      "documentation": "Helpers for the orchestration model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -190,7 +198,7 @@
     },
     {
       "name": "features",
-      "documentation": "Features for the engine model.\n",
+      "documentation": "Features for the orchestration model.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },

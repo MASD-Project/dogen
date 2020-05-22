@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_FEATURES_FEATURES_HPP
-#define DOGEN_ORCHESTRATION_TYPES_FEATURES_FEATURES_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_HELPERS_HPP
+#define DOGEN_ORCHESTRATION_TYPES_HELPERS_HELPERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 /**
- * @brief Features for the orchestration model.
+ * @brief Helpers for the orchestration model.
  */
 namespace dogen::orchestration {
 }

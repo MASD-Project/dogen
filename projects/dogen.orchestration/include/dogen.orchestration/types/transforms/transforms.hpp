@@ -18,15 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_FEATURES_FEATURES_HPP
-#define DOGEN_ORCHESTRATION_TYPES_FEATURES_FEATURES_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_TRANSFORMS_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_TRANSFORMS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 /**
- * @brief Features for the orchestration model.
+ * @brief Top-level transforms for Dogen. These are
+ * the entry points to all transformations.
  */
 namespace dogen::orchestration {
 }
