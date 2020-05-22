@@ -9,8 +9,9 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/test_data/dogen_product.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
-#include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
+#include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen/types/tracing_backend.hpp"
 
@@ -124,9 +125,18 @@ configuration setup_reporting_configuration(const path& target,
 void apply_transforms(const configuration& cfg, const path& output_dir,
     const path& target) {
 
+    /*
+     * Generate the context.
+     */
     using namespace dogen::orchestration::transforms;
-    scoped_context_manager sco(cfg, run_activity, output_dir);
-    const auto ctx(sco.context());
+    const auto& a(run_activity);
+    const auto ctx(context_factory::make_context(cfg, a, output_dir));
+
+    /*
+     * Bind the tracer to the current scope.
+     */
+    const auto& t(*ctx.injection_context().tracer());
+    dogen::tracing::scoped_tracer st(t);
 
     /*
      * Produce the physical model.

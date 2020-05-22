@@ -28,10 +28,11 @@
 #include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/operation_reason_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
+#include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace  {
@@ -92,8 +93,14 @@ apply_physical_model_production(const boost::filesystem::path& target,
      * Create the context.
      */
     using namespace dogen::orchestration::transforms;
-    scoped_context_manager sco(cfg, run_activity, output_dir);
-    const auto ctx(sco.context());
+    const auto& a(run_activity);
+    const auto ctx(context_factory::make_context(cfg, a, output_dir));
+
+    /*
+     * Bind the tracer to the current scope.
+     */
+    const auto& t(*ctx.injection_context().tracer());
+    dogen::tracing::scoped_tracer st(t);
 
     /*
      * Produce the physical model.
