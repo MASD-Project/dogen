@@ -31,6 +31,21 @@
 
 namespace dogen::tracing {
 
+/**
+ * @brief Top-level scoped tracer. Signals the end of the run.
+ */
+class scoped_tracer final {
+public:
+    scoped_tracer(const tracer& tp) : tracer_(tp) {}
+    ~scoped_tracer() { tracer_.end_run(); }
+
+private:
+    const tracer& tracer_;
+};
+
+/**
+ * @brief Scoped tracer for a transform chain.
+ */
 class scoped_chain_tracer final {
 private:
     static std::string generate_guid();
@@ -99,6 +114,9 @@ private:
     const std::string transform_instance_id_;
 };
 
+/**
+ * @brief Scoped tracer for a regular transform.
+ */
 class scoped_transform_tracer final {
 private:
     static std::string generate_guid();
