@@ -30,7 +30,7 @@
 #include <algorithm>
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
 
@@ -46,7 +46,7 @@ public:
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::list<dogen::physical::entities::backend>& backends,
-        const dogen::physical::entities::meta_name_repository& names);
+        const dogen::physical::entities::meta_name_indices& indexed_names);
 
 public:
     /**
@@ -75,13 +75,13 @@ public:
     void backends(const std::list<dogen::physical::entities::backend>&& v);
 
     /**
-     * @brief Repository with all the meta-names in this kernel.
+     * @brief Repository with all the meta-names in this kernel, indexed appropriately.
      */
     /**@{*/
-    const dogen::physical::entities::meta_name_repository& names() const;
-    dogen::physical::entities::meta_name_repository& names();
-    void names(const dogen::physical::entities::meta_name_repository& v);
-    void names(const dogen::physical::entities::meta_name_repository&& v);
+    const dogen::physical::entities::meta_name_indices& indexed_names() const;
+    dogen::physical::entities::meta_name_indices& indexed_names();
+    void indexed_names(const dogen::physical::entities::meta_name_indices& v);
+    void indexed_names(const dogen::physical::entities::meta_name_indices&& v);
     /**@}*/
 
 public:
@@ -98,7 +98,7 @@ private:
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::list<dogen::physical::entities::backend> backends_;
-    dogen::physical::entities::meta_name_repository names_;
+    dogen::physical::entities::meta_name_indices indexed_names_;
 };
 
 }

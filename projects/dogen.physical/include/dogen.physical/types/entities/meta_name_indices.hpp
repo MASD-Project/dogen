@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_INDICES_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_INDICES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,17 +36,17 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Repository containing physical meta-names, indexed as required by use cases.
+ * @brief Containing physical meta-names, indexed as required by use cases.
  */
-class meta_name_repository final {
+class meta_name_indices final {
 public:
-    meta_name_repository() = default;
-    meta_name_repository(const meta_name_repository&) = default;
-    meta_name_repository(meta_name_repository&&) = default;
-    ~meta_name_repository() = default;
+    meta_name_indices() = default;
+    meta_name_indices(const meta_name_indices&) = default;
+    meta_name_indices(meta_name_indices&&) = default;
+    ~meta_name_indices() = default;
 
 public:
-    meta_name_repository(
+    meta_name_indices(
         const std::list<dogen::physical::entities::meta_name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
@@ -105,14 +105,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const meta_name_repository& rhs) const;
-    bool operator!=(const meta_name_repository& rhs) const {
+    bool operator==(const meta_name_indices& rhs) const;
+    bool operator!=(const meta_name_indices& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(meta_name_repository& other) noexcept;
-    meta_name_repository& operator=(meta_name_repository other);
+    void swap(meta_name_indices& other) noexcept;
+    meta_name_indices& operator=(meta_name_indices other);
 
 private:
     std::list<dogen::physical::entities::meta_name> all_;
@@ -128,8 +128,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::meta_name_repository& lhs,
-    dogen::physical::entities::meta_name_repository& rhs) {
+    dogen::physical::entities::meta_name_indices& lhs,
+    dogen::physical::entities::meta_name_indices& rhs) {
     lhs.swap(rhs);
 }
 

@@ -30,7 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.text/types/entities/element_archetype.hpp"
 #include "dogen.text/types/entities/backend_properties.hpp"
@@ -68,21 +68,21 @@ private:
 private:
     static std::unordered_map<std::string, backend_feature_group>
     make_backend_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp);
+        const physical::entities::meta_name_indices& nrp);
 
     static std::unordered_map<std::string, facet_feature_group>
     make_facet_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp);
+        const physical::entities::meta_name_indices& nrp);
 
     static std::unordered_map<std::string, global_archetype_feature_group>
     make_global_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp);
+        const physical::entities::meta_name_indices& nrp);
 
     static std::unordered_map<std::string, local_archetype_feature_group>
     make_local_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp);
+        const physical::entities::meta_name_indices& nrp);
 
 private:
     static std::unordered_map<std::string, entities::backend_properties>
@@ -103,7 +103,7 @@ private:
 
     static void populate_global_enablement_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp,
+        const physical::entities::meta_name_indices& nrp,
         entities::model& m);
 
     static std::unordered_map<
@@ -116,7 +116,7 @@ private:
 
     static void populate_local_enablement_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_repository& nrp,
+        const physical::entities::meta_name_indices& nrp,
         entities::model& m);
 
 public:

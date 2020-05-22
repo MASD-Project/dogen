@@ -26,25 +26,25 @@ kernel::kernel(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::list<dogen::physical::entities::backend>& backends,
-    const dogen::physical::entities::meta_name_repository& names)
+    const dogen::physical::entities::meta_name_indices& indexed_names)
     : description_(description),
       meta_name_(meta_name),
       backends_(backends),
-      names_(names) { }
+      indexed_names_(indexed_names) { }
 
 void kernel::swap(kernel& other) noexcept {
     using std::swap;
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(backends_, other.backends_);
-    swap(names_, other.names_);
+    swap(indexed_names_, other.indexed_names_);
 }
 
 bool kernel::operator==(const kernel& rhs) const {
     return description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         backends_ == rhs.backends_ &&
-        names_ == rhs.names_;
+        indexed_names_ == rhs.indexed_names_;
 }
 
 kernel& kernel::operator=(kernel other) {
@@ -101,20 +101,20 @@ void kernel::backends(const std::list<dogen::physical::entities::backend>&& v) {
     backends_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name_repository& kernel::names() const {
-    return names_;
+const dogen::physical::entities::meta_name_indices& kernel::indexed_names() const {
+    return indexed_names_;
 }
 
-dogen::physical::entities::meta_name_repository& kernel::names() {
-    return names_;
+dogen::physical::entities::meta_name_indices& kernel::indexed_names() {
+    return indexed_names_;
 }
 
-void kernel::names(const dogen::physical::entities::meta_name_repository& v) {
-    names_ = v;
+void kernel::indexed_names(const dogen::physical::entities::meta_name_indices& v) {
+    indexed_names_ = v;
 }
 
-void kernel::names(const dogen::physical::entities::meta_name_repository&& v) {
-    names_ = std::move(v);
+void kernel::indexed_names(const dogen::physical::entities::meta_name_indices&& v) {
+    indexed_names_ = std::move(v);
 }
 
 }

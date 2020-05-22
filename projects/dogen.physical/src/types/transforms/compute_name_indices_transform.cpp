@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/transforms/index_kernel_properties_transform.hpp"
+#include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
 
 namespace dogen::physical::transforms {
 
-bool index_kernel_properties_transform::operator==(const index_kernel_properties_transform& /*rhs*/) const {
+bool compute_name_indices_transform::operator==(const compute_name_indices_transform& /*rhs*/) const {
     return true;
 }
 

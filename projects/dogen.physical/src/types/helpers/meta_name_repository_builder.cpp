@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_indices_io.hpp"
 #include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
 
@@ -165,7 +165,7 @@ add(const entities::meta_name_repository_parts& parts) {
     add(parts.by_logical_meta_name());
 }
 
-const entities::meta_name_repository& meta_name_repository_builder::build() {
+const entities::meta_name_indices& meta_name_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();
     populate_archetypes_by_facet_by_backend();

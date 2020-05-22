@@ -23,7 +23,7 @@
 #include "dogen.physical/io/entities/kernel_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const kernel& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"backends\": " << v.backends() << ", "
-      << "\"names\": " << v.names()
+      << "\"indexed_names\": " << v.indexed_names()
       << " }";
     return(s);
 }

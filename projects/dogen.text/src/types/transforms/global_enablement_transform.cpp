@@ -61,7 +61,7 @@ std::unordered_map<
     global_enablement_transform::backend_feature_group>
 global_enablement_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& mnrp) {
+    const physical::entities::meta_name_indices& mnrp) {
     std::unordered_map<std::string, backend_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -81,7 +81,7 @@ std::unordered_map<
     global_enablement_transform::facet_feature_group>
 global_enablement_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& nrp) {
+    const physical::entities::meta_name_indices& nrp) {
     std::unordered_map<std::string, facet_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -105,7 +105,7 @@ std::unordered_map<
     global_enablement_transform::global_archetype_feature_group>
 global_enablement_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& nrp) {
+    const physical::entities::meta_name_indices& nrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -127,7 +127,7 @@ std::unordered_map<
     global_enablement_transform::local_archetype_feature_group>
 global_enablement_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& nrp) {
+    const physical::entities::meta_name_indices& nrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -222,7 +222,7 @@ global_enablement_transform::obtain_archetype_properties(
 
 void global_enablement_transform::populate_global_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& nrp,
+    const physical::entities::meta_name_indices& nrp,
     entities::model& m) {
 
     const auto bftg(make_backend_feature_group(fm, nrp));
@@ -340,7 +340,7 @@ global_enablement_transform::obtain_local_enablement_properties(
 
 void global_enablement_transform::populate_local_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_repository& nrp,
+    const physical::entities::meta_name_indices& nrp,
     entities::model& m) {
     /*
      * Computes all of the possible features for every physical
@@ -399,7 +399,7 @@ apply(const context& ctx, entities::model& m) {
 
     const auto &fm(*ctx.feature_model());
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.names());
+    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
     populate_global_enablement_properties(fm, nrp, m);
     populate_local_enablement_properties(fm, nrp, m);
 

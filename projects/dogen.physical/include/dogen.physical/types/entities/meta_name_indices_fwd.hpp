@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_META_NAME_REPOSITORY_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_META_NAME_REPOSITORY_IO_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_INDICES_FWD_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_INDICES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
-
 namespace dogen::physical::entities {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::physical::entities::meta_name_repository& v);
+class meta_name_indices;
 
 }
 

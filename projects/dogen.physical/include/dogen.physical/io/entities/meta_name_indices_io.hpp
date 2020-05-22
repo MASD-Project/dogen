@@ -18,32 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_INDEX_KERNEL_PROPERTIES_TRANSFORM_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_INDEX_KERNEL_PROPERTIES_TRANSFORM_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_META_NAME_INDICES_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_META_NAME_INDICES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 
-namespace dogen::physical::transforms {
+namespace dogen::physical::entities {
 
-class index_kernel_properties_transform final {
-public:
-    index_kernel_properties_transform() = default;
-    index_kernel_properties_transform(const index_kernel_properties_transform&) = default;
-    index_kernel_properties_transform(index_kernel_properties_transform&&) = default;
-    ~index_kernel_properties_transform() = default;
-    index_kernel_properties_transform& operator=(const index_kernel_properties_transform&) = default;
-
-public:
-    bool operator==(const index_kernel_properties_transform& rhs) const;
-    bool operator!=(const index_kernel_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::meta_name_indices& v);
 
 }
 

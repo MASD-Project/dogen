@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/facet_properties_io.hpp"
@@ -363,7 +363,7 @@ apply(const context& ctx, entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.names());
+    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
     const auto& lmn(nrp.by_logical_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());

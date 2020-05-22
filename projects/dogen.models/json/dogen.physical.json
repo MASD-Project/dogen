@@ -99,8 +99,8 @@
       ]
     },
     {
-      "name": "entities::meta_name_repository",
-      "documentation": "Repository containing physical meta-names, indexed as required by use cases.\n",
+      "name": "entities::meta_name_indices",
+      "documentation": "Containing physical meta-names, indexed as required by use cases.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -195,9 +195,9 @@
           "type": "std::list<backend>"
         },
         {
-          "name": "names",
-          "type": "meta_name_repository",
-          "documentation": "Repository with all the meta-names in this kernel.\n"
+          "name": "indexed_names",
+          "type": "meta_name_indices",
+          "documentation": "Repository with all the meta-names in this kernel, indexed appropriately.\n"
         }
       ]
     },
@@ -1263,7 +1263,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::index_kernel_properties_transform",
+      "name": "transforms::compute_name_indices_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

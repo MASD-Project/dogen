@@ -100,7 +100,7 @@ private:
          * text.
          */
         const auto& pmm(physical_meta_model_);
-        const auto& nrp(pmm.kernels().cbegin()->second.names());
+        const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
         const auto& lmn(nrp.by_logical_meta_name());
         const auto mn(e->meta_name().qualified().dot());
         const auto i(lmn.find(mn));

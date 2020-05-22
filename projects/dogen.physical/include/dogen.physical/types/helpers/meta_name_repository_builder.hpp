@@ -29,7 +29,7 @@
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.physical/types/entities/meta_name_repository_parts.hpp"
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -50,10 +50,10 @@ public:
     void add(const entities::meta_name_repository_parts& parts);
 
 public:
-    const entities::meta_name_repository& build();
+    const entities::meta_name_indices& build();
 
 private:
-    entities::meta_name_repository repository_;
+    entities::meta_name_indices repository_;
 };
 
 }

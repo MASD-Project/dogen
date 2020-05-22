@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_REPOSITORY_FWD_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_COMPUTE_NAME_INDICES_TRANSFORM_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_COMPUTE_NAME_INDICES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::physical::entities {
+#include <algorithm>
 
-class meta_name_repository;
+namespace dogen::physical::transforms {
+
+class compute_name_indices_transform final {
+public:
+    compute_name_indices_transform() = default;
+    compute_name_indices_transform(const compute_name_indices_transform&) = default;
+    compute_name_indices_transform(compute_name_indices_transform&&) = default;
+    ~compute_name_indices_transform() = default;
+    compute_name_indices_transform& operator=(const compute_name_indices_transform&) = default;
+
+public:
+    bool operator==(const compute_name_indices_transform& rhs) const;
+    bool operator!=(const compute_name_indices_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 

@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
 
-meta_name_repository::meta_name_repository(
+meta_name_indices::meta_name_indices(
     const std::list<dogen::physical::entities::meta_name>& all,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
@@ -34,7 +34,7 @@ meta_name_repository::meta_name_repository(
       by_logical_meta_name_(by_logical_meta_name),
       by_backend_by_facet_(by_backend_by_facet) { }
 
-void meta_name_repository::swap(meta_name_repository& other) noexcept {
+void meta_name_indices::swap(meta_name_indices& other) noexcept {
     using std::swap;
     swap(all_, other.all_);
     swap(facet_names_by_backend_name_, other.facet_names_by_backend_name_);
@@ -43,7 +43,7 @@ void meta_name_repository::swap(meta_name_repository& other) noexcept {
     swap(by_backend_by_facet_, other.by_backend_by_facet_);
 }
 
-bool meta_name_repository::operator==(const meta_name_repository& rhs) const {
+bool meta_name_indices::operator==(const meta_name_indices& rhs) const {
     return all_ == rhs.all_ &&
         facet_names_by_backend_name_ == rhs.facet_names_by_backend_name_ &&
         formatter_names_by_backend_name_ == rhs.formatter_names_by_backend_name_ &&
@@ -51,89 +51,89 @@ bool meta_name_repository::operator==(const meta_name_repository& rhs) const {
         by_backend_by_facet_ == rhs.by_backend_by_facet_;
 }
 
-meta_name_repository& meta_name_repository::operator=(meta_name_repository other) {
+meta_name_indices& meta_name_indices::operator=(meta_name_indices other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::physical::entities::meta_name>& meta_name_repository::all() const {
+const std::list<dogen::physical::entities::meta_name>& meta_name_indices::all() const {
     return all_;
 }
 
-std::list<dogen::physical::entities::meta_name>& meta_name_repository::all() {
+std::list<dogen::physical::entities::meta_name>& meta_name_indices::all() {
     return all_;
 }
 
-void meta_name_repository::all(const std::list<dogen::physical::entities::meta_name>& v) {
+void meta_name_indices::all(const std::list<dogen::physical::entities::meta_name>& v) {
     all_ = v;
 }
 
-void meta_name_repository::all(const std::list<dogen::physical::entities::meta_name>&& v) {
+void meta_name_indices::all(const std::list<dogen::physical::entities::meta_name>&& v) {
     all_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_repository::facet_names_by_backend_name() const {
+const std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_indices::facet_names_by_backend_name() const {
     return facet_names_by_backend_name_;
 }
 
-std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_repository::facet_names_by_backend_name() {
+std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_indices::facet_names_by_backend_name() {
     return facet_names_by_backend_name_;
 }
 
-void meta_name_repository::facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
+void meta_name_indices::facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
     facet_names_by_backend_name_ = v;
 }
 
-void meta_name_repository::facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
+void meta_name_indices::facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
     facet_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_repository::formatter_names_by_backend_name() const {
+const std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_indices::formatter_names_by_backend_name() const {
     return formatter_names_by_backend_name_;
 }
 
-std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_repository::formatter_names_by_backend_name() {
+std::unordered_map<std::string, std::unordered_set<std::string> >& meta_name_indices::formatter_names_by_backend_name() {
     return formatter_names_by_backend_name_;
 }
 
-void meta_name_repository::formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
+void meta_name_indices::formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
     formatter_names_by_backend_name_ = v;
 }
 
-void meta_name_repository::formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
+void meta_name_indices::formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v) {
     formatter_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_repository::by_logical_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_indices::by_logical_meta_name() const {
     return by_logical_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_repository::by_logical_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_indices::by_logical_meta_name() {
     return by_logical_meta_name_;
 }
 
-void meta_name_repository::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
+void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
     by_logical_meta_name_ = v;
 }
 
-void meta_name_repository::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v) {
+void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v) {
     by_logical_meta_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& meta_name_repository::by_backend_by_facet() const {
+const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& meta_name_indices::by_backend_by_facet() const {
     return by_backend_by_facet_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& meta_name_repository::by_backend_by_facet() {
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& meta_name_indices::by_backend_by_facet() {
     return by_backend_by_facet_;
 }
 
-void meta_name_repository::by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v) {
+void meta_name_indices::by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v) {
     by_backend_by_facet_ = v;
 }
 
-void meta_name_repository::by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v) {
+void meta_name_indices::by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v) {
     by_backend_by_facet_ = std::move(v);
 }
 

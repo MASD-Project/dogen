@@ -24,7 +24,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/meta_name_repository.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
@@ -140,7 +140,7 @@ void extraction_properties_transform::apply(const context& ctx,
         transform_id, transform_id, *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.names());
+    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
     const auto& ns(nrp.all());
     const auto& cfg(*m.root_module()->configuration());
     const auto ep(make_extraction_properties(ctx, ns, cfg));

@@ -26,7 +26,7 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/io/entities/meta_name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_name_indices_io.hpp"
 #include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
@@ -78,7 +78,7 @@ create_physical_meta_model(
     auto r(boost::make_shared<meta_model>());
 
     const auto nrp(b.build());
-    r->kernels()["masd"].names(nrp);
+    r->kernels()["masd"].indexed_names(nrp);
 
     /*
      * Obtain the template instantiation domains.
@@ -159,7 +159,7 @@ make_context(const configuration& cfg, const std::string& activity,
      * Obtain the physical meta-model.
      */
     const auto pmm(create_physical_meta_model(rg));
-    const auto& nrp(pmm->kernels().begin()->second.names());
+    const auto& nrp(pmm->kernels().begin()->second.indexed_names());
     vctx.template_instantiation_domains(pmm->template_instantiation_domains());
 
     /*
