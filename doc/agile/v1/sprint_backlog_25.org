@@ -13,33 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-21 Thu 22:51]
+#+CAPTION: Clock summary at [2020-05-22 Fri 12:41]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *49:31* |       |       | 100.0 |
+| *Total time*                                          | *51:36* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 49:31   |       |       | 100.0 |
-| Active                                                |         | 49:31 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  12.0 |
-| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.6 |
-| Sprint and product backlog grooming                   |         |       |  1:10 |   2.4 |
+| Stories                                               | 51:36   |       |       | 100.0 |
+| Active                                                |         | 51:36 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  11.5 |
+| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.5 |
+| Sprint and product backlog grooming                   |         |       |  1:10 |   2.3 |
 | Nightly nursing                                       |         |       |  0:11 |   0.4 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.6 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.3 |
+| Analysis on templating and logical model              |         |       |  1:09 |   2.2 |
 | Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.9 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.3 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   3.3 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.3 |
-| Move decoration transform into logical model          |         |       |  5:33 |  11.2 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   7.1 |
-| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   2.1 |
-| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.9 |
-| Profiles do not support collection types              |         |       |  4:13 |   8.5 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  35.4 |
-| Create an encoder for org-mode                        |         |       |  1:31 |   3.1 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   3.2 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   3.2 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   2.2 |
+| Move decoration transform into logical model          |         |       |  5:33 |  10.8 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   6.8 |
+| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   2.0 |
+| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.8 |
+| Profiles do not support collection types              |         |       |  4:13 |   8.2 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  33.9 |
 | Create archetypes for all physical elements           |         |       |  0:39 |   1.3 |
+| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   2.1 |
+| Create an encoder for org-mode                        |         |       |  1:31 |   2.9 |
+| Create a PMM chain in physical model                  |         |       |  0:59 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1166,6 +1168,74 @@ Notes:
 - replace the hard-coded make full path function in locator with a
   wale KVP. Add the KVP to all artefacts.
 
+*** COMPLETED Create archetypes for all physical elements             :story:
+    CLOSED: [2020-05-22 Fri 10:58]
+    :LOGBOOK:
+    CLOCK: [2020-05-21 Thu 22:12]--[2020-05-21 Thu 22:51] =>  0:39
+    :END:
+
+At present we are missing archetypes for:
+
+- facet
+- backend
+- part
+- archetype kind
+
+Add these.
+
+*** COMPLETED Analysis on how to build PMM from archetypes in text    :story:
+    CLOSED: [2020-05-22 Fri 11:01]
+    :LOGBOOK:
+    CLOCK: [2020-05-22 Fri 10:58]--[2020-05-22 Fri 11:01] =>  0:03
+    CLOCK: [2020-05-22 Fri 09:54]--[2020-05-22 Fri 10:57] =>  1:03
+    :END:
+
+At present we are building the PMM all over the place: some of it is
+in orchestration (context factory), some of it is in physical model
+(=meta_name_repository_builder=), some of it comes from the text
+entities such as registrar etc. We need to do some analysis on how to
+unify all of this mess into a comprehensible whole.
+
+Notes:
+
+- State of the onion. At present we have:
+
+  - =physical=: =meta_name_repository=,
+    =meta_name_repository_builder=: these should be in kernel.
+  - =text.cpp=, =text.csharp=: the initializer code should be in each
+    facet.
+  - =text.cpp=, =text.csharp=: the registrar code related to
+    formatters should probably be in backend.
+  - =text.cpp=, =text.csharp=: traits should not be used. We should
+    either use the string directly (e.g. in archetype definition) or
+    make specific references to archetypes (e.g. when referring to an
+    external archetype).
+- to do this much coding using stitch will not be practical because
+  the development cycles would be too long. A solution is to mark all
+  of these types as =override=false=. This would allow us to handcraft
+  all the code until we get it to work, and then use the diffs to
+  update the templates. We can even do them incrementally by setting
+  override to true one element at a time.
+- there is no longer a registrar for formatters or a workflow;
+  instead, the backend becomes the workflow. The "registration" is
+  static, obtained from code generation: the backend calls apply on
+  the facet which calls apply on the archetypes. If we ever need
+  extensibility, we need to design a plugin system for facets and
+  archetypes. For now, its all statically determined - i.e. at compile
+  time/generation time. Once we create a proper kernel and merge all
+  text models we can apply the exact same logic to kernels as
+  well. For now we need some kind of backend registration (as already
+  exists in =text=).
+
+In conclusion:
+
+- the generation of the PMM must be unified by calling the "raw
+  materials" from text entities, and then processing these via chains
+  in physical model until the entire PMM is built.
+- the generation of text must be unified by moving the work done in
+  some of the text classes such as workflow into the physical
+  instances that live in text (backend, facet).
+
 *** STARTED Create an encoder for org-mode                            :story:
     :LOGBOOK:
     CLOCK: [2020-05-14 Thu 22:01]--[2020-05-14 Thu 22:24] =>  0:23
@@ -1197,19 +1267,33 @@ Notes:
   we've finished converting all formatters including C#.
 - archetype initialiser will be implemented in terms of facets.
 
-*** STARTED Create archetypes for all physical elements               :story:
+*** STARTED Create a PMM chain in physical model                      :story:
     :LOGBOOK:
-    CLOCK: [2020-05-21 Thu 22:12]--[2020-05-21 Thu 22:51] =>  0:39
+    CLOCK: [2020-05-22 Fri 12:10]--[2020-05-22 Fri 12:41] =>  0:31
+    CLOCK: [2020-05-22 Fri 11:02]--[2020-05-22 Fri 11:30] =>  0:28
     :END:
 
-At present we are missing archetypes for:
+We need to create a set of transforms that generate a complete
+physical model.
 
-- facet
-- backend
-- part
-- archetype kind
+Tasks:
 
-Add these.
+- copy meta-name repository attributes into kernel. Actually, these
+  are in a neat form this way. We should instead just rename the class
+  to something more meaningful: =meta_name_indicies=? We should also
+  remove references to "names" and "formatters".
+- add a way to obtain raw kernel, backend, facet and archetypes from
+  new formatters. Set all of these formatters to override so that we
+  can code them manually.
+- create a transform based on registrar that use raw data to build the
+  new meta-name repository.
+- make the repository builder a transform in the PMM chain.
+- copy code in context factory into a chain in physical.
+- implement context factory in terms of the new transform.
+- delete repository, registrar etc.
+- rename code generation chain to file generation chain.
+- create a orchestration transform for the PMM generation; call it and
+  supply its result as an input to the context factory.
 
 *** Split =text= from the kernel                                      :story:
 
@@ -1231,6 +1315,21 @@ obvious if we had more than one kernel. The best way to avoid this is:
   the kernel and call all backends.
 - leave all transforms which aren't kernel specific in =text=. It will
   also contain all of the T2T infrastructure.
+
+*** Consider creating meta-types for transform, chain and context     :story:
+
+These are clearly an established pattern within dogen. It would be
+nice to make them visible. Advantages:
+
+- we could have templates that define the class layout.
+- we wouldn't have to define "typeable" everywhere, we can make sure
+  there are only two archetypes for it.
+- it would automatically be set to override.
+- we would have different colours for transforms and chains.
+- if the users supply the context and model we could automatically
+  generate the correct includes, and add these to the apply
+  method. This can either be done as a hack (as we do for say
+  archetypes, etc) or we could add support for proper operations.
 
 *** Consider renaming =wale= to =tangle=                              :story:
 
@@ -1283,7 +1382,7 @@ as wale parameters. These should be deduced from the logical model
 element. It is fine to hard-code this because we are designing it
 explicitly for archetypes, not as a general purpose mechanism.
 
-*** Create a container for profiles                                   :story:
+*** Consider creating a container for profiles                        :story:
 
 At present we have placed all profiles in the profiles model and made
 it non-generatable. This means we can use regular packages. However,
@@ -1292,6 +1391,13 @@ those profiles were placed in a package we would generate an empty
 package. Ideally, we should be able to have a profile-specific
 container for profiles which does not have an expression at the
 physical level.
+
+*** Consider creating a container for features                        :story:
+
+At present we have regular namespaces containing features. Perhaps it
+makes more sense to have a specialised container that stops users from
+adding other types? Note that we don't have the same requirement as we
+do for profiles, this is just to make things "neater".
 
 *** Reduce number of required wale keys                               :story:
 
