@@ -19,7 +19,8 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
 #include "dogen.injection/types/transforms/model_to_model_chain.hpp"
@@ -42,10 +43,24 @@ void converter::convert(const configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Started conversion.";
 
     {
+        /*
+         * Create the context.
+         */
         using namespace transforms;
-        scoped_injection_context_manager scim(cfg, conversion_activity);
+        const auto& a(conversion_activity);
+        const auto ctx(context_factory::make_injection_context(cfg, a));
+
+        /*
+         * Bind the tracer to the current scope.
+         */
+        const auto& t(*ctx.tracer());
+        tracing::scoped_tracer st(t);
+
+        /*
+         * Apply the code generation chain.
+         */
         using namespace dogen::injection::transforms;
-        model_to_model_chain::apply(scim.context(), source, destination);
+        model_to_model_chain::apply(ctx, source, destination);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished conversion.";
