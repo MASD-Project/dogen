@@ -23,6 +23,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include "dogen/types/spec_entry.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/entities/text.hpp"
 #include "dogen.variability/types/entities/boolean.hpp"
 #include "dogen.variability/types/entities/number.hpp"
@@ -30,10 +32,9 @@
 #include "dogen.variability/lexical_cast/entities/value_type_lc.hpp"
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
-#include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
+#include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/spec_dumper.hpp"
 
 namespace {
@@ -42,7 +43,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("orchestration.spec_dumper"));
 
 const std::string empty_output_directory;
-const std::string activity("dumpspecs");
+const std::string dumping_activity("dumpspecs");
 
 using namespace dogen::variability::entities;
 class visitor : public value_visitor {
@@ -225,20 +226,42 @@ specs spec_dumper::dump(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Started dumping specs.";
 
     {
+        /*
+         * Generate the specs.
+         */
         specs r;
         r.categories().push_back(create_injection_category());
         r.categories().push_back(create_conversion_category());
         r.categories().push_back(create_generation_category());
 
+
+        /*
+         * Create the context.
+         */
         using namespace transforms;
-        scoped_context_manager scm(cfg, activity, empty_output_directory);
-        const auto& ctx(scm.context());
+        const auto& a(dumping_activity);
+        const auto& od(empty_output_directory);
+        const auto ctx(context_factory::make_context(cfg, a, od));
+
+        /*
+         * Bind the tracer to the current scope.
+         */
+        const auto& t(*ctx.injection_context().tracer());
+        tracing::scoped_tracer st(t);
+
+        /*
+         * Obtain the feature model.
+         */
         const auto& fm(*ctx.logical_context().feature_model());
         r.categories().push_back(create_features_category(fm));
 
+        /*
+         * Obtain the physical meta-model.
+         */
         const auto& pmm(*ctx.logical_context().physical_meta_model());
         const auto tid(pmm.template_instantiation_domains());
         r.categories().push_back(create_variability_domains_category(tid));
+
         return r;
     }
 
