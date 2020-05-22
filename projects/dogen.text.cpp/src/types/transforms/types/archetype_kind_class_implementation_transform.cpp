@@ -77,19 +77,6 @@ std::list<std::string> archetype_kind_class_implementation_transform::inclusion_
 void archetype_kind_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    const auto& arch(ast.as<logical::entities::physical::archetype_kind>(e));
-
-    {
-        auto sbf(ast.make_scoped_boilerplate_formatter(arch));
-        {
-            const auto ns(ast.make_namespaces(arch.name()));
-            auto snf(ast.make_scoped_namespace_formatter(ns));
-ast.stream() << std::endl;
-ast.stream() << "class " << arch.name().simple() << ";" << std::endl;
-ast.stream() << std::endl;
-        } // snf
-    } // sbf
-
     ast.update_artefact();
 }
 
