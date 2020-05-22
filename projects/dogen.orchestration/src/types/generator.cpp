@@ -19,8 +19,9 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
+#include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/generator.hpp"
 
 namespace {
@@ -41,9 +42,24 @@ void generator::generate(const configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Started generation.";
 
     {
+        /*
+         * Create the context.
+         */
         using namespace transforms;
-        scoped_context_manager scm(cfg, generation_activity, output_directory);
-        code_generation_chain::apply(scm.context(), target);
+        const auto& od(output_directory);
+        const auto& a(generation_activity);
+        const auto ctx(context_factory::make_context(cfg, a, od));
+
+        /*
+         * Bind the tracer to the current scope.
+         */
+        const auto& t(*ctx.injection_context().tracer());
+        tracing::scoped_tracer st(t);
+
+        /*
+         * Apply the code generation chain.
+         */
+        code_generation_chain::apply(ctx, target);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished generation.";
