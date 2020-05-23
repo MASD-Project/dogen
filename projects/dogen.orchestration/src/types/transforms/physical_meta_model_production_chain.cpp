@@ -41,10 +41,10 @@ namespace dogen::orchestration::transforms {
 
 boost::shared_ptr<physical::entities::meta_model>
 physical_meta_model_production_chain::
-apply(const tracing::tracer& tracer, const
+apply(const physical::transforms::minimal_context& ctx, const
     text::transforms::model_to_text_technical_space_chain_registrar& rg) {
     tracing::scoped_chain_tracer stp(lg, "physical meta-model production chain",
-        transform_id, "physical_meta_model", tracer);
+        transform_id, "physical_meta_model", *ctx.tracer());
 
     physical::helpers::meta_name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
