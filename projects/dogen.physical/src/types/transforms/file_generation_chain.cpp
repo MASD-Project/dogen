@@ -23,11 +23,11 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/write_artefacts_transform.hpp"
 #include "dogen.physical/types/transforms/remove_files_transform.hpp"
-#include "dogen.physical/types/transforms/code_generation_chain.hpp"
+#include "dogen.physical/types/transforms/file_generation_chain.hpp"
 
 namespace {
 
-const std::string transform_id("physical.transforms.code_generation_chain");
+const std::string transform_id("physical.transforms.file_generation_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -36,9 +36,9 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void code_generation_chain::
+void file_generation_chain::
 apply(const context& ctx, const entities::model& m) {
-    tracing::scoped_chain_tracer stp(lg, "code generation chain",
+    tracing::scoped_chain_tracer stp(lg, "file generation chain",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*

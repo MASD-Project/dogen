@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_FILE_GENERATION_CHAIN_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_FILE_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,12 +31,13 @@
 namespace dogen::physical::transforms {
 
 /**
- * @brief Generates code for an physical model.
+ * @brief Generates files in the filesystem for a given physical
+ * model.
  *
  * @pre Physical model must have already been through the production
  * chain.
  */
-class code_generation_chain final {
+class file_generation_chain final {
 public:
     static void apply(const context& ctx, const entities::model& m);
 };

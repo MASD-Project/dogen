@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
-#include "dogen.physical/types/transforms/code_generation_chain.hpp"
+#include "dogen.physical/types/transforms/file_generation_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
@@ -56,8 +56,8 @@ void code_generation_chain::apply(const context& ctx,
     /*
      * Runn all of the physical transforms against the physical models.
      */
-    using physical::transforms::code_generation_chain;
-    code_generation_chain::apply(ctx.physical_context(), m);
+    using physical::transforms::file_generation_chain;
+    file_generation_chain::apply(ctx.physical_context(), m);
 
     stp.end_chain(m);
 
