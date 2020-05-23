@@ -137,8 +137,9 @@ bootstrap_full_context(const configuration& cfg, const std::string& activity,
     /*
      * Finally, create the top-level context.
      */
+    const auto& a(activity);
     const auto& od(output_directory);
-    const auto r(context_factory::make_context(cfg, activity, od));
+    const auto r(context_factory::make_context_new(cfg, a, od, vctx, fm, pmm));
     return r;
 }
 
