@@ -77,6 +77,17 @@ public:
     static context make_context(const configuration& cfg,
         const std::string& activity,
         const boost::filesystem::path& output_directory);
+
+    /**
+     * @brief Creates the top-level context required by all transform
+     * chains.
+     */
+    static context make_context_new(const configuration& cfg,
+        const std::string& activity,
+        const boost::filesystem::path& output_directory,
+        const variability::transforms::context& vctx,
+        boost::shared_ptr<variability::entities::feature_model> fm,
+        boost::shared_ptr<physical::entities::meta_model> pmm);
 };
 
 }

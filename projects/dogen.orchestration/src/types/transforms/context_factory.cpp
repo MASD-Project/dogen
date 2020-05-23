@@ -287,4 +287,95 @@ make_context(const configuration& cfg, const std::string& activity,
     return r;
 }
 
+context context_factory::make_context_new(const configuration& cfg,
+    const std::string& activity,
+    const boost::filesystem::path& output_directory,
+    const variability::transforms::context& vctx,
+    boost::shared_ptr<variability::entities::feature_model> fm,
+    boost::shared_ptr<physical::entities::meta_model> pmm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating the top-level context. Activity: "
+                             << activity;
+
+    /*
+     * Create the top-level context and all of its sub-contexts. Start
+     * by copying across attributes we've already defined.
+     */
+    orchestration::transforms::context r;
+    r.variability_context(vctx);
+
+    /*
+     * Obtain the data directories.
+     */
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    r.injection_context().data_directories(lib_dirs);
+
+    /*
+     * Handle the feature model.
+     */
+    r.injection_context().feature_model(fm);
+    r.logical_context().feature_model(fm);
+    r.text_context().feature_model(fm);
+    r.physical_context().feature_model(fm);
+
+    /*
+     * Handle the compatibility mode for all other contexts.
+     */
+    const auto cm(vctx.compatibility_mode());
+    r.logical_context().compatibility_mode(cm);
+    r.injection_context().compatibility_mode(cm);
+
+    /*
+     * Populate the output directory.
+     */
+    r.text_context().output_directory_path(output_directory);
+
+    /*
+     * Setup the archetype location repository.
+     */
+
+    r.injection_context().physical_meta_model(pmm);
+    r.logical_context().physical_meta_model(pmm);
+    r.text_context().physical_meta_model(pmm);
+
+    /*
+     * Setup the tracer.
+     */
+    const auto tracer(vctx.tracer());
+    r.injection_context().tracer(tracer);
+    r.logical_context().tracer(tracer);
+    r.text_context().tracer(tracer);
+    r.physical_context().tracer(tracer);
+
+    /*
+     * Setup the diffing and operational reporting configuration.
+     */
+    r.physical_context().diffing_configuration(cfg.diffing());
+    r.physical_context().reporting_configuration(cfg.reporting());
+
+    /*
+     * Populate dry run mode.
+     */
+    const auto drm(cfg.model_processing().dry_run_mode_enabled());
+    r.physical_context().dry_run_mode_enabled(drm);
+
+    /*
+     * Populate the variability overrides.
+     */
+    const auto& vo(cfg.model_processing().variability_overrides());
+    r.injection_context().variability_overrides(vo);
+
+    /*
+     * Populate the generation timestamp.
+     */
+    using namespace boost::posix_time;
+    std::ostringstream s;
+    s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
+    r.text_context().generation_timestamp(s.str());
+    r.logical_context().activity_timestamp(s.str());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated context. Result: " << r;
+    return r;
+}
+
 }
