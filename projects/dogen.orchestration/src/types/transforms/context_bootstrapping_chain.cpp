@@ -135,7 +135,7 @@ context_bootstrapping_chain::bootstrap_injection_context(
     /*
      * Create the injection context.
      */
-    const auto r(context_factory::make_injection_context_new(activity, t, pmm));
+    const auto r(context_factory::make_injection_context(activity, t, pmm));
     return r;
 }
 
@@ -169,7 +169,7 @@ bootstrap_full_context(const configuration& cfg, const std::string& activity,
      */
     const auto& a(activity);
     const auto& od(output_directory);
-    const auto r(context_factory::make_context_new(cfg, a, od, vctx, fm, pmm));
+    const auto r(context_factory::make_context(cfg, a, od, vctx, fm, pmm));
     return r;
 }
 

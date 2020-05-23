@@ -59,7 +59,7 @@ context_factory::make_variability_context(const configuration& cfg,
     return r;
 }
 
-injection::transforms::context context_factory::make_injection_context_new(
+injection::transforms::context context_factory::make_injection_context(
     const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
     boost::shared_ptr<physical::entities::meta_model> pmm) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
@@ -86,8 +86,8 @@ injection::transforms::context context_factory::make_injection_context_new(
     return r;
 }
 
-context context_factory::make_context_new(const configuration& cfg,
-    const std::string& activity,
+context context_factory::
+make_context(const configuration& cfg, const std::string& activity,
     const boost::filesystem::path& output_directory,
     const variability::transforms::context& vctx,
     boost::shared_ptr<variability::entities::feature_model> fm,

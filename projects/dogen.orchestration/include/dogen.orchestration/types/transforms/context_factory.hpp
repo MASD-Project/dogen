@@ -59,7 +59,7 @@ public:
      * @brief Creates a transform context required by the injection
      * chain.
      */
-    static injection::transforms::context make_injection_context_new(
+    static injection::transforms::context make_injection_context(
         const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
         boost::shared_ptr<physical::entities::meta_model> pmm);
 
@@ -67,7 +67,7 @@ public:
      * @brief Creates the top-level context required by all transform
      * chains.
      */
-    static context make_context_new(const configuration& cfg,
+    static context make_context(const configuration& cfg,
         const std::string& activity,
         const boost::filesystem::path& output_directory,
         const variability::transforms::context& vctx,
