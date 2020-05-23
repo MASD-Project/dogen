@@ -32,7 +32,7 @@
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/operation_reason_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.orchestration/types/transforms/context_factory.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace  {
@@ -90,11 +90,13 @@ apply_physical_model_production(const boost::filesystem::path& target,
     const auto cfg(f.make(target, run_activity));
 
     /*
-     * Create the context.
+     * Bootstrap the top-level context.
      */
     using namespace dogen::orchestration::transforms;
+    using cbc = context_bootstrapping_chain;
+    const auto& od(output_dir);
     const auto& a(run_activity);
-    const auto ctx(context_factory::make_context(cfg, a, output_dir));
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
 
     /*
      * Bind the tracer to the current scope.

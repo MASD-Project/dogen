@@ -31,7 +31,7 @@
 #include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
-#include "dogen.orchestration/types/transforms/context_factory.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 namespace  {
@@ -116,10 +116,13 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
     const auto cfg(f.make(target, run_activity));
 
     /*
-     * Create the context.
+     * Bootstrap the top-level context.
      */
     using namespace dogen::orchestration::transforms;
-    const auto ctx(context_factory::make_context(cfg, activity, output_dir));
+    using cbc = context_bootstrapping_chain;
+    const auto& od(output_dir);
+    const auto& a(run_activity);
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
 
     /*
      * Bind the tracer to the current scope.

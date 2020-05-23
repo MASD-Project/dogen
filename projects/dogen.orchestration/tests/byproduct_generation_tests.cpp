@@ -11,7 +11,7 @@
 #include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
-#include "dogen.orchestration/types/transforms/context_factory.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen/types/tracing_backend.hpp"
 
@@ -27,7 +27,7 @@ const std::string transform_stats_graphviz_fn("transform_stats.dot");
 const std::string references_graph_org_fn("references_graph.org");
 const std::string references_graph_text_fn("references_graph.txt");
 const std::string references_graph_graphviz_fn("references_graph.dot");
-const std::string physical_name_prefix("000-physical_name_repository-");
+const std::string physical_name_prefix("000-configuration-");
 const std::string physical_name_postfix("-initial_input.json");
 const std::string injection_transform_prefix(
     "000-injection.dia.decoding_transform-dogen-");
@@ -126,11 +126,13 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     const path& target) {
 
     /*
-     * Generate the context.
+     * Bootstrap the top-level context.
      */
     using namespace dogen::orchestration::transforms;
+    using cbc = context_bootstrapping_chain;
+    const auto& od(output_dir);
     const auto& a(run_activity);
-    const auto ctx(context_factory::make_context(cfg, a, output_dir));
+    const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
 
     /*
      * Bind the tracer to the current scope.
