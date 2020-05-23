@@ -34,7 +34,7 @@
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
-#include "dogen.orchestration/types/transforms/context_factory.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/spec_dumper.hpp"
 
 namespace {
@@ -227,21 +227,24 @@ specs spec_dumper::dump(const configuration& cfg) const {
 
     {
         /*
-         * Generate the specs.
+         * Generate the specs for injection, conversion and
+         * generation.
          */
         specs r;
         r.categories().push_back(create_injection_category());
         r.categories().push_back(create_conversion_category());
         r.categories().push_back(create_generation_category());
 
-
         /*
-         * Create the context.
+         * Bootstrap the top-level context. We need a full context
+         * because we require some models that are created in the
+         * bootstrapping process.
          */
         using namespace transforms;
+        using cbc = context_bootstrapping_chain;
         const auto& a(dumping_activity);
         const auto& od(empty_output_directory);
-        const auto ctx(context_factory::make_context(cfg, a, od));
+        const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
 
         /*
          * Bind the tracer to the current scope.
@@ -250,13 +253,13 @@ specs spec_dumper::dump(const configuration& cfg) const {
         tracing::scoped_tracer st(t);
 
         /*
-         * Obtain the feature model.
+         * Convert all features in the feature model to categories.
          */
         const auto& fm(*ctx.logical_context().feature_model());
         r.categories().push_back(create_features_category(fm));
 
         /*
-         * Obtain the physical meta-model.
+         * Convert the template instantiation domains into categories.
          */
         const auto& pmm(*ctx.logical_context().physical_meta_model());
         const auto tid(pmm.template_instantiation_domains());
