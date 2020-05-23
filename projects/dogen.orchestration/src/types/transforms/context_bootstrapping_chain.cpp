@@ -52,6 +52,18 @@ const std::string input_id("configuration");
 
 namespace dogen::orchestration::transforms {
 
+void context_bootstrapping_chain::register_variability_entities(
+    variability::helpers::registrar& rg) {
+    physical::features::initializer::register_entities(rg);
+    injection::features::initializer::register_entities(rg);
+    logical::features::initializer::register_entities(rg);
+    templating::initializer::register_entities(rg);
+    variability::features::initializer::register_entities(rg);
+    text::cpp::feature_initializer::register_entities(rg);
+    text::csharp::feature_initializer::register_entities(rg);
+    features::initializer::register_entities(rg);
+}
+
 boost::shared_ptr<physical::entities::meta_model> context_bootstrapping_chain::
 create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
@@ -70,20 +82,30 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     return r;
 }
 
-void context_bootstrapping_chain::register_variability_entities(
-    variability::helpers::registrar& rg) {
-    physical::features::initializer::register_entities(rg);
-    injection::features::initializer::register_entities(rg);
-    logical::features::initializer::register_entities(rg);
-    templating::initializer::register_entities(rg);
-    variability::features::initializer::register_entities(rg);
-    text::cpp::feature_initializer::register_entities(rg);
-    text::csharp::feature_initializer::register_entities(rg);
-    features::initializer::register_entities(rg);
+boost::shared_ptr<variability::entities::feature_model>
+context_bootstrapping_chain::
+create_variability_feature_model(const variability::transforms::context& ctx) {
+    /*
+     * First we must register all entities in the variability space,
+     * which we obtain by all the initialisers scattered across all
+     * models.
+     */
+    variability::helpers::registrar vrg;
+    register_variability_entities(vrg);
+    const auto ftrp(vrg.feature_template_repository());
+    const auto frp(vrg.feature_repository());
+
+    /*
+     * Now apply the feature model production chain to use those
+     * entities to create a feature model.
+     */
+    using variability::transforms::feature_model_production_chain;
+    const auto r(feature_model_production_chain::apply(ctx, ftrp, frp));
+    return r;
 }
 
 context context_bootstrapping_chain::
-bootstrap(const configuration& cfg, const std::string& activity,
+bootstrap_full_context(const configuration& cfg, const std::string& activity,
     const boost::filesystem::path& output_directory) {
     /*
      * Setup the tracer. Note that we do it regardless of whether
@@ -101,30 +123,22 @@ bootstrap(const configuration& cfg, const std::string& activity,
     const auto pmm(create_physical_meta_model(t));
 
     /*
-     * Now create the variability context, needed to create the
-     * feature model.
+     * Create the variability context, needed to create the feature
+     * model.
      */
     const auto tid(pmm->template_instantiation_domains());
     const auto vctx(context_factory::make_variability_context(cfg, t, tid));
 
     /*
-     * Now we can create the feature model. First we must register all
-     * entities in the variability space, which we obtain by all the
-     * initialisers scattered across all models. Then we can apply the
-     * feature model production chain to use those entities to create
-     * a feature model.
+     * Now we can create the feature model.
      */
-    variability::helpers::registrar vrg;
-    register_variability_entities(vrg);
-    const auto ftrp(vrg.feature_template_repository());
-    const auto frp(vrg.feature_repository());
-    using variability::transforms::feature_model_production_chain;
-    const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
+    const auto fm(create_variability_feature_model(vctx));
 
     /*
-     * Finally, create the context.
+     * Finally, create the top-level context.
      */
-    const auto r(context_factory::make_context(cfg, activity, output_directory));
+    const auto& od(output_directory);
+    const auto r(context_factory::make_context(cfg, activity, od));
     return r;
 }
 

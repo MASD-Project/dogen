@@ -29,8 +29,10 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.variability/types/helpers/registrar.hpp"
+#include "dogen.variability/types/transforms/context.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -45,23 +47,31 @@ namespace dogen::orchestration::transforms {
 class context_bootstrapping_chain final {
 private:
     /**
-     * @brief Creates the physical meta-model.
-     */
-    static boost::shared_ptr<physical::entities::meta_model>
-    create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer);
-
-    /**
      * @brief Registers all entities defined by the variability
      * initialisation process.
      */
     static void
     register_variability_entities(variability::helpers::registrar& rg);
 
+private:
+    /**
+     * @brief Creates the physical meta-model.
+     */
+    static boost::shared_ptr<physical::entities::meta_model>
+    create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer);
+
+    /**
+     * @brief Creates the variability feature model.
+     */
+    static boost::shared_ptr<variability::entities::feature_model>
+    create_variability_feature_model(
+        const variability::transforms::context& ctx);
+
 public:
     /**
      * @brief Execute the bootstrap process, producing a context.
      */
-    static context bootstrap(const configuration& cfg,
+    static context bootstrap_full_context(const configuration& cfg,
         const std::string& activity,
         const boost::filesystem::path& output_directory);
 };
