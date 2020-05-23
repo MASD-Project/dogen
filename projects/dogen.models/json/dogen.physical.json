@@ -1268,6 +1268,21 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::minimal_context",
+      "documentation": "Smallest possible context required for bootstrapping purposes.\n",
+      "stereotypes": [
+        "dogen::typeable",
+        "dogen::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        }
+      ]
     }
   ]
 }
