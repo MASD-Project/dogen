@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
@@ -41,7 +41,7 @@ public:
      * @brief Executes the transform.
      */
     static boost::shared_ptr<physical::entities::meta_model>
-    apply(const physical::transforms::context&& ctx, const
+    apply(const tracing::tracer& tracer, const
         text::transforms::model_to_text_technical_space_chain_registrar& rg);
 };
 
