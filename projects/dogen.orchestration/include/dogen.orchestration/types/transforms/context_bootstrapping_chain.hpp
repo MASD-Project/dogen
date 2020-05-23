@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_BOOTSTRAPPER_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_BOOTSTRAPPER_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_BOOTSTRAPPING_CHAIN_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_CONTEXT_BOOTSTRAPPING_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,10 +36,13 @@
 namespace dogen::orchestration::transforms {
 
 /**
- * @brief Bootstraps the transforms sub-system by running all of the
- * first stage chains needed by the remaining chains.
+ * @brief Bootstraps the transforms sub-system.
+ *
+ * This transform is responsible for running all of the first stage
+ * chains needed by the remaining chains, and producing the top-level
+ * transform context.
  */
-class bootstrapper final {
+class context_bootstrapping_chain final {
 private:
     /**
      * @brief Creates the physical meta-model.

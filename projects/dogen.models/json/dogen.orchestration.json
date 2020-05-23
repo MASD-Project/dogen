@@ -272,7 +272,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::bootstrapper",
+      "name": "transforms::context_bootstrapping_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

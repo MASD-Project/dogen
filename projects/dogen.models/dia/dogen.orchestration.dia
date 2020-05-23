@@ -5514,7 +5514,7 @@ the entry points to all transformations.
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#bootstrapper#</dia:string>
+        <dia:string>#context_bootstrapping_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

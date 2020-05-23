@@ -39,12 +39,12 @@
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.orchestration/types/transforms/physical_meta_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_factory.hpp"
-#include "dogen.orchestration/types/transforms/bootstrapper.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("orchestration.bootstrapper"));
+auto lg(logger_factory("orchestration.context_bootstrapping_chain"));
 
 const std::string input_id("configuration");
 
@@ -52,7 +52,7 @@ const std::string input_id("configuration");
 
 namespace dogen::orchestration::transforms {
 
-boost::shared_ptr<physical::entities::meta_model> bootstrapper::
+boost::shared_ptr<physical::entities::meta_model> context_bootstrapping_chain::
 create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
      * Obtain the transform registrar and ensure it has been setup.
@@ -70,7 +70,7 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     return r;
 }
 
-void bootstrapper::register_variability_entities(
+void context_bootstrapping_chain::register_variability_entities(
     variability::helpers::registrar& rg) {
     physical::features::initializer::register_entities(rg);
     injection::features::initializer::register_entities(rg);
@@ -82,7 +82,7 @@ void bootstrapper::register_variability_entities(
     features::initializer::register_entities(rg);
 }
 
-context bootstrapper::
+context context_bootstrapping_chain::
 bootstrap(const configuration& cfg, const std::string& activity,
     const boost::filesystem::path& output_directory) {
     /*
