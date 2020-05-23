@@ -53,6 +53,12 @@ private:
     static void
     register_variability_entities(variability::helpers::registrar& rg);
 
+    /**
+     * @brief Creates and sets up the tracer.
+     */
+    static boost::shared_ptr<tracing::tracer> create_and_setup_tracer(
+        const configuration& cfg, const std::string& activity);
+
 private:
     /**
      * @brief Creates the physical meta-model.
@@ -69,7 +75,16 @@ private:
 
 public:
     /**
-     * @brief Execute the bootstrap process, producing a context.
+     * @brief Execute a partial bootstrapping, producing an injection
+     * context.
+     */
+    static injection::transforms::context
+    bootstrap_injection_context(const configuration& cfg,
+        const std::string& activity);
+
+    /**
+     * @brief Execute the full bootstrap process, producing a
+     * top-level context.
      */
     static context bootstrap_full_context(const configuration& cfg,
         const std::string& activity,

@@ -64,6 +64,21 @@ void context_bootstrapping_chain::register_variability_entities(
     features::initializer::register_entities(rg);
 }
 
+boost::shared_ptr<tracing::tracer>
+context_bootstrapping_chain::create_and_setup_tracer(
+    const configuration& cfg, const std::string& activity) {
+    /*
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle
+     * that. Also, we start tracing here so that all transforms can
+     * make use of it.
+     */
+    using namespace transforms;
+    const auto r(boost::make_shared<tracing::tracer>(cfg, activity));
+    r->start_run(input_id, cfg);
+    return r;
+}
+
 boost::shared_ptr<physical::entities::meta_model> context_bootstrapping_chain::
 create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
@@ -104,18 +119,33 @@ create_variability_feature_model(const variability::transforms::context& ctx) {
     return r;
 }
 
+injection::transforms::context
+context_bootstrapping_chain::bootstrap_injection_context(
+    const configuration& cfg, const std::string& activity) {
+    /*
+     * Obtain the tracer.
+     */
+    const auto t(create_and_setup_tracer(cfg, activity));
+
+    /*
+     * Create the physical meta-model.
+     */
+    const auto pmm(create_physical_meta_model(t));
+
+    /*
+     * Create the injection context.
+     */
+    const auto r(context_factory::make_injection_context_new(activity, t, pmm));
+    return r;
+}
+
 context context_bootstrapping_chain::
 bootstrap_full_context(const configuration& cfg, const std::string& activity,
     const boost::filesystem::path& output_directory) {
     /*
-     * Setup the tracer. Note that we do it regardless of whether
-     * tracing is enabled or not - its the tracer job to handle
-     * that. Also, we start tracing here so that all transforms can
-     * make use of it.
+     * Obtain the tracer.
      */
-    using namespace transforms;
-    const auto t(boost::make_shared<tracing::tracer>(cfg, activity));
-    t->start_run(input_id, cfg);
+    const auto t(create_and_setup_tracer(cfg, activity));
 
     /*
      * Create the physical meta-model.
