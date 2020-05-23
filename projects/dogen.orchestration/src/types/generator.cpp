@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
-#include "dogen.orchestration/types/transforms/context_factory.hpp"
+#include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/generator.hpp"
 
 namespace {
@@ -43,12 +43,13 @@ void generator::generate(const configuration& cfg,
 
     {
         /*
-         * Create the context.
+         * Bootstrap the top-level context.
          */
         using namespace transforms;
+        using cbc = context_bootstrapping_chain;
         const auto& od(output_directory);
         const auto& a(generation_activity);
-        const auto ctx(context_factory::make_context(cfg, a, od));
+        const auto ctx(cbc::bootstrap_full_context(cfg, a, od));
 
         /*
          * Bind the tracer to the current scope.
