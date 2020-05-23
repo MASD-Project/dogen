@@ -27,8 +27,8 @@
 
 namespace dogen::text::cpp::transforms {
 
-class types final : public model_to_text_transform {
-public:
+// class types final : public model_to_text_transform {
+// public:
 }
 
 #endif

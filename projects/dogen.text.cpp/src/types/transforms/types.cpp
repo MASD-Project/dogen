@@ -1,2 +1,2 @@
-// dummy function to suppress ranlib warnings
+// dummy function to suppress ranlib warningsx
 void types() { }
