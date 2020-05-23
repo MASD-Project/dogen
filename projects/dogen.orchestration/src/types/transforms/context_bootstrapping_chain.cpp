@@ -21,13 +21,13 @@
 #include <boost/make_shared.hpp>
 #include "dogen/io/configuration_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/entities/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
 #include "dogen.templating/types/initializer.hpp"
-#include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.injection/io/transforms/context_io.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
@@ -37,14 +37,18 @@
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
+#include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/transforms/physical_meta_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 
 namespace {
 
+const std::string transform_id(
+    "orchestration.transforms.context_bootstrapping_chain");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("orchestration.context_bootstrapping_chain"));
+auto lg(logger_factory(transform_id));
 
 const std::string input_id("configuration");
 
@@ -126,6 +130,8 @@ context_bootstrapping_chain::bootstrap_injection_context(
      * Obtain the tracer.
      */
     const auto t(create_and_setup_tracer(cfg, activity));
+    tracing::scoped_chain_tracer stp(lg, "full bootstrapping", transform_id,
+        "bootstrapping", *t);
 
     /*
      * Create the physical meta-model.
@@ -136,6 +142,7 @@ context_bootstrapping_chain::bootstrap_injection_context(
      * Create the injection context.
      */
     const auto r(context_factory::make_injection_context(activity, t, pmm));
+    stp.end_chain(r);
     return r;
 }
 
@@ -146,6 +153,8 @@ bootstrap_full_context(const configuration& cfg, const std::string& activity,
      * Obtain the tracer.
      */
     const auto t(create_and_setup_tracer(cfg, activity));
+    tracing::scoped_chain_tracer stp(lg, "full bootstrapping", transform_id,
+        "bootstrapping", *t);
 
     /*
      * Create the physical meta-model.
@@ -170,6 +179,8 @@ bootstrap_full_context(const configuration& cfg, const std::string& activity,
     const auto& a(activity);
     const auto& od(output_directory);
     const auto r(context_factory::make_context(cfg, a, od, vctx, fm, pmm));
+
+    stp.end_chain(r);
     return r;
 }
 

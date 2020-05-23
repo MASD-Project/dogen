@@ -32,6 +32,7 @@
 #include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
