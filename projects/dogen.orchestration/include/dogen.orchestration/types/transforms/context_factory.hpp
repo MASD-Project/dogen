@@ -27,6 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
+#include "dogen.physical/types/transforms/minimal_context.hpp"
 #include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
@@ -46,6 +47,22 @@ private:
         variability::helpers::registrar& rg);
 
 public:
+    /**
+     * @brief Creates the physical minimal context for bootstrapping.
+     */
+    static physical::transforms::minimal_context
+    make_minimal_context(boost::shared_ptr<tracing::tracer> tracer);
+
+    /**
+     * @brief Creates the physical minimal context for bootstrapping.
+     */
+    static variability::transforms::context
+    make_variability_context(
+        const configuration& cfg,
+        boost::shared_ptr<tracing::tracer> tracer,
+        const std::unordered_map<std::string, std::vector<std::string>>&
+        template_instantiation_domains);
+
     /**
      * @brief Creates a transform context required by the injection
      * chain.

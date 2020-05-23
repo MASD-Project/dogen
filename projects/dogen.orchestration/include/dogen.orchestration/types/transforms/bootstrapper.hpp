@@ -25,24 +25,42 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen/types/configuration.hpp"
+#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.variability/types/helpers/registrar.hpp"
+#include "dogen.orchestration/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Bootstraps the transforms sub-system by running all of the
+ * first stage chains needed by the remaining chains.
+ */
 class bootstrapper final {
-public:
-    bootstrapper() = default;
-    bootstrapper(const bootstrapper&) = default;
-    bootstrapper(bootstrapper&&) = default;
-    ~bootstrapper() = default;
-    bootstrapper& operator=(const bootstrapper&) = default;
+private:
+    /**
+     * @brief Creates the physical meta-model.
+     */
+    static boost::shared_ptr<physical::entities::meta_model>
+    create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer);
+
+    /**
+     * @brief Registers all entities defined by the variability
+     * initialisation process.
+     */
+    static void
+    register_variability_entities(variability::helpers::registrar& rg);
 
 public:
-    bool operator==(const bootstrapper& rhs) const;
-    bool operator!=(const bootstrapper& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Execute the bootstrap process, producing a context.
+     */
+    static context bootstrap(const configuration& cfg,
+        const std::string& activity,
+        const boost::filesystem::path& output_directory);
 };
 
 }

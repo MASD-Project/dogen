@@ -99,6 +99,13 @@ register_variability_entities(variability::helpers::registrar& rg) {
     features::initializer::register_entities(rg);
 }
 
+physical::transforms::minimal_context context_factory::
+make_minimal_context(boost::shared_ptr<tracing::tracer> tracer) {
+    physical::transforms::minimal_context r;
+    r.tracer(tracer);
+    return r;
+}
+
 injection::transforms::context context_factory::
 make_injection_context(const configuration& cfg,
     const std::string& activity) {
@@ -134,6 +141,21 @@ make_injection_context(const configuration& cfg,
 
     return r;
 
+}
+
+variability::transforms::context
+context_factory::make_variability_context(const configuration& cfg,
+    boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_map<std::string, std::vector<std::string>>&
+    template_instantiation_domains) {
+
+    variability::transforms::context r;
+    r.template_instantiation_domains(template_instantiation_domains);
+    const bool cm(cfg.model_processing().compatibility_mode_enabled());
+    r.compatibility_mode(cm);
+    r.tracer(tracer);
+
+    return r;
 }
 
 context context_factory::
