@@ -13,35 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-23 Sat 13:06]
+#+CAPTION: Clock summary at [2020-05-23 Sat 16:55]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *54:51* |       |       | 100.0 |
+| *Total time*                                          | *56:36* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 54:51   |       |       | 100.0 |
-| Active                                                |         | 54:51 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  10.8 |
+| Stories                                               | 56:36   |       |       | 100.0 |
+| Active                                                |         | 56:36 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  10.5 |
 | Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.4 |
 | Sprint and product backlog grooming                   |         |       |  1:10 |   2.1 |
 | Nightly nursing                                       |         |       |  0:24 |   0.7 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.6 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.1 |
+| Analysis on templating and logical model              |         |       |  1:09 |   2.0 |
 | Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.8 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.0 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   3.0 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.1 |
-| Move decoration transform into logical model          |         |       |  5:33 |  10.1 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   6.4 |
-| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.9 |
-| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.7 |
-| Profiles do not support collection types              |         |       |  4:13 |   7.7 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  31.9 |
-| Create archetypes for all physical elements           |         |       |  0:39 |   1.2 |
-| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   2.0 |
-| Create an encoder for org-mode                        |         |       |  1:31 |   2.8 |
-| Create a PMM chain in physical model                  |         |       |  4:01 |   7.3 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   2.9 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   2.9 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   2.0 |
+| Move decoration transform into logical model          |         |       |  5:33 |   9.8 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   6.2 |
+| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.8 |
+| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.6 |
+| Profiles do not support collection types              |         |       |  4:13 |   7.4 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  30.9 |
+| Create archetypes for all physical elements           |         |       |  0:39 |   1.1 |
+| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   1.9 |
+| Create a bootstrapping chain for context              |         |       |  3:03 |   5.4 |
+| Create an encoder for org-mode                        |         |       |  1:31 |   2.7 |
+| Create a PMM chain in physical model                  |         |       |  2:43 |   4.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1242,6 +1243,21 @@ In conclusion:
   some of the text classes such as workflow into the physical
   instances that live in text (backend, facet).
 
+*** COMPLETED Create a bootstrapping chain for context                :story:
+    CLOSED: [2020-05-23 Sat 16:52]
+    :LOGBOOK:
+    CLOCK: [2020-05-23 Sat 16:52]--[2020-05-23 Sat 16:53] =>  0:01
+    CLOCK: [2020-05-23 Sat 16:46]--[2020-05-23 Sat 16:51] =>  0:05
+    CLOCK: [2020-05-23 Sat 15:10]--[2020-05-23 Sat 16:45] =>  1:35
+    CLOCK: [2020-05-23 Sat 11:44]--[2020-05-23 Sat 13:06] =>  1:22
+    :END:
+
+At present we have a context "factory" that is more of a transform
+than a factory: it calls a number of transforms and does lots of
+complex processing. We need to extract out all of the complex
+processing into a chain of its own and call the factory from that
+chain as required. This is needed in order to clean up the PMM.
+
 *** STARTED Create an encoder for org-mode                            :story:
     :LOGBOOK:
     CLOCK: [2020-05-14 Thu 22:01]--[2020-05-14 Thu 22:24] =>  0:23
@@ -1275,7 +1291,7 @@ Notes:
 
 *** STARTED Create a PMM chain in physical model                      :story:
     :LOGBOOK:
-    CLOCK: [2020-05-23 Sat 11:44]--[2020-05-23 Sat 13:06] =>  1:22
+    CLOCK: [2020-05-23 Sat 16:51]--[2020-05-23 Sat 16:55] =>  0:04
     CLOCK: [2020-05-22 Fri 16:41]--[2020-05-22 Fri 17:50] =>  1:09
     CLOCK: [2020-05-22 Fri 16:01]--[2020-05-22 Fri 16:20] =>  0:19
     CLOCK: [2020-05-22 Fri 14:20]--[2020-05-22 Fri 14:32] =>  0:12
