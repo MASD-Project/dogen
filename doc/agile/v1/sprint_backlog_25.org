@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-22 Fri 18:27]
+#+CAPTION: Clock summary at [2020-05-23 Sat 13:06]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *53:16* |       |       | 100.0 |
+| *Total time*                                          | *54:51* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 53:16   |       |       | 100.0 |
-| Active                                                |         | 53:16 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  11.2 |
-| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.5 |
-| Sprint and product backlog grooming                   |         |       |  1:10 |   2.2 |
-| Nightly nursing                                       |         |       |  0:11 |   0.3 |
+| Stories                                               | 54:51   |       |       | 100.0 |
+| Active                                                |         | 54:51 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  10.8 |
+| Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.4 |
+| Sprint and product backlog grooming                   |         |       |  1:10 |   2.1 |
+| Nightly nursing                                       |         |       |  0:24 |   0.7 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.6 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.2 |
+| Analysis on templating and logical model              |         |       |  1:09 |   2.1 |
 | Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.8 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   3.1 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   3.1 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.2 |
-| Move decoration transform into logical model          |         |       |  5:33 |  10.4 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   6.6 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   3.0 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   3.0 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   2.1 |
+| Move decoration transform into logical model          |         |       |  5:33 |  10.1 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   6.4 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.9 |
-| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.8 |
-| Profiles do not support collection types              |         |       |  4:13 |   7.9 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  32.9 |
+| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.7 |
+| Profiles do not support collection types              |         |       |  4:13 |   7.7 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  31.9 |
 | Create archetypes for all physical elements           |         |       |  0:39 |   1.2 |
-| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   2.1 |
+| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   2.0 |
 | Create an encoder for org-mode                        |         |       |  1:31 |   2.8 |
-| Create a PMM chain in physical model                  |         |       |  2:39 |   5.0 |
+| Create a PMM chain in physical model                  |         |       |  4:01 |   7.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -63,6 +63,11 @@ Release Announcements:
 - [[https://twitter.com/MarcoCraveiro/status/1258142736571564032][twitter]]
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6663907059412545536-NdxP][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+Idea for next sprint: Foz do cunene. Pictures:
+
+- https://prazerdeconhecer.files.wordpress.com/2015/11/img_2152.jpg
+- [[https://prazerdeconhecer.wordpress.com/2015/11/14/parque-ionafoz-do-cunene-parte-vi/][Parque Iona/Foz do Cunene (parte VI)]]
 
 **** Dogen v1.0.24, "Imbondeiro no Iona"
 
@@ -616,6 +621,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
+    CLOCK: [2020-05-23 Sat 11:31]--[2020-05-23 Sat 11:44] =>  0:13
     CLOCK: [2020-05-17 Sun 09:41]--[2020-05-17 Sun 09:52] =>  0:11
     :END:
 
@@ -1269,6 +1275,7 @@ Notes:
 
 *** STARTED Create a PMM chain in physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-23 Sat 11:44]--[2020-05-23 Sat 13:06] =>  1:22
     CLOCK: [2020-05-22 Fri 16:41]--[2020-05-22 Fri 17:50] =>  1:09
     CLOCK: [2020-05-22 Fri 16:01]--[2020-05-22 Fri 16:20] =>  0:19
     CLOCK: [2020-05-22 Fri 14:20]--[2020-05-22 Fri 14:32] =>  0:12
