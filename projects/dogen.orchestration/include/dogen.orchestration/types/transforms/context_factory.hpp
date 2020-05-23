@@ -69,6 +69,9 @@ public:
      */
     static injection::transforms::context make_injection_context(
         const configuration& cfg, const std::string& activity);
+    static injection::transforms::context make_injection_context_new(
+        const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
+        boost::shared_ptr<physical::entities::meta_model> pmm);
 
     /**
      * @brief Creates the injection context required by all transform

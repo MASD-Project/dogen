@@ -106,6 +106,21 @@ make_minimal_context(boost::shared_ptr<tracing::tracer> tracer) {
     return r;
 }
 
+variability::transforms::context
+context_factory::make_variability_context(const configuration& cfg,
+    boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_map<std::string, std::vector<std::string>>&
+    template_instantiation_domains) {
+
+    variability::transforms::context r;
+    r.template_instantiation_domains(template_instantiation_domains);
+    const bool cm(cfg.model_processing().compatibility_mode_enabled());
+    r.compatibility_mode(cm);
+    r.tracer(tracer);
+
+    return r;
+}
+
 injection::transforms::context context_factory::
 make_injection_context(const configuration& cfg,
     const std::string& activity) {
@@ -140,19 +155,30 @@ make_injection_context(const configuration& cfg,
     r.tracer(tracer);
 
     return r;
-
 }
 
-variability::transforms::context
-context_factory::make_variability_context(const configuration& cfg,
-    boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_map<std::string, std::vector<std::string>>&
-    template_instantiation_domains) {
+injection::transforms::context context_factory::make_injection_context_new(
+    const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
+    boost::shared_ptr<physical::entities::meta_model> pmm) {
+    BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
 
-    variability::transforms::context r;
-    r.template_instantiation_domains(template_instantiation_domains);
-    const bool cm(cfg.model_processing().compatibility_mode_enabled());
-    r.compatibility_mode(cm);
+    /*
+     * Obtain the share directory.
+     */
+    injection::transforms::context r;
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    r.data_directories(lib_dirs);
+
+    /*
+     * Setup the physical data structures.
+     */
+    r.physical_meta_model(pmm);
+
+    /*
+     * Setup the tracer. Note that we do it regardless of whether
+     * tracing is enabled or not - its the tracer job to handle that.
+     */
     r.tracer(tracer);
 
     return r;
