@@ -5865,17 +5865,17 @@ the entry points to all transformations.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="168.145,22.2"/>
+        <dia:point val="153.072,22.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.485,21.45;168.895,29.7"/>
+        <dia:rectangle val="133.485,21.45;153.822,29.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="168.145,22.2"/>
-        <dia:point val="168.145,28"/>
+        <dia:point val="153.072,22.2"/>
+        <dia:point val="153.072,28"/>
         <dia:point val="133.535,28"/>
         <dia:point val="133.535,28.1"/>
       </dia:attribute>
@@ -5894,7 +5894,7 @@ the entry points to all transformations.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O48" connection="7"/>
+        <dia:connection handle="0" to="O48" connection="6"/>
         <dia:connection handle="1" to="O7" connection="4"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
@@ -5972,22 +5972,22 @@ the entry points to all transformations.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="141,24"/>
+        <dia:point val="156,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.95,23.95;166.205,26.55"/>
+        <dia:rectangle val="155.95,23.95;171.58,27.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="141,24"/>
+        <dia:point val="156,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.155000000000005"/>
+        <dia:real val="15.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.5"/>
+        <dia:real val="3.3000000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6001,8 +6001,9 @@ the entry points to all transformations.
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Bootstraps the transform sub-system by running all of the first
-stage chains needed by the remaining chains.#</dia:string>
+            <dia:string>#Bootstraps the transform sub-system by
+running all of the first stage chains
+needed by the remaining chains.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6011,7 +6012,7 @@ stage chains needed by the remaining chains.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="141.35,25.2441"/>
+            <dia:point val="156.35,25.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6025,17 +6026,17 @@ stage chains needed by the remaining chains.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O52">
       <dia:attribute name="obj_pos">
-        <dia:point val="153.578,24"/>
+        <dia:point val="163.765,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.674,22.0438;153.639,24.0616"/>
+        <dia:rectangle val="163.7,21.811;168.343,24.0653"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="153.578,24"/>
-        <dia:point val="153.072,22.2"/>
+        <dia:point val="163.765,24"/>
+        <dia:point val="168.145,22.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -6050,11 +6051,11 @@ stage chains needed by the remaining chains.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="153.325,23.6"/>
+        <dia:point val="165.955,23.6"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O51" connection="1"/>
-        <dia:connection handle="1" to="O48" connection="6"/>
+        <dia:connection handle="1" to="O48" connection="7"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
