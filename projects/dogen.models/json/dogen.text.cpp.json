@@ -35,7 +35,8 @@
       "name": "transforms::types",
       "documentation": "Formatters for the types facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"

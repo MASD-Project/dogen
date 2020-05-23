@@ -238,7 +238,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
