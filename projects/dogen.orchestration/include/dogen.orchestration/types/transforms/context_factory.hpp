@@ -27,8 +27,8 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
+#include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
-#include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
@@ -38,14 +38,6 @@ namespace dogen::orchestration::transforms {
  * @brief Factory that creates the transformation context.
  */
 class context_factory final {
-private:
-    /**
-     * @brief Registers all entities defined by the variability
-     * initialisation process.
-     */
-    static void register_variability_entities(
-        variability::helpers::registrar& rg);
-
 public:
     /**
      * @brief Creates the physical minimal context for bootstrapping.
@@ -67,19 +59,9 @@ public:
      * @brief Creates a transform context required by the injection
      * chain.
      */
-    static injection::transforms::context make_injection_context(
-        const configuration& cfg, const std::string& activity);
     static injection::transforms::context make_injection_context_new(
         const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
         boost::shared_ptr<physical::entities::meta_model> pmm);
-
-    /**
-     * @brief Creates the injection context required by all transform
-     * chains.
-     */
-    static context make_context(const configuration& cfg,
-        const std::string& activity,
-        const boost::filesystem::path& output_directory);
 
     /**
      * @brief Creates the top-level context required by all transform
