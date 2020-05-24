@@ -12,37 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-24 Sun 11:58]
+#+CAPTION: Clock summary at [2020-05-24 Sun 13:02]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *58:18* |       |       | 100.0 |
+| *Total time*                                          | *59:19* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 58:18   |       |       | 100.0 |
-| Active                                                |         | 58:18 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  10.2 |
+| Stories                                               | 59:19   |       |       | 100.0 |
+| Active                                                |         | 59:19 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |  10.0 |
 | Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.3 |
-| Sprint and product backlog grooming                   |         |       |  1:30 |   2.6 |
+| Sprint and product backlog grooming                   |         |       |  1:30 |   2.5 |
 | Nightly nursing                                       |         |       |  0:24 |   0.7 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.5 |
-| Analysis on templating and logical model              |         |       |  1:09 |   2.0 |
+| Analysis on templating and logical model              |         |       |  1:09 |   1.9 |
 | Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.8 |
 | Remove stitch template builder                        |         |       |  0:09 |   0.3 |
 | Add template related attributes to physical elements  |         |       |  1:38 |   2.8 |
 | Resolve references to wale templates in logical model |         |       |  1:39 |   2.8 |
-| =templating= should not depend on =physical=          |         |       |  1:09 |   2.0 |
-| Move decoration transform into logical model          |         |       |  5:33 |   9.5 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   6.0 |
-| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.8 |
+| =templating= should not depend on =physical=          |         |       |  1:09 |   1.9 |
+| Move decoration transform into logical model          |         |       |  5:33 |   9.4 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   5.9 |
+| Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.7 |
 | Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.6 |
-| Profiles do not support collection types              |         |       |  4:13 |   7.2 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  30.0 |
+| Profiles do not support collection types              |         |       |  4:13 |   7.1 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  29.5 |
 | Create archetypes for all physical elements           |         |       |  0:39 |   1.1 |
 | Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   1.9 |
-| Create a bootstrapping chain for context              |         |       |  3:20 |   5.7 |
-| Facet and backend files are in the wrong folder       |         |       |  0:48 |   1.4 |
+| Create a bootstrapping chain for context              |         |       |  3:20 |   5.6 |
+| Facet and backend files are in the wrong folder       |         |       |  0:48 |   1.3 |
 | Create an encoder for org-mode                        |         |       |  1:31 |   2.6 |
-| Create a PMM chain in physical model                  |         |       |  3:00 |   5.1 |
+| Create a PMM chain in physical model                  |         |       |  4:01 |   6.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1309,6 +1309,8 @@ Notes:
 
 *** STARTED Create a PMM chain in physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-24 Sun 13:00]--[2020-05-24 Sun 13:02] =>  0:02
+    CLOCK: [2020-05-24 Sun 12:00]--[2020-05-24 Sun 12:59] =>  0:59
     CLOCK: [2020-05-24 Sun 11:53]--[2020-05-24 Sun 11:58] =>  0:05
     CLOCK: [2020-05-23 Sat 23:12]--[2020-05-23 Sat 23:24] =>  0:12
     CLOCK: [2020-05-23 Sat 16:51]--[2020-05-23 Sat 16:55] =>  0:04
@@ -1326,16 +1328,17 @@ Tasks:
 
 - copy meta-name repository attributes into kernel. Actually, these
   are in a neat form this way. We should instead just rename the class
-  to something more meaningful: =meta_name_indicies=? We should also
-  remove references to "names" and "formatters".
+  to something more meaningful: =meta_name_indicies=? Done.
+- we should also remove references to "names" and "formatters" in the
+  indicies.
 - add a way to obtain raw kernel, backend, facet and archetypes from
   new formatters. Set all of these formatters to override so that we
   can code them manually.
 - create a transform based on registrar that use raw data to build the
   new meta-name repository.
 - make the repository builder a transform in the PMM chain.
-- copy code in context factory into a chain in physical.
-- implement context factory in terms of the new transform.
+- copy code in context factory into a chain in physical. Done.
+- implement context factory in terms of the new transform. Done.
 - delete repository, registrar etc.
 - rename code generation chain to file generation chain. Done.
 - create a orchestration transform for the PMM generation; call it and
@@ -1346,7 +1349,8 @@ Notes:
 - the best approach to implement the facets and backends is a
   combination of both handcrafting and code generation. We need to
   generate the includes and the adding of the archetypes to the facet.
-
+- "static" archetypes are not static. Also remove spurious r list in
+  includes for archetype headers and possibly implementation.
 
 *** Split =text= from the kernel                                      :story:
 
