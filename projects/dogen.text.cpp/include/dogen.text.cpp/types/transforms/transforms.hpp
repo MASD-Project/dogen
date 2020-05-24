@@ -25,10 +25,26 @@
 #pragma once
 #endif
 
+#include "dogen.physical/types/entities/backend.hpp"
+#include "dogen.text.cpp/types/transforms/registrar.hpp"
+
 namespace dogen::text::cpp {
 
-class transforms final : public model_to_text_transform {
+/**
+ * @brief Formatters for the C++ model.
+ *
+ * Takes types in the C++ model and creates a file
+ * representation of these types according to the
+ * grammar of the C++ technical space.
+ */
+class transforms_backend final {
 public:
+    static physical::entities::facet static_facet();
+    physical::entities::facet facet() const;
+
+public:
+    static void initialise(transforms::registrar& r);
+};
 }
 
 #endif

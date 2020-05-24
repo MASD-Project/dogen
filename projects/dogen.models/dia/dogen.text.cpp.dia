@@ -50396,26 +50396,48 @@ void facet_class_implementation_transform::apply(const context&amp; ctx, const l
 &lt;#+
 
 std::list&lt;std::string&gt; backend_class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory&amp; /*f*/,
-    const logical::entities::element&amp; /*e*/) const {
-    static std::list&lt;std::string&gt; r;
-    return r;
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    const auto&amp; be(assistant::as&lt;logical::entities::physical::backend&gt;(e));
+
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/backend.hpp");
+    using logical::entities::technical_space;
+    if (be.major_technical_space() == technical_space::cpp) {
+        builder.add_as_user(
+            "dogen.text.cpp/types/transforms/registrar.hpp");
+    } else if (be.major_technical_space() == technical_space::csharp) {
+        builder.add_as_user(
+            "dogen.text.csharp/types/transforms/registrar.hpp");
+    }
+    const auto ch_arch(traits::class_header_archetype_qn());
+    return builder.build();
 }
 
 void backend_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
-    const auto&amp; o(ast.as&lt;logical::entities::physical::backend&gt;(e));
+    const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
 
     {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        auto sbf(ast.make_scoped_boilerplate_formatter(be));
         {
-            const auto ns(ast.make_namespaces(o.name()));
+            const auto ns(ast.make_namespaces(be.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 #&gt;
 
-class &lt;#= o.name().simple() #&gt; final : public model_to_text_transform {
+&lt;#+
+            ast.comment(be.documentation());
+#&gt;
+class &lt;#= be.name().simple() #&gt;_backend final {
 public:
+    static physical::entities::facet static_facet();
+    physical::entities::facet facet() const;
+
+public:
+    static void initialise(transforms::registrar&amp; r);
+};
 &lt;#+
         } // snf
 #&gt;
