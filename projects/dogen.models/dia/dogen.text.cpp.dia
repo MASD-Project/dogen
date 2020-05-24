@@ -37543,13 +37543,13 @@ register_entities(variability::helpers::registrar&amp; rg) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,204"/>
+        <dia:point val="-48,203"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,203.95;-22.04,208.45"/>
+        <dia:rectangle val="-48.05,202.95;-22.04,207.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,204"/>
+        <dia:point val="-48,203"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -46128,13 +46128,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O298">
       <dia:attribute name="obj_pos">
-        <dia:point val="56,174"/>
+        <dia:point val="-12,191"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,173.95;69.64,177.65"/>
+        <dia:rectangle val="-12.05,190.95;1.64,194.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="56,174"/>
+        <dia:point val="-12,191"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -46865,13 +46865,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,195"/>
+        <dia:point val="2,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,194.95;29.5,198.65"/>
+        <dia:rectangle val="1.95,197.95;29.5,201.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,195"/>
+        <dia:point val="2,198"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -47003,13 +47003,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O303">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,211"/>
+        <dia:point val="-19,211"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,210.95;0.805,215.45"/>
+        <dia:rectangle val="-19.05,210.95;5.805,215.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,211"/>
+        <dia:point val="-19,211"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -47164,19 +47164,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O304">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,198.6"/>
+        <dia:point val="15.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.6725,198.55;16.575,211.05"/>
+        <dia:rectangle val="-6.6725,201.55;16.575,211.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,198.6"/>
-        <dia:point val="15.725,201"/>
-        <dia:point val="-11.6225,201"/>
-        <dia:point val="-11.6225,211"/>
+        <dia:point val="15.725,201.6"/>
+        <dia:point val="15.725,204"/>
+        <dia:point val="-6.6225,204"/>
+        <dia:point val="-6.6225,211"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -47206,13 +47206,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O305">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,211"/>
+        <dia:point val="26,211"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,210.95;56.885,215.45"/>
+        <dia:rectangle val="25.95,210.95;53.885,215.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,211"/>
+        <dia:point val="26,211"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -47367,19 +47367,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O306">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,198.6"/>
+        <dia:point val="15.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.875,198.55;42.9675,211.05"/>
+        <dia:rectangle val="14.875,201.55;39.9675,211.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,198.6"/>
-        <dia:point val="15.725,201"/>
-        <dia:point val="42.9175,201"/>
-        <dia:point val="42.9175,211"/>
+        <dia:point val="15.725,201.6"/>
+        <dia:point val="15.725,204"/>
+        <dia:point val="39.9175,204"/>
+        <dia:point val="39.9175,211"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -47409,13 +47409,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O307">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,203"/>
+        <dia:point val="2,205"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,202.95;32.195,207.45"/>
+        <dia:rectangle val="1.95,204.95;32.195,209.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,203"/>
+        <dia:point val="2,205"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.145"/>
@@ -47570,19 +47570,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,198.6"/>
+        <dia:point val="15.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.875,198.55;17.1225,203"/>
+        <dia:rectangle val="14.875,201.55;17.1225,205"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,198.6"/>
-        <dia:point val="15.725,201"/>
-        <dia:point val="17.0725,201"/>
-        <dia:point val="17.0725,202.95"/>
+        <dia:point val="15.725,201.6"/>
+        <dia:point val="15.725,204"/>
+        <dia:point val="17.0725,204"/>
+        <dia:point val="17.0725,204.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -47842,17 +47842,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O310">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.6225,215.4"/>
+        <dia:point val="-6.6225,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.325,215.35;-10.7725,218.05"/>
+        <dia:rectangle val="-18.325,215.35;-5.7725,218.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.6225,215.4"/>
-        <dia:point val="-11.6225,217"/>
+        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-6.6225,217"/>
         <dia:point val="-18.275,217"/>
         <dia:point val="-18.275,218"/>
       </dia:attribute>
@@ -48114,17 +48114,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O312">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.6225,215.4"/>
+        <dia:point val="-6.6225,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.4725,215.35;13.7375,218.05"/>
+        <dia:rectangle val="-7.4725,215.35;13.7375,218.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.6225,215.4"/>
-        <dia:point val="-11.6225,217"/>
+        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-6.6225,217"/>
         <dia:point val="13.6875,217"/>
         <dia:point val="13.6875,218"/>
       </dia:attribute>
@@ -48361,17 +48361,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O314">
       <dia:attribute name="obj_pos">
-        <dia:point val="42.9175,215.45"/>
+        <dia:point val="39.9175,215.45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.0675,215.4;45.775,218.001"/>
+        <dia:rectangle val="39.0675,215.4;45.775,218.001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="42.9175,215.45"/>
-        <dia:point val="42.9175,217"/>
+        <dia:point val="39.9175,215.45"/>
+        <dia:point val="39.9175,217"/>
         <dia:point val="45.725,217"/>
         <dia:point val="45.725,217.951"/>
       </dia:attribute>
@@ -48633,17 +48633,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O316">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.6225,215.4"/>
+        <dia:point val="-6.6225,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-12.4725,215.35;-3.0325,227"/>
+        <dia:rectangle val="-7.4725,215.35;-3.0325,227"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.6225,215.4"/>
-        <dia:point val="-11.6225,217"/>
+        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-6.6225,217"/>
         <dia:point val="-3.0825,217"/>
         <dia:point val="-3.0825,226.95"/>
       </dia:attribute>
@@ -48905,17 +48905,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O318">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11.6225,215.4"/>
+        <dia:point val="-6.6225,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.7475,215.35;-10.7725,227"/>
+        <dia:rectangle val="-33.7475,215.35;-5.7725,227"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-11.6225,215.4"/>
-        <dia:point val="-11.6225,217"/>
+        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-6.6225,217"/>
         <dia:point val="-33.6975,217"/>
         <dia:point val="-33.6975,226.95"/>
       </dia:attribute>
@@ -49152,17 +49152,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O320">
       <dia:attribute name="obj_pos">
-        <dia:point val="42.9175,215.4"/>
+        <dia:point val="39.9175,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.2525,215.35;43.7675,227.05"/>
+        <dia:rectangle val="30.2525,215.35;40.7675,227.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="42.9175,215.4"/>
-        <dia:point val="42.9175,217"/>
+        <dia:point val="39.9175,215.4"/>
+        <dia:point val="39.9175,217"/>
         <dia:point val="30.3025,217"/>
         <dia:point val="30.3025,227"/>
       </dia:attribute>
@@ -49603,17 +49603,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O323">
       <dia:attribute name="obj_pos">
-        <dia:point val="42.9175,215.4"/>
+        <dia:point val="39.9175,215.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.0675,215.35;61.7375,227.05"/>
+        <dia:rectangle val="39.0675,215.35;61.7375,227.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="42.9175,215.4"/>
-        <dia:point val="42.9175,217"/>
+        <dia:point val="39.9175,215.4"/>
+        <dia:point val="39.9175,217"/>
         <dia:point val="61.6875,217"/>
         <dia:point val="61.6875,227"/>
       </dia:attribute>
@@ -49645,13 +49645,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O324">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,174"/>
+        <dia:point val="34,174"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,173.95;51.72,180.05"/>
+        <dia:rectangle val="33.95,173.95;50.72,180.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,174"/>
+        <dia:point val="34,174"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
