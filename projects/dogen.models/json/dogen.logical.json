@@ -496,6 +496,11 @@
           "name": "meta_names",
           "type": "std::unordered_map<std::string, name>",
           "documentation": "All meta-names by qualified name.\n"
+        },
+        {
+          "name": "container_ids",
+          "type": "std::unordered_set<std::string>",
+          "documentation": "IDs of all meta-elements which can contain other elements.\n"
         }
       ]
     },
@@ -4508,6 +4513,13 @@
           "documentation": "Technical space to which this physical element belongs to.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::containers_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

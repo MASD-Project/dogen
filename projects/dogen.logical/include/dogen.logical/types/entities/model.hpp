@@ -91,7 +91,8 @@ public:
         const dogen::logical::entities::orm::element_repository& orm_elements,
         const dogen::logical::entities::build::element_repository& build_elements,
         const dogen::logical::entities::physical::element_repository& physical_elements,
-        const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names);
+        const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names,
+        const std::unordered_set<std::string>& container_ids);
 
 public:
     /**
@@ -292,6 +293,16 @@ public:
     void meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
     /**@}*/
 
+    /**
+     * @brief IDs of all meta-elements which can contain other elements.
+     */
+    /**@{*/
+    const std::unordered_set<std::string>& container_ids() const;
+    std::unordered_set<std::string>& container_ids();
+    void container_ids(const std::unordered_set<std::string>& v);
+    void container_ids(const std::unordered_set<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -326,6 +337,7 @@ private:
     dogen::logical::entities::build::element_repository build_elements_;
     dogen::logical::entities::physical::element_repository physical_elements_;
     std::unordered_map<std::string, dogen::logical::entities::name> meta_names_;
+    std::unordered_set<std::string> container_ids_;
 };
 
 }
