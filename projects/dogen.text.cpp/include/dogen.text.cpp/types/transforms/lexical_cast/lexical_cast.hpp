@@ -29,11 +29,12 @@
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
+
 /**
  * @brief Formatters related to conversions from and to
  * string.
  */
-class lexical_cast final {
+class lexical_cast_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

@@ -29,10 +29,11 @@
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
+
 /**
  * @brief Formatters related to build files.
  */
-class build final {
+class build_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

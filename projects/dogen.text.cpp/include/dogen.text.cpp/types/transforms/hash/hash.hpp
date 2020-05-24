@@ -29,11 +29,12 @@
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
+
 /**
  * @brief Formatters for the hash facet of the
  * C++ technical space.
  */
-class hash final {
+class hash_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

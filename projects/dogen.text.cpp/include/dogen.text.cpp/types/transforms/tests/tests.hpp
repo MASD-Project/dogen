@@ -29,11 +29,12 @@
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
 namespace dogen::text::cpp::transforms {
+
 /**
  * @brief Formatters that generate tests for generated
  * code.
  */
-class tests final {
+class tests_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

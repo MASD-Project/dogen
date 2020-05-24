@@ -29,11 +29,12 @@
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
 
 namespace dogen::text::csharp::transforms {
+
 /**
  * @brief M2T transforms for the types facet of
  * the C# Technical Space.
  */
-class types final {
+class types_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

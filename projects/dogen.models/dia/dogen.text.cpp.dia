@@ -50010,9 +50010,12 @@ void facet_class_header_transform::apply(const context&amp; ctx, const logical::
         {
             const auto ns(ast.make_namespaces(fct.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#+
             ast.comment(fct.documentation());
 #&gt;
-class &lt;#= fct.name().simple() #&gt; final {
+class &lt;#= fct.name().simple() #&gt;_facet final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

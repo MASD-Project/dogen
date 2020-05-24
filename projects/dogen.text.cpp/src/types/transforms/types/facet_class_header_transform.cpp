@@ -88,8 +88,9 @@ void facet_class_header_transform::apply(const context& ctx, const logical::enti
         {
             const auto ns(ast.make_namespaces(fct.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+ast.stream() << std::endl;
             ast.comment(fct.documentation());
-ast.stream() << "class " << fct.name().simple() << " final {" << std::endl;
+ast.stream() << "class " << fct.name().simple() << "_facet final {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    static physical::entities::facet static_facet();" << std::endl;
 ast.stream() << "    physical::entities::facet facet() const;" << std::endl;
