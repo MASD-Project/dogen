@@ -138,14 +138,7 @@ private:
     }
 
 public:
-    void operator()(boost::shared_ptr<logical::entities::element> e) {
-        add(e);
-    }
-
-    void operator()
-    (boost::shared_ptr<logical::entities::structural::module> m) {
-        add(m);
-    }
+    void operator()(boost::shared_ptr<logical::entities::element> e) { add(e); }
 
 public:
     const text::entities::model& result() const { return result_; }
