@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Updates container related properties in the model.
+ */
 class containers_transform final {
 public:
-    containers_transform() = default;
-    containers_transform(const containers_transform&) = default;
-    containers_transform(containers_transform&&) = default;
-    ~containers_transform() = default;
-    containers_transform& operator=(const containers_transform&) = default;
-
-public:
-    bool operator==(const containers_transform& rhs) const;
-    bool operator!=(const containers_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Execute the transform against the model.
+     */
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
