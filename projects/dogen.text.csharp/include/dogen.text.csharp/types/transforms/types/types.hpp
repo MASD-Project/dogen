@@ -25,10 +25,22 @@
 #pragma once
 #endif
 
-namespace dogen::text::csharp::transforms {
+#include "dogen.physical/types/entities/facet.hpp"
+#include "dogen.text.csharp/types/transforms/registrar.hpp"
 
-class types final : public model_to_text_transform {
+namespace dogen::text::csharp::transforms {
+/**
+ * @brief M2T transforms for the types facet of
+ * the C# Technical Space.
+ */
+class types final {
 public:
+    static physical::entities::facet static_facet();
+    physical::entities::facet facet() const;
+
+public:
+    static void initialise(registrar& r);
+};
 }
 
 #endif

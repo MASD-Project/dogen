@@ -25,10 +25,22 @@
 #pragma once
 #endif
 
-namespace dogen::text::cpp::transforms {
+#include "dogen.physical/types/entities/facet.hpp"
+#include "dogen.text.cpp/types/transforms/registrar.hpp"
 
-class tests final : public model_to_text_transform {
+namespace dogen::text::cpp::transforms {
+/**
+ * @brief Formatters that generate tests for generated
+ * code.
+ */
+class tests final {
 public:
+    static physical::entities::facet static_facet();
+    physical::entities::facet facet() const;
+
+public:
+    static void initialise(registrar& r);
+};
 }
 
 #endif

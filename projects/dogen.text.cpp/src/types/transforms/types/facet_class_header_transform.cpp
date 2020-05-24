@@ -59,29 +59,47 @@ boost::filesystem::path facet_class_header_transform::full_path(
 }
 
 std::list<std::string> facet_class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
+
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
+    using logical::entities::technical_space;
+    if (fct.major_technical_space() == technical_space::cpp) {
+        builder.add_as_user(
+            "dogen.text.cpp/types/transforms/registrar.hpp");
+    } else if (fct.major_technical_space() == technical_space::csharp) {
+        builder.add_as_user(
+            "dogen.text.csharp/types/transforms/registrar.hpp");
+    }
+    const auto ch_arch(traits::class_header_archetype_qn());
+    return builder.build();
 }
 
 void facet_class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
-    const auto& o(ast.as<logical::entities::physical::facet>(e));
+    const auto& fct(ast.as<logical::entities::physical::facet>(e));
 
     {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(o.name()));
+            const auto ns(ast.make_namespaces(fct.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-ast.stream() << std::endl;
-ast.stream() << "class " << o.name().simple() << " final : public model_to_text_transform {" << std::endl;
+            ast.comment(fct.documentation());
+ast.stream() << "class " << fct.name().simple() << " final {" << std::endl;
 ast.stream() << "public:" << std::endl;
+ast.stream() << "    static physical::entities::facet static_facet();" << std::endl;
+ast.stream() << "    physical::entities::facet facet() const;" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "public:" << std::endl;
+ast.stream() << "    static void initialise(registrar& r);" << std::endl;
+ast.stream() << "};" << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
 }
-
 }

@@ -238,7 +238,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
@@ -49981,26 +49981,45 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
 &lt;#+
 
 std::list&lt;std::string&gt; facet_class_header_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory&amp; /*f*/,
-    const logical::entities::element&amp; /*e*/) const {
-    static std::list&lt;std::string&gt; r;
-    return r;
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    const auto&amp; fct(assistant::as&lt;logical::entities::physical::facet&gt;(e));
+
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
+    using logical::entities::technical_space;
+    if (fct.major_technical_space() == technical_space::cpp) {
+        builder.add_as_user(
+            "dogen.text.cpp/types/transforms/registrar.hpp");
+    } else if (fct.major_technical_space() == technical_space::csharp) {
+        builder.add_as_user(
+            "dogen.text.csharp/types/transforms/registrar.hpp");
+    }
+    const auto ch_arch(traits::class_header_archetype_qn());
+    return builder.build();
 }
 
 void facet_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
-    const auto&amp; o(ast.as&lt;logical::entities::physical::facet&gt;(e));
+    const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
     {
-        auto sbf(ast.make_scoped_boilerplate_formatter(o));
+        auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(o.name()));
+            const auto ns(ast.make_namespaces(fct.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(fct.documentation());
 #&gt;
-
-class &lt;#= o.name().simple() #&gt; final : public model_to_text_transform {
+class &lt;#= fct.name().simple() #&gt; final {
 public:
+    static physical::entities::facet static_facet();
+    physical::entities::facet facet() const;
+
+public:
+    static void initialise(registrar&amp; r);
+};
 &lt;#+
         } // snf
 #&gt;
@@ -50009,7 +50028,6 @@ public:
     } // sbf
     ast.update_artefact();
 }
-
 #&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
