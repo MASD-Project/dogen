@@ -12,37 +12,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-24 Sun 13:02]
+#+CAPTION: Clock summary at [2020-05-24 Sun 15:28]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *59:19* |       |       | 100.0 |
+| *Total time*                                          | *60:41* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 59:19   |       |       | 100.0 |
-| Active                                                |         | 59:19 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |  10.0 |
+| Stories                                               | 60:41   |       |       | 100.0 |
+| Active                                                |         | 60:41 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |   9.8 |
 | Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.3 |
-| Sprint and product backlog grooming                   |         |       |  1:30 |   2.5 |
+| Sprint and product backlog grooming                   |         |       |  2:20 |   3.8 |
 | Nightly nursing                                       |         |       |  0:24 |   0.7 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.5 |
 | Analysis on templating and logical model              |         |       |  1:09 |   1.9 |
-| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.8 |
-| Remove stitch template builder                        |         |       |  0:09 |   0.3 |
-| Add template related attributes to physical elements  |         |       |  1:38 |   2.8 |
-| Resolve references to wale templates in logical model |         |       |  1:39 |   2.8 |
+| Ensure stitch templates result in valid JSON          |         |       |  0:27 |   0.7 |
+| Remove stitch template builder                        |         |       |  0:09 |   0.2 |
+| Add template related attributes to physical elements  |         |       |  1:38 |   2.7 |
+| Resolve references to wale templates in logical model |         |       |  1:39 |   2.7 |
 | =templating= should not depend on =physical=          |         |       |  1:09 |   1.9 |
-| Move decoration transform into logical model          |         |       |  5:33 |   9.4 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   5.9 |
+| Move decoration transform into logical model          |         |       |  5:33 |   9.1 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   5.8 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.7 |
-| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.6 |
-| Profiles do not support collection types              |         |       |  4:13 |   7.1 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  29.5 |
+| Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.5 |
+| Profiles do not support collection types              |         |       |  4:13 |   6.9 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  28.9 |
 | Create archetypes for all physical elements           |         |       |  0:39 |   1.1 |
-| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   1.9 |
-| Create a bootstrapping chain for context              |         |       |  3:20 |   5.6 |
+| Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   1.8 |
+| Create a bootstrapping chain for context              |         |       |  3:20 |   5.5 |
 | Facet and backend files are in the wrong folder       |         |       |  0:48 |   1.3 |
-| Create an encoder for org-mode                        |         |       |  1:31 |   2.6 |
-| Create a PMM chain in physical model                  |         |       |  4:01 |   6.8 |
+| Create an encoder for org-mode                        |         |       |  1:31 |   2.5 |
+| Create a PMM chain in physical model                  |         |       |  4:25 |   7.3 |
+| Fix =static_archetype= method in archetypes           |         |       |  0:08 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -611,6 +612,10 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-24 Sun 14:58]--[2020-05-24 Sun 15:28] =>  0:30
+    CLOCK: [2020-05-24 Sun 14:50]--[2020-05-24 Sun 14:57] =>  0:07
+    CLOCK: [2020-05-24 Sun 14:36]--[2020-05-24 Sun 14:40] =>  0:04
+    CLOCK: [2020-05-24 Sun 14:26]--[2020-05-24 Sun 14:35] =>  0:09
     CLOCK: [2020-05-23 Sat 22:51]--[2020-05-23 Sat 23:11] =>  0:20
     CLOCK: [2020-05-21 Thu 22:02]--[2020-05-21 Thu 22:12] =>  0:10
     CLOCK: [2020-05-09 Sat 09:03]--[2020-05-09 Sat 09:23] =>  0:20
@@ -1309,6 +1314,7 @@ Notes:
 
 *** STARTED Create a PMM chain in physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-05-24 Sun 14:01]--[2020-05-24 Sun 14:25] =>  0:24
     CLOCK: [2020-05-24 Sun 13:00]--[2020-05-24 Sun 13:02] =>  0:02
     CLOCK: [2020-05-24 Sun 12:00]--[2020-05-24 Sun 12:59] =>  0:59
     CLOCK: [2020-05-24 Sun 11:53]--[2020-05-24 Sun 11:58] =>  0:05
@@ -1351,6 +1357,38 @@ Notes:
   generate the includes and the adding of the archetypes to the facet.
 - "static" archetypes are not static. Also remove spurious r list in
   includes for archetype headers and possibly implementation.
+- we don't nee to worry about archetype kinds for now as these will
+  not have an impact on the builder replacement. They are only needed
+  for the locator, so we can sort them out then.
+
+*** STARTED Fix =static_archetype= method in archetypes               :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-24 Sun 14:41]--[2020-05-24 Sun 14:49] =>  0:08
+    :END:
+
+At present "static" archetype is a non-static method. Also, we need to
+create a factory method and add a local static variable. Finally, we
+need to return the archetype by reference.
+
+*** Extend tracing to M2T transforms                                  :story:
+
+There is nothing stopping us from having a context with the tracer,
+and doing a dump of the artefact before and after a M2T
+transform. However its not clear how useful this will be given we
+shall only see an empty artefact and then a filled in artefact.
+
+Actually we should do a dump of both the artefact and the model
+element. This should be done when we supply text's =element_artefacts=
+as input (possibly with a more suitable name). Or perhaps we should
+start by dumping just the logical model element and the end result for
+now.
+
+Tasks:
+
+- add logging includes and setup to transforms.
+- add scoped tracer to all transforms.
+- add io for archertypes and elements to all transforms.
+- use tracer on apply for all transforms.
 
 *** Split =text= from the kernel                                      :story:
 
@@ -1697,12 +1735,57 @@ the backend, one for the features and one for the archetype
 (global). Then another one for the archetype, locally. Each with the
 correct binding point.
 
-*** Extend tracing to M2T and T2T transforms                          :story:
+*** Consider creating a org-mode based tracing format                 :story:
 
-There is nothing stopping us from having a context with the tracer,
-and doing a dump of the artefact before and after a M2T
-transform. However its not clear how useful this will be given we
-shall only see an empty artefact and then a filled in artefact.
+We've already seen the power of org-mode for representing a code
+generation model. This opens an intriguing question: is org-mode also
+a good tracing format? At present we are tracing with JSON. This
+works OK but we always have to JQ the result and the JSON mode in
+emacs is not the most performant. If we could instead look at trace
+files from org-mode we would have the full power of org-mode:
+
+- we could create "indexes" with links to all dumps: a top-level org
+  file with links to the chains and top-level files, which then link
+  to other files.
+- we could add clock tables to time each transform (through since we
+  are serialising its not obvious if this has any purpose.
+- we could use other org-mode tools for analysis such as org-roam.
+- we could create tables to organise useful information such as
+  timings.
+- we could add links to the log file and all other files produced.
+- we could add a link to the target model and reference models.
+
+In effect, org-mode would provide us with a navigable (and diffable)
+set of documents that provide a complete description of each run.
+
+This work should wait for the PDM refactor as we do not want to have
+to create helpers for all of the PDM types (lists, vectors, etc).
+
+This could also be very useful as a logging format if we could
+compress it to a single line as we do with JSON, but then expand it to
+multi-line via a trivial conversion (e.g. as we do with JQ). For
+example, if we escaped newlines, tabs etc, it should be possible to
+trivially reconstruct the original org-mode document via simple
+elisp. In this case, we could switch IO to use org-mode, as long as
+there is an "escape" flag somewhere.
+
+In addition, if we have a pointer, we could replace those with
+org-mode links to take us back to the original definition of an
+object. We could simply hash the pointer and use it as a property in
+org-mode; then for all links, we just hash the pointer and create a
+link. In addition, if the user provides suitable annotations, we could
+do the same thing for IDs. That is, say we have a primitive
+representing the qualified name for an entity; if we could somehow
+know that, we could then create a link back to the entity (though,
+sadly, not via the hash pointer).
+
+If we had support for sizes, we could also create org-tables giving us
+a breakdown in terms of size. This could use a gnuplot block or an R
+block for graphical representation.
+
+Links:
+
+- [[https://emacs.stackexchange.com/questions/53416/draw-pie-chart-from-orgmode-table][SO: Draw pie chart from orgmode table]]
 
 *** Consider renaming logic-less templates                            :story:
 

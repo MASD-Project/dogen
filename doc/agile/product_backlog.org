@@ -14278,6 +14278,47 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider developing a org-mode log format                         :story:
+
+We seem to be applying org-mode to everything, with some
+success. Perhaps it could also be applied to log files. Whilst the
+structure of the logs is normally flat, they are encoding a space with
+topology. That is to say, if one imagines a single-threaded program
+(multi-threaded is much more complex), it would be great if one could
+see the logged data as a graph that is isomorphic to the product and
+component structure. Note though that we are not proposing a
+"physical" representation of the graph, or else we will end up with a
+debugger output or a profile (e.g. function call tree). Instead, the
+idea is that with the domain knowledge one has, you can choose what
+containment relationships are relevant and these may not at all
+coincide with the function call tree. Instead, what you are looking
+for is "readability" of the graph: can a user follow it through and
+figure out what high-level operations the system is performing?
+
+Most of the data in a log file can be encoded in org-mode:
+
+- timestamps can be encoded as org-mode timestamps.
+- log level can be a tag.
+- object and attribute names can be titles in a header.
+- content can be encoded depending on the types; see the story on
+  tracing via org-mode for ideas.
+
+In addition, for performance reasons we could encode the data into a
+binary format, which can be cracked open into org-mode as required. We
+could also create a "org-logger" designed specifically to log data in
+this hierarchy, with appropriate functions (create scope, etc). We
+could add appropriate scope guards to perform entry and exit of scopes
+as we do with tracing. We could also use macros as boost log does for
+performance reasons.
+
+Its important to note that this would be very complicated in a
+multi-threaded world. We could take the easy approach and make each
+thread a root topic, but then its not clear how one would follow the
+context from where the thread was created.
+
+Links:
+
+- [[https://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/][Find stuff in org-mode anywhere]]: org-mode in a SQLite database.
 
 *** Consider adding support for SignalR                               :story:
 
