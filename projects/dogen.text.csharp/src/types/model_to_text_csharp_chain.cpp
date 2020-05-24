@@ -106,9 +106,8 @@ model_to_text_csharp_chain::technical_space() const {
 
 void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     const bool enable_backend_directories,  text::entities::model& m) const {
-    tracing::scoped_transform_tracer stp(lg,
-        "C# model to text transform", transform_id, m.name().qualified().dot(),
-        *ctx.tracer());
+    tracing::scoped_chain_tracer stp(lg, "C# M2T chain",
+        transform_id, m.name().qualified().dot(), *ctx.tracer());
     /*
      * Create the locator.
      */
