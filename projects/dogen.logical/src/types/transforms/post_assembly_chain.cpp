@@ -41,6 +41,7 @@
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/decoration_transform.hpp"
+#include "dogen.logical/types/transforms/containers_transform.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -177,6 +178,11 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * logic-less template population.
      */
     archetype_rendering_transform::apply(ctx, m);
+
+    /*
+     * Update all containers. No particular dependency.
+     */
+    containers_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
