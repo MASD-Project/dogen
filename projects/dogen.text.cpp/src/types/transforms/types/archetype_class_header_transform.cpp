@@ -18,6 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/io/shared_ptr_io.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -58,6 +63,15 @@ boost::filesystem::path archetype_class_header_transform::full_path(
     return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
 }
 
+namespace {
+
+const std::string transform_id("text.cpp.types.archetype_class_header_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 std::list<std::string> archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {
@@ -78,6 +92,8 @@ std::list<std::string> archetype_class_header_transform::inclusion_dependencies(
 
 void archetype_class_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "types archetype class header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::physical::archetype>(e));
 
@@ -125,6 +141,8 @@ ast.stream() << std::endl;
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
+
 }
 
 }

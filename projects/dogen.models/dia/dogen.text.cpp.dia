@@ -45808,6 +45808,11 @@ std::list&lt;dogen::variability::entities::feature&gt;
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -45817,6 +45822,15 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
+
+namespace {
+
+const std::string transform_id("text.cpp.types.archetype_class_header_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
@@ -45838,6 +45852,8 @@ std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_depende
 
 void archetype_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "types archetype class header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::physical::archetype&gt;(e));
 
@@ -45895,6 +45911,8 @@ public:
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
+
 }
 
 #&gt;#</dia:string>
