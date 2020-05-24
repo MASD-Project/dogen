@@ -45780,8 +45780,6 @@ std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_depende
     const logical::entities::element&amp; e) const {
     const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
 
-    static std::list&lt;std::string&gt; r;
-
     auto builder(f.make());
     using logical::entities::technical_space;
     if (arch.major_technical_space() == technical_space::cpp) {
