@@ -27,7 +27,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype archetype_class_header_transform::static_archetype() const {
+const physical::entities::archetype& archetype_class_header_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -40,7 +40,7 @@ physical::entities::archetype archetype_class_header_transform::static_archetype
     return r;
 }
 
-physical::entities::archetype archetype_class_header_transform::archetype() const {
+const physical::entities::archetype& archetype_class_header_transform::archetype() const {
     return static_archetype();
 }
 
@@ -89,8 +89,8 @@ void archetype_class_header_transform::apply(const context& ctx, const logical::
 ast.stream() << std::endl;
 ast.stream() << "class " << o.name().simple() << " final : public model_to_text_transform {" << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    physical::entities::archetype static_archetype() const;" << std::endl;
-ast.stream() << "    physical::entities::archetype archetype() const override;" << std::endl;
+ast.stream() << "    static const physical::entities::archetype& static_archetype();" << std::endl;
+ast.stream() << "    const physical::entities::archetype& archetype() const override;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
             using logical::entities::technical_space;

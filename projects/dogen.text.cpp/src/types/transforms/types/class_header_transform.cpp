@@ -33,7 +33,7 @@
 #include "dogen.text.cpp/types/transforms/types/class_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype class_header_transform::static_archetype() const {
+const physical::entities::archetype& class_header_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -46,7 +46,7 @@ physical::entities::archetype class_header_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype class_header_transform::archetype() const {
+const physical::entities::archetype& class_header_transform::archetype() const {
     return static_archetype();
 }
 

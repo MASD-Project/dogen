@@ -34,7 +34,7 @@
 #include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
 
 namespace dogen::text::cpp::transforms::tests {
-physical::entities::archetype cmakelists_transform::static_archetype() const {
+const physical::entities::archetype& cmakelists_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -47,7 +47,7 @@ physical::entities::archetype cmakelists_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype cmakelists_transform::archetype() const {
+const physical::entities::archetype& cmakelists_transform::archetype() const {
     return static_archetype();
 }
 

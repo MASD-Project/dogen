@@ -28,7 +28,7 @@
 #include "dogen.text.csharp/types/transforms/test_data/enum_transform.hpp"
 
 namespace dogen::text::csharp::transforms::test_data {
-physical::entities::archetype enum_transform::static_archetype() const {
+const physical::entities::archetype& enum_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -41,7 +41,7 @@ physical::entities::archetype enum_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype enum_transform::archetype() const {
+const physical::entities::archetype& enum_transform::archetype() const {
     return static_archetype();
 }
 

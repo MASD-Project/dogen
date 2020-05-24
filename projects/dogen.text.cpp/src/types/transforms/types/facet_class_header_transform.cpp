@@ -27,7 +27,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype facet_class_header_transform::static_archetype() const {
+const physical::entities::archetype& facet_class_header_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -40,7 +40,7 @@ physical::entities::archetype facet_class_header_transform::static_archetype() c
     return r;
 }
 
-physical::entities::archetype facet_class_header_transform::archetype() const {
+const physical::entities::archetype& facet_class_header_transform::archetype() const {
     return static_archetype();
 }
 

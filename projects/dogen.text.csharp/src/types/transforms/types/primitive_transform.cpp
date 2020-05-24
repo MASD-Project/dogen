@@ -29,7 +29,7 @@
 #include "dogen.text.csharp/types/transforms/types/primitive_transform.hpp"
 
 namespace dogen::text::csharp::transforms::types {
-physical::entities::archetype primitive_transform::static_archetype() const {
+const physical::entities::archetype& primitive_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -42,7 +42,7 @@ physical::entities::archetype primitive_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype primitive_transform::archetype() const {
+const physical::entities::archetype& primitive_transform::archetype() const {
     return static_archetype();
 }
 

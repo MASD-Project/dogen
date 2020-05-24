@@ -27,7 +27,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype primitive_forward_declarations_transform::static_archetype() const {
+const physical::entities::archetype& primitive_forward_declarations_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -40,7 +40,7 @@ physical::entities::archetype primitive_forward_declarations_transform::static_a
     return r;
 }
 
-physical::entities::archetype primitive_forward_declarations_transform::archetype() const {
+const physical::entities::archetype& primitive_forward_declarations_transform::archetype() const {
     return static_archetype();
 }
 

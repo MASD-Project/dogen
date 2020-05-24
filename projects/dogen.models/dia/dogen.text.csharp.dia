@@ -15301,7 +15301,7 @@ public:
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#
-physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -15314,7 +15314,7 @@ physical::entities::archetype {{class.simple_name}}::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype {{class.simple_name}}::archetype() const {
+const physical::entities::archetype&amp; {{class.simple_name}}::archetype() const {
     return static_archetype();
 }
 
@@ -15327,8 +15327,7 @@ std::list&lt;std::string&gt; {{class.simple_name}}::
 inclusion_dependencies(const logical::entities::element&amp; /*e*/) const {
     std::list&lt;std::string&gt; r;
     return r;
-}
-#</dia:string>
+}#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

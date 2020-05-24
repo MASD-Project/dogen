@@ -33,7 +33,7 @@
 #include "dogen.text.cpp/types/transforms/visual_studio/msbuild_targets_transform.hpp"
 
 namespace dogen::text::cpp::transforms::visual_studio {
-physical::entities::archetype msbuild_targets_transform::static_archetype() const {
+const physical::entities::archetype& msbuild_targets_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -46,7 +46,7 @@ physical::entities::archetype msbuild_targets_transform::static_archetype() cons
     return r;
 }
 
-physical::entities::archetype msbuild_targets_transform::archetype() const {
+const physical::entities::archetype& msbuild_targets_transform::archetype() const {
     return static_archetype();
 }
 

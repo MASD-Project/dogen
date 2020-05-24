@@ -33,7 +33,7 @@
 #include "dogen.text.cpp/types/transforms/templates/logic_less_template_transform.hpp"
 
 namespace dogen::text::cpp::transforms::templates {
-physical::entities::archetype logic_less_template_transform::static_archetype() const {
+const physical::entities::archetype& logic_less_template_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -46,7 +46,7 @@ physical::entities::archetype logic_less_template_transform::static_archetype() 
     return r;
 }
 
-physical::entities::archetype logic_less_template_transform::archetype() const {
+const physical::entities::archetype& logic_less_template_transform::archetype() const {
     return static_archetype();
 }
 

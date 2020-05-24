@@ -35,7 +35,7 @@
 #include "dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
-physical::entities::archetype class_implementation_transform::static_archetype() const {
+const physical::entities::archetype& class_implementation_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -48,7 +48,7 @@ physical::entities::archetype class_implementation_transform::static_archetype()
     return r;
 }
 
-physical::entities::archetype class_implementation_transform::archetype() const {
+const physical::entities::archetype& class_implementation_transform::archetype() const {
     return static_archetype();
 }
 

@@ -30,7 +30,7 @@
 #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
-physical::entities::archetype project_transform::static_archetype() const {
+const physical::entities::archetype& project_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -43,7 +43,7 @@ physical::entities::archetype project_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype project_transform::archetype() const {
+const physical::entities::archetype& project_transform::archetype() const {
     return static_archetype();
 }
 

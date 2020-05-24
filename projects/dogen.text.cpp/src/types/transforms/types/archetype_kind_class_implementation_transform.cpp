@@ -30,7 +30,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype archetype_kind_class_implementation_transform::static_archetype() const {
+const physical::entities::archetype& archetype_kind_class_implementation_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -43,7 +43,7 @@ physical::entities::archetype archetype_kind_class_implementation_transform::sta
     return r;
 }
 
-physical::entities::archetype archetype_kind_class_implementation_transform::archetype() const {
+const physical::entities::archetype& archetype_kind_class_implementation_transform::archetype() const {
     return static_archetype();
 }
 

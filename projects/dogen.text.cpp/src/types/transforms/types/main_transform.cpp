@@ -30,7 +30,7 @@
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 
 namespace dogen::text::cpp::transforms::types {
-physical::entities::archetype main_transform::static_archetype() const {
+const physical::entities::archetype& main_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
         using pmnf = physical::helpers::meta_name_factory;
@@ -43,7 +43,7 @@ physical::entities::archetype main_transform::static_archetype() const {
     return r;
 }
 
-physical::entities::archetype main_transform::archetype() const {
+const physical::entities::archetype& main_transform::archetype() const {
     return static_archetype();
 }
 

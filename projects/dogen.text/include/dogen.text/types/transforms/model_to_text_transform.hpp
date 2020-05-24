@@ -30,7 +30,7 @@
 namespace dogen::text::transforms {
 
 /**
- * @brief Common interface to all TEXT transforms.
+ * @brief Common interface to all M2T transforms.
  */
 class model_to_text_transform {
 public:
@@ -41,9 +41,9 @@ public:
 
 public:
     /**
-     * @brief Physical archetype to which this TEXT transforms binds to.
+     * @brief Physical archetype to which this M2T transform binds to.
      */
-    virtual physical::entities::archetype archetype() const = 0;
+    virtual const physical::entities::archetype& archetype() const = 0;
 };
 
 }

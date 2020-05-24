@@ -31,8 +31,8 @@ namespace dogen::text::cpp::transforms::odb {
 
 class object_odb_options_transform final : public model_to_text_transform {
 public:
-    physical::entities::archetype static_archetype() const;
-    physical::entities::archetype archetype() const override;
+    static const physical::entities::archetype& static_archetype();
+    const physical::entities::archetype& archetype() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(
