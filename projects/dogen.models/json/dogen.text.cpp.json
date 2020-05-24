@@ -874,12 +874,16 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "model",
-          "type": "formattables::model"
+          "name": "enabled_archetype_for_element",
+          "type": "std::unordered_set<text::entities::element_archetype>"
         },
         {
           "name": "element_properties",
           "type": "formattables::element_properties"
+        },
+        {
+          "name": "model",
+          "type": "formattables::model"
         },
         {
           "name": "helpers",

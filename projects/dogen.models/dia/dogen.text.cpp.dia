@@ -9623,7 +9623,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="143.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.288,180.429;147.012,184.312"/>
+        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14040,19 +14040,19 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,194"/>
+        <dia:point val="44,193"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,193.95;95.37,199.25"/>
+        <dia:rectangle val="43.95,192.95;95.37,199.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,194"/>
+        <dia:point val="44,193"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="51.32"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -14144,10 +14144,10 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#model#</dia:string>
+            <dia:string>#enabled_archetype_for_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formattables::model#</dia:string>
+            <dia:string>#std::unordered_set&lt;text::entities::element_archetype&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -14171,6 +14171,29 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#formattables::element_properties#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#formattables::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -20496,7 +20519,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="86,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.61,188.25;86.75,194.8"/>
+        <dia:rectangle val="69.61,188.25;86.75,193.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20505,7 +20528,7 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:point val="86,189"/>
         <dia:point val="86,191"/>
         <dia:point val="69.66,191"/>
-        <dia:point val="69.66,194"/>
+        <dia:point val="69.66,193"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
