@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TESTS_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TESTS_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_SERIALIZATION_SERIALIZATION_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_SERIALIZATION_SERIALIZATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen::text::cpp::transforms {
 
-class tests final : public model_to_text_transform {
+class serialization final : public model_to_text_transform {
 public:
 }
 

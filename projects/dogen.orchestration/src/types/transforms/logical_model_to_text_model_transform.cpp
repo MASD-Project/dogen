@@ -144,7 +144,6 @@ public:
 
     void operator()
     (boost::shared_ptr<logical::entities::structural::module> m) {
-        result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
 
@@ -159,9 +158,8 @@ private:
 
 }
 
-text::entities::model
-logical_model_to_text_model_transform::apply(const text::transforms::context& ctx,
-    const logical::entities::model& m) {
+text::entities::model logical_model_to_text_model_transform::
+apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     text::entities::model r;
     r.name(m.name());
     r.meta_name(logical::helpers::meta_name_factory::make_model_name());
@@ -184,6 +182,7 @@ logical_model_to_text_model_transform::apply(const text::transforms::context& ct
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
     r.all_technical_spaces(m.all_technical_spaces());
+    r.module_ids(m.container_ids());
 
     populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);

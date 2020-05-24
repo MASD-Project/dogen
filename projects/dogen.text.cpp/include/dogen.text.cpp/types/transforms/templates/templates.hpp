@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_HPP
-#define DOGEN_TEXT_CSHARP_TYPES_TRANSFORMS_TEST_DATA_HPP
+#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEMPLATES_TEMPLATES_HPP
+#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TEMPLATES_TEMPLATES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::text::csharp::transforms {
+namespace dogen::text::cpp::transforms {
 
-class test_data final : public model_to_text_transform {
+class templates final : public model_to_text_transform {
 public:
 }
 

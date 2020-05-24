@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-/**
- * @brief Formatters that generate tests for generated
- * code.
- */
 namespace dogen::text::cpp::transforms {
+
+class tests final : public model_to_text_transform {
+public:
 }
 
 #endif
