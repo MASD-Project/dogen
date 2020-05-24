@@ -31,7 +31,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -70,12 +70,14 @@ private:
         const std::string& archetype) const;
 
 private:
-    void execute(const std::unordered_set<text::entities::element_archetype>&
+    void execute(boost::shared_ptr<tracing::tracer> tracer,
+        const std::unordered_set<text::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         formattables::formattable& fbl) const;
 
 public:
-    void execute(const std::unordered_set<text::entities::element_archetype>&
+    void execute(boost::shared_ptr<tracing::tracer> tracer,
+        const std::unordered_set<text::entities::element_archetype>&
         enabled_archetype_for_element, formattables::model& fm) const;
 
 private:

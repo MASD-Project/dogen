@@ -65,9 +65,11 @@ std::string model_to_text_csharp_chain::description() const {
     return ::description;
 }
 
-void model_to_text_csharp_chain::apply(formattables::model& fm) const {
+void model_to_text_csharp_chain::
+apply(boost::shared_ptr<tracing::tracer> tracer,
+    formattables::model& fm) const {
     transforms::workflow wf;
-    wf.execute(fm);
+    wf.execute(tracer, fm);
 }
 
 const std::forward_list<physical::entities::meta_name>&
@@ -123,7 +125,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
      * Generate the formattables model.
      */
     auto fm(create_formattables_model(feature_model, frp, l, m));
-    apply(fm);
+    apply(ctx.tracer(), fm);
     m.managed_directories().push_back(l.project_path());
 }
 

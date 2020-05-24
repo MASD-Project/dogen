@@ -84,7 +84,8 @@ workflow::get_artefact(const std::unordered_map<std::string,
 }
 
 void
-workflow::execute(const std::unordered_set<text::entities::element_archetype>&
+workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_set<text::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
     formattables::formattable& fbl) const {
 
@@ -120,7 +121,7 @@ workflow::execute(const std::unordered_set<text::entities::element_archetype>&
         using logical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
-            frp.helper_formatters());
+            frp.helper_formatters(), tracer);
 
         auto& a(*aptr);
         const auto fs(ap.formatting_style());
@@ -156,15 +157,15 @@ workflow::execute(const std::unordered_set<text::entities::element_archetype>&
     }
 }
 
-void workflow::
-execute(const std::unordered_set<text::entities::element_archetype>&
+void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_set<text::entities::element_archetype>&
     enabled_archetype_for_element, formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
 
     for (auto& pair : fm.formattables()) {
         auto& fbl(pair.second);
-        execute(enabled_archetype_for_element, fm, fbl);
+        execute(tracer, enabled_archetype_for_element, fm, fbl);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
 }

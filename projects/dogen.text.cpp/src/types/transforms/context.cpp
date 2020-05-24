@@ -28,10 +28,11 @@ context::context(
     const formattables::element_properties& element_properties,
     const formattables::model& fm,
     const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::list<std::shared_ptr<helper_transform>>>>& helpers)
+    std::list<std::shared_ptr<helper_transform>>>>& helpers,
+    boost::shared_ptr<tracing::tracer> tracer)
     : enabled_archetype_for_element_(enabled_archetype_for_element),
       element_properties_(element_properties), model_(fm),
-      helpers_(helpers) { }
+      helpers_(helpers), tracer_(tracer) { }
 
 const std::unordered_set<text::entities::element_archetype>&
 context::enabled_archetype_for_element() const {
@@ -53,6 +54,10 @@ const std::unordered_map<
         std::string, std::list<std::shared_ptr<helper_transform>>>>&
 context::helpers() const {
     return helpers_;
+}
+
+boost::shared_ptr<tracing::tracer> context::tracer() const {
+    return tracer_;
 }
 
 }

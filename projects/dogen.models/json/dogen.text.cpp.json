@@ -888,6 +888,10 @@
         {
           "name": "helpers",
           "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
         }
       ]
     },

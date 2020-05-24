@@ -30,6 +30,8 @@
 #include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.text/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
@@ -47,7 +49,8 @@ public:
         const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
         std::unordered_map<std::string, std::list<std::shared_ptr<
-        helper_transform>>>>& helpers);
+        helper_transform>>>>& helpers,
+        boost::shared_ptr<tracing::tracer> tracer);
 
 public:
     const std::unordered_set<text::entities::element_archetype>&
@@ -64,6 +67,8 @@ public:
             std::list<std::shared_ptr<helper_transform>>>>&
         helpers() const;
 
+    boost::shared_ptr<tracing::tracer> tracer() const;
+
 private:
     const std::unordered_set<text::entities::element_archetype>&
     enabled_archetype_for_element_;
@@ -75,6 +80,7 @@ private:
             std::string, std::list<
                              std::shared_ptr<helper_transform>>>>&
     helpers_;
+    boost::shared_ptr<tracing::tracer> tracer_;
 };
 
 }

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
@@ -51,7 +52,8 @@ private:
         const std::string& archetype) const;
 
 public:
-    void execute(const formattables::model& fm) const;
+    void execute(boost::shared_ptr<tracing::tracer> tracer,
+        const formattables::model& fm) const;
 
 private:
     static std::shared_ptr<csharp::transforms::registrar> registrar_;

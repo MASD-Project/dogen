@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
@@ -62,7 +63,8 @@ private:
         const transforms::repository& frp, const formattables::locator & l,
         const text::entities::model& m) const;
 
-    void apply(formattables::model& fm) const;
+    void apply(boost::shared_ptr<tracing::tracer> tracer,
+        formattables::model& fm) const;
 
 public:
     std::string description() const override;

@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_map>
+#include "dogen.tracing/types/tracer.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 #include "dogen.text.csharp/types/formattables/element_properties.hpp"
 #include "dogen.text.csharp/types/transforms/helper_transform.hpp"
@@ -38,7 +39,8 @@ public:
     context(const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
         std::unordered_map<std::string, std::list<std::shared_ptr<
-        helper_transform>>>>& helpers);
+        helper_transform>>>>& helpers,
+        boost::shared_ptr<tracing::tracer> tracer);
 
 public:
     const formattables::element_properties& element_properties() const;
@@ -50,6 +52,8 @@ public:
             std::list<std::shared_ptr<helper_transform>>>>&
         helpers() const;
 
+    boost::shared_ptr<tracing::tracer> tracer() const;
+
 private:
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;
@@ -59,6 +63,7 @@ private:
             std::string, std::list<
                              std::shared_ptr<helper_transform>>>>&
         helpers_;
+    boost::shared_ptr<tracing::tracer> tracer_;
 };
 
 }

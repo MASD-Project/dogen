@@ -90,13 +90,14 @@ std::string model_to_text_cpp_chain::description() const {
 }
 
 void model_to_text_cpp_chain::
-apply(const std::unordered_set<text::entities::element_archetype>&
+apply(boost::shared_ptr<tracing::tracer> tracer,
+    const std::unordered_set<text::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
     const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
     formattables::model& fm) const {
     transforms::workflow wf(l, feature_model, cf);
-    wf.execute(enabled_archetype_for_element, fm);
+    wf.execute(tracer, enabled_archetype_for_element, fm);
 }
 
 std::list<boost::filesystem::path> model_to_text_cpp_chain::
@@ -161,7 +162,7 @@ void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
     const auto& eafe(m.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
-    apply(eafe, l, feature_model, cf, fm);
+    apply(ctx.tracer(), eafe, l, feature_model, cf, fm);
     m.managed_directories(managed_directories(l));
 }
 
