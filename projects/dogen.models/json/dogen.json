@@ -113,6 +113,11 @@
           "name": "run_id",
           "type": "std::string",
           "documentation": "Identifier to use for the present run.\n"
+        },
+        {
+          "name": "filter_regexes",
+          "type": "std::vector<std::string>",
+          "documentation": "If supplied, ignore all traces except those which match the supplied regexes.\n"
         }
       ]
     },

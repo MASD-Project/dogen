@@ -34,6 +34,20 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 
 std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
@@ -52,7 +66,8 @@ std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
       << "\"use_short_names\": " << v.use_short_names() << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
       << "\"backend\": " << v.backend() << ", "
-      << "\"run_id\": " << "\"" << tidy_up_string(v.run_id()) << "\""
+      << "\"run_id\": " << "\"" << tidy_up_string(v.run_id()) << "\"" << ", "
+      << "\"filter_regexes\": " << v.filter_regexes()
       << " }";
     return(s);
 }

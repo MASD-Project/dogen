@@ -37,7 +37,8 @@ tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
       use_short_names_(std::move(rhs.use_short_names_)),
       output_directory_(std::move(rhs.output_directory_)),
       backend_(std::move(rhs.backend_)),
-      run_id_(std::move(rhs.run_id_)) { }
+      run_id_(std::move(rhs.run_id_)),
+      filter_regexes_(std::move(rhs.filter_regexes_)) { }
 
 tracing_configuration::tracing_configuration(
     const dogen::tracing_level level,
@@ -47,7 +48,8 @@ tracing_configuration::tracing_configuration(
     const bool use_short_names,
     const boost::filesystem::path& output_directory,
     const dogen::tracing_backend backend,
-    const std::string& run_id)
+    const std::string& run_id,
+    const std::vector<std::string>& filter_regexes)
     : level_(level),
       format_(format),
       guids_enabled_(guids_enabled),
@@ -55,7 +57,8 @@ tracing_configuration::tracing_configuration(
       use_short_names_(use_short_names),
       output_directory_(output_directory),
       backend_(backend),
-      run_id_(run_id) { }
+      run_id_(run_id),
+      filter_regexes_(filter_regexes) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
@@ -67,6 +70,7 @@ void tracing_configuration::swap(tracing_configuration& other) noexcept {
     swap(output_directory_, other.output_directory_);
     swap(backend_, other.backend_);
     swap(run_id_, other.run_id_);
+    swap(filter_regexes_, other.filter_regexes_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
@@ -77,7 +81,8 @@ bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
         use_short_names_ == rhs.use_short_names_ &&
         output_directory_ == rhs.output_directory_ &&
         backend_ == rhs.backend_ &&
-        run_id_ == rhs.run_id_;
+        run_id_ == rhs.run_id_ &&
+        filter_regexes_ == rhs.filter_regexes_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
@@ -182,6 +187,24 @@ tracing_configuration& tracing_configuration::run_id(const std::string& v) {
 
 tracing_configuration& tracing_configuration::run_id(const std::string&& v) {
     run_id_ = std::move(v);
+    return *this;
+}
+
+const std::vector<std::string>& tracing_configuration::filter_regexes() const {
+    return filter_regexes_;
+}
+
+std::vector<std::string>& tracing_configuration::filter_regexes() {
+    return filter_regexes_;
+}
+
+tracing_configuration& tracing_configuration::filter_regexes(const std::vector<std::string>& v) {
+    filter_regexes_ = v;
+    return *this;
+}
+
+tracing_configuration& tracing_configuration::filter_regexes(const std::vector<std::string>&& v) {
+    filter_regexes_ = std::move(v);
     return *this;
 }
 

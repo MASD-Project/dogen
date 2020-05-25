@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/tracing_level.hpp"
@@ -57,7 +58,8 @@ public:
         const bool use_short_names,
         const boost::filesystem::path& output_directory,
         const dogen::tracing_backend backend,
-        const std::string& run_id);
+        const std::string& run_id,
+        const std::vector<std::string>& filter_regexes);
 
 public:
     /**
@@ -133,6 +135,16 @@ public:
     tracing_configuration& run_id(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If supplied, ignore all traces except those which match the supplied regexes.
+     */
+    /**@{*/
+    const std::vector<std::string>& filter_regexes() const;
+    std::vector<std::string>& filter_regexes();
+    tracing_configuration& filter_regexes(const std::vector<std::string>& v);
+    tracing_configuration& filter_regexes(const std::vector<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const tracing_configuration& rhs) const;
     bool operator!=(const tracing_configuration& rhs) const {
@@ -152,6 +164,7 @@ private:
     boost::filesystem::path output_directory_;
     dogen::tracing_backend backend_;
     std::string run_id_;
+    std::vector<std::string> filter_regexes_;
 };
 
 }
