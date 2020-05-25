@@ -87,7 +87,7 @@ const std::string tracing_backend_arg("tracing-backend");
 const std::string tracing_backend_file("file");
 const std::string tracing_backend_database("relational");
 const std::string tracing_run_id_arg("tracing-run-id");
-const std::string tracing_filter_regexes_arg("tracing-filter-regexes");
+const std::string tracing_filter_regex_arg("tracing-filter-regex");
 
 const std::string reporting_enabled_arg("reporting-enabled");
 const std::string reporting_style_arg("reporting-style");
@@ -199,7 +199,7 @@ options_description make_top_level_visible_options_description() {
             "Backend to use for tracing. Valid values: file, relational.")
         ("tracing-run-id", value<std::string>(),
             "Run ID to use to identify the tracing session.")
-        ("tracing-filter-regexes", value<std::vector<std::string>>(),
+        ("tracing-filter-regex", value<std::vector<std::string>>(),
             "One or more regular expressions for the transform ID, used "
             "to filter the tracing output.");
     r.add(tod);
@@ -517,8 +517,8 @@ read_tracing_configuration(const variables_map& vm,
     const auto tracing_dir(byproduct_dir / tracing_default_directory);
     r.output_directory(tracing_dir);
 
-    if (vm.count(tracing_filter_regexes_arg)) {
-        r.filter_regexes(vm[tracing_filter_regexes_arg]
+    if (vm.count(tracing_filter_regex_arg)) {
+        r.filter_regexes(vm[tracing_filter_regex_arg]
             .as<std::vector<std::string>>());
     }
 
