@@ -44554,6 +44554,9 @@ std::list&lt;std::string&gt; source_cmakelists_transform::inclusion_dependencies
 
 void source_cmakelists_transform::apply(const context&amp; ctx,
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "source cmakelists transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
@@ -44646,6 +44649,7 @@ endif()
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -44849,6 +44853,9 @@ std::list&lt;std::string&gt; include_cmakelists_transform::inclusion_dependencie
 
 void include_cmakelists_transform::apply(const context&amp; ctx,
     const logical::entities::element&amp; e, physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "include cmakelists transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
@@ -44874,6 +44881,7 @@ install(
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
