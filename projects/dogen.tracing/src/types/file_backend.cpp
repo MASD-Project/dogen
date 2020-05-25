@@ -44,7 +44,7 @@ auto lg(logger_factory(id));
 
 const char zero('0');
 const std::string empty;
-const unsigned int leading_zeros(3);
+const unsigned int leading_zeros(5);
 const std::string delimiter("-");
 const std::string extension(".json");
 

@@ -27,12 +27,12 @@ const std::string transform_stats_graphviz_fn("transform_stats.dot");
 const std::string references_graph_org_fn("references_graph.org");
 const std::string references_graph_text_fn("references_graph.txt");
 const std::string references_graph_graphviz_fn("references_graph.dot");
-const std::string physical_name_prefix("000-configuration-");
+const std::string physical_name_prefix("00000-configuration-");
 const std::string physical_name_postfix("-initial_input.json");
 const std::string injection_transform_prefix(
-    "000-injection.dia.decoding_transform-dogen-");
-const std::string first_short_name("000-initial_input.json");
-const std::string second_short_name("001-input.json");
+    "00000-injection.dia.decoding_transform-dogen-");
+const std::string first_short_name("00000-initial_input.json");
+const std::string second_short_name("00001-input.json");
 const std::string injection_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
