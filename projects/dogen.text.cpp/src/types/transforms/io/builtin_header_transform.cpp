@@ -81,11 +81,15 @@ std::list<std::string> builtin_header_transform::inclusion_dependencies(
     return r;
 }
 
-void builtin_header_transform::apply(const context& /*ctx*/, const logical::entities::element& e,
+void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "FIXME",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     a.logical_name().simple(e.name().simple());
     a.logical_name().qualified(e.name().qualified().dot());
     a.origin_sha1_hash(e.origin_sha1_hash());
+    stp.end_transform(a);
 }
 
 }
