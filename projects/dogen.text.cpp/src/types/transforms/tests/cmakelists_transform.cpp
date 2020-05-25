@@ -94,6 +94,9 @@ std::list<std::string> cmakelists_transform::inclusion_dependencies(
 
 void cmakelists_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "cmakelists transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto& c(ast.as<cmakelists>(e));
@@ -162,5 +165,6 @@ ast.stream() << std::endl;
 ast.stream() << "install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)" << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }

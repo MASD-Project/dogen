@@ -34999,6 +34999,9 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
 
 void class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
     {
@@ -35454,6 +35457,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -35850,6 +35854,9 @@ std::list&lt;std::string&gt; enum_implementation_transform::inclusion_dependenci
 
 void enum_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
@@ -36070,6 +36077,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -42953,6 +42961,9 @@ std::list&lt;std::string&gt; main_transform::inclusion_dependencies(
 
 void main_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "main transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::structural::entry_point;
     const auto&amp; ep(ast.as&lt;entry_point&gt;(e));
@@ -42988,6 +42999,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -45399,6 +45411,9 @@ std::list&lt;std::string&gt; cmakelists_transform::inclusion_dependencies(
 
 void cmakelists_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "cmakelists transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::build::cmakelists;
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
@@ -45477,6 +45492,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
