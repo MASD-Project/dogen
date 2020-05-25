@@ -93,6 +93,9 @@ std::list<std::string> project_transform::inclusion_dependencies(
 
 void project_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "project transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::project;
     const auto& proj(ast.as<project>(e));
@@ -137,5 +140,6 @@ ast.stream() << "  </ItemGroup>" << std::endl;
 ast.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.Cpp.targets\" />" << std::endl;
 ast.stream() << "</Project>" << std::endl;
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }

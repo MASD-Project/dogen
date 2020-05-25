@@ -93,6 +93,9 @@ std::list<std::string> msbuild_targets_transform::inclusion_dependencies(
 
 void msbuild_targets_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "msbuild targets transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::msbuild_targets;
     const auto& c(ast.as<msbuild_targets>(e));
@@ -146,5 +149,6 @@ ast.stream() << "    </Target>" << std::endl;
 ast.stream() << "</Project>" << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }

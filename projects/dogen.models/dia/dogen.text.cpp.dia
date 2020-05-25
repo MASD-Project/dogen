@@ -42447,6 +42447,9 @@ std::list&lt;std::string&gt; project_transform::inclusion_dependencies(
 
 void project_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "project transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::project;
     const auto&amp; proj(ast.as&lt;project&gt;(e));
@@ -42499,6 +42502,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;/Project&gt;
 &lt;#+
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -42699,6 +42703,9 @@ std::list&lt;std::string&gt; solution_transform::inclusion_dependencies(
 
 void solution_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "solution transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::solution;
     const auto&amp; sln(ast.as&lt;solution&gt;(e));
@@ -42736,6 +42743,7 @@ Global
 EndGlobal
 &lt;#+
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -44275,6 +44283,9 @@ std::list&lt;std::string&gt; msbuild_targets_transform::inclusion_dependencies(
 
 void msbuild_targets_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "msbuild targets transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::visual_studio::msbuild_targets;
     const auto&amp; c(ast.as&lt;msbuild_targets&gt;(e));
@@ -44342,6 +44353,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
