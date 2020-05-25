@@ -18,6 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/io/shared_ptr_io.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.physical/io/entities/artefact_io.hpp"
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
@@ -91,6 +96,9 @@ std::list<std::string> common_odb_options_transform::inclusion_dependencies(
 
 void common_odb_options_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "common odb options transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     using logical::entities::orm::common_odb_options;
     const auto& o(ast.as<common_odb_options>(e));
@@ -141,5 +149,7 @@ ast.stream() << "# debug regexes" << std::endl;
 ast.stream() << "# --include-regex-trace" << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
+
 }
