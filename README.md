@@ -85,8 +85,8 @@ the following:
   Dogen development (though of course we are gathering a long list of
   ideas in our [product
   backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org)).
-- in our quest for the conceptual model, we have and /we shall
-  continue/ to break the API many times. This will manifest itself in
+- in our quest for the conceptual model, we have broken and _we shall
+  continue_ to break the API many times. This will manifest itself in
   having to update user models or in changes in the generated
   code. Features that have been working thus far may also be
   deprecated. We provide no guarantees of forward or backward
@@ -96,7 +96,7 @@ the following:
   the [release notes](https://github.com/MASD-Project/dogen/releases).
 - we do have an [extensive suite of
   tests](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
-  (both generated and handcrafted), but these focus /only/ on Dogen's
+  (both generated and handcrafted), but these focus _only_ on Dogen's
   use cases. If you try any permutations outside these, it is likely
   you will find problems. The errors you will get will not be the most
   obvious.
