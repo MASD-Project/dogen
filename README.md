@@ -68,6 +68,49 @@ available as a separate git repo:
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
 
+# Status of the Project
+
+Whilst we welcome users and contributors, we think its important to
+set clear expectations for the project. At the outset we must stress
+that Dogen is an _academic project_ at present, with academic
+goals. That is, our objectives are not (yet) to produce a fully
+polished tool, ready for end users to work on industrial scale
+projects. If for whatever reason you decide to use it, bear in mind
+the following:
+
+- our goal at present is to work out the MASD conceptual model. We
+  will continue to refactor the code internally until it is consistent
+  with the conceptual model. It will take a long while to get
+  there. This means that adding new features is not a priority for
+  Dogen development (though of course we are gathering a long list of
+  ideas in our [product
+  backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org)).
+- in our quest for the conceptual model, we have and /we shall
+  continue/ to break the API many times. This will manifest itself in
+  having to update user models or in changes in the generated
+  code. Features that have been working thus far may also be
+  deprecated. We provide no guarantees of forward or backward
+  compatibility; there isn't even an effort not to break these - in
+  fact, quite the opposite, if its not in agreement with the
+  conceptual model it must be changed. We do try to highlight these in
+  the [release notes](https://github.com/MASD-Project/dogen/releases).
+- we do have an [extensive suite of
+  tests](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
+  (both generated and handcrafted), but these focus /only/ on Dogen's
+  use cases. If you try any permutations outside these, it is likely
+  you will find problems. The errors you will get will not be the most
+  obvious.
+- there is little to no documentation on Dogen. This will not change
+  until we publish the PhD thesis. Resources are limited and they are
+  all directed to development at present.
+- for this tool to be useful in any way in its present state, you must
+  have a good working knowledge of
+  [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering).
+
+These warnings can probably best summarised as follows: "if it breaks,
+you get to keep the pieces; and it will break, often". But if you find
+such things fun, proceed with caution.
+
 # Binary Packages
 
 Binary packages are available for each release on
