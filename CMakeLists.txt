@@ -521,6 +521,8 @@ if (DOGEN_CLI_EXECUTABLE)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-guids-enabled)
     # change to file or relational as required.
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-backend file)
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS}
+    #    --tracing-filter-regex .*text.transforms.model_to_text_chain.*)
 
     set(DOGEN_DATABASE_OPTIONS "")
     # uncomment to enable database tracing.
