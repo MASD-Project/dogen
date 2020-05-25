@@ -18,6 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/io/shared_ptr_io.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
