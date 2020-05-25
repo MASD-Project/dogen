@@ -69,7 +69,15 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-void builtin_transform::apply(const context& /*ctx*/, const logical::entities::element& /*e*/,
-    physical::entities::artefact& /*a*/) const {}
+void builtin_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "builtin transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    a.logical_name().simple(e.name().simple());
+    a.logical_name().qualified(e.name().qualified().dot());
+    a.origin_sha1_hash(e.origin_sha1_hash());
+    stp.end_transform(a);
+}
 
 }

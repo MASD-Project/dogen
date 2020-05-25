@@ -1855,6 +1855,9 @@
 
 void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().qualified(), e));
@@ -2127,6 +2130,7 @@ using System;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -2308,6 +2312,9 @@ using System;
 
 void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().qualified(), e));
     {
@@ -2349,6 +2356,7 @@ using System;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -3770,6 +3778,9 @@ using System.Collections.Generic;
 
 void exception_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "exception transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
@@ -3794,6 +3805,7 @@ using System;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -12568,8 +12580,16 @@ using System;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entities::element&amp; /*e*/,
-    physical::entities::artefact&amp; /*a*/) const {}
+void builtin_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "builtin transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    a.logical_name().simple(e.name().simple());
+    a.logical_name().qualified(e.name().qualified().dot());
+    a.origin_sha1_hash(e.origin_sha1_hash());
+    stp.end_transform(a);
+}
 
 #&gt;#</dia:string>
           </dia:attribute>
@@ -13992,6 +14012,9 @@ void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entitie
 
 void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
@@ -14116,6 +14139,7 @@ using System;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>

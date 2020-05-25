@@ -73,6 +73,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
@@ -171,5 +174,6 @@ ast.stream() << "    }" << std::endl;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }
