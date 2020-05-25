@@ -82,6 +82,9 @@ std::list<std::string> namespace_header_transform::inclusion_dependencies(
 
 void namespace_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "namespace header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& m(ast.as<logical::entities::structural::module>(e));
 
@@ -106,6 +109,7 @@ ast.stream() << std::endl;
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

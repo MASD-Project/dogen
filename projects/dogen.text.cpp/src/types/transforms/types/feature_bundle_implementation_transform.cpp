@@ -109,6 +109,9 @@ std::list<std::string> feature_bundle_implementation_transform::inclusion_depend
 
 void feature_bundle_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "feature bundle implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& fb(ast.as<logical::entities::variability::feature_bundle>(e));
 
@@ -213,6 +216,7 @@ ast.stream() << std::endl;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

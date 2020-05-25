@@ -90,8 +90,12 @@ std::list<std::string> backend_class_implementation_transform::inclusion_depende
 
 void backend_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "backend class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

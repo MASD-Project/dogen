@@ -109,6 +109,9 @@ std::list<std::string> feature_template_bundle_implementation_transform::inclusi
 
 void feature_template_bundle_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "feature template bundle implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& ftb(ast.as<logical::entities::variability::feature_template_bundle>(e));
 
@@ -218,6 +221,7 @@ ast.stream() << std::endl;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

@@ -81,6 +81,9 @@ std::list<std::string> primitive_forward_declarations_transform::inclusion_depen
 
 void primitive_forward_declarations_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive forward declarations transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
@@ -96,6 +99,7 @@ ast.stream() << std::endl;
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

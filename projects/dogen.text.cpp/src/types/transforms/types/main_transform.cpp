@@ -90,6 +90,9 @@ std::list<std::string> main_transform::inclusion_dependencies(
 
 void main_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "main transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::structural::entry_point>(e));
 
@@ -107,6 +110,7 @@ ast.stream() << std::endl;
 ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }

@@ -90,10 +90,13 @@ std::list<std::string> archetype_class_implementation_transform::inclusion_depen
 
 void archetype_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "archetype class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::archetype>(e));
     ast.update_artefact();
     a.content(arch.rendered_stitch_template());
+    stp.end_transform(a);
 }
 
 }
