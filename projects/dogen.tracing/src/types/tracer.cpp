@@ -48,7 +48,10 @@ backend_factory_registrar& tracer::registrar() {
 }
 
 tracer::tracer(const configuration& cfg, const std::string& activity)
-    : backend_(registrar_.try_make_backend(cfg, activity)) {}
+    : backend_(registrar_.try_make_backend(cfg, activity)),
+      filter_regexes_(make_filter_regexes(cfg.tracing() ?
+              cfg.tracing()->filter_regexes() :
+              std::vector<std::string>())) {}
 
 std::string tracer::last_transform_instance_id() const {
     if (parent_id_.empty()) {
@@ -75,6 +78,37 @@ void tracer::add_references_graph(const std::string& root_vertex,
     edges_per_model) const {
     if (backend_)
         backend_->add_references_graph(root_vertex, edges_per_model);
+}
+
+std::vector<std::regex>
+tracer::make_filter_regexes(const std::vector<std::string>& filter_regexes) {
+    std::vector<std::regex> r;
+    r.reserve(filter_regexes.size());
+    for (const auto& fr : filter_regexes) {
+        BOOST_LOG_SEV(lg, debug) << "Creating regex for: " << fr;
+        r.push_back(std::regex(fr));
+    }
+    return r;
+}
+
+bool tracer::transform_enabled(const std::string& transform_id) const {
+    /*
+     * If the user did not provide any regxes, all transforms are enabled.
+     */
+    if (filter_regexes_.empty())
+        return true;
+
+    for (const auto& re : filter_regexes_) {
+        BOOST_LOG_SEV(lg, debug) << "Applying regex to '"
+                                 << transform_id << "'.";
+
+        if (std::regex_match(transform_id, re)) {
+            BOOST_LOG_SEV(lg, debug) << "Regex matches, transform enabled.";
+            return true;
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "No regex matches, transform disabled.";
+    return false;
 }
 
 void tracer::end_run() const {

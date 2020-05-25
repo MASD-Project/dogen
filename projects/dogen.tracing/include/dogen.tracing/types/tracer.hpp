@@ -27,6 +27,7 @@
 
 #include <list>
 #include <stack>
+#include <regex>
 #include <string>
 #include <sstream>
 #include <unordered_map>
@@ -86,6 +87,20 @@ public:
         const std::unordered_map<std::string, std::list<std::string>>&
         edges_per_model) const;
 
+private:
+    /**
+     * @brief Converts the supplied strings, if any, into regular
+     * expressions.
+     */
+    static std::vector<std::regex>
+    make_filter_regexes(const std::vector<std::string>& filter_regexes);
+
+    /**
+     * @brief Returns true if the supplied transform ID is selected by
+     * the current set of filtering regexes, false otherwise.
+     */
+    bool transform_enabled(const std::string& transform_id) const;
+
 public:
     /**
      * @brief Starts a transform chain.
@@ -102,8 +117,14 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_chain(last_transform_instance_id(), transform_id,
-                transform_instance_id, model_id, to_string(input));
+            if (transform_enabled(transform_instance_id)) {
+                backend_->start_chain(last_transform_instance_id(),
+                    transform_id, transform_instance_id, model_id,
+                    to_string(input));
+            } else {
+                backend_->start_chain(last_transform_instance_id(),
+                    transform_id, transform_instance_id, model_id);
+            }
             push_parent_id(transform_instance_id);
         }
     }
@@ -124,9 +145,14 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_transform(last_transform_instance_id(),
-                transform_id, transform_instance_id, model_id,
-                to_string(input));
+            if (transform_enabled(transform_instance_id)) {
+                backend_->start_transform(last_transform_instance_id(),
+                    transform_id, transform_instance_id, model_id,
+                    to_string(input));
+            } else {
+                backend_->start_transform(last_transform_instance_id(),
+                    transform_id, transform_instance_id, model_id);
+            }
         }
     }
     /**@}*/
@@ -144,8 +170,13 @@ public:
         const Ioable& output) const {
         if (backend_) {
             pop_parent_id();
-            backend_->end_chain(last_transform_instance_id(), transform_id,
-                transform_instance_id, model_id, to_string(output));
+            if (transform_enabled(transform_instance_id)) {
+                backend_->end_chain(last_transform_instance_id(), transform_id,
+                    transform_instance_id, model_id, to_string(output));
+            } else {
+                backend_->end_chain(last_transform_instance_id(),
+                    transform_id, transform_instance_id);
+            }
         }
     }
     /**@}*/
@@ -161,8 +192,14 @@ public:
         const std::string& transform_instance_id, const std::string& model_id,
         const Ioable& output) const {
         if (backend_) {
-            backend_->end_transform(last_transform_instance_id(), transform_id,
-                transform_instance_id, model_id, to_string(output));
+            if (transform_enabled(transform_instance_id)) {
+                backend_->end_transform(last_transform_instance_id(),
+                    transform_id, transform_instance_id, model_id,
+                    to_string(output));
+            } else {
+                backend_->end_transform(last_transform_instance_id(),
+                    transform_id, transform_instance_id);
+            }
         }
     }
     /**@}*/
@@ -177,6 +214,7 @@ public:
 
 private:
     boost::shared_ptr<tracing::backend> backend_;
+    const std::vector<std::regex> filter_regexes_;
     static backend_factory_registrar registrar_;
     mutable std::stack<std::string> parent_id_;
 };
