@@ -72,6 +72,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void assistant_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
@@ -277,5 +280,6 @@ ast.stream() << "    }" << std::endl;
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }

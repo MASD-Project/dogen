@@ -3142,6 +3142,9 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
 
 void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "FIXME",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().qualified(), e));
     {
@@ -3316,6 +3319,7 @@ using System.Collections.Generic;
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -3497,6 +3501,9 @@ using System.Collections.Generic;
 
 void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().qualified(), e));
     {
@@ -3605,6 +3612,7 @@ using System.Collections.Generic;
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -14329,6 +14337,9 @@ using System;
 
 void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
     {
@@ -14458,6 +14469,7 @@ using System.Collections.Generic;
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -17588,6 +17600,9 @@ using System.Collections;
 
 void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     {
         const auto sn(e.name().simple());
@@ -17797,6 +17812,7 @@ using System.Collections.Specialized;
         }
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
