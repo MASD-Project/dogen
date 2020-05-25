@@ -16329,6 +16329,9 @@ std::string {{class.simple_name}}::helper_name() const {
 
 void project_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "project transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
     const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().qualified(), e));
@@ -16381,6 +16384,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;/Project&gt;
 &lt;#+
     ast.update_artefact();
+    stp.end_transform(a);
+
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -16572,6 +16577,9 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 
 void solution_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "solution transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
     const auto&amp; sln(ast.as&lt;solution&gt;(archetype().meta_name().qualified(), e));
@@ -16609,6 +16617,7 @@ Global
 EndGlobal
 &lt;#+
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>

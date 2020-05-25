@@ -75,6 +75,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void solution_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "solution transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
     const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
@@ -102,5 +105,6 @@ ast.stream() << "        StartupItem = CSharpModel.csproj" << std::endl;
 ast.stream() << "    EndGlobalSection" << std::endl;
 ast.stream() << "EndGlobal" << std::endl;
     ast.update_artefact();
+    stp.end_transform(a);
 }
 }
