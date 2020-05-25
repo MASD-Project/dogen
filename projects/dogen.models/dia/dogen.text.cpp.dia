@@ -5145,6 +5145,9 @@ std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
 
 void class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
@@ -5192,6 +5195,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -5409,6 +5413,9 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
 
 void class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
@@ -5516,6 +5523,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -13984,6 +13992,9 @@ std::list&lt;std::string&gt; enum_header_transform::inclusion_dependencies(
 
 void enum_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
@@ -14000,6 +14011,7 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -17330,11 +17342,15 @@ std::list&lt;std::string&gt; builtin_header_transform::inclusion_dependencies(
     return r;
 }
 
-void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::entities::element&amp; e,
+void builtin_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "builtin header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     a.logical_name().simple(e.name().simple());
     a.logical_name().qualified(e.name().qualified().dot());
     a.origin_sha1_hash(e.origin_sha1_hash());
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -30438,6 +30454,9 @@ std::list&lt;std::string&gt; primitive_header_transform::inclusion_dependencies(
 
 void primitive_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
@@ -30463,6 +30482,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -31822,6 +31842,9 @@ primitive_implementation_transform::inclusion_dependencies(
 
 void primitive_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
@@ -31877,6 +31900,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -40905,6 +40929,9 @@ std::list&lt;std::string&gt; class_forward_declarations_transform::inclusion_dep
 
 void class_forward_declarations_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "class forward declarations transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
@@ -40927,6 +40954,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -41344,6 +41372,9 @@ std::list&lt;std::string&gt; primitive_forward_declarations_transform::inclusion
 
 void primitive_forward_declarations_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive forward declarations transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
@@ -41366,6 +41397,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -41560,6 +41592,9 @@ std::list&lt;std::string&gt; type_registrar_header_transform::inclusion_dependen
 
 void type_registrar_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "type registrar header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; rg(ast.as&lt;logical::entities::serialization::type_registrar&gt;(e));
 
@@ -41586,6 +41621,7 @@ static void register_types(Archive&amp; ar);
 
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
@@ -41808,6 +41844,9 @@ inclusion_dependencies(
 
 void type_registrar_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
    physical::entities::artefact&amp; a) const {
+   tracing::scoped_transform_tracer stp(lg, "type registrar implementationtransform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; rg(ast.as&lt;logical::entities::serialization::type_registrar&gt;(e));
 
@@ -41865,6 +41904,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>

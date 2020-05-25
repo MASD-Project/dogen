@@ -117,6 +117,9 @@ inclusion_dependencies(
 
 void type_registrar_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
    physical::entities::artefact& a) const {
+   tracing::scoped_transform_tracer stp(lg, "type registrar implementationtransform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& rg(ast.as<logical::entities::serialization::type_registrar>(e));
 
@@ -164,6 +167,7 @@ ast.stream() << std::endl;
         } // snf
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 }
