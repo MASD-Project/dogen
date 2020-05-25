@@ -33,6 +33,15 @@
 #include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
 
 namespace dogen::text::csharp::transforms::io {
+namespace {
+
+const std::string transform_id("text.csharp.transforms.io.primitive_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& primitive_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

@@ -33,6 +33,15 @@
 #include "dogen.text.csharp/types/transforms/types/class_transform.hpp"
 
 namespace dogen::text::csharp::transforms::types {
+namespace {
+
+const std::string transform_id("text.csharp.transforms.types.class_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& class_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

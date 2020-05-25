@@ -15400,7 +15400,15 @@ public:
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#
+            <dia:string>#namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

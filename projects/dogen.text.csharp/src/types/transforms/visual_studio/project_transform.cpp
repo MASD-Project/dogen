@@ -35,6 +35,15 @@
 #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
+namespace {
+
+const std::string transform_id("text.csharp.transforms.visual_studio.project_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& project_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
