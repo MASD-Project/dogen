@@ -38647,6 +38647,9 @@ std::list&lt;std::string&gt; enum_header_transform::inclusion_dependencies(
 
 void enum_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; enm(ast.as&lt;logical::entities::structural::enumeration&gt;(e));
 
@@ -38719,6 +38722,7 @@ inline &lt;#= qn #&gt; lexical_cast(const std::string &amp; s) {
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
 }
 
 #&gt;#</dia:string>
