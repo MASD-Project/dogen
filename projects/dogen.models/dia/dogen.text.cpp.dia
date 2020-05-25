@@ -4071,6 +4071,11 @@ public:
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
@@ -4167,13 +4172,13 @@ operator&lt;&lt;(std::ostream&amp; s,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,309"/>
+        <dia:point val="52,309"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,308.95;81.655,313.45"/>
+        <dia:rectangle val="51.95,308.95;80.655,313.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,309"/>
+        <dia:point val="52,309"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
@@ -4282,6 +4287,11 @@ operator&lt;&lt;(std::ostream&amp; s,
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
@@ -4523,6 +4533,11 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
@@ -4617,13 +4632,13 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,315"/>
+        <dia:point val="52,315"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,314.95;83.58,319.45"/>
+        <dia:rectangle val="51.95,314.95;82.58,319.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,315"/>
+        <dia:point val="52,315"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.530000000000001"/>
@@ -4732,6 +4747,11 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
@@ -16712,6 +16732,11 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -29451,6 +29476,11 @@ public:
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -30806,13 +30836,13 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O209">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,321"/>
+        <dia:point val="52,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,320.95;82.81,325.45"/>
+        <dia:rectangle val="51.95,320.95;81.81,325.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,321"/>
+        <dia:point val="52,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.760000000000002"/>
@@ -30921,6 +30951,11 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
