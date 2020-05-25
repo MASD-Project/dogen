@@ -91,7 +91,7 @@ tracer::make_filter_regexes(const std::vector<std::string>& filter_regexes) {
     return r;
 }
 
-bool tracer::transform_enabled(const std::string& transform_id) const {
+bool tracer::is_transform_enabled(const std::string& transform_id) const {
     /*
      * If the user did not provide any regxes, all transforms are enabled.
      */

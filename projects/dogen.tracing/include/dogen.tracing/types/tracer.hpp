@@ -99,7 +99,7 @@ private:
      * @brief Returns true if the supplied transform ID is selected by
      * the current set of filtering regexes, false otherwise.
      */
-    bool transform_enabled(const std::string& transform_id) const;
+    bool is_transform_enabled(const std::string& transform_id) const;
 
 public:
     /**
@@ -117,7 +117,7 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            if (transform_enabled(transform_instance_id)) {
+            if (is_transform_enabled(transform_id)) {
                 backend_->start_chain(last_transform_instance_id(),
                     transform_id, transform_instance_id, model_id,
                     to_string(input));
@@ -145,7 +145,7 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            if (transform_enabled(transform_instance_id)) {
+            if (is_transform_enabled(transform_id)) {
                 backend_->start_transform(last_transform_instance_id(),
                     transform_id, transform_instance_id, model_id,
                     to_string(input));
@@ -170,7 +170,7 @@ public:
         const Ioable& output) const {
         if (backend_) {
             pop_parent_id();
-            if (transform_enabled(transform_instance_id)) {
+            if (is_transform_enabled(transform_id)) {
                 backend_->end_chain(last_transform_instance_id(), transform_id,
                     transform_instance_id, model_id, to_string(output));
             } else {
@@ -192,7 +192,7 @@ public:
         const std::string& transform_instance_id, const std::string& model_id,
         const Ioable& output) const {
         if (backend_) {
-            if (transform_enabled(transform_instance_id)) {
+            if (is_transform_enabled(transform_id)) {
                 backend_->end_transform(last_transform_instance_id(),
                     transform_id, transform_instance_id, model_id,
                     to_string(output));
