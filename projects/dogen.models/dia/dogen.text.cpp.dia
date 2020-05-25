@@ -268,7 +268,9 @@
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.#</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1539,7 +1541,9 @@ inline void swap(
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.#</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1770,7 +1774,9 @@ public:
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2053,7 +2059,8 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 #DOGEN masd.wale.kvp.class.simple_name=exception_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=exception_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=exception#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=exception
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2310,7 +2317,9 @@ private:
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2559,7 +2568,8 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 #DOGEN masd.wale.kvp.class.simple_name=namespace_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=namespace_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=module#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=module
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2782,7 +2792,8 @@ namespace &lt;#= m.name().simple() #&gt; {
 #DOGEN masd.wale.kvp.class.simple_name=visitor_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=visitor#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=visitor
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3048,7 +3059,9 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3724,7 +3737,9 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3977,7 +3992,9 @@ public:
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.#</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4193,7 +4210,9 @@ operator&lt;&lt;(std::ostream&amp; s,
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4439,7 +4458,9 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4653,7 +4674,9 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:string>#masd::physical::archetype, dogen::enumeration_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for enumerations.#</dia:string>
+        <dia:string>#Generates implementation files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4932,7 +4955,9 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.#</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5182,7 +5207,9 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5544,7 +5571,9 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for objects.#</dia:string>
+        <dia:string>#Generates header files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5786,7 +5815,9 @@ public:
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6162,7 +6193,9 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6387,7 +6420,9 @@ private:
         <dia:string>#masd::physical::archetype, dogen::enumeration_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Generates implementation files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6653,7 +6688,9 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for archetypes.#</dia:string>
+        <dia:string>#Generates header files for archetypes.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13748,7 +13785,9 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13955,7 +13994,9 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16104,7 +16145,9 @@ and element.#</dia:string>
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16295,7 +16338,9 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16487,7 +16532,9 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16678,7 +16725,9 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16869,7 +16918,9 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17060,7 +17111,9 @@ void builtin_header_transform::apply(const context&amp; /*ctx*/, const logical::
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for builtins.#</dia:string>
+        <dia:string>#Generates header files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -28811,7 +28864,9 @@ not a regular" helper.#</dia:string>
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29200,7 +29255,9 @@ inline void swap(
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29427,7 +29484,9 @@ public:
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29645,7 +29704,9 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29893,7 +29954,9 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30125,7 +30188,9 @@ public:
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30348,7 +30413,9 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30663,7 +30730,9 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30912,7 +30981,9 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31167,7 +31238,9 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31466,7 +31539,9 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for primitives.#</dia:string>
+        <dia:string>#Generates header files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34635,7 +34710,8 @@ code.
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.object
 #DOGEN masd.wale.kvp.class.simple_name=class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_implementation
-#DOGEN masd.wale.kvp.meta_element=object#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35488,7 +35564,8 @@ BOOST_AUTO_TEST_SUITE_END()
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.enumeration
 #DOGEN masd.wale.kvp.class.simple_name=enum_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=enum_implementation
-#DOGEN masd.wale.kvp.meta_element=enumeration#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=enumeration
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35961,7 +36038,8 @@ BOOST_AUTO_TEST_SUITE_END()
 #DOGEN masd.wale.kvp.class.simple_name=feature_template_bundle_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36280,7 +36358,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_template_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_template_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_template_bundle_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_feature_template_bundle
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36639,7 +36718,8 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 #DOGEN masd.wale.kvp.class.simple_name=variability_initializer_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=variability_initializer#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_initializer
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36867,7 +36947,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
 #DOGEN masd.wale.kvp.class.simple_name=variability_initializer_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=variability_initializer_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_initializer#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_initializer
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38305,7 +38386,9 @@ string.
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for enumerations.#</dia:string>
+        <dia:string>#Generates header files for enumerations.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.lexical_cast#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39880,7 +39963,8 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.wale.kvp.meta_element=templating_logic_less_templates
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.templating
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_templates#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_templates
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40080,7 +40164,8 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=object#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40291,7 +40376,8 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=visitor_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=visitor#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=visitor
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40502,7 +40588,8 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=object#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=object
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40724,7 +40811,8 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=primitive#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=primitive
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40935,7 +41023,8 @@ class &lt;#= p.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=primitive#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=primitive
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41157,7 +41246,8 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.wale.kvp.class.simple_name=type_registrar_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41375,7 +41465,8 @@ static void register_types(Archive&amp; ar);
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
 #DOGEN masd.wale.kvp.class.simple_name=type_registrar_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_implementation
-#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=serialization_type_registrar
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42081,7 +42172,8 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
 #DOGEN masd.wale.kvp.meta_element=visual_studio_project
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42332,7 +42424,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.meta_element=visual_studio_solution
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42565,7 +42658,8 @@ EndGlobal
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.entry_point
 #DOGEN masd.wale.kvp.class.simple_name=main_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=main
-#DOGEN masd.wale.kvp.meta_element=entry_point#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=entry_point
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42811,7 +42905,8 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 #DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43052,7 +43147,8 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.meta_element=primitive
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43291,7 +43387,8 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
 #DOGEN masd.wale.kvp.class.simple_name=main_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=main
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.wale.kvp.meta_element=entry_point#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=entry_point
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43619,7 +43716,8 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #DOGEN masd.wale.kvp.meta_element=orm_common_odb_options
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43878,7 +43976,8 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.meta_element=visual_studio_msbuild_targets
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_msbuild_targets#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_msbuild_targets
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44183,7 +44282,8 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
 #DOGEN masd.wale.kvp.meta_element=build_cmakelists
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_source_cmakelists#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_source_cmakelists
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44475,7 +44575,8 @@ endif()
 #DOGEN masd.wale.kvp.meta_element=build_cmakelists
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_include_cmakelists#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_include_cmakelists
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44978,7 +45079,8 @@ install(
 #DOGEN masd.wale.kvp.meta_element=build_cmakelists
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.testing
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_tests_cmakelists#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_tests_cmakelists
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -45364,7 +45466,8 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 #DOGEN masd.wale.kvp.class.simple_name=feature_bundle_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_header
 #DOGEN masd.wale.kvp.class.inclusion_support_type=canonical_support
-#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -45657,13 +45760,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,321"/>
+        <dia:point val="-16,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,320.95;8.96,325.45"/>
+        <dia:rectangle val="-16.05,320.95;9.96,325.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,321"/>
+        <dia:point val="-16,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -45683,7 +45786,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_feature_bundle
 #DOGEN masd.wale.kvp.class.simple_name=feature_bundle_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=feature_bundle_implementation
-#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=variability_feature_bundle
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -46039,7 +46143,8 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
-#DOGEN masd.wale.kvp.meta_element=physical_archetype#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_archetype
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -46673,7 +46778,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
-#DOGEN masd.wale.kvp.meta_element=physical_archetype#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_archetype
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -50264,7 +50370,8 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header
-#DOGEN masd.wale.kvp.meta_element=physical_facet#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_facet
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -50495,7 +50602,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation
-#DOGEN masd.wale.kvp.meta_element=physical_facet#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_facet
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -50692,7 +50800,8 @@ void facet_class_implementation_transform::apply(const context&amp; ctx, const l
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_header_transform
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header
-#DOGEN masd.wale.kvp.meta_element=physical_backend#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_backend
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -50924,7 +51033,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation
-#DOGEN masd.wale.kvp.meta_element=physical_backend#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_backend
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51121,7 +51231,8 @@ void backend_class_implementation_transform::apply(const context&amp; ctx, const
 #DOGEN masd.wale.kvp.class.simple_name=part_class_header_transform
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_header
-#DOGEN masd.wale.kvp.meta_element=physical_part#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_part
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51331,7 +51442,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation
-#DOGEN masd.wale.kvp.meta_element=physical_part#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_part
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51528,7 +51640,8 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_header_transform
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_header
-#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51738,7 +51851,8 @@ public:
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_implementation
-#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

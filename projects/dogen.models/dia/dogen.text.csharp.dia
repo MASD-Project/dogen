@@ -1741,7 +1741,9 @@
         <dia:string>#masd::physical::archetype, dogen::object_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2192,7 +2194,9 @@ using System;
         <dia:string>#masd::physical::archetype, dogen::enumeration_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for enums.#</dia:string>
+        <dia:string>#Generates implementation files for enums.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2451,7 +2455,9 @@ using System;
         <dia:string>#masd::physical::archetype, dogen::object_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2731,7 +2737,9 @@ using System;
         <dia:string>#masd::physical::archetype, dogen::enumeration_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for enums.#</dia:string>
+        <dia:string>#Generates implementation files for enums.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3004,7 +3012,9 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:string>#masd::physical::archetype, dogen::object_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for objects.#</dia:string>
+        <dia:string>#Generates implementation files for objects.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3357,7 +3367,9 @@ using System.Collections.Generic;
         <dia:string>#masd::physical::archetype, dogen::enumeration_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for enums.#</dia:string>
+        <dia:string>#Generates implementation files for enums.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3644,7 +3656,9 @@ using System.Collections.Generic;
         <dia:string>#masd::physical::archetype, dogen::exception_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for exceptions.#</dia:string>
+        <dia:string>#Generates implementation files for exceptions.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -12443,7 +12457,9 @@ using System;
         <dia:string>#masd::physical::archetype, dogen::builtin_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for builtins.#</dia:string>
+        <dia:string>#Generates implementation files for builtins.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13861,7 +13877,9 @@ void builtin_transform::apply(const context&amp; /*ctx*/, const logical::entitie
         <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14165,7 +14183,9 @@ using System;
         <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14473,7 +14493,9 @@ using System.Collections.Generic;
         <dia:string>#masd::physical::archetype, dogen::primitive_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for primitives.#</dia:string>
+        <dia:string>#Generates implementation files for primitives.
+
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16136,7 +16158,8 @@ std::string {{class.simple_name}}::helper_name() const {
 #DOGEN masd.wale.kvp.meta_element=visual_studio_project
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16377,7 +16400,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.meta_element=visual_studio_solution
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
-#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution#</dia:string>
+#DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16711,7 +16735,8 @@ EndGlobal
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
 #DOGEN masd.wale.kvp.class.simple_name=assistant_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=assistant
-#DOGEN masd.wale.kvp.meta_element=assistant#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=assistant
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17402,7 +17427,8 @@ using System.Collections;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.assistant
 #DOGEN masd.wale.kvp.class.simple_name=assistant_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=assistant
-#DOGEN masd.wale.kvp.meta_element=assistant#</dia:string>
+#DOGEN masd.wale.kvp.meta_element=assistant
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
