@@ -38334,6 +38334,11 @@ string.
           <dia:attribute name="comment">
             <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
 &lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::lexical_cast #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
