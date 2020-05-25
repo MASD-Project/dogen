@@ -10273,6 +10273,13 @@ Links:
 - [[https://blog.trailofbits.com/2019/05/31/fuzzing-unit-tests-with-deepstate-and-eclipser/][Fuzzing Unit Tests with DeepState and Eclipser]]
 - [[https://generated.photos][Generated Photos]]: AI generated realistic pictures of people. We
   could download a fixed set or use the API.
+- [[https://github.com/minimaxir/big-list-of-naughty-strings][GH big-list-of-naughty-strings]]: The Big List of Naughty Strings is a
+  list of strings which have a high probability of causing issues when
+  used as user-input data.
+- [[https://github.com/eliabieri/blnscpp][GH blnscpp]]: Single header C++ API for the Big List of Naughty
+  Strings.
+- [[https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words][GH List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words]]: List of
+  Dirty, Naughty, Obscene, and Otherwise Bad Words
 
 Fantasy:
 
@@ -13590,6 +13597,26 @@ Links:
 Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
+
+*** Consider cross-platform building                                  :story:
+
+At present we use windows and appveyor for windows builds. This is a
+bit painful because we don't have a windows machine. It would be nicer
+if we could install clang/llvm cross platform tools, including a
+debugger, which could run on wine and build windows packages cross
+platform. If we could do the same thing for OSX, then we would only
+have to support Linux. This would also mean we could setup vcpkg
+builds in docker containers with the cross-platform environment.
+
+Links:
+
+- [[https://gitlab.gnome.org/GNOME/msitools][GH msitools]]: set of programs to inspect and build Windows Installer
+  files.
+- [[https://github.com/tpoechtrager/osxcross][GH osxcross]]: Mac OS X cross toolchain for Linux, FreeBSD, OpenBSD
+  and Android (Termux)
+- [[https://askubuntu.com/questions/1117461/how-do-i-create-a-dmg-file-on-linux-ubuntu-for-macos][SO How do I create a DMG file on linux Ubuntu for MacOS]]
+- [[https://stackoverflow.com/questions/286419/how-to-build-a-dmg-mac-os-x-file-on-a-non-mac-platform][SO How to build a dmg Mac OS X file (on a non-Mac platform)?]]
+- [[http://www.elstensoftware.com/blog/2013/04/17/scripting-dmg-build-osx-linux/][Scripting DMG builds on OS X from Linux]]
 
 *** Log file per transform                                            :story:
 

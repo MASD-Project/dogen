@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-25 Mon 01:12]
+#+CAPTION: Clock summary at [2020-05-25 Mon 10:43]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *63:15* |       |       | 100.0 |
+| *Total time*                                          | *63:48* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 63:15   |       |       | 100.0 |
-| Active                                                |         | 63:15 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  5:57 |   9.4 |
+| Stories                                               | 63:48   |       |       | 100.0 |
+| Active                                                |         | 63:48 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  5:57 |   9.3 |
 | Create a demo and presentation for previous sprint    |         |       |  0:47 |   1.2 |
-| Sprint and product backlog grooming                   |         |       |  2:20 |   3.7 |
+| Sprint and product backlog grooming                   |         |       |  2:53 |   4.5 |
 | Nightly nursing                                       |         |       |  0:24 |   0.6 |
 | Check name of model for variability transform         |         |       |  0:19 |   0.5 |
 | Analysis on templating and logical model              |         |       |  1:09 |   1.8 |
@@ -31,19 +31,19 @@
 | Add template related attributes to physical elements  |         |       |  1:38 |   2.6 |
 | Resolve references to wale templates in logical model |         |       |  1:39 |   2.6 |
 | =templating= should not depend on =physical=          |         |       |  1:09 |   1.8 |
-| Move decoration transform into logical model          |         |       |  5:33 |   8.8 |
-| Split wale out of stitch templates                    |         |       |  3:31 |   5.6 |
+| Move decoration transform into logical model          |         |       |  5:33 |   8.7 |
+| Split wale out of stitch templates                    |         |       |  3:31 |   5.5 |
 | Paper: An EMF-like UML generator for C++              |         |       |  1:02 |   1.6 |
 | Paper: An Abstraction for Reusable MDD Components     |         |       |  0:56 |   1.5 |
-| Profiles do not support collection types              |         |       |  4:13 |   6.7 |
-| Promote all formatters to archetypes                  |         |       | 17:31 |  27.7 |
+| Profiles do not support collection types              |         |       |  4:13 |   6.6 |
+| Promote all formatters to archetypes                  |         |       | 17:31 |  27.5 |
 | Create archetypes for all physical elements           |         |       |  0:39 |   1.0 |
 | Analysis on how to build PMM from archetypes in text  |         |       |  1:06 |   1.7 |
-| Create a bootstrapping chain for context              |         |       |  3:20 |   5.3 |
+| Create a bootstrapping chain for context              |         |       |  3:20 |   5.2 |
 | Facet and backend files are in the wrong folder       |         |       |  0:48 |   1.3 |
 | Fix =static_archetype= method in archetypes           |         |       |  1:25 |   2.2 |
 | Create an encoder for org-mode                        |         |       |  1:31 |   2.4 |
-| Create a PMM chain in physical model                  |         |       |  4:25 |   7.0 |
+| Create a PMM chain in physical model                  |         |       |  4:25 |   6.9 |
 | Extend tracing to M2T transforms                      |         |       |  1:17 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -613,6 +613,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-05-25 Mon 10:10]--[2020-05-25 Mon 10:43] =>  0:33
     CLOCK: [2020-05-24 Sun 14:58]--[2020-05-24 Sun 15:28] =>  0:30
     CLOCK: [2020-05-24 Sun 14:50]--[2020-05-24 Sun 14:57] =>  0:07
     CLOCK: [2020-05-24 Sun 14:36]--[2020-05-24 Sun 14:40] =>  0:04
@@ -1382,7 +1383,7 @@ Notes:
   not have an impact on the builder replacement. They are only needed
   for the locator, so we can sort them out then.
 
-*** STARTED Extend tracing to M2T transforms
+*** STARTED Extend tracing to M2T transforms                          :story:
     :LOGBOOK:
     CLOCK: [2020-05-24 Sun 23:55]--[2020-05-25 Mon 01:12] =>  1:17
     :END:
@@ -1408,6 +1409,15 @@ Tasks:
 - add log definition. Can be done to wale template.
 - add io includes for archertypes and elements to all transforms.
 - use tracer on apply for all transforms.
+
+*** Add "scoped tracing" via regexes                                  :story:
+
+Once we start dumping the M2T data into the traces, tracing is going
+to take a very long time. In many cases we know specifically what we
+want; its either a given transform or subsystem. If we could supply a
+regex or list of regexes to the tracer, and dump only if there is a
+match, we could filter out tracing data. However, one slight snag is
+that we need to filter before doing the string conversion.
 
 *** Split =text= from the kernel                                      :story:
 
