@@ -36,6 +36,15 @@
 #include "dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.test_data.class_header_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& class_header_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

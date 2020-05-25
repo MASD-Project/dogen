@@ -35,6 +35,15 @@
 #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.serialization.class_forward_declarations_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& class_forward_declarations_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

@@ -39,6 +39,15 @@
 #include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
 
 namespace dogen::text::cpp::transforms::tests {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.tests.cmakelists_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& cmakelists_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

@@ -38,6 +38,15 @@
 #include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
 
 namespace dogen::text::cpp::transforms::lexical_cast {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.lexical_cast.enum_header_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& enum_header_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

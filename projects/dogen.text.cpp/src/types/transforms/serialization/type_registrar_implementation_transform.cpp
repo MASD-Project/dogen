@@ -39,6 +39,15 @@
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.serialization.type_registrar_implementation_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& type_registrar_implementation_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

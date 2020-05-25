@@ -38,6 +38,15 @@
 #include "dogen.text.cpp/types/transforms/templates/logic_less_template_transform.hpp"
 
 namespace dogen::text::cpp::transforms::templates {
+namespace {
+
+const std::string transform_id("text.cpp.transforms.templates.logic_less_template_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype& logic_less_template_transform::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;

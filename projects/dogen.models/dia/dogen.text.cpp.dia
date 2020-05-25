@@ -38906,7 +38906,15 @@ public:
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#
+            <dia:string>#namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -39076,7 +39084,15 @@ boost::filesystem::path {{class.simple_name}}::full_path(
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#
+            <dia:string>#namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
 const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
@@ -46252,15 +46268,6 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
-
-namespace {
-
-const std::string transform_id("text.cpp.types.archetype_class_header_transform");
-
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
 
 std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
