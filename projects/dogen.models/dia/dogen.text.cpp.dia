@@ -40238,9 +40238,13 @@ std::list&lt;std::string&gt; logic_less_template_transform::inclusion_dependenci
 
 void logic_less_template_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "logic less template transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     ast.update_artefact();
     a.overwrite(false);
+    stp.end_transform(a);
 }
 #&gt;#</dia:string>
           </dia:attribute>
