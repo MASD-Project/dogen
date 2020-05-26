@@ -4364,6 +4364,17 @@ useful for languages like C# and Java, to control serialisation, etc.
 We should make this approach consistent with deprecation of features
 as per [[*Consider adding "deprecated feature names"][this story]].
 
+*** Investigate telosys
+
+It appears to an interesting code generator, though we cannot locate
+any academic papers.
+
+Links:
+
+- [[http://www.telosys.org/index.html#intro][telosys homepage]]
+- [[https://github.com/telosys-tools-bricks][GH telosys]]
+- [[https://modeling-languages.com/telosys-tools-the-concept-of-lightweight-model-for-code-generation/][Telosys – a lightweight and pragmatic code-generator]]
+
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
@@ -16073,12 +16084,30 @@ Links:
 
 - [[https://github.com/TonicAI/masquerade][masquerade:]] real time data annonymiser. See this [[https://www.tonic.ai/post/masquerade-a-postgres-proxy/][blog post]].
 
-*** Consider using the fmt library instead of iostreams               :story:
+*** Consider adding support for the fmt library                       :story:
 
 It would be interesting to benchmark dogen using iostreams vs dogen
-using the fmt library.
+using the =fmt= library. It would also be nice to have a IO based on
+=fmt=.
 
-- https://github.com/fmtlib/fmt
+Links:
+
+- [[https://github.com/fmtlib/fmt][GH fmt]]
+
+*** Consider adding support for the =fast_io= library                 :story:
+
+Yet another library for formatting:
+
+#+begin_quote
+fast_io is a new C++20 library for extremely fast input/output and
+aims to replace iostream and cstdio. It is header-only (module only in
+the future) for easy inclusion in your project. It requires a capable
+C++20 compiler supporting concepts.
+#+end_quote
+
+Links:
+
+- [[https://github.com/expnkx/fast_io][GH fast_io]]
 
 *** Determine types that are no longer used                           :story:
 
