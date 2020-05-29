@@ -28,18 +28,20 @@
 #include <list>
 #include <string>
 #include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/helpers/flattening_strategy.hpp"
 
 namespace dogen::logical::helpers {
 
 class name_flattener final {
 public:
-    explicit name_flattener(const bool detect_model_name = true);
+    explicit name_flattener(const flattening_strategy fs =
+        flattening_strategy::exclude_simple_name_conditionally);
 
 public:
     std::list<std::string> flatten(const entities::name& n) const;
 
 private:
-    const bool detect_model_name_;
+    const flattening_strategy flattening_strategy_;
 };
 
 }
