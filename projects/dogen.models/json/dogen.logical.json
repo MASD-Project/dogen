@@ -4545,6 +4545,14 @@
           "documentation": "Excludes the simple name if its the same as the last internal module name.\n"
         }
       ]
+    },
+    {
+      "name": "helpers::flattening_error",
+      "documentation": "An error occurred whilst flattening a name.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
