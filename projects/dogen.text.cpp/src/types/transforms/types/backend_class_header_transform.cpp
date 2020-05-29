@@ -59,7 +59,7 @@ const physical::entities::archetype& backend_class_header_transform::archetype()
 }
 
 inclusion_support_types backend_class_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
+    return inclusion_support_types::canonical_support;
 }
 
 boost::filesystem::path backend_class_header_transform::inclusion_path(

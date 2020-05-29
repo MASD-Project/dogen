@@ -59,7 +59,7 @@ const physical::entities::archetype& facet_class_header_transform::archetype() c
 }
 
 inclusion_support_types facet_class_header_transform::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
+    return inclusion_support_types::canonical_support;
 }
 
 boost::filesystem::path facet_class_header_transform::inclusion_path(
