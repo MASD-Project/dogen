@@ -238,7 +238,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
@@ -1515,7 +1515,7 @@ inline void swap(
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#hash#</dia:string>
@@ -3998,7 +3998,7 @@ public:
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#io#</dia:string>
@@ -4977,7 +4977,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#serialization#</dia:string>
@@ -5601,7 +5601,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -6734,7 +6734,7 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#odb#</dia:string>
@@ -34525,7 +34525,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tests#</dia:string>
@@ -38261,7 +38261,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#lexical_cast#</dia:string>
@@ -39851,7 +39851,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#templates#</dia:string>
@@ -42092,7 +42092,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>
@@ -44518,7 +44518,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#build#</dia:string>
@@ -50871,13 +50871,13 @@ public:
         <dia:point val="-16,255"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,254.95;21.51,259.45"/>
+        <dia:rectangle val="-16.05,254.95;9.96,259.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-16,255"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.460000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -50886,7 +50886,7 @@ public:
         <dia:string>#facet_class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::archetype, dogen::implementation_configuration, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Generates implementation files for archetypes.
@@ -51029,7 +51029,7 @@ void facet_class_implementation_transform::apply(const context&amp; ctx, const l
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(fct.name()));
+            const auto ns(ast.make_namespaces(fct.name(), false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(fct.name().simple() + "_facet");
 #&gt;
@@ -51048,12 +51048,12 @@ physical::entities::facet make_facet() {
     r.meta_name(b.build());
 
     const auto lambda([&amp;](const auto&amp; arch) {
-        const auto id(arch.qualified());
+        const auto id(arch.qualified().dot());
         const auto inserted(r.archetypes().insert(id, arch));
         if (!inserted) {
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; arch;
-            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + archetype));
+            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + arch));
         }
     });
 

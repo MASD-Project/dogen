@@ -35,7 +35,8 @@
       "name": "transforms::types",
       "documentation": "Formatters for the types facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -87,7 +88,8 @@
       "name": "transforms::hash",
       "documentation": "Formatters for the hash facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -305,7 +307,8 @@
       "name": "transforms::io",
       "documentation": "Formatters for the io facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -412,7 +415,8 @@
       "name": "transforms::serialization",
       "documentation": "Formatters for the boost serialisation\nfacet of the C++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -471,7 +475,8 @@
       "name": "transforms::test_data",
       "documentation": "Formatters for the test_data facet\nof the C++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -578,7 +583,8 @@
       "name": "transforms::odb",
       "documentation": "Formatters for the odb facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2213,7 +2219,8 @@
       "name": "transforms::tests",
       "documentation": "Formatters that generate tests for generated\ncode.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2628,7 +2635,8 @@
       "name": "transforms::lexical_cast",
       "documentation": "Formatters related to conversions from and to\nstring.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2779,7 +2787,8 @@
       "name": "transforms::templates",
       "documentation": "Formatters related to templating.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3043,7 +3052,8 @@
       "name": "transforms::visual_studio",
       "documentation": "Formatters related to Visual Studio support.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3313,7 +3323,8 @@
       "name": "transforms::build",
       "documentation": "Formatters related to build files.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -4124,8 +4135,7 @@
       "documentation": "Generates implementation files for archetypes.\n",
       "stereotypes": [
         "masd::physical::archetype",
-        "dogen::implementation_configuration",
-        "dogen::handcrafted::typeable"
+        "dogen::implementation_configuration"
       ],
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_facet",
@@ -4139,7 +4149,7 @@
         {
           "name": "stitch_template_content",
           "type": "",
-          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/io/shared_ptr_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.tracing/types/scoped_tracer.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/io/entities/element_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/io/entities/artefact_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/entities/facet.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/physical/facet.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/facet_class_implementation_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> facet_class_implementation_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    const auto& fct(assistant::as<logical::entities::physical::facet>(e));\n    auto builder(f.make());\n    const auto ch_arch(traits::canonical_archetype());\n    builder.add(fct.name(), ch_arch);\n    builder.add(fct.archetypes(), ch_arch);\n    builder.add_as_user(\"dogen.physical/types/helpers/meta_name_builder.hpp\");\n    builder.add_as_user(\"dogen.utility/types/log/logger.hpp\");\n    return builder.build();\n}\n\nvoid facet_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& fct(ast.as<logical::entities::physical::facet>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(fct));\n        {\n            const auto ns(ast.make_namespaces(fct.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const auto sn(fct.name().simple() + \"_facet\");\n#>\nnamespace {\n\nusing namespace dogen::utility::log;\nstatic logger lg(logger_factory(\"<#= fct.name().qualified().dot() #>\"));\n\nphysical::entities::facet make_facet() {\n    physical::helpers::meta_name_builder b;\n    b.kernel(\"<#= fct.kernel_name() #>\");\n    b.backend(\"<#= fct.backend_name() #>\");\n    b.facet(\"<#= fct.name().simple() #>\");\n\n    physical::entities::facet r;\n    r.meta_name(b.build());\n\n    const auto lambda([&](const auto& arch) {\n        const auto id(arch.qualified());\n        const auto inserted(r.archetypes().insert(id, arch));\n        if (!inserted) {\n            const std::string duplicate_archetype(\"Duplicate archetype: \");\n            BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;\n            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + archetype));\n        }\n    });\n\n<#+\n            for (const auto& n : fct.archetypes()) {\n#>\n    lambda(<#= n.simple() #>::static_archetype());\n<#+\n            }\n#>\n    return r;\n}\n\n}\n\nphysical::entities::facet <#= sn #>::static_facet() {\n    static const auto r(make_facet());\n    return r;\n}\n\nphysical::entities::facet <#= sn #>::facet() const {\n    return static_facet();\n}\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
+          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/io/shared_ptr_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.tracing/types/scoped_tracer.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/io/entities/element_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/io/entities/artefact_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/types/entities/facet.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/physical/facet.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/helpers/meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/facet_class_implementation_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> facet_class_implementation_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& f,\n    const logical::entities::element& e) const {\n    const auto& fct(assistant::as<logical::entities::physical::facet>(e));\n    auto builder(f.make());\n    const auto ch_arch(traits::canonical_archetype());\n    builder.add(fct.name(), ch_arch);\n    builder.add(fct.archetypes(), ch_arch);\n    builder.add_as_user(\"dogen.physical/types/helpers/meta_name_builder.hpp\");\n    builder.add_as_user(\"dogen.utility/types/log/logger.hpp\");\n    return builder.build();\n}\n\nvoid facet_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    const auto& fct(ast.as<logical::entities::physical::facet>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(fct));\n        {\n            const auto ns(ast.make_namespaces(fct.name(), false/*detect_model_name*/));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n            const auto sn(fct.name().simple() + \"_facet\");\n#>\nnamespace {\n\nusing namespace dogen::utility::log;\nstatic logger lg(logger_factory(\"<#= fct.name().qualified().dot() #>\"));\n\nphysical::entities::facet make_facet() {\n    physical::helpers::meta_name_builder b;\n    b.kernel(\"<#= fct.kernel_name() #>\");\n    b.backend(\"<#= fct.backend_name() #>\");\n    b.facet(\"<#= fct.name().simple() #>\");\n\n    physical::entities::facet r;\n    r.meta_name(b.build());\n\n    const auto lambda([&](const auto& arch) {\n        const auto id(arch.qualified().dot());\n        const auto inserted(r.archetypes().insert(id, arch));\n        if (!inserted) {\n            const std::string duplicate_archetype(\"Duplicate archetype: \");\n            BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;\n            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + arch));\n        }\n    });\n\n<#+\n            for (const auto& n : fct.archetypes()) {\n#>\n    lambda(<#= n.simple() #>::static_archetype());\n<#+\n            }\n#>\n    return r;\n}\n\n}\n\nphysical::entities::facet <#= sn #>::static_facet() {\n    static const auto r(make_facet());\n    return r;\n}\n\nphysical::entities::facet <#= sn #>::facet() const {\n    return static_facet();\n}\n\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n}\n#>\n"
         },
         {
           "name": "wale_template_reference",

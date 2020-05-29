@@ -1711,7 +1711,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
@@ -2433,7 +2433,7 @@ using System;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#io#</dia:string>
@@ -2998,7 +2998,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -5044,7 +5044,7 @@ using System;
         <dia:point val="99.7625,34.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.0125,32.95;119.108,36.055"/>
+        <dia:rectangle val="99.0125,32.95;119.107,36.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8106,7 +8106,7 @@ using System;
         <dia:point val="150.375,-54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.412,-62.85;151.125,-53.2"/>
+        <dia:rectangle val="131.413,-62.85;151.125,-53.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15954,7 +15954,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet#</dia:string>
+        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>

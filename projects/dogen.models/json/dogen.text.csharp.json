@@ -117,7 +117,8 @@
       "name": "transforms::types",
       "documentation": "M2T transforms for the types facet of\nthe C# Technical Space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -176,7 +177,8 @@
       "name": "transforms::io",
       "documentation": "M2T transforms for the io facet of\nthe C# Technical Space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -235,7 +237,8 @@
       "name": "transforms::test_data",
       "documentation": "M2T transforms for the test data\nfacet of the C# Technical Space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -1065,7 +1068,8 @@
       "name": "transforms::visual_studio",
       "documentation": "M2T transforms for the visual studio\nfacet of the C# Technical Space.\n",
       "stereotypes": [
-        "masd::physical::facet"
+        "masd::physical::facet",
+        "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"

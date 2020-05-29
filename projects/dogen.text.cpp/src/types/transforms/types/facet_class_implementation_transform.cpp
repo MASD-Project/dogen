@@ -27,6 +27,7 @@
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -82,19 +83,73 @@ boost::filesystem::path facet_class_implementation_transform::full_path(
 }
 
 std::list<std::string> facet_class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    const auto& fct(assistant::as<logical::entities::physical::facet>(e));
+    auto builder(f.make());
+    const auto ch_arch(traits::canonical_archetype());
+    builder.add(fct.name(), ch_arch);
+    builder.add(fct.archetypes(), ch_arch);
+    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    return builder.build();
 }
 
 void facet_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "facet class implementation transform",
-        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    ast.update_artefact();
-    stp.end_transform(a);
-}
+    const auto& fct(ast.as<logical::entities::physical::facet>(e));
 
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(fct));
+        {
+            const auto ns(ast.make_namespaces(fct.name(), false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(fct.name().simple() + "_facet");
+ast.stream() << "namespace {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "using namespace dogen::utility::log;" << std::endl;
+ast.stream() << "static logger lg(logger_factory(\"" << fct.name().qualified().dot() << "\"));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "physical::entities::facet make_facet() {" << std::endl;
+ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
+ast.stream() << "    b.kernel(\"" << fct.kernel_name() << "\");" << std::endl;
+ast.stream() << "    b.backend(\"" << fct.backend_name() << "\");" << std::endl;
+ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    physical::entities::facet r;" << std::endl;
+ast.stream() << "    r.meta_name(b.build());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    const auto lambda([&](const auto& arch) {" << std::endl;
+ast.stream() << "        const auto id(arch.qualified().dot());" << std::endl;
+ast.stream() << "        const auto inserted(r.archetypes().insert(id, arch));" << std::endl;
+ast.stream() << "        if (!inserted) {" << std::endl;
+ast.stream() << "            const std::string duplicate_archetype(\"Duplicate archetype: \");" << std::endl;
+ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + arch));" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    });" << std::endl;
+ast.stream() << std::endl;
+            for (const auto& n : fct.archetypes()) {
+ast.stream() << "    lambda(" << n.simple() << "::static_archetype());" << std::endl;
+            }
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "physical::entities::facet " << sn << "::static_facet() {" << std::endl;
+ast.stream() << "    static const auto r(make_facet());" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "physical::entities::facet " << sn << "::facet() const {" << std::endl;
+ast.stream() << "    return static_facet();" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+        } // snf
+ast.stream() << std::endl;
+    } // sbf
+    ast.update_artefact();
+}
 }
