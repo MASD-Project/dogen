@@ -57853,7 +57853,7 @@ FIXME: optional for now.
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#flattening_strategies#</dia:string>
+        <dia:string>#flattening_strategy#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::enumeration#</dia:string>

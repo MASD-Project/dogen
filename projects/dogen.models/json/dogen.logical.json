@@ -4522,7 +4522,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::flattening_strategies",
+      "name": "helpers::flattening_strategy",
       "documentation": "Strategies to apply when flattening a logical name into a list.\n",
       "stereotypes": [
         "masd::enumeration"

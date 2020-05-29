@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_IO_HELPERS_FLATTENING_STRATEGIES_IO_HPP
-#define DOGEN_LOGICAL_IO_HELPERS_FLATTENING_STRATEGIES_IO_HPP
+#ifndef DOGEN_LOGICAL_IO_HELPERS_FLATTENING_STRATEGY_IO_HPP
+#define DOGEN_LOGICAL_IO_HELPERS_FLATTENING_STRATEGY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.logical/types/helpers/flattening_strategies.hpp"
+#include "dogen.logical/types/helpers/flattening_strategy.hpp"
 
 namespace dogen::logical::helpers {
 
-std::ostream& operator<<(std::ostream& s, const flattening_strategies& v);
+std::ostream& operator<<(std::ostream& s, const flattening_strategy& v);
 
 }
 

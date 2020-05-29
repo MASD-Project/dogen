@@ -18,35 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <ostream>
-#include <stdexcept>
-#include "dogen.logical/io/helpers/flattening_strategies_io.hpp"
+#ifndef DOGEN_LOGICAL_TYPES_HELPERS_FLATTENING_STRATEGY_HPP
+#define DOGEN_LOGICAL_TYPES_HELPERS_FLATTENING_STRATEGY_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::logical::helpers {
 
-std::ostream& operator<<(std::ostream& s, const flattening_strategies& v) {
-    s << "{ " << "\"__type__\": " << "\"flattening_strategies\", " << "\"value\": ";
-
-    std::string attr;
-    switch (v) {
-    case flattening_strategies::invalid:
-        attr = "\"invalid\"";
-        break;
-    case flattening_strategies::include_simple_name:
-        attr = "\"include_simple_name\"";
-        break;
-    case flattening_strategies::exclude_simple_name:
-        attr = "\"exclude_simple_name\"";
-        break;
-    case flattening_strategies::exclude_simple_name_conditionally:
-        attr = "\"exclude_simple_name_conditionally\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for flattening_strategies");
-    }
-    s << attr << " }";
-    return s;
-}
+/**
+ * @brief Strategies to apply when flattening a logical name into a list.
+ */
+enum class flattening_strategy : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    include_simple_name = 1, ///< Includes the simple name in the final list.
+    exclude_simple_name = 2, ///< Excludes the simple name.
+    exclude_simple_name_conditionally = 3 ///< Excludes the simple name if its the same as the last internal module name.
+};
 
 }
+
+#endif
