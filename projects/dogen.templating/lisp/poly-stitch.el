@@ -31,45 +31,41 @@
 
 (require 'polymode)
 
-(defcustom pm-inner/stitch-directive
-  (pm-inner-auto-chunkmode :name "conf" :mode 'conf-unix-mode
-                           :head-matcher "<#@"
-                           :tail-matcher "#>")
-  "Template code."
-  :group 'poly-innermodes
-  :type 'object)
+(define-hostmode poly-stitch-hostmode :mode 'fundamental-mode)
 
-(defcustom pm-inner/stitch-expansion-block
-  (pm-inner-auto-chunkmode :name "conf" :mode 'conf-unix-mode
-                           :head-matcher "<#\\$"
-                           :tail-matcher "#>")
-  "Template code."
-  :group 'poly-innermodes
-  :type 'object)
+(define-innermode poly-stitch-directive-innermode
+  :mode 'fundamental-mode
+  :head-matcher "<#@"
+  :tail-matcher "#>"
+  :head-mode 'host
+  :tail-mode 'host)
 
-(defcustom pm-inner/stitch-expression-control-block
-  (pm-inner-auto-chunkmode :name "c++" :mode 'c++-mode
-                           :head-matcher "<#="
-                           :tail-matcher "#>")
-  "Template code."
-  :group 'poly-innermodes
-  :type 'object)
+(define-innermode poly-stitch-expansion-block-innermode
+  :mode 'fundamental-mode
+  :head-matcher "<#\\$"
+  :tail-matcher "#>"
+  :head-mode 'host
+  :tail-mode 'host)
 
-(define-polymode stitch-mode
-  :hostmode 'pm-host/C++
-  :innermodes '(pm-inner/stitch-standard-control-block
-                pm-inner/stitch-directive
-                pm-inner/stitch-expression-control-block
-                pm-inner/stitch-expansion-block))
+(define-innermode poly-stitch-big-block-innermode
+  :mode 'c++-mode
+  :head-matcher "<#\\+"
+  :tail-matcher "#>"
+  :head-mode 'host
+  :tail-mode 'host)
 
-;; (defcustom pm-weaver/stitcher
-;;   (pm-shell-weaver "stitcher"
-;;                    :from-to
-;;                    '(("stitch" "\\.\\(stitch\\|cpp\\)\\'" "stitch" "C++" "dogen.stitcher --target %i --log-directory /tmp")))
-;;   "Dogen stitcher weaver."
-;;   :group 'polymode-weave
-;;   :type 'object)
+(define-innermode poly-stitch-expression-control-block-innermode
+  :mode 'c++-mode
+  :head-matcher "<#="
+  :tail-matcher "#>"
+  :head-mode 'host
+  :tail-mode 'host)
 
-;; (polymode-register-weaver pm-weaver/stitcher nil pm-poly/stitch)
+(define-polymode poly-stitch-mode
+  :hostmode 'poly-stitch-hostmode
+  :innermodes '(poly-stitch-directive-innermode
+                poly-stitch-expansion-block-innermode
+                poly-stitch-big-block-innermode
+                poly-stitch-expression-control-block-innermode))
 
 ;; (add-to-list 'auto-mode-alist '("\\.stitch" . stitch-mode))
