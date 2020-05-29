@@ -20,7 +20,6 @@
  */
 #include <set>
 #include <list>
-#include <boost/lexical_cast.hpp>
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"

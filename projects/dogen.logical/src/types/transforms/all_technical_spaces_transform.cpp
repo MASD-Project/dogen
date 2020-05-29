@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
