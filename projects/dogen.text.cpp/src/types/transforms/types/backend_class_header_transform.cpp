@@ -102,7 +102,8 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(be));
         {
-            const auto ns(ast.make_namespaces(be.name()));
+            const auto ns(ast.make_namespaces(be.name(),
+                    false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << std::endl;
             ast.comment(be.documentation());

@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
 
-namespace dogen::text::csharp {
+namespace dogen::text::csharp::transforms {
 
 /**
  * @brief M2T transforms for the C# Technical Space.

@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
-namespace dogen::text::cpp {
+namespace dogen::text::cpp::transforms {
 
 /**
  * @brief Formatters for the C++ model.

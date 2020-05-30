@@ -103,13 +103,14 @@ void facet_class_header_transform::apply(const context& ctx, const logical::enti
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(fct.name()));
+            const auto ns(ast.make_namespaces(e.name(),
+                    false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << std::endl;
             ast.comment(fct.documentation());
 ast.stream() << "class " << fct.name().simple() << "_facet final {" << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static physical::entities::facet static_facet();" << std::endl;
+ast.stream() << "    static physical::entities::facet static_:facet();" << std::endl;
 ast.stream() << "    physical::entities::facet facet() const;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;

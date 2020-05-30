@@ -50799,7 +50799,8 @@ void facet_class_header_transform::apply(const context&amp; ctx, const logical::
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(fct.name()));
+            const auto ns(ast.make_namespaces(e.name(),
+                    false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 #&gt;
 
@@ -50808,7 +50809,7 @@ void facet_class_header_transform::apply(const context&amp; ctx, const logical::
 #&gt;
 class &lt;#= fct.name().simple() #&gt;_facet final {
 public:
-    static physical::entities::facet static_facet();
+    static physical::entities::facet static_:facet();
     physical::entities::facet facet() const;
 
 public:
@@ -51298,7 +51299,8 @@ void backend_class_header_transform::apply(const context&amp; ctx, const logical
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(be));
         {
-            const auto ns(ast.make_namespaces(be.name()));
+            const auto ns(ast.make_namespaces(be.name(),
+                    false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 #&gt;
 
