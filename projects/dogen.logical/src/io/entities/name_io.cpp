@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/location_io.hpp"
@@ -35,11 +36,18 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::entities::name\"" << ", "
       << "\"qualified\": " << v.qualified() << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
-      << "\"location\": " << v.location()
+      << "\"location\": " << v.location() << ", "
+      << "\"is_container\": " << v.is_container()
       << " }";
     return(s);
 }

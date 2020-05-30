@@ -48,16 +48,19 @@ namespace dogen::logical::entities {
  */
 class name final {
 public:
-    name() = default;
     name(const name&) = default;
     name(name&&) = default;
     ~name() = default;
 
 public:
+    name();
+
+public:
     name(
         const dogen::logical::entities::fully_qualified_representation& qualified,
         const std::string& simple,
-        const dogen::logical::entities::location& location);
+        const dogen::logical::entities::location& location,
+        const bool is_container);
 
 public:
     const dogen::logical::entities::fully_qualified_representation& qualified() const;
@@ -87,6 +90,14 @@ public:
     void location(const dogen::logical::entities::location&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the name indicates an element that can contain other elements.
+     */
+    /**@{*/
+    bool is_container() const;
+    void is_container(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const name& rhs) const;
     bool operator!=(const name& rhs) const {
@@ -101,6 +112,7 @@ private:
     dogen::logical::entities::fully_qualified_representation qualified_;
     std::string simple_;
     dogen::logical::entities::location location_;
+    bool is_container_;
 };
 
 }

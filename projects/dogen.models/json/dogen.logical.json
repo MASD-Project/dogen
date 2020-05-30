@@ -277,6 +277,11 @@
           "name": "location",
           "type": "location",
           "documentation": "Where the name is located in element space.\n"
+        },
+        {
+          "name": "is_container",
+          "type": "bool",
+          "documentation": "If true, the name indicates an element that can contain other elements.\n"
         }
       ]
     },

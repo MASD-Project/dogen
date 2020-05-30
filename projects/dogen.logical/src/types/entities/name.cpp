@@ -22,25 +22,32 @@
 
 namespace dogen::logical::entities {
 
+name::name()
+    : is_container_(static_cast<bool>(0)) { }
+
 name::name(
     const dogen::logical::entities::fully_qualified_representation& qualified,
     const std::string& simple,
-    const dogen::logical::entities::location& location)
+    const dogen::logical::entities::location& location,
+    const bool is_container)
     : qualified_(qualified),
       simple_(simple),
-      location_(location) { }
+      location_(location),
+      is_container_(is_container) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
     swap(qualified_, other.qualified_);
     swap(simple_, other.simple_);
     swap(location_, other.location_);
+    swap(is_container_, other.is_container_);
 }
 
 bool name::operator==(const name& rhs) const {
     return qualified_ == rhs.qualified_ &&
         simple_ == rhs.simple_ &&
-        location_ == rhs.location_;
+        location_ == rhs.location_ &&
+        is_container_ == rhs.is_container_;
 }
 
 name& name::operator=(name other) {
@@ -95,6 +102,14 @@ void name::location(const dogen::logical::entities::location& v) {
 
 void name::location(const dogen::logical::entities::location&& v) {
     location_ = std::move(v);
+}
+
+bool name::is_container() const {
+    return is_container_;
+}
+
+void name::is_container(const bool v) {
+    is_container_ = v;
 }
 
 }

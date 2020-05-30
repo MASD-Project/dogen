@@ -917,7 +917,7 @@ etc.).
         <dia:point val="-139.938,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.688,-63.65;-134.98,-54.2"/>
+        <dia:rectangle val="-140.688,-62.85;-134.98,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -926,7 +926,7 @@ etc.).
         <dia:point val="-139.938,-55"/>
         <dia:point val="-139.938,-58"/>
         <dia:point val="-135.18,-58"/>
-        <dia:point val="-135.18,-63.6"/>
+        <dia:point val="-135.18,-62.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1498,7 +1498,7 @@ purpose.#</dia:string>
         <dia:point val="-148,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-148.05,-68.05;-135.13,-63.55"/>
+        <dia:rectangle val="-148.05,-68.05;-135.13,-62.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-148,-68"/>
@@ -1507,7 +1507,7 @@ purpose.#</dia:string>
         <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#name#</dia:string>
@@ -1645,6 +1645,29 @@ The simple name must be unique for a given location.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Where the name is located in element space.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_container#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the name indicates an element that can contain other elements.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20712,7 +20735,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-151.938,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-152.688,-63.65;-147.8,-54.2"/>
+        <dia:rectangle val="-152.688,-62.85;-147.8,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20721,7 +20744,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-151.938,-55"/>
         <dia:point val="-151.938,-58"/>
         <dia:point val="-148,-58"/>
-        <dia:point val="-148,-63.6"/>
+        <dia:point val="-148,-62.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
