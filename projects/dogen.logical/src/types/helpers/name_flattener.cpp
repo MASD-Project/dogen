@@ -22,7 +22,6 @@
 #include <boost/thread/exceptions.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/helpers/flattening_strategy_io.hpp"
 #include "dogen.logical/types/helpers/flattening_error.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
 

@@ -4515,31 +4515,6 @@
       ]
     },
     {
-      "name": "helpers::flattening_strategy",
-      "documentation": "Strategies to apply when flattening a logical name into a list.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "include_simple_name",
-          "type": "",
-          "documentation": "Includes the simple name in the final list.\n"
-        },
-        {
-          "name": "exclude_simple_name",
-          "type": "",
-          "documentation": "Excludes the simple name.\n"
-        },
-        {
-          "name": "exclude_simple_name_conditionally",
-          "type": "",
-          "documentation": "Excludes the simple name if its the same as the last internal module name.\n"
-        }
-      ]
-    },
-    {
       "name": "helpers::flattening_error",
       "documentation": "An error occurred whilst flattening a name.\n",
       "stereotypes": [
