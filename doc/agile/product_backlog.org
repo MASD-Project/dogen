@@ -78,6 +78,18 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Handling of model name is incorrect                               :story:
+
+At present we are handling all containers in one way, and model names
+in another. For model names we check for the presence of the model
+name on both model modules and simple names. For all other cases,
+including containers, we do not have the container name in the
+internal module path; we just append the simple name when flattening
+or when building a file name. We should be able to use the exact same
+logic for model names, but this will likely result in a lot of
+breakage. We need to change it once we have finished the locator clean
+up.
+
 *** Product family projects                                 :reviewing:story:
 
 Just like it makes sense to operate at the product level (e.g. add
