@@ -50,11 +50,9 @@ locator::locator(const boost::filesystem::path& output_directory_path,
     const transforms::repository& frp,
     const variability::entities::configuration& rcfg,
     const logical::entities::name& model_name,
-    const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
       configuration_(make_configuration(fm, frp, rcfg)),
-      module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
               configuration_, enable_backend_directories)) {}
 

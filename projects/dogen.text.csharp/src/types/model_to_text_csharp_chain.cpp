@@ -117,8 +117,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     const auto odp(ctx.output_directory_path());
     const auto& frp(transforms::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
-    const formattables::locator l(odp, feature_model, frp, rcfg, mn, m.
-        module_ids(), ekd);
+    const formattables::locator l(odp, feature_model, frp, rcfg, mn, ekd);
 
     /*
      * Generate the formattables model.

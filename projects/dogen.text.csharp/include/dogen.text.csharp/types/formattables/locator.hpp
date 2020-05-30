@@ -89,7 +89,6 @@ public:
         const transforms::repository& frp,
         const variability::entities::configuration& rcfg,
         const logical::entities::name& model_name,
-        const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);
 
 private:
@@ -140,7 +139,6 @@ public:
 private:
     const logical::entities::name& model_name_;
     const locator_configuration configuration_;
-    const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
 };
 
