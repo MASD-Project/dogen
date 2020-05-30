@@ -238,7 +238,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
@@ -51019,6 +51019,8 @@ std::list&lt;std::string&gt; facet_class_implementation_transform::inclusion_dep
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+
     return builder.build();
 }
 
@@ -51050,12 +51052,14 @@ physical::entities::facet make_facet() {
     r.meta_name(b.build());
 
     const auto lambda([&amp;](const auto&amp; arch) {
-        const auto id(arch.qualified().dot());
-        const auto inserted(r.archetypes().insert(id, arch));
+        const auto id(arch.meta_name().qualified());
+        const auto pair(std::make_pair(id, arch));
+        const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
+            using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
-            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; arch;
-            BOOST_THROW_EXCEPTION(formatting_error(duplicate_archetype + arch));
+            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
         }
     });
 

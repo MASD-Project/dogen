@@ -41,6 +41,11 @@ const std::string empty_archetype(
 
 namespace dogen::physical::helpers {
 
+meta_name_builder& meta_name_builder::kernel(const std::string& s) {
+    meta_name_.location().kernel(s);
+    return *this;
+}
+
 meta_name_builder& meta_name_builder::backend(const std::string& s) {
     meta_name_.location().backend(s);
     return *this;
@@ -58,7 +63,8 @@ meta_name_builder& meta_name_builder::archetype(const std::string& s) {
 
 entities::meta_name meta_name_builder::build() {
     /*
-     * Kernel is always hard-coded to MASD.
+     * Kernel is always hard-coded to MASD. FIXME: replace this when
+     * we implement kernels properly.
      */
     auto& mn(meta_name_);
     auto& l(mn.location());
