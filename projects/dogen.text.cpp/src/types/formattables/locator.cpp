@@ -343,11 +343,8 @@ boost::filesystem::path locator::make_facet_path(
      * Modules other than the model module contribute their simple
      * names to the directories.
      */
-    if (n != model_name_) {
-        const auto i(module_ids_.find(n.qualified().dot()));
-        if (i != module_ids_.end())
+    if (n != model_name_ && n.is_container())
             r /= n.simple();
-    }
 
     /*
      * Handle the file name.
@@ -396,11 +393,8 @@ boost::filesystem::path locator::make_facet_path_temp(
      * Modules other than the model module contribute their simple
      * names to the directories.
      */
-    if (n != model_name_) {
-        const auto i(module_ids_.find(n.qualified().dot()));
-        if (i != module_ids_.end())
-            r /= n.simple();
-    }
+    if (n != model_name_ && n.is_container())
+        r /= n.simple();
 
     /*
      * Handle the file name.
