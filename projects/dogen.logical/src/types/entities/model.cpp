@@ -59,8 +59,7 @@ model::model(model&& rhs)
       orm_elements_(std::move(rhs.orm_elements_)),
       build_elements_(std::move(rhs.build_elements_)),
       physical_elements_(std::move(rhs.physical_elements_)),
-      meta_names_(std::move(rhs.meta_names_)),
-      container_ids_(std::move(rhs.container_ids_)) { }
+      meta_names_(std::move(rhs.meta_names_)) { }
 
 model::model(
     const dogen::logical::entities::name& name,
@@ -85,8 +84,7 @@ model::model(
     const dogen::logical::entities::orm::element_repository& orm_elements,
     const dogen::logical::entities::build::element_repository& build_elements,
     const dogen::logical::entities::physical::element_repository& physical_elements,
-    const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names,
-    const std::unordered_set<std::string>& container_ids)
+    const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -109,8 +107,7 @@ model::model(
       orm_elements_(orm_elements),
       build_elements_(build_elements),
       physical_elements_(physical_elements),
-      meta_names_(meta_names),
-      container_ids_(container_ids) { }
+      meta_names_(meta_names) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -137,7 +134,6 @@ void model::swap(model& other) noexcept {
     swap(build_elements_, other.build_elements_);
     swap(physical_elements_, other.physical_elements_);
     swap(meta_names_, other.meta_names_);
-    swap(container_ids_, other.container_ids_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -163,8 +159,7 @@ bool model::operator==(const model& rhs) const {
         orm_elements_ == rhs.orm_elements_ &&
         build_elements_ == rhs.build_elements_ &&
         physical_elements_ == rhs.physical_elements_ &&
-        meta_names_ == rhs.meta_names_ &&
-        container_ids_ == rhs.container_ids_;
+        meta_names_ == rhs.meta_names_;
 }
 
 model& model::operator=(model other) {
@@ -523,22 +518,6 @@ void model::meta_names(const std::unordered_map<std::string, dogen::logical::ent
 
 void model::meta_names(const std::unordered_map<std::string, dogen::logical::entities::name>&& v) {
     meta_names_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& model::container_ids() const {
-    return container_ids_;
-}
-
-std::unordered_set<std::string>& model::container_ids() {
-    return container_ids_;
-}
-
-void model::container_ids(const std::unordered_set<std::string>& v) {
-    container_ids_ = v;
-}
-
-void model::container_ids(const std::unordered_set<std::string>&& v) {
-    container_ids_ = std::move(v);
 }
 
 }

@@ -155,20 +155,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::logical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -196,8 +182,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"orm_elements\": " << v.orm_elements() << ", "
       << "\"build_elements\": " << v.build_elements() << ", "
       << "\"physical_elements\": " << v.physical_elements() << ", "
-      << "\"meta_names\": " << v.meta_names() << ", "
-      << "\"container_ids\": " << v.container_ids()
+      << "\"meta_names\": " << v.meta_names()
       << " }";
     return(s);
 }
