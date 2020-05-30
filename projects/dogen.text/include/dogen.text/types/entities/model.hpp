@@ -71,7 +71,6 @@ public:
         const std::unordered_set<dogen::logical::entities::name>& leaves,
         const std::list<dogen::text::entities::element_artefacts>& elements,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
-        const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
         const dogen::logical::entities::technical_space input_technical_space,
         const dogen::logical::entities::technical_space output_technical_space,
@@ -138,16 +137,6 @@ public:
     boost::shared_ptr<dogen::logical::entities::structural::module>& root_module();
     void root_module(const boost::shared_ptr<dogen::logical::entities::structural::module>& v);
     void root_module(const boost::shared_ptr<dogen::logical::entities::structural::module>&& v);
-    /**@}*/
-
-    /**
-     * @brief IDs of all of the model elements which are modules.
-     */
-    /**@{*/
-    const std::unordered_set<std::string>& module_ids() const;
-    std::unordered_set<std::string>& module_ids();
-    void module_ids(const std::unordered_set<std::string>& v);
-    void module_ids(const std::unordered_set<std::string>&& v);
     /**@}*/
 
     /**
@@ -231,7 +220,6 @@ private:
     std::unordered_set<dogen::logical::entities::name> leaves_;
     std::list<dogen::text::entities::element_artefacts> elements_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
-    std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
     dogen::logical::entities::technical_space input_technical_space_;
     dogen::logical::entities::technical_space output_technical_space_;

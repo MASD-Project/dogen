@@ -45,7 +45,6 @@ model::model(model&& rhs)
       leaves_(std::move(rhs.leaves_)),
       elements_(std::move(rhs.elements_)),
       root_module_(std::move(rhs.root_module_)),
-      module_ids_(std::move(rhs.module_ids_)),
       has_generatable_types_(std::move(rhs.has_generatable_types_)),
       input_technical_space_(std::move(rhs.input_technical_space_)),
       output_technical_space_(std::move(rhs.output_technical_space_)),
@@ -64,7 +63,6 @@ model::model(
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const std::list<dogen::text::entities::element_artefacts>& elements,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
-    const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
     const dogen::logical::entities::technical_space input_technical_space,
     const dogen::logical::entities::technical_space output_technical_space,
@@ -81,7 +79,6 @@ model::model(
       leaves_(leaves),
       elements_(elements),
       root_module_(root_module),
-      module_ids_(module_ids),
       has_generatable_types_(has_generatable_types),
       input_technical_space_(input_technical_space),
       output_technical_space_(output_technical_space),
@@ -101,7 +98,6 @@ void model::swap(model& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(elements_, other.elements_);
     swap(root_module_, other.root_module_);
-    swap(module_ids_, other.module_ids_);
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(output_technical_space_, other.output_technical_space_);
@@ -121,7 +117,6 @@ bool model::operator==(const model& rhs) const {
         leaves_ == rhs.leaves_ &&
         elements_ == rhs.elements_ &&
         root_module_ == rhs.root_module_ &&
-        module_ids_ == rhs.module_ids_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         output_technical_space_ == rhs.output_technical_space_ &&
@@ -249,22 +244,6 @@ void model::root_module(const boost::shared_ptr<dogen::logical::entities::struct
 
 void model::root_module(const boost::shared_ptr<dogen::logical::entities::structural::module>&& v) {
     root_module_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& model::module_ids() const {
-    return module_ids_;
-}
-
-std::unordered_set<std::string>& model::module_ids() {
-    return module_ids_;
-}
-
-void model::module_ids(const std::unordered_set<std::string>& v) {
-    module_ids_ = v;
-}
-
-void model::module_ids(const std::unordered_set<std::string>&& v) {
-    module_ids_ = std::move(v);
 }
 
 bool model::has_generatable_types() const {

@@ -175,7 +175,6 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
     r.all_technical_spaces(m.all_technical_spaces());
-    r.module_ids(m.container_ids());
 
     populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);

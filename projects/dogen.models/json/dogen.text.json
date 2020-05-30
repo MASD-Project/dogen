@@ -50,11 +50,6 @@
           "documentation": "The module that represents the model.\n"
         },
         {
-          "name": "module_ids",
-          "type": "std::unordered_set<std::string>",
-          "documentation": "IDs of all of the model elements which are modules.\n"
-        },
-        {
           "name": "has_generatable_types",
           "type": "bool",
           "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"

@@ -104,20 +104,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::logical::entities::technical_space>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -191,7 +177,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"leaves\": " << v.leaves() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"root_module\": " << v.root_module() << ", "
-      << "\"module_ids\": " << v.module_ids() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"input_technical_space\": " << v.input_technical_space() << ", "
       << "\"output_technical_space\": " << v.output_technical_space() << ", "
