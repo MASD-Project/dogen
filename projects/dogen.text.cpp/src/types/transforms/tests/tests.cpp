@@ -54,10 +54,10 @@ physical::entities::facet make_facet() {
         }
     });
 
-    lambda(main_transform::static_archetype());
-    lambda(cmakelists_transform::static_archetype());
     lambda(class_implementation_transform::static_archetype());
+    lambda(cmakelists_transform::static_archetype());
     lambda(enum_implementation_transform::static_archetype());
+    lambda(main_transform::static_archetype());
     return r;
 }
 

@@ -194,31 +194,45 @@ void updater::update(entities::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Element added to container: " << container_id;
 }
 
-class sort_containers {
+using namespace entities;
+
+/**
+ * @brief Sorts the container of elements modeling the Container
+ * concept.
+ */
+class container_sorter {
 private:
     template<typename Container>
-    void sort(Container& /*c*/) {
-        // using logical::entities::name;
-        // c.contains().sort(
-        //     [](const name& lhs, const name& rhs) {
-        //         return lhs.qualified().dot() < rhs.qualified().dot();
-        //     });
+    void sort_and_validate(Container& c) {
+        /*
+         * First we sort the container.
+         */
+        c.contains().sort();
 
         /*
-         * It seems we already contained an element with that name.
+         * Now we validate for uniqueness: we don't expect duplicate
+         * containee ids.
          */
-        // BOOST_LOG_SEV(lg, error) << duplicate_element << containee_id;
-        // BOOST_THROW_EXCEPTION(
-        //     transformation_error(duplicate_element + containee_id));
+        std::set<std::string> ids;
+        for (const auto& id : c.contains()) {
+            const auto inserted(ids.insert(id).second);
+            if (inserted)
+                continue;
+
+            /*
+             * It seems we already contained an element with that name.
+             */
+            BOOST_LOG_SEV(lg, error) << duplicate_element << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_element + id));
+        }
     }
 
 public:
-    void operator()(logical::entities::structural::module& v) { sort(v); }
-
-    //
-    // modeline_group
-    // logical::entities::physical::backend
-    // logical::entities::physical::facet
+    void operator()(element&) { }
+    void operator()(structural::module& v) { sort_and_validate(v); }
+    void operator()(decoration::modeline_group& v) { sort_and_validate(v); }
+    void operator()(physical::backend& v) { sort_and_validate(v); }
+    void operator()(physical::facet& v) { sort_and_validate(v); }
 };
 
 }
@@ -227,8 +241,19 @@ void containment_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
+    /*
+     * Update all of the containees and containers about their
+     * relationships.
+     */
+    using namespace entities;
     updater u(m);
-    entities::elements_traversal(m, u);
+    elements_traversal(m, u);
+
+    /*
+     * Sort all of the containers to ensure they are stable.
+     */
+    container_sorter cs;
+    elements_traversal(m, cs);
 
     stp.end_transform(m);
 }

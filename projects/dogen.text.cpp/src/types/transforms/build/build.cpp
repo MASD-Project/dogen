@@ -52,8 +52,8 @@ physical::entities::facet make_facet() {
         }
     });
 
-    lambda(source_cmakelists_transform::static_archetype());
     lambda(include_cmakelists_transform::static_archetype());
+    lambda(source_cmakelists_transform::static_archetype());
     return r;
 }
 
