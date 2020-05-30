@@ -34,7 +34,7 @@ namespace dogen::text::csharp::transforms::types {
  * @brief M2T transforms for the types facet of
  * the C# Technical Space.
  */
-class types_facet final {
+class types_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

@@ -57,12 +57,12 @@ physical::entities::facet make_facet() {
 
 }
 
-physical::entities::facet templates_facet::static_facet() {
+physical::entities::facet templates_facet_chain::static_facet() {
     static const auto r(make_facet());
     return r;
 }
 
-physical::entities::facet templates_facet::facet() const {
+physical::entities::facet templates_facet_chain::facet() const {
     return static_facet();
 }
 

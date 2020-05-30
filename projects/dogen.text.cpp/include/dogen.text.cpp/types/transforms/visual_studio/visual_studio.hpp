@@ -33,7 +33,7 @@ namespace dogen::text::cpp::transforms::visual_studio {
 /**
  * @brief Formatters related to Visual Studio support.
  */
-class visual_studio_facet final {
+class visual_studio_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

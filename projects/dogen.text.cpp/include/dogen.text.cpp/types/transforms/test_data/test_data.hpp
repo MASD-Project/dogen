@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::test_data {
  * @brief Formatters for the test_data facet
  * of the C++ technical space.
  */
-class test_data_facet final {
+class test_data_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

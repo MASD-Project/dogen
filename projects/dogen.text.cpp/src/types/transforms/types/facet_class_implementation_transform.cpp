@@ -108,7 +108,7 @@ void facet_class_implementation_transform::apply(const context& ctx, const logic
             const auto ns(ast.make_namespaces(fct.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(fct.name().simple() + "_facet");
+            const auto sn(fct.name().simple() + "_facet_chain");
 ast.stream() << "namespace {" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "using namespace dogen::utility::log;" << std::endl;

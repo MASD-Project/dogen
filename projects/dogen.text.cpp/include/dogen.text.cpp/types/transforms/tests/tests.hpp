@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::tests {
  * @brief Formatters that generate tests for generated
  * code.
  */
-class tests_facet final {
+class tests_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

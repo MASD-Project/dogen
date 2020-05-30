@@ -33,7 +33,7 @@ namespace dogen::text::cpp::transforms::build {
 /**
  * @brief Formatters related to build files.
  */
-class build_facet final {
+class build_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

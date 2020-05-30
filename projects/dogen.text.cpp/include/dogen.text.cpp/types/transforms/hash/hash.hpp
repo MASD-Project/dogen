@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::hash {
  * @brief Formatters for the hash facet of the
  * C++ technical space.
  */
-class hash_facet final {
+class hash_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

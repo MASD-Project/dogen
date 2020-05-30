@@ -34,7 +34,7 @@ namespace dogen::text::csharp::transforms::test_data {
  * @brief M2T transforms for the test data
  * facet of the C# Technical Space.
  */
-class test_data_facet final {
+class test_data_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

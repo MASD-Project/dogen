@@ -34,7 +34,7 @@ namespace dogen::text::csharp::transforms::visual_studio {
  * @brief M2T transforms for the visual studio
  * facet of the C# Technical Space.
  */
-class visual_studio_facet final {
+class visual_studio_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

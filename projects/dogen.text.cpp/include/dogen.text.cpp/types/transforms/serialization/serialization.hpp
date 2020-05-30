@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::serialization {
  * @brief Formatters for the boost serialisation
  * facet of the C++ technical space.
  */
-class serialization_facet final {
+class serialization_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

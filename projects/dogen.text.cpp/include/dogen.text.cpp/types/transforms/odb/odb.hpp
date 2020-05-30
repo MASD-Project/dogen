@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::odb {
  * @brief Formatters for the odb facet of the
  * C++ technical space.
  */
-class odb_facet final {
+class odb_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

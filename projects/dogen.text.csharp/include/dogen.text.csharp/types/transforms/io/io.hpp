@@ -34,7 +34,7 @@ namespace dogen::text::csharp::transforms::io {
  * @brief M2T transforms for the io facet of
  * the C# Technical Space.
  */
-class io_facet final {
+class io_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

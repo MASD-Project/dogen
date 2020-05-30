@@ -33,7 +33,7 @@ namespace dogen::text::cpp::transforms::templates {
 /**
  * @brief Formatters related to templating.
  */
-class templates_facet final {
+class templates_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;

@@ -34,7 +34,7 @@ namespace dogen::text::cpp::transforms::lexical_cast {
  * @brief Formatters related to conversions from and to
  * string.
  */
-class lexical_cast_facet final {
+class lexical_cast_facet_chain final {
 public:
     static physical::entities::facet static_facet();
     physical::entities::facet facet() const;
