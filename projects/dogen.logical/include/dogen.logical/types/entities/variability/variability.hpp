@@ -72,7 +72,7 @@
  * perhaps it will have the underisable side-effect of hiding all of this
  * complexity.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::variability {
 }
 
 #endif

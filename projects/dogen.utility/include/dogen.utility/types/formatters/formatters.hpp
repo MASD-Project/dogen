@@ -30,7 +30,7 @@
  * that are not associated with any particular
  * model.
  */
-namespace dogen::utility {
+namespace dogen::utility::formatters {
 }
 
 #endif

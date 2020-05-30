@@ -28,7 +28,7 @@
 /**
  * @brief Helpers for the physical model.
  */
-namespace dogen::physical {
+namespace dogen::physical::helpers {
 }
 
 #endif

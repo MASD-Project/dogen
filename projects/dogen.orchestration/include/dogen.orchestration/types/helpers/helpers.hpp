@@ -28,7 +28,7 @@
 /**
  * @brief Helpers for the orchestration model.
  */
-namespace dogen::orchestration {
+namespace dogen::orchestration::helpers {
 }
 
 #endif

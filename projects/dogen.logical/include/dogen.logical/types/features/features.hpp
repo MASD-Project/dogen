@@ -28,7 +28,7 @@
 /**
  * @brief Defines all features used by the logical model.
  */
-namespace dogen::logical {
+namespace dogen::logical::features {
 }
 
 #endif

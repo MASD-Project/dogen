@@ -29,7 +29,7 @@
  * @brief Houses meta-model elements related to
  * build systems.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::visual_studio {
 }
 
 #endif

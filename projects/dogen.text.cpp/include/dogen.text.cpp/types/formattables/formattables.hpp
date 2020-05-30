@@ -29,7 +29,7 @@
  * @brief Formattables contains all types required by the formatters
  * and those used to generate them.
  */
-namespace dogen::text::cpp {
+namespace dogen::text::cpp::formattables {
 }
 
 #endif

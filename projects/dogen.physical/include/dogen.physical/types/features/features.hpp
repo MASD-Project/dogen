@@ -28,7 +28,7 @@
 /**
  * @brief Features for the MASD physical model.
  */
-namespace dogen::physical {
+namespace dogen::physical::features {
 }
 
 #endif

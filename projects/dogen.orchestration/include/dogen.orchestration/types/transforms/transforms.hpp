@@ -29,7 +29,7 @@
  * @brief Top-level transforms for Dogen. These are
  * the entry points to all transformations.
  */
-namespace dogen::orchestration {
+namespace dogen::orchestration::transforms {
 }
 
 #endif

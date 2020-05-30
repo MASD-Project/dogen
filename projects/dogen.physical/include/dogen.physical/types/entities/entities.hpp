@@ -28,7 +28,7 @@
 /**
  * @brief Defines the MASD physical space.
  */
-namespace dogen::physical {
+namespace dogen::physical::entities {
 }
 
 #endif

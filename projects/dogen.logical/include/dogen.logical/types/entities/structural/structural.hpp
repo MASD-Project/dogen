@@ -29,7 +29,7 @@
  * @brief Houses all of the meta-modeling elements related
  * to structural modeling.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::structural {
 }
 
 #endif

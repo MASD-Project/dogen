@@ -51,21 +51,28 @@ name_flattener::flatten(const entities::name& n) const {
     for (const auto& m : l.internal_modules())
         r.push_back(m);
 
-    if (!detect_model_name_)
-        return r;
+    if (detect_model_name_) {
+        /*
+         * if the name belongs to the model's module, we need to
+         * remove the module's simple name from the module path (it is
+         * in both the module path and it is also the module's simple
+         * name).
+         */
+        const bool no_internal_modules(l.internal_modules().empty());
+        const bool has_model_modules(!l.model_modules().empty());
+        const bool is_model_name(no_internal_modules && has_model_modules &&
+            n.simple() == l.model_modules().back());
 
-    /*
-     * if the name belongs to the model's module, we need to remove the
-     * module's simple name from the module path (it is in both the
-     * module path and it is also the module's simple name).
-     */
-    const bool no_internal_modules(l.internal_modules().empty());
-    const bool has_model_modules(!l.model_modules().empty());
-    const bool is_model_name(no_internal_modules && has_model_modules &&
-        n.simple() == l.model_modules().back());
-
-    if (is_model_name)
-        r.pop_back();
+        if (is_model_name)
+            r.pop_back();
+    } else if (n.is_container()) {
+        /*
+         * For containers, we need to put the simple name into the
+         * list. This ensures that we place them in the correct
+         * namespace.
+         */
+        r.push_back(n.simple());
+    }
 
     return r;
 }

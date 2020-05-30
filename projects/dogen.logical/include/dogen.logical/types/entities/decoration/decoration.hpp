@@ -29,7 +29,7 @@
  * @brief Houses all of the meta-modeling elements and
  * properties related to decorations.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::decoration {
 }
 
 #endif

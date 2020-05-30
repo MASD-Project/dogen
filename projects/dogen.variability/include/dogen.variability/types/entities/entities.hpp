@@ -29,7 +29,7 @@
  * @brief Contains all of the types describing variability
  * with Masd.
  */
-namespace dogen::variability {
+namespace dogen::variability::entities {
 }
 
 #endif

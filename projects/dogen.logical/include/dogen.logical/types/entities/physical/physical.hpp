@@ -28,7 +28,7 @@
 /**
  * @brief Logical representation of elements in the physical dimension.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::physical {
 }
 
 #endif

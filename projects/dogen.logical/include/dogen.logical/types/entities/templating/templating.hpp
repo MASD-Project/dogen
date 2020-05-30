@@ -28,7 +28,7 @@
 /**
  * @brief Meta-model elements related to templating .
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::templating {
 }
 
 #endif

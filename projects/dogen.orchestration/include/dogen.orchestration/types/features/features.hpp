@@ -28,7 +28,7 @@
 /**
  * @brief Features for the orchestration model.
  */
-namespace dogen::orchestration {
+namespace dogen::orchestration::features {
 }
 
 #endif

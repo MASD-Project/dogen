@@ -30,7 +30,7 @@
  * to building, which don't have their own containing
  * namespace.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::build {
 }
 
 #endif

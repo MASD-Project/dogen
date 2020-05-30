@@ -28,7 +28,7 @@
 /**
  * @brief Contains formatting classes for the logical model.
  */
-namespace dogen::logical {
+namespace dogen::logical::formatters {
 }
 
 #endif

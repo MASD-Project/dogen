@@ -28,7 +28,7 @@
 /**
  * @brief Meta-model elements related to mapping domains.
  */
-namespace dogen::logical::entities {
+namespace dogen::logical::entities::mapping {
 }
 
 #endif

@@ -29,7 +29,7 @@
  * @brief Defines all of the features and feature groups used by
  * the injection model.
  */
-namespace dogen::injection {
+namespace dogen::injection::features {
 }
 
 #endif

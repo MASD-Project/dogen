@@ -28,7 +28,7 @@
 /**
  * @brief Features used by the variability model.
  */
-namespace dogen::variability {
+namespace dogen::variability::features {
 }
 
 #endif
