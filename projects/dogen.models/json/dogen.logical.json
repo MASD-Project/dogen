@@ -4520,13 +4520,6 @@
       ]
     },
     {
-      "name": "transforms::containers_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "helpers::flattening_strategy",
       "documentation": "Strategies to apply when flattening a logical name into a list.\n",
       "stereotypes": [
