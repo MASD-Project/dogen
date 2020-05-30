@@ -12,44 +12,45 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-05-29 Fri 17:27]
+#+CAPTION: Clock summary at [2020-05-30 Sat 13:44]
 | <75>                                                     |         |       |       |       |
 | Headline                                                 | Time    |       |       |     % |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                             | *74:00* |       |       | 100.0 |
+| *Total time*                                             | *75:24* |       |       | 100.0 |
 |----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                  | 74:00   |       |       | 100.0 |
-| Active                                                   |         | 74:00 |       | 100.0 |
-| Edit release notes for previous sprint                   |         |       |  5:57 |   8.0 |
-| Create a demo and presentation for previous sprint       |         |       |  0:47 |   1.1 |
-| Sprint and product backlog grooming                      |         |       |  3:31 |   4.8 |
+| Stories                                                  | 75:24   |       |       | 100.0 |
+| Active                                                   |         | 75:24 |       | 100.0 |
+| Edit release notes for previous sprint                   |         |       |  5:57 |   7.9 |
+| Create a demo and presentation for previous sprint       |         |       |  0:47 |   1.0 |
+| Sprint and product backlog grooming                      |         |       |  3:31 |   4.7 |
 | Nightly nursing                                          |         |       |  0:24 |   0.5 |
 | Check name of model for variability transform            |         |       |  0:19 |   0.4 |
-| Analysis on templating and logical model                 |         |       |  1:09 |   1.6 |
+| Analysis on templating and logical model                 |         |       |  1:09 |   1.5 |
 | Ensure stitch templates result in valid JSON             |         |       |  0:27 |   0.6 |
 | Remove stitch template builder                           |         |       |  0:09 |   0.2 |
 | Add template related attributes to physical elements     |         |       |  1:38 |   2.2 |
 | Resolve references to wale templates in logical model    |         |       |  1:39 |   2.2 |
-| =templating= should not depend on =physical=             |         |       |  1:09 |   1.6 |
-| Move decoration transform into logical model             |         |       |  5:33 |   7.5 |
-| Split wale out of stitch templates                       |         |       |  3:31 |   4.8 |
+| =templating= should not depend on =physical=             |         |       |  1:09 |   1.5 |
+| Move decoration transform into logical model             |         |       |  5:33 |   7.4 |
+| Split wale out of stitch templates                       |         |       |  3:31 |   4.7 |
 | Paper: An EMF-like UML generator for C++                 |         |       |  1:02 |   1.4 |
-| Paper: An Abstraction for Reusable MDD Components        |         |       |  0:56 |   1.3 |
-| Paper: Architecture-Centric Model-Driven Web Engineering |         |       |  1:09 |   1.6 |
-| Profiles do not support collection types                 |         |       |  4:13 |   5.7 |
-| Promote all formatters to archetypes                     |         |       | 17:31 |  23.7 |
+| Paper: An Abstraction for Reusable MDD Components        |         |       |  0:56 |   1.2 |
+| Paper: Architecture-Centric Model-Driven Web Engineering |         |       |  1:09 |   1.5 |
+| Profiles do not support collection types                 |         |       |  4:13 |   5.6 |
+| Promote all formatters to archetypes                     |         |       | 17:31 |  23.2 |
 | Create archetypes for all physical elements              |         |       |  0:39 |   0.9 |
 | Analysis on how to build PMM from archetypes in text     |         |       |  1:06 |   1.5 |
-| Create a bootstrapping chain for context                 |         |       |  3:20 |   4.5 |
+| Create a bootstrapping chain for context                 |         |       |  3:20 |   4.4 |
 | Facet and backend files are in the wrong folder          |         |       |  0:48 |   1.1 |
 | Fix =static_archetype= method in archetypes              |         |       |  1:25 |   1.9 |
-| Extend tracing to M2T transforms                         |         |       |  3:51 |   5.2 |
+| Extend tracing to M2T transforms                         |         |       |  3:51 |   5.1 |
 | Add "scoped tracing" via regexes                         |         |       |  1:04 |   1.4 |
 | Fix borked dist-upgrade                                  |         |       |  0:49 |   1.1 |
-| Update stitch mode for emacs                             |         |       |  1:19 |   1.8 |
+| Update stitch mode for emacs                             |         |       |  1:19 |   1.7 |
 | Create an encoder for org-mode                           |         |       |  1:31 |   2.0 |
-| Create a PMM chain in physical model                     |         |       |  6:31 |   8.8 |
+| Create a PMM chain in physical model                     |         |       |  6:31 |   8.6 |
 | Namespace documentation is incorrect                     |         |       |  0:33 |   0.7 |
+| Handling of container names is incorrect                 |         |       |  1:24 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1560,6 +1561,51 @@ documentation for =features= namespace is:
 
 We are not taking the namespace name into account (should have been
 =dogen::logical::features=).
+
+*** STARTED Handling of container names is incorrect                  :story:
+    :LOGBOOK:
+    CLOCK: [2020-05-30 Sat 13:19]--[2020-05-30 Sat 13:43] =>  0:24
+    CLOCK: [2020-05-29 Fri 21:52]--[2020-05-29 Fri 22:02] =>  0:10
+    CLOCK: [2020-05-29 Fri 21:01]--[2020-05-29 Fri 21:51] =>  0:50
+    :END:
+
+We made a modeling error when modeling container names. We created a
+hack for model names (i.e. detect when we are handling a model name
+and then work around it) and didn't do the same for module names. This
+resulted in mistakes when creating namespaces for modules. In
+addition, we also have a lot of hackery around modules for filenames;
+we ended up creating a set of container ID's purely just so we can
+handle these correctly in locator. What we did is the following: for
+all modeling elements, there is a mapping of logical to physical space
+that takes into account the module path plus the element name,
+/except/ for containers. For these, we have a conceptual difficulty;
+they map to two different types of physical constructs, files (for
+documentation up to now, but also for facets and backends from now on)
+and directories (because the containers give rise to containing
+directories). Regular elements, of course, only give rise to
+files. Its fine to map to different kinds of physical elements, but
+this must be signalled directly by the name without any additional
+data structures. The approach would like like so:
+
+- add a boolean flag in name for containers. Populate it during
+  adaption. Resolution should take care to make it consistent across
+  the model.
+- use a consistent approach across all containers. We should not
+  duplicate the name of the element on both the model name and the
+  simple name. This could probably cause a lot of breakage. Similarly
+  with modules, the name should not be in both internal modules and
+  simple name.
+- update name flattener, locator etc to do the right thing.
+- remove the container id's.
+
+We still have a problem: we haven't unified the handling of model
+names versus all other containers. This is because we do not know
+where to look (model modules or internal modules). We could just make
+this an enumeration (model, containing element, scalar element. Or
+actually maybe it doesn't even matter. This property is only used to
+create namespaces and directory/file names; and all cases behave the
+same way (e.g. if container, add simple name as directory and as
+filename or as namespace and as class).
 
 *** Replace =formatting_error= with =transformation_error=            :story:
 
