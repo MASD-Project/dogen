@@ -110,7 +110,7 @@ ast.stream() << std::endl;
             ast.comment(fct.documentation());
 ast.stream() << "class " << fct.name().simple() << "_facet final {" << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static physical::entities::facet static_:facet();" << std::endl;
+ast.stream() << "    static physical::entities::facet static_facet();" << std::endl;
 ast.stream() << "    physical::entities::facet facet() const;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;

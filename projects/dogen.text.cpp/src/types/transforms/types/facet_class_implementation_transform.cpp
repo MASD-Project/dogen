@@ -103,7 +103,8 @@ void facet_class_implementation_transform::apply(const context& ctx, const logic
     {
         auto sbf(ast.make_scoped_boilerplate_formatter(fct));
         {
-            const auto ns(ast.make_namespaces(fct.name(), false/*detect_model_name*/));
+            const auto ns(ast.make_namespaces(fct.name(),
+                    false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto sn(fct.name().simple() + "_facet");
 ast.stream() << "namespace {" << std::endl;
