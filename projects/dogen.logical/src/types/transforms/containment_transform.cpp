@@ -79,23 +79,14 @@ private:
         }
 
         /*
-         * If it does exist, we expect the insertion to work cleanly.
+         * If it does exist, add the containee to the container.
          */
         auto& container(*i->second);
-        const bool inserted(container.contains().insert(containee_id).second);
-        if (inserted) {
-            BOOST_LOG_SEV(lg, debug) << "Added element. Containee: '"
-                                     << containee_id
-                                     << "' Container: '" << container_id << "'";
-            return true;
-        }
-
-        /*
-         * It seems we already contained an element with that name.
-         */
-        BOOST_LOG_SEV(lg, error) << duplicate_element << containee_id;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(duplicate_element + containee_id));
+        container.contains().push_back(containee_id);
+        BOOST_LOG_SEV(lg, debug) << "Added element. Containee: '"
+                                 << containee_id
+                                 << "' Container: '" << container_id << "'";
+        return true;
     }
 
     /**
@@ -202,6 +193,33 @@ void updater::update(entities::element& e) {
     e.contained_by(container_id);
     BOOST_LOG_SEV(lg, debug) << "Element added to container: " << container_id;
 }
+
+class sort_containers {
+private:
+    template<typename Container>
+    void sort(Container& /*c*/) {
+        // using logical::entities::name;
+        // c.contains().sort(
+        //     [](const name& lhs, const name& rhs) {
+        //         return lhs.qualified().dot() < rhs.qualified().dot();
+        //     });
+
+        /*
+         * It seems we already contained an element with that name.
+         */
+        // BOOST_LOG_SEV(lg, error) << duplicate_element << containee_id;
+        // BOOST_THROW_EXCEPTION(
+        //     transformation_error(duplicate_element + containee_id));
+    }
+
+public:
+    void operator()(logical::entities::structural::module& v) { sort(v); }
+
+    //
+    // modeline_group
+    // logical::entities::physical::backend
+    // logical::entities::physical::facet
+};
 
 }
 

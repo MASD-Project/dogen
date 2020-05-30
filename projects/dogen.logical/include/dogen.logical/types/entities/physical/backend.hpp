@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
@@ -67,7 +66,7 @@ public:
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& id,
         const dogen::logical::entities::technical_space major_technical_space,
-        const std::unordered_set<std::string>& contains,
+        const std::list<std::string>& contains,
         const std::string& kernel_name,
         const std::list<dogen::logical::entities::name>& facets,
         const std::list<dogen::logical::entities::name>& parts,
@@ -103,10 +102,15 @@ public:
     void major_technical_space(const dogen::logical::entities::technical_space v);
     /**@}*/
 
-    const std::unordered_set<std::string>& contains() const;
-    std::unordered_set<std::string>& contains();
-    void contains(const std::unordered_set<std::string>& v);
-    void contains(const std::unordered_set<std::string>&& v);
+    /**
+     * @brief All elements contained by this element.
+     */
+    /**@{*/
+    const std::list<std::string>& contains() const;
+    std::list<std::string>& contains();
+    void contains(const std::list<std::string>& v);
+    void contains(const std::list<std::string>&& v);
+    /**@}*/
 
     /**
      * @brief Kernel that owns this backend.
@@ -174,7 +178,7 @@ public:
 private:
     std::string id_;
     dogen::logical::entities::technical_space major_technical_space_;
-    std::unordered_set<std::string> contains_;
+    std::list<std::string> contains_;
     std::string kernel_name_;
     std::list<dogen::logical::entities::name> facets_;
     std::list<dogen::logical::entities::name> parts_;

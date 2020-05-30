@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/orm/module_properties.hpp"
@@ -68,7 +68,7 @@ public:
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::unordered_set<std::string>& contains,
+        const std::list<std::string>& contains,
         const bool is_root,
         const bool is_global_module,
         const boost::optional<dogen::logical::entities::orm::module_properties>& orm_properties);
@@ -84,10 +84,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_set<std::string>& contains() const;
-    std::unordered_set<std::string>& contains();
-    void contains(const std::unordered_set<std::string>& v);
-    void contains(const std::unordered_set<std::string>&& v);
+    /**
+     * @brief All elements contained by this element.
+     */
+    /**@{*/
+    const std::list<std::string>& contains() const;
+    std::list<std::string>& contains();
+    void contains(const std::list<std::string>& v);
+    void contains(const std::list<std::string>&& v);
+    /**@}*/
 
     /**
      * @brief If true, this module is thee root module of the model.
@@ -124,7 +129,7 @@ public:
     module& operator=(module other);
 
 private:
-    std::unordered_set<std::string> contains_;
+    std::list<std::string> contains_;
     bool is_root_;
     bool is_global_module_;
     boost::optional<dogen::logical::entities::orm::module_properties> orm_properties_;

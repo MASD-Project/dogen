@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -84,7 +84,7 @@ backend::backend(
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
     const dogen::logical::entities::technical_space major_technical_space,
-    const std::unordered_set<std::string>& contains,
+    const std::list<std::string>& contains,
     const std::string& kernel_name,
     const std::list<dogen::logical::entities::name>& facets,
     const std::list<dogen::logical::entities::name>& parts,
@@ -209,19 +209,19 @@ void backend::major_technical_space(const dogen::logical::entities::technical_sp
     major_technical_space_ = v;
 }
 
-const std::unordered_set<std::string>& backend::contains() const {
+const std::list<std::string>& backend::contains() const {
     return contains_;
 }
 
-std::unordered_set<std::string>& backend::contains() {
+std::list<std::string>& backend::contains() {
     return contains_;
 }
 
-void backend::contains(const std::unordered_set<std::string>& v) {
+void backend::contains(const std::list<std::string>& v) {
     contains_ = v;
 }
 
-void backend::contains(const std::unordered_set<std::string>&& v) {
+void backend::contains(const std::list<std::string>&& v) {
     contains_ = std::move(v);
 }
 

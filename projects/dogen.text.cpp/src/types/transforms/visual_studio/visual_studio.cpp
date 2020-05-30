@@ -53,9 +53,9 @@ physical::entities::facet make_facet() {
         }
     });
 
-    lambda(project_transform::static_archetype());
-    lambda(solution_transform::static_archetype());
     lambda(msbuild_targets_transform::static_archetype());
+    lambda(solution_transform::static_archetype());
+    lambda(project_transform::static_archetype());
     return r;
 }
 

@@ -56,12 +56,12 @@ physical::entities::facet make_facet() {
         }
     });
 
-    lambda(primitive_implementation_transform::static_archetype());
-    lambda(primitive_header_transform::static_archetype());
-    lambda(enum_header_transform::static_archetype());
-    lambda(class_header_transform::static_archetype());
-    lambda(class_implementation_transform::static_archetype());
     lambda(builtin_header_transform::static_archetype());
+    lambda(class_implementation_transform::static_archetype());
+    lambda(class_header_transform::static_archetype());
+    lambda(primitive_header_transform::static_archetype());
+    lambda(primitive_implementation_transform::static_archetype());
+    lambda(enum_header_transform::static_archetype());
     return r;
 }
 

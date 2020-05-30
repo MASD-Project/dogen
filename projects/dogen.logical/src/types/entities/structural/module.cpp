@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -92,7 +92,7 @@ module::module(
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::unordered_set<std::string>& contains,
+    const std::list<std::string>& contains,
     const bool is_root,
     const bool is_global_module,
     const boost::optional<dogen::logical::entities::orm::module_properties>& orm_properties)
@@ -181,19 +181,19 @@ module& module::operator=(module other) {
     return *this;
 }
 
-const std::unordered_set<std::string>& module::contains() const {
+const std::list<std::string>& module::contains() const {
     return contains_;
 }
 
-std::unordered_set<std::string>& module::contains() {
+std::list<std::string>& module::contains() {
     return contains_;
 }
 
-void module::contains(const std::unordered_set<std::string>& v) {
+void module::contains(const std::list<std::string>& v) {
     contains_ = v;
 }
 
-void module::contains(const std::unordered_set<std::string>&& v) {
+void module::contains(const std::list<std::string>&& v) {
     contains_ = std::move(v);
 }
 

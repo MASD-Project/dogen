@@ -57,12 +57,12 @@ physical::entities::facet make_facet() {
         }
     });
 
-    lambda(builtin_header_transform::static_archetype());
-    lambda(object_odb_options_transform::static_archetype());
-    lambda(class_header_transform::static_archetype());
-    lambda(primitive_odb_options_transform::static_archetype());
-    lambda(primitive_header_transform::static_archetype());
     lambda(common_odb_options_transform::static_archetype());
+    lambda(primitive_header_transform::static_archetype());
+    lambda(object_odb_options_transform::static_archetype());
+    lambda(primitive_odb_options_transform::static_archetype());
+    lambda(builtin_header_transform::static_archetype());
+    lambda(class_header_transform::static_archetype());
     lambda(enum_header_transform::static_archetype());
     return r;
 }

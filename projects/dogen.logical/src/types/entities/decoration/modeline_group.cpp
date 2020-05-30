@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -104,7 +104,7 @@ modeline_group::modeline_group(
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::unordered_set<std::string>& contains,
+    const std::list<std::string>& contains,
     const std::list<boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines)
     : dogen::logical::entities::element(
       name,
@@ -177,19 +177,19 @@ modeline_group& modeline_group::operator=(modeline_group other) {
     return *this;
 }
 
-const std::unordered_set<std::string>& modeline_group::contains() const {
+const std::list<std::string>& modeline_group::contains() const {
     return contains_;
 }
 
-std::unordered_set<std::string>& modeline_group::contains() {
+std::list<std::string>& modeline_group::contains() {
     return contains_;
 }
 
-void modeline_group::contains(const std::unordered_set<std::string>& v) {
+void modeline_group::contains(const std::list<std::string>& v) {
     contains_ = v;
 }
 
-void modeline_group::contains(const std::unordered_set<std::string>&& v) {
+void modeline_group::contains(const std::list<std::string>&& v) {
     contains_ = std::move(v);
 }
 

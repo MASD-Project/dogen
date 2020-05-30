@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_fwd.hpp"
@@ -66,7 +65,7 @@ public:
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::unordered_set<std::string>& contains,
+        const std::list<std::string>& contains,
         const std::list<boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines);
 
 public:
@@ -80,10 +79,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_set<std::string>& contains() const;
-    std::unordered_set<std::string>& contains();
-    void contains(const std::unordered_set<std::string>& v);
-    void contains(const std::unordered_set<std::string>&& v);
+    /**
+     * @brief All elements contained by this element.
+     */
+    /**@{*/
+    const std::list<std::string>& contains() const;
+    std::list<std::string>& contains();
+    void contains(const std::list<std::string>& v);
+    void contains(const std::list<std::string>&& v);
+    /**@}*/
 
     /**
      * @brief Modelines that make up the group.
@@ -109,7 +113,7 @@ public:
     modeline_group& operator=(modeline_group other);
 
 private:
-    std::unordered_set<std::string> contains_;
+    std::list<std::string> contains_;
     std::list<boost::shared_ptr<dogen::logical::entities::decoration::modeline> > modelines_;
 };
 
