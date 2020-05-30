@@ -57,6 +57,7 @@ public:
     void internal_modules(const std::string& im);
     void internal_modules(const std::list<std::string>& im);
     void location(const entities::location& l);
+    void is_container(const bool is_container);
 
 public:
     entities::name build();

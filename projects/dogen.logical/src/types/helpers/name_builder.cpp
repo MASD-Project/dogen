@@ -101,6 +101,10 @@ void name_builder::location(const entities::location& l) {
     location_builder_.location(l);
 }
 
+void name_builder::is_container(const bool is_container) {
+    name_.is_container(is_container);
+}
+
 entities::name name_builder::build() {
     name_.location(location_builder_.build());
     if (model_name_mode_)
