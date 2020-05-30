@@ -1711,7 +1711,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#types#</dia:string>
@@ -2433,7 +2433,7 @@ using System;
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#io#</dia:string>
@@ -2998,7 +2998,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_data#</dia:string>
@@ -15954,7 +15954,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::physical::facet, dogen::handcrafted::typeable#</dia:string>
+        <dia:string>#masd::physical::facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio#</dia:string>

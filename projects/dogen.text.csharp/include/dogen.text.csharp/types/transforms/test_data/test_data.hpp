@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
 
-namespace dogen::text::csharp::transforms {
+namespace dogen::text::csharp::transforms::test_data {
 
 /**
  * @brief M2T transforms for the test data
