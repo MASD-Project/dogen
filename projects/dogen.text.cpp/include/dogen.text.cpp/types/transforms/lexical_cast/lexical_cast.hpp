@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::text::cpp::transforms::lexical_cast {
 
 /**
  * @brief Formatters related to conversions from and to

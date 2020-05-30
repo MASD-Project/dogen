@@ -87,8 +87,7 @@
       "name": "transforms::hash",
       "documentation": "Formatters for the hash facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -306,8 +305,7 @@
       "name": "transforms::io",
       "documentation": "Formatters for the io facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -414,8 +412,7 @@
       "name": "transforms::serialization",
       "documentation": "Formatters for the boost serialisation\nfacet of the C++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -474,8 +471,7 @@
       "name": "transforms::test_data",
       "documentation": "Formatters for the test_data facet\nof the C++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -582,8 +578,7 @@
       "name": "transforms::odb",
       "documentation": "Formatters for the odb facet of the\nC++ technical space.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2218,8 +2213,7 @@
       "name": "transforms::tests",
       "documentation": "Formatters that generate tests for generated\ncode.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2634,8 +2628,7 @@
       "name": "transforms::lexical_cast",
       "documentation": "Formatters related to conversions from and to\nstring.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2786,8 +2779,7 @@
       "name": "transforms::templates",
       "documentation": "Formatters related to templating.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3051,8 +3043,7 @@
       "name": "transforms::visual_studio",
       "documentation": "Formatters related to Visual Studio support.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3322,8 +3313,7 @@
       "name": "transforms::build",
       "documentation": "Formatters related to build files.\n",
       "stereotypes": [
-        "masd::physical::facet",
-        "dogen::handcrafted::typeable"
+        "masd::physical::facet"
       ],
       "tagged_values": {
         "masd.injection.dia.comment": "true"

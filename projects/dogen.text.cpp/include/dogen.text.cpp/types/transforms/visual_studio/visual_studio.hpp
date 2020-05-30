@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
 
-namespace dogen::text::cpp::transforms {
+namespace dogen::text::cpp::transforms::visual_studio {
 
 /**
  * @brief Formatters related to Visual Studio support.
