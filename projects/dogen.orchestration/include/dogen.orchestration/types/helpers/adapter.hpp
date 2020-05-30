@@ -115,7 +115,7 @@ private:
      * @pre n must not be empty.
      */
     logical::entities::name to_name(const logical::entities::location& l,
-        const std::string& n) const;
+        const std::string& n, const bool is_container) const;
 
     /**
      * @brief Creates a logical name using the element name provided.
@@ -125,7 +125,8 @@ private:
      *
      * @pre n must not be empty.
      */
-    logical::entities::name to_name(const std::string& n) const;
+    logical::entities::name
+    to_name(const std::string& n, const bool is_container) const;
 
     /**
      * @brief Converts an injection attribute to a modeline field.
@@ -164,7 +165,7 @@ private:
     void populate_element(const logical::entities::location& l,
         const stereotypes_conversion_result& scr,
         const injection::entities::element& ie,
-        logical::entities::element& e) const;
+        const bool is_container, logical::entities::element& e) const;
 
 public:
     /**

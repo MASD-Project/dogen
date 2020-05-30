@@ -146,7 +146,7 @@ to_potential_binding(const std::list<std::string>& stereotypes) const {
 }
 
 logical::entities::name adapter::to_name(const logical::entities::location& l,
-    const std::string& n) const {
+    const std::string& n, const bool is_container) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
      * Names are expected to be delimited by the scope operator,
@@ -163,11 +163,13 @@ logical::entities::name adapter::to_name(const logical::entities::location& l,
 
     b.external_modules(l.external_modules());
     b.model_modules(l.model_modules());
+    b.is_container(is_container);
 
     return b.build();
 }
 
-logical::entities::name adapter::to_name(const std::string& n) const {
+logical::entities::name
+adapter::to_name(const std::string& n, const bool is_container) const {
     /*
      * Names are expected to be delimited by the scope operator,
      * denoting internal modules.
@@ -180,6 +182,7 @@ logical::entities::name adapter::to_name(const std::string& n) const {
     tokens.pop_back();
     if (!tokens.empty())
         b.internal_modules(tokens);
+    b.is_container(is_container);
 
     return b.build();
 }
@@ -249,7 +252,7 @@ adapter::to_enumerator(const logical::entities::name& owner,
 void adapter::populate_element(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie,
-    logical::entities::element& e) const {
+    const bool is_container, logical::entities::element& e) const {
 
     /*
      * Ensure we populate the configuration before we attempt to read
@@ -258,7 +261,7 @@ void adapter::populate_element(const logical::entities::location& l,
     e.configuration(ie.configuration());
     const auto& ds(scr.dynamic_stereotypes());
     e.configuration()->profile_bindings(to_potential_binding(ds));
-    e.name(to_name(l, ie.name()));
+    e.name(to_name(l, ie.name(), is_container));
     e.configuration()->name().qualified(e.name().qualified().dot());
 
     /*
@@ -280,7 +283,7 @@ adapter::to_object(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::object>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     r->is_associative_container(ie.is_associative_container());
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
 
@@ -288,7 +291,7 @@ adapter::to_object(const logical::entities::location& l,
         r->local_attributes().push_back(to_attribute(r->name(), attr));
 
     for (const auto& p : ie.parents())
-        r->parents().push_back(to_name(l, p));
+        r->parents().push_back(to_name(l, p, false/*is_container*/));
 
     return r;
 }
@@ -301,13 +304,13 @@ adapter::to_object_template(const logical::entities::location& l,
                              << "to object template: " << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::object_template>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->local_attributes().push_back(to_attribute(r->name(), attr));
 
     for (const auto& p : ie.parents())
-        r->parents().push_back(to_name(l, p));
+        r->parents().push_back(to_name(l, p, false/*is_container*/));
 
     return r;
 }
@@ -320,7 +323,7 @@ adapter::to_exception(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::exception>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -333,7 +336,7 @@ adapter::to_primitive(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::primitive>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -346,7 +349,7 @@ adapter::to_enumeration(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::enumeration>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->enumerators().push_back(to_enumerator(r->name(), attr));
@@ -362,7 +365,7 @@ to_module(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::module>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -375,7 +378,7 @@ adapter::to_builtin(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::builtin>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
 
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
@@ -394,7 +397,7 @@ adapter::to_entry_point(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::entry_point>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -407,7 +410,7 @@ adapter::to_assistant(const logical::entities::location& l,
                              << ie.name();
 
     auto r(boost::make_shared<logical::entities::structural::assistant>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -417,7 +420,7 @@ adapter::to_modeline_group(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline_group>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -427,7 +430,7 @@ adapter::to_modeline(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->fields().push_back(to_modeline_field(r->name(), attr));
@@ -440,7 +443,7 @@ adapter::to_generation_marker(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<generation_marker>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -477,7 +480,7 @@ adapter::to_licence(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<licence>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -501,7 +504,7 @@ void adapter::populate_abstract_profile(const logical::entities::location& l,
     const injection::entities::element& ie,
     logical::entities::variability::abstract_profile& ap) const {
     for (const auto& p : ie.parents())
-        ap.parents().push_back(to_name(l, p));
+        ap.parents().push_back(to_name(l, p, false/*is_container*/));
 }
 
 void adapter::populate_abstract_feature(
@@ -570,7 +573,7 @@ adapter::to_variability_profile(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::variability::profile;
     auto r(boost::make_shared<profile>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
@@ -587,7 +590,7 @@ adapter::to_variability_profile_template(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::variability::profile_template;
     auto r(boost::make_shared<profile_template>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
@@ -606,7 +609,7 @@ adapter::to_variability_feature_template_bundle(
     const injection::entities::element &ie) const {
     using logical::entities::variability::feature_template_bundle;
     auto r(boost::make_shared<feature_template_bundle>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
         logical::entities::variability::feature_template ft;
@@ -623,7 +626,7 @@ adapter::to_variability_feature_bundle(const logical::entities::location &l,
     const injection::entities::element &ie) const {
     using logical::entities::variability::feature_bundle;
     auto r(boost::make_shared<feature_bundle>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
         logical::entities::variability::feature f;
@@ -642,7 +645,7 @@ adapter::to_variability_initializer(const logical::entities::location &l,
     const injection::entities::element &ie) const {
     using logical::entities::variability::initializer;
     auto r(boost::make_shared<initializer>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -653,7 +656,7 @@ adapter::to_fixed_mappable(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::mapping::fixed_mappable;
     auto r(boost::make_shared<fixed_mappable>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -664,7 +667,7 @@ adapter::to_extensible_mappable(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::mapping::extensible_mappable;
     auto r(boost::make_shared<extensible_mappable>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -675,7 +678,7 @@ adapter::to_logic_less_template(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::templating::logic_less_template;
     auto r(boost::make_shared<logic_less_template>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -699,7 +702,7 @@ adapter::to_type_registrar(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::serialization::type_registrar;
     auto r(boost::make_shared<type_registrar>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -710,7 +713,7 @@ adapter::to_visual_studio_solution(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::solution;
     auto r(boost::make_shared<solution>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -735,7 +738,7 @@ adapter::to_visual_studio_project(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::project;
     auto r(boost::make_shared<project>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -760,7 +763,7 @@ adapter::to_visual_studio_msbuild_targets(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::msbuild_targets;
     auto r(boost::make_shared<msbuild_targets>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -771,7 +774,7 @@ adapter::to_orm_common_odb_options(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::orm::common_odb_options;
     auto r(boost::make_shared<common_odb_options>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -782,7 +785,7 @@ adapter::to_build_cmakelists(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::build::cmakelists;
     auto r(boost::make_shared<cmakelists>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -793,7 +796,7 @@ adapter::to_physical_backend(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::physical::backend;
     auto r(boost::make_shared<backend>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -804,7 +807,7 @@ adapter::to_physical_facet(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::physical::facet;
     auto r(boost::make_shared<facet>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
@@ -815,7 +818,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::physical::archetype;
     auto r(boost::make_shared<archetype>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -826,7 +829,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         else if (n == wale_template_reference_attr_name) {
             const auto v(attr.value());
             ensure_not_empty(r->name().qualified().dot(), v);
-            r->wale_template(to_name(v));
+            r->wale_template(to_name(v, false/*is_container*/));
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
@@ -843,8 +846,7 @@ adapter::to_physical_archetype_kind(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::physical::archetype_kind;
     auto r(boost::make_shared<archetype_kind>());
-    populate_element(l, scr, ie, *r);
-
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -869,7 +871,7 @@ adapter::to_physical_part(const logical::entities::location& l,
     const injection::entities::element& ie) const {
     using logical::entities::physical::part;
     auto r(boost::make_shared<part>());
-    populate_element(l, scr, ie, *r);
+    populate_element(l, scr, ie, false/*is_container*/, *r);
 
     const std::string path_contribution_none("none");
     const std::string path_contribution_as_directories("as_directories");
