@@ -266,10 +266,7 @@ obtain_facet_properties(const std::string& facet_name) const {
 std::list<std::string>
 assistant::make_namespaces(const logical::entities::name& n,
     const bool detect_model_name) const {
-    using namespace logical::helpers;
-    name_flattener nf(detect_model_name ?
-        flattening_strategy::exclude_simple_name_conditionally :
-        flattening_strategy::exclude_simple_name);
+    logical::helpers::name_flattener nf(detect_model_name);
     return nf.flatten(n);
 }
 

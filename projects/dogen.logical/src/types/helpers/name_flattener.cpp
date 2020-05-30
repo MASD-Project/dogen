@@ -38,8 +38,8 @@ unsupported_strategy("Flattening strategy is not supported: ");
 
 namespace dogen::logical::helpers {
 
-name_flattener::name_flattener(const flattening_strategy flattening_strategy)
-    : flattening_strategy_(flattening_strategy) {}
+name_flattener::name_flattener(const bool detect_model_name)
+    : detect_model_name_(detect_model_name) {}
 
 std::list<std::string>
 name_flattener::flatten(const entities::name& n) const {
@@ -52,37 +52,21 @@ name_flattener::flatten(const entities::name& n) const {
     for (const auto& m : l.internal_modules())
         r.push_back(m);
 
-    switch(flattening_strategy_) {
-    case flattening_strategy::exclude_simple_name:
-        break;
+    if (!detect_model_name_)
+        return r;
 
-    case flattening_strategy::include_simple_name:
-        r.push_back(n.simple());
-        break;
+    /*
+     * if the name belongs to the model's module, we need to remove the
+     * module's simple name from the module path (it is in both the
+     * module path and it is also the module's simple name).
+     */
+    const bool no_internal_modules(l.internal_modules().empty());
+    const bool has_model_modules(!l.model_modules().empty());
+    const bool is_model_name(no_internal_modules && has_model_modules &&
+        n.simple() == l.model_modules().back());
 
-    case flattening_strategy::exclude_simple_name_conditionally: {
-        /*
-         * if the name belongs to the model's module, we need to remove the
-         * module's simple name from the module path (it is in both the
-         * module path and it is also the module's simple name).
-         */
-        const bool no_internal_modules(l.internal_modules().empty());
-        const bool has_model_modules(!l.model_modules().empty());
-        const bool is_model_name(no_internal_modules && has_model_modules &&
-            n.simple() == l.model_modules().back());
-
-        if (is_model_name)
-            r.pop_back();
-
-        break;
-    }
-    default: {
-        std::ostringstream os;
-        os << unsupported_strategy << flattening_strategy_;
-        const auto s(os.str());
-        BOOST_LOG_SEV(lg, error) << s;
-        BOOST_THROW_EXCEPTION(flattening_error(s));
-    } }
+    if (is_model_name)
+        r.pop_back();
 
     return r;
 }

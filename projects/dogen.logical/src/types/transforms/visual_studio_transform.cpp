@@ -55,8 +55,7 @@ namespace dogen::logical::transforms {
 
 std::string
 visual_studio_transform::project_name(const entities::name& n) {
-    using namespace logical::helpers;
-    name_flattener nfl(flattening_strategy::exclude_simple_name);
+    logical::helpers::name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(n));
     const auto r(boost::algorithm::join(ns, dot));
     return r;
