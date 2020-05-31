@@ -23,8 +23,11 @@
 #include "dogen.utility/types/io/shared_ptr_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
+#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
+#include "dogen.text.cpp/types/transforms/transforms.hpp"
+#include "dogen.text.csharp/types/transforms/transforms.hpp"
 #include "dogen.orchestration/types/transforms/physical_meta_model_production_chain.hpp"
 
 namespace {
@@ -46,6 +49,27 @@ apply(const physical::transforms::minimal_context& ctx, const
     tracing::scoped_chain_tracer stp(lg, "physical meta-model production chain",
         transform_id, "physical_meta_model", *ctx.tracer());
 
+    using physical::entities::meta_model;
+    auto r(boost::make_shared<meta_model>());
+
+    /*
+     * Create the MASD kernel. This is done here until we support
+     * kernels in the logical representation of the physical
+     * meta-model through text transforms.
+     */
+    physical::helpers::meta_name_builder mnb;
+    mnb.kernel("masd");
+
+    physical::entities::kernel k;
+    k.meta_name(mnb.build());
+    k.backends().push_back(
+        text::cpp::transforms::transforms_backend_chain::static_backend());
+    k.backends().push_back(
+        text::csharp::transforms::transforms_backend_chain::static_backend());
+
+    /*
+     * Legacy repository building.
+     */
     physical::helpers::meta_name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
@@ -53,11 +77,13 @@ apply(const physical::transforms::minimal_context& ctx, const
         b.add(t.physical_meta_name_repository_parts());
     }
 
-    using physical::entities::meta_model;
-    auto r(boost::make_shared<meta_model>());
-
     const auto nrp(b.build());
-    r->kernels()["masd"].indexed_names(nrp);
+    k.indexed_names(nrp);
+
+    /*
+     * Add the new kernel to model.
+     */
+    r->kernels()[k.meta_name().simple()] = k;
 
     /*
      * Obtain the template instantiation domains.
