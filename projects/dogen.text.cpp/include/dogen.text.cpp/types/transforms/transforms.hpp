@@ -39,8 +39,8 @@ namespace dogen::text::cpp::transforms {
  */
 class transforms_backend_chain final {
 public:
-    static physical::entities::backend static_backend();
-    physical::entities::backend backend() const;
+    static const physical::entities::backend& static_backend();
+    const physical::entities::backend& backend() const;
 
 public:
     static void initialise(transforms::registrar& r);

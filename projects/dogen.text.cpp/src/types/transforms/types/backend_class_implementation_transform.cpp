@@ -82,10 +82,20 @@ boost::filesystem::path backend_class_implementation_transform::full_path(
 }
 
 std::list<std::string> backend_class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const logical::entities::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    auto builder(f.make());
+    const auto ch_arch(traits::canonical_archetype());
+    const auto& be(assistant::as<logical::entities::physical::backend>(e));
+
+    builder.add(be.name(), ch_arch);
+    builder.add(be.facets(), ch_arch);
+    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+
+    return builder.build();
 }
 
 void backend_class_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
@@ -94,8 +104,62 @@ void backend_class_implementation_transform::apply(const context& ctx, const log
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto& be(ast.as<logical::entities::physical::backend>(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(be));
+        {
+            const auto ns(ast.make_namespaces(be.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(be.name().simple() + "_backend_chain");
+ast.stream() << "namespace {" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "using namespace dogen::utility::log;" << std::endl;
+ast.stream() << "static logger lg(logger_factory(\"" << be.name().qualified().dot() << "\"));" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "physical::entities::backend make_backend() {" << std::endl;
+ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
+ast.stream() << "    b.kernel(\"" << be.kernel_name() << "\");" << std::endl;
+ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    physical::entities::backend r;" << std::endl;
+ast.stream() << "    r.meta_name(b.build());" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "    const auto lambda([&](const auto& fct) {" << std::endl;
+ast.stream() << "        const auto id(fct.meta_name().qualified());" << std::endl;
+ast.stream() << "        const auto pair(std::make_pair(id, fct));" << std::endl;
+ast.stream() << "        const auto inserted(r.facets().insert(pair).second);" << std::endl;
+ast.stream() << "        if (!inserted) {" << std::endl;
+ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
+ast.stream() << "            const std::string duplicate_facet(\"Duplicate facet: \");" << std::endl;
+ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    });" << std::endl;
+ast.stream() << std::endl;
+            for (const auto& n : be.facets()) {
+ast.stream() << "    lambda(" << n.simple() << "::" << n.simple() << "_facet_chain::static_facet());" << std::endl;
+            }
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "const physical::entities::backend& " << sn << "::static_backend() {" << std::endl;
+ast.stream() << "    static const auto r(make_backend());" << std::endl;
+ast.stream() << "    return r;" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+ast.stream() << "const physical::entities::backend& " << sn << "::backend() const {" << std::endl;
+ast.stream() << "    return static_backend();" << std::endl;
+ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
+        } // snf
+ast.stream() << std::endl;
+    } // sbf
     ast.update_artefact();
     stp.end_transform(a);
-}
 
+}
 }

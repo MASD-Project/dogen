@@ -51319,8 +51319,8 @@ void backend_class_header_transform::apply(const context&amp; ctx, const logical
 #&gt;
 class &lt;#= be.name().simple() #&gt;_backend_chain final {
 public:
-    static physical::entities::backend static_backend();
-    physical::entities::backend backend() const;
+    static const physical::entities::backend&amp; static_backend();
+    const physical::entities::backend&amp; backend() const;
 
 public:
     static void initialise(transforms::registrar&amp; r);
@@ -51520,10 +51520,20 @@ public:
 &lt;#+
 
 std::list&lt;std::string&gt; backend_class_implementation_transform::inclusion_dependencies(
-    const formattables::dependencies_builder_factory&amp; /*f*/,
-    const logical::entities::element&amp; /*e*/) const {
-    static std::list&lt;std::string&gt; r;
-    return r;
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+
+    auto builder(f.make());
+    const auto ch_arch(traits::canonical_archetype());
+    const auto&amp; be(assistant::as&lt;logical::entities::physical::backend&gt;(e));
+
+    builder.add(be.name(), ch_arch);
+    builder.add(be.facets(), ch_arch);
+    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+
+    return builder.build();
 }
 
 void backend_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
@@ -51532,10 +51542,72 @@ void backend_class_implementation_transform::apply(const context&amp; ctx, const
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
-    ast.update_artefact();
-    stp.end_transform(a);
+    const auto&amp; be(ast.as&lt;logical::entities::physical::backend&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(be));
+        {
+            const auto ns(ast.make_namespaces(be.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(be.name().simple() + "_backend_chain");
+#&gt;
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("&lt;#= be.name().qualified().dot() #&gt;"));
+
+physical::entities::backend make_backend() {
+    physical::helpers::meta_name_builder b;
+    b.kernel("&lt;#= be.kernel_name() #&gt;");
+    b.backend("&lt;#= be.backend_name() #&gt;");
+
+    physical::entities::backend r;
+    r.meta_name(b.build());
+
+    const auto lambda([&amp;](const auto&amp; fct) {
+        const auto id(fct.meta_name().qualified());
+        const auto pair(std::make_pair(id, fct));
+        const auto inserted(r.facets().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate facet: ");
+            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_facet &lt;&lt; id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));
+        }
+    });
+
+&lt;#+
+            for (const auto&amp; n : be.facets()) {
+#&gt;
+    lambda(&lt;#= n.simple() #&gt;::&lt;#= n.simple() #&gt;_facet_chain::static_facet());
+&lt;#+
+            }
+#&gt;
+    return r;
 }
 
+}
+
+const physical::entities::backend&amp; &lt;#= sn #&gt;::static_backend() {
+    static const auto r(make_backend());
+    return r;
+}
+
+const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
+    return static_backend();
+}
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
 #&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
