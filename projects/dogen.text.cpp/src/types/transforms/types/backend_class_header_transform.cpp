@@ -107,10 +107,10 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << std::endl;
             ast.comment(be.documentation());
-ast.stream() << "class " << be.name().simple() << "_backend final {" << std::endl;
+ast.stream() << "class " << be.name().simple() << "_backend_chain final {" << std::endl;
 ast.stream() << "public:" << std::endl;
-ast.stream() << "    static physical::entities::facet static_facet();" << std::endl;
-ast.stream() << "    physical::entities::facet facet() const;" << std::endl;
+ast.stream() << "    static physical::entities::backend static_backend();" << std::endl;
+ast.stream() << "    physical::entities::backend backend() const;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    static void initialise(transforms::registrar& r);" << std::endl;

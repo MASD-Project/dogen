@@ -51312,10 +51312,10 @@ void backend_class_header_transform::apply(const context&amp; ctx, const logical
 &lt;#+
             ast.comment(be.documentation());
 #&gt;
-class &lt;#= be.name().simple() #&gt;_backend final {
+class &lt;#= be.name().simple() #&gt;_backend_chain final {
 public:
-    static physical::entities::facet static_facet();
-    physical::entities::facet facet() const;
+    static physical::entities::backend static_backend();
+    physical::entities::backend backend() const;
 
 public:
     static void initialise(transforms::registrar&amp; r);

@@ -37,10 +37,10 @@ namespace dogen::text::cpp::transforms {
  * representation of these types according to the
  * grammar of the C++ technical space.
  */
-class transforms_backend final {
+class transforms_backend_chain final {
 public:
-    static physical::entities::facet static_facet();
-    physical::entities::facet facet() const;
+    static physical::entities::backend static_backend();
+    physical::entities::backend backend() const;
 
 public:
     static void initialise(transforms::registrar& r);
