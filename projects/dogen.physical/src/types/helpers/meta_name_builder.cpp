@@ -73,6 +73,7 @@ entities::meta_name meta_name_builder::build() {
     /*
      * Simple and qualified names depend on what has been filled in.
      */
+    const bool has_backend(!l.backend().empty());
     const bool has_facet(!l.facet().empty());
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
@@ -83,11 +84,16 @@ entities::meta_name meta_name_builder::build() {
         mn.simple(l.facet());
         mn.qualified(qualified_meta_name_builder::build_facet(l));
         meta_name_validator::validate_facet_name(mn);
-    } else {
+    } else if (has_backend) {
         mn.simple(l.backend());
         mn.qualified(qualified_meta_name_builder::build_backend(l));
         meta_name_validator::validate_backend_name(mn);
+    } else {
+        mn.simple(l.kernel());
+        mn.qualified(qualified_meta_name_builder::build_kernel(l));
+        meta_name_validator::validate_kernel_name(mn);
     }
+
     return mn;
 }
 
