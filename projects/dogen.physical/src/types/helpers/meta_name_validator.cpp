@@ -33,6 +33,7 @@ const std::string empty_qualified("Qualified name is empty.");
 const std::string empty_kernel("Model name is empty.");
 const std::string empty_backend("Backend name is empty.");
 const std::string empty_facet("Facet name is empty.");
+const std::string non_empty_backend("Backend name is not empty.");
 const std::string non_empty_facet("Facet name is not empty.");
 const std::string empty_archetype("Archetype is empty.");
 const std::string non_empty_archetype("Archetype is not empty.");
@@ -41,7 +42,9 @@ const std::string non_empty_archetype("Archetype is not empty.");
 
 namespace dogen::physical::helpers {
 
-void meta_name_validator::common_validation(const entities::meta_name& mn) {
+void meta_name_validator::common_validation(const entities::meta_name& mn,
+    const bool is_kernel) {
+
     /*
      * Simple name must be populated.
      */
@@ -67,17 +70,48 @@ void meta_name_validator::common_validation(const entities::meta_name& mn) {
         BOOST_THROW_EXCEPTION(validation_error(empty_kernel));
     }
 
+    if (!is_kernel) {
+        /*
+         * All locations must belong to a backend.
+         */
+        if (l.backend().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_backend;
+            BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+        }
+    }
+}
+
+void meta_name_validator::validate_kernel_name(const entities::meta_name& mn) {
+    common_validation(mn, true/*is_kernel*/);
+
     /*
-     * All locations must belong to a backend.
+     * Backend must not be populated.
      */
-    if (l.backend().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_backend;
-        BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+    const auto& l(mn.location());
+    if (!l.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_backend;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_backend));
+    }
+
+    /*
+     * Facet must not be populated.
+     */
+    if (!l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
+    }
+
+    /*
+     * Archetype must not be populated.
+     */
+    if (!l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
     }
 }
 
 void meta_name_validator::validate_backend_name(const entities::meta_name& mn) {
-    common_validation(mn);
+    common_validation(mn, false/*is_kernel*/);
 
     /*
      * Facet must not be populated.
@@ -98,7 +132,7 @@ void meta_name_validator::validate_backend_name(const entities::meta_name& mn) {
 }
 
 void meta_name_validator::validate_facet_name(const entities::meta_name& mn) {
-    common_validation(mn);
+    common_validation(mn, false/*is_kernel*/);
 
     /*
      * Facet must be populated.
@@ -119,7 +153,7 @@ void meta_name_validator::validate_facet_name(const entities::meta_name& mn) {
 }
 
 void meta_name_validator::validate_archetype_name(const entities::meta_name& mn) {
-    common_validation(mn);
+    common_validation(mn, false/*is_kernel*/);
 
     /*
      * All locations must belong to a facet.
