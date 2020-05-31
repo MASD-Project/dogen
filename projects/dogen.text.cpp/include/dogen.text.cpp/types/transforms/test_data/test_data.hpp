@@ -36,8 +36,8 @@ namespace dogen::text::cpp::transforms::test_data {
  */
 class test_data_facet_chain final {
 public:
-    static physical::entities::facet static_facet();
-    physical::entities::facet facet() const;
+    static const physical::entities::facet& static_facet();
+    const physical::entities::facet& facet() const;
 
 public:
     static void initialise(registrar& r);

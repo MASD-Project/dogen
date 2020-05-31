@@ -75,12 +75,12 @@ physical::entities::facet make_facet() {
 
 }
 
-physical::entities::facet serialization_facet_chain::static_facet() {
+const physical::entities::facet& serialization_facet_chain::static_facet() {
     static const auto r(make_facet());
     return r;
 }
 
-physical::entities::facet serialization_facet_chain::facet() const {
+const physical::entities::facet& serialization_facet_chain::facet() const {
     return static_facet();
 }
 
