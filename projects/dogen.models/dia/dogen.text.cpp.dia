@@ -51026,6 +51026,9 @@ std::list&lt;std::string&gt; facet_class_implementation_transform::inclusion_dep
 
 void facet_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "facet class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
 
@@ -51091,6 +51094,8 @@ physical::entities::facet &lt;#= sn #&gt;::facet() const {
 &lt;#+
     } // sbf
     ast.update_artefact();
+    stp.end_transform(a);
+
 }
 #&gt;#</dia:string>
           </dia:attribute>
