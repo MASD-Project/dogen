@@ -15445,6 +15445,18 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider supporting nano-id                                       :story:
+
+At present we are relying on UUIDs for several things such as tracing
+file names. These will be used even more once we get into
+services. Apparently there is a slightly more compact way of doing
+this: nano-id. We could not locate a port to C++.
+
+Links:
+
+- [[https://github.com/codeyu/nanoid-net][GH nanoid-net]]: nano-id for C#
+- [[https://medium.com/javascript-in-plain-english/you-might-not-need-uuid-v4-for-generating-random-identifiers-89e8a28a7d77][You Might Not Need UUID V4 for Generating Random Identifiers]]
+
 *** Consider developing a org-mode log format                         :story:
 
 We seem to be applying org-mode to everything, with some
