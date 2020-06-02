@@ -826,7 +826,7 @@ removed if we need to find it again.
 
 - Removed at commit 7d95e0db34.
 
-*** COMPLETED Add template related attributes to physical elements    :story:
+*** CANCELLED Add template related attributes to physical elements    :story:
     CLOSED: [2020-05-08 Fri 16:50]
     :LOGBOOK:
     CLOCK: [2020-05-08 Fri 12:25]--[2020-05-08 Fri 13:33] =>  1:08
