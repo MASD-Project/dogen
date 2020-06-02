@@ -1,0 +1,49 @@
+#+title: Sprint Backlog 26
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) spike(p) }
+
+* Sprint Goals
+
+- finish PMM generation.
+- implement locator and dependencies via PMM.
+- move physical elements and transforms from logical and text models
+  to physical model.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2020-06-02 Tue 10:37]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *2:34* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 2:34   |      |      | 100.0 |
+| Active                                 |        | 2:34 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 2:34 | 100.0 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-01 Mon 20:01]--[2020-06-01 Mon 22:35] =>  2:34
+    :END:
+
+Add github release notes for previous sprint.
+
+*** Create a demo and presentation for previous sprint                :story:
+
+Time spent creating the demo and presentation.
+
+*** Sprint and product backlog grooming                               :story:
+
+Updates to sprint and product backlog.
+
+*** Nightly nursing                                                   :story:
+
+Time spent fixing issues with nightly builds, daily checks etc.
+
+** Deprecated
