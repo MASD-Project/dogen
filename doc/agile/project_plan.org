@@ -19,7 +19,7 @@ task juggler installed:
 
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   13d
+   :EFFORT:   26d
    :BLOCKER:  start
    :allocate: s26
    :END:
@@ -31,7 +31,7 @@ task juggler installed:
 
 *** PDMs generation
    :PROPERTIES:
-   :EFFORT:   13d
+   :EFFORT:   26d
    :BLOCKER:  previous-sibling
    :allocate: s27
    :END:
@@ -41,7 +41,7 @@ task juggler installed:
 
 *** Product generation
    :PROPERTIES:
-   :EFFORT:   13d
+   :EFFORT:   26d
    :BLOCKER:  previous-sibling
    :allocate: s28
    :END:
@@ -50,7 +50,7 @@ task juggler installed:
 
 *** Productionisation
    :PROPERTIES:
-   :EFFORT:   13d
+   :EFFORT:   26d
    :BLOCKER:  previous-sibling
    :allocate: s29
    :END:
