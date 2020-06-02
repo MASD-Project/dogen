@@ -61,7 +61,7 @@
   :head-mode 'host
   :tail-mode 'host)
 
-(define-polymode poly-stitch-mode
+(define-polymode stitch-mode
   :hostmode 'poly-stitch-hostmode
   :innermodes '(poly-stitch-directive-innermode
                 poly-stitch-expansion-block-innermode
