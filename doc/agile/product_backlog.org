@@ -8207,6 +8207,33 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Test cases show up as zero in report.ci                       :story:
+
+The [[https://report.ci/reports/gh/MASD-Project/dogen][report.ci]] tool written by Klemens Morgenstern is now showing zero
+test cases. According to Klemens:
+
+#+begin_quote
+I just checked, and the issue is that boost.test doesn't contain
+passed test cases, only the suites. Since I now manually count them
+(bc other test frameworks don't have it as a numerical value at the
+end), it looks like it's zero. This is bad, but I don’t want to spam
+the report with "unnamed test case #42" either, so I'll probably need
+to add a few more things, so it might take a bit.
+
+In the meantime, you can add more information to your tests by setting
+the log_level & report_level of boost, report.ci will then also
+generate annotations for passing
+tests. https://www.boost.org/doc/libs/1_73_0/libs/test/doc/html/boost_test/utf_reference/rt_param_reference.html
+
+You can set a level to the badges (experiment here:
+https://report.ci/badges), the current default is `cases`, but you can
+alternatively set it to `suites`, which gives you 8/8 or `checks`,
+which counts the assertions (1901/1901).
+
+Hope that helps, I also created an issue
+https://github.com/report-ci/scripts/issues/16
+#+end_quote
+
 *** Upload release to github                                          :story:
 
 At present we are manually uploading binaries on a release to
