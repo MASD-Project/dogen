@@ -15472,6 +15472,47 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding AMQP support                                      :story:
+
+It seems fairly straightforward to extend the logical model to support
+AMQP. We could add the following entities:
+
+- cluster: package. Has a name.
+- node: package. belongs to a cluster, has a name.
+- virtual host: package. belongs to a node, has a name.
+- exchange: class. has a name, belongs to a host.
+- queue: class. has a name, belongs to a host.
+- binding: relationship. associates exchanges with exchanges or
+  queues. Has a routing key and a set of KVPs (called arguments).
+
+With this we can do the basic modeling of simple setups for AMQP. We
+could also generate code that generates this infrastructure (or
+destroys it).
+
+Notes:
+
+- we could associate objects in the object model to topics and to
+  routing keys. This could be done via a short-hand that says "for
+  this object create an associated topic" whatever that means
+  precisely.
+- we could generate all the code for reading and writing the object.
+- we should add these logical model elements to AMQP namespace and
+  wait until other MQs show up. Then we can abstract them into a MQ
+  namespace, potentially.
+- initialisation code should only be triggered on demand; this is
+  because if we have multiple services we may have race conditions. We
+  need to ensure one of them has the lock to create the
+  infrastructure.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol][Advanced Message Queuing Protocol]]
+- [[https://www.rabbitmq.com/tutorials/amqp-concepts.html][RabbitMQ: AMQP 0-9-1 Model Explained]]
+- [[https://qpid.apache.org/releases/qpid-cpp-1.39.0/index.html][Qpid C++ 1.39.0]]: Qpid C++ offers a connection-oriented messaging API
+  and a message broker written in C++ that stores, routes, and
+  forwards messages using AMQP.
+- [[https://github.com/apache/qpid-cpp][qpid GH]]. [[https://github.com/apache/qpid-cpp/tree/master/examples/messaging][Examples]].
+
 *** Consider supporting nano-id                                       :story:
 
 At present we are relying on UUIDs for several things such as tracing
