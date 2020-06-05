@@ -35,7 +35,7 @@ static logger lg(logger_factory("dogen.text.csharp.transforms"));
 
 physical::entities::backend make_backend() {
     physical::helpers::meta_name_builder b;
-    b.kernel("masd");
+    b.meta_model("masd");
     b.backend("csharp");
 
     physical::entities::backend r;

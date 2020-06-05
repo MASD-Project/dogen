@@ -58,7 +58,7 @@ apply(const physical::transforms::minimal_context& ctx, const
     auto r(boost::make_shared<meta_model>());
 
     physical::helpers::meta_name_builder mnb;
-    mnb.kernel("masd");
+    mnb.meta_model("masd");
 
     r->meta_name(mnb.build());
     r->backends().push_back(

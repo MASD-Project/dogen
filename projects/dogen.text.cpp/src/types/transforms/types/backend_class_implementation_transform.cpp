@@ -120,7 +120,7 @@ ast.stream() << "static logger lg(logger_factory(\"" << be.name().qualified().do
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::backend make_backend() {" << std::endl;
 ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
-ast.stream() << "    b.kernel(\"" << be.kernel_name() << "\");" << std::endl;
+ast.stream() << "    b.meta_model(\"" << be.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::backend r;" << std::endl;

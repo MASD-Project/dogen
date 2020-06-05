@@ -85,7 +85,7 @@ backend::backend(
     const std::string& id,
     const dogen::logical::entities::technical_space major_technical_space,
     const std::list<std::string>& contains,
-    const std::string& kernel_name,
+    const std::string& meta_model_name,
     const std::list<dogen::logical::entities::name>& facets,
     const std::list<dogen::logical::entities::name>& parts,
     const std::list<dogen::logical::entities::name>& archetype_kinds,
@@ -108,7 +108,7 @@ backend::backend(
       id_(id),
       major_technical_space_(major_technical_space),
       contains_(contains),
-      kernel_name_(kernel_name),
+      meta_model_name_(meta_model_name),
       facets_(facets),
       parts_(parts),
       archetype_kinds_(archetype_kinds),
@@ -139,7 +139,7 @@ void backend::to_stream(std::ostream& s) const {
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"contains\": " << contains_ << ", "
-      << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
+      << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
       << "\"archetype_kinds\": " << archetype_kinds_ << ", "
@@ -154,7 +154,7 @@ void backend::swap(backend& other) noexcept {
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
     swap(contains_, other.contains_);
-    swap(kernel_name_, other.kernel_name_);
+    swap(meta_model_name_, other.meta_model_name_);
     swap(facets_, other.facets_);
     swap(parts_, other.parts_);
     swap(archetype_kinds_, other.archetype_kinds_);
@@ -172,7 +172,7 @@ bool backend::operator==(const backend& rhs) const {
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
         contains_ == rhs.contains_ &&
-        kernel_name_ == rhs.kernel_name_ &&
+        meta_model_name_ == rhs.meta_model_name_ &&
         facets_ == rhs.facets_ &&
         parts_ == rhs.parts_ &&
         archetype_kinds_ == rhs.archetype_kinds_ &&
@@ -225,20 +225,20 @@ void backend::contains(const std::list<std::string>&& v) {
     contains_ = std::move(v);
 }
 
-const std::string& backend::kernel_name() const {
-    return kernel_name_;
+const std::string& backend::meta_model_name() const {
+    return meta_model_name_;
 }
 
-std::string& backend::kernel_name() {
-    return kernel_name_;
+std::string& backend::meta_model_name() {
+    return meta_model_name_;
 }
 
-void backend::kernel_name(const std::string& v) {
-    kernel_name_ = v;
+void backend::meta_model_name(const std::string& v) {
+    meta_model_name_ = v;
 }
 
-void backend::kernel_name(const std::string&& v) {
-    kernel_name_ = std::move(v);
+void backend::meta_model_name(const std::string&& v) {
+    meta_model_name_ = std::move(v);
 }
 
 const std::list<dogen::logical::entities::name>& backend::facets() const {

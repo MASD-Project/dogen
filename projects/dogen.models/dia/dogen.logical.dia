@@ -51662,7 +51662,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_name#</dia:string>
+            <dia:string>#meta_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -51671,7 +51671,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the physical meta-model containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -51694,7 +51694,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the backend containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -51717,7 +51717,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the facet containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -51981,7 +51981,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_name#</dia:string>
+            <dia:string>#meta_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -51990,7 +51990,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Kernel that owns this backend.#</dia:string>
+            <dia:string>#Name of the physical meta-model containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52208,7 +52208,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_name#</dia:string>
+            <dia:string>#meta_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -52217,7 +52217,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the physical meta-model containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52240,7 +52240,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the backend containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52443,7 +52443,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_name#</dia:string>
+            <dia:string>#meta_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -52452,7 +52452,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the physical meta-model containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -52475,7 +52475,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the backend containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -53027,7 +53027,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_name#</dia:string>
+            <dia:string>#meta_model_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -53036,7 +53036,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the physical meta-model containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -53059,7 +53059,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the backend containing this element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -53082,7 +53082,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Extension to use for the files of this kind.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -57740,7 +57740,7 @@ FIXME: optional for now.
         <dia:point val="-56.6225,55.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.3725,53.95;-36.8925,57.6"/>
+        <dia:rectangle val="-57.3725,53.255;-36.8925,56.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

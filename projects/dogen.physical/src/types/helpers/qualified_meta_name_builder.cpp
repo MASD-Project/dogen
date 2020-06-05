@@ -28,11 +28,11 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("physical.helpers.qualified_meta_name_builder"));
 
-const std::string kernel_name("masd");
+const std::string meta_model_name("masd");
 const std::string canonical_name("canonical_archetype");
 const std::string dot(".");
 
-const std::string empty_kernel("Kernel cannot be empty.");
+const std::string empty_meta_model("Meta-model cannot be empty.");
 const std::string empty_backend("Backend cannot be empty.");
 const std::string empty_facet("Facet cannot be empty.");
 const std::string empty_archetype(
@@ -43,18 +43,18 @@ const std::string empty_archetype(
 namespace dogen::physical::helpers {
 
 std::string
-qualified_meta_name_builder::build_kernel(const entities::location& l) {
+qualified_meta_name_builder::build_meta_model(const entities::location& l) {
     const auto& mmn(l.meta_model());
     if (mmn.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_kernel;
-        BOOST_THROW_EXCEPTION(building_error(empty_kernel));
+        BOOST_LOG_SEV(lg, error) << empty_meta_model;
+        BOOST_THROW_EXCEPTION(building_error(empty_meta_model));
     }
     return mmn;
 }
 
 std::string
-qualified_meta_name_builder::build_kernel(const entities::meta_name& mn) {
-    return build_kernel(mn.location());
+qualified_meta_name_builder::build_meta_model(const entities::meta_name& mn) {
+    return build_meta_model(mn.location());
 }
 
 std::string
@@ -65,7 +65,7 @@ qualified_meta_name_builder::build_backend(const entities::location& l) {
         BOOST_THROW_EXCEPTION(building_error(empty_backend));
     }
 
-    return build_kernel(l) + dot + b;
+    return build_meta_model(l) + dot + b;
 }
 
 std::string

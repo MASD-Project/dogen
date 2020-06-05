@@ -59,7 +59,7 @@ archetype::archetype(archetype&& rhs)
         std::forward<dogen::logical::entities::element>(rhs)),
       id_(std::move(rhs.id_)),
       major_technical_space_(std::move(rhs.major_technical_space_)),
-      kernel_name_(std::move(rhs.kernel_name_)),
+      meta_model_name_(std::move(rhs.meta_model_name_)),
       backend_name_(std::move(rhs.backend_name_)),
       facet_name_(std::move(rhs.facet_name_)),
       part_id_(std::move(rhs.part_id_)),
@@ -86,7 +86,7 @@ archetype::archetype(
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
     const dogen::logical::entities::technical_space major_technical_space,
-    const std::string& kernel_name,
+    const std::string& meta_model_name,
     const std::string& backend_name,
     const std::string& facet_name,
     const std::string& part_id,
@@ -112,7 +112,7 @@ archetype::archetype(
       decoration),
       id_(id),
       major_technical_space_(major_technical_space),
-      kernel_name_(kernel_name),
+      meta_model_name_(meta_model_name),
       backend_name_(backend_name),
       facet_name_(facet_name),
       part_id_(part_id),
@@ -146,7 +146,7 @@ void archetype::to_stream(std::ostream& s) const {
     s << ", "
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
-      << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
+      << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
@@ -164,7 +164,7 @@ void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
-    swap(kernel_name_, other.kernel_name_);
+    swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
     swap(facet_name_, other.facet_name_);
     swap(part_id_, other.part_id_);
@@ -185,7 +185,7 @@ bool archetype::operator==(const archetype& rhs) const {
     return dogen::logical::entities::element::compare(rhs) &&
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
-        kernel_name_ == rhs.kernel_name_ &&
+        meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
         facet_name_ == rhs.facet_name_ &&
         part_id_ == rhs.part_id_ &&
@@ -226,20 +226,20 @@ void archetype::major_technical_space(const dogen::logical::entities::technical_
     major_technical_space_ = v;
 }
 
-const std::string& archetype::kernel_name() const {
-    return kernel_name_;
+const std::string& archetype::meta_model_name() const {
+    return meta_model_name_;
 }
 
-std::string& archetype::kernel_name() {
-    return kernel_name_;
+std::string& archetype::meta_model_name() {
+    return meta_model_name_;
 }
 
-void archetype::kernel_name(const std::string& v) {
-    kernel_name_ = v;
+void archetype::meta_model_name(const std::string& v) {
+    meta_model_name_ = v;
 }
 
-void archetype::kernel_name(const std::string&& v) {
-    kernel_name_ = std::move(v);
+void archetype::meta_model_name(const std::string&& v) {
+    meta_model_name_ = std::move(v);
 }
 
 const std::string& archetype::backend_name() const {

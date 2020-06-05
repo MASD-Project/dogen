@@ -68,7 +68,7 @@ public:
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& id,
         const dogen::logical::entities::technical_space major_technical_space,
-        const std::string& kernel_name,
+        const std::string& meta_model_name,
         const std::string& backend_name,
         const std::string& facet_name,
         const std::string& part_id,
@@ -107,20 +107,35 @@ public:
     void major_technical_space(const dogen::logical::entities::technical_space v);
     /**@}*/
 
-    const std::string& kernel_name() const;
-    std::string& kernel_name();
-    void kernel_name(const std::string& v);
-    void kernel_name(const std::string&& v);
+    /**
+     * @brief Name of the physical meta-model containing this element.
+     */
+    /**@{*/
+    const std::string& meta_model_name() const;
+    std::string& meta_model_name();
+    void meta_model_name(const std::string& v);
+    void meta_model_name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Name of the backend containing this element.
+     */
+    /**@{*/
     const std::string& backend_name() const;
     std::string& backend_name();
     void backend_name(const std::string& v);
     void backend_name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Name of the facet containing this element.
+     */
+    /**@{*/
     const std::string& facet_name() const;
     std::string& facet_name();
     void facet_name(const std::string& v);
     void facet_name(const std::string&& v);
+    /**@}*/
 
     /**
      * @brief ID for the part this archetype belongs to.
@@ -198,7 +213,7 @@ public:
 private:
     std::string id_;
     dogen::logical::entities::technical_space major_technical_space_;
-    std::string kernel_name_;
+    std::string meta_model_name_;
     std::string backend_name_;
     std::string facet_name_;
     std::string part_id_;

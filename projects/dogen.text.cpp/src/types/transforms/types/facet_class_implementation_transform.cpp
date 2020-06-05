@@ -119,7 +119,7 @@ ast.stream() << "static logger lg(logger_factory(\"" << fct.name().qualified().d
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::facet make_facet() {" << std::endl;
 ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
-ast.stream() << "    b.kernel(\"" << fct.kernel_name() << "\");" << std::endl;
+ast.stream() << "    b.meta_model(\"" << fct.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << fct.backend_name() << "\");" << std::endl;
 ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;
 ast.stream() << std::endl;
@@ -160,6 +160,5 @@ ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
-
 }
 }

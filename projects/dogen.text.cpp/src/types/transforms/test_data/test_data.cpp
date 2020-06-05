@@ -38,7 +38,7 @@ static logger lg(logger_factory("dogen.text.cpp.transforms.test_data"));
 
 physical::entities::facet make_facet() {
     physical::helpers::meta_name_builder b;
-    b.kernel("masd");
+    b.meta_model("masd");
     b.backend("cpp");
     b.facet("test_data");
 

@@ -30,7 +30,7 @@ static logger lg(logger_factory("physical.helpers.meta_name_validator"));
 
 const std::string empty_simple("Simple name is empty.");
 const std::string empty_qualified("Qualified name is empty.");
-const std::string empty_kernel("Model name is empty.");
+const std::string empty_meta_model("Meta-model name is empty.");
 const std::string empty_backend("Backend name is empty.");
 const std::string empty_facet("Facet name is empty.");
 const std::string non_empty_backend("Backend name is not empty.");
@@ -43,7 +43,7 @@ const std::string non_empty_archetype("Archetype is not empty.");
 namespace dogen::physical::helpers {
 
 void meta_name_validator::common_validation(const entities::meta_name& mn,
-    const bool is_kernel) {
+    const bool is_meta_model) {
 
     /*
      * Simple name must be populated.
@@ -62,15 +62,15 @@ void meta_name_validator::common_validation(const entities::meta_name& mn,
     }
 
     /*
-     * All locations must belong to a kernel.
+     * All locations must belong to a meta-model.
      */
     const auto& l(mn.location());
     if (l.meta_model().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_kernel;
-        BOOST_THROW_EXCEPTION(validation_error(empty_kernel));
+        BOOST_LOG_SEV(lg, error) << empty_meta_model;
+        BOOST_THROW_EXCEPTION(validation_error(empty_meta_model));
     }
 
-    if (!is_kernel) {
+    if (!is_meta_model) {
         /*
          * All locations must belong to a backend.
          */
@@ -81,8 +81,9 @@ void meta_name_validator::common_validation(const entities::meta_name& mn,
     }
 }
 
-void meta_name_validator::validate_kernel_name(const entities::meta_name& mn) {
-    common_validation(mn, true/*is_kernel*/);
+void meta_name_validator::
+validate_meta_model_name(const entities::meta_name& mn) {
+    common_validation(mn, true/*is_meta_model*/);
 
     /*
      * Backend must not be populated.
@@ -111,7 +112,7 @@ void meta_name_validator::validate_kernel_name(const entities::meta_name& mn) {
 }
 
 void meta_name_validator::validate_backend_name(const entities::meta_name& mn) {
-    common_validation(mn, false/*is_kernel*/);
+    common_validation(mn, false/*is_meta_model*/);
 
     /*
      * Facet must not be populated.
@@ -132,7 +133,7 @@ void meta_name_validator::validate_backend_name(const entities::meta_name& mn) {
 }
 
 void meta_name_validator::validate_facet_name(const entities::meta_name& mn) {
-    common_validation(mn, false/*is_kernel*/);
+    common_validation(mn, false/*is_meta_model*/);
 
     /*
      * Facet must be populated.
@@ -153,7 +154,7 @@ void meta_name_validator::validate_facet_name(const entities::meta_name& mn) {
 }
 
 void meta_name_validator::validate_archetype_name(const entities::meta_name& mn) {
-    common_validation(mn, false/*is_kernel*/);
+    common_validation(mn, false/*is_meta_model*/);
 
     /*
      * All locations must belong to a facet.

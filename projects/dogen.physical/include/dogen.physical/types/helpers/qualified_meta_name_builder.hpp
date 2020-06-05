@@ -41,12 +41,12 @@ namespace dogen::physical::helpers {
 class qualified_meta_name_builder final {
 public:
     /**
-     * @brief Builds a qualified name for the kernel region in
+     * @brief Builds a qualified name for the meta-model region in
      * physical space.
      */
     /**@{*/
-    static std::string build_kernel(const entities::location& l);
-    static std::string build_kernel(const entities::meta_name& mn);
+    static std::string build_meta_model(const entities::location& l);
+    static std::string build_meta_model(const entities::meta_name& mn);
     /**@}*/
 
     /**

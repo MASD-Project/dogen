@@ -4039,16 +4039,19 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel_name",
-          "type": "std::string"
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
         },
         {
           "name": "backend_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
         },
         {
           "name": "facet_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the facet containing this element.\n"
         },
         {
           "name": "part_id",
@@ -4093,9 +4096,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel_name",
+          "name": "meta_model_name",
           "type": "std::string",
-          "documentation": "Kernel that owns this backend.\n"
+          "documentation": "Name of the physical meta-model containing this element.\n"
         },
         {
           "name": "facets",
@@ -4130,12 +4133,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel_name",
-          "type": "std::string"
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
         },
         {
           "name": "backend_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
         },
         {
           "name": "archetypes",
@@ -4154,12 +4159,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel_name",
-          "type": "std::string"
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
         },
         {
           "name": "backend_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
         },
         {
           "name": "external_modules_path_contribution",
@@ -4202,16 +4209,19 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel_name",
-          "type": "std::string"
+          "name": "meta_model_name",
+          "type": "std::string",
+          "documentation": "Name of the physical meta-model containing this element.\n"
         },
         {
           "name": "backend_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the backend containing this element.\n"
         },
         {
           "name": "file_extension",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Extension to use for the files of this kind.\n"
         }
       ]
     },

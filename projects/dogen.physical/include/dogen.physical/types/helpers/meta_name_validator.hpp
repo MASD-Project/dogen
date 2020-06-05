@@ -42,13 +42,13 @@ private:
      * @brief Validation rules that are common to all types of names.
      */
     static void common_validation(const entities::meta_name& mn,
-        const bool is_kernel);
+        const bool is_meta_model);
 
 public:
     /**
-     * @brief Checks if the meta-name is valid as a kernel name.
+     * @brief Checks if the meta-name is valid as a meta-model name.
      */
-    static void validate_kernel_name(const entities::meta_name& mn);
+    static void validate_meta_model_name(const entities::meta_name& mn);
 
     /**
      * @brief Checks if the meta-name is valid as a backend name.

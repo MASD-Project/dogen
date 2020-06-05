@@ -36,9 +36,9 @@ namespace dogen::physical::helpers {
 class meta_name_builder final {
 public:
     /**
-     * @brief Adds a kernel to the name.
+     * @brief Adds a meta-model to the name.
      */
-    meta_name_builder& kernel(const std::string& s);
+    meta_name_builder& meta_model(const std::string& s);
 
     /**
      * @brief Adds a backend to the name.

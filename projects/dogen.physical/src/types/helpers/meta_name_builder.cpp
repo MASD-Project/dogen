@@ -41,7 +41,7 @@ const std::string empty_archetype(
 
 namespace dogen::physical::helpers {
 
-meta_name_builder& meta_name_builder::kernel(const std::string& s) {
+meta_name_builder& meta_name_builder::meta_model(const std::string& s) {
     meta_name_.location().meta_model(s);
     return *this;
 }
@@ -90,8 +90,8 @@ entities::meta_name meta_name_builder::build() {
         meta_name_validator::validate_backend_name(mn);
     } else {
         mn.simple(l.meta_model());
-        mn.qualified(qualified_meta_name_builder::build_kernel(l));
-        meta_name_validator::validate_kernel_name(mn);
+        mn.qualified(qualified_meta_name_builder::build_meta_model(l));
+        meta_name_validator::validate_meta_model_name(mn);
     }
 
     return mn;

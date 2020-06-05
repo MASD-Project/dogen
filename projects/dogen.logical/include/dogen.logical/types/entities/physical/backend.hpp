@@ -67,7 +67,7 @@ public:
         const std::string& id,
         const dogen::logical::entities::technical_space major_technical_space,
         const std::list<std::string>& contains,
-        const std::string& kernel_name,
+        const std::string& meta_model_name,
         const std::list<dogen::logical::entities::name>& facets,
         const std::list<dogen::logical::entities::name>& parts,
         const std::list<dogen::logical::entities::name>& archetype_kinds,
@@ -113,13 +113,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Kernel that owns this backend.
+     * @brief Name of the physical meta-model containing this element.
      */
     /**@{*/
-    const std::string& kernel_name() const;
-    std::string& kernel_name();
-    void kernel_name(const std::string& v);
-    void kernel_name(const std::string&& v);
+    const std::string& meta_model_name() const;
+    std::string& meta_model_name();
+    void meta_model_name(const std::string& v);
+    void meta_model_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -179,7 +179,7 @@ private:
     std::string id_;
     dogen::logical::entities::technical_space major_technical_space_;
     std::list<std::string> contains_;
-    std::string kernel_name_;
+    std::string meta_model_name_;
     std::list<dogen::logical::entities::name> facets_;
     std::list<dogen::logical::entities::name> parts_;
     std::list<dogen::logical::entities::name> archetype_kinds_;

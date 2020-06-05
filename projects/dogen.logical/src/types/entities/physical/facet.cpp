@@ -85,7 +85,7 @@ facet::facet(
     const std::string& id,
     const dogen::logical::entities::technical_space major_technical_space,
     const std::list<std::string>& contains,
-    const std::string& kernel_name,
+    const std::string& meta_model_name,
     const std::string& backend_name,
     const std::list<dogen::logical::entities::name>& archetypes)
     : dogen::logical::entities::element(
@@ -106,7 +106,7 @@ facet::facet(
       id_(id),
       major_technical_space_(major_technical_space),
       contains_(contains),
-      kernel_name_(kernel_name),
+      meta_model_name_(meta_model_name),
       backend_name_(backend_name),
       archetypes_(archetypes) { }
 
@@ -135,7 +135,7 @@ void facet::to_stream(std::ostream& s) const {
       << "\"id\": " << "\"" << tidy_up_string(id_) << "\"" << ", "
       << "\"major_technical_space\": " << major_technical_space_ << ", "
       << "\"contains\": " << contains_ << ", "
-      << "\"kernel_name\": " << "\"" << tidy_up_string(kernel_name_) << "\"" << ", "
+      << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"archetypes\": " << archetypes_
       << " }";
@@ -148,7 +148,7 @@ void facet::swap(facet& other) noexcept {
     swap(id_, other.id_);
     swap(major_technical_space_, other.major_technical_space_);
     swap(contains_, other.contains_);
-    swap(kernel_name_, other.kernel_name_);
+    swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
     swap(archetypes_, other.archetypes_);
 }
@@ -164,7 +164,7 @@ bool facet::operator==(const facet& rhs) const {
         id_ == rhs.id_ &&
         major_technical_space_ == rhs.major_technical_space_ &&
         contains_ == rhs.contains_ &&
-        kernel_name_ == rhs.kernel_name_ &&
+        meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
         archetypes_ == rhs.archetypes_;
 }
@@ -215,20 +215,20 @@ void facet::contains(const std::list<std::string>&& v) {
     contains_ = std::move(v);
 }
 
-const std::string& facet::kernel_name() const {
-    return kernel_name_;
+const std::string& facet::meta_model_name() const {
+    return meta_model_name_;
 }
 
-std::string& facet::kernel_name() {
-    return kernel_name_;
+std::string& facet::meta_model_name() {
+    return meta_model_name_;
 }
 
-void facet::kernel_name(const std::string& v) {
-    kernel_name_ = v;
+void facet::meta_model_name(const std::string& v) {
+    meta_model_name_ = v;
 }
 
-void facet::kernel_name(const std::string&& v) {
-    kernel_name_ = std::move(v);
+void facet::meta_model_name(const std::string&& v) {
+    meta_model_name_ = std::move(v);
 }
 
 const std::string& facet::backend_name() const {

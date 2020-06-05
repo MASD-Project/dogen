@@ -35,7 +35,7 @@ static logger lg(logger_factory("dogen.text.csharp.transforms.test_data"));
 
 physical::entities::facet make_facet() {
     physical::helpers::meta_name_builder b;
-    b.kernel("masd");
+    b.meta_model("masd");
     b.backend("csharp");
     b.facet("test_data");
 

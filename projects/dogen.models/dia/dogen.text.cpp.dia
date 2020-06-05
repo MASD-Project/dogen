@@ -51047,7 +51047,7 @@ static logger lg(logger_factory("&lt;#= fct.name().qualified().dot() #&gt;"));
 
 physical::entities::facet make_facet() {
     physical::helpers::meta_name_builder b;
-    b.kernel("&lt;#= fct.kernel_name() #&gt;");
+    b.meta_model("&lt;#= fct.meta_model_name() #&gt;");
     b.backend("&lt;#= fct.backend_name() #&gt;");
     b.facet("&lt;#= fct.name().simple() #&gt;");
 
@@ -51095,7 +51095,6 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
-
 }
 #&gt;#</dia:string>
           </dia:attribute>
@@ -51559,7 +51558,7 @@ static logger lg(logger_factory("&lt;#= be.name().qualified().dot() #&gt;"));
 
 physical::entities::backend make_backend() {
     physical::helpers::meta_name_builder b;
-    b.kernel("&lt;#= be.kernel_name() #&gt;");
+    b.meta_model("&lt;#= be.meta_model_name() #&gt;");
     b.backend("&lt;#= be.backend_name() #&gt;");
 
     physical::entities::backend r;

@@ -42,7 +42,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string separator(".");
-const std::string kernel_name("masd");
+const std::string meta_model_name("masd");
 
 const std::string ambiguous_name("Name maps to more than one element type:");
 const std::string unsupported_composition(
@@ -78,13 +78,13 @@ process_backends(const context& ctx, entities::model& m) {
         auto& b(*pair.second);
         const auto scfg(physical::make_static_configuration(fg, b));
         b.backend_name(scfg.backend_name);
-        b.kernel_name(kernel_name);
+        b.meta_model_name(meta_model_name);
 
         /*
          * Generate the ID for this backend.
          */
         std::ostringstream os;
-        os << kernel_name << separator << b.backend_name();
+        os << meta_model_name << separator << b.backend_name();
         b.id(os.str());
         BOOST_LOG_SEV(lg, debug) << "ID: " << b.id();
 
@@ -191,7 +191,7 @@ void physical_entities_transform::process_facets(entities::model& m) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& fct(*pair.second);
-        fct.kernel_name(kernel_name);
+        fct.meta_model_name(meta_model_name);
 
         /*
          * Facets can only exist in the context of a backend.
@@ -205,7 +205,7 @@ void physical_entities_transform::process_facets(entities::model& m) {
          * Generate the ID for this facet.
          */
         std::ostringstream os;
-        os << kernel_name << separator
+        os << meta_model_name << separator
            << fct.backend_name() << separator
            << fct.name().simple();
         fct.id(os.str());
@@ -267,7 +267,7 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& ak(*pair.second);
-        ak.kernel_name(kernel_name);
+        ak.meta_model_name(meta_model_name);
 
         /*
          * Archetype kinds can only exist in the context of a backend.
@@ -282,7 +282,7 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
          * Generate the ID for this archetype kind.
          */
         std::ostringstream os;
-        os << kernel_name << separator
+        os << meta_model_name << separator
            << ak.backend_name() << separator
            << ak.name().simple();
         ak.id(os.str());
@@ -299,7 +299,7 @@ void physical_entities_transform::process_parts(entities::model& m) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& part(*pair.second);
-        part.kernel_name(kernel_name);
+        part.meta_model_name(meta_model_name);
 
         /*
          * Parts can only exist in the context of a backend.
@@ -314,7 +314,7 @@ void physical_entities_transform::process_parts(entities::model& m) {
          * Generate the ID for this part.
          */
         std::ostringstream os;
-        os << kernel_name << separator
+        os << meta_model_name << separator
            << part.backend_name() << separator
            << part.name().simple();
         part.id(os.str());
@@ -358,7 +358,7 @@ process_archetypes(const context& ctx, entities::model& m) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& arch(*pair.second);
-        arch.kernel_name(kernel_name);
+        arch.meta_model_name(meta_model_name);
 
         /*
          * Read all of the associated meta-data.
@@ -389,7 +389,7 @@ process_archetypes(const context& ctx, entities::model& m) {
          */
         std::ostringstream os;
         const auto sn(arch.name().simple());
-        os << kernel_name << separator
+        os << meta_model_name << separator
            << arch.backend_name() << separator
            << arch.facet_name() << separator << sn;
         arch.id(os.str());

@@ -32,7 +32,7 @@ static logger lg(logger_factory("dogen.text.cpp.transforms.lexical_cast"));
 
 physical::entities::facet make_facet() {
     physical::helpers::meta_name_builder b;
-    b.kernel("masd");
+    b.meta_model("masd");
     b.backend("cpp");
     b.facet("lexical_cast");
 
