@@ -211,7 +211,7 @@
         <dia:point val="-48,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,239.15;16.05,350.05"/>
+        <dia:rectangle val="-48.05,239.15;16.05,333.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -223,7 +223,7 @@
         <dia:real val="64"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="109"/>
+        <dia:real val="92"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -247,19 +247,19 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,279"/>
+        <dia:point val="-46,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,278.95;-18.115,283.45"/>
+        <dia:rectangle val="-46.05,273.95;-20.425,277.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,279"/>
+        <dia:point val="-46,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
@@ -829,29 +829,6 @@ inline void swap(
     stp.end_transform(a);
 }
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1488,7 +1465,7 @@ inline void swap(
         <dia:point val="18,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,239.15;86.05,282.05"/>
+        <dia:rectangle val="17.95,239.15;86.05,279.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1500,7 +1477,7 @@ inline void swap(
         <dia:real val="68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="41"/>
+        <dia:real val="38"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1527,16 +1504,16 @@ inline void swap(
         <dia:point val="20,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,248.95;47.885,253.45"/>
+        <dia:rectangle val="19.95,248.95;45.575,252.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
@@ -1728,29 +1705,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -1764,7 +1718,7 @@ public:
         <dia:point val="51,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,248.95;79.655,253.45"/>
+        <dia:rectangle val="50.95,248.95;79.655,252.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="51,249"/>
@@ -1773,7 +1727,7 @@ public:
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_implementation_transform#</dia:string>
@@ -2011,29 +1965,6 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2044,19 +1975,19 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,285"/>
+        <dia:point val="-16,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,284.95;11.885,289.45"/>
+        <dia:rectangle val="-16.05,278.95;6.88,282.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,285"/>
+        <dia:point val="-16,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception_header_transform#</dia:string>
@@ -2279,29 +2210,6 @@ private:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2312,19 +2220,19 @@ private:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,291"/>
+        <dia:point val="-16,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,290.95;11.885,295.45"/>
+        <dia:rectangle val="-16.05,283.95;11.5,287.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,291"/>
+        <dia:point val="-16,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_header_transform#</dia:string>
@@ -2528,29 +2436,6 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2561,19 +2446,19 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,291"/>
+        <dia:point val="-46,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,290.95;-18.115,295.45"/>
+        <dia:rectangle val="-46.05,283.95;-23.12,287.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,291"/>
+        <dia:point val="-46,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#namespace_header_transform#</dia:string>
@@ -2756,29 +2641,6 @@ namespace &lt;#= m.name().simple() #&gt; {
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2789,19 +2651,19 @@ namespace &lt;#= m.name().simple() #&gt; {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,297"/>
+        <dia:point val="-46,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,296.95;-18.115,301.45"/>
+        <dia:rectangle val="-46.05,288.95;-23.12,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,297"/>
+        <dia:point val="-46,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor_header_transform#</dia:string>
@@ -3033,29 +2895,6 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3066,19 +2905,19 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,279"/>
+        <dia:point val="-16,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,278.95;12.655,283.45"/>
+        <dia:rectangle val="-16.05,273.95;12.655,277.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,279"/>
+        <dia:point val="-16,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_implementation_transform#</dia:string>
@@ -3715,29 +3554,6 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3748,19 +3564,19 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,255"/>
+        <dia:point val="20,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,254.95;47.885,259.45"/>
+        <dia:rectangle val="19.95,253.95;47.5,257.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,255"/>
+        <dia:point val="20,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_header_transform#</dia:string>
@@ -3935,29 +3751,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3968,22 +3761,22 @@ public:
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,301"/>
+        <dia:point val="18,298"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,299.15;86.05,347.05"/>
+        <dia:rectangle val="17.95,296.15;86.05,341.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,301"/>
+        <dia:point val="18,298"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="46"/>
+        <dia:real val="43"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -4007,19 +3800,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,309"/>
+        <dia:point val="20,306"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,308.95;47.885,313.45"/>
+        <dia:rectangle val="19.95,305.95;45.575,309.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,309"/>
+        <dia:point val="20,306"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
@@ -4196,29 +3989,6 @@ operator&lt;&lt;(std::ostream&amp; s,
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -4229,19 +3999,19 @@ operator&lt;&lt;(std::ostream&amp; s,
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,309"/>
+        <dia:point val="52,306"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,308.95;80.655,313.45"/>
+        <dia:rectangle val="51.95,305.95;80.655,309.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,309"/>
+        <dia:point val="52,306"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_implementation_transform#</dia:string>
@@ -4448,29 +4218,6 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -4481,19 +4228,19 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,315"/>
+        <dia:point val="20,311"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,314.95;47.885,319.45"/>
+        <dia:rectangle val="19.95,310.95;47.5,314.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,315"/>
+        <dia:point val="20,311"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_header_transform#</dia:string>
@@ -4668,29 +4415,6 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -4701,19 +4425,19 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,315"/>
+        <dia:point val="52,311"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,314.95;82.58,319.45"/>
+        <dia:rectangle val="51.95,310.95;82.58,314.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,315"/>
+        <dia:point val="52,311"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_implementation_transform#</dia:string>
@@ -4903,29 +4627,6 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6704,22 +6405,22 @@ populate(const unsigned int position, result_type&amp; v) {
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,353"/>
+        <dia:point val="-48,336"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,351.15;16.05,393.05"/>
+        <dia:rectangle val="-48.05,334.15;16.05,364.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,353"/>
+        <dia:point val="-48,336"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="64"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="40"/>
+        <dia:real val="28"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -6743,19 +6444,19 @@ populate(const unsigned int position, result_type&amp; v) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,361"/>
+        <dia:point val="-46,344"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,360.95;-18.115,365.45"/>
+        <dia:rectangle val="-46.05,343.95;-20.425,347.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,361"/>
+        <dia:point val="-46,344"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_header_transform#</dia:string>
@@ -6963,29 +6664,6 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7232,16 +6910,16 @@ of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O35">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,303"/>
+        <dia:point val="20,300"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,302.95;35.58,307.15"/>
+        <dia:rectangle val="19.95,299.95;35.58,304.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,303"/>
+        <dia:point val="20,300"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -7273,7 +6951,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="20.35,304.244"/>
+            <dia:point val="20.35,301.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -7287,16 +6965,16 @@ C++ technical space.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,355"/>
+        <dia:point val="-46,338"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,354.95;-30.42,359.15"/>
+        <dia:rectangle val="-46.05,337.95;-30.42,342.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,355"/>
+        <dia:point val="-46,338"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -7328,7 +7006,7 @@ C++ technical space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-45.65,356.244"/>
+            <dia:point val="-45.65,339.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -7730,13 +7408,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6,355"/>
+        <dia:point val="-6,338"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,354.95;6.87,358.05"/>
+        <dia:rectangle val="-6.05,337.95;6.87,341.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-6,355"/>
+        <dia:point val="-6,338"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -7841,13 +7519,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="54,303"/>
+        <dia:point val="54,300"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,302.95;66.87,306.05"/>
+        <dia:rectangle val="53.95,299.95;66.87,303.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="54,303"/>
+        <dia:point val="54,300"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -10862,13 +10540,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O71">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,355"/>
+        <dia:point val="-24,338"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,354.95;-11.13,358.65"/>
+        <dia:rectangle val="-24.05,337.95;-11.13,341.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,355"/>
+        <dia:point val="-24,338"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -11004,13 +10682,13 @@ main, or from another initialiser.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O72">
       <dia:attribute name="obj_pos">
-        <dia:point val="38,303"/>
+        <dia:point val="38,300"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,302.95;50.87,306.65"/>
+        <dia:rectangle val="37.95,299.95;50.87,303.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="38,303"/>
+        <dia:point val="38,300"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -14058,19 +13736,19 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O84">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,367"/>
+        <dia:point val="-46,349"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,366.95;-18.115,371.45"/>
+        <dia:rectangle val="-46.05,348.95;-18.5,352.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,367"/>
+        <dia:point val="-46,349"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_header_transform#</dia:string>
@@ -14232,29 +13910,6 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16214,19 +15869,19 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O94">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,309"/>
+        <dia:point val="-16,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,308.95;11.885,313.45"/>
+        <dia:rectangle val="-16.05,298.95;9.96,302.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,309"/>
+        <dia:point val="-16,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_transform#</dia:string>
@@ -16378,29 +16033,6 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -16411,19 +16043,19 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O95">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,255"/>
+        <dia:point val="51,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,254.95;78.885,259.45"/>
+        <dia:rectangle val="50.95,253.95;76.96,257.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,255"/>
+        <dia:point val="51,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_transform#</dia:string>
@@ -16565,29 +16197,6 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16806,19 +16415,19 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,327"/>
+        <dia:point val="20,321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,326.95;47.885,331.45"/>
+        <dia:rectangle val="19.95,320.95;45.96,324.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,327"/>
+        <dia:point val="20,321"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_transform#</dia:string>
@@ -16970,29 +16579,6 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -17003,19 +16589,19 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O98">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,361"/>
+        <dia:point val="-16,344"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,360.95;11.885,365.45"/>
+        <dia:rectangle val="-16.05,343.95;9.96,347.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,361"/>
+        <dia:point val="-16,344"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_header_transform#</dia:string>
@@ -17156,29 +16742,6 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -24164,13 +23727,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O156">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,344"/>
+        <dia:point val="-46,328"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,343.95;-33.13,347.05"/>
+        <dia:rectangle val="-46.05,327.95;-33.13,331.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,344"/>
+        <dia:point val="-46,328"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24275,13 +23838,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O157">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,277"/>
+        <dia:point val="51,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,276.95;63.87,280.05"/>
+        <dia:rectangle val="50.95,273.95;63.87,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,277"/>
+        <dia:point val="51,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24386,13 +23949,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O158">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,267"/>
+        <dia:point val="66,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,266.95;78.87,270.05"/>
+        <dia:rectangle val="65.95,263.95;78.87,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,267"/>
+        <dia:point val="66,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24497,13 +24060,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O159">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,277"/>
+        <dia:point val="35,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,276.95;47.87,280.05"/>
+        <dia:rectangle val="34.95,273.95;47.87,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,277"/>
+        <dia:point val="35,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24608,13 +24171,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O160">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,272"/>
+        <dia:point val="35,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,271.95;48.6,275.05"/>
+        <dia:rectangle val="34.95,268.95;48.6,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,272"/>
+        <dia:point val="35,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.550000000000001"/>
@@ -24719,13 +24282,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O161">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,267"/>
+        <dia:point val="20,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,266.95;32.87,270.05"/>
+        <dia:rectangle val="19.95,263.95;32.87,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,267"/>
+        <dia:point val="20,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24830,13 +24393,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O162">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,267"/>
+        <dia:point val="35,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,266.95;47.87,270.05"/>
+        <dia:rectangle val="34.95,263.95;47.87,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,267"/>
+        <dia:point val="35,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -24941,13 +24504,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O163">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,272"/>
+        <dia:point val="20,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,271.95;32.87,275.05"/>
+        <dia:rectangle val="19.95,268.95;32.87,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,272"/>
+        <dia:point val="20,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25052,13 +24615,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O164">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,267"/>
+        <dia:point val="51,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,266.95;63.87,270.05"/>
+        <dia:rectangle val="50.95,263.95;63.87,267.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,267"/>
+        <dia:point val="51,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25163,13 +24726,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O165">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,272"/>
+        <dia:point val="51,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,271.95;63.87,275.05"/>
+        <dia:rectangle val="50.95,268.95;63.87,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,272"/>
+        <dia:point val="51,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25274,13 +24837,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O166">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,277"/>
+        <dia:point val="20,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,276.95;32.87,280.05"/>
+        <dia:rectangle val="19.95,273.95;32.87,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,277"/>
+        <dia:point val="20,274"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25385,13 +24948,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O167">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,272"/>
+        <dia:point val="66,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,271.95;78.87,275.05"/>
+        <dia:rectangle val="65.95,268.95;78.87,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,272"/>
+        <dia:point val="66,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25496,13 +25059,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O168">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,338"/>
+        <dia:point val="51,331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,337.95;64.6,341.05"/>
+        <dia:rectangle val="50.95,330.95;64.6,334.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,338"/>
+        <dia:point val="51,331"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.550000000000001"/>
@@ -25607,13 +25170,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O169">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,343"/>
+        <dia:point val="20,336"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,342.95;32.87,346.05"/>
+        <dia:rectangle val="19.95,335.95;32.87,339.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,343"/>
+        <dia:point val="20,336"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25718,13 +25281,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O170">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,333"/>
+        <dia:point val="66,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,332.95;78.87,336.05"/>
+        <dia:rectangle val="65.95,325.95;78.87,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,333"/>
+        <dia:point val="66,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25829,13 +25392,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O171">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,333"/>
+        <dia:point val="20,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,332.95;32.87,336.05"/>
+        <dia:rectangle val="19.95,325.95;32.87,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,333"/>
+        <dia:point val="20,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -25940,13 +25503,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O172">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,333"/>
+        <dia:point val="35,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,332.95;47.87,336.05"/>
+        <dia:rectangle val="34.95,325.95;47.87,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,333"/>
+        <dia:point val="35,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -26051,13 +25614,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O173">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,338"/>
+        <dia:point val="66,331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,337.95;78.87,341.05"/>
+        <dia:rectangle val="65.95,330.95;78.87,334.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,338"/>
+        <dia:point val="66,331"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -26162,13 +25725,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O174">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,338"/>
+        <dia:point val="20,331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,337.95;32.87,341.05"/>
+        <dia:rectangle val="19.95,330.95;32.87,334.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,338"/>
+        <dia:point val="20,331"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -26273,13 +25836,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O175">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,333"/>
+        <dia:point val="51,326"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,332.95;63.87,336.05"/>
+        <dia:rectangle val="50.95,325.95;63.87,329.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,333"/>
+        <dia:point val="51,326"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -28271,13 +27834,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O193">
       <dia:attribute name="obj_pos">
-        <dia:point val="34,338"/>
+        <dia:point val="34,331"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,337.95;48.9675,341.05"/>
+        <dia:rectangle val="33.95,330.95;48.9675,334.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="34,338"/>
+        <dia:point val="34,331"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.9175"/>
@@ -28384,16 +27947,16 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O194">
       <dia:attribute name="obj_pos">
-        <dia:point val="36,343"/>
+        <dia:point val="36,336"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,342.95;58.125,345.55"/>
+        <dia:rectangle val="35.95,335.95;58.125,338.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="36,343"/>
+        <dia:point val="36,336"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.075000000000003"/>
@@ -28423,7 +27986,7 @@ not a regular" helper.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="36.35,344.244"/>
+            <dia:point val="36.35,337.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -28437,17 +28000,17 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="47.0375,343"/>
+        <dia:point val="47.0375,336"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.2767,340.607;47.1014,343.064"/>
+        <dia:rectangle val="41.2767,333.607;47.1014,336.064"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="47.0375,343"/>
-        <dia:point val="41.4588,341"/>
+        <dia:point val="47.0375,336"/>
+        <dia:point val="41.4588,334"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -28462,7 +28025,7 @@ not a regular" helper.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="44.2486,342.5"/>
+        <dia:point val="44.2486,335.5"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O194" connection="1"/>
@@ -28957,19 +28520,19 @@ not a regular" helper.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O201">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,303"/>
+        <dia:point val="-46,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,302.95;-18.115,307.45"/>
+        <dia:rectangle val="-46.05,293.95;-19.27,297.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,303"/>
+        <dia:point val="-46,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_transform#</dia:string>
@@ -29319,29 +28882,6 @@ inline void swap(
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -29352,19 +28892,19 @@ inline void swap(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O202">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,261"/>
+        <dia:point val="20,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,260.95;47.885,265.45"/>
+        <dia:rectangle val="19.95,258.95;46.73,262.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,261"/>
+        <dia:point val="20,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_transform#</dia:string>
@@ -29552,29 +29092,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -29585,19 +29102,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O203">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,321"/>
+        <dia:point val="20,316"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,320.95;47.885,325.45"/>
+        <dia:rectangle val="19.95,315.95;46.73,319.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,321"/>
+        <dia:point val="20,316"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_transform#</dia:string>
@@ -29776,29 +29293,6 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -29809,19 +29303,19 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O204">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,367"/>
+        <dia:point val="-16,349"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,366.95;11.885,371.45"/>
+        <dia:rectangle val="-16.05,348.95;10.73,352.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,367"/>
+        <dia:point val="-16,349"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_header_transform#</dia:string>
@@ -30019,29 +29513,6 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30530,19 +30001,19 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O207">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,303"/>
+        <dia:point val="-16,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,302.95;13.81,307.45"/>
+        <dia:rectangle val="-16.05,293.95;13.81,297.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,303"/>
+        <dia:point val="-16,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_implementation_transform#</dia:string>
@@ -30818,29 +30289,6 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -30851,19 +30299,19 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O208">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,261"/>
+        <dia:point val="51,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,260.95;80.81,265.45"/>
+        <dia:rectangle val="50.95,258.95;80.81,262.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,261"/>
+        <dia:point val="51,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_implementation_transform#</dia:string>
@@ -31073,29 +30521,6 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31106,19 +30531,19 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O209">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,321"/>
+        <dia:point val="52,316"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,320.95;81.81,325.45"/>
+        <dia:rectangle val="51.95,315.95;81.81,319.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,321"/>
+        <dia:point val="52,316"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_implementation_transform#</dia:string>
@@ -31323,29 +30748,6 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
     stp.end_transform(a);
 }
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34495,16 +33897,16 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O234">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,372"/>
+        <dia:point val="18,366"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,370.15;86.05,393.05"/>
+        <dia:rectangle val="17.95,364.15;86.05,387.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,372"/>
+        <dia:point val="18,366"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="68"/>
@@ -34534,16 +33936,16 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O235">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,374"/>
+        <dia:point val="20,368"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,373.95;37.89,378.15"/>
+        <dia:rectangle val="19.95,367.95;37.89,372.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,374"/>
+        <dia:point val="20,368"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.840000000000003"/>
@@ -34575,7 +33977,7 @@ code.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="20.35,375.244"/>
+            <dia:point val="20.35,369.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -34589,13 +33991,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O236">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,374"/>
+        <dia:point val="44,368"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,373.95;56.87,377.65"/>
+        <dia:rectangle val="43.95,367.95;56.87,371.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,374"/>
+        <dia:point val="44,368"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -34731,13 +34133,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O237">
       <dia:attribute name="obj_pos">
-        <dia:point val="59,374"/>
+        <dia:point val="59,368"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.95,373.95;71.87,377.05"/>
+        <dia:rectangle val="58.95,367.95;71.87,371.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="59,374"/>
+        <dia:point val="59,368"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -34842,13 +34244,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,380"/>
+        <dia:point val="20,374"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,379.95;45.19,384.45"/>
+        <dia:rectangle val="19.95,373.95;45.19,378.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,380"/>
+        <dia:point val="20,374"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -35700,13 +35102,13 @@ BOOST_AUTO_TEST_SUITE_END()
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,380"/>
+        <dia:point val="50,374"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,379.95;75.19,384.45"/>
+        <dia:rectangle val="49.95,373.95;75.19,378.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,380"/>
+        <dia:point val="50,374"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -36177,19 +35579,19 @@ BOOST_AUTO_TEST_SUITE_END()
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,315"/>
+        <dia:point val="-46,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,314.95;-18.115,319.45"/>
+        <dia:rectangle val="-46.05,303.95;-23.12,307.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,315"/>
+        <dia:point val="-46,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_template_bundle_header_transform#</dia:string>
@@ -36469,29 +35871,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -36502,19 +35881,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,315"/>
+        <dia:point val="-16,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,314.95;9.96,319.45"/>
+        <dia:rectangle val="-16.05,303.95;9.96,307.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,315"/>
+        <dia:point val="-16,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_template_bundle_implementation_transform#</dia:string>
@@ -36832,29 +36211,6 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -36865,19 +36221,19 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,327"/>
+        <dia:point val="-46,314"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,326.95;-18.115,331.45"/>
+        <dia:rectangle val="-46.05,313.95;-23.12,317.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,327"/>
+        <dia:point val="-46,314"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_initializer_header_transform#</dia:string>
@@ -37066,29 +36422,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -37099,19 +36432,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,327"/>
+        <dia:point val="-16,314"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,326.95;9.96,331.45"/>
+        <dia:rectangle val="-16.05,313.95;9.96,317.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,327"/>
+        <dia:point val="-16,314"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_initializer_implementation_transform#</dia:string>
@@ -37305,29 +36638,6 @@ register_entities(variability::helpers::registrar&amp; rg) {
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -40343,19 +39653,19 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O265">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,285"/>
+        <dia:point val="-46,279"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,284.95;-18.115,289.45"/>
+        <dia:rectangle val="-46.05,278.95;-23.12,282.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,285"/>
+        <dia:point val="-46,279"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_forward_declarations_transform#</dia:string>
@@ -40526,29 +39836,6 @@ class &lt;#= o.name().simple() #&gt;;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -40559,19 +39846,19 @@ class &lt;#= o.name().simple() #&gt;;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,297"/>
+        <dia:point val="-16,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,296.95;11.885,301.45"/>
+        <dia:rectangle val="-16.05,288.95;6.88,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,297"/>
+        <dia:point val="-16,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visitor_forward_declarations_transform#</dia:string>
@@ -40731,29 +40018,6 @@ class &lt;#= o.name().simple() #&gt;;
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41002,19 +40266,19 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,309"/>
+        <dia:point val="-46,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,308.95;-18.115,313.45"/>
+        <dia:rectangle val="-46.05,298.95;-23.12,302.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,309"/>
+        <dia:point val="-46,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_forward_declarations_transform#</dia:string>
@@ -41174,29 +40438,6 @@ class &lt;#= p.name().simple() #&gt;;
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42062,16 +41303,16 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O273">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,350"/>
+        <dia:point val="18,344"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,348.15;86.05,369.05"/>
+        <dia:rectangle val="17.95,342.15;86.05,363.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,350"/>
+        <dia:point val="18,344"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="68"/>
@@ -42101,16 +41342,16 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O274">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,352"/>
+        <dia:point val="20,346"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,351.95;37.89,355.35"/>
+        <dia:rectangle val="19.95,345.95;37.89,349.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,352"/>
+        <dia:point val="20,346"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.840000000000003"/>
@@ -42141,7 +41382,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="20.35,353.244"/>
+            <dia:point val="20.35,347.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -42155,13 +41396,13 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O275">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,352"/>
+        <dia:point val="43,346"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,351.95;55.87,355.05"/>
+        <dia:rectangle val="42.95,345.95;55.87,349.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,352"/>
+        <dia:point val="43,346"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -42266,13 +41507,13 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O276">
       <dia:attribute name="obj_pos">
-        <dia:point val="61,352"/>
+        <dia:point val="61,346"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,351.95;73.87,355.05"/>
+        <dia:rectangle val="60.95,345.95;73.87,349.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="61,352"/>
+        <dia:point val="61,346"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -42377,19 +41618,19 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O277">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,357"/>
+        <dia:point val="52,351"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,356.95;77.19,361.45"/>
+        <dia:rectangle val="51.95,350.95;63.715,354.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,357"/>
+        <dia:point val="52,351"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_transform#</dia:string>
@@ -42407,7 +41648,8 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42600,29 +41842,6 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -42633,19 +41852,19 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O278">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,357"/>
+        <dia:point val="20,351"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,356.95;45.19,361.45"/>
+        <dia:rectangle val="19.95,350.95;31.715,354.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,357"/>
+        <dia:point val="20,351"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#solution_transform#</dia:string>
@@ -42663,7 +41882,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42841,29 +42061,6 @@ EndGlobal
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -42874,13 +42071,13 @@ EndGlobal
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O279">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,386"/>
+        <dia:point val="20,380"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,385.95;45.19,390.45"/>
+        <dia:rectangle val="19.95,379.95;45.19,384.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,386"/>
+        <dia:point val="20,380"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -43122,19 +42319,19 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,373"/>
+        <dia:point val="-46,354"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,372.95;-20.81,377.45"/>
+        <dia:rectangle val="-46.05,353.95;-31.895,357.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,373"/>
+        <dia:point val="-46,354"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="14.055000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#object_odb_options_transform#</dia:string>
@@ -43152,7 +42349,8 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43336,29 +42534,6 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -43369,19 +42544,19 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O281">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,373"/>
+        <dia:point val="-16,354"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,372.95;9.19,377.45"/>
+        <dia:rectangle val="-16.05,353.95;-0.62,357.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,373"/>
+        <dia:point val="-16,354"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="15.330000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_odb_options_transform#</dia:string>
@@ -43399,7 +42574,8 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43583,29 +42759,6 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -43616,19 +42769,19 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O282">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,333"/>
+        <dia:point val="-46,319"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,332.95;-20.04,337.45"/>
+        <dia:rectangle val="-46.05,318.95;-20.04,322.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,333"/>
+        <dia:point val="-46,319"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#main_transform#</dia:string>
@@ -43804,29 +42957,6 @@ int main(int /*argc*/, char* /*argv*/[]) {
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -43947,19 +43077,19 @@ int main(int /*argc*/, char* /*argv*/[]) {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O284">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,379"/>
+        <dia:point val="-46,359"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,378.95;-20.81,383.45"/>
+        <dia:rectangle val="-46.05,358.95;-30.8825,362.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,379"/>
+        <dia:point val="-46,359"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="15.067500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#common_odb_options_transform#</dia:string>
@@ -43977,7 +43107,8 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.implementation
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44184,29 +43315,6 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -44217,19 +43325,19 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O285">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,363"/>
+        <dia:point val="20,357"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,362.95;45.19,367.45"/>
+        <dia:rectangle val="19.95,356.95;32.7,360.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,363"/>
+        <dia:point val="20,357"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="12.65"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#msbuild_targets_transform#</dia:string>
@@ -44247,7 +43355,8 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_msbuild_targets
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44455,29 +43564,6 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -44488,16 +43574,16 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O286">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,285"/>
+        <dia:point val="18,282"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,283.15;86.05,298.05"/>
+        <dia:rectangle val="17.95,280.15;86.05,295.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,285"/>
+        <dia:point val="18,282"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="68"/>
@@ -44527,19 +43613,19 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O287">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,292"/>
+        <dia:point val="52,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,291.95;77.19,296.45"/>
+        <dia:rectangle val="51.95,288.95;65.6275,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,292"/>
+        <dia:point val="52,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="13.577500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#source_cmakelists_transform#</dia:string>
@@ -44557,7 +43643,8 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_source_cmakelists
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44791,29 +43878,6 @@ endif()
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -44824,19 +43888,19 @@ endif()
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O288">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,292"/>
+        <dia:point val="20,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,291.95;45.19,296.45"/>
+        <dia:rectangle val="19.95,288.95;33.9,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,292"/>
+        <dia:point val="20,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="13.85"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#include_cmakelists_transform#</dia:string>
@@ -44854,7 +43918,8 @@ endif()
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.cpp.project
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_include_cmakelists
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build
+#DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -45023,29 +44088,6 @@ install(
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -45056,16 +44098,16 @@ install(
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O289">
       <dia:attribute name="obj_pos">
-        <dia:point val="20,287"/>
+        <dia:point val="20,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,286.95;35.58,290.35"/>
+        <dia:rectangle val="19.95,283.95;35.58,287.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="20,287"/>
+        <dia:point val="20,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.530000000000001"/>
@@ -45096,7 +44138,7 @@ install(
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="20.35,288.244"/>
+            <dia:point val="20.35,285.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -45110,13 +44152,13 @@ install(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O290">
       <dia:attribute name="obj_pos">
-        <dia:point val="39,287"/>
+        <dia:point val="39,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.95,286.95;51.87,290.05"/>
+        <dia:rectangle val="38.95,283.95;51.87,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="39,287"/>
+        <dia:point val="39,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -45221,13 +44263,13 @@ install(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O291">
       <dia:attribute name="obj_pos">
-        <dia:point val="55,287"/>
+        <dia:point val="55,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,286.95;67.87,290.05"/>
+        <dia:rectangle val="54.95,283.95;67.87,287.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="55,287"/>
+        <dia:point val="55,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -45332,13 +44374,13 @@ install(
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O292">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,386"/>
+        <dia:point val="50,380"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,385.95;75.19,390.45"/>
+        <dia:rectangle val="49.95,379.95;75.19,384.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,386"/>
+        <dia:point val="50,380"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.140000000000001"/>
@@ -45725,19 +44767,19 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,321"/>
+        <dia:point val="-46,309"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,320.95;-18.115,325.45"/>
+        <dia:rectangle val="-46.05,308.95;-23.12,312.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,321"/>
+        <dia:point val="-46,309"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_bundle_header_transform#</dia:string>
@@ -46017,29 +45059,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -46050,19 +45069,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,321"/>
+        <dia:point val="-16,309"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,320.95;9.96,325.45"/>
+        <dia:rectangle val="-16.05,308.95;9.96,312.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,321"/>
+        <dia:point val="-16,309"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_bundle_implementation_transform#</dia:string>
@@ -46377,29 +45396,6 @@ std::list&lt;dogen::variability::entities::feature&gt;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -46413,16 +45409,16 @@ std::list&lt;dogen::variability::entities::feature&gt;
         <dia:point val="-46,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,248.95;-18.115,253.45"/>
+        <dia:rectangle val="-46.05,248.95;-23.12,252.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-46,249"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_class_header_transform#</dia:string>
@@ -46631,29 +45627,6 @@ public:
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -47040,7 +46013,7 @@ public:
         <dia:point val="-16,249"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,248.95;9.96,253.45"/>
+        <dia:rectangle val="-16.05,248.95;9.96,252.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-16,249"/>
@@ -47049,7 +46022,7 @@ public:
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_class_implementation_transform#</dia:string>
@@ -47195,29 +46168,6 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -47647,13 +46597,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,198"/>
+        <dia:point val="7,198"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,197.95;29.5,201.65"/>
+        <dia:rectangle val="6.95,197.95;34.5,201.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,198"/>
+        <dia:point val="7,198"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -47788,16 +46738,16 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="-19,211"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.05,210.95;5.805,215.45"/>
+        <dia:rectangle val="-19.05,210.95;14.275,216.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-19,211"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#header_configuration#</dia:string>
@@ -47936,6 +46886,29 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.physical.wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -47946,19 +46919,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O304">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,201.6"/>
+        <dia:point val="20.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.6725,201.55;16.575,211.05"/>
+        <dia:rectangle val="-2.4375,201.55;21.575,211.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,201.6"/>
-        <dia:point val="15.725,204"/>
-        <dia:point val="-6.6225,204"/>
-        <dia:point val="-6.6225,211"/>
+        <dia:point val="20.725,201.6"/>
+        <dia:point val="20.725,204"/>
+        <dia:point val="-2.3875,204"/>
+        <dia:point val="-2.3875,211"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -47988,19 +46961,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O305">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,211"/>
+        <dia:point val="28,211"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,210.95;53.885,215.45"/>
+        <dia:rectangle val="27.95,210.95;58.58,216.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,211"/>
+        <dia:point val="28,211"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#implementation_configuration#</dia:string>
@@ -48139,6 +47112,29 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.physical.wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -48149,19 +47145,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O306">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,201.6"/>
+        <dia:point val="20.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.875,201.55;39.9675,211.05"/>
+        <dia:rectangle val="19.875,201.55;43.315,211.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,201.6"/>
-        <dia:point val="15.725,204"/>
-        <dia:point val="39.9175,204"/>
-        <dia:point val="39.9175,211"/>
+        <dia:point val="20.725,201.6"/>
+        <dia:point val="20.725,204"/>
+        <dia:point val="43.265,204"/>
+        <dia:point val="43.265,211"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48191,13 +47187,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O307">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,205"/>
+        <dia:point val="6,205"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,204.95;32.195,209.45"/>
+        <dia:rectangle val="5.95,204.95;36.195,209.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,205"/>
+        <dia:point val="6,205"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.145"/>
@@ -48352,19 +47348,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="15.725,201.6"/>
+        <dia:point val="20.725,201.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.875,201.55;17.1225,205"/>
+        <dia:rectangle val="19.875,201.55;21.575,205"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.725,201.6"/>
-        <dia:point val="15.725,204"/>
-        <dia:point val="17.0725,204"/>
-        <dia:point val="17.0725,204.95"/>
+        <dia:point val="20.725,201.6"/>
+        <dia:point val="20.725,204"/>
+        <dia:point val="21.0725,204"/>
+        <dia:point val="21.0725,204.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48394,13 +47390,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O309">
       <dia:attribute name="obj_pos">
-        <dia:point val="-32,218"/>
+        <dia:point val="-32,219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-32.05,217.95;-4.5,224.85"/>
+        <dia:rectangle val="-32.05,218.95;-4.5,225.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-32,218"/>
+        <dia:point val="-32,219"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -48624,19 +47620,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O310">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-2.3875,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.325,215.35;-5.7725,218.05"/>
+        <dia:rectangle val="-18.325,216.15;-1.5375,219.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,215.4"/>
-        <dia:point val="-6.6225,217"/>
-        <dia:point val="-18.275,217"/>
+        <dia:point val="-2.3875,216.2"/>
+        <dia:point val="-2.3875,218"/>
         <dia:point val="-18.275,218"/>
+        <dia:point val="-18.275,219"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48666,13 +47662,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O311">
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,218"/>
+        <dia:point val="-1,219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,217.95;28.425,224.85"/>
+        <dia:rectangle val="-1.05,218.95;28.425,225.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-1,218"/>
+        <dia:point val="-1,219"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -48896,19 +47892,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O312">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-2.3875,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.4725,215.35;13.7375,218.05"/>
+        <dia:rectangle val="-3.2375,216.15;13.7375,219.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,215.4"/>
-        <dia:point val="-6.6225,217"/>
-        <dia:point val="13.6875,217"/>
+        <dia:point val="-2.3875,216.2"/>
+        <dia:point val="-2.3875,218"/>
         <dia:point val="13.6875,218"/>
+        <dia:point val="13.6875,219"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48938,13 +47934,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O313">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,218"/>
+        <dia:point val="32,219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,217.95;59.5,224.05"/>
+        <dia:rectangle val="31.95,218.95;59.5,225.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,218"/>
+        <dia:point val="32,219"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -49143,19 +48139,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O314">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.9175,215.45"/>
+        <dia:point val="43.265,216.25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.0675,215.4;45.775,218.001"/>
+        <dia:rectangle val="42.415,216.2;45.775,219.001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.9175,215.45"/>
-        <dia:point val="39.9175,217"/>
-        <dia:point val="45.725,217"/>
-        <dia:point val="45.725,217.951"/>
+        <dia:point val="43.265,216.25"/>
+        <dia:point val="43.265,218"/>
+        <dia:point val="45.725,218"/>
+        <dia:point val="45.725,218.951"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -49178,20 +48174,20 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O305" connection="12"/>
+        <dia:connection handle="0" to="O305" connection="14"/>
         <dia:connection handle="1" to="O313" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O315">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,226"/>
+        <dia:point val="-17,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,225.95;10.885,232.85"/>
+        <dia:rectangle val="-17.05,226.95;10.885,233.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,226"/>
+        <dia:point val="-17,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -49415,19 +48411,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O316">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-2.3875,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.4725,215.35;-3.0325,226"/>
+        <dia:rectangle val="-3.2375,216.15;-1.5375,227"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,215.4"/>
-        <dia:point val="-6.6225,217"/>
-        <dia:point val="-3.0825,217"/>
-        <dia:point val="-3.0825,225.95"/>
+        <dia:point val="-2.3875,216.2"/>
+        <dia:point val="-2.3875,218"/>
+        <dia:point val="-3.0825,218"/>
+        <dia:point val="-3.0825,226.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -49457,13 +48453,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O317">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,226"/>
+        <dia:point val="-48,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,225.95;-19.345,232.85"/>
+        <dia:rectangle val="-48.05,226.95;-19.345,233.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,226"/>
+        <dia:point val="-48,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
@@ -49687,19 +48683,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O318">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6.6225,215.4"/>
+        <dia:point val="-2.3875,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.7475,215.35;-5.7725,226"/>
+        <dia:rectangle val="-33.7475,216.15;-1.5375,227"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-6.6225,215.4"/>
-        <dia:point val="-6.6225,217"/>
-        <dia:point val="-33.6975,217"/>
-        <dia:point val="-33.6975,225.95"/>
+        <dia:point val="-2.3875,216.2"/>
+        <dia:point val="-2.3875,218"/>
+        <dia:point val="-33.6975,218"/>
+        <dia:point val="-33.6975,226.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -49729,13 +48725,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O319">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,226"/>
+        <dia:point val="16,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,225.95;44.655,232.05"/>
+        <dia:rectangle val="15.95,226.95;44.655,233.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,226"/>
+        <dia:point val="16,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.605"/>
@@ -49934,19 +48930,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O320">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.9175,215.4"/>
+        <dia:point val="43.265,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.2525,215.35;40.7675,226.05"/>
+        <dia:rectangle val="30.2525,216.15;44.115,227.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.9175,215.4"/>
-        <dia:point val="39.9175,217"/>
-        <dia:point val="30.3025,217"/>
-        <dia:point val="30.3025,226"/>
+        <dia:point val="43.265,216.2"/>
+        <dia:point val="43.265,218"/>
+        <dia:point val="30.3025,218"/>
+        <dia:point val="30.3025,227"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -50180,13 +49176,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O322">
       <dia:attribute name="obj_pos">
-        <dia:point val="47,226"/>
+        <dia:point val="47,227"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,225.95;76.425,232.05"/>
+        <dia:rectangle val="46.95,226.95;76.425,233.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="47,226"/>
+        <dia:point val="47,227"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -50385,19 +49381,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O323">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.9175,215.4"/>
+        <dia:point val="43.265,216.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.0675,215.35;61.7375,226.05"/>
+        <dia:rectangle val="42.415,216.15;61.7375,227.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.9175,215.4"/>
-        <dia:point val="39.9175,217"/>
-        <dia:point val="61.6875,217"/>
-        <dia:point val="61.6875,226"/>
+        <dia:point val="43.265,216.2"/>
+        <dia:point val="43.265,218"/>
+        <dia:point val="61.6875,218"/>
+        <dia:point val="61.6875,227"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -50631,19 +49627,19 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O325">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,255"/>
+        <dia:point val="-46,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,254.95;-18.115,259.45"/>
+        <dia:rectangle val="-46.05,253.95;-23.12,257.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,255"/>
+        <dia:point val="-46,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#facet_class_header_transform#</dia:string>
@@ -50836,29 +49832,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -50869,19 +49842,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O326">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,255"/>
+        <dia:point val="-16,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,254.95;9.96,259.45"/>
+        <dia:rectangle val="-16.05,253.95;9.96,257.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,255"/>
+        <dia:point val="-16,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#facet_class_implementation_transform#</dia:string>
@@ -51108,29 +50081,6 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -51141,19 +50091,19 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O327">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,261"/>
+        <dia:point val="-46,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,260.95;-18.115,265.45"/>
+        <dia:rectangle val="-46.05,258.95;-23.12,262.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,261"/>
+        <dia:point val="-46,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend_class_header_transform#</dia:string>
@@ -51346,29 +50296,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -51379,19 +50306,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O328">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,261"/>
+        <dia:point val="-16,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,260.95;9.96,265.45"/>
+        <dia:rectangle val="-16.05,258.95;9.96,262.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,261"/>
+        <dia:point val="-16,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend_class_implementation_transform#</dia:string>
@@ -51619,29 +50546,6 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -51652,19 +50556,19 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O329">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,267"/>
+        <dia:point val="-46,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,266.95;-18.115,271.45"/>
+        <dia:rectangle val="-46.05,263.95;-23.12,267.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,267"/>
+        <dia:point val="-46,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#part_class_header_transform#</dia:string>
@@ -51835,29 +50739,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -51868,19 +50749,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O330">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,267"/>
+        <dia:point val="-16,264"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,266.95;9.96,271.45"/>
+        <dia:rectangle val="-16.05,263.95;9.96,267.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,267"/>
+        <dia:point val="-16,264"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#part_class_implementation_transform#</dia:string>
@@ -52036,29 +50917,6 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -52069,19 +50927,19 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O331">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,273"/>
+        <dia:point val="-46,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,272.95;-18.115,277.45"/>
+        <dia:rectangle val="-46.05,268.95;-23.12,272.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,273"/>
+        <dia:point val="-46,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_kind_class_header_transform#</dia:string>
@@ -52252,29 +51110,6 @@ public:
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation_header#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -52285,19 +51120,19 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O332">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,273"/>
+        <dia:point val="-16,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,272.95;9.96,277.45"/>
+        <dia:rectangle val="-16.05,268.95;9.96,272.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,273"/>
+        <dia:point val="-16,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_kind_class_implementation_transform#</dia:string>
@@ -52442,29 +51277,6 @@ void archetype_kind_class_implementation_transform::apply(const context&amp; ctx
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#cpp_artefact_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
