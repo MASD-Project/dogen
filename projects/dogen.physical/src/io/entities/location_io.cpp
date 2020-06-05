@@ -35,7 +35,7 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::location\"" << ", "
-      << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "
+      << "\"meta_model\": " << "\"" << tidy_up_string(v.meta_model()) << "\"" << ", "
       << "\"backend\": " << "\"" << tidy_up_string(v.backend()) << "\"" << ", "
       << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "
       << "\"archetype\": " << "\"" << tidy_up_string(v.archetype()) << "\""

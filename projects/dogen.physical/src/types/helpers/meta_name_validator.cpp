@@ -65,7 +65,7 @@ void meta_name_validator::common_validation(const entities::meta_name& mn,
      * All locations must belong to a kernel.
      */
     const auto& l(mn.location());
-    if (l.kernel().empty()) {
+    if (l.meta_model().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_kernel;
         BOOST_THROW_EXCEPTION(validation_error(empty_kernel));
     }

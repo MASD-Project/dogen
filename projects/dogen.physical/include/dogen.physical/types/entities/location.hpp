@@ -46,7 +46,7 @@ public:
 
 public:
     location(
-        const std::string& kernel,
+        const std::string& meta_model,
         const std::string& backend,
         const std::string& facet,
         const std::string& archetype);
@@ -55,13 +55,13 @@ public:
     /**
      * @brief Top-most container for the physical space.
      *
-     * The kernel is always expected to be  @e masd.
+     * The meta-model is always expected to be  @e masd.
      */
     /**@{*/
-    const std::string& kernel() const;
-    std::string& kernel();
-    void kernel(const std::string& v);
-    void kernel(const std::string&& v);
+    const std::string& meta_model() const;
+    std::string& meta_model();
+    void meta_model(const std::string& v);
+    void meta_model(const std::string&& v);
     /**@}*/
 
     /**
@@ -105,7 +105,7 @@ public:
     location& operator=(location other);
 
 private:
-    std::string kernel_;
+    std::string meta_model_;
     std::string backend_;
     std::string facet_;
     std::string archetype_;

@@ -392,13 +392,13 @@ physical dimension of MASD conceptual space.
         <dia:point val="117,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,-107.05;126.405,-101.75"/>
+        <dia:rectangle val="116.95,-107.05;126.79,-101.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,-107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.3550000000000004"/>
+        <dia:real val="9.7400000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -497,7 +497,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel#</dia:string>
+            <dia:string>#meta_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -508,7 +508,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Top-most container for the physical space.
 
-The kernel is always expected to be  @e masd.#</dia:string>
+The meta-model is always expected to be  @e masd.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

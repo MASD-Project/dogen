@@ -23,25 +23,25 @@
 namespace dogen::physical::entities {
 
 location::location(
-    const std::string& kernel,
+    const std::string& meta_model,
     const std::string& backend,
     const std::string& facet,
     const std::string& archetype)
-    : kernel_(kernel),
+    : meta_model_(meta_model),
       backend_(backend),
       facet_(facet),
       archetype_(archetype) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
-    swap(kernel_, other.kernel_);
+    swap(meta_model_, other.meta_model_);
     swap(backend_, other.backend_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
 
 bool location::operator==(const location& rhs) const {
-    return kernel_ == rhs.kernel_ &&
+    return meta_model_ == rhs.meta_model_ &&
         backend_ == rhs.backend_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
@@ -53,20 +53,20 @@ location& location::operator=(location other) {
     return *this;
 }
 
-const std::string& location::kernel() const {
-    return kernel_;
+const std::string& location::meta_model() const {
+    return meta_model_;
 }
 
-std::string& location::kernel() {
-    return kernel_;
+std::string& location::meta_model() {
+    return meta_model_;
 }
 
-void location::kernel(const std::string& v) {
-    kernel_ = v;
+void location::meta_model(const std::string& v) {
+    meta_model_ = v;
 }
 
-void location::kernel(const std::string&& v) {
-    kernel_ = std::move(v);
+void location::meta_model(const std::string&& v) {
+    meta_model_ = std::move(v);
 }
 
 const std::string& location::backend() const {

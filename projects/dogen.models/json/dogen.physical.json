@@ -46,9 +46,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel",
+          "name": "meta_model",
           "type": "std::string",
-          "documentation": "Top-most container for the physical space.\n\nThe kernel is always expected to be  @e masd.\n"
+          "documentation": "Top-most container for the physical space.\n\nThe meta-model is always expected to be  @e masd.\n"
         },
         {
           "name": "backend",

@@ -30,7 +30,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("physical.helpers.meta_name_builder"));
 
-const std::string kernel_name("masd");
+const std::string meta_model_name("masd");
 
 const std::string empty_backend("Backend cannot be empty.");
 const std::string empty_facet("Facet cannot be empty.");
@@ -42,7 +42,7 @@ const std::string empty_archetype(
 namespace dogen::physical::helpers {
 
 meta_name_builder& meta_name_builder::kernel(const std::string& s) {
-    meta_name_.location().kernel(s);
+    meta_name_.location().meta_model(s);
     return *this;
 }
 
@@ -63,12 +63,12 @@ meta_name_builder& meta_name_builder::archetype(const std::string& s) {
 
 entities::meta_name meta_name_builder::build() {
     /*
-     * Kernel is always hard-coded to MASD. FIXME: replace this when
-     * we implement kernels properly.
+     * Meta-model is always hard-coded to MASD. FIXME: replace this
+     * when we implement this properly.
      */
     auto& mn(meta_name_);
     auto& l(mn.location());
-    l.kernel(kernel_name);
+    l.meta_model(meta_model_name);
 
     /*
      * Simple and qualified names depend on what has been filled in.
@@ -89,7 +89,7 @@ entities::meta_name meta_name_builder::build() {
         mn.qualified(qualified_meta_name_builder::build_backend(l));
         meta_name_validator::validate_backend_name(mn);
     } else {
-        mn.simple(l.kernel());
+        mn.simple(l.meta_model());
         mn.qualified(qualified_meta_name_builder::build_kernel(l));
         meta_name_validator::validate_kernel_name(mn);
     }
