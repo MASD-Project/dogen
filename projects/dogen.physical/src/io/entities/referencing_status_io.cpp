@@ -18,31 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen.physical/io/entities/referencing_status_io.hpp"
 
-namespace {
+namespace dogen::physical::entities {
 
-const std::string
-transform_id("physical.transforms.meta_model_production_chain");
+std::ostream& operator<<(std::ostream& s, const referencing_status& v) {
+    s << "{ " << "\"__type__\": " << "\"referencing_status\", " << "\"value\": ";
 
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
-
-namespace dogen::physical::transforms {
-
-void meta_model_production_chain::
-apply(const physical::transforms::minimal_context& ctx,
-    const physical::entities::meta_model& mm) {
-    tracing::scoped_chain_tracer stp(lg, "meta model production chain",
-        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
-
-
-    stp.end_chain(mm);
+    std::string attr;
+    switch (v) {
+    case referencing_status::invalid:
+        attr = "\"invalid\"";
+        break;
+    case referencing_status::not_referable:
+        attr = "\"not_referable\"";
+        break;
+    case referencing_status::referable:
+        attr = "\"referable\"";
+        break;
+    case referencing_status::facet_default:
+        attr = "\"facet_default\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for referencing_status");
+    }
+    s << attr << " }";
+    return s;
 }
 
 }

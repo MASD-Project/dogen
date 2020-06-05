@@ -22,6 +22,9 @@
 
 namespace dogen::physical::entities {
 
+archetype::archetype()
+    : referencing_status_(static_cast<dogen::physical::entities::referencing_status>(0)) { }
+
 archetype::archetype(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
@@ -32,7 +35,8 @@ archetype::archetype(
     const std::string& generated_by,
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
-    const std::string& part)
+    const std::string& part,
+    const dogen::physical::entities::referencing_status referencing_status)
     : description_(description),
       meta_name_(meta_name),
       default_postfix_(default_postfix),
@@ -42,7 +46,8 @@ archetype::archetype(
       generated_by_(generated_by),
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
-      part_(part) { }
+      part_(part),
+      referencing_status_(referencing_status) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -56,6 +61,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
+    swap(referencing_status_, other.referencing_status_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -68,7 +74,8 @@ bool archetype::operator==(const archetype& rhs) const {
         generated_by_ == rhs.generated_by_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
-        part_ == rhs.part_;
+        part_ == rhs.part_ &&
+        referencing_status_ == rhs.referencing_status_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -235,6 +242,14 @@ void archetype::part(const std::string& v) {
 
 void archetype::part(const std::string&& v) {
     part_ = std::move(v);
+}
+
+dogen::physical::entities::referencing_status archetype::referencing_status() const {
+    return referencing_status_;
+}
+
+void archetype::referencing_status(const dogen::physical::entities::referencing_status v) {
+    referencing_status_ = v;
 }
 
 }

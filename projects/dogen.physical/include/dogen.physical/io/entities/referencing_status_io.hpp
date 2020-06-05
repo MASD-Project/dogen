@@ -18,31 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_REFERENCING_STATUS_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_REFERENCING_STATUS_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string
-transform_id("physical.transforms.meta_model_production_chain");
+#include <iosfwd>
+#include "dogen.physical/types/entities/referencing_status.hpp"
 
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
+namespace dogen::physical::entities {
 
-}
-
-namespace dogen::physical::transforms {
-
-void meta_model_production_chain::
-apply(const physical::transforms::minimal_context& ctx,
-    const physical::entities::meta_model& mm) {
-    tracing::scoped_chain_tracer stp(lg, "meta model production chain",
-        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
-
-
-    stp.end_chain(mm);
-}
+std::ostream& operator<<(std::ostream& s, const referencing_status& v);
 
 }
+
+#endif

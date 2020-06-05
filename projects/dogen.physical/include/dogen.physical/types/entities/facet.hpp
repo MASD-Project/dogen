@@ -48,7 +48,8 @@ public:
         const dogen::physical::entities::meta_name& meta_name,
         const std::string& default_postfix,
         const std::string& override_postfix,
-        const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes);
+        const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+        const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id);
 
 public:
     /**
@@ -116,6 +117,18 @@ public:
     void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v);
     void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v);
 
+    /**
+     * @brief Maps the logical model element ID to the default archetype for this facet.
+     *
+     * Used to obtain the default archetype for referencing.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id() const;
+    std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id();
+    void default_archetype_for_logical_meta_model_id(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v);
+    void default_archetype_for_logical_meta_model_id(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v);
+    /**@}*/
+
 public:
     bool operator==(const facet& rhs) const;
     bool operator!=(const facet& rhs) const {
@@ -134,6 +147,7 @@ private:
     std::string default_postfix_;
     std::string override_postfix_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;
+    std::unordered_map<std::string, dogen::physical::entities::archetype> default_archetype_for_logical_meta_model_id_;
 };
 
 }

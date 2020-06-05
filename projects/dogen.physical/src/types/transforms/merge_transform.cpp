@@ -21,12 +21,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_set_io.hpp"
 #include "dogen.physical/types/transforms/merge_transform.hpp"
 
 namespace {
 
-const std::string transform_id("text.transforms.merge_transform");
+const std::string transform_id("physical.transforms.merge_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -36,8 +37,8 @@ namespace dogen::physical::transforms {
 
 entities::model merge_transform::apply(const physical::transforms::context& ctx,
     const physical::entities::model_set& ms) {
-    tracing::scoped_chain_tracer stp(lg, "merge transform",
-        transform_id, ms.name().simple(), *ctx.tracer(), ms);
+    tracing::scoped_chain_tracer stp(lg, "merge transform", transform_id,
+        ms.name().simple(), *ctx.tracer(), ms);
 
     bool first(true);
     physical::entities::model r;
@@ -64,6 +65,8 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
         for (const auto& md : m.managed_directories())
             r.managed_directories().push_back(md);
     }
+
+    stp.end_chain(r);
     return r;
 }
 

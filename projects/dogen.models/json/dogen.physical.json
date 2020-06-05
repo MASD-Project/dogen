@@ -306,6 +306,11 @@
         {
           "name": "archetypes",
           "type": "std::unordered_map<std::string, archetype>"
+        },
+        {
+          "name": "default_archetype_for_logical_meta_model_id",
+          "type": "std::unordered_map<std::string, archetype>",
+          "documentation": "Maps the logical model element ID to the default archetype for this facet.\n\nUsed to obtain the default archetype for referencing.\n"
         }
       ]
     },
@@ -333,6 +338,11 @@
           "name": "part",
           "type": "std::string",
           "documentation": "Part in which we are located.\n"
+        },
+        {
+          "name": "referencing_status",
+          "type": "referencing_status",
+          "documentation": "Status of this archetype with regards to being referenced by other archetypes.\n"
         }
       ]
     },
@@ -1271,6 +1281,31 @@
         {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
+        }
+      ]
+    },
+    {
+      "name": "entities::referencing_status",
+      "documentation": "Status of a given archetype with regards to referencing by other archetypes.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "not_referable",
+          "type": "",
+          "documentation": "Archertype cannot be legally referenced.\n"
+        },
+        {
+          "name": "referable",
+          "type": "",
+          "documentation": "Archetype can be referenced by other archetypes using its full name only.\n"
+        },
+        {
+          "name": "facet_default",
+          "type": "",
+          "documentation": "References to the facet will resolve to this archetype.\n"
         }
       ]
     }

@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/minimal_context.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Produces a complete physical meta-model.
+ */
 class meta_model_production_chain final {
 public:
-    meta_model_production_chain() = default;
-    meta_model_production_chain(const meta_model_production_chain&) = default;
-    meta_model_production_chain(meta_model_production_chain&&) = default;
-    ~meta_model_production_chain() = default;
-    meta_model_production_chain& operator=(const meta_model_production_chain&) = default;
-
-public:
-    bool operator==(const meta_model_production_chain& rhs) const;
-    bool operator!=(const meta_model_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Apply the transform to input model set.
+     */
+    static void apply(const physical::transforms::minimal_context& ctx,
+        const physical::entities::meta_model& mm);
 };
 
 }

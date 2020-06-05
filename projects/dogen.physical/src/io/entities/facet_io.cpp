@@ -61,7 +61,8 @@ std::ostream& operator<<(std::ostream& s, const facet& v) {
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
       << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
-      << "\"archetypes\": " << v.archetypes()
+      << "\"archetypes\": " << v.archetypes() << ", "
+      << "\"default_archetype_for_logical_meta_model_id\": " << v.default_archetype_for_logical_meta_model_id()
       << " }";
     return(s);
 }

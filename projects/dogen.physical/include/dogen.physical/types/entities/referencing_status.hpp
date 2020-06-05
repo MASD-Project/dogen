@@ -18,31 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_REFERENCING_STATUS_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_REFERENCING_STATUS_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string
-transform_id("physical.transforms.meta_model_production_chain");
+namespace dogen::physical::entities {
 
-using namespace dogen::utility::log;
-auto lg(logger_factory(transform_id));
-
-}
-
-namespace dogen::physical::transforms {
-
-void meta_model_production_chain::
-apply(const physical::transforms::minimal_context& ctx,
-    const physical::entities::meta_model& mm) {
-    tracing::scoped_chain_tracer stp(lg, "meta model production chain",
-        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
-
-
-    stp.end_chain(mm);
-}
+/**
+ * @brief Status of a given archetype with regards to referencing by other archetypes.
+ */
+enum class referencing_status : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    not_referable = 1, ///< Archertype cannot be legally referenced.
+    referable = 2, ///< Archetype can be referenced by other archetypes using its full name only.
+    facet_default = 3 ///< References to the facet will resolve to this archetype.
+};
 
 }
+
+#endif
