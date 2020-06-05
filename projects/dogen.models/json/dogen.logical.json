@@ -4280,6 +4280,22 @@
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "referencing_status",
+          "type": "masd::variability::text",
+          "documentation": "Referencing status for the archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "wale_template_reference",
+          "type": "masd::variability::text",
+          "documentation": "Name of the wale template that the archetype uses.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },

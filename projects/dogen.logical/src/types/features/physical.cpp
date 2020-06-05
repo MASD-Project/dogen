@@ -93,6 +93,36 @@ make_masd_physical_major_technical_space() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_physical_referencing_status() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("referencing_status");
+    r.name().qualified("masd.physical.referencing_status");
+    r.description(R"(Referencing status for the archetype.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_physical_wale_template_reference() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("wale_template_reference");
+    r.name().qualified("masd.physical.wale_template_reference");
+    r.description(R"(Name of the wale template that the archetype uses.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
 }
 
 physical::feature_group
@@ -104,6 +134,8 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
     r.part_id = s.get_by_name("masd.physical.part_id");
     r.logical_meta_element_id = s.get_by_name("masd.physical.logical_meta_element_id");
     r.major_technical_space = s.get_by_name("masd.physical.major_technical_space");
+    r.referencing_status = s.get_by_name("masd.physical.referencing_status");
+    r.wale_template_reference = s.get_by_name("masd.physical.wale_template_reference");
 
     return r;
 }
@@ -122,6 +154,10 @@ physical::static_configuration physical::make_static_configuration(
         r.logical_meta_element_id = s.get_text_content(fg.logical_meta_element_id);
     if (s.has_configuration_point(fg.major_technical_space))
         r.major_technical_space = s.get_text_content(fg.major_technical_space);
+    if (s.has_configuration_point(fg.referencing_status))
+        r.referencing_status = s.get_text_content(fg.referencing_status);
+    if (s.has_configuration_point(fg.wale_template_reference))
+        r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
     return r;
 }
 
@@ -133,6 +169,8 @@ physical::make_features() {
     r.push_back(make_masd_physical_part_id());
     r.push_back(make_masd_physical_logical_meta_element_id());
     r.push_back(make_masd_physical_major_technical_space());
+    r.push_back(make_masd_physical_referencing_status());
+    r.push_back(make_masd_physical_wale_template_reference());
     return r;
 }
 
