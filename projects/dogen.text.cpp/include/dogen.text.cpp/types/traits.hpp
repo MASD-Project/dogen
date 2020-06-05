@@ -35,9 +35,9 @@ namespace dogen::text::cpp {
  */
 struct traits {
     /**
-     * @brief Name of the masd kernel.
+     * @brief Name of the masd physical meta-model.
      */
-    static std::string kernel();
+    static std::string meta_model();
 
     /**
      * @brief Name of this backend.

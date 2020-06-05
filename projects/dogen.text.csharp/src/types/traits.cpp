@@ -22,7 +22,7 @@
 
 namespace dogen::text::csharp {
 
-std::string traits::kernel() {
+std::string traits::meta_model() {
     static std::string r("masd");
     return r;
 }

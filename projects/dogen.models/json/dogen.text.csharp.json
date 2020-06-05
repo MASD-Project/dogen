@@ -1,5 +1,5 @@
 {
-  "documentation": "CSharp is the c# model in the default generation kernel.\n",
+  "documentation": "Provides the C# backend for the defaul physical meta-model.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.text.csharp",

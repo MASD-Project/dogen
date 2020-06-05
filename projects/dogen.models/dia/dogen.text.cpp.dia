@@ -132,7 +132,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#CPP is the C++ backend in the default generation kernel.
+            <dia:string>#Provides the C++ backend for the default physical meta-model.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=dogen.text.cpp

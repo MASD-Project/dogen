@@ -136,7 +136,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Repository with all the meta-names in this kernel, indexed appropriately.
+     * @brief Repository with all the meta-names in this meta-model, indexed appropriately.
      */
     /**@{*/
     const dogen::physical::entities::meta_name_indices& indexed_names() const;

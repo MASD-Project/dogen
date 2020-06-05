@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief CSharp is the c# model in the default generation kernel.
+ * @brief Provides the C# backend for the defaul physical meta-model.
  */
 namespace dogen::text::csharp {
 }

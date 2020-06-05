@@ -413,7 +413,7 @@ physical dimension of MASD conceptual space.
         <dia:string>#Location of an entity or set of entities in the hierarchical physical space.
 
 These must be populated in order, e.g. in order to have a backend we must have a
-kernel; in order to have a facet we must have a backend and in order to have a
+meta-model; in order to have a facet we must have a backend and in order to have a
 formatter we must have a facet. We may not have any.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -1903,7 +1903,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Repository with all the meta-names in this kernel, indexed appropriately.#</dia:string>
+            <dia:string>#Repository with all the meta-names in this meta-model, indexed appropriately.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13487,7 +13487,7 @@ The simple name must be unique for a given location.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#build_kernel#</dia:string>
+            <dia:string>#build_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>

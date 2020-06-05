@@ -40,9 +40,9 @@ struct traits {
     static std::string enabled();
 
     /**
-     * @brief Name of the masd kernel.
+     * @brief Name of the masd meta-model.
      */
-    static std::string kernel();
+    static std::string meta_model();
 
     /**
      * @brief Name of this backend.

@@ -64,22 +64,22 @@ make(const std::list<entities::meta_name>& mns) {
             }
         });
 
-    const auto masd_kernel("masd");
+    const auto masd_meta_model("masd");
     for (const auto& mn: mns) {
         /*
-         * Kernel
+         * Meta-model
          */
         const auto bqn(qualified_meta_name_builder::build_backend(mn));
         const auto fqn(qualified_meta_name_builder::build_facet(mn));
         const auto qn(mn.qualified());
 
-        sorted[masd_kernel].insert(bqn);
-        sorted[masd_kernel].insert(fqn);
-        sorted[masd_kernel].insert(qn);
+        sorted[masd_meta_model].insert(bqn);
+        sorted[masd_meta_model].insert(fqn);
+        sorted[masd_meta_model].insert(qn);
 
-        sorted[masd_kernel + backend_postfix].insert(bqn);
-        sorted[masd_kernel + facet_postfix].insert(fqn);
-        ensure_inserted(masd_kernel + archetype_postfix, qn);
+        sorted[masd_meta_model + backend_postfix].insert(bqn);
+        sorted[masd_meta_model + facet_postfix].insert(fqn);
+        ensure_inserted(masd_meta_model + archetype_postfix, qn);
 
         /*
          * Backend

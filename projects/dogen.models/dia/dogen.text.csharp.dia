@@ -94,7 +94,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#CSharp is the c# model in the default generation kernel.
+            <dia:string>#Provides the C# backend for the defaul physical meta-model.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=dogen.text.csharp

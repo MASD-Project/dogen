@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief CPP is the C++ backend in the default generation kernel.
+ * @brief Provides the C++ backend for the default physical meta-model.
  */
 namespace dogen::text::cpp {
 }

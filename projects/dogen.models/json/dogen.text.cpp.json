@@ -1,5 +1,5 @@
 {
-  "documentation": "CPP is the C++ backend in the default generation kernel.\n",
+  "documentation": "Provides the C++ backend for the default physical meta-model.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.text.cpp",

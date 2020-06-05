@@ -34,7 +34,7 @@ namespace dogen::physical::entities {
  * @brief Location of an entity or set of entities in the hierarchical physical space.
  *
  * These must be populated in order, e.g. in order to have a backend we must have a
- * kernel; in order to have a facet we must have a backend and in order to have a
+ * meta-model; in order to have a facet we must have a backend and in order to have a
  * formatter we must have a facet. We may not have any.
  */
 class location final {

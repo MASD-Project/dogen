@@ -39,12 +39,6 @@ std::string formatter::format(const text_template& tt) const {
     for (const auto& pair : tt.supplied_kvps()) {
         const auto key(wrap_key(pair.first));
         const auto& value(pair.second);
-
-        // For some reason replace_all does not seem to work correctly
-        // on clang debug, _sometimes_, when we use strings rather
-        // than literals. This rather puzzling behaviour started when
-        // we upgraded to kernel 5.2 with all dependencies otherwise
-        // unchanged.
         boost::replace_all(r, key.c_str(), value.c_str());
     }
     return r;
