@@ -15,18 +15,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-05 Fri 12:12]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *9:51* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 9:51   |      |      | 100.0 |
-| Active                                             |        | 9:51 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 7:42 |  78.2 |
-| Create a demo and presentation for previous sprint |        |      | 1:11 |  12.0 |
-| Sprint and product backlog grooming                |        |      | 0:47 |   8.0 |
-| Nightly nursing                                    |        |      | 0:11 |   1.9 |
+#+CAPTION: Clock summary at [2020-06-05 Fri 17:40]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *13:36* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 13:36   |       |      | 100.0 |
+| Active                                             |         | 13:36 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 7:42 |  56.6 |
+| Create a demo and presentation for previous sprint |         |       | 1:11 |   8.7 |
+| Sprint and product backlog grooming                |         |       | 0:47 |   5.8 |
+| Nightly nursing                                    |         |       | 0:11 |   1.3 |
+| Merge kernel with physical meta-model              |         |       | 1:31 |  11.2 |
+| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   3.1 |
+| Create a TS agnostic representation of inclusion   |         |       | 1:32 |  11.3 |
+| Convert =wale_template_reference= to meta-data     |         |       | 0:17 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -811,6 +815,86 @@ technical spaces are obtained from the formatters, there is an
 argument to say that archetypes should have an associated technical
 space. We need to decouple these concepts in order to figure out where
 they belong.
+
+*** COMPLETED Merge kernel with physical meta-model                   :story:
+    CLOSED: [2020-06-05 Fri 15:36]
+    :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 14:08]--[2020-06-05 Fri 15:36] =>  1:28
+    CLOCK: [2020-06-05 Fri 14:04]--[2020-06-05 Fri 14:07] =>  0:03
+    :END:
+
+We made a slight modeling error: kernels are actually the PMM
+themselves. That is, it does not make sense for a PMM to contain one
+or more kernels, because:
+
+- we only have one kernel at present.
+- in the future, when we have more than one kernel, we should have
+  multiple physical models.
+- a given component should target only one kernel. This is a
+  conjecture, given we don't have a second kernel to compare notes
+  against but seems like a sensible one.
+
+Due to all this we should just merge kernel into the meta-model. This
+should tidy-up a number of hacks we did around kernel handling.
+
+*** STARTED Use PMM to compute =meta_name_indices=                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
+    :END:
+
+Now that we have assembled most of PMM, we should be able to use it to
+compute the =meta_name_indices=.
+
+- it does not make a lot of sense to have more than one kernel. Merge
+  it with PMM.
+- handle inclusion support in physical meta-model.
+
+*** STARTED Create a TS agnostic representation of inclusion          :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 16:38]--[2020-06-05 Fri 17:21] =>  0:43
+    CLOCK: [2020-06-05 Fri 15:37]--[2020-06-05 Fri 16:26] =>  0:49
+    :END:
+
+At present in the C++ model, archetypes are declaring their
+=inclusion_support_types=. This is an enum that allows us to figure
+out if an archetype can be included or not:
+
+- none: not designed to be included (cpp, cmake, etc).
+- regular: regular header file.
+- canonical: header file which is the default inclusion for a given
+  facet for a given meta-type.
+
+We need to generalise this into a technical space agnostic
+representation and place it on the physical model.
+
+As per story in previous sprint, we can extend the notion of
+"references" we already use for models. Meta-model archetypes have a
+status with regards to referability (referencing status?):
+
+- not referable.
+- referable.
+- referable, default for the facet.
+
+When we assemble the PMM we need to check that for all facets there is
+a default archetype. We could create a map in the facet that maps
+logical model elements to archetypes.
+
+Notes:
+
+- we should make referability a meta-data parameter so that we can use
+  profiles. We should also do the same for
+  =wale_template_reference=. There is no advantage of using an
+  attribute and we can save a lot of time by using profiles.
+
+*** STARTED Convert =wale_template_reference= to meta-data            :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 17:22]--[2020-06-05 Fri 17:39] =>  0:17
+    :END:
+
+Its not clear why we implemented this as an attribute, but now we have
+lots of duplication. We could easily use profiles to avoid this
+duplication if only it was meta-data. Convert it into meta-data,
+remove all attributes from all M2T transforms and update profiles.
 
 *** Stitch formatter updates                                          :story:
 
