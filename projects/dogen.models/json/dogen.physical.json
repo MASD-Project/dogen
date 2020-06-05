@@ -163,9 +163,9 @@
     },
     {
       "name": "entities::meta_model",
-      "documentation": "Describes the geomtry of physical space.\n\nProvides details of the kernels available in the current instance of Dogen.\n",
+      "documentation": "Describes the geomtry of physical space.\n\nProvides details of the backends available in the current instance of Dogen.\n",
       "stereotypes": [
-        "MetaElement"
+        "ContainingMetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

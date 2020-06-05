@@ -40,7 +40,7 @@ namespace dogen::physical::entities {
 /**
  * @brief Describes the geomtry of physical space.
  *
- * Provides details of the kernels available in the current instance of Dogen.
+ * Provides details of the backends available in the current instance of Dogen.
  */
 class meta_model final {
 public:
@@ -51,6 +51,8 @@ public:
 
 public:
     meta_model(
+        const std::string& default_directory_name,
+        const std::string& override_directory_name,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
@@ -59,6 +61,26 @@ public:
         const dogen::physical::entities::meta_name_indices& indexed_names);
 
 public:
+    /**
+     * @brief Default directory name.
+     */
+    /**@{*/
+    const std::string& default_directory_name() const;
+    std::string& default_directory_name();
+    void default_directory_name(const std::string& v);
+    void default_directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Override directory name, if any.
+     */
+    /**@{*/
+    const std::string& override_directory_name() const;
+    std::string& override_directory_name();
+    void override_directory_name(const std::string& v);
+    void override_directory_name(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Human readable description of the entity.
      */
@@ -134,6 +156,8 @@ public:
     meta_model& operator=(meta_model other);
 
 private:
+    std::string default_directory_name_;
+    std::string override_directory_name_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;

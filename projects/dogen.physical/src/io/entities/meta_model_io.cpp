@@ -103,6 +103,8 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const meta_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::meta_model\"" << ", "
+      << "\"default_directory_name\": " << "\"" << tidy_up_string(v.default_directory_name()) << "\"" << ", "
+      << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"enablement_flags\": " << v.enablement_flags() << ", "
