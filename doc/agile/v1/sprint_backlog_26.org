@@ -15,22 +15,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-05 Fri 17:40]
+#+CAPTION: Clock summary at [2020-06-05 Fri 21:52]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *13:36* |       |      | 100.0 |
+| *Total time*                                       | *13:56* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 13:36   |       |      | 100.0 |
-| Active                                             |         | 13:36 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 7:42 |  56.6 |
-| Create a demo and presentation for previous sprint |         |       | 1:11 |   8.7 |
-| Sprint and product backlog grooming                |         |       | 0:47 |   5.8 |
+| Stories                                            | 13:56   |       |      | 100.0 |
+| Active                                             |         | 13:56 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 7:42 |  55.3 |
+| Create a demo and presentation for previous sprint |         |       | 1:11 |   8.5 |
+| Sprint and product backlog grooming                |         |       | 0:47 |   5.6 |
 | Nightly nursing                                    |         |       | 0:11 |   1.3 |
-| Merge kernel with physical meta-model              |         |       | 1:31 |  11.2 |
-| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   3.1 |
-| Create a TS agnostic representation of inclusion   |         |       | 1:32 |  11.3 |
-| Convert =wale_template_reference= to meta-data     |         |       | 0:17 |   2.1 |
+| Merge kernel with physical meta-model              |         |       | 1:31 |  10.9 |
+| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   4.4 |
+| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   3.0 |
+| Create a TS agnostic representation of inclusion   |         |       | 1:32 |  11.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -837,6 +837,18 @@ or more kernels, because:
 Due to all this we should just merge kernel into the meta-model. This
 should tidy-up a number of hacks we did around kernel handling.
 
+*** COMPLETED Convert =wale_template_reference= to meta-data          :story:
+    CLOSED: [2020-06-05 Fri 21:51]
+    :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 21:31]--[2020-06-05 Fri 21:51] =>  0:20
+    CLOCK: [2020-06-05 Fri 17:22]--[2020-06-05 Fri 17:39] =>  0:17
+    :END:
+
+Its not clear why we implemented this as an attribute, but now we have
+lots of duplication. We could easily use profiles to avoid this
+duplication if only it was meta-data. Convert it into meta-data,
+remove all attributes from all M2T transforms and update profiles.
+
 *** STARTED Use PMM to compute =meta_name_indices=                    :story:
     :LOGBOOK:
     CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
@@ -885,16 +897,6 @@ Notes:
   profiles. We should also do the same for
   =wale_template_reference=. There is no advantage of using an
   attribute and we can save a lot of time by using profiles.
-
-*** STARTED Convert =wale_template_reference= to meta-data            :story:
-    :LOGBOOK:
-    CLOCK: [2020-06-05 Fri 17:22]--[2020-06-05 Fri 17:39] =>  0:17
-    :END:
-
-Its not clear why we implemented this as an attribute, but now we have
-lots of duplication. We could easily use profiles to avoid this
-duplication if only it was meta-data. Convert it into meta-data,
-remove all attributes from all M2T transforms and update profiles.
 
 *** Stitch formatter updates                                          :story:
 
