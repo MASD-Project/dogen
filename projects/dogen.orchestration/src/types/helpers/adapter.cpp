@@ -67,7 +67,6 @@ const std::string path_contribution_as_path_components("as_path_components");
 
 const std::string content_attr_name("content");
 const std::string stitch_template_content_attr_name("stitch_template_content");
-const std::string wale_template_reference_attr_name("wale_template_reference");
 
 const std::string empty_string("String is empty but expected value.");
 const std::string non_empty_string(
@@ -826,11 +825,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
 
         if (n == stitch_template_content_attr_name)
             r->stitch_template_content(attr.documentation());
-        else if (n == wale_template_reference_attr_name) {
-            const auto v(attr.value());
-            ensure_not_empty(r->name().qualified().dot(), v);
-            r->wale_template(to_name(v, false/*is_container*/));
-        } else {
+        else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
                 adaptation_exception(unsupported_attribute + n));
