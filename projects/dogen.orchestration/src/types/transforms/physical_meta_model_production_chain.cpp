@@ -49,22 +49,21 @@ apply(const physical::transforms::minimal_context& ctx, const
     tracing::scoped_chain_tracer stp(lg, "physical meta-model production chain",
         transform_id, "physical_meta_model", *ctx.tracer());
 
+    /*
+     * Create the MASD PMM. This is done here until we support
+     * defining PMMs in the logical representation of the physical
+     * meta-model through text transforms.
+     */
     using physical::entities::meta_model;
     auto r(boost::make_shared<meta_model>());
 
-    /*
-     * Create the MASD kernel. This is done here until we support
-     * kernels in the logical representation of the physical
-     * meta-model through text transforms.
-     */
     physical::helpers::meta_name_builder mnb;
     mnb.kernel("masd");
 
-    physical::entities::kernel k;
-    k.meta_name(mnb.build());
-    k.backends().push_back(
+    r->meta_name(mnb.build());
+    r->backends().push_back(
         text::cpp::transforms::transforms_backend_chain::static_backend());
-    k.backends().push_back(
+    r->backends().push_back(
         text::csharp::transforms::transforms_backend_chain::static_backend());
 
     /*
@@ -78,12 +77,7 @@ apply(const physical::transforms::minimal_context& ctx, const
     }
 
     const auto nrp(b.build());
-    k.indexed_names(nrp);
-
-    /*
-     * Add the new kernel to model.
-     */
-    r->kernels()[k.meta_name().simple()] = k;
+    r->indexed_names(nrp);
 
     /*
      * Obtain the template instantiation domains.

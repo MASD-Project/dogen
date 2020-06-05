@@ -30,7 +30,6 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/kernel.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
@@ -54,7 +53,6 @@ public:
     meta_model(
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
-        const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels,
         const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const std::list<dogen::physical::entities::backend>& backends,
@@ -79,16 +77,6 @@ public:
     dogen::physical::entities::meta_name& meta_name();
     void meta_name(const dogen::physical::entities::meta_name& v);
     void meta_name(const dogen::physical::entities::meta_name&& v);
-    /**@}*/
-
-    /**
-     * @brief Lists all available kernels, by kernel id.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels() const;
-    std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels();
-    void kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v);
-    void kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v);
     /**@}*/
 
     /**
@@ -148,7 +136,6 @@ public:
 private:
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
-    std::unordered_map<std::string, dogen::physical::entities::kernel> kernels_;
     std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     std::list<dogen::physical::entities::backend> backends_;

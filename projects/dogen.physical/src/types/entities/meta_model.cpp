@@ -25,14 +25,12 @@ namespace dogen::physical::entities {
 meta_model::meta_model(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
-    const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels,
     const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const std::list<dogen::physical::entities::backend>& backends,
     const dogen::physical::entities::meta_name_indices& indexed_names)
     : description_(description),
       meta_name_(meta_name),
-      kernels_(kernels),
       enablement_flags_(enablement_flags),
       template_instantiation_domains_(template_instantiation_domains),
       backends_(backends),
@@ -42,7 +40,6 @@ void meta_model::swap(meta_model& other) noexcept {
     using std::swap;
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
-    swap(kernels_, other.kernels_);
     swap(enablement_flags_, other.enablement_flags_);
     swap(template_instantiation_domains_, other.template_instantiation_domains_);
     swap(backends_, other.backends_);
@@ -52,7 +49,6 @@ void meta_model::swap(meta_model& other) noexcept {
 bool meta_model::operator==(const meta_model& rhs) const {
     return description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
-        kernels_ == rhs.kernels_ &&
         enablement_flags_ == rhs.enablement_flags_ &&
         template_instantiation_domains_ == rhs.template_instantiation_domains_ &&
         backends_ == rhs.backends_ &&
@@ -95,22 +91,6 @@ void meta_model::meta_name(const dogen::physical::entities::meta_name& v) {
 
 void meta_model::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::physical::entities::kernel>& meta_model::kernels() const {
-    return kernels_;
-}
-
-std::unordered_map<std::string, dogen::physical::entities::kernel>& meta_model::kernels() {
-    return kernels_;
-}
-
-void meta_model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v) {
-    kernels_ = v;
-}
-
-void meta_model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v) {
-    kernels_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& meta_model::enablement_flags() const {

@@ -363,8 +363,8 @@ apply(const context& ctx, entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
-    const auto& lmn(nrp.by_logical_meta_name());
+    const auto& in(pmm.indexed_names());
+    const auto& lmn(in.by_logical_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;

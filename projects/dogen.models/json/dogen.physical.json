@@ -170,11 +170,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernels",
-          "type": "std::unordered_map<std::string, kernel>",
-          "documentation": "Lists all available kernels, by kernel id.\n"
-        },
-        {
           "name": "enablement_flags",
           "type": "std::unordered_map<std::string, enablement_flags>",
           "documentation": "Global enablement flags\n"
@@ -188,24 +183,6 @@
           "name": "backends",
           "type": "std::list<backend>",
           "documentation": "All backends available in this meta-model.\n"
-        },
-        {
-          "name": "indexed_names",
-          "type": "meta_name_indices",
-          "documentation": "Repository with all the meta-names in this kernel, indexed appropriately.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::kernel",
-      "stereotypes": [
-        "MetaElement"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backends",
-          "type": "std::list<backend>"
         },
         {
           "name": "indexed_names",

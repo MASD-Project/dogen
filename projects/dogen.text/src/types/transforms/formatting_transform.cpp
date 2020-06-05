@@ -167,10 +167,9 @@ void formatting_transform::apply(const context& ctx, entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
-    const auto& ns(nrp.all());
+    const auto& in(pmm.indexed_names());
     const auto& fm(*ctx.feature_model());
-    const auto fgs(make_feature_groups(fm, ns));
+    const auto fgs(make_feature_groups(fm, in.all()));
     for(auto& ea : m.elements()) {
         auto& e(*ea.element());
         apply(fgs, e);

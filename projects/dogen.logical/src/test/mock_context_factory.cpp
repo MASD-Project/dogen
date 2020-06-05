@@ -43,7 +43,6 @@ transforms::context mock_context_factory::make() {
 
     transforms::context r;
     r.physical_meta_model(boost::make_shared<physical::entities::meta_model>());
-    r.physical_meta_model()->kernels()["masd"];
 
     configuration cfg;
     const auto activity("testing");

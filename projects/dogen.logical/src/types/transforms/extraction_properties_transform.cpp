@@ -140,10 +140,9 @@ void extraction_properties_transform::apply(const context& ctx,
         transform_id, transform_id, *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
-    const auto& ns(nrp.all());
+    const auto& in(pmm.indexed_names());
     const auto& cfg(*m.root_module()->configuration());
-    const auto ep(make_extraction_properties(ctx, ns, cfg));
+    const auto ep(make_extraction_properties(ctx, in.all(), cfg));
     m.extraction_properties(ep);
 
     stp.end_transform(m);

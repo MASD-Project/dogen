@@ -61,8 +61,8 @@ update_element(const context& ctx, logical::entities::element& e) {
 
     const auto mn(e.meta_name().qualified().dot());
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
-    const auto& lmn(nrp.by_logical_meta_name());
+    const auto& in(pmm.indexed_names());
+    const auto& lmn(in.by_logical_meta_name());
     const auto i(lmn.find(mn));
     if (i == lmn.end()) {
         BOOST_LOG_SEV(lg, debug) << "No archetypes for meta-name: " << mn;

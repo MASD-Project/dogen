@@ -399,9 +399,9 @@ apply(const context& ctx, entities::model& m) {
 
     const auto &fm(*ctx.feature_model());
     const auto& pmm(*ctx.physical_meta_model());
-    const auto& nrp(pmm.kernels().cbegin()->second.indexed_names());
-    populate_global_enablement_properties(fm, nrp, m);
-    populate_local_enablement_properties(fm, nrp, m);
+    const auto& in(pmm.indexed_names());
+    populate_global_enablement_properties(fm, in, m);
+    populate_local_enablement_properties(fm, in, m);
 
     stp.end_transform(m);
 }
