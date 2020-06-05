@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include "dogen.physical/types/transforms/context_fwd.hpp"
 #include "dogen.physical/types/entities/model_set.hpp"
 
@@ -37,7 +36,7 @@ namespace dogen::physical::transforms {
 class merge_transform final {
 public:
     /**
-     * @brief Apply the transform to the list of input models.
+     * @brief Apply the transform to the input model set.
      */
     static entities::model apply(const physical::transforms::context& ctx,
         const physical::entities::model_set& ms);
