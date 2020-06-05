@@ -164,6 +164,9 @@
     {
       "name": "entities::meta_model",
       "documentation": "Describes the geomtry of physical space.\n\nProvides details of the kernels available in the current instance of Dogen.\n",
+      "stereotypes": [
+        "MetaElement"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -180,6 +183,16 @@
           "name": "template_instantiation_domains",
           "type": "std::unordered_map<std::string, std::vector<std::string>>",
           "documentation": "Provides all of the domains to be used for template instantiation.\n\nExample of a domain is \"masd.facet\" which contains the list of all available facets.\nTemplates (facet and profile) are then instantiated over this range, depending on\nuser choices.\n"
+        },
+        {
+          "name": "backends",
+          "type": "std::list<backend>",
+          "documentation": "All backends available in this meta-model.\n"
+        },
+        {
+          "name": "indexed_names",
+          "type": "meta_name_indices",
+          "documentation": "Repository with all the meta-names in this kernel, indexed appropriately.\n"
         }
       ]
     },

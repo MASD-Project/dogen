@@ -21,8 +21,11 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/kernel_io.hpp"
+#include "dogen.physical/io/entities/backend_io.hpp"
+#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.physical/io/entities/enablement_flags_io.hpp"
+#include "dogen.physical/io/entities/meta_name_indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -100,14 +103,32 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::backend>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const meta_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::meta_model\"" << ", "
+      << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
+      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"kernels\": " << v.kernels() << ", "
       << "\"enablement_flags\": " << v.enablement_flags() << ", "
-      << "\"template_instantiation_domains\": " << v.template_instantiation_domains()
+      << "\"template_instantiation_domains\": " << v.template_instantiation_domains() << ", "
+      << "\"backends\": " << v.backends() << ", "
+      << "\"indexed_names\": " << v.indexed_names()
       << " }";
     return(s);
 }

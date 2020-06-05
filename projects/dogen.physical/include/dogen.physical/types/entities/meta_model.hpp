@@ -25,12 +25,16 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/kernel.hpp"
+#include "dogen.physical/types/entities/backend.hpp"
+#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
 
@@ -48,11 +52,35 @@ public:
 
 public:
     meta_model(
+        const std::string& description,
+        const dogen::physical::entities::meta_name& meta_name,
         const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels,
         const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
-        const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains);
+        const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
+        const std::list<dogen::physical::entities::backend>& backends,
+        const dogen::physical::entities::meta_name_indices& indexed_names);
 
 public:
+    /**
+     * @brief Human readable description of the entity.
+     */
+    /**@{*/
+    const std::string& description() const;
+    std::string& description();
+    void description(const std::string& v);
+    void description(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::physical::entities::meta_name& meta_name() const;
+    dogen::physical::entities::meta_name& meta_name();
+    void meta_name(const dogen::physical::entities::meta_name& v);
+    void meta_name(const dogen::physical::entities::meta_name&& v);
+    /**@}*/
+
     /**
      * @brief Lists all available kernels, by kernel id.
      */
@@ -87,6 +115,26 @@ public:
     void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v);
     /**@}*/
 
+    /**
+     * @brief All backends available in this meta-model.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::backend>& backends() const;
+    std::list<dogen::physical::entities::backend>& backends();
+    void backends(const std::list<dogen::physical::entities::backend>& v);
+    void backends(const std::list<dogen::physical::entities::backend>&& v);
+    /**@}*/
+
+    /**
+     * @brief Repository with all the meta-names in this kernel, indexed appropriately.
+     */
+    /**@{*/
+    const dogen::physical::entities::meta_name_indices& indexed_names() const;
+    dogen::physical::entities::meta_name_indices& indexed_names();
+    void indexed_names(const dogen::physical::entities::meta_name_indices& v);
+    void indexed_names(const dogen::physical::entities::meta_name_indices&& v);
+    /**@}*/
+
 public:
     bool operator==(const meta_model& rhs) const;
     bool operator!=(const meta_model& rhs) const {
@@ -98,9 +146,13 @@ public:
     meta_model& operator=(meta_model other);
 
 private:
+    std::string description_;
+    dogen::physical::entities::meta_name meta_name_;
     std::unordered_map<std::string, dogen::physical::entities::kernel> kernels_;
     std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
+    std::list<dogen::physical::entities::backend> backends_;
+    dogen::physical::entities::meta_name_indices indexed_names_;
 };
 
 }
