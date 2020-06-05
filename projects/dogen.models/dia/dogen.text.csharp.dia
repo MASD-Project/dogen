@@ -134,7 +134,7 @@
         <dia:point val="-17,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,4.15;218.05,76.05"/>
+        <dia:rectangle val="-17.05,4.15;218.05,70.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -146,7 +146,7 @@
         <dia:real val="235"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="70"/>
+        <dia:real val="64"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1684,7 +1684,7 @@
         <dia:point val="-15,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,38.15;42.05,74.05"/>
+        <dia:rectangle val="-15.05,38.15;42.05,68.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1696,7 +1696,7 @@
         <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="34"/>
+        <dia:real val="28"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1723,7 +1723,7 @@
         <dia:point val="-13,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,47.95;9.88,52.45"/>
+        <dia:rectangle val="-13.05,47.95;9.88,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-13,48"/>
@@ -1732,7 +1732,7 @@
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_transform#</dia:string>
@@ -2144,29 +2144,6 @@ using System;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2180,7 +2157,7 @@ using System;
         <dia:point val="14,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,47.95;38.805,52.45"/>
+        <dia:rectangle val="13.95,47.95;38.805,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="14,48"/>
@@ -2189,7 +2166,7 @@ using System;
         <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_transform#</dia:string>
@@ -2370,29 +2347,6 @@ using System;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2406,7 +2360,7 @@ using System;
         <dia:point val="44,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,38.15;100.05,74.05"/>
+        <dia:rectangle val="43.95,38.15;100.05,68.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2418,7 +2372,7 @@ using System;
         <dia:real val="56"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="34"/>
+        <dia:real val="28"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2445,7 +2399,7 @@ using System;
         <dia:point val="46,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,47.95;68.88,52.45"/>
+        <dia:rectangle val="45.95,47.95;68.88,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="46,48"/>
@@ -2454,7 +2408,7 @@ using System;
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_transform#</dia:string>
@@ -2695,29 +2649,6 @@ using System;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2731,7 +2662,7 @@ using System;
         <dia:point val="73,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,47.95;97.805,52.45"/>
+        <dia:rectangle val="72.95,47.95;97.805,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,48"/>
@@ -2740,7 +2671,7 @@ using System;
         <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_transform#</dia:string>
@@ -2935,29 +2866,6 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2971,7 +2879,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="102,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,38.15;159.05,74.05"/>
+        <dia:rectangle val="101.95,38.15;159.05,68.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2983,7 +2891,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="34"/>
+        <dia:real val="28"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -3010,7 +2918,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="104,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,47.95;126.88,52.45"/>
+        <dia:rectangle val="103.95,47.95;126.88,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,48"/>
@@ -3019,7 +2927,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#class_transform#</dia:string>
@@ -3333,29 +3241,6 @@ using System.Collections.Generic;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3369,7 +3254,7 @@ using System.Collections.Generic;
         <dia:point val="132,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,47.95;156.805,52.45"/>
+        <dia:rectangle val="131.95,47.95;156.805,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="132,48"/>
@@ -3378,7 +3263,7 @@ using System.Collections.Generic;
         <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enum_transform#</dia:string>
@@ -3626,29 +3511,6 @@ using System.Collections.Generic;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -3659,19 +3521,19 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,54"/>
+        <dia:point val="-13,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,53.95;11.035,58.45"/>
+        <dia:rectangle val="-13.05,52.95;11.035,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,54"/>
+        <dia:point val="-13,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#exception_transform#</dia:string>
@@ -3824,29 +3686,6 @@ using System;
     stp.end_transform(a);
 }
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5044,7 +4883,7 @@ using System;
         <dia:point val="99.7625,34.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.0125,32.95;119.107,36.055"/>
+        <dia:rectangle val="99.0125,32.95;119.108,36.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12146,13 +11985,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,68"/>
+        <dia:point val="-13,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,67.95;1.025,71.05"/>
+        <dia:rectangle val="-13.05,62.95;1.025,66.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,68"/>
+        <dia:point val="-13,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -12464,19 +12303,19 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O92">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,60"/>
+        <dia:point val="-13,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,59.95;10.265,64.45"/>
+        <dia:rectangle val="-13.05,57.95;10.265,61.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,60"/>
+        <dia:point val="-13,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#builtin_transform#</dia:string>
@@ -12608,29 +12447,6 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
 }
 
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13114,13 +12930,13 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,68"/>
+        <dia:point val="46,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,67.95;60.025,71.05"/>
+        <dia:rectangle val="45.95,58.95;60.025,62.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,68"/>
+        <dia:point val="46,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -13892,19 +13708,19 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,54"/>
+        <dia:point val="14,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,53.95;38.035,58.45"/>
+        <dia:rectangle val="13.95,52.95;38.035,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,54"/>
+        <dia:point val="14,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_transform#</dia:string>
@@ -14169,29 +13985,6 @@ using System;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -14205,7 +13998,7 @@ using System;
         <dia:point val="132,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,53.95;156.035,58.45"/>
+        <dia:rectangle val="131.95,53.95;156.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="132,54"/>
@@ -14214,7 +14007,7 @@ using System;
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_transform#</dia:string>
@@ -14483,29 +14276,6 @@ using System.Collections.Generic;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -14516,19 +14286,19 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O106">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,54"/>
+        <dia:point val="46,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,53.95;70.035,58.45"/>
+        <dia:rectangle val="45.95,52.95;70.035,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,54"/>
+        <dia:point val="46,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive_transform#</dia:string>
@@ -14729,29 +14499,6 @@ using System;
     stp.end_transform(a);
 }
 #&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15927,7 +15674,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="161,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.95,38.15;216.05,74.05"/>
+        <dia:rectangle val="160.95,38.15;216.05,68.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15939,7 +15686,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:real val="55"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="34"/>
+        <dia:real val="28"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -16188,16 +15935,16 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="164,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.95,47.95;186.88,52.45"/>
+        <dia:rectangle val="163.95,47.95;175.715,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="164,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_transform#</dia:string>
@@ -16215,7 +15962,8 @@ std::string {{class.simple_name}}::helper_name() const {
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
-#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
+#DOGEN masd.physical.wale_template_reference=csharp_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16399,29 +16147,6 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -16435,16 +16160,16 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:point val="190,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.95,47.95;212.88,52.45"/>
+        <dia:rectangle val="189.95,47.95;201.715,51.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="190,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#solution_transform#</dia:string>
@@ -16462,7 +16187,8 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory
 #DOGEN masd.physical.part_id=masd.csharp.implementation
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
-#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
+#DOGEN masd.physical.wale_template_reference=csharp_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16631,29 +16357,6 @@ EndGlobal
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -16774,19 +16477,19 @@ EndGlobal
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O121">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,54"/>
+        <dia:point val="73,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,53.95;97.035,58.45"/>
+        <dia:rectangle val="72.95,52.95;97.035,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,54"/>
+        <dia:point val="73,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#assistant_transform#</dia:string>
@@ -17437,29 +17140,6 @@ using System.Collections;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -17473,7 +17153,7 @@ using System.Collections;
         <dia:point val="104,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,53.95;128.035,58.45"/>
+        <dia:rectangle val="103.95,53.95;128.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,54"/>
@@ -17482,7 +17162,7 @@ using System.Collections;
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#assistant_transform#</dia:string>
@@ -17835,29 +17515,6 @@ using System.Collections.Specialized;
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#wale_template_reference#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#csharp_transform_implementation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -17981,16 +17638,16 @@ using System.Collections.Specialized;
         <dia:point val="10,11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,10.95;37.5,16.25"/>
+        <dia:rectangle val="9.95,10.95;38.27,17.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_configuration#</dia:string>
@@ -18138,6 +17795,29 @@ using System.Collections.Specialized;
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>#make_full_path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.physical.wale_template_reference#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#csharp_transform_implementation#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -18484,17 +18164,17 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O128">
       <dia:attribute name="obj_pos">
-        <dia:point val="23.725,16.2"/>
+        <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.325,16.15;24.575,21.05"/>
+        <dia:rectangle val="-1.325,16.95;24.96,21.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="23.725,16.2"/>
-        <dia:point val="23.725,19"/>
+        <dia:point val="24.11,17"/>
+        <dia:point val="24.11,19"/>
         <dia:point val="-1.275,19"/>
         <dia:point val="-1.275,21"/>
       </dia:attribute>
@@ -18937,17 +18617,17 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="23.725,16.2"/>
+        <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.875,16.15;30.7375,21.0001"/>
+        <dia:rectangle val="23.26,16.95;30.7375,21.0001"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="23.725,16.2"/>
-        <dia:point val="23.725,19"/>
+        <dia:point val="24.11,17"/>
+        <dia:point val="24.11,19"/>
         <dia:point val="30.6875,19"/>
         <dia:point val="30.6875,20.9501"/>
       </dia:attribute>
@@ -19186,17 +18866,17 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="23.725,16.2"/>
+        <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.2525,16.15;24.575,29.05"/>
+        <dia:rectangle val="14.2525,16.95;24.96,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="23.725,16.2"/>
-        <dia:point val="23.725,19"/>
+        <dia:point val="24.11,17"/>
+        <dia:point val="24.11,19"/>
         <dia:point val="14.3025,19"/>
         <dia:point val="14.3025,29"/>
       </dia:attribute>
@@ -19435,17 +19115,17 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O135">
       <dia:attribute name="obj_pos">
-        <dia:point val="23.725,16.2"/>
+        <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.875,16.15;47.3525,29.05"/>
+        <dia:rectangle val="23.26,16.95;47.3525,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="23.725,16.2"/>
-        <dia:point val="23.725,19"/>
+        <dia:point val="24.11,17"/>
+        <dia:point val="24.11,19"/>
         <dia:point val="47.3025,19"/>
         <dia:point val="47.3025,29"/>
       </dia:attribute>
@@ -19684,17 +19364,17 @@ the C# Technical Space.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O137">
       <dia:attribute name="obj_pos">
-        <dia:point val="23.725,16.2"/>
+        <dia:point val="24.11,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.875,16.15;62.9675,21.05"/>
+        <dia:rectangle val="23.26,16.95;62.9675,21.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="23.725,16.2"/>
-        <dia:point val="23.725,19"/>
+        <dia:point val="24.11,17"/>
+        <dia:point val="24.11,19"/>
         <dia:point val="62.9175,19"/>
         <dia:point val="62.9175,21"/>
       </dia:attribute>
@@ -19704,7 +19384,7 @@ the C# Technical Space.
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
