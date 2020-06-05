@@ -4082,6 +4082,11 @@
           "name": "rendered_stitch_template",
           "type": "std::string",
           "documentation": "Contains the result of the stitch template after rendering.\n"
+        },
+        {
+          "name": "referencing_status",
+          "type": "std::string",
+          "documentation": "Status of this archetype with regards to referencing.\n"
         }
       ]
     },

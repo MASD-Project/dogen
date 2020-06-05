@@ -76,7 +76,8 @@ public:
         const std::string& stitch_template_content,
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content,
-        const std::string& rendered_stitch_template);
+        const std::string& rendered_stitch_template,
+        const std::string& referencing_status);
 
 public:
     using element::accept;
@@ -197,6 +198,16 @@ public:
     void rendered_stitch_template(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Status of this archetype with regards to referencing.
+     */
+    /**@{*/
+    const std::string& referencing_status() const;
+    std::string& referencing_status();
+    void referencing_status(const std::string& v);
+    void referencing_status(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -222,6 +233,7 @@ private:
     boost::optional<dogen::logical::entities::name> wale_template_;
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
+    std::string referencing_status_;
 };
 
 }
