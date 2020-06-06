@@ -15,24 +15,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-06 Sat 13:33]
+#+CAPTION: Clock summary at [2020-06-06 Sat 18:22]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *15:35* |       |      | 100.0 |
+| *Total time*                                       | *15:56* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 15:35   |       |      | 100.0 |
-| Active                                             |         | 15:35 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 7:42 |  49.4 |
-| Create a demo and presentation for previous sprint |         |       | 1:11 |   7.6 |
-| Sprint and product backlog grooming                |         |       | 0:47 |   5.0 |
+| Stories                                            | 15:56   |       |      | 100.0 |
+| Active                                             |         | 15:56 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 7:42 |  48.3 |
+| Create a demo and presentation for previous sprint |         |       | 1:11 |   7.4 |
+| Sprint and product backlog grooming                |         |       | 1:08 |   7.1 |
 | Nightly nursing                                    |         |       | 0:11 |   1.2 |
-| Merge kernel with physical meta-model              |         |       | 1:31 |   9.7 |
-| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   4.0 |
+| Merge kernel with physical meta-model              |         |       | 1:31 |   9.5 |
+| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   3.9 |
 | Create an emacs mode for wale                      |         |       | 0:14 |   1.5 |
-| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   2.7 |
-| Create a TS agnostic representation of inclusion   |         |       | 2:19 |  14.9 |
-| Reduce number of required wale keys                |         |       | 0:38 |   4.1 |
+| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   2.6 |
+| Create a TS agnostic representation of inclusion   |         |       | 2:19 |  14.5 |
+| Reduce number of required wale keys                |         |       | 0:38 |   4.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -787,6 +787,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 18:01]--[2020-06-06 Sat 18:22] =>  0:21
     CLOCK: [2020-06-05 Fri 11:06]--[2020-06-05 Fri 11:19] =>  0:13
     CLOCK: [2020-06-05 Fri 10:24]--[2020-06-05 Fri 10:38] =>  0:14
     CLOCK: [2020-06-04 Thu 23:12]--[2020-06-04 Thu 23:26] =>  0:14

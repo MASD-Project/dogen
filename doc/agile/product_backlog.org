@@ -9857,6 +9857,9 @@ Links:
   generator: [[https://github.com/beached/json_to_cpp][json_to_cpp]].
 - [[https://github.com/simdjson/simdjson][simdjson]]: parsing gigabytes of JSON per second
   https://simdjson.org. See also [[https://lemire.me/blog/2020/03/31/we-released-simdjson-0-3-the-fastest-json-parser-in-the-world-is-even-better/][this post]].
+- [[https://github.com/awangk/ujson][ujson]]: µjson is a a small, C++11, UTF-8, JSON library
+- [[https://github.com/ultrajson/ultrajson][ultrajson]]: Ultra fast JSON decoder and encoder written in C with
+  Python bindings
 
 Merged stories:
 
@@ -9883,6 +9886,19 @@ this JSON mode.
 
 It seems we do not yet have a story for this. The idea is to have some
 basic JSON roundtripping support. The user can configure the backend.
+
+*** Consider adding support for Hypothesis                            :story:
+
+This seems like a very interesting property based testing
+framework. Perhaps we can understand the basic concepts and port it to
+Dogen.
+
+Links:
+
+- https://hypothesis.works/: main site
+- [[https://hypothesis.works/articles/intro/][articles on hypothesis]]
+- [[https://hypothesis.works/articles/what-is-hypothesis/][What is Hypothesis?]]
+- [[https://github.com/HypothesisWorks/hypothesis/tree/master/hypothesis-python][GH hypothesis python]]
 
 *** Finish adding support for Language Agnostic Models (LAM)          :story:
 
@@ -10965,6 +10981,8 @@ Links:
 
 - [[http://gamesfromwithin.com/physical-structure-and-c-part-1-a-first-look][Physical Structure and C++ – Part 1: A First Look]]
 - [[http://gamesfromwithin.com/physical-structure-and-c-part-2-build-times][Physical Structure and C++ – Part 2: Build Times]]
+- [[https://github.com/metrixplusplus/metrixplusplus][GH metrixplusplus]]: Metrix++ is an extendable tool for code metrics
+  collection and analysis.
 
 *** Add support for configuration as environment variables            :story:
 
@@ -17997,6 +18015,9 @@ Links:
   Model, a powerful abstraction on which to collect and expose
   metrics. We offer the possibility for metrics to be collected by
   Prometheus, but other push/pull collections can be added as plugins.
+- [[https://github.com/ultradns/cppmetrics][cppmetrics]]: C++ port of the codahale/dropwizard metrics library. See
+  also [[https://github.com/konstan/cppmetrics][this fork]].
+- [[https://github.com/orca-zhang/influxdb-cpp][GH influxdb-cpp]]: influxdb is used as a timeseries DB for metrics.
 
 *** Consider adding support for RAFT protocol                         :story:
 
