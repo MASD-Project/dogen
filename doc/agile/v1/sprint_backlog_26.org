@@ -15,24 +15,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-06 Sat 18:22]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *15:56* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 15:56   |       |      | 100.0 |
-| Active                                             |         | 15:56 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 7:42 |  48.3 |
-| Create a demo and presentation for previous sprint |         |       | 1:11 |   7.4 |
-| Sprint and product backlog grooming                |         |       | 1:08 |   7.1 |
-| Nightly nursing                                    |         |       | 0:11 |   1.2 |
-| Merge kernel with physical meta-model              |         |       | 1:31 |   9.5 |
-| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   3.9 |
-| Create an emacs mode for wale                      |         |       | 0:14 |   1.5 |
-| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   2.6 |
-| Create a TS agnostic representation of inclusion   |         |       | 2:19 |  14.5 |
-| Reduce number of required wale keys                |         |       | 0:38 |   4.0 |
+#+CAPTION: Clock summary at [2020-06-06 Sat 19:29]
+| <75>                                                  |         |       |      |       |
+| Headline                                              | Time    |       |      |     % |
+|-------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                          | *16:34* |       |      | 100.0 |
+|-------------------------------------------------------+---------+-------+------+-------|
+| Stories                                               | 16:34   |       |      | 100.0 |
+| Active                                                |         | 16:34 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:42 |  46.5 |
+| Create a demo and presentation for previous sprint    |         |       | 1:11 |   7.1 |
+| Sprint and product backlog grooming                   |         |       | 1:13 |   7.3 |
+| Nightly nursing                                       |         |       | 0:11 |   1.1 |
+| Merge kernel with physical meta-model                 |         |       | 1:31 |   9.2 |
+| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   3.7 |
+| Create an emacs mode for wale                         |         |       | 0:14 |   1.4 |
+| Create a TS agnostic representation of inclusion      |         |       | 2:19 |  14.0 |
+| Use PMM to compute =meta_name_indices=                |         |       | 0:25 |   2.5 |
+| Analysis on reducing the number of required wale keys |         |       | 1:11 |   7.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -787,6 +787,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 19:24]--[2020-06-06 Sat 19:29] =>  0:05
     CLOCK: [2020-06-06 Sat 18:01]--[2020-06-06 Sat 18:22] =>  0:21
     CLOCK: [2020-06-05 Fri 11:06]--[2020-06-05 Fri 11:19] =>  0:13
     CLOCK: [2020-06-05 Fri 10:24]--[2020-06-05 Fri 10:38] =>  0:14
@@ -887,18 +888,6 @@ Links:
 
 - https://github.com/mustache/emacs
 
-*** STARTED Use PMM to compute =meta_name_indices=                    :story:
-    :LOGBOOK:
-    CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
-    :END:
-
-Now that we have assembled most of PMM, we should be able to use it to
-compute the =meta_name_indices=.
-
-- it does not make a lot of sense to have more than one kernel. Merge
-  it with PMM.
-- handle inclusion support in physical meta-model.
-
 *** STARTED Create a TS agnostic representation of inclusion          :story:
     :LOGBOOK:
     CLOCK: [2020-06-06 Sat 12:06]--[2020-06-06 Sat 12:53] =>  0:47
@@ -937,8 +926,28 @@ Notes:
   =wale_template_reference=. There is no advantage of using an
   attribute and we can save a lot of time by using profiles.
 
-*** STARTED Reduce number of required wale keys                       :story:
+*** STARTED Use PMM to compute =meta_name_indices=                    :story:
     :LOGBOOK:
+    CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
+    :END:
+
+Now that we have assembled most of PMM, we should be able to use it to
+compute the =meta_name_indices=.
+
+- it does not make a lot of sense to have more than one kernel. Merge
+  it with PMM.
+- handle inclusion support in physical meta-model.
+
+Once this is done, we need to delete all of the infrastructure that
+was created to compute this data:
+
+- registrar stuff
+- methods in the M2T transform related to PMM
+- helpers.
+
+*** STARTED Analysis on reducing the number of required wale keys     :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 18:50]--[2020-06-06 Sat 19:23] =>  0:33
     CLOCK: [2020-06-06 Sat 13:25]--[2020-06-06 Sat 13:33] =>  0:08
     CLOCK: [2020-06-06 Sat 12:54]--[2020-06-06 Sat 13:24] =>  0:30
     :END:
@@ -988,7 +997,43 @@ Notes:
   =masd.wale.kvp.locator_function=. These can be left as is.
 - the logical meta-name should be resolved. However since we need to
   replace this with stereotypes, we can ignore this for now.
+- in fact, we have found a much deeper truth. Archetypes have been
+  projected into the physical dimension incorrectly; we have merged
+  the notion of a transform with the notion of a factory. In reality,
+  if we take a step back, the logical representation of an archetype
+  is projected into the physical dimension in two distinct ways:
 
+  - as a factory of physical elements;
+  - as a transform.
+
+  We conflated these two things into the formatter and this is the
+  source of all confusion. In fact the fact that the wale template was
+  common across (almost) all archetypes was already an indication of
+  this duplication of efforts. In reality, we should have had two
+  distinct M2T transforms for each of these projects. Then, there
+  would only be one stitch template for all archetypes for the factory
+  projection. Also the factory projects does not need the
+  static/virtual stuff - we can simply create a factory that,
+  every time it is called, creates a new PMM. It will only be called
+  once, from the bootstrapping chain.
+- this also means that the archetype for the factory will take on the
+  majority of the work we are doing with wale keys at present. In
+  order to cater for legacy, we may still need some additional
+  properties:
+
+: #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
+
+  We should add these to the logical archetype just for now and
+  deprecate it once the clean up is complete.
+- this is a much cleaner approach. Even the postfixes =_transform= and
+  =_factory= are cleanly handled as we already do for things such as
+  forward declarations. It also means there is a lot less hackery when
+  obtaining the parameters for what are at present the wale keys and
+  in the future will be just the state of the logical archetype.
+- the exact same projects will apply to most logical representations
+  of physical elements (=backend=, =facet=, =archetype=). Some however
+  will not require all; =archetype_kind= and =part= just need the
+  factory projection.
 
 Merged stories:
 
@@ -1002,6 +1047,22 @@ want flexibility; we want structural consistency. That is to say we
 want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
 we should enforce this by deducing these parameters from the logical
 model element and other wale template parameters.
+
+*** Split archetype factory from transform                            :story:
+
+As per analysis story, we need to create two different archetypes for
+archetype:
+
+- transform
+- factory
+
+We can start by creating factory and moving it all across, then
+deleting the aspects of factory from the existing transform. However,
+the only slight snag is that there may be users of the =archetype=
+method in the transform interface. We need to figure out who is using
+it outside of bootstrapping. We won't be able to delete the existing
+factory code in the interface until this is done. Perhaps we should
+first move to the new PMM generation and then do this clean up.
 
 *** Consider renaming =wale= to =tangle=                              :story:
 
