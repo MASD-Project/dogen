@@ -100,17 +100,6 @@ nice to make them visible. Advantages:
   method. This can either be done as a hack (as we do for say
   archetypes, etc) or we could add support for proper operations.
 
-*** Consider renaming =wale= to =tangle=                              :story:
-
-Wale and stitch are remnant from the sewing days. Whilst stitch is
-still vaguely appropriate, we can't even remember what wale stands
-for. We should use a more domain-specific term such as weave or
-tangle. In fact, we probably should rename =stitch= to =weave= given
-it weaves text with code, and find a better name for wale. Its not
-"tangling" (given tangling, as we understand it from org-mode, is just
-another name for weaving). We need to look into logic-less templates
-terminology.
-
 *** Consider creating a container for profiles                        :story:
 
 At present we have placed all profiles in the profiles model and made
@@ -307,7 +296,10 @@ their type in the logical model. Rename these to wale templates.
 
 Actually its not yet clear if the existing logic could not be extended
 to other template types. We should wait until we implement it front to
-back and then make
+back and then make a decision.
+
+The most obvious thing is just to call the templates after their
+actual name: mustache.
 
 *** Stitch templates should be bound to Dogen M2T transforms          :story:
 

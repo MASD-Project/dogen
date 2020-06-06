@@ -15,22 +15,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-05 Fri 21:52]
+#+CAPTION: Clock summary at [2020-06-06 Sat 13:33]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *13:56* |       |      | 100.0 |
+| *Total time*                                       | *15:35* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 13:56   |       |      | 100.0 |
-| Active                                             |         | 13:56 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 7:42 |  55.3 |
-| Create a demo and presentation for previous sprint |         |       | 1:11 |   8.5 |
-| Sprint and product backlog grooming                |         |       | 0:47 |   5.6 |
-| Nightly nursing                                    |         |       | 0:11 |   1.3 |
-| Merge kernel with physical meta-model              |         |       | 1:31 |  10.9 |
-| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   4.4 |
-| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   3.0 |
-| Create a TS agnostic representation of inclusion   |         |       | 1:32 |  11.0 |
+| Stories                                            | 15:35   |       |      | 100.0 |
+| Active                                             |         | 15:35 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 7:42 |  49.4 |
+| Create a demo and presentation for previous sprint |         |       | 1:11 |   7.6 |
+| Sprint and product backlog grooming                |         |       | 0:47 |   5.0 |
+| Nightly nursing                                    |         |       | 0:11 |   1.2 |
+| Merge kernel with physical meta-model              |         |       | 1:31 |   9.7 |
+| Convert =wale_template_reference= to meta-data     |         |       | 0:37 |   4.0 |
+| Create an emacs mode for wale                      |         |       | 0:14 |   1.5 |
+| Use PMM to compute =meta_name_indices=             |         |       | 0:25 |   2.7 |
+| Create a TS agnostic representation of inclusion   |         |       | 2:19 |  14.9 |
+| Reduce number of required wale keys                |         |       | 0:38 |   4.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -849,6 +851,41 @@ lots of duplication. We could easily use profiles to avoid this
 duplication if only it was meta-data. Convert it into meta-data,
 remove all attributes from all M2T transforms and update profiles.
 
+*** COMPLETED Create an emacs mode for wale                           :story:
+    CLOSED: [2020-06-06 Sat 13:08]
+    :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 12:53]--[2020-06-06 Sat 13:07] =>  0:14
+    :END:
+
+We should just copy and paste the stitch mode for this. Actually,
+since wale is just a cut down vesion of mustache, we can just make
+use of a mustache mode.
+
+Attempt at a mode:
+
+#+begin_src emacs-lisp
+(require 'polymode)
+
+(define-hostmode poly-wale-hostmode :mode 'fundamental-mode)
+
+(define-innermode poly-wale-variable-innermode
+  :mode 'conf-mode
+  :head-matcher "{{"
+  :tail-matcher "}}"
+  :head-mode 'host
+  :tail-mode 'host)
+
+(define-polymode wale-mode
+  :hostmode 'poly-wale-hostmode
+  :innermodes '(poly-wale-variable-innermode))
+
+;; (add-to-list 'auto-mode-alist '("\\.wale" . wale-mode))
+#+end_src
+
+Links:
+
+- https://github.com/mustache/emacs
+
 *** STARTED Use PMM to compute =meta_name_indices=                    :story:
     :LOGBOOK:
     CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
@@ -863,6 +900,7 @@ compute the =meta_name_indices=.
 
 *** STARTED Create a TS agnostic representation of inclusion          :story:
     :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 12:06]--[2020-06-06 Sat 12:53] =>  0:47
     CLOCK: [2020-06-05 Fri 16:38]--[2020-06-05 Fri 17:21] =>  0:43
     CLOCK: [2020-06-05 Fri 15:37]--[2020-06-05 Fri 16:26] =>  0:49
     :END:
@@ -897,6 +935,115 @@ Notes:
   profiles. We should also do the same for
   =wale_template_reference=. There is no advantage of using an
   attribute and we can save a lot of time by using profiles.
+
+*** STARTED Reduce number of required wale keys                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-06 Sat 13:25]--[2020-06-06 Sat 13:33] =>  0:08
+    CLOCK: [2020-06-06 Sat 12:54]--[2020-06-06 Sat 13:24] =>  0:30
+    :END:
+
+We have a number of keys that can be derived:
+
+- the meta-name factory is fixed for all transforms.
+- the class simple name can be derived from the archetype name or even
+  from the class name itself.
+
+Actually, there is something much more profound going on here which we
+missed completely due to the complexity of generating generators. In
+reality, there are two "moments" of generation:
+
+- there is the archetype generation. This involves the expansion of
+  the mustache template (which we called wale thus far), and the
+  expansion of the stitch template.
+- then there is the generation of the target logical model
+  element. This happens when the code generated by the first moment
+  executes against a user model.
+
+In the first moment, we have complete access to the archetype within
+the logical model. At present, we have ignored this and instead
+bypassed the logical model representation and supplied the inputs to
+the mustache expansion directly; these are the wale keys:
+
+: #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform
+: #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
+: #DOGEN masd.wale.kvp.meta_element=physical_archetype
+: #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+
+However if we look at these very carefully, all of this information is
+already present in the logical model representation of an archetype
+(by definition really). And we can use meta-data to give the archetype
+all of the required data:
+
+: #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
+
+So in reality all we need to do is to have a pass in the wale template
+expansion which populates the KVP using data from the logical
+element. All inputs should be supplied as regular meta-data and they
+should be modeled correctly in the logical model.
+
+Notes:
+
+- we will not be able to model the legacy keys such as
+  =masd.wale.kvp.locator_function=. These can be left as is.
+- the logical meta-name should be resolved. However since we need to
+  replace this with stereotypes, we can ignore this for now.
+
+
+Merged stories:
+
+*Remove =class.simple_name= variable*
+
+In the past we thought it was a good idea to separate the archetype
+name (e.g. ={{archetype.simple_name}}=) from the class name
+(e.g. =class.simple_name=). This was done so that the templates would
+be more "flexible" and more explicit. However, it turns out we don't
+want flexibility; we want structural consistency. That is to say we
+want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
+we should enforce this by deducing these parameters from the logical
+model element and other wale template parameters.
+
+*** Consider renaming =wale= to =tangle=                              :story:
+
+Wale and stitch are remnant from the sewing days. Whilst stitch is
+still vaguely appropriate, we can't even remember what wale stands
+for. We should use a more domain-specific term such as weave or
+tangle. In fact, we probably should rename =stitch= to =weave= given
+it weaves text with code, and find a better name for wale. Its not
+"tangling" (given tangling, as we understand it from org-mode, is just
+another name for weaving). We need to look into logic-less templates
+terminology.
+
+Actually this is a mistake. Wale is just a poor-person's mustache and
+will be replaced by a proper implementation of mustache as soon as we
+can. We should instead start calling it mustache and explain this is
+just a temporary fix.
+
+*** Merging of collections does not overwrite keys                    :story:
+
+In variability, given a profile with a collection C and an element
+with a collection K, the merge of the two collections will result in
+duplicate keys if an entry exists on both C and K. We should take K.
+
+*** Referability and logical model                                    :story:
+
+We have modeled referability as a physical property but in reality its
+a combination:
+
+- at the logical model level, we know if a model element can be
+  referred or not. We also know that referability works in sets:
+  classes of elements can refer to each other but not across other
+  classes. This requires building a proper taxonomy for referability.
+- at the physical level we inherit the logical referability
+  properties, but then in addition, we need to state that for each
+  facet and each logical model element, there exists one and only one
+  default archetype.
+
+The domain model should reflect these findings.
+
+Notes:
+
+- we already have some kind of concept for this because we use this in
+  the resolver. Investigate how its being used.
 
 *** Stitch formatter updates                                          :story:
 
@@ -1028,27 +1175,6 @@ Merged stories:
 Where we are using these traits classes, we should really be including
 the formatter and calling for its static name - at least within each
 backend.
-
-*** Reduce number of required wale keys                               :story:
-
-We have a number of keys that can be derived:
-
-- the meta-name factory is fixed for all transforms.
-- the class simple name can be derived from the archetype name or even
-  from the class name itself.
-
-Merged stories:
-
-*Remove =class.simple_name= variable*
-
-In the past we thought it was a good idea to separate the archetype
-name (e.g. ={{archetype.simple_name}}=) from the class name
-(e.g. =class.simple_name=). This was done so that the templates would
-be more "flexible" and more explicit. However, it turns out we don't
-want flexibility; we want structural consistency. That is to say we
-want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
-we should enforce this by deducing these parameters from the logical
-model element and other wale template parameters.
 
 *** Add documentation to archetypes headers                           :story:
 
