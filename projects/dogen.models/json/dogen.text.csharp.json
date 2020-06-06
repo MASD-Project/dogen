@@ -1046,7 +1046,8 @@
         "masd.physical.part_id": "masd.csharp.implementation",
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_project",
         "masd.wale.kvp.containing_namespace": "text.csharp.transforms.visual_studio",
-        "masd.physical.wale_template_reference": "csharp_transform_implementation"
+        "masd.physical.wale_template_reference": "csharp_transform_implementation",
+        "masd.physical.referencing_status": "not_referable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1072,7 +1073,8 @@
         "masd.physical.part_id": "masd.csharp.implementation",
         "masd.wale.kvp.locator_function": "make_full_path_for_visual_studio_solution",
         "masd.wale.kvp.containing_namespace": "text.csharp.transforms.visual_studio",
-        "masd.physical.wale_template_reference": "csharp_transform_implementation"
+        "masd.physical.wale_template_reference": "csharp_transform_implementation",
+        "masd.physical.referencing_status": "not_referable"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1176,6 +1178,11 @@
           "name": "masd.physical.wale_template_reference",
           "type": "",
           "value": "csharp_transform_implementation"
+        },
+        {
+          "name": "masd.physical.referencing_status",
+          "type": "",
+          "value": "facet_default"
         }
       ]
     },

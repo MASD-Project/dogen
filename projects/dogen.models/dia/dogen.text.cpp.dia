@@ -37194,7 +37194,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="18,367"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,365.15;87.05,386.05"/>
+        <dia:rectangle val="17.95,365.15;86.05,386.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37203,7 +37203,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="18,367"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="69"/>
+        <dia:real val="68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="19"/>
