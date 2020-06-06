@@ -32,7 +32,8 @@
 
 namespace {
 
-const std::string transform_id("archetype_rendering_transform");
+const std::string transform_id(
+    "logical.transforms.archetype_rendering_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
