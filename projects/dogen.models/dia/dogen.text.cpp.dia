@@ -38045,7 +38045,7 @@ const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype
         using pmnf = physical::helpers::meta_name_factory;
         r.meta_name(pmnf::make(cpp::traits::backend_sn(),
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-        using lmnf = {{meta_name_factory}};
+        using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
         return r;
     }());
@@ -38223,7 +38223,7 @@ const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype
         using pmnf = physical::helpers::meta_name_factory;
         r.meta_name(pmnf::make(cpp::traits::backend_sn(),
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-        using lmnf = {{meta_name_factory}};
+        using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
         return r;
     }());
@@ -46076,31 +46076,28 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="7,193"/>
+        <dia:point val="9,194"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,192.95;34.5,196.65"/>
+        <dia:rectangle val="8.95,193.95;23.065,197.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="7,193"/>
+        <dia:point val="9,194"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="14.015000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#common_archetype_configuration#</dia:string>
+        <dia:string>#base_archetype_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Contains the configuration common to all archetypes.
-
-#DOGEN masd.variability.binding_point=entity
-#</dia:string>
+        <dia:string>#Contains the configuration common to all archetypes.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -46180,31 +46177,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.wale.kvp.meta_name_factory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#logical::helpers::meta_name_factory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-      </dia:attribute>
+      <dia:attribute name="attributes"/>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -46398,17 +46371,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O304">
       <dia:attribute name="obj_pos">
-        <dia:point val="20.725,196.6"/>
+        <dia:point val="16.0075,197"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.4375,196.55;21.575,206.05"/>
+        <dia:rectangle val="-2.4375,196.95;16.8575,206.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.725,196.6"/>
-        <dia:point val="20.725,199"/>
+        <dia:point val="16.0075,197"/>
+        <dia:point val="16.0075,199"/>
         <dia:point val="-2.3875,199"/>
         <dia:point val="-2.3875,206"/>
       </dia:attribute>
@@ -46647,17 +46620,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O306">
       <dia:attribute name="obj_pos">
-        <dia:point val="20.725,196.6"/>
+        <dia:point val="16.0075,197"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.875,196.55;39.315,206.05"/>
+        <dia:rectangle val="15.1575,196.95;39.315,206.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.725,196.6"/>
-        <dia:point val="20.725,199"/>
+        <dia:point val="16.0075,197"/>
+        <dia:point val="16.0075,199"/>
         <dia:point val="39.265,199"/>
         <dia:point val="39.265,206"/>
       </dia:attribute>
@@ -46873,17 +46846,17 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="20.725,196.6"/>
+        <dia:point val="16.0075,197"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.215,196.55;21.575,200.003"/>
+        <dia:rectangle val="15.1575,196.95;18.315,200.003"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.725,196.6"/>
-        <dia:point val="20.725,199"/>
+        <dia:point val="16.0075,197"/>
+        <dia:point val="16.0075,199"/>
         <dia:point val="18.265,199"/>
         <dia:point val="18.265,199.953"/>
       </dia:attribute>
