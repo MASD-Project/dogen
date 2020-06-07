@@ -50,6 +50,7 @@ const physical::entities::archetype& primitive_transform::static_archetype() {
             traits::facet_sn(), traits::primitive_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_primitive_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;
     }());
     return r;

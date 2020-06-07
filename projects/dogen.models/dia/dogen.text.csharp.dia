@@ -15212,6 +15212,7 @@ const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::{{referencing_status}});
         return r;
     }());
     return r;
