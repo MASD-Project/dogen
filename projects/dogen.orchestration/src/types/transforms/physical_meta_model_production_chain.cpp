@@ -39,7 +39,7 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const bool legacy(true);
+const bool legacy(false);
 
 }
 
