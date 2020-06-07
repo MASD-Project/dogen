@@ -18,12 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("physical.transforms.compute_name_indices_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool compute_name_indices_transform::operator==(const compute_name_indices_transform& /*rhs*/) const {
-    return true;
+void compute_name_indices_transform::
+apply(const physical::transforms::minimal_context& ctx,
+    const physical::entities::meta_model& mm) {
+    tracing::scoped_transform_tracer stp(lg, "compute name indices transform",
+        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
+/*
+    for (auto& be : mm.backends()) {
+        for (auto& fct_pair : be.facets()) {
+            auto& fct(fct_pair.second);
+            for (auto& arch_pair : fct.archetypes()) {
+                auto& arch(arch_pair.second);
+
+
+            }
+
+        }
+    }
+*/
+
+    stp.end_transform(mm);
 }
 
 }

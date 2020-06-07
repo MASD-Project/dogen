@@ -21,6 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
+#include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 
 namespace {
@@ -41,6 +42,11 @@ apply(const physical::transforms::minimal_context& ctx,
     tracing::scoped_chain_tracer stp(lg, "meta model production chain",
         transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
 
+    /*
+     * For now we just have one step in this chain which is to update
+     * all of the meta-name indices.
+     */
+    compute_name_indices_transform::apply(ctx, mm);
 
     stp.end_chain(mm);
 }
