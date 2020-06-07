@@ -20,6 +20,7 @@
  */
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/shared_ptr_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
