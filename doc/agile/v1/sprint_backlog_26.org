@@ -15,24 +15,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-07 Sun 16:27]
+#+CAPTION: Clock summary at [2020-06-07 Sun 16:39]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *20:18* |       |      | 100.0 |
+| *Total time*                                          | *20:28* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 20:18   |       |      | 100.0 |
-| Active                                                |         | 20:18 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:42 |  37.9 |
+| Stories                                               | 20:28   |       |      | 100.0 |
+| Active                                                |         | 20:28 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:42 |  37.6 |
 | Create a demo and presentation for previous sprint    |         |       | 1:11 |   5.8 |
-| Sprint and product backlog grooming                   |         |       | 1:34 |   7.7 |
+| Sprint and product backlog grooming                   |         |       | 1:44 |   8.5 |
 | Nightly nursing                                       |         |       | 0:11 |   0.9 |
-| Merge kernel with physical meta-model                 |         |       | 1:31 |   7.5 |
+| Merge kernel with physical meta-model                 |         |       | 1:31 |   7.4 |
 | Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   3.0 |
 | Create an emacs mode for wale                         |         |       | 0:14 |   1.1 |
-| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  15.1 |
+| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  15.0 |
 | Analysis on reducing the number of required wale keys |         |       | 1:11 |   5.8 |
-| Use PMM to compute =meta_name_indices=                |         |       | 3:03 |  15.0 |
+| Use PMM to compute =meta_name_indices=                |         |       | 3:03 |  14.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -787,6 +787,8 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-07 Sun 16:37]--[2020-06-07 Sun 16:39] =>  0:02
+    CLOCK: [2020-06-07 Sun 16:28]--[2020-06-07 Sun 16:36] =>  0:08
     CLOCK: [2020-06-07 Sun 11:15]--[2020-06-07 Sun 11:36] =>  0:21
     CLOCK: [2020-06-06 Sat 19:24]--[2020-06-06 Sat 19:29] =>  0:05
     CLOCK: [2020-06-06 Sat 18:01]--[2020-06-06 Sat 18:22] =>  0:21
@@ -1051,18 +1053,104 @@ was created to compute this data:
 - methods in the M2T transform related to PMM
 - helpers.
 
-*** Improve referencing status                                        :story:
+*** STARTED Inject backend, facets and archetypes into PMM            :story:
 
-We did a very quick hack to move inclusion status into the physical
-model. However, there are a number of things that need looking at:
+At present we only have artefacts in the PMM. We need to inject all
+other missing elements. We also need to create a transform which
+builds the PMM. Finally while we're at it we should add enablement
+properties and associated transform.
 
-- we should make referability a meta-data parameter so that we can use
-  profiles. We should also do the same for
-  =wale_template_reference=. There is no advantage of using an
-  attribute and we can save a lot of time by using profiles.
-- note also that some archetypes are intrinsically non-referable:
-  =cpp=, =CMakeLists= etc. Perhaps we could make this a property of
-  the kind as well.
+Notes:
+
+- we should also change template instantiation code to use the PMM.
+- once we have a flag, we can detect disabled backends before any work
+  is carried out. The cost should be very close to zero. We don't need
+  to do any checks for this afterwards.
+- we need to add a list of archetypes that each archetype depends
+  on. We need to update the formatters to return archetypes rather
+  than names and have the dependencies there.
+
+Merged stories:
+
+*Implement archetype locations from physical meta-model*
+
+We need to use the new physical meta-model to obtain information about
+the layout of physical space, replacing the archetype locations.
+
+Tasks:
+
+- make the existing backend interface return the layout of physical
+  space.
+- create a transform that populates all of the data structures needed
+  by the current code base (archetype locations).
+- replace the existing archetype locations with a physical meta-model.
+- remove all the archetype locations data structures.
+
+Notes:
+
+- template instantiation domains should be a part of the physical
+  meta-model. Create a transform to compute these. *done*
+- remove Locatable from Element? *done*
+
+Merged stories:
+
+*Clean-up archetype locations modeling*
+
+We now have a large number of containers with different aspects of
+archetype locations data. We need to look through all of the usages of
+archetype locations and see if we can make the data structures a bit
+more sensible. For example, we should use archetype location id's
+where possible and only use the full type where required.
+
+Notes:
+
+- formatters could return id's?
+- add an ID to archetype location; create a builder like name builder
+  and populate ID as part of the build process.
+
+*Implement the physical meta-model*
+
+We need to replace the existing classes around archetype locations
+with the new meta-model types.
+
+Notes:
+
+- formatters should add their data to a registrar that lives in the
+  physical model rather than expose it via an interface.
+
+*** STARTED Model inclusion =inclusion_support_types= in the physical model :story:
+
+At present we have a quick hack on =text.cpp= to model the inclusion
+of archetypes. In order to migrate the PMM to the new architecture, we
+need to bring this concept across. We had envisioned that this work
+would have been done when dealing with dependencies, but since we
+cannot progress with the PMM work, we need to at least address this
+aspect. The crux of it is: dependencies are functions of logical
+meta-types to logical meta-types. However, they also have a physical
+component.
+
+Most of the work is already done, we just need to remove the legacy
+stuff (enum, interface methods) and see what breaks.
+
+Notes:
+
+- an archetype may not be able to participate on dependency
+  relationships at all. Or it may be able to participate in
+  relationships but just as a regular archetype. Finally, it may be a
+  "canonical" archetype; that is, when we have a dependency against a
+  facet, the canonical archetype for that logical meta-type gets
+  picked up.
+- canonical archetypes exist mainly because we ended up with cases
+  where there are more than one archetype that can be depended on for
+  a given logical meta-type (e.g. forward declarations). In this
+  cases, we need to disambiguate a reference.
+- actually, aren't dependencies just "references"? Perhaps we can
+  reuse terminology from references.
+- in C# we are mapping dependencies to using statements. This means we
+  extract the namespaces of each dependency and then use the "unique"
+  of all namespaces. However, we may end up in a situation where there
+  are name clashes. For example, if we had a reference to =A::a= and
+  =B::a=, this would cause problems.
 
 *** Split archetype factory from transform                            :story:
 
@@ -1079,6 +1167,67 @@ method in the transform interface. We need to figure out who is using
 it outside of bootstrapping. We won't be able to delete the existing
 factory code in the interface until this is done. Perhaps we should
 first move to the new PMM generation and then do this clean up.
+
+*** Replace initialisers with facet-based initialisation              :story:
+
+Now that we have facets, archetypes, etc as proper meta-model
+elements, it is becoming clear that the initialiser is just a facet in
+disguise. We have enough information to generate all initialisers as
+part of the code generation of facets and backends. Once we do this,
+we have reached the point where it is possible to create a new
+meta-model element and add a formatter for it and code will be
+automatically generated without any manual intervention. Similarly,
+deleting formatters will delete all traces of it from the code
+generator.
+
+*** Replace uses of traits in archetype initialisation                :story:
+
+At present we are relying on the traits class to initialise the
+archetype in the wale template:
+
+: physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+:    static physical::entities::archetype r([]() {
+:        physical::entities::archetype r;
+:        using pmnf = physical::helpers::meta_name_factory;
+:        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+:            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+:        using lmnf = {{meta_name_factory}};
+:        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+:        return r;
+:    }());
+:    return r;
+: }
+
+However, given that we now know this template is used only for
+archetypes and we want to enforce a structural consistency, we should
+start to initialise all of these variables as literal strings supplied
+as wale parameters. These should be deduced from the logical model
+element. It is fine to hard-code this because we are designing it
+explicitly for archetypes, not as a general purpose mechanism.
+
+This can only be done when we are generating the PMM via facets and
+backends.
+
+Merged stories:
+
+*Replace traits with calls to the PMM elements*
+
+Where we are using these traits classes, we should really be including
+the formatter and calling for its static name - at least within each
+backend.
+
+*** Improve referencing status                                        :story:
+
+We did a very quick hack to move inclusion status into the physical
+model. However, there are a number of things that need looking at:
+
+- we should make referability a meta-data parameter so that we can use
+  profiles. We should also do the same for
+  =wale_template_reference=. There is no advantage of using an
+  attribute and we can save a lot of time by using profiles.
+- note also that some archetypes are intrinsically non-referable:
+  =cpp=, =CMakeLists= etc. Perhaps we could make this a property of
+  the kind as well.
 
 *** Consider renaming =wale= to =tangle=                              :story:
 
@@ -1144,37 +1293,6 @@ of empty directories. It doesn't seem easy to stop the directory
 generation but perhaps we could add the tracing directory to the file
 transforms and run the "remove empty directories" transform over it.
 
-*** Model inclusion =inclusion_support_types= in the physical model   :story:
-
-At present we have a quick hack on =text.cpp= to model the inclusion
-of archetypes. In order to migrate the PMM to the new architecture, we
-need to bring this concept across. We had envisioned that this work
-would have been done when dealing with dependencies, but since we
-cannot progress with the PMM work, we need to at least address this
-aspect. The crux of it is: dependencies are functions of logical
-meta-types to logical meta-types. However, they also have a physical
-component.
-
-Notes:
-
-- an archetype may not be able to participate on dependency
-  relationships at all. Or it may be able to participate in
-  relationships but just as a regular archetype. Finally, it may be a
-  "canonical" archetype; that is, when we have a dependency against a
-  facet, the canonical archetype for that logical meta-type gets
-  picked up.
-- canonical archetypes exist mainly because we ended up with cases
-  where there are more than one archetype that can be depended on for
-  a given logical meta-type (e.g. forward declarations). In this
-  cases, we need to disambiguate a reference.
-- actually, aren't dependencies just "references"? Perhaps we can
-  reuse terminology from references.
-- in C# we are mapping dependencies to using statements. This means we
-  extract the namespaces of each dependency and then use the "unique"
-  of all namespaces. However, we may end up in a situation where there
-  are name clashes. For example, if we had a reference to =A::a= and
-  =B::a=, this would cause problems.
-
 *** Replace =formatting_error= with =transformation_error=            :story:
 
 Now that we moved from formatters to M2T transforms, we should stop
@@ -1218,42 +1336,6 @@ Though we've split wale out of stitch in the logical model, its still
 possible to instantiate a wale template within stitch. We should
 remove this as well.
 
-*** Replace uses of traits in archetype initialisation                :story:
-
-At present we are relying on the traits class to initialise the
-archetype in the wale template:
-
-: physical::entities::archetype {{class.simple_name}}::static_archetype() const {
-:    static physical::entities::archetype r([]() {
-:        physical::entities::archetype r;
-:        using pmnf = physical::helpers::meta_name_factory;
-:        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-:            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-:        using lmnf = {{meta_name_factory}};
-:        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
-:        return r;
-:    }());
-:    return r;
-: }
-
-However, given that we now know this template is used only for
-archetypes and we want to enforce a structural consistency, we should
-start to initialise all of these variables as literal strings supplied
-as wale parameters. These should be deduced from the logical model
-element. It is fine to hard-code this because we are designing it
-explicitly for archetypes, not as a general purpose mechanism.
-
-This can only be done when we are generating the PMM via facets and
-backends.
-
-Merged stories:
-
-*Replace traits with calls to the PMM elements*
-
-Where we are using these traits classes, we should really be including
-the formatter and calling for its static name - at least within each
-backend.
-
 *** Add documentation to archetypes headers                           :story:
 
 At present we are ignoring the documentation we supply with the
@@ -1267,83 +1349,6 @@ tests and from within CLI. In reality, since orchestration is joining
 all the dots, it should have a top-level initialiser that sets
 everything up. It should then be called by the CLI initialiser and the
 tests initialiser, which has additional stuff to initialise.
-
-*** Replace initialisers with facet-based initialisation              :story:
-
-Now that we have facets, archetypes, etc as proper meta-model
-elements, it is becoming clear that the initialiser is just a facet in
-disguise. We have enough information to generate all initialisers as
-part of the code generation of facets and backends. Once we do this,
-we have reached the point where it is possible to create a new
-meta-model element and add a formatter for it and code will be
-automatically generated without any manual intervention. Similarly,
-deleting formatters will delete all traces of it from the code
-generator.
-
-*** Inject backend, facets and archetypes into PMM                    :story:
-
-At present we only have artefacts in the PMM. We need to inject all
-other missing elements. We also need to create a transform which
-builds the PMM. Finally while we're at it we should add enablement
-properties and associated transform.
-
-Notes:
-
-- we should also change template instantiation code to use the PMM.
-- once we have a flag, we can detect disabled backends before any work
-  is carried out. The cost should be very close to zero. We don't need
-  to do any checks for this afterwards.
-- we need to add a list of archetypes that each archetype depends
-  on. We need to update the formatters to return archetypes rather
-  than names and have the dependencies there.
-
-Merged stories:
-
-*Implement archetype locations from physical meta-model*
-
-We need to use the new physical meta-model to obtain information about
-the layout of physical space, replacing the archetype locations.
-
-Tasks:
-
-- make the existing backend interface return the layout of physical
-  space.
-- create a transform that populates all of the data structures needed
-  by the current code base (archetype locations).
-- replace the existing archetype locations with a physical meta-model.
-- remove all the archetype locations data structures.
-
-Notes:
-
-- template instantiation domains should be a part of the physical
-  meta-model. Create a transform to compute these. *done*
-- remove Locatable from Element? *done*
-
-Merged stories:
-
-*Clean-up archetype locations modeling*
-
-We now have a large number of containers with different aspects of
-archetype locations data. We need to look through all of the usages of
-archetype locations and see if we can make the data structures a bit
-more sensible. For example, we should use archetype location id's
-where possible and only use the full type where required.
-
-Notes:
-
-- formatters could return id's?
-- add an ID to archetype location; create a builder like name builder
-  and populate ID as part of the build process.
-
-*Implement the physical meta-model*
-
-We need to replace the existing classes around archetype locations
-with the new meta-model types.
-
-Notes:
-
-- formatters should add their data to a registrar that lives in the
-  physical model rather than expose it via an interface.
 
 *** Split enablement features                                         :story:
 
