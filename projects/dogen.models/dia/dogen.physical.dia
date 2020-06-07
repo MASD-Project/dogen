@@ -4294,7 +4294,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="126.062,-93.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="124.013,-93.45;126.912,-87.95"/>
+        <dia:rectangle val="124.012,-93.45;126.912,-87.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4624,7 +4624,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="124.062,-84.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.212,-84.9998;126.422,-78.95"/>
+        <dia:rectangle val="123.212,-84.9998;126.423,-78.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6304,7 +6304,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="135.025,-101.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.175,-101.85;156.113,-96.95"/>
+        <dia:rectangle val="134.175,-101.85;156.112,-96.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8165,7 +8165,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="215.845,-112.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="204.101,-112.359;215.904,-109.598"/>
+        <dia:rectangle val="204.1,-112.359;215.904,-109.598"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16191,7 +16191,7 @@ models and meta-models for the physical model.
         <dia:point val="102.525,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.59,-92.5997;103.275,-86.4"/>
+        <dia:rectangle val="100.59,-92.5997;103.275,-87.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16263,7 +16263,7 @@ models and meta-models for the physical model.
         <dia:point val="88.91,-115.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.16,-116.05;92.05,-113.7"/>
+        <dia:rectangle val="88.16,-116.05;92.05,-114.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16335,7 +16335,7 @@ models and meta-models for the physical model.
         <dia:point val="78.285,-68.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.535,-69.05;81.05,-64.7"/>
+        <dia:rectangle val="77.535,-69.05;81.05,-65.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16407,7 +16407,7 @@ models and meta-models for the physical model.
         <dia:point val="168,-114.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="164.925,-115.65;168.75,-112.5"/>
+        <dia:rectangle val="164.925,-115.65;168.75,-113.245"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16660,7 +16660,7 @@ models and meta-models for the physical model.
         <dia:point val="170.125,-75.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="169.375,-76.15;174.492,-67.4492"/>
+        <dia:rectangle val="169.375,-76.15;174.492,-68.2492"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16732,7 +16732,7 @@ models and meta-models for the physical model.
         <dia:point val="160,-75.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="159.95,-75.45;168.355,-67.4"/>
+        <dia:rectangle val="159.95,-75.45;168.355,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16804,7 +16804,7 @@ models and meta-models for the physical model.
         <dia:point val="109,-67.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.903,-68.65;109.75,-66.3"/>
+        <dia:rectangle val="105.903,-68.65;109.75,-67.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
