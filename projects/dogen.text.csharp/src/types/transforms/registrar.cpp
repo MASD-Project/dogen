@@ -161,9 +161,4 @@ registrar::physical_meta_names_by_family() const {
     return physical_meta_names_by_family_;
 }
 
-const physical::entities::meta_name_repository_parts&
-registrar::physical_meta_name_repository_parts() const {
-    return physical_meta_name_repository_parts_;
-}
-
 }

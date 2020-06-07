@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/minimal_context.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Updates the meta-name indices in the meta-model.
+ */
 class compute_name_indices_transform final {
 public:
-    compute_name_indices_transform() = default;
-    compute_name_indices_transform(const compute_name_indices_transform&) = default;
-    compute_name_indices_transform(compute_name_indices_transform&&) = default;
-    ~compute_name_indices_transform() = default;
-    compute_name_indices_transform& operator=(const compute_name_indices_transform&) = default;
-
-public:
-    bool operator==(const compute_name_indices_transform& rhs) const;
-    bool operator!=(const compute_name_indices_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Apply the transform to the meta-model.
+     */
+    static void apply(const physical::transforms::minimal_context& ctx,
+        const physical::entities::meta_model& mm);
 };
 
 }

@@ -131,22 +131,6 @@
       ]
     },
     {
-      "name": "entities::meta_name_repository_parts",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "all",
-          "type": "std::list<meta_name>",
-          "documentation": "All physical meta-names for the archetypes owned by this part, listing all\navailable backends, facets and archetypes.\n"
-        },
-        {
-          "name": "by_logical_meta_name",
-          "type": "std::unordered_map<std::string, meta_name_group>",
-          "documentation": "Returns the physical meta-names for each logical meta name.\n"
-        }
-      ]
-    },
-    {
       "name": "helpers::meta_name_repository_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"

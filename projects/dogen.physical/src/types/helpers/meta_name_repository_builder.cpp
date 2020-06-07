@@ -159,12 +159,6 @@ void meta_name_repository_builder::add(const std::unordered_map<std::string,
     }
 }
 
-void meta_name_repository_builder::
-add(const entities::meta_name_repository_parts& parts) {
-    add(parts.all());
-    add(parts.by_logical_meta_name());
-}
-
 const entities::meta_name_indices& meta_name_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();

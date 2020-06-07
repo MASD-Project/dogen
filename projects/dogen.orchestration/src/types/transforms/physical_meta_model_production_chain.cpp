@@ -73,7 +73,6 @@ apply(const physical::transforms::minimal_context& ctx, const
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.physical_meta_names_by_logical_meta_name());
-        b.add(t.physical_meta_name_repository_parts());
     }
 
     const auto nrp(b.build());

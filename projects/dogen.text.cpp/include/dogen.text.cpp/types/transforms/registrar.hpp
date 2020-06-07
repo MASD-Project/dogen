@@ -32,7 +32,6 @@
 #include <unordered_map>
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/meta_name_group.hpp"
-#include "dogen.physical/types/entities/meta_name_repository_parts.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -98,13 +97,6 @@ public:
                              std::list<physical::entities::meta_name>>&
     physical_meta_names_by_family() const;
 
-    /**
-     * @brief Returns the repository parts for the physical
-     * meta-names.
-     */
-    const physical::entities::meta_name_repository_parts&
-    physical_meta_name_repository_parts() const;
-
 public:
     /**
      * @brief Returns all of the available helper transforms.
@@ -123,8 +115,6 @@ private:
     physical_meta_names_by_logical_meta_name_;
     std::unordered_map<std::string, std::list<physical::entities::meta_name>>
     physical_meta_names_by_family_;
-    physical::entities::meta_name_repository_parts
-    physical_meta_name_repository_parts_;
 };
 
 template<typename Transform>

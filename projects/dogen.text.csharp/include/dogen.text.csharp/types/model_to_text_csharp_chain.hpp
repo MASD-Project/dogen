@@ -82,9 +82,6 @@ public:
                              std::list<physical::entities::meta_name>>&
     physical_meta_names_by_family() const override;
 
-    const physical::entities::meta_name_repository_parts&
-    physical_meta_name_repository_parts() const override;
-
 public:
     logical::entities::technical_space technical_space() const override;
 

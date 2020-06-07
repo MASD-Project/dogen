@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/meta_name_group.hpp"
-#include "dogen.physical/types/entities/meta_name_repository_parts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/entities/model.hpp"
@@ -86,13 +85,6 @@ public:
                                      std::list<physical::entities::meta_name>
                                      >&
     physical_meta_names_by_family() const = 0;
-
-    /**
-     * @brief Returns this backend's part of the repository of
-     * physical meta-names.
-     */
-    virtual const physical::entities::meta_name_repository_parts&
-    physical_meta_name_repository_parts() const = 0;
 
 public:
     /**

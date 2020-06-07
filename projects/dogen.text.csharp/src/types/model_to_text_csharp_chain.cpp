@@ -92,13 +92,6 @@ model_to_text_csharp_chain::physical_meta_names_by_family() const {
     return rg.physical_meta_names_by_family();
 }
 
-const physical::entities::meta_name_repository_parts&
-model_to_text_csharp_chain::
-physical_meta_name_repository_parts() const {
-    const auto& rg(transforms::workflow::registrar());
-    return rg.physical_meta_name_repository_parts();
-}
-
 logical::entities::technical_space
 model_to_text_csharp_chain::technical_space() const {
     return logical::entities::technical_space::csharp;
