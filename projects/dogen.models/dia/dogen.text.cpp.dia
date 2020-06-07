@@ -37530,8 +37530,7 @@ string.
       <dia:attribute name="comment">
         <dia:string>#Generates header files for enumerations.
 
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.lexical_cast
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.lexical_cast#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

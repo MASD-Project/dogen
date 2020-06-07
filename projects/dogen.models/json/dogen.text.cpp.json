@@ -2427,8 +2427,7 @@
         "dogen::enumeration_header_configuration"
       ],
       "tagged_values": {
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.lexical_cast",
-        "masd.physical.referencing_status": "not_referable"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.lexical_cast"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
