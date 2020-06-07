@@ -24,7 +24,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.physical/types/helpers/meta_name_builder.hpp"
-#include "dogen.physical/types/helpers/meta_name_repository_builder.hpp"
+#include "dogen.physical/types/helpers/meta_name_index_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.text.cpp/types/transforms/transforms.hpp"
 #include "dogen.text.csharp/types/transforms/transforms.hpp"
@@ -69,7 +69,7 @@ apply(const physical::transforms::minimal_context& ctx, const
     /*
      * Legacy repository building.
      */
-    physical::helpers::meta_name_repository_builder b;
+    physical::helpers::meta_name_index_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.physical_meta_names_by_logical_meta_name());

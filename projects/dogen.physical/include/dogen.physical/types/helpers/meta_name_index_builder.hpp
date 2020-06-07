@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_HELPERS_NAME_REPOSITORY_BUILDER_HPP
-#define DOGEN_LOGICAL_TYPES_HELPERS_NAME_REPOSITORY_BUILDER_HPP
+#ifndef DOGEN_LOGICAL_TYPES_HELPERS_NAME_INDEX_BUILDER_HPP
+#define DOGEN_LOGICAL_TYPES_HELPERS_NAME_INDEX_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
 
 namespace dogen::physical::helpers {
 
-class meta_name_repository_builder final {
+class meta_name_index_builder final {
 private:
     void validate(const std::list<entities::meta_name>& mns) const;
     void populate_names(const std::list<entities::meta_name>& mns);
@@ -49,7 +49,7 @@ public:
     const entities::meta_name_indices& build();
 
 private:
-    entities::meta_name_indices repository_;
+    entities::meta_name_indices index_;
 };
 
 }

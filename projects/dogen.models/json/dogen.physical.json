@@ -131,7 +131,7 @@
       ]
     },
     {
-      "name": "helpers::meta_name_repository_builder",
+      "name": "helpers::meta_name_index_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

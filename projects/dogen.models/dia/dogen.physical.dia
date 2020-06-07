@@ -1198,7 +1198,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_name_repository_builder#</dia:string>
+        <dia:string>#meta_name_index_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
