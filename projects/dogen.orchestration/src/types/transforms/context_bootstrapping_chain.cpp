@@ -32,12 +32,10 @@
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
-#include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text.cpp/types/feature_initializer.hpp"
 #include "dogen.text.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
-#include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text.cpp/types/transforms/transforms.hpp"
 #include "dogen.text.csharp/types/transforms/transforms.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
@@ -88,14 +86,8 @@ context_bootstrapping_chain::create_and_setup_tracer(
 boost::shared_ptr<physical::entities::meta_model> context_bootstrapping_chain::
 create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     /*
-     * Obtain the transform registrar and ensure it has been setup.
-     */
-    using text::transforms::model_to_text_chain;
-    const auto& rg(model_to_text_chain::registrar());
-    rg.validate();
-
-    /*
-     * Create the physical meta-model.
+     * Create the minimal context. Note that we cannot use a regular
+     * context because these depend on the PMM.
      */
     const auto ctx(context_factory::make_minimal_context(tracer));
 
@@ -108,7 +100,7 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
     };
 
     /*
-     * Execute the physical chain.
+     * Execute the physical chain to get a PMM.
      */
     using physical::transforms::meta_model_production_chain;
     const auto r(meta_model_production_chain::apply(ctx, bes));
