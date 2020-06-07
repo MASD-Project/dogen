@@ -71,9 +71,6 @@ public:
     std::string id() const override;
 
 public:
-    const std::forward_list<physical::entities::meta_name>&
-    physical_meta_names() const override;
-
     const std::unordered_map<std::string,
                              physical::entities::meta_name_group>&
     physical_meta_names_by_logical_meta_name() const override;

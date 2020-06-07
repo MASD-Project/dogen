@@ -66,13 +66,6 @@ public:
 
 public:
     /**
-     * @brief Returns the physical meta-names for the registered
-     * transforms.
-     */
-    const std::forward_list<physical::entities::meta_name>&
-    physical_meta_names() const;
-
-    /**
      * @brief Returns the physical meta-names for each logical
      * meta-type.
      */
@@ -88,7 +81,6 @@ public:
 
 private:
     repository transform_repository_;
-    std::forward_list<physical::entities::meta_name> physical_meta_names_;
     std::unordered_map<std::string,
                        physical::entities::meta_name_group>
     physical_meta_names_by_logical_meta_name_;

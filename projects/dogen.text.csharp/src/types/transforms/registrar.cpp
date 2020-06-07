@@ -63,8 +63,6 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
                              << frp;
-
-    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << physical_meta_names_;
 }
 
 void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
@@ -92,7 +90,6 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * need not worry about canonical archetypes since this backend
      * does not require them.
      */
-    physical_meta_names_.push_front(n);
     const auto mn(t->archetype().logical_meta_element_id());
     auto& g(physical_meta_names_by_logical_meta_name_[mn]);
     g.meta_names().push_back(n);
@@ -144,11 +141,6 @@ register_helper_transform(std::shared_ptr<helper_transform> ht) {
 
 const repository& registrar::formatter_repository() const {
     return transform_repository_;
-}
-
-const std::forward_list<physical::entities::meta_name>&
-registrar::physical_meta_names() const {
-    return physical_meta_names_;
 }
 
 const std::unordered_map<std::string, physical::entities::meta_name_group>&

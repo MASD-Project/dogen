@@ -72,12 +72,6 @@ apply(boost::shared_ptr<tracing::tracer> tracer,
     wf.execute(tracer, fm);
 }
 
-const std::forward_list<physical::entities::meta_name>&
-model_to_text_csharp_chain::physical_meta_names() const {
-    const auto& rg(transforms::workflow::registrar());
-    return rg.physical_meta_names();
-}
-
 const std::unordered_map<std::string,
                          physical::entities::meta_name_group>&
 model_to_text_csharp_chain::physical_meta_names_by_logical_meta_name() const {

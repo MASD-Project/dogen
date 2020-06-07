@@ -160,7 +160,6 @@ void registrar::validate() const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is valid. Repository: " << trp;
-    BOOST_LOG_SEV(lg, debug) << "Physical names: " << physical_meta_names_;
 }
 
 void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
@@ -176,7 +175,6 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
      * Add the transform to the physical names stores.
      */
     const auto pmn(f->archetype().meta_name());
-    physical_meta_names_.push_front(pmn);
 
     /*
      * Handle the meta-type collection of physical names.
@@ -242,11 +240,6 @@ void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) 
 
 const repository& registrar::formatter_repository() const {
     return transform_repository_;
-}
-
-const std::forward_list<physical::entities::meta_name>&
-registrar::physical_meta_names() const {
-    return physical_meta_names_;
 }
 
 const std::unordered_map<std::string, physical::entities::meta_name_group>&

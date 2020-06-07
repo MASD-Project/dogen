@@ -63,14 +63,6 @@ public:
 
 public:
     /**
-     * @brief All physical meta-names for the archetypes owned by this
-     * transform, listing all available backends, facets and
-     * archetypes.
-     */
-    virtual const std::forward_list<physical::entities::meta_name>&
-    physical_meta_names() const = 0;
-
-    /**
      * @brief Returns the physical meta-names for each logical
      * meta-name.
      */
