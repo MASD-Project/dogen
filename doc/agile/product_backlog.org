@@ -8048,6 +8048,10 @@ Links:
 - [[https://github.com/qicosmos/render][render]]
 - [[https://github.com/pantor/inja][inja]]: in vcpkg, needs JSON library.
 - [[https://github.com/jrziviani/amps][amps]]
+- [[https://github.com/OlafvdSpek/ctemplate][ctemplate]]: This library provides an easy to use and lightning fast
+  text templating system to use with C++ programs. It was originally
+  called Google Templates, due to its origin as the template system
+  used for Google search result pages.
 
 *** Org-mode schemas                                                  :story:
 

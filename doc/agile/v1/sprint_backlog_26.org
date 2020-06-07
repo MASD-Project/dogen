@@ -15,24 +15,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-07 Sun 11:36]
+#+CAPTION: Clock summary at [2020-06-07 Sun 12:24]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *16:55* |       |      | 100.0 |
+| *Total time*                                          | *17:40* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 16:55   |       |      | 100.0 |
-| Active                                                |         | 16:55 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:42 |  45.5 |
-| Create a demo and presentation for previous sprint    |         |       | 1:11 |   7.0 |
-| Sprint and product backlog grooming                   |         |       | 1:13 |   7.2 |
-| Nightly nursing                                       |         |       | 0:32 |   3.2 |
-| Merge kernel with physical meta-model                 |         |       | 1:31 |   9.0 |
-| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   3.6 |
-| Create an emacs mode for wale                         |         |       | 0:14 |   1.4 |
-| Create a TS agnostic representation of inclusion      |         |       | 2:19 |  13.7 |
-| Use PMM to compute =meta_name_indices=                |         |       | 0:25 |   2.5 |
-| Analysis on reducing the number of required wale keys |         |       | 1:11 |   7.0 |
+| Stories                                               | 17:40   |       |      | 100.0 |
+| Active                                                |         | 17:40 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:42 |  43.6 |
+| Create a demo and presentation for previous sprint    |         |       | 1:11 |   6.7 |
+| Sprint and product backlog grooming                   |         |       | 1:34 |   8.9 |
+| Nightly nursing                                       |         |       | 0:11 |   1.0 |
+| Merge kernel with physical meta-model                 |         |       | 1:31 |   8.6 |
+| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   3.5 |
+| Create an emacs mode for wale                         |         |       | 0:14 |   1.3 |
+| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  17.4 |
+| Use PMM to compute =meta_name_indices=                |         |       | 0:25 |   2.4 |
+| Analysis on reducing the number of required wale keys |         |       | 1:11 |   6.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -787,6 +787,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-07 Sun 11:15]--[2020-06-07 Sun 11:36] =>  0:21
     CLOCK: [2020-06-06 Sat 19:24]--[2020-06-06 Sat 19:29] =>  0:05
     CLOCK: [2020-06-06 Sat 18:01]--[2020-06-06 Sat 18:22] =>  0:21
     CLOCK: [2020-06-05 Fri 11:06]--[2020-06-05 Fri 11:19] =>  0:13
@@ -799,7 +800,6 @@ Updates to sprint and product backlog.
 
 *** STARTED Nightly nursing                                           :story:
     :LOGBOOK:
-    CLOCK: [2020-06-07 Sun 11:15]--[2020-06-07 Sun 11:36] =>  0:21
     CLOCK: [2020-06-05 Fri 12:01]--[2020-06-05 Fri 12:12] =>  0:11
     :END:
 
@@ -889,8 +889,12 @@ Links:
 
 - https://github.com/mustache/emacs
 
-*** STARTED Create a TS agnostic representation of inclusion          :story:
+*** COMPLETED Create a TS agnostic representation of inclusion        :story:
+    CLOSED: [2020-06-07 Sun 12:24]
     :LOGBOOK:
+    CLOCK: [2020-06-07 Sun 12:17]--[2020-06-07 Sun 12:23] =>  0:06
+    CLOCK: [2020-06-07 Sun 11:46]--[2020-06-07 Sun 12:16] =>  0:30
+    CLOCK: [2020-06-07 Sun 11:37]--[2020-06-07 Sun 11:46] =>  0:09
     CLOCK: [2020-06-06 Sat 12:06]--[2020-06-06 Sat 12:53] =>  0:47
     CLOCK: [2020-06-05 Fri 16:38]--[2020-06-05 Fri 17:21] =>  0:43
     CLOCK: [2020-06-05 Fri 15:37]--[2020-06-05 Fri 16:26] =>  0:49
@@ -920,33 +924,8 @@ When we assemble the PMM we need to check that for all facets there is
 a default archetype. We could create a map in the facet that maps
 logical model elements to archetypes.
 
-Notes:
-
-- we should make referability a meta-data parameter so that we can use
-  profiles. We should also do the same for
-  =wale_template_reference=. There is no advantage of using an
-  attribute and we can save a lot of time by using profiles.
-
-*** STARTED Use PMM to compute =meta_name_indices=                    :story:
-    :LOGBOOK:
-    CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
-    :END:
-
-Now that we have assembled most of PMM, we should be able to use it to
-compute the =meta_name_indices=.
-
-- it does not make a lot of sense to have more than one kernel. Merge
-  it with PMM.
-- handle inclusion support in physical meta-model.
-
-Once this is done, we need to delete all of the infrastructure that
-was created to compute this data:
-
-- registrar stuff
-- methods in the M2T transform related to PMM
-- helpers.
-
-*** STARTED Analysis on reducing the number of required wale keys     :story:
+*** COMPLETED Analysis on reducing the number of required wale keys   :story:
+    CLOSED: [2020-06-07 Sun 12:25]
     :LOGBOOK:
     CLOCK: [2020-06-06 Sat 18:50]--[2020-06-06 Sat 19:23] =>  0:33
     CLOCK: [2020-06-06 Sat 13:25]--[2020-06-06 Sat 13:33] =>  0:08
@@ -1048,6 +1027,39 @@ want flexibility; we want structural consistency. That is to say we
 want all classes to be name exactly =[ARCHETYPE_NAME]_transform=. So
 we should enforce this by deducing these parameters from the logical
 model element and other wale template parameters.
+
+*** STARTED Use PMM to compute =meta_name_indices=                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-07 Sun 12:24]
+    CLOCK: [2020-06-05 Fri 13:39]--[2020-06-05 Fri 14:04] =>  0:25
+    :END:
+
+Now that we have assembled most of PMM, we should be able to use it to
+compute the =meta_name_indices=.
+
+- it does not make a lot of sense to have more than one kernel. Merge
+  it with PMM.
+- handle inclusion support in physical meta-model.
+
+Once this is done, we need to delete all of the infrastructure that
+was created to compute this data:
+
+- registrar stuff
+- methods in the M2T transform related to PMM
+- helpers.
+
+*** Improve referencing status                                        :story:
+
+We did a very quick hack to move inclusion status into the physical
+model. However, there are a number of things that need looking at:
+
+- we should make referability a meta-data parameter so that we can use
+  profiles. We should also do the same for
+  =wale_template_reference=. There is no advantage of using an
+  attribute and we can save a lot of time by using profiles.
+- note also that some archetypes are intrinsically non-referable:
+  =cpp=, =CMakeLists= etc. Perhaps we could make this a property of
+  the kind as well.
 
 *** Split archetype factory from transform                            :story:
 
