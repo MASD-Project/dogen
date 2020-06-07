@@ -26,6 +26,7 @@
 #include "dogen.physical/types/transforms/meta_model_assembly_transform.hpp"
 #include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
 #include "dogen.physical/types/transforms/compute_template_instantiation_domains.hpp"
+#include "dogen.physical/types/helpers/meta_model_validator.hpp"
 #include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 
 namespace {
@@ -62,6 +63,11 @@ apply(const physical::transforms::minimal_context& ctx,
      * Compute the template instantiation domains.
      */
     compute_template_instantiation_domains::apply(ctx, *r);
+
+    /*
+     * Validate the generated model.
+     */
+    helpers::meta_model_validator::validate(*r);
 
     stp.end_chain(*r);
 

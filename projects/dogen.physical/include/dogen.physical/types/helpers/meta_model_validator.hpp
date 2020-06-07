@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/meta_model.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Ensures the meta-model is in a good state.
+ */
 class meta_model_validator final {
 public:
-    meta_model_validator() = default;
-    meta_model_validator(const meta_model_validator&) = default;
-    meta_model_validator(meta_model_validator&&) = default;
-    ~meta_model_validator() = default;
-    meta_model_validator& operator=(const meta_model_validator&) = default;
-
-public:
-    bool operator==(const meta_model_validator& rhs) const;
-    bool operator!=(const meta_model_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void validate(physical::entities::meta_model& mm);
 };
 
 }
