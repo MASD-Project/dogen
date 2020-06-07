@@ -79,13 +79,6 @@ model_to_text_csharp_chain::physical_meta_names_by_logical_meta_name() const {
     return rg.physical_meta_names_by_logical_meta_name();
 }
 
-const std::unordered_map<std::string,
-                         std::list<physical::entities::meta_name>>&
-model_to_text_csharp_chain::physical_meta_names_by_family() const {
-    const auto& rg(transforms::workflow::registrar());
-    return rg.physical_meta_names_by_family();
-}
-
 logical::entities::technical_space
 model_to_text_csharp_chain::technical_space() const {
     return logical::entities::technical_space::csharp;

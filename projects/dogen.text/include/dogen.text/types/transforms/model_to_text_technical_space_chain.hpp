@@ -70,14 +70,6 @@ public:
                                      physical::entities::meta_name_group>&
     physical_meta_names_by_logical_meta_name() const = 0;
 
-    /**
-     * @brief Returns the physical meta-names for each family.
-     */
-    virtual const std::unordered_map<std::string,
-                                     std::list<physical::entities::meta_name>
-                                     >&
-    physical_meta_names_by_family() const = 0;
-
 public:
     /**
      * @brief Technical space targeted by this transform.

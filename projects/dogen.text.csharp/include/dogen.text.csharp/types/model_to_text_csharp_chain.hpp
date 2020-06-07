@@ -75,10 +75,6 @@ public:
                              physical::entities::meta_name_group>&
     physical_meta_names_by_logical_meta_name() const override;
 
-    const std::unordered_map<std::string,
-                             std::list<physical::entities::meta_name>>&
-    physical_meta_names_by_family() const override;
-
 public:
     logical::entities::technical_space technical_space() const override;
 

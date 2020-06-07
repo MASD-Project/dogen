@@ -247,11 +247,6 @@ registrar::physical_meta_names_by_logical_meta_name() const {
     return physical_meta_names_by_logical_meta_name_;
 }
 
-const std::unordered_map<std::string, std::list<physical::entities::meta_name>>&
-registrar::physical_meta_names_by_family() const {
-    return physical_meta_names_by_family_;
-}
-
 const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
