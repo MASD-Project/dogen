@@ -14705,6 +14705,22 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Investigate SQLancer                                              :story:
+
+This looks like an interesting project:
+
+#+begin_quote
+SQLancer (Synthesized Query Lancer) is a tool to automatically test
+Database Management Systems (DBMS) in order to find logic bugs in
+their implementation. We refer to logic bugs as those bugs that cause
+the DBMS to fetch an incorrect result set (e.g., by omitting a
+record).
+#+end_quote
+
+Links:
+
+- [[https://github.com/sqlancer/sqlancer][GH]]
+
 *** Investigate how RBAC can be integrated with Dogen                 :story:
 
 At some point we will need permissions in Dogen. RBAC is a possibility.
