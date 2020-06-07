@@ -3148,7 +3148,7 @@ spaces.#</dia:string>
         <dia:point val="138,136"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="137.95,135.95;172.43,144.45"/>
+        <dia:rectangle val="137.95,135.95;172.43,142.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="138,136"/>
@@ -3157,7 +3157,7 @@ spaces.#</dia:string>
         <dia:real val="34.380000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model_to_text_technical_space_chain#</dia:string>
@@ -3302,66 +3302,6 @@ spaces.#</dia:string>
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#physical_meta_name_repository_parts#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#physical::entities::meta_name_repository_parts#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#physical_meta_names_family_properties#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, entities::archetype_family_properties&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
@@ -4653,7 +4593,7 @@ spaces.#</dia:string>
         <dia:point val="114.105,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.938,123.55;114.855,128.8"/>
+        <dia:rectangle val="111.937,123.55;114.855,128.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8932,7 +8872,7 @@ spaces.#</dia:string>
         <dia:point val="167.785,148"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.14,144.35;168.535,148.8"/>
+        <dia:rectangle val="155.14,141.95;168.535,148.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8941,7 +8881,7 @@ spaces.#</dia:string>
         <dia:point val="167.785,148"/>
         <dia:point val="167.785,146"/>
         <dia:point val="155.19,146"/>
-        <dia:point val="155.19,144.4"/>
+        <dia:point val="155.19,142"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9211,7 +9151,7 @@ spaces.#</dia:string>
         <dia:point val="134.52,137.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.77,136.35;138.05,138.7"/>
+        <dia:rectangle val="133.77,136.35;138.05,137.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
