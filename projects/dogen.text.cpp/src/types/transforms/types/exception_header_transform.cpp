@@ -54,6 +54,7 @@ const physical::entities::archetype& exception_header_transform::static_archetyp
             traits::facet_sn(), traits::exception_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_exception_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;
     }());
     return r;

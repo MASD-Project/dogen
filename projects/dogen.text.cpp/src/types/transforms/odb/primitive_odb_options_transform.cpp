@@ -58,6 +58,7 @@ const physical::entities::archetype& primitive_odb_options_transform::static_arc
             traits::facet_sn(), traits::primitive_odb_options_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_primitive_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;

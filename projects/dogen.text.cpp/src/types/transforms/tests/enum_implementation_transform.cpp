@@ -62,6 +62,7 @@ const physical::entities::archetype& enum_implementation_transform::static_arche
             traits::facet_sn(), traits::enum_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_enumeration_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;

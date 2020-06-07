@@ -52,6 +52,7 @@ const physical::entities::archetype& builtin_header_transform::static_archetype(
             traits::facet_sn(), traits::builtin_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_builtin_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;
     }());
     return r;

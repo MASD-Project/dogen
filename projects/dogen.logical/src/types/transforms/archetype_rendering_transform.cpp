@@ -45,7 +45,7 @@ const std::string stitch_wale_key("stitch.wale.template_instantiation_result");
 
 const std::string empty_stitch_template("Stitch template has no content: ");
 const std::string empty_wale_template("Wale template has no content: ");
-const std::string duplicate_wale_key("Duplicate wale key: ");
+const std::string duplicate_key("Duplicate wale key: ");
 const std::string missing_decoration("Missing decoration: ");
 
 }
@@ -86,14 +86,25 @@ std::string archetype_rendering_transform::render_wale_template(
      * Create the input kvps for wale template.
      */
     std::unordered_map<std::string, std::string> kvps;
-    for (const auto& pair : scfg.kvp) {
-        const auto inserted(kvps.insert(pair).second);
-        if (!inserted) {
-            const auto& k(pair.first);
-            BOOST_LOG_SEV(lg, error) << duplicate_wale_key << k;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_wale_key + k));
-        }
-    }
+    const auto checked_insert(
+        [&](const auto& pair) {
+            const auto inserted(kvps.insert(pair).second);
+            if (!inserted) {
+                const auto& k(pair.first);
+                BOOST_LOG_SEV(lg, error) << duplicate_key << k;
+                BOOST_THROW_EXCEPTION(transformation_error(duplicate_key + k));
+            }
+        });
+
+    for (const auto& pair : scfg.kvp)
+        checked_insert(pair);
+
+    /*
+     * Inject the keys that can be inferred from the meta-model element.
+     */
+    const auto rs(arch.referencing_status());
+    if (!rs.empty())
+        checked_insert(std::make_pair("referencing_status", rs));
 
     /*
      * Instantiate the wale template.

@@ -52,6 +52,7 @@ const physical::entities::archetype& class_forward_declarations_transform::stati
             traits::facet_sn(), traits::class_forward_declarations_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_object_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::referable);
         return r;
     }());
     return r;

@@ -57,6 +57,7 @@ const physical::entities::archetype& variability_initializer_implementation_tran
             traits::facet_sn(), traits::variability_initializer_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_variability_initializer_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;

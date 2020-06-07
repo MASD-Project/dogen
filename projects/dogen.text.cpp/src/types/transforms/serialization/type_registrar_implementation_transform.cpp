@@ -56,6 +56,7 @@ const physical::entities::archetype& type_registrar_implementation_transform::st
             traits::facet_sn(), traits::type_registrar_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_serialization_type_registrar_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;

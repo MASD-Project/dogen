@@ -58,6 +58,7 @@ const physical::entities::archetype& feature_bundle_header_transform::static_arc
             traits::facet_sn(), traits::feature_bundle_header_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_variability_feature_bundle_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;
     }());
     return r;

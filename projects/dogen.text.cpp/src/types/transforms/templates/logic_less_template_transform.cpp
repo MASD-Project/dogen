@@ -55,6 +55,7 @@ const physical::entities::archetype& logic_less_template_transform::static_arche
             traits::facet_sn(), traits::logic_less_template_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_templating_logic_less_templates_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;

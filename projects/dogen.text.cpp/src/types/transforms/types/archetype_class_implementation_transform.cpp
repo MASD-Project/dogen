@@ -52,6 +52,7 @@ const physical::entities::archetype& archetype_class_implementation_transform::s
             traits::facet_sn(), traits::archetype_class_implementation_archetype_sn()));
         using lmnf = logical::helpers::meta_name_factory;
         r.logical_meta_element_id(lmnf::make_physical_archetype_name().qualified().dot());
+        r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;
     }());
     return r;
