@@ -21,7 +21,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/types/helpers/meta_name_validator.hpp"
 #include "dogen.text.csharp/io/transforms/repository_io.hpp"
 #include "dogen.text.csharp/types/transforms/registrar_error.hpp"
@@ -86,17 +85,9 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     transform_repository_.stock_artefact_formatters_.push_front(t);
 
     /*
-     * Add the transform to the physical names stores. Note that we
-     * need not worry about canonical archetypes since this backend
-     * does not require them.
-     */
-    const auto mn(t->archetype().logical_meta_element_id());
-    auto& g(physical_meta_names_by_logical_meta_name_[mn]);
-    g.meta_names().push_back(n);
-
-    /*
      * Add the transform to the index by meta-name.
      */
+    const auto mn(t->archetype().logical_meta_element_id());
     auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
     safmt[mn].push_front(t);
 
@@ -141,11 +132,6 @@ register_helper_transform(std::shared_ptr<helper_transform> ht) {
 
 const repository& registrar::formatter_repository() const {
     return transform_repository_;
-}
-
-const std::unordered_map<std::string, physical::entities::meta_name_group>&
-registrar::physical_meta_names_by_logical_meta_name() const {
-    return physical_meta_names_by_logical_meta_name_;
 }
 
 }

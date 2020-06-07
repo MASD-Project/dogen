@@ -30,7 +30,6 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/entities/model.hpp"
@@ -60,15 +59,6 @@ public:
      * @brief Returns a human readable description of this transform.
      */
     virtual std::string description() const = 0;
-
-public:
-    /**
-     * @brief Returns the physical meta-names for each logical
-     * meta-name.
-     */
-    virtual const std::unordered_map<std::string,
-                                     physical::entities::meta_name_group>&
-    physical_meta_names_by_logical_meta_name() const = 0;
 
 public:
     /**

@@ -109,13 +109,6 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-const std::unordered_map<std::string,
-                         physical::entities::meta_name_group>&
-model_to_text_cpp_chain::physical_meta_names_by_logical_meta_name() const {
-    const auto& rg(transforms::workflow::registrar());
-    return rg.physical_meta_names_by_logical_meta_name();
-}
-
 logical::entities::technical_space
 model_to_text_cpp_chain::technical_space() const {
     return logical::entities::technical_space::cpp;

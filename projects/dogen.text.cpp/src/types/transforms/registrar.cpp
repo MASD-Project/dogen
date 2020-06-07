@@ -99,61 +99,6 @@ void registrar::validate() const {
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms_by_meta_name));
     }
 
-    /*
-     * Validate the registered canonical transforms.
-     */
-    const auto cs(inclusion_support_types::canonical_support);
-    for (const auto& pair : trp.stock_artefact_formatters_by_meta_name()) {
-        const auto mn(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << mn;
-
-        const auto& transforms(pair.second);
-        std::set<std::string> facets_found;
-        std::set<std::string> all_facets;
-        using qnb = physical::helpers::qualified_meta_name_builder;
-        for (const auto& ptr : transforms) {
-            const auto& transform(*ptr);
-            const auto pn(transform.archetype().meta_name());
-            const auto fct(qnb::build_facet(pn));
-            all_facets.insert(fct);
-            if (transform.inclusion_support_type() != cs)
-                continue;
-
-            /*
-             * We can only have one canonical transform per type per
-             * facet.
-             */
-            const auto i(facets_found.find(fct));
-            if (i != facets_found.end()) {
-                const auto arch(pn.qualified());
-                BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
-                                         << fct << " archetype: " << arch
-                                         << " meta name: " << mn;
-                BOOST_THROW_EXCEPTION(registrar_error(
-                        more_than_one_canonical_archetype + fct));
-            }
-            facets_found.insert(fct);
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "All Facets: " << all_facets;
-        BOOST_LOG_SEV(lg, debug) << "Facets found: " << facets_found;
-
-        /*
-         * We should have one canonical transform per type per
-         * facet. However, there are certain facet such as build and
-         * visual studio where we don't actually require canonical
-         * archetypes so we just warn.
-         */
-        std::set<std::string> result;
-        std::set_difference(all_facets.begin(), all_facets.end(),
-            facets_found.begin(), facets_found.end(),
-            std::inserter(result, result.end()));
-        if (!result.empty()) {
-            BOOST_LOG_SEV(lg, warn) << facets_missing_canonical_archetype
-                                     << " : " << result;
-        }
-    }
-
     if (trp.stock_artefact_formatters().empty()) {
         BOOST_LOG_SEV(lg, error) << no_transforms;
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
@@ -172,39 +117,9 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
     trp.stock_artefact_formatters_.push_front(f);
 
     /*
-     * Add the transform to the physical names stores.
-     */
-    const auto pmn(f->archetype().meta_name());
-
-    /*
-     * Handle the meta-type collection of physical names.
-     */
-    const auto mn(f->archetype().logical_meta_element_id());
-    auto& g(physical_meta_names_by_logical_meta_name_[mn]);
-    g.meta_names().push_back(pmn);
-
-    /*
-     * If the archetype location points to a canonical archetype,
-     * update the canonical archetype mapping.
-     */
-    auto& cal(g.canonical_locations());
-    const auto qn(pmn.qualified());
-    using qnb = physical::helpers::qualified_meta_name_builder;
-    const auto cs(inclusion_support_types::canonical_support);
-    if (f->inclusion_support_type() == cs) {
-        const auto fct(qnb::build_facet(pmn));
-        const auto carch(transforms::traits::canonical_archetype(fct));
-        const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-            BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + qn));
-        }
-        BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
-    }
-
-    /*
      * Add the transform to the index of transforms by meta-name.
      */
+    const auto mn(f->archetype().logical_meta_element_id());
     auto& safbmt(trp.stock_artefact_formatters_by_meta_name());
     safbmt[mn].push_front(f);
 
@@ -214,6 +129,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
      * helpful side-effect of ensuring the id is unique in physical
      * space.
      */
+    const auto pmn(f->archetype().meta_name());
+    const auto qn(pmn.qualified());
     auto& safba(trp.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(qn, f));
     const auto inserted(safba.insert(pair).second);
@@ -240,11 +157,6 @@ void registrar::register_helper_transform(std::shared_ptr<helper_transform> ht) 
 
 const repository& registrar::formatter_repository() const {
     return transform_repository_;
-}
-
-const std::unordered_map<std::string, physical::entities::meta_name_group>&
-registrar::physical_meta_names_by_logical_meta_name() const {
-    return physical_meta_names_by_logical_meta_name_;
 }
 
 const std::unordered_map<

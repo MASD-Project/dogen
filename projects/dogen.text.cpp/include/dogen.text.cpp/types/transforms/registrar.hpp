@@ -30,8 +30,6 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/meta_name_group.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -77,14 +75,6 @@ public:
 
 public:
     /**
-     * @brief Returns the physical meta-names for each logical
-     * meta-type.
-     */
-    const std::unordered_map<std::string, physical::entities::meta_name_group>&
-    physical_meta_names_by_logical_meta_name() const;
-
-public:
-    /**
      * @brief Returns all of the available helper transforms.
      */
     const std::unordered_map<
@@ -96,8 +86,6 @@ public:
 
 private:
     repository transform_repository_;
-    std::unordered_map<std::string, physical::entities::meta_name_group>
-    physical_meta_names_by_logical_meta_name_;
 };
 
 template<typename Transform>

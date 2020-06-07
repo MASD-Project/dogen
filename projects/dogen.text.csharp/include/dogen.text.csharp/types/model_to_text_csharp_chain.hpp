@@ -71,11 +71,6 @@ public:
     std::string id() const override;
 
 public:
-    const std::unordered_map<std::string,
-                             physical::entities::meta_name_group>&
-    physical_meta_names_by_logical_meta_name() const override;
-
-public:
     logical::entities::technical_space technical_space() const override;
 
     void apply(const text::transforms::context& ctx,

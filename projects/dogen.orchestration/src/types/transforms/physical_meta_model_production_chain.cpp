@@ -48,7 +48,7 @@ namespace dogen::orchestration::transforms {
 boost::shared_ptr<physical::entities::meta_model>
 physical_meta_model_production_chain::
 apply(const physical::transforms::minimal_context& ctx, const
-    text::transforms::model_to_text_technical_space_chain_registrar& rg) {
+    text::transforms::model_to_text_technical_space_chain_registrar& /*rg*/) {
     tracing::scoped_chain_tracer stp(lg, "physical meta-model production chain",
         transform_id, "physical_meta_model", *ctx.tracer());
 
@@ -76,20 +76,20 @@ apply(const physical::transforms::minimal_context& ctx, const
         /*
          * Legacy repository building.
          */
-        physical::helpers::meta_name_index_builder b;
-        for (const auto& pair : rg.transforms_by_technical_space()) {
-            const auto& t(*pair.second);
-            b.add(t.physical_meta_names_by_logical_meta_name());
-        }
+        // physical::helpers::meta_name_index_builder b;
+        // for (const auto& pair : rg.transforms_by_technical_space()) {
+        //     const auto& t(*pair.second);
+        //     b.add(t.physical_meta_names_by_logical_meta_name());
+        // }
 
-        const auto nrp(b.build());
-        r->indexed_names(nrp);
+        // const auto nrp(b.build());
+        // r->indexed_names(nrp);
 
         /*
          * Obtain the template instantiation domains.
          */
-        using tidf = physical::helpers::template_instantiation_domains_factory;
-        r->template_instantiation_domains(tidf::make(nrp.all()));
+        // using tidf = physical::helpers::template_instantiation_domains_factory;
+        // r->template_instantiation_domains(tidf::make(nrp.all()));
 
         stp.end_chain(r);
         return r;
