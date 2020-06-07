@@ -17159,7 +17159,7 @@ models and meta-models for the physical model.
             <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
