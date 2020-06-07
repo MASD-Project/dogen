@@ -96,13 +96,13 @@ apply(const physical::transforms::minimal_context& ctx,
      * Obtain the archetypes' physical meta-names by logical model
      * meta-name.
      */
-    auto pmm_by_lmn(obtain_physical_meta_names_by_logical_meta_name(mm));
+    auto pmn_by_lmn(obtain_physical_meta_names_by_logical_meta_name(mm));
 
     /*
      * Now compute all of the indices.
      */
     physical::helpers::meta_name_index_builder b;
-    b.add(pmm_by_lmn);
+    b.add(pmn_by_lmn);
     mm.indexed_names(b.build());
 
     stp.end_transform(mm);
