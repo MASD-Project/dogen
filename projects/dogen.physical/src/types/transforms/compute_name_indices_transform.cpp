@@ -41,45 +41,68 @@ auto lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 void compute_name_indices_transform::
-apply(const physical::transforms::minimal_context& ctx,
-    physical::entities::meta_model& mm) {
-    tracing::scoped_transform_tracer stp(lg, "compute name indices transform",
-        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
+update_physical_meta_names_by_logical_meta_name(
+    const physical::entities::archetype& arch,
+    std::unordered_map<std::string, physical::entities::meta_name_group>&
+    physical_meta_names_by_logical_meta_name) {
 
-    std::unordered_map<std::string, physical::entities::meta_name_group>
-        physical_meta_names_by_logical_meta_name;
+    const auto pmn(arch.meta_name());
+    const auto lmn(arch.logical_meta_element_id());
+    auto& g(physical_meta_names_by_logical_meta_name[lmn]);
+    g.meta_names().push_back(pmn);
 
+    auto& cal(g.canonical_locations());
+    const auto qn(pmn.qualified());
+    using qnb = physical::helpers::qualified_meta_name_builder;
+    const auto rs_fd(entities::referencing_status::facet_default);
+    if (arch.referencing_status() == rs_fd) {
+        const auto fct_qn(qnb::build_facet(pmn));
+        const auto carch(fct_qn + canonical_archetype_postfix);
+        const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
+            BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype + qn));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
+    }
+}
+
+std::unordered_map<std::string, physical::entities::meta_name_group>
+compute_name_indices_transform::
+obtain_physical_meta_names_by_logical_meta_name(
+    const physical::entities::meta_model& mm) {
+
+    std::unordered_map<std::string, physical::entities::meta_name_group> r;
     for (auto& be : mm.backends()) {
         for (auto& fct_pair : be.facets()) {
             auto& fct(fct_pair.second);
             for (auto& arch_pair : fct.archetypes()) {
                 auto& arch(arch_pair.second);
-
-                const auto pmn(arch.meta_name());
-                const auto lmn(arch.logical_meta_element_id());
-                auto& g(physical_meta_names_by_logical_meta_name[lmn]);
-                g.meta_names().push_back(pmn);
-
-                auto& cal(g.canonical_locations());
-                const auto qn(pmn.qualified());
-                using qnb = physical::helpers::qualified_meta_name_builder;
-                const auto rs_fd(entities::referencing_status::facet_default);
-                if (arch.referencing_status() == rs_fd) {
-                    const auto fct_qn(qnb::build_facet(pmn));
-                    const auto carch(fct_qn + canonical_archetype_postfix);
-                    const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
-                    if (!inserted) {
-                        BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-                        BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype + qn));
-                    }
-                    BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
-                }
+                update_physical_meta_names_by_logical_meta_name(arch, r);
             }
         }
     }
 
+    return r;
+}
+
+void compute_name_indices_transform::
+apply(const physical::transforms::minimal_context& ctx,
+    physical::entities::meta_model& mm) {
+    tracing::scoped_transform_tracer stp(lg, "compute name indices transform",
+        transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
+
+    /*
+     * Obtain the archetypes' physical meta-names by logical model
+     * meta-name.
+     */
+    auto pmm_by_lmn(obtain_physical_meta_names_by_logical_meta_name(mm));
+
+    /*
+     * Now compute all of the indices.
+     */
     physical::helpers::meta_name_index_builder b;
-    b.add(physical_meta_names_by_logical_meta_name);
+    b.add(pmm_by_lmn);
     mm.indexed_names(b.build());
 
     stp.end_transform(mm);
