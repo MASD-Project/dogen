@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PRODUCTION_CHAIN_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PRODUCTION_CHAIN_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_ASSEMBLY_TRANSFORM_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_ASSEMBLY_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,13 +34,12 @@
 namespace dogen::physical::transforms {
 
 /**
- * @brief Produces a complete physical meta-model from a set of
- * initial parts.
+ * @brief Assembles a set of backends into a meta-model.
  */
-class meta_model_production_chain final {
+class meta_model_assembly_transform final {
 public:
     /**
-     * @brief Apply the transform to generate a meta-model.
+     * @brief Apply the transform.
      */
     static boost::shared_ptr<physical::entities::meta_model>
     apply(const physical::transforms::minimal_context& ctx,

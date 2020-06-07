@@ -18,20 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
+#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.physical/types/transforms/meta_model_assembly_transform.hpp"
-#include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
-#include "dogen.physical/types/transforms/compute_template_instantiation_domains.hpp"
-#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 
 namespace {
 
 const std::string
-transform_id("physical.transforms.meta_model_production_chain");
+transform_id("physical.transforms.meta_model_assembly_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -41,30 +40,22 @@ auto lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 boost::shared_ptr<physical::entities::meta_model>
-meta_model_production_chain::
+meta_model_assembly_transform::
 apply(const physical::transforms::minimal_context& ctx,
     const std::list<entities::backend>& bes) {
-    tracing::scoped_chain_tracer stp(lg, "meta model production chain",
+    tracing::scoped_transform_tracer stp(lg, "meta model assembly chain",
         transform_id, "physical-meta-model", *ctx.tracer(), bes);
 
+    using physical::entities::meta_model;
+    auto r(boost::make_shared<meta_model>());
 
-    /*
-     * Assemble the parts into a meta-model.
-     */
-    auto r(meta_model_assembly_transform::apply(ctx, bes));
+    helpers::meta_name_builder mnb;
+    mnb.meta_model("masd");
 
-    /*
-     * Compute all meta-name indices.
-     */
-    compute_name_indices_transform::apply(ctx, *r);
+    for (const auto& be : bes)
+        r->backends().push_back(be);
 
-    /*
-     * Compute the template instantiation domains.
-     */
-    compute_template_instantiation_domains::apply(ctx, *r);
-
-    stp.end_chain(*r);
-
+    stp.end_transform(r);
     return r;
 }
 

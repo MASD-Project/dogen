@@ -18,33 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PRODUCTION_CHAIN_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PRODUCTION_CHAIN_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_COMPUTE_TEMPLATE_INSTANTIATION_DOMAINS_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_COMPUTE_TEMPLATE_INSTANTIATION_DOMAINS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/transforms/minimal_context.hpp"
-#include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 
 namespace dogen::physical::transforms {
 
 /**
- * @brief Produces a complete physical meta-model from a set of
- * initial parts.
+ * @brief Computes all of the template instantiation domains for this
+ * meta-model.
  */
-class meta_model_production_chain final {
+class compute_template_instantiation_domains final {
 public:
     /**
-     * @brief Apply the transform to generate a meta-model.
+     * @brief Apply the transform to the meta-model.
      */
-    static boost::shared_ptr<physical::entities::meta_model>
-    apply(const physical::transforms::minimal_context& ctx,
-        const std::list<entities::backend>& bes);
+    static void apply(const physical::transforms::minimal_context& ctx,
+        physical::entities::meta_model& mm);
 };
 
 }

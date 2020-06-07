@@ -1292,6 +1292,20 @@
           "documentation": "References to the facet will resolve to this archetype.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::meta_model_assembly_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::compute_template_instantiation_domains",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

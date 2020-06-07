@@ -39,7 +39,7 @@ public:
      * @brief Apply the transform to the meta-model.
      */
     static void apply(const physical::transforms::minimal_context& ctx,
-        const physical::entities::meta_model& mm);
+        physical::entities::meta_model& mm);
 };
 
 }

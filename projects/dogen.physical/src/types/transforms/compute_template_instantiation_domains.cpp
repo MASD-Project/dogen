@@ -18,20 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/transforms/meta_model_assembly_transform.hpp"
-#include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
+#include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.physical/types/transforms/compute_template_instantiation_domains.hpp"
-#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 
 namespace {
 
 const std::string
-transform_id("physical.transforms.meta_model_production_chain");
+transform_id("physical.transforms.compute_template_instantiation_domains");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -40,32 +36,19 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-boost::shared_ptr<physical::entities::meta_model>
-meta_model_production_chain::
+void compute_template_instantiation_domains::
 apply(const physical::transforms::minimal_context& ctx,
-    const std::list<entities::backend>& bes) {
-    tracing::scoped_chain_tracer stp(lg, "meta model production chain",
-        transform_id, "physical-meta-model", *ctx.tracer(), bes);
+    physical::entities::meta_model& mm) {
+    tracing::scoped_transform_tracer stp(lg,
+        "compute template instantiation domains", transform_id,
+        mm.meta_name().simple(), *ctx.tracer(), mm);
 
+    const auto& ina(mm.indexed_names().all());
+    using tidf = physical::helpers::template_instantiation_domains_factory;
+    const auto tid(tidf::make(ina));
+    mm.template_instantiation_domains(tid);
 
-    /*
-     * Assemble the parts into a meta-model.
-     */
-    auto r(meta_model_assembly_transform::apply(ctx, bes));
-
-    /*
-     * Compute all meta-name indices.
-     */
-    compute_name_indices_transform::apply(ctx, *r);
-
-    /*
-     * Compute the template instantiation domains.
-     */
-    compute_template_instantiation_domains::apply(ctx, *r);
-
-    stp.end_chain(*r);
-
-    return r;
+    stp.end_transform(mm);
 }
 
 }
