@@ -78,6 +78,13 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Check RedHat guidelines on release notes                          :story:
+
+This post seems to contain a lot of interesting information about
+release notes:
+
+- [[http://community.redhat.com/blog/2015/12/guidelines-for-announcing-software-releases/][Guidelines For Announcing Software Releases]]
+
 *** Use GCC to code generate tests in nightly               :reviewing:story:
 
 At present we seem to be using the clang binary to code generate the
@@ -3661,6 +3668,13 @@ these. Suggestions:
 
 - [[https://github.com/avao/Qart/blob/master/Src/Qart.CyberTester/Bootstrapper.cs][bootstrapper]], with a =Bootstrapper.CreateContainer= method;
   e.g. =masd::ioc::bootstrapper=.
+
+Links:
+
+- [[https://github.com/autofac/Autofac][Autofac GH]]: Autofac is an IoC container for Microsoft .NET. It
+  manages the dependencies between classes so that applications stay
+  easy to change as they grow in size and complexity. This is achieved
+  by treating regular .NET classes as components.
 
 *** Primitives are not comparable                                     :story:
 
@@ -7466,6 +7480,7 @@ Links:
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 - =-Wdocumentation=: clang doxygen warning.
 - =-WExtra=
+- =-save-temps= =-Wextra= =-Wfloat-equal=
 
 See also:
 
@@ -7474,6 +7489,7 @@ See also:
 - [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
 - [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
 - [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
+
 
 Merged stories:
 
@@ -9899,6 +9915,21 @@ Links:
 - [[https://hypothesis.works/articles/intro/][articles on hypothesis]]
 - [[https://hypothesis.works/articles/what-is-hypothesis/][What is Hypothesis?]]
 - [[https://github.com/HypothesisWorks/hypothesis/tree/master/hypothesis-python][GH hypothesis python]]
+
+*** Investigate =machine.specifications=                              :story:
+
+Yet another approach to testing:
+
+#+begin_quote
+Machine.Specifications is a Context/Specification framework geared
+towards removing language noise and simplifying tests. [...] MSpec is
+called a "context/specification" test framework because of the
+"grammar" that is used in describing and coding the tests or "specs".
+#+end_quote
+
+Links:
+
+- [[https://github.com/machine/machine.specifications][GH]]
 
 *** Finish adding support for Language Agnostic Models (LAM)          :story:
 
@@ -14670,6 +14701,32 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Investigate how RBAC can be integrated with Dogen                 :story:
+
+At some point we will need permissions in Dogen. RBAC is a possibility.
+
+Links:
+
+- http://cmw.web.cern.ch/CMW/rbacAPI/index.html
+- http://www.authenticationworld.com/Single-Sign-On-Authentication/SSOandLDAP.html
+- https://payhip.com/b/41Tw
+- https://git.shibboleth.net/view/?p=cpp-opensaml.git;a=summary
+
+*** Consider adding OpenHMI support                                   :story:
+
+This is a Qt only framework but seems very interesting:
+
+#+begin_quote
+"Open HMI Tester" or OHT is an application framework for the
+development of GUI testing tools. It uses real-time GUI introspection
+to capture and simulate real user interaction, which enhances
+robustness and tolerance to changes during testing stage.
+#+end_quote
+
+Links:
+
+- [[https://github.com/pedromateo/openhmitester][GH project]]
+
 *** Consider adding AMQP support                                      :story:
 
 It seems fairly straightforward to extend the logical model to support
@@ -16768,6 +16825,8 @@ Links:
 - [[https://github.com/rollbear/trompeloeil][trompeloeil]]: Header only C++14 mocking framework
 - [[http://turtle.sourceforge.net/index.html][Turtle]]: A C++ mock object library for Boost
 - [[https://enterprisecraftsmanship.com/posts/when-to-mock/][Article: When to mock]]
+- [[https://github.com/Moq/moq4][GH Moq]]
+- [[https://github.com/moq/Moq.AutoMocker][GH Moq.AutoMocker]]
 
 *** Investigate ribosome for ideas                                    :story:
 
