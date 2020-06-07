@@ -26,6 +26,7 @@
 #include "dogen.variability/types/entities/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
+#include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
@@ -37,8 +38,9 @@
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
+#include "dogen.text.cpp/types/transforms/transforms.hpp"
+#include "dogen.text.csharp/types/transforms/transforms.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
-#include "dogen.orchestration/types/transforms/physical_meta_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 
@@ -96,8 +98,21 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
      * Create the physical meta-model.
      */
     const auto ctx(context_factory::make_minimal_context(tracer));
-    using pmm_chain = transforms::physical_meta_model_production_chain;
-    const auto r(pmm_chain::apply(ctx, rg));
+
+    /*
+     * Obtain the backends.
+     */
+    const std::list<physical::entities::backend> bes {
+        text::cpp::transforms::transforms_backend_chain::static_backend(),
+        text::csharp::transforms::transforms_backend_chain::static_backend()
+    };
+
+    /*
+     * Execute the physical chain.
+     */
+    using physical::transforms::meta_model_production_chain;
+    const auto r(meta_model_production_chain::apply(ctx, bes));
+
     return r;
 }
 

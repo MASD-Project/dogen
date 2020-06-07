@@ -39,16 +39,13 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const bool legacy(false);
-
 }
 
 namespace dogen::orchestration::transforms {
 
 boost::shared_ptr<physical::entities::meta_model>
 physical_meta_model_production_chain::
-apply(const physical::transforms::minimal_context& ctx, const
-    text::transforms::model_to_text_technical_space_chain_registrar& /*rg*/) {
+apply(const physical::transforms::minimal_context& ctx) {
     tracing::scoped_chain_tracer stp(lg, "physical meta-model production chain",
         transform_id, "physical_meta_model", *ctx.tracer());
 
@@ -58,47 +55,10 @@ apply(const physical::transforms::minimal_context& ctx, const
         text::csharp::transforms::transforms_backend_chain::static_backend()
     };
 
-    if (legacy) {
-        /*
-         * Create the MASD PMM. This is done here until we support
-         * defining PMMs in the logical representation of the physical
-         * meta-model through text transforms.
-         */
-        using physical::entities::meta_model;
-        auto r(boost::make_shared<meta_model>());
-
-        physical::helpers::meta_name_builder mnb;
-        mnb.meta_model("masd");
-
-        r->meta_name(mnb.build());
-        r->backends(bes);
-
-        /*
-         * Legacy repository building.
-         */
-        // physical::helpers::meta_name_index_builder b;
-        // for (const auto& pair : rg.transforms_by_technical_space()) {
-        //     const auto& t(*pair.second);
-        //     b.add(t.physical_meta_names_by_logical_meta_name());
-        // }
-
-        // const auto nrp(b.build());
-        // r->indexed_names(nrp);
-
-        /*
-         * Obtain the template instantiation domains.
-         */
-        // using tidf = physical::helpers::template_instantiation_domains_factory;
-        // r->template_instantiation_domains(tidf::make(nrp.all()));
-
-        stp.end_chain(r);
-        return r;
-    } else {
-        using physical::transforms::meta_model_production_chain;
-        const auto r(meta_model_production_chain::apply(ctx, bes));
-        stp.end_chain(r);
-        return r;
-    }
+    using physical::transforms::meta_model_production_chain;
+    const auto r(meta_model_production_chain::apply(ctx, bes));
+    stp.end_chain(r);
+    return r;
 }
 
 }

@@ -28,7 +28,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
-#include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -41,8 +40,7 @@ public:
      * @brief Executes the transform.
      */
     static boost::shared_ptr<physical::entities::meta_model>
-    apply(const physical::transforms::minimal_context& ctx, const
-        text::transforms::model_to_text_technical_space_chain_registrar& rg);
+    apply(const physical::transforms::minimal_context& ctx);
 };
 
 }
