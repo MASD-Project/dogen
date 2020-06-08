@@ -7489,7 +7489,7 @@ See also:
 - [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
 - [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
 - [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
-
+- [[https://www.reddit.com/r/cpp/comments/grpux6/which_gcc_flags_do_you_use_often/][Which GCC flags do you use often?]]
 
 Merged stories:
 
@@ -7510,6 +7510,25 @@ swap function. This uses the move constructor. For some reason, the
 compiler does not think the default move constructor is initialising
 the member variables correctly. Not obvious why that would be.
 
+*** Investigate =modern-cpp-template=                                 :story:
+
+This project seems to supply a very good base to use on our C++
+projects: "A template for modern C++ projects using CMake,
+Clang-Format, CI, unit testing and more, with support for downstream
+inclusion."
+
+In fact it seems there are quite a few of these. We need to find out
+the differences between them.
+
+Link:
+
+- [[https://github.com/filipdutescu/modern-cpp-template][modern-cpp-template GH]]
+- [[https://github.com/lefticus/cpp_starter_project][cpp_starter_project GH]]: A template CMake project to get you started
+  with C++ and tooling
+- [[https://github.com/TheLartians/ModernCppStarter][ModernCppStarter GH]]: Kick-start your C++! A template for modern C++
+  projects using CMake, CI, code coverage, clang-format, reproducible
+  dependency management and much more.
+
 *** Consider moving CI to GitHub Actions                              :story:
 
 At present we are using Travis and AppVeyor for our CI. However, it
@@ -7517,6 +7536,13 @@ would be nice to have a single place with all of the CI (and even more
 ideally, packaging as well). GitHub seems to offer some kind of CI
 support via GitHub actions. However, we need to first move to building
 on [[*Build dogen from docker][docker]].
+
+Actually it seems we don't even need to do very much. See [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][this article]].
+
+Links:
+
+- [[https://raymii.org/s/articles/Github_Actions_cpp_boost_cmake_speedup.html][Github Actions, C++ with Boost and cmake, almost a 50% speedup with
+  caching]]
 
 *** Run ODB on nightlies                                              :story:
 
@@ -14705,6 +14731,46 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for gatbage collection via Oilpan         :story:
+
+This looks like an interesting project: Oilpan.
+
+#+begin_quote
+Oilpan is a garbage collector written in C++ for managing C++ memory
+#+end_quote
+
+Links:
+- [[https://chromium.googlesource.com/v8/v8.git/+/HEAD/include/cppgc/][source code]]
+- [[https://v8.dev/blog/high-performance-cpp-gc][High-performance garbage collection for C++]]
+
+*** Add support for QR codes                                          :story:
+
+It should be pretty straightforward to add support for QR
+codes. Wikipedia definition:
+
+#+begin_quote
+QR code (abbreviated from Quick Response code) is the trademark for a
+type of matrix barcode (or two-dimensional barcode) first designed in
+1994 for the automotive industry in Japan. A barcode is a
+machine-readable optical label that contains information about the
+item to which it is attached. In practice, QR codes often contain data
+for a locator, identifier, or tracker that points to a website or
+application. A QR code uses four standardized encoding modes (numeric,
+alphanumeric, byte/binary, and kanji) to store data efficiently;
+extensions may also be used.
+#+end_quote
+
+Links:
+
+- [[https://github.com/nayuki/QR-Code-generator/tree/master/cpp][QR-Code-generator GH]]: This project aims to be the best, clearest QR
+  Code generator library in multiple languages. The primary goals are
+  flexible options and absolute correctness. Secondary goals are
+  compact implementation size and good documentation comments. See
+  also [[https://github.com/nayuki/QR-Code-generator][top-level page]].
+- [[https://en.wikipedia.org/wiki/QR_code][QR code Wikipedia]]
+- [[https://github.com/RaymiiOrg/cpp-qr-to-png][cpp-qr-to-png GH]]: A bridge between two great libraries,
+  QR-Code-Generator and Tiny-PNG-Out. Article [[https://raymii.org/s/software/Cpp_generate_qr_code_and_write_it_to_png_scaled.html][here]].
+
 *** Investigate SQLancer                                              :story:
 
 This looks like an interesting project:
@@ -14904,6 +14970,7 @@ Links:
 - [[http://flowbasedprogramming.com/docs/html/index.html][DSPatch]]: The Refreshingly Simple C++ Dataflow Framework
 - [[https://github.com/RaftLib/RaftLib][RaftLib GitHub]]: The RaftLib C++ library, streaming/dataflow
   concurrency via C++ iostream-like operators. See also [[http://raftlib.io][home page]].
+- [[https://github.com/taskflow/taskflow][Taskflow GH]]: Modern C++ Parallel Task Programming. [[https://taskflow.github.io/taskflow/index.html][API docs]].
 
 *** Consider adding suppot for SeqAn                                  :story:
 
