@@ -14731,6 +14731,18 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for =libmish=                             :story:
+
+#+begin_quote
+Libmish adds a command prompt to your program, and telnet access. With
+your own commands.
+#+end_quote
+
+Links:
+
+- [[https://github.com/buserror/libmish][libmish GH]]
+- [[https://github.com/ggerganov/incppect][incppect GH]]: Inspect C++ memory in the browser
+
 *** Consider adding support for gatbage collection via Oilpan         :story:
 
 This looks like an interesting project: Oilpan.
