@@ -15,24 +15,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-09 Tue 21:54]
+#+CAPTION: Clock summary at [2020-06-10 Wed 22:11]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *20:54* |       |      | 100.0 |
+| *Total time*                                          | *21:09* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 20:54   |       |      | 100.0 |
-| Active                                                |         | 20:54 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:42 |  36.8 |
-| Create a demo and presentation for previous sprint    |         |       | 1:11 |   5.7 |
-| Sprint and product backlog grooming                   |         |       | 2:10 |  10.4 |
+| Stories                                               | 21:09   |       |      | 100.0 |
+| Active                                                |         | 21:09 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:42 |  36.4 |
+| Create a demo and presentation for previous sprint    |         |       | 1:11 |   5.6 |
+| Sprint and product backlog grooming                   |         |       | 2:10 |  10.2 |
 | Nightly nursing                                       |         |       | 0:11 |   0.9 |
-| Merge kernel with physical meta-model                 |         |       | 1:31 |   7.3 |
-| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   3.0 |
+| Merge kernel with physical meta-model                 |         |       | 1:31 |   7.2 |
+| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   2.9 |
 | Create an emacs mode for wale                         |         |       | 0:14 |   1.1 |
-| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  14.7 |
-| Analysis on reducing the number of required wale keys |         |       | 1:11 |   5.7 |
-| Use PMM to compute =meta_name_indices=                |         |       | 3:03 |  14.6 |
+| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  14.5 |
+| Analysis on reducing the number of required wale keys |         |       | 1:11 |   5.6 |
+| Use PMM to compute =meta_name_indices=                |         |       | 3:03 |  14.4 |
+| Split archetype factory from transform                |         |       | 0:15 |   1.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1164,7 +1165,10 @@ Notes:
   are name clashes. For example, if we had a reference to =A::a= and
   =B::a=, this would cause problems.
 
-*** Split archetype factory from transform                            :story:
+*** STARTED Split archetype factory from transform                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-10 Wed 21:56]--[2020-06-10 Wed 22:11] =>  0:15
+    :END:
 
 As per analysis story, we need to create two different archetypes for
 archetype:
