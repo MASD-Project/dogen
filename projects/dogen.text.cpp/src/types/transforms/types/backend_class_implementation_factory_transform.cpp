@@ -113,7 +113,7 @@ void backend_class_implementation_factory_transform::apply(const context& ctx, c
             const auto ns(ast.make_namespaces(be.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(be.name().simple() + "_facet");
+            const auto sn(be.name().simple() + "_factory");
 ast.stream() << "namespace {" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "using namespace dogen::utility::log;" << std::endl;
@@ -121,7 +121,7 @@ ast.stream() << "static logger lg(logger_factory(\"" << be.name().qualified().do
 ast.stream() << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "physical::entities::backend " << sn << "::make_backend() {" << std::endl;
+ast.stream() << "physical::entities::backend " << sn << "::make() {" << std::endl;
 ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << be.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
