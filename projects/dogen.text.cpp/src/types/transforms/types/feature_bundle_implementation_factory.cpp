@@ -24,12 +24,10 @@
 namespace dogen::text::cpp::transforms::types {
 
 const physical::entities::archetype& feature_bundle_implementation_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
+    static auto r([]() {
         physical::entities::archetype r;
-            using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp", "types",
-                "feature_bundle_implementation"));
-
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("cpp", "types", "feature_bundle_implementation"));
         r.logical_meta_element_id("dogen.logical.entities.variability_feature_bundle");
         r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;

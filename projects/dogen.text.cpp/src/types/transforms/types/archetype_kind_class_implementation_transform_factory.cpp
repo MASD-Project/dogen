@@ -24,12 +24,10 @@
 namespace dogen::text::cpp::transforms::types {
 
 const physical::entities::archetype& archetype_kind_class_implementation_transform_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
+    static auto r([]() {
         physical::entities::archetype r;
-            using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp", "types",
-                "archetype_kind_class_implementation_transform"));
-
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("cpp", "types", "archetype_kind_class_implementation_transform"));
         r.logical_meta_element_id("dogen.logical.entities.physical_archetype_kind");
         r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;

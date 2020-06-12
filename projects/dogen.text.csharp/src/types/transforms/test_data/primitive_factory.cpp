@@ -24,12 +24,10 @@
 namespace dogen::text::csharp::transforms::test_data {
 
 const physical::entities::archetype& primitive_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
+    static auto r([]() {
         physical::entities::archetype r;
-            using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("csharp", "test_data",
-                "primitive"));
-
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("csharp", "test_data", "primitive"));
         r.logical_meta_element_id("dogen.logical.entities.primitive");
         r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;

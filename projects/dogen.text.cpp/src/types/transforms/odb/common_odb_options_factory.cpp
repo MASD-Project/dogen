@@ -24,12 +24,10 @@
 namespace dogen::text::cpp::transforms::odb {
 
 const physical::entities::archetype& common_odb_options_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
+    static auto r([]() {
         physical::entities::archetype r;
-            using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp", "odb",
-                "common_odb_options"));
-
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("cpp", "odb", "common_odb_options"));
         r.logical_meta_element_id("dogen.logical.entities.orm_common_odb_options");
         r.referencing_status(physical::entities::referencing_status::not_referable);
         return r;

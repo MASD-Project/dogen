@@ -24,12 +24,10 @@
 namespace dogen::text::cpp::transforms::odb {
 
 const physical::entities::archetype& class_header_factory::make_archetype() {
-    static physical::entities::archetype r([]() {
+    static auto r([]() {
         physical::entities::archetype r;
-            using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp", "odb",
-                "class_header"));
-
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("cpp", "odb", "class_header"));
         r.logical_meta_element_id("dogen.logical.entities.object");
         r.referencing_status(physical::entities::referencing_status::facet_default);
         return r;
