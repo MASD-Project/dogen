@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::serialization {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * primitive_implementation_transform.
+ *
+ * Archetype documentation: Generates header files for primitives.
+
+ */
 class primitive_implementation_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

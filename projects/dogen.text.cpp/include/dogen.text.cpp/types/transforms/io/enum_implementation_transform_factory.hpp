@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::io {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * enum_implementation_transform.
+ *
+ * Archetype documentation: Generates implementation files for enumerations.
+
+ */
 class enum_implementation_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

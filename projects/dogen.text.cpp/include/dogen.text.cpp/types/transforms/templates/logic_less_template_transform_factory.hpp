@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::templates {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * logic_less_template_transform.
+ *
+ * Archetype documentation: Generates logic-less templates.
+
+ */
 class logic_less_template_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

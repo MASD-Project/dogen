@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * main_transform.
+ *
+ * Archetype documentation: Generates implementation file for entry point.
+
+ */
 class main_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

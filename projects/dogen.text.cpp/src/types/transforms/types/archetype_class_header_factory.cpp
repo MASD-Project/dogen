@@ -94,10 +94,20 @@ void archetype_class_header_factory::apply(const context& ctx, const logical::en
             const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << std::endl;
+ast.stream() << "/**" << std::endl;
+ast.stream() << " * @brief Creates a physical representation for the archetype" << std::endl;
+ast.stream() << " * " << o.name().simple() << "." << std::endl;
+ast.stream() << " *" << std::endl;
+ast.stream() << " * Archetype documentation: " << o.documentation() << std::endl;
+ast.stream() << " */" << std::endl;
 ast.stream() << "class " << o.name().simple() << " final {" << std::endl;
 ast.stream() << "public:" << std::endl;
+ast.stream() << "    /**" << std::endl;
+ast.stream() << "     * @brief Makes the archetype." << std::endl;
+ast.stream() << "     */" << std::endl;
 ast.stream() << "    static const physical::entities::archetype& make_archetype();" << std::endl;
 ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf

@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * archetype_class_header_factory.
+ *
+ * Archetype documentation: Generates header files for archetype factories.
+
+ */
 class archetype_class_header_factory final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

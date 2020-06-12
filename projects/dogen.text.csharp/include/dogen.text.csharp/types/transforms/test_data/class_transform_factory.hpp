@@ -29,10 +29,21 @@
 
 namespace dogen::text::csharp::transforms::test_data {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * class_transform.
+ *
+ * Archetype documentation: Generates implementation files for objects.
+
+ */
 class class_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

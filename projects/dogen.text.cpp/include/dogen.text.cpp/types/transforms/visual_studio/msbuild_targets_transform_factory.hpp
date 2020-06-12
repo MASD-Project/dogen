@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::visual_studio {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * msbuild_targets_transform.
+ *
+ * Archetype documentation: Generates msbuild targets.
+
+ */
 class msbuild_targets_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

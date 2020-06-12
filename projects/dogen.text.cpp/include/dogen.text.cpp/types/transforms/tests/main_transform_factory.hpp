@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::tests {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * main_transform.
+ *
+ * Archetype documentation: Generates entry point for tests.
+
+ */
 class main_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::visual_studio {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * solution_transform.
+ *
+ * Archetype documentation: Generates visual studio solutions.
+
+ */
 class solution_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

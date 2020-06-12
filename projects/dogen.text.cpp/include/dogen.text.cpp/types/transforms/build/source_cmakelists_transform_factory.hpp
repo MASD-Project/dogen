@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::build {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * source_cmakelists_transform.
+ *
+ * Archetype documentation: Generates cmakelists for tests.
+
+ */
 class source_cmakelists_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

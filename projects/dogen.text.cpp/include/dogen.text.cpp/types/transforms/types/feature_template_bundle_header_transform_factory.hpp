@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * feature_template_bundle_header_transform.
+ *
+ * Archetype documentation: Generates implementation files for feature template bundles
+
+ */
 class feature_template_bundle_header_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

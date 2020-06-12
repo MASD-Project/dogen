@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::odb {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * primitive_odb_options_transform.
+ *
+ * Archetype documentation: Generates object options for odb.
+
+ */
 class primitive_odb_options_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

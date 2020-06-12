@@ -29,10 +29,21 @@
 
 namespace dogen::text::csharp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * builtin_transform.
+ *
+ * Archetype documentation: Generates implementation files for builtins.
+
+ */
 class builtin_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

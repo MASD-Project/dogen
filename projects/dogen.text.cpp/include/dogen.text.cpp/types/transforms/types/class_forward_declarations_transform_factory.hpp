@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * class_forward_declarations_transform.
+ *
+ * Archetype documentation: Generates forward declarations for classes.
+
+ */
 class class_forward_declarations_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

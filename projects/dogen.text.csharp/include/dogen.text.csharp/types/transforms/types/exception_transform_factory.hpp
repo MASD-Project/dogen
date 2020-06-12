@@ -29,10 +29,21 @@
 
 namespace dogen::text::csharp::transforms::types {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * exception_transform.
+ *
+ * Archetype documentation: Generates implementation files for exceptions.
+
+ */
 class exception_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

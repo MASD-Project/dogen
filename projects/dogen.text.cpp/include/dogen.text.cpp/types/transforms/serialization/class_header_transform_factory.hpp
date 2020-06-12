@@ -29,10 +29,21 @@
 
 namespace dogen::text::cpp::transforms::serialization {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * class_header_transform.
+ *
+ * Archetype documentation: Generates header files for objects.
+
+ */
 class class_header_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif

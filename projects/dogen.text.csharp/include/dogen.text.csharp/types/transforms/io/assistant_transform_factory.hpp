@@ -29,10 +29,21 @@
 
 namespace dogen::text::csharp::transforms::io {
 
+/**
+ * @brief Creates a physical representation for the archetype
+ * assistant_transform.
+ *
+ * Archetype documentation: Generates implementation files for assistants.
+
+ */
 class assistant_transform final {
 public:
+    /**
+     * @brief Makes the archetype.
+     */
     static const physical::entities::archetype& make_archetype();
 };
+
 }
 
 #endif
