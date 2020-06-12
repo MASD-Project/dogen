@@ -105,7 +105,7 @@ ast.stream() << "public:" << std::endl;
 ast.stream() << "    /**" << std::endl;
 ast.stream() << "     * @brief Makes the archetype." << std::endl;
 ast.stream() << "     */" << std::endl;
-ast.stream() << "    static const physical::entities::archetype& make_archetype();" << std::endl;
+ast.stream() << "    static physical::entities::archetype make();" << std::endl;
 ast.stream() << "};" << std::endl;
 ast.stream() << std::endl;
         } // snf

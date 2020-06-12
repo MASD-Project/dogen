@@ -23,15 +23,12 @@
 
 namespace dogen::text::cpp::transforms::templates {
 
-const physical::entities::archetype& logic_less_template_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("cpp", "templates", "logic_less_template"));
-        r.logical_meta_element_id("dogen.logical.entities.templating_logic_less_templates");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
-        return r;
-    }());
+physical::entities::archetype logic_less_template_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "templates", "logic_less_template"));
+    r.logical_meta_element_id("dogen.logical.entities.templating_logic_less_templates");
+    r.referencing_status(physical::entities::referencing_status::not_referable);
     return r;
 }
 

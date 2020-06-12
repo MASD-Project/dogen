@@ -51209,7 +51209,7 @@ public:
     /**
      * @brief Makes the archetype.
      */
-    static const physical::entities::archetype&amp; make_archetype();
+    static physical::entities::archetype make();
 };
 
 &lt;#+
@@ -51411,15 +51411,12 @@ void archetype_class_implementation_factory_transform::apply(const context&amp; 
             const auto sn(arch.name().simple() + "_factory");
 #&gt;
 
-const physical::entities::archetype&amp; &lt;#= sn #&gt;::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
-        r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
-        r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
-        return r;
-    }());
+physical::entities::archetype &lt;#= sn #&gt;::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
+    r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
+    r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
     return r;
 }
 

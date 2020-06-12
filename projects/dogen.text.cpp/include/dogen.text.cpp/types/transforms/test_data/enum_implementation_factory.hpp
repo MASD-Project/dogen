@@ -41,7 +41,7 @@ public:
     /**
      * @brief Makes the archetype.
      */
-    static const physical::entities::archetype& make_archetype();
+    static physical::entities::archetype make();
 };
 
 }

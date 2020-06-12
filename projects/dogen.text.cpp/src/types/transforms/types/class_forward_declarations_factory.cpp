@@ -23,15 +23,12 @@
 
 namespace dogen::text::cpp::transforms::types {
 
-const physical::entities::archetype& class_forward_declarations_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("cpp", "types", "class_forward_declarations"));
-        r.logical_meta_element_id("dogen.logical.entities.object");
-        r.referencing_status(physical::entities::referencing_status::referable);
-        return r;
-    }());
+physical::entities::archetype class_forward_declarations_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "types", "class_forward_declarations"));
+    r.logical_meta_element_id("dogen.logical.entities.object");
+    r.referencing_status(physical::entities::referencing_status::referable);
     return r;
 }
 

@@ -23,15 +23,12 @@
 
 namespace dogen::text::cpp::transforms::build {
 
-const physical::entities::archetype& source_cmakelists_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("cpp", "build", "source_cmakelists"));
-        r.logical_meta_element_id("dogen.logical.entities.build_cmakelists");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
-        return r;
-    }());
+physical::entities::archetype source_cmakelists_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "build", "source_cmakelists"));
+    r.logical_meta_element_id("dogen.logical.entities.build_cmakelists");
+    r.referencing_status(physical::entities::referencing_status::not_referable);
     return r;
 }
 

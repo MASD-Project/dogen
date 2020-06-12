@@ -23,15 +23,12 @@
 
 namespace dogen::text::cpp::transforms::odb {
 
-const physical::entities::archetype& primitive_odb_options_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("cpp", "odb", "primitive_odb_options"));
-        r.logical_meta_element_id("dogen.logical.entities.primitive");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
-        return r;
-    }());
+physical::entities::archetype primitive_odb_options_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "odb", "primitive_odb_options"));
+    r.logical_meta_element_id("dogen.logical.entities.primitive");
+    r.referencing_status(physical::entities::referencing_status::not_referable);
     return r;
 }
 

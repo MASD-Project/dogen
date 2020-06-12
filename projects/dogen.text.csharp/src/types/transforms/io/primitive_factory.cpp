@@ -23,15 +23,12 @@
 
 namespace dogen::text::csharp::transforms::io {
 
-const physical::entities::archetype& primitive_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("csharp", "io", "primitive"));
-        r.logical_meta_element_id("dogen.logical.entities.primitive");
-        r.referencing_status(physical::entities::referencing_status::facet_default);
-        return r;
-    }());
+physical::entities::archetype primitive_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("csharp", "io", "primitive"));
+    r.logical_meta_element_id("dogen.logical.entities.primitive");
+    r.referencing_status(physical::entities::referencing_status::facet_default);
     return r;
 }
 

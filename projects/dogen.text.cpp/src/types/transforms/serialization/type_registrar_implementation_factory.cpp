@@ -23,15 +23,12 @@
 
 namespace dogen::text::cpp::transforms::serialization {
 
-const physical::entities::archetype& type_registrar_implementation_factory::make_archetype() {
-    static auto r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make("cpp", "serialization", "type_registrar_implementation"));
-        r.logical_meta_element_id("dogen.logical.entities.variability_initializer");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
-        return r;
-    }());
+physical::entities::archetype type_registrar_implementation_factory::make() {
+    physical::entities::archetype r;
+    using pmnf = physical::helpers::meta_name_factory;
+    r.meta_name(pmnf::make("cpp", "serialization", "type_registrar_implementation"));
+    r.logical_meta_element_id("dogen.logical.entities.variability_initializer");
+    r.referencing_status(physical::entities::referencing_status::not_referable);
     return r;
 }
 
