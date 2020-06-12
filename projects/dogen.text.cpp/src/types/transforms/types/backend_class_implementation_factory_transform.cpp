@@ -87,11 +87,13 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const logical::entities::element& e) const {
 
     auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
     const auto& be(assistant::as<logical::entities::physical::backend>(e));
+    const auto be_ch_arch(traits::backend_class_header_factory_archetype_qn());
+    builder.add(be.name(), be_ch_arch);
 
-    builder.add(be.name(), ch_arch);
+    const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
     builder.add(be.facets(), ch_arch);
+
     builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
