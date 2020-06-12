@@ -36,8 +36,8 @@
 #include "dogen.text.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
-#include "dogen.text.cpp/types/transforms/transforms_transform.hpp"
-#include "dogen.text.csharp/types/transforms/transforms_transform.hpp"
+#include "dogen.text.cpp/types/transforms/transforms_factory.hpp"
+#include "dogen.text.csharp/types/transforms/transforms_factory.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/transforms/context_factory.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
@@ -95,8 +95,8 @@ create_physical_meta_model(boost::shared_ptr<tracing::tracer> tracer) {
      * Obtain the backends.
      */
     const std::list<physical::entities::backend> bes {
-        text::cpp::transforms::transforms_backend_chain::static_backend(),
-        text::csharp::transforms::transforms_backend_chain::static_backend()
+        text::cpp::transforms::transforms_factory::make(),
+        text::csharp::transforms::transforms_factory::make()
     };
 
     /*
