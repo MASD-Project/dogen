@@ -2748,7 +2748,7 @@
         "dogen::implementation_configuration"
       ],
       "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.variability_initializer",
+        "masd.physical.logical_meta_element_id": "dogen.logical.entities.serialization_type_registrar",
         "masd.wale.kvp.class.simple_name": "type_registrar_implementation_transform",
         "masd.wale.kvp.archetype.simple_name": "type_registrar_implementation",
         "masd.wale.kvp.meta_element": "serialization_type_registrar",

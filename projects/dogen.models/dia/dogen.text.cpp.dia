@@ -40476,7 +40476,7 @@ static void register_types(Archive&amp; ar);
       <dia:attribute name="comment">
         <dia:string>#Generates header files for feature bundles.
 
-#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.variability_initializer
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.serialization_type_registrar
 #DOGEN masd.wale.kvp.class.simple_name=type_registrar_implementation_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=type_registrar_implementation
 #DOGEN masd.wale.kvp.meta_element=serialization_type_registrar
