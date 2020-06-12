@@ -54,43 +54,88 @@ struct traits {
     static std::string class_forward_declarations_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class header archetype.
+     * @brief Name of the archetype for the archetype class header
+     * transform.
      */
     static std::string archetype_class_header_archetype_qn();
     static std::string archetype_class_header_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class implementation
-     * archetype.
+     * @brief Name of the archetype for the archetype class header
+     * factory.
+     */
+    static std::string archetype_class_header_factory_archetype_qn();
+    static std::string archetype_class_header_factory_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the archetype class
+     * implementation transform.
      */
     static std::string archetype_class_implementation_archetype_qn();
     static std::string archetype_class_implementation_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class header archetype.
+     * @brief Name of the archetype for the archetype class
+     * implementation factory.
+     */
+    static std::string archetype_class_implementation_factory_archetype_qn();
+    static std::string archetype_class_implementation_factory_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the facet class header
+     * transform.
      */
     static std::string facet_class_header_archetype_qn();
     static std::string facet_class_header_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class implementation
-     * archetype.
+     * @brief Name of the archetype for the facet class header
+     * factory.
+     */
+    static std::string facet_class_header_factory_archetype_qn();
+    static std::string facet_class_header_factory_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the facet class implementation
+     * transform.
      */
     static std::string facet_class_implementation_archetype_qn();
     static std::string facet_class_implementation_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class header archetype.
+     * @brief Name of the archetype for the facet class implementation
+     * factory.
+     */
+    static std::string facet_class_implementation_factory_archetype_qn();
+    static std::string facet_class_implementation_factory_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the backend class header
+     * transform.
      */
     static std::string backend_class_header_archetype_qn();
     static std::string backend_class_header_archetype_sn();
 
     /**
-     * @brief Name of the archetype for the class implementation
-     * archetype.
+     * @brief Name of the archetype for the backend class header
+     * factory.
+     */
+    static std::string backend_class_header_factory_archetype_qn();
+    static std::string backend_class_header_factory_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the backend class
+     * implementation.
      */
     static std::string backend_class_implementation_archetype_qn();
     static std::string backend_class_implementation_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the backend class
+     * implementation factory.
+     */
+    static std::string backend_class_implementation_factory_archetype_qn();
+    static std::string backend_class_implementation_factory_archetype_sn();
 
     /**
      * @brief Name of the archetype for the class header archetype.
