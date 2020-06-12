@@ -262,7 +262,7 @@
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -1516,7 +1516,7 @@ inline void swap(
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -1730,7 +1730,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
@@ -1990,7 +1990,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exception_header_transform#</dia:string>
+        <dia:string>#exception_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -2234,7 +2234,7 @@ private:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -2460,7 +2460,7 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#namespace_header_transform#</dia:string>
+        <dia:string>#namespace_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -2664,7 +2664,7 @@ namespace &lt;#= m.name().simple() #&gt; {
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_header_transform#</dia:string>
+        <dia:string>#visitor_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -2917,7 +2917,7 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
@@ -3576,7 +3576,7 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -3812,7 +3812,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -4011,7 +4011,7 @@ operator&lt;&lt;(std::ostream&amp; s,
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
@@ -4240,7 +4240,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -4437,7 +4437,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_transform#</dia:string>
+        <dia:string>#enum_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_implementation_configuration#</dia:string>
@@ -4699,7 +4699,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -4932,7 +4932,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
@@ -5277,7 +5277,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -5502,7 +5502,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_implementation_configuration#</dia:string>
@@ -5861,7 +5861,7 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -6069,7 +6069,7 @@ private:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_transform#</dia:string>
+        <dia:string>#enum_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_implementation_configuration#</dia:string>
@@ -6318,7 +6318,7 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_transform#</dia:string>
+        <dia:string>#class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::object_header_configuration#</dia:string>
@@ -13397,7 +13397,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -13587,7 +13587,7 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -15720,7 +15720,7 @@ and element.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -15894,7 +15894,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -16069,7 +16069,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -16243,7 +16243,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -16417,7 +16417,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -16591,7 +16591,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_transform#</dia:string>
+        <dia:string>#builtin_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::builtin_header_configuration#</dia:string>
@@ -28325,7 +28325,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -28697,7 +28697,7 @@ inline void swap(
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -28907,7 +28907,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -29108,7 +29108,7 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -29339,7 +29339,7 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -29554,7 +29554,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_transform#</dia:string>
+        <dia:string>#primitive_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_header_configuration#</dia:string>
@@ -29760,7 +29760,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_transform#</dia:string>
+        <dia:string>#primitive_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
@@ -30058,7 +30058,7 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_transform#</dia:string>
+        <dia:string>#primitive_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
@@ -30290,7 +30290,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_transform#</dia:string>
+        <dia:string>#primitive_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
@@ -30528,7 +30528,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_transform#</dia:string>
+        <dia:string>#primitive_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
@@ -30810,7 +30810,7 @@ populate(const unsigned int position, result_type&amp; v) {
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_transform#</dia:string>
+        <dia:string>#primitive_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::primitive_implementation_configuration#</dia:string>
@@ -33957,7 +33957,7 @@ code.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_transform#</dia:string>
+        <dia:string>#class_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
@@ -34792,7 +34792,7 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_transform#</dia:string>
+        <dia:string>#enum_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
@@ -35246,7 +35246,7 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_bundle_header_transform#</dia:string>
+        <dia:string>#feature_template_bundle_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -35547,7 +35547,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_bundle_implementation_transform#</dia:string>
+        <dia:string>#feature_template_bundle_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
@@ -35887,7 +35887,7 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_initializer_header_transform#</dia:string>
+        <dia:string>#variability_initializer_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -36097,7 +36097,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_initializer_implementation_transform#</dia:string>
+        <dia:string>#variability_initializer_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
@@ -37522,7 +37522,7 @@ string.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_transform#</dia:string>
+        <dia:string>#enum_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::enumeration_header_configuration#</dia:string>
@@ -39078,19 +39078,19 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:point val="90,248"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,247.95;104.222,251.65"/>
+        <dia:rectangle val="89.95,247.95;101.715,251.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="90,248"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.172499999999999"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#logic_less_template_transform#</dia:string>
+        <dia:string>#logic_less_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -39276,7 +39276,7 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_forward_declarations_transform#</dia:string>
+        <dia:string>#class_forward_declarations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
@@ -39470,7 +39470,7 @@ class &lt;#= o.name().simple() #&gt;;
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_forward_declarations_transform#</dia:string>
+        <dia:string>#visitor_forward_declarations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
@@ -39664,7 +39664,7 @@ class &lt;#= o.name().simple() #&gt;;
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_forward_declarations_transform#</dia:string>
+        <dia:string>#class_forward_declarations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
@@ -39869,7 +39869,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_forward_declarations_transform#</dia:string>
+        <dia:string>#primitive_forward_declarations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
@@ -40063,7 +40063,7 @@ class &lt;#= p.name().simple() #&gt;;
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_forward_declarations_transform#</dia:string>
+        <dia:string>#primitive_forward_declarations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
@@ -40268,7 +40268,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_registrar_header_transform#</dia:string>
+        <dia:string>#type_registrar_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -40468,7 +40468,7 @@ static void register_types(Archive&amp; ar);
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_registrar_implementation_transform#</dia:string>
+        <dia:string>#type_registrar_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
@@ -41153,7 +41153,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#project_transform#</dia:string>
+        <dia:string>#project#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -41388,7 +41388,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#solution_transform#</dia:string>
+        <dia:string>#solution#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -41608,7 +41608,7 @@ EndGlobal
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#main_transform#</dia:string>
+        <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::tests_configuration#</dia:string>
@@ -41821,19 +41821,19 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
         <dia:point val="20,362"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,361.95;34.105,365.65"/>
+        <dia:rectangle val="19.95,361.95;31.715,365.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20,362"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.055000000000001"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_odb_options_transform#</dia:string>
+        <dia:string>#object_odb_options#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -42047,19 +42047,19 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
         <dia:point val="50,362"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,361.95;65.38,365.65"/>
+        <dia:rectangle val="49.95,361.95;61.715,365.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,362"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.330000000000002"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_odb_options_transform#</dia:string>
+        <dia:string>#primitive_odb_options#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -42285,7 +42285,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#main_transform#</dia:string>
+        <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
@@ -42580,19 +42580,19 @@ int main(int /*argc*/, char* /*argv*/[]) {
         <dia:point val="20,367"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,366.95;35.1175,370.65"/>
+        <dia:rectangle val="19.95,366.95;31.715,370.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20,367"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.067500000000001"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#common_odb_options_transform#</dia:string>
+        <dia:string>#common_odb_options#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -42829,19 +42829,19 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
         <dia:point val="90,363"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,362.95;102.7,366.65"/>
+        <dia:rectangle val="89.95,362.95;101.715,366.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="90,363"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.65"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#msbuild_targets_transform#</dia:string>
+        <dia:string>#msbuild_targets#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -43118,19 +43118,19 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
         <dia:point val="52,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,288.95;65.6275,292.65"/>
+        <dia:rectangle val="51.95,288.95;63.715,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="52,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.577500000000001"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_cmakelists_transform#</dia:string>
+        <dia:string>#source_cmakelists#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -43394,19 +43394,19 @@ endif()
         <dia:point val="20,289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,288.95;33.9,292.65"/>
+        <dia:rectangle val="19.95,288.95;31.715,292.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20,289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.85"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#include_cmakelists_transform#</dia:string>
+        <dia:string>#include_cmakelists#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -43893,7 +43893,7 @@ install(
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cmakelists_transform#</dia:string>
+        <dia:string>#cmakelists#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype#</dia:string>
@@ -44265,7 +44265,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_header_transform#</dia:string>
+        <dia:string>#feature_bundle_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
@@ -44566,7 +44566,7 @@ public:
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_implementation_transform#</dia:string>
+        <dia:string>#feature_bundle_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
@@ -44912,7 +44912,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
         <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -45018,13 +45018,13 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
     const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
@@ -45042,7 +45042,7 @@ std::list&lt;std::string&gt; archetype_class_header_transform::inclusion_depende
     return builder.build();
 }
 
-void archetype_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_header_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -45054,9 +45054,10 @@ void archetype_class_header_transform::apply(const context&amp; ctx, const logic
         {
             const auto ns(ast.make_namespaces(o.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(o.name().simple() + "_transform");
 #&gt;
 
-class &lt;#= o.name().simple() #&gt; final : public model_to_text_transform {
+class &lt;#= sn #&gt; final : public model_to_text_transform {
 public:
     static const physical::entities::archetype&amp; static_archetype();
     const physical::entities::archetype&amp; archetype() const override;
@@ -45515,7 +45516,7 @@ public:
         <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -45624,20 +45625,20 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_implementation_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void archetype_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_implementation_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -46913,13 +46914,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O309">
       <dia:attribute name="obj_pos">
-        <dia:point val="-33,223"/>
+        <dia:point val="-32,223"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.05,222.95;-5.5,229.05"/>
+        <dia:rectangle val="-32.05,222.95;-4.5,229.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-33,223"/>
+        <dia:point val="-32,223"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.449999999999999"/>
@@ -47123,7 +47124,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:point val="-6.6225,220.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.325,220.35;-5.7725,223.05"/>
+        <dia:rectangle val="-18.325,220.35;-5.7725,223.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -47131,8 +47132,8 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
       <dia:attribute name="orth_points">
         <dia:point val="-6.6225,220.4"/>
         <dia:point val="-6.6225,222"/>
-        <dia:point val="-19.275,222"/>
-        <dia:point val="-19.275,223"/>
+        <dia:point val="-18.275,222"/>
+        <dia:point val="-18.275,223"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -49082,7 +49083,7 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
         <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
-#DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform
+#DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -49188,13 +49189,13 @@ void archetype_class_implementation_transform::apply(const context&amp; ctx, con
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; facet_class_header_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; facet_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
 
@@ -49214,7 +49215,7 @@ std::list&lt;std::string&gt; facet_class_header_transform::inclusion_dependencie
     return builder.build();
 }
 
-void facet_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void facet_class_header_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "facet class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -49296,7 +49297,7 @@ public:
         <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
-#DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform
+#DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -49406,13 +49407,13 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; facet_class_implementation_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; facet_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
     const auto&amp; fct(assistant::as&lt;logical::entities::physical::facet&gt;(e));
@@ -49427,7 +49428,7 @@ std::list&lt;std::string&gt; facet_class_implementation_transform::inclusion_dep
     return builder.build();
 }
 
-void facet_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void facet_class_implementation_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "facet class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -49472,7 +49473,7 @@ physical::entities::facet make_facet() {
 &lt;#+
             for (const auto&amp; n : fct.archetypes()) {
 #&gt;
-    lambda(&lt;#= n.simple() #&gt;::static_archetype());
+    lambda(&lt;#= n.simple() #&gt;_transform::static_archetype());
 &lt;#+
             }
 #&gt;
@@ -49521,13 +49522,13 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O327">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,282"/>
+        <dia:point val="-46,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,281.95;-17.73,285.65"/>
+        <dia:rectangle val="-46.05,268.95;-17.73,272.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,282"/>
+        <dia:point val="-46,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -49545,7 +49546,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
         <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
-#DOGEN masd.wale.kvp.class.simple_name=backend_class_header_transform
+#DOGEN masd.wale.kvp.class.simple_name=backend_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -49651,13 +49652,13 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; backend_class_header_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; backend_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
 
@@ -49677,7 +49678,7 @@ std::list&lt;std::string&gt; backend_class_header_transform::inclusion_dependenc
     return builder.build();
 }
 
-void backend_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void backend_class_header_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -49735,13 +49736,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O328">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,282"/>
+        <dia:point val="-15,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,281.95;9.96,285.65"/>
+        <dia:rectangle val="-15.05,268.95;10.96,272.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,282"/>
+        <dia:point val="-15,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -49759,7 +49760,7 @@ public:
         <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
-#DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_transform
+#DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -49868,13 +49869,13 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; backend_class_implementation_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; backend_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
 
@@ -49891,7 +49892,7 @@ std::list&lt;std::string&gt; backend_class_implementation_transform::inclusion_d
     return builder.build();
 }
 
-void backend_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void backend_class_implementation_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "backend class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -49985,13 +49986,13 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O329">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,296"/>
+        <dia:point val="-46,282"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,295.95;-17.73,299.65"/>
+        <dia:rectangle val="-46.05,281.95;-17.73,285.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,296"/>
+        <dia:point val="-46,282"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -50009,7 +50010,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
         <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
-#DOGEN masd.wale.kvp.class.simple_name=part_class_header_transform
+#DOGEN masd.wale.kvp.class.simple_name=part_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_header
 #DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -50115,20 +50116,20 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; part_class_header_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; part_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void part_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void part_class_header_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "part class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -50177,13 +50178,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O330">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,296"/>
+        <dia:point val="-15,282"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,295.95;9.96,299.65"/>
+        <dia:rectangle val="-15.05,281.95;10.96,285.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,296"/>
+        <dia:point val="-15,282"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -50201,7 +50202,7 @@ public:
         <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
-#DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_transform
+#DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -50310,20 +50311,20 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; part_class_implementation_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; part_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void part_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void part_class_implementation_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "part class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -50355,13 +50356,13 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O331">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,301"/>
+        <dia:point val="-46,287"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,300.95;-17.73,304.65"/>
+        <dia:rectangle val="-46.05,286.95;-17.73,290.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,301"/>
+        <dia:point val="-46,287"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -50379,7 +50380,7 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
         <dia:string>#Generates header files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
-#DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_header_transform
+#DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_header
 #DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -50485,20 +50486,20 @@ void part_class_implementation_transform::apply(const context&amp; ctx, const lo
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_kind_class_header_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_kind_class_header_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void archetype_kind_class_header_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_kind_class_header_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype kind class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -50547,13 +50548,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O332">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,301"/>
+        <dia:point val="-15,287"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,300.95;9.96,304.65"/>
+        <dia:rectangle val="-15.05,286.95;10.96,290.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,301"/>
+        <dia:point val="-15,287"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -50571,7 +50572,7 @@ public:
         <dia:string>#Generates implementation files for archetypes.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
-#DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_implementation_transform
+#DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_implementation
 #DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -50680,20 +50681,20 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_kind_class_implementation_transform::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_kind_class_implementation_transform_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; /*f*/,
     const logical::entities::element&amp; /*e*/) const {
     static std::list&lt;std::string&gt; r;
     return r;
 }
 
-void archetype_kind_class_implementation_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_kind_class_implementation_transform_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype kind class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -51061,7 +51062,7 @@ void archetype_kind_class_implementation_transform::apply(const context&amp; ctx
         <dia:string>#Generates header files for archetype factories.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_factory
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_factory
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
@@ -51169,13 +51170,13 @@ void archetype_kind_class_implementation_transform::apply(const context&amp; ctx
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_header_factory::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_header_factory_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; /*e*/) const {
     auto builder(f.make());
@@ -51183,7 +51184,7 @@ std::list&lt;std::string&gt; archetype_class_header_factory::inclusion_dependenc
     return builder.build();
 }
 
-void archetype_class_header_factory::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_header_factory_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "types archetype class header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
@@ -51268,7 +51269,7 @@ public:
         <dia:string>#Generates implementation files for archetype factories.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
-#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_factory
+#DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_factory
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
@@ -51377,13 +51378,13 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
-std::list&lt;std::string&gt; archetype_class_implementation_factory::inclusion_dependencies(
+std::list&lt;std::string&gt; archetype_class_implementation_factory_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; e) const {
     const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
@@ -51394,7 +51395,7 @@ std::list&lt;std::string&gt; archetype_class_implementation_factory::inclusion_d
     return builder.build();
 }
 
-void archetype_class_implementation_factory::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+void archetype_class_implementation_factory_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
     tracing::scoped_transform_tracer stp(lg, "archetype class implementation transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);

@@ -125,7 +125,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "transforms::types::class_transform",
+      "name": "transforms::types::class",
       "documentation": "Generates implementation files for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "name": "transforms::types::enum_transform",
+      "name": "transforms::types::enum",
       "documentation": "Generates implementation files for enums.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -174,7 +174,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "transforms::io::class_transform",
+      "name": "transforms::io::class",
       "documentation": "Generates implementation files for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -193,7 +193,7 @@
       ]
     },
     {
-      "name": "transforms::io::enum_transform",
+      "name": "transforms::io::enum",
       "documentation": "Generates implementation files for enums.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -223,7 +223,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "transforms::test_data::class_transform",
+      "name": "transforms::test_data::class",
       "documentation": "Generates implementation files for objects.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -242,7 +242,7 @@
       ]
     },
     {
-      "name": "transforms::test_data::enum_transform",
+      "name": "transforms::test_data::enum",
       "documentation": "Generates implementation files for enums.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -261,7 +261,7 @@
       ]
     },
     {
-      "name": "transforms::types::exception_transform",
+      "name": "transforms::types::exception",
       "documentation": "Generates implementation files for exceptions.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -724,7 +724,7 @@
       ]
     },
     {
-      "name": "transforms::types::builtin_transform",
+      "name": "transforms::types::builtin",
       "documentation": "Generates implementation files for builtins.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -816,7 +816,7 @@
       ]
     },
     {
-      "name": "transforms::types::primitive_transform",
+      "name": "transforms::types::primitive",
       "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -835,7 +835,7 @@
       ]
     },
     {
-      "name": "transforms::test_data::primitive_transform",
+      "name": "transforms::test_data::primitive",
       "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -854,7 +854,7 @@
       ]
     },
     {
-      "name": "transforms::io::primitive_transform",
+      "name": "transforms::io::primitive",
       "documentation": "Generates implementation files for primitives.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -1032,7 +1032,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::visual_studio::project_transform",
+      "name": "transforms::visual_studio::project",
       "documentation": "Generates visual studio project.\n",
       "stereotypes": [
         "masd::physical::archetype"
@@ -1059,7 +1059,7 @@
       ]
     },
     {
-      "name": "transforms::visual_studio::solution_transform",
+      "name": "transforms::visual_studio::solution",
       "documentation": "Generates visual studio solutions.\n",
       "stereotypes": [
         "masd::physical::archetype"
@@ -1094,7 +1094,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::io::assistant_transform",
+      "name": "transforms::io::assistant",
       "documentation": "Generates implementation files for assistants.\n",
       "stereotypes": [
         "masd::physical::archetype",
@@ -1117,7 +1117,7 @@
       ]
     },
     {
-      "name": "transforms::test_data::assistant_transform",
+      "name": "transforms::test_data::assistant",
       "documentation": "Generates implementation files for assistants.\n",
       "stereotypes": [
         "masd::physical::archetype",
