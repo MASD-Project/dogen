@@ -45,6 +45,8 @@
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_header_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/facet_class_header_factory_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_header_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_transform_transform.hpp"
@@ -81,6 +83,8 @@ void initializer::initialize(registrar& rg) {
     register_formatter<archetype_class_implementation_factory_transform>(rg);
     register_formatter<facet_class_header_transform_transform>(rg);
     register_formatter<facet_class_implementation_transform_transform>(rg);
+    register_formatter<facet_class_header_factory_transform>(rg);
+    register_formatter<facet_class_implementation_factory_transform>(rg);
     register_formatter<backend_class_header_transform_transform>(rg);
     register_formatter<backend_class_implementation_transform_transform>(rg);
     register_formatter<part_class_header_transform_transform>(rg);
