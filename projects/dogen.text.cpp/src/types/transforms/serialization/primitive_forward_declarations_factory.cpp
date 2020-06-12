@@ -27,9 +27,8 @@ const physical::entities::archetype& primitive_forward_declarations_factory::mak
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "serialization",
-                "primitive_forward_declarations_factory"));
+            r.meta_name(pmnf::make("cpp", "serialization",
+                "primitive_forward_declarations"));
 
         r.logical_meta_element_id("dogen.logical.entities.primitive");
         r.referencing_status(physical::entities::referencing_status::referable);

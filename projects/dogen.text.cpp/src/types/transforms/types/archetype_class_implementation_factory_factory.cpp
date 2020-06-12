@@ -27,9 +27,8 @@ const physical::entities::archetype& archetype_class_implementation_factory_fact
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "types",
-                "archetype_class_implementation_factory_factory"));
+            r.meta_name(pmnf::make("cpp", "types",
+                "archetype_class_implementation_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.physical_archetype");
         r.referencing_status(physical::entities::referencing_status::not_referable);

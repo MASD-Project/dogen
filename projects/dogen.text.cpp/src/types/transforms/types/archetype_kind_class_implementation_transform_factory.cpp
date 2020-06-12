@@ -27,9 +27,8 @@ const physical::entities::archetype& archetype_kind_class_implementation_transfo
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "types",
-                "archetype_kind_class_implementation_transform_factory"));
+            r.meta_name(pmnf::make("cpp", "types",
+                "archetype_kind_class_implementation_transform"));
 
         r.logical_meta_element_id("dogen.logical.entities.physical_archetype_kind");
         r.referencing_status(physical::entities::referencing_status::not_referable);

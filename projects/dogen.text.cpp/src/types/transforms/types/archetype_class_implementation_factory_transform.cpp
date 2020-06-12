@@ -112,9 +112,8 @@ ast.stream() << "const physical::entities::archetype& " << sn << "::make_archety
 ast.stream() << "    static physical::entities::archetype r([]() {" << std::endl;
 ast.stream() << "        physical::entities::archetype r;" << std::endl;
 ast.stream() << "            using pmnf = physical::helpers::meta_name_factory;" << std::endl;
-ast.stream() << "            r.meta_name(pmnf::make(\"" << arch.backend_name() << "\"," << std::endl;
-ast.stream() << "                \"" << arch.facet_name() << "\"," << std::endl;
-ast.stream() << "                \"" << sn << "\"));" << std::endl;
+ast.stream() << "            r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\"," << std::endl;
+ast.stream() << "                \"" << arch.name().simple() << "\"));" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "        r.logical_meta_element_id(\"" << arch.logical_meta_element_id() << "\");" << std::endl;
 ast.stream() << "        r.referencing_status(physical::entities::referencing_status::" << arch.referencing_status() << ");" << std::endl;

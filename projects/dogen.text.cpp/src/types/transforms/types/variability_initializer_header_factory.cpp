@@ -27,9 +27,8 @@ const physical::entities::archetype& variability_initializer_header_factory::mak
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "types",
-                "variability_initializer_header_factory"));
+            r.meta_name(pmnf::make("cpp", "types",
+                "variability_initializer_header"));
 
         r.logical_meta_element_id("dogen.logical.entities.variability_initializer");
         r.referencing_status(physical::entities::referencing_status::facet_default);

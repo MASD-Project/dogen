@@ -27,9 +27,8 @@ const physical::entities::archetype& project_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("csharp",
-                "visual_studio",
-                "project_factory"));
+            r.meta_name(pmnf::make("csharp", "visual_studio",
+                "project"));
 
         r.logical_meta_element_id("dogen.logical.entities.visual_studio_project");
         r.referencing_status(physical::entities::referencing_status::not_referable);

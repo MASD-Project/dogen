@@ -27,9 +27,8 @@ const physical::entities::archetype& part_class_header_transform_factory::make_a
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "types",
-                "part_class_header_transform_factory"));
+            r.meta_name(pmnf::make("cpp", "types",
+                "part_class_header_transform"));
 
         r.logical_meta_element_id("dogen.logical.entities.physical_part");
         r.referencing_status(physical::entities::referencing_status::facet_default);

@@ -27,9 +27,8 @@ const physical::entities::archetype& feature_bundle_header_factory::make_archety
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("cpp",
-                "types",
-                "feature_bundle_header_factory"));
+            r.meta_name(pmnf::make("cpp", "types",
+                "feature_bundle_header"));
 
         r.logical_meta_element_id("dogen.logical.entities.variability_feature_bundle");
         r.referencing_status(physical::entities::referencing_status::facet_default);

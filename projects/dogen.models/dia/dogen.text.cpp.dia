@@ -51415,9 +51415,8 @@ const physical::entities::archetype&amp; &lt;#= sn #&gt;::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
-            r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;",
-                "&lt;#= arch.facet_name() #&gt;",
-                "&lt;#= sn #&gt;"));
+            r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;",
+                "&lt;#= arch.name().simple() #&gt;"));
 
         r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
         r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
