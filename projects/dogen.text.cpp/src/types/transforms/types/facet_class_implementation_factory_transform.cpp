@@ -88,8 +88,10 @@ std::list<std::string> facet_class_implementation_factory_transform::inclusion_d
     const logical::entities::element& e) const {
     const auto& fct(assistant::as<logical::entities::physical::facet>(e));
     auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
-    builder.add(fct.name(), ch_arch);
+    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
+    builder.add(fct.name(), fct_ch_arch);
+
+    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
@@ -142,7 +144,7 @@ ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;
             for (const auto& n : fct.archetypes()) {
-ast.stream() << "    lambda(" << n.simple() << "_transform::static_archetype());" << std::endl;
+ast.stream() << "    lambda(" << n.simple() << "_factory::make());" << std::endl;
             }
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;

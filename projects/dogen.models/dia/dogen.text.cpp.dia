@@ -51613,13 +51613,17 @@ void facet_class_header_factory_transform::apply(const context&amp; ctx, const l
             auto snf(ast.make_scoped_namespace_formatter(ns));
 #&gt;
 
-&lt;#+
-            ast.comment(fct.documentation());
-#&gt;
+/**
+ * @brief Creates a physical representation for the facet
+ * &lt;#= fct.name().simple() #&gt;.
+ *
+ * Facet documentation: &lt;#= fct.documentation() #&gt;
+ */
 class &lt;#= fct.name().simple() #&gt;_factory final {
 public:
     static physical::entities::facet make();
 };
+
 &lt;#+
         } // snf
 #&gt;
@@ -51796,8 +51800,10 @@ std::list&lt;std::string&gt; facet_class_implementation_factory_transform::inclu
     const logical::entities::element&amp; e) const {
     const auto&amp; fct(assistant::as&lt;logical::entities::physical::facet&gt;(e));
     auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
-    builder.add(fct.name(), ch_arch);
+    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
+    builder.add(fct.name(), fct_ch_arch);
+
+    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
@@ -51853,7 +51859,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#+
             for (const auto&amp; n : fct.archetypes()) {
 #&gt;
-    lambda(&lt;#= n.simple() #&gt;_transform::static_archetype());
+    lambda(&lt;#= n.simple() #&gt;_factory::make());
 &lt;#+
             }
 #&gt;

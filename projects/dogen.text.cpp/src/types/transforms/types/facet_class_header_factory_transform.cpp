@@ -96,11 +96,17 @@ void facet_class_header_factory_transform::apply(const context& ctx, const logic
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 ast.stream() << std::endl;
-            ast.comment(fct.documentation());
+ast.stream() << "/**" << std::endl;
+ast.stream() << " * @brief Creates a physical representation for the facet" << std::endl;
+ast.stream() << " * " << fct.name().simple() << "." << std::endl;
+ast.stream() << " *" << std::endl;
+ast.stream() << " * Facet documentation: " << fct.documentation() << std::endl;
+ast.stream() << " */" << std::endl;
 ast.stream() << "class " << fct.name().simple() << "_factory final {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    static physical::entities::facet make();" << std::endl;
 ast.stream() << "};" << std::endl;
+ast.stream() << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf
