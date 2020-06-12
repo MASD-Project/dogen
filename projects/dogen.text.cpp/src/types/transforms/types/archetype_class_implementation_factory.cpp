@@ -116,8 +116,7 @@ ast.stream() << "            r.meta_name(pmnf::make(\"" << arch.backend_name() <
 ast.stream() << "                \"" << arch.facet_name() << "\"," << std::endl;
 ast.stream() << "                \"" << sn << "\"));" << std::endl;
 ast.stream() << std::endl;
-ast.stream() << "        using lmnf = logical::helpers::meta_name_factory;" << std::endl;
-ast.stream() << "        r.logical_meta_element_id(lmnf::make_" << arch.logical_meta_element_id() << " name().qualified().dot());" << std::endl;
+ast.stream() << "        r.logical_meta_element_id(\"" << arch.logical_meta_element_id() << "\");" << std::endl;
 ast.stream() << "        r.referencing_status(physical::entities::referencing_status::" << arch.referencing_status() << ");" << std::endl;
 ast.stream() << "        return r;" << std::endl;
 ast.stream() << "    }());" << std::endl;

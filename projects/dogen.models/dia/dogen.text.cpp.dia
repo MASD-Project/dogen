@@ -51418,8 +51418,7 @@ const physical::entities::archetype&amp; &lt;#= sn #&gt;::static_archetype() {
                 "&lt;#= arch.facet_name() #&gt;",
                 "&lt;#= sn #&gt;"));
 
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_&lt;#= arch.logical_meta_element_id() #&gt; name().qualified().dot());
+        r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
         r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
         return r;
     }());
