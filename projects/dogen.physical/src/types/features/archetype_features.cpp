@@ -47,6 +47,9 @@ make_postfix() {
     r.default_value_overrides().push_back(
         default_value_override("factory",
             f.make(vt, std::list<std::string>{ "factory" })));
+    r.default_value_overrides().push_back(
+        default_value_override("transform",
+            f.make(vt, std::list<std::string>{ "transform" })));
     return r;
 }
 

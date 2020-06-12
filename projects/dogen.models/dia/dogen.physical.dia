@@ -5029,7 +5029,8 @@ Used to obtain the default archetype for referencing.#</dia:string>
 
 #DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.default_value_override.forward_declarations="fwd"
-#DOGEN masd.variability.default_value_override.factory="factory"#</dia:string>
+#DOGEN masd.variability.default_value_override.factory="factory"
+#DOGEN masd.variability.default_value_override.transform="transform"#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

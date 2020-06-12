@@ -571,7 +571,8 @@
           "tagged_values": {
             "masd.variability.binding_point": "global",
             "masd.variability.default_value_override.forward_declarations": "\"fwd\"",
-            "masd.variability.default_value_override.factory": "\"factory\""
+            "masd.variability.default_value_override.factory": "\"factory\"",
+            "masd.variability.default_value_override.transform": "\"transform\""
           }
         },
         {
