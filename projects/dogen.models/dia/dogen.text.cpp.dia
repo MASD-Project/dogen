@@ -51176,10 +51176,11 @@ void archetype_kind_class_implementation_transform::apply(const context&amp; ctx
 &lt;#+
 
 std::list&lt;std::string&gt; archetype_class_header_factory::inclusion_dependencies(
-    const formattables::dependencies_builder_factory&amp; /*f*/,
+    const formattables::dependencies_builder_factory&amp; f,
     const logical::entities::element&amp; /*e*/) const {
-    static const std::list&lt;std::string&gt; r;
-    return r;
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/archetype.hpp");
+    return builder.build();
 }
 
 void archetype_class_header_factory::apply(const context&amp; ctx, const logical::entities::element&amp; e,

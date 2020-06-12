@@ -74,10 +74,11 @@ boost::filesystem::path archetype_class_header_factory::full_path(
 }
 
 std::list<std::string> archetype_class_header_factory::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
+    const formattables::dependencies_builder_factory& f,
     const logical::entities::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/archetype.hpp");
+    return builder.build();
 }
 
 void archetype_class_header_factory::apply(const context& ctx, const logical::entities::element& e,
