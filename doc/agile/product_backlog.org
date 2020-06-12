@@ -78,6 +78,13 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Reserved keywords are relative to model elements                  :story:
+
+At present we do a blanket check for reserved keywords across all
+elements. Some elements however are unaffected by this such as
+profiles, archetypes (to an extent) etc. We need a way to check
+different kinds of elements against different lists.
+
 *** Merge visitor with object                                         :story:
 
 At present we are violating the principle that all meta-model elements

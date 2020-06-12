@@ -46,14 +46,14 @@ const std::regex loose_name_regex("^[a-zA-Z_][\\-\\.a-zA-Z0-9_]*$");
 
 /*
  * FIXME: we've removed the following keywords for now because masd
- * uses these terms: "module"
+ * uses these terms: "module" "class" "enum"
  */
 constexpr std::array<std::string_view, 81> cpp_reserved = { {
         "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
         "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor",
-        "break", "case", "catch", "class", "compl", "const",
+        "break", "case", "catch", "compl", "const",
         "const_cast", "constexpr", "continue", "decltype", "default", "delete",
-        "do", "dynamic_cast", "else", "enum", "explicit", "export", "extern",
+        "do", "dynamic_cast", "else", "explicit", "export", "extern",
         "false", "for", "friend", "goto", "if", "import", "inline",
         "mutable", "namespace", "new", "noexcept", "not",
         "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected",
@@ -73,13 +73,13 @@ constexpr std::array<std::string_view, 11> cpp_builtins = { {
 
 /*
  * FIXME: we've removed the following keywords for now because test
- * models use these terms: "base".
+ * models use these terms: "base", "class", "enum"
  */
 constexpr std::array<std::string_view, 64> csharp_reserved = { {
         "abstract", "as", "break",
-        "case", "catch", "checked", "class",
+        "case", "catch", "checked",
         "const", "continue", "default", "delegate",
-        "do", "else", "enum", "event",
+        "do", "else", "event",
         "explicit", "extern",   "false", "finally",
         "fixed", "for", "foreach", "goto",
         "if", "implicit", "in", "interface",
