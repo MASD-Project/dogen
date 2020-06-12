@@ -44,6 +44,9 @@ make_postfix() {
     r.default_value_overrides().push_back(
         default_value_override("forward_declarations",
             f.make(vt, std::list<std::string>{ "fwd" })));
+    r.default_value_overrides().push_back(
+        default_value_override("factory",
+            f.make(vt, std::list<std::string>{ "factory" })));
     return r;
 }
 
