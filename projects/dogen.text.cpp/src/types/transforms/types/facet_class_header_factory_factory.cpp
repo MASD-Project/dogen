@@ -18,32 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_FACET_CLASS_HEADER_TRANSFORM_FACTORY_HPP
-#define DOGEN_TEXT_CPP_TYPES_TRANSFORMS_TYPES_FACET_CLASS_HEADER_TRANSFORM_FACTORY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen.physical/types/entities/archetype.hpp"
+#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/facet_class_header_factory_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
-/**
- * @brief Creates a physical representation for the archetype
- * facet_class_header_transform.
- *
- * Archetype documentation: Generates header files for facet transforms.
-
- */
-class facet_class_header_transform_factory final {
-public:
-    /**
-     * @brief Makes the archetype.
-     */
-    static const physical::entities::archetype& make_archetype();
-};
+const physical::entities::archetype& facet_class_header_factory_factory::make_archetype() {
+    static auto r([]() {
+        physical::entities::archetype r;
+        using pmnf = physical::helpers::meta_name_factory;
+        r.meta_name(pmnf::make("cpp", "types", "facet_class_header_factory"));
+        r.logical_meta_element_id("dogen.logical.entities.physical_facet");
+        r.referencing_status(physical::entities::referencing_status::referable);
+        return r;
+    }());
+    return r;
+}
 
 }
 
-#endif

@@ -49080,7 +49080,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>#masd::physical::archetype, dogen::header_facet_default_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates header files for archetypes.
+        <dia:string>#Generates header files for facet transforms.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform_transform
@@ -49294,7 +49294,7 @@ public:
         <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Generates implementation files for archetypes.
+        <dia:string>#Generates implementation files for facet transforms.
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform_transform
@@ -49736,13 +49736,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O328">
       <dia:attribute name="obj_pos">
-        <dia:point val="-15,269"/>
+        <dia:point val="-16,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,268.95;10.96,272.65"/>
+        <dia:rectangle val="-16.05,268.95;9.96,272.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-15,269"/>
+        <dia:point val="-16,269"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -51420,6 +51420,446 @@ const physical::entities::archetype&amp; &lt;#= sn #&gt;::make_archetype() {
         r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
         return r;
     }());
+    return r;
+}
+
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O338">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-46,264"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-46.05,263.95;-23.12,267.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-46,264"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="22.830000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#facet_class_header_factory#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::header_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates header files for facet factories.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
+#DOGEN masd.wale.kvp.class.simple_name=facet_class_header_factory_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header_factory
+#DOGEN masd.wale.kvp.meta_element=physical_facet
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
+#DOGEN masd.physical.referencing_status=referable#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; facet_class_header_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; /*e*/) const {
+    auto builder(f.make());
+    builder.add_as_user("dogen.physical/types/entities/facet.hpp");
+    return builder.build();
+}
+
+void facet_class_header_factory_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "facet class header transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
+    const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(fct));
+        {
+            const auto ns(ast.make_namespaces(e.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#&gt;
+
+&lt;#+
+            ast.comment(fct.documentation());
+#&gt;
+class &lt;#= fct.name().simple() #&gt;_factory final {
+public:
+    static physical::entities::facet make();
+};
+&lt;#+
+        } // snf
+#&gt;
+
+&lt;#+
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O339">
+      <dia:attribute name="obj_pos">
+        <dia:point val="-16,264"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-16.05,263.95;9.96,267.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="-16,264"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.91"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#facet_class_implementation_factory#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::physical::archetype, dogen::implementation_configuration#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Generates implementation files for facet factory.
+
+#DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
+#DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_factory_transform
+#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_factory
+#DOGEN masd.wale.kvp.meta_element=physical_facet
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#68d799"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#stitch_template_content#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#&lt;#@ masd.stitch.stream_variable_name=ast.stream() #&gt;
+&lt;#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
+&lt;#$ stitch.wale.template_instantiation_result #&gt;
+&lt;#+
+
+std::list&lt;std::string&gt; facet_class_implementation_factory_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory&amp; f,
+    const logical::entities::element&amp; e) const {
+    const auto&amp; fct(assistant::as&lt;logical::entities::physical::facet&gt;(e));
+    auto builder(f.make());
+    const auto ch_arch(traits::canonical_archetype());
+    builder.add(fct.name(), ch_arch);
+    builder.add(fct.archetypes(), ch_arch);
+    builder.add_as_user("dogen.utility/types/log/logger.hpp");
+    builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+
+    return builder.build();
+}
+
+void facet_class_implementation_factory_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
+    physical::entities::artefact&amp; a) const {
+    tracing::scoped_transform_tracer stp(lg, "facet class implementation transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const auto&amp; fct(ast.as&lt;logical::entities::physical::facet&gt;(e));
+
+    {
+        auto sbf(ast.make_scoped_boilerplate_formatter(fct));
+        {
+            const auto ns(ast.make_namespaces(fct.name(),
+                    false/*detect_model_name*/));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const auto sn(fct.name().simple() + "_factory");
+#&gt;
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("&lt;#= fct.name().qualified().dot() #&gt;"));
+
+}
+
+physical::entities::facet &lt;#= sn #&gt;::make() {
+    physical::helpers::meta_name_builder b;
+    b.meta_model("&lt;#= fct.meta_model_name() #&gt;");
+    b.backend("&lt;#= fct.backend_name() #&gt;");
+    b.facet("&lt;#= fct.name().simple() #&gt;");
+
+    physical::entities::facet r;
+    r.meta_name(b.build());
+
+    const auto lambda([&amp;](const auto&amp; arch) {
+        const auto id(arch.meta_name().qualified());
+        const auto pair(std::make_pair(id, arch));
+        const auto inserted(r.archetypes().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_archetype("Duplicate archetype: ");
+            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+        }
+    });
+
+&lt;#+
+            for (const auto&amp; n : fct.archetypes()) {
+#&gt;
+    lambda(&lt;#= n.simple() #&gt;_transform::static_archetype());
+&lt;#+
+            }
+#&gt;
     return r;
 }
 
