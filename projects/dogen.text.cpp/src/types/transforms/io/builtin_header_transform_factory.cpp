@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/io/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/builtin_header_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 
-const physical::entities::archetype& builtin_header_transform::static_archetype() {
+const physical::entities::archetype& builtin_header_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "io",
-                "builtin_header_transform"));
+                "builtin_header_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.builtin");
         r.referencing_status(physical::entities::referencing_status::facet_default);
@@ -37,5 +37,6 @@ const physical::entities::archetype& builtin_header_transform::static_archetype(
     }());
     return r;
 }
+
 }
 

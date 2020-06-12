@@ -36,7 +36,7 @@ namespace dogen::text::csharp::transforms::types {
  * Archetype documentation: Generates implementation files for enums.
 
  */
-class enum_transform final {
+class enum_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

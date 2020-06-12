@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::serialization {
  * Archetype documentation: Generates header files for feature bundles.
 
  */
-class type_registrar_implementation_transform final {
+class type_registrar_implementation_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

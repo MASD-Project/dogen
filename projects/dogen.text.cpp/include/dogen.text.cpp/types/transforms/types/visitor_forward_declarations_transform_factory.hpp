@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::types {
  * Archetype documentation: Generates forward declarations for visitors.
 
  */
-class visitor_forward_declarations_transform final {
+class visitor_forward_declarations_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

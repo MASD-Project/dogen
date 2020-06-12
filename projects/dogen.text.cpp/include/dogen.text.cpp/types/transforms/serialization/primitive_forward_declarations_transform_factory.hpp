@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::serialization {
  * Archetype documentation: Generates forward declarations for primitives.
 
  */
-class primitive_forward_declarations_transform final {
+class primitive_forward_declarations_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

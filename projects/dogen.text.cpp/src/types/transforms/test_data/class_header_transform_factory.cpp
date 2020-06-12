@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/class_header_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 
-const physical::entities::archetype& class_header_transform::static_archetype() {
+const physical::entities::archetype& class_header_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "test_data",
-                "class_header_transform"));
+                "class_header_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.object");
         r.referencing_status(physical::entities::referencing_status::facet_default);
@@ -37,5 +37,6 @@ const physical::entities::archetype& class_header_transform::static_archetype() 
     }());
     return r;
 }
+
 }
 

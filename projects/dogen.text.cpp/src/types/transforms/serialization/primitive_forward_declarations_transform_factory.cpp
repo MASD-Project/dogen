@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 
-const physical::entities::archetype& primitive_forward_declarations_transform::static_archetype() {
+const physical::entities::archetype& primitive_forward_declarations_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "serialization",
-                "primitive_forward_declarations_transform"));
+                "primitive_forward_declarations_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.primitive");
         r.referencing_status(physical::entities::referencing_status::referable);
@@ -37,5 +37,6 @@ const physical::entities::archetype& primitive_forward_declarations_transform::s
     }());
     return r;
 }
+
 }
 

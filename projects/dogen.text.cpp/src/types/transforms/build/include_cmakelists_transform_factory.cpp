@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform.hpp"
+#include "dogen.text.cpp/types/transforms/build/include_cmakelists_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::build {
 
-const physical::entities::archetype& include_cmakelists_transform::static_archetype() {
+const physical::entities::archetype& include_cmakelists_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "build",
-                "include_cmakelists_transform"));
+                "include_cmakelists_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.build_cmakelists");
         r.referencing_status(physical::entities::referencing_status::not_referable);
@@ -37,5 +37,6 @@ const physical::entities::archetype& include_cmakelists_transform::static_archet
     }());
     return r;
 }
+
 }
 

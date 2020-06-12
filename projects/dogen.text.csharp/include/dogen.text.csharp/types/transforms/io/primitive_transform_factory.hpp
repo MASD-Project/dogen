@@ -36,7 +36,7 @@ namespace dogen::text::csharp::transforms::io {
  * Archetype documentation: Generates implementation files for primitives.
 
  */
-class primitive_transform final {
+class primitive_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::odb {
  * Archetype documentation: Generates object options for odb.
 
  */
-class object_odb_options_transform final {
+class object_odb_options_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

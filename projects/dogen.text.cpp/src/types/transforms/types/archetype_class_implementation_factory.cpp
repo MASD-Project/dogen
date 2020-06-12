@@ -87,7 +87,7 @@ std::list<std::string> archetype_class_implementation_factory::inclusion_depende
     const logical::entities::element& e) const {
     const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
     auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
+    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(arch.name(), ch_arch);
     builder.add_as_user("dogen.physical/types/helpers/meta_name_factory.hpp");
     return builder.build();
@@ -106,9 +106,9 @@ void archetype_class_implementation_factory::apply(const context& ctx, const log
             const auto ns(ast.make_namespaces(arch.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(arch.name().simple());
+            const auto sn(arch.name().simple() + "_factory");
 ast.stream() << std::endl;
-ast.stream() << "const physical::entities::archetype& " << sn << "::static_archetype() {" << std::endl;
+ast.stream() << "const physical::entities::archetype& " << sn << "::make_archetype() {" << std::endl;
 ast.stream() << "    static physical::entities::archetype r([]() {" << std::endl;
 ast.stream() << "        physical::entities::archetype r;" << std::endl;
 ast.stream() << "            using pmnf = physical::helpers::meta_name_factory;" << std::endl;
@@ -122,6 +122,7 @@ ast.stream() << "        return r;" << std::endl;
 ast.stream() << "    }());" << std::endl;
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
+ast.stream() << std::endl;
         } // snf
 ast.stream() << std::endl;
     } // sbf

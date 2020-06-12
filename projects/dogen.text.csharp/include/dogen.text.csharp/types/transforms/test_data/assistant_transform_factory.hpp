@@ -36,7 +36,7 @@ namespace dogen::text::csharp::transforms::test_data {
  * Archetype documentation: Generates implementation files for assistants.
 
  */
-class assistant_transform final {
+class assistant_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

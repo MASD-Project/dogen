@@ -36,7 +36,7 @@ namespace dogen::text::csharp::transforms::types {
  * Archetype documentation: Generates implementation files for builtins.
 
  */
-class builtin_transform final {
+class builtin_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

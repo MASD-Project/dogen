@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
+#include "dogen.text.csharp/types/transforms/visual_studio/project_transform_factory.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
 
-const physical::entities::archetype& project_transform::static_archetype() {
+const physical::entities::archetype& project_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("csharp",
                 "visual_studio",
-                "project_transform"));
+                "project_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.visual_studio_project");
         r.referencing_status(physical::entities::referencing_status::not_referable);
@@ -37,5 +37,6 @@ const physical::entities::archetype& project_transform::static_archetype() {
     }());
     return r;
 }
+
 }
 

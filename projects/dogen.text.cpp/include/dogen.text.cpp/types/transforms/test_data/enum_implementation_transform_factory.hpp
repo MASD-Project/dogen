@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::test_data {
  * Archetype documentation: Generates implementation files for enumerations.
 
  */
-class enum_implementation_transform final {
+class enum_implementation_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

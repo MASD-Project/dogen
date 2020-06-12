@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/templates/logic_less_template_transform.hpp"
+#include "dogen.text.cpp/types/transforms/templates/logic_less_template_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::templates {
 
-const physical::entities::archetype& logic_less_template_transform::static_archetype() {
+const physical::entities::archetype& logic_less_template_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "templates",
-                "logic_less_template_transform"));
+                "logic_less_template_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.templating_logic_less_templates");
         r.referencing_status(physical::entities::referencing_status::not_referable);
@@ -37,5 +37,6 @@ const physical::entities::archetype& logic_less_template_transform::static_arche
     }());
     return r;
 }
+
 }
 

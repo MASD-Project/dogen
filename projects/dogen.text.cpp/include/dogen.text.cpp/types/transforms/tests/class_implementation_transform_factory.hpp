@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::tests {
  * Archetype documentation: Generates tests for objects.
 
  */
-class class_implementation_transform final {
+class class_implementation_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

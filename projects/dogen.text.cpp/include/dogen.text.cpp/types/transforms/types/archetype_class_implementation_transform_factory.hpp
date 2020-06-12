@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::types {
  * Archetype documentation: Generates implementation files for archetypes.
 
  */
-class archetype_class_implementation_transform final {
+class archetype_class_implementation_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

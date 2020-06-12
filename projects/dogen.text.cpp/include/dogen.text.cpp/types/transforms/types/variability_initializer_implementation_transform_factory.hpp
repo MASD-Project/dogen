@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::types {
  * Archetype documentation: Generates header files for feature bundles.
 
  */
-class variability_initializer_implementation_transform final {
+class variability_initializer_implementation_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

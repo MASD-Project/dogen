@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::build {
  * Archetype documentation: Generates cmakelists for tests.
 
  */
-class include_cmakelists_transform final {
+class include_cmakelists_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

@@ -51203,7 +51203,7 @@ void archetype_class_header_factory::apply(const context&amp; ctx, const logical
  *
  * Archetype documentation: &lt;#= o.documentation() #&gt;
  */
-class &lt;#= o.name().simple() #&gt; final {
+class &lt;#= o.name().simple() #&gt;_factory final {
 public:
     /**
      * @brief Makes the archetype.
@@ -51388,7 +51388,7 @@ std::list&lt;std::string&gt; archetype_class_implementation_factory::inclusion_d
     const logical::entities::element&amp; e) const {
     const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
     auto builder(f.make());
-    const auto ch_arch(traits::canonical_archetype());
+    const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(arch.name(), ch_arch);
     builder.add_as_user("dogen.physical/types/helpers/meta_name_factory.hpp");
     return builder.build();
@@ -51407,10 +51407,10 @@ void archetype_class_implementation_factory::apply(const context&amp; ctx, const
             const auto ns(ast.make_namespaces(arch.name(),
                     false/*detect_model_name*/));
             auto snf(ast.make_scoped_namespace_formatter(ns));
-            const auto sn(arch.name().simple());
+            const auto sn(arch.name().simple() + "_factory");
 #&gt;
 
-const physical::entities::archetype&amp; &lt;#= sn #&gt;::static_archetype() {
+const physical::entities::archetype&amp; &lt;#= sn #&gt;::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
@@ -51424,6 +51424,7 @@ const physical::entities::archetype&amp; &lt;#= sn #&gt;::static_archetype() {
     }());
     return r;
 }
+
 &lt;#+
         } // snf
 #&gt;

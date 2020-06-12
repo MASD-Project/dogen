@@ -19,17 +19,17 @@
  *
  */
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
-#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::lexical_cast {
 
-const physical::entities::archetype& enum_header_transform::static_archetype() {
+const physical::entities::archetype& enum_header_transform_factory::make_archetype() {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
             using pmnf = physical::helpers::meta_name_factory;
             r.meta_name(pmnf::make("cpp",
                 "lexical_cast",
-                "enum_header_transform"));
+                "enum_header_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.enumeration");
         r.referencing_status(physical::entities::referencing_status::facet_default);
@@ -37,5 +37,6 @@ const physical::entities::archetype& enum_header_transform::static_archetype() {
     }());
     return r;
 }
+
 }
 

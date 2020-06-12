@@ -100,7 +100,7 @@ ast.stream() << " * " << o.name().simple() << "." << std::endl;
 ast.stream() << " *" << std::endl;
 ast.stream() << " * Archetype documentation: " << o.documentation() << std::endl;
 ast.stream() << " */" << std::endl;
-ast.stream() << "class " << o.name().simple() << " final {" << std::endl;
+ast.stream() << "class " << o.name().simple() << "_factory final {" << std::endl;
 ast.stream() << "public:" << std::endl;
 ast.stream() << "    /**" << std::endl;
 ast.stream() << "     * @brief Makes the archetype." << std::endl;

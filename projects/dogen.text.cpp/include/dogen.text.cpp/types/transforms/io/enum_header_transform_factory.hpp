@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::io {
  * Archetype documentation: Generates header files for enumerations.
 
  */
-class enum_header_transform final {
+class enum_header_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

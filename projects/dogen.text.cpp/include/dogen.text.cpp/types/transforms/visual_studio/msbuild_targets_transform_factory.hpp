@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::visual_studio {
  * Archetype documentation: Generates msbuild targets.
 
  */
-class msbuild_targets_transform final {
+class msbuild_targets_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.

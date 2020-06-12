@@ -36,7 +36,7 @@ namespace dogen::text::cpp::transforms::templates {
  * Archetype documentation: Generates logic-less templates.
 
  */
-class logic_less_template_transform final {
+class logic_less_template_transform_factory final {
 public:
     /**
      * @brief Makes the archetype.
