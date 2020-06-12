@@ -15,26 +15,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-12 Fri 13:42]
+#+CAPTION: Clock summary at [2020-06-12 Fri 23:15]
 | <75>                                                       |         |       |      |       |
 | Headline                                                   | Time    |       |      |     % |
 |------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *23:00* |       |      | 100.0 |
+| *Total time*                                               | *28:57* |       |      | 100.0 |
 |------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 23:00   |       |      | 100.0 |
-| Active                                                     |         | 23:00 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 7:42 |  33.5 |
-| Create a demo and presentation for previous sprint         |         |       | 1:11 |   5.1 |
-| Sprint and product backlog grooming                        |         |       | 2:10 |   9.4 |
-| Nightly nursing                                            |         |       | 0:11 |   0.8 |
-| Merge kernel with physical meta-model                      |         |       | 1:31 |   6.6 |
-| Convert =wale_template_reference= to meta-data             |         |       | 0:37 |   2.7 |
-| Create an emacs mode for wale                              |         |       | 0:14 |   1.0 |
-| Create a TS agnostic representation of inclusion           |         |       | 3:04 |  13.3 |
-| Analysis on reducing the number of required wale keys      |         |       | 1:11 |   5.1 |
-| Use PMM to compute =meta_name_indices=                     |         |       | 3:03 |  13.3 |
-| Split archetype factory from transform                     |         |       | 1:30 |   6.5 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       | 0:36 |   2.6 |
+| Stories                                                    | 28:57   |       |      | 100.0 |
+| Active                                                     |         | 28:57 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 7:42 |  26.6 |
+| Create a demo and presentation for previous sprint         |         |       | 1:11 |   4.1 |
+| Sprint and product backlog grooming                        |         |       | 2:10 |   7.5 |
+| Nightly nursing                                            |         |       | 0:11 |   0.6 |
+| Merge kernel with physical meta-model                      |         |       | 1:31 |   5.2 |
+| Convert =wale_template_reference= to meta-data             |         |       | 0:37 |   2.1 |
+| Create an emacs mode for wale                              |         |       | 0:14 |   0.8 |
+| Create a TS agnostic representation of inclusion           |         |       | 3:04 |  10.6 |
+| Analysis on reducing the number of required wale keys      |         |       | 1:11 |   4.1 |
+| Use PMM to compute =meta_name_indices=                     |         |       | 3:03 |  10.5 |
+| Split archetype factory from transform                     |         |       | 7:27 |  25.7 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       | 0:36 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1168,6 +1168,8 @@ Notes:
 
 *** STARTED Split archetype factory from transform                    :story:
     :LOGBOOK:
+    CLOCK: [2020-06-12 Fri 21:31]--[2020-06-12 Fri 23:14] =>  1:43
+    CLOCK: [2020-06-12 Fri 14:26]--[2020-06-12 Fri 18:40] =>  4:14
     CLOCK: [2020-06-12 Fri 11:50]--[2020-06-12 Fri 13:05] =>  1:15
     CLOCK: [2020-06-10 Wed 21:56]--[2020-06-10 Wed 22:11] =>  0:15
     :END:
@@ -1251,6 +1253,39 @@ Another way to look at this is that we have different types of tags:
 
 Users can override the values of postfix tags either locally or
 globally.
+
+Notes:
+
+- there is also a lot of hackery regarding the model element name; we
+  are adding "_factory", "_transform", etc all over the place. It
+  would be nicer somehow if the projection took care of this. Not all
+  tags contribute to the physical element name though (fwd for example
+  should not change the forward declaration), but presumably we could
+  use the original logical name for those cases.
+- actually appending "_transform" in the names was a more serious
+  mistake than it appeared. What we did was to effectively change the
+  archetype names because they are now defined by the modeling
+  element. In reality, the archetype name must not have the word
+  transform, /unless/ it represents a projection of a physical element
+  (e.g. the archetype's archetype). The physical elements are special
+  because they define the projectors themselves and we need two
+  projectors for each of them: one for transform and one for
+  factory. All other elements must be named after the archetype
+  (e.g. =class_header= not =class_header_transform=) and then the
+  projection will generate the two representations
+  (e.g. =class_header_factory= and =class_header_transform=). The
+  problem is that we need to bootstrap this state. This is not easy
+  due to the recursive nature of the framework. If we change the names
+  of the elements so that they do not have "_transform", we will
+  generate files without "_transform". These will then generate the
+  correct factories but the incorrect transforms. However, if we add a
+  postfix default override that checks for "_transform" and postixes
+  it with "_transform" then we should generate the same files. This is
+  very subtle: the postfix is matching against the archetype name of
+  the archetype transform's transform. Note also that this means we
+  will generate archetypes with names such as "_transform_transform"
+  and this is by design: these are the archetypes representing the
+  transforms of the transforms.
 
 *** Replace initialisers with facet-based initialisation              :story:
 
