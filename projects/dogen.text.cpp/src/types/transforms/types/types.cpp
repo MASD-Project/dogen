@@ -42,6 +42,7 @@
 #include "dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp"
@@ -82,6 +83,7 @@ physical::entities::facet make_facet() {
 
     lambda(archetype_class_header_factory::static_archetype());
     lambda(archetype_class_header_transform::static_archetype());
+    lambda(archetype_class_implementation_factory::static_archetype());
     lambda(archetype_class_implementation_transform::static_archetype());
     lambda(archetype_kind_class_header_transform::static_archetype());
     lambda(archetype_kind_class_implementation_transform::static_archetype());
