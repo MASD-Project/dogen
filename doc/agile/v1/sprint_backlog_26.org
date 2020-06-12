@@ -15,25 +15,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-10 Wed 22:11]
-| <75>                                                  |         |       |      |       |
-| Headline                                              | Time    |       |      |     % |
-|-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *21:09* |       |      | 100.0 |
-|-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 21:09   |       |      | 100.0 |
-| Active                                                |         | 21:09 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:42 |  36.4 |
-| Create a demo and presentation for previous sprint    |         |       | 1:11 |   5.6 |
-| Sprint and product backlog grooming                   |         |       | 2:10 |  10.2 |
-| Nightly nursing                                       |         |       | 0:11 |   0.9 |
-| Merge kernel with physical meta-model                 |         |       | 1:31 |   7.2 |
-| Convert =wale_template_reference= to meta-data        |         |       | 0:37 |   2.9 |
-| Create an emacs mode for wale                         |         |       | 0:14 |   1.1 |
-| Create a TS agnostic representation of inclusion      |         |       | 3:04 |  14.5 |
-| Analysis on reducing the number of required wale keys |         |       | 1:11 |   5.6 |
-| Use PMM to compute =meta_name_indices=                |         |       | 3:03 |  14.4 |
-| Split archetype factory from transform                |         |       | 0:15 |   1.2 |
+#+CAPTION: Clock summary at [2020-06-12 Fri 13:42]
+| <75>                                                       |         |       |      |       |
+| Headline                                                   | Time    |       |      |     % |
+|------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                               | *23:00* |       |      | 100.0 |
+|------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                    | 23:00   |       |      | 100.0 |
+| Active                                                     |         | 23:00 |      | 100.0 |
+| Edit release notes for previous sprint                     |         |       | 7:42 |  33.5 |
+| Create a demo and presentation for previous sprint         |         |       | 1:11 |   5.1 |
+| Sprint and product backlog grooming                        |         |       | 2:10 |   9.4 |
+| Nightly nursing                                            |         |       | 0:11 |   0.8 |
+| Merge kernel with physical meta-model                      |         |       | 1:31 |   6.6 |
+| Convert =wale_template_reference= to meta-data             |         |       | 0:37 |   2.7 |
+| Create an emacs mode for wale                              |         |       | 0:14 |   1.0 |
+| Create a TS agnostic representation of inclusion           |         |       | 3:04 |  13.3 |
+| Analysis on reducing the number of required wale keys      |         |       | 1:11 |   5.1 |
+| Use PMM to compute =meta_name_indices=                     |         |       | 3:03 |  13.3 |
+| Split archetype factory from transform                     |         |       | 1:30 |   6.5 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       | 0:36 |   2.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1167,6 +1168,7 @@ Notes:
 
 *** STARTED Split archetype factory from transform                    :story:
     :LOGBOOK:
+    CLOCK: [2020-06-12 Fri 11:50]--[2020-06-12 Fri 13:05] =>  1:15
     CLOCK: [2020-06-10 Wed 21:56]--[2020-06-10 Wed 22:11] =>  0:15
     :END:
 
@@ -1183,6 +1185,72 @@ method in the transform interface. We need to figure out who is using
 it outside of bootstrapping. We won't be able to delete the existing
 factory code in the interface until this is done. Perhaps we should
 first move to the new PMM generation and then do this clean up.
+
+Notes:
+
+- need to create archetypes for all factories in traits for now. These
+  will not be needed at the end of the factory work because we will
+  use the meta-model element to generate the archetype factory.
+- need to make sure the factories are not also facet defaults in
+  references.
+- in the end we will have to rename the archetypes of the physical
+  entities to have the postfix "_transform". This includes parts and
+  kinds. We should do that when we have moved over to the factory.
+
+*** STARTED Archetype kind and postfix as symptoms of a larger pattern :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-12 Fri 13:41]--[2020-06-12 Fri 13:42] =>  0:01
+    CLOCK: [2020-06-12 Fri 13:06]--[2020-06-12 Fri 13:41] =>  0:35
+    :END:
+
+At present we have introduced the concept of "archetype kind" to deal
+with the fact that some artefacts have the extension "cpp" and others
+"hpp" and so on. We also have the concept of a "postfix" which deals
+with cases where there are more than one projection from logical space
+into physical space for the same kind. For example, =object= is
+projected to both class header and class header forward
+declaration. Without the postfix we would generate the same file name
+for both. At present, postfixes have defaults, handled by default
+variability overrides:
+
+: #DOGEN masd.variability.default_value_override.forward_declarations="fwd"
+
+The key =forward_declarations= is matched against the expanded key for
+the feature. If it ends with this string, it will have the default
+override. This is non-obvious. Finally, we also have the concept of
+"parts". This is not yet implemented, but the gist of it is that
+archetypes are grouped into "parts" such as =src=, =include= and so
+on.
+
+If we take a step back, what is happening here that we have been
+creating ad-hoc solutions for the problem that the function mapping
+logical model elements to physical elements may return a set with many
+elements. We need a way to generate unique IDs for each of these
+elements, and that ID is mapped to a file name. The driver for the
+mapping must be the archetype. Users may be able to override some
+aspects of this mapping (as they can do with extensions and postfixes
+at present). One possibility is to generalise these notions into
+"archetype tags". Tags can have one of three effects:
+
+- add a postfix;
+- add an extension;
+- add a directory.
+
+An archetype can have many tags. Only one tag can have an extension
+and only one tag can have a directory. All other tags are concatenated
+together with =_=. Tags can have an associated feature that enables
+overrides. This can be done globally or locally.
+
+Another way to look at this is that we have different types of tags:
+
+- directory tags: what we call parts. Facets have one of
+  these. Archetypes inherit them.
+- extension tags: archetypes have one of these.
+- postfix tags: archetypes have zero or many of these. Facets can have
+  one of these. Facet tags are inherited by archetypes.
+
+Users can override the values of postfix tags either locally or
+globally.
 
 *** Replace initialisers with facet-based initialisation              :story:
 

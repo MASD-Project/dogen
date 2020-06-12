@@ -78,6 +78,14 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Merge visitor with object                                         :story:
+
+At present we are violating the principle that all meta-model elements
+must be present in the user model; we are injecting visitors. However,
+it can be argued that visitor is just a physical projection of the
+object logical element. If we did this we would solve the
+inconsistency without needing to add another element to user models.
+
 *** Check RedHat guidelines on release notes                          :story:
 
 This post seems to contain a lot of interesting information about
