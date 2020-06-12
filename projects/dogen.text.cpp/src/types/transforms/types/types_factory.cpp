@@ -36,6 +36,7 @@
 #include "dogen.text.cpp/types/transforms/types/class_forward_declarations_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_header_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_transform_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/backend_class_header_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_header_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_forward_declarations_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_implementation_factory.hpp"
@@ -47,6 +48,7 @@
 #include "dogen.text.cpp/types/transforms/types/archetype_class_header_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_implementation_transform_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
@@ -91,7 +93,9 @@ physical::entities::facet types_factory::make() {
     lambda(archetype_class_implementation_transform_factory::make());
     lambda(archetype_kind_class_header_transform_factory::make());
     lambda(archetype_kind_class_implementation_transform_factory::make());
+    lambda(backend_class_header_factory_factory::make());
     lambda(backend_class_header_transform_factory::make());
+    lambda(backend_class_implementation_factory_factory::make());
     lambda(backend_class_implementation_transform_factory::make());
     lambda(builtin_header_factory::make());
     lambda(class_forward_declarations_factory::make());
