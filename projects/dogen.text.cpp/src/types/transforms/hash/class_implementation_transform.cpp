@@ -37,6 +37,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/hash/class_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::hash {
 namespace {
