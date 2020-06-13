@@ -37,6 +37,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/io/enum_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/enum_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 namespace {

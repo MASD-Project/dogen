@@ -40,6 +40,7 @@
 #include "dogen.text.cpp/types/transforms/io/traits.hpp"
 #include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"
 #include "dogen.text.cpp/types/transforms/io/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/io/primitive_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::io {
 namespace {
