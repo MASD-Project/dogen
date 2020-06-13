@@ -15,26 +15,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-13 Sat 00:30]
-| <75>                                                       |         |       |      |       |
-| Headline                                                   | Time    |       |      |     % |
-|------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                               | *30:10* |       |      | 100.0 |
-|------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                    | 30:10   |       |      | 100.0 |
-| Active                                                     |         | 30:10 |      | 100.0 |
-| Edit release notes for previous sprint                     |         |       | 7:42 |  25.5 |
-| Create a demo and presentation for previous sprint         |         |       | 1:11 |   3.9 |
-| Sprint and product backlog grooming                        |         |       | 2:10 |   7.2 |
-| Nightly nursing                                            |         |       | 0:11 |   0.6 |
-| Merge kernel with physical meta-model                      |         |       | 1:31 |   5.0 |
-| Convert =wale_template_reference= to meta-data             |         |       | 0:37 |   2.0 |
-| Create an emacs mode for wale                              |         |       | 0:14 |   0.8 |
-| Create a TS agnostic representation of inclusion           |         |       | 3:04 |  10.2 |
-| Analysis on reducing the number of required wale keys      |         |       | 1:11 |   3.9 |
-| Use PMM to compute =meta_name_indices=                     |         |       | 3:03 |  10.1 |
-| Split archetype factory from transform                     |         |       | 8:40 |  28.7 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       | 0:36 |   2.0 |
+#+CAPTION: Clock summary at [2020-06-13 Sat 19:46]
+| <75>                                                       |         |       |       |       |
+| Headline                                                   | Time    |       |       |     % |
+|------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                               | *32:29* |       |       | 100.0 |
+|------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                    | 32:29   |       |       | 100.0 |
+| Active                                                     |         | 32:29 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  7:42 |  23.7 |
+| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.6 |
+| Sprint and product backlog grooming                        |         |       |  2:12 |   6.8 |
+| Nightly nursing                                            |         |       |  0:11 |   0.6 |
+| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.7 |
+| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.9 |
+| Create an emacs mode for wale                              |         |       |  0:14 |   0.7 |
+| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   9.4 |
+| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.6 |
+| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   9.4 |
+| Split archetype factory from transform                     |         |       | 10:57 |  33.7 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -789,6 +789,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-13 Sat 19:44]--[2020-06-13 Sat 19:46] =>  0:02
     CLOCK: [2020-06-09 Tue 21:44]--[2020-06-09 Tue 21:54] =>  0:10
     CLOCK: [2020-06-08 Mon 21:55]--[2020-06-08 Mon 22:11] =>  0:16
     CLOCK: [2020-06-07 Sun 16:37]--[2020-06-07 Sun 16:39] =>  0:02
@@ -1057,6 +1058,49 @@ was created to compute this data:
 - methods in the M2T transform related to PMM
 - helpers.
 
+*** COMPLETED Split archetype factory from transform                  :story:
+    CLOSED: [2020-06-13 Sat 19:43]
+    :LOGBOOK:
+    CLOCK: [2020-06-13 Sat 19:23]--[2020-06-13 Sat 19:43] =>  0:20
+    CLOCK: [2020-06-13 Sat 17:25]--[2020-06-13 Sat 19:22] =>  1:57
+    CLOCK: [2020-06-13 Sat 00:01]--[2020-06-13 Sat 00:29] =>  0:28
+    CLOCK: [2020-06-12 Fri 23:15]--[2020-06-13 Sat 00:00] =>  0:45
+    CLOCK: [2020-06-12 Fri 21:31]--[2020-06-12 Fri 23:14] =>  1:43
+    CLOCK: [2020-06-12 Fri 14:26]--[2020-06-12 Fri 18:40] =>  4:14
+    CLOCK: [2020-06-12 Fri 11:50]--[2020-06-12 Fri 13:05] =>  1:15
+    CLOCK: [2020-06-10 Wed 21:56]--[2020-06-10 Wed 22:11] =>  0:15
+    :END:
+
+As per analysis story, we need to create two different archetypes for
+archetype:
+
+- transform
+- factory
+
+We can start by creating factory and moving it all across, then
+deleting the aspects of factory from the existing transform. However,
+the only slight snag is that there may be users of the =archetype=
+method in the transform interface. We need to figure out who is using
+it outside of bootstrapping. We won't be able to delete the existing
+factory code in the interface until this is done. Perhaps we should
+first move to the new PMM generation and then do this clean up.
+
+Notes:
+
+- need to create archetypes for all factories in traits for now. These
+  will not be needed at the end of the factory work because we will
+  use the meta-model element to generate the archetype factory.
+- need to make sure the factories are not also facet defaults in
+  references.
+- in the end we will have to rename the archetypes of the physical
+  entities to have the postfix "_transform". This includes parts and
+  kinds. We should do that when we have moved over to the factory.
+- implement archetype in transform in terms of the factory. Add
+  includes to each transform of the factory and update wustache
+  template.
+- update all references to traits to call the transform instead. Then
+  we can remove traits.
+
 *** STARTED Inject backend, facets and archetypes into PMM            :story:
 
 At present we only have artefacts in the PMM. We need to inject all
@@ -1122,7 +1166,7 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
-*** STARTED Model inclusion =inclusion_support_types= in the physical model :story:
+*** STARTED Model =inclusion_support_types= in the physical model     :story:
 
 At present we have a quick hack on =text.cpp= to model the inclusion
 of archetypes. In order to migrate the PMM to the new architecture, we
@@ -1165,46 +1209,6 @@ Notes:
   of all namespaces. However, we may end up in a situation where there
   are name clashes. For example, if we had a reference to =A::a= and
   =B::a=, this would cause problems.
-
-*** STARTED Split archetype factory from transform                    :story:
-    :LOGBOOK:
-    CLOCK: [2020-06-13 Sat 00:01]--[2020-06-13 Sat 00:29] =>  0:28
-    CLOCK: [2020-06-12 Fri 23:15]--[2020-06-13 Sat 00:00] =>  0:45
-    CLOCK: [2020-06-12 Fri 21:31]--[2020-06-12 Fri 23:14] =>  1:43
-    CLOCK: [2020-06-12 Fri 14:26]--[2020-06-12 Fri 18:40] =>  4:14
-    CLOCK: [2020-06-12 Fri 11:50]--[2020-06-12 Fri 13:05] =>  1:15
-    CLOCK: [2020-06-10 Wed 21:56]--[2020-06-10 Wed 22:11] =>  0:15
-    :END:
-
-As per analysis story, we need to create two different archetypes for
-archetype:
-
-- transform
-- factory
-
-We can start by creating factory and moving it all across, then
-deleting the aspects of factory from the existing transform. However,
-the only slight snag is that there may be users of the =archetype=
-method in the transform interface. We need to figure out who is using
-it outside of bootstrapping. We won't be able to delete the existing
-factory code in the interface until this is done. Perhaps we should
-first move to the new PMM generation and then do this clean up.
-
-Notes:
-
-- need to create archetypes for all factories in traits for now. These
-  will not be needed at the end of the factory work because we will
-  use the meta-model element to generate the archetype factory.
-- need to make sure the factories are not also facet defaults in
-  references.
-- in the end we will have to rename the archetypes of the physical
-  entities to have the postfix "_transform". This includes parts and
-  kinds. We should do that when we have moved over to the factory.
-- implement archetype in transform in terms of the factory. Add
-  includes to each transform of the factory and update wustache
-  template.
-- update all references to traits to call the transform instead. Then
-  we can remove traits.
 
 *** STARTED Archetype kind and postfix as symptoms of a larger pattern :story:
     :LOGBOOK:
@@ -1294,6 +1298,15 @@ Notes:
   and this is by design: these are the archetypes representing the
   transforms of the transforms.
 
+*** Remove traits for archetypes                                      :story:
+
+At this point all traits should now be covered either by features or
+by the physical model. We need to go through all archetypes and
+whenever we find a reference to a trait, we need to include the header
+for that archetype and call the =archetype()= method. We also need to
+add support to facets for canonical archetypes. Once all of this is
+done we need to remove traits and see what breaks.
+
 *** Replace initialisers with facet-based initialisation              :story:
 
 Now that we have facets, archetypes, etc as proper meta-model
@@ -1370,6 +1383,26 @@ Actually this is a mistake. Wale is just a poor-person's mustache and
 will be replaced by a proper implementation of mustache as soon as we
 can. We should instead start calling it mustache and explain this is
 just a temporary fix.
+
+*** Consider renaming logic-less templates                            :story:
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means.
+
+In addition, the templates should be specific to their types; we need
+to know if its a mustache template or a stitch template because the
+processing will be very different. The templates should be named after
+their type in the logical model. Rename these to wale templates.
+
+Actually its not yet clear if the existing logic could not be extended
+to other template types. We should wait until we implement it front to
+back and then make a decision.
+
+The most obvious thing is just to call the templates after their
+actual name: mustache.
 
 *** Merging of collections does not overwrite keys                    :story:
 

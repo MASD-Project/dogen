@@ -303,26 +303,6 @@ Links:
 
 - [[https://emacs.stackexchange.com/questions/53416/draw-pie-chart-from-orgmode-table][SO: Draw pie chart from orgmode table]]
 
-*** Consider renaming logic-less templates                            :story:
-
-Originally we though this was a good name because it was used by some
-domain experts, but it seems it generates more confusion than
-anything. It may just be a term used by mustache and other niche
-template groups. We should probably rename it to text templates given
-most domain experts know what that means.
-
-In addition, the templates should be specific to their types; we need
-to know if its a mustache template or a stitch template because the
-processing will be very different. The templates should be named after
-their type in the logical model. Rename these to wale templates.
-
-Actually its not yet clear if the existing logic could not be extended
-to other template types. We should wait until we implement it front to
-back and then make a decision.
-
-The most obvious thing is just to call the templates after their
-actual name: mustache.
-
 *** Stitch templates should be bound to Dogen M2T transforms          :story:
 
 At present we have tried to create some kind of generic implementation
