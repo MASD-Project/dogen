@@ -60,7 +60,8 @@ const physical::entities::archetype& class_forward_declarations_transform::stati
 }
 
 const physical::entities::archetype& class_forward_declarations_transform::archetype() const {
-    return static_archetype();
+    static auto r(class_forward_declarations_factory::make());
+    return r;
 }
 
 inclusion_support_types class_forward_declarations_transform::inclusion_support_type() const {

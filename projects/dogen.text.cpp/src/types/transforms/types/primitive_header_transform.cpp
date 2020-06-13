@@ -60,7 +60,8 @@ const physical::entities::archetype& primitive_header_transform::static_archetyp
 }
 
 const physical::entities::archetype& primitive_header_transform::archetype() const {
-    return static_archetype();
+    static auto r(primitive_header_factory::make());
+    return r;
 }
 
 inclusion_support_types primitive_header_transform::inclusion_support_type() const {

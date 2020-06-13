@@ -66,7 +66,8 @@ const physical::entities::archetype& feature_bundle_header_transform::static_arc
 }
 
 const physical::entities::archetype& feature_bundle_header_transform::archetype() const {
-    return static_archetype();
+    static auto r(feature_bundle_header_factory::make());
+    return r;
 }
 
 inclusion_support_types feature_bundle_header_transform::inclusion_support_type() const {

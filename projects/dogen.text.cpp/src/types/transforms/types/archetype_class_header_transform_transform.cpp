@@ -57,7 +57,8 @@ const physical::entities::archetype& archetype_class_header_transform_transform:
 }
 
 const physical::entities::archetype& archetype_class_header_transform_transform::archetype() const {
-    return static_archetype();
+    static auto r(archetype_class_header_transform_factory::make());
+    return r;
 }
 
 inclusion_support_types archetype_class_header_transform_transform::inclusion_support_type() const {

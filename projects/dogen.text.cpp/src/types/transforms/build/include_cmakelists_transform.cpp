@@ -66,7 +66,8 @@ const physical::entities::archetype& include_cmakelists_transform::static_archet
 }
 
 const physical::entities::archetype& include_cmakelists_transform::archetype() const {
-    return static_archetype();
+    static auto r(include_cmakelists_factory::make());
+    return r;
 }
 
 inclusion_support_types include_cmakelists_transform::inclusion_support_type() const {

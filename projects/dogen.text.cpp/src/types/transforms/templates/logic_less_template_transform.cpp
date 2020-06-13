@@ -63,7 +63,8 @@ const physical::entities::archetype& logic_less_template_transform::static_arche
 }
 
 const physical::entities::archetype& logic_less_template_transform::archetype() const {
-    return static_archetype();
+    static auto r(logic_less_template_factory::make());
+    return r;
 }
 
 inclusion_support_types logic_less_template_transform::inclusion_support_type() const {

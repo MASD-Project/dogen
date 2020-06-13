@@ -57,7 +57,8 @@ const physical::entities::archetype& primitive_forward_declarations_transform::s
 }
 
 const physical::entities::archetype& primitive_forward_declarations_transform::archetype() const {
-    return static_archetype();
+    static auto r(primitive_forward_declarations_factory::make());
+    return r;
 }
 
 inclusion_support_types primitive_forward_declarations_transform::inclusion_support_type() const {

@@ -64,7 +64,8 @@ const physical::entities::archetype& type_registrar_implementation_transform::st
 }
 
 const physical::entities::archetype& type_registrar_implementation_transform::archetype() const {
-    return static_archetype();
+    static auto r(type_registrar_implementation_factory::make());
+    return r;
 }
 
 inclusion_support_types type_registrar_implementation_transform::inclusion_support_type() const {

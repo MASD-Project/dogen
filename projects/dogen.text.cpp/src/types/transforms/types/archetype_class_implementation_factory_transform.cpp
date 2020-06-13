@@ -60,7 +60,8 @@ const physical::entities::archetype& archetype_class_implementation_factory_tran
 }
 
 const physical::entities::archetype& archetype_class_implementation_factory_transform::archetype() const {
-    return static_archetype();
+    static auto r(archetype_class_implementation_factory_factory::make());
+    return r;
 }
 
 inclusion_support_types archetype_class_implementation_factory_transform::inclusion_support_type() const {

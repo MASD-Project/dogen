@@ -57,7 +57,8 @@ const physical::entities::archetype& visitor_forward_declarations_transform::sta
 }
 
 const physical::entities::archetype& visitor_forward_declarations_transform::archetype() const {
-    return static_archetype();
+    static auto r(visitor_forward_declarations_factory::make());
+    return r;
 }
 
 inclusion_support_types visitor_forward_declarations_transform::inclusion_support_type() const {

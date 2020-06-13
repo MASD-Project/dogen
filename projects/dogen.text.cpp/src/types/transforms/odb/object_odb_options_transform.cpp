@@ -66,7 +66,8 @@ const physical::entities::archetype& object_odb_options_transform::static_archet
 }
 
 const physical::entities::archetype& object_odb_options_transform::archetype() const {
-    return static_archetype();
+    static auto r(object_odb_options_factory::make());
+    return r;
 }
 
 inclusion_support_types object_odb_options_transform::inclusion_support_type() const {

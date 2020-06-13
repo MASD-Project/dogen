@@ -63,7 +63,8 @@ const physical::entities::archetype& variability_initializer_header_transform::s
 }
 
 const physical::entities::archetype& variability_initializer_header_transform::archetype() const {
-    return static_archetype();
+    static auto r(variability_initializer_header_factory::make());
+    return r;
 }
 
 inclusion_support_types variability_initializer_header_transform::inclusion_support_type() const {

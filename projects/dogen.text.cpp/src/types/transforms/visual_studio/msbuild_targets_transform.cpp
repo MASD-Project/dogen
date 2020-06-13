@@ -63,7 +63,8 @@ const physical::entities::archetype& msbuild_targets_transform::static_archetype
 }
 
 const physical::entities::archetype& msbuild_targets_transform::archetype() const {
-    return static_archetype();
+    static auto r(msbuild_targets_factory::make());
+    return r;
 }
 
 inclusion_support_types msbuild_targets_transform::inclusion_support_type() const {

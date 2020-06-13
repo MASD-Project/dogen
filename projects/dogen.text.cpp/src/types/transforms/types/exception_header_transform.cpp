@@ -62,7 +62,8 @@ const physical::entities::archetype& exception_header_transform::static_archetyp
 }
 
 const physical::entities::archetype& exception_header_transform::archetype() const {
-    return static_archetype();
+    static auto r(exception_header_factory::make());
+    return r;
 }
 
 inclusion_support_types exception_header_transform::inclusion_support_type() const {
