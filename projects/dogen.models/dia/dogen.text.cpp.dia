@@ -5407,6 +5407,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -5636,6 +5637,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -5991,6 +5993,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -6202,6 +6205,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/enum_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -16201,6 +16205,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -29478,6 +29483,7 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -30674,6 +30680,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/test_data/primitive_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 

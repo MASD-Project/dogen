@@ -33,6 +33,7 @@
 #include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/primitive_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/primitive_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 namespace {

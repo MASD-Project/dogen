@@ -38,6 +38,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/traits.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/class_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/test_data/class_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::test_data {
 namespace {
