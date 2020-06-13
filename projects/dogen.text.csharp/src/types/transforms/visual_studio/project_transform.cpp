@@ -33,6 +33,7 @@
 #include "dogen.text.csharp/types/transforms/visual_studio/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp"
+#include "dogen.text.csharp/types/transforms/visual_studio/project_factory.hpp"
 
 namespace dogen::text::csharp::transforms::visual_studio {
 namespace {
