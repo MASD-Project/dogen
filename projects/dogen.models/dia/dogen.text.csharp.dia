@@ -3049,6 +3049,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -3385,6 +3386,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -14132,6 +14134,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -17296,6 +17299,7 @@ using System.Collections;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
