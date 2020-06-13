@@ -31,6 +31,7 @@
 #include "dogen.text.csharp/types/transforms/io/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/io/primitive_transform.hpp"
+#include "dogen.text.csharp/types/transforms/io/primitive_factory.hpp"
 
 namespace dogen::text::csharp::transforms::io {
 namespace {
