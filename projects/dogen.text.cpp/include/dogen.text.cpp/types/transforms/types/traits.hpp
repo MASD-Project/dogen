@@ -57,8 +57,8 @@ struct traits {
      * @brief Name of the archetype for the archetype class header
      * transform.
      */
-    static std::string archetype_class_header_archetype_qn();
-    static std::string archetype_class_header_archetype_sn();
+    static std::string archetype_class_header_transform_archetype_qn();
+    static std::string archetype_class_header_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the archetype class header
@@ -71,8 +71,8 @@ struct traits {
      * @brief Name of the archetype for the archetype class
      * implementation transform.
      */
-    static std::string archetype_class_implementation_archetype_qn();
-    static std::string archetype_class_implementation_archetype_sn();
+    static std::string archetype_class_implementation_transform_archetype_qn();
+    static std::string archetype_class_implementation_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the archetype class
@@ -85,8 +85,8 @@ struct traits {
      * @brief Name of the archetype for the facet class header
      * transform.
      */
-    static std::string facet_class_header_archetype_qn();
-    static std::string facet_class_header_archetype_sn();
+    static std::string facet_class_header_transform_archetype_qn();
+    static std::string facet_class_header_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the facet class header
@@ -99,8 +99,8 @@ struct traits {
      * @brief Name of the archetype for the facet class implementation
      * transform.
      */
-    static std::string facet_class_implementation_archetype_qn();
-    static std::string facet_class_implementation_archetype_sn();
+    static std::string facet_class_implementation_transform_archetype_qn();
+    static std::string facet_class_implementation_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the facet class implementation
@@ -113,8 +113,8 @@ struct traits {
      * @brief Name of the archetype for the backend class header
      * transform.
      */
-    static std::string backend_class_header_archetype_qn();
-    static std::string backend_class_header_archetype_sn();
+    static std::string backend_class_header_transform_archetype_qn();
+    static std::string backend_class_header_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the backend class header
@@ -127,8 +127,8 @@ struct traits {
      * @brief Name of the archetype for the backend class
      * implementation.
      */
-    static std::string backend_class_implementation_archetype_qn();
-    static std::string backend_class_implementation_archetype_sn();
+    static std::string backend_class_implementation_transform_archetype_qn();
+    static std::string backend_class_implementation_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the backend class
@@ -140,28 +140,28 @@ struct traits {
     /**
      * @brief Name of the archetype for the class header archetype.
      */
-    static std::string part_class_header_archetype_qn();
-    static std::string part_class_header_archetype_sn();
+    static std::string part_class_header_transform_archetype_qn();
+    static std::string part_class_header_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the class implementation
      * archetype.
      */
-    static std::string part_class_implementation_archetype_qn();
-    static std::string part_class_implementation_archetype_sn();
+    static std::string part_class_implementation_transform_archetype_qn();
+    static std::string part_class_implementation_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the class header archetype.
      */
-    static std::string archetype_kind_class_header_archetype_qn();
-    static std::string archetype_kind_class_header_archetype_sn();
+    static std::string archetype_kind_class_header_transform_archetype_qn();
+    static std::string archetype_kind_class_header_transform_archetype_sn();
 
     /**
      * @brief Name of the archetype for the class implementation
      * archetype.
      */
-    static std::string archetype_kind_class_implementation_archetype_qn();
-    static std::string archetype_kind_class_implementation_archetype_sn();
+    static std::string archetype_kind_class_implementation_transform_archetype_qn();
+    static std::string archetype_kind_class_implementation_transform_archetype_sn();
 
     /**
      * @brief Name of the forward declaration's archetype.

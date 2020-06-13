@@ -3181,7 +3181,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
         "masd.wale.kvp.class.simple_name": "archetype_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_class_header",
+        "masd.wale.kvp.archetype.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3254,7 +3254,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype",
         "masd.wale.kvp.class.simple_name": "archetype_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation",
+        "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3792,7 +3792,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_facet",
         "masd.wale.kvp.class.simple_name": "facet_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "facet_class_header",
+        "masd.wale.kvp.archetype.simple_name": "facet_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3815,7 +3815,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_facet",
         "masd.wale.kvp.class.simple_name": "facet_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "facet_class_implementation",
+        "masd.wale.kvp.archetype.simple_name": "facet_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3838,7 +3838,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_backend",
         "masd.wale.kvp.class.simple_name": "backend_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "backend_class_header",
+        "masd.wale.kvp.archetype.simple_name": "backend_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_backend",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3861,7 +3861,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_backend",
         "masd.wale.kvp.class.simple_name": "backend_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "backend_class_implementation",
+        "masd.wale.kvp.archetype.simple_name": "backend_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_backend",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3884,7 +3884,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_part",
         "masd.wale.kvp.class.simple_name": "part_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "part_class_header",
+        "masd.wale.kvp.archetype.simple_name": "part_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_part",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3907,7 +3907,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_part",
         "masd.wale.kvp.class.simple_name": "part_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "part_class_implementation",
+        "masd.wale.kvp.archetype.simple_name": "part_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_part",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3930,7 +3930,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype_kind",
         "masd.wale.kvp.class.simple_name": "archetype_kind_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_header",
+        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype_kind",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
@@ -3953,7 +3953,7 @@
       "tagged_values": {
         "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype_kind",
         "masd.wale.kvp.class.simple_name": "archetype_kind_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_implementation",
+        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_archetype_kind",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },

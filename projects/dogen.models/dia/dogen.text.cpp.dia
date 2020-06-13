@@ -9392,7 +9392,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="143.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.288,180.429;147.012,184.312"/>
+        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44979,7 +44979,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -45584,7 +45584,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -49152,7 +49152,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header
+#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -49367,7 +49367,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_facet
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation
+#DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -49617,7 +49617,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_header_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header
+#DOGEN masd.wale.kvp.archetype.simple_name=backend_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -49832,7 +49832,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_backend
 #DOGEN masd.wale.kvp.class.simple_name=backend_class_implementation_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation
+#DOGEN masd.wale.kvp.archetype.simple_name=backend_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -50083,7 +50083,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_header_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=part_class_header
+#DOGEN masd.wale.kvp.archetype.simple_name=part_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -50276,7 +50276,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_part
 #DOGEN masd.wale.kvp.class.simple_name=part_class_implementation_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation
+#DOGEN masd.wale.kvp.archetype.simple_name=part_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_part
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -50455,7 +50455,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_header_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_header
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -50648,7 +50648,7 @@ public:
 
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.physical_archetype_kind
 #DOGEN masd.wale.kvp.class.simple_name=archetype_kind_class_implementation_transform_transform
-#DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_implementation
+#DOGEN masd.wale.kvp.archetype.simple_name=archetype_kind_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype_kind
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
@@ -51075,7 +51075,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
         <dia:point val="-1.3875,213.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.6725,213.15;-0.5375,216.6"/>
+        <dia:rectangle val="-6.6725,213.15;-0.5375,216.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -51322,13 +51322,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O337">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,254"/>
+        <dia:point val="-18.5714,253.857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,253.95;9.96,257.65"/>
+        <dia:rectangle val="-18.6214,253.807;7.38857,257.507"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,254"/>
+        <dia:point val="-18.5714,253.857"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>

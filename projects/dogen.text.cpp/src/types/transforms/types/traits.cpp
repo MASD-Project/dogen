@@ -59,12 +59,12 @@ std::string traits::class_forward_declarations_archetype_sn() {
     return r;
 }
 
-std::string traits::archetype_class_header_archetype_qn(){
+std::string traits::archetype_class_header_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + ".archetype_class_header_transform");
     return r;
 }
 
-std::string traits::archetype_class_header_archetype_sn(){
+std::string traits::archetype_class_header_transform_archetype_sn(){
     static std::string r("archetype_class_header_transform");
     return r;
 }
@@ -79,12 +79,12 @@ std::string traits::archetype_class_header_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::archetype_class_implementation_archetype_qn(){
+std::string traits::archetype_class_implementation_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + ".archetype_class_implementation_transform");
     return r;
 }
 
-std::string traits::archetype_class_implementation_archetype_sn(){
+std::string traits::archetype_class_implementation_transform_archetype_sn(){
     static std::string r("archetype_class_implementation_transform");
     return r;
 }
@@ -99,12 +99,12 @@ std::string traits::archetype_class_implementation_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::facet_class_header_archetype_qn(){
+std::string traits::facet_class_header_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + ".facet_class_header_transform");
     return r;
 }
 
-std::string traits::facet_class_header_archetype_sn(){
+std::string traits::facet_class_header_transform_archetype_sn(){
     static std::string r("facet_class_header_transform");
     return r;
 }
@@ -119,12 +119,12 @@ std::string traits::facet_class_header_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::facet_class_implementation_archetype_qn(){
+std::string traits::facet_class_implementation_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + ".facet_class_implementation_transform");
     return r;
 }
 
-std::string traits::facet_class_implementation_archetype_sn(){
+std::string traits::facet_class_implementation_transform_archetype_sn(){
     static std::string r("facet_class_implementation_transform");
     return r;
 }
@@ -139,12 +139,12 @@ std::string traits::facet_class_implementation_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::backend_class_header_archetype_qn(){
+std::string traits::backend_class_header_transform_archetype_qn(){
     static std::string r(traits::facet_qn() +  ".backend_class_header_transform");
     return r;
 }
 
-std::string traits::backend_class_header_archetype_sn(){
+std::string traits::backend_class_header_transform_archetype_sn(){
     static std::string r("backend_class_header_transform");
     return r;
 }
@@ -159,12 +159,12 @@ std::string traits::backend_class_header_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::backend_class_implementation_archetype_qn(){
+std::string traits::backend_class_implementation_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + "backend_class_implementation_transform");
     return r;
 }
 
-std::string traits::backend_class_implementation_archetype_sn(){
+std::string traits::backend_class_implementation_transform_archetype_sn(){
     static std::string r("backend_class_implementation_transform");
     return r;
 }
@@ -179,42 +179,42 @@ std::string traits::backend_class_implementation_factory_archetype_sn(){
     return r;
 }
 
-std::string traits::part_class_header_archetype_qn(){
+std::string traits::part_class_header_transform_archetype_qn(){
     static std::string r(traits::facet_qn() +  ".part_class_header_transform");
     return r;
 }
 
-std::string traits::part_class_header_archetype_sn(){
+std::string traits::part_class_header_transform_archetype_sn(){
     static std::string r("part_class_header_transform");
     return r;
 }
 
-std::string traits::part_class_implementation_archetype_qn(){
+std::string traits::part_class_implementation_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + "part_class_implementation_transform");
     return r;
 }
 
-std::string traits::part_class_implementation_archetype_sn(){
+std::string traits::part_class_implementation_transform_archetype_sn(){
     static std::string r("part_class_implementation_transform");
     return r;
 }
 
-std::string traits::archetype_kind_class_header_archetype_qn(){
+std::string traits::archetype_kind_class_header_transform_archetype_qn(){
     static std::string r(traits::facet_qn() +  ".archetype_kind_class_header_transform");
     return r;
 }
 
-std::string traits::archetype_kind_class_header_archetype_sn(){
+std::string traits::archetype_kind_class_header_transform_archetype_sn(){
     static std::string r("archetype_kind_class_header_transform");
     return r;
 }
 
-std::string traits::archetype_kind_class_implementation_archetype_qn(){
+std::string traits::archetype_kind_class_implementation_transform_archetype_qn(){
     static std::string r(traits::facet_qn() + "archetype_kind_class_implementation_transform");
     return r;
 }
 
-std::string traits::archetype_kind_class_implementation_archetype_sn(){
+std::string traits::archetype_kind_class_implementation_transform_archetype_sn(){
     static std::string r("archetype_kind_class_implementation_transform");
     return r;
 }
