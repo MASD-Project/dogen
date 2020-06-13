@@ -31,6 +31,7 @@
 #include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/types/enum_transform.hpp"
+#include "dogen.text.csharp/types/transforms/types/enum_factory.hpp"
 
 namespace dogen::text::csharp::transforms::types {
 namespace {
