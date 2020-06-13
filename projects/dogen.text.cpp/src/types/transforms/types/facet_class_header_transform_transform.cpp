@@ -43,22 +43,12 @@ auto lg(logger_factory(transform_id));
 }
 
 const physical::entities::archetype& facet_class_header_transform_transform::static_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::facet_class_header_transform_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_physical_facet_name().qualified().dot());
-        r.referencing_status(physical::entities::referencing_status::facet_default);
-        return r;
-    }());
+    static auto r(facet_class_header_transform_factory::make());
     return r;
 }
 
 const physical::entities::archetype& facet_class_header_transform_transform::archetype() const {
-    static auto r(facet_class_header_transform_factory::make());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types facet_class_header_transform_transform::inclusion_support_type() const {

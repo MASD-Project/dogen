@@ -38084,22 +38084,12 @@ auto lg(logger_factory(transform_id));
 }
 
 const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
-        r.referencing_status(physical::entities::referencing_status::{{referencing_status}});
-        return r;
-    }());
+    static auto r({{archetype.simple_name}}_factory::make());
     return r;
 }
 
 const physical::entities::archetype&amp; {{class.simple_name}}::archetype() const {
-    static auto r({{archetype.simple_name}}_factory::make());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
@@ -38264,22 +38254,12 @@ auto lg(logger_factory(transform_id));
 }
 
 const physical::entities::archetype&amp; {{class.simple_name}}::static_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
-        r.referencing_status(physical::entities::referencing_status::{{referencing_status}});
-        return r;
-    }());
+    static auto r({{archetype.simple_name}}_factory::make());
     return r;
 }
 
 const physical::entities::archetype&amp; {{class.simple_name}}::archetype() const {
-    static auto r({{archetype.simple_name}}_factory::make());
-    return r;
+    return static_archetype();
 }
 
 inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
