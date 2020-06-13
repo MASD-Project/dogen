@@ -37,6 +37,7 @@
 #include "dogen.text.cpp/types/transforms/tests/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/tests/cmakelists_transform.hpp"
+#include "dogen.text.cpp/types/transforms/tests/cmakelists_factory.hpp"
 
 namespace dogen::text::cpp::transforms::tests {
 namespace {
