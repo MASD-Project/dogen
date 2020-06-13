@@ -31,6 +31,7 @@
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 

@@ -39,6 +39,7 @@
 #include "dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/feature_template_bundle_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {

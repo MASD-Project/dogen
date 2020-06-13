@@ -35,6 +35,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/hash/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/exception_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/exception_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {

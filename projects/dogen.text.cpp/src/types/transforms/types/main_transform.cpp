@@ -30,6 +30,7 @@
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/main_transform.hpp"
+#include "dogen.text.cpp/types/transforms/types/main_factory.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"

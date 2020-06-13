@@ -382,6 +382,7 @@
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -2113,6 +2114,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/exception_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -2350,7 +2352,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/enum_header_transform.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/enum_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -2579,6 +2581,7 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/namespace_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/namespace_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -2787,6 +2790,7 @@ namespace &lt;#= m.name().simple() #&gt; {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -3039,6 +3043,7 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -15836,6 +15841,7 @@ and element.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -28442,6 +28448,7 @@ not a regular" helper.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -29882,6 +29889,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -35373,6 +35381,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -35675,6 +35684,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -36011,6 +36021,7 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/hash/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -36223,6 +36234,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/variability_initializer_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -39394,6 +39406,7 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/class_forward_declarations_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -39588,6 +39601,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/visitor_forward_declarations_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -39987,6 +40001,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/primitive_forward_declarations_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -42403,6 +42418,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/main_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/main_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
@@ -44392,6 +44408,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -44694,6 +44711,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/io/inserter_implementation_helper.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/feature_bundle_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -45019,6 +45037,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -45626,6 +45645,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -49190,6 +49210,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -49408,6 +49429,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -49653,6 +49675,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -49870,6 +49893,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -50117,6 +50141,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_header_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -50312,6 +50337,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/part_class_implementation_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -50487,6 +50513,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -50682,6 +50709,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -51171,6 +51199,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_header_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -51379,6 +51408,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -51584,6 +51614,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_header_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -51790,6 +51821,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -52030,6 +52062,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_header_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
@@ -52236,6 +52269,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
