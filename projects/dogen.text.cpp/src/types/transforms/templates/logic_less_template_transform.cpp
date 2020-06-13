@@ -36,6 +36,7 @@
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.text.cpp/types/transforms/templates/traits.hpp"
 #include "dogen.text.cpp/types/transforms/templates/logic_less_template_transform.hpp"
+#include "dogen.text.cpp/types/transforms/templates/logic_less_template_factory.hpp"
 
 namespace dogen::text::cpp::transforms::templates {
 namespace {
