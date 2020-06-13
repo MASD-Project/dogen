@@ -33,6 +33,7 @@
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/class_forward_declarations_factory.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 namespace {

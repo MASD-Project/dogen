@@ -4829,6 +4829,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -5064,6 +5065,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -13532,6 +13534,7 @@ main, or from another initialiser.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/enum_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -16731,6 +16734,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/builtin_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -29700,6 +29704,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -30962,6 +30967,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -39828,6 +39834,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/class_forward_declarations_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -40228,6 +40235,7 @@ class &lt;#= p.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/primitive_forward_declarations_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -40429,6 +40437,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_header_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 
@@ -40635,6 +40644,7 @@ static void register_types(Archive&amp; ar);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/inclusion_constants.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_transform.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/serialization/type_registrar_implementation_factory.hpp" #&gt;
 &lt;#$ stitch.wale.template_instantiation_result #&gt;
 &lt;#+
 

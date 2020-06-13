@@ -34,6 +34,7 @@
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/enum_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/enum_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 namespace {

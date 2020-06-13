@@ -31,6 +31,7 @@
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/type_registrar_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 namespace {

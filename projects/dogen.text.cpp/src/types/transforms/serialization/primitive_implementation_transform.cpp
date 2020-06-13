@@ -36,6 +36,7 @@
 #include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/traits.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/primitive_implementation_transform.hpp"
+#include "dogen.text.cpp/types/transforms/serialization/primitive_implementation_factory.hpp"
 
 namespace dogen::text::cpp::transforms::serialization {
 namespace {
