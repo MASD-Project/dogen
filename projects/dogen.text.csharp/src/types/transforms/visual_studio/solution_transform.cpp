@@ -47,16 +47,7 @@ auto lg(logger_factory(transform_id));
 }
 
 const physical::entities::archetype& solution_transform::static_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
-            traits::facet_sn(), traits::solution_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_visual_studio_solution_name().qualified().dot());
-        r.referencing_status(physical::entities::referencing_status::not_referable);
-        return r;
-    }());
+    static auto r(solution_factory::make());
     return r;
 }
 

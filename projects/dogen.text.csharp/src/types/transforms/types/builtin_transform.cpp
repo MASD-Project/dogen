@@ -43,16 +43,7 @@ auto lg(logger_factory(transform_id));
 }
 
 const physical::entities::archetype& builtin_transform::static_archetype() {
-    static physical::entities::archetype r([]() {
-        physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
-        r.meta_name(pmnf::make(csharp::traits::backend_sn(),
-            traits::facet_sn(), traits::builtin_archetype_sn()));
-        using lmnf = logical::helpers::meta_name_factory;
-        r.logical_meta_element_id(lmnf::make_builtin_name().qualified().dot());
-        r.referencing_status(physical::entities::referencing_status::facet_default);
-        return r;
-    }());
+    static auto r(builtin_factory::make());
     return r;
 }
 
