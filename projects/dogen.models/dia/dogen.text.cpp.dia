@@ -49529,26 +49529,6 @@ physical::entities::facet make_facet() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
-
-    const auto lambda([&amp;](const auto&amp; arch) {
-        const auto id(arch.meta_name().qualified());
-        const auto pair(std::make_pair(id, arch));
-        const auto inserted(r.archetypes().insert(pair).second);
-        if (!inserted) {
-            using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate archetype: ");
-            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
-        }
-    });
-
-&lt;#+
-            for (const auto&amp; n : fct.archetypes()) {
-#&gt;
-    lambda(&lt;#= n.simple() #&gt;_transform::static_archetype());
-&lt;#+
-            }
-#&gt;
     return r;
 }
 
@@ -51324,13 +51304,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O337">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18.5714,253.857"/>
+        <dia:point val="-16,254"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.6214,253.807;7.38857,257.507"/>
+        <dia:rectangle val="-16.05,253.95;9.96,257.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18.5714,253.857"/>
+        <dia:point val="-16,254"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>

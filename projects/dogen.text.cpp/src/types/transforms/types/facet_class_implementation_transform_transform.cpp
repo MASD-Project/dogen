@@ -128,22 +128,6 @@ ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::facet r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;
-ast.stream() << std::endl;
-ast.stream() << "    const auto lambda([&](const auto& arch) {" << std::endl;
-ast.stream() << "        const auto id(arch.meta_name().qualified());" << std::endl;
-ast.stream() << "        const auto pair(std::make_pair(id, arch));" << std::endl;
-ast.stream() << "        const auto inserted(r.archetypes().insert(pair).second);" << std::endl;
-ast.stream() << "        if (!inserted) {" << std::endl;
-ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
-ast.stream() << "            const std::string duplicate_archetype(\"Duplicate archetype: \");" << std::endl;
-ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;" << std::endl;
-ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));" << std::endl;
-ast.stream() << "        }" << std::endl;
-ast.stream() << "    });" << std::endl;
-ast.stream() << std::endl;
-            for (const auto& n : fct.archetypes()) {
-ast.stream() << "    lambda(" << n.simple() << "_transform::static_archetype());" << std::endl;
-            }
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;

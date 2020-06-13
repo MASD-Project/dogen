@@ -41,23 +41,6 @@ physical::entities::facet make_facet() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
-
-    const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().qualified());
-        const auto pair(std::make_pair(id, arch));
-        const auto inserted(r.archetypes().insert(pair).second);
-        if (!inserted) {
-            using text::transforms::transformation_error;
-            const std::string duplicate_archetype("Duplicate archetype: ");
-            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
-        }
-    });
-
-    lambda(class_implementation_transform::static_archetype());
-    lambda(cmakelists_transform::static_archetype());
-    lambda(enum_implementation_transform::static_archetype());
-    lambda(main_transform::static_archetype());
     return r;
 }
 
