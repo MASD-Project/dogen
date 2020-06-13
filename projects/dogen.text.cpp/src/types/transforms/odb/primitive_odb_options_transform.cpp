@@ -39,6 +39,7 @@
 #include "dogen.text.cpp/types/transforms/odb/traits.hpp"
 #include "dogen.text.cpp/types/transforms/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/primitive_odb_options_factory.hpp"
 
 namespace dogen::text::cpp::transforms::odb {
 namespace {

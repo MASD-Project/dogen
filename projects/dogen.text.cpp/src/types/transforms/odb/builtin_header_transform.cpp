@@ -32,6 +32,7 @@
 #include "dogen.text.cpp/types/transforms/inclusion_constants.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/odb/builtin_header_transform.hpp"
+#include "dogen.text.cpp/types/transforms/odb/builtin_header_factory.hpp"
 
 namespace dogen::text::cpp::transforms::odb {
 namespace {
