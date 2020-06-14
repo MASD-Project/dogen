@@ -15,26 +15,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-13 Sat 19:46]
+#+CAPTION: Clock summary at [2020-06-14 Sun 21:44]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *32:29* |       |       | 100.0 |
+| *Total time*                                               | *34:20* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 32:29   |       |       | 100.0 |
-| Active                                                     |         | 32:29 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  7:42 |  23.7 |
-| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.6 |
-| Sprint and product backlog grooming                        |         |       |  2:12 |   6.8 |
-| Nightly nursing                                            |         |       |  0:11 |   0.6 |
-| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.7 |
-| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.9 |
+| Stories                                                    | 34:20   |       |       | 100.0 |
+| Active                                                     |         | 34:20 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  7:42 |  22.4 |
+| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.4 |
+| Sprint and product backlog grooming                        |         |       |  2:12 |   6.4 |
+| Nightly nursing                                            |         |       |  0:11 |   0.5 |
+| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.4 |
+| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.8 |
 | Create an emacs mode for wale                              |         |       |  0:14 |   0.7 |
-| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   9.4 |
-| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.6 |
-| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   9.4 |
-| Split archetype factory from transform                     |         |       | 10:57 |  33.7 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.8 |
+| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   8.9 |
+| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.4 |
+| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   8.9 |
+| Split archetype factory from transform                     |         |       | 10:57 |  31.9 |
+| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.4 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.7 |
+| Remove traits for archetypes                               |         |       |  0:40 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1101,6 +1103,16 @@ Notes:
 - update all references to traits to call the transform instead. Then
   we can remove traits.
 
+*** COMPLETED Paper: Using Aspects to Model Product Line Variability  :story:
+    CLOSED: [2020-06-14 Sun 21:44]
+    :LOGBOOK:
+    CLOCK: [2020-06-14 Sun 17:01]--[2020-06-14 Sun 18:12] =>  1:11
+    :END:
+
+- Groher, Iris, and Markus Voelter. "Using Aspects to Model Product Line
+  Variability." SPLC (2). 2008.
+- https://pdfs.semanticscholar.org/4c77/0315cd8151f6c162ac2f99ecc62225f4c94e.pdf?_ga=2.246561604.1739388568.1592151663-6190553.1592151663
+
 *** STARTED Inject backend, facets and archetypes into PMM            :story:
 
 At present we only have artefacts in the PMM. We need to inject all
@@ -1298,7 +1310,11 @@ Notes:
   and this is by design: these are the archetypes representing the
   transforms of the transforms.
 
-*** Remove traits for archetypes                                      :story:
+*** STARTED Remove traits for archetypes                              :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-14 Sun 16:59]--[2020-06-14 Sun 17:07] =>  0:08
+    CLOCK: [2020-06-14 Sun 00:02]--[2020-06-14 Sun 00:34] =>  0:32
+    :END:
 
 At this point all traits should now be covered either by features or
 by the physical model. We need to go through all archetypes and
