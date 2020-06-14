@@ -68,7 +68,7 @@ available as a separate git repo:
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
 
-# Status of the Project
+# Status
 
 Whilst we welcome users and contributors, we think its important to
 set clear expectations for the project. At the outset we must stress
@@ -111,7 +111,7 @@ These warnings can probably best summarised as follows: "if it breaks,
 you get to keep the pieces; and it will break, often". But if you find
 such things fun, proceed with caution.
 
-# Binary Packages
+# Packages
 
 Binary packages are available for each release on
 [BinTray](https://bintray.com/masd-project/main/dogen), covering
@@ -135,7 +135,7 @@ Where ```${VERSION}``` is your Dogen version such as ```1.0.25```.
 
 ----
 
-# Building From Source
+# Building
 
 In order to build Dogen you will need a C++ toolchain. On Linux and
 OSX, you'll need a recent compiler with C++ 17 support, such as [GCC
@@ -265,7 +265,7 @@ wonderful linker errors.
 
 ---
 
-## Running Tests
+## Testing
 
 If you'd like to run the project tests, execute the target
 ```run_all_tests``` or its abbreviation ```rat```. This is sufficient
@@ -304,7 +304,7 @@ additional models (```SOME_PATH``` being your local directory):
 Executing the ```run_all_tests``` target will now also include the
 reference implementations. Make sure your changes do not break these models.
 
-## Regenerating Models
+## Generation
 
 If you'd like to run Dogen to regenerate all of its models, you can do
 so by using the target ```generate_all_dia``` or its abbreviation
@@ -340,7 +340,7 @@ A number of videos are now available discussing Dogen, gathered under
   that have been read to get a better understanding of the field. We
   try to read one of these a week, but we don't always succeed.
 
-# Blog Posts
+# Posts
 
 Over time, a number of assorted blog posts have been published on
 Dogen, mainly covering its development process:
