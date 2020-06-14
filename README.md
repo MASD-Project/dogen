@@ -114,12 +114,14 @@ such things fun, proceed with caution.
 # Packages
 
 Binary packages are available for each release on
-[BinTray](https://bintray.com/masd-project/main/dogen), covering
-Debian Linux, OSX and Windows - 64-bit only. Packages are generated
-for each commit. Development is done from git master, so latest should
-always be greatest, but you may want to use packages from the previous
-sprint rather than what is currently under development (see badges
-above).
+[BinTray](https://bintray.com/masd-project/main/dogen) and
+[GitHub](https://github.com/MASD-Project/dogen/releases) (links at the
+end of each release note). The binaries cover Debian Linux, OSX and
+Windows - 64-bit only. Packages are also generated for each commit,
+and placed in BinTry only. Development is done from git master, so
+latest should always be greatest, but you may want to use packages
+from the previous sprint rather than what is currently under
+development (see badges above).
 
 ---
 **Notes**
