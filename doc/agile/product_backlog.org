@@ -11834,6 +11834,8 @@ dogen's benchmarks:
 
 - [[https://github.com/nickbruun/hayai][hayai]]
 - [[https://bruun.co/2012/02/07/easy-cpp-benchmarking][Easy C++ benchmarking]]
+- [[https://github.com/martinus/nanobench][nanobench GH]]: ankerl::nanobench is a platform independent
+  microbenchmarking library for C++11/14/17/20.
 
 *** Generate AssemblyInfo in C#                                       :story:
 
@@ -14725,6 +14727,21 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for =objectbox=                           :story:
+
+This is a very interesting project:
+
+#+begin_quote
+ObjectBox is a superfast database for objects. These are the C and C++
+APIs to run ObjectBox as an embedded database in your C/C++
+application. In this embedded mode, it runs within your application
+process.
+#+end_quote
+
+Links:
+
+- [[https://github.com/objectbox/objectbox-c][GH project]]
 
 *** Consider adding support for =libmish=                             :story:
 
