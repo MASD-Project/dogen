@@ -301,7 +301,7 @@
         {
           "name": "proxy_reference",
           "type": "",
-          "documentation": "The element was part of a reference model which is a proxy model.\n\nProxy models expose types from existing code such as STL, boost, etc,\nproviding a way to expose third party code into Dogen so that we\ncan make use of these types.\n"
+          "documentation": "The element was part of a reference model which is a proxy model.\n"
         },
         {
           "name": "non_proxy_reference",

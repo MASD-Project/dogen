@@ -784,16 +784,16 @@ C++ pointers, references and so on.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="-279,-107"/>
+        <dia:point val="-278,-106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-279.05,-107.05;-250.715,-70.85"/>
+        <dia:rectangle val="-278.05,-106.05;-249.715,-69.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-279,-107"/>
+        <dia:point val="-278,-106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.235000000000003"/>
@@ -865,7 +865,7 @@ etc.).
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-278.65,-105.756"/>
+            <dia:point val="-277.65,-104.756"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1825,11 +1825,7 @@ The simple name must be unique for a given location.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The element was part of a reference model which is a proxy model.
-
-Proxy models expose types from existing code such as STL, boost, etc,
-providing a way to expose third party code into Dogen so that we
-can make use of these types.#</dia:string>
+            <dia:string>#The element was part of a reference model which is a proxy model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

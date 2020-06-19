@@ -33,7 +33,7 @@ namespace dogen::logical::entities {
 enum class origin_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     target = 1, ///< The element is part of the target model.
-    proxy_reference = 2, ///< The element was part of a reference model which is a proxy model.///<///< Proxy models expose types from existing code such as STL, boost, etc,///< providing a way to expose third party code into Dogen so that we///< can make use of these types.
+    proxy_reference = 2, ///< The element was part of a reference model which is a proxy model.
     non_proxy_reference = 3, ///< The element was part of a reference model which is regular dogen model.
     not_yet_determined = 4 ///< The origin of the element is not yet known
 };
