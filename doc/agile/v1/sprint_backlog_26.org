@@ -15,28 +15,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-16 Tue 22:47]
+#+CAPTION: Clock summary at [2020-06-19 Fri 17:56]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *34:30* |       |       | 100.0 |
+| *Total time*                                               | *38:03* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 34:30   |       |       | 100.0 |
-| Active                                                     |         | 34:30 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  7:42 |  22.3 |
-| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.4 |
-| Sprint and product backlog grooming                        |         |       |  2:22 |   6.9 |
+| Stories                                                    | 38:03   |       |       | 100.0 |
+| Active                                                     |         | 38:03 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  7:42 |  20.2 |
+| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.1 |
+| Sprint and product backlog grooming                        |         |       |  2:43 |   7.1 |
 | Nightly nursing                                            |         |       |  0:11 |   0.5 |
-| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.4 |
-| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.8 |
-| Create an emacs mode for wale                              |         |       |  0:14 |   0.7 |
-| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   8.9 |
-| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.4 |
-| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   8.8 |
-| Split archetype factory from transform                     |         |       | 10:57 |  31.7 |
-| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.4 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.7 |
-| Remove traits for archetypes                               |         |       |  0:40 |   1.9 |
+| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.0 |
+| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.6 |
+| Create an emacs mode for wale                              |         |       |  0:14 |   0.6 |
+| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   8.1 |
+| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.1 |
+| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   8.0 |
+| Split archetype factory from transform                     |         |       | 10:57 |  28.8 |
+| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.1 |
+| Remove traits for archetypes                               |         |       |  0:44 |   1.9 |
+| Analysis on solving relationship problems                  |         |       |  3:08 |   8.2 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -791,6 +792,8 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-19 Fri 17:54]--[2020-06-19 Fri 17:56] =>  0:02
+    CLOCK: [2020-06-19 Fri 11:23]--[2020-06-19 Fri 11:42] =>  0:19
     CLOCK: [2020-06-16 Tue 22:37]--[2020-06-16 Tue 22:47] =>  0:10
     CLOCK: [2020-06-13 Sat 19:44]--[2020-06-13 Sat 19:46] =>  0:02
     CLOCK: [2020-06-09 Tue 21:44]--[2020-06-09 Tue 21:54] =>  0:10
@@ -1114,6 +1117,218 @@ Notes:
   Variability." SPLC (2). 2008.
 - https://pdfs.semanticscholar.org/4c77/0315cd8151f6c162ac2f99ecc62225f4c94e.pdf?_ga=2.246561604.1739388568.1592151663-6190553.1592151663
 
+*** CANCELLED Remove traits for archetypes                            :story:
+    CLOSED: [2020-06-19 Fri 17:54]
+    :LOGBOOK:
+    CLOCK: [2020-06-19 Fri 11:18]--[2020-06-19 Fri 11:22] =>  0:04
+    CLOCK: [2020-06-14 Sun 16:59]--[2020-06-14 Sun 17:07] =>  0:08
+    CLOCK: [2020-06-14 Sun 00:02]--[2020-06-14 Sun 00:34] =>  0:32
+    :END:
+
+At this point all traits should now be covered either by features or
+by the physical model. We need to go through all archetypes and
+whenever we find a reference to a trait, we need to include the header
+for that archetype and call the =archetype()= method. We also need to
+add support to facets for canonical archetypes. Once all of this is
+done we need to remove traits and see what breaks.
+
+Actually this story is much more complex than anticipated. We could do
+a quick hack to remove traits, but it would then be removed by the
+larger refactor. So might as well cancel this effort and focus on the
+refactor.
+
+*** CANCELLED Model =inclusion_support_types= in the physical model   :story:
+    CLOSED: [2020-06-19 Fri 17:56]
+
+*Rationale*: we need to address this when we refactor dependencies.
+
+At present we have a quick hack on =text.cpp= to model the inclusion
+of archetypes. In order to migrate the PMM to the new architecture, we
+need to bring this concept across. We had envisioned that this work
+would have been done when dealing with dependencies, but since we
+cannot progress with the PMM work, we need to at least address this
+aspect. The crux of it is: dependencies are functions of logical
+meta-types to logical meta-types. However, they also have a physical
+component.
+
+Most of the work is already done, we just need to remove the legacy
+stuff (enum, interface methods) and see what breaks.
+
+Actually we are still making use of it in the directive parts:
+
+: File: dogen.text.cpp/src/types/formattables/directive_group_repository_factory.cpp
+:  79  27         using transforms::inclusion_support_types;
+:  80  30         static const auto ns(inclusion_support_types::not_supported);
+: 172  23     using transforms::inclusion_support_types;
+: 173  26     static const auto ns(inclusion_support_types::not_supported);
+: 260  31     const auto cs(transforms::inclusion_support_types::canonical_support);
+
+
+Notes:
+
+- an archetype may not be able to participate on dependency
+  relationships at all. Or it may be able to participate in
+  relationships but just as a regular archetype. Finally, it may be a
+  "canonical" archetype; that is, when we have a dependency against a
+  facet, the canonical archetype for that logical meta-type gets
+  picked up.
+- canonical archetypes exist mainly because we ended up with cases
+  where there are more than one archetype that can be depended on for
+  a given logical meta-type (e.g. forward declarations). In this
+  cases, we need to disambiguate a reference.
+- actually, aren't dependencies just "references"? Perhaps we can
+  reuse terminology from references.
+- in C# we are mapping dependencies to using statements. This means we
+  extract the namespaces of each dependency and then use the "unique"
+  of all namespaces. However, we may end up in a situation where there
+  are name clashes. For example, if we had a reference to =A::a= and
+  =B::a=, this would cause problems.
+
+*** COMPLETED Analysis on solving relationship problems               :story:
+    CLOSED: [2020-06-19 Fri 17:53]
+    :LOGBOOK:
+    CLOCK: [2020-06-19 Fri 16:12]--[2020-06-19 Fri 17:53] =>  1:41
+    CLOCK: [2020-06-19 Fri 15:03]--[2020-06-19 Fri 16:11] =>  1:08
+    CLOCK: [2020-06-19 Fri 12:35]--[2020-06-19 Fri 12:54] =>  0:19
+    :END:
+
+At present when you have a reference to a model element in the logical
+dimension, its not always obvious to what it should resolve to in the
+physical dimension:
+
+- in the simplest case, because you do not know the type of the
+  element you have no way of knowing its physical counterpart. This is
+  the case with object's plain associations. These can map to
+  enumerations, exceptions, etc. For this we use canonical references,
+  which point to a facet and resolve to one physical archetype.
+- in the more complex case, this may happen outside of type
+  definitions. For example, say you want to have a pointer to an
+  element. This implies you need to include the forward declaration
+  header rather than the class definition header. At present, this is
+  hard-coded to find class definitions:
+
+:    const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
+:    builder.add(o.opaque_associations(), fwd_arch);
+
+  This has worked thus far because almost all of the use cases are of
+  classes pointing to classes. But it would fail say if we had a
+  pointer to a visitor.
+
+In general, what we are trying to say is that the resolution maps a
+function "association" in logical space to another function
+"association" in physical space. There are many functions of type
+"association". The physical space function requires additional
+arguments:
+
+- the tag (e.g. "type definition", "forward declaration");
+- the facet;
+- the logical element.
+
+or:
+
+- the archetype; and
+- the logical element.
+
+The resolution function can resolve a tag and a facet into an archetype.
+
+There is a second, more complex case: where we need to have a physical
+level relationship of logical elements because some features are
+enabled. For example, if IO is enabled we need to include =<iosfwd>=
+in types. This could be a different kind of relationship -
+conditional? It should only allow inspecting facet state.
+
+These cases could be called:
+
+- derived (implied? projected?) physical relations
+- independent (explicit?) physical relations. actually static, because
+  these are known at meta-model time.
+
+Projected relations are projected by the relation type. During the
+archetype factory, we can resolve all of the projections into
+archetypes. During the dependency building process we can reuse what
+was resolved. Relation types:
+
+- parent
+- child
+- transparent_associations
+- opaque_associations
+- associative_container_keys
+- visitation
+- serialisation
+
+The logical model will contain the tags associated with the
+archetypes, as well as their tagging requirements across each
+association type the archetype is interested in. The generated code
+will populate the physical entities with these values. During the PMM
+bootstrapping we will resolve all tags to concrete archetypes. Each
+archetype will have a simple string property for each
+relationship. Its either populated with a well-known value (=unused=)
+or with a valid archetype. Builder will check that it is not
+=unused=. If it is it will throw ("you said it was unused by you are
+trying to use it"). With this we can now generate a graph of
+dependencies between archetypes, across specific relations. This means
+we can easily throw when some invalid request is made - ask for IO but
+types is disabled.
+
+Actually a better approach is to declare an enum for the relation
+types and then have a container such as an array with optional to the
+type. This could contain:
+
+- archetype
+- tags: list of string.
+
+The builder can then take the optional and do the right thing. Tags
+are used to populate the archetype during PMM bootstrap. Physical
+model reads a KVP of relation to CSV and creates the list. The list of
+tags must resolve to a unique archetype, else we throw. All archetypes
+are tagged with facets.
+
+Actually maybe we can code generate a method in archetype that takes
+the enum and returns the archetype. If the optional is empty it
+throws.
+
+Slight problem: we need to map the logical model entity to the
+archetype. The problem is that we need to view this as a multi-step
+process:
+
+1. during PMM construction, at best, all we can do is associate an
+   archetype with a set of tags - i.e. what is it tagged with; and
+   associate an archetype with a set of relations and tags - i.e. for
+   each association, what tags should it use to find the
+   archetypes. We can then locate all archetypes that match those tags
+   (for example: =masd.cpp.types.type_definition=). We can also
+   validate that for each logical model entity there is one and only
+   one archetype. However, of course we will always resolve into a
+   vector of archetypes because we do not have the context of a
+   specific logical element. The most useful data structure is
+   probably (logical model meta-type, relation) -> archetype. However,
+   this is not useful when building because all we have is the
+   name. We can also keep track of explicit relations but more work is
+   needed.
+2. during PM construction, we can, for each logical element, get its
+   meta-type, and use the map created in the PMM to resolve it to a
+   pair of (id, association) -> archetype. The physical model then
+   keeps this map for each artefact.
+3. a second transform then kicks in and generates all of the paths for
+   physical model elements: relative, absolute, dependency path etc.
+4. a third transform then populates each artefact with a set of
+   relationships. We probably don't even care about relation types in
+   the artefact. We just need to go through each type, find its
+   associations, resolve each one to a meta-type, then resolve them to
+   an archetype, then retrieve the archetype and get the
+   dependencies. Then add the dependencies to the archetype.
+
+The slight problem is that steps 2-4 must happen during the LM to PM
+transform. We need this chain to exist inside orchestration. Also, we
+cannot really resolve just one problem in isolation; dependency
+generation, directives, etc are all coupled in one big problem. We
+need to address all of these in one go. On the plus side, we can
+create a new path/old path set of fields for the new generation of
+path and dependencies and diff them until they match.
+
+Static relations can be just a list of IDs and tags. These must also
+be resolved as part of this process.
+
 *** STARTED Inject backend, facets and archetypes into PMM            :story:
 
 At present we only have artefacts in the PMM. We need to inject all
@@ -1178,50 +1393,6 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
-
-*** STARTED Model =inclusion_support_types= in the physical model     :story:
-
-At present we have a quick hack on =text.cpp= to model the inclusion
-of archetypes. In order to migrate the PMM to the new architecture, we
-need to bring this concept across. We had envisioned that this work
-would have been done when dealing with dependencies, but since we
-cannot progress with the PMM work, we need to at least address this
-aspect. The crux of it is: dependencies are functions of logical
-meta-types to logical meta-types. However, they also have a physical
-component.
-
-Most of the work is already done, we just need to remove the legacy
-stuff (enum, interface methods) and see what breaks.
-
-Actually we are still making use of it in the directive parts:
-
-: File: dogen.text.cpp/src/types/formattables/directive_group_repository_factory.cpp
-:  79  27         using transforms::inclusion_support_types;
-:  80  30         static const auto ns(inclusion_support_types::not_supported);
-: 172  23     using transforms::inclusion_support_types;
-: 173  26     static const auto ns(inclusion_support_types::not_supported);
-: 260  31     const auto cs(transforms::inclusion_support_types::canonical_support);
-
-
-Notes:
-
-- an archetype may not be able to participate on dependency
-  relationships at all. Or it may be able to participate in
-  relationships but just as a regular archetype. Finally, it may be a
-  "canonical" archetype; that is, when we have a dependency against a
-  facet, the canonical archetype for that logical meta-type gets
-  picked up.
-- canonical archetypes exist mainly because we ended up with cases
-  where there are more than one archetype that can be depended on for
-  a given logical meta-type (e.g. forward declarations). In this
-  cases, we need to disambiguate a reference.
-- actually, aren't dependencies just "references"? Perhaps we can
-  reuse terminology from references.
-- in C# we are mapping dependencies to using statements. This means we
-  extract the namespaces of each dependency and then use the "unique"
-  of all namespaces. However, we may end up in a situation where there
-  are name clashes. For example, if we had a reference to =A::a= and
-  =B::a=, this would cause problems.
 
 *** STARTED Archetype kind and postfix as symptoms of a larger pattern :story:
     :LOGBOOK:
@@ -1311,18 +1482,72 @@ Notes:
   and this is by design: these are the archetypes representing the
   transforms of the transforms.
 
-*** STARTED Remove traits for archetypes                              :story:
-    :LOGBOOK:
-    CLOCK: [2020-06-14 Sun 16:59]--[2020-06-14 Sun 17:07] =>  0:08
-    CLOCK: [2020-06-14 Sun 00:02]--[2020-06-14 Sun 00:34] =>  0:32
-    :END:
+*** Add the ability to cast an enum to the underlying type            :story:
 
-At this point all traits should now be covered either by features or
-by the physical model. We need to go through all archetypes and
-whenever we find a reference to a trait, we need to include the header
-for that archetype and call the =archetype()= method. We also need to
-add support to facets for canonical archetypes. Once all of this is
-done we need to remove traits and see what breaks.
+As per stack overflow, is now not easy to convert an enum to its
+underlying type. However, it also proposes some simple solutions:
+
+C++ 11:
+
+#+begin_src C++
+template <typename E>
+constexpr typename std::underlying_type<E>::type to_underlying(E e) noexcept {
+    return static_cast<typename std::underlying_type<E>::type>(e);
+}
+std::cout << foo(to_underlying(b::B2)) << std::endl;
+#+end_src
+
+C++ 14:
+
+#+begin_src C++
+#include <type_traits>
+
+template <typename E>
+constexpr auto to_underlying(E e) noexcept
+{
+    return static_cast<std::underlying_type_t<E>>(e);
+}
+#+end_src
+
+We could easily add these methods to our enums.
+
+Links:
+
+- [[https://stackoverflow.com/questions/8357240/how-to-automatically-convert-strongly-typed-enum-into-int][How to automatically convert strongly typed enum into int?]]
+
+*** Add =enum= size constant for all enums                            :story:
+
+A common use case is to declare an array of the size of an
+enumeration. It should take into account that invalid is not a valid
+value. We could declare a const named after the enum that contains the
+size. In fact we could declare with and without invalid.
+
+Actually for our use case we need to remove invalid, so this is not
+needed. Just total count will do. In terms of the name, SO says:
+
+#+begin_quote
+Length() tends to refer to contiguous elements - a string has a length
+for example.
+
+Count() tends to refer to the number of elements in a looser
+collection.
+
+Size() tends to refer to the size of the collection, often this can be
+different from the length in cases like vectors (or strings), there
+may be 10 characters in a string, but storage is reserved for 20. It
+also may refer to number of elements - check source/documentation.
+
+Capacity() - used to specifically refer to allocated space in
+collection and not number of valid elements in it. If type has both
+"capacity" and "size" defined then "size" usually refers to number of
+actual elements.
+#+end_quote
+
+C# calls it =Length=.
+
+Links:
+
+- [[https://stackoverflow.com/questions/300522/count-vs-length-vs-size-in-a-collection][count vs length vs size in a collection]]
 
 *** Replace initialisers with facet-based initialisation              :story:
 
