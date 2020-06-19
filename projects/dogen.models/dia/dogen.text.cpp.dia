@@ -431,8 +431,6 @@ std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
          * must include the parent we do not need any additional
          * includes.
          */
-        builder.add(o.opaque_associations(), fwd_arch);
-
         const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype_qn());
         builder.add(*o.base_visitor(), visitor_fwd_arch);
     }
