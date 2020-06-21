@@ -78,6 +78,17 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Cross-compilation for all targets                                 :story:
+
+We need to move to cross-compilation to avoid having to have builds on
+all supported OS's.
+
+Links:
+
+- [[https://github.com/ruslo/polly][GH repo]]: Collection of CMake toolchain files and scripts for
+  cross-platform build and CI testing (GCC, Visual Studio, iOS,
+  Android, Clang analyzer, sanitizers etc.)
+
 *** Reserved keywords are relative to model elements                  :story:
 
 At present we do a blanket check for reserved keywords across all
@@ -2899,6 +2910,8 @@ features, as explained here:
 - [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
   platform C++ CMake project using modern CMake syntax and transitive
   dependencies.
+- [[https://cgold.readthedocs.io/en/latest/][CGold: The Hitchhiker’s Guide to the CMake]]
+- [[https://polly.readthedocs.io/en/latest/index.html][Polly: Collection of CMake toolchains]]
 
 We need to implement this using proper CMake idioms.
 

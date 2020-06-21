@@ -15,29 +15,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-19 Fri 17:56]
+#+CAPTION: Clock summary at [2020-06-21 Sun 12:50]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *38:03* |       |       | 100.0 |
+| *Total time*                                               | *39:52* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 38:03   |       |       | 100.0 |
-| Active                                                     |         | 38:03 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  7:42 |  20.2 |
-| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.1 |
-| Sprint and product backlog grooming                        |         |       |  2:43 |   7.1 |
+| Stories                                                    | 39:52   |       |       | 100.0 |
+| Active                                                     |         | 39:52 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  7:42 |  19.3 |
+| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.0 |
+| Sprint and product backlog grooming                        |         |       |  2:55 |   7.3 |
 | Nightly nursing                                            |         |       |  0:11 |   0.5 |
-| Merge kernel with physical meta-model                      |         |       |  1:31 |   4.0 |
-| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.6 |
+| Merge kernel with physical meta-model                      |         |       |  1:31 |   3.8 |
+| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.5 |
 | Create an emacs mode for wale                              |         |       |  0:14 |   0.6 |
-| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   8.1 |
-| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.1 |
-| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   8.0 |
-| Split archetype factory from transform                     |         |       | 10:57 |  28.8 |
-| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.1 |
-| Remove traits for archetypes                               |         |       |  0:44 |   1.9 |
-| Analysis on solving relationship problems                  |         |       |  3:08 |   8.2 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.6 |
+| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   7.7 |
+| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.0 |
+| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   7.7 |
+| Split archetype factory from transform                     |         |       | 10:57 |  27.5 |
+| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.0 |
+| Remove traits for archetypes                               |         |       |  0:44 |   1.8 |
+| Analysis on solving relationship problems                  |         |       |  4:45 |  11.9 |
+| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -792,6 +792,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-21 Sun 11:00]--[2020-06-21 Sun 11:12] =>  0:12
     CLOCK: [2020-06-19 Fri 17:54]--[2020-06-19 Fri 17:56] =>  0:02
     CLOCK: [2020-06-19 Fri 11:23]--[2020-06-19 Fri 11:42] =>  0:19
     CLOCK: [2020-06-16 Tue 22:37]--[2020-06-16 Tue 22:47] =>  0:10
@@ -1187,6 +1188,7 @@ Notes:
 *** COMPLETED Analysis on solving relationship problems               :story:
     CLOSED: [2020-06-19 Fri 17:53]
     :LOGBOOK:
+    CLOCK: [2020-06-21 Sun 11:13]--[2020-06-21 Sun 12:50] =>  1:37
     CLOCK: [2020-06-19 Fri 16:12]--[2020-06-19 Fri 17:53] =>  1:41
     CLOCK: [2020-06-19 Fri 15:03]--[2020-06-19 Fri 16:11] =>  1:08
     CLOCK: [2020-06-19 Fri 12:35]--[2020-06-19 Fri 12:54] =>  0:19
@@ -1328,6 +1330,136 @@ path and dependencies and diff them until they match.
 
 Static relations can be just a list of IDs and tags. These must also
 be resolved as part of this process.
+
+There are a few cases that can be solved using tags/labels. For this
+we can apply a solution similar to [[https://cloud.google.com/compute/docs/labeling-resources][GCP labels]]:
+
+#+begin_quote
+Labels are a lightweight way to group together resources that are
+related or associated with each other. For example, a common practice
+is to label resources that are intended for production, staging, or
+development separately, so you can easily search for resources that
+belong to each development stage when necessary. Your labels might say
+vmrole:webserver, environment:production, location:west, and so
+on. You always add labels as key/value pairs:
+
+{
+ "labels": {
+    "vmrole": "webserver",
+    "environment": "production",
+    "location": "west",...
+    }
+}
+#+end_quote
+
+Use cases:
+
+- extension (what we have artefact kind for at present).
+- postfix. We could address both facet and archetype postfix in one
+  go.
+- archetype resolution: forward declarations, type definition.
+
+The implementation could be as follows:
+
+- in the logical meta-model we add an element of type label. You can
+  instantiate it by supplying a name (the class name) and a value. The
+  value is meta-data. Example: key: =standard_dogen_header_file=,
+  value: =hpp=.
+- the element class is extended to have labels. This is just a list of
+  string.
+
+Actually this is a mistake. We have already solved this problem,
+multiple times: its the same thing as we did for modelines, licences
+etc. We could have a non-typed solution such as labels, but then we
+have no validation on the shape of the data. Instead, we decided to
+create meta-model elements to model each data type, and to bind them
+using configuration. We need to take a similar approach. The only
+slight problem is on how we do the binding between the different types
+of archetypes and these elements containing configuration. We can take
+modelines as an example. For this we have many modelines such as
+=cpp=, =cs=, =cmake=, etc. At present these modelines bind to
+archetypes with massive hackery. First we assumed we needed one modeline
+per technical space. Then, in =decoration_transform=, we forced all
+elements to have decorations generated for all technical spaces even
+though they may only need a few. The third and final act of this
+tragedy is that the assistant then chooses the appropriate decoration
+based on the technical space. This is known up front because each M2T
+is associated with only one TS. To make matters worse, we default the
+TS in the assistant:
+
+:        const logical::entities::technical_space ts =
+:        logical::entities::technical_space::cpp);
+
+There is a degree of cleverness as to how modelines bind to
+configurations: they are grouped into modeline groups; each modeline
+is associated with a TS (which makes sense). Users then associate
+their decorations to modelines either locally or globally. If users
+want to associate a group of files to a modeline, they can create a
+profile and make those model elements use that configuration. This
+solves a lot of problems.
+
+Part of this machinery can be deployed to solve extensions and
+postfixes. We could also have decoration element groups with different
+kinds of extensions (and associated to technical spaces). The only
+snag is that we still need to distinguish between different "types" of
+archetypes in a TS to find the right extension. These types are at
+present fairly arbitrary:
+
+- C++ TS: dogen header, implementation; odb header, implementation
+- CMake TS: file
+- C# TS: file
+
+And so on. By default, if nothing else is specified we could also bind
+by TS. However, to cope with the peculiarity of C++ TS we will have
+more than one element binding to it. In this cases we do need
+labels. However, we just need archetypes to have labels (logical and
+physical). Labels are CSV of KVP (e.g. =extension:odb=). And to round
+up matters, we could also address parts in this way. A =part= becomes
+a decoration element which gives rise to a physical representation. It
+needs only two parameters:
+
+- model_modules_path_contribution: in folder, as directories.
+- facet_path_contribution: in folder, as directory
+
+Then we could have a tag at the archetype level which maps to the
+part. The only snag is that we now allow variability here. Users can
+make new parts, assign archetypes to new parts etc. This is not
+desirable as it will most likely result in borked components. The only
+option we want users to have is whether to use public headers or
+not. So perhaps we should allow for decoration elements for the part
+but they must be bound to existing parts. Also, the project part can't
+really be configured. In fact if we think about it, the problem is we
+haven't modeled products correctly. If we had:
+
+- family
+- product
+- component: parallel hierarchy: facets.
+- part
+- archetype
+
+Then we could say that an archetype is associated with either a
+product, a component, a part or a facet in a part. Note: it must be a
+facet in a part. Parts can have a decoration - as probably all other
+elements can as well. These are archetype properties which are not
+configurable. If the user disables public headers, we need to somehow
+redirect all archetypes that are in the public headers part to go
+somewhere else.
+
+Since we have a working solution for post-fixes as it stands we should
+just leave it as it is until there is a significant problem with
+it. For now we need to make sure all forward declarations are
+annotated correctly with the postfix. Path generation code will use
+existing postfix and directory name infrastructure, unchanged. We will
+focus only on solving the canonical header problems via
+tags. Archetype kinds become tags. For certain kinds (type definition,
+forward declaration) There can only be one archetype per logical model
+element. We use it to resolve names. Archetypes will be associated
+with an owner, which can be any of the valid building blocks above
+(family, etc). Users can create extensions as decorations. Users
+choose an extension group to associate to a model. Where there are
+more than one archetype per TS for a given extension, users must
+provide tags. The tag must bind to the tag provided in the extension
+decoration.
 
 *** STARTED Inject backend, facets and archetypes into PMM            :story:
 
