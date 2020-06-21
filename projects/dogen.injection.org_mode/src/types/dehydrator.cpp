@@ -37,26 +37,24 @@ const std::string invalid_enumerator("invalid");
 
 namespace dogen::injection::org_mode {
 
-void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
-    utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("documentation");
-    s << " : ";
-    uf.insert_quoted(d);
-}
-
 void dehydrator::insert_tagged_values(std::ostream& s,
     const std::list<std::pair<std::string, std::string>>& tv) {
 
-    s << ":dogen:" << std::endl;
+    if (tv.empty())
+        return;
+
+    s << ":dogen-tagged_values:" << std::endl;
     for (const auto& pair : tv)
         s << ":" << pair.first << ": " << pair.second << std::endl;
-    s << ":end:" << std::endl << std::endl;
+    s << ":end:" << std::endl;
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
     const std::list<std::string>& st) {
+    if (st.empty())
+        return;
 
-    s << "stereotypes: ";
+    s << ":stereotypes: ";
 
     bool is_first(true);
     for (const auto& stereotype : st) {
@@ -68,17 +66,18 @@ void dehydrator::insert_stereotypes(std::ostream& s,
     s << std::endl;
 }
 
-void dehydrator::insert_parents(std::ostream& s,
-    const std::list<std::string>& st) {
+void dehydrator::
+insert_parents(std::ostream& s, const std::list<std::string>& parents) {
+    if (parents.empty())
+        return;
 
-    utility::formatters::utility_formatter uf(s);
-    s << "parents: ";
+    s << ":parents: ";
 
     bool is_first(true);
-    for (const auto& stereotype : st) {
+    for (const auto& p : parents) {
         if (!is_first)
             s << ", ";
-        s << stereotype;
+        s << p;
         is_first = false;
     }
     s << std::endl;
@@ -87,69 +86,38 @@ void dehydrator::insert_parents(std::ostream& s,
 void dehydrator::insert_attribute(std::ostream& s,
     const injection::entities::attribute& a) {
 
-    s << "** " << a.name() << std::endl;
+    s << "*** " << a.name() << "      " << ":attribute:" << std::endl;
 
-    utility::formatters::utility_formatter uf(s);
-    uf.insert_quoted("type");
-    s << " : ";
-    uf.insert_quoted_escaped(a.type());
+    insert_tagged_values(s, a.tagged_values());
+    s << ":dogen-properties:" << std::endl
+      << ":type: " << a.type() << std::endl;
 
-    if (!a.value().empty()) {
-        s << comma_space;
-        uf.insert_quoted("value");
-        s << " : ";
-        uf.insert_quoted_escaped(a.value());
-    }
+    if (!a.value().empty())
+        s << ":value: " << a.value() << std::endl;
 
-    if (!a.documentation().empty()) {
-        s << comma_space;
-        insert_documentation(s, a.documentation());
-    }
+    insert_stereotypes(s, a.stereotypes());
+    s << ":end:" << std::endl << std::endl;
 
-    if (!a.stereotypes().empty()) {
-        s << comma_space;
-        insert_stereotypes(s, a.stereotypes());
-    }
-
-    if (!a.tagged_values().empty()) {
-        s << comma_space;
-        insert_tagged_values(s, a.tagged_values());
-    }
-
-    s << " }" << std::endl;
+    if (!a.documentation().empty())
+        s << a.documentation() << std::endl;
 }
 
 void dehydrator::insert_element(std::ostream& s,
     const injection::entities::element& e) {
 
-    s << "* " << e.name() << std::endl;
-    utility::formatters::utility_formatter uf(s);
+    s << "** " << e.name() << "    " << ":element:" << std::endl;
 
-    if (!e.parents().empty()) {
-        s << comma_space;
+    insert_tagged_values(s, e.tagged_values());
+
+    if (!e.parents().empty() || !e.stereotypes().empty()) {
+        s << ":dogen-properties:" << std::endl;
         insert_parents(s, e.parents());
-    }
-
-    if (!e.documentation().empty()) {
-        s << e.documentation() << std::endl;
-    }
-
-    if (!e.stereotypes().empty()) {
-        s << comma_space;
         insert_stereotypes(s, e.stereotypes());
+        s << ":end:" << std::endl;
     }
 
-    if (!e.tagged_values().empty()) {
-        s << comma_space;
-        insert_tagged_values(s, e.tagged_values());
-    }
-
-    if (!e.fallback_element_type().empty()) {
-        s << comma_space;
-        uf.insert_quoted("fallback_element_type");
-        s << " : ";
-        uf.insert_quoted_escaped(e.fallback_element_type());
-    }
+    if (!e.documentation().empty())
+        s << e.documentation() << std::endl;
 
     for (const auto& a : e.attributes())
         insert_attribute(s, a);
@@ -158,20 +126,21 @@ void dehydrator::insert_element(std::ostream& s,
 std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::ostringstream s;
 
-    s << "#+title: " << m.name() << std::endl
-      << "#+options: ^:nil" << std::endl;
+    s << "#+TITLE: " << m.name() << std::endl
+      << "#+OPTIONS: ^:nil" << std::endl;
 
-    if (!m.tagged_values().empty())
-        insert_tagged_values(s, m.tagged_values());
-
-    s << m.documentation() << std::endl;
+    insert_tagged_values(s, m.tagged_values());
 
     if (!m.stereotypes().empty()) {
-        if (!m.documentation().empty())
-            s << ", ";
+        s << ":dogen-properties:" << std::endl;
         insert_stereotypes(s, m.stereotypes());
+        s << ":end:" << std::endl << std::endl;
     }
 
+    if (!m.documentation().empty())
+        s << m.documentation() << std::endl;
+
+    s << "* Elements" << std::endl;
     for (const auto& e : m.elements())
         insert_element(s, e);
 

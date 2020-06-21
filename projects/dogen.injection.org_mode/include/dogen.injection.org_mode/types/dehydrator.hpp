@@ -42,7 +42,6 @@ private:
     static std::string tidy_up_string(std::string s);
 
 private:
-    static void insert_documentation(std::ostream& s, const std::string& d);
     static void insert_tagged_values(std::ostream& s,
         const std::list<std::pair<std::string, std::string>>& tv);
     static void insert_stereotypes(std::ostream& s,
