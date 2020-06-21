@@ -15,29 +15,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-21 Sun 16:05]
-| <75>                                                       |         |       |       |       |
-| Headline                                                   | Time    |       |       |     % |
-|------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *41:04* |       |       | 100.0 |
-|------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 41:04   |       |       | 100.0 |
-| Active                                                     |         | 41:04 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  7:42 |  18.8 |
-| Create a demo and presentation for previous sprint         |         |       |  1:11 |   2.9 |
-| Sprint and product backlog grooming                        |         |       |  4:07 |  10.0 |
-| Nightly nursing                                            |         |       |  0:11 |   0.4 |
-| Merge kernel with physical meta-model                      |         |       |  1:31 |   3.7 |
-| Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.5 |
-| Create an emacs mode for wale                              |         |       |  0:14 |   0.6 |
-| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   7.5 |
-| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   2.9 |
-| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   7.4 |
-| Split archetype factory from transform                     |         |       | 10:57 |  26.7 |
-| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   2.9 |
-| Remove traits for archetypes                               |         |       |  0:44 |   1.8 |
-| Analysis on solving relationship problems                  |         |       |  4:45 |  11.6 |
-| Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.5 |
+#+CAPTION: Clock summary at [2020-06-21 Sun 23:26]
+| <75>                                                              |         |       |       |       |
+| Headline                                                          | Time    |       |       |     % |
+|-------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                      | *44:04* |       |       | 100.0 |
+|-------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                           | 44:04   |       |       | 100.0 |
+| Active                                                            |         | 44:04 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  17.5 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.7 |
+| Sprint and product backlog grooming                               |         |       |  4:07 |   9.3 |
+| Nightly nursing                                                   |         |       |  0:11 |   0.4 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   3.4 |
+| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.4 |
+| Create an emacs mode for wale                                     |         |       |  0:14 |   0.5 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   7.0 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.7 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   6.9 |
+| Split archetype factory from transform                            |         |       | 10:57 |  24.8 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.7 |
+| Remove traits for archetypes                                      |         |       |  0:44 |   1.7 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |  10.8 |
+| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.4 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.6 |
+| Improve org-mode converter                                        |         |       |  1:52 |   4.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1463,7 +1465,7 @@ more than one archetype per TS for a given extension, users must
 provide tags. The tag must bind to the tag provided in the extension
 decoration.
 
-*** COMPLETED Archetype kind and postfix as symptoms of a larger pattern :story:
+*** COMPLETED Archetype kind and postfix as parts of a larger pattern :story:
     CLOSED: [2020-06-21 Sun 14:53]
     :LOGBOOK:
     CLOCK: [2020-06-12 Fri 13:41]--[2020-06-12 Fri 13:42] =>  0:01
@@ -1620,6 +1622,41 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** COMPLETED Paper: A flexible code generator for MOF-based modeling languages :story:
+    CLOSED: [2020-06-21 Sun 17:14]
+    :LOGBOOK:
+    CLOCK: [2020-06-21 Sun 16:06]--[2020-06-21 Sun 17:14] =>  1:08
+    :END:
+
+- Bichler, Lutz. "A flexible code generator for MOF-based modeling
+  languages." 2nd OOPSLA Workshop on Generative Techniques in the
+  context of Model Driven Architecture. 2003.
+- Link: https://s23m.com/oopsla2003/bichler.pdf
+
+*** STARTED Improve org-mode converter                                :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-21 Sun 21:51]--[2020-06-21 Sun 23:26] =>  1:35
+    CLOCK: [2020-06-21 Sun 19:28]--[2020-06-21 Sun 19:45] =>  0:17
+    :END:
+
+Work on the org-mode converter on the side to bring it closer to a
+usable state.
+
+Notes:
+
+- consider splitting documentation from model elements. This would
+  allow us to have sections etc in the documentation, whilst at the
+  same time also having a nested structure to describe model
+  structure.
+- need to group model elements by containing element. Need to remove
+  containing element from name.
+- logical model element type should be in =#+tags=. Need spaces to
+  align it properly.
+- consider allowing documentation using org-mode syntax. This would
+  then be converted when we generate the model.
+- preserve the dia object ID and the dia container ID (child
+  node). With this we can recreate the containment relationships.
 
 *** Add labels to archetypes                                          :story:
 

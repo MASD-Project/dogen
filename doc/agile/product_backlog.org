@@ -78,6 +78,15 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Conversion does not validate missing options                      :story:
+
+When we fail to add the mandatory options in conversion, we don't get
+a sensible error:
+
+: $ ./dogen.cli convert dogen.logical.dia dogen.logical.org
+: Error: Extension cannot be empty.
+: Failed to execute command.
+
 *** Cross-compilation for all targets                                 :story:
 
 We need to move to cross-compilation to avoid having to have builds on
@@ -5863,6 +5872,10 @@ point on fixing this until we move to the new JSON format. This could
 also resolve the elment fall back issue in JSON: check to see if any
 static stereotypes with element definitions have been supplied, and if
 not, use the fallback element type.
+
+Actually we shouldn't even have a fallback element type at the JSON
+level; if an injector does not provide a type, we should just default
+to say object.
 
 Merged stories:
 
@@ -14740,6 +14753,14 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for =zq= and ZNG                          :story:
+
+Interesting tool for log parsing, and associated format.
+
+Links:
+
+- [[https://github.com/brimsec/zq][GH project]]
 
 *** Consider adding support for =objectbox=                           :story:
 
