@@ -15,28 +15,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-21 Sun 12:50]
+#+CAPTION: Clock summary at [2020-06-21 Sun 16:05]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *39:52* |       |       | 100.0 |
+| *Total time*                                               | *41:04* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 39:52   |       |       | 100.0 |
-| Active                                                     |         | 39:52 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  7:42 |  19.3 |
-| Create a demo and presentation for previous sprint         |         |       |  1:11 |   3.0 |
-| Sprint and product backlog grooming                        |         |       |  2:55 |   7.3 |
-| Nightly nursing                                            |         |       |  0:11 |   0.5 |
-| Merge kernel with physical meta-model                      |         |       |  1:31 |   3.8 |
+| Stories                                                    | 41:04   |       |       | 100.0 |
+| Active                                                     |         | 41:04 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  7:42 |  18.8 |
+| Create a demo and presentation for previous sprint         |         |       |  1:11 |   2.9 |
+| Sprint and product backlog grooming                        |         |       |  4:07 |  10.0 |
+| Nightly nursing                                            |         |       |  0:11 |   0.4 |
+| Merge kernel with physical meta-model                      |         |       |  1:31 |   3.7 |
 | Convert =wale_template_reference= to meta-data             |         |       |  0:37 |   1.5 |
 | Create an emacs mode for wale                              |         |       |  0:14 |   0.6 |
-| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   7.7 |
-| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   3.0 |
-| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   7.7 |
-| Split archetype factory from transform                     |         |       | 10:57 |  27.5 |
-| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   3.0 |
+| Create a TS agnostic representation of inclusion           |         |       |  3:04 |   7.5 |
+| Analysis on reducing the number of required wale keys      |         |       |  1:11 |   2.9 |
+| Use PMM to compute =meta_name_indices=                     |         |       |  3:03 |   7.4 |
+| Split archetype factory from transform                     |         |       | 10:57 |  26.7 |
+| Paper: Using Aspects to Model Product Line Variability     |         |       |  1:11 |   2.9 |
 | Remove traits for archetypes                               |         |       |  0:44 |   1.8 |
-| Analysis on solving relationship problems                  |         |       |  4:45 |  11.9 |
+| Analysis on solving relationship problems                  |         |       |  4:45 |  11.6 |
 | Archetype kind and postfix as symptoms of a larger pattern |         |       |  0:36 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -792,6 +792,8 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-21 Sun 16:01]--[2020-06-21 Sun 16:05] =>  0:04
+    CLOCK: [2020-06-21 Sun 14:52]--[2020-06-21 Sun 16:00] =>  1:08
     CLOCK: [2020-06-21 Sun 11:00]--[2020-06-21 Sun 11:12] =>  0:12
     CLOCK: [2020-06-19 Fri 17:54]--[2020-06-19 Fri 17:56] =>  0:02
     CLOCK: [2020-06-19 Fri 11:23]--[2020-06-19 Fri 11:42] =>  0:19
@@ -1461,72 +1463,8 @@ more than one archetype per TS for a given extension, users must
 provide tags. The tag must bind to the tag provided in the extension
 decoration.
 
-*** STARTED Inject backend, facets and archetypes into PMM            :story:
-
-At present we only have artefacts in the PMM. We need to inject all
-other missing elements. We also need to create a transform which
-builds the PMM. Finally while we're at it we should add enablement
-properties and associated transform.
-
-Notes:
-
-- we should also change template instantiation code to use the PMM.
-- once we have a flag, we can detect disabled backends before any work
-  is carried out. The cost should be very close to zero. We don't need
-  to do any checks for this afterwards.
-- we need to add a list of archetypes that each archetype depends
-  on. We need to update the formatters to return archetypes rather
-  than names and have the dependencies there.
-
-Merged stories:
-
-*Implement archetype locations from physical meta-model*
-
-We need to use the new physical meta-model to obtain information about
-the layout of physical space, replacing the archetype locations.
-
-Tasks:
-
-- make the existing backend interface return the layout of physical
-  space.
-- create a transform that populates all of the data structures needed
-  by the current code base (archetype locations).
-- replace the existing archetype locations with a physical meta-model.
-- remove all the archetype locations data structures.
-
-Notes:
-
-- template instantiation domains should be a part of the physical
-  meta-model. Create a transform to compute these. *done*
-- remove Locatable from Element? *done*
-
-Merged stories:
-
-*Clean-up archetype locations modeling*
-
-We now have a large number of containers with different aspects of
-archetype locations data. We need to look through all of the usages of
-archetype locations and see if we can make the data structures a bit
-more sensible. For example, we should use archetype location id's
-where possible and only use the full type where required.
-
-Notes:
-
-- formatters could return id's?
-- add an ID to archetype location; create a builder like name builder
-  and populate ID as part of the build process.
-
-*Implement the physical meta-model*
-
-We need to replace the existing classes around archetype locations
-with the new meta-model types.
-
-Notes:
-
-- formatters should add their data to a registrar that lives in the
-  physical model rather than expose it via an interface.
-
-*** STARTED Archetype kind and postfix as symptoms of a larger pattern :story:
+*** COMPLETED Archetype kind and postfix as symptoms of a larger pattern :story:
+    CLOSED: [2020-06-21 Sun 14:53]
     :LOGBOOK:
     CLOCK: [2020-06-12 Fri 13:41]--[2020-06-12 Fri 13:42] =>  0:01
     CLOCK: [2020-06-12 Fri 13:06]--[2020-06-12 Fri 13:41] =>  0:35
@@ -1613,6 +1551,220 @@ Notes:
   will generate archetypes with names such as "_transform_transform"
   and this is by design: these are the archetypes representing the
   transforms of the transforms.
+
+*** COMPLETED Inject backend, facets and archetypes into PMM          :story:
+    CLOSED: [2020-06-21 Sun 16:06]
+
+*Rationale*: this was achieved as part of the factory / transform
+split in the PMM.
+
+At present we only have artefacts in the PMM. We need to inject all
+other missing elements. We also need to create a transform which
+builds the PMM. Finally while we're at it we should add enablement
+properties and associated transform.
+
+Notes:
+
+- we should also change template instantiation code to use the PMM.
+- once we have a flag, we can detect disabled backends before any work
+  is carried out. The cost should be very close to zero. We don't need
+  to do any checks for this afterwards.
+- we need to add a list of archetypes that each archetype depends
+  on. We need to update the formatters to return archetypes rather
+  than names and have the dependencies there.
+
+Merged stories:
+
+*Implement archetype locations from physical meta-model*
+
+We need to use the new physical meta-model to obtain information about
+the layout of physical space, replacing the archetype locations.
+
+Tasks:
+
+- make the existing backend interface return the layout of physical
+  space.
+- create a transform that populates all of the data structures needed
+  by the current code base (archetype locations).
+- replace the existing archetype locations with a physical meta-model.
+- remove all the archetype locations data structures.
+
+Notes:
+
+- template instantiation domains should be a part of the physical
+  meta-model. Create a transform to compute these. *done*
+- remove Locatable from Element? *done*
+
+Merged stories:
+
+*Clean-up archetype locations modeling*
+
+We now have a large number of containers with different aspects of
+archetype locations data. We need to look through all of the usages of
+archetype locations and see if we can make the data structures a bit
+more sensible. For example, we should use archetype location id's
+where possible and only use the full type where required.
+
+Notes:
+
+- formatters could return id's?
+- add an ID to archetype location; create a builder like name builder
+  and populate ID as part of the build process.
+
+*Implement the physical meta-model*
+
+We need to replace the existing classes around archetype locations
+with the new meta-model types.
+
+Notes:
+
+- formatters should add their data to a registrar that lives in the
+  physical model rather than expose it via an interface.
+
+*** Add labels to archetypes                                          :story:
+
+We need to be able to label archetypes when we define them.
+
+- add feature for labels.
+- add labels concept in physical model.
+- update transform to read labels from meta-data and populate logical model.
+- update templates to generate the labels.
+
+Label keys:
+
+- roles: type declaration, forward declaration.
+- groups: dogen, dogen.standard_cpp_header,
+  dogen.standard_cpp_implementation, header.
+
+*** Add relations between archetypes in the PMM                       :story:
+
+We need to add a new enum in the physical model: =relation_type=.
+
+- parent
+- child
+- transparent_associations
+- opaque_associations
+- associative_container_keys
+- visitation
+- serialisation
+
+Then we need to be able to add to each archetype a KVP of relation to
+either an archetype or to a label. If its a label it must have the
+label syntax: =role:type_definition=. Otherwise its assumed to be an
+archetype. We could probably use the prefix =archetype:= for the
+archetype direct mapping. There must be a way to distinguish between a
+projected physical relation and an explicit physical relation.
+
+*** Add archetype ownership model                                     :story:
+
+Archetypes can be owned by either a part or directly by a backend. In
+the future, they can also be owned by a product, a component, etc. We
+don't need to worry about this yet. Parts are owned by a backend. We
+need to ensure the current code supports this correctly. Archetypes
+that live at the project level must be owned by the backend, not the
+part.
+
+*** Add artefact's archetype to artefact class                        :story:
+
+For now a simple string would do. In the future we may need a pointer
+and join the PMM to the PM. We'll see how the use cases develop.
+
+*** Add file extensions to decoration                                 :story:
+
+Create something really simple:
+
+- extension groups
+- extensions
+
+Model this after modelines and modeline groups. We just need to define
+an extension group that has all the extensions we have currently in
+use. Extensions belong to a TS. Extensions can have a label. If there
+is more than one extension for a given TS they must have a
+label. Example:
+
+=extension_type:odb_headers=
+
+We then need to label archetypes with these. This is only needed for
+cases where there is more than one extension for a given TS (c++
+headers and implementation).
+
+*** Add full path processing to PM                                    :story:
+
+We need to be able to generate full paths in the PM. This will require
+access to the file extensions. For this we will need new decoration
+elements. This must be done as part of the logical model to physical
+model conversion.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We
+may need to treat certain labels more specially than others - its not
+clear. We need a container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*** Add dependency generation to PM                                   :story:
+
+We should store the dependencies in the following format:
+
+- relative path
+- dot notation
+- colon notation
+- header guard: not very nice but its the easiest way to solve this
+  problem for now.
+
+Archetypes should record their own information for this. This involves
+reading meta-data for certain cases (e.g. PDMs). One archetype can
+have more than one of these entries. We could map this like an RPM:
+
+- provides
+- requires
+
+or
+
+- exports
+- imports
+
+Once we are generating the provides/exports we can then use the maps
+to populate the imports.
+
+Merged stories:
+
+*Add dependencies between artefacts in the PM*
+
+During logical model conversion, we need to create a map in the
+physical model capturing for each artefact:
+
+- id of the dependent element
+- archetype
+- relation type
+
+Note however that the full purpose of this transform is to resolve
+this triplet into a relative path to create a dependency. So we may
+not need to store this in the model and just have it in the transform
+as an intermediate state.
+
+For C# dependencies are written as the fully qualified element
+name. We then need further processing to determine what the using
+statements should be. As we do not have any usings at present this
+will have to be handled in another story. For now we should just make
+sure we record the dependencies.
+
+*** Create a logical to physical projector                            :story:
+
+The projection logic is now getting really complex. We really need a
+class to take over this work. It should also group model elements by
+type so that we can obtain the archetypes just once instead of
+processing one model element at a time.
+
+*** Consider creating a label for generated files                     :story:
+
+We could label all files which are not generated as "manual". Not
+clear how exactly that would be useful.
 
 *** Add the ability to cast an enum to the underlying type            :story:
 
