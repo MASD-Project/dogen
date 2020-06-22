@@ -63,6 +63,7 @@ public:
         const dogen::logical::entities::name& meta_name,
         const dogen::logical::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+        const std::list<dogen::logical::entities::label>& labels,
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,

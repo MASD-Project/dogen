@@ -33,6 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/label.hpp"
 #include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
@@ -75,6 +76,7 @@ public:
         const dogen::logical::entities::name& meta_name,
         const dogen::logical::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+        const std::list<dogen::logical::entities::label>& labels,
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
@@ -202,6 +204,16 @@ public:
     void configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v);
     /**@}*/
 
+    /**
+     * @brief All labels associated with this element.
+     */
+    /**@{*/
+    const std::list<dogen::logical::entities::label>& labels() const;
+    std::list<dogen::logical::entities::label>& labels();
+    void labels(const std::list<dogen::logical::entities::label>& v);
+    void labels(const std::list<dogen::logical::entities::label>&& v);
+    /**@}*/
+
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties();
     void artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& v);
@@ -242,6 +254,7 @@ private:
     dogen::logical::entities::name meta_name_;
     dogen::logical::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
+    std::list<dogen::logical::entities::label> labels_;
     std::unordered_map<std::string, dogen::logical::entities::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, dogen::logical::entities::enablement_properties> enablement_properties_;
     std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;

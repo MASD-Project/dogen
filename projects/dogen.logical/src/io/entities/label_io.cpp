@@ -19,23 +19,25 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/label_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/io/entities/artefact_properties_io.hpp"
-#include "dogen.logical/io/entities/enablement_properties_io.hpp"
-#include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::logical::entities {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const label& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::logical::entities::label\"" << ", "
+      << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
     return(s);
 }
 

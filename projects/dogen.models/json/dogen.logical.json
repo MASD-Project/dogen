@@ -3,15 +3,6 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.logical",
-    "masd.injection.reference": "cpp.builtins",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "dogen",
-    "masd.injection.reference": "dogen.variability",
-    "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "masd",
-    "masd.injection.reference": "masd.variability",
-    "masd.injection.reference": "dogen.profiles",
     "masd.injection.reference": "dogen.physical",
     "masd.injection.input_technical_space": "cpp",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
@@ -242,6 +233,21 @@
       ]
     },
     {
+      "name": "entities::Labelable",
+      "documentation": "The ability to attach labels to an element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::list<label>",
+          "documentation": "All labels associated with this element.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::Element",
       "parents": [
         "entities::Nameable",
@@ -251,7 +257,8 @@
         "entities::Stereotypable",
         "entities::MetaNameable",
         "entities::TechnicalSpaceRelationship",
-        "entities::Configurable"
+        "entities::Configurable",
+        "entities::Labelable"
       ],
       "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [
@@ -4553,6 +4560,23 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::label",
+      "documentation": "A label is a key-value pair that can be used by the processing engine in a flexible way.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string",
+          "documentation": "Key of the label.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value associated with this label.\n"
+        }
+      ]
     }
   ]
 }

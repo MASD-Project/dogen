@@ -18,25 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/label_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/io/entities/artefact_properties_io.hpp"
-#include "dogen.logical/io/entities/enablement_properties_io.hpp"
-#include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_LABEL_FWD_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_LABEL_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::logical::entities {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
-}
+class label;
 
 }
+
+#endif
