@@ -4577,6 +4577,25 @@
           "documentation": "Value associated with this label.\n"
         }
       ]
+    },
+    {
+      "name": "features::labelling",
+      "documentation": "Features related to labels.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.label",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Labels to attach to modeling elements. Key must be unique.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
     }
   ]
 }
