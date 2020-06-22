@@ -63,8 +63,6 @@ const std::string unexpected_output_ts(
 namespace dogen::logical::transforms {
 
 using helpers::decoration_configuration;
-using entities::decoration::generation_marker;
-using entities::decoration::modeline;
 
 typedef std::unordered_map<entities::technical_space,
                            boost::optional<
