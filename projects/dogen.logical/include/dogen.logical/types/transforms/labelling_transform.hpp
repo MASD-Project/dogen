@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
 
 class labelling_transform final {
 public:
-    labelling_transform() = default;
-    labelling_transform(const labelling_transform&) = default;
-    labelling_transform(labelling_transform&&) = default;
-    ~labelling_transform() = default;
-    labelling_transform& operator=(const labelling_transform&) = default;
-
-public:
-    bool operator==(const labelling_transform& rhs) const;
-    bool operator!=(const labelling_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
