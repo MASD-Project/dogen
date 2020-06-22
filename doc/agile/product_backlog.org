@@ -9745,7 +9745,9 @@ JSON Web Tokens (JWT) are used in web apps.
 
 Links:
 
-- [[https://github.com/Thalhammer/jwt-cpp][jwt-cpp]]
+- [[https://github.com/Thalhammer/jwt-cpp][jwt-cpp]]: A header only library for creating and validating json web
+  tokens in c++.
+- [[https://github.com/arun11299/cpp-jwt][cpp-jwt]]
 
 *** Investigate the uses of =nameOf= in Dogen                         :story:
 
@@ -14855,6 +14857,12 @@ Links:
 - http://www.authenticationworld.com/Single-Sign-On-Authentication/SSOandLDAP.html
 - https://payhip.com/b/41Tw
 - https://git.shibboleth.net/view/?p=cpp-opensaml.git;a=summary
+- [[https://github.com/casbin/casbin-cpp][casbin-cpp GH]]: An authorization library that supports access control
+  models like ACL, RBAC, ABAC in C/C++.
+- [[https://github.com/sirikata/liboauthcpp][liboauthcpp GH]]: A pure C++ OAuth library.
+- [[https://github.com/InfiniteRasa/Authentication-Server][Authentication-Server]]
+- [[https://stackoverflow.com/questions/11580944/client-to-server-authentication-in-c-using-sockets][Client to Server Authentication in C++ using sockets]]
+- [[https://www.omg.org/news/meetings/workshops/presentations/docsec_present/1997/1-1.pdf][Introduction to CORBA Security]]
 
 *** Consider adding OpenHMI support                                   :story:
 
