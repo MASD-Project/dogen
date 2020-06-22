@@ -3,6 +3,15 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.logical",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.variability",
+    "masd.injection.reference": "dogen.profiles",
     "masd.injection.reference": "dogen.physical",
     "masd.injection.input_technical_space": "cpp",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
@@ -4596,6 +4605,13 @@
           }
         }
       ]
+    },
+    {
+      "name": "transforms::labels_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
