@@ -170,16 +170,16 @@
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="-50,171"/>
+        <dia:point val="-50,171.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.05,169.15;198.05,396.05"/>
+        <dia:rectangle val="-50.05,169.221;198.05,396.121"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-50,171"/>
+        <dia:point val="-50,171.071"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="248"/>
@@ -9390,7 +9390,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="143.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
+        <dia:rectangle val="143.288,180.429;147.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44961,7 +44961,8 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.a_labelz=a,b,c#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
