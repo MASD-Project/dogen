@@ -18,33 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_TRANSFORMS_LABELS_TRANSFORM_HPP
-#define DOGEN_LOGICAL_TYPES_TRANSFORMS_LABELS_TRANSFORM_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
+#include "dogen.logical/types/transforms/labelling_transform.hpp"
 
 namespace dogen::logical::transforms {
 
-class labels_transform final {
-public:
-    labels_transform() = default;
-    labels_transform(const labels_transform&) = default;
-    labels_transform(labels_transform&&) = default;
-    ~labels_transform() = default;
-    labels_transform& operator=(const labels_transform&) = default;
-
-public:
-    bool operator==(const labels_transform& rhs) const;
-    bool operator!=(const labels_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
-
+bool labelling_transform::operator==(const labelling_transform& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

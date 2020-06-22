@@ -4607,7 +4607,7 @@
       ]
     },
     {
-      "name": "transforms::labels_transform",
+      "name": "transforms::labelling_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
