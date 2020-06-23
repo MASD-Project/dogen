@@ -52,7 +52,8 @@
         "dogen::object_header_configuration"
       ],
       "tagged_values": {
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -141,7 +142,8 @@
         "masd.wale.kvp.class.simple_name": "exception_header_transform",
         "masd.wale.kvp.archetype.simple_name": "exception_header",
         "masd.wale.kvp.meta_element": "exception",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -160,7 +162,8 @@
         "dogen::enumeration_header_configuration"
       ],
       "tagged_values": {
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -206,7 +209,8 @@
         "masd.wale.kvp.class.simple_name": "visitor_header_transform",
         "masd.wale.kvp.archetype.simple_name": "visitor_header",
         "masd.wale.kvp.meta_element": "visitor",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1008,7 +1012,8 @@
         "dogen::builtin_header_configuration"
       ],
       "tagged_values": {
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1704,7 +1709,8 @@
         "dogen::primitive_header_configuration"
       ],
       "tagged_values": {
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2608,7 +2614,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.referencing_status": "referable",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "forward declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2633,7 +2640,8 @@
         "masd.physical.referencing_status": "referable",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "visitor",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "forward declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2683,7 +2691,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.referencing_status": "referable",
         "masd.wale.kvp.meta_element": "primitive",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.label.roles": "forward declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3185,8 +3194,7 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.label.a_labelz": "a,b,c"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

@@ -270,7 +270,8 @@
       <dia:attribute name="comment">
         <dia:string>#Generates header files for objects.
 
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2003,7 +2004,8 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 #DOGEN masd.wale.kvp.class.simple_name=exception_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=exception_header
 #DOGEN masd.wale.kvp.meta_element=exception
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2244,7 +2246,8 @@ private:
       <dia:attribute name="comment">
         <dia:string>#Generates header files for enumerations.
 
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2679,7 +2682,8 @@ namespace &lt;#= m.name().simple() #&gt; {
 #DOGEN masd.wale.kvp.class.simple_name=visitor_header_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_header
 #DOGEN masd.wale.kvp.meta_element=visitor
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15749,7 +15753,8 @@ and element.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Generates header files for builtins.
 
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -28360,7 +28365,8 @@ not a regular" helper.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Generates header files for primitives.
 
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39318,7 +39324,8 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.referencing_status=referable
 #DOGEN masd.wale.kvp.meta_element=object
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=forward declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39513,7 +39520,8 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.physical.referencing_status=referable
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=visitor
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=forward declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39914,7 +39922,8 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.physical.referencing_status=referable
 #DOGEN masd.wale.kvp.meta_element=primitive
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.label.roles=forward declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44963,8 +44972,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.label.a_labelz=a,b,c#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

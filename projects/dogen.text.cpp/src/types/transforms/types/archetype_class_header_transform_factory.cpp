@@ -29,7 +29,6 @@ physical::entities::archetype archetype_class_header_transform_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "archetype_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_archetype");
     r.referencing_status(physical::entities::referencing_status::facet_default);
-     r.labels().push_back(physical::entities::label("a_labelz", "a,b,c"));
     return r;
 }
 

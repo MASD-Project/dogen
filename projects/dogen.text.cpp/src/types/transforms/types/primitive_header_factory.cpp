@@ -29,6 +29,7 @@ physical::entities::archetype primitive_header_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "primitive_header"));
     r.logical_meta_element_id("dogen.logical.entities.primitive");
     r.referencing_status(physical::entities::referencing_status::facet_default);
+     r.labels().push_back(physical::entities::label("roles", "type_declaration"));
     return r;
 }
 
