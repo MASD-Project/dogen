@@ -51456,6 +51456,13 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
     r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
     r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
+&lt;#+
+            for(const auto&amp; l : arch.labels()) {
+#&gt;
+     r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+&lt;#+
+            }
+#&gt;
     return r;
 }
 
