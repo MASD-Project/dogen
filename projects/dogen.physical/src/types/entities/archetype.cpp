@@ -28,6 +28,7 @@ archetype::archetype()
 archetype::archetype(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
+    const std::list<dogen::physical::entities::label>& labels,
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::list<std::string>& depends,
@@ -39,6 +40,7 @@ archetype::archetype(
     const dogen::physical::entities::referencing_status referencing_status)
     : description_(description),
       meta_name_(meta_name),
+      labels_(labels),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
       depends_(depends),
@@ -53,6 +55,7 @@ void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
+    swap(labels_, other.labels_);
     swap(default_postfix_, other.default_postfix_);
     swap(override_postfix_, other.override_postfix_);
     swap(depends_, other.depends_);
@@ -67,6 +70,7 @@ void archetype::swap(archetype& other) noexcept {
 bool archetype::operator==(const archetype& rhs) const {
     return description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
+        labels_ == rhs.labels_ &&
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
         depends_ == rhs.depends_ &&
@@ -114,6 +118,22 @@ void archetype::meta_name(const dogen::physical::entities::meta_name& v) {
 
 void archetype::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::list<dogen::physical::entities::label>& archetype::labels() const {
+    return labels_;
+}
+
+std::list<dogen::physical::entities::label>& archetype::labels() {
+    return labels_;
+}
+
+void archetype::labels(const std::list<dogen::physical::entities::label>& v) {
+    labels_ = v;
+}
+
+void archetype::labels(const std::list<dogen::physical::entities::label>&& v) {
+    labels_ = std::move(v);
 }
 
 const std::string& archetype::default_postfix() const {

@@ -30,6 +30,7 @@ part::part(
     const std::string& override_directory_name,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
+    const std::list<dogen::physical::entities::label>& labels,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -38,6 +39,7 @@ part::part(
       override_directory_name_(override_directory_name),
       description_(description),
       meta_name_(meta_name),
+      labels_(labels),
       path_configuration_(path_configuration),
       facets_(facets),
       archetypes_(archetypes),
@@ -49,6 +51,7 @@ void part::swap(part& other) noexcept {
     swap(override_directory_name_, other.override_directory_name_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
+    swap(labels_, other.labels_);
     swap(path_configuration_, other.path_configuration_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -60,6 +63,7 @@ bool part::operator==(const part& rhs) const {
         override_directory_name_ == rhs.override_directory_name_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
+        labels_ == rhs.labels_ &&
         path_configuration_ == rhs.path_configuration_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -134,6 +138,22 @@ void part::meta_name(const dogen::physical::entities::meta_name& v) {
 
 void part::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::list<dogen::physical::entities::label>& part::labels() const {
+    return labels_;
+}
+
+std::list<dogen::physical::entities::label>& part::labels() {
+    return labels_;
+}
+
+void part::labels(const std::list<dogen::physical::entities::label>& v) {
+    labels_ = v;
+}
+
+void part::labels(const std::list<dogen::physical::entities::label>&& v) {
+    labels_ = std::move(v);
 }
 
 const dogen::physical::entities::path_configuration& part::path_configuration() const {

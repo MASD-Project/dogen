@@ -30,6 +30,7 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
@@ -55,6 +56,7 @@ public:
         const std::string& override_directory_name,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
+        const std::list<dogen::physical::entities::label>& labels,
         const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const std::list<dogen::physical::entities::backend>& backends,
@@ -99,6 +101,16 @@ public:
     dogen::physical::entities::meta_name& meta_name();
     void meta_name(const dogen::physical::entities::meta_name& v);
     void meta_name(const dogen::physical::entities::meta_name&& v);
+    /**@}*/
+
+    /**
+     * @brief All labels associated with this element.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::label>& labels() const;
+    std::list<dogen::physical::entities::label>& labels();
+    void labels(const std::list<dogen::physical::entities::label>& v);
+    void labels(const std::list<dogen::physical::entities::label>&& v);
     /**@}*/
 
     /**
@@ -160,6 +172,7 @@ private:
     std::string override_directory_name_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
+    std::list<dogen::physical::entities::label> labels_;
     std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     std::list<dogen::physical::entities::backend> backends_;

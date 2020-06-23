@@ -27,6 +27,7 @@ backend::backend(
     const std::string& override_directory_name,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
+    const std::list<dogen::physical::entities::label>& labels,
     const std::unordered_map<std::string, dogen::physical::entities::part>& parts,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -35,6 +36,7 @@ backend::backend(
       override_directory_name_(override_directory_name),
       description_(description),
       meta_name_(meta_name),
+      labels_(labels),
       parts_(parts),
       facets_(facets),
       archetypes_(archetypes),
@@ -46,6 +48,7 @@ void backend::swap(backend& other) noexcept {
     swap(override_directory_name_, other.override_directory_name_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
+    swap(labels_, other.labels_);
     swap(parts_, other.parts_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -57,6 +60,7 @@ bool backend::operator==(const backend& rhs) const {
         override_directory_name_ == rhs.override_directory_name_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
+        labels_ == rhs.labels_ &&
         parts_ == rhs.parts_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -131,6 +135,22 @@ void backend::meta_name(const dogen::physical::entities::meta_name& v) {
 
 void backend::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::list<dogen::physical::entities::label>& backend::labels() const {
+    return labels_;
+}
+
+std::list<dogen::physical::entities::label>& backend::labels() {
+    return labels_;
+}
+
+void backend::labels(const std::list<dogen::physical::entities::label>& v) {
+    labels_ = v;
+}
+
+void backend::labels(const std::list<dogen::physical::entities::label>&& v) {
+    labels_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::physical::entities::part>& backend::parts() const {

@@ -432,10 +432,26 @@
       ]
     },
     {
+      "name": "entities::Labelable",
+      "documentation": "The ability to attach labels to an element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::list<label>",
+          "documentation": "All labels associated with this element.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::MetaElement",
       "parents": [
         "entities::Describable",
-        "entities::MetaNameable"
+        "entities::MetaNameable",
+        "entities::Labelable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -1315,6 +1331,23 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::label",
+      "documentation": "A label is a key-value pair that can be used by the processing engine in a flexible way.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string",
+          "documentation": "Key of the label.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value associated with this label.\n"
+        }
+      ]
     }
   ]
 }
