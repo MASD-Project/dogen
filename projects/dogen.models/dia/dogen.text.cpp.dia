@@ -51469,7 +51469,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;
-     r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
 #&gt;
