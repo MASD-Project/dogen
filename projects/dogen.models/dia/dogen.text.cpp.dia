@@ -6624,7 +6624,7 @@ grammar of the C++ technical space.
         <dia:point val="-46,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,242.95;-30.42,247.15"/>
+        <dia:rectangle val="-46.05,242.95;-30.42,247.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6636,7 +6636,7 @@ grammar of the C++ technical space.
         <dia:real val="15.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.8999999999999995"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6653,7 +6653,8 @@ grammar of the C++ technical space.
             <dia:string>#Formatters for the types facet of the
 C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.injection.dia.comment=true
+#DOGEN masd.label.test=some_label#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -51891,6 +51892,13 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
+&lt;#+
+            for(const auto&amp; l : fct.labels()) {
+#&gt;
+    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+&lt;#+
+            }
+#&gt;
 
     const auto lambda([&amp;](const auto&amp; arch) {
         const auto id(arch.meta_name().qualified());
