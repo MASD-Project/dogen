@@ -6564,7 +6564,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:point val="-48,173"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,172.95;-28.955,181.15"/>
+        <dia:rectangle val="-48.05,172.95;-28.955,181.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6576,7 +6576,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6598,7 +6598,8 @@ grammar of the C++ technical space.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.physical.backend_name=cpp
-#DOGEN masd.physical.major_technical_space=cpp#</dia:string>
+#DOGEN masd.physical.major_technical_space=cpp
+#DOGEN masd.label.test=lbl#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -52348,6 +52349,13 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 
     physical::entities::backend r;
     r.meta_name(b.build());
+&lt;#+
+            for(const auto&amp; l : be.labels()) {
+#&gt;
+    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+&lt;#+
+            }
+#&gt;
 
     const auto lambda([&amp;](const auto&amp; fct) {
         const auto id(fct.meta_name().qualified());

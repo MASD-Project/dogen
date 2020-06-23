@@ -122,6 +122,9 @@ ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::backend r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;
+            for(const auto& l : be.labels()) {
+ast.stream() << "    r.labels().push_back(physical::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
+            }
 ast.stream() << std::endl;
 ast.stream() << "    const auto lambda([&](const auto& fct) {" << std::endl;
 ast.stream() << "        const auto id(fct.meta_name().qualified());" << std::endl;

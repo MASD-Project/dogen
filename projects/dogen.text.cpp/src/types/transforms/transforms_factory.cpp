@@ -49,6 +49,7 @@ physical::entities::backend transforms_factory::make() {
 
     physical::entities::backend r;
     r.meta_name(b.build());
+    r.labels().push_back(physical::entities::label("test", "lbl"));
 
     const auto lambda([&](const auto& fct) {
         const auto id(fct.meta_name().qualified());
