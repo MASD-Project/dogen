@@ -90,13 +90,15 @@ a sensible error:
 *** Cross-compilation for all targets                                 :story:
 
 We need to move to cross-compilation to avoid having to have builds on
-all supported OS's.
+all supported OS's. We need to also be able to run all tests so for
+this we need something like Wine. We should use clang on all OSs.
 
 Links:
 
 - [[https://github.com/ruslo/polly][GH repo]]: Collection of CMake toolchain files and scripts for
   cross-platform build and CI testing (GCC, Visual Studio, iOS,
   Android, Clang analyzer, sanitizers etc.)
+- [[https://github.com/darlinghq/darling][darling GH]]: Wine but for OSX. Can be used to run DMGs (see readme).
 
 *** Reserved keywords are relative to model elements                  :story:
 
