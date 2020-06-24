@@ -1,0 +1,3557 @@
+#+TITLE: dogen.text.csharp
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.text.csharp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: cpp.std
+:masd.injection.reference: dogen
+:masd.injection.reference: dogen.variability
+:masd.injection.reference: dogen.tracing
+:masd.injection.reference: dogen.logical
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.injection.input_technical_space: cpp
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Provides the C# backend for the defaul physical meta-model.
+
+* model_to_text_csharp_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* workflow_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+* initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* transforms
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.physical.backend_name: csharp
+:masd.physical.major_technical_space: csharp
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::backend
+:end:
+M2T transforms for the C# Technical Space.
+
+Takes types in the logical model and creates text
+representations of these types according to the grammar
+of the C# Technical Space.
+
+** transforms::workflow
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** registrar_
+:dogen-properties:
+:type: transforms::registrar
+:end:
+
+** transforms::registrar
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** formatter_repository_
+:dogen-properties:
+:type: transforms::repository
+:end:
+
+** transforms::model_to_text_transform
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** transforms::repository
+:dogen-tagged_values:
+:masd.cpp.io.enabled: true
+:masd.cpp.io.overwrite: false
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** stock_artefact_formatters_by_meta_name
+:dogen-properties:
+:type: std::unordered_map<std::string, std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>>
+:end:
+
+*** stock_artefact_formatters
+:dogen-properties:
+:type: std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>
+:end:
+
+*** stock_artefact_formatters_by_archetype
+:dogen-properties:
+:type: std::unordered_map<std::string, std::shared_ptr<transforms::model_to_text_transform>>
+:end:
+
+** transforms::types
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::facet
+:end:
+M2T transforms for the types facet of
+the C# Technical Space.
+
+*** transforms::types::class
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.types
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::object_configuration
+:end:
+Generates implementation files for objects.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/class_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/class_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void class_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "class transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    const auto id(e.name().qualified().dot());
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
+            if (!o.in_inheritance_relationship() || !o.is_child()) {
+#>
+    public <#= ast.make_inheritance_keyword_text(o) #>class <#= sn #>
+<#+
+            } else {
+                const auto& pn(o.parents().front());
+                const auto pqn(ast.get_qualified_name(pn));
+#>
+    public <#= ast.make_inheritance_keyword_text(o) #>class <#= sn #> : <#= pqn #>
+<#+
+            }
+#>
+    {
+<#+
+            if (!o.local_attributes().empty()) {
+                if (!ctx.element_properties().helper_properties().empty())
+                    ast.add_helper_methods(id);
+
+                /*
+                * Properties
+                */
+#>
+        #region Properties
+<#+
+                for (const auto& attr : o.local_attributes()) {
+                    ast.comment(attr.documentation(), 2/*indent*/);
+#>
+        public <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (o.is_immutable() ? "internal " : "") #>set; }
+<#+
+                }
+#>
+        #endregion
+
+<#+
+            }
+
+            /*
+             * Constructors.
+             */
+#>
+        #region Constructors
+        public <#= sn #>() { }
+<#+
+            if (!o.all_attributes().empty()) {
+                const auto attr_count(o.all_attributes().size());
+                if (attr_count == 1) {
+                     const auto attr(*o.all_attributes().begin());
+#>
+        public <#= sn #>(<#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #>)
+<#+
+                } else {
+#>
+
+        public <#= sn #>(
+<#+
+                    utility::formatters::sequence_formatter sf(attr_count);
+                    sf.postfix_configuration().last(")");
+                    for (const auto& attr : o.all_attributes()) {
+#>
+            <#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #><#= sf.postfix() #>
+<#+
+                        sf.next();
+                    }
+                }
+
+                if (!o.parents().empty()) {
+                    const auto& pair(*o.inherited_attributes().begin());
+                    const auto& pattrs(pair.second);
+                    const auto size(pattrs.size());
+
+                    if (size == 0) {
+#>
+            : base()
+<#+
+                    } else if (size == 1) {
+#>
+            : base(<#= ast.make_argument_name(pattrs.front()) #>)
+<#+
+                    } else {
+                        utility::formatters::sequence_formatter sf(size);
+                        sf.postfix_configuration().last(")");
+                        sf.prefix_configuration().first(",").not_first(",");
+#>
+            : base(
+<#+
+                        for (const auto& pattr : pattrs) {
+#>
+                <#= ast.make_argument_name(pattr) #><#= sf.postfix() #>
+<#+
+                            sf.next();
+                        }
+                    }
+                }
+#>
+        {
+<#+
+                if (o.local_attributes().empty()) {
+#>
+            // no properties
+<#+
+                } else {
+                    for (const auto& attr : o.local_attributes()) {
+#>
+            <#= attr.name().simple() #> = <#= ast.make_argument_name(attr) #>;
+<#+
+                    }
+                }
+#>
+        }
+<#+
+            }
+#>
+        #endregion
+
+<#+
+            /*
+             * Equals
+             */
+#>
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            var value = obj as <#= sn #>;
+<#+
+            if (o.local_attributes().empty()) {
+                if (!o.parents().empty()) {
+#>
+            return (value != null && base.Equals(value));
+<#+
+                } else {
+#>
+            return value != null;
+<#+
+                }
+            } else {
+                if (!o.parents().empty()) {
+#>
+            if (value == null || !base.Equals(value)) return false;
+<#+
+                } else {
+#>
+            if (value == null) return false;
+<#+
+                }
+#>
+
+            return
+<#+
+                utility::formatters::sequence_formatter sf(o.local_attributes().size());
+                sf.element_separator("");
+                sf.postfix_configuration().not_last(" &&");
+                sf.postfix_configuration().last(";");
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+                        if (attr.parsed_type().is_floating_point()) {
+#>
+                NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>)<#= sf.postfix() #>
+<#+
+                        } else {
+#>
+                <#= attr.name().simple() #> == value.<#= attr.name().simple() #><#= sf.postfix() #>
+<#+
+                        }
+                    } else {
+#>
+                <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
+                <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>)<#= sf.postfix() #>
+<#+
+                    }
+                    sf.next();
+                }
+            }
+#>
+        }
+
+        public static bool operator ==(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            if (Object.ReferenceEquals(lhs, rhs))
+                return true;
+
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public override int GetHashCode()
+        {
+<#+
+            if (o.local_attributes().empty()) {
+#>
+            return 0;
+<#+
+            } else {
+#>
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+<#+
+                for (const auto& attr : o.local_attributes()) {
+                    if (attr.parsed_type().is_current_simple_type()) {
+#>
+                hash = (hash * HashingMultiplier) ^ <#= attr.name().simple() #>.GetHashCode();
+<#+
+                    } else {
+#>
+                hash = (hash * HashingMultiplier) ^
+                    (!<#= ast.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+<#+
+                    }
+                }
+#>
+                return hash;
+            }
+<#+
+            }
+#>
+        }
+        #endregion
+<#+
+            if (o.in_inheritance_relationship())
+            {
+#>
+
+        #region Dumpers
+<#+
+                if (o.is_parent() && !o.is_child()) {
+#>
+        internal abstract string Dump();
+<#+
+                } else if (o.is_leaf()) {
+#>
+        internal override string Dump()
+        {
+            return <#= sn #>Dumper.Dump(this);
+        }
+<#+
+                }
+#>
+        #endregion
+<#+
+        }
+#>
+    }
+<#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::types::enum
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.types
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::enumeration_configuration
+:end:
+Generates implementation files for enums.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/enum_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/enum_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
+            if (ye.use_implementation_defined_underlying_element())
+#>
+    public enum <#= sn #>
+<#+
+            else
+#>
+    public enum <#= sn #> : <#= ast.get_qualified_name(ye.underlying_element()) #>
+    {
+<#+
+            utility::formatters::sequence_formatter sf(ye.enumerators().size());
+            for (const auto& en : ye.enumerators()) {
+                if (ye.use_implementation_defined_enumerator_values())
+#>
+        <#= en.name().simple() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>
+<#+
+                else
+#>
+        <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= ast.comment_inline(en.documentation()) #>
+<#+
+                sf.next();
+            }
+#>
+    }
+<#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::types::exception
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.types
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::exception_configuration
+:end:
+Generates implementation files for exceptions.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/exception_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/exception_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void exception_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "exception transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
+#>
+    public class <#= sn #>  : Exception
+    {
+        public <#= sn #>() { }
+        public <#= sn #>(string message) : base(message) { }
+        public <#= sn #>(string message, Exception inner) : base(message, inner) { }
+    }
+<#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::types::initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::types::traits
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::types::floating_point_number_helper
+:dogen-properties:
+:stereotypes: dogen::csharp::helper_transform
+:end:
+*** transforms::types::builtin
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.types
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::builtin_configuration
+:end:
+Generates implementation files for builtins.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/builtin_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/builtin_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void builtin_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "builtin transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    a.logical_name().simple(e.name().simple());
+    a.logical_name().qualified(e.name().qualified().dot());
+    a.origin_sha1_hash(e.origin_sha1_hash());
+    stp.end_transform(a);
+}
+
+#>
+
+#+end_src
+*** transforms::types::primitive
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.types
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::primitive_configuration
+:end:
+Generates implementation files for primitives.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<iostream> #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/primitive_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/primitive_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    const auto id(e.name().qualified().dot());
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            ast.comment(e.documentation(), 1/*indent*/);
+#>
+    public sealed class <#= sn #>
+    {
+<#+
+            if (!ctx.element_properties().helper_properties().empty())
+                ast.add_helper_methods(id);
+
+            /*
+             * Properties
+             */
+#>
+        #region Properties
+<#+
+            const auto& attr(p.value_attribute());
+            ast.comment(attr.documentation(), 2/*indent*/);
+#>
+        public <#= ast.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (p.is_immutable() ? "internal " : "") #>set; }
+        #endregion
+
+<#+
+            /*
+             * Constructors.
+             */
+#>
+        #region Constructors
+        public <#= sn #>() { }
+        public <#= sn #>(<#= ast.get_qualified_name(attr.parsed_type()) #> <#= ast.make_argument_name(attr) #>)
+        {
+            <#= attr.name().simple() #> = <#= ast.make_argument_name(attr) #>;
+        }
+        #endregion
+
+<#+
+            /*
+             * Equals
+             */
+#>
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            var value = obj as <#= sn #>;
+            if (value == null) return false;
+            return
+<#+
+             if (attr.parsed_type().is_current_simple_type()) {
+                if (attr.parsed_type().is_floating_point()) {
+#>
+                NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>);
+<#+
+                } else {
+#>
+                <#= attr.name().simple() #> == value.<#= attr.name().simple() #>;
+<#+
+                }
+           } else {
+#>
+                <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
+                <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>);
+<#+
+            }
+#>
+        }
+
+        public static bool operator ==(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            if (Object.ReferenceEquals(lhs, rhs))
+                return true;
+
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+<#+
+                if (attr.parsed_type().is_current_simple_type()) {
+#>
+                hash = (hash * HashingMultiplier) ^ <#= attr.name().simple() #>.GetHashCode();
+<#+
+                } else {
+#>
+                hash = (hash * HashingMultiplier) ^
+                    (!<#= ast.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+<#+
+                }
+#>
+                return hash;
+            }
+        }
+        #endregion
+    }
+<#+
+        } // snf
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+** transforms::io
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::facet
+:end:
+M2T transforms for the io facet of
+the C# Technical Space.
+
+*** transforms::io::class
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.io
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::object_configuration
+:end:
+Generates implementation files for objects.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/class_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/class_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void class_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "class transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const bool has_attributes(!o.local_attributes().empty());
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<null>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+<#+
+                if (!o.parents().empty()) {
+                    const auto& pn(o.parents().front());
+                    const auto pqn(ast.get_qualified_name(pn));
+#>
+            assistant.AddKey("__parent_0__");
+            assistant.AddPairSeparator();
+            <#= pqn #>Dumper.Dump(assistant, value<#= (has_attributes ? ", true/*withSeparator*/" : "") #>);
+<#+
+                }
+
+                utility::formatters::sequence_formatter sf(o.local_attributes().size());
+                sf.element_separator("");
+                sf.postfix_configuration().not_last(", true/*withSeparator*/");
+                sf.postfix_configuration().last("");
+
+                for (const auto& attr : o.local_attributes()) {
+                    const auto oap(ast.get_assistant_properties(attr));
+                    if (oap && oap->requires_assistance()) {
+#>
+            assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #><#= sf.postfix() #>);
+<#+
+                    } else {
+                        const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#>
+            assistant.AddKey("<#= attr.name().simple() #>");
+            assistant.AddPairSeparator();
+            <#= attr_qn #>Dumper.Dump(assistant, value.<#= attr.name().simple() #><#= sf.postfix() #>);
+<#+
+                    }
+
+                    sf.next();
+                }
+#>
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(<#= sn #> value)
+        {
+<#+
+                if (o.is_parent()) {
+#>
+            return value.Dump();
+<#+
+                } else {
+#>
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+<#+
+                }
+#>
+        }
+    }
+<#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::io::enum
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.io
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::enumeration_configuration
+:end:
+Generates implementation files for enums.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/enum_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/enum_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+   physical::entities::artefact& a) const {
+   tracing::scoped_transform_tracer stp(lg, "enum transform",
+       transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>", true/*withSeparator*/);
+            string valueAsString = "Unsupported Value";
+            switch (value)
+            {
+<#+
+            for (const auto& en : ye.enumerators()) {
+#>
+                case <#= ye.name().simple() #>.<#= en.name().simple() #>:
+                    valueAsString = "<#= en.name().simple() #>";
+                    break;
+<#+
+            }
+#>
+            }
+
+            assistant.Add("value", valueAsString);
+            assistant.AddEndObject();
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(<#= sn #> value)
+        {
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+        }
+    }
+<#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::io::initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::io::traits
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::io::enumerable_helper
+:dogen-properties:
+:stereotypes: dogen::csharp::helper_transform
+:end:
+*** transforms::io::primitive
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.io
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::primitive_configuration
+:end:
+Generates implementation files for primitives.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/primitive_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/primitive_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<null>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+<#+
+            const auto attr(p.value_attribute());
+            const auto oap(ast.get_assistant_properties(attr));
+            if (oap && oap->requires_assistance()) {
+#>
+            assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #>);
+<#+
+            } else {
+                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#>
+            assistant.AddKey("<#= attr.name().simple() #>");
+            assistant.AddPairSeparator();
+            <#= attr_qn #>Dumper.Dump(assistant, value.<#= attr.name().simple() #>;
+<#+
+            }
+#>
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(<#= sn #> value)
+        {
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+        }
+    }
+<#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::io::assistant
+:dogen-tagged_values:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.assistant
+:masd.wale.kvp.class.simple_name: assistant_transform
+:masd.wale.kvp.archetype.simple_name: assistant
+:masd.wale.kvp.meta_element: assistant
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.io
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::archetype_configuration
+:end:
+Generates implementation files for assistants.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/assistant_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/assistant_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void assistant_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+using System.Text;
+using System.Collections;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+    class <#= sn #>Dumper
+    {
+        #region Properties
+        private readonly StringBuilder _stringBuilder;
+        private int _currentDepth;
+
+        private const uint MaxDepth = 1000;
+        private const string HashCode = "HashCode";
+        private const string Type = "__type__";
+        private const string StringType = "string";
+        private const string ByteType = "byte";
+        private const string SByteType = "sbyte";
+        private const string IntType = "int";
+        private const string UIntType = "uint";
+        private const string LongType = "long";
+        private const string ULongType = "ulong";
+        private const string FloatType = "float";
+        private const string DoubleType = "double";
+        private const string CharType = "char";
+        private const string DecimalType = "decimal";
+        private const string BoolType = "bool";
+        private const string NullValue = "<null>";
+        private const string SystemObjectType = "System.Object";
+        private const string KeyType = "key";
+        private const string ValueType = "value";
+        private const string DataKey = "data";
+        #endregion
+
+        #region Depth management
+        public void IncrementDepth()
+        {
+            ++_currentDepth;
+        }
+
+        public void DecrementDepth()
+        {
+            ++_currentDepth;
+        }
+
+        public bool MaximumDepthExceeded()
+        {
+            return _currentDepth > MaxDepth;
+        }
+        #endregion
+
+        #region Adds for JSON syntax
+        public void AddStartObject()
+        {
+            _stringBuilder.Append("{ ");
+        }
+
+        public void AddEndObject()
+        {
+            _stringBuilder.Append(" }");
+        }
+
+        public void AddStartArray()
+        {
+            _stringBuilder.Append("[ ");
+        }
+
+        public void AddEndArray()
+        {
+            _stringBuilder.Append(" ]");
+        }
+
+        public void AddPairSeparator()
+        {
+            _stringBuilder.Append(" : ");
+        }
+
+        public void AddMemberSeparator()
+        {
+            _stringBuilder.Append(", ");
+        }
+
+        public void AddQuoted(string value)
+        {
+            if (value == null)
+                _stringBuilder.Append("\"<null>\"");
+            else
+                _stringBuilder.Append("\"" + value + "\"");
+        }
+
+        public void AddNonQuoted(int value)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+        }
+
+        public void AddKey(string k)
+        {
+            AddQuoted(k);
+        }
+
+        public void AddType(string typeName, bool withSeparator = false)
+        {
+            AddKey(Type);
+            AddPairSeparator();
+            AddQuoted(typeName);
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddKeyWithSeparator(string key)
+        {
+            AddKey(key);
+            AddPairSeparator();
+        }
+
+        public void HandleMemberSeparator(bool withSeparator)
+        {
+            if (withSeparator)
+                AddMemberSeparator();
+        }
+        #endregion
+
+        #region Add value for well known types
+        private bool HandleBoxedPrimitives(object value)
+        {
+            var type = value.GetType();
+            if (type == typeof(string))
+            {
+                AddStartObject();
+                AddType(StringType, true/*withSeparator*/);
+                Add(DataKey, value as string);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(byte))
+            {
+                AddStartObject();
+                AddType(ByteType, true/*withSeparator*/);
+                Add(DataKey, (byte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(sbyte))
+            {
+                AddStartObject();
+                AddType(SByteType, true/*withSeparator*/);
+                Add(DataKey, (sbyte)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(int))
+            {
+                AddStartObject();
+                AddType(IntType, true/*withSeparator*/);
+                Add(DataKey, (int)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(uint))
+            {
+                AddStartObject();
+                AddType(UIntType, true/*withSeparator*/);
+                Add(DataKey, (uint)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(long))
+            {
+                AddStartObject();
+                AddType(LongType, true/*withSeparator*/);
+                Add(DataKey, (long)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(ulong))
+            {
+                AddStartObject();
+                AddType(ULongType, true/*withSeparator*/);
+                Add(DataKey, (ulong)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(float))
+            {
+                AddStartObject();
+                AddType(FloatType, true/*withSeparator*/);
+                Add(DataKey, (float)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(double))
+            {
+                AddStartObject();
+                AddType(DoubleType, true/*withSeparator*/);
+                Add(DataKey, (double)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(char))
+            {
+                AddStartObject();
+                AddType(CharType, true/*withSeparator*/);
+                Add(DataKey, (char)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(decimal))
+            {
+                AddStartObject();
+                AddType(DecimalType, true/*withSeparator*/);
+                Add(DataKey, (decimal)value);
+                AddEndObject();
+                return true;
+            }
+
+            if (type == typeof(bool))
+            {
+                AddStartObject();
+                AddType(BoolType, true/*withSeparator*/);
+                Add(DataKey, (bool)value);
+                AddEndObject();
+                return true;
+            }
+
+            return false;
+        }
+
+        private void AddValue(object value, bool withSeparator = false)
+        {
+            AddStartObject();
+            AddType(SystemObjectType, true/*withSeparator*/);
+
+            if (value == null)
+            {
+                Add(DataKey, NullValue);
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
+
+            AddKey(DataKey);
+            AddPairSeparator();
+            if (HandleBoxedPrimitives(value))
+            {
+                AddEndObject();
+                HandleMemberSeparator(withSeparator);
+                return;
+            }
+
+            AddStartObject();
+            AddKey(HashCode);
+            AddPairSeparator();
+            AddNonQuoted(value.GetHashCode());
+
+            AddEndObject(); // data
+            AddEndObject();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(string value, bool withSeparator = false)
+        {
+            AddQuoted(value);
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(byte value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(sbyte value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(int value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(uint value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(long value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(ulong value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(float value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(double value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(char value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(Convert.ToInt16(value)));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(decimal value, bool withSeparator = false)
+        {
+            _stringBuilder.Append(Convert.ToString(value));
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(bool value, bool withSeparator = false)
+        {
+            if (value)
+                _stringBuilder.Append("true");
+            else
+                _stringBuilder.Append("false");
+
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(IEnumerable value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (var item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddValue(item);
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+
+        private void AddValue(IDictionary value, bool withSeparator = false)
+        {
+            AddStartArray();
+            bool isFirst = true;
+            foreach (DictionaryEntry item in value)
+            {
+                if (!isFirst)
+                    AddMemberSeparator();
+
+                AddStartArray();
+
+                AddStartObject();
+                AddType(KeyType, true/*withSeparator*/);
+                Add(DataKey, item.Key);
+                AddEndObject();
+
+                AddMemberSeparator();
+
+                AddStartObject();
+                AddType(ValueType, true/*withSeparator*/);
+                Add(DataKey, item.Value);
+                AddEndObject();
+
+                AddEndArray();
+                isFirst = false;
+            }
+            AddEndArray();
+            HandleMemberSeparator(withSeparator);
+        }
+        #endregion
+
+        #region Add for well known types
+        public void Add(string key, object value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, string value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, byte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, sbyte value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, int value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, uint value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, long value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, ulong value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, float value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, double value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, char value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, decimal value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, bool value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IEnumerable value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+
+        public void Add(string key, IDictionary value, bool withSeparator = false)
+        {
+            AddKeyWithSeparator(key);
+            AddValue(value, withSeparator);
+        }
+        #endregion
+
+        public AssistantDumper()
+        {
+            _stringBuilder = new StringBuilder();
+        }
+
+        public override string ToString()
+        {
+            return _stringBuilder.ToString();
+        }
+    }
+<#+
+        }
+    } // sbf
+
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+** transforms::test_data
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::facet
+:end:
+M2T transforms for the test data
+facet of the C# Technical Space.
+
+*** transforms::test_data::class
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.test_data
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::object_configuration
+:end:
+Generates implementation files for objects.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/class_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void class_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "FIXME",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+            const bool has_attributes(!o.all_attributes().empty());
+            const bool is_parent_or_has_attributes(
+                !o.parents().empty() || has_attributes);
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>SequenceGenerator
+    {
+        static internal void Populate(<#= sn #> value, uint position)
+        {
+<#+
+                if (!is_parent_or_has_attributes) {
+#>
+            // nothing to populate
+<#+
+                } else {
+                    unsigned int count(0);
+                    if (!o.parents().empty()) {
+                        const auto& pn(o.parents().front());
+                        const auto pqn(ast.get_qualified_name(pn));
+#>
+            <#= pqn #>SequenceGenerator.Populate(value, position);
+<#+
+                    }
+
+                    for (const auto& attr : o.local_attributes()) {
+                        const auto oap(ast.get_assistant_properties(attr));
+                        if (oap && oap->requires_assistance()) {
+#>
+            value.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position + <#= count++ #>);
+<#+
+                        } else {
+                            const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#>
+            value.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position + <#= count++ #>);
+<#+
+                        }
+                    }
+                }
+#>
+        }
+
+        static internal <#= sn #> Create(uint position)
+        {
+<#+
+            if (!o.is_parent()) {
+#>
+            var result = new <#= sn #>();
+<#+
+                if (has_attributes) {
+#>
+            Populate(result, position);
+<#+
+                }
+#>
+            return result;
+<#+
+            } else {
+                auto leaves(o.leaves());
+                const auto front(leaves.front());
+                leaves.pop_front();
+                unsigned int i(0);
+                const auto total(static_cast<unsigned int>(leaves.size()));
+                for (const auto& l : leaves) {
+#>
+            if ((position % <#= total #>) == <#= i++ #>)
+                return <#= ast.get_qualified_name(l) #>SequenceGenerator.Create(position);
+<#+
+                }
+#>
+            return <#= ast.get_qualified_name(front) #>SequenceGenerator.Create(position);
+<#+
+            }
+#>
+        }
+
+        #region Enumerator
+        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable
+        {
+            #region Properties
+            private uint _position;
+            private <#= sn #> _current;
+            #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = <#= sn #>SequenceGenerator.Create(_position);
+            }
+
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
+
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                PopulateCurrent();
+                return true;
+            }
+
+            public void Reset()
+            {
+                _position = 0;
+                PopulateCurrent();
+            }
+
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
+
+            <#= sn #> IEnumerator<<#= sn #>>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
+            #endregion
+
+            public <#= sn #>Enumerator()
+            {
+                PopulateCurrent();
+            }
+        }
+        #endregion
+
+        #region Enumerable
+        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+
+            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+            #endregion
+        }
+        #endregion
+
+        static public IEnumerable<<#= sn #>> Sequence()
+        {
+            return new <#= sn #>Enumerable();
+        }
+    }
+<#+
+        }
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::test_data::enum
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.test_data
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::enumeration_configuration
+:end:
+Generates implementation files for enums.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/enum_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void enum_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "enum transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>SequenceGenerator
+    {
+        static internal <#= sn #> Create(uint position)
+        {
+            var result = (<#= sn #>)(position % <#= ye.enumerators().size() #>);
+            return result;
+        }
+
+        #region Enumerator
+        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable
+        {
+            #region Properties
+            private uint _position;
+            private <#= sn #> _current;
+            #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = <#= sn #>SequenceGenerator.Create(_position);
+            }
+
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
+
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                PopulateCurrent();
+                return true;
+            }
+
+            public void Reset()
+            {
+                _position = 0;
+                PopulateCurrent();
+            }
+
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
+
+            <#= sn #> IEnumerator<<#= sn #>>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
+            #endregion
+
+            public <#= sn #>Enumerator()
+            {
+                PopulateCurrent();
+            }
+        }
+        #endregion
+
+        #region Enumerable
+        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+
+            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+            #endregion
+        }
+        #endregion
+
+        static public IEnumerable<<#= sn #>> Sequence()
+        {
+            return new <#= sn #>Enumerable();
+        }
+    }
+<#+
+        }
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::test_data::initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::test_data::traits
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::test_data::primitive
+:dogen-tagged_values:
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.test_data
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::primitive_configuration
+:end:
+Generates implementation files for primitives.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/primitive_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void primitive_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(ast.get_qualified_name(e.name()));
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>SequenceGenerator
+    {
+        static internal void Populate(<#= sn #> value, uint position)
+        {
+<#+
+            const auto attr(p.value_attribute());
+            const auto oap(ast.get_assistant_properties(attr));
+            if (oap && oap->requires_assistance()) {
+#>
+            value.<#= attr.name().simple() #> = AssistantSequenceGenerator.Create<#= oap->method_postfix() #>(position);
+<#+
+            } else {
+                const auto attr_qn(ast.get_qualified_name(attr.parsed_type().current()));
+#>
+            value.<#= attr.name().simple() #> = <#= attr_qn #>SequenceGenerator.Create(position);
+<#+
+            }
+#>
+        }
+
+        static internal <#= sn #> Create(uint position)
+        {
+            var result = new <#= sn #>();
+            Populate(result, position);
+            return result;
+        }
+
+        #region Enumerator
+        private class <#= sn #>Enumerator : IEnumerator, IEnumerator<<#= sn #>>, IDisposable
+        {
+            #region Properties
+            private uint _position;
+            private <#= sn #> _current;
+            #endregion
+
+            private void PopulateCurrent()
+            {
+                _current = <#= sn #>SequenceGenerator.Create(_position);
+            }
+
+            #region IDisposable
+            public void Dispose()
+            {
+            }
+            #endregion
+
+            #region IEnumerator implementation
+            public bool MoveNext()
+            {
+                ++_position;
+                PopulateCurrent();
+                return true;
+            }
+
+            public void Reset()
+            {
+                _position = 0;
+                PopulateCurrent();
+            }
+
+            public object Current {
+                get
+                {
+                    return _current;
+                }
+            }
+
+            <#= sn #> IEnumerator<<#= sn #>>.Current
+            {
+                get
+                {
+                    return _current;
+                }
+            }
+            #endregion
+
+            public <#= sn #>Enumerator()
+            {
+                PopulateCurrent();
+            }
+        }
+        #endregion
+
+        #region Enumerable
+        private class <#= sn #>Enumerable : IEnumerable, IEnumerable<<#= sn #>>
+        {
+            #region IEnumerable implementation
+            public IEnumerator GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+
+            IEnumerator<<#= sn #>> IEnumerable<<#= sn #>>.GetEnumerator()
+            {
+                return new <#= sn #>Enumerator();
+            }
+            #endregion
+        }
+        #endregion
+
+        static public IEnumerable<<#= sn #>> Sequence()
+        {
+            return new <#= sn #>Enumerable();
+        }
+    }
+<#+
+        }
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+*** transforms::test_data::assistant
+:dogen-tagged_values:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.assistant
+:masd.wale.kvp.class.simple_name: assistant_transform
+:masd.wale.kvp.archetype.simple_name: assistant
+:masd.wale.kvp.meta_element: assistant
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.test_data
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype, dogen::archetype_configuration
+:end:
+Generates implementation files for assistants.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/assistant_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void assistant_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    {
+        const auto sn(e.name().simple());
+        auto sbf(ast.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+using System.Collections;
+using System.Collections.Specialized;
+
+<#+
+            const auto ns(ast.make_namespaces(e.name()));
+            auto snf(ast.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Provides helper methods for the sequence generators.
+    /// </summary>
+    static class <#= sn #>SequenceGenerator
+    {
+        private const int SequenceSize = 10;
+
+        public static object CreateObject(uint position)
+        {
+            return "this is an object: " + Convert.ToString(position);
+        }
+
+        public static string CreateString(uint position)
+        {
+            return "this is a string: " + Convert.ToString(position);
+        }
+
+        public static byte CreateByte(uint position)
+        {
+            return Convert.ToByte(position);
+        }
+
+        public static sbyte CreateShortByte(uint position)
+        {
+            return Convert.ToSByte(position);
+        }
+
+        public static int CreateInt(uint position)
+        {
+            return Convert.ToInt32(position);
+        }
+
+        public static uint CreateUInt(uint position)
+        {
+            return position;
+        }
+
+        public static short CreateShort(uint position)
+        {
+            return Convert.ToInt16(position);
+        }
+
+        public static ushort CreateUShort(uint position)
+        {
+            return Convert.ToUInt16(position);
+        }
+
+        public static long CreateLong(uint position)
+        {
+            return Convert.ToInt64(position);
+        }
+
+        public static ulong CreateULong(uint position)
+        {
+            return Convert.ToUInt64(position);
+        }
+
+        public static float CreateFloat(uint position)
+        {
+            return Convert.ToSingle(position);
+        }
+
+        public static double CreateDouble(uint position)
+        {
+            return Convert.ToDouble(position);
+        }
+
+        public static char CreateChar(uint position)
+        {
+            return Convert.ToChar(position);
+        }
+
+        public static bool CreateBool(uint position)
+        {
+            return position % 2 == 0;
+        }
+
+        public static decimal CreateDecimal(uint position)
+        {
+            return Convert.ToDecimal(position);
+        }
+
+        public static IEnumerable CreateIEnumerable(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static ICollection CreateICollection(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static IList CreateIList(uint position)
+        {
+            return CreateArrayList(position);
+        }
+
+        public static ArrayList CreateArrayList(uint position)
+        {
+            var result = new ArrayList();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                switch((position + i) % 5)
+                {
+                case 0: result.Add(CreateString(position + i)); break;
+                case 1: result.Add(CreateByte(position + i)); break;
+                case 2: result.Add(CreateInt(position + i)); break;
+                case 3: result.Add(CreateLong(position + i)); break;
+                case 4: result.Add(CreateFloat(position + i)); break;
+                case 5: result.Add(CreateDecimal(position + i)); break;
+                default: result.Add(CreateBool(position + i)); break;
+                }
+            }
+            return result;
+        }
+
+        public static IDictionary CreateIDictionary(uint position)
+        {
+            return CreateHashtable(position);
+        }
+
+        public static Hashtable CreateHashtable(uint position)
+        {
+            var result = new Hashtable();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static HybridDictionary CreateHybridDictionary(uint position)
+        {
+            var result = new HybridDictionary();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static NameValueCollection CreateNameValueCollection(uint position)
+        {
+            var result = new NameValueCollection();
+            for (uint i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+
+        public static BitArray CreateBitArray(uint position)
+        {
+            var result = new BitArray(SequenceSize);
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result[i] = position % 2 == 0;
+            }
+            return result;
+        }
+
+        public static Queue CreateQueue(uint position)
+        {
+            var result = new Queue();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Enqueue("value_" + position + i);
+            }
+            return result;
+        }
+
+        public static Stack CreateStack(uint position)
+        {
+            var result = new Stack();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Push("value_" + position + i);
+            }
+            return result;
+        }
+
+        public static SortedList CreateSortedList(uint position)
+        {
+            var result = new SortedList();
+            for (int i = 0; i < SequenceSize; i++)
+            {
+                result.Add("key_" + position + i, "value_" + position + i);
+            }
+            return result;
+        }
+    }
+<#+
+        }
+    } // sbf
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+** transforms::registrar_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+There was an error in the registrar.
+
+** transforms::assistant
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::context
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** element_properties
+:dogen-properties:
+:type: formattables::element_properties
+:end:
+
+*** model
+:dogen-properties:
+:type: formattables::model
+:end:
+
+*** helpers
+:dogen-properties:
+:type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:end:
+
+*** tracer
+:dogen-properties:
+:type: boost::shared_ptr<tracing::tracer>
+:end:
+
+** transforms::formatting_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst formatting.
+
+** transforms::helper_transform
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::global_features
+:dogen-tagged_values:
+:masd.variability.generate_static_configuration: false
+:masd.variability.key_prefix: masd.csharp
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+*** directory
+:dogen-tagged_values:
+:masd.variability.binding_point: global
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:value: "cs"
+:end:
+
+*** aspect.requires_static_reference_equals
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "true"
+:end:
+
+*** helper.family
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:value: "Default"
+:end:
+
+*** assistant.requires_assistance
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "false"
+:end:
+
+*** assistant.method_postfix
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+** transforms::visual_studio
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::facet
+:end:
+M2T transforms for the visual studio
+facet of the C# Technical Space.
+
+*** transforms::visual_studio::initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::visual_studio::traits
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** transforms::visual_studio::project
+:dogen-tagged_values:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.visual_studio_project
+:masd.wale.kvp.class.simple_name: project_transform
+:masd.wale.kvp.archetype.simple_name: project
+:masd.wale.kvp.meta_element: visual_studio_project
+:masd.wale.kvp.meta_name_factory: logical::helpers::meta_name_factory
+:masd.physical.part_id: masd.csharp.implementation
+:masd.wale.kvp.locator_function: make_full_path_for_visual_studio_project
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
+:masd.physical.wale_template_reference: csharp_transform_implementation
+:masd.physical.referencing_status: not_referable
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype
+:end:
+Generates visual studio project.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/project_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/project_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void project_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "project transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    using logical::entities::visual_studio::project;
+    const auto& proj(ast.as<project>(archetype().meta_name().qualified(), e));
+
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{<#= proj.guid() #>}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace><#= proj.project_name() #></RootNamespace>
+    <AssemblyName><#= proj.project_name() #></AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+<#+
+        for (const auto& ig : proj.item_groups()) {
+#>
+  <ItemGroup>
+<#+
+            for (const auto& i : ig.items())
+#>
+    <<#= i.name() #> Include="<#= i.include() #>" />
+  </ItemGroup>
+<#+
+        }
+#>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
+<#+
+    ast.update_artefact();
+    stp.end_transform(a);
+
+}
+#>
+
+#+end_src
+*** transforms::visual_studio::solution
+:dogen-tagged_values:
+:masd.physical.logical_meta_element_id: dogen.logical.entities.visual_studio_solution
+:masd.wale.kvp.class.simple_name: solution_transform
+:masd.wale.kvp.archetype.simple_name: solution
+:masd.wale.kvp.meta_element: visual_studio_solution
+:masd.wale.kvp.meta_name_factory: logical::helpers::meta_name_factory
+:masd.physical.part_id: masd.csharp.implementation
+:masd.wale.kvp.locator_function: make_full_path_for_visual_studio_solution
+:masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
+:masd.physical.wale_template_reference: csharp_transform_implementation
+:masd.physical.referencing_status: not_referable
+:end:
+:dogen-properties:
+:stereotypes: masd::physical::archetype
+:end:
+Generates visual studio solutions.
+
+**** stitch_template_content
+:dogen-properties:
+:end:
+
+#+begin_src stitch
+<#@ masd.stitch.stream_variable_name=ast.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/solution_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/solution_factory.hpp" #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void solution_transform::apply(const context& ctx, const logical::entities::element& e,
+    physical::entities::artefact& a) const {
+    tracing::scoped_transform_tracer stp(lg, "solution transform",
+        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
+
+    assistant ast(ctx, e, archetype().meta_name(), a);
+    using logical::entities::visual_studio::solution;
+    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
+#>
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+Project("{<#= ppb.type_guid() #>}") = "<#= ppb.name() #>", "<#= ppb.name() #>.csproj", "{<#= ppb.guid() #>}"
+EndProject
+<#+
+    }
+#>
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+        {<#= ppb.guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {<#= ppb.guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU
+<#+
+    }
+#>
+    EndGlobalSection
+    GlobalSection(MonoDevelopProperties) = preSolution
+        StartupItem = CSharpModel.csproj
+    EndGlobalSection
+EndGlobal
+<#+
+    ast.update_artefact();
+    stp.end_transform(a);
+}
+#>
+
+#+end_src
+** transforms::archetype_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::archetype_configuration
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.part_id
+:dogen-properties:
+:value: masd.csharp.implementation
+:end:
+
+*** masd.wale.kvp.locator_function
+:dogen-properties:
+:value: make_full_path
+:end:
+
+*** masd.physical.wale_template_reference
+:dogen-properties:
+:value: csharp_transform_implementation
+:end:
+
+*** masd.physical.referencing_status
+:dogen-properties:
+:value: facet_default
+:end:
+
+** transforms::object_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::object_configuration
+:end:
+:dogen-properties:
+:parents: transforms::archetype_configuration
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.logical_meta_element_id
+:dogen-properties:
+:value: dogen.logical.entities.object
+:end:
+
+*** masd.wale.kvp.class.simple_name
+:dogen-properties:
+:value: class_transform
+:end:
+
+*** masd.wale.kvp.archetype.simple_name
+:dogen-properties:
+:value: class
+:end:
+
+*** masd.wale.kvp.meta_element
+:dogen-properties:
+:value: object
+:end:
+
+** transforms::implementation
+:dogen-properties:
+:stereotypes: masd::physical::part
+:end:
+Contains the implementation files.
+
+*** external_modules_path_contribution
+:dogen-properties:
+:value: none
+:end:
+
+*** model_modules_path_contribution
+:dogen-properties:
+:value: as_path_components
+:end:
+
+*** facet_path_contribution
+:dogen-properties:
+:value: as_directories
+:end:
+
+*** requires_relative_path
+:dogen-properties:
+:value: false
+:end:
+
+** transforms::enumeration_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::enumeration_configuration
+:end:
+:dogen-properties:
+:parents: transforms::archetype_configuration
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.logical_meta_element_id
+:dogen-properties:
+:value: dogen.logical.entities.enumeration
+:end:
+
+*** masd.wale.kvp.class.simple_name
+:dogen-properties:
+:value: enum_transform
+:end:
+
+*** masd.wale.kvp.archetype.simple_name
+:dogen-properties:
+:value: enum
+:end:
+
+*** masd.wale.kvp.meta_element
+:dogen-properties:
+:value: enumeration
+:end:
+
+** transforms::exception_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::exception_configuration
+:end:
+:dogen-properties:
+:parents: transforms::archetype_configuration
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.logical_meta_element_id
+:dogen-properties:
+:value: dogen.logical.entities.exception
+:end:
+
+*** masd.wale.kvp.class.simple_name
+:dogen-properties:
+:value: exception_transform
+:end:
+
+*** masd.wale.kvp.archetype.simple_name
+:dogen-properties:
+:value: exception
+:end:
+
+*** masd.wale.kvp.meta_element
+:dogen-properties:
+:value: exception
+:end:
+
+** transforms::primitive_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::primitive_configuration
+:end:
+:dogen-properties:
+:parents: transforms::archetype_configuration
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.logical_meta_element_id
+:dogen-properties:
+:value: dogen.logical.entities.primitive
+:end:
+
+*** masd.wale.kvp.class.simple_name
+:dogen-properties:
+:value: primitive_transform
+:end:
+
+*** masd.wale.kvp.archetype.simple_name
+:dogen-properties:
+:value: primitive
+:end:
+
+*** masd.wale.kvp.meta_element
+:dogen-properties:
+:value: primitive
+:end:
+
+** transforms::builtin_configuration
+:dogen-tagged_values:
+:masd.variability.binding_point: entity
+:masd.variability.stereotype: dogen::builtin_configuration
+:end:
+:dogen-properties:
+:parents: transforms::archetype_configuration
+:stereotypes: masd::variability::profile
+:end:
+Contains the configuration common to all archetypes.
+
+*** masd.physical.logical_meta_element_id
+:dogen-properties:
+:value: dogen.logical.entities.builtin
+:end:
+
+*** masd.wale.kvp.class.simple_name
+:dogen-properties:
+:value: builtin_transform
+:end:
+
+*** masd.wale.kvp.archetype.simple_name
+:dogen-properties:
+:value: builtin
+:end:
+
+*** masd.wale.kvp.meta_element
+:dogen-properties:
+:value: builtin
+:end:
+
+* traits
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* formattables
+** formattables::model
+*** name
+:dogen-properties:
+:type: logical::entities::name
+:end:
+
+*** formattables
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::formattable>
+:end:
+
+*** project_items
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** aspect_properties
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::aspect_properties>
+:end:
+
+*** assistant_properties
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::assistant_properties>
+:end:
+
+** formattables::formattable
+*** element_properties
+:dogen-properties:
+:type: formattables::element_properties
+:end:
+
+*** element
+:dogen-properties:
+:type: boost::shared_ptr<logical::entities::element>
+:end:
+
+*** artefacts
+:dogen-properties:
+:type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:end:
+
+** formattables::element_properties
+All of the properties associated with an element.
+
+*** artefact_properties
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::artefact_properties>
+:end:
+
+*** helper_properties
+:dogen-properties:
+:type: std::list<formattables::helper_properties>
+:end:
+
+*** attribute_properties
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::attribute_properties>
+:end:
+
+** formattables::locator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::locator_configuration
+*** facet_configurations
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::locator_facet_configuration>
+:end:
+
+*** archetype_configurations
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::locator_archetype_configuration>
+:end:
+
+*** disable_facet_directories
+:dogen-properties:
+:type: bool
+:end:
+
+*** backend_directory_name
+:dogen-properties:
+:type: std::string
+:end:
+
+** formattables::adapter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::adaptation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** formattables::workflow
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::artefact_properties
+*** enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** overwrite
+:dogen-properties:
+:type: bool
+:end:
+
+*** file_path
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+*** relative_path
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+*** using_dependencies
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** formattables::model_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::file_path_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::reducer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::expansion_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst performing model expansion.
+
+** formattables::using_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::project_items_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::locator_archetype_configuration
+*** facet_directory
+:dogen-properties:
+:type: std::string
+:end:
+
+*** facet_postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+*** archetype_postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+** formattables::locator_facet_configuration
+*** directory
+:dogen-properties:
+:type: std::string
+:end:
+
+*** postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+** formattables::location_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred while the locator was creating a path.
+
+** formattables::aspect_properties
+*** is_floating_point
+:dogen-properties:
+:type: bool
+:end:
+
+*** requires_static_reference_equals
+:dogen-properties:
+:type: bool
+:end:
+
+** formattables::aspect_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::helper_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::helper_properties
+*** current
+:dogen-properties:
+:type: formattables::helper_descriptor
+:end:
+
+*** direct_descendants
+:dogen-properties:
+:type: std::list<formattables::helper_descriptor>
+:end:
+
+*** in_inheritance_relationship
+:dogen-properties:
+:type: bool
+:end:
+
+** formattables::helper_descriptor
+*** family
+:dogen-properties:
+:type: std::string
+:end:
+
+*** namespaces
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** name_identifiable
+:dogen-properties:
+:type: std::string
+:end:
+
+*** name_qualified
+:dogen-properties:
+:type: std::string
+:end:
+
+*** name_tree_qualified
+:dogen-properties:
+:type: std::string
+:end:
+
+*** name_tree_identifiable
+:dogen-properties:
+:type: std::string
+:end:
+
+*** is_simple_type
+:dogen-properties:
+:type: bool
+:end:
+
+*** is_circular_dependency
+:dogen-properties:
+:type: bool
+:end:
+
+** formattables::helper_configuration
+*** helper_families
+:dogen-properties:
+:type: std::unordered_map<std::string, std::string>
+:end:
+
+** formattables::assistant_properties
+*** requires_assistance
+:dogen-properties:
+:type: bool
+:end:
+
+If true, the type needs help of an assistant.
+
+*** method_postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+Postfix to use to call the appropriate assistant method, if required.
+
+** formattables::assistant_expander
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formattables::attribute_properties
+*** auxiliary_function_properties
+:dogen-properties:
+:type: std::unordered_map<std::string, formattables::auxiliary_function_properties>
+:end:
+
+** formattables::auxiliary_function_types
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+*** assistant
+:dogen-properties:
+:end:
+
+The auxiliary function is supplied by an assistant.
+
+*** helper
+:dogen-properties:
+:end:
+
+The auxiliary function is supplied by a helper.
+
+** formattables::auxiliary_function_properties
+*** type
+:dogen-properties:
+:type: formattables::auxiliary_function_types
+:end:
+
+*** name
+:dogen-properties:
+:type: std::string
+:end:
+
+* feature_initializer
+:dogen-properties:
+:stereotypes: masd::variability::initializer
+:end:
+* csharp_artefact_transform_header
+:dogen-tagged_values:
+:masd.cpp.templates.logic_less_template.overwrite: false
+:end:
+:dogen-properties:
+:stereotypes: masd::templating::logic_less_templates
+:end:
+** content
+:dogen-properties:
+:end:
+
+#+begin_src mustache
+class {{class.simple_name}} final : public model_to_text_transform {
+public:
+    physical::entities::archetype static_archetype() const;
+    physical::entities::archetype archetype() const override;
+
+public:
+    std::list<std::string> inclusion_dependencies(
+        const logical::entities::element& e) const override;
+
+    boost::filesystem::path full_path(
+        const formattables::locator& l, const logical::entities::name& n) const override;
+
+public:
+    void apply(const context& ctx, const logical::entities::element& e,
+        physical::entities::artefact& a) const override;
+};
+
+#+end_src
+* csharp_transform_implementation
+:dogen-tagged_values:
+:masd.cpp.templates.logic_less_template.overwrite: false
+:end:
+:dogen-properties:
+:stereotypes: masd::templating::logic_less_templates
+:end:
+** content
+:dogen-properties:
+:end:
+
+#+begin_src mustache
+namespace {
+
+const std::string transform_id("{{containing_namespace}}.{{class.simple_name}}");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
+
+const physical::entities::archetype& {{class.simple_name}}::static_archetype() {
+    static auto r({{archetype.simple_name}}_factory::make());
+    return r;
+}
+
+const physical::entities::archetype& {{class.simple_name}}::archetype() const {
+    return static_archetype();
+}
+
+boost::filesystem::path {{class.simple_name}}::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
+    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+}
+
+std::list<std::string> {{class.simple_name}}::
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+#+end_src
+* csharp_helper_transform_header
+:dogen-tagged_values:
+:masd.cpp.templates.logic_less_template.overwrite: false
+:end:
+:dogen-properties:
+:stereotypes: masd::templating::logic_less_templates
+:end:
+** content
+:dogen-properties:
+:end:
+
+#+begin_src mustache
+class {{class.simple_name}} : public helper_transform {
+public:
+    std::string id() const override;
+    std::string family() const override;
+    std::list<std::string> owning_formatters() const override;
+    std::list<std::string> owning_facets() const override;
+    std::string helper_name() const override;
+    void apply(assistant& ast, const formattables::helper_properties& hc) const override;
+};
+
+#+end_src
+* csharp_helper_transform_implementation
+:dogen-tagged_values:
+:masd.cpp.templates.logic_less_template.overwrite: false
+:end:
+:dogen-properties:
+:stereotypes: masd::templating::logic_less_templates
+:end:
+** content
+:dogen-properties:
+:end:
+
+#+begin_src mustache
+std::string {{class.simple_name}}::id() const {
+    static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
+        std::string("<") + helper_name() + std::string(">"));
+    return r;
+}
+
+std::string {{class.simple_name}}::family() const {
+    static std::string r("{{helper.family}}");
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_formatters() const {
+    static auto r(std::list<std::string> {
+        traits::class_archetype_qn(),
+        traits::primitive_archetype_qn()
+    });
+    return r;
+}
+
+std::list<std::string>
+{{class.simple_name}}::owning_facets() const {
+    static auto r(std::list<std::string> {
+        traits::facet_qn()
+    });
+    return r;
+}
+
+std::string {{class.simple_name}}::helper_name() const {
+    static std::string r("{{class.simple_name}}");
+    return r;
+}
+
+#+end_src
+* registrar
+:dogen-properties:
+:stereotypes: masd::serialization::type_registrar
+:end:
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

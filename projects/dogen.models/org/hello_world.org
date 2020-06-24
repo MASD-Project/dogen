@@ -1,0 +1,30 @@
+#+TITLE: hello_world
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.hello_world
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.std
+:masd.injection.reference: masd
+:masd.physical.delete_extra_files: true
+:masd.physical.delete_empty_directories: true
+:masd.cpp.enabled: true
+:masd.cpp.standard: c++-17
+:masd.csharp.enabled: false
+:end:
+Welcome to Dogen!
+
+This is one of the simplest models you can generate, a single class with one
+property. You can see the use of comments at the class level and property
+level.
+
+* one_property
+Hello World class.
+
+** property
+:dogen-properties:
+:type: std::string
+:end:
+
+This is a sample property.
+

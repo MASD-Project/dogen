@@ -1,0 +1,100 @@
+#+TITLE: dogen.json_schema
+#+OPTIONS: ^:nil
+* schema_document
+** id_keyword
+:dogen-properties:
+:type: std::string
+:end:
+
+Defines a URI for the schema.
+
+** schema_keyword
+:dogen-properties:
+:type: std::string
+:end:
+
+** title
+:dogen-properties:
+:type: std::string
+:end:
+
+** type
+:dogen-properties:
+:type: type
+:end:
+
+** description
+:dogen-properties:
+:type: std::string
+:end:
+
+* type
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+** object
+:dogen-properties:
+:end:
+
+** array
+:dogen-properties:
+:end:
+
+** string
+:dogen-properties:
+:end:
+
+** number
+:dogen-properties:
+:end:
+
+** boolean
+:dogen-properties:
+:end:
+
+** null
+:dogen-properties:
+:end:
+
+* properties
+** type
+:dogen-properties:
+:type: type
+:end:
+
+** minimum
+:dogen-properties:
+:type: unsigned int
+:end:
+
+** maximum
+:dogen-properties:
+:type: unsigned int
+:end:
+
+** description
+:dogen-properties:
+:type: std::string
+:end:
+
+* value
+* object
+:dogen-properties:
+:parents: value
+:end:
+* array
+:dogen-properties:
+:parents: value
+:end:
+* string
+:dogen-properties:
+:parents: value
+:end:
+* number
+:dogen-properties:
+:parents: value
+:end:
+* boolean
+:dogen-properties:
+:parents: value
+:end:

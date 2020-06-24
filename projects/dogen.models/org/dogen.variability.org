@@ -1,0 +1,778 @@
+#+TITLE: dogen.variability
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.variability
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.injection.reference: dogen.tracing
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+The varibility model is responsible for managing variation in MASD.
+
+One of the core principles of MASD is to enable the development of
+"families" of software products; that is, sets of products which share
+similar "traits". Those traits are encoded as "configuration" so that
+we can talk about them at a higher level of abstraction. This approach
+is often referred to in the literature as Software Product Line
+Engineering (SPLE). MASD takes a very simplistic view of SPLE,
+allowing a very restricted form of variation across a set of
+well-defined features. The present model provides the basic
+infrastructure required to define features, as well as to read those
+features from dynamic data structures.
+
+Note that the present model only concerns itself with the low-level
+implementation of variability. You can think of it as a stack, with
+this model sitting at the bottom. Above it lie the logical
+representation of variability, which enables the code generator to
+generate code that makes use of the infrastructure provided by this
+model. But the present model is designed to be understood in complete
+isolation from the layers above (and in fact, precedes the generalised
+approach).
+
+The variability space is indirectly connected to the physical dimension.
+The main reason why is because we need to instantiate features across
+the geometry of physical space (e.g. "for every facet...", "for every
+archetype...", etc). However, we have tried to avoid coupling these two
+models together because we do not think that conceptually this coupling
+makes sense. That is, it just happens that we instantiate features across
+the geometry of physical space, but this is not a concern o veriability -
+only of its user. This decoupling was achieved by creating the concept
+of template instantiation domains, which are just sets. These are mapped
+elsewhere from the geometry of physical space.
+
+* entities
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Contains all of the types describing variability
+with Masd.
+
+** entities::element
+:dogen-properties:
+:stereotypes: Element
+:end:
+Represents an element modeling some aspect of variability.
+
+** entities::feature
+:dogen-properties:
+:parents: entities::element
+:stereotypes: FeatureElement
+:end:
+Unit of configuration within Dogen. Defines the domain of values.
+
+*** is_partially_matchable
+:dogen-properties:
+:type: bool
+:end:
+
+Feature name can be matched partially.
+
+** entities::name
+Name of the element in the variability metamodel.
+
+*** simple
+:dogen-properties:
+:type: std::string
+:end:
+
+Non-qualified name of the element.
+
+*** qualified
+:dogen-properties:
+:type: std::string
+:end:
+
+Qualified name of the element, using dots to separate the hierarchy.
+
+** entities::binding_point
+:dogen-properties:
+:stereotypes: masd::enumeration, dogen::convertible
+:end:
+Determines how a feature can be bound to a modeling element.
+
+*** any
+:dogen-properties:
+:end:
+
+Feature can be configured anywhere.
+
+*** global
+:dogen-properties:
+:end:
+
+Feature can only be configured in the root module.
+
+*** element
+:dogen-properties:
+:end:
+
+Feature can be configured in any modeling element.
+
+*** property
+:dogen-properties:
+:end:
+
+Feature can only be configured in a property of a modeling element.
+
+*** operation
+:dogen-properties:
+:end:
+
+Feature can only be configured in an operation of a modeling element.
+
+** entities::feature_model
+Container of all available features, organised for querying.
+
+*** all
+:dogen-properties:
+:type: std::list<feature>
+:end:
+
+*** by_name
+:dogen-properties:
+:type: std::unordered_map<std::string, feature>
+:end:
+
+Features by qualified name.
+
+*** partially_matchable
+:dogen-properties:
+:type: std::unordered_map<std::string, feature>
+:end:
+
+Features that can be partially matcheable, by qualified name.
+
+** entities::feature_template
+:dogen-properties:
+:parents: entities::element
+:stereotypes: FeatureElement, Templateable
+:end:
+Defines a template that can be used to instantiate features.
+
+*** default_value_overrides
+:dogen-properties:
+:type: std::list<default_value_override>
+:end:
+
+Overrides for the default value, if any.
+
+** entities::value_type
+:dogen-properties:
+:stereotypes: masd::enumeration, dogen::convertible
+:end:
+What values can a feature have.
+
+*** text
+:dogen-properties:
+:end:
+
+*** text_collection
+:dogen-properties:
+:end:
+
+*** number
+:dogen-properties:
+:end:
+
+*** boolean
+:dogen-properties:
+:end:
+
+*** key_value_pair
+:dogen-properties:
+:end:
+
+** entities::profile_template
+:dogen-properties:
+:parents: entities::element
+:stereotypes: Profilable
+:end:
+Holds a set of templates for configuration points.
+
+*** templates
+:dogen-properties:
+:type: std::list<configuration_point_template>
+:end:
+
+** entities::configuration_point_template
+:dogen-properties:
+:parents: entities::element
+:stereotypes: Templateable
+:end:
+*** untyped_value
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** entities::value
+:dogen-properties:
+:stereotypes: masd::visitable
+:end:
+Base class of all value types.
+
+Represents a value for a configuration point, a default value for a feature, etc.
+
+** entities::number
+:dogen-properties:
+:parents: entities::value
+:end:
+Represents a numeric integral value.
+
+*** content
+:dogen-properties:
+:type: int
+:end:
+
+** entities::text
+:dogen-properties:
+:parents: entities::value
+:end:
+Represents a text value.
+
+*** content
+:dogen-properties:
+:type: std::string
+:end:
+
+** entities::text_collection
+:dogen-properties:
+:parents: entities::value
+:end:
+Represents a collection of text values.
+
+*** content
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** entities::boolean
+:dogen-properties:
+:parents: entities::value
+:end:
+Represents a boolean value.
+
+*** content
+:dogen-properties:
+:type: bool
+:end:
+
+** entities::key_value_pair
+:dogen-properties:
+:parents: entities::value
+:end:
+Represents a pair of key and value.
+
+*** content
+:dogen-properties:
+:type: std::list<std::pair<std::string, std::string>>
+:end:
+
+#+begin_src mustache
+The data structure was chosen to guarantee that the order is maintained from 
+source.
+
+#+end_src
+** entities::configuration
+:dogen-properties:
+:parents: entities::element
+:stereotypes: ConfigurationStore
+:end:
+*** profile_bindings
+:dogen-properties:
+:type: std::list<potential_binding>
+:end:
+
+Bindings to profiles.
+
+*** configuration_bindings
+:dogen-properties:
+:type: std::list<potential_binding>
+:end:
+
+Relationships between this bound configuration and other bound configurations.
+
+These relationships are inferred from the relationships of the underlying model
+elements.
+
+*** source_binding_point
+:dogen-properties:
+:type: binding_point
+:end:
+
+Where was this configuration sourced from with regards to binding.
+
+*** from_target
+:dogen-properties:
+:type: bool
+:end:
+
+If true, this configuration was sourced from an element in the target model.
+
+** entities::configuration_point
+:dogen-properties:
+:parents: entities::element
+:stereotypes: Valuable
+:end:
+Maps a feature name to an instance value
+
+** entities::Nameable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** name
+:dogen-properties:
+:type: name
+:end:
+
+** entities::Describable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** description
+:dogen-properties:
+:type: std::string
+:end:
+
+Human readable description of the feature, used for documentation.
+
+** entities::Element
+:dogen-properties:
+:parents: entities::Nameable, entities::Describable
+:stereotypes: masd::object_template
+:end:
+** entities::Defaultable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** default_value
+:dogen-properties:
+:type: boost::shared_ptr<value>
+:end:
+
+Default value for element, if any.
+
+** entities::Typeable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** value_type
+:dogen-properties:
+:type: value_type
+:end:
+
+Type of the value for the feature that will result of the template instantiation.
+
+** entities::BindActionable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** profile_binding_action
+:dogen-properties:
+:type: binding_action
+:end:
+
+*** configuration_binding_action
+:dogen-properties:
+:type: binding_action
+:end:
+
+** entities::Bindable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** binding_point
+:dogen-properties:
+:type: binding_point
+:end:
+
+How the feature binds against other model elements.
+
+** entities::FeatureElement
+:dogen-properties:
+:parents: entities::Element, entities::Defaultable, entities::Typeable, entities::BindActionable, entities::Bindable
+:stereotypes: masd::object_template
+:end:
+** entities::Templateable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** instantiation_domain_name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the domain to use for template instantiation.
+
+@pre The instantiation domain name must exist.
+
+** entities::Valuable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** value
+:dogen-properties:
+:type: boost::shared_ptr<value>
+:end:
+
+Value that has been assigned to this element.
+
+** entities::ConfigurationStore
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** configuration_points
+:dogen-properties:
+:type: std::unordered_map<std::string, configuration_point>
+:end:
+
+All configuration points associated with this element.
+
+** entities::profile
+:dogen-properties:
+:parents: entities::element
+:stereotypes: ConfigurationStore, Profilable
+:end:
+*** merged
+:dogen-properties:
+:type: bool
+:end:
+
+If true, the profile has been merged with all of its parents.
+
+*** base_layer_profile
+:dogen-properties:
+:type: std::string
+:end:
+
+Which base layer does this profile rely on, if any.
+
+** entities::binding_action
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+What action to take when binding.
+
+*** ignore
+:dogen-properties:
+:end:
+
+Ignores the implict relationship.
+
+*** copy
+:dogen-properties:
+:end:
+
+Copy across the value of the feature from the related element
+
+** entities::profile_repository
+*** by_name
+:dogen-properties:
+:type: std::unordered_map<std::string, profile>
+:end:
+
+*** by_stereotype
+:dogen-properties:
+:type: std::unordered_map<std::string, profile>
+:end:
+
+** entities::configuration_model_set
+*** models
+:dogen-properties:
+:type: std::list<configuration_model>
+:end:
+
+** entities::configuration_model
+*** global
+:dogen-properties:
+:type: boost::shared_ptr<configuration>
+:end:
+
+*** local
+:dogen-properties:
+:type: std::unordered_map<std::string, boost::shared_ptr<configuration>>
+:end:
+
+** entities::profile_template_repository
+*** templates
+:dogen-properties:
+:type: std::list<profile_template>
+:end:
+
+** entities::potential_binding
+Contains information about a potential binding.
+
+*** name
+:dogen-properties:
+:type: std::string
+:end:
+
+The name to bind to. This can represent a profile or configuration name, or an
+alias.
+
+*** realized
+:dogen-properties:
+:type: bool
+:end:
+
+If true, the potential binding was realised into an actual binding.
+
+** entities::feature_template_repository
+Stores a set of feature templates.
+
+*** templates
+:dogen-properties:
+:type: std::list<feature_template>
+:end:
+
+** entities::feature_repository
+Stores a set of features.
+
+*** features
+:dogen-properties:
+:type: std::list<feature>
+:end:
+
+** entities::default_value_override
+Stores an override for a default value.
+
+*** key_ends_with
+:dogen-properties:
+:type: std::string
+:end:
+
+*** default_value
+:dogen-properties:
+:type: boost::shared_ptr<value>
+:end:
+
+** entities::Generalizable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** parents
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** entities::Stereotypable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** stereotype
+:dogen-properties:
+:type: std::string
+:end:
+
+** entities::Profilable
+:dogen-properties:
+:parents: entities::Bindable, entities::Generalizable, entities::Stereotypable
+:stereotypes: masd::object_template
+:end:
+* helpers
+** helpers::feature_selector
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::configuration_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::configuration_point_merger
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::value_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::building_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** helpers::selection_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** helpers::configuration_selector
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::template_instantiator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::instantiation_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst instantiating templates.
+
+** helpers::registrar
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+*** templates_repository
+:dogen-properties:
+:type: entities::feature_template_repository
+:end:
+
+*** features_repository
+:dogen-properties:
+:type: entities::feature_repository
+:end:
+
+** helpers::enum_mapper
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::enum_mapping_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst mapping enums to or from strings.
+
+** helpers::relational_adapter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::adaption_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst adapting a model.
+
+** helpers::configuration_points_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::merging_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst merging.
+
+* transforms
+** transforms::feature_model_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::feature_template_instantiation_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::feature_model_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::profile_repository_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::profile_template_instantiation_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::profile_binding_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::context
+:dogen-properties:
+:stereotypes: dogen::typeable, dogen::pretty_printable
+:end:
+Context for transformations.
+
+*** compatibility_mode
+:dogen-properties:
+:type: bool
+:end:
+
+*** template_instantiation_domains
+:dogen-properties:
+:type: std::unordered_map<std::string, std::vector<std::string>>
+:end:
+
+Provides all of the domains to be used for template instantiation.
+
+Example of a domain is "masd.facet" which contains the list of all available facets.
+Templates (facet and profile) are then instantiated over this range, depending on 
+user choices.
+
+*** tracer
+:dogen-properties:
+:type: boost::shared_ptr<tracing::tracer>
+:end:
+
+** transforms::profile_merging_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::transformation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst applying a transformation.
+
+** transforms::global_configuration_binding_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::profile_repository_inputs
+*** profiles
+:dogen-properties:
+:type: std::list<entities::profile>
+:end:
+
+*** templates
+:dogen-properties:
+:type: std::list<entities::profile_template>
+:end:
+
+* features
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Features used by the variability model.
+
+** features::profile
+:dogen-tagged_values:
+:masd.variability.default_binding_point: any
+:masd.variability.key_prefix: masd.variability
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Features related to profile processing.
+
+*** profile
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+Profile associated with this configuration.
+
+** features::initializer
+:dogen-properties:
+:stereotypes: masd::variability::initializer
+:end:
+* registrar
+:dogen-properties:
+:stereotypes: masd::serialization::type_registrar
+:end:
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

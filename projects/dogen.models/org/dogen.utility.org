@@ -1,0 +1,477 @@
+#+TITLE: dogen.utility
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.utility
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Assorted utilities used by Dogen.
+
+* exception
+** exception::invalid_enum_value
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** exception::utility_exception
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* filesystem
+** filesystem::file
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** filesystem::file_not_found
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+File was not found.
+
+** filesystem::io_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst performing an IO operation.
+
+** filesystem::path
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* hash
+** hash::combine
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** hash::list_hash
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** hash::sha1_hash
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* io
+** io::array_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::forward_list_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::jsonify_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::list_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::map_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::memory_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::optional_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::pair_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::set_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::shared_ptr_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::typeindex_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::unordered_map_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::unordered_set_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** io::vector_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* log
+** log::logger
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** log::lifecycle_manager
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** log::scoped_lifecycle_manager
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** log::severity_level
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** log::logging_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Options related to logging.
+
+*** severity
+:dogen-properties:
+:type: std::string
+:end:
+
+Level at which to log.
+
+*** filename
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the file to log into.
+
+If empty, file logging is disabled.
+
+*** output_to_console
+:dogen-properties:
+:type: bool
+:end:
+
+If true, dumps the log into the console.
+
+*** output_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+Directory in which to place the output.
+
+** log::invalid_logging_configuration
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: false
+:end:
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+The values supplied for the logging configuration are not valid.
+
+** log::logging_configuration_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* serialization
+** serialization::archive_types
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** serialization::xml_helper
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** serialization::path
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* string
+** string::splitter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** string::differ
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* test
+** test::asserter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test::bytewise_file_asserter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test::file_asserter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test::logging
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test::xml_serialization_helper
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test::exception_checkers
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test::fixture
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test::macros
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* test_data
+** test_data::filesystem_tests
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::generate_container
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test_data::generator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test_data::northwind
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::resolver
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::sequence
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test_data::tds_test_good
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::test_data
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** test_data::validating_resolver
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::xml_reader
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::dogen_product
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::cpp_ref_impl_product
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::csharp_ref_impl_product
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** test_data::test_data_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst obtaining the test data.
+
+* xml
+** xml::exception
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** xml::node_types
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** xml::node_types_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** xml::text_reader
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** xml::text_reader_io
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* environment
+** environment::environment_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+There was an error reading an environment variable.
+
+** environment::variable_reader
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* formatters
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Contains all of the formatting primitives
+that are not associated with any particular
+model.
+
+** formatters::formatting_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error has occurred while formatting.
+
+** formatters::quote_type
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Types of quotes that can be used in streaming.
+
+*** single_quote
+:dogen-properties:
+:end:
+
+*** double_quote
+:dogen-properties:
+:end:
+
+** formatters::spacing_type
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+*** no_space
+:dogen-properties:
+:end:
+
+*** left_space
+:dogen-properties:
+:end:
+
+*** right_space
+:dogen-properties:
+:end:
+
+*** left_and_right_space
+:dogen-properties:
+:end:
+
+** formatters::utility_formatter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formatters::indent_filter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** formatters::comment_style
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Supported styles of comments.
+
+*** c_style
+:dogen-properties:
+:end:
+
+Original C programming language style.
+
+*** cpp_style
+:dogen-properties:
+:end:
+
+One line, C++ style.
+
+*** csharp_style
+:dogen-properties:
+:end:
+
+C# programming language style.
+
+*** shell_style
+:dogen-properties:
+:end:
+
+UNIX shell scripting comments.
+
+*** sql_style
+:dogen-properties:
+:end:
+
+Comments start with a double-dash.
+
+*** xml_style
+:dogen-properties:
+:end:
+
+Comments using XML syntax.
+
+** formatters::comment_formatter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formatters::sequence_formatter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** formatters::infix_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration to use for a given infix in sequence formatter.
+
+*** first
+:dogen-properties:
+:type: std::string
+:end:
+
+Applicable only to the first element of a sequence, if the sequence has more
+than one element.
+
+*** not_first
+:dogen-properties:
+:type: std::string
+:end:
+
+Applicable to all elements other than the first.
+
+*** not_last
+:dogen-properties:
+:type: std::string
+:end:
+
+Applicable to all elements other than the last.
+
+*** last
+:dogen-properties:
+:type: std::string
+:end:
+
+Only applicable to the last element of a sequence.
+
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

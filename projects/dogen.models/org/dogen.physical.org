@@ -1,0 +1,1287 @@
+#+TITLE: dogen.physical
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.physical
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: dogen.tracing
+:masd.injection.reference: dogen.variability
+:masd.injection.reference: dogen
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+The pysical model defines the core entities that make up the
+physical dimension of MASD conceptual space.
+
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:
+* entities
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Defines the MASD physical space.
+
+** entities::location
+Location of an entity or set of entities in the hierarchical physical space.
+
+These must be populated in order, e.g. in order to have a backend we must have a
+meta-model; in order to have a facet we must have a backend and in order to have a
+formatter we must have a facet. We may not have any.
+
+*** meta_model
+:dogen-properties:
+:type: std::string
+:end:
+
+Top-most container for the physical space.
+
+The meta-model is always expected to be  @e masd.
+
+*** backend
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the backend that owns this field, if any.
+
+*** facet
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the facet that owns this field, if any.
+
+*** archetype
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the archetype that owns this field, if any.
+
+** entities::meta_name_group
+*** meta_names
+:dogen-properties:
+:type: std::list<meta_name>
+:end:
+
+All meta-names that belong to this group.
+
+*** canonical_locations
+:dogen-properties:
+:type: std::unordered_map<std::string, std::string>
+:end:
+
+Maps a concrete archetype location to its canonical form, if the canonical
+form is supported. Otherwise no such mapping will exist.
+
+** entities::meta_name_indices
+Containing physical meta-names, indexed as required by use cases.
+
+*** all
+:dogen-properties:
+:type: std::list<meta_name>
+:end:
+
+All meta-names.
+
+*** facet_names_by_backend_name
+:dogen-properties:
+:type: std::unordered_map<std::string, std::unordered_set<std::string>>
+:end:
+
+Qualified names of facets by qualified names of backends.
+
+*** formatter_names_by_backend_name
+:dogen-properties:
+:type: std::unordered_map<std::string, std::unordered_set<std::string>>
+:end:
+
+Qualified archetype names by qualified backend names.
+
+*** by_logical_meta_name
+:dogen-properties:
+:type: std::unordered_map<std::string, meta_name_group>
+:end:
+
+Physical meta-names by logical meta-names.
+
+*** by_backend_by_facet
+:dogen-properties:
+:type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>
+:end:
+
+Archetype names by qualified backend and facet names
+
+** entities::meta_model
+:dogen-properties:
+:stereotypes: ContainingMetaElement
+:end:
+Describes the geomtry of physical space.
+
+Provides details of the backends available in the current instance of Dogen.
+
+*** enablement_flags
+:dogen-properties:
+:type: std::unordered_map<std::string, enablement_flags>
+:end:
+
+Global enablement flags
+
+*** template_instantiation_domains
+:dogen-properties:
+:type: std::unordered_map<std::string, std::vector<std::string>>
+:end:
+
+Provides all of the domains to be used for template instantiation.
+
+Example of a domain is "masd.facet" which contains the list of all available facets.
+Templates (facet and profile) are then instantiated over this range, depending on
+user choices.
+
+*** backends
+:dogen-properties:
+:type: std::list<backend>
+:end:
+
+All backends available in this meta-model.
+
+*** indexed_names
+:dogen-properties:
+:type: meta_name_indices
+:end:
+
+Repository with all the meta-names in this meta-model, indexed appropriately.
+
+** entities::backend
+:dogen-properties:
+:stereotypes: ContainingMetaElement
+:end:
+Code generation backend, targeting a given technical space.
+
+*** parts
+:dogen-properties:
+:type: std::unordered_map<std::string, part>
+:end:
+
+*** facets
+:dogen-properties:
+:type: std::unordered_map<std::string, facet>
+:end:
+
+*** archetypes
+:dogen-properties:
+:type: std::unordered_map<std::string, archetype>
+:end:
+
+*** archetype_kinds
+:dogen-properties:
+:type: std::unordered_map<std::string, archetype_kind>
+:end:
+
+** entities::part
+:dogen-properties:
+:stereotypes: ContainingMetaElement
+:end:
+*** path_configuration
+:dogen-properties:
+:type: path_configuration
+:end:
+
+*** facets
+:dogen-properties:
+:type: std::unordered_map<std::string, facet>
+:end:
+
+*** archetypes
+:dogen-properties:
+:type: std::unordered_map<std::string, archetype>
+:end:
+
+*** requires_relative_path
+:dogen-properties:
+:type: bool
+:end:
+
+If true, this part needs a path relative to its root.
+
+** entities::path_configuration
+Describes how paths are handled within a part.
+
+*** external_modules
+:dogen-properties:
+:type: path_contribution_type
+:end:
+
+What kind of contribution do the external modules make to the final path.
+
+*** model_modules
+:dogen-properties:
+:type: path_contribution_type
+:end:
+
+What kind of contribution do the model modules make to the final path.
+
+*** facet
+:dogen-properties:
+:type: path_contribution_type
+:end:
+
+What kind of contribution does the facet make to the final path.
+
+*** internal_modules
+:dogen-properties:
+:type: path_contribution_type
+:end:
+
+What kind of contribution do the internal modules make to the final path.
+
+** entities::path_contribution_type
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Different kinds of contributions that can be made to the final path computation.
+
+*** none
+:dogen-properties:
+:end:
+
+The item does not contribute at all to the path.
+
+*** as_directories
+:dogen-properties:
+:end:
+
+The item contributes folders to the path.
+
+*** as_path_components
+:dogen-properties:
+:end:
+
+The item contributes a single folder to the path, as a delimited string.
+
+** entities::facet
+:dogen-properties:
+:stereotypes: ContainingMetaElement, Postfixable
+:end:
+*** archetypes
+:dogen-properties:
+:type: std::unordered_map<std::string, archetype>
+:end:
+
+*** default_archetype_for_logical_meta_model_id
+:dogen-properties:
+:type: std::unordered_map<std::string, archetype>
+:end:
+
+Maps the logical model element ID to the default archetype for this facet.
+
+Used to obtain the default archetype for referencing.
+
+** entities::archetype
+:dogen-properties:
+:stereotypes: MetaElement, Postfixable, Associatable
+:end:
+Represents a meta-artefact.
+
+*** archetype_kind_id
+:dogen-properties:
+:type: std::string
+:end:
+
+ID for the archetype kind that this archetype is an instance of.
+
+*** logical_meta_element_id
+:dogen-properties:
+:type: std::string
+:end:
+
+ID of the meta-element in the logical model this archetype binds to.
+
+*** part
+:dogen-properties:
+:type: std::string
+:end:
+
+Part in which we are located.
+
+*** referencing_status
+:dogen-properties:
+:type: referencing_status
+:end:
+
+Status of this archetype with regards to being referenced by other archetypes.
+
+** entities::archetype_kind
+:dogen-properties:
+:stereotypes: Describable
+:end:
+*** id
+:dogen-properties:
+:type: std::string
+:end:
+
+*** file_extension
+:dogen-properties:
+:type: std::string
+:end:
+
+** entities::logical_name
+Physical representation of a logical name.
+
+*** simple
+:dogen-properties:
+:type: std::string
+:end:
+
+*** qualified
+:dogen-properties:
+:type: std::string
+:end:
+
+*** external_modules
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** model_modules
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** internal_modules
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** entities::model
+:dogen-properties:
+:stereotypes: Element
+:end:
+Collection of entities representing objects in physical space.
+
+*** technical_space
+:dogen-properties:
+:type: std::string
+:end:
+
+Primary technical space that this model belongs to.
+
+*** artefacts
+:dogen-properties:
+:type: std::list<boost::shared_ptr<artefact>>
+:end:
+
+All artefacts that make up this physical model.
+
+*** managed_directories
+:dogen-properties:
+:type: std::list<boost::filesystem::path>
+:end:
+
+*** outputting_properties
+:dogen-properties:
+:type: outputting_properties
+:end:
+
+** entities::Describable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** description
+:dogen-properties:
+:type: std::string
+:end:
+
+Human readable description of the entity.
+
+** entities::MetaNameable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have a meta-name.
+
+*** meta_name
+:dogen-properties:
+:type: meta_name
+:end:
+
+Meta-name for this meta-element.
+
+** entities::Labelable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+The ability to attach labels to an element.
+
+*** labels
+:dogen-properties:
+:type: std::list<label>
+:end:
+
+All labels associated with this element.
+
+** entities::MetaElement
+:dogen-properties:
+:parents: entities::Describable, entities::MetaNameable, entities::Labelable
+:stereotypes: masd::object_template
+:end:
+** entities::ContainingMetaElement
+:dogen-properties:
+:parents: entities::MetaElement
+:stereotypes: masd::object_template
+:end:
+*** default_directory_name
+:dogen-properties:
+:type: std::string
+:end:
+
+Default directory name.
+
+*** override_directory_name
+:dogen-properties:
+:type: std::string
+:end:
+
+Override directory name, if any.
+
+** entities::Postfixable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+*** default_postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+Default postfix for the element.
+
+*** override_postfix
+:dogen-properties:
+:type: std::string
+:end:
+
+Overridden postfix, if any.
+
+** entities::artefact
+:dogen-properties:
+:stereotypes: Element
+:end:
+Represents an entity in physical space.
+
+*** content
+:dogen-properties:
+:type: std::string
+:end:
+
+#+begin_src mustache
+Content of the file.
+
+#+end_src
+*** enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** overwrite
+:dogen-properties:
+:type: bool
+:end:
+
+*** relative_paths
+:dogen-properties:
+:type: std::unordered_map<std::string, boost::filesystem::path>
+:end:
+
+Paths relative to the path ID that keys the container.
+
+*** dependencies
+:dogen-properties:
+:type: std::vector<boost::filesystem::path>
+:end:
+
+Files in the project directory that this file depends on, but which are not generated.
+
+*** unified_diff
+:dogen-properties:
+:type: std::string
+:end:
+
+Unified diff between the in-memory artefact and the file in the filesystem.
+
+*** operation
+:dogen-properties:
+:type: operation
+:end:
+
+*** enablement_flags
+:dogen-properties:
+:type: enablement_flags
+:end:
+
+Local enablement flags.
+
+** entities::Configurable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have meta-data associated.
+
+*** configuration
+:dogen-properties:
+:type: boost::shared_ptr<variability::entities::configuration>
+:end:
+
+Configuration for this element.
+
+** entities::DeterminableOrigin
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Properties related to the origin of the modeling element.
+
+*** origin_sha1_hash
+:dogen-properties:
+:type: std::string
+:end:
+
+SHA1 hash of the original model that contained the element.
+
+*** logical_name
+:dogen-properties:
+:type: logical_name
+:end:
+
+Logical model details of the element that originated this physical element.
+
+*** physical_meta_name
+:dogen-properties:
+:type: meta_name
+:end:
+
+Physical model details of the meta-element that originated this element.
+
+** entities::Nameable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have a name.
+
+*** name
+:dogen-properties:
+:type: name
+:end:
+
+Name of the physical element.
+
+** entities::Element
+:dogen-properties:
+:parents: entities::Configurable, entities::DeterminableOrigin, entities::Nameable
+:stereotypes: masd::object_template
+:end:
+** entities::outputting_properties
+Properties related to outputting.
+
+*** force_write
+:dogen-properties:
+:type: bool
+:end:
+
+*** delete_extra_files
+:dogen-properties:
+:type: bool
+:end:
+
+*** ignore_files_matching_regex
+:dogen-properties:
+:type: std::vector<std::string>
+:end:
+
+*** delete_empty_directories
+:dogen-properties:
+:type: bool
+:end:
+
+** entities::operation
+Operation to apply to an artefact.
+
+*** type
+:dogen-properties:
+:type: operation_type
+:end:
+
+*** reason
+:dogen-properties:
+:type: operation_reason
+:end:
+
+** entities::operation_type
+:dogen-tagged_values:
+:masd.cpp.hash.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Operation to perform to a given artefact.
+
+*** create_only
+:dogen-properties:
+:end:
+
+Creates a file from an artefact only if it does not yet exist.
+
+*** write
+:dogen-properties:
+:end:
+
+Unconditionally writes an artefact into file.
+
+*** ignore
+:dogen-properties:
+:end:
+
+Ingores an artefact.
+
+*** remove
+:dogen-properties:
+:end:
+
+Deletes a file.
+
+** entities::operation_reason
+:dogen-tagged_values:
+:masd.cpp.hash.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Reasons for performing an operation.
+
+*** newly_generated
+:dogen-properties:
+:end:
+
+Artefact will produce a new generated file.
+
+*** changed_generated
+:dogen-properties:
+:end:
+
+Artefact will produce a changed generated file.
+
+*** unchanged_generated
+:dogen-properties:
+:end:
+
+Generated artefact contents match file contents.
+
+*** already_exists
+:dogen-properties:
+:end:
+
+The file already exists and we we're asked to create only.
+
+*** ignore_generated
+:dogen-properties:
+:end:
+
+User requested artefact to be ignored.
+
+*** force_write
+:dogen-properties:
+:end:
+
+User requested to always write generated artefacts.
+
+*** unexpected
+:dogen-properties:
+:end:
+
+Artefact represents an unexpected file in project.
+
+*** ignore_unexpected
+:dogen-properties:
+:end:
+
+File is unexpected but the user asked us not to delete it.
+
+*** ignore_regex
+:dogen-properties:
+:end:
+
+File is unexpected but the user asked us to ignore it via regexes.
+
+** entities::enablement_flags
+*** backend_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** facet_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** facet_overwrite
+:dogen-properties:
+:type: bool
+:end:
+
+*** archetype_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** archetype_overwrite
+:dogen-properties:
+:type: boost::optional<bool>
+:end:
+
+** entities::meta_name
+Name of an element in physical space.
+
+A name represents a point or a region in physical space. It can only be used by one
+physical element. Names can be uniquely identified by their qualified ID.
+
+Name has the following properties: a) two different points or regionsin physical
+space cannot have the same name and b) the same point or region in physical space
+can only have one and only one name.
+
+*** simple
+:dogen-properties:
+:type: std::string
+:end:
+
+Simple (non-qualified) name of the physical element at this address.
+
+The simple name must be unique for a given location.
+
+*** qualified
+:dogen-properties:
+:type: std::string
+:end:
+
+Qualified name for a physical element.
+
+*** location
+:dogen-properties:
+:type: location
+:end:
+
+Location for a name in physical space.
+
+** entities::name
+*** simple
+:dogen-properties:
+:type: std::string
+:end:
+
+File or directory simple name.
+
+*** qualified
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+Absolute path to the file or directory.
+
+The qualified name indicates the location in the filesystem where it will be
+written or where it was sourced from.
+
+** entities::Associatable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+The meta-element is associated with other meta-elements
+
+*** depends
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+List of meta-elements this meta-element depends upon, if any.
+
+*** generates
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+List of meta-elements this meta-element is used to generate, if any.
+
+*** generated_by
+:dogen-properties:
+:type: std::string
+:end:
+
+Meta-element used to generate this meta-element, if any.
+
+** entities::model_set
+:dogen-properties:
+:stereotypes: Nameable
+:end:
+Represents a set of related physical models.
+
+*** models
+:dogen-properties:
+:type: std::list<model>
+:end:
+
+All models that are a member of this set.
+
+** entities::referencing_status
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Status of a given archetype with regards to referencing by other archetypes.
+
+*** not_referable
+:dogen-properties:
+:end:
+
+Archertype cannot be legally referenced.
+
+*** referable
+:dogen-properties:
+:end:
+
+Archetype can be referenced by other archetypes using its full name only.
+
+*** facet_default
+:dogen-properties:
+:end:
+
+References to the facet will resolve to this archetype.
+
+** entities::label
+A label is a key-value pair that can be used by the processing engine in a flexible way.
+
+*** key
+:dogen-properties:
+:type: std::string
+:end:
+
+Key of the label.
+
+*** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Value associated with this label.
+
+* helpers
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Helpers for the physical model.
+
+** helpers::template_instantiation_domains_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::meta_name_index_builder
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::building_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred while the field factory was building.
+
+** helpers::path_generator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::file_status_collector
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::files_by_status
+*** unexpected
+:dogen-properties:
+:type: std::list<boost::filesystem::path>
+:end:
+
+*** ignored
+:dogen-properties:
+:type: std::list<boost::filesystem::path>
+:end:
+
+** helpers::unified_differ
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::meta_name_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::meta_name_builder
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::qualified_meta_name_builder
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::meta_name_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::validation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred during validation.
+
+** helpers::meta_model_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* features
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Features for the MASD physical model.
+
+** features::facet_features
+:dogen-tagged_values:
+:masd.variability.instantiation_domain_name: masd.facet
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_template_bundle
+:end:
+Physical features common to all facets.
+
+*** directory
+:dogen-tagged_values:
+:masd.variability.binding_point: global
+:masd.variability.default_value_override.cpp.types: "types"
+:masd.variability.default_value_override.cpp.hash: "hash"
+:masd.variability.default_value_override.cpp.tests: "generated_tests"
+:masd.variability.default_value_override.cpp.io: "io"
+:masd.variability.default_value_override.cpp.lexical_cast: "lexical_cast"
+:masd.variability.default_value_override.cpp.templates: "templates"
+:masd.variability.default_value_override.cpp.odb: "odb"
+:masd.variability.default_value_override.cpp.test_data: "test_data"
+:masd.variability.default_value_override.cpp.serialization: "serialization"
+:masd.variability.default_value_override.csharp.types: "Types"
+:masd.variability.default_value_override.csharp.io: "Dumpers"
+:masd.variability.default_value_override.csharp.test_data: "SequenceGenerators"
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:value: ""
+:end:
+
+Directory in which to place this facet.
+
+*** postfix
+:dogen-tagged_values:
+:masd.variability.binding_point: global
+:masd.variability.default_value_override.cpp.tests: "tests"
+:masd.variability.default_value_override.cpp.hash: "hash"
+:masd.variability.default_value_override.cpp.lexical_cast: "lc"
+:masd.variability.default_value_override.cpp.io: "io"
+:masd.variability.default_value_override.cpp.odb: "pragmas"
+:masd.variability.default_value_override.cpp.test_data: "td"
+:masd.variability.default_value_override.cpp.serialization: "ser"
+:masd.variability.default_value_override.csharp.io: "Dumper"
+:masd.variability.default_value_override.csharp.test_data: "SequenceGenerator"
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:value: ""
+:end:
+
+Postfix to use for all files that belong to this facet.
+
+*** overwrite
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "true"
+:end:
+
+If true, the generated files will overwrite existing files.
+
+** features::archetype_features
+:dogen-tagged_values:
+:masd.variability.instantiation_domain_name: masd.archetype
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_template_bundle
+:end:
+Features common to all archetypes.
+
+*** postfix
+:dogen-tagged_values:
+:masd.variability.binding_point: global
+:masd.variability.default_value_override.forward_declarations: "fwd"
+:masd.variability.default_value_override.factory: "factory"
+:masd.variability.default_value_override.transform: "transform"
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:value: ""
+:end:
+
+Postfix to use for all files that belong to this facet.
+
+*** overwrite
+:dogen-tagged_values:
+:masd.variability.binding_point: element
+:end:
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "true"
+:end:
+
+If true, the generated files will overwrite existing files.
+
+** features::initializer
+:dogen-properties:
+:stereotypes: masd::variability::initializer
+:end:
+** features::filesystem
+:dogen-tagged_values:
+:masd.variability.default_binding_point: global
+:masd.variability.key_prefix: masd.physical
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Features related to filesystem operations.
+
+*** force_write
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "false"
+:end:
+
+If true, artefacts are always written to the filesystem.
+
+If false, the system will check to see if writing is needed by performing a binary
+diff. If no changes are detected, no writting is performed.
+
+*** delete_extra_files
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "true"
+:end:
+
+If true, any files the code generator is not aware of are deleted.
+
+If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
+
+*** ignore_files_matching_regex
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text_collection
+:end:
+
+Regular expressions to filter files prior to deletion.
+
+Only applicable if "delete_extra_files" is enabled.
+
+*** delete_empty_directories
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "false"
+:end:
+
+If true, all directories without any files will be deleted.
+
+This setting is recursive: if a directory is composed of one or more directories that
+are themselves empty, the entire directory tree is deleted.
+
+*** enable_backend_directories
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "false"
+:end:
+
+If true, a directory is created for each technical space targeted.
+
+Note that this setting is only relevant if you are targetting a single output technical
+space. If you are targetting more than one, it will automatically be set to true.
+
+** features::enablement
+:dogen-tagged_values:
+:masd.variability.default_binding_point: any
+:masd.variability.generate_static_configuration: false
+:masd.variability.instantiation_domain_name: masd
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_template_bundle
+:end:
+Enablement related properties.
+
+*** enabled
+:dogen-properties:
+:type: masd::variability::boolean
+:value: "true"
+:end:
+
+If true, decorations are enabled on this modeling element.
+
+** features::formatting
+:dogen-tagged_values:
+:masd.variability.default_binding_point: any
+:masd.variability.instantiation_domain_name: masd.archetype
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_template_bundle
+:end:
+Features related to formatting.
+
+*** formatting_style
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+Style of formatting to use for this archetype.
+
+*** formatting_input
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+If the formatting style requires a template, the name of the template to use.
+
+* transforms
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Contains all of the transforms needed to produce
+models and meta-models for the physical model.
+
+** transforms::context
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::typeable, dogen::pretty_printable
+:end:
+*** diffing_configuration
+:dogen-properties:
+:type: boost::optional<diffing_configuration>
+:end:
+
+*** reporting_configuration
+:dogen-properties:
+:type: boost::optional<reporting_configuration>
+:end:
+
+*** dry_run_mode_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+*** feature_model
+:dogen-properties:
+:type: boost::shared_ptr<variability::entities::feature_model>
+:end:
+
+*** tracer
+:dogen-properties:
+:type: boost::shared_ptr<tracing::tracer>
+:end:
+
+** transforms::transform_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** transforms::file_generation_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::write_artefacts_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::update_outputting_properties_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::remove_files_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::generate_report_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::model_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::generate_diffs_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::gather_external_artefacts_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::generate_patch_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::mock_content_filler_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::operation_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::merge_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::meta_model_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::compute_name_indices_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::minimal_context
+:dogen-properties:
+:stereotypes: dogen::typeable, dogen::pretty_printable
+:end:
+Smallest possible context required for bootstrapping purposes.
+
+*** tracer
+:dogen-properties:
+:type: boost::shared_ptr<tracing::tracer>
+:end:
+
+** transforms::meta_model_assembly_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::compute_template_instantiation_domains
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* registrar
+:dogen-properties:
+:stereotypes: masd::serialization::type_registrar
+:end:

@@ -1,0 +1,134 @@
+#+TITLE: dogen.tracing
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.tracing
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: cpp.std
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen
+:masd.injection.reference: dogen.profiles
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Houses classes common to all transformations.
+
+* tracer
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:end:
+** backend
+:dogen-properties:
+:type: boost::shared_ptr<backend>
+:end:
+
+* metrics
+:dogen-properties:
+:stereotypes: dogen::untestable
+:end:
+** transform_id
+:dogen-properties:
+:type: std::string
+:end:
+
+** model_id
+:dogen-properties:
+:type: std::string
+:end:
+
+** guid
+:dogen-properties:
+:type: std::string
+:end:
+
+** start
+:dogen-properties:
+:type: unsigned long
+:end:
+
+** end
+:dogen-properties:
+:type: unsigned long
+:end:
+
+** children
+:dogen-properties:
+:type: std::list<boost::shared_ptr<metrics>>
+:end:
+
+* metrics_builder
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* metrics_printer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* tracing_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred when trying to generate tracing data.
+
+* scoped_tracer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* references_printer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* backend
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:end:
+* file_backend
+:dogen-properties:
+:parents: backend
+:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:end:
+* backend_factory_registrar
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** backend_factories_
+:dogen-properties:
+:type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
+:end:
+
+* registrar_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+* backend_factory
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* file_backend_factory
+:dogen-properties:
+:parents: backend_factory
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

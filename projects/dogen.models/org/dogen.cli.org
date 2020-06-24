@@ -1,0 +1,161 @@
+#+TITLE: dogen.cli
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.cli
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: dogen
+:masd.injection.reference: dogen.utility
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Implements the command-line interface for Dogen.
+
+* parser_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+A fatal error has occurred during option parsing.
+
+* application
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* command_line_parser
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* program_options_parser
+:dogen-properties:
+:parents: command_line_parser
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* injector_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* application_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+A fatal error has occurred whilst executing the application.
+
+* configuration
+All of the configuration required by the command line application.
+
+** logging
+:dogen-properties:
+:type: boost::optional<utility::log::logging_configuration>
+:end:
+
+Configuration related to logging, if any.
+
+** api
+:dogen-properties:
+:type: dogen::configuration
+:end:
+
+** cli
+:dogen-properties:
+:type: cli_configuration
+:end:
+
+* generation_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration related to code generation.
+
+** reference_model_directories
+:dogen-properties:
+:type: std::vector<boost::filesystem::path>
+:end:
+
+Directories to search for reference models.
+
+** target
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+Target model for generation.
+
+** output_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+* conversion_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration for the model conversion.
+
+** source
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+** destination
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the file to output the conversion to.
+
+* configuration_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* initializer
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* cli_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration specific to the CLI application.
+
+** activity
+:dogen-properties:
+:type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
+:end:
+
+** byproduct_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+Directory in which to place all files not directly related to generated code.
+
+* main
+:dogen-tagged_values:
+:masd.cpp.types.enabled: true
+:masd.cpp.types.overwrite: false
+:end:
+:dogen-properties:
+:stereotypes: masd::entry_point
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:
+* dumpspecs_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Dumps all the specs about this version of dogen.
+
+** style
+:dogen-properties:
+:type: reporting_style
+:end:
+
+Which style to use when dumping the specs.
+

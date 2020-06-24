@@ -1,0 +1,296 @@
+#+TITLE: dogen.templating
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.templating
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: cpp.std
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.injection.input_technical_space: cpp
+:masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+* wale
+** wale::text_template
+:dogen-properties:
+:stereotypes: ConfigurableViaKvps
+:end:
+Represents a wale text template.
+
+*** content
+:dogen-properties:
+:type: std::string
+:end:
+
+#+begin_src mustache
+Textual content of the wale template.
+
+#+end_src
+** wale::key_extractor
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** wale::instantiator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** wale::formatter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** wale::formatting_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst formatting.
+
+** wale::extraction_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst extracting a key.
+
+* stitch
+** stitch::parser
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** stitch::block
+*** type
+:dogen-properties:
+:type: block_types
+:end:
+
+*** content
+:dogen-properties:
+:type: std::string
+:end:
+
+** stitch::text_template
+:dogen-properties:
+:stereotypes: ConfigurableViaKvps
+:end:
+Domain representation of a stitch template.
+
+*** properties
+:dogen-properties:
+:type: properties
+:end:
+
+Properties of the template.
+
+*** body
+:dogen-properties:
+:type: text_template_body
+:end:
+
+Body of the text template.
+
+** stitch::formatter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** stitch::parsing_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst parsing.
+
+** stitch::formatting_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred whilst formatting.
+
+** stitch::properties
+*** stream_variable_name
+:dogen-properties:
+:type: std::string
+:end:
+
+*** inclusion_dependencies
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** containing_namespaces
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** wale_template
+:dogen-properties:
+:type: std::string
+:end:
+
+*** wale_kvps
+:dogen-properties:
+:type: std::unordered_map<std::string, std::string>
+:end:
+
+** stitch::line
+*** blocks
+:dogen-properties:
+:type: std::list<block>
+:end:
+
+** stitch::block_types
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+*** text_block
+:dogen-properties:
+:end:
+
+*** standard_control_block
+:dogen-properties:
+:end:
+
+*** expression_block
+:dogen-properties:
+:end:
+
+*** variable_block
+:dogen-properties:
+:end:
+
+** stitch::instantiator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** stitch::text_template_body
+*** tagged_values
+:dogen-properties:
+:type: std::list<std::pair<std::string, std::string>>
+:end:
+
+*** lines
+:dogen-properties:
+:type: std::list<line>
+:end:
+
+** stitch::instantiation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** stitch::features
+:dogen-tagged_values:
+:masd.variability.default_binding_point: any
+:masd.variability.key_prefix: masd.stitch
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Stitch templating features.
+
+*** stream_variable_name
+:dogen-properties:
+:type: masd::variability::text
+:value: "stream_"
+:end:
+
+Which name to use for the variable with the stream.
+
+*** relative_output_directory
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+Relative path to the output directory.
+
+*** inclusion_dependency
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text_collection
+:end:
+
+C++ Include header.
+
+*** containing_namespaces
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+Namespaces that contain the class represented by the template.
+
+*** wale.text_template
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text
+:end:
+
+Name of the wale text template to instantiate, if any.
+
+*** wale.kvp
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::key_value_pair
+:end:
+
+Array of wale KVPs to use in template instantiation.
+
+* ConfigurableViaKvps
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Element has the ability to recieve configuration arguments as a set of KVPs.
+
+** expected_keys
+:dogen-properties:
+:type: std::unordered_set<std::string>
+:end:
+
+Set of keys that are expected to be supplied.
+
+** supplied_kvps
+:dogen-properties:
+:type: std::unordered_map<std::string, std::string>
+:end:
+
+Key value pairs that were supplied for instantiation.
+
+* helpers
+** helpers::kvp_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::validation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred with the supplied KVPs.
+
+** helpers::kvp_resolver
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::resolution_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred when trying to resolve a key.
+
+* initializer
+:dogen-properties:
+:stereotypes: masd::variability::initializer
+:end:
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

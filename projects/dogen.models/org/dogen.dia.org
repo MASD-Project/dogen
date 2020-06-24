@@ -1,0 +1,322 @@
+#+TITLE: dogen.dia
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.dia
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.physical.ignore_files_matching_regex: .*/*.py
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+* diagram_data
+Represents a all the data associated with a diagram.
+
+** attributes
+:dogen-properties:
+:type: std::vector<attribute>
+:end:
+
+All attributes associated with the diagram data.
+
+* attribute
+Attribute in a Dia diagram.
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the attribute.
+
+** values
+:dogen-properties:
+:type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
+:end:
+
+Values for the attribute.
+
+* composite
+:dogen-properties:
+:stereotypes: dogen::untestable
+:end:
+Attribute value which is made up of other attributes.
+
+** type
+:dogen-properties:
+:type: std::string
+:end:
+
+Type of the composite node
+
+** value
+:dogen-properties:
+:type: std::vector<boost::shared_ptr<attribute>>
+:end:
+
+Underlying Dia attributes.
+
+** inner_composite
+:dogen-properties:
+:type: boost::shared_ptr<composite>
+:end:
+
+Some composites contain an inner composite field.
+
+* color
+Represents a color in a diagram.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of an RGB value in hex.
+
+* diagram
+Represents a diagram in Dia.
+
+** diagram_data
+:dogen-properties:
+:type: diagram_data
+:end:
+
+Basic diagram definitions.
+
+** layers
+:dogen-properties:
+:type: std::vector<layer>
+:end:
+
+Visual layers on the diagram.
+
+* layer
+Represents a layer in a Dia diagram.
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the layer.
+
+** visible
+:dogen-properties:
+:type: bool
+:end:
+
+Whether the layer is visible on screen or not.
+
+** active
+:dogen-properties:
+:type: bool
+:end:
+
+Whether the layer is active or not.
+
+** objects
+:dogen-properties:
+:type: std::vector<object>
+:end:
+
+Dia objects contained in layer.
+
+* real
+Represents a real value.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a real value.
+
+* integer
+Represents an integer value.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of an integer value.
+
+* object
+Represents a Dia object.
+
+** type
+:dogen-properties:
+:type: std::string
+:end:
+
+Type of the object.
+
+** version
+:dogen-properties:
+:type: int
+:end:
+
+Version of the object.
+
+** id
+:dogen-properties:
+:type: std::string
+:end:
+
+Unique identifier for the object in this diagram.
+
+** connections
+:dogen-properties:
+:type: std::vector<connection>
+:end:
+
+Connection details for this object.
+
+** child_node
+:dogen-properties:
+:type: boost::optional<child_node>
+:end:
+
+Parenting information for this object.
+
+** attributes
+:dogen-properties:
+:type: std::vector<attribute>
+:end:
+
+All attributes associated with the object.
+
+* point
+Represents a point in a diagram.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a point with X/Y coordinates.
+
+* boolean
+Represents a boolean value.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a boolean value.
+
+* child_node
+Represents a child_node in a diagram.
+
+Child nodes are used in Dia to represent the relationship between a
+package and the entities it contains. For example, if class O1 is
+inside package O0 then class O1 will have a child node element with
+a parent pointing to O0.
+
+** parent
+:dogen-properties:
+:type: std::string
+:end:
+
+Parent for this object.
+
+* string
+Represents a string value.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a string value.
+
+* font
+Represents a font in a diagram.
+
+** family
+:dogen-properties:
+:type: std::string
+:end:
+
+** style
+:dogen-properties:
+:type: std::string
+:end:
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+* enumeration
+Represents a enumeration in a diagram.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a enumeration.
+
+* connection
+Connection between entities in a Dia diagram.
+
+** handle
+:dogen-properties:
+:type: std::string
+:end:
+
+Internal handle for the connection.
+
+** to
+:dogen-properties:
+:type: std::string
+:end:
+
+Object we're connected to.
+
+** connection_slot
+:dogen-properties:
+:type: std::string
+:end:
+
+Number of the connection slot we're connected to.
+
+This is known in Dia as a connection but to avoid confusion
+between the class and the slot concepts, we renamed it.
+
+* rectangle
+Represents a rectangle in a diagram.
+
+** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Text representation of a rectangle with a pair of X/Y coordinates.
+
+* hydrator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+Reads a Dia diagram and instatiates the dia model objects.
+
+* hydration_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error occurred while reading a diagram.
+
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

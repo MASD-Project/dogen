@@ -1,0 +1,479 @@
+#+TITLE: dogen.injection
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.injection
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: dogen.variability
+:masd.injection.reference: dogen.tracing
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.injection.reference: dogen.physical
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Provides support for encoding and decoding of external models.
+
+An external model is defined as:
+
+@li a third-party format that is not owned or controlled by
+    Dogen, such as Dia;
+@li a Dogen format designed for interoperability (JSON).
+
+External models are converted into an intermediate format called
+the @e injection model, because it is the original entry point into
+the dogen processing pipeline. It also reflects the notion that we
+are injecting external technical spaces into the MASD technical
+technical space.
+
+A @e codec must be created for each external model that is to be
+injected, providing a transformation between the native formats
+and the injection model. The codecs are created in their own models,
+following the naming convention injection.X for a given codec X.
+They then register against the injection registrar. Note that for a
+given file extension, there can only be one and only one codec to
+manage it.
+
+* transforms
+** transforms::encoding_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** transforms::registrar
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::registrar_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+A registration error has occurred.
+
+** transforms::model_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::model_to_model_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::context
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:end:
+:dogen-properties:
+:stereotypes: dogen::typeable, dogen::pretty_printable
+:end:
+*** data_directories
+:dogen-properties:
+:type: std::vector<boost::filesystem::path>
+:end:
+
+*** feature_model
+:dogen-properties:
+:type: boost::shared_ptr<variability::entities::feature_model>
+:end:
+
+*** physical_meta_model
+:dogen-properties:
+:type: boost::shared_ptr<physical::entities::meta_model>
+:end:
+
+Meta-model for the physical dimension.
+
+*** tracer
+:dogen-properties:
+:type: boost::shared_ptr<tracing::tracer>
+:end:
+
+*** compatibility_mode
+:dogen-properties:
+:type: bool
+:end:
+
+*** variability_overrides
+:dogen-properties:
+:type: std::vector<std::string>
+:end:
+
+Raw set of variability overrides.
+
+** transforms::transformation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** transforms::decoding_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+** transforms::model_set_production_chain
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::input_technical_space_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::references_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::configuration_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::reference_graph_data_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::tagged_values_overrides_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** transforms::compute_sha1_transform
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* entities
+** entities::model
+:dogen-properties:
+:stereotypes: Element
+:end:
+Represents an external model.
+
+*** elements
+:dogen-properties:
+:type: std::list<element>
+:end:
+
+*** input_technical_space
+:dogen-properties:
+:type: std::string
+:end:
+
+Technical space to which the model belongs, within the injection space.
+
+*** references
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** processed_variability_overrides
+:dogen-properties:
+:type: std::unordered_set<std::string>
+:end:
+
+All the variability overrides that were processed by this model.
+
+** entities::element
+:dogen-properties:
+:stereotypes: Element
+:end:
+Represents an element from an external model.
+
+*** parents
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+*** attributes
+:dogen-properties:
+:type: std::list<attribute>
+:end:
+
+*** fallback_element_type
+:dogen-properties:
+:type: std::string
+:end:
+
+Stereotype conveying element type, to be used when none is provided with the
+main stereotypes.
+
+*** can_be_primitive_underlier
+:dogen-properties:
+:type: bool
+:end:
+
+*** in_global_module
+:dogen-properties:
+:type: bool
+:end:
+
+*** can_be_enumeration_underlier
+:dogen-properties:
+:type: bool
+:end:
+
+*** is_default_enumeration_type
+:dogen-properties:
+:type: bool
+:end:
+
+*** is_associative_container
+:dogen-properties:
+:type: bool
+:end:
+
+*** is_floating_point
+:dogen-properties:
+:type: bool
+:end:
+
+** entities::attribute
+:dogen-properties:
+:stereotypes: Element
+:end:
+*** type
+:dogen-properties:
+:type: std::string
+:end:
+
+*** value
+:dogen-properties:
+:type: std::string
+:end:
+
+Default value for this attribute, if any.
+
+** entities::model_set
+*** target
+:dogen-properties:
+:type: model
+:end:
+
+*** references
+:dogen-properties:
+:type: std::list<model>
+:end:
+
+*** reference_graph_data
+:dogen-properties:
+:type: reference_graph_data
+:end:
+
+Stores the data required to build a graph of references for a model set.
+
+** entities::Taggable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to contain tagged values.
+
+*** tagged_values
+:dogen-properties:
+:type: std::list<std::pair<std::string, std::string>>
+:end:
+
+*** tagged_values_overrides
+:dogen-properties:
+:type: std::list<std::pair<std::string, std::string>>
+:end:
+
+Meta-data sourced externally that can be used to override meta-data in model.
+
+** entities::Stereotypable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have stereotypes.
+
+*** stereotypes
+:dogen-properties:
+:type: std::list<std::string>
+:end:
+
+** entities::Documentable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to provide documentation.
+
+*** documentation
+:dogen-properties:
+:type: std::string
+:end:
+
+Code comments.
+
+These are expected to follow the grammar of the comment processing tools
+of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
+
+** entities::Nameable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have a name.
+
+*** name
+:dogen-properties:
+:type: std::string
+:end:
+
+** entities::Configurable
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Ability to have meta-data associated.
+
+*** configuration
+:dogen-properties:
+:type: boost::shared_ptr<variability::entities::configuration>
+:end:
+
+Configuration for this element.
+
+** entities::DeterminableOrigin
+:dogen-properties:
+:stereotypes: masd::object_template
+:end:
+Properties related to the origin of the modeling element.
+
+*** origin_sha1_hash
+:dogen-properties:
+:type: std::string
+:end:
+
+SHA1 hash of the original model that contained the element.
+
+*** origin_element_id
+:dogen-properties:
+:type: std::string
+:end:
+
+Identifier within the origin model for the modeling element.
+
+*** origin_containing_element_id
+:dogen-properties:
+:type: std::string
+:end:
+
+Unique identifier for an element containing this element, if any.
+
+** entities::Element
+:dogen-properties:
+:parents: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin
+:stereotypes: masd::object_template
+:end:
+Consolidates a number of related object templates.
+
+** entities::reference_graph_data
+Contains all the data required to build the graph of references.
+
+*** root
+:dogen-properties:
+:type: std::string
+:end:
+
+Has the name of the target model, which is the entry point to the references
+graph.
+
+*** edges_per_model
+:dogen-properties:
+:type: std::unordered_map<std::string, std::list<std::string>>
+:end:
+
+Contains the list of referenced models for a particular model name.
+
+* helpers
+** helpers::references_resolver
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::reference_resolution_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+** helpers::references_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+** helpers::reference_validation_error
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+A cycle was detected in the references graph.
+
+* features
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:end:
+Defines all of the features and feature groups used by
+the injection model.
+
+** features::input_technical_space
+:dogen-tagged_values:
+:masd.variability.default_binding_point: global
+:masd.variability.key_prefix: masd.injection
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Feature bundle for the input technical space.
+
+*** input_technical_space
+:dogen-properties:
+:type: masd::variability::text
+:value: "agnostic"
+:end:
+
+Input technical space for this model.
+
+** features::reference
+:dogen-tagged_values:
+:masd.variability.default_binding_point: global
+:masd.variability.key_prefix: masd.injection
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Features related to model referencing.
+
+*** reference
+:dogen-tagged_values:
+:masd.variability.is_optional: true
+:end:
+:dogen-properties:
+:type: masd::variability::text_collection
+:end:
+
+Imports an external model.
+
+** features::initializer
+:dogen-properties:
+:stereotypes: masd::variability::initializer
+:end:
+** features::uml
+:dogen-tagged_values:
+:masd.variability.default_binding_point: any
+:masd.variability.generate_static_configuration: false
+:masd.variability.key_prefix: masd.injection
+:end:
+:dogen-properties:
+:stereotypes: masd::variability::feature_bundle
+:end:
+Features related to all UML injectors.
+
+*** dia.comment
+:dogen-properties:
+:type: masd::variability::boolean
+:end:
+
+If true, the UML comment is linked to the containing package.
+
+If the containing package is the model itself, it is linked to the model's module.
+
+* registrar
+:dogen-properties:
+:stereotypes: masd::serialization::type_registrar
+:end:
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:

@@ -1,0 +1,474 @@
+#+TITLE: dogen
+#+OPTIONS: ^:nil
+:dogen-tagged_values:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen
+:masd.injection.input_technical_space: cpp
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+Provides the top-level API for the dogen product.
+
+* configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+** model_processing
+:dogen-properties:
+:type: model_processing_configuration
+:end:
+
+** tracing
+:dogen-properties:
+:type: boost::optional<tracing_configuration>
+:end:
+
+Configuration for tracing.
+
+** diffing
+:dogen-properties:
+:type: boost::optional<diffing_configuration>
+:end:
+
+** reporting
+:dogen-properties:
+:type: boost::optional<reporting_configuration>
+:end:
+
+** byproduct_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+Directory in which to place all files not directly related to generated code.
+
+** database
+:dogen-properties:
+:type: boost::optional<database_configuration>
+:end:
+
+Configuration related to database connectivity, if any.
+
+* tracing_level
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Available levels for tracing transformation.
+
+** detail
+:dogen-properties:
+:end:
+
+** summary
+:dogen-properties:
+:end:
+
+* tracing_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration related to transform tracing.
+
+** level
+:dogen-properties:
+:type: tracing_level
+:end:
+
+Dump all available tracing information about transforms.
+
+** format
+:dogen-properties:
+:type: tracing_format
+:end:
+
+Format to use when writting trace files.
+
+Only valid for the file backend.
+
+** guids_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+Enable GUIDs in probe stats.
+
+Disabling GUIDs makes comparisons easier.
+
+** logging_impact
+:dogen-properties:
+:type: std::string
+:end:
+
+Additional information to tell tracing about the possible impact of logging.
+
+Informative string detailing whether logging was off, or set to debug etc. This is
+required in order to be able to compare like-for-like numbers.
+
+** use_short_names
+:dogen-properties:
+:type: bool
+:end:
+
+Use short directory and file names. Useful mainly on windows due to path
+size limitations.
+
+** output_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+** backend
+:dogen-properties:
+:type: tracing_backend
+:end:
+
+Which backend to use for tracing.
+
+** run_id
+:dogen-properties:
+:type: std::string
+:end:
+
+Identifier to use for the present run.
+
+** filter_regexes
+:dogen-properties:
+:type: std::vector<std::string>
+:end:
+
+If supplied, ignore all traces except those which match the supplied regexes.
+
+* tracing_format
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Available formats for tracing transformations.
+
+** plain
+:dogen-properties:
+:end:
+
+Plain text format.
+
+** org_mode
+:dogen-properties:
+:end:
+
+Emacs Org mode.
+
+** graphviz
+:dogen-properties:
+:end:
+
+Dot notation for GraphViz
+
+* configuration_builder
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+masd::builder
+
+* diffing_configuration
+:dogen-properties:
+:stereotypes: masd::fluent
+:end:
+Configuration for diff generation.
+
+** destination
+:dogen-properties:
+:type: diffing_destination
+:end:
+
+** output_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+* configuration_validator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* model_processing_configuration
+Configuration related to the behaviour of Dogen whilst processing models.
+
+** compatibility_mode_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+Try to process models even if there are errors.
+
+Only a certain class of errors are allowed, believed to be caused by backwards or
+forwards compatibility problems: missing types or types that do not exist.
+
+** dry_run_mode_enabled
+:dogen-properties:
+:type: bool
+:end:
+
+If true, all transforms wil be executed but no code will be emitted.
+
+** variability_overrides
+:dogen-properties:
+:type: std::vector<std::string>
+:end:
+
+Raw set of variability overrides.
+
+Overrides are CSV strings in the following format:
+
+MODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE
+
+ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.
+
+Please note that you can only override elements in the following cases:
+
+- they must have been supplied by the user *directly* on a modeling element (e.g.
+not as part of a profile).
+- the type of the feature being overriden must be scalar.
+
+** activity_timestamp
+:dogen-properties:
+:type: boost::posix_time::ptime
+:end:
+
+Timepoint at which the activity started.
+
+* invalid_configuration_exception
+:dogen-tagged_values:
+:masd.cpp.types.class_forward_declarations.enabled: false
+:end:
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+The values supplied for the configuration are not valid.
+
+* generator
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* converter
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* generation_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+* conversion_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+* diffing_destination
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Where to place the diffing results.
+
+** file
+:dogen-properties:
+:end:
+
+Generates a patch file.
+
+** console
+:dogen-properties:
+:end:
+
+Outputs the diff to the console.
+
+* reporting_configuration
+Configuration related to operational reports.
+
+** style
+:dogen-properties:
+:type: reporting_style
+:end:
+
+** output_directory
+:dogen-properties:
+:type: boost::filesystem::path
+:end:
+
+* reporting_style
+:dogen-properties:
+:stereotypes: masd::enumeration, dogen::convertible
+:end:
+Available formats for operational reports.
+
+** plain
+:dogen-properties:
+:end:
+
+Plain text format.
+
+** org_mode
+:dogen-properties:
+:end:
+
+Emacs Org mode.
+
+* mock_configuration_factory
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable
+:end:
+* database_configuration
+Contains the config
+
+** host
+:dogen-properties:
+:type: std::string
+:end:
+
+Database host to connect to.
+
+** port
+:dogen-properties:
+:type: unsigned int
+:end:
+
+Database port to connect to.
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of the database to connect to.
+
+** user
+:dogen-properties:
+:type: std::string
+:end:
+
+User to use in thedatabase connection.
+
+** password
+:dogen-properties:
+:type: std::string
+:end:
+
+** engine
+:dogen-properties:
+:type: database_engine
+:end:
+
+Which relational database engine to connect to.
+
+** generate_schema
+:dogen-properties:
+:type: bool
+:end:
+
+If true, deletes all tables and recreates them. Otherwise, assumes their presence.
+
+* tracing_backend
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Available backends to manage tracing information.
+
+** file
+:dogen-properties:
+:end:
+
+Write tracing information to files.
+
+** relational_database
+:dogen-properties:
+:end:
+
+Write tracing information to a relational database.
+
+* database_engine
+:dogen-properties:
+:stereotypes: masd::enumeration
+:end:
+Supported relational databases engines.
+
+** postgres
+:dogen-properties:
+:end:
+
+Connect to a PostgreSQL database.
+
+** sqlite
+:dogen-properties:
+:end:
+
+Connect to a SQLite database.
+
+* main
+:dogen-properties:
+:stereotypes: masd::entry_point, dogen::untypable
+:end:
+* CMakeLists
+:dogen-properties:
+:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:end:
+* specs
+Describes details of the available functionality within this version of Dogen.
+
+** categories
+:dogen-properties:
+:type: std::list<spec_category>
+:end:
+
+All categories of specifications.
+
+* spec_category
+Describes a category of dogen specifications.
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name of this group of specs.
+
+** entries
+:dogen-properties:
+:type: std::list<spec_entry>
+:end:
+
+Entries describing various aspects of this group.
+
+** description
+:dogen-properties:
+:type: std::string
+:end:
+
+Purpose of the group.
+
+* spec_entry
+Unit of functionality within Dogen.
+
+** name
+:dogen-properties:
+:type: std::string
+:end:
+
+Name for this spec entry.
+
+** description
+:dogen-properties:
+:type: std::string
+:end:
+
+Human readable text describing this entry.
+
+* spec_dumper
+:dogen-properties:
+:stereotypes: dogen::handcrafted::typeable::header_only
+:end:
+* dumping_exception
+:dogen-properties:
+:stereotypes: masd::exception
+:end:
+An error ocurred when dumping dogen's specs.
+
