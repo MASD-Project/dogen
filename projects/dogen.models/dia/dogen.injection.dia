@@ -926,7 +926,7 @@
         <dia:point val="38.89,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.14,60.2;79.615,63.8"/>
+        <dia:rectangle val="38.14,60.255;79.615,63.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -962,7 +962,7 @@
         <dia:point val="-20,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,-4.05;7.13,26.55"/>
+        <dia:rectangle val="-20.05,-4.05;7.13,24.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -974,7 +974,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="30.500000000000004"/>
+        <dia:real val="28.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1031,7 +1031,7 @@ manage it.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-19.65,-2.755"/>
+            <dia:point val="-19.65,-2.75594"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1660,7 +1660,7 @@ manage it.
         <dia:point val="19,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.95,23.95;33.025,34.05"/>
+        <dia:rectangle val="18.95,23.95;33.025,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19,24"/>
@@ -1669,7 +1669,7 @@ manage it.
         <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element#</dia:string>
@@ -1759,6 +1759,52 @@ manage it.
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#id#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Unique identifier as supplied by the original injection format.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#container_id#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Unique identifier for an element containing this element.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#parents#</dia:string>
@@ -2740,16 +2786,16 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="58.7625,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.9375,29.25;59.5125,36.05"/>
+        <dia:rectangle val="25.9375,29.25;59.5125,37.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="58.7625,30"/>
-        <dia:point val="58.7625,36"/>
-        <dia:point val="25.9875,36"/>
-        <dia:point val="25.9875,34"/>
+        <dia:point val="58.7625,37"/>
+        <dia:point val="25.9875,37"/>
+        <dia:point val="25.9875,35.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3909,7 +3955,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="86.5275,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.475,20.2;87.2775,24.8"/>
+        <dia:rectangle val="71.475,20.255;87.2775,24.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5045,7 +5091,7 @@ and, if so, ignore it.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="33.35,104.245"/>
+            <dia:point val="33.35,104.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5810,7 +5856,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="66.22,100.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.47,99.3;72.05,103.05"/>
+        <dia:rectangle val="65.47,99.355;72.05,103.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5884,7 +5930,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="32.975,25.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.225,24.3;36.05,27.5"/>
+        <dia:rectangle val="32.225,24.35;36.05,27.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6310,7 +6356,7 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="35,84.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.005,83.3;35.75,86.9"/>
+        <dia:rectangle val="31.005,83.35;35.75,86.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6560,7 +6606,7 @@ the injection model.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="107.35,48.245"/>
+            <dia:point val="107.35,48.2441"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -7739,7 +7785,7 @@ graph.#</dia:string>
         <dia:point val="38,98.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.2231,97.3;38.75,99.6"/>
+        <dia:rectangle val="35.2231,97.35;38.75,99.655"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7988,7 +8034,7 @@ graph.#</dia:string>
         <dia:point val="61.68,84.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.93,83.3;66.05,86.9"/>
+        <dia:rectangle val="60.93,83.35;66.05,86.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

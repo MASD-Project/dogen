@@ -123,6 +123,8 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"container_id\": " << "\"" << tidy_up_string(v.container_id()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes() << ", "
       << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\"" << ", "
