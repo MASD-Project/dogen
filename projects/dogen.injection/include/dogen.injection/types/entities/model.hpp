@@ -56,6 +56,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const std::string& origin_element_id,
+        const std::string& origin_containing_element_id,
         const std::list<dogen::injection::entities::element>& elements,
         const std::string& input_technical_space,
         const std::list<std::string>& references,
@@ -130,6 +131,16 @@ public:
     void origin_element_id(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Unique identifier for an element containing this element, if any.
+     */
+    /**@{*/
+    const std::string& origin_containing_element_id() const;
+    std::string& origin_containing_element_id();
+    void origin_containing_element_id(const std::string& v);
+    void origin_containing_element_id(const std::string&& v);
+    /**@}*/
+
     const std::list<dogen::injection::entities::element>& elements() const;
     std::list<dogen::injection::entities::element>& elements();
     void elements(const std::list<dogen::injection::entities::element>& v);
@@ -179,6 +190,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     std::string origin_element_id_;
+    std::string origin_containing_element_id_;
     std::list<dogen::injection::entities::element> elements_;
     std::string input_technical_space_;
     std::list<std::string> references_;

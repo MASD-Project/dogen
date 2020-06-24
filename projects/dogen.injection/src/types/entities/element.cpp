@@ -49,8 +49,7 @@ element::element(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const std::string& origin_element_id,
-    const std::string& id,
-    const std::string& container_id,
+    const std::string& origin_containing_element_id,
     const std::list<std::string>& parents,
     const std::list<dogen::injection::entities::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -68,8 +67,7 @@ element::element(
       configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       origin_element_id_(origin_element_id),
-      id_(id),
-      container_id_(container_id),
+      origin_containing_element_id_(origin_containing_element_id),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -90,8 +88,7 @@ void element::swap(element& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(origin_element_id_, other.origin_element_id_);
-    swap(id_, other.id_);
-    swap(container_id_, other.container_id_);
+    swap(origin_containing_element_id_, other.origin_containing_element_id_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -112,8 +109,7 @@ bool element::operator==(const element& rhs) const {
         configuration_ == rhs.configuration_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         origin_element_id_ == rhs.origin_element_id_ &&
-        id_ == rhs.id_ &&
-        container_id_ == rhs.container_id_ &&
+        origin_containing_element_id_ == rhs.origin_containing_element_id_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -259,36 +255,20 @@ void element::origin_element_id(const std::string&& v) {
     origin_element_id_ = std::move(v);
 }
 
-const std::string& element::id() const {
-    return id_;
+const std::string& element::origin_containing_element_id() const {
+    return origin_containing_element_id_;
 }
 
-std::string& element::id() {
-    return id_;
+std::string& element::origin_containing_element_id() {
+    return origin_containing_element_id_;
 }
 
-void element::id(const std::string& v) {
-    id_ = v;
+void element::origin_containing_element_id(const std::string& v) {
+    origin_containing_element_id_ = v;
 }
 
-void element::id(const std::string&& v) {
-    id_ = std::move(v);
-}
-
-const std::string& element::container_id() const {
-    return container_id_;
-}
-
-std::string& element::container_id() {
-    return container_id_;
-}
-
-void element::container_id(const std::string& v) {
-    container_id_ = v;
-}
-
-void element::container_id(const std::string&& v) {
-    container_id_ = std::move(v);
+void element::origin_containing_element_id(const std::string&& v) {
+    origin_containing_element_id_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {

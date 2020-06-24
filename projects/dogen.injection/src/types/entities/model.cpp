@@ -41,6 +41,7 @@ model::model(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const std::string& origin_element_id,
+    const std::string& origin_containing_element_id,
     const std::list<dogen::injection::entities::element>& elements,
     const std::string& input_technical_space,
     const std::list<std::string>& references,
@@ -53,6 +54,7 @@ model::model(
       configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       origin_element_id_(origin_element_id),
+      origin_containing_element_id_(origin_containing_element_id),
       elements_(elements),
       input_technical_space_(input_technical_space),
       references_(references),
@@ -68,6 +70,7 @@ void model::swap(model& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(origin_element_id_, other.origin_element_id_);
+    swap(origin_containing_element_id_, other.origin_containing_element_id_);
     swap(elements_, other.elements_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(references_, other.references_);
@@ -83,6 +86,7 @@ bool model::operator==(const model& rhs) const {
         configuration_ == rhs.configuration_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         origin_element_id_ == rhs.origin_element_id_ &&
+        origin_containing_element_id_ == rhs.origin_containing_element_id_ &&
         elements_ == rhs.elements_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         references_ == rhs.references_ &&
@@ -221,6 +225,22 @@ void model::origin_element_id(const std::string& v) {
 
 void model::origin_element_id(const std::string&& v) {
     origin_element_id_ = std::move(v);
+}
+
+const std::string& model::origin_containing_element_id() const {
+    return origin_containing_element_id_;
+}
+
+std::string& model::origin_containing_element_id() {
+    return origin_containing_element_id_;
+}
+
+void model::origin_containing_element_id(const std::string& v) {
+    origin_containing_element_id_ = v;
+}
+
+void model::origin_containing_element_id(const std::string&& v) {
+    origin_containing_element_id_ = std::move(v);
 }
 
 const std::list<dogen::injection::entities::element>& model::elements() const {

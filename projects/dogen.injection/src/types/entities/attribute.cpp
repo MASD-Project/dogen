@@ -41,6 +41,7 @@ attribute::attribute(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const std::string& origin_element_id,
+    const std::string& origin_containing_element_id,
     const std::string& type,
     const std::string& value)
     : tagged_values_(tagged_values),
@@ -51,6 +52,7 @@ attribute::attribute(
       configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       origin_element_id_(origin_element_id),
+      origin_containing_element_id_(origin_containing_element_id),
       type_(type),
       value_(value) { }
 
@@ -64,6 +66,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(origin_element_id_, other.origin_element_id_);
+    swap(origin_containing_element_id_, other.origin_containing_element_id_);
     swap(type_, other.type_);
     swap(value_, other.value_);
 }
@@ -77,6 +80,7 @@ bool attribute::operator==(const attribute& rhs) const {
         configuration_ == rhs.configuration_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         origin_element_id_ == rhs.origin_element_id_ &&
+        origin_containing_element_id_ == rhs.origin_containing_element_id_ &&
         type_ == rhs.type_ &&
         value_ == rhs.value_;
 }
@@ -213,6 +217,22 @@ void attribute::origin_element_id(const std::string& v) {
 
 void attribute::origin_element_id(const std::string&& v) {
     origin_element_id_ = std::move(v);
+}
+
+const std::string& attribute::origin_containing_element_id() const {
+    return origin_containing_element_id_;
+}
+
+std::string& attribute::origin_containing_element_id() {
+    return origin_containing_element_id_;
+}
+
+void attribute::origin_containing_element_id(const std::string& v) {
+    origin_containing_element_id_ = v;
+}
+
+void attribute::origin_containing_element_id(const std::string&& v) {
+    origin_containing_element_id_ = std::move(v);
 }
 
 const std::string& attribute::type() const {

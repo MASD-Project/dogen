@@ -57,8 +57,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const std::string& origin_element_id,
-        const std::string& id,
-        const std::string& container_id,
+        const std::string& origin_containing_element_id,
         const std::list<std::string>& parents,
         const std::list<dogen::injection::entities::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -139,23 +138,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Unique identifier as supplied by the original injection format.
+     * @brief Unique identifier for an element containing this element, if any.
      */
     /**@{*/
-    const std::string& id() const;
-    std::string& id();
-    void id(const std::string& v);
-    void id(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Unique identifier for an element containing this element.
-     */
-    /**@{*/
-    const std::string& container_id() const;
-    std::string& container_id();
-    void container_id(const std::string& v);
-    void container_id(const std::string&& v);
+    const std::string& origin_containing_element_id() const;
+    std::string& origin_containing_element_id();
+    void origin_containing_element_id(const std::string& v);
+    void origin_containing_element_id(const std::string&& v);
     /**@}*/
 
     const std::list<std::string>& parents() const;
@@ -216,8 +205,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     std::string origin_element_id_;
-    std::string id_;
-    std::string container_id_;
+    std::string origin_containing_element_id_;
     std::list<std::string> parents_;
     std::list<dogen::injection::entities::attribute> attributes_;
     std::string fallback_element_type_;

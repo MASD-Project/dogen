@@ -1660,7 +1660,7 @@ manage it.
         <dia:point val="19,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.95,23.95;33.025,35.65"/>
+        <dia:rectangle val="18.95,23.95;33.025,34.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19,24"/>
@@ -1669,7 +1669,7 @@ manage it.
         <dia:real val="13.975"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.6"/>
+        <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element#</dia:string>
@@ -1759,52 +1759,6 @@ manage it.
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Unique identifier as supplied by the original injection format.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#container_id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Unique identifier for an element containing this element.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#parents#</dia:string>
@@ -2786,7 +2740,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="58.7625,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.9375,29.25;59.5125,37.2"/>
+        <dia:rectangle val="25.9375,29.25;59.5125,37.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2795,7 +2749,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="58.7625,30"/>
         <dia:point val="58.7625,37"/>
         <dia:point val="25.9875,37"/>
-        <dia:point val="25.9875,35.6"/>
+        <dia:point val="25.9875,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8067,19 +8021,19 @@ graph.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O68">
       <dia:attribute name="obj_pos">
-        <dia:point val="70,7"/>
+        <dia:point val="68,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,6.95;82.485,11.45"/>
+        <dia:rectangle val="67.95,6.95;84.72,12.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="70,7"/>
+        <dia:point val="68,7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#DeterminableOrigin#</dia:string>
@@ -8215,6 +8169,29 @@ graph.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#origin_containing_element_id#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Unique identifier for an element containing this element, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -8225,17 +8202,17 @@ graph.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="76.2175,11.4"/>
+        <dia:point val="76.335,12.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.0125,11.35;77.0675,16.05"/>
+        <dia:rectangle val="38.0125,12.15;77.185,16.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="76.2175,11.4"/>
-        <dia:point val="76.2175,14"/>
+        <dia:point val="76.335,12.2"/>
+        <dia:point val="76.335,14"/>
         <dia:point val="38.0625,14"/>
         <dia:point val="38.0625,16"/>
       </dia:attribute>

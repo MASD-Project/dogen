@@ -51,6 +51,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const std::string& origin_element_id,
+        const std::string& origin_containing_element_id,
         const std::string& type,
         const std::string& value);
 
@@ -123,6 +124,16 @@ public:
     void origin_element_id(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Unique identifier for an element containing this element, if any.
+     */
+    /**@{*/
+    const std::string& origin_containing_element_id() const;
+    std::string& origin_containing_element_id();
+    void origin_containing_element_id(const std::string& v);
+    void origin_containing_element_id(const std::string&& v);
+    /**@}*/
+
     const std::string& type() const;
     std::string& type();
     void type(const std::string& v);
@@ -157,6 +168,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     std::string origin_element_id_;
+    std::string origin_containing_element_id_;
     std::string type_;
     std::string value_;
 };

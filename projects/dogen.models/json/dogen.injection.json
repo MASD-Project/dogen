@@ -97,16 +97,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "id",
-          "type": "std::string",
-          "documentation": "Unique identifier as supplied by the original injection format.\n"
-        },
-        {
-          "name": "container_id",
-          "type": "std::string",
-          "documentation": "Unique identifier for an element containing this element.\n"
-        },
-        {
           "name": "parents",
           "type": "std::list<std::string>"
         },
@@ -368,6 +358,11 @@
           "name": "origin_element_id",
           "type": "std::string",
           "documentation": "Identifier within the origin model for the modeling element.\n"
+        },
+        {
+          "name": "origin_containing_element_id",
+          "type": "std::string",
+          "documentation": "Unique identifier for an element containing this element, if any.\n"
         }
       ]
     },
