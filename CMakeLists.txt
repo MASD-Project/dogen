@@ -489,6 +489,16 @@ if (DOGEN_CLI_EXECUTABLE)
     add_custom_target(ca)
     add_dependencies(ca convert_all)
 
+    add_custom_target(convert_all_json)
+    add_custom_target(caj)
+    add_dependencies(caj convert_all_json)
+    add_dependencies(ca caj)
+
+    add_custom_target(convert_all_org)
+    add_custom_target(cao)
+    add_dependencies(cao convert_all_org)
+    add_dependencies(ca cao)
+
     #
     # Options to use for all Dogen invocations
     #
