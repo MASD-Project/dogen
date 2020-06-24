@@ -102,6 +102,7 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.documentation(po.comment().documentation());
     r.tagged_values(po.comment().tagged_values());
     r.origin_element_id(po.id());
+    r.origin_containing_element_id(po.child_node_id());
     process_stereotypes(po, r);
 
     for (const auto& attr : po.attributes())
