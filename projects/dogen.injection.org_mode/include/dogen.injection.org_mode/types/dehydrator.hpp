@@ -49,9 +49,12 @@ private:
     static void insert_parents(std::ostream& s,
         const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,
-        const injection::entities::attribute& a);
+        const unsigned int level, const entities::attribute& a);
     static void insert_element(std::ostream& s,
-        const injection::entities::element& e);
+        const unsigned int level, const entities::element& e);
+    static void walk_parent_to_child(std::ostream& s, const unsigned int level,
+        const std::string& id, const std::unordered_map<std::string,
+        std::list<entities::element>>& parent_to_child_map);
 
 public:
     static std::string dehydrate(const injection::entities::model& m);

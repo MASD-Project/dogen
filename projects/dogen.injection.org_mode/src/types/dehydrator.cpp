@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <list>
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -84,28 +85,46 @@ insert_parents(std::ostream& s, const std::list<std::string>& parents) {
 }
 
 void dehydrator::insert_attribute(std::ostream& s,
-    const injection::entities::attribute& a) {
-
-    s << "*** " << a.name() << "      " << ":attribute:" << std::endl;
+    const unsigned int level, const entities::attribute& a) {
+    const std::string stars(level, '*');
+    s << stars << " " << a.name() << std::endl;
 
     insert_tagged_values(s, a.tagged_values());
-    s << ":dogen-properties:" << std::endl
-      << ":type: " << a.type() << std::endl;
+    if (!a.type().empty() || !a.value().empty() || a.stereotypes().empty()) {
+        s << ":dogen-properties:" << std::endl;
+        if (!a.type().empty())
+            s << ":type: " << a.type() << std::endl;
 
-    if (!a.value().empty())
-        s << ":value: " << a.value() << std::endl;
+        if (!a.value().empty())
+            s << ":value: " << a.value() << std::endl;
 
-    insert_stereotypes(s, a.stereotypes());
-    s << ":end:" << std::endl << std::endl;
+        insert_stereotypes(s, a.stereotypes());
+        s << ":end:" << std::endl << std::endl;
+    }
 
-    if (!a.documentation().empty())
-        s << a.documentation() << std::endl;
+    if (!a.documentation().empty()) {
+        if (a.name() == "content") {
+            s << "#+begin_src mustache" << std::endl
+              << a.documentation() << std::endl
+              << "#+end_src" << std::endl;
+        } else if (a.name() == "stitch_template_content") {
+            s << "#+begin_src stitch" << std::endl
+              << a.documentation() << std::endl
+              << "#+end_src" << std::endl;
+        } else if (a.name() == "short_form" || a.name() == "long_form") {
+            s << "#+begin_src fundamental" << std::endl
+              << a.documentation() << std::endl
+              << "#+end_src" << std::endl;
+        } else
+            s << a.documentation() << std::endl;
+    }
 }
 
 void dehydrator::insert_element(std::ostream& s,
-    const injection::entities::element& e) {
+    const unsigned int level, const entities::element& e) {
 
-    s << "** " << e.name() << "    " << ":element:" << std::endl;
+    const std::string stars(level, '*');
+    s << stars << " " << e.name() << std::endl;
 
     insert_tagged_values(s, e.tagged_values());
 
@@ -120,7 +139,21 @@ void dehydrator::insert_element(std::ostream& s,
         s << e.documentation() << std::endl;
 
     for (const auto& a : e.attributes())
-        insert_attribute(s, a);
+        insert_attribute(s, level + 1, a);
+}
+
+void dehydrator::walk_parent_to_child(std::ostream& s, const unsigned int level,
+    const std::string& id, const std::unordered_map<std::string,
+    std::list<entities::element>>& parent_to_child_map) {
+
+    const auto i(parent_to_child_map.find(id));
+    if (i != parent_to_child_map.end()) {
+        for (const auto& e : i->second) {
+            insert_element(s, level, e);
+            const auto id(e.origin_element_id());
+            walk_parent_to_child(s, level + 1, id, parent_to_child_map);
+        }
+    }
 }
 
 std::string dehydrator::dehydrate(const injection::entities::model& m) {
@@ -140,9 +173,16 @@ std::string dehydrator::dehydrate(const injection::entities::model& m) {
     if (!m.documentation().empty())
         s << m.documentation() << std::endl;
 
-    s << "* Elements" << std::endl;
-    for (const auto& e : m.elements())
-        insert_element(s, e);
+
+    std::unordered_map<std::string,
+                       std::list<entities::element>> parent_to_child_map;
+    for (const auto& e : m.elements()) {
+        auto& n(parent_to_child_map[e.origin_containing_element_id()]);
+        n.push_back(e);
+    }
+
+    std::string empty;
+    walk_parent_to_child(s, 1, empty, parent_to_child_map);
 
     return s.str();
 }
