@@ -44,7 +44,7 @@ void dehydrator::insert_tagged_values(std::ostream& s,
     if (tv.empty())
         return;
 
-    s << ":dogen-tagged_values:" << std::endl;
+    s << ":dogen-tagged-values:" << std::endl;
     for (const auto& pair : tv)
         s << ":" << pair.first << ": " << pair.second << std::endl;
     s << ":end:" << std::endl;
@@ -108,7 +108,7 @@ void dehydrator::insert_attribute(std::ostream& s,
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "stitch_template_content") {
-            s << "#+begin_src stitch" << std::endl
+            s << "#+begin_src fundamental" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "short_form" || a.name() == "long_form") {
