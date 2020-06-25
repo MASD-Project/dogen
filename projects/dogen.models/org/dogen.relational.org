@@ -1,5 +1,5 @@
-#+TITLE: dogen.relational
-#+OPTIONS: ^:nil
+#+title: dogen.relational
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.relational

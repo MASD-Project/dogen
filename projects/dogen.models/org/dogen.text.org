@@ -1,5 +1,5 @@
-#+TITLE: dogen.text
-#+OPTIONS: ^:nil
+#+title: dogen.text
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.text

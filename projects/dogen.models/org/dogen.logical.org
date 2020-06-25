@@ -1,5 +1,5 @@
-#+TITLE: dogen.logical
-#+OPTIONS: ^:nil
+#+title: dogen.logical
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.logical
@@ -2929,7 +2929,7 @@ ID of the meta-element in the logical model this archetype binds to.
 :type: std::string
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 Content of the stitch template associated with this archetype, if any exists.
 
 #+end_src

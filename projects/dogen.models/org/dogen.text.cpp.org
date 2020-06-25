@@ -1,5 +1,5 @@
-#+TITLE: dogen.text.cpp
-#+OPTIONS: ^:nil
+#+title: dogen.text.cpp
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.text.cpp
@@ -60,7 +60,7 @@ Generates header files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -547,7 +547,7 @@ Generates header files for exceptions.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -669,7 +669,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -779,7 +779,7 @@ Generates header files for namespaces.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -865,7 +865,7 @@ Generates header files for visitors.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -995,7 +995,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1544,7 +1544,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1604,7 +1604,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1857,7 +1857,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2040,7 +2040,7 @@ Generates implementation files for feature template bundles
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2222,7 +2222,7 @@ Generates implementation files for feature templates.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2443,7 +2443,7 @@ Generates header files for feature bundles.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2534,7 +2534,7 @@ Generates header files for feature bundles.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2645,7 +2645,7 @@ Generates forward declarations for classes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2721,7 +2721,7 @@ Generates forward declarations for visitors.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2797,7 +2797,7 @@ Generates forward declarations for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2870,7 +2870,7 @@ Generates implementation file for entry point.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2948,7 +2948,7 @@ Generates header files for feature bundles.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3130,7 +3130,7 @@ Generates implementation files for feature bundles.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3348,7 +3348,7 @@ Generates header files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3471,7 +3471,7 @@ Generates implementation files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3531,7 +3531,7 @@ Generates header files for facet transforms.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3626,7 +3626,7 @@ Generates implementation files for facet transforms.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3736,7 +3736,7 @@ Generates header files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3831,7 +3831,7 @@ Generates implementation files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -3962,7 +3962,7 @@ Generates header files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4035,7 +4035,7 @@ Generates implementation files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4094,7 +4094,7 @@ Generates header files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4167,7 +4167,7 @@ Generates implementation files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4228,7 +4228,7 @@ Generates header files for archetype factories.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4314,7 +4314,7 @@ Generates implementation files for archetype factories.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4410,7 +4410,7 @@ Generates header files for facet factories.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4493,7 +4493,7 @@ Generates implementation files for facet factory.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4625,7 +4625,7 @@ Generates header files for backend factories.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4709,7 +4709,7 @@ Generates implementation files for backend factories.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4853,7 +4853,7 @@ Generates header files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -4948,7 +4948,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5089,7 +5089,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5175,7 +5175,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5275,7 +5275,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5366,7 +5366,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::hash #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5489,7 +5489,7 @@ Generates header files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5569,7 +5569,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5679,7 +5679,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5757,7 +5757,7 @@ Generates implementation files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5869,7 +5869,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -5964,7 +5964,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6046,7 +6046,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6175,7 +6175,7 @@ Generates header files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6289,7 +6289,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6484,7 +6484,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6555,7 +6555,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6615,7 +6615,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6702,7 +6702,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6842,7 +6842,7 @@ Generates forward declarations for classes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -6928,7 +6928,7 @@ Generates forward declarations for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7012,7 +7012,7 @@ Generates header files for type registrars.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7093,7 +7093,7 @@ Generates header files for feature bundles.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7240,7 +7240,7 @@ Generates header files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7346,7 +7346,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7586,7 +7586,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7675,7 +7675,7 @@ Generates implementation files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7774,7 +7774,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7893,7 +7893,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -7989,7 +7989,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8162,7 +8162,7 @@ Generates header files for archetypes.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8292,7 +8292,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8368,7 +8368,7 @@ Generates header files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8423,7 +8423,7 @@ Generates header files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8544,7 +8544,7 @@ Generates object options for odb.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8651,7 +8651,7 @@ Generates object options for odb.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -8758,7 +8758,7 @@ Generates object options for odb.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -9057,7 +9057,7 @@ Generates tests for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -9629,7 +9629,7 @@ Generates tests for enumeration.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -9964,7 +9964,7 @@ Generates entry point for tests.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10075,7 +10075,7 @@ Generates cmakelists for tests.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::tests #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10472,7 +10472,7 @@ Generates header files for enumerations.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::lexical_cast #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10631,7 +10631,7 @@ Generates logic-less templates.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::templates #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10715,7 +10715,7 @@ Generates visual studio project.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10831,7 +10831,7 @@ Generates visual studio solutions.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -10932,7 +10932,7 @@ Generates msbuild targets.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -11072,7 +11072,7 @@ Generates cmakelists for tests.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::build #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -11229,7 +11229,7 @@ Generates cmakelists for tests.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::build #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>

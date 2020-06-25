@@ -1,5 +1,5 @@
-#+TITLE: hello_world
-#+OPTIONS: ^:nil
+#+title: hello_world
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.hello_world

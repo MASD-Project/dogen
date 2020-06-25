@@ -1,5 +1,5 @@
-#+TITLE: dogen.openapi
-#+OPTIONS: ^:nil
+#+title: dogen.openapi
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 * document
 ** openapi
 :dogen-properties:

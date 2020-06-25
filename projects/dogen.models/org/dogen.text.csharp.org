@@ -1,5 +1,5 @@
-#+TITLE: dogen.text.csharp
-#+OPTIONS: ^:nil
+#+title: dogen.text.csharp
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.text.csharp
@@ -117,7 +117,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -432,7 +432,7 @@ Generates implementation files for enums.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -516,7 +516,7 @@ Generates implementation files for exceptions.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -595,7 +595,7 @@ Generates implementation files for builtins.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -641,7 +641,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -819,7 +819,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -963,7 +963,7 @@ Generates implementation files for enums.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1073,7 +1073,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1192,7 +1192,7 @@ Generates implementation files for assistants.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1752,7 +1752,7 @@ Generates implementation files for objects.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1969,7 +1969,7 @@ Generates implementation files for enums.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2128,7 +2128,7 @@ Generates implementation files for primitives.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2304,7 +2304,7 @@ Generates implementation files for assistants.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2689,7 +2689,7 @@ Generates visual studio project.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2796,7 +2796,7 @@ Generates visual studio solutions.
 :dogen-properties:
 :end:
 
-#+begin_src fundamental
+#+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>

@@ -1,5 +1,5 @@
-#+TITLE: dogen.json_schema
-#+OPTIONS: ^:nil
+#+title: dogen.json_schema
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 * schema_document
 ** id_keyword
 :dogen-properties:
