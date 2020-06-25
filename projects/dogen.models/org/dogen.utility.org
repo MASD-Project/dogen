@@ -1,6 +1,6 @@
 #+TITLE: dogen.utility
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.utility
 :masd.injection.input_technical_space: cpp
@@ -168,7 +168,7 @@ If true, dumps the log into the console.
 Directory in which to place the output.
 
 ** log::invalid_logging_configuration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: false
 :end:
 :dogen-properties:
@@ -327,7 +327,7 @@ There was an error reading an environment variable.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * formatters
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Contains all of the formatting primitives

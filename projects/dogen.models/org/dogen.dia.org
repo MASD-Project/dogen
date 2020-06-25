@@ -1,6 +1,6 @@
 #+TITLE: dogen.dia
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.dia
 :masd.injection.input_technical_space: cpp

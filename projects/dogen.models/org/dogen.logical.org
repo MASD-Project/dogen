@@ -1,6 +1,6 @@
 #+TITLE: dogen.logical
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.logical
 :masd.injection.reference: cpp.builtins
@@ -850,7 +850,7 @@ Element has the ability to have relationships with other elements.
 :end:
 
 ** entities::technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.hash.enabled: true
 :end:
 :dogen-properties:
@@ -1210,7 +1210,7 @@ Has the ability to contain other elements.
 All elements contained by this element.
 
 ** entities::decoration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the meta-modeling elements and
@@ -1460,7 +1460,7 @@ as a modeline.
 :end:
 
 ** entities::meta_element
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: logical::meta_element
 :end:
@@ -1473,7 +1473,7 @@ as a modeline.
 :end:
 
 ** entities::variability
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the meta-modeling elements related to variability.
@@ -1892,7 +1892,7 @@ Key as it was originally provided by the user.
 :end:
 
 ** entities::orm
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the properties related to ORM
@@ -2215,7 +2215,7 @@ Database to which the mapping applies. If none is supplied, it will apply to all
 :end:
 
 ** entities::structural
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the meta-modeling elements related
@@ -2530,7 +2530,7 @@ Represents an entry point to a binary.
 General type to provide helpers.
 
 ** entities::mapping
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Meta-model elements related to mapping domains.
@@ -2589,7 +2589,7 @@ variability types.
 :end:
 
 ** entities::templating
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Meta-model elements related to templating .
@@ -2618,7 +2618,7 @@ Content of the logic-less template.
 :end:
 
 ** entities::serialization
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the meta-modeling elements related
@@ -2657,7 +2657,7 @@ Registrars on other models this registrar depends on.
 :end:
 
 ** entities::visual_studio
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses meta-model elements related to
@@ -2802,7 +2802,7 @@ GUID that uniquely identifies this element.
 :end:
 
 ** entities::build
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the meta-modeling elements related
@@ -2852,7 +2852,7 @@ Represents build CMakeLists files.
 :end:
 
 ** entities::physical
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Logical representation of elements in the physical dimension.
@@ -2929,7 +2929,7 @@ ID of the meta-element in the logical model this archetype binds to.
 :type: std::string
 :end:
 
-#+begin_src stitch
+#+begin_src fundamental
 Content of the stitch template associated with this archetype, if any exists.
 
 #+end_src
@@ -3169,13 +3169,13 @@ Value associated with this label.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * transforms
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Houses all of the transformations supported by logical.
 
 ** transforms::context
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -3818,13 +3818,13 @@ A fatal error has occurred while parsing.
 An error occurred whilst flattening a name.
 
 * features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Defines all features used by the logical model.
 
 ** features::type_parameters
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.type_parameters
 :end:
@@ -3856,7 +3856,7 @@ Parameters to configure generic types.
 :stereotypes: masd::variability::initializer
 :end:
 ** features::enumeration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.enumeration
 :end:
@@ -3875,7 +3875,7 @@ If true, it uses the default implementation defined underlying element for the
 technical space targeted.
 
 *** underlying_element
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -3901,7 +3901,7 @@ If true, uses the enumeration values supplied by the underlying technical space.
 If true, adds an enumerator to represent an invalid choice.
 
 ** features::enumerator
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: property
 :masd.variability.key_prefix: masd.enumerator
 :end:
@@ -3911,7 +3911,7 @@ If true, adds an enumerator to represent an invalid choice.
 Parameters related to enumerators.
 
 *** value
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -3921,7 +3921,7 @@ Parameters related to enumerators.
 Value to use for this enumerator. Must be unique for an enumeration.
 
 ** features::generalization
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.generalization
 :end:
@@ -3931,7 +3931,7 @@ Value to use for this enumerator. Must be unique for an enumeration.
 Features related to the generalization relationship.
 
 *** is_final
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -3941,7 +3941,7 @@ Features related to the generalization relationship.
 Whether to mark a type as final or not.
 
 *** parent
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -3951,7 +3951,7 @@ Whether to mark a type as final or not.
 Name of the parent of the current element.
 
 ** features::origin
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :end:
 :dogen-properties:
@@ -3968,7 +3968,7 @@ Features related to the origin of the model.
 If true, sets the origin of the model to "proxy model".
 
 ** features::output_technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.physical
 :end:
@@ -3978,7 +3978,7 @@ If true, sets the origin of the model to "proxy model".
 Features related to the output technical space.
 
 *** output_technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -3988,7 +3988,7 @@ Features related to the output technical space.
 Set of output technical spaces that this model targets.
 
 ** features::primitive
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.primitive
 :end:
@@ -3998,7 +3998,7 @@ Set of output technical spaces that this model targets.
 Features related to primitive elements.
 
 *** underlying_element
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4025,7 +4025,7 @@ If true, use type aliasing to implement the primitive if the technical space sup
 it.
 
 ** features::orm
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.orm
 :end:
 :dogen-properties:
@@ -4034,7 +4034,7 @@ it.
 Features related to ORM support.
 
 *** database_system
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.is_optional: true
 :end:
@@ -4045,7 +4045,7 @@ Features related to ORM support.
 Database system to target for ORM support.
 
 *** table_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4056,7 +4056,7 @@ Database system to target for ORM support.
 Name of the database table for this element.
 
 *** schema_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4067,7 +4067,7 @@ Name of the database table for this element.
 Name of the database schema for this modeling element.
 
 *** is_primary_key
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4078,7 +4078,7 @@ Name of the database schema for this modeling element.
 If true, this property will be used for the primary key.
 
 *** column_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4089,7 +4089,7 @@ If true, this property will be used for the primary key.
 Overrides the name of the column name for the database table.
 
 *** is_nullable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4100,7 +4100,7 @@ Overrides the name of the column name for the database table.
 If true, the column can be null.
 
 *** is_composite
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4111,7 +4111,7 @@ If true, the column can be null.
 If true, the primary key is a composite key.
 
 *** letter_case
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.is_optional: true
 :end:
@@ -4122,7 +4122,7 @@ If true, the primary key is a composite key.
 Determines the casing to use for identifiers.
 
 *** type_override
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4136,7 +4136,7 @@ Note: we've set the binding point to "any" as a hack to allow for primitive supp
 Should really be "property".
 
 *** type_mapping
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4150,7 +4150,7 @@ Note: we've set the binding point to "any" as a hack to allow for primitive supp
 Should really be "property".
 
 *** odb_pragma
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4164,7 +4164,7 @@ Use these when you need some functionality which is not natively supported by
 ORM in Dogen.
 
 ** features::decoration_modeline
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.decoration.modeline
 :end:
@@ -4174,7 +4174,7 @@ ORM in Dogen.
 Modeline properties.
 
 *** editor
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4184,7 +4184,7 @@ Modeline properties.
 Editor to use in this modeline.
 
 *** location
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4194,7 +4194,7 @@ Editor to use in this modeline.
 Where to place the modeline.
 
 *** technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4204,7 +4204,7 @@ Where to place the modeline.
 Technical space targeted by the modeline.
 
 ** features::variability_templates
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.variability
 :end:
 :dogen-properties:
@@ -4213,7 +4213,7 @@ Technical space targeted by the modeline.
 Features related to the processing of variability for feature and profile templates.
 
 *** binding_point
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4224,7 +4224,7 @@ Features related to the processing of variability for feature and profile templa
 Where does this feature bind into.
 
 *** stereotype
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4235,7 +4235,7 @@ Where does this feature bind into.
 Stereotype for this profile. Must be globally unique.
 
 *** value
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4249,7 +4249,7 @@ Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
 *** is_optional
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :end:
 :dogen-properties:
@@ -4260,7 +4260,7 @@ the default value field if available.
 If true, the feature template provides an optional feature.
 
 *** default_value_override
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4273,7 +4273,7 @@ Default values to override the "default" default value.
 These match on keys ending with the specified string.
 
 ** features::mapping
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.mapping
 :end:
@@ -4283,7 +4283,7 @@ These match on keys ending with the specified string.
 Meta-data related to element mapping.
 
 *** target
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4293,7 +4293,7 @@ Meta-data related to element mapping.
 Type that is the source of the mapping.
 
 *** destination
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4303,7 +4303,7 @@ Type that is the source of the mapping.
 Type that is the destination of the mapping.
 
 ** features::variability_bundle
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.variability
 :end:
 :dogen-properties:
@@ -4312,7 +4312,7 @@ Type that is the destination of the mapping.
 Features related to the processing of variability for feature bundles.
 
 *** generate_registration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :end:
 :dogen-properties:
@@ -4325,7 +4325,7 @@ If true, generates code to register the features.
 @pre Features must not already exist.
 
 *** generate_static_configuration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :end:
 :dogen-properties:
@@ -4336,7 +4336,7 @@ If true, generates code to register the features.
 If true, generates a c++ class to contain the configuration at compile time.
 
 *** default_binding_point
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4347,7 +4347,7 @@ If true, generates a c++ class to contain the configuration at compile time.
 Where does this bundle bind to.
 
 *** instantiation_domain_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4358,7 +4358,7 @@ Where does this bundle bind to.
 Template instantiation domain name to use when instantiating template.
 
 *** key_prefix
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4369,7 +4369,7 @@ Template instantiation domain name to use when instantiating template.
 Prefix to apply to construct the qualified name, if any.
 
 ** features::variability_entry
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.generate_registration: false
 :masd.variability.key_prefix: masd.variability
 :end:
@@ -4379,7 +4379,7 @@ Prefix to apply to construct the qualified name, if any.
 Features related to the processing of variability for profiles and profile templates.
 
 *** binding_point
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4390,7 +4390,7 @@ Features related to the processing of variability for profiles and profile templ
 Where does this profile or profile template bind to.
 
 *** value
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: property
 :masd.variability.is_optional: true
 :end:
@@ -4404,7 +4404,7 @@ Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
 *** instantiation_domain_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4415,7 +4415,7 @@ the default value field if available.
 Template instantiation domain name to use when instantiating template.
 
 ** features::variability_profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.generate_registration: false
 :masd.variability.key_prefix: masd.variability
 :end:
@@ -4425,7 +4425,7 @@ Template instantiation domain name to use when instantiating template.
 Features related to the processing of variability for profile entries.
 
 *** stereotype
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4436,7 +4436,7 @@ Features related to the processing of variability for profile entries.
 Stereotype for this profile. Must be globally unique.
 
 *** key_prefix
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4447,7 +4447,7 @@ Stereotype for this profile. Must be globally unique.
 Prefix to apply to construct the qualified name, if any.
 
 *** binding_point
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: any
 :masd.variability.is_optional: true
 :end:
@@ -4458,7 +4458,7 @@ Prefix to apply to construct the qualified name, if any.
 Where does this profile or profile template bind to.
 
 ** features::physical
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.physical
 :end:
@@ -4468,7 +4468,7 @@ Where does this profile or profile template bind to.
 Features required for physical elements.
 
 *** backend_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4480,7 +4480,7 @@ Simple name of the backend.
 FIXME: temporary until we rename the namespaces.
 
 *** part_id
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4492,7 +4492,7 @@ Fully qualified physical name of the part this artefact belongs to.
 FIXME: optional for now.
 
 *** logical_meta_element_id
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4504,7 +4504,7 @@ Fully qualified name of the logical model element.
 FIXME: optional for now.
 
 *** major_technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4514,7 +4514,7 @@ FIXME: optional for now.
 Major technical space to which this element belongs to.
 
 *** referencing_status
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4524,7 +4524,7 @@ Major technical space to which this element belongs to.
 Referencing status for the archetype.
 
 *** wale_template_reference
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4534,7 +4534,7 @@ Referencing status for the archetype.
 Name of the wale template that the archetype uses.
 
 ** features::wale
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.wale
 :end:
@@ -4544,7 +4544,7 @@ Name of the wale template that the archetype uses.
 Wale related features.
 
 *** text_template
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4554,7 +4554,7 @@ Wale related features.
 Name of the wale text template to instantiate, if any.
 
 *** kvp
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4564,7 +4564,7 @@ Name of the wale text template to instantiate, if any.
 Array of wale KVPs to use in template instantiation.
 
 ** features::decoration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.decoration
 :end:
@@ -4572,7 +4572,7 @@ Array of wale KVPs to use in template instantiation.
 :stereotypes: masd::variability::feature_bundle
 :end:
 *** enabled
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4582,7 +4582,7 @@ Array of wale KVPs to use in template instantiation.
 If true, decorations are enabled on this modeling element.
 
 *** copyright_notice
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4592,7 +4592,7 @@ If true, decorations are enabled on this modeling element.
 Copyright notices for this modeling element.
 
 *** licence_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4602,7 +4602,7 @@ Copyright notices for this modeling element.
 Name of the licence to use for this modeling element.
 
 *** modeline_group_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4612,7 +4612,7 @@ Name of the licence to use for this modeling element.
 Name of the modeline group for this modeling element.
 
 *** marker_name
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -4628,7 +4628,7 @@ Name of the decoration marker to use for this modeling element.
 Features related to labels.
 
 *** masd.label
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.is_optional: true
 :end:
@@ -4651,7 +4651,7 @@ Labels to attach to modeling elements. Key must be unique.
 :stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :end:
 * formatters
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Contains formatting classes for the logical model.

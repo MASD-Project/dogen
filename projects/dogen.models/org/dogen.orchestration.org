@@ -1,6 +1,6 @@
 #+TITLE: dogen.orchestration
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.orchestration
 :masd.injection.reference: cpp.builtins
@@ -22,7 +22,7 @@
 Orchestration-based imlementation of the Dogen product API.
 
 * transforms
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Top-level transforms for Dogen. These are
@@ -33,7 +33,7 @@ the entry points to all transformations.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 ** transforms::context
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -103,14 +103,14 @@ An error occurred in the factory whilst making.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * generator
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.generalization.parent: dogen::generator
 :end:
 :dogen-properties:
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * converter
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.generalization.parent: dogen::converter
 :end:
 :dogen-properties:
@@ -121,7 +121,7 @@ An error occurred in the factory whilst making.
 :stereotypes: dogen::handcrafted::typeable::header_only
 :end:
 * helpers
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Helpers for the orchestration model.
@@ -153,13 +153,13 @@ user defined stereotypes.
 :end:
 
 * features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Features for the orchestration model.
 
 ** features::model_location
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.injection
 :end:
@@ -169,7 +169,7 @@ Features for the orchestration model.
 Feature group for model location related features.
 
 *** external_modules
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -203,7 +203,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 :stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :end:
 * spec_dumper
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.generalization.parent: dogen::spec_dumper
 :end:
 :dogen-properties:

@@ -1,6 +1,6 @@
 #+TITLE: hello_world
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.hello_world
 :masd.injection.input_technical_space: cpp

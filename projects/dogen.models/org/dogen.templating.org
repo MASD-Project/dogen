@@ -1,6 +1,6 @@
 #+TITLE: dogen.templating
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.templating
 :masd.injection.reference: cpp.builtins
@@ -177,7 +177,7 @@ An error occurred whilst formatting.
 :stereotypes: masd::exception
 :end:
 ** stitch::features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.stitch
 :end:
@@ -195,7 +195,7 @@ Stitch templating features.
 Which name to use for the variable with the stream.
 
 *** relative_output_directory
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -205,7 +205,7 @@ Which name to use for the variable with the stream.
 Relative path to the output directory.
 
 *** inclusion_dependency
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -222,7 +222,7 @@ C++ Include header.
 Namespaces that contain the class represented by the template.
 
 *** wale.text_template
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -232,7 +232,7 @@ Namespaces that contain the class represented by the template.
 Name of the wale text template to instantiate, if any.
 
 *** wale.kvp
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:

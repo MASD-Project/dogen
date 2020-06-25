@@ -1,6 +1,6 @@
 #+TITLE: dogen.injection.org_mode
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.injection.org_mode
 :masd.injection.reference: cpp.builtins

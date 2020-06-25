@@ -1,6 +1,6 @@
 #+TITLE: dogen.profiles
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.profiles
 :masd.injection.reference: masd
@@ -19,7 +19,7 @@ You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
 * base
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 The base layer profiles are designed to be applied first.
@@ -29,7 +29,7 @@ other layers can then configure features.
 
 
 ** base::decoration
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.key_prefix: masd.decoration
 :end:
@@ -54,14 +54,14 @@ Configuration for the decoration elements.
 :end:
 
 *** copyright_notice
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.value: Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 :end:
 :dogen-properties:
 :end:
 
 ** base::extraction
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.physical
 :end:
 :dogen-properties:
@@ -80,7 +80,7 @@ Configuration for extraction.
 :end:
 
 ** base::csharp
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.csharp
 :end:
 :dogen-properties:
@@ -94,7 +94,7 @@ Configures the main options for the C# backend.
 :end:
 
 ** base::ignores
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.key_prefix: masd.physical
 :end:
@@ -124,7 +124,7 @@ Regexes to ignore.
 :end:
 
 ** base::base_profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.cpp
 :end:
 :dogen-properties:
@@ -169,7 +169,7 @@ Configures the main options for the C++ backend.
 :end:
 
 ** base::default_profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :end:
 :dogen-properties:
@@ -179,7 +179,7 @@ Configures the main options for the C++ backend.
 Variability profile for a typical dogen model.
 
 ** base::disable_all_facets
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :end:
 :dogen-properties:
@@ -190,7 +190,7 @@ Variability profile for a typical dogen model.
 Disables all facets in the C++ backend.
 
 *** enabled
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.instantiation_domain_name: masd.facet
 :end:
 :dogen-properties:
@@ -198,7 +198,7 @@ Disables all facets in the C++ backend.
 :end:
 
 ** base::relational_profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.key_prefix: masd.cpp
 :end:
 :dogen-properties:
@@ -231,7 +231,7 @@ Disables all facets in the C++ backend.
 :end:
 
 * composable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 The composable layer is made up of profiles that
@@ -240,7 +240,7 @@ These can be used to compose the final configuration
 for the element.
 
 ** composable::typeable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::typeable
 :end:
@@ -263,7 +263,7 @@ If you are typeable, it probably means you do not want the default configuration
 so we disable all facets.
 
 ** composable::pretty_printable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::pretty_printable
 :masd.variability.key_prefix: masd.cpp.io
@@ -279,7 +279,7 @@ The element has the ability to dump itself to a stream.
 :end:
 
 ** composable::hashable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::hashable
 :masd.variability.key_prefix: masd.cpp.hash
@@ -295,7 +295,7 @@ The element has the ability to generate hashes.
 :end:
 
 ** composable::serializable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::serializable
 :masd.variability.key_prefix: masd.cpp.serialization
@@ -309,7 +309,7 @@ The element has the ability to generate hashes.
 :end:
 
 ** composable::handcrafted
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :end:
 :dogen-properties:
@@ -323,7 +323,7 @@ Base profile for model elements that are manually generated.
 :end:
 
 ** composable::handcrafted_pretty_printable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::pretty_printable
 :masd.variability.key_prefix: masd.cpp.io
@@ -343,7 +343,7 @@ Base profile for model elements that are manually generated.
 :end:
 
 ** composable::handcrafted_typeable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::typeable
 :masd.variability.key_prefix: masd.cpp.types
@@ -370,7 +370,7 @@ Configuration for model elements that are generated manually by the user.
 :end:
 
 ** composable::header_only
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::handcrafted::typeable::header_only
 :masd.variability.key_prefix: masd.cpp.types
@@ -387,7 +387,7 @@ This element has only a types header file.
 :end:
 
 ** composable::inheritable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::inheritable
 :end:
@@ -400,7 +400,7 @@ This element has only a types header file.
 :end:
 
 ** composable::implementation_only
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::typeable::implementation_only
 :masd.variability.key_prefix: masd.cpp.types
@@ -437,7 +437,7 @@ This element has only a types implementation file.
 :end:
 
 ** composable::cpp_helper_transform
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::cpp::helper_transform
 :masd.variability.key_prefix: masd.cpp.types
@@ -472,7 +472,7 @@ This element has only a types implementation file.
 :end:
 
 ** composable::csharp_helper_transform
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::csharp::helper_transform
 :masd.variability.key_prefix: masd.cpp.types
@@ -507,7 +507,7 @@ This element has only a types implementation file.
 :end:
 
 ** composable::handcrafted_serializable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::serializable
 :masd.variability.key_prefix: masd.cpp.serialization
@@ -527,7 +527,7 @@ This element has only a types implementation file.
 :end:
 
 ** composable::convertible
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::convertible
 :masd.variability.key_prefix: masd.cpp.lexical_cast
@@ -541,7 +541,7 @@ This element has only a types implementation file.
 :end:
 
 ** composable::untestable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::untestable
 :masd.variability.key_prefix: masd.cpp.tests
@@ -557,7 +557,7 @@ Model element will not be tested via generated tests.
 :end:
 
 ** composable::untypable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::untypable
 :masd.variability.key_prefix: masd.cpp.types
@@ -573,7 +573,7 @@ The element does not have a types facet.
 :end:
 
 ** composable::handcrafted_cmake
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::cmake
 :masd.variability.key_prefix: masd.cpp
@@ -592,7 +592,7 @@ The element does not have a types facet.
 :end:
 
 ** composable::forward_declarable
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::forward_declarable
 :masd.variability.key_prefix: masd.cpp.types

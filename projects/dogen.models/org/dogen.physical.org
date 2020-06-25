@@ -1,6 +1,6 @@
 #+TITLE: dogen.physical
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.physical
 :masd.injection.input_technical_space: cpp
@@ -27,7 +27,7 @@ physical dimension of MASD conceptual space.
 :stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :end:
 * entities
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Defines the MASD physical space.
@@ -626,7 +626,7 @@ Operation to apply to an artefact.
 :end:
 
 ** entities::operation_type
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.hash.enabled: true
 :end:
 :dogen-properties:
@@ -659,7 +659,7 @@ Ingores an artefact.
 Deletes a file.
 
 ** entities::operation_reason
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.hash.enabled: true
 :end:
 :dogen-properties:
@@ -880,7 +880,7 @@ Key of the label.
 Value associated with this label.
 
 * helpers
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Helpers for the physical model.
@@ -949,13 +949,13 @@ An error occurred during validation.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Features for the MASD physical model.
 
 ** features::facet_features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.instantiation_domain_name: masd.facet
 :end:
 :dogen-properties:
@@ -964,7 +964,7 @@ Features for the MASD physical model.
 Physical features common to all facets.
 
 *** directory
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.default_value_override.cpp.types: "types"
 :masd.variability.default_value_override.cpp.hash: "hash"
@@ -987,7 +987,7 @@ Physical features common to all facets.
 Directory in which to place this facet.
 
 *** postfix
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.default_value_override.cpp.tests: "tests"
 :masd.variability.default_value_override.cpp.hash: "hash"
@@ -1007,7 +1007,7 @@ Directory in which to place this facet.
 Postfix to use for all files that belong to this facet.
 
 *** overwrite
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :end:
 :dogen-properties:
@@ -1018,7 +1018,7 @@ Postfix to use for all files that belong to this facet.
 If true, the generated files will overwrite existing files.
 
 ** features::archetype_features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.instantiation_domain_name: masd.archetype
 :end:
 :dogen-properties:
@@ -1027,7 +1027,7 @@ If true, the generated files will overwrite existing files.
 Features common to all archetypes.
 
 *** postfix
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: global
 :masd.variability.default_value_override.forward_declarations: "fwd"
 :masd.variability.default_value_override.factory: "factory"
@@ -1041,7 +1041,7 @@ Features common to all archetypes.
 Postfix to use for all files that belong to this facet.
 
 *** overwrite
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.binding_point: element
 :end:
 :dogen-properties:
@@ -1056,7 +1056,7 @@ If true, the generated files will overwrite existing files.
 :stereotypes: masd::variability::initializer
 :end:
 ** features::filesystem
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.physical
 :end:
@@ -1087,7 +1087,7 @@ If true, any files the code generator is not aware of are deleted.
 If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
 
 *** ignore_files_matching_regex
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -1121,7 +1121,7 @@ Note that this setting is only relevant if you are targetting a single output te
 space. If you are targetting more than one, it will automatically be set to true.
 
 ** features::enablement
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.generate_static_configuration: false
 :masd.variability.instantiation_domain_name: masd
@@ -1140,7 +1140,7 @@ Enablement related properties.
 If true, decorations are enabled on this modeling element.
 
 ** features::formatting
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.instantiation_domain_name: masd.archetype
 :end:
@@ -1164,14 +1164,14 @@ Style of formatting to use for this archetype.
 If the formatting style requires a template, the name of the template to use.
 
 * transforms
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Contains all of the transforms needed to produce
 models and meta-models for the physical model.
 
 ** transforms::context
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:

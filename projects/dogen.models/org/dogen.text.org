@@ -1,6 +1,6 @@
 #+TITLE: dogen.text
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.text
 :masd.injection.reference: cpp.builtins
@@ -125,7 +125,7 @@ spaces.
 :end:
 
 ** entities::element_archetype
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.hash.enabled: true
 :end:
 *** element
@@ -338,7 +338,7 @@ Models that belong to this set.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 ** transforms::context
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -386,7 +386,7 @@ An error occurred whilst applying a transformation.
 :stereotypes: masd::exception
 :end:
 ** transforms::model_to_text_transform
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:

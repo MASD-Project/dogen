@@ -1,6 +1,6 @@
 #+TITLE: dogen
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen
 :masd.injection.input_technical_space: cpp
@@ -240,7 +240,7 @@ not as part of a profile).
 Timepoint at which the activity started.
 
 * invalid_configuration_exception
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: false
 :end:
 :dogen-properties:

@@ -1,6 +1,6 @@
 #+TITLE: dogen.variability
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.variability
 :masd.injection.input_technical_space: cpp
@@ -47,7 +47,7 @@ of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
 
 * entities
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Contains all of the types describing variability
@@ -735,13 +735,13 @@ An error occurred whilst applying a transformation.
 :end:
 
 * features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Features used by the variability model.
 
 ** features::profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.variability
 :end:
@@ -751,7 +751,7 @@ Features used by the variability model.
 Features related to profile processing.
 
 *** profile
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:

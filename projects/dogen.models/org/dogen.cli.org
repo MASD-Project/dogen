@@ -1,6 +1,6 @@
 #+TITLE: dogen.cli
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.cli
 :masd.injection.input_technical_space: cpp
@@ -135,7 +135,7 @@ Configuration specific to the CLI application.
 Directory in which to place all files not directly related to generated code.
 
 * main
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.enabled: true
 :masd.cpp.types.overwrite: false
 :end:

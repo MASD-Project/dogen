@@ -1,6 +1,6 @@
 #+TITLE: dogen.tracing
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.tracing
 :masd.injection.input_technical_space: cpp
@@ -16,7 +16,7 @@
 Houses classes common to all transformations.
 
 * tracer
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -84,7 +84,7 @@ An error occurred when trying to generate tracing data.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 * backend
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -109,7 +109,7 @@ An error occurred when trying to generate tracing data.
 :stereotypes: masd::exception
 :end:
 * backend_factory
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:

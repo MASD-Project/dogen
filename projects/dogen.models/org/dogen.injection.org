@@ -1,6 +1,6 @@
 #+TITLE: dogen.injection
 #+OPTIONS: ^:nil
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.injection
 :masd.injection.input_technical_space: cpp
@@ -61,7 +61,7 @@ A registration error has occurred.
 :stereotypes: dogen::handcrafted::typeable
 :end:
 ** transforms::context
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.cpp.types.class_forward_declarations.enabled: true
 :end:
 :dogen-properties:
@@ -397,14 +397,14 @@ Contains the list of referenced models for a particular model name.
 A cycle was detected in the references graph.
 
 * features
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.injection.dia.comment: true
 :end:
 Defines all of the features and feature groups used by
 the injection model.
 
 ** features::input_technical_space
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.injection
 :end:
@@ -422,7 +422,7 @@ Feature bundle for the input technical space.
 Input technical space for this model.
 
 ** features::reference
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.injection
 :end:
@@ -432,7 +432,7 @@ Input technical space for this model.
 Features related to model referencing.
 
 *** reference
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.is_optional: true
 :end:
 :dogen-properties:
@@ -446,7 +446,7 @@ Imports an external model.
 :stereotypes: masd::variability::initializer
 :end:
 ** features::uml
-:dogen-tagged_values:
+:dogen-tagged-values:
 :masd.variability.default_binding_point: any
 :masd.variability.generate_static_configuration: false
 :masd.variability.key_prefix: masd.injection
