@@ -795,6 +795,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-06-25 Thu 08:02]--[2020-06-25 Thu 08:30] =>  0:28
     CLOCK: [2020-06-21 Sun 16:01]--[2020-06-21 Sun 16:05] =>  0:04
     CLOCK: [2020-06-21 Sun 14:52]--[2020-06-21 Sun 16:00] =>  1:08
     CLOCK: [2020-06-21 Sun 11:00]--[2020-06-21 Sun 11:12] =>  0:12

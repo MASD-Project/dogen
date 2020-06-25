@@ -78,6 +78,34 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Injector types with regards to containment                        :story:
+
+It seems we have two models for injectors:
+
+- those where element containment is represented through nesting,
+  e.g. XML, JSON, org-mode. These can of course be flat too, but its
+  natural to represent elements as containers.
+- those where element containment is represented through "links",
+  e.g. Dia. When we represent containment through links, we need to
+  create a graph of the elements and then transform them into a
+  qualified path.
+
+At present we left it to the dia injector to resolve the link
+containment. It makes more sense to model the containment type in the
+injection model and then to have a transform that does the graphing
+for link models. We also need a transform that does the name nesting
+for nested models. Both do nothing for the converse case. This will
+simplify injector code.
+
+Notes:
+
+- linked models must supply the original model ID as well as container
+  ID. Nested models may or may not supply this information.
+- we should transform nested models into flat models as part of the
+  injection chain. The final model should be a flat model.
+- perhaps we should have a notion of a nested model and a nested
+  element. This way the type system encodes this information.
+
 *** Conversion does not validate missing options                      :story:
 
 When we fail to add the mandatory options in conversion, we don't get
@@ -9470,6 +9498,18 @@ Links:
 - [[http://www.olegsych.com/2008/02/t4-class-feature-blocks/][Understanding T4: Class Feature Blocks]]
 - [[https://msdn.microsoft.com/en-us/library/bb126478.aspx][Writing a t4 template]] (section Class feature control blocks).
 
+** Unclassified
+
+*** Org-mode and rountripping                                         :story:
+
+With org-mode we will be able to sync selected elements from the
+source code:
+
+- get properties from manually crafted classes. No use case for this
+  yet.
+- get all test names. This can be used to generate the org-mode test
+  file with org-babel.
+
 ** Injection
 
 Changes to injection.
@@ -14757,6 +14797,20 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding scripts or targets for core dumping               :story:
+
+We will likely need the same kind of scripts to retrieve core dumps
+from generated applications. We could either create CMake targets for
+these or maybe shell scripts. At least for the most common scenarios.
+
+Links:
+
+- [[https://github.com/Microsoft/ProcDump-for-Linux][ProcDump GH]]: ProcDump is a Linux reimagining of the classic ProcDump
+  tool from the Sysinternals suite of tools for Windows. ProcDump
+  provides a convenient way for Linux developers to create core dumps
+  of their application based on performance triggers.
+- [[https://linux.byexamples.com/archives/371/gcore-obtain-core-dump-of-current-running-application/][gcore: obtain core dump of current running application]]
 
 *** Consider adding support for =zq= and ZNG                          :story:
 
