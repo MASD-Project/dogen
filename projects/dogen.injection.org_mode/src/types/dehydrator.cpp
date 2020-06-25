@@ -108,7 +108,7 @@ void dehydrator::insert_attribute(std::ostream& s,
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "stitch_template_content") {
-            s << "#+begin_src fundamental" << std::endl
+            s << "#+begin_src stitch" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "short_form" || a.name() == "long_form") {
@@ -159,8 +159,9 @@ void dehydrator::walk_parent_to_child(std::ostream& s, const unsigned int level,
 std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::ostringstream s;
 
-    s << "#+TITLE: " << m.name() << std::endl
-      << "#+OPTIONS: ^:nil" << std::endl;
+    s << "#+title: " << m.name() << std::endl
+      << "#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil"
+      << std::endl;
 
     insert_tagged_values(s, m.tagged_values());
 
