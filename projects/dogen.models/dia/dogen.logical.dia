@@ -53407,16 +53407,16 @@ element.#</dia:string>
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,61.95;134.415,69.65"/>
+        <dia:rectangle val="114.95,61.95;135.955,71.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.365000000000002"/>
+        <dia:real val="20.905000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#physical#</dia:string>
@@ -53651,6 +53651,56 @@ FIXME: optional for now.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Name of the wale template that the archetype uses.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#variable_relation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::key_value_pair#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Define a variable relation between the current archetype and another archetype.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#fixed_relation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::key_value_pair#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Define a fixed relation between the current archetype and another archetype.
 
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
