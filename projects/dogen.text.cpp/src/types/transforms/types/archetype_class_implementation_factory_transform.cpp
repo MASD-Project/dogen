@@ -105,7 +105,7 @@ ast.stream() << "    physical::entities::archetype r;" << std::endl;
 ast.stream() << "    using pmnf = physical::helpers::meta_name_factory;" << std::endl;
 ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
 ast.stream() << "    r.logical_meta_element_id(\"" << arch.logical_meta_element_id() << "\");" << std::endl;
-ast.stream() << "    r.referencing_status(physical::entities::referencing_status::" << arch.referencing_status() << ");" << std::endl;
+ast.stream() << "    r.relation_status(physical::entities::relation_status::" << arch.relation_status() << ");" << std::endl;
             for(const auto& l : arch.labels()) {
 ast.stream() << "    r.labels().push_back(physical::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }
@@ -113,7 +113,6 @@ ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
         } // snf
-ast.stream() << std::endl;
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);

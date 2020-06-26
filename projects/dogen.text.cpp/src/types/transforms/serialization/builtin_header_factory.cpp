@@ -28,9 +28,8 @@ physical::entities::archetype builtin_header_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "serialization", "builtin_header"));
     r.logical_meta_element_id("dogen.logical.entities.builtin");
-    r.referencing_status(physical::entities::referencing_status::facet_default);
+    r.relation_status(physical::entities::relation_status::facet_default);
     return r;
 }
 
 }
-

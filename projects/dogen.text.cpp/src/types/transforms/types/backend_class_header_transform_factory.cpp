@@ -28,9 +28,8 @@ physical::entities::archetype backend_class_header_transform_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "backend_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_backend");
-    r.referencing_status(physical::entities::referencing_status::facet_default);
+    r.relation_status(physical::entities::relation_status::facet_default);
     return r;
 }
 
 }
-

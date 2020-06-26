@@ -21,29 +21,29 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.physical/io/entities/referencing_status_io.hpp"
+#include "dogen.physical/io/entities/relation_status_io.hpp"
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const referencing_status& v) {
-    s << "{ " << "\"__type__\": " << "\"referencing_status\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const relation_status& v) {
+    s << "{ " << "\"__type__\": " << "\"relation_status\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case referencing_status::invalid:
+    case relation_status::invalid:
         attr = "\"invalid\"";
         break;
-    case referencing_status::not_referable:
-        attr = "\"not_referable\"";
+    case relation_status::not_relatable:
+        attr = "\"not_relatable\"";
         break;
-    case referencing_status::referable:
-        attr = "\"referable\"";
+    case relation_status::relatable:
+        attr = "\"relatable\"";
         break;
-    case referencing_status::facet_default:
+    case relation_status::facet_default:
         attr = "\"facet_default\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for referencing_status");
+        throw std::invalid_argument("Invalid value for relation_status");
     }
     s << attr << " }";
     return s;

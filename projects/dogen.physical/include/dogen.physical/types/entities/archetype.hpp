@@ -31,8 +31,8 @@
 #include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/fixed_relation.hpp"
+#include "dogen.physical/types/entities/relation_status.hpp"
 #include "dogen.physical/types/entities/variable_relation.hpp"
-#include "dogen.physical/types/entities/referencing_status.hpp"
 
 namespace dogen::physical::entities {
 
@@ -61,7 +61,7 @@ public:
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
         const std::string& part,
-        const dogen::physical::entities::referencing_status referencing_status,
+        const dogen::physical::entities::relation_status relation_status,
         const std::list<dogen::physical::entities::variable_relation>& variable_relations,
         const std::list<dogen::physical::entities::fixed_relation>& fixed_relations);
 
@@ -177,11 +177,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Status of this archetype with regards to being referenced by other archetypes.
+     * @brief Status of this archetype with regards to being related to archetypes.
      */
     /**@{*/
-    dogen::physical::entities::referencing_status referencing_status() const;
-    void referencing_status(const dogen::physical::entities::referencing_status v);
+    dogen::physical::entities::relation_status relation_status() const;
+    void relation_status(const dogen::physical::entities::relation_status v);
     /**@}*/
 
     /**
@@ -228,7 +228,7 @@ private:
     std::string archetype_kind_id_;
     std::string logical_meta_element_id_;
     std::string part_;
-    dogen::physical::entities::referencing_status referencing_status_;
+    dogen::physical::entities::relation_status relation_status_;
     std::list<dogen::physical::entities::variable_relation> variable_relations_;
     std::list<dogen::physical::entities::fixed_relation> fixed_relations_;
 };

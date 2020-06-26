@@ -23,7 +23,7 @@
 namespace dogen::physical::entities {
 
 archetype::archetype()
-    : referencing_status_(static_cast<dogen::physical::entities::referencing_status>(0)) { }
+    : relation_status_(static_cast<dogen::physical::entities::relation_status>(0)) { }
 
 archetype::archetype(
     const std::string& description,
@@ -37,7 +37,7 @@ archetype::archetype(
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
     const std::string& part,
-    const dogen::physical::entities::referencing_status referencing_status,
+    const dogen::physical::entities::relation_status relation_status,
     const std::list<dogen::physical::entities::variable_relation>& variable_relations,
     const std::list<dogen::physical::entities::fixed_relation>& fixed_relations)
     : description_(description),
@@ -51,7 +51,7 @@ archetype::archetype(
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
-      referencing_status_(referencing_status),
+      relation_status_(relation_status),
       variable_relations_(variable_relations),
       fixed_relations_(fixed_relations) { }
 
@@ -68,7 +68,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
-    swap(referencing_status_, other.referencing_status_);
+    swap(relation_status_, other.relation_status_);
     swap(variable_relations_, other.variable_relations_);
     swap(fixed_relations_, other.fixed_relations_);
 }
@@ -85,7 +85,7 @@ bool archetype::operator==(const archetype& rhs) const {
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
-        referencing_status_ == rhs.referencing_status_ &&
+        relation_status_ == rhs.relation_status_ &&
         variable_relations_ == rhs.variable_relations_ &&
         fixed_relations_ == rhs.fixed_relations_;
 }
@@ -272,12 +272,12 @@ void archetype::part(const std::string&& v) {
     part_ = std::move(v);
 }
 
-dogen::physical::entities::referencing_status archetype::referencing_status() const {
-    return referencing_status_;
+dogen::physical::entities::relation_status archetype::relation_status() const {
+    return relation_status_;
 }
 
-void archetype::referencing_status(const dogen::physical::entities::referencing_status v) {
-    referencing_status_ = v;
+void archetype::relation_status(const dogen::physical::entities::relation_status v) {
+    relation_status_ = v;
 }
 
 const std::list<dogen::physical::entities::variable_relation>& archetype::variable_relations() const {

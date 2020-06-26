@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_REFERENCING_STATUS_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_REFERENCING_STATUS_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_RELATION_STATUS_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_RELATION_STATUS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,13 +28,13 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Status of a given archetype with regards to referencing by other archetypes.
+ * @brief Status of a given archetype with regards to being related to other archetypes.
  */
-enum class referencing_status : unsigned int {
+enum class relation_status : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    not_referable = 1, ///< Archertype cannot be legally referenced.
-    referable = 2, ///< Archetype can be referenced by other archetypes using its full name only.
-    facet_default = 3 ///< References to the facet will resolve to this archetype.
+    not_relatable = 1, ///< Archertype cannot be legally related to other archetypes.
+    relatable = 2, ///< Archetype can be related to archetypes.
+    facet_default = 3 ///< FIXME: hack for now
 };
 
 }

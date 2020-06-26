@@ -32,7 +32,7 @@ const physical::entities::archetype& enum_implementation_transform_factory::make
                 "enum_implementation_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.enumeration");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
+        r.relation_status(physical::entities::relation_status::not_relatable);
         return r;
     }());
     return r;

@@ -78,7 +78,7 @@ public:
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content,
         const std::string& rendered_stitch_template,
-        const std::string& referencing_status);
+        const std::string& relation_status);
 
 public:
     using element::accept;
@@ -200,13 +200,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Status of this archetype with regards to referencing.
+     * @brief Status of this archetype with regards to relations.
      */
     /**@{*/
-    const std::string& referencing_status() const;
-    std::string& referencing_status();
-    void referencing_status(const std::string& v);
-    void referencing_status(const std::string&& v);
+    const std::string& relation_status() const;
+    std::string& relation_status();
+    void relation_status(const std::string& v);
+    void relation_status(const std::string&& v);
     /**@}*/
 
 public:
@@ -234,7 +234,7 @@ private:
     boost::optional<dogen::logical::entities::name> wale_template_;
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
-    std::string referencing_status_;
+    std::string relation_status_;
 };
 
 }

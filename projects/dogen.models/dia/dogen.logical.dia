@@ -51777,7 +51777,7 @@ just to avoid problems.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#referencing_status#</dia:string>
+            <dia:string>#relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -51786,7 +51786,7 @@ just to avoid problems.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Status of this archetype with regards to referencing.#</dia:string>
+            <dia:string>#Status of this archetype with regards to relations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -53568,7 +53568,7 @@ FIXME: optional for now.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#referencing_status#</dia:string>
+            <dia:string>#relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -53577,7 +53577,7 @@ FIXME: optional for now.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Referencing status for the archetype.
+            <dia:string>#Relation status for the archetype.
 
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>

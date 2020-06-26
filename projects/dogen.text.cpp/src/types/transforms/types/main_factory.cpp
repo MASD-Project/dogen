@@ -28,9 +28,8 @@ physical::entities::archetype main_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "main"));
     r.logical_meta_element_id("dogen.logical.entities.entry_point");
-    r.referencing_status(physical::entities::referencing_status::not_referable);
+    r.relation_status(physical::entities::relation_status::not_relatable);
     return r;
 }
 
 }
-

@@ -4100,9 +4100,9 @@
           "documentation": "Contains the result of the stitch template after rendering.\n"
         },
         {
-          "name": "referencing_status",
+          "name": "relation_status",
           "type": "std::string",
-          "documentation": "Status of this archetype with regards to referencing.\n"
+          "documentation": "Status of this archetype with regards to relations.\n"
         }
       ]
     },
@@ -4298,9 +4298,9 @@
           }
         },
         {
-          "name": "referencing_status",
+          "name": "relation_status",
           "type": "masd::variability::text",
-          "documentation": "Referencing status for the archetype.\n",
+          "documentation": "Relation status for the archetype.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }

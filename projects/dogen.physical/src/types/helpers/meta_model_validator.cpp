@@ -48,7 +48,7 @@ void meta_model_validator::validate(physical::entities::meta_model& mm) {
     std::set<std::string> facets_found;
     std::set<std::string> all_facets;
 
-    const auto rs_fd(entities::referencing_status::facet_default);
+    const auto rs_fd(entities::relation_status::facet_default);
     for (auto& be : mm.backends()) {
         for (auto& fct_pair : be.facets()) {
             auto& fct(fct_pair.second);
@@ -65,7 +65,7 @@ void meta_model_validator::validate(physical::entities::meta_model& mm) {
                 const auto pmn(arch.meta_name());
                 const auto fct(qnb::build_facet(pmn));
                 all_facets.insert(fct);
-                if (arch.referencing_status() == rs_fd) {
+                if (arch.relation_status() == rs_fd) {
                     continue;
 
                     /*

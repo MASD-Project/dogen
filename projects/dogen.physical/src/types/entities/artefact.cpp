@@ -42,6 +42,7 @@ artefact::artefact(
     const dogen::physical::entities::logical_name& logical_name,
     const dogen::physical::entities::meta_name& physical_meta_name,
     const dogen::physical::entities::name& name,
+    const std::string& archetype_id,
     const std::string& content,
     const bool enabled,
     const bool overwrite,
@@ -56,6 +57,7 @@ artefact::artefact(
       logical_name_(logical_name),
       physical_meta_name_(physical_meta_name),
       name_(name),
+      archetype_id_(archetype_id),
       content_(content),
       enabled_(enabled),
       overwrite_(overwrite),
@@ -73,6 +75,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(logical_name_, other.logical_name_);
     swap(physical_meta_name_, other.physical_meta_name_);
     swap(name_, other.name_);
+    swap(archetype_id_, other.archetype_id_);
     swap(content_, other.content_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
@@ -90,6 +93,7 @@ bool artefact::operator==(const artefact& rhs) const {
         logical_name_ == rhs.logical_name_ &&
         physical_meta_name_ == rhs.physical_meta_name_ &&
         name_ == rhs.name_ &&
+        archetype_id_ == rhs.archetype_id_ &&
         content_ == rhs.content_ &&
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
@@ -185,6 +189,22 @@ void artefact::name(const dogen::physical::entities::name& v) {
 
 void artefact::name(const dogen::physical::entities::name&& v) {
     name_ = std::move(v);
+}
+
+const std::string& artefact::archetype_id() const {
+    return archetype_id_;
+}
+
+std::string& artefact::archetype_id() {
+    return archetype_id_;
+}
+
+void artefact::archetype_id(const std::string& v) {
+    archetype_id_ = v;
+}
+
+void artefact::archetype_id(const std::string&& v) {
+    archetype_id_ = std::move(v);
 }
 
 const std::string& artefact::content() const {

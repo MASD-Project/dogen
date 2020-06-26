@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_REFERENCING_STATUS_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_REFERENCING_STATUS_IO_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_RELATION_STATUS_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_RELATION_STATUS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.physical/types/entities/referencing_status.hpp"
+#include "dogen.physical/types/entities/relation_status.hpp"
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const referencing_status& v);
+std::ostream& operator<<(std::ostream& s, const relation_status& v);
 
 }
 

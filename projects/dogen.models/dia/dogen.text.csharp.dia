@@ -15967,7 +15967,7 @@ std::string {{class.simple_name}}::helper_name() const {
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16194,7 +16194,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
 #DOGEN masd.wale.kvp.containing_namespace=text.csharp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=csharp_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -17820,7 +17820,7 @@ using System.Collections.Specialized;
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.physical.referencing_status#</dia:string>
+            <dia:string>#masd.physical.relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

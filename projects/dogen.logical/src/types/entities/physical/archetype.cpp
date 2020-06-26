@@ -68,7 +68,7 @@ archetype::archetype(archetype&& rhs)
       wale_template_(std::move(rhs.wale_template_)),
       wale_template_content_(std::move(rhs.wale_template_content_)),
       rendered_stitch_template_(std::move(rhs.rendered_stitch_template_)),
-      referencing_status_(std::move(rhs.referencing_status_)) { }
+      relation_status_(std::move(rhs.relation_status_)) { }
 
 archetype::archetype(
     const dogen::logical::entities::name& name,
@@ -97,7 +97,7 @@ archetype::archetype(
     const boost::optional<dogen::logical::entities::name>& wale_template,
     const std::string& wale_template_content,
     const std::string& rendered_stitch_template,
-    const std::string& referencing_status)
+    const std::string& relation_status)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -125,7 +125,7 @@ archetype::archetype(
       wale_template_(wale_template),
       wale_template_content_(wale_template_content),
       rendered_stitch_template_(rendered_stitch_template),
-      referencing_status_(referencing_status) { }
+      relation_status_(relation_status) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -160,7 +160,7 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"wale_template\": " << wale_template_ << ", "
       << "\"wale_template_content\": " << "\"" << tidy_up_string(wale_template_content_) << "\"" << ", "
       << "\"rendered_stitch_template\": " << "\"" << tidy_up_string(rendered_stitch_template_) << "\"" << ", "
-      << "\"referencing_status\": " << "\"" << tidy_up_string(referencing_status_) << "\""
+      << "\"relation_status\": " << "\"" << tidy_up_string(relation_status_) << "\""
       << " }";
 }
 
@@ -179,7 +179,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(wale_template_, other.wale_template_);
     swap(wale_template_content_, other.wale_template_content_);
     swap(rendered_stitch_template_, other.rendered_stitch_template_);
-    swap(referencing_status_, other.referencing_status_);
+    swap(relation_status_, other.relation_status_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -201,7 +201,7 @@ bool archetype::operator==(const archetype& rhs) const {
         wale_template_ == rhs.wale_template_ &&
         wale_template_content_ == rhs.wale_template_content_ &&
         rendered_stitch_template_ == rhs.rendered_stitch_template_ &&
-        referencing_status_ == rhs.referencing_status_;
+        relation_status_ == rhs.relation_status_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -378,20 +378,20 @@ void archetype::rendered_stitch_template(const std::string&& v) {
     rendered_stitch_template_ = std::move(v);
 }
 
-const std::string& archetype::referencing_status() const {
-    return referencing_status_;
+const std::string& archetype::relation_status() const {
+    return relation_status_;
 }
 
-std::string& archetype::referencing_status() {
-    return referencing_status_;
+std::string& archetype::relation_status() {
+    return relation_status_;
 }
 
-void archetype::referencing_status(const std::string& v) {
-    referencing_status_ = v;
+void archetype::relation_status(const std::string& v) {
+    relation_status_ = v;
 }
 
-void archetype::referencing_status(const std::string&& v) {
-    referencing_status_ = std::move(v);
+void archetype::relation_status(const std::string&& v) {
+    relation_status_ = std::move(v);
 }
 
 }

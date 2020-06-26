@@ -44,12 +44,12 @@ auto lg(logger_factory(transform_id));
 
 const std::string separator(".");
 const std::string meta_model_name("masd");
-const std::string referencing_status_not_referable("not_referable");
-const std::string referencing_status_referable("referable");
-const std::string referencing_status_facet_default("facet_default");
+const std::string relation_status_not_relatable("not_relatable");
+const std::string relation_status_referable("referable");
+const std::string relation_status_facet_default("facet_default");
 
-const std::string invalid_referencing_status(
-    "Referencing status is not valid: ");
+const std::string invalid_relation_status(
+    "Relation status is not valid: ");
 const std::string ambiguous_name("Name maps to more than one element type:");
 const std::string unsupported_composition(
     "Physical element composition is not supported: ");
@@ -386,18 +386,18 @@ process_archetypes(const context& ctx, entities::model& m) {
             arch.wale_template(n);
         }
 
-        const auto rs(scfg.referencing_status);
+        const auto rs(scfg.relation_status);
         const bool is_valid_rs(
-            rs == referencing_status_not_referable ||
-            rs == referencing_status_referable ||
-            rs == referencing_status_facet_default);
+            rs == relation_status_not_relatable ||
+            rs == relation_status_referable ||
+            rs == relation_status_facet_default);
         if (!is_valid_rs) {
-            BOOST_LOG_SEV(lg, error) << invalid_referencing_status << rs;
+            BOOST_LOG_SEV(lg, error) << invalid_relation_status << rs;
             // BOOST_THROW_EXCEPTION(
-            //     transformation_error(invalid_or_empty_referencing_status
+            //     transformation_error(invalid_or_empty_relation_status
             //      rs));
         }
-        arch.referencing_status(rs);
+        arch.relation_status(rs);
 
         /*
          * Archetypes can only exist in the context of a backend and a

@@ -779,7 +779,7 @@ All models that are a member of this set.
 
 Status of a given archetype with regards to referencing by other archetypes.
 
-*** not_referable
+*** not_relatable
 Archertype cannot be legally referenced.
 
 *** referable

@@ -28,9 +28,8 @@ physical::entities::archetype archetype_class_implementation_factory_factory::ma
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "archetype_class_implementation_factory"));
     r.logical_meta_element_id("dogen.logical.entities.physical_archetype");
-    r.referencing_status(physical::entities::referencing_status::not_referable);
+    r.relation_status(physical::entities::relation_status::not_relatable);
     return r;
 }
 
 }
-

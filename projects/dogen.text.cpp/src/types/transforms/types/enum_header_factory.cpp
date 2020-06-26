@@ -28,10 +28,9 @@ physical::entities::archetype enum_header_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "enum_header"));
     r.logical_meta_element_id("dogen.logical.entities.enumeration");
-    r.referencing_status(physical::entities::referencing_status::facet_default);
+    r.relation_status(physical::entities::relation_status::facet_default);
     r.labels().push_back(physical::entities::label("roles", "type_declaration"));
     return r;
 }
 
 }
-

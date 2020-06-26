@@ -32,7 +32,7 @@ const physical::entities::archetype& cmakelists_transform_factory::make_archetyp
                 "cmakelists_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.build_cmakelists");
-        r.referencing_status(physical::entities::referencing_status::not_referable);
+        r.relation_status(physical::entities::relation_status::not_relatable);
         return r;
     }());
     return r;

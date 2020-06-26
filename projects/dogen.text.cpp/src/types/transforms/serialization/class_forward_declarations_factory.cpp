@@ -28,9 +28,8 @@ physical::entities::archetype class_forward_declarations_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "serialization", "class_forward_declarations"));
     r.logical_meta_element_id("dogen.logical.entities.object");
-    r.referencing_status(physical::entities::referencing_status::referable);
+    r.relation_status(physical::entities::relation_status::relatable);
     return r;
 }
 
 }
-

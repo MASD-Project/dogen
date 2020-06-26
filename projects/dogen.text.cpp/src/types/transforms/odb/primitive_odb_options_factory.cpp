@@ -28,9 +28,8 @@ physical::entities::archetype primitive_odb_options_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "odb", "primitive_odb_options"));
     r.logical_meta_element_id("dogen.logical.entities.primitive");
-    r.referencing_status(physical::entities::referencing_status::not_referable);
+    r.relation_status(physical::entities::relation_status::not_relatable);
     return r;
 }
 
 }
-

@@ -324,9 +324,9 @@
           "documentation": "Part in which we are located.\n"
         },
         {
-          "name": "referencing_status",
-          "type": "referencing_status",
-          "documentation": "Status of this archetype with regards to being referenced by other archetypes.\n"
+          "name": "relation_status",
+          "type": "relation_status",
+          "documentation": "Status of this archetype with regards to being related to archetypes.\n"
         },
         {
           "name": "variable_relations",
@@ -634,6 +634,11 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "archetype_id",
+          "type": "std::string",
+          "documentation": "ID of the archetype that this artefact is an instance of.\n"
+        },
         {
           "name": "content",
           "type": "std::string",
@@ -1302,27 +1307,27 @@
       ]
     },
     {
-      "name": "entities::referencing_status",
-      "documentation": "Status of a given archetype with regards to referencing by other archetypes.\n",
+      "name": "entities::relation_status",
+      "documentation": "Status of a given archetype with regards to being related to other archetypes.\n",
       "stereotypes": [
         "masd::enumeration"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "not_referable",
+          "name": "not_relatable",
           "type": "",
-          "documentation": "Archertype cannot be legally referenced.\n"
+          "documentation": "Archertype cannot be legally related to other archetypes.\n"
         },
         {
-          "name": "referable",
+          "name": "relatable",
           "type": "",
-          "documentation": "Archetype can be referenced by other archetypes using its full name only.\n"
+          "documentation": "Archetype can be related to archetypes.\n"
         },
         {
           "name": "facet_default",
           "type": "",
-          "documentation": "References to the facet will resolve to this archetype.\n"
+          "documentation": "FIXME: hack for now\n"
         }
       ]
     },

@@ -54,8 +54,8 @@ update_physical_meta_names_by_logical_meta_name(
     auto& cal(g.canonical_locations());
     const auto qn(pmn.qualified());
     using qnb = physical::helpers::qualified_meta_name_builder;
-    const auto rs_fd(entities::referencing_status::facet_default);
-    if (arch.referencing_status() == rs_fd) {
+    const auto rs_fd(entities::relation_status::facet_default);
+    if (arch.relation_status() == rs_fd) {
         const auto fct_qn(qnb::build_facet(pmn));
         const auto carch(fct_qn + canonical_archetype_postfix);
         const auto inserted(cal.insert(std::make_pair(qn, carch)).second);

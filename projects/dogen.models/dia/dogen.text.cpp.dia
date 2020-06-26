@@ -39140,7 +39140,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_templates
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.templates
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39322,7 +39322,7 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable
+#DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=forward declaration#</dia:string>
@@ -39517,7 +39517,7 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.physical.logical_meta_element_id=dogen.logical.entities.visitor
 #DOGEN masd.wale.kvp.class.simple_name=visitor_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=visitor_forward_declarations
-#DOGEN masd.physical.referencing_status=referable
+#DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
 #DOGEN masd.wale.kvp.meta_element=visitor
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
@@ -39714,7 +39714,7 @@ class &lt;#= o.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=class_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=class_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable
+#DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.meta_element=object
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
@@ -39920,7 +39920,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable
+#DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.meta_element=primitive
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.label.roles=forward declaration#</dia:string>
@@ -40116,7 +40116,7 @@ class &lt;#= p.name().simple() #&gt;;
 #DOGEN masd.wale.kvp.class.simple_name=primitive_forward_declarations_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=primitive_forward_declarations
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable
+#DOGEN masd.physical.relation_status=relatable
 #DOGEN masd.wale.kvp.meta_element=primitive
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.serialization#</dia:string>
       </dia:attribute>
@@ -41214,7 +41214,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_project
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41450,7 +41450,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_visual_studio_solution
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41897,7 +41897,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42124,7 +42124,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42659,7 +42659,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_odb_options
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.odb
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42909,7 +42909,7 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_msbuild_targets
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.visual_studio
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43199,7 +43199,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_source_cmakelists
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43476,7 +43476,7 @@ endif()
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_include_cmakelists
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.build
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43964,7 +43964,7 @@ install(
 #DOGEN masd.wale.kvp.locator_function=make_full_path_for_tests_cmakelists
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.tests
 #DOGEN masd.physical.wale_template_reference=cpp_artefact_transform_implementation
-#DOGEN masd.physical.referencing_status=not_referable#</dia:string>
+#DOGEN masd.physical.relation_status=not_relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -46651,13 +46651,13 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.physical.referencing_status#</dia:string>
+            <dia:string>#masd.physical.relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#not_referable#</dia:string>
+            <dia:string>#not_relatable#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -46900,13 +46900,13 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.physical.referencing_status#</dia:string>
+            <dia:string>#masd.physical.relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#not_referable#</dia:string>
+            <dia:string>#not_relatable#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
@@ -51012,7 +51012,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.physical.referencing_status#</dia:string>
+            <dia:string>#masd.physical.relation_status#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -51114,7 +51114,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable#</dia:string>
+#DOGEN masd.physical.relation_status=relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51465,7 +51465,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
     r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
-    r.referencing_status(physical::entities::referencing_status::&lt;#= arch.referencing_status() #&gt;);
+    r.relation_status(physical::entities::relation_status::&lt;#= arch.relation_status() #&gt;);
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;
@@ -51478,9 +51478,6 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 
 &lt;#+
         } // snf
-#&gt;
-
-&lt;#+
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
@@ -51536,7 +51533,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable#</dia:string>
+#DOGEN masd.physical.relation_status=relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51991,7 +51988,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.referencing_status=referable#</dia:string>
+#DOGEN masd.physical.relation_status=relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

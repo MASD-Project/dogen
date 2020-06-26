@@ -43,7 +43,7 @@ public:
         variability::entities::feature part_id;
         variability::entities::feature logical_meta_element_id;
         variability::entities::feature major_technical_space;
-        variability::entities::feature referencing_status;
+        variability::entities::feature relation_status;
         variability::entities::feature wale_template_reference;
     };
 
@@ -56,7 +56,7 @@ public:
         std::string part_id;
         std::string logical_meta_element_id;
         std::string major_technical_space;
-        std::string referencing_status;
+        std::string relation_status;
         std::string wale_template_reference;
     };
 

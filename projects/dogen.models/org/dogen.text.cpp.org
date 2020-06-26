@@ -8247,7 +8247,7 @@ void primitive_header_transform::apply(const context& ctx, const logical::entiti
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -8350,7 +8350,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -8453,7 +8453,7 @@ void primitive_odb_options_transform::apply(const context& ctx, const logical::e
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -9731,7 +9731,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 :masd.wale.kvp.locator_function: make_full_path_for_tests_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10231,7 +10231,7 @@ Formatters related to templating.
 :masd.wale.kvp.locator_function: make_full_path_for_templates
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.templates
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10310,7 +10310,7 @@ Formatters related to Visual Studio support.
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_project
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10422,7 +10422,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_solution
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10519,7 +10519,7 @@ EndGlobal
 :masd.wale.kvp.locator_function: make_full_path_for_msbuild_targets
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10654,7 +10654,7 @@ Formatters related to build files.
 :masd.wale.kvp.locator_function: make_full_path_for_source_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10807,7 +10807,7 @@ endif()
 :masd.wale.kvp.locator_function: make_full_path_for_include_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_referable
+:masd.physical.referencing_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -11007,7 +11007,7 @@ Contains the configuration common to most archetypes in tests.
 :END:
 *** masd.physical.referencing_status
 :PROPERTIES:
-:masd.injection.value: not_referable
+:masd.injection.value: not_relatable
 :END:
 ** transforms::header_configuration
 :PROPERTIES:
@@ -11122,7 +11122,7 @@ Contains the configuration common to all c++ implementation archetypes.
 :END:
 *** masd.physical.referencing_status
 :PROPERTIES:
-:masd.injection.value: not_referable
+:masd.injection.value: not_relatable
 :END:
 ** transforms::object_implementation_configuration
 :PROPERTIES:
