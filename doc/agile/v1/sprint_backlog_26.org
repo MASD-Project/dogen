@@ -15,33 +15,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-26 Fri 19:34]
+#+CAPTION: Clock summary at [2020-06-27 Sat 00:13]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *53:37* |       |       | 100.0 |
+| *Total time*                                                      | *56:09* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 53:37   |       |       | 100.0 |
-| Active                                                            |         | 53:37 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  14.4 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.2 |
-| Sprint and product backlog grooming                               |         |       |  4:35 |   8.5 |
+| Stories                                                           | 56:09   |       |       | 100.0 |
+| Active                                                            |         | 56:09 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  13.7 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.1 |
+| Sprint and product backlog grooming                               |         |       |  4:35 |   8.2 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.3 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.8 |
-| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.2 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.7 |
+| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.1 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.4 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.7 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.2 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.7 |
-| Split archetype factory from transform                            |         |       | 10:57 |  20.4 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.2 |
-| Remove traits for archetypes                                      |         |       |  0:44 |   1.4 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   8.9 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.5 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.1 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.4 |
+| Split archetype factory from transform                            |         |       | 10:57 |  19.5 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.1 |
+| Remove traits for archetypes                                      |         |       |  0:44 |   1.3 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   8.5 |
 | Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.1 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.1 |
-| Add labels to archetypes                                          |         |       |  2:22 |   4.4 |
-| Improve org-mode converter                                        |         |       |  5:15 |   9.8 |
-| Add relations between archetypes in the PMM                       |         |       |  3:20 |   6.2 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.0 |
+| Add labels to archetypes                                          |         |       |  2:22 |   4.2 |
+| Improve org-mode converter                                        |         |       |  5:15 |   9.3 |
+| Add relations between archetypes in the PMM                       |         |       |  4:00 |   7.1 |
+| Analysis on implementing containment with configuration           |         |       |  1:52 |   3.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1703,6 +1704,10 @@ Notes:
 
 *** STARTED Add relations between archetypes in the PMM               :story:
     :LOGBOOK:
+    CLOCK: [2020-06-27 Sat 00:10]--[2020-06-27 Sat 00:13] =>  0:03
+    CLOCK: [2020-06-26 Fri 23:56]--[2020-06-27 Sat 00:09] =>  0:13
+    CLOCK: [2020-06-26 Fri 21:47]--[2020-06-26 Fri 21:54] =>  0:07
+    CLOCK: [2020-06-26 Fri 20:00]--[2020-06-26 Fri 20:17] =>  0:17
     CLOCK: [2020-06-26 Fri 18:02]--[2020-06-26 Fri 19:34] =>  1:32
     CLOCK: [2020-06-26 Fri 17:02]--[2020-06-26 Fri 17:33] =>  0:31
     CLOCK: [2020-06-26 Fri 13:03]--[2020-06-26 Fri 13:17] =>  0:14
@@ -1763,6 +1768,141 @@ We need to remove =facet_default= from referencing status. It should
 just be referable or non-referable. We could use a boolean for
 this. If a type is non-referable, we should throw when it is part of a
 relationship.
+
+Tasks:
+
+- add URNs to all archetypes.
+- create a transform that resolves all label URNs into archetype URNs.
+- populate the artefact's archetype.
+- create a transform that takes the archetypes relations and populates
+  the artefact's relations with LPPs.
+- change physical model to be indexed by LPP.
+- add new field to artefact for the concrete relation in terms of file
+  names.
+
+At this point we need to stop because the file names are not being
+populated correctly.
+
+*** STARTED Analysis on implementing containment with configuration   :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-26 Fri 23:42]--[2020-06-26 Fri 23:48] =>  0:06
+    CLOCK: [2020-06-26 Fri 23:10]--[2020-06-26 Fri 23:42] =>  0:32
+    CLOCK: [2020-06-26 Fri 21:55]--[2020-06-26 Fri 23:09] =>  1:14
+    :END:
+
+At present, we have implemented enablement by using the "global and
+local" approach. This is the same as we did for decorations. The idea
+is that the root module contains the "global" configuration, and
+elements can "locally" override it where necessary. Most of the time,
+the global configuration is sufficient, but occasionally overrides are
+necessary. This works well for decoration because there are
+computations that are needed, and it would not be a good idea to have
+to do this for each element. However, this is not ideal for
+enablement. To understand why we need to remember that enablement at
+present is (probably) not implemented correctly. For a correct
+implementation, we need to take into account the root module of each
+referenced model - not of the target model - and then compute the
+local / element enablement relative to that global configuration. This
+would have been evident if we had PDMs because their enablement
+profiles are so distinct from a typical Dogen model. At any rate, we
+could solve this issue by computing enablement in the pre-assembly
+chain of the logical model; this would give us access to the correct
+root modules. But once we do that, then one starts to question if the
+entire enablement should not be handled in the logical model as well,
+and then the nice bounded context we have between logical and physical
+domains starts to erode very quickly. At present its very clear: once
+we start projecting from the logical space into the logical-physical
+space then we exited the logical domain.
+
+There is an alternative to this but unfortunately it requires breaking
+with the "global and local" approach. We could instead use the
+variability subsystem to encapsulate the same information. At present
+we do not allow individual elements to set enablement for kernel and
+facet. We could loosen this requirement and allow elements to set
+facet enablement. We could then set these in profiles. The final step
+is to have some kind of mechanism to propagate the stereotypes from
+containing elements. This could be done at injection level, once
+containment is handled correctly. We could have a setting "default
+stereotypes" or some such. It is applied to all containing
+elements. We need to separate these inside injection. All types that
+are contained by a container with "default stereotypes" inherit
+these. Then variability processing just processes the default
+stereotypes first and then the rest. We need to make sure we handle
+nested containment correctly though.
+
+Once this is in place, we can then perform "flat" enablement
+processing; we only need to look at the current model element. This
+may all sound very strange conceptually, because its no longer
+possible to switch off a facet globally. Instead, we change the
+profile, which as a consequence, then changes each and every
+element. Its also possible to change a facet "locally" but the effect
+is only to change the current element. A lot of these operations
+become semantically very strange, so some conceptual justification is
+required. But the end result is that we can process elements in
+isolation and we no longer need to worry about where they come
+from. So with this we can do the whole of enablement within the
+physical model.
+
+The good thing about this approach is that we can try it side by side
+with the existing approach as they shouldn't clash. We just need to
+create separate profiles.
+
+Once we got everything in the physical model, we can then use the
+meta-relations and the relations (given in terms of logical-physical
+points or LPPs) and create an acyclic graph with them. We need to also
+introduce a bitmap as follows:
+
+- archetype enabled or disabled.
+- archetype overwrite enabled or disabled.
+- supported: false for PDMs that don't support certain archetypes.
+- applicable: false if the archetype does not match the logical model
+  meta-element.
+- same for facet.
+- for backend just enabled or disabled.
+
+These are the observed flags, as read out of the meta-data. We then
+have the computed flag which needs to record:
+
+- enabled or disabled.
+- resolution failure: true if a dependency was not in the expected
+  state.
+- need to record if the failure can be resolved or not.
+
+With the relations in LPPs we can then build a DAG and compute the
+flags.
+
+Links:
+
+- [[https://www.uml-diagrams.org/stereotype.html][UML Stereotype]]
+- [[https://en.wikipedia.org/wiki/Stereotype_(UML)][Wikipedia - Stereotype (UML)]]
+
+*** Injector types with regards to containment                        :story:
+
+It seems we have two models for injectors:
+
+- those where element containment is represented through nesting,
+  e.g. XML, JSON, org-mode. These can of course be flat too, but its
+  natural to represent elements as containers.
+- those where element containment is represented through "links",
+  e.g. Dia. When we represent containment through links, we need to
+  create a graph of the elements and then transform them into a
+  qualified path.
+
+At present we left it to the dia injector to resolve the link
+containment. It makes more sense to model the containment type in the
+injection model and then to have a transform that does the graphing
+for link models. We also need a transform that does the name nesting
+for nested models. Both do nothing for the converse case. This will
+simplify injector code.
+
+Notes:
+
+- linked models must supply the original model ID as well as container
+  ID. Nested models may or may not supply this information.
+- we should transform nested models into flat models as part of the
+  injection chain. The final model should be a flat model.
+- perhaps we should have a notion of a nested model and a nested
+  element. This way the type system encodes this information.
 
 *** Add artefact's archetype to artefact class                        :story:
 

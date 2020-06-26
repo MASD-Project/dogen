@@ -78,34 +78,6 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Injector types with regards to containment                        :story:
-
-It seems we have two models for injectors:
-
-- those where element containment is represented through nesting,
-  e.g. XML, JSON, org-mode. These can of course be flat too, but its
-  natural to represent elements as containers.
-- those where element containment is represented through "links",
-  e.g. Dia. When we represent containment through links, we need to
-  create a graph of the elements and then transform them into a
-  qualified path.
-
-At present we left it to the dia injector to resolve the link
-containment. It makes more sense to model the containment type in the
-injection model and then to have a transform that does the graphing
-for link models. We also need a transform that does the name nesting
-for nested models. Both do nothing for the converse case. This will
-simplify injector code.
-
-Notes:
-
-- linked models must supply the original model ID as well as container
-  ID. Nested models may or may not supply this information.
-- we should transform nested models into flat models as part of the
-  injection chain. The final model should be a flat model.
-- perhaps we should have a notion of a nested model and a nested
-  element. This way the type system encodes this information.
-
 *** Conversion does not validate missing options                      :story:
 
 When we fail to add the mandatory options in conversion, we don't get
@@ -1780,6 +1752,7 @@ Links:
   the famous library.
 - [[https://github.com/dobrichev/fsss2][fsss2 GitHub repo]]: Fast Simple Sudoku Solver 2.
 - [[https://www.reddit.com/r/cpp/comments/94dkme/modern_sat_solvers_fast_neat_and_underused_part_1/][reddit: Modern SAT solvers: fast, neat and underused (part 1 of N)]]
+- [[https://en.wikipedia.org/wiki/Conjunctive_normal_form][Wikipedia: Conjunctive normal form]]
 
 *** Add additional reference directories                              :story:
      CLOSED: [2020-04-07 Tue 08:51]
