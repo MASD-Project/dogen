@@ -23,19 +23,23 @@
 namespace dogen::physical::entities {
 
 fixed_relation::fixed_relation(
+    const std::string& urn,
     const std::string& archetype_urn,
     const std::string& logical_model_element_id)
-    : archetype_urn_(archetype_urn),
+    : urn_(urn),
+      archetype_urn_(archetype_urn),
       logical_model_element_id_(logical_model_element_id) { }
 
 void fixed_relation::swap(fixed_relation& other) noexcept {
     using std::swap;
+    swap(urn_, other.urn_);
     swap(archetype_urn_, other.archetype_urn_);
     swap(logical_model_element_id_, other.logical_model_element_id_);
 }
 
 bool fixed_relation::operator==(const fixed_relation& rhs) const {
-    return archetype_urn_ == rhs.archetype_urn_ &&
+    return urn_ == rhs.urn_ &&
+        archetype_urn_ == rhs.archetype_urn_ &&
         logical_model_element_id_ == rhs.logical_model_element_id_;
 }
 
@@ -43,6 +47,22 @@ fixed_relation& fixed_relation::operator=(fixed_relation other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& fixed_relation::urn() const {
+    return urn_;
+}
+
+std::string& fixed_relation::urn() {
+    return urn_;
+}
+
+void fixed_relation::urn(const std::string& v) {
+    urn_ = v;
+}
+
+void fixed_relation::urn(const std::string&& v) {
+    urn_ = std::move(v);
 }
 
 const std::string& fixed_relation::archetype_urn() const {

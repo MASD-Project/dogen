@@ -42,16 +42,29 @@ public:
 
 public:
     variable_relation(
+        const std::string& urn,
         const std::string& archetype_urn,
         const dogen::physical::entities::variable_relation_type type);
 
 public:
     /**
-     * @brief URN pointing to the archetype.
+     * @brief URN which may or may not be an archetype URN.
      *
      *  It must have the form "archetype:" if pointing to an archetype, or  "label:" if
      * pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
      * to a unique archetype.
+     */
+    /**@{*/
+    const std::string& urn() const;
+    std::string& urn();
+    void urn(const std::string& v);
+    void urn(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief URN pointing to the archetype.
+     *
+     *  It must have the form "archetype:".
      */
     /**@{*/
     const std::string& archetype_urn() const;
@@ -79,6 +92,7 @@ public:
     variable_relation& operator=(variable_relation other);
 
 private:
+    std::string urn_;
     std::string archetype_urn_;
     dogen::physical::entities::variable_relation_type type_;
 };

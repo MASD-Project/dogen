@@ -1406,9 +1406,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "urn",
+          "type": "std::string",
+          "documentation": "URN which may or may not be an archetype URN.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+        },
+        {
           "name": "archetype_urn",
           "type": "std::string",
-          "documentation": "URN pointing to the archetype.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+          "documentation": "URN pointing to the archetype.\n\n It must have the form \"archetype:\".\n"
         }
       ]
     },

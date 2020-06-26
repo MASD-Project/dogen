@@ -18042,7 +18042,7 @@ Element must exist in the current loaded models.#</dia:string>
         <dia:point val="117,-89"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,-89.05;127.945,-85.35"/>
+        <dia:rectangle val="116.95,-89.05;127.945,-84.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,-89"/>
@@ -18051,7 +18051,7 @@ Element must exist in the current loaded models.#</dia:string>
         <dia:real val="10.895"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Urnable#</dia:string>
@@ -18143,6 +18143,33 @@ Element must exist in the current loaded models.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#urn#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#URN which may or may not be an archetype URN.
+
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
+pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
+to a unique archetype.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#archetype_urn#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -18154,9 +18181,7 @@ Element must exist in the current loaded models.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#URN pointing to the archetype.
 
- It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
-pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
-to a unique archetype.#</dia:string>
+ It must have the form "archetype:".#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
