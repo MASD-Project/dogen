@@ -58919,13 +58919,13 @@ FIXME: optional for now.
         <dia:point val="184,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="183.95,-70.05;194.945,-66.35"/>
+        <dia:rectangle val="183.95,-70.05;194.175,-66.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="184,-70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.895"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -59020,7 +59020,7 @@ FIXME: optional for now.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_urn#</dia:string>
+            <dia:string>#urn#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -59029,7 +59029,7 @@ FIXME: optional for now.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#URN pointing to the archetype.
+            <dia:string>#URN pointing to an archetype or a label.
 
  It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
 pointing to a label, and then is followed by "KEY:VALUE". The label must resolve

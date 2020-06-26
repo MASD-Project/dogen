@@ -39,22 +39,22 @@ public:
 
 public:
     variable_relation(
-        const std::string& archetype_urn,
+        const std::string& urn,
         const std::string& type);
 
 public:
     /**
-     * @brief URN pointing to the archetype.
+     * @brief URN pointing to an archetype or a label.
      *
      *  It must have the form "archetype:" if pointing to an archetype, or  "label:" if
      * pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
      * to a unique archetype.
      */
     /**@{*/
-    const std::string& archetype_urn() const;
-    std::string& archetype_urn();
-    void archetype_urn(const std::string& v);
-    void archetype_urn(const std::string&& v);
+    const std::string& urn() const;
+    std::string& urn();
+    void urn(const std::string& v);
+    void urn(const std::string&& v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
     variable_relation& operator=(variable_relation other);
 
 private:
-    std::string archetype_urn_;
+    std::string urn_;
     std::string type_;
 };
 

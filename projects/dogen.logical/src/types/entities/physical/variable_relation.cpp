@@ -23,19 +23,19 @@
 namespace dogen::logical::entities::physical {
 
 variable_relation::variable_relation(
-    const std::string& archetype_urn,
+    const std::string& urn,
     const std::string& type)
-    : archetype_urn_(archetype_urn),
+    : urn_(urn),
       type_(type) { }
 
 void variable_relation::swap(variable_relation& other) noexcept {
     using std::swap;
-    swap(archetype_urn_, other.archetype_urn_);
+    swap(urn_, other.urn_);
     swap(type_, other.type_);
 }
 
 bool variable_relation::operator==(const variable_relation& rhs) const {
-    return archetype_urn_ == rhs.archetype_urn_ &&
+    return urn_ == rhs.urn_ &&
         type_ == rhs.type_;
 }
 
@@ -45,20 +45,20 @@ variable_relation& variable_relation::operator=(variable_relation other) {
     return *this;
 }
 
-const std::string& variable_relation::archetype_urn() const {
-    return archetype_urn_;
+const std::string& variable_relation::urn() const {
+    return urn_;
 }
 
-std::string& variable_relation::archetype_urn() {
-    return archetype_urn_;
+std::string& variable_relation::urn() {
+    return urn_;
 }
 
-void variable_relation::archetype_urn(const std::string& v) {
-    archetype_urn_ = v;
+void variable_relation::urn(const std::string& v) {
+    urn_ = v;
 }
 
-void variable_relation::archetype_urn(const std::string&& v) {
-    archetype_urn_ = std::move(v);
+void variable_relation::urn(const std::string&& v) {
+    urn_ = std::move(v);
 }
 
 const std::string& variable_relation::type() const {

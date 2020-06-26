@@ -35,7 +35,7 @@ namespace dogen::logical::entities::physical {
 std::ostream& operator<<(std::ostream& s, const fixed_relation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::entities::physical::fixed_relation\"" << ", "
-      << "\"archetype_urn\": " << "\"" << tidy_up_string(v.archetype_urn()) << "\"" << ", "
+      << "\"urn\": " << "\"" << tidy_up_string(v.urn()) << "\"" << ", "
       << "\"logical_model_element_id\": " << "\"" << tidy_up_string(v.logical_model_element_id()) << "\""
       << " }";
     return(s);
