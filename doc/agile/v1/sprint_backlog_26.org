@@ -15,33 +15,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-26 Fri 13:17]
+#+CAPTION: Clock summary at [2020-06-26 Fri 19:34]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *51:34* |       |       | 100.0 |
+| *Total time*                                                      | *53:37* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 51:34   |       |       | 100.0 |
-| Active                                                            |         | 51:34 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  14.9 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.3 |
-| Sprint and product backlog grooming                               |         |       |  4:35 |   8.9 |
-| Nightly nursing                                                   |         |       |  0:11 |   0.4 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.9 |
+| Stories                                                           | 53:37   |       |       | 100.0 |
+| Active                                                            |         | 53:37 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  14.4 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.2 |
+| Sprint and product backlog grooming                               |         |       |  4:35 |   8.5 |
+| Nightly nursing                                                   |         |       |  0:11 |   0.3 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.8 |
 | Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.2 |
-| Create an emacs mode for wale                                     |         |       |  0:14 |   0.5 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.9 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.3 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.9 |
-| Split archetype factory from transform                            |         |       | 10:57 |  21.2 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.3 |
+| Create an emacs mode for wale                                     |         |       |  0:14 |   0.4 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.7 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.2 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.7 |
+| Split archetype factory from transform                            |         |       | 10:57 |  20.4 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.2 |
 | Remove traits for archetypes                                      |         |       |  0:44 |   1.4 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   9.2 |
-| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.2 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.2 |
-| Add labels to archetypes                                          |         |       |  2:22 |   4.6 |
-| Improve org-mode converter                                        |         |       |  5:15 |  10.2 |
-| Add relations between archetypes in the PMM                       |         |       |  1:17 |   2.5 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   8.9 |
+| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.1 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.1 |
+| Add labels to archetypes                                          |         |       |  2:22 |   4.4 |
+| Improve org-mode converter                                        |         |       |  5:15 |   9.8 |
+| Add relations between archetypes in the PMM                       |         |       |  3:20 |   6.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1703,6 +1703,8 @@ Notes:
 
 *** STARTED Add relations between archetypes in the PMM               :story:
     :LOGBOOK:
+    CLOCK: [2020-06-26 Fri 18:02]--[2020-06-26 Fri 19:34] =>  1:32
+    CLOCK: [2020-06-26 Fri 17:02]--[2020-06-26 Fri 17:33] =>  0:31
     CLOCK: [2020-06-26 Fri 13:03]--[2020-06-26 Fri 13:17] =>  0:14
     CLOCK: [2020-06-26 Fri 11:55]--[2020-06-26 Fri 12:44] =>  0:49
     CLOCK: [2020-06-26 Fri 11:40]--[2020-06-26 Fri 11:54] =>  0:14
@@ -1762,19 +1764,15 @@ just be referable or non-referable. We could use a boolean for
 this. If a type is non-referable, we should throw when it is part of a
 relationship.
 
-*** Add archetype ownership model                                     :story:
-
-Archetypes can be owned by either a part or directly by a backend. In
-the future, they can also be owned by a product, a component, etc. We
-don't need to worry about this yet. Parts are owned by a backend. We
-need to ensure the current code supports this correctly. Archetypes
-that live at the project level must be owned by the backend, not the
-part.
-
 *** Add artefact's archetype to artefact class                        :story:
 
 For now a simple string would do. In the future we may need a pointer
 and join the PMM to the PM. We'll see how the use cases develop.
+
+*** Replace =facet_default= with labels                               :story:
+
+We need to stop using the enumeration to determine the canonical
+header and use instead the new labelling mechanism.
 
 *** Add file extensions to decoration                                 :story:
 
@@ -1860,6 +1858,15 @@ name. We then need further processing to determine what the using
 statements should be. As we do not have any usings at present this
 will have to be handled in another story. For now we should just make
 sure we record the dependencies.
+
+*** Add archetype ownership model                                     :story:
+
+Archetypes can be owned by either a part or directly by a backend. In
+the future, they can also be owned by a product, a component, etc. We
+don't need to worry about this yet. Parts are owned by a backend. We
+need to ensure the current code supports this correctly. Archetypes
+that live at the project level must be owned by the backend, not the
+part.
 
 *** KVPs with invalid field name still works                          :story:
 
