@@ -4183,7 +4183,7 @@ element.#</dia:string>
         <dia:point val="126.062,-94.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.013,-94.45;126.912,-88.95"/>
+        <dia:rectangle val="110.012,-94.45;126.912,-88.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4513,7 +4513,7 @@ element.#</dia:string>
         <dia:point val="110.062,-85.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="109.212,-85.9998;114.422,-79.95"/>
+        <dia:rectangle val="109.212,-85.9998;114.423,-79.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6242,7 +6242,7 @@ The format used is dependent on the technical space the artefact belongs to.#</d
         <dia:point val="133.025,-102.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.175,-102.85;152.113,-97.95"/>
+        <dia:rectangle val="132.175,-102.85;152.112,-97.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12547,7 +12547,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="100.062,-94.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.2125,-94.45;110.112,-88.95"/>
+        <dia:rectangle val="99.212,-94.45;110.112,-88.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17691,7 +17691,7 @@ models and meta-models for the physical model.
         <dia:point val="99.355,-108"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.605,-112.85;102.07,-106.4"/>
+        <dia:rectangle val="98.605,-112.85;102.07,-107.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17727,7 +17727,7 @@ models and meta-models for the physical model.
         <dia:point val="113.062,-94.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.013,-94.45;113.912,-88.4"/>
+        <dia:rectangle val="110.012,-94.45;113.912,-88.9991"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17805,7 +17805,7 @@ models and meta-models for the physical model.
         <dia:point val="113.062,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.858,-104.45;113.812,-96.4"/>
+        <dia:rectangle val="107.857,-104.45;113.812,-97.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18561,7 +18561,7 @@ to a unique archetype.#</dia:string>
         <dia:point val="128.665,-68.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.915,-71.65;131.456,-67.3"/>
+        <dia:rectangle val="127.915,-71.65;131.456,-68.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18628,19 +18628,19 @@ to a unique archetype.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="114.365,-67.3"/>
+        <dia:point val="114.365,-68.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.615,-68.95;117.05,-65.7"/>
+        <dia:rectangle val="113.615,-69.65;117.05,-66.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="114.365,-67.3"/>
-        <dia:point val="116,-67.3"/>
+        <dia:point val="114.365,-68.9"/>
         <dia:point val="116,-68.9"/>
-        <dia:point val="117,-68.9"/>
+        <dia:point val="116,-67.3"/>
+        <dia:point val="117,-67.3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -18657,8 +18657,8 @@ to a unique archetype.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O20" connection="9"/>
-        <dia:connection handle="1" to="O140" connection="3"/>
+        <dia:connection handle="0" to="O20" connection="4"/>
+        <dia:connection handle="1" to="O140" connection="8"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -18703,7 +18703,7 @@ to a unique archetype.#</dia:string>
         <dia:point val="114.365,-65.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.615,-66.45;117.05,-62.3"/>
+        <dia:rectangle val="113.615,-66.45;117.05,-63.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
