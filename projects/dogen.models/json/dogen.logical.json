@@ -809,7 +809,7 @@
     },
     {
       "name": "transforms::context",
-      "documentation": "\nContext for all logical transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
+      "documentation": "Context for all logical transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
       "stereotypes": [
         "dogen::typeable",
         "dogen::pretty_printable"

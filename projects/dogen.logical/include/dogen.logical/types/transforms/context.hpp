@@ -36,8 +36,7 @@
 namespace dogen::logical::transforms {
 
 /**
- *
- * Context for all logical transformations.
+ * @brief Context for all logical transformations.
  *
  * Contains all of the external data required for the transformations
  * to execute. It's not ideal to have a huge "global" class, with lots

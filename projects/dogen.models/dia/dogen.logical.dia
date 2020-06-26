@@ -6873,15 +6873,15 @@ model.#</dia:string>
         <dia:string>#dogen::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true
-
-Context for all logical transformations.
+        <dia:string>#Context for all logical transformations.
 
 Contains all of the external data required for the transformations
 to execute. It's not ideal to have a huge "global" class, with lots
 of unrelated state; however, over time, we found that a number of
 arguments were being supplied across the call graph, resulting in a
-lot of repetitive code. The context gathers together all of these.#</dia:string>
+lot of repetitive code. The context gathers together all of these.
+
+#DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
