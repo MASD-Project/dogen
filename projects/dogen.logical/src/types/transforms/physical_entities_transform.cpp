@@ -45,7 +45,7 @@ auto lg(logger_factory(transform_id));
 const std::string separator(".");
 const std::string meta_model_name("masd");
 const std::string relation_status_not_relatable("not_relatable");
-const std::string relation_status_referable("referable");
+const std::string relation_status_relatable("relatable");
 const std::string relation_status_facet_default("facet_default");
 
 const std::string invalid_relation_status(
@@ -389,13 +389,12 @@ process_archetypes(const context& ctx, entities::model& m) {
         const auto rs(scfg.relation_status);
         const bool is_valid_rs(
             rs == relation_status_not_relatable ||
-            rs == relation_status_referable ||
+            rs == relation_status_relatable ||
             rs == relation_status_facet_default);
         if (!is_valid_rs) {
             BOOST_LOG_SEV(lg, error) << invalid_relation_status << rs;
-            // BOOST_THROW_EXCEPTION(
-            //     transformation_error(invalid_or_empty_relation_status
-            //      rs));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_relation_status + rs));
         }
         arch.relation_status(rs);
 
