@@ -1,6 +1,6 @@
 #+title: dogen.palette
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.palette
 :masd.injection.reference: cpp.builtins
@@ -8,7 +8,8 @@
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
+
 Exercises all dogen-defined stereotypes that have an impact in
 colour, so we can see how the entire palette looks like.
 
@@ -22,27 +23,27 @@ We should try to keep all elements in one screen as much
 as possible, so we can evaluate how they work together.
 
 * palette_test_one_one
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * palette_test_one_two
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 * palette_test_one_three
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::implementation_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::implementation_only
+:END:
 * package
 ** package::palette_test_one_one
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** package::palette_test_one_two
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 ** package::palette_test_one_three
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::implementation_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::implementation_only
+:END:

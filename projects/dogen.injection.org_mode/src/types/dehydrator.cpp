@@ -40,14 +40,11 @@ namespace dogen::injection::org_mode {
 
 void dehydrator::insert_tagged_values(std::ostream& s,
     const std::list<std::pair<std::string, std::string>>& tv) {
-
     if (tv.empty())
         return;
 
-    s << ":dogen-tagged-values:" << std::endl;
     for (const auto& pair : tv)
         s << ":" << pair.first << ": " << pair.second << std::endl;
-    s << ":end:" << std::endl;
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
@@ -55,7 +52,7 @@ void dehydrator::insert_stereotypes(std::ostream& s,
     if (st.empty())
         return;
 
-    s << ":stereotypes: ";
+    s << ":masd.injection.stereotypes: ";
 
     bool is_first(true);
     for (const auto& stereotype : st) {
@@ -72,7 +69,7 @@ insert_parents(std::ostream& s, const std::list<std::string>& parents) {
     if (parents.empty())
         return;
 
-    s << ":parents: ";
+    s << ":masd.injection.parent: ";
 
     bool is_first(true);
     for (const auto& p : parents) {
@@ -89,17 +86,22 @@ void dehydrator::insert_attribute(std::ostream& s,
     const std::string stars(level, '*');
     s << stars << " " << a.name() << std::endl;
 
-    insert_tagged_values(s, a.tagged_values());
-    if (!a.type().empty() || !a.value().empty() || a.stereotypes().empty()) {
-        s << ":dogen-properties:" << std::endl;
+    const auto& tv(a.tagged_values());
+    if (!a.type().empty() || !a.value().empty() || !a.stereotypes().empty()
+        || !tv.empty()) {
+        s << ":PROPERTIES:" << std::endl;
+        insert_tagged_values(s, tv);
         if (!a.type().empty())
-            s << ":type: " << a.type() << std::endl;
+            s << ":masd.injection.type: " << a.type() << std::endl;
 
         if (!a.value().empty())
-            s << ":value: " << a.value() << std::endl;
+            s << ":masd.injection.value: " << a.value() << std::endl;
 
         insert_stereotypes(s, a.stereotypes());
-        s << ":end:" << std::endl << std::endl;
+        s << ":END:" << std::endl;
+
+        if (!a.documentation().empty())
+            s << std::endl;
     }
 
     if (!a.documentation().empty()) {
@@ -126,13 +128,16 @@ void dehydrator::insert_element(std::ostream& s,
     const std::string stars(level, '*');
     s << stars << " " << e.name() << std::endl;
 
-    insert_tagged_values(s, e.tagged_values());
-
-    if (!e.parents().empty() || !e.stereotypes().empty()) {
-        s << ":dogen-properties:" << std::endl;
+    const auto& tv(e.tagged_values());
+    if (!e.parents().empty() || !e.stereotypes().empty() || !tv.empty()) {
+        s << ":PROPERTIES:" << std::endl;
+        insert_tagged_values(s, tv);
         insert_parents(s, e.parents());
         insert_stereotypes(s, e.stereotypes());
-        s << ":end:" << std::endl;
+        s << ":END:" << std::endl;
+
+        if (!e.documentation().empty())
+            s << std::endl;
     }
 
     if (!e.documentation().empty())
@@ -163,17 +168,19 @@ std::string dehydrator::dehydrate(const injection::entities::model& m) {
       << "#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil"
       << std::endl;
 
-    insert_tagged_values(s, m.tagged_values());
-
-    if (!m.stereotypes().empty()) {
-        s << ":dogen-properties:" << std::endl;
+    const auto& tv(m.tagged_values());
+    if (!m.stereotypes().empty() || !tv.empty()) {
+        s << ":PROPERTIES:" << std::endl;
+        insert_tagged_values(s, tv);
         insert_stereotypes(s, m.stereotypes());
-        s << ":end:" << std::endl << std::endl;
+        s << ":END:" << std::endl;
+
+        if (!m.documentation().empty())
+            s << std::endl;
     }
 
     if (!m.documentation().empty())
         s << m.documentation() << std::endl;
-
 
     std::unordered_map<std::string,
                        std::list<entities::element>> parent_to_child_map;

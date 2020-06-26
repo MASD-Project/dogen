@@ -1,6 +1,6 @@
 #+title: dogen.injection.org_mode
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.injection.org_mode
 :masd.injection.reference: cpp.builtins
@@ -14,7 +14,8 @@
 :masd.injection.reference: dogen.profiles
 :masd.injection.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
+
 Provides file importing support for org-mode.
 
 Note: generated tests have been disabled for this model because
@@ -23,34 +24,34 @@ tests to fail. Once generated types have been added (or the bug
 is fixed) remove this configuration.
 
 * hydration_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
 * initializer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * hydrator
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * decoding_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * encoding_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * dehydrator
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * main
-:dogen-properties:
-:stereotypes: masd::entry_point, dogen::untypable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

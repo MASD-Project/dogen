@@ -1,6 +1,6 @@
 #+title: dogen.cli
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.cli
 :masd.injection.input_technical_space: cpp
@@ -13,149 +13,149 @@
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
+
 Implements the command-line interface for Dogen.
 
 * parser_exception
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 A fatal error has occurred during option parsing.
 
 * application
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * command_line_parser
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 * program_options_parser
-:dogen-properties:
-:parents: command_line_parser
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.parent: command_line_parser
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * injector_factory
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 * application_exception
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 A fatal error has occurred whilst executing the application.
 
 * configuration
 All of the configuration required by the command line application.
 
 ** logging
-:dogen-properties:
-:type: boost::optional<utility::log::logging_configuration>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::optional<utility::log::logging_configuration>
+:END:
 
 Configuration related to logging, if any.
 
 ** api
-:dogen-properties:
-:type: dogen::configuration
-:end:
-
+:PROPERTIES:
+:masd.injection.type: dogen::configuration
+:END:
 ** cli
-:dogen-properties:
-:type: cli_configuration
-:end:
-
+:PROPERTIES:
+:masd.injection.type: cli_configuration
+:END:
 * generation_configuration
-:dogen-properties:
-:stereotypes: masd::fluent
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::fluent
+:END:
+
 Configuration related to code generation.
 
 ** reference_model_directories
-:dogen-properties:
-:type: std::vector<boost::filesystem::path>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<boost::filesystem::path>
+:END:
 
 Directories to search for reference models.
 
 ** target
-:dogen-properties:
-:type: boost::filesystem::path
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
 
 Target model for generation.
 
 ** output_directory
-:dogen-properties:
-:type: boost::filesystem::path
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
 * conversion_configuration
-:dogen-properties:
-:stereotypes: masd::fluent
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::fluent
+:END:
+
 Configuration for the model conversion.
 
 ** source
-:dogen-properties:
-:type: boost::filesystem::path
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
 ** destination
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Name of the file to output the conversion to.
 
 * configuration_validator
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * initializer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * cli_configuration
-:dogen-properties:
-:stereotypes: masd::fluent
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::fluent
+:END:
+
 Configuration specific to the CLI application.
 
 ** activity
-:dogen-properties:
-:type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>
+:END:
 ** byproduct_directory
-:dogen-properties:
-:type: boost::filesystem::path
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
 
 Directory in which to place all files not directly related to generated code.
 
 * main
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.enabled: true
 :masd.cpp.types.overwrite: false
-:end:
-:dogen-properties:
-:stereotypes: masd::entry_point
-:end:
+:masd.injection.stereotypes: masd::entry_point
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:
 * dumpspecs_configuration
-:dogen-properties:
-:stereotypes: masd::fluent
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::fluent
+:END:
+
 Dumps all the specs about this version of dogen.
 
 ** style
-:dogen-properties:
-:type: reporting_style
-:end:
+:PROPERTIES:
+:masd.injection.type: reporting_style
+:END:
 
 Which style to use when dumping the specs.
 

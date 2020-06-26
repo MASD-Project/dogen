@@ -1,6 +1,6 @@
 #+title: dogen.profiles
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.profiles
 :masd.injection.reference: masd
@@ -8,7 +8,8 @@
 :masd.injection.is_proxy_model: true
 :masd.cpp.enabled: false
 :masd.csharp.enabled: false
-:end:
+:END:
+
 Top-level model in Dogen that contains all of the shared
 types at the meta-model level.
 
@@ -19,9 +20,10 @@ You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
 * base
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
-:end:
+:END:
+
 The base layer profiles are designed to be applied first.
 Their objective is to set the initial state from which
 other layers can then configure features.
@@ -29,606 +31,506 @@ other layers can then configure features.
 
 
 ** base::decoration
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.key_prefix: masd.decoration
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Configuration for the decoration elements.
 
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** licence_name
-:dogen-properties:
-:value: masd.gpl_v3
-:end:
-
+:PROPERTIES:
+:masd.injection.value: masd.gpl_v3
+:END:
 *** modeline_group_name
-:dogen-properties:
-:value: masd.emacs
-:end:
-
+:PROPERTIES:
+:masd.injection.value: masd.emacs
+:END:
 *** copyright_notice
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.value: Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
-:end:
-:dogen-properties:
-:end:
-
+:END:
 ** base::extraction
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.key_prefix: masd.physical
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Configuration for extraction.
 
 *** delete_extra_files
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** delete_empty_directories
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** base::csharp
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.key_prefix: masd.csharp
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Configures the main options for the C# backend.
 
 *** enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** base::ignores
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.key_prefix: masd.physical
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Regexes to ignore.
 
 *** ignore_files_matching_regex
-:dogen-properties:
-:value: .*/test/.*
-:end:
-
+:PROPERTIES:
+:masd.injection.value: .*/test/.*
+:END:
 *** ignore_files_matching_regex
-:dogen-properties:
-:value: .*/tests/.*
-:end:
-
+:PROPERTIES:
+:masd.injection.value: .*/tests/.*
+:END:
 ** base::base
-:dogen-properties:
-:parents: base::decoration, base::extraction, base::csharp, base::ignores
-:stereotypes: masd::variability::profile
-:end:
+:PROPERTIES:
+:masd.injection.parent: base::decoration, base::extraction, base::csharp, base::ignores
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** masd.cpp.standard
-:dogen-properties:
-:value: c++-17
-:end:
-
+:PROPERTIES:
+:masd.injection.value: c++-17
+:END:
 ** base::base_profile
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.key_prefix: masd.cpp
-:end:
-:dogen-properties:
-:parents: base::base
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: base::base
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Configures the main options for the C++ backend.
 
 *** odb.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** hash.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** serialization.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** lexical_cast.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** tests.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** test_data.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** templates.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** base::default_profile
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
-:end:
-:dogen-properties:
-:parents: base::base_profile
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: base::base_profile
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Variability profile for a typical dogen model.
 
 ** base::disable_all_facets
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
-:end:
-:dogen-properties:
-:parents: base::base
-:stereotypes: masd::variability::profile_template
-:end:
+:masd.injection.parent: base::base
+:masd.injection.stereotypes: masd::variability::profile_template
+:END:
+
 
 Disables all facets in the C++ backend.
 
 *** enabled
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.facet
-:end:
-:dogen-properties:
-:value: false
-:end:
-
+:masd.injection.value: false
+:END:
 ** base::relational_profile
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.key_prefix: masd.cpp
-:end:
-:dogen-properties:
-:parents: base::base_profile
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: base::base_profile
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** odb.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** build.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** base::test_all_facets
-:dogen-properties:
-:parents: base::base
-:stereotypes: masd::variability::profile
-:end:
+:PROPERTIES:
+:masd.injection.parent: base::base
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** masd.decoration.marker_name
-:dogen-properties:
-:value: dogen.profiles.test_marker
-:end:
-
+:PROPERTIES:
+:masd.injection.value: dogen.profiles.test_marker
+:END:
 *** masd.cpp.tests.main.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 * composable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
-:end:
+:END:
+
 The composable layer is made up of profiles that
 are meant to be applied on top of the base layer.
 These can be used to compose the final configuration
 for the element.
 
 ** composable::typeable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::typeable
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Model element is defined as a type.
 
 *** masd.cpp.types.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** masd.variability.profile
-:dogen-properties:
-:value: dogen.profiles.base.disable_all_facets
-:end:
+:PROPERTIES:
+:masd.injection.value: dogen.profiles.base.disable_all_facets
+:END:
 
 If you are typeable, it probably means you do not want the default configuration,
 so we disable all facets.
 
 ** composable::pretty_printable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::pretty_printable
 :masd.variability.key_prefix: masd.cpp.io
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 The element has the ability to dump itself to a stream.
 
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::hashable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::hashable
 :masd.variability.key_prefix: masd.cpp.hash
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 The element has the ability to generate hashes.
 
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::serializable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::serializable
 :masd.variability.key_prefix: masd.cpp.serialization
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::handcrafted
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Base profile for model elements that are manually generated.
 
 *** masd.variability.profile
-:dogen-properties:
-:value: dogen.profiles.base.disable_all_facets
-:end:
-
+:PROPERTIES:
+:masd.injection.value: dogen.profiles.base.disable_all_facets
+:END:
 ** composable::handcrafted_pretty_printable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::pretty_printable
 :masd.variability.key_prefix: masd.cpp.io
-:end:
-:dogen-properties:
-:parents: composable::handcrafted
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::handcrafted
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** overwrite
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::handcrafted_typeable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::typeable
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:parents: composable::handcrafted
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::handcrafted
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Configuration for model elements that are generated manually by the user.
 
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** overwrite
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** class_forward_declarations.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::header_only
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::handcrafted::typeable::header_only
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:parents: composable::handcrafted_typeable
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::handcrafted_typeable
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 This element has only a types header file.
 
 *** class_implementation.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::inheritable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::inheritable
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** masd.generalization.is_final
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::implementation_only
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::typeable::implementation_only
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:parents: composable::handcrafted_typeable
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::handcrafted_typeable
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 This element has only a types implementation file.
 
 *** class_header.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** class_forward_declarations.enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 *** class_implementation.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::base_helper_formatter
-:dogen-properties:
-:parents: composable::handcrafted_typeable
-:stereotypes: masd::variability::profile
-:end:
+:PROPERTIES:
+:masd.injection.parent: composable::handcrafted_typeable
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** masd.generalization.parent
-:dogen-properties:
-:value: transforms::helper_transform
-:end:
-
+:PROPERTIES:
+:masd.injection.value: transforms::helper_transform
+:END:
 ** composable::cpp_helper_transform
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::cpp::helper_transform
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:parents: composable::base_helper_formatter
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::base_helper_formatter
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** class_header.formatting_style
-:dogen-properties:
-:value: wale
-:end:
-
+:PROPERTIES:
+:masd.injection.value: wale
+:END:
 *** class_header.formatting_input
-:dogen-properties:
-:value: cpp_helper_transform_header.wale
-:end:
-
+:PROPERTIES:
+:masd.injection.value: cpp_helper_transform_header.wale
+:END:
 *** class_header.overwrite
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** class_implementation.formatting_style
-:dogen-properties:
-:value: stitch
-:end:
-
+:PROPERTIES:
+:masd.injection.value: stitch
+:END:
 *** class_implementation.overwrite
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::csharp_helper_transform
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: global
 :masd.variability.stereotype: dogen::csharp::helper_transform
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:parents: composable::base_helper_formatter
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::base_helper_formatter
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** class_header.formatting_style
-:dogen-properties:
-:value: wale
-:end:
-
+:PROPERTIES:
+:masd.injection.value: wale
+:END:
 *** class_header.formatting_input
-:dogen-properties:
-:value: csharp_helper_transform_header.wale
-:end:
-
+:PROPERTIES:
+:masd.injection.value: csharp_helper_transform_header.wale
+:END:
 *** class_header.overwrite
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** class_implementation.formatting_style
-:dogen-properties:
-:value: stitch
-:end:
-
+:PROPERTIES:
+:masd.injection.value: stitch
+:END:
 *** class_implementation.overwrite
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::handcrafted_serializable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::serializable
 :masd.variability.key_prefix: masd.cpp.serialization
-:end:
-:dogen-properties:
-:parents: composable::handcrafted
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.parent: composable::handcrafted
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** overwrite
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::convertible
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::convertible
 :masd.variability.key_prefix: masd.cpp.lexical_cast
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** composable::untestable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::untestable
 :masd.variability.key_prefix: masd.cpp.tests
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Model element will not be tested via generated tests.
 
 *** enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::untypable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::untypable
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 The element does not have a types facet.
 
 *** enabled
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::handcrafted_cmake
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::handcrafted::cmake
 :masd.variability.key_prefix: masd.cpp
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
 *** build.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 *** build.overwrite
-:dogen-properties:
-:value: false
-:end:
-
+:PROPERTIES:
+:masd.injection.value: false
+:END:
 ** composable::forward_declarable
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.variability.binding_point: element
 :masd.variability.stereotype: dogen::forward_declarable
 :masd.variability.key_prefix: masd.cpp.types
-:end:
-:dogen-properties:
-:stereotypes: masd::variability::profile
-:end:
+:masd.injection.stereotypes: masd::variability::profile
+:END:
+
 Element has forward declarations.
 
 *** class_forward_declarations.enabled
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 * test_marker
-:dogen-properties:
-:stereotypes: masd::decoration::generation_marker
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::decoration::generation_marker
+:END:
 ** add_date_time
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** add_warning
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** add_dogen_version
-:dogen-properties:
-:value: true
-:end:
-
+:PROPERTIES:
+:masd.injection.value: true
+:END:
 ** message
-:dogen-properties:
-:end:
-
 These files are code-generated via overrides to test dogen. Do not commit them.
 

@@ -1,6 +1,6 @@
 #+title: dogen.text
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.text
 :masd.injection.reference: cpp.builtins
@@ -15,67 +15,67 @@
 :masd.injection.reference: dogen.profiles
 :masd.injection.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
 * entities
 ** entities::model
-:dogen-properties:
-:stereotypes: Nameable, MetaNameable, DeterminableOrigin
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: Nameable, MetaNameable, DeterminableOrigin
+:END:
+
 Yarn model.
 
 *** references
-:dogen-properties:
-:type: std::unordered_map<logical::entities::name, logical::entities::origin_types>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<logical::entities::name, logical::entities::origin_types>
+:END:
 
 All other models that this model depends on, mapped to their origin.
 
 *** leaves
-:dogen-properties:
-:type: std::unordered_set<logical::entities::name>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::unordered_set<logical::entities::name>
+:END:
 
 All leaf types in this model.
 
 Leaves are types concrete types which have a parent.
 
 *** elements
-:dogen-properties:
-:type: std::list<element_artefacts>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::list<element_artefacts>
+:END:
 *** root_module
-:dogen-properties:
-:type: boost::shared_ptr<logical::entities::structural::module>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<logical::entities::structural::module>
+:END:
 
 The module that represents the model.
 
 *** has_generatable_types
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 If true the intermediate model has at least one generable type, false otherwise.
 
 *** input_technical_space
-:dogen-properties:
-:type: logical::entities::technical_space
-:end:
+:PROPERTIES:
+:masd.injection.type: logical::entities::technical_space
+:END:
 
 Technical space which this model used originally.
 
 *** output_technical_space
-:dogen-properties:
-:type: logical::entities::technical_space
-:end:
+:PROPERTIES:
+:masd.injection.type: logical::entities::technical_space
+:END:
 
 Technical space into which to output the model.
 
 *** all_technical_spaces
-:dogen-properties:
-:type: std::unordered_set<logical::entities::technical_space>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::unordered_set<logical::entities::technical_space>
+:END:
 
 Set of all technical concrete spaces involved in generating this model.
 
@@ -84,173 +84,145 @@ all of the secondary technical spaces. Does not include any abstract technical
 spaces.
 
 *** orm_properties
-:dogen-properties:
-:type: boost::optional<logical::entities::orm::model_properties>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::optional<logical::entities::orm::model_properties>
+:END:
 *** enabled_archetype_for_element
-:dogen-properties:
-:type: std::unordered_set<element_archetype>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_set<element_archetype>
+:END:
 *** global_enablement_properties
-:dogen-properties:
-:type: global_enablement_properties
-:end:
-
+:PROPERTIES:
+:masd.injection.type: global_enablement_properties
+:END:
 *** extraction_properties
-:dogen-properties:
-:type: logical::entities::extraction_properties
-:end:
-
+:PROPERTIES:
+:masd.injection.type: logical::entities::extraction_properties
+:END:
 *** managed_directories
-:dogen-properties:
-:type: std::list<boost::filesystem::path>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::list<boost::filesystem::path>
+:END:
 ** entities::formatting_styles
-:dogen-properties:
-:stereotypes: masd::enumeration
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::enumeration
+:END:
 *** stock
-:dogen-properties:
-:end:
-
 *** wale
-:dogen-properties:
-:end:
-
 *** stitch
-:dogen-properties:
-:end:
-
 ** entities::element_archetype
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.hash.enabled: true
-:end:
+:END:
 *** element
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 *** archetype
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** entities::backend_properties
 Properties related to the backend.
 
 *** enabled
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 If true, this backend is enabled.
 
 ** entities::global_enablement_properties
 *** backend_properties
-:dogen-properties:
-:type: std::unordered_map<std::string, backend_properties>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, backend_properties>
+:END:
 *** facet_properties
-:dogen-properties:
-:type: std::unordered_map<std::string, facet_properties>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, facet_properties>
+:END:
 *** archetype_properties
-:dogen-properties:
-:type: std::unordered_map<std::string, archetype_properties>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, archetype_properties>
+:END:
 *** denormalised_archetype_properties
-:dogen-properties:
-:type: std::unordered_map<std::string, denormalised_archetype_properties>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, denormalised_archetype_properties>
+:END:
 ** entities::denormalised_archetype_properties
 *** backend_enabled
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 *** facet_enabled
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 *** facet_overwrite
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 *** archetype_enabled
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 *** archetype_overwrite
-:dogen-properties:
-:type: boost::optional<bool>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
 ** entities::facet_properties
 *** enabled
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 If true, this facet is enabled.
 
 *** overwrite
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 ** entities::archetype_properties
 Archetype level properties, applicable to all instances of this archetype.
 
 *** enabled
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 If false, will disable all instances of this archetype.
 
 *** overwrite
-:dogen-properties:
-:type: boost::optional<bool>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
 ** entities::Nameable
-:dogen-properties:
-:stereotypes: masd::object_template
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
 *** name
-:dogen-properties:
-:type: logical::entities::name
-:end:
-
+:PROPERTIES:
+:masd.injection.type: logical::entities::name
+:END:
 ** entities::MetaNameable
-:dogen-properties:
-:stereotypes: masd::object_template
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
 *** meta_name
-:dogen-properties:
-:type: logical::entities::name
-:end:
-
+:PROPERTIES:
+:masd.injection.type: logical::entities::name
+:END:
 ** entities::DeterminableOrigin
-:dogen-properties:
-:stereotypes: masd::object_template
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
+
 A unit of logical that can be code generated.
 
 *** origin_sha1_hash
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 SHA1 key of the original injection model.
 
@@ -258,216 +230,203 @@ SHA1 key of the original injection model.
 Maps logical elements with the physical artefacts that will be produced from them.
 
 *** element
-:dogen-properties:
-:type: boost::shared_ptr<logical::entities::element>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<logical::entities::element>
+:END:
 
 Logical element that gives rise to the artefact.
 
 *** artefacts
-:dogen-properties:
-:type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:END:
 
 Physical artefact that will be produced from the logical element.
 
 ** entities::model_set
-:dogen-properties:
-:stereotypes: Nameable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: Nameable
+:END:
+
 Represents a set of related models.
 
 *** models
-:dogen-properties:
-:type: std::list<model>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::list<model>
+:END:
 
 Models that belong to this set.
 
 * transforms
 ** transforms::generability_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::model_to_text_chain
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::model_to_text_technical_space_chain
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only, dogen::forward_declarable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only, dogen::forward_declarable
+:END:
 ** transforms::model_to_text_technical_space_chain_registrar
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable, dogen::forward_declarable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable, dogen::forward_declarable
+:END:
 *** transforms_by_technical_space_
-:dogen-properties:
-:type: std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>
+:END:
 ** transforms::local_enablement_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::artefact_properties_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::formatting_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::formatting_configuration
 *** style
-:dogen-properties:
-:type: entities::formatting_styles
-:end:
-
+:PROPERTIES:
+:masd.injection.type: entities::formatting_styles
+:END:
 *** input
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** transforms::model_generation_chain
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::global_enablement_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** transforms::context
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:end:
-:dogen-properties:
-:stereotypes: dogen::typeable, dogen::pretty_printable
-:end:
+:masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
+:END:
 *** physical_meta_model
-:dogen-properties:
-:type: boost::shared_ptr<physical::entities::meta_model>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<physical::entities::meta_model>
+:END:
 
 Meta-model for the physical dimension.
 
 *** output_directory_path
-:dogen-properties:
-:type: boost::filesystem::path
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
 
 FIXME: to be removed
 
 *** feature_model
-:dogen-properties:
-:type: boost::shared_ptr<variability::entities::feature_model>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<variability::entities::feature_model>
+:END:
 *** tracer
-:dogen-properties:
-:type: boost::shared_ptr<tracing::tracer>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<tracing::tracer>
+:END:
 *** generation_timestamp
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Human readable timestamp of when the generation took place.
 
 ** transforms::transformation_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 An error occurred whilst applying a transformation.
 
 ** transforms::registrar_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
 ** transforms::model_to_text_transform
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:end:
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 * formatters
 ** formatters::formatting_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 An error has occurred while formatting.
 
 ** formatters::namespace_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::scoped_namespace_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::boilerplate_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::scoped_boilerplate_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::dependencies_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::header_guard_formatter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** formatters::boilerplate_properties
 *** preamble
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 *** postamble
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 *** dependencies
-:dogen-properties:
-:type: std::list<std::string>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::list<std::string>
+:END:
 *** header_guard
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 *** technical_space
-:dogen-properties:
-:type: logical::entities::technical_space
-:end:
-
+:PROPERTIES:
+:masd.injection.type: logical::entities::technical_space
+:END:
 *** generate_preamble
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 *** generate_header_guards
-:dogen-properties:
-:type: bool
-:end:
-
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 * registrar
-:dogen-properties:
-:stereotypes: masd::serialization::type_registrar
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::serialization::type_registrar
+:END:
 * main
-:dogen-properties:
-:stereotypes: masd::entry_point, dogen::untypable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

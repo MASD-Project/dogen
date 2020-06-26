@@ -1,6 +1,6 @@
 #+title: dogen.tracing
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.tracing
 :masd.injection.input_technical_space: cpp
@@ -12,123 +12,111 @@
 :masd.injection.reference: dogen
 :masd.injection.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
+
 Houses classes common to all transformations.
 
 * tracer
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:end:
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
-:end:
+:masd.injection.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:END:
 ** backend
-:dogen-properties:
-:type: boost::shared_ptr<backend>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<backend>
+:END:
 * metrics
-:dogen-properties:
-:stereotypes: dogen::untestable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::untestable
+:END:
 ** transform_id
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** model_id
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** guid
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** start
-:dogen-properties:
-:type: unsigned long
-:end:
-
+:PROPERTIES:
+:masd.injection.type: unsigned long
+:END:
 ** end
-:dogen-properties:
-:type: unsigned long
-:end:
-
+:PROPERTIES:
+:masd.injection.type: unsigned long
+:END:
 ** children
-:dogen-properties:
-:type: std::list<boost::shared_ptr<metrics>>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::list<boost::shared_ptr<metrics>>
+:END:
 * metrics_builder
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * metrics_printer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * tracing_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 An error occurred when trying to generate tracing data.
 
 * scoped_tracer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * references_printer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * backend
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:end:
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
-:end:
+:masd.injection.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:END:
 * file_backend
-:dogen-properties:
-:parents: backend
-:stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
-:end:
+:PROPERTIES:
+:masd.injection.parent: backend
+:masd.injection.stereotypes: dogen::handcrafted::typeable, dogen::pretty_printable
+:END:
 * backend_factory_registrar
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 ** backend_factories_
-:dogen-properties:
-:type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>
+:END:
 * registrar_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
 * backend_factory
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:end:
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 * file_backend_factory
-:dogen-properties:
-:parents: backend_factory
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.parent: backend_factory
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * initializer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * main
-:dogen-properties:
-:stereotypes: masd::entry_point, dogen::untypable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

@@ -1,6 +1,6 @@
 #+title: dogen.dia
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.dia
 :masd.injection.input_technical_space: cpp
@@ -12,14 +12,14 @@
 :masd.injection.reference: dogen.profiles
 :masd.physical.ignore_files_matching_regex: .*/*.py
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
 * diagram_data
 Represents a all the data associated with a diagram.
 
 ** attributes
-:dogen-properties:
-:type: std::vector<attribute>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<attribute>
+:END:
 
 All attributes associated with the diagram data.
 
@@ -27,43 +27,44 @@ All attributes associated with the diagram data.
 Attribute in a Dia diagram.
 
 ** name
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Name of the attribute.
 
 ** values
-:dogen-properties:
-:type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
+:END:
 
 Values for the attribute.
 
 * composite
-:dogen-properties:
-:stereotypes: dogen::untestable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::untestable
+:END:
+
 Attribute value which is made up of other attributes.
 
 ** type
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Type of the composite node
 
 ** value
-:dogen-properties:
-:type: std::vector<boost::shared_ptr<attribute>>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<boost::shared_ptr<attribute>>
+:END:
 
 Underlying Dia attributes.
 
 ** inner_composite
-:dogen-properties:
-:type: boost::shared_ptr<composite>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<composite>
+:END:
 
 Some composites contain an inner composite field.
 
@@ -71,9 +72,9 @@ Some composites contain an inner composite field.
 Represents a color in a diagram.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of an RGB value in hex.
 
@@ -81,16 +82,16 @@ Text representation of an RGB value in hex.
 Represents a diagram in Dia.
 
 ** diagram_data
-:dogen-properties:
-:type: diagram_data
-:end:
+:PROPERTIES:
+:masd.injection.type: diagram_data
+:END:
 
 Basic diagram definitions.
 
 ** layers
-:dogen-properties:
-:type: std::vector<layer>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<layer>
+:END:
 
 Visual layers on the diagram.
 
@@ -98,30 +99,30 @@ Visual layers on the diagram.
 Represents a layer in a Dia diagram.
 
 ** name
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Name of the layer.
 
 ** visible
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 Whether the layer is visible on screen or not.
 
 ** active
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 Whether the layer is active or not.
 
 ** objects
-:dogen-properties:
-:type: std::vector<object>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<object>
+:END:
 
 Dia objects contained in layer.
 
@@ -129,9 +130,9 @@ Dia objects contained in layer.
 Represents a real value.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a real value.
 
@@ -139,9 +140,9 @@ Text representation of a real value.
 Represents an integer value.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of an integer value.
 
@@ -149,44 +150,44 @@ Text representation of an integer value.
 Represents a Dia object.
 
 ** type
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Type of the object.
 
 ** version
-:dogen-properties:
-:type: int
-:end:
+:PROPERTIES:
+:masd.injection.type: int
+:END:
 
 Version of the object.
 
 ** id
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Unique identifier for the object in this diagram.
 
 ** connections
-:dogen-properties:
-:type: std::vector<connection>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<connection>
+:END:
 
 Connection details for this object.
 
 ** child_node
-:dogen-properties:
-:type: boost::optional<child_node>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::optional<child_node>
+:END:
 
 Parenting information for this object.
 
 ** attributes
-:dogen-properties:
-:type: std::vector<attribute>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::vector<attribute>
+:END:
 
 All attributes associated with the object.
 
@@ -194,9 +195,9 @@ All attributes associated with the object.
 Represents a point in a diagram.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a point with X/Y coordinates.
 
@@ -204,9 +205,9 @@ Text representation of a point with X/Y coordinates.
 Represents a boolean value.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a boolean value.
 
@@ -219,9 +220,9 @@ inside package O0 then class O1 will have a child node element with
 a parent pointing to O0.
 
 ** parent
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Parent for this object.
 
@@ -229,9 +230,9 @@ Parent for this object.
 Represents a string value.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a string value.
 
@@ -239,27 +240,24 @@ Text representation of a string value.
 Represents a font in a diagram.
 
 ** family
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** style
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** name
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 * enumeration
 Represents a enumeration in a diagram.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a enumeration.
 
@@ -267,23 +265,23 @@ Text representation of a enumeration.
 Connection between entities in a Dia diagram.
 
 ** handle
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Internal handle for the connection.
 
 ** to
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Object we're connected to.
 
 ** connection_slot
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Number of the connection slot we're connected to.
 
@@ -294,29 +292,31 @@ between the class and the slot concepts, we renamed it.
 Represents a rectangle in a diagram.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text representation of a rectangle with a pair of X/Y coordinates.
 
 * hydrator
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+
 Reads a Dia diagram and instatiates the dia model objects.
 
 * hydration_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 An error occurred while reading a diagram.
 
 * main
-:dogen-properties:
-:stereotypes: masd::entry_point, dogen::untypable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

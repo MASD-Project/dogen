@@ -1,6 +1,6 @@
 #+title: dogen.injection.dia
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
-:dogen-tagged-values:
+:PROPERTIES:
 :masd.injection.dia.comment: true
 :masd.injection.model_modules: dogen.injection.dia
 :masd.injection.reference: cpp.builtins
@@ -15,7 +15,8 @@
 :masd.injection.reference: dogen.profiles
 :masd.injection.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
-:end:
+:END:
+
 Injection.Dia is a unidirectional transformation model that transforms
 a Dia @e diagram into an injection @e model.
 
@@ -91,243 +92,223 @@ entity.
 For details on the stereotypes see the MASD UML profile.
 
 * adaptation_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 A fatal error has occurred while adapting a Dia model object
 into its masd representation.
 
 * grapher
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * graphing_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 An error has occurred while building the dia object graph.
 
 * processed_comment_factory
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * processed_object_factory
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * processed_attribute
 ** name
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Name of the property.
 
 ** type
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Type of the property.
 
 ** comment
-:dogen-properties:
-:type: processed_comment
-:end:
+:PROPERTIES:
+:masd.injection.type: processed_comment
+:END:
 
 Any comments associated with the property.
 
 ** value
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 * processed_object
 Representation of a dia object after first stage processing.
 
 ** id
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Dia object id.
 
 ** name
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Name of the object in dia format.
 
 ** dia_object_type
-:dogen-properties:
-:type: dia_object_types
-:end:
+:PROPERTIES:
+:masd.injection.type: dia_object_types
+:END:
 
 Type of the dia object.
 
 ** stereotypes
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** comment
-:dogen-properties:
-:type: processed_comment
-:end:
+:PROPERTIES:
+:masd.injection.type: processed_comment
+:END:
 
 Any comments associated with the object.
 
 On the case of a UML note, represents the text of the note.
 
 ** child_node_id
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 If the object is contained in another object, its node id.
 
 ** connection
-:dogen-properties:
-:type: boost::optional<std::pair<std::string,std::string>>
-:end:
+:PROPERTIES:
+:masd.injection.type: boost::optional<std::pair<std::string,std::string>>
+:END:
 
 Connections this object may have with other objects.
 
 ** attributes
-:dogen-properties:
-:type: std::list<processed_attribute>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::list<processed_attribute>
+:END:
 
 All attributes associated with dia object.
 
 * dia_object_types
-:dogen-properties:
-:stereotypes: masd::enumeration
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::enumeration
+:END:
+
 Identifier for the type of Dia object.
 
 ** uml_large_package
-:dogen-properties:
-:end:
-
 A UML package
 
 ** uml_class
-:dogen-properties:
-:end:
-
 A UML class
 
 ** uml_generalization
-:dogen-properties:
-:end:
-
 UML Inheritance
 
 ** uml_association
-:dogen-properties:
-:end:
-
 UML Association
 
 ** uml_note
-:dogen-properties:
-:end:
-
 UML Note
 
 ** uml_message
-:dogen-properties:
-:end:
-
 UML Message
 
 ** uml_realization
-:dogen-properties:
-:end:
-
 UML Realization
 
 * validator
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * validation_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
 The object profile is not valid.
 
 * traits
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * processed_comment
 Contains the same content as the original dia comment, but split by type of data.
 
 ** documentation
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Text of the comment, excluding all Dogen instructions.
 
 ** tagged_values
-:dogen-properties:
-:type: std::list<std::pair<std::string,std::string>>
-:end:
+:PROPERTIES:
+:masd.injection.type: std::list<std::pair<std::string,std::string>>
+:END:
 
 Dogen instructions, in the key-value-pair form.
 
 ** applicable_to_parent_object
-:dogen-properties:
-:type: bool
-:end:
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
 
 If true, the comment should be attached to the dia object containing it.
 
 ** original_content
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Content of the field as it was read from the dia object.
 
 * initializer
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * building_error
-:dogen-properties:
-:stereotypes: masd::exception
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
 * visitor
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable::header_only
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
 ** builder_
-:dogen-properties:
-:type: builder
-:end:
-
+:PROPERTIES:
+:masd.injection.type: builder
+:END:
 * builder
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * adapter
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * decoding_transform
-:dogen-properties:
-:stereotypes: dogen::handcrafted::typeable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * main
-:dogen-properties:
-:stereotypes: masd::entry_point, dogen::untypable
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:END:
 * CMakeLists
-:dogen-properties:
-:stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

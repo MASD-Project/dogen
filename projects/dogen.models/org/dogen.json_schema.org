@@ -2,99 +2,73 @@
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 * schema_document
 ** id_keyword
-:dogen-properties:
-:type: std::string
-:end:
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 
 Defines a URI for the schema.
 
 ** schema_keyword
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** title
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 ** type
-:dogen-properties:
-:type: type
-:end:
-
+:PROPERTIES:
+:masd.injection.type: type
+:END:
 ** description
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 * type
-:dogen-properties:
-:stereotypes: masd::enumeration
-:end:
+:PROPERTIES:
+:masd.injection.stereotypes: masd::enumeration
+:END:
 ** object
-:dogen-properties:
-:end:
-
 ** array
-:dogen-properties:
-:end:
-
 ** string
-:dogen-properties:
-:end:
-
 ** number
-:dogen-properties:
-:end:
-
 ** boolean
-:dogen-properties:
-:end:
-
 ** null
-:dogen-properties:
-:end:
-
 * properties
 ** type
-:dogen-properties:
-:type: type
-:end:
-
+:PROPERTIES:
+:masd.injection.type: type
+:END:
 ** minimum
-:dogen-properties:
-:type: unsigned int
-:end:
-
+:PROPERTIES:
+:masd.injection.type: unsigned int
+:END:
 ** maximum
-:dogen-properties:
-:type: unsigned int
-:end:
-
+:PROPERTIES:
+:masd.injection.type: unsigned int
+:END:
 ** description
-:dogen-properties:
-:type: std::string
-:end:
-
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
 * value
 * object
-:dogen-properties:
-:parents: value
-:end:
+:PROPERTIES:
+:masd.injection.parent: value
+:END:
 * array
-:dogen-properties:
-:parents: value
-:end:
+:PROPERTIES:
+:masd.injection.parent: value
+:END:
 * string
-:dogen-properties:
-:parents: value
-:end:
+:PROPERTIES:
+:masd.injection.parent: value
+:END:
 * number
-:dogen-properties:
-:parents: value
-:end:
+:PROPERTIES:
+:masd.injection.parent: value
+:END:
 * boolean
-:dogen-properties:
-:parents: value
-:end:
+:PROPERTIES:
+:masd.injection.parent: value
+:END:
