@@ -15,32 +15,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-25 Thu 23:18]
+#+CAPTION: Clock summary at [2020-06-26 Fri 13:17]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *49:01* |       |       | 100.0 |
+| *Total time*                                                      | *51:34* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 49:01   |       |       | 100.0 |
-| Active                                                            |         | 49:01 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  15.7 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.4 |
-| Sprint and product backlog grooming                               |         |       |  4:35 |   9.4 |
+| Stories                                                           | 51:34   |       |       | 100.0 |
+| Active                                                            |         | 51:34 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  14.9 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.3 |
+| Sprint and product backlog grooming                               |         |       |  4:35 |   8.9 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.4 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   3.1 |
-| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.3 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.9 |
+| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.2 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.5 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   6.3 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.4 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   6.2 |
-| Split archetype factory from transform                            |         |       | 10:57 |  22.3 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.4 |
-| Remove traits for archetypes                                      |         |       |  0:44 |   1.5 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   9.7 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.9 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.3 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.9 |
+| Split archetype factory from transform                            |         |       | 10:57 |  21.2 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.3 |
+| Remove traits for archetypes                                      |         |       |  0:44 |   1.4 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   9.2 |
 | Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.2 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.3 |
-| Add labels to archetypes                                          |         |       |  2:22 |   4.8 |
-| Improve org-mode converter                                        |         |       |  3:59 |   8.1 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.2 |
+| Add labels to archetypes                                          |         |       |  2:22 |   4.6 |
+| Improve org-mode converter                                        |         |       |  5:15 |  10.2 |
+| Add relations between archetypes in the PMM                       |         |       |  1:17 |   2.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1658,6 +1659,7 @@ Label keys:
 
 *** STARTED Improve org-mode converter                                :story:
     :LOGBOOK:
+    CLOCK: [2020-06-26 Fri 10:00]--[2020-06-26 Fri 11:16] =>  1:16
     CLOCK: [2020-06-25 Thu 23:00]--[2020-06-25 Thu 23:18] =>  0:18
     CLOCK: [2020-06-25 Thu 22:31]--[2020-06-25 Thu 22:59] =>  0:28
     CLOCK: [2020-06-24 Wed 06:39]--[2020-06-24 Wed 08:00] =>  1:21
@@ -1682,8 +1684,29 @@ Notes:
   then be converted when we generate the model.
 - preserve the dia object ID and the dia container ID (child
   node). With this we can recreate the containment relationships.
+- we should aim to make our org models compliant to org-mode
+  syntax. This means we should avoid introducing our own drawers
+  and have different ways of representing meta-data. Instead, we will
+  use the regular meta-data subsystem for all the data transported in
+  a model which cannot be extracted from its structure. The injector
+  transforms then need to check if the data is coming from meta-data
+  or from the properties themselves and throw when an attribute is
+  defined in both places. There are not that many new keys required.
+- we should add a flag "is container". If set and there are no
+  stereotype attributes for the meta-model element, the default is
+  module. If not set, the default is object. This property is conveyed
+  through the meta-data.
+- add simple and qualified name to injection.
+- add =CUSTOM_ID= with a UUID.
+- reduce size of code font and add colouring for latex.
+- add operations to injection.
 
-*** Add relations between archetypes in the PMM                       :story:
+*** STARTED Add relations between archetypes in the PMM               :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-26 Fri 13:03]--[2020-06-26 Fri 13:17] =>  0:14
+    CLOCK: [2020-06-26 Fri 11:55]--[2020-06-26 Fri 12:44] =>  0:49
+    CLOCK: [2020-06-26 Fri 11:40]--[2020-06-26 Fri 11:54] =>  0:14
+    :END:
 
 We need to add a new enum in the physical model: =relation_type=.
 
@@ -1693,7 +1716,7 @@ We need to add a new enum in the physical model: =relation_type=.
 - opaque_associations
 - associative_container_keys
 - visitation
-- serialisation
+- self: header for implementation, serialisation forward declaration, etc.
 
 Then we need to be able to add to each archetype a KVP of relation to
 either an archetype or to a label. If its a label it must have the
@@ -1701,6 +1724,43 @@ label syntax: =role:type_definition=. Otherwise its assumed to be an
 archetype. We could probably use the prefix =archetype:= for the
 archetype direct mapping. There must be a way to distinguish between a
 projected physical relation and an explicit physical relation.
+
+We have a slight problem: relations are relative to the meta-type
+element. The above are mainly for object. We have different ones for
+each meta-type. If we made the key a string, and a precondition that
+the relation name must match the attribute name, we could solve this
+problem. Actually it doesn't make a lot of difference; at the end of
+the day we will still require a dispatch of the form:
+
+- for every entry in the KVP for our current archetype:
+  1. locate the attribute that matches the key (for example =parent=);
+  2. get the name and the archetype and convert it into a dependency.
+  3. store that in the artefact.
+
+Step 1 will always require some kind of mapping, and it will not be
+code generated. Enum is fine, we should just throw if a relation is
+not supported by a given meta-type. We will add more relations as we
+go through the different meta-types. Actually, there are two types of
+relations: variable and constant. Variable because they need an
+argument of the model type. Constant because they are fixed to a model
+type. The physical model could have two containers to represent
+this, or a single container with a relation that has a type. If the
+type is constant we need to supply the logical model element id.
+
+For fixed relations we need:
+
+- logical model element id;
+- archetype or label.
+
+For variable relations we need:
+
+- relation type;
+- archetype or label.
+
+We need to remove =facet_default= from referencing status. It should
+just be referable or non-referable. We could use a boolean for
+this. If a type is non-referable, we should throw when it is part of a
+relationship.
 
 *** Add archetype ownership model                                     :story:
 
