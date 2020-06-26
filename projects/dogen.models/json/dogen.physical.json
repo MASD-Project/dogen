@@ -327,6 +327,16 @@
           "name": "referencing_status",
           "type": "referencing_status",
           "documentation": "Status of this archetype with regards to being referenced by other archetypes.\n"
+        },
+        {
+          "name": "variable_relations",
+          "type": "std::list<variable_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a variable logical meta-model\nelement.\n"
+        },
+        {
+          "name": "fixed_relations",
+          "type": "std::list<fixed_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
         }
       ]
     },
@@ -1346,6 +1356,94 @@
           "name": "value",
           "type": "std::string",
           "documentation": "Value associated with this label.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::fixed_relation",
+      "documentation": "Represents a relation between archetypes, fixed to a logical model element.\n",
+      "stereotypes": [
+        "Urnable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_model_element_id",
+          "type": "std::string",
+          "documentation": "ID of the logical model element that the relation is fixed against.\n\nElement must exist in the current loaded models.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variable_relation",
+      "stereotypes": [
+        "Urnable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "variable_relation_type",
+          "documentation": "How these archetypes are related.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Urnable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetype_urn",
+          "type": "std::string",
+          "documentation": "URN pointing to the archetype.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::variable_relation_type",
+      "documentation": "Lists all of the valid variable relation types.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "self",
+          "type": "",
+          "documentation": "Logical element is related to itself across different projections.\n"
+        },
+        {
+          "name": "parent",
+          "type": "",
+          "documentation": "Parent of logical element.\n"
+        },
+        {
+          "name": "child",
+          "type": "",
+          "documentation": "Child of logical element.\n"
+        },
+        {
+          "name": "transparent",
+          "type": "",
+          "documentation": "The relation with another logical element requires the element's full definition.\n"
+        },
+        {
+          "name": "opaque",
+          "type": "",
+          "documentation": "The relation with another logical element does not requires its full definition.\n"
+        },
+        {
+          "name": "associative_key",
+          "type": "",
+          "documentation": "The associated element is used as an associative key.\n"
+        },
+        {
+          "name": "visitation",
+          "type": "",
+          "documentation": "The associated element visits or is visited by the current element.\n"
         }
       ]
     }

@@ -30,6 +30,8 @@
 #include <algorithm>
 #include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.physical/types/entities/fixed_relation.hpp"
+#include "dogen.physical/types/entities/variable_relation.hpp"
 #include "dogen.physical/types/entities/referencing_status.hpp"
 
 namespace dogen::physical::entities {
@@ -59,7 +61,9 @@ public:
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
         const std::string& part,
-        const dogen::physical::entities::referencing_status referencing_status);
+        const dogen::physical::entities::referencing_status referencing_status,
+        const std::list<dogen::physical::entities::variable_relation>& variable_relations,
+        const std::list<dogen::physical::entities::fixed_relation>& fixed_relations);
 
 public:
     /**
@@ -180,6 +184,28 @@ public:
     void referencing_status(const dogen::physical::entities::referencing_status v);
     /**@}*/
 
+    /**
+     * @brief All archetypes this archetype is related to,  over a variable logical meta-model
+     * element.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::variable_relation>& variable_relations() const;
+    std::list<dogen::physical::entities::variable_relation>& variable_relations();
+    void variable_relations(const std::list<dogen::physical::entities::variable_relation>& v);
+    void variable_relations(const std::list<dogen::physical::entities::variable_relation>&& v);
+    /**@}*/
+
+    /**
+     * @brief All archetypes this archetype is related to,  over a fixed logical meta-model
+     * element.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::fixed_relation>& fixed_relations() const;
+    std::list<dogen::physical::entities::fixed_relation>& fixed_relations();
+    void fixed_relations(const std::list<dogen::physical::entities::fixed_relation>& v);
+    void fixed_relations(const std::list<dogen::physical::entities::fixed_relation>&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -203,6 +229,8 @@ private:
     std::string logical_meta_element_id_;
     std::string part_;
     dogen::physical::entities::referencing_status referencing_status_;
+    std::list<dogen::physical::entities::variable_relation> variable_relations_;
+    std::list<dogen::physical::entities::fixed_relation> fixed_relations_;
 };
 
 }
