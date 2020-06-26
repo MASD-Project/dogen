@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -64,6 +65,7 @@ public:
         const bool overwrite,
         const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
         const std::vector<boost::filesystem::path>& dependencies,
+        const std::list<std::string>& relations,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
         const dogen::physical::entities::enablement_flags& enablement_flags);
@@ -156,6 +158,18 @@ public:
     /**@}*/
 
     /**
+     * @brief Artefacts that this artefact depends on.
+     *
+     * The format used is dependent on the technical space the artefact belongs to.
+     */
+    /**@{*/
+    const std::list<std::string>& relations() const;
+    std::list<std::string>& relations();
+    void relations(const std::list<std::string>& v);
+    void relations(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
      * @brief Unified diff between the in-memory artefact and the file in the filesystem.
      */
     /**@{*/
@@ -201,6 +215,7 @@ private:
     bool overwrite_;
     std::unordered_map<std::string, boost::filesystem::path> relative_paths_;
     std::vector<boost::filesystem::path> dependencies_;
+    std::list<std::string> relations_;
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
     dogen::physical::entities::enablement_flags enablement_flags_;

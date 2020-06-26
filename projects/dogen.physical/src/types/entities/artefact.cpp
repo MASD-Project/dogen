@@ -47,6 +47,7 @@ artefact::artefact(
     const bool overwrite,
     const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
     const std::vector<boost::filesystem::path>& dependencies,
+    const std::list<std::string>& relations,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::enablement_flags& enablement_flags)
@@ -60,6 +61,7 @@ artefact::artefact(
       overwrite_(overwrite),
       relative_paths_(relative_paths),
       dependencies_(dependencies),
+      relations_(relations),
       unified_diff_(unified_diff),
       operation_(operation),
       enablement_flags_(enablement_flags) { }
@@ -76,6 +78,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(overwrite_, other.overwrite_);
     swap(relative_paths_, other.relative_paths_);
     swap(dependencies_, other.dependencies_);
+    swap(relations_, other.relations_);
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_flags_, other.enablement_flags_);
@@ -92,6 +95,7 @@ bool artefact::operator==(const artefact& rhs) const {
         overwrite_ == rhs.overwrite_ &&
         relative_paths_ == rhs.relative_paths_ &&
         dependencies_ == rhs.dependencies_ &&
+        relations_ == rhs.relations_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
         enablement_flags_ == rhs.enablement_flags_;
@@ -245,6 +249,22 @@ void artefact::dependencies(const std::vector<boost::filesystem::path>& v) {
 
 void artefact::dependencies(const std::vector<boost::filesystem::path>&& v) {
     dependencies_ = std::move(v);
+}
+
+const std::list<std::string>& artefact::relations() const {
+    return relations_;
+}
+
+std::list<std::string>& artefact::relations() {
+    return relations_;
+}
+
+void artefact::relations(const std::list<std::string>& v) {
+    relations_ = v;
+}
+
+void artefact::relations(const std::list<std::string>&& v) {
+    relations_ = std::move(v);
 }
 
 const std::string& artefact::unified_diff() const {

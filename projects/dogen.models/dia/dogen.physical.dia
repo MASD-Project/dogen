@@ -5471,7 +5471,7 @@ element.#</dia:string>
         <dia:point val="139,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.95,-69.05;167.655,-59.75"/>
+        <dia:rectangle val="138.95,-69.05;167.655,-58.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="139,-69"/>
@@ -5480,7 +5480,7 @@ element.#</dia:string>
         <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="10"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact#</dia:string>
@@ -5674,6 +5674,31 @@ element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Files in the project directory that this file depends on, but which are not generated.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#relations#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Artefacts that this artefact depends on.
+
+The format used is dependent on the technical space the artefact belongs to.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18201,13 +18226,13 @@ to a unique archetype.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O142">
       <dia:attribute name="obj_pos">
-        <dia:point val="127,-79"/>
+        <dia:point val="126,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.95,-79.05;137.562,-70.55"/>
+        <dia:rectangle val="125.95,-79.05;136.562,-70.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="127,-79"/>
+        <dia:point val="126,-79"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.512499999999999"/>
@@ -18513,15 +18538,15 @@ to a unique archetype.#</dia:string>
         <dia:point val="128.665,-67.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.915,-70.65;132.456,-66.3"/>
+        <dia:rectangle val="127.915,-70.65;131.456,-66.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="128.665,-67.9"/>
-        <dia:point val="132.256,-67.9"/>
-        <dia:point val="132.256,-70.6"/>
+        <dia:point val="131.256,-67.9"/>
+        <dia:point val="131.256,-70.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
