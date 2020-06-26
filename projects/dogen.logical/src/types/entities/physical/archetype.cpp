@@ -25,6 +25,8 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/io/entities/physical/fixed_relation_io.hpp"
+#include "dogen.logical/io/entities/physical/variable_relation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,6 +51,34 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::physical::variable_relation>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::physical::fixed_relation>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::logical::entities::physical {
 
 archetype::archetype()
@@ -68,7 +98,9 @@ archetype::archetype(archetype&& rhs)
       wale_template_(std::move(rhs.wale_template_)),
       wale_template_content_(std::move(rhs.wale_template_content_)),
       rendered_stitch_template_(std::move(rhs.rendered_stitch_template_)),
-      relation_status_(std::move(rhs.relation_status_)) { }
+      relation_status_(std::move(rhs.relation_status_)),
+      variable_relations_(std::move(rhs.variable_relations_)),
+      fixed_relations_(std::move(rhs.fixed_relations_)) { }
 
 archetype::archetype(
     const dogen::logical::entities::name& name,
@@ -97,7 +129,9 @@ archetype::archetype(
     const boost::optional<dogen::logical::entities::name>& wale_template,
     const std::string& wale_template_content,
     const std::string& rendered_stitch_template,
-    const std::string& relation_status)
+    const std::string& relation_status,
+    const std::list<dogen::logical::entities::physical::variable_relation>& variable_relations,
+    const std::list<dogen::logical::entities::physical::fixed_relation>& fixed_relations)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -125,7 +159,9 @@ archetype::archetype(
       wale_template_(wale_template),
       wale_template_content_(wale_template_content),
       rendered_stitch_template_(rendered_stitch_template),
-      relation_status_(relation_status) { }
+      relation_status_(relation_status),
+      variable_relations_(variable_relations),
+      fixed_relations_(fixed_relations) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -160,7 +196,9 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"wale_template\": " << wale_template_ << ", "
       << "\"wale_template_content\": " << "\"" << tidy_up_string(wale_template_content_) << "\"" << ", "
       << "\"rendered_stitch_template\": " << "\"" << tidy_up_string(rendered_stitch_template_) << "\"" << ", "
-      << "\"relation_status\": " << "\"" << tidy_up_string(relation_status_) << "\""
+      << "\"relation_status\": " << "\"" << tidy_up_string(relation_status_) << "\"" << ", "
+      << "\"variable_relations\": " << variable_relations_ << ", "
+      << "\"fixed_relations\": " << fixed_relations_
       << " }";
 }
 
@@ -180,6 +218,8 @@ void archetype::swap(archetype& other) noexcept {
     swap(wale_template_content_, other.wale_template_content_);
     swap(rendered_stitch_template_, other.rendered_stitch_template_);
     swap(relation_status_, other.relation_status_);
+    swap(variable_relations_, other.variable_relations_);
+    swap(fixed_relations_, other.fixed_relations_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -201,7 +241,9 @@ bool archetype::operator==(const archetype& rhs) const {
         wale_template_ == rhs.wale_template_ &&
         wale_template_content_ == rhs.wale_template_content_ &&
         rendered_stitch_template_ == rhs.rendered_stitch_template_ &&
-        relation_status_ == rhs.relation_status_;
+        relation_status_ == rhs.relation_status_ &&
+        variable_relations_ == rhs.variable_relations_ &&
+        fixed_relations_ == rhs.fixed_relations_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -392,6 +434,38 @@ void archetype::relation_status(const std::string& v) {
 
 void archetype::relation_status(const std::string&& v) {
     relation_status_ = std::move(v);
+}
+
+const std::list<dogen::logical::entities::physical::variable_relation>& archetype::variable_relations() const {
+    return variable_relations_;
+}
+
+std::list<dogen::logical::entities::physical::variable_relation>& archetype::variable_relations() {
+    return variable_relations_;
+}
+
+void archetype::variable_relations(const std::list<dogen::logical::entities::physical::variable_relation>& v) {
+    variable_relations_ = v;
+}
+
+void archetype::variable_relations(const std::list<dogen::logical::entities::physical::variable_relation>&& v) {
+    variable_relations_ = std::move(v);
+}
+
+const std::list<dogen::logical::entities::physical::fixed_relation>& archetype::fixed_relations() const {
+    return fixed_relations_;
+}
+
+std::list<dogen::logical::entities::physical::fixed_relation>& archetype::fixed_relations() {
+    return fixed_relations_;
+}
+
+void archetype::fixed_relations(const std::list<dogen::logical::entities::physical::fixed_relation>& v) {
+    fixed_relations_ = v;
+}
+
+void archetype::fixed_relations(const std::list<dogen::logical::entities::physical::fixed_relation>&& v) {
+    fixed_relations_ = std::move(v);
 }
 
 }

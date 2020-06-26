@@ -4103,6 +4103,16 @@
           "name": "relation_status",
           "type": "std::string",
           "documentation": "Status of this archetype with regards to relations.\n"
+        },
+        {
+          "name": "variable_relations",
+          "type": "std::list<variable_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a variable logical meta-model\nelement.\n"
+        },
+        {
+          "name": "fixed_relations",
+          "type": "std::list<fixed_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
         }
       ]
     },
@@ -4612,6 +4622,47 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::physical::variable_relation",
+      "stereotypes": [
+        "Urnable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string",
+          "documentation": "Type of the variable relation.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::fixed_relation",
+      "stereotypes": [
+        "Urnable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_model_element_id",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::Urnable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetype_urn",
+          "type": "std::string",
+          "documentation": "URN pointing to the archetype.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+        }
+      ]
     }
   ]
 }

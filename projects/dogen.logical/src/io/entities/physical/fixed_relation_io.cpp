@@ -20,17 +20,24 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_io.hpp"
 #include "dogen.logical/io/entities/physical/fixed_relation_io.hpp"
-#include "dogen.logical/io/entities/physical/variable_relation_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::logical::entities::physical {
 
-std::ostream& operator<<(std::ostream& s, const archetype& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const fixed_relation& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::logical::entities::physical::fixed_relation\"" << ", "
+      << "\"archetype_urn\": " << "\"" << tidy_up_string(v.archetype_urn()) << "\"" << ", "
+      << "\"logical_model_element_id\": " << "\"" << tidy_up_string(v.logical_model_element_id()) << "\""
+      << " }";
     return(s);
 }
 

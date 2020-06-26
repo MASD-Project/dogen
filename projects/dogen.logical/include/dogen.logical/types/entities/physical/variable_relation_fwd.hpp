@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_io.hpp"
-#include "dogen.logical/io/entities/physical/fixed_relation_io.hpp"
-#include "dogen.logical/io/entities/physical/variable_relation_io.hpp"
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_VARIABLE_RELATION_FWD_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_VARIABLE_RELATION_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::logical::entities::physical {
 
-std::ostream& operator<<(std::ostream& s, const archetype& v) {
-    v.to_stream(s);
-    return(s);
-}
+class variable_relation;
 
 }
+
+#endif
