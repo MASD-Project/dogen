@@ -48,6 +48,9 @@ std::ostream& operator<<(std::ostream& s, const value_type& v) {
     case value_type::key_value_pair:
         attr = "\"key_value_pair\"";
         break;
+    case value_type::comma_separated:
+        attr = "\"comma_separated\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for value_type");
     }

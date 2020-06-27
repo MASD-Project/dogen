@@ -47,6 +47,8 @@ inline std::string lexical_cast(const dogen::variability::entities::value_type& 
         return "value_type::boolean";
     case value_type::key_value_pair:
         return "value_type::key_value_pair";
+    case value_type::comma_separated:
+        return "value_type::comma_separated";
     default:
         throw boost::bad_lexical_cast();
     }
@@ -68,6 +70,8 @@ inline dogen::variability::entities::value_type lexical_cast(const std::string &
         return value_type::boolean;
     if (s == "key_value_pair" || s == "value_type::key_value_pair")
         return value_type::key_value_pair;
+    if (s == "comma_separated" || s == "value_type::comma_separated")
+        return value_type::comma_separated;
     throw boost::bad_lexical_cast();
 }
 

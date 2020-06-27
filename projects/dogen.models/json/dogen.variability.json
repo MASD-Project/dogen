@@ -152,23 +152,33 @@
       "attributes": [
         {
           "name": "text",
-          "type": ""
+          "type": "",
+          "documentation": "Represents a text value.\n"
         },
         {
           "name": "text_collection",
-          "type": ""
+          "type": "",
+          "documentation": "Represents a collection of text values.\n"
         },
         {
           "name": "number",
-          "type": ""
+          "type": "",
+          "documentation": "Represents a numeric integral value.\n"
         },
         {
           "name": "boolean",
-          "type": ""
+          "type": "",
+          "documentation": "Represents a boolean value.\n"
         },
         {
           "name": "key_value_pair",
-          "type": ""
+          "type": "",
+          "documentation": "Represents a pair of key and value.\n"
+        },
+        {
+          "name": "comma_separated",
+          "type": "",
+          "documentation": "Represents a CSV input that is split into a collection of text values.\n"
         }
       ]
     },
@@ -958,6 +968,20 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::comma_separated",
+      "parents": [
+        "entities::value"
+      ],
+      "documentation": "Represents a CSV input that is split into a collection of text values.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::list<std::string>"
+        }
+      ]
     }
   ]
 }

@@ -29,6 +29,7 @@
 #include "dogen.variability/types/entities/number_fwd.hpp"
 #include "dogen.variability/types/entities/boolean_fwd.hpp"
 #include "dogen.variability/types/entities/key_value_pair_fwd.hpp"
+#include "dogen.variability/types/entities/comma_separated_fwd.hpp"
 #include "dogen.variability/types/entities/text_collection_fwd.hpp"
 
 namespace dogen::variability::entities {
@@ -49,6 +50,16 @@ public:
     virtual void visit(const dogen::variability::entities::boolean&) { }
     virtual void visit(dogen::variability::entities::boolean&) const { }
     virtual void visit(dogen::variability::entities::boolean&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::variability::entities::comma_separated
+     */
+    /**@{*/
+    virtual void visit(const dogen::variability::entities::comma_separated&) const { }
+    virtual void visit(const dogen::variability::entities::comma_separated&) { }
+    virtual void visit(dogen::variability::entities::comma_separated&) const { }
+    virtual void visit(dogen::variability::entities::comma_separated&) { }
     /**@}*/
 
     /**
