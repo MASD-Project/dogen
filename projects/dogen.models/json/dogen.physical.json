@@ -327,10 +327,6 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Properties of this archetype with regards to relations.\n"
-        },
-        {
-          "name": "relation_status",
-          "type": "relation_status"
         }
       ]
     },

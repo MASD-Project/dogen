@@ -28,7 +28,7 @@ physical::entities::archetype enum_header_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "test_data", "enum_header"));
     r.logical_meta_element_id("dogen.logical.entities.enumeration");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     return r;
 }
 

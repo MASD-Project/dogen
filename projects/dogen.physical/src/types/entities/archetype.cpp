@@ -22,9 +22,6 @@
 
 namespace dogen::physical::entities {
 
-archetype::archetype()
-    : relation_status_(static_cast<dogen::physical::entities::relation_status>(0)) { }
-
 archetype::archetype(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
@@ -37,8 +34,7 @@ archetype::archetype(
     const std::string& archetype_kind_id,
     const std::string& logical_meta_element_id,
     const std::string& part,
-    const dogen::physical::entities::relations& relations,
-    const dogen::physical::entities::relation_status relation_status)
+    const dogen::physical::entities::relations& relations)
     : description_(description),
       meta_name_(meta_name),
       labels_(labels),
@@ -50,8 +46,7 @@ archetype::archetype(
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
-      relations_(relations),
-      relation_status_(relation_status) { }
+      relations_(relations) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -67,7 +62,6 @@ void archetype::swap(archetype& other) noexcept {
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
     swap(relations_, other.relations_);
-    swap(relation_status_, other.relation_status_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -82,8 +76,7 @@ bool archetype::operator==(const archetype& rhs) const {
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
-        relations_ == rhs.relations_ &&
-        relation_status_ == rhs.relation_status_;
+        relations_ == rhs.relations_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -282,14 +275,6 @@ void archetype::relations(const dogen::physical::entities::relations& v) {
 
 void archetype::relations(const dogen::physical::entities::relations&& v) {
     relations_ = std::move(v);
-}
-
-dogen::physical::entities::relation_status archetype::relation_status() const {
-    return relation_status_;
-}
-
-void archetype::relation_status(const dogen::physical::entities::relation_status v) {
-    relation_status_ = v;
 }
 
 }

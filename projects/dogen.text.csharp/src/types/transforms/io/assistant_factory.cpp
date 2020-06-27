@@ -28,7 +28,7 @@ physical::entities::archetype assistant_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("csharp", "io", "assistant"));
     r.logical_meta_element_id("dogen.logical.entities.assistant");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     return r;
 }
 

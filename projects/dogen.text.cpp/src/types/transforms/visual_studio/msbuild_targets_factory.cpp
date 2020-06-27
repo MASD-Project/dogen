@@ -28,7 +28,7 @@ physical::entities::archetype msbuild_targets_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "visual_studio", "msbuild_targets"));
     r.logical_meta_element_id("dogen.logical.entities.visual_studio_msbuild_targets");
-    r.relation_status(physical::entities::relation_status::not_relatable);
+    r.relations().status(physical::entities::relation_status::not_relatable);
     return r;
 }
 

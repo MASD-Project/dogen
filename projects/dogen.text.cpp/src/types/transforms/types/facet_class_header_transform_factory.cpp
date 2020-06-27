@@ -28,7 +28,7 @@ physical::entities::archetype facet_class_header_transform_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "facet_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_facet");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     return r;
 }
 

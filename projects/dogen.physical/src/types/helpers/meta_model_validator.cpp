@@ -65,7 +65,7 @@ void meta_model_validator::validate(physical::entities::meta_model& mm) {
                 const auto pmn(arch.meta_name());
                 const auto fct(qnb::build_facet(pmn));
                 all_facets.insert(fct);
-                if (arch.relation_status() == rs_fd) {
+                if (arch.relations().status() == rs_fd) {
                     continue;
 
                     /*

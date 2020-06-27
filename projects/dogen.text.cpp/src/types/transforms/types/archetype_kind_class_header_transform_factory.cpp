@@ -28,7 +28,7 @@ physical::entities::archetype archetype_kind_class_header_transform_factory::mak
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "archetype_kind_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_archetype_kind");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     return r;
 }
 

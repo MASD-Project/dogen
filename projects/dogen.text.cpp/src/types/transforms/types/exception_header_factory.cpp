@@ -28,7 +28,7 @@ physical::entities::archetype exception_header_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "exception_header"));
     r.logical_meta_element_id("dogen.logical.entities.exception");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     r.labels().push_back(physical::entities::label("roles", "type_declaration"));
     return r;
 }

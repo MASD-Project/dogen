@@ -31,7 +31,6 @@
 #include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/relations.hpp"
-#include "dogen.physical/types/entities/relation_status.hpp"
 
 namespace dogen::physical::entities {
 
@@ -40,12 +39,10 @@ namespace dogen::physical::entities {
  */
 class archetype final {
 public:
+    archetype() = default;
     archetype(const archetype&) = default;
     archetype(archetype&&) = default;
     ~archetype() = default;
-
-public:
-    archetype();
 
 public:
     archetype(
@@ -60,8 +57,7 @@ public:
         const std::string& archetype_kind_id,
         const std::string& logical_meta_element_id,
         const std::string& part,
-        const dogen::physical::entities::relations& relations,
-        const dogen::physical::entities::relation_status relation_status);
+        const dogen::physical::entities::relations& relations);
 
 public:
     /**
@@ -184,9 +180,6 @@ public:
     void relations(const dogen::physical::entities::relations&& v);
     /**@}*/
 
-    dogen::physical::entities::relation_status relation_status() const;
-    void relation_status(const dogen::physical::entities::relation_status v);
-
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -210,7 +203,6 @@ private:
     std::string logical_meta_element_id_;
     std::string part_;
     dogen::physical::entities::relations relations_;
-    dogen::physical::entities::relation_status relation_status_;
 };
 
 }

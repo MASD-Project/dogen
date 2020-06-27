@@ -28,7 +28,7 @@ physical::entities::archetype class_implementation_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "test_data", "class_implementation"));
     r.logical_meta_element_id("dogen.logical.entities.object");
-    r.relation_status(physical::entities::relation_status::not_relatable);
+    r.relations().status(physical::entities::relation_status::not_relatable);
     return r;
 }
 

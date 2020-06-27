@@ -28,7 +28,7 @@ physical::entities::archetype type_registrar_header_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "serialization", "type_registrar_header"));
     r.logical_meta_element_id("dogen.logical.entities.serialization_type_registrar");
-    r.relation_status(physical::entities::relation_status::facet_default);
+    r.relations().status(physical::entities::relation_status::facet_default);
     return r;
 }
 

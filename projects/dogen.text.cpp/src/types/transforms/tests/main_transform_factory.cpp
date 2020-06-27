@@ -32,7 +32,7 @@ const physical::entities::archetype& main_transform_factory::make_archetype() {
                 "main_transform_factory"));
 
         r.logical_meta_element_id("dogen.logical.entities.entry_point");
-        r.relation_status(physical::entities::relation_status::not_relatable);
+        r.relations().status(physical::entities::relation_status::not_relatable);
         return r;
     }());
     return r;

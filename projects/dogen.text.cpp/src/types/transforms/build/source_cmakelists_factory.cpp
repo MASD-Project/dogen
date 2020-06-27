@@ -28,7 +28,7 @@ physical::entities::archetype source_cmakelists_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "build", "source_cmakelists"));
     r.logical_meta_element_id("dogen.logical.entities.build_cmakelists");
-    r.relation_status(physical::entities::relation_status::not_relatable);
+    r.relations().status(physical::entities::relation_status::not_relatable);
     return r;
 }
 

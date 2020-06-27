@@ -28,7 +28,7 @@ physical::entities::archetype class_forward_declarations_factory::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "class_forward_declarations"));
     r.logical_meta_element_id("dogen.logical.entities.object");
-    r.relation_status(physical::entities::relation_status::relatable);
+    r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(physical::entities::label("roles", "forward declaration"));
     return r;
 }
