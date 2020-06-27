@@ -4322,7 +4322,7 @@
           }
         },
         {
-          "name": "fixed_relation",
+          "name": "constant_relation",
           "type": "masd::variability::comma_separated",
           "documentation": "Define a fixed relation between the current archetype and another archetype.\n",
           "tagged_values": {

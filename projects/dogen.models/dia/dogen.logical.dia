@@ -53571,7 +53571,7 @@ FIXME: optional for now.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#fixed_relation#</dia:string>
+            <dia:string>#constant_relation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::comma_separated#</dia:string>

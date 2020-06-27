@@ -139,11 +139,11 @@ make_masd_physical_variable_relation() {
 }
 
 dogen::variability::entities::feature
-make_masd_physical_fixed_relation() {
+make_masd_physical_constant_relation() {
     using namespace dogen::variability::entities;
     feature r;
-    r.name().simple("fixed_relation");
-    r.name().qualified("masd.physical.fixed_relation");
+    r.name().simple("constant_relation");
+    r.name().qualified("masd.physical.constant_relation");
     r.description(R"(Define a fixed relation between the current archetype and another archetype.
 
 )");
@@ -167,7 +167,7 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
     r.relation_status = s.get_by_name("masd.physical.relation_status");
     r.wale_template_reference = s.get_by_name("masd.physical.wale_template_reference");
     r.variable_relation = s.get_by_name("masd.physical.variable_relation");
-    r.fixed_relation = s.get_by_name("masd.physical.fixed_relation");
+    r.constant_relation = s.get_by_name("masd.physical.constant_relation");
 
     return r;
 }
@@ -192,8 +192,8 @@ physical::static_configuration physical::make_static_configuration(
         r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
     if (s.has_configuration_point(fg.variable_relation))
         r.variable_relation = s.get_comma_separated_content(fg.variable_relation);
-    if (s.has_configuration_point(fg.fixed_relation))
-        r.fixed_relation = s.get_comma_separated_content(fg.fixed_relation);
+    if (s.has_configuration_point(fg.constant_relation))
+        r.constant_relation = s.get_comma_separated_content(fg.constant_relation);
     return r;
 }
 
@@ -208,7 +208,7 @@ physical::make_features() {
     r.push_back(make_masd_physical_relation_status());
     r.push_back(make_masd_physical_wale_template_reference());
     r.push_back(make_masd_physical_variable_relation());
-    r.push_back(make_masd_physical_fixed_relation());
+    r.push_back(make_masd_physical_constant_relation());
     return r;
 }
 

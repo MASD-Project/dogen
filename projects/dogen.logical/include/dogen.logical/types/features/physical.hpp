@@ -46,7 +46,7 @@ public:
         variability::entities::feature relation_status;
         variability::entities::feature wale_template_reference;
         variability::entities::feature variable_relation;
-        variability::entities::feature fixed_relation;
+        variability::entities::feature constant_relation;
     };
 
     static feature_group
@@ -61,7 +61,7 @@ public:
         std::string relation_status;
         std::string wale_template_reference;
         std::list<std::string> variable_relation;
-        std::list<std::string> fixed_relation;
+        std::list<std::string> constant_relation;
     };
 
     static static_configuration make_static_configuration(
