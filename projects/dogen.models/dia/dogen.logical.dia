@@ -51239,13 +51239,13 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O399">
       <dia:attribute name="obj_pos">
-        <dia:point val="142,-53"/>
+        <dia:point val="144,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.95,-53.05;174.89,-46.95"/>
+        <dia:rectangle val="143.95,-53.05;176.89,-46.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="142,-53"/>
+        <dia:point val="144,-53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -52270,13 +52270,13 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O404">
       <dia:attribute name="obj_pos">
-        <dia:point val="141,-43"/>
+        <dia:point val="138,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.95,-43.05;160.03,-33.75"/>
+        <dia:rectangle val="137.95,-43.05;157.03,-33.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="141,-43"/>
+        <dia:point val="138,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
@@ -52602,17 +52602,17 @@ just to avoid problems.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.84,-53"/>
+        <dia:point val="176.84,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="174.09,-56.25;190.652,-52.2"/>
+        <dia:rectangle val="176.09,-56.25;190.652,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.84,-53"/>
-        <dia:point val="174.84,-55"/>
+        <dia:point val="176.84,-53"/>
+        <dia:point val="176.84,-55"/>
         <dia:point val="190.452,-55"/>
         <dia:point val="190.452,-56.2"/>
       </dia:attribute>
@@ -52674,17 +52674,17 @@ just to avoid problems.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="142,-53"/>
+        <dia:point val="144,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.25,-57.85;148.652,-52.2"/>
+        <dia:rectangle val="143.25,-57.85;148.652,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="142,-53"/>
-        <dia:point val="142,-55"/>
+        <dia:point val="144,-53"/>
+        <dia:point val="144,-55"/>
         <dia:point val="148.452,-55"/>
         <dia:point val="148.452,-57.8"/>
       </dia:attribute>
@@ -52746,19 +52746,19 @@ just to avoid problems.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="142,-47"/>
+        <dia:point val="144,-47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.25,-47.75;150.69,-42.2487"/>
+        <dia:rectangle val="143.25,-47.75;147.69,-42.2487"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="142,-47"/>
-        <dia:point val="142,-45"/>
-        <dia:point val="150.49,-45"/>
-        <dia:point val="150.49,-43.0487"/>
+        <dia:point val="144,-47"/>
+        <dia:point val="144,-45"/>
+        <dia:point val="147.49,-45"/>
+        <dia:point val="147.49,-43.0487"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -52999,17 +52999,17 @@ just to avoid problems.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="158.42,-53"/>
+        <dia:point val="160.42,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.67,-57.7998;169.535,-52.2"/>
+        <dia:rectangle val="159.67,-57.7998;169.535,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="158.42,-53"/>
-        <dia:point val="158.42,-55"/>
+        <dia:point val="160.42,-53"/>
+        <dia:point val="160.42,-55"/>
         <dia:point val="169.335,-55"/>
         <dia:point val="169.335,-57.7498"/>
       </dia:attribute>
@@ -53287,13 +53287,13 @@ just to avoid problems.#</dia:string>
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,61.95;135.955,71.25"/>
+        <dia:rectangle val="114.95,61.95;134.415,71.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.2000000000000011"/>
@@ -53549,7 +53549,7 @@ FIXME: optional for now.
             <dia:string>#variable_relation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::key_value_pair#</dia:string>
+            <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -53574,7 +53574,7 @@ FIXME: optional for now.
             <dia:string>#fixed_relation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::key_value_pair#</dia:string>
+            <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -59599,17 +59599,17 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.84,-47"/>
+        <dia:point val="176.84,-47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.95,-47.75;175.59,-41.4"/>
+        <dia:rectangle val="162.95,-47.75;177.59,-41.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.84,-47"/>
-        <dia:point val="174.84,-44.65"/>
+        <dia:point val="176.84,-47"/>
+        <dia:point val="176.84,-44.65"/>
         <dia:point val="163,-44.65"/>
         <dia:point val="163,-43"/>
       </dia:attribute>

@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include <utility>
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -61,8 +60,8 @@ public:
         std::string major_technical_space;
         std::string relation_status;
         std::string wale_template_reference;
-        std::list<std::pair<std::string, std::string> > variable_relation;
-        std::list<std::pair<std::string, std::string> > fixed_relation;
+        std::string variable_relation;
+        std::string fixed_relation;
     };
 
     static static_configuration make_static_configuration(

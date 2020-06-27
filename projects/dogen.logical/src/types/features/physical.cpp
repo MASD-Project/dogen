@@ -132,9 +132,8 @@ make_masd_physical_variable_relation() {
     r.description(R"(Define a variable relation between the current archetype and another archetype.
 
 )");
-    const auto vt(value_type::key_value_pair);
+    const auto vt(value_type::text);
     r.value_type(vt);
-    r.is_partially_matchable(true);
     r.binding_point(binding_point::element);
     return r;
 }
@@ -148,9 +147,8 @@ make_masd_physical_fixed_relation() {
     r.description(R"(Define a fixed relation between the current archetype and another archetype.
 
 )");
-    const auto vt(value_type::key_value_pair);
+    const auto vt(value_type::text);
     r.value_type(vt);
-    r.is_partially_matchable(true);
     r.binding_point(binding_point::element);
     return r;
 }
@@ -193,9 +191,9 @@ physical::static_configuration physical::make_static_configuration(
     if (s.has_configuration_point(fg.wale_template_reference))
         r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
     if (s.has_configuration_point(fg.variable_relation))
-        r.variable_relation = s.get_key_value_pair_content(fg.variable_relation);
+        r.variable_relation = s.get_text_content(fg.variable_relation);
     if (s.has_configuration_point(fg.fixed_relation))
-        r.fixed_relation = s.get_key_value_pair_content(fg.fixed_relation);
+        r.fixed_relation = s.get_text_content(fg.fixed_relation);
     return r;
 }
 

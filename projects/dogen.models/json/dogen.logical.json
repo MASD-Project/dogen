@@ -4315,7 +4315,7 @@
         },
         {
           "name": "variable_relation",
-          "type": "masd::variability::key_value_pair",
+          "type": "masd::variability::text",
           "documentation": "Define a variable relation between the current archetype and another archetype.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
@@ -4323,7 +4323,7 @@
         },
         {
           "name": "fixed_relation",
-          "type": "masd::variability::key_value_pair",
+          "type": "masd::variability::text",
           "documentation": "Define a fixed relation between the current archetype and another archetype.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
