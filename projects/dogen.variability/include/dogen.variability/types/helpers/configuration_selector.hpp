@@ -247,6 +247,45 @@ public:
     get_key_value_pair_content(const entities::feature& f) const;
     /**@}*/
 
+public:
+    /**
+     * @brief Processes the content as a comma-separated value, and
+     * returns the collection.
+     *
+     * @pre @v must be of comma-separated type.
+     */
+    static std::list<std::string>
+    get_comma_separated_content(const entities::value& v);
+
+    /**
+     * @brief Retrieves the configuration point associated with the
+     * supplied qualified name or feature, and returns the contents of
+     * its value as a comma-separated.
+     *
+     * @pre has_configuration_point must be true.
+     * @pre Configuration point for qualified name or feature must
+     * exist.
+     * @pre The type of its value must be comma-separated.
+     */
+    /**@{*/
+    std::list<std::string>
+    get_comma_separated_content(const std::string& qn) const;
+    std::list<std::string>
+    get_comma_separated_content(const entities::feature& f) const;
+    /**@}*/
+
+    /**
+     * @brief Retrieves the configuration point associated with the
+     * supplied feature, and returns either the contents of its value
+     * as comma-separated, or, if no configuration point exists, the
+     * default value for the feature.
+     *
+     * @pre feature must have a default value.
+     * @pre default value must be of type comma-separated.
+     */
+    std::list<std::string>
+    get_comma_separated_content_or_default(const entities::feature& f) const;
+
 private:
     const entities::configuration& configuration_;
 };

@@ -22,12 +22,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/io/entities/value_type_io.hpp"
 #include "dogen.variability/types/entities/text.hpp"
-#include "dogen.variability/types/entities/text_collection.hpp"
-#include "dogen.variability/types/entities/boolean.hpp"
 #include "dogen.variability/types/entities/number.hpp"
+#include "dogen.variability/types/entities/boolean.hpp"
 #include "dogen.variability/types/entities/key_value_pair.hpp"
+#include "dogen.variability/types/entities/text_collection.hpp"
+#include "dogen.variability/types/entities/comma_separated.hpp"
 #include "dogen.variability/types/helpers/building_exception.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 
@@ -148,12 +150,19 @@ make_kvp(const std::list<std::pair<std::string, std::string>>& v) const {
 }
 
 boost::shared_ptr<entities::value> value_factory::
+make_comma_separated(const std::string& v) const {
+    using utility::string::splitter;
+    const auto splitted(splitter::split_csv(v));
+    return boost::make_shared<entities::comma_separated>(splitted);
+}
+
+boost::shared_ptr<entities::value> value_factory::
 make(const entities::value_type& vt, const std::list<std::string>& v) const {
     ensure_non_empty(v);
 
     using entities::value_type;
     switch (vt) {
-    case value_type::text:
+     case value_type::text:
         return make_text(v.front());
     case value_type::text_collection:
         return make_text_collection(v);
@@ -161,6 +170,8 @@ make(const entities::value_type& vt, const std::list<std::string>& v) const {
         return make_boolean(v.front());
     case value_type::number:
         return make_number(v.front());
+    case value_type::comma_separated:
+        return make_comma_separated(v.front());
     default:
         break;
     }

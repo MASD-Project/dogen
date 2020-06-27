@@ -26,6 +26,7 @@
 #include "dogen.variability/types/entities/number.hpp"
 #include "dogen.variability/types/entities/boolean.hpp"
 #include "dogen.variability/types/entities/key_value_pair.hpp"
+#include "dogen.variability/types/entities/comma_separated.hpp"
 #include "dogen.variability/types/entities/text_collection.hpp"
 #include "dogen.variability/types/helpers/selection_exception.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
@@ -47,6 +48,8 @@ const std::string not_text("Configuration point does not have text content: ");
 const std::string not_text_collection(
     "Configuration point does not have text collection content: ");
 const std::string not_kvp("Configuration point does not have kvp content: ");
+const std::string not_comma_separated(
+    "Configuration point does not have comma-separated content: ");
 const std::string unexpected_type(
     "Configuration point has an unexpected type: ");
 typedef boost::error_info<struct tag_errmsg, std::string> extension_error_info;
@@ -106,7 +109,8 @@ get_configuration_point_value(const std::string& qn) const {
         return *i->second.value();
 
     BOOST_LOG_SEV(lg, error) << configuration_point_not_found << qn;
-    BOOST_THROW_EXCEPTION(selection_exception(configuration_point_not_found + qn));
+    BOOST_THROW_EXCEPTION(
+        selection_exception(configuration_point_not_found + qn));
 }
 
 const entities::value& configuration_selector::
@@ -328,6 +332,54 @@ configuration_selector::get_key_value_pair_content(const std::string& qn) const 
 const std::list<std::pair<std::string, std::string>>& configuration_selector::
 get_key_value_pair_content(const entities::feature& f) const {
     return get_key_value_pair_content(f.name().qualified());
+}
+
+std::list<std::string> configuration_selector::
+get_comma_separated_content(const entities::value& v) {
+    try {
+        const auto& b(dynamic_cast<const entities::comma_separated&>(v));
+        return b.content();
+    } catch(const std::bad_cast& /*e*/) {
+        BOOST_LOG_SEV(lg, error) << unexpected_value_type;
+        BOOST_THROW_EXCEPTION(selection_exception(unexpected_value_type));
+    }
+}
+
+std::list<std::string> configuration_selector::
+get_comma_separated_content(const std::string& qn) const {
+    const auto& v(get_configuration_point_value(qn));
+
+    try {
+        const auto& tc(dynamic_cast<const entities::comma_separated&>(v));
+        return tc.content();
+    } catch(const std::bad_cast& /*e*/) {
+        BOOST_LOG_SEV(lg, error) << unexpected_type
+                                 << qn;
+        BOOST_THROW_EXCEPTION(selection_exception(unexpected_type + qn));
+    }
+}
+
+std::list<std::string> configuration_selector::
+get_comma_separated_content(const entities::feature& f) const {
+    return get_comma_separated_content(f.name().qualified());
+}
+
+std::list<std::string> configuration_selector::
+get_comma_separated_content_or_default(const entities::feature& f) const {
+    if (has_configuration_point(f))
+        return get_comma_separated_content(f);
+
+    ensure_default_value(f);
+
+    try {
+        return get_comma_separated_content(*f.default_value());
+    } catch(boost::exception& e) {
+        const auto n(f.name().qualified());
+        BOOST_LOG_SEV(lg, error) << not_comma_separated << n
+                                 << " (entry's default value)";
+        e << extension_error_info(configuration_point_name + n);
+        throw;
+    }
 }
 
 }

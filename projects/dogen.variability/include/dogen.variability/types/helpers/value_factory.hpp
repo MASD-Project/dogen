@@ -106,6 +106,12 @@ public:
     boost::shared_ptr<entities::value>
     make_kvp(const std::list<std::pair<std::string, std::string>>& v) const;
 
+    /**
+     * @brief Creates a stand alone comma-separated value.
+     */
+    boost::shared_ptr<entities::value>
+    make_comma_separated(const std::string& v) const;
+
 public:
     /**
      * @brief Creates a value using the supplied enum.
