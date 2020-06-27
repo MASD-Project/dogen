@@ -53,7 +53,7 @@
       ],
       "tagged_values": {
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.label.roles": "type_declaration"
+        "masd.label.role": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3194,7 +3194,8 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.constant_relation": "dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3805,7 +3806,8 @@
         "masd.wale.kvp.class.simple_name": "facet_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "facet_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_facet",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.constant_relation": "dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3828,7 +3830,9 @@
         "masd.wale.kvp.class.simple_name": "facet_class_implementation_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "facet_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_facet",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.variable_relation": "transparent,role:type_declaration",
+        "masd.physical.constant_relation": "dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3999,7 +4003,9 @@
         "masd.wale.kvp.meta_element": "physical_archetype",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
-        "masd.physical.relation_status": "relatable"
+        "masd.physical.relation_status": "relatable",
+        "masd.label.role": "type_declaration",
+        "masd.physical.constant_relation": "dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4022,7 +4028,9 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_implementation_factory_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation_factory",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.constant_relation": "dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header",
+        "masd.physical.variable_relation": "self,archetype:masd.cpp.types.archetype_class_header_factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4047,7 +4055,9 @@
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
-        "masd.physical.relation_status": "relatable"
+        "masd.label.role": "type_declaration",
+        "masd.physical.relation_status": "relatable",
+        "masd.physical.constant_relation": "dogen.physical.entities.facet,archetype:masd.cpp.types.class_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4070,7 +4080,9 @@
         "masd.wale.kvp.class.simple_name": "facet_class_implementation_factory_transform",
         "masd.wale.kvp.archetype.simple_name": "facet_class_implementation_factory",
         "masd.wale.kvp.meta_element": "physical_facet",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.variable_relation": "transparent,archetype:masd.cpp.types.archetype_class_header_factory",
+        "masd.physical.constant_relation": "dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4095,7 +4107,8 @@
         "masd.wale.kvp.meta_element": "physical_backend",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
-        "masd.physical.relation_status": "relatable"
+        "masd.physical.relation_status": "relatable",
+        "masd.label.role": "type_declaration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

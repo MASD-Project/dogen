@@ -271,7 +271,7 @@
         <dia:string>#Generates header files for objects.
 
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
-#DOGEN masd.label.roles=type_declaration#</dia:string>
+#DOGEN masd.label.role=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44972,7 +44972,9 @@ std::list&lt;dogen::variability::entities::feature&gt;
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:cpp
+#DOGEN masd.physical.constant_relation=dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -49145,7 +49147,10 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_header_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_header_transform
 #DOGEN masd.wale.kvp.meta_element=physical_facet
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.physical.constant_relation=dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:cpp
+#DOGEN masd.physical.constant_relation=dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -49360,7 +49365,12 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_transform_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_transform
 #DOGEN masd.wale.kvp.meta_element=physical_facet
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.variable_relation=transparent,role:type_declaration
+#DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51114,7 +51124,9 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.relation_status=relatable#</dia:string>
+#DOGEN masd.physical.relation_status=relatable
+#DOGEN masd.label.role=type_declaration
+#DOGEN masd.physical.constant_relation=dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51320,7 +51332,9 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=archetype_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=archetype_class_implementation_factory
 #DOGEN masd.wale.kvp.meta_element=physical_archetype
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.archetype_class_header_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51533,7 +51547,9 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 #DOGEN masd.wale.kvp.meta_element=physical_facet
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.relation_status=relatable#</dia:string>
+#DOGEN masd.label.role=type_declaration
+#DOGEN masd.physical.relation_status=relatable
+#DOGEN masd.physical.constant_relation=dogen.physical.entities.facet,archetype:masd.cpp.types.class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51736,7 +51752,12 @@ public:
 #DOGEN masd.wale.kvp.class.simple_name=facet_class_implementation_factory_transform
 #DOGEN masd.wale.kvp.archetype.simple_name=facet_class_implementation_factory
 #DOGEN masd.wale.kvp.meta_element=physical_facet
-#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types#</dia:string>
+#DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
+#DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.facet_class_header_factory
+#DOGEN masd.physical.variable_relation=transparent,archetype:masd.cpp.types.archetype_class_header_factory
+#DOGEN masd.physical.constant_relation=dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -51775,7 +51796,7 @@ public:
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#68d799"/>
+        <dia:color val="#000099"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -51988,7 +52009,8 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 #DOGEN masd.wale.kvp.meta_element=physical_backend
 #DOGEN masd.wale.kvp.containing_namespace=text.cpp.transforms.types
 #DOGEN masd.wale.kvp.class.inclusion_support_type=regular_support
-#DOGEN masd.physical.relation_status=relatable#</dia:string>
+#DOGEN masd.physical.relation_status=relatable
+#DOGEN masd.label.role=type_declaration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
