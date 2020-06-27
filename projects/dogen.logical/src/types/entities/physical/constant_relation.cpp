@@ -18,62 +18,82 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/entities/physical/fixed_relation.hpp"
+#include "dogen.logical/types/entities/physical/constant_relation.hpp"
 
 namespace dogen::logical::entities::physical {
 
-fixed_relation::fixed_relation(
+constant_relation::constant_relation(
     const std::string& urn,
+    const std::list<dogen::logical::entities::label>& labels,
     const std::string& logical_model_element_id)
     : urn_(urn),
+      labels_(labels),
       logical_model_element_id_(logical_model_element_id) { }
 
-void fixed_relation::swap(fixed_relation& other) noexcept {
+void constant_relation::swap(constant_relation& other) noexcept {
     using std::swap;
     swap(urn_, other.urn_);
+    swap(labels_, other.labels_);
     swap(logical_model_element_id_, other.logical_model_element_id_);
 }
 
-bool fixed_relation::operator==(const fixed_relation& rhs) const {
+bool constant_relation::operator==(const constant_relation& rhs) const {
     return urn_ == rhs.urn_ &&
+        labels_ == rhs.labels_ &&
         logical_model_element_id_ == rhs.logical_model_element_id_;
 }
 
-fixed_relation& fixed_relation::operator=(fixed_relation other) {
+constant_relation& constant_relation::operator=(constant_relation other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& fixed_relation::urn() const {
+const std::string& constant_relation::urn() const {
     return urn_;
 }
 
-std::string& fixed_relation::urn() {
+std::string& constant_relation::urn() {
     return urn_;
 }
 
-void fixed_relation::urn(const std::string& v) {
+void constant_relation::urn(const std::string& v) {
     urn_ = v;
 }
 
-void fixed_relation::urn(const std::string&& v) {
+void constant_relation::urn(const std::string&& v) {
     urn_ = std::move(v);
 }
 
-const std::string& fixed_relation::logical_model_element_id() const {
+const std::list<dogen::logical::entities::label>& constant_relation::labels() const {
+    return labels_;
+}
+
+std::list<dogen::logical::entities::label>& constant_relation::labels() {
+    return labels_;
+}
+
+void constant_relation::labels(const std::list<dogen::logical::entities::label>& v) {
+    labels_ = v;
+}
+
+void constant_relation::labels(const std::list<dogen::logical::entities::label>&& v) {
+    labels_ = std::move(v);
+}
+
+const std::string& constant_relation::logical_model_element_id() const {
     return logical_model_element_id_;
 }
 
-std::string& fixed_relation::logical_model_element_id() {
+std::string& constant_relation::logical_model_element_id() {
     return logical_model_element_id_;
 }
 
-void fixed_relation::logical_model_element_id(const std::string& v) {
+void constant_relation::logical_model_element_id(const std::string& v) {
     logical_model_element_id_ = v;
 }
 
-void fixed_relation::logical_model_element_id(const std::string&& v) {
+void constant_relation::logical_model_element_id(const std::string&& v) {
     logical_model_element_id_ = std::move(v);
 }
 

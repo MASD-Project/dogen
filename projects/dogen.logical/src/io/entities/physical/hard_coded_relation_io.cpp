@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_IO_ENTITIES_PHYSICAL_FIXED_RELATION_IO_HPP
-#define DOGEN_LOGICAL_IO_ENTITIES_PHYSICAL_FIXED_RELATION_IO_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.logical/io/entities/physical/hard_coded_relation_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen.logical/types/entities/physical/fixed_relation.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::logical::entities::physical {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::logical::entities::physical::fixed_relation& v);
-
+std::ostream& operator<<(std::ostream& s, const hard_coded_relation& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::logical::entities::physical::hard_coded_relation\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
+    return(s);
 }
 
-#endif
+}

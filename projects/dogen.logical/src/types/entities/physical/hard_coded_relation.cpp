@@ -18,19 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_io.hpp"
-#include "dogen.logical/io/entities/physical/relations_io.hpp"
+#include "dogen.logical/types/entities/physical/hard_coded_relation.hpp"
 
 namespace dogen::logical::entities::physical {
 
-std::ostream& operator<<(std::ostream& s, const archetype& v) {
-    v.to_stream(s);
-    return(s);
+hard_coded_relation::hard_coded_relation(const std::string& value)
+    : value_(value) { }
+
+void hard_coded_relation::swap(hard_coded_relation& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+bool hard_coded_relation::operator==(const hard_coded_relation& rhs) const {
+    return value_ == rhs.value_;
+}
+
+hard_coded_relation& hard_coded_relation::operator=(hard_coded_relation other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+const std::string& hard_coded_relation::value() const {
+    return value_;
+}
+
+std::string& hard_coded_relation::value() {
+    return value_;
+}
+
+void hard_coded_relation::value(const std::string& v) {
+    value_ = v;
+}
+
+void hard_coded_relation::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
 }

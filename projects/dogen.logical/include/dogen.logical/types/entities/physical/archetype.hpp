@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
@@ -33,8 +32,7 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/types/entities/physical/fixed_relation.hpp"
-#include "dogen.logical/types/entities/physical/variable_relation.hpp"
+#include "dogen.logical/types/entities/physical/relations.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -81,9 +79,8 @@ public:
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content,
         const std::string& rendered_stitch_template,
-        const std::string& relation_status,
-        const std::list<dogen::logical::entities::physical::variable_relation>& variable_relations,
-        const std::list<dogen::logical::entities::physical::fixed_relation>& fixed_relations);
+        const dogen::logical::entities::physical::relations& relations,
+        const std::string& relation_status);
 
 public:
     using element::accept;
@@ -205,6 +202,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Relation information for this archetype.
+     */
+    /**@{*/
+    const dogen::logical::entities::physical::relations& relations() const;
+    dogen::logical::entities::physical::relations& relations();
+    void relations(const dogen::logical::entities::physical::relations& v);
+    void relations(const dogen::logical::entities::physical::relations&& v);
+    /**@}*/
+
+    /**
      * @brief Status of this archetype with regards to relations.
      */
     /**@{*/
@@ -212,28 +219,6 @@ public:
     std::string& relation_status();
     void relation_status(const std::string& v);
     void relation_status(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief All archetypes this archetype is related to,  over a variable logical meta-model
-     * element.
-     */
-    /**@{*/
-    const std::list<dogen::logical::entities::physical::variable_relation>& variable_relations() const;
-    std::list<dogen::logical::entities::physical::variable_relation>& variable_relations();
-    void variable_relations(const std::list<dogen::logical::entities::physical::variable_relation>& v);
-    void variable_relations(const std::list<dogen::logical::entities::physical::variable_relation>&& v);
-    /**@}*/
-
-    /**
-     * @brief All archetypes this archetype is related to,  over a fixed logical meta-model
-     * element.
-     */
-    /**@{*/
-    const std::list<dogen::logical::entities::physical::fixed_relation>& fixed_relations() const;
-    std::list<dogen::logical::entities::physical::fixed_relation>& fixed_relations();
-    void fixed_relations(const std::list<dogen::logical::entities::physical::fixed_relation>& v);
-    void fixed_relations(const std::list<dogen::logical::entities::physical::fixed_relation>&& v);
     /**@}*/
 
 public:
@@ -261,9 +246,8 @@ private:
     boost::optional<dogen::logical::entities::name> wale_template_;
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
+    dogen::logical::entities::physical::relations relations_;
     std::string relation_status_;
-    std::list<dogen::logical::entities::physical::variable_relation> variable_relations_;
-    std::list<dogen::logical::entities::physical::fixed_relation> fixed_relations_;
 };
 
 }

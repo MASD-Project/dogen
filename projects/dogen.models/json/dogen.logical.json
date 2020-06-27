@@ -4100,19 +4100,14 @@
           "documentation": "Contains the result of the stitch template after rendering.\n"
         },
         {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this archetype.\n"
+        },
+        {
           "name": "relation_status",
           "type": "std::string",
           "documentation": "Status of this archetype with regards to relations.\n"
-        },
-        {
-          "name": "variable_relations",
-          "type": "std::list<variable_relation>",
-          "documentation": "All archetypes this archetype is related to,  over a variable logical meta-model\nelement.\n"
-        },
-        {
-          "name": "fixed_relations",
-          "type": "std::list<fixed_relation>",
-          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
         }
       ]
     },
@@ -4654,9 +4649,10 @@
       ]
     },
     {
-      "name": "entities::physical::fixed_relation",
+      "name": "entities::physical::constant_relation",
       "stereotypes": [
-        "Urnable"
+        "Urnable",
+        "Labelable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4677,6 +4673,40 @@
           "name": "urn",
           "type": "std::string",
           "documentation": "URN pointing to an archetype or a label.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::hard_coded_relation",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::relations",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "status",
+          "type": "std::string",
+          "documentation": "Status of this archetype with regards to relations.\n"
+        },
+        {
+          "name": "constant",
+          "type": "std::list<constant_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
+        },
+        {
+          "name": "variable",
+          "type": "std::list<variable_relation>"
+        },
+        {
+          "name": "hard_coded",
+          "type": "std::list<hard_coded_relation>"
         }
       ]
     }
