@@ -9396,7 +9396,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="143.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.288,180.429;147.012,184.312"/>
+        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
