@@ -20,7 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/fixed_relation_io.hpp"
+#include "dogen.physical/io/entities/label_io.hpp"
+#include "dogen.physical/io/entities/constant_relation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,13 +31,28 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::label>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const fixed_relation& v) {
+std::ostream& operator<<(std::ostream& s, const constant_relation& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::fixed_relation\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::constant_relation\"" << ", "
       << "\"urn\": " << "\"" << tidy_up_string(v.urn()) << "\"" << ", "
       << "\"archetype_urn\": " << "\"" << tidy_up_string(v.archetype_urn()) << "\"" << ", "
+      << "\"labels\": " << v.labels() << ", "
       << "\"logical_model_element_id\": " << "\"" << tidy_up_string(v.logical_model_element_id()) << "\""
       << " }";
     return(s);

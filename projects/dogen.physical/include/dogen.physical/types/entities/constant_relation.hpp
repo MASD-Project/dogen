@@ -18,32 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_FIXED_RELATION_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_FIXED_RELATION_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_CONSTANT_RELATION_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_CONSTANT_RELATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
+#include "dogen.physical/types/entities/label.hpp"
 
 namespace dogen::physical::entities {
 
 /**
  * @brief Represents a relation between archetypes, fixed to a logical model element.
  */
-class fixed_relation final {
+class constant_relation final {
 public:
-    fixed_relation() = default;
-    fixed_relation(const fixed_relation&) = default;
-    fixed_relation(fixed_relation&&) = default;
-    ~fixed_relation() = default;
+    constant_relation() = default;
+    constant_relation(const constant_relation&) = default;
+    constant_relation(constant_relation&&) = default;
+    ~constant_relation() = default;
 
 public:
-    fixed_relation(
+    constant_relation(
         const std::string& urn,
         const std::string& archetype_urn,
+        const std::list<dogen::physical::entities::label>& labels,
         const std::string& logical_model_element_id);
 
 public:
@@ -74,6 +77,16 @@ public:
     /**@}*/
 
     /**
+     * @brief All labels associated with this element.
+     */
+    /**@{*/
+    const std::list<dogen::physical::entities::label>& labels() const;
+    std::list<dogen::physical::entities::label>& labels();
+    void labels(const std::list<dogen::physical::entities::label>& v);
+    void labels(const std::list<dogen::physical::entities::label>&& v);
+    /**@}*/
+
+    /**
      * @brief ID of the logical model element that the relation is fixed against.
      *
      * Element must exist in the current loaded models.
@@ -86,18 +99,19 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const fixed_relation& rhs) const;
-    bool operator!=(const fixed_relation& rhs) const {
+    bool operator==(const constant_relation& rhs) const;
+    bool operator!=(const constant_relation& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(fixed_relation& other) noexcept;
-    fixed_relation& operator=(fixed_relation other);
+    void swap(constant_relation& other) noexcept;
+    constant_relation& operator=(constant_relation other);
 
 private:
     std::string urn_;
     std::string archetype_urn_;
+    std::list<dogen::physical::entities::label> labels_;
     std::string logical_model_element_id_;
 };
 
@@ -107,8 +121,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::fixed_relation& lhs,
-    dogen::physical::entities::fixed_relation& rhs) {
+    dogen::physical::entities::constant_relation& lhs,
+    dogen::physical::entities::constant_relation& rhs) {
     lhs.swap(rhs);
 }
 

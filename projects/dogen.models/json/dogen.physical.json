@@ -324,19 +324,13 @@
           "documentation": "Part in which we are located.\n"
         },
         {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Properties of this archetype with regards to relations.\n"
+        },
+        {
           "name": "relation_status",
-          "type": "relation_status",
-          "documentation": "Status of this archetype with regards to being related to archetypes.\n"
-        },
-        {
-          "name": "variable_relations",
-          "type": "std::list<variable_relation>",
-          "documentation": "All archetypes this archetype is related to,  over a variable logical meta-model\nelement.\n"
-        },
-        {
-          "name": "fixed_relations",
-          "type": "std::list<fixed_relation>",
-          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
+          "type": "relation_status"
         }
       ]
     },
@@ -1370,10 +1364,11 @@
       ]
     },
     {
-      "name": "entities::fixed_relation",
+      "name": "entities::constant_relation",
       "documentation": "Represents a relation between archetypes, fixed to a logical model element.\n",
       "stereotypes": [
-        "Urnable"
+        "Urnable",
+        "Labelable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1459,6 +1454,43 @@
           "name": "visitation",
           "type": "",
           "documentation": "The associated element visits or is visited by the current element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::relations",
+      "documentation": "Models relationships between archetypes.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "status",
+          "type": "relation_status",
+          "documentation": "Status of this archetype with regards to being related to archetypes.\n"
+        },
+        {
+          "name": "constant",
+          "type": "std::list<constant_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a fixed logical meta-model\nelement.\n"
+        },
+        {
+          "name": "variable",
+          "type": "std::list<variable_relation>",
+          "documentation": "All archetypes this archetype is related to,  over a variable logical meta-model\nelement.\n"
+        },
+        {
+          "name": "hard_coded",
+          "type": "std::list<hard_coded_relation>"
+        }
+      ]
+    },
+    {
+      "name": "entities::hard_coded_relation",
+      "documentation": "Relations against hard-coded values.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "value",
+          "type": "std::string"
         }
       ]
     }

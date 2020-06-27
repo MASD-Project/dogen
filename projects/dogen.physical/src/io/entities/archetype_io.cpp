@@ -23,9 +23,8 @@
 #include "dogen.physical/io/entities/label_io.hpp"
 #include "dogen.physical/io/entities/archetype_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/fixed_relation_io.hpp"
+#include "dogen.physical/io/entities/relations_io.hpp"
 #include "dogen.physical/io/entities/relation_status_io.hpp"
-#include "dogen.physical/io/entities/variable_relation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -63,34 +62,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::variable_relation>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::fixed_relation>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const archetype& v) {
@@ -107,9 +78,8 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\"" << ", "
-      << "\"relation_status\": " << v.relation_status() << ", "
-      << "\"variable_relations\": " << v.variable_relations() << ", "
-      << "\"fixed_relations\": " << v.fixed_relations()
+      << "\"relations\": " << v.relations() << ", "
+      << "\"relation_status\": " << v.relation_status()
       << " }";
     return(s);
 }

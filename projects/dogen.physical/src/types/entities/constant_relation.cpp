@@ -18,82 +18,102 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/fixed_relation.hpp"
+#include "dogen.physical/types/entities/constant_relation.hpp"
 
 namespace dogen::physical::entities {
 
-fixed_relation::fixed_relation(
+constant_relation::constant_relation(
     const std::string& urn,
     const std::string& archetype_urn,
+    const std::list<dogen::physical::entities::label>& labels,
     const std::string& logical_model_element_id)
     : urn_(urn),
       archetype_urn_(archetype_urn),
+      labels_(labels),
       logical_model_element_id_(logical_model_element_id) { }
 
-void fixed_relation::swap(fixed_relation& other) noexcept {
+void constant_relation::swap(constant_relation& other) noexcept {
     using std::swap;
     swap(urn_, other.urn_);
     swap(archetype_urn_, other.archetype_urn_);
+    swap(labels_, other.labels_);
     swap(logical_model_element_id_, other.logical_model_element_id_);
 }
 
-bool fixed_relation::operator==(const fixed_relation& rhs) const {
+bool constant_relation::operator==(const constant_relation& rhs) const {
     return urn_ == rhs.urn_ &&
         archetype_urn_ == rhs.archetype_urn_ &&
+        labels_ == rhs.labels_ &&
         logical_model_element_id_ == rhs.logical_model_element_id_;
 }
 
-fixed_relation& fixed_relation::operator=(fixed_relation other) {
+constant_relation& constant_relation::operator=(constant_relation other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& fixed_relation::urn() const {
+const std::string& constant_relation::urn() const {
     return urn_;
 }
 
-std::string& fixed_relation::urn() {
+std::string& constant_relation::urn() {
     return urn_;
 }
 
-void fixed_relation::urn(const std::string& v) {
+void constant_relation::urn(const std::string& v) {
     urn_ = v;
 }
 
-void fixed_relation::urn(const std::string&& v) {
+void constant_relation::urn(const std::string&& v) {
     urn_ = std::move(v);
 }
 
-const std::string& fixed_relation::archetype_urn() const {
+const std::string& constant_relation::archetype_urn() const {
     return archetype_urn_;
 }
 
-std::string& fixed_relation::archetype_urn() {
+std::string& constant_relation::archetype_urn() {
     return archetype_urn_;
 }
 
-void fixed_relation::archetype_urn(const std::string& v) {
+void constant_relation::archetype_urn(const std::string& v) {
     archetype_urn_ = v;
 }
 
-void fixed_relation::archetype_urn(const std::string&& v) {
+void constant_relation::archetype_urn(const std::string&& v) {
     archetype_urn_ = std::move(v);
 }
 
-const std::string& fixed_relation::logical_model_element_id() const {
+const std::list<dogen::physical::entities::label>& constant_relation::labels() const {
+    return labels_;
+}
+
+std::list<dogen::physical::entities::label>& constant_relation::labels() {
+    return labels_;
+}
+
+void constant_relation::labels(const std::list<dogen::physical::entities::label>& v) {
+    labels_ = v;
+}
+
+void constant_relation::labels(const std::list<dogen::physical::entities::label>&& v) {
+    labels_ = std::move(v);
+}
+
+const std::string& constant_relation::logical_model_element_id() const {
     return logical_model_element_id_;
 }
 
-std::string& fixed_relation::logical_model_element_id() {
+std::string& constant_relation::logical_model_element_id() {
     return logical_model_element_id_;
 }
 
-void fixed_relation::logical_model_element_id(const std::string& v) {
+void constant_relation::logical_model_element_id(const std::string& v) {
     logical_model_element_id_ = v;
 }
 
-void fixed_relation::logical_model_element_id(const std::string&& v) {
+void constant_relation::logical_model_element_id(const std::string&& v) {
     logical_model_element_id_ = std::move(v);
 }
 

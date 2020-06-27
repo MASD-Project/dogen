@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_FIXED_RELATION_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_FIXED_RELATION_FWD_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_HARD_CODED_RELATION_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_HARD_CODED_RELATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.physical/types/entities/hard_coded_relation.hpp"
+
 namespace dogen::physical::entities {
 
-class fixed_relation;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::hard_coded_relation& v);
 
 }
 
