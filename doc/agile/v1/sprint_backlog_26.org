@@ -15,34 +15,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-27 Sat 00:13]
+#+CAPTION: Clock summary at [2020-06-27 Sat 21:16]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *56:09* |       |       | 100.0 |
+| *Total time*                                                      | *58:33* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 56:09   |       |       | 100.0 |
-| Active                                                            |         | 56:09 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  13.7 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.1 |
-| Sprint and product backlog grooming                               |         |       |  4:35 |   8.2 |
+| Stories                                                           | 58:33   |       |       | 100.0 |
+| Active                                                            |         | 58:33 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  13.2 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.0 |
+| Sprint and product backlog grooming                               |         |       |  4:35 |   7.8 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.3 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.7 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.6 |
 | Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.1 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.4 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.5 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.1 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.4 |
-| Split archetype factory from transform                            |         |       | 10:57 |  19.5 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.1 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.2 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.0 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.2 |
+| Split archetype factory from transform                            |         |       | 10:57 |  18.7 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.0 |
 | Remove traits for archetypes                                      |         |       |  0:44 |   1.3 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   8.5 |
-| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.1 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   2.0 |
-| Add labels to archetypes                                          |         |       |  2:22 |   4.2 |
-| Improve org-mode converter                                        |         |       |  5:15 |   9.3 |
-| Add relations between archetypes in the PMM                       |         |       |  4:00 |   7.1 |
-| Analysis on implementing containment with configuration           |         |       |  1:52 |   3.3 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   8.1 |
+| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.0 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.9 |
+| Add labels to archetypes                                          |         |       |  2:22 |   4.0 |
+| Improve org-mode converter                                        |         |       |  5:15 |   9.0 |
+| Add relations between archetypes in the PMM                       |         |       |  6:21 |  10.8 |
+| Analysis on implementing containment with configuration           |         |       |  1:52 |   3.2 |
+| Add support for CSV values in variability                         |         |       |  0:03 |   0.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1704,6 +1705,9 @@ Notes:
 
 *** STARTED Add relations between archetypes in the PMM               :story:
     :LOGBOOK:
+    CLOCK: [2020-06-27 Sat 20:59]--[2020-06-27 Sat 21:12] =>  0:13
+    CLOCK: [2020-06-27 Sat 20:41]--[2020-06-27 Sat 20:58] =>  0:17
+    CLOCK: [2020-06-27 Sat 11:27]--[2020-06-27 Sat 13:18] =>  1:51
     CLOCK: [2020-06-27 Sat 00:10]--[2020-06-27 Sat 00:13] =>  0:03
     CLOCK: [2020-06-26 Fri 23:56]--[2020-06-27 Sat 00:09] =>  0:13
     CLOCK: [2020-06-26 Fri 21:47]--[2020-06-26 Fri 21:54] =>  0:07
@@ -1875,6 +1879,15 @@ Links:
 
 - [[https://www.uml-diagrams.org/stereotype.html][UML Stereotype]]
 - [[https://en.wikipedia.org/wiki/Stereotype_(UML)][Wikipedia - Stereotype (UML)]]
+
+*** STARTED Add support for CSV values in variability                 :story:
+    :LOGBOOK:
+    CLOCK: [2020-06-27 Sat 21:13]--[2020-06-27 Sat 21:16] =>  0:03
+    :END:
+
+It would be nice to get CSV values out of variability without having
+to do any additional work. We just need to add a type for this and
+associated scaffolding.
 
 *** Injector types with regards to containment                        :story:
 

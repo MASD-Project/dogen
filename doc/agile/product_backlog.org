@@ -14004,6 +14004,19 @@ Links:
 - [[https://github.com/dbus-asio/dbus-asio][dbus-asio]]: DBus C++ implementation based on boost asio. [[https://fosdem.org/2019/schedule/event/dbus_asio/][FOSDEM talk]].
 - [[https://gitlab.freedesktop.org/dbus/dbus][libdbus]]: original D-Bus C library.
 
+*** Add support for Asio uring                                        :story:
+
+#+begin_quote
+Asio Uring adapts the io_uring functionality added in the Linux kernel
+5.1 to the model of Boost.Asio with the framework laid for future
+adaptation to the model of the Networking TS. This enables native
+asynchronous file I/O within the context of Boost.Asio.
+#+end_quote
+
+Links:
+
+- [[https://github.com/RobertLeahy/AsioUring][AsioUring GH]]
+
 *** Add support for Microsoft Bond                                     :epic:
 
 More of a placeholder - will require further investigation. Seems like
@@ -18053,12 +18066,16 @@ least). However, another way to look at this is to consider this
 functionality to be facets of the product which can be code generated
 on demand.
 
+The easiest thing is to add the config file to our meta-model so that
+we can generate it.
+
 Links:
 
 - [[https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6][KONG - The Microservice API Gateway]]
 - [[https://docs.konghq.com/hub/kong-inc/oauth2/][kong oauth2 plugin]]
 - [[https://docs.konghq.com/hub/kong-inc/jwt/][kong jwt plugin]]
 - [[https://github.com/envoyproxy/envoy][envoy GitHub]]
+- [[https://www.envoyproxy.io/docs/envoy/latest/intro/life_of_a_request][envoy: Life of a Request]]
 
 *** Consider generating code for RAII wrapper                         :story:
 
