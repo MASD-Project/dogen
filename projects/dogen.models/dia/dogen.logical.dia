@@ -53287,13 +53287,13 @@ just to avoid problems.#</dia:string>
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,61.95;134.415,71.25"/>
+        <dia:rectangle val="114.95,61.95;136.34,71.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="115,62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.365000000000002"/>
+        <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.2000000000000011"/>
@@ -53549,7 +53549,7 @@ FIXME: optional for now.
             <dia:string>#variable_relation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::comma_separated#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -53574,7 +53574,7 @@ FIXME: optional for now.
             <dia:string>#fixed_relation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::comma_separated#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
