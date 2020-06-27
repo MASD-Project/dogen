@@ -51465,7 +51465,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
     r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
-    r.relations().status(physical::entities::relation_status::&lt;#= arch.relation_status() #&gt;);
+    r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;

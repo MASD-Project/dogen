@@ -396,7 +396,7 @@ process_archetypes(const context& ctx, entities::model& m) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(invalid_relation_status + rs));
         }
-        arch.relation_status(rs);
+        arch.relations().status(rs);
 
         /*
          * Archetypes can only exist in the context of a backend and a

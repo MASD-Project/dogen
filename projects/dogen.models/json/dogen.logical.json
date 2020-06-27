@@ -4103,11 +4103,6 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Relation information for this archetype.\n"
-        },
-        {
-          "name": "relation_status",
-          "type": "std::string",
-          "documentation": "Status of this archetype with regards to relations.\n"
         }
       ]
     },

@@ -79,8 +79,7 @@ public:
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content,
         const std::string& rendered_stitch_template,
-        const dogen::logical::entities::physical::relations& relations,
-        const std::string& relation_status);
+        const dogen::logical::entities::physical::relations& relations);
 
 public:
     using element::accept;
@@ -211,16 +210,6 @@ public:
     void relations(const dogen::logical::entities::physical::relations&& v);
     /**@}*/
 
-    /**
-     * @brief Status of this archetype with regards to relations.
-     */
-    /**@{*/
-    const std::string& relation_status() const;
-    std::string& relation_status();
-    void relation_status(const std::string& v);
-    void relation_status(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -247,7 +236,6 @@ private:
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
     dogen::logical::entities::physical::relations relations_;
-    std::string relation_status_;
 };
 
 }

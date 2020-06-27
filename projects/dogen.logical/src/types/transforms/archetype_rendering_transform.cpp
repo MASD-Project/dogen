@@ -102,7 +102,7 @@ std::string archetype_rendering_transform::render_wale_template(
     /*
      * Inject the keys that can be inferred from the meta-model element.
      */
-    const auto rs(arch.relation_status());
+    const auto rs(arch.relations().status());
     if (!rs.empty())
         checked_insert(std::make_pair("referencing_status", rs));
 
