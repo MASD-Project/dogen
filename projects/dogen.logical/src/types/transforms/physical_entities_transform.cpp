@@ -348,7 +348,8 @@ process_archetypes(const context& ctx, entities::model& m) {
      * First, we organise the parts by their IDs.
      */
     const auto& parts(pe.parts());
-    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
+    std::unordered_map<std::string,
+                       boost::shared_ptr<entities::physical::part>>
         parts_by_ids;
     for (const auto& pair : parts) {
         const auto& part(*pair.second);
@@ -370,10 +371,17 @@ process_archetypes(const context& ctx, entities::model& m) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& arch(*pair.second);
+
+        /*
+         * The meta-model name is hard-coded as we only support one.
+         */
         arch.meta_model_name(meta_model_name);
 
         /*
-         * Read all of the associated meta-data.
+         * Read all of the associated meta-data. First we get the
+         * logical model meta-element ID. It must not be empty, but
+         * otherwise We don't validate it here - this will be done
+         * later on.
          */
         const auto scfg(physical::make_static_configuration(fg, arch));
         arch.part_id(scfg.part_id);
@@ -383,15 +391,22 @@ process_archetypes(const context& ctx, entities::model& m) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(missing_logical_meta_element));
         }
-
         arch.logical_meta_element_id(lmen);
 
+        /*
+         * Read the reference to a wale template. Its existence will
+         * be validated later on during resolution. It may be empty
+         * since not all archetypes need a wale template.
+         */
         const auto wtr(scfg.wale_template_reference);
         if (!wtr.empty()) {
             const auto n(helpers::name_builder::build(wtr));
             arch.wale_template(n);
         }
 
+        /*
+         * Read and validate the relation status.
+         */
         const auto rs(scfg.relation_status);
         const bool is_valid_rs(
             rs == relation_status_not_relatable ||
@@ -404,6 +419,12 @@ process_archetypes(const context& ctx, entities::model& m) {
         }
         arch.relations().status(rs);
 
+        /*
+         * Process the constant relations. These are CSV values with
+         * either 2 or three fields. The first field is the logical
+         * model element ID, the second field the original URN and the
+         * final, possibly optional field, is a colon separated label.
+         */
         for (const auto& cr : scfg.constant_relation) {
             const auto sz(cr.size());
             if (sz != 2 && sz != 3) {
@@ -415,13 +436,22 @@ process_archetypes(const context& ctx, entities::model& m) {
                 BOOST_THROW_EXCEPTION(transformation_error(s));
             }
 
+            /*
+             * Read the logical model meta-element ID we are related to.
+             */
             auto i(cr.begin());
             entities::physical::constant_relation lcr;
             lcr.logical_model_element_id(*i);
 
+            /*
+             * Read the URN, as it was originally supplied by the user.
+             */
             ++i;
             lcr.original_urn(*i);
 
+            /*
+             * If present, read the label.
+             */
             if (sz == 3) {
                 ++i;
                 const auto s(*i);
