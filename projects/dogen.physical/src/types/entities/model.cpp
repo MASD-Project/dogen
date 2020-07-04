@@ -51,7 +51,8 @@ model::model(
     const std::string& technical_space,
     const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
-    const dogen::physical::entities::outputting_properties& outputting_properties)
+    const dogen::physical::entities::outputting_properties& outputting_properties,
+    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id)
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
@@ -60,7 +61,8 @@ model::model(
       technical_space_(technical_space),
       artefacts_(artefacts),
       managed_directories_(managed_directories),
-      outputting_properties_(outputting_properties) { }
+      outputting_properties_(outputting_properties),
+      artefact_sets_by_logical_id_(artefact_sets_by_logical_id) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -73,6 +75,7 @@ void model::swap(model& other) noexcept {
     swap(artefacts_, other.artefacts_);
     swap(managed_directories_, other.managed_directories_);
     swap(outputting_properties_, other.outputting_properties_);
+    swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -84,7 +87,8 @@ bool model::operator==(const model& rhs) const {
         technical_space_ == rhs.technical_space_ &&
         artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_ &&
-        outputting_properties_ == rhs.outputting_properties_;
+        outputting_properties_ == rhs.outputting_properties_ &&
+        artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_;
 }
 
 model& model::operator=(model other) {
@@ -235,6 +239,22 @@ void model::outputting_properties(const dogen::physical::entities::outputting_pr
 
 void model::outputting_properties(const dogen::physical::entities::outputting_properties&& v) {
     outputting_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() const {
+    return artefact_sets_by_logical_id_;
+}
+
+std::unordered_map<std::string, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() {
+    return artefact_sets_by_logical_id_;
+}
+
+void model::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v) {
+    artefact_sets_by_logical_id_ = v;
+}
+
+void model::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v) {
+    artefact_sets_by_logical_id_ = std::move(v);
 }
 
 }

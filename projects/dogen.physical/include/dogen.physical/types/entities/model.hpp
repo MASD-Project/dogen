@@ -28,11 +28,13 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
+#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
@@ -59,7 +61,8 @@ public:
         const std::string& technical_space,
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
-        const dogen::physical::entities::outputting_properties& outputting_properties);
+        const dogen::physical::entities::outputting_properties& outputting_properties,
+        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id);
 
 public:
     /**
@@ -142,6 +145,16 @@ public:
     void outputting_properties(const dogen::physical::entities::outputting_properties& v);
     void outputting_properties(const dogen::physical::entities::outputting_properties&& v);
 
+    /**
+     * @brief All atefact sets in this model, by logical ID.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
+    std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
+    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
+    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -162,6 +175,7 @@ private:
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
+    std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
 };
 
 }

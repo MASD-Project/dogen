@@ -399,6 +399,11 @@
         {
           "name": "outputting_properties",
           "type": "outputting_properties"
+        },
+        {
+          "name": "artefact_sets_by_logical_id",
+          "type": "std::unordered_map<std::string, artefact_set>",
+          "documentation": "All atefact sets in this model, by logical ID.\n"
         }
       ]
     },
@@ -1487,6 +1492,27 @@
         {
           "name": "value",
           "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::artefact_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_element_id",
+          "type": "std::string",
+          "documentation": "Identifier for the manifold in logical space where this set exists.\n"
+        },
+        {
+          "name": "artefacts_by_archetype",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>",
+          "documentation": "All artefacts that are contained within this set, organised by archetype.\n"
+        },
+        {
+          "name": "archetype_for_role",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Resolves a role into a concrete archetype, in the context of this logical element.\n"
         }
       ]
     }
