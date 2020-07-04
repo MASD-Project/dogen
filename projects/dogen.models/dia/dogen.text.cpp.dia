@@ -51436,6 +51436,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -51484,6 +51485,43 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
             for(const auto&amp; l : arch.labels()) {
 #&gt;
     r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+&lt;#+
+            }
+
+            for(const auto&amp; cr : arch.relations().constant()) {
+#&gt;
+
+    r.relations().constant().push_back(
+        physical::entities::constant_relation(
+            "&lt;#= cr.original_urn() #&gt;",
+            ""/*resolved_urn*/,
+&lt;#+
+                if (cr.labels().empty()) {
+#&gt;
+            std::list&lt;physical::entities::label&gt; {},
+&lt;#+
+                } else {
+#&gt;
+            std::list&lt;physical::entities::label&gt; {
+&lt;#+
+                    utility::formatters::sequence_formatter sf(cr.labels().size());
+                    // sf.prefix_configuration().first(": ").not_first("  ");
+                    sf.postfix_configuration().not_last(",")/*.last("")*/;
+
+                    for(const auto&amp; l : cr.labels()) {
+#&gt;
+                physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;")&lt;#= sf.postfix() #&gt;
+&lt;#+
+                        sf.next();
+                    }
+#&gt;
+            },
+&lt;#+
+                }
+#&gt;
+            "&lt;#= cr.logical_model_element_id() #&gt;"
+        )
+    );
 &lt;#+
             }
 #&gt;

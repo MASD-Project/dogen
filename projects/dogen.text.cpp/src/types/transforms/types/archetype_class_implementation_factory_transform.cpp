@@ -26,6 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.physical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -108,6 +109,31 @@ ast.stream() << "    r.logical_meta_element_id(\"" << arch.logical_meta_element_
 ast.stream() << "    r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
             for(const auto& l : arch.labels()) {
 ast.stream() << "    r.labels().push_back(physical::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
+            }
+
+            for(const auto& cr : arch.relations().constant()) {
+ast.stream() << std::endl;
+ast.stream() << "    r.relations().constant().push_back(" << std::endl;
+ast.stream() << "        physical::entities::constant_relation(" << std::endl;
+ast.stream() << "            \"" << cr.original_urn() << "\"," << std::endl;
+ast.stream() << "            \"\"/*resolved_urn*/," << std::endl;
+                if (cr.labels().empty()) {
+ast.stream() << "            std::list<physical::entities::label> {}," << std::endl;
+                } else {
+ast.stream() << "            std::list<physical::entities::label> {" << std::endl;
+                    utility::formatters::sequence_formatter sf(cr.labels().size());
+                    // sf.prefix_configuration().first(": ").not_first("  ");
+                    sf.postfix_configuration().not_last(",")/*.last("")*/;
+
+                    for(const auto& l : cr.labels()) {
+ast.stream() << "                physical::entities::label(\"" << l.key() << "\", \"" << l.value() << "\")" << sf.postfix() << std::endl;
+                        sf.next();
+                    }
+ast.stream() << "            }," << std::endl;
+                }
+ast.stream() << "            \"" << cr.logical_model_element_id() << "\"" << std::endl;
+ast.stream() << "        )" << std::endl;
+ast.stream() << "    );" << std::endl;
             }
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
