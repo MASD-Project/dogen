@@ -44,8 +44,8 @@ public:
 
 public:
     constant_relation(
-        const std::string& urn,
-        const std::string& archetype_urn,
+        const std::string& original_urn,
+        const std::string& resolved_urn,
         const std::list<dogen::physical::entities::label>& labels,
         const std::string& logical_model_element_id);
 
@@ -58,10 +58,10 @@ public:
      * to a unique archetype.
      */
     /**@{*/
-    const std::string& urn() const;
-    std::string& urn();
-    void urn(const std::string& v);
-    void urn(const std::string&& v);
+    const std::string& original_urn() const;
+    std::string& original_urn();
+    void original_urn(const std::string& v);
+    void original_urn(const std::string&& v);
     /**@}*/
 
     /**
@@ -70,10 +70,10 @@ public:
      *  It must have the form "archetype:".
      */
     /**@{*/
-    const std::string& archetype_urn() const;
-    std::string& archetype_urn();
-    void archetype_urn(const std::string& v);
-    void archetype_urn(const std::string&& v);
+    const std::string& resolved_urn() const;
+    std::string& resolved_urn();
+    void resolved_urn(const std::string& v);
+    void resolved_urn(const std::string&& v);
     /**@}*/
 
     /**
@@ -109,8 +109,8 @@ public:
     constant_relation& operator=(constant_relation other);
 
 private:
-    std::string urn_;
-    std::string archetype_urn_;
+    std::string original_urn_;
+    std::string resolved_urn_;
     std::list<dogen::physical::entities::label> labels_;
     std::string logical_model_element_id_;
 };
