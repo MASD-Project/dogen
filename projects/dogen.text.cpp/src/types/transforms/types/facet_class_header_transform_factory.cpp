@@ -40,6 +40,7 @@ physical::entities::archetype facet_class_header_transform_factory::make() {
             "dogen.text.csharp.transforms.registrar"
         )
     );
+
     return r;
 }
 

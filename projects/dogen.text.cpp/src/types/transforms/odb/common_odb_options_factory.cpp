@@ -29,6 +29,7 @@ physical::entities::archetype common_odb_options_factory::make() {
     r.meta_name(pmnf::make("cpp", "odb", "common_odb_options"));
     r.logical_meta_element_id("dogen.logical.entities.orm_common_odb_options");
     r.relations().status(physical::entities::relation_status::not_relatable);
+
     return r;
 }
 

@@ -39,6 +39,7 @@ physical::entities::archetype facet_class_header_factory_factory::make() {
             "dogen.physical.entities.facet"
         )
     );
+
     return r;
 }
 

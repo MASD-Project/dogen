@@ -38,6 +38,7 @@ physical::entities::archetype facet_class_implementation_transform_factory::make
             "dogen.text.transforms.transformation_error"
         )
     );
+
     return r;
 }
 

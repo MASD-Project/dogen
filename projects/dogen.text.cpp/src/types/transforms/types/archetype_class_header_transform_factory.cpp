@@ -40,6 +40,7 @@ physical::entities::archetype archetype_class_header_transform_factory::make() {
             "dogen.text.csharp.transforms.model_to_text_transform"
         )
     );
+
     return r;
 }
 

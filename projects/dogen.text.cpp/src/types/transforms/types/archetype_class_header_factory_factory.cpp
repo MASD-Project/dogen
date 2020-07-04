@@ -39,6 +39,7 @@ physical::entities::archetype archetype_class_header_factory_factory::make() {
             "dogen.physical.entities.archetype"
         )
     );
+
     return r;
 }
 

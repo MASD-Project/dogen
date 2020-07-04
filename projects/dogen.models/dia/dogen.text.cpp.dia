@@ -51524,7 +51524,19 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     );
 &lt;#+
             }
+
+            for(const auto&amp; vr : arch.relations().variable()) {
 #&gt;
+
+    r.relations().variable().push_back(
+        physical::entities::variable_relation(
+            "&lt;#= vr.original_urn() #&gt;", physical::entities::&lt;#= vr.type() #&gt;
+        )
+    );
+&lt;#+
+            }
+#&gt;
+
     return r;
 }
 

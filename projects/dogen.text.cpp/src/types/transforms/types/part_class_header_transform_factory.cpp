@@ -29,6 +29,7 @@ physical::entities::archetype part_class_header_transform_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "part_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_part");
     r.relations().status(physical::entities::relation_status::facet_default);
+
     return r;
 }
 

@@ -38,6 +38,7 @@ physical::entities::archetype facet_class_implementation_factory_factory::make()
             "dogen.physical.helpers.meta_name_builder"
         )
     );
+
     return r;
 }
 

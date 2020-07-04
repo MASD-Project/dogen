@@ -29,6 +29,7 @@ physical::entities::archetype primitive_forward_declarations_factory::make() {
     r.meta_name(pmnf::make("cpp", "serialization", "primitive_forward_declarations"));
     r.logical_meta_element_id("dogen.logical.entities.primitive");
     r.relations().status(physical::entities::relation_status::relatable);
+
     return r;
 }
 

@@ -29,6 +29,7 @@ physical::entities::archetype project_factory::make() {
     r.meta_name(pmnf::make("csharp", "visual_studio", "project"));
     r.logical_meta_element_id("dogen.logical.entities.visual_studio_project");
     r.relations().status(physical::entities::relation_status::not_relatable);
+
     return r;
 }
 

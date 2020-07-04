@@ -29,6 +29,7 @@ physical::entities::archetype enum_header_factory::make() {
     r.meta_name(pmnf::make("cpp", "lexical_cast", "enum_header"));
     r.logical_meta_element_id("dogen.logical.entities.enumeration");
     r.relations().status(physical::entities::relation_status::facet_default);
+
     return r;
 }
 

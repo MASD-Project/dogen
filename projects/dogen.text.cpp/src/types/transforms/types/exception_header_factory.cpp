@@ -30,6 +30,7 @@ physical::entities::archetype exception_header_factory::make() {
     r.logical_meta_element_id("dogen.logical.entities.exception");
     r.relations().status(physical::entities::relation_status::facet_default);
     r.labels().push_back(physical::entities::label("roles", "type_declaration"));
+
     return r;
 }
 

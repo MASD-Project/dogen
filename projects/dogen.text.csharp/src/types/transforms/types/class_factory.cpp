@@ -29,6 +29,7 @@ physical::entities::archetype class_factory::make() {
     r.meta_name(pmnf::make("csharp", "types", "class"));
     r.logical_meta_element_id("dogen.logical.entities.object");
     r.relations().status(physical::entities::relation_status::facet_default);
+
     return r;
 }
 

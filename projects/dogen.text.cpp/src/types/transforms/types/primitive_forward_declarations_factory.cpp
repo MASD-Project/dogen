@@ -30,6 +30,7 @@ physical::entities::archetype primitive_forward_declarations_factory::make() {
     r.logical_meta_element_id("dogen.logical.entities.primitive");
     r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(physical::entities::label("roles", "forward declaration"));
+
     return r;
 }
 

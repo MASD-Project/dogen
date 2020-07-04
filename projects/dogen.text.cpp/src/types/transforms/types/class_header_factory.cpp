@@ -30,6 +30,7 @@ physical::entities::archetype class_header_factory::make() {
     r.logical_meta_element_id("dogen.logical.entities.object");
     r.relations().status(physical::entities::relation_status::facet_default);
     r.labels().push_back(physical::entities::label("role", "type_declaration"));
+
     return r;
 }
 

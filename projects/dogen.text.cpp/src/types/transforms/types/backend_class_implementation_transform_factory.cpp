@@ -29,6 +29,7 @@ physical::entities::archetype backend_class_implementation_transform_factory::ma
     r.meta_name(pmnf::make("cpp", "types", "backend_class_implementation_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_backend");
     r.relations().status(physical::entities::relation_status::not_relatable);
+
     return r;
 }
 

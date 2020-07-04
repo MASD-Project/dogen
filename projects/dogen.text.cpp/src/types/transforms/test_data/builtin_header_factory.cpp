@@ -29,6 +29,7 @@ physical::entities::archetype builtin_header_factory::make() {
     r.meta_name(pmnf::make("cpp", "test_data", "builtin_header"));
     r.logical_meta_element_id("dogen.logical.entities.builtin");
     r.relations().status(physical::entities::relation_status::facet_default);
+
     return r;
 }
 

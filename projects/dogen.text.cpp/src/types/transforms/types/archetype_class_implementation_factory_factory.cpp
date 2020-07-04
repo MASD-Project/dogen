@@ -38,6 +38,7 @@ physical::entities::archetype archetype_class_implementation_factory_factory::ma
             "dogen.physical.helpers.meta_name_factory"
         )
     );
+
     return r;
 }
 

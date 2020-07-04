@@ -135,6 +135,16 @@ ast.stream() << "            \"" << cr.logical_model_element_id() << "\"" << std
 ast.stream() << "        )" << std::endl;
 ast.stream() << "    );" << std::endl;
             }
+
+            for(const auto& vr : arch.relations().variable()) {
+ast.stream() << std::endl;
+ast.stream() << "    r.relations().variable().push_back(" << std::endl;
+ast.stream() << "        physical::entities::variable_relation(" << std::endl;
+ast.stream() << "            \"" << vr.original_urn() << "\", physical::entities::" << vr.type() << std::endl;
+ast.stream() << "        )" << std::endl;
+ast.stream() << "    );" << std::endl;
+            }
+ast.stream() << std::endl;
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;

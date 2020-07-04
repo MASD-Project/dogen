@@ -29,6 +29,7 @@ physical::entities::archetype variability_initializer_implementation_factory::ma
     r.meta_name(pmnf::make("cpp", "types", "variability_initializer_implementation"));
     r.logical_meta_element_id("dogen.logical.entities.variability_initializer");
     r.relations().status(physical::entities::relation_status::not_relatable);
+
     return r;
 }
 

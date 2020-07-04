@@ -30,6 +30,7 @@ physical::entities::archetype backend_class_header_factory_factory::make() {
     r.logical_meta_element_id("dogen.logical.entities.physical_backend");
     r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(physical::entities::label("role", "type_declaration"));
+
     return r;
 }
 

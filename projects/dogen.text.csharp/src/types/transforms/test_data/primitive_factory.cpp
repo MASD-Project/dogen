@@ -29,6 +29,7 @@ physical::entities::archetype primitive_factory::make() {
     r.meta_name(pmnf::make("csharp", "test_data", "primitive"));
     r.logical_meta_element_id("dogen.logical.entities.primitive");
     r.relations().status(physical::entities::relation_status::facet_default);
+
     return r;
 }
 
