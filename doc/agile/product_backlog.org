@@ -10742,6 +10742,10 @@ Links:
   Strings.
 - [[https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words][GH List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words]]: List of
   Dirty, Naughty, Obscene, and Otherwise Bad Words
+- [[https://voice.mozilla.org/en/about][Mozilla Common Voice]]: Common Voice is part of Mozilla's initiative
+  to help teach machines how real people speak. In addition to the
+  Common Voice dataset, we’re also building an open source speech
+  recognition engine called Deep Speech.
 
 Fantasy:
 
@@ -14783,6 +14787,34 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider allowing restrictions on primitives                      :story:
+
+In XML it is possible to state the following:
+
+#+begin_src xml
+  <xsd:simpleType name="Scheme">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The base class for all types which define coding schemes that are allowed to be empty.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="NormalizedString">
+      <xsd:maxLength value="255" />
+    </xsd:restriction>
+  </xsd:simpleType>
+#+end_src
+
+Then the type =Scheme= is now a restriction of a string:
+
+#+begin_quote
+The normalizedString data type is derived from the String data type.
+
+The normalizedString data type also contains characters, but the XML
+processor will remove line feeds, carriage returns, and tab
+characters.
+#+end_quote
+
+It would be really nice if we could also have restrictions on our
+primitive types, particularly with things such as normalised string.
 
 *** Consider adding scripts or targets for core dumping               :story:
 
