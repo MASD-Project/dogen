@@ -37,6 +37,8 @@ static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_archetype(
     "Found more than one artefact for archetype:");
+const std::string duplicate_logical_element(
+    "Found more than one artefact set for logical model ID: ");
 
 }
 
@@ -90,6 +92,19 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
                         BOOST_THROW_EXCEPTION(transform_exception(
                                 duplicate_archetype + archetype_id));
                     }
+                }
+            }
+
+            if (!as.artefacts_by_archetype().empty()) {
+                auto& asbli(pm.artefact_sets_by_logical_id());
+                const auto& leid(as.logical_element_id());
+                auto pair(std::make_pair(leid, as));
+                const bool inserted(asbli.insert(pair).second);
+                if (!inserted) {
+                    BOOST_LOG_SEV(lg, error) << duplicate_logical_element
+                                             << leid;
+                    BOOST_THROW_EXCEPTION(transform_exception(
+                            duplicate_logical_element + leid));
                 }
             }
         }
