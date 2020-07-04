@@ -304,12 +304,12 @@ ID of the meta-element in the logical model this archetype binds to.
 
 Part in which we are located.
 
-*** referencing_status
+*** relations
 :PROPERTIES:
-:masd.injection.type: referencing_status
+:masd.injection.type: relations
 :END:
 
-Status of this archetype with regards to being referenced by other archetypes.
+Properties of this archetype with regards to relations.
 
 ** entities::archetype_kind
 :PROPERTIES:
@@ -360,13 +360,6 @@ Collection of entities representing objects in physical space.
 
 Primary technical space that this model belongs to.
 
-*** artefacts
-:PROPERTIES:
-:masd.injection.type: std::list<boost::shared_ptr<artefact>>
-:END:
-
-All artefacts that make up this physical model.
-
 *** managed_directories
 :PROPERTIES:
 :masd.injection.type: std::list<boost::filesystem::path>
@@ -375,6 +368,27 @@ All artefacts that make up this physical model.
 :PROPERTIES:
 :masd.injection.type: outputting_properties
 :END:
+*** artefact_sets_by_logical_id
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, artefact_set>
+:END:
+
+All atefact sets in this model, by logical ID.
+
+*** orphan_artefacts
+:PROPERTIES:
+:masd.injection.type: std::list<boost::shared_ptr<physical::entities::artefact>>
+:END:
+
+Artefacts that exist in the physical dimension only.
+
+*** artefacts
+:PROPERTIES:
+:masd.injection.type: std::list<boost::shared_ptr<physical::entities::artefact>>
+:END:
+
+All artefacts that make up this physical model.
+
 ** entities::Describable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -463,6 +477,13 @@ Overridden postfix, if any.
 
 Represents an entity in physical space.
 
+*** archetype_id
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+ID of the archetype that this artefact is an instance of.
+
 *** content
 :PROPERTIES:
 :masd.injection.type: std::string
@@ -493,6 +514,15 @@ Paths relative to the path ID that keys the container.
 :END:
 
 Files in the project directory that this file depends on, but which are not generated.
+
+*** relations
+:PROPERTIES:
+:masd.injection.type: std::list<std::string>
+:END:
+
+Artefacts that this artefact depends on.
+
+The format used is dependent on the technical space the artefact belongs to.
 
 *** unified_diff
 :PROPERTIES:
@@ -772,21 +802,21 @@ Represents a set of related physical models.
 
 All models that are a member of this set.
 
-** entities::referencing_status
+** entities::relation_status
 :PROPERTIES:
 :masd.injection.stereotypes: masd::enumeration
 :END:
 
-Status of a given archetype with regards to referencing by other archetypes.
+Status of a given archetype with regards to being related to other archetypes.
 
 *** not_relatable
-Archertype cannot be legally referenced.
+Archertype cannot be legally related to other archetypes.
 
-*** referable
-Archetype can be referenced by other archetypes using its full name only.
+*** relatable
+Archetype can be related to archetypes.
 
 *** facet_default
-References to the facet will resolve to this archetype.
+FIXME: hack for now
 
 ** entities::label
 A label is a key-value pair that can be used by the processing engine in a flexible way.
@@ -804,6 +834,144 @@ Key of the label.
 :END:
 
 Value associated with this label.
+
+** entities::constant_relation
+:PROPERTIES:
+:masd.injection.stereotypes: Urnable, Labelable
+:END:
+
+Represents a relation between archetypes, fixed to a logical model element.
+
+*** logical_model_element_id
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+ID of the logical model element that the relation is fixed against.
+
+Element must exist in the current loaded models.
+
+** entities::variable_relation
+:PROPERTIES:
+:masd.injection.stereotypes: Urnable
+:END:
+*** type
+:PROPERTIES:
+:masd.injection.type: variable_relation_type
+:END:
+
+How these archetypes are related.
+
+** entities::Urnable
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
+*** original_urn
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+URN which may or may not be an archetype URN.
+
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
+pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
+to a unique archetype.
+
+*** resolved_urn
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+URN pointing to the archetype.
+
+ It must have the form "archetype:".
+
+** entities::variable_relation_type
+:PROPERTIES:
+:masd.injection.stereotypes: masd::enumeration
+:END:
+
+Lists all of the valid variable relation types.
+
+*** self
+Logical element is related to itself across different projections.
+
+*** parent
+Parent of logical element.
+
+*** child
+Child of logical element.
+
+*** transparent
+The relation with another logical element requires the element's full definition.
+
+*** opaque
+The relation with another logical element does not requires its full definition.
+
+*** associative_key
+The associated element is used as an associative key.
+
+*** visitation
+The associated element visits or is visited by the current element.
+
+** entities::relations
+Models relationships between archetypes.
+
+*** status
+:PROPERTIES:
+:masd.injection.type: relation_status
+:END:
+
+Status of this archetype with regards to being related to archetypes.
+
+*** constant
+:PROPERTIES:
+:masd.injection.type: std::list<constant_relation>
+:END:
+
+All archetypes this archetype is related to,  over a fixed logical meta-model
+element.
+
+*** variable
+:PROPERTIES:
+:masd.injection.type: std::list<variable_relation>
+:END:
+
+All archetypes this archetype is related to,  over a variable logical meta-model
+element.
+
+*** hard_coded
+:PROPERTIES:
+:masd.injection.type: std::list<hard_coded_relation>
+:END:
+** entities::hard_coded_relation
+Relations against hard-coded values.
+
+*** value
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+** entities::artefact_set
+*** logical_element_id
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+Identifier for the manifold in logical space where this set exists.
+
+*** artefacts_by_archetype
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:END:
+
+All artefacts that are contained within this set, organised by archetype.
+
+*** archetype_for_role
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<std::string, std::string>
+:END:
+
+Resolves a role into a concrete archetype, in the context of this logical element.
 
 * helpers
 :PROPERTIES:

@@ -2590,7 +2590,7 @@ facet of the C# Technical Space.
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_project
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -2693,7 +2693,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_solution
 :masd.wale.kvp.containing_namespace: text.csharp.transforms.visual_studio
 :masd.physical.wale_template_reference: csharp_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -2791,7 +2791,7 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.injection.value: csharp_transform_implementation
 :END:
-*** masd.physical.referencing_status
+*** masd.physical.relation_status
 :PROPERTIES:
 :masd.injection.value: facet_default
 :END:

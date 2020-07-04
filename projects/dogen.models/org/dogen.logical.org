@@ -2725,12 +2725,12 @@ Content of the wale template associated with this archetype, if any exists.
 
 Contains the result of the stitch template after rendering.
 
-**** referencing_status
+**** relations
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: relations
 :END:
 
-Status of this archetype with regards to referencing.
+Relation information for this archetype.
 
 *** entities::physical::backend
 :PROPERTIES:
@@ -2908,6 +2908,69 @@ Unique identifier in physical space for this element.
 
 Technical space to which this physical element belongs to.
 
+*** entities::physical::variable_relation
+:PROPERTIES:
+:masd.injection.stereotypes: Urnable
+:END:
+**** type
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+Type of the variable relation.
+
+*** entities::physical::constant_relation
+:PROPERTIES:
+:masd.injection.stereotypes: Urnable, Labelable
+:END:
+**** logical_model_element_id
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+*** entities::physical::Urnable
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
+**** original_urn
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+URN pointing to an archetype or a label, as it was originally created by the user.
+
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
+pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
+to a unique archetype.
+
+*** entities::physical::hard_coded_relation
+**** value
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+*** entities::physical::relations
+**** status
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+Status of this archetype with regards to relations.
+
+**** constant
+:PROPERTIES:
+:masd.injection.type: std::list<constant_relation>
+:END:
+
+All archetypes this archetype is related to,  over a fixed logical meta-model
+element.
+
+**** variable
+:PROPERTIES:
+:masd.injection.type: std::list<variable_relation>
+:END:
+**** hard_coded
+:PROPERTIES:
+:masd.injection.type: std::list<hard_coded_relation>
+:END:
 ** entities::output_model_set
 :PROPERTIES:
 :masd.injection.stereotypes: Nameable
@@ -2955,7 +3018,6 @@ Houses all of the transformations supported by logical.
 :masd.cpp.types.class_forward_declarations.enabled: true
 :masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
-
 
 Context for all logical transformations.
 
@@ -4143,13 +4205,13 @@ FIXME: optional for now.
 
 Major technical space to which this element belongs to.
 
-*** referencing_status
+*** relation_status
 :PROPERTIES:
 :masd.variability.is_optional: true
 :masd.injection.type: masd::variability::text
 :END:
 
-Referencing status for the archetype.
+Relation status for the archetype.
 
 *** wale_template_reference
 :PROPERTIES:
@@ -4158,6 +4220,22 @@ Referencing status for the archetype.
 :END:
 
 Name of the wale template that the archetype uses.
+
+*** variable_relation
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.injection.type: masd::variability::comma_separated_collection
+:END:
+
+Define a variable relation between the current archetype and another archetype.
+
+*** constant_relation
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.injection.type: masd::variability::comma_separated_collection
+:END:
+
+Define a fixed relation between the current archetype and another archetype.
 
 ** features::wale
 :PROPERTIES:

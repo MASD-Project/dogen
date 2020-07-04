@@ -160,10 +160,26 @@ Overrides for the default value, if any.
 What values can a feature have.
 
 *** text
+Represents a text value.
+
 *** text_collection
+Represents a collection of text values.
+
 *** number
+Represents a numeric integral value.
+
 *** boolean
+Represents a boolean value.
+
 *** key_value_pair
+Represents a pair of key and value.
+
+*** comma_separated
+Represents a CSV input that is split into a collection of text values.
+
+*** comma_separated_collection
+Represents a collection of CSV input that is split into a collection of text values.
+
 ** entities::profile_template
 :PROPERTIES:
 :masd.injection.parent: entities::element
@@ -531,6 +547,28 @@ Stores an override for a default value.
 :PROPERTIES:
 :masd.injection.parent: entities::Bindable, entities::Generalizable, entities::Stereotypable
 :masd.injection.stereotypes: masd::object_template
+:END:
+** entities::comma_separated
+:PROPERTIES:
+:masd.injection.parent: entities::value
+:END:
+
+Represents a CSV input that is split into a collection of text values.
+
+*** content
+:PROPERTIES:
+:masd.injection.type: std::list<std::string>
+:END:
+** entities::comma_separated_collection
+:PROPERTIES:
+:masd.injection.parent: entities::value
+:END:
+
+Represents a collection of CSV input that is split into a collection of text values.
+
+*** content
+:PROPERTIES:
+:masd.injection.type: std::list<std::list<std::string>>
 :END:
 * helpers
 ** helpers::feature_selector

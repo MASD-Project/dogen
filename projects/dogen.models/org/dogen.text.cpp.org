@@ -48,7 +48,7 @@ C++ technical space.
 *** transforms::types::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.label.roles: type_declaration
+:masd.label.role: type_declaration
 :masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
@@ -2578,7 +2578,7 @@ register_entities(variability::helpers::registrar& rg) {
 :masd.wale.kvp.class.simple_name: class_forward_declarations_transform
 :masd.wale.kvp.archetype.simple_name: class_forward_declarations
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
@@ -2649,7 +2649,7 @@ class <#= o.name().simple() #>;
 :masd.physical.logical_meta_element_id: dogen.logical.entities.visitor
 :masd.wale.kvp.class.simple_name: visitor_forward_declarations_transform
 :masd.wale.kvp.archetype.simple_name: visitor_forward_declarations
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
 :masd.wale.kvp.class.inclusion_support_type: regular_support
 :masd.wale.kvp.meta_element: visitor
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
@@ -2722,7 +2722,7 @@ class <#= o.name().simple() #>;
 :masd.wale.kvp.class.simple_name: primitive_forward_declarations_transform
 :masd.wale.kvp.archetype.simple_name: primitive_forward_declarations
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
@@ -3261,6 +3261,8 @@ std::list<dogen::variability::entities::feature>
 :masd.wale.kvp.archetype.simple_name: archetype_class_header_transform
 :masd.wale.kvp.meta_element: physical_archetype
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.constant_relation: dogen.text.cpp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:cpp
+:masd.physical.constant_relation: dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
@@ -3436,6 +3438,9 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
 :masd.wale.kvp.archetype.simple_name: facet_class_header_transform
 :masd.wale.kvp.meta_element: physical_facet
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:cpp
+:masd.physical.constant_relation: dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
@@ -3527,6 +3532,11 @@ public:
 :masd.wale.kvp.archetype.simple_name: facet_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_facet
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.variable_relation: self,archetype:masd.cpp.types.class_header
+:masd.physical.variable_relation: transparent,role:type_declaration
+:masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
 :masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4100,7 +4110,9 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 :masd.wale.kvp.meta_element: physical_archetype
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
+:masd.label.role: type_declaration
+:masd.physical.constant_relation: dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -4183,6 +4195,8 @@ public:
 :masd.wale.kvp.archetype.simple_name: archetype_class_implementation_factory
 :masd.wale.kvp.meta_element: physical_archetype
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.constant_relation: dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+:masd.physical.variable_relation: self,archetype:masd.cpp.types.archetype_class_header_factory
 :masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4200,6 +4214,7 @@ Generates implementation files for archetype factories.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
@@ -4243,22 +4258,70 @@ physical::entities::archetype <#= sn #>::make() {
     using pmnf = physical::helpers::meta_name_factory;
     r.meta_name(pmnf::make("<#= arch.backend_name() #>", "<#= arch.facet_name() #>", "<#= arch.name().simple() #>"));
     r.logical_meta_element_id("<#= arch.logical_meta_element_id() #>");
-    r.referencing_status(physical::entities::referencing_status::<#= arch.referencing_status() #>);
+    r.relations().status(physical::entities::relation_status::<#= arch.relations().status() #>);
 <#+
             for(const auto& l : arch.labels()) {
 #>
     r.labels().push_back(physical::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
+
+            for(const auto& cr : arch.relations().constant()) {
 #>
+
+    r.relations().constant().push_back(
+        physical::entities::constant_relation(
+            "<#= cr.original_urn() #>",
+            ""/*resolved_urn*/,
+<#+
+                if (cr.labels().empty()) {
+#>
+            std::list<physical::entities::label> {},
+<#+
+                } else {
+#>
+            std::list<physical::entities::label> {
+<#+
+                    utility::formatters::sequence_formatter sf(cr.labels().size());
+                    // sf.prefix_configuration().first(": ").not_first("  ");
+                    sf.postfix_configuration().not_last(",")/*.last("")*/;
+
+                    for(const auto& l : cr.labels()) {
+#>
+                physical::entities::label("<#= l.key() #>", "<#= l.value() #>")<#= sf.postfix() #>
+<#+
+                        sf.next();
+                    }
+#>
+            },
+<#+
+                }
+#>
+            "<#= cr.logical_model_element_id() #>"
+        )
+    );
+<#+
+            }
+
+            for(const auto& vr : arch.relations().variable()) {
+#>
+
+    r.relations().variable().push_back(
+        physical::entities::variable_relation(
+            "<#= vr.original_urn() #>",
+            ""/*resolved_urn*/,
+            physical::entities::variable_relation_type::<#= vr.type() #>
+        )
+    );
+<#+
+            }
+#>
+
     return r;
 }
 
 <#+
         } // snf
-#>
-
-<#+
     } // sbf
     ast.update_artefact();
     stp.end_transform(a);
@@ -4274,7 +4337,9 @@ physical::entities::archetype <#= sn #>::make() {
 :masd.wale.kvp.meta_element: physical_facet
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.label.role: type_declaration
+:masd.physical.relation_status: relatable
+:masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -4354,6 +4419,11 @@ public:
 :masd.wale.kvp.archetype.simple_name: facet_class_implementation_factory
 :masd.wale.kvp.meta_element: physical_facet
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
+:masd.physical.variable_relation: self,archetype:masd.cpp.types.facet_class_header_factory
+:masd.physical.variable_relation: transparent,archetype:masd.cpp.types.archetype_class_header_factory
+:masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
 :masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
@@ -4481,7 +4551,8 @@ physical::entities::facet <#= sn #>::make() {
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
+:masd.label.role: type_declaration
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
@@ -6605,7 +6676,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 :masd.wale.kvp.class.simple_name: class_forward_declarations_transform
 :masd.wale.kvp.archetype.simple_name: class_forward_declarations
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
@@ -6687,7 +6758,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 :masd.wale.kvp.class.simple_name: primitive_forward_declarations_transform
 :masd.wale.kvp.archetype.simple_name: primitive_forward_declarations
 :masd.wale.kvp.class.inclusion_support_type: regular_support
-:masd.physical.referencing_status: referable
+:masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
 :masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
@@ -8247,7 +8318,7 @@ void primitive_header_transform::apply(const context& ctx, const logical::entiti
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -8350,7 +8421,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -8453,7 +8524,7 @@ void primitive_odb_options_transform::apply(const context& ctx, const logical::e
 :masd.wale.kvp.locator_function: make_full_path_for_odb_options
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -9731,7 +9802,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 :masd.wale.kvp.locator_function: make_full_path_for_tests_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10231,7 +10302,7 @@ Formatters related to templating.
 :masd.wale.kvp.locator_function: make_full_path_for_templates
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.templates
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10310,7 +10381,7 @@ Formatters related to Visual Studio support.
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_project
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10422,7 +10493,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.locator_function: make_full_path_for_visual_studio_solution
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10519,7 +10590,7 @@ EndGlobal
 :masd.wale.kvp.locator_function: make_full_path_for_msbuild_targets
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10654,7 +10725,7 @@ Formatters related to build files.
 :masd.wale.kvp.locator_function: make_full_path_for_source_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -10807,7 +10878,7 @@ endif()
 :masd.wale.kvp.locator_function: make_full_path_for_include_cmakelists
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
-:masd.physical.referencing_status: not_relatable
+:masd.physical.relation_status: not_relatable
 :masd.injection.stereotypes: masd::physical::archetype
 :END:
 
@@ -11005,7 +11076,7 @@ Contains the configuration common to most archetypes in tests.
 :PROPERTIES:
 :masd.injection.value: cpp_artefact_transform_implementation
 :END:
-*** masd.physical.referencing_status
+*** masd.physical.relation_status
 :PROPERTIES:
 :masd.injection.value: not_relatable
 :END:
@@ -11042,7 +11113,7 @@ Contains the configuration common to all c++ header archetypes.
 :PROPERTIES:
 :masd.injection.value: canonical_support
 :END:
-*** masd.physical.referencing_status
+*** masd.physical.relation_status
 :PROPERTIES:
 :masd.injection.value: facet_default
 :END:
@@ -11120,7 +11191,7 @@ Contains the configuration common to all c++ implementation archetypes.
 :PROPERTIES:
 :masd.injection.value: cpp_artefact_transform_implementation
 :END:
-*** masd.physical.referencing_status
+*** masd.physical.relation_status
 :PROPERTIES:
 :masd.injection.value: not_relatable
 :END:
