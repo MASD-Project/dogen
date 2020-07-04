@@ -53,36 +53,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::artefact>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
@@ -115,6 +85,36 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::artefact>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -126,10 +126,11 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
-      << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "
-      << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id()
+      << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
+      << "\"orphan_artefacts\": " << v.orphan_artefacts() << ", "
+      << "\"artefacts\": " << v.artefacts()
       << " }";
     return(s);
 }

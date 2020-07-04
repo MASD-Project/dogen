@@ -3455,16 +3455,16 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="148,-108"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.95,-108.05;177.425,-101.15"/>
+        <dia:rectangle val="147.95,-108.05;178.195,-100.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="148,-108"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.375"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -3579,29 +3579,6 @@ Used to obtain the default archetype for referencing.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#artefacts#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;artefact&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All artefacts that make up this physical model.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#managed_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -3658,6 +3635,52 @@ Used to obtain the default archetype for referencing.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All atefact sets in this model, by logical ID.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#orphan_artefacts#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;physical::entities::artefact&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Artefacts that exist in the physical dimension only.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#artefacts#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;physical::entities::artefact&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#All artefacts that make up this physical model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15038,7 +15061,7 @@ written or where it was sourced from.#</dia:string>
         <dia:point val="172.062,-113.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="171.312,-114.15;177.575,-107.2"/>
+        <dia:rectangle val="171.312,-114.15;178.345,-107.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15046,8 +15069,8 @@ written or where it was sourced from.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="172.062,-113.4"/>
         <dia:point val="172.062,-110"/>
-        <dia:point val="177.375,-110"/>
-        <dia:point val="177.375,-108"/>
+        <dia:point val="178.145,-110"/>
+        <dia:point val="178.145,-108"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19153,17 +19176,17 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="162.688,-101.2"/>
+        <dia:point val="163.072,-100.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.412,-101.95;163.438,-96.4"/>
+        <dia:rectangle val="154.412,-101.15;163.822,-96.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="162.688,-101.2"/>
-        <dia:point val="162.688,-99"/>
+        <dia:point val="163.072,-100.4"/>
+        <dia:point val="163.072,-99"/>
         <dia:point val="154.463,-99"/>
         <dia:point val="154.463,-98"/>
       </dia:attribute>

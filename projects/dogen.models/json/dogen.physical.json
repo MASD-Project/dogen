@@ -388,11 +388,6 @@
           "documentation": "Primary technical space that this model belongs to.\n"
         },
         {
-          "name": "artefacts",
-          "type": "std::list<boost::shared_ptr<artefact>>",
-          "documentation": "All artefacts that make up this physical model.\n"
-        },
-        {
           "name": "managed_directories",
           "type": "std::list<boost::filesystem::path>"
         },
@@ -404,6 +399,16 @@
           "name": "artefact_sets_by_logical_id",
           "type": "std::unordered_map<std::string, artefact_set>",
           "documentation": "All atefact sets in this model, by logical ID.\n"
+        },
+        {
+          "name": "orphan_artefacts",
+          "type": "std::list<boost::shared_ptr<physical::entities::artefact>>",
+          "documentation": "Artefacts that exist in the physical dimension only.\n"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::list<boost::shared_ptr<physical::entities::artefact>>",
+          "documentation": "All artefacts that make up this physical model.\n"
         }
       ]
     },

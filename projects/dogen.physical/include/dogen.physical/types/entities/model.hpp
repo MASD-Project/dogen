@@ -59,10 +59,11 @@ public:
         const dogen::physical::entities::meta_name& physical_meta_name,
         const dogen::physical::entities::name& name,
         const std::string& technical_space,
-        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
-        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id);
+        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
+        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts);
 
 public:
     /**
@@ -125,16 +126,6 @@ public:
     void technical_space(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief All artefacts that make up this physical model.
-     */
-    /**@{*/
-    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
-    std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
-    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v);
-    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
-    /**@}*/
-
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
     void managed_directories(const std::list<boost::filesystem::path>& v);
@@ -155,6 +146,26 @@ public:
     void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
     /**@}*/
 
+    /**
+     * @brief Artefacts that exist in the physical dimension only.
+     */
+    /**@{*/
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts() const;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts();
+    void orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v);
+    void orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
+    /**@}*/
+
+    /**
+     * @brief All artefacts that make up this physical model.
+     */
+    /**@{*/
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
+    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v);
+    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -172,10 +183,11 @@ private:
     dogen::physical::entities::meta_name physical_meta_name_;
     dogen::physical::entities::name name_;
     std::string technical_space_;
-    std::list<boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
     std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
 };
 
 }
