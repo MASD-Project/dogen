@@ -51,6 +51,9 @@ std::ostream& operator<<(std::ostream& s, const value_type& v) {
     case value_type::comma_separated:
         attr = "\"comma_separated\"";
         break;
+    case value_type::comma_separated_collection:
+        attr = "\"comma_separated_collection\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for value_type");
     }

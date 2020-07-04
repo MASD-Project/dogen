@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_VARIABILITY_TYPES_ENTITIES_VALUE_TYPE_HPP
-#define DOGEN_VARIABILITY_TYPES_ENTITIES_VALUE_TYPE_HPP
+#ifndef DOGEN_VARIABILITY_TYPES_ENTITIES_COMMA_SEPARATED_COLLECTION_FWD_HPP
+#define DOGEN_VARIABILITY_TYPES_ENTITIES_COMMA_SEPARATED_COLLECTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,19 +27,7 @@
 
 namespace dogen::variability::entities {
 
-/**
- * @brief What values can a feature have.
- */
-enum class value_type : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    text = 1, ///< Represents a text value.
-    text_collection = 2, ///< Represents a collection of text values.
-    number = 3, ///< Represents a numeric integral value.
-    boolean = 4, ///< Represents a boolean value.
-    key_value_pair = 5, ///< Represents a pair of key and value.
-    comma_separated = 6, ///< Represents a CSV input that is split into a collection of text values.
-    comma_separated_collection = 7 ///< Represents a collection of CSV input that is split into a collection of text values.
-};
+class comma_separated_collection;
 
 }
 

@@ -179,6 +179,11 @@
           "name": "comma_separated",
           "type": "",
           "documentation": "Represents a CSV input that is split into a collection of text values.\n"
+        },
+        {
+          "name": "comma_separated_collection",
+          "type": "",
+          "documentation": "Represents a collection of CSV input that is split into a collection of text values.\n"
         }
       ]
     },
@@ -980,6 +985,20 @@
         {
           "name": "content",
           "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "entities::comma_separated_collection",
+      "parents": [
+        "entities::value"
+      ],
+      "documentation": "Represents a collection of CSV input that is split into a collection of text values.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::list<std::list<std::string>>"
         }
       ]
     }

@@ -31,6 +31,7 @@
 #include "dogen.variability/types/entities/key_value_pair_fwd.hpp"
 #include "dogen.variability/types/entities/comma_separated_fwd.hpp"
 #include "dogen.variability/types/entities/text_collection_fwd.hpp"
+#include "dogen.variability/types/entities/comma_separated_collection_fwd.hpp"
 
 namespace dogen::variability::entities {
 
@@ -60,6 +61,16 @@ public:
     virtual void visit(const dogen::variability::entities::comma_separated&) { }
     virtual void visit(dogen::variability::entities::comma_separated&) const { }
     virtual void visit(dogen::variability::entities::comma_separated&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::variability::entities::comma_separated_collection
+     */
+    /**@{*/
+    virtual void visit(const dogen::variability::entities::comma_separated_collection&) const { }
+    virtual void visit(const dogen::variability::entities::comma_separated_collection&) { }
+    virtual void visit(dogen::variability::entities::comma_separated_collection&) const { }
+    virtual void visit(dogen::variability::entities::comma_separated_collection&) { }
     /**@}*/
 
     /**
