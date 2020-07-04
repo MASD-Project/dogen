@@ -4665,9 +4665,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "urn",
+          "name": "original_urn",
           "type": "std::string",
-          "documentation": "URN pointing to an archetype or a label.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+          "documentation": "URN pointing to an archetype or a label, as it was originally created by the user.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
         }
       ]
     },

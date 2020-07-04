@@ -41,23 +41,23 @@ public:
 
 public:
     constant_relation(
-        const std::string& urn,
+        const std::string& original_urn,
         const std::list<dogen::logical::entities::label>& labels,
         const std::string& logical_model_element_id);
 
 public:
     /**
-     * @brief URN pointing to an archetype or a label.
+     * @brief URN pointing to an archetype or a label, as it was originally created by the user.
      *
      *  It must have the form "archetype:" if pointing to an archetype, or  "label:" if
      * pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
      * to a unique archetype.
      */
     /**@{*/
-    const std::string& urn() const;
-    std::string& urn();
-    void urn(const std::string& v);
-    void urn(const std::string&& v);
+    const std::string& original_urn() const;
+    std::string& original_urn();
+    void original_urn(const std::string& v);
+    void original_urn(const std::string&& v);
     /**@}*/
 
     /**
@@ -86,7 +86,7 @@ public:
     constant_relation& operator=(constant_relation other);
 
 private:
-    std::string urn_;
+    std::string original_urn_;
     std::list<dogen::logical::entities::label> labels_;
     std::string logical_model_element_id_;
 };

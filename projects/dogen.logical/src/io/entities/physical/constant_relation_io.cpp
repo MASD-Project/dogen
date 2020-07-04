@@ -50,7 +50,7 @@ namespace dogen::logical::entities::physical {
 std::ostream& operator<<(std::ostream& s, const constant_relation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::entities::physical::constant_relation\"" << ", "
-      << "\"urn\": " << "\"" << tidy_up_string(v.urn()) << "\"" << ", "
+      << "\"original_urn\": " << "\"" << tidy_up_string(v.original_urn()) << "\"" << ", "
       << "\"labels\": " << v.labels() << ", "
       << "\"logical_model_element_id\": " << "\"" << tidy_up_string(v.logical_model_element_id()) << "\""
       << " }";

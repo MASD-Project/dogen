@@ -23,22 +23,22 @@
 namespace dogen::logical::entities::physical {
 
 constant_relation::constant_relation(
-    const std::string& urn,
+    const std::string& original_urn,
     const std::list<dogen::logical::entities::label>& labels,
     const std::string& logical_model_element_id)
-    : urn_(urn),
+    : original_urn_(original_urn),
       labels_(labels),
       logical_model_element_id_(logical_model_element_id) { }
 
 void constant_relation::swap(constant_relation& other) noexcept {
     using std::swap;
-    swap(urn_, other.urn_);
+    swap(original_urn_, other.original_urn_);
     swap(labels_, other.labels_);
     swap(logical_model_element_id_, other.logical_model_element_id_);
 }
 
 bool constant_relation::operator==(const constant_relation& rhs) const {
-    return urn_ == rhs.urn_ &&
+    return original_urn_ == rhs.original_urn_ &&
         labels_ == rhs.labels_ &&
         logical_model_element_id_ == rhs.logical_model_element_id_;
 }
@@ -49,20 +49,20 @@ constant_relation& constant_relation::operator=(constant_relation other) {
     return *this;
 }
 
-const std::string& constant_relation::urn() const {
-    return urn_;
+const std::string& constant_relation::original_urn() const {
+    return original_urn_;
 }
 
-std::string& constant_relation::urn() {
-    return urn_;
+std::string& constant_relation::original_urn() {
+    return original_urn_;
 }
 
-void constant_relation::urn(const std::string& v) {
-    urn_ = v;
+void constant_relation::original_urn(const std::string& v) {
+    original_urn_ = v;
 }
 
-void constant_relation::urn(const std::string&& v) {
-    urn_ = std::move(v);
+void constant_relation::original_urn(const std::string&& v) {
+    original_urn_ = std::move(v);
 }
 
 const std::list<dogen::logical::entities::label>& constant_relation::labels() const {

@@ -35,7 +35,7 @@ namespace dogen::logical::entities::physical {
 std::ostream& operator<<(std::ostream& s, const variable_relation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::entities::physical::variable_relation\"" << ", "
-      << "\"urn\": " << "\"" << tidy_up_string(v.urn()) << "\"" << ", "
+      << "\"original_urn\": " << "\"" << tidy_up_string(v.original_urn()) << "\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\""
       << " }";
     return(s);
