@@ -60,8 +60,8 @@ public:
         std::string major_technical_space;
         std::string relation_status;
         std::string wale_template_reference;
-        std::list<std::string> variable_relation;
-        std::list<std::string> constant_relation;
+        std::list<std::list<std::string> > variable_relation;
+        std::list<std::list<std::string> > constant_relation;
     };
 
     static static_configuration make_static_configuration(
