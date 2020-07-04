@@ -30,6 +30,15 @@ physical::entities::archetype facet_class_header_factory_factory::make() {
     r.logical_meta_element_id("dogen.logical.entities.physical_facet");
     r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(physical::entities::label("role", "type_declaration"));
+
+    r.relations().constant().push_back(
+        physical::entities::constant_relation(
+            "archetype:masd.cpp.types.class_header",
+            ""/*resolved_urn*/,
+            std::list<physical::entities::label> {},
+            "dogen.physical.entities.facet"
+        )
+    );
     return r;
 }
 

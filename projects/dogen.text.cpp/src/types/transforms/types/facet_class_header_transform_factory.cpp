@@ -29,6 +29,17 @@ physical::entities::archetype facet_class_header_transform_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "facet_class_header_transform"));
     r.logical_meta_element_id("dogen.logical.entities.physical_facet");
     r.relations().status(physical::entities::relation_status::facet_default);
+
+    r.relations().constant().push_back(
+        physical::entities::constant_relation(
+            "archetype:masd.cpp.types.class_header",
+            ""/*resolved_urn*/,
+            std::list<physical::entities::label> {
+                physical::entities::label("technical_space", "csharp")
+            },
+            "dogen.text.csharp.transforms.registrar"
+        )
+    );
     return r;
 }
 

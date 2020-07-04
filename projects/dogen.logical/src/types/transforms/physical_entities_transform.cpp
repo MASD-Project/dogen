@@ -21,6 +21,8 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
@@ -30,6 +32,7 @@
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/types/entities/physical/constant_relation.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
@@ -65,6 +68,9 @@ const std::string uncontained_part(
     "Parts must be contained by a backend. Name: ");
 const std::string uncontained_archetype_kind(
     "Archetype kind must be contained by a backend. Name: ");
+const std::string invalid_constant_relation(
+    "Constant relation must have 2 or 3 parameters. Found: ");
+const std::string invalid_label("Label must have a key and a value. Found: ");
 
 }
 
@@ -397,6 +403,42 @@ process_archetypes(const context& ctx, entities::model& m) {
                 transformation_error(invalid_relation_status + rs));
         }
         arch.relations().status(rs);
+
+        for (const auto& cr : scfg.constant_relation) {
+            const auto sz(cr.size());
+            if (sz != 2 && sz != 3) {
+                std::ostringstream os;
+                os << invalid_constant_relation << cr;
+                const auto s(os.str());
+
+                BOOST_LOG_SEV(lg, error) << s;
+                BOOST_THROW_EXCEPTION(transformation_error(s));
+            }
+
+            auto i(cr.begin());
+            entities::physical::constant_relation lcr;
+            lcr.logical_model_element_id(*i);
+
+            ++i;
+            lcr.original_urn(*i);
+
+            if (sz == 3) {
+                ++i;
+                const auto s(*i);
+                using utility::string::splitter;
+                const auto splitted(splitter::split_delimited(s, ":"));
+                if (splitted.size() != 2) {
+                    BOOST_LOG_SEV(lg, error) << invalid_label << s;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(invalid_label + s));
+                }
+                entities::label lbl;
+                lbl.key(splitted.front());
+                lbl.value(splitted.back());
+                lcr.labels().push_back(lbl);
+            }
+            arch.relations().constant().push_back(lcr);
+        }
 
         /*
          * Archetypes can only exist in the context of a backend and a
