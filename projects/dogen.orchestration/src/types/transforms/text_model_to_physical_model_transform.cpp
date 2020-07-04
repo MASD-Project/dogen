@@ -22,7 +22,9 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
+#include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/text_model_to_physical_model_transform.hpp"
 
 namespace {
@@ -32,6 +34,9 @@ const std::string transform_id(
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
+
+const std::string duplicate_archetype(
+    "Found more than one artefact for archetype:");
 
 }
 
@@ -54,8 +59,15 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
         pm.configuration(m.root_module()->configuration());
         pm.managed_directories(m.managed_directories());
 
-        for (const auto& element : m.elements()) {
-            for (const auto& pair : element.artefacts()) {
+        for (const auto& ea : m.elements()) {
+            const auto& e(*ea.element());
+            const auto logical_element_id(e.name().qualified().dot());
+
+            physical::entities::artefact_set as;
+            as.logical_element_id(logical_element_id);
+
+            for (const auto& pair : ea.artefacts()) {
+                const auto archetype_id(pair.first);
                 const auto aptr(pair.second);
                 /*
                  * FIXME: mega-hack: prune empty artefacts. This is
@@ -66,8 +78,19 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
                  * transforms.
                  */
                 const auto& p(aptr->name().qualified());
-                if (!p.empty())
+                if (!p.empty()) {
                     pm.artefacts().push_back(aptr);
+
+                    auto& aba(as.artefacts_by_archetype());
+                    const auto pair(std::make_pair(archetype_id, aptr));
+                    const bool inserted(aba.insert(pair).second);
+                    if (!inserted) {
+                        BOOST_LOG_SEV(lg, error) << duplicate_archetype
+                                                 << archetype_id;
+                        BOOST_THROW_EXCEPTION(transform_exception(
+                                duplicate_archetype + archetype_id));
+                    }
+                }
             }
         }
         r.models().push_back(pm);
