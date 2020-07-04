@@ -30,6 +30,7 @@
 #include "dogen.variability/types/entities/key_value_pair.hpp"
 #include "dogen.variability/types/entities/text_collection.hpp"
 #include "dogen.variability/types/entities/comma_separated.hpp"
+#include "dogen.variability/types/entities/comma_separated_collection.hpp"
 #include "dogen.variability/types/helpers/building_exception.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 
@@ -157,6 +158,16 @@ make_comma_separated(const std::string& v) const {
 }
 
 boost::shared_ptr<entities::value> value_factory::
+make_comma_separated_collection(const std::list<std::string>& v) const {
+    using utility::string::splitter;
+    std::list<std::list<std::string>> value;
+    for (const auto& entry: v)
+        value.push_back(splitter::split_csv(entry));
+
+    return boost::make_shared<entities::comma_separated_collection>(value);
+}
+
+boost::shared_ptr<entities::value> value_factory::
 make(const entities::value_type& vt, const std::list<std::string>& v) const {
     ensure_non_empty(v);
 
@@ -172,6 +183,8 @@ make(const entities::value_type& vt, const std::list<std::string>& v) const {
         return make_number(v.front());
     case value_type::comma_separated:
         return make_comma_separated(v.front());
+    case value_type::comma_separated_collection:
+        return make_comma_separated_collection(v);
     default:
         break;
     }
@@ -200,7 +213,5 @@ value_factory::make(const entities::feature& f,
     }
     return make_kvp(v);
 }
-
-
 
 }

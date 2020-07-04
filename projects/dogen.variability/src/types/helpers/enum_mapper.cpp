@@ -38,6 +38,8 @@ const std::string input_value_type_number("masd::variability::number");
 const std::string input_value_type_boolean("masd::variability::boolean");
 const std::string input_value_type_kvp("masd::variability::key_value_pair");
 const std::string input_value_type_csv("masd::variability::comma_separated");
+const std::string input_value_type_csv_collection(
+    "masd::variability::comma_separated_collection");
 
 const std::string output_value_type_text("value_type::text");
 const std::string output_value_type_text_collection(
@@ -46,6 +48,8 @@ const std::string output_value_type_number("value_type::number");
 const std::string output_value_type_boolean("value_type::boolean");
 const std::string output_value_type_kvp("value_type::key_value_pair");
 const std::string output_value_type_csv("value_type::comma_separated");
+const std::string output_value_type_csv_collection(
+    "value_type::comma_separated_collection");
 
 const std::string output_value_type_text_simple("text");
 const std::string output_value_type_text_collection_simple(
@@ -54,6 +58,8 @@ const std::string output_value_type_number_simple("number");
 const std::string output_value_type_boolean_simple("boolean");
 const std::string output_value_type_kvp_simple("key_value_pair");
 const std::string output_value_type_csv_simple("comma_separated");
+const std::string output_value_type_csv_collection_simple(
+    "comma_separated_collection");
 
 const std::string input_binding_point_any("any");
 const std::string input_binding_point_global("global");
@@ -89,6 +95,8 @@ enum_mapper::to_value_type(const std::string& s) {
         return value_type::key_value_pair;
     else if (s == input_value_type_csv)
         return value_type::comma_separated;
+    else if (s == input_value_type_csv_collection)
+        return value_type::comma_separated_collection;
 
     BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_value_type + s));
@@ -134,6 +142,9 @@ std::string enum_mapper::from_value_type(const entities::value_type v,
     case value_type::comma_separated:
         return qualified ? output_value_type_csv :
         output_value_type_csv_simple;
+    case value_type::comma_separated_collection:
+        return qualified ? output_value_type_csv_collection :
+        output_value_type_csv_collection_simple;
     default: {
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
