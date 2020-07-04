@@ -39,6 +39,14 @@ physical::entities::archetype archetype_class_implementation_factory_factory::ma
         )
     );
 
+    r.relations().variable().push_back(
+        physical::entities::variable_relation(
+            "archetype:masd.cpp.types.archetype_class_header_factory",
+            ""/*resolved_urn*/,
+            physical::entities::variable_relation_type::self
+        )
+    );
+
     return r;
 }
 

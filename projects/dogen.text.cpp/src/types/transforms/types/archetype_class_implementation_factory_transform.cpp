@@ -140,7 +140,9 @@ ast.stream() << "    );" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    r.relations().variable().push_back(" << std::endl;
 ast.stream() << "        physical::entities::variable_relation(" << std::endl;
-ast.stream() << "            \"" << vr.original_urn() << "\", physical::entities::" << vr.type() << std::endl;
+ast.stream() << "            \"" << vr.original_urn() << "\"," << std::endl;
+ast.stream() << "            \"\"/*resolved_urn*/," << std::endl;
+ast.stream() << "            physical::entities::variable_relation_type::" << vr.type() << std::endl;
 ast.stream() << "        )" << std::endl;
 ast.stream() << "    );" << std::endl;
             }

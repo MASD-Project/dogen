@@ -39,6 +39,14 @@ physical::entities::archetype facet_class_implementation_transform_factory::make
         )
     );
 
+    r.relations().variable().push_back(
+        physical::entities::variable_relation(
+            "role:type_declaration",
+            ""/*resolved_urn*/,
+            physical::entities::variable_relation_type::transparent
+        )
+    );
+
     return r;
 }
 

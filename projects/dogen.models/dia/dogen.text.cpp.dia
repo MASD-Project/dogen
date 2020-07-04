@@ -51530,7 +51530,9 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 
     r.relations().variable().push_back(
         physical::entities::variable_relation(
-            "&lt;#= vr.original_urn() #&gt;", physical::entities::&lt;#= vr.type() #&gt;
+            "&lt;#= vr.original_urn() #&gt;",
+            ""/*resolved_urn*/,
+            physical::entities::variable_relation_type::&lt;#= vr.type() #&gt;
         )
     );
 &lt;#+

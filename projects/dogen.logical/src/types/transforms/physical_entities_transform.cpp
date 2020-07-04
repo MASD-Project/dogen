@@ -51,6 +51,14 @@ const std::string relation_status_not_relatable("not_relatable");
 const std::string relation_status_relatable("relatable");
 const std::string relation_status_facet_default("facet_default");
 
+const std::string varibale_relation_type_self("self");
+const std::string varibale_relation_type_parent("parent");
+const std::string varibale_relation_type_child("child");
+const std::string varibale_relation_type_transparent("transparent");
+const std::string varibale_relation_type_opaque("opaque");
+const std::string varibale_relation_type_associative_key("associative_key");
+const std::string varibale_relation_type_visitation("visitation");
+
 const std::string invalid_relation_status(
     "Relation status is not valid: ");
 const std::string ambiguous_name("Name maps to more than one element type:");
@@ -70,7 +78,10 @@ const std::string uncontained_archetype_kind(
     "Archetype kind must be contained by a backend. Name: ");
 const std::string invalid_constant_relation(
     "Constant relation must have 2 or 3 parameters. Found: ");
+const std::string invalid_variable_relation(
+    "Variable relations must have 2 parameters. Found: ");
 const std::string invalid_label("Label must have a key and a value. Found: ");
+const std::string invalid_relation_type("Invalid relation type: ");
 
 }
 
@@ -468,6 +479,50 @@ process_archetypes(const context& ctx, entities::model& m) {
                 lcr.labels().push_back(lbl);
             }
             arch.relations().constant().push_back(lcr);
+        }
+
+        /*
+         * Process the variable relations. These are CSV values with
+         * 2 fields. The first field is the original URN and the
+         * second is the relation type.
+         */
+        for (const auto& vr : scfg.variable_relation) {
+            const auto sz(vr.size());
+            if (sz != 2) {
+                std::ostringstream os;
+                os << invalid_variable_relation << vr;
+                const auto s(os.str());
+
+                BOOST_LOG_SEV(lg, error) << s;
+                BOOST_THROW_EXCEPTION(transformation_error(s));
+            }
+
+            /*
+             * Read the relation type.
+             */
+            auto i(vr.begin());
+            const auto rt(*i);
+            if (rt != varibale_relation_type_self &&
+                rt != varibale_relation_type_parent &&
+                rt != varibale_relation_type_child &&
+                rt != varibale_relation_type_transparent &&
+                rt != varibale_relation_type_opaque &&
+                rt != varibale_relation_type_associative_key &&
+                rt != varibale_relation_type_visitation) {
+                BOOST_LOG_SEV(lg, error) << invalid_relation_type << rt;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(invalid_relation_type + rt));
+            }
+
+            entities::physical::variable_relation lvr;
+            lvr.type(rt);
+
+            /*
+             * Read the URN, as it was originally supplied by the user.
+             */
+            ++i;
+            lvr.original_urn(*i);
+            arch.relations().variable().push_back(lvr);
         }
 
         /*
