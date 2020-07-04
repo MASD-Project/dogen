@@ -15,35 +15,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-06-28 Sun 00:10]
+#+CAPTION: Clock summary at [2020-07-04 Sat 18:16]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *60:23* |       |       | 100.0 |
+| *Total time*                                                      | *65:32* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 60:23   |       |       | 100.0 |
-| Active                                                            |         | 60:23 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  12.8 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   2.0 |
-| Sprint and product backlog grooming                               |         |       |  4:35 |   7.6 |
+| Stories                                                           | 65:32   |       |       | 100.0 |
+| Active                                                            |         | 65:32 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  11.7 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.8 |
+| Sprint and product backlog grooming                               |         |       |  5:00 |   7.6 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.3 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.5 |
-| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   1.0 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.3 |
+| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   0.9 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.4 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   5.1 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   2.0 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   5.1 |
-| Split archetype factory from transform                            |         |       | 10:57 |  18.1 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   2.0 |
-| Remove traits for archetypes                                      |         |       |  0:44 |   1.2 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   7.9 |
-| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   1.0 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.9 |
-| Add labels to archetypes                                          |         |       |  2:22 |   3.9 |
-| Add support for CSV values in variability                         |         |       |  0:25 |   0.7 |
-| Improve org-mode converter                                        |         |       |  5:15 |   8.7 |
-| Add relations between archetypes in the PMM                       |         |       |  7:49 |  12.9 |
-| Analysis on implementing containment with configuration           |         |       |  1:52 |   3.1 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   4.7 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.8 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   4.7 |
+| Split archetype factory from transform                            |         |       | 10:57 |  16.7 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.8 |
+| Remove traits for archetypes                                      |         |       |  0:44 |   1.1 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   7.2 |
+| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   0.9 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.7 |
+| Add labels to archetypes                                          |         |       |  2:22 |   3.6 |
+| Add support for CSV values in variability                         |         |       |  0:56 |   1.4 |
+| Improve org-mode converter                                        |         |       |  5:15 |   8.0 |
+| Add relations between archetypes in the PMM                       |         |       | 10:38 |  16.2 |
+| Analysis on implementing containment with configuration           |         |       |  1:52 |   2.8 |
+| Add hash map of artefacts in physical model                       |         |       |  1:24 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -798,6 +799,7 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-07-04 Sat 11:30]--[2020-07-04 Sat 11:55] =>  0:25
     CLOCK: [2020-06-25 Thu 08:02]--[2020-06-25 Thu 08:30] =>  0:28
     CLOCK: [2020-06-21 Sun 16:01]--[2020-06-21 Sun 16:05] =>  0:04
     CLOCK: [2020-06-21 Sun 14:52]--[2020-06-21 Sun 16:00] =>  1:08
@@ -1662,6 +1664,7 @@ Label keys:
 *** COMPLETED Add support for CSV values in variability               :story:
     CLOSED: [2020-06-27 Sat 22:30]
     :LOGBOOK:
+    CLOCK: [2020-07-04 Sat 14:49]--[2020-07-04 Sat 15:20] =>  0:31
     CLOCK: [2020-06-27 Sat 21:53]--[2020-06-27 Sat 22:15] =>  0:22
     CLOCK: [2020-06-27 Sat 21:13]--[2020-06-27 Sat 21:16] =>  0:03
     :END:
@@ -1669,6 +1672,9 @@ Label keys:
 It would be nice to get CSV values out of variability without having
 to do any additional work. We just need to add a type for this and
 associated scaffolding.
+
+Actually we made a mistake: we need collections of CSV values rather
+than just one entry.
 
 *** STARTED Improve org-mode converter                                :story:
     :LOGBOOK:
@@ -1716,6 +1722,9 @@ Notes:
 
 *** STARTED Add relations between archetypes in the PMM               :story:
     :LOGBOOK:
+    CLOCK: [2020-07-04 Sat 15:22]--[2020-07-04 Sat 16:51] =>  1:29
+    CLOCK: [2020-07-04 Sat 13:56]--[2020-07-04 Sat 14:49] =>  0:53
+    CLOCK: [2020-07-04 Sat 12:35]--[2020-07-04 Sat 13:02] =>  0:27
     CLOCK: [2020-06-27 Sat 22:20]--[2020-06-27 Sat 23:48] =>  1:28
     CLOCK: [2020-06-27 Sat 20:59]--[2020-06-27 Sat 21:12] =>  0:13
     CLOCK: [2020-06-27 Sat 20:41]--[2020-06-27 Sat 20:58] =>  0:17
@@ -1787,7 +1796,8 @@ relationship.
 
 Tasks:
 
-- add URNs to all archetypes.
+- add relations to all archetypes.
+- generate code that creates the PMM with the new relations.
 - create a transform that resolves all label URNs into archetype URNs.
 - populate the artefact's archetype.
 - create a transform that takes the archetypes relations and populates
@@ -1798,6 +1808,13 @@ Tasks:
 
 At this point we need to stop because the file names are not being
 populated correctly.
+
+Actually because this task is so complicated, and because we are bound
+to make serious modeling errors, it makes more sense to try to do a
+bit of each task to try to get things to work end to end. They won't
+actually work, of course, until all is done, but it should at least
+give us a feel for the problems before we spend ages changing lots of
+M2Ts.
 
 *** STARTED Analysis on implementing containment with configuration   :story:
     :LOGBOOK:
@@ -1891,6 +1908,15 @@ Links:
 
 - [[https://www.uml-diagrams.org/stereotype.html][UML Stereotype]]
 - [[https://en.wikipedia.org/wiki/Stereotype_(UML)][Wikipedia - Stereotype (UML)]]
+
+*** STARTED Add hash map of artefacts in physical model               :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-04 Sat 16:52]--[2020-07-04 Sat 18:16] =>  1:24
+    :END:
+
+At present we have only a list of artefacts. This is not sufficient
+for the relationship look-ups. Make it the same as the formattables
+model.
 
 *** Injector types with regards to containment                        :story:
 

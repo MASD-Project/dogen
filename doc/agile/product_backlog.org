@@ -17724,10 +17724,47 @@ Assorted notes on cleaning-up the dia model:
 Similar to what we've done with ODB, it would be nice to be able to
 integrate the XSD tool with dogen:
 
-- have a meta-model element for XSD schemas, perhaps using an =xsd=
-  facet.
+- have a meta-model element for XSD schemas. We should also have a
+  part called =xsd= to store the XSD schemas. In this part we should
+  be able to have packages (e.g. =xsd::confirmation=). The meta-model
+  element must support all of the configuration options used by XSD
+  tool:
+
+: xsdcxx cxx-tree --generate-polymorphic --generate-serialization --cxx-suffix .cpp --hxx-suffix .hpp
+: --namespace-map http://www.fpml.org/FpML-5/confirmation=fpml511
+: --namespace-map http://www.w3.org/XML/1998/namespace=xml_ns
+: --namespace-map http://www.w3.org/2000/09/xmldsig#=xmldsig_nsdone
+: --polymorphic-type Product --polymorphic-type DirectionalLeg
+: --polymorphic-type PricingStructure --polymorphic-type
+: Rate --polymorphic-type PricingStructureValuation $b
+
+  These should be in meta-data so that we can inherit them as
+  profiles.
+- we should handle decorations via prologue/epilogue.
+- useful options: =--std version=, =--guard-prefix=, etc. See man page
+  for details.
 - generate CMake targets that execute the XSD tool and place the
   output in appropriate locations.
+- we should also support a =data= part with XML data files as
+  examples. Ideally these should then be used by generated tests to do
+  round-trip tests.
+- generated code should conform as much as possible to the dogen
+  structure (=include=, =src= folders, etc).
+
+Links:
+
+- [[https://manpages.debian.org/jessie/xsdcxx/xsdcxx.1][xsdcxx man page]]
+- [[https://www.codesynthesis.com/products/xsd/][XSD: XML Data Binding for C++]]
+- [[https://www.codesynthesis.com/pipermail/xsd-users/2013-July/003990.html][[xsd-users] schema to c++ namespace mapping problem]]
+
+*** Harmful workload generator                                        :story:
+
+Noisia is a "Harmful workload generator for PostgreSQL." We could try
+to extract some of these ideas and place them into generated code.
+
+Links:
+
+- https://github.com/lesovsky/noisia
 
 *** Add Coherence POF serialisation support                            :epic:
 
