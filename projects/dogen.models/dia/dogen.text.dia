@@ -2625,8 +2625,8 @@ spaces.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="148.77,34"/>
-        <dia:point val="148.77,33"/>
-        <dia:point val="145.602,33"/>
+        <dia:point val="148.77,32"/>
+        <dia:point val="145.602,32"/>
         <dia:point val="145.602,30.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
