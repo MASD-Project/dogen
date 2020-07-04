@@ -74,13 +74,13 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.logical_context(), lmset));
 
     /*
-     * Obtain the TEXT model set
+     * Obtain the text model set
      */
     auto textms(logical_model_to_text_model_transform::
         apply(ctx.text_context(), lms));
 
     /*
-     * Run all the TEXT chain against the models.
+     * Run all the text chain against the models.
      */
     text::transforms::model_generation_chain::
         apply(ctx.text_context(), textms);
