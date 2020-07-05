@@ -40,7 +40,7 @@ FIXME: temporary until we rename the namespaces.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -57,7 +57,7 @@ FIXME: optional for now.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -74,7 +74,7 @@ FIXME: optional for now.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -89,7 +89,7 @@ make_masd_physical_major_technical_space() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -104,7 +104,7 @@ make_masd_physical_relation_status() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -119,7 +119,7 @@ make_masd_physical_wale_template_reference() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -134,7 +134,7 @@ make_masd_physical_variable_relation() {
 )");
     const auto vt(value_type::comma_separated_collection);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
@@ -149,7 +149,7 @@ make_masd_physical_constant_relation() {
 )");
     const auto vt(value_type::comma_separated_collection);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::any);
     return r;
 }
 
