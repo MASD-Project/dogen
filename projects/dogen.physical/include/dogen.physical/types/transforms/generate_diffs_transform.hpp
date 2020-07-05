@@ -21,6 +21,7 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_GENERATE_DIFFS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_GENERATE_DIFFS_TRANSFORM_HPP
 
+#include "dogen.physical/types/entities/artefact.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -35,6 +36,10 @@ namespace dogen::physical::transforms {
  * between files in the filesystem and the generated content.
  */
 class generate_diffs_transform final {
+    static bool
+    process_artefact(const boost::filesystem::path& managed_dir,
+        physical::entities::artefact& a);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };

@@ -62,14 +62,6 @@ apply(const context& ctx, const entities::model& m) {
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
-     * If we don't have any artefacts then we're done.
-     */
-    if (m.artefacts().empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No artefacts were generated.";
-        return;
-    }
-
-    /*
      * If the user requested a dry run, we cannot execute.
      */
     if (ctx.dry_run_mode_enabled()) {
@@ -82,29 +74,32 @@ apply(const context& ctx, const entities::model& m) {
      * operation to the filesystem. Ignore all other artefacts.
      */
     unsigned int files_written(0);
-    for (const auto& ptr : m.artefacts()) {
-        const auto& a(*ptr);
-        const auto p(a.name().qualified());
-        const auto gs(p.generic_string());
-        BOOST_LOG_SEV(lg, trace) << "Processing file: " << p;
+    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
+        auto& as(as_pair.second);
+        for (auto& a_pair : as.artefacts_by_archetype()) {
+            auto& a(*a_pair.second);
+            const auto p(a.name().qualified());
+            const auto gs(p.generic_string());
+            BOOST_LOG_SEV(lg, trace) << "Processing file: " << p;
 
-        if (gs.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_file_name;
-            BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
+            if (gs.empty()) {
+                BOOST_LOG_SEV(lg, error) << empty_file_name;
+                BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
+            }
+
+            using physical::entities::operation_type;
+            const auto ot(a.operation().type());
+            if (ot != operation_type::write) {
+                BOOST_LOG_SEV(lg, trace) << "Ignoring operation: " << ot;
+                continue;
+            }
+
+            ++files_written;
+            BOOST_LOG_SEV(lg, trace) << "Writing file.";
+            create_directories(p);
+            using dogen::utility::filesystem::write_file_content;
+            write_file_content(p, a.content());
         }
-
-        using physical::entities::operation_type;
-        const auto ot(a.operation().type());
-        if (ot != operation_type::write) {
-            BOOST_LOG_SEV(lg, trace) << "Ignoring operation: " << ot;
-            continue;
-        }
-
-        ++files_written;
-        BOOST_LOG_SEV(lg, trace) << "Writing file.";
-        create_directories(p);
-        using dogen::utility::filesystem::write_file_content;
-        write_file_content(p, a.content());
     }
 
     BOOST_LOG_SEV(lg, info) << "Total files written: " << files_written;

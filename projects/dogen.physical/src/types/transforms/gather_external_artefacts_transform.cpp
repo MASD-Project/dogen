@@ -86,7 +86,7 @@ apply(const context& ctx, entities::model& m) {
     for (const auto& f : fbs.ignored()) {
         const auto ot(operation_type::ignore);
         const auto rsn(operation_reason::ignore_regex);
-        m.artefacts().push_back(make_artefact(f, ot, rsn));
+        m.orphan_artefacts().push_back(make_artefact(f, ot, rsn));
     }
 
     /*
@@ -99,7 +99,7 @@ apply(const context& ctx, entities::model& m) {
         const auto ot(def ? operation_type::remove : operation_type::ignore);
         const auto rsn(def ? operation_reason::unexpected :
             operation_reason::ignore_unexpected);
-        m.artefacts().push_back(make_artefact(f, ot, rsn));
+        m.orphan_artefacts().push_back(make_artefact(f, ot, rsn));
     }
 
     stp.end_transform(fbs);

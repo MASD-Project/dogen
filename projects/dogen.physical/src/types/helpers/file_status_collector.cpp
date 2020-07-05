@@ -47,8 +47,18 @@ namespace dogen::physical::helpers {
 std::set<boost::filesystem::path> file_status_collector::
 obtain_expected_files(const entities::model& m) {
     std::set<boost::filesystem::path> r;
-    for (const auto& ptr : m.artefacts()) {
-        const auto& a(*ptr);
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype()) {
+            const auto& a(*a_pair.second);
+            r.insert(a.name().qualified().generic_string());
+            for (const auto& d : a.dependencies())
+                r.insert(d.generic_string());
+        }
+    }
+
+    for (const auto& aptr : m.orphan_artefacts()) {
+        const auto& a(*aptr);
         r.insert(a.name().qualified().generic_string());
         for (const auto& d : a.dependencies())
             r.insert(d.generic_string());

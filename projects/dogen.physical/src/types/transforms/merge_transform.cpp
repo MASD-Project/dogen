@@ -18,11 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_set_io.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -30,6 +32,8 @@ namespace {
 const std::string transform_id("physical.transforms.merge_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
+
+const std::string duplicate_archetype("Duplicate archetype : ");
 
 }
 
@@ -59,8 +63,24 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
         /*
          * Now we copy the stuff that actually matters.
          */
-        for (const auto& a : m.artefacts())
-            r.artefacts().push_back(a);
+        for (const auto& rhs_as_pair : m.artefact_sets_by_logical_id()) {
+            const auto& rhs_as(rhs_as_pair.second);
+            auto& lhs_as(r.artefact_sets_by_logical_id()[rhs_as_pair.first]);
+            auto& lhs_aba(lhs_as.artefacts_by_archetype());
+
+            for (const auto& rhs_a_pair : rhs_as.artefacts_by_archetype()) {
+                const bool inserted(lhs_aba.insert(rhs_a_pair).second);
+                if (!inserted) {
+                    const auto& id(rhs_a_pair.first);
+                    BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
+                    BOOST_THROW_EXCEPTION(
+                        transform_exception(duplicate_archetype + id));
+                }
+            }
+        }
+
+        for (const auto& aptr : m.orphan_artefacts())
+            r.orphan_artefacts().push_back(aptr);
 
         for (const auto& md : m.managed_directories())
             r.managed_directories().push_back(md);

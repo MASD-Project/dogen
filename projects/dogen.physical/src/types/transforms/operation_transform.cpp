@@ -137,8 +137,16 @@ void operation_transform::apply(const context& ctx, entities::model& m) {
         "operation transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
-    for (auto& ptr : m.artefacts()) {
-        auto& a(*ptr);
+    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
+        auto& as(as_pair.second);
+        for (auto& a_pair : as.artefacts_by_archetype()) {
+            auto& a(*a_pair.second);
+            apply(a, m.outputting_properties().force_write());
+        }
+    }
+
+    for (const auto& aptr : m.orphan_artefacts()) {
+        auto& a(*aptr);
         apply(a, m.outputting_properties().force_write());
     }
 

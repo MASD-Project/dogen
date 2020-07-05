@@ -35,6 +35,18 @@ namespace dogen::physical::transforms {
  * of the filesystem, would make it the same as the generated model.
  */
 class generate_patch_transform final {
+private:
+    /**
+     * @brief Gathers all the diffs in the model.
+     */
+    static std::string collect_diffs(const entities::model& m);
+
+    /**
+     * @brief Handles the creation of a patch.
+     */
+    static void handle_patch(const dogen::diffing_configuration& cfg,
+        const std::string& model_name, const std::string& content);
+
 public:
     static void apply(const context& ctx, const entities::model& m);
 };

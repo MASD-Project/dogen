@@ -129,8 +129,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
-      << "\"orphan_artefacts\": " << v.orphan_artefacts() << ", "
-      << "\"artefacts\": " << v.artefacts()
+      << "\"orphan_artefacts\": " << v.orphan_artefacts()
       << " }";
     return(s);
 }

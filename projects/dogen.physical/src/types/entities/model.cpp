@@ -52,8 +52,7 @@ model::model(
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
     const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
-    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
-    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts)
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts)
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
@@ -63,8 +62,7 @@ model::model(
       managed_directories_(managed_directories),
       outputting_properties_(outputting_properties),
       artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
-      orphan_artefacts_(orphan_artefacts),
-      artefacts_(artefacts) { }
+      orphan_artefacts_(orphan_artefacts) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -78,7 +76,6 @@ void model::swap(model& other) noexcept {
     swap(outputting_properties_, other.outputting_properties_);
     swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
     swap(orphan_artefacts_, other.orphan_artefacts_);
-    swap(artefacts_, other.artefacts_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -91,8 +88,7 @@ bool model::operator==(const model& rhs) const {
         managed_directories_ == rhs.managed_directories_ &&
         outputting_properties_ == rhs.outputting_properties_ &&
         artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
-        orphan_artefacts_ == rhs.orphan_artefacts_ &&
-        artefacts_ == rhs.artefacts_;
+        orphan_artefacts_ == rhs.orphan_artefacts_;
 }
 
 model& model::operator=(model other) {
@@ -259,22 +255,6 @@ void model::orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::
 
 void model::orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
     orphan_artefacts_ = std::move(v);
-}
-
-const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& model::artefacts() const {
-    return artefacts_;
-}
-
-std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& model::artefacts() {
-    return artefacts_;
-}
-
-void model::artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
-    artefacts_ = v;
-}
-
-void model::artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
-    artefacts_ = std::move(v);
 }
 
 }

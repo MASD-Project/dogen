@@ -150,10 +150,26 @@ void print_operation_reason(const bool add_brackets,
         s << "] ";
 }
 
+std::list<boost::shared_ptr<dogen::physical::entities::artefact>>
+gather_artefacts(const dogen::physical::entities::model& m) {
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact>> r;
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype())
+            r.push_back(a_pair.second);
+    }
+
+    for (const auto& a : m.orphan_artefacts())
+        r.push_back(a);
+
+    return r;
+}
+
 void print_plain_report(std::ostream& s,
-    const dogen::physical::entities::model& m) {
-    const auto base(m.managed_directories().front());
-    for (auto& ptr : m.artefacts()) {
+    const boost::filesystem::path& managed_dir,
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact>>&
+    artefacts) {
+    for (auto& ptr : artefacts) {
         auto& a(*ptr);
         const auto p(a.name().qualified());
         if (p.empty()) {
@@ -167,14 +183,16 @@ void print_plain_report(std::ostream& s,
         print_operation_type(true/*add_brackets*/, a.operation().type(), s);
         print_operation_reason(true/*add_brackets*/, a.operation().reason(), s);
 
-        auto rp(p.lexically_relative(base));
+        auto rp(p.lexically_relative(managed_dir));
         const auto gs(rp.generic_string());
         s << gs << std::endl;
     }
 }
 
 void print_org_mode_report(std::ostream& s,
-    const dogen::physical::entities::model& m) {
+    const boost::filesystem::path& managed_dir,
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact>>&
+    artefacts) {
 
     using namespace dogen::physical;
     std::unordered_map<operation_type,
@@ -183,8 +201,7 @@ void print_org_mode_report(std::ostream& s,
                                           >
                        > map;
 
-    const auto base(m.managed_directories().front());
-    for (auto& ptr : m.artefacts()) {
+    for (auto& ptr : artefacts) {
         auto& a(*ptr);
         const auto p(a.name().qualified());
         if (p.empty()) {
@@ -195,11 +212,11 @@ void print_org_mode_report(std::ostream& s,
         BOOST_LOG_SEV(lg, debug) << "Processing arefact: " << p.filename();
 
         const auto& op(a.operation());
-        auto rp(p.lexically_relative(base));
+        auto rp(p.lexically_relative(managed_dir));
         map[op.type()][op.reason()].insert(rp.generic_string());
     }
 
-    s << "* All Operations (" << m.artefacts().size() << ")" << std::endl;
+    s << "* All Operations (" << artefacts.size() << ")" << std::endl;
     for (const auto& first_pair : map) {
         s << "** Operation: ";
         print_operation_type(false/*add_brackets*/, first_pair.first, s);
@@ -263,14 +280,16 @@ apply(const context& ctx, const entities::model& m) {
     const auto& cfg(*ctx.reporting_configuration());
     BOOST_LOG_SEV(lg, debug) << "Style requested: " << cfg.style();
 
+    const auto artefacts(gather_artefacts(m));
+    const auto md(m.managed_directories().front());
     std::string extension;
     switch(cfg.style()) {
     case reporting_style::plain:
-        print_plain_report(ss, m);
+        print_plain_report(ss, md, artefacts);
         extension = text_extension;
         break;
     case reporting_style::org_mode:
-        print_org_mode_report(ss, m);
+        print_org_mode_report(ss, md, artefacts);
         extension = org_extension;
         break;
     default: {

@@ -81,8 +81,6 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
                  */
                 const auto& p(aptr->name().qualified());
                 if (!p.empty()) {
-                    pm.artefacts().push_back(aptr);
-
                     auto& aba(as.artefacts_by_archetype());
                     const auto pair(std::make_pair(archetype_id, aptr));
                     const bool inserted(aba.insert(pair).second);

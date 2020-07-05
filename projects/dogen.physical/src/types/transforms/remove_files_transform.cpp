@@ -37,20 +37,28 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void remove_files_transform::delete_extra_files(const entities::model& m) {
-    /*
-     * If the user did not ask to delete extra files, do nothing.
-     */
-    if (!m.outputting_properties().delete_extra_files()) {
-        BOOST_LOG_SEV(lg, debug) << "Delete extra files is off.";
-        return;
+std::list<boost::shared_ptr<entities::artefact>>
+remove_files_transform::gather_artefacts(const entities::model& m) {
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact>> r;
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype())
+            r.push_back(a_pair.second);
     }
 
+    for (const auto& a : m.orphan_artefacts())
+        r.push_back(a);
+
+    return r;
+}
+
+void remove_files_transform::delete_extra_files(
+    const std::list<boost::shared_ptr<entities::artefact>>& artefacts) {
     /*
      * Collect all the files to remove across the model.
      */
     std::list<boost::filesystem::path> unexpected;
-    for (const auto& ptr : m.artefacts()) {
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
         using physical::entities::operation_type;
         if (a.operation().type() == operation_type::remove)
@@ -102,7 +110,8 @@ apply(const context& ctx, const entities::model& m) {
     /*
      * If we don't have any artefacts then we're done.
      */
-    if (m.artefacts().empty()) {
+    const auto& artefacts(gather_artefacts(m));
+    if (artefacts.empty()) {
         BOOST_LOG_SEV(lg, info) << "No artefacts were generated.";
         return;
     }
@@ -116,9 +125,13 @@ apply(const context& ctx, const entities::model& m) {
     }
 
     /*
-     * Execute the transform.
+     * If the user did not ask to delete extra files, do nothing.
      */
-    delete_extra_files(m);
+    if (m.outputting_properties().delete_extra_files())
+        delete_extra_files(artefacts);
+    else
+        BOOST_LOG_SEV(lg, debug) << "Delete extra files is off.";
+
     delete_empty_directories(m);
 }
 

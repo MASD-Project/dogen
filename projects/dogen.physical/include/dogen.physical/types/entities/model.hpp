@@ -62,8 +62,7 @@ public:
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
         const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
-        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
-        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts);
+        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts);
 
 public:
     /**
@@ -156,16 +155,6 @@ public:
     void orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
     /**@}*/
 
-    /**
-     * @brief All artefacts that make up this physical model.
-     */
-    /**@{*/
-    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
-    std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
-    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& v);
-    void artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
-    /**@}*/
-
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -187,7 +176,6 @@ private:
     dogen::physical::entities::outputting_properties outputting_properties_;
     std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
-    std::list<boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
 };
 
 }

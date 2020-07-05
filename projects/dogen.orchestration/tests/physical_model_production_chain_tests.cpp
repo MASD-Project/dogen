@@ -72,6 +72,21 @@ void print_lines(const std::string& content, const unsigned int total,
     }
 }
 
+std::list<boost::shared_ptr<dogen::physical::entities::artefact>>
+gather_artefacts(const dogen::physical::entities::model& m) {
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact>> r;
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype())
+            r.push_back(a_pair.second);
+    }
+
+    for (const auto& a : m.orphan_artefacts())
+        r.push_back(a);
+
+    return r;
+}
+
 dogen::physical::entities::model
 apply_physical_model_production(const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir,
@@ -122,7 +137,8 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
 
     unsigned int diffs_found(0);
-    for (const auto& ptr : m.artefacts()) {
+    const auto& artefacts(gather_artefacts(m));
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
         using namespace dogen::physical::entities;
         /*
@@ -191,7 +207,8 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
 bool check_for_delete_extra(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& ptr : m.artefacts()) {
+    const auto& artefacts(gather_artefacts(m));
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
 
         /*
@@ -255,7 +272,8 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
 bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& ptr : m.artefacts()) {
+    const auto& artefacts(gather_artefacts(m));
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
 
         /*
@@ -319,7 +337,8 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
 bool check_for_force_write(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& ptr : m.artefacts()) {
+    const auto& artefacts(gather_artefacts(m));
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
 
         /*
@@ -374,7 +393,8 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
 bool check_out_of_sync(const boost::filesystem::path& output_dir,
     const dogen::physical::entities::model& m) {
     unsigned int diffs_found(0);
-    for (const auto& ptr : m.artefacts()) {
+    const auto& artefacts(gather_artefacts(m));
+    for (const auto& ptr : artefacts) {
         const auto& a(*ptr);
 
         /*

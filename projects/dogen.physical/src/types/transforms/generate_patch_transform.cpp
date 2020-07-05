@@ -49,42 +49,37 @@ const std::string using_dir_message("Using directory: ");
 
 namespace dogen::physical::transforms {
 
-void generate_patch_transform::
-apply(const context& ctx, const entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg,
-        "generate patch transform", transform_id, m.name().simple(),
-        *ctx.tracer(), m);
+std::string generate_patch_transform::collect_diffs(const entities::model& m) {
+    std::ostringstream os;
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype()) {
+            const auto& a(*a_pair.second);
+            BOOST_LOG_SEV(lg, trace) << "Processing artefact: "
+                                     << a.name().qualified().filename();
 
-    BOOST_LOG_SEV(lg, debug) << "Creating patch for model: "
-                             << m.name().simple();
+            if (a.unified_diff().empty()) {
+                BOOST_LOG_SEV(lg, trace) << "Arefact has no diff.";
+                continue;
+            }
 
-    /*
-     * If the user did not request diffing, there is nothing to do.
-     */
-    if (!ctx.diffing_configuration()) {
-        BOOST_LOG_SEV(lg, debug) << "Diffing not enabled.";
-        return;
-    }
-
-    std::ostringstream ss;
-    for (auto& ptr : m.artefacts()) {
-        auto& a(*ptr);
-        BOOST_LOG_SEV(lg, trace) << "Processing arefact: "
-                                 << a.name().qualified().filename();
-
-        if (a.unified_diff().empty()) {
-            BOOST_LOG_SEV(lg, trace) << "Arefact has no diff.";
-            continue;
+            BOOST_LOG_SEV(lg, debug) << "Adding diff to patch. Size: "
+                                     << a.unified_diff().size();
+            os << a.unified_diff();
         }
-
-        BOOST_LOG_SEV(lg, debug) << "Adding diff to patch. Size: "
-                                 << a.unified_diff().size();
-
-        ss << a.unified_diff();
     }
 
-    const auto c(ss.str());
-    const auto& cfg(*ctx.diffing_configuration());
+    for (const auto& aptr : m.orphan_artefacts()) {
+        const auto& a(*aptr);
+        os << a.unified_diff();
+    }
+
+    return os.str();
+}
+
+void generate_patch_transform::
+handle_patch(const dogen::diffing_configuration& cfg,
+    const std::string& model_name, const std::string& content) {
     const auto dest(cfg.destination());
     switch(dest) {
     case diffing_destination::file: {
@@ -95,23 +90,54 @@ apply(const context& ctx, const entities::model& m) {
         create_directories(cfg.output_directory());
 
         boost::filesystem::path p(cfg.output_directory());
-        p /= m.name().simple() + ".patch";
+        p /= model_name + ".patch";
 
         BOOST_LOG_SEV(lg, debug) << "Writing patch file: " << p.generic()
-                                 << ". Size: " << c.size();
+                                 << ". Size: " << content.size();
         using dogen::utility::filesystem::write_file_content;
-        write_file_content(p, c);
+        write_file_content(p, content);
         break;
     }
     case diffing_destination::console:
         BOOST_LOG_SEV(lg, debug) << "Outputting patch to console.";
-        std::cout << c;
+        std::cout << content;
         break;
     default: {
         const auto s(boost::lexical_cast<std::string>(dest));
         BOOST_LOG_SEV(lg, error) << unexpected_destination << s;
         BOOST_THROW_EXCEPTION(transform_exception(unexpected_destination + s));
     } }
+}
+
+void generate_patch_transform::
+apply(const context& ctx, const entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "generate patch transform", transform_id, m.name().simple(),
+        *ctx.tracer(), m);
+
+    const auto mn(m .name().simple());
+    BOOST_LOG_SEV(lg, debug) << "Creating patch for model: " << mn;
+
+    /*
+     * If the user did not request diffing, there is nothing to do.
+     */
+    if (!ctx.diffing_configuration()) {
+        BOOST_LOG_SEV(lg, debug) << "Diffing not enabled.";
+        return;
+    }
+
+    /*
+     * Obtain all the content for the diff.s
+     */
+    const auto content(collect_diffs(m));
+
+    /*
+     * Generate the patch.
+     */
+    const auto& cfg(*ctx.diffing_configuration());
+
+    handle_patch(cfg, mn, content);
+
     BOOST_LOG_SEV(lg, debug) << "Finished generating patch";
 }
 

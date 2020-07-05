@@ -36,7 +36,12 @@ namespace dogen::physical::transforms {
  */
 class remove_files_transform final {
 private:
-    static void delete_extra_files(const entities::model& m);
+    static std::list<boost::shared_ptr<entities::artefact>>
+    gather_artefacts(const entities::model& m);
+
+    static void delete_extra_files(
+        const std::list<boost::shared_ptr<entities::artefact>>& artefacts);
+
     static void delete_empty_directories(const entities::model& m);
 
 public:

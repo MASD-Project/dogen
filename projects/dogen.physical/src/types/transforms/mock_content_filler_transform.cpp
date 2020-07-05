@@ -42,6 +42,21 @@ std::string create_hacked_contents(const std::string file_name) {
     return ss.str();
 }
 
+std::list<boost::shared_ptr<dogen::physical::entities::artefact>>
+gather_artefacts(const dogen::physical::entities::model& m) {
+    std::list<boost::shared_ptr<dogen::physical::entities::artefact>>  r;
+    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
+        const auto& as(as_pair.second);
+        for (const auto& a_pair : as.artefacts_by_archetype())
+            r.push_back(a_pair.second);
+    }
+
+    for (const auto& a : m.orphan_artefacts())
+        r.push_back(a);
+
+    return r;
+}
+
 }
 
 namespace dogen::physical::transforms {
@@ -52,7 +67,8 @@ apply(const context& ctx, entities::model& m) {
         "mock content filler transform", transform_id, m.name().simple(),
         *ctx.tracer());
 
-    for (auto& ptr : m.artefacts()) {
+    auto artefacts(gather_artefacts(m));
+    for (auto& ptr : artefacts) {
         auto& a(*ptr);
         if (!a.content().empty())
             continue;
