@@ -714,15 +714,15 @@ void resolver::resolve_archetypes(const indices& idx, entities::model& m) {
     for (auto& pair : m.physical_elements().archetypes()) {
         auto& arch(*pair.second);
         const auto n(arch.name());
-        if (!arch.wale_template())
+        if (!arch.generator().wale_template())
             continue;
 
-        const auto original(*arch.wale_template());
+        const auto original(*arch.generator().wale_template());
         const entities::name resolved(resolve_name(m, idx, n, original));
         BOOST_LOG_SEV(lg, debug) << "Resolved name: "
                                  << original.qualified().dot()
                                  << " to: " << resolved.qualified().dot();
-        arch.wale_template(resolved);
+        arch.generator().wale_template(resolved);
     }
 }
 

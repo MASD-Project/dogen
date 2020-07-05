@@ -28,8 +28,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/physical/relations.hpp"
@@ -43,14 +41,12 @@ namespace dogen::logical::entities::physical {
 class archetype final : public dogen::logical::entities::element {
 public:
     archetype(const archetype&) = default;
+    archetype(archetype&&) = default;
 
 public:
     archetype();
 
     virtual ~archetype() noexcept { }
-
-public:
-    archetype(archetype&& rhs);
 
 public:
     archetype(
@@ -76,10 +72,6 @@ public:
         const std::string& facet_name,
         const std::string& part_id,
         const std::string& logical_meta_element_id,
-        const std::string& stitch_template_content,
-        const boost::optional<dogen::logical::entities::name>& wale_template,
-        const std::string& wale_template_content,
-        const std::string& rendered_stitch_template,
         const dogen::logical::entities::physical::relations& relations,
         const dogen::logical::entities::physical::archetype_generator& generator);
 
@@ -163,46 +155,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Content of the stitch template associated with this archetype, if any exists.
-     */
-    /**@{*/
-    const std::string& stitch_template_content() const;
-    std::string& stitch_template_content();
-    void stitch_template_content(const std::string& v);
-    void stitch_template_content(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Parsed name of the wale template linked to this archetype, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::logical::entities::name>& wale_template() const;
-    boost::optional<dogen::logical::entities::name>& wale_template();
-    void wale_template(const boost::optional<dogen::logical::entities::name>& v);
-    void wale_template(const boost::optional<dogen::logical::entities::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Content of the wale template associated with this archetype, if any exists.
-     */
-    /**@{*/
-    const std::string& wale_template_content() const;
-    std::string& wale_template_content();
-    void wale_template_content(const std::string& v);
-    void wale_template_content(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Contains the result of the stitch template after rendering.
-     */
-    /**@{*/
-    const std::string& rendered_stitch_template() const;
-    std::string& rendered_stitch_template();
-    void rendered_stitch_template(const std::string& v);
-    void rendered_stitch_template(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Relation information for this archetype.
      */
     /**@{*/
@@ -243,10 +195,6 @@ private:
     std::string facet_name_;
     std::string part_id_;
     std::string logical_meta_element_id_;
-    std::string stitch_template_content_;
-    boost::optional<dogen::logical::entities::name> wale_template_;
-    std::string wale_template_content_;
-    std::string rendered_stitch_template_;
     dogen::logical::entities::physical::relations relations_;
     dogen::logical::entities::physical::archetype_generator generator_;
 };

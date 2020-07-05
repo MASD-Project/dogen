@@ -824,7 +824,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         ensure_not_empty(r->name().qualified().dot(), n);
 
         if (n == stitch_template_content_attr_name)
-            r->stitch_template_content(attr.documentation());
+            r->generator().stitch_template_content(attr.documentation());
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(

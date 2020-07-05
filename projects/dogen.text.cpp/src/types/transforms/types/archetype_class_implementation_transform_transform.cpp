@@ -88,7 +88,7 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::archetype>(e));
     ast.update_artefact();
-    a.content(arch.rendered_stitch_template());
+    a.content(arch.generator().rendered_stitch_template());
     stp.end_transform(a);
 }
 

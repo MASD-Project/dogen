@@ -412,7 +412,7 @@ process_archetypes(const context& ctx, entities::model& m) {
         const auto wtr(scfg.wale_template_reference);
         if (!wtr.empty()) {
             const auto n(helpers::name_builder::build(wtr));
-            arch.wale_template(n);
+            arch.generator().wale_template(n);
         }
 
         /*
