@@ -819,17 +819,28 @@ adapter::to_physical_archetype(const logical::entities::location& l,
     auto r(boost::make_shared<archetype>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
-    for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
-        ensure_not_empty(r->name().qualified().dot(), n);
+    for (const auto& ia : ie.attributes()) {
+        const auto n(ia.name());
+        const auto id(r->name().qualified().dot());
+        ensure_not_empty(id, n);
 
-        if (n == stitch_template_content_attr_name)
-            r->generator().stitch_template_content(attr.documentation());
-        else {
+        if (n != stitch_template_content_attr_name) {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
                 adaptation_exception(unsupported_attribute + n));
         }
+
+        auto& g(r->generator());
+        g.stitch_template_content(ia.documentation());
+        g.configuration(ia.configuration());
+
+        auto& cfg(*g.configuration());
+        cfg.name().qualified(id);
+
+        helpers::stereotypes_helper h;
+        const auto scr(h.from_string(ia.stereotypes()));
+        const auto& ds(scr.dynamic_stereotypes());
+        cfg.profile_bindings(to_potential_binding(ds));
     }
 
     return r;
