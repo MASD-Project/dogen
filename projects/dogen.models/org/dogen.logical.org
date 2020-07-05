@@ -2960,7 +2960,7 @@ Contains all the properties related to the generation of archetypes themselves.
 :masd.injection.type: std::string
 :END:
 
-#+begin_src stitch
+#+begin_src fundamental
 Content of the stitch template associated with this archetype, if any exists.
 
 #+end_src

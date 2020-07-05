@@ -103,7 +103,7 @@ the C# Technical Space.
 Generates implementation files for objects.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -414,7 +414,7 @@ using System;
 Generates implementation files for enums.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -494,7 +494,7 @@ using System;
 Generates implementation files for exceptions.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -569,7 +569,7 @@ using System;
 Generates implementation files for builtins.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -611,7 +611,7 @@ void builtin_transform::apply(const context& ctx, const logical::entities::eleme
 Generates implementation files for primitives.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::types #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -784,7 +784,7 @@ the C# Technical Space.
 Generates implementation files for objects.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -924,7 +924,7 @@ using System;
 Generates implementation files for enums.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1030,7 +1030,7 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
 Generates implementation files for primitives.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1145,7 +1145,7 @@ using System;
 Generates implementation files for assistants.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1700,7 +1700,7 @@ facet of the C# Technical Space.
 Generates implementation files for objects.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -1913,7 +1913,7 @@ using System.Collections.Generic;
 Generates implementation files for enums.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2068,7 +2068,7 @@ using System.Collections.Generic;
 Generates implementation files for primitives.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2240,7 +2240,7 @@ using System.Collections.Generic;
 Generates implementation files for assistants.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::test_data #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2597,7 +2597,7 @@ facet of the C# Technical Space.
 Generates visual studio project.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
@@ -2700,7 +2700,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 Generates visual studio solutions.
 
 **** stitch_template_content
-#+begin_src stitch
+#+begin_src fundamental
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::csharp::transforms::visual_studio #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
