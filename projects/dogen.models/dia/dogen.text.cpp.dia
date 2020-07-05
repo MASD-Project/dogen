@@ -45168,7 +45168,20 @@ public:
 
 }
 
-#&gt;#</dia:string>
+#&gt;
+#DOGEN masd.physical.constant_relation=dogen.utility.io.shared_ptr,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.tracing.scoped_tracer,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.logical.entities.element,archetype:masd.cpp.io.class_header
+#DOGEN masd.physical.constant_relation=dogen.physical.entities.artefact,archetype:masd.cpp.io.class_header
+#DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.logical.entities.physical.archetype,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.logical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.assistant,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.archetype_class_header_transform_transform,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.archetype_class_header_transform_factory,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.traits,archetype:masd.cpp.types.class_header
+#DOGEN masd.physical.constant_relation=dogen.text.cpp.transforms.types.traits,archetype:masd.cpp.types.class_header#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
