@@ -15,36 +15,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-04 Sat 18:16]
+#+CAPTION: Clock summary at [2020-07-05 Sun 01:55]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *65:32* |       |       | 100.0 |
+| *Total time*                                                      | *68:21* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 65:32   |       |       | 100.0 |
-| Active                                                            |         | 65:32 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  11.7 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.8 |
-| Sprint and product backlog grooming                               |         |       |  5:00 |   7.6 |
+| Stories                                                           | 68:21   |       |       | 100.0 |
+| Active                                                            |         | 68:21 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  7:42 |  11.3 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.7 |
+| Sprint and product backlog grooming                               |         |       |  5:00 |   7.3 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.3 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.3 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.2 |
 | Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   0.9 |
-| Create an emacs mode for wale                                     |         |       |  0:14 |   0.4 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   4.7 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.8 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   4.7 |
-| Split archetype factory from transform                            |         |       | 10:57 |  16.7 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.8 |
+| Create an emacs mode for wale                                     |         |       |  0:14 |   0.3 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   4.5 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.7 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   4.5 |
+| Split archetype factory from transform                            |         |       | 10:57 |  16.0 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.7 |
 | Remove traits for archetypes                                      |         |       |  0:44 |   1.1 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   7.2 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   6.9 |
 | Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   0.9 |
 | Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.7 |
-| Add labels to archetypes                                          |         |       |  2:22 |   3.6 |
+| Add labels to archetypes                                          |         |       |  2:22 |   3.5 |
 | Add support for CSV values in variability                         |         |       |  0:56 |   1.4 |
-| Improve org-mode converter                                        |         |       |  5:15 |   8.0 |
-| Add relations between archetypes in the PMM                       |         |       | 10:38 |  16.2 |
-| Analysis on implementing containment with configuration           |         |       |  1:52 |   2.8 |
-| Add hash map of artefacts in physical model                       |         |       |  1:24 |   2.1 |
+| Improve org-mode converter                                        |         |       |  5:15 |   7.7 |
+| Add relations between archetypes in the PMM                       |         |       | 10:38 |  15.6 |
+| Analysis on implementing containment with configuration           |         |       |  1:52 |   2.7 |
+| Add hash map of artefacts in physical model                       |         |       |  2:59 |   4.4 |
+| Archetype relations for stitch templates                          |         |       |  1:14 |   1.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1911,12 +1912,131 @@ Links:
 
 *** STARTED Add hash map of artefacts in physical model               :story:
     :LOGBOOK:
+    CLOCK: [2020-07-05 Sun 00:20]--[2020-07-05 Sun 01:55] =>  1:35
     CLOCK: [2020-07-04 Sat 16:52]--[2020-07-04 Sat 18:16] =>  1:24
     :END:
 
 At present we have only a list of artefacts. This is not sufficient
 for the relationship look-ups. Make it the same as the formattables
 model.
+
+Notes:
+
+- create a special point in logical space for orphan physical
+  elements: =masd.orphanage=. Remove =orphan_artefacts=. Actually this
+  will not work because we are orphans on both the logical and
+  physical dimensions.
+- if we update all types to use the new container, the code should
+  work as is.
+
+*** STARTED Archetype relations for stitch templates                  :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-04 Sat 22:05]--[2020-07-04 Sat 22:15] =>  0:10
+    CLOCK: [2020-07-04 Sat 21:00]--[2020-07-04 Sat 22:04] =>  1:04
+    :END:
+
+Originally we thought the include files belonged in the stitch
+templates. However, this is a modeling error. By doing so we are
+bypassing the type system in the logical-physical model. This means
+for example that you can reference a physical element that is disabled
+and you won't know until compilation. The right thing to do is to
+declare relations for archetypes as well. The problem is that because
+we are dealing with archetypes, it is a bit confusing. In truth, we
+have "two levels" of relations (these are parallel to the notion of
+"generation moments which we have not yet explored properly):
+
+- relations of the archetype as a "generator generator", that is a
+  generator that makes generators. These are hidden in the stitch
+  template:
+
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/io/shared_ptr_io.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
+: <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
+: <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/types/traits.hpp" #>
+
+- relations of the archetype we are going to generate. These are
+  declared in the meta-data:
+
+: #DOGEN masd.physical.variable_relation=self,archetype:masd.cpp.types.class_header
+: #DOGEN masd.physical.variable_relation=transparent,role:type_declaration
+: #DOGEN masd.physical.constant_relation=dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
+: #DOGEN masd.physical.constant_relation=dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+: #DOGEN masd.physical.constant_relation=dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
+
+Because we need to distinguish between these, we can't just declare
+the relations at the meta-data level. Also, archetype relations are
+always constant relations against a fixed archetype. One possibility,
+which is a bit of a hack, but has some merits, is to have meta-data at
+the archetype level and meta-data at the template level,
+e.g. =stitch_template_content=. In a very real sense, these are the
+meta-relations and the relations but we are trying to avoid the word
+meta because the type system is already very confusing. However, we
+may have to make an exception here. The concepts are correct, its just
+that these names are terrible. The overall approach is as follows:
+
+- make the stitch template a proper attribute (or at any rate
+  something with configuration). Remainder of the comment is the
+  stitch template.
+- create a "meta-relation" in the archetype which has only constant
+  relations. Populate these during the physical entities transform
+  with the attribute meta-data, as we do with the class meta-data. The
+  only difference is we populate the "meta-relations".
+- during logical to physical projection, anything on the
+  "meta-relations" container is resolved (in the same way as constant
+  relations are) and the result is used to populate the artefact
+  instance.
+
+Similarly, we should not have anything on the template related to:
+
+- namespaces
+- boilerplate
+- decoration
+
+For example:
+
+: <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
+
+The archetype's archetype transform must handle all of this. The
+stitch template is merely a variable on the meta-type. This finally
+allows us to remove variability from templating.
+
+The wale expansion does stay within the stitch template though.
+
+Actually if we take one step further, then there are constant and
+variable relations:
+
+- constant relations are: logging, scoped tracing, etc. These can even
+  be declared in the stitch template of the archetype's
+  archetype. Note that we avoided using stitch here because it was all
+  becoming a bit too confusing, but perhaps this can now be
+  revisited. The stitch template would now have:
+  - declare the logger.
+  - perform the boilerplate parts.
+  - output the instantiated stitch template.
+- variable relations are as already described.
+
+This also means that there are now three generational moments:
+
+- the generation of the generator generator generator. This is when
+  the archetype's archetype is generated.
+- the generation of the generator generator. This is when the
+  archetype's archetype executes against a specific archetype (other
+  than archetype itself). This is what we have doing since almost the
+  beginning.
+- the generation of regular instances.
 
 *** Injector types with regards to containment                        :story:
 
