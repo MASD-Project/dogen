@@ -40,7 +40,7 @@ FIXME: temporary until we rename the namespaces.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::any);
+    r.binding_point(binding_point::element);
     return r;
 }
 
@@ -57,7 +57,7 @@ FIXME: optional for now.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::any);
+    r.binding_point(binding_point::element);
     return r;
 }
 
@@ -74,7 +74,7 @@ FIXME: optional for now.
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::any);
+    r.binding_point(binding_point::element);
     return r;
 }
 
@@ -89,7 +89,7 @@ make_masd_physical_major_technical_space() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::any);
+    r.binding_point(binding_point::element);
     return r;
 }
 
@@ -104,7 +104,7 @@ make_masd_physical_wale_template_reference() {
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::any);
+    r.binding_point(binding_point::element);
     return r;
 }
 

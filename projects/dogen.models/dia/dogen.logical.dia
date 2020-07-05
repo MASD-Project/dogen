@@ -53238,7 +53238,7 @@ just to avoid problems.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Features required for physical elements.
 
-#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.default_binding_point=element
 #DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
