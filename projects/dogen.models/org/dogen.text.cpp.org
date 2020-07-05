@@ -3269,6 +3269,22 @@ std::list<dogen::variability::entities::feature>
 Generates header files for archetypes.
 
 **** stitch_template_content
+:PROPERTIES:
+:masd.physical.constant_relation: dogen.utility.io.shared_ptr,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.tracing.scoped_tracer,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.logical.entities.element,archetype:masd.cpp.io.class_header
+:masd.physical.constant_relation: dogen.physical.entities.artefact,archetype:masd.cpp.io.class_header
+:masd.physical.constant_relation: dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.logical.entities.physical.archetype,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.logical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.transforms.assistant,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.transforms.types.archetype_class_header_transform_transform,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.transforms.types.archetype_class_header_transform_factory,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.traits,archetype:masd.cpp.types.class_header
+:masd.physical.constant_relation: dogen.text.cpp.transforms.types.traits,archetype:masd.cpp.types.class_header
+:END:
+
 #+begin_src stitch
 <#@ masd.stitch.stream_variable_name=ast.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>
@@ -3424,7 +3440,7 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::archetype>(e));
     ast.update_artefact();
-    a.content(arch.rendered_stitch_template());
+    a.content(arch.generator().rendered_stitch_template());
     stp.end_transform(a);
 }
 

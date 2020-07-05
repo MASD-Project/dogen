@@ -2695,42 +2695,19 @@ ID for the part this archetype belongs to.
 
 ID of the meta-element in the logical model this archetype binds to.
 
-**** stitch_template_content
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-#+begin_src stitch
-Content of the stitch template associated with this archetype, if any exists.
-
-#+end_src
-**** wale_template
-:PROPERTIES:
-:masd.injection.type: boost::optional<name>
-:END:
-
-Parsed name of the wale template linked to this archetype, if any.
-
-**** wale_template_content
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Content of the wale template associated with this archetype, if any exists.
-
-**** rendered_stitch_template
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Contains the result of the stitch template after rendering.
-
 **** relations
 :PROPERTIES:
 :masd.injection.type: relations
 :END:
 
 Relation information for this archetype.
+
+**** generator
+:PROPERTIES:
+:masd.injection.type: archetype_generator
+:END:
+
+Properties related to the generator for this archetype.
 
 *** entities::physical::backend
 :PROPERTIES:
@@ -2971,6 +2948,50 @@ element.
 :PROPERTIES:
 :masd.injection.type: std::list<hard_coded_relation>
 :END:
+*** entities::physical::archetype_generator
+:PROPERTIES:
+:masd.injection.stereotypes: Configurable
+:END:
+
+Contains all the properties related to the generation of archetypes themselves.
+
+**** stitch_template_content
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+#+begin_src stitch
+Content of the stitch template associated with this archetype, if any exists.
+
+#+end_src
+**** wale_template
+:PROPERTIES:
+:masd.injection.type: boost::optional<name>
+:END:
+
+Parsed name of the wale template linked to this archetype, if any.
+
+**** wale_template_content
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+Content of the wale template associated with this archetype, if any exists.
+
+**** rendered_stitch_template
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+
+Contains the result of the stitch template after rendering.
+
+**** relations
+:PROPERTIES:
+:masd.injection.type: relations
+:END:
+
+Relation information for this archetype.
+
 ** entities::output_model_set
 :PROPERTIES:
 :masd.injection.stereotypes: Nameable
@@ -4160,7 +4181,7 @@ Where does this profile or profile template bind to.
 
 ** features::physical
 :PROPERTIES:
-:masd.variability.default_binding_point: element
+:masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.physical
 :masd.injection.stereotypes: masd::variability::feature_bundle
 :END:

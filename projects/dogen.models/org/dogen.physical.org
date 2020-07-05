@@ -382,13 +382,6 @@ All atefact sets in this model, by logical ID.
 
 Artefacts that exist in the physical dimension only.
 
-*** artefacts
-:PROPERTIES:
-:masd.injection.type: std::list<boost::shared_ptr<physical::entities::artefact>>
-:END:
-
-All artefacts that make up this physical model.
-
 ** entities::Describable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
