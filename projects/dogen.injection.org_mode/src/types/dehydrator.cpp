@@ -110,7 +110,7 @@ void dehydrator::insert_attribute(std::ostream& s,
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "stitch_template_content") {
-            s << "#+begin_src stitch" << std::endl
+            s << "#+begin_src fundamental" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
         } else if (a.name() == "short_form" || a.name() == "long_form") {
