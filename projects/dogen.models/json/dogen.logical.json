@@ -4103,6 +4103,11 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Relation information for this archetype.\n"
+        },
+        {
+          "name": "generator",
+          "type": "archetype_generator",
+          "documentation": "Properties related to the generator for this archetype.\n"
         }
       ]
     },
@@ -4702,6 +4707,41 @@
         {
           "name": "hard_coded",
           "type": "std::list<hard_coded_relation>"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical::archetype_generator",
+      "documentation": "Contains all the properties related to the generation of archetypes themselves.\n",
+      "stereotypes": [
+        "Configurable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stitch_template_content",
+          "type": "std::string",
+          "documentation": "Content of the stitch template associated with this archetype, if any exists.\n"
+        },
+        {
+          "name": "wale_template",
+          "type": "boost::optional<name>",
+          "documentation": "Parsed name of the wale template linked to this archetype, if any.\n"
+        },
+        {
+          "name": "wale_template_content",
+          "type": "std::string",
+          "documentation": "Content of the wale template associated with this archetype, if any exists.\n"
+        },
+        {
+          "name": "rendered_stitch_template",
+          "type": "std::string",
+          "documentation": "Contains the result of the stitch template after rendering.\n"
+        },
+        {
+          "name": "relations",
+          "type": "relations",
+          "documentation": "Relation information for this archetype.\n"
         }
       ]
     }

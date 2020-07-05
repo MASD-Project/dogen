@@ -33,6 +33,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/physical/relations.hpp"
+#include "dogen.logical/types/entities/physical/archetype_generator.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -79,7 +80,8 @@ public:
         const boost::optional<dogen::logical::entities::name>& wale_template,
         const std::string& wale_template_content,
         const std::string& rendered_stitch_template,
-        const dogen::logical::entities::physical::relations& relations);
+        const dogen::logical::entities::physical::relations& relations,
+        const dogen::logical::entities::physical::archetype_generator& generator);
 
 public:
     using element::accept;
@@ -210,6 +212,16 @@ public:
     void relations(const dogen::logical::entities::physical::relations&& v);
     /**@}*/
 
+    /**
+     * @brief Properties related to the generator for this archetype.
+     */
+    /**@{*/
+    const dogen::logical::entities::physical::archetype_generator& generator() const;
+    dogen::logical::entities::physical::archetype_generator& generator();
+    void generator(const dogen::logical::entities::physical::archetype_generator& v);
+    void generator(const dogen::logical::entities::physical::archetype_generator&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -236,6 +248,7 @@ private:
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
     dogen::logical::entities::physical::relations relations_;
+    dogen::logical::entities::physical::archetype_generator generator_;
 };
 
 }

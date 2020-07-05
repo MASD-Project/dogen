@@ -26,6 +26,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.logical/io/entities/physical/archetype_generator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -69,7 +70,8 @@ archetype::archetype(archetype&& rhs)
       wale_template_(std::move(rhs.wale_template_)),
       wale_template_content_(std::move(rhs.wale_template_content_)),
       rendered_stitch_template_(std::move(rhs.rendered_stitch_template_)),
-      relations_(std::move(rhs.relations_)) { }
+      relations_(std::move(rhs.relations_)),
+      generator_(std::move(rhs.generator_)) { }
 
 archetype::archetype(
     const dogen::logical::entities::name& name,
@@ -98,7 +100,8 @@ archetype::archetype(
     const boost::optional<dogen::logical::entities::name>& wale_template,
     const std::string& wale_template_content,
     const std::string& rendered_stitch_template,
-    const dogen::logical::entities::physical::relations& relations)
+    const dogen::logical::entities::physical::relations& relations,
+    const dogen::logical::entities::physical::archetype_generator& generator)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -126,7 +129,8 @@ archetype::archetype(
       wale_template_(wale_template),
       wale_template_content_(wale_template_content),
       rendered_stitch_template_(rendered_stitch_template),
-      relations_(relations) { }
+      relations_(relations),
+      generator_(generator) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -161,7 +165,8 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"wale_template\": " << wale_template_ << ", "
       << "\"wale_template_content\": " << "\"" << tidy_up_string(wale_template_content_) << "\"" << ", "
       << "\"rendered_stitch_template\": " << "\"" << tidy_up_string(rendered_stitch_template_) << "\"" << ", "
-      << "\"relations\": " << relations_
+      << "\"relations\": " << relations_ << ", "
+      << "\"generator\": " << generator_
       << " }";
 }
 
@@ -181,6 +186,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(wale_template_content_, other.wale_template_content_);
     swap(rendered_stitch_template_, other.rendered_stitch_template_);
     swap(relations_, other.relations_);
+    swap(generator_, other.generator_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -202,7 +208,8 @@ bool archetype::operator==(const archetype& rhs) const {
         wale_template_ == rhs.wale_template_ &&
         wale_template_content_ == rhs.wale_template_content_ &&
         rendered_stitch_template_ == rhs.rendered_stitch_template_ &&
-        relations_ == rhs.relations_;
+        relations_ == rhs.relations_ &&
+        generator_ == rhs.generator_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -393,6 +400,22 @@ void archetype::relations(const dogen::logical::entities::physical::relations& v
 
 void archetype::relations(const dogen::logical::entities::physical::relations&& v) {
     relations_ = std::move(v);
+}
+
+const dogen::logical::entities::physical::archetype_generator& archetype::generator() const {
+    return generator_;
+}
+
+dogen::logical::entities::physical::archetype_generator& archetype::generator() {
+    return generator_;
+}
+
+void archetype::generator(const dogen::logical::entities::physical::archetype_generator& v) {
+    generator_ = v;
+}
+
+void archetype::generator(const dogen::logical::entities::physical::archetype_generator&& v) {
+    generator_ = std::move(v);
 }
 
 }
