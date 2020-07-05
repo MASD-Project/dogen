@@ -34265,13 +34265,13 @@ to structural modeling.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O239">
       <dia:attribute name="obj_pos">
-        <dia:point val="98,17"/>
+        <dia:point val="74,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,16.95;111.64,20.05"/>
+        <dia:rectangle val="73.95,15.95;87.64,19.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="98,17"/>
+        <dia:point val="74,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -34726,13 +34726,13 @@ technical space targeted.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,22"/>
+        <dia:point val="113,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,21.95;129.795,26.45"/>
+        <dia:rectangle val="112.95,21.95;127.795,26.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,22"/>
+        <dia:point val="113,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -34891,13 +34891,13 @@ technical space targeted.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,30"/>
+        <dia:point val="113,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,29.95;141.73,33.65"/>
+        <dia:rectangle val="112.95,29.95;139.73,33.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,30"/>
+        <dia:point val="113,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -35764,13 +35764,13 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,38"/>
+        <dia:point val="113,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,37.95;131.335,43.25"/>
+        <dia:rectangle val="112.95,37.95;129.335,43.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,38"/>
+        <dia:point val="113,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -53215,19 +53215,19 @@ just to avoid problems.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O412">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,62"/>
+        <dia:point val="113,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,61.95;140.575,71.25"/>
+        <dia:rectangle val="112.95,54.95;132.415,61.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,62"/>
+        <dia:point val="113,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.524999999999999"/>
+        <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#physical#</dia:string>
@@ -53427,31 +53427,6 @@ FIXME: optional for now.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#relation_status#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Relation status for the archetype.
-
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#wale_template_reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -53462,56 +53437,6 @@ FIXME: optional for now.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Name of the wale template that the archetype uses.
-
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#variable_relation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::comma_separated_collection#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Define a variable relation between the current archetype and another archetype.
-
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#constant_relation#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::comma_separated_collection#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Define a fixed relation between the current archetype and another archetype.
 
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -54240,13 +54165,13 @@ FIXME: optional for now.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O419">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,55"/>
+        <dia:point val="52,61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,54.95;130.565,59.45"/>
+        <dia:rectangle val="51.95,60.95;67.565,65.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,55"/>
+        <dia:point val="52,61"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -55436,13 +55361,13 @@ FIXME: optional for now.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O427">
       <dia:attribute name="obj_pos">
-        <dia:point val="115,46"/>
+        <dia:point val="113,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,45.95;135.955,52.85"/>
+        <dia:rectangle val="112.95,45.95;133.955,52.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="115,46"/>
+        <dia:point val="113,46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
@@ -58070,13 +57995,13 @@ FIXME: optional for now.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O449">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,55"/>
+        <dia:point val="51,55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,54.95;71.26,58.65"/>
+        <dia:rectangle val="50.95,54.95;69.26,58.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,55"/>
+        <dia:point val="51,55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -59934,6 +59859,196 @@ element.#</dia:string>
         <dia:connection handle="1" to="O456" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O398"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O465">
+      <dia:attribute name="obj_pos">
+        <dia:point val="113,64"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="112.95,63.95;138.575,69.25"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="113,64"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="25.524999999999999"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="5.2000000000000011"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#physical_relations#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Features related to relations at the physical level.
+
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#bad7d7"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#relation_status#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Relation status for the archetype.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#variable_relation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::comma_separated_collection#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Define a variable relation between the current archetype and another archetype.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#constant_relation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::comma_separated_collection#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Define a fixed relation between the current archetype and another archetype.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O236"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

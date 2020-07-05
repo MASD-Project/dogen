@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_FEATURES_PHYSICAL_HPP
-#define DOGEN_LOGICAL_TYPES_FEATURES_PHYSICAL_HPP
+#ifndef DOGEN_LOGICAL_TYPES_FEATURES_PHYSICAL_RELATIONS_HPP
+#define DOGEN_LOGICAL_TYPES_FEATURES_PHYSICAL_RELATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,16 +34,14 @@
 namespace dogen::logical::features {
 
 /**
- * @brief Features required for physical elements.
+ * @brief Features related to relations at the physical level.
  */
-class physical final {
+class physical_relations final {
 public:
     struct feature_group {
-        variability::entities::feature backend_name;
-        variability::entities::feature part_id;
-        variability::entities::feature logical_meta_element_id;
-        variability::entities::feature major_technical_space;
-        variability::entities::feature wale_template_reference;
+        variability::entities::feature relation_status;
+        variability::entities::feature variable_relation;
+        variability::entities::feature constant_relation;
     };
 
     static feature_group
@@ -51,11 +49,9 @@ public:
 
 public:
     struct static_configuration {
-        std::string backend_name;
-        std::string part_id;
-        std::string logical_meta_element_id;
-        std::string major_technical_space;
-        std::string wale_template_reference;
+        std::string relation_status;
+        std::list<std::list<std::string> > variable_relation;
+        std::list<std::list<std::string> > constant_relation;
     };
 
     static static_configuration make_static_configuration(

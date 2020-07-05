@@ -4283,33 +4283,9 @@
           }
         },
         {
-          "name": "relation_status",
-          "type": "masd::variability::text",
-          "documentation": "Relation status for the archetype.\n",
-          "tagged_values": {
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
           "name": "wale_template_reference",
           "type": "masd::variability::text",
           "documentation": "Name of the wale template that the archetype uses.\n",
-          "tagged_values": {
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "variable_relation",
-          "type": "masd::variability::comma_separated_collection",
-          "documentation": "Define a variable relation between the current archetype and another archetype.\n",
-          "tagged_values": {
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "constant_relation",
-          "type": "masd::variability::comma_separated_collection",
-          "documentation": "Define a fixed relation between the current archetype and another archetype.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
@@ -4722,6 +4698,44 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Relation information for this archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::physical_relations",
+      "documentation": "Features related to relations at the physical level.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.physical"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "relation_status",
+          "type": "masd::variability::text",
+          "documentation": "Relation status for the archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "variable_relation",
+          "type": "masd::variability::comma_separated_collection",
+          "documentation": "Define a variable relation between the current archetype and another archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "constant_relation",
+          "type": "masd::variability::comma_separated_collection",
+          "documentation": "Define a fixed relation between the current archetype and another archetype.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     }

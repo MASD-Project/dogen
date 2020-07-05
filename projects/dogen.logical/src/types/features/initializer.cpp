@@ -31,6 +31,7 @@
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.logical/types/features/generalization.hpp"
 #include "dogen.logical/types/features/type_parameters.hpp"
+#include "dogen.logical/types/features/physical_relations.hpp"
 #include "dogen.logical/types/features/variability_bundle.hpp"
 #include "dogen.logical/types/features/decoration_modeline.hpp"
 #include "dogen.logical/types/features/variability_templates.hpp"
@@ -51,6 +52,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::logical::features::orm::make_features());
     rg.register_features(dogen::logical::features::output_technical_space::make_features());
     rg.register_features(dogen::logical::features::physical::make_features());
+    rg.register_features(dogen::logical::features::physical_relations::make_features());
     rg.register_features(dogen::logical::features::primitive::make_features());
     rg.register_features(dogen::logical::features::type_parameters::make_features());
     rg.register_features(dogen::logical::features::variability_bundle::make_features());

@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/physical/relations.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -58,6 +60,12 @@ private:
      * @brief Processes all of the logical representations of parts.
      */
     static void process_parts(entities::model& m);
+
+    /**
+     * @brief Reads all data related to physical relations.
+     */
+    static entities::physical::relations process_relations(const context& ctx,
+        const variability::entities::configuration& cfg);
 
     /**
      * @brief Processes all of the logical representations of

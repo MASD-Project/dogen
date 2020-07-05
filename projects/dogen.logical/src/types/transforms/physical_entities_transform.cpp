@@ -26,6 +26,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
+#include "dogen.logical/types/features/physical_relations.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
@@ -346,6 +347,131 @@ void physical_entities_transform::process_parts(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing parts.";
 }
 
+entities::physical::relations
+physical_entities_transform::process_relations(const context& ctx,
+    const variability::entities::configuration& cfg) {
+    using features::physical_relations;
+    const auto& fm(*ctx.feature_model());
+    const auto fg(physical_relations::make_feature_group(fm));
+    const auto scfg(physical_relations::make_static_configuration(fg, cfg));
+
+    /*
+     * Read and validate the relation status. For now we ignore empty
+     * relation status. This is because the generators are not
+     * populating it.
+     */
+    entities::physical::relations r;
+    const auto rs(scfg.relation_status);
+    if (!rs.empty()) {
+        const bool is_valid_rs(
+            rs == relation_status_not_relatable ||
+            rs == relation_status_relatable ||
+            rs == relation_status_facet_default);
+
+        if (!is_valid_rs) {
+            BOOST_LOG_SEV(lg, error) << invalid_relation_status << rs;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_relation_status + rs));
+        }
+        r.status(rs);
+    }
+
+    /*
+     * Process the constant relations. These are CSV values with
+     * either 2 or three fields. The first field is the logical
+     * model element ID, the second field the original URN and the
+     * final, possibly optional field, is a colon separated label.
+     */
+    for (const auto& cr : scfg.constant_relation) {
+        const auto sz(cr.size());
+        if (sz != 2 && sz != 3) {
+            std::ostringstream os;
+            os << invalid_constant_relation << cr;
+            const auto s(os.str());
+
+            BOOST_LOG_SEV(lg, error) << s;
+            BOOST_THROW_EXCEPTION(transformation_error(s));
+        }
+
+        /*
+         * Read the logical model meta-element ID we are related to.
+         */
+        auto i(cr.begin());
+        entities::physical::constant_relation lcr;
+        lcr.logical_model_element_id(*i);
+
+        /*
+         * Read the URN, as it was originally supplied by the user.
+         */
+        ++i;
+        lcr.original_urn(*i);
+
+        /*
+         * If present, read the label.
+         */
+        if (sz == 3) {
+            ++i;
+            const auto s(*i);
+            using utility::string::splitter;
+            const auto splitted(splitter::split_delimited(s, ":"));
+            if (splitted.size() != 2) {
+                BOOST_LOG_SEV(lg, error) << invalid_label << s;
+                BOOST_THROW_EXCEPTION(transformation_error(invalid_label + s));
+            }
+            entities::label lbl;
+            lbl.key(splitted.front());
+            lbl.value(splitted.back());
+            lcr.labels().push_back(lbl);
+        }
+        r.constant().push_back(lcr);
+    }
+
+    /*
+     * Process the variable relations. These are CSV values with
+     * 2 fields. The first field is the original URN and the
+     * second is the relation type.
+     */
+    for (const auto& vr : scfg.variable_relation) {
+        const auto sz(vr.size());
+        if (sz != 2) {
+            std::ostringstream os;
+            os << invalid_variable_relation << vr;
+            const auto s(os.str());
+
+            BOOST_LOG_SEV(lg, error) << s;
+            BOOST_THROW_EXCEPTION(transformation_error(s));
+        }
+
+        /*
+         * Read the relation type.
+         */
+        auto i(vr.begin());
+        const auto rt(*i);
+        if (rt != varibale_relation_type_self &&
+            rt != varibale_relation_type_parent &&
+            rt != varibale_relation_type_child &&
+            rt != varibale_relation_type_transparent &&
+            rt != varibale_relation_type_opaque &&
+            rt != varibale_relation_type_associative_key &&
+            rt != varibale_relation_type_visitation) {
+            BOOST_LOG_SEV(lg, error) << invalid_relation_type << rt;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_relation_type + rt));
+        }
+
+        entities::physical::variable_relation lvr;
+        lvr.type(rt);
+
+        /*
+         * Read the URN, as it was originally supplied by the user.
+         */
+        ++i;
+        lvr.original_urn(*i);
+        r.variable().push_back(lvr);
+    }
+    return r;
+}
+
 void physical_entities_transform::
 process_archetypes(const context& ctx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
@@ -405,6 +531,13 @@ process_archetypes(const context& ctx, entities::model& m) {
         arch.logical_meta_element_id(lmen);
 
         /*
+        * Read all relations for both the archetype and its generator.
+        */
+        arch.relations(process_relations(ctx, *arch.configuration()));
+        auto& g(arch.generator());
+        g.relations(process_relations(ctx, *g.configuration()));
+
+        /*
          * Read the reference to a wale template. Its existence will
          * be validated later on during resolution. It may be empty
          * since not all archetypes need a wale template.
@@ -413,116 +546,6 @@ process_archetypes(const context& ctx, entities::model& m) {
         if (!wtr.empty()) {
             const auto n(helpers::name_builder::build(wtr));
             arch.generator().wale_template(n);
-        }
-
-        /*
-         * Read and validate the relation status.
-         */
-        const auto rs(scfg.relation_status);
-        const bool is_valid_rs(
-            rs == relation_status_not_relatable ||
-            rs == relation_status_relatable ||
-            rs == relation_status_facet_default);
-        if (!is_valid_rs) {
-            BOOST_LOG_SEV(lg, error) << invalid_relation_status << rs;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(invalid_relation_status + rs));
-        }
-        arch.relations().status(rs);
-
-        /*
-         * Process the constant relations. These are CSV values with
-         * either 2 or three fields. The first field is the logical
-         * model element ID, the second field the original URN and the
-         * final, possibly optional field, is a colon separated label.
-         */
-        for (const auto& cr : scfg.constant_relation) {
-            const auto sz(cr.size());
-            if (sz != 2 && sz != 3) {
-                std::ostringstream os;
-                os << invalid_constant_relation << cr;
-                const auto s(os.str());
-
-                BOOST_LOG_SEV(lg, error) << s;
-                BOOST_THROW_EXCEPTION(transformation_error(s));
-            }
-
-            /*
-             * Read the logical model meta-element ID we are related to.
-             */
-            auto i(cr.begin());
-            entities::physical::constant_relation lcr;
-            lcr.logical_model_element_id(*i);
-
-            /*
-             * Read the URN, as it was originally supplied by the user.
-             */
-            ++i;
-            lcr.original_urn(*i);
-
-            /*
-             * If present, read the label.
-             */
-            if (sz == 3) {
-                ++i;
-                const auto s(*i);
-                using utility::string::splitter;
-                const auto splitted(splitter::split_delimited(s, ":"));
-                if (splitted.size() != 2) {
-                    BOOST_LOG_SEV(lg, error) << invalid_label << s;
-                    BOOST_THROW_EXCEPTION(
-                        transformation_error(invalid_label + s));
-                }
-                entities::label lbl;
-                lbl.key(splitted.front());
-                lbl.value(splitted.back());
-                lcr.labels().push_back(lbl);
-            }
-            arch.relations().constant().push_back(lcr);
-        }
-
-        /*
-         * Process the variable relations. These are CSV values with
-         * 2 fields. The first field is the original URN and the
-         * second is the relation type.
-         */
-        for (const auto& vr : scfg.variable_relation) {
-            const auto sz(vr.size());
-            if (sz != 2) {
-                std::ostringstream os;
-                os << invalid_variable_relation << vr;
-                const auto s(os.str());
-
-                BOOST_LOG_SEV(lg, error) << s;
-                BOOST_THROW_EXCEPTION(transformation_error(s));
-            }
-
-            /*
-             * Read the relation type.
-             */
-            auto i(vr.begin());
-            const auto rt(*i);
-            if (rt != varibale_relation_type_self &&
-                rt != varibale_relation_type_parent &&
-                rt != varibale_relation_type_child &&
-                rt != varibale_relation_type_transparent &&
-                rt != varibale_relation_type_opaque &&
-                rt != varibale_relation_type_associative_key &&
-                rt != varibale_relation_type_visitation) {
-                BOOST_LOG_SEV(lg, error) << invalid_relation_type << rt;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(invalid_relation_type + rt));
-            }
-
-            entities::physical::variable_relation lvr;
-            lvr.type(rt);
-
-            /*
-             * Read the URN, as it was originally supplied by the user.
-             */
-            ++i;
-            lvr.original_urn(*i);
-            arch.relations().variable().push_back(lvr);
         }
 
         /*

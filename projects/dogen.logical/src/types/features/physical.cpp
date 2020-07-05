@@ -94,21 +94,6 @@ make_masd_physical_major_technical_space() {
 }
 
 dogen::variability::entities::feature
-make_masd_physical_relation_status() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("relation_status");
-    r.name().qualified("masd.physical.relation_status");
-    r.description(R"(Relation status for the archetype.
-
-)");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::entities::feature
 make_masd_physical_wale_template_reference() {
     using namespace dogen::variability::entities;
     feature r;
@@ -118,36 +103,6 @@ make_masd_physical_wale_template_reference() {
 
 )");
     const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::entities::feature
-make_masd_physical_variable_relation() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("variable_relation");
-    r.name().qualified("masd.physical.variable_relation");
-    r.description(R"(Define a variable relation between the current archetype and another archetype.
-
-)");
-    const auto vt(value_type::comma_separated_collection);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::entities::feature
-make_masd_physical_constant_relation() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("constant_relation");
-    r.name().qualified("masd.physical.constant_relation");
-    r.description(R"(Define a fixed relation between the current archetype and another archetype.
-
-)");
-    const auto vt(value_type::comma_separated_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
     return r;
@@ -164,10 +119,7 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
     r.part_id = s.get_by_name("masd.physical.part_id");
     r.logical_meta_element_id = s.get_by_name("masd.physical.logical_meta_element_id");
     r.major_technical_space = s.get_by_name("masd.physical.major_technical_space");
-    r.relation_status = s.get_by_name("masd.physical.relation_status");
     r.wale_template_reference = s.get_by_name("masd.physical.wale_template_reference");
-    r.variable_relation = s.get_by_name("masd.physical.variable_relation");
-    r.constant_relation = s.get_by_name("masd.physical.constant_relation");
 
     return r;
 }
@@ -186,14 +138,8 @@ physical::static_configuration physical::make_static_configuration(
         r.logical_meta_element_id = s.get_text_content(fg.logical_meta_element_id);
     if (s.has_configuration_point(fg.major_technical_space))
         r.major_technical_space = s.get_text_content(fg.major_technical_space);
-    if (s.has_configuration_point(fg.relation_status))
-        r.relation_status = s.get_text_content(fg.relation_status);
     if (s.has_configuration_point(fg.wale_template_reference))
         r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
-    if (s.has_configuration_point(fg.variable_relation))
-        r.variable_relation = s.get_comma_separated_collection_content(fg.variable_relation);
-    if (s.has_configuration_point(fg.constant_relation))
-        r.constant_relation = s.get_comma_separated_collection_content(fg.constant_relation);
     return r;
 }
 
@@ -205,10 +151,7 @@ physical::make_features() {
     r.push_back(make_masd_physical_part_id());
     r.push_back(make_masd_physical_logical_meta_element_id());
     r.push_back(make_masd_physical_major_technical_space());
-    r.push_back(make_masd_physical_relation_status());
     r.push_back(make_masd_physical_wale_template_reference());
-    r.push_back(make_masd_physical_variable_relation());
-    r.push_back(make_masd_physical_constant_relation());
     return r;
 }
 
