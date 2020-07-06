@@ -78,6 +78,16 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Name clashes between generated code and non-generated code        :story:
+
+We named a type =archetype_generator=. This caused it to be redefined
+because we also use that name in =test_data= facet. These clashes
+should not really happen. The main problem is that we did not want to
+use different namespaces in facets. We should then at least tell users
+when they are about to create a name clash. For this we need a way to
+get all the "registered" names and then compare the names the user
+wants to define against those.
+
 *** Conversion does not validate missing options                      :story:
 
 When we fail to add the mandatory options in conversion, we don't get
@@ -8290,7 +8300,11 @@ Notes:
 Links:
 
 - [[https://www.reddit.com/r/cpp/comments/eov5fh/critique_my_project_libclsp_a_c17_library/][Critique my project. Libclsp, a C++17 library]]
-= [[https://github.com/otreblan/libclsp][libclsp]]: A C++17 library for language servers.
+- [[https://github.com/otreblan/libclsp][libclsp]]: A C++17 library for language servers.
+- [[https://github.com/kuafuwang/LspCpp][LspCpp GH]]
+- [[https://microsoft.github.io/language-server-protocol/implementors/sdks/][SDKs for LSP]]
+- [[https://microsoft.github.io/language-server-protocol/implementors/servers/][LSP servers]]: we could look at the C++ servers to see if any offer an
+  LSP library.
 
 *** Org-mode as a carrier format for modeling                         :story:
 
