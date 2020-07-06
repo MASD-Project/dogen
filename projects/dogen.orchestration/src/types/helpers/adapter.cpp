@@ -830,11 +830,11 @@ adapter::to_physical_archetype(const logical::entities::location& l,
                 adaptation_exception(unsupported_attribute + n));
         }
 
-        auto& g(r->generator());
-        g.stitch_template_content(ia.documentation());
-        g.configuration(ia.configuration());
+        auto& tt(r->text_templating());
+        tt.stitch_template_content(ia.documentation());
+        tt.configuration(ia.configuration());
 
-        auto& cfg(*g.configuration());
+        auto& cfg(*tt.configuration());
         cfg.name().qualified(id);
 
         helpers::stereotypes_helper h;

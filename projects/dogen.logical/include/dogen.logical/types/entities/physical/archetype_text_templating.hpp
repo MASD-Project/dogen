@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_GENERATOR_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_GENERATOR_HPP
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,17 +38,17 @@ namespace dogen::logical::entities::physical {
 /**
  * @brief Contains all the properties related to the generation of archetypes themselves.
  */
-class archetype_generator final {
+class archetype_text_templating final {
 public:
-    archetype_generator() = default;
-    archetype_generator(const archetype_generator&) = default;
-    ~archetype_generator() = default;
+    archetype_text_templating() = default;
+    archetype_text_templating(const archetype_text_templating&) = default;
+    ~archetype_text_templating() = default;
 
 public:
-    archetype_generator(archetype_generator&& rhs);
+    archetype_text_templating(archetype_text_templating&& rhs);
 
 public:
-    archetype_generator(
+    archetype_text_templating(
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& stitch_template_content,
         const boost::optional<dogen::logical::entities::name>& wale_template,
@@ -118,14 +118,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const archetype_generator& rhs) const;
-    bool operator!=(const archetype_generator& rhs) const {
+    bool operator==(const archetype_text_templating& rhs) const;
+    bool operator!=(const archetype_text_templating& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(archetype_generator& other) noexcept;
-    archetype_generator& operator=(archetype_generator other);
+    void swap(archetype_text_templating& other) noexcept;
+    archetype_text_templating& operator=(archetype_text_templating other);
 
 private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
@@ -142,8 +142,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::logical::entities::physical::archetype_generator& lhs,
-    dogen::logical::entities::physical::archetype_generator& rhs) {
+    dogen::logical::entities::physical::archetype_text_templating& lhs,
+    dogen::logical::entities::physical::archetype_text_templating& rhs) {
     lhs.swap(rhs);
 }
 

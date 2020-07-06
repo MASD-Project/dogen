@@ -23,7 +23,7 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_generator_io.hpp"
+#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
 namespace boost {
 
@@ -66,9 +66,9 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 namespace dogen::logical::entities::physical {
 
-std::ostream& operator<<(std::ostream& s, const archetype_generator& v) {
+std::ostream& operator<<(std::ostream& s, const archetype_text_templating& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::logical::entities::physical::archetype_generator\"" << ", "
+      << "\"__type__\": " << "\"dogen::logical::entities::physical::archetype_text_templating\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"stitch_template_content\": " << "\"" << tidy_up_string(v.stitch_template_content()) << "\"" << ", "
       << "\"wale_template\": " << v.wale_template() << ", "

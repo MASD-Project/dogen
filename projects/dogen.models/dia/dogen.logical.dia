@@ -51469,13 +51469,13 @@ just to avoid problems.#</dia:string>
         <dia:point val="164,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.95,-43.05;180.72,-34.55"/>
+        <dia:rectangle val="163.95,-43.05;181.105,-34.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="164,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -51708,16 +51708,16 @@ just to avoid problems.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#generator#</dia:string>
+            <dia:string>#text_templating#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#archetype_generator#</dia:string>
+            <dia:string>#archetype_text_templating#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Properties related to the generator for this archetype.#</dia:string>
+            <dia:string>#Properties related to the text templating for this archetype.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -59434,7 +59434,7 @@ element.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_generator#</dia:string>
+        <dia:string>#archetype_text_templating#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#Configurable#</dia:string>
@@ -59682,17 +59682,17 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="180.67,-43"/>
+        <dia:point val="181.055,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="179.92,-45.05;191.765,-41.4"/>
+        <dia:rectangle val="180.305,-45.05;191.765,-41.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="180.67,-43"/>
-        <dia:point val="180.67,-45"/>
+        <dia:point val="181.055,-43"/>
+        <dia:point val="181.055,-45"/>
         <dia:point val="191.565,-45"/>
         <dia:point val="191.565,-43"/>
       </dia:attribute>
@@ -59754,17 +59754,17 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="172.335,-34.6"/>
+        <dia:point val="172.528,-34.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="169.95,-35.35;173.085,-30.4"/>
+        <dia:rectangle val="169.95,-35.35;173.278,-30.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="172.335,-34.6"/>
-        <dia:point val="172.335,-33"/>
+        <dia:point val="172.528,-34.6"/>
+        <dia:point val="172.528,-33"/>
         <dia:point val="170,-33"/>
         <dia:point val="170,-32"/>
       </dia:attribute>

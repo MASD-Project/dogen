@@ -31,7 +31,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/physical/relations.hpp"
-#include "dogen.logical/types/entities/physical/archetype_generator.hpp"
+#include "dogen.logical/types/entities/physical/archetype_text_templating.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -73,7 +73,7 @@ public:
         const std::string& part_id,
         const std::string& logical_meta_element_id,
         const dogen::logical::entities::physical::relations& relations,
-        const dogen::logical::entities::physical::archetype_generator& generator);
+        const dogen::logical::entities::physical::archetype_text_templating& text_templating);
 
 public:
     using element::accept;
@@ -165,13 +165,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Properties related to the generator for this archetype.
+     * @brief Properties related to the text templating for this archetype.
      */
     /**@{*/
-    const dogen::logical::entities::physical::archetype_generator& generator() const;
-    dogen::logical::entities::physical::archetype_generator& generator();
-    void generator(const dogen::logical::entities::physical::archetype_generator& v);
-    void generator(const dogen::logical::entities::physical::archetype_generator&& v);
+    const dogen::logical::entities::physical::archetype_text_templating& text_templating() const;
+    dogen::logical::entities::physical::archetype_text_templating& text_templating();
+    void text_templating(const dogen::logical::entities::physical::archetype_text_templating& v);
+    void text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v);
     /**@}*/
 
 public:
@@ -196,7 +196,7 @@ private:
     std::string part_id_;
     std::string logical_meta_element_id_;
     dogen::logical::entities::physical::relations relations_;
-    dogen::logical::entities::physical::archetype_generator generator_;
+    dogen::logical::entities::physical::archetype_text_templating text_templating_;
 };
 
 }

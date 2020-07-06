@@ -24,7 +24,7 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/physical/archetype_io.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
-#include "dogen.logical/io/entities/physical/archetype_generator_io.hpp"
+#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
 namespace dogen::logical::entities::physical {
 

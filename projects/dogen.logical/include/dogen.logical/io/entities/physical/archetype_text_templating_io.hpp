@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_GENERATOR_FWD_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_PHYSICAL_ARCHETYPE_GENERATOR_FWD_HPP
+#ifndef DOGEN_LOGICAL_IO_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_IO_HPP
+#define DOGEN_LOGICAL_IO_ENTITIES_PHYSICAL_ARCHETYPE_TEXT_TEMPLATING_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.logical/types/entities/physical/archetype_text_templating.hpp"
+
 namespace dogen::logical::entities::physical {
 
-class archetype_generator;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::logical::entities::physical::archetype_text_templating& v);
 
 }
 

@@ -534,8 +534,8 @@ process_archetypes(const context& ctx, entities::model& m) {
         * Read all relations for both the archetype and its generator.
         */
         arch.relations(process_relations(ctx, *arch.configuration()));
-        auto& g(arch.generator());
-        g.relations(process_relations(ctx, *g.configuration()));
+        auto& tt(arch.text_templating());
+        tt.relations(process_relations(ctx, *tt.configuration()));
 
         /*
          * Read the reference to a wale template. Its existence will
@@ -545,7 +545,7 @@ process_archetypes(const context& ctx, entities::model& m) {
         const auto wtr(scfg.wale_template_reference);
         if (!wtr.empty()) {
             const auto n(helpers::name_builder::build(wtr));
-            arch.generator().wale_template(n);
+            tt.wale_template(n);
         }
 
         /*

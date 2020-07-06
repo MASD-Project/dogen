@@ -61,7 +61,8 @@ std::string archetype_rendering_transform::render_wale_template(
      * If there is no wale template there is nothing to do, return an
      * empty string.
      */
-    if (!arch.generator().wale_template()) {
+    auto& tt(arch.text_templating());
+    if (!tt.wale_template()) {
         std::string r;
         return r;
     }
@@ -70,8 +71,8 @@ std::string archetype_rendering_transform::render_wale_template(
      * Conversely, if the user specifically requested a wale template,
      * we expect its contents to be non-zero.
      */
-    if (arch.generator().wale_template_content().empty()) {
-        const auto tid(arch.generator().wale_template()->qualified().dot());
+    if (tt.wale_template_content().empty()) {
+        const auto tid(tt.wale_template()->qualified().dot());
         BOOST_LOG_SEV(lg, error) << empty_wale_template << tid;
         BOOST_THROW_EXCEPTION(transformation_error(empty_wale_template + tid));
     }
@@ -110,7 +111,7 @@ std::string archetype_rendering_transform::render_wale_template(
      * Instantiate the wale template.
      */
     templating::wale::instantiator inst;
-    const auto content(arch.generator().wale_template_content());
+    const auto& content(tt.wale_template_content());
     const auto r(inst.instantiate(content, kvps));
     BOOST_LOG_SEV(lg, debug) << "Finished rendering wale template.";
     return r;
@@ -125,8 +126,9 @@ std::string archetype_rendering_transform::render_stitch_template(
      * Stitch template cannot be empty.
      */
     BOOST_LOG_SEV(lg, debug) << "Rendering stitch template.";
+    auto& tt(arch.text_templating());
     const auto id(arch.name().qualified().dot());
-    const auto& st(arch.generator().stitch_template_content());
+    const auto& st(tt.stitch_template_content());
     if (st.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_stitch_template << id;
         BOOST_THROW_EXCEPTION(transformation_error(empty_stitch_template + id));
@@ -194,7 +196,7 @@ apply(const context& ctx, entities::model& m) {
          * Now render the stitch template and update the archetype.
          */
         const auto rst(render_stitch_template(fm, rwt, arch));
-        arch.generator().rendered_stitch_template(rst);
+        arch.text_templating().rendered_stitch_template(rst);
     }
 
     stp.end_transform(m);

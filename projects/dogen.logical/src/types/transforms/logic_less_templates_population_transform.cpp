@@ -52,7 +52,8 @@ apply(const context& ctx, entities::model& m) {
     auto& archs(pe.archetypes());
     for (auto& pair : archs) {
         auto& arch(*pair.second);
-        if (!arch.generator().wale_template())
+        auto& tt(arch.text_templating());
+        if (!tt.wale_template())
             continue;
 
         /*
@@ -60,7 +61,7 @@ apply(const context& ctx, entities::model& m) {
          * expect to find the template since resolution already has
          * taken place, but you never know.
          */
-        const auto tid(arch.generator().wale_template()->qualified().dot());
+        const auto tid(tt.wale_template()->qualified().dot());
         const auto& llt(m.templating_elements().logic_less_templates());
         const auto k(llt.find(tid));
         if (k == llt.end()) {
@@ -68,7 +69,7 @@ apply(const context& ctx, entities::model& m) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(missing_logic_less_template + tid));
         }
-        arch.generator().wale_template_content(k->second->content());
+        tt.wale_template_content(k->second->content());
     }
 
     stp.end_transform(m);

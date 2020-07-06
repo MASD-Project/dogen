@@ -25,7 +25,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
-#include "dogen.logical/io/entities/physical/archetype_generator_io.hpp"
+#include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -64,7 +64,7 @@ archetype::archetype(
     const std::string& part_id,
     const std::string& logical_meta_element_id,
     const dogen::logical::entities::physical::relations& relations,
-    const dogen::logical::entities::physical::archetype_generator& generator)
+    const dogen::logical::entities::physical::archetype_text_templating& text_templating)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -89,7 +89,7 @@ archetype::archetype(
       part_id_(part_id),
       logical_meta_element_id_(logical_meta_element_id),
       relations_(relations),
-      generator_(generator) { }
+      text_templating_(text_templating) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -121,7 +121,7 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(logical_meta_element_id_) << "\"" << ", "
       << "\"relations\": " << relations_ << ", "
-      << "\"generator\": " << generator_
+      << "\"text_templating\": " << text_templating_
       << " }";
 }
 
@@ -137,7 +137,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(part_id_, other.part_id_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(relations_, other.relations_);
-    swap(generator_, other.generator_);
+    swap(text_templating_, other.text_templating_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -156,7 +156,7 @@ bool archetype::operator==(const archetype& rhs) const {
         part_id_ == rhs.part_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         relations_ == rhs.relations_ &&
-        generator_ == rhs.generator_;
+        text_templating_ == rhs.text_templating_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -285,20 +285,20 @@ void archetype::relations(const dogen::logical::entities::physical::relations&& 
     relations_ = std::move(v);
 }
 
-const dogen::logical::entities::physical::archetype_generator& archetype::generator() const {
-    return generator_;
+const dogen::logical::entities::physical::archetype_text_templating& archetype::text_templating() const {
+    return text_templating_;
 }
 
-dogen::logical::entities::physical::archetype_generator& archetype::generator() {
-    return generator_;
+dogen::logical::entities::physical::archetype_text_templating& archetype::text_templating() {
+    return text_templating_;
 }
 
-void archetype::generator(const dogen::logical::entities::physical::archetype_generator& v) {
-    generator_ = v;
+void archetype::text_templating(const dogen::logical::entities::physical::archetype_text_templating& v) {
+    text_templating_ = v;
 }
 
-void archetype::generator(const dogen::logical::entities::physical::archetype_generator&& v) {
-    generator_ = std::move(v);
+void archetype::text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v) {
+    text_templating_ = std::move(v);
 }
 
 }
