@@ -33,22 +33,26 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 namespace dogen::physical::entities {
 
 artefact_set::artefact_set(
+    const std::string& logical_meta_element_id,
     const std::string& logical_element_id,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
     const std::unordered_map<std::string, std::string>& archetype_for_role)
-    : logical_element_id_(logical_element_id),
+    : logical_meta_element_id_(logical_meta_element_id),
+      logical_element_id_(logical_element_id),
       artefacts_by_archetype_(artefacts_by_archetype),
       archetype_for_role_(archetype_for_role) { }
 
 void artefact_set::swap(artefact_set& other) noexcept {
     using std::swap;
+    swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(logical_element_id_, other.logical_element_id_);
     swap(artefacts_by_archetype_, other.artefacts_by_archetype_);
     swap(archetype_for_role_, other.archetype_for_role_);
 }
 
 bool artefact_set::operator==(const artefact_set& rhs) const {
-    return logical_element_id_ == rhs.logical_element_id_ &&
+    return logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
+        logical_element_id_ == rhs.logical_element_id_ &&
         artefacts_by_archetype_ == rhs.artefacts_by_archetype_ &&
         archetype_for_role_ == rhs.archetype_for_role_;
 }
@@ -57,6 +61,22 @@ artefact_set& artefact_set::operator=(artefact_set other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& artefact_set::logical_meta_element_id() const {
+    return logical_meta_element_id_;
+}
+
+std::string& artefact_set::logical_meta_element_id() {
+    return logical_meta_element_id_;
+}
+
+void artefact_set::logical_meta_element_id(const std::string& v) {
+    logical_meta_element_id_ = v;
+}
+
+void artefact_set::logical_meta_element_id(const std::string&& v) {
+    logical_meta_element_id_ = std::move(v);
 }
 
 const std::string& artefact_set::logical_element_id() const {

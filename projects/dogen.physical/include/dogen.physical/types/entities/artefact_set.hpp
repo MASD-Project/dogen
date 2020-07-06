@@ -33,6 +33,9 @@
 
 namespace dogen::physical::entities {
 
+/**
+ * @brief Represents a slice of logical-physical space fixed at one logical point.
+ */
 class artefact_set final {
 public:
     artefact_set() = default;
@@ -42,13 +45,24 @@ public:
 
 public:
     artefact_set(
+        const std::string& logical_meta_element_id,
         const std::string& logical_element_id,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
         const std::unordered_map<std::string, std::string>& archetype_for_role);
 
 public:
     /**
-     * @brief Identifier for the manifold in logical space where this set exists.
+     * @brief Identifier of the meta-element in the logical dimension.
+     */
+    /**@{*/
+    const std::string& logical_meta_element_id() const;
+    std::string& logical_meta_element_id();
+    void logical_meta_element_id(const std::string& v);
+    void logical_meta_element_id(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier of the element in the logical dimension.
      */
     /**@{*/
     const std::string& logical_element_id() const;
@@ -88,6 +102,7 @@ public:
     artefact_set& operator=(artefact_set other);
 
 private:
+    std::string logical_meta_element_id_;
     std::string logical_element_id_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;
     std::unordered_map<std::string, std::string> archetype_for_role_;

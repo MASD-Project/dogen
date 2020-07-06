@@ -88,6 +88,7 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_set\"" << ", "
+      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"logical_element_id\": " << "\"" << tidy_up_string(v.logical_element_id()) << "\"" << ", "
       << "\"artefacts_by_archetype\": " << v.artefacts_by_archetype() << ", "
       << "\"archetype_for_role\": " << v.archetype_for_role()

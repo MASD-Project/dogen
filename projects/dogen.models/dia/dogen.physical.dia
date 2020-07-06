@@ -3715,16 +3715,16 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="154.463,-93.6"/>
+        <dia:point val="154.463,-92.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.713,-94.35;161.502,-88.2"/>
+        <dia:rectangle val="153.713,-93.55;161.502,-88.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="154.463,-93.6"/>
+        <dia:point val="154.463,-92.8"/>
         <dia:point val="154.463,-91"/>
         <dia:point val="161.303,-91"/>
         <dia:point val="161.303,-89"/>
@@ -18939,7 +18939,7 @@ element.#</dia:string>
         <dia:point val="134,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.95,-98.05;174.975,-93.55"/>
+        <dia:rectangle val="133.95,-98.05;174.975,-92.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="134,-98"/>
@@ -18948,7 +18948,7 @@ element.#</dia:string>
         <dia:real val="40.924999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_set#</dia:string>
@@ -18957,7 +18957,7 @@ element.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Represents a slice of logical-physical space fixed at one logical point.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -19040,6 +19040,29 @@ element.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#logical_meta_element_id#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Identifier of the meta-element in the logical dimension.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#logical_element_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -19049,7 +19072,7 @@ element.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Identifier for the manifold in logical space where this set exists.#</dia:string>
+            <dia:string>#Identifier of the element in the logical dimension.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
