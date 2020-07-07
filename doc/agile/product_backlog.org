@@ -9515,6 +9515,24 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+
+*** Consider using PMR strings                                        :story:
+
+We should create a report that provides a size distribution of files
+in Dogen. This would enable us to figure out if there is a "common
+size" that most files have. If so, it may make sense to create PMR
+strings to represent files so that we do not require dynamic
+allocation for string concatenation when generating files. However, we
+should probably only look into this after considering a move to =fmt=.
+
+Even if we don't use PMR, this could still be useful if there is a way
+to pre-allocate these strings like one can do with vectors. We should
+also try to use the content string for the formatting.
+
+Links:
+
+- [[https://blog.feabhas.com/2019/03/thanks-for-the-memory-allocator/][Thanks for the memory (allocator)]]
+
 *** Consider adding attributes to meta-model                          :story:
 
 Programming languages such as C#, Java and C++ support annotating
@@ -14003,16 +14021,6 @@ Franca is an IDL language for which there is an XText definition and a
 C++ (spirit) implementation [[https://github.com/martinhaefner/franca][here]]. It may be useful as a gateway for
 other IDLs.
 
-*** Add support for the fmt library                                   :story:
-
-We could add a facet for fmt that acts like the iostreams
-facet.
-
-Links:
-
-- https://accu.org/index.php/journals/2509
-- https://github.com/fmtlib/fmt
-
 *** Add support for D-Bus                                             :story:
 
 [[https://en.wikipedia.org/wiki/D-Bus][D-Bus]] is an RPC mechanism used on Linux.
@@ -16789,15 +16797,32 @@ Links:
 
 - [[https://github.com/TonicAI/masquerade][masquerade:]] real time data annonymiser. See this [[https://www.tonic.ai/post/masquerade-a-postgres-proxy/][blog post]].
 
-*** Consider adding support for the fmt library                       :story:
+*** Consider adding support for the =fmt= library                     :story:
 
 It would be interesting to benchmark dogen using iostreams vs dogen
 using the =fmt= library. It would also be nice to have a IO based on
 =fmt=.
 
+We should also consider replacing iostreams in M2T with =fmt=. We need
+to find a way to benchmark both approaches.
+
 Links:
 
 - [[https://github.com/fmtlib/fmt][GH fmt]]
+- [[https://github.com/fmtlib/fmt/issues/122][#122: Can't write into a pre-existing buffer?]] It seems we can
+  pre-allocate the string for the buffer.
+
+Merged stories:
+
+*Add support for the fmt library*
+
+We could add a facet for fmt that acts like the iostreams
+facet.
+
+Links:
+
+- https://accu.org/index.php/journals/2509
+- https://github.com/fmtlib/fmt
 
 *** Consider adding support for the =fast_io= library                 :story:
 
