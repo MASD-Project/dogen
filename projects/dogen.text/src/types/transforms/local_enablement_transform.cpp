@@ -364,7 +364,7 @@ apply(const context& ctx, entities::model& m) {
 
     const auto& pmm(*ctx.physical_meta_model());
     const auto& in(pmm.indexed_names());
-    const auto& lmn(in.by_logical_meta_name());
+    const auto& lmn(in.archetype_names_by_logical_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;

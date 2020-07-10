@@ -101,7 +101,7 @@ private:
          */
         const auto& pmm(physical_meta_model_);
         const auto& in(pmm.indexed_names());
-        const auto& lmn(in.by_logical_meta_name());
+        const auto& lmn(in.archetype_names_by_logical_meta_name());
         const auto mn(e->meta_name().qualified().dot());
         const auto i(lmn.find(mn));
         if (i != lmn.end()) {

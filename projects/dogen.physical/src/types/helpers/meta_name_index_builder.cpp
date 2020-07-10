@@ -87,7 +87,7 @@ void meta_name_index_builder::populate_facet_names_by_backend_name() {
 }
 
 void meta_name_index_builder::populate_archetypes_by_facet_by_backend() {
-    auto& abbbf(index_.by_backend_by_facet());
+    auto& abbbf(index_.archetype_names_by_backend_by_facet());
     using qnb = physical::helpers::qualified_meta_name_builder;
     for (const auto& n : index_.all()) {
         const auto b(qnb::build_backend(n));
@@ -107,7 +107,7 @@ void meta_name_index_builder::add(const std::list<entities::meta_name>& mns) {
 
 void meta_name_index_builder::add(const std::unordered_map<std::string,
     entities::archetype_name_set>& by_logical_meta_name) {
-    auto& lmn(index_.by_logical_meta_name());
+    auto& lmn(index_.archetype_names_by_logical_meta_name());
     for (const auto& pair : by_logical_meta_name) {
         /*
          * We start by inserting the physical meta-names into the

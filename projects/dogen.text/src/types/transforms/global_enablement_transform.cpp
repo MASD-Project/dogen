@@ -239,7 +239,7 @@ void global_enablement_transform::populate_global_enablement_properties(
      * Now populate the denormalised archetype properties by querying
      * the containers we've already populated.
      */
-    for (const auto& backend_pair : nrp.by_backend_by_facet()) {
+    for (const auto& backend_pair : nrp.archetype_names_by_backend_by_facet()) {
         /*
          * First we locate the backend for the current batch of
          * physical locations.
@@ -371,7 +371,7 @@ void global_enablement_transform::populate_local_enablement_properties(
          * writing).
          */
         const auto mn_id(pair.first);
-        const auto& lmn(nrp.by_logical_meta_name());
+        const auto& lmn(nrp.archetype_names_by_logical_meta_name());
         const auto i(lmn.find(mn_id));
         if (i == lmn.end())
             continue;

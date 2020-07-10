@@ -125,12 +125,12 @@
           "documentation": "Qualified names of facets by qualified names of backends.\n"
         },
         {
-          "name": "by_logical_meta_name",
+          "name": "archetype_names_by_logical_meta_name",
           "type": "std::unordered_map<std::string, archetype_name_set>",
           "documentation": "Physical meta-names by logical meta-names.\n"
         },
         {
-          "name": "by_backend_by_facet",
+          "name": "archetype_names_by_backend_by_facet",
           "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>",
           "documentation": "Archetype names by qualified backend and facet names\n"
         }

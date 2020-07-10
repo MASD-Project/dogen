@@ -153,8 +153,8 @@ std::ostream& operator<<(std::ostream& s, const meta_name_indices& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::meta_name_indices\"" << ", "
       << "\"all\": " << v.all() << ", "
       << "\"facet_names_by_backend_name\": " << v.facet_names_by_backend_name() << ", "
-      << "\"by_logical_meta_name\": " << v.by_logical_meta_name() << ", "
-      << "\"by_backend_by_facet\": " << v.by_backend_by_facet()
+      << "\"archetype_names_by_logical_meta_name\": " << v.archetype_names_by_logical_meta_name() << ", "
+      << "\"archetype_names_by_backend_by_facet\": " << v.archetype_names_by_backend_by_facet()
       << " }";
     return(s);
 }
