@@ -31,6 +31,7 @@
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen/types/diffing_configuration.hpp"
 #include "dogen/types/reporting_configuration.hpp"
+#include "dogen.physical/types/entities/meta_model_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
 
 namespace dogen::physical::transforms {
@@ -52,6 +53,7 @@ public:
         const boost::optional<dogen::reporting_configuration>& reporting_configuration,
         const bool dry_run_mode_enabled,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
+        const boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
@@ -73,6 +75,16 @@ public:
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
+    /**
+     * @brief Meta-model for the physical dimension.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model() const;
+    boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model();
+    void meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v);
+    void meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v);
+    /**@}*/
+
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<dogen::tracing::tracer>& tracer();
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>& v);
@@ -93,6 +105,7 @@ private:
     boost::optional<dogen::reporting_configuration> reporting_configuration_;
     bool dry_run_mode_enabled_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
+    boost::shared_ptr<dogen::physical::entities::meta_model> meta_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
 };
 

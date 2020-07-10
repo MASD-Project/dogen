@@ -24,6 +24,7 @@
 #include "dogen/io/diffing_configuration_io.hpp"
 #include "dogen/io/reporting_configuration_io.hpp"
 #include "dogen.physical/io/transforms/context_io.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.variability/io/entities/feature_model_io.hpp"
 
 namespace boost {
@@ -74,6 +75,22 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace boost {
 
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::tracing::tracer>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
@@ -103,6 +120,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"reporting_configuration\": " << v.reporting_configuration() << ", "
       << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
+      << "\"meta_model\": " << v.meta_model() << ", "
       << "\"tracer\": " << v.tracer()
       << " }";
     return(s);

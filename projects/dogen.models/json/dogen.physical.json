@@ -1015,6 +1015,11 @@
           "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
+          "name": "meta_model",
+          "type": "boost::shared_ptr<entities::meta_model>",
+          "documentation": "Meta-model for the physical dimension.\n"
+        },
+        {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
         }

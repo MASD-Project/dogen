@@ -20,12 +20,22 @@
  */
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::variability::entities::feature_model>& lhs,
 const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::physical::entities::meta_model>& lhs,
+const boost::shared_ptr<dogen::physical::entities::meta_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -50,6 +60,7 @@ context::context(context&& rhs)
       reporting_configuration_(std::move(rhs.reporting_configuration_)),
       dry_run_mode_enabled_(std::move(rhs.dry_run_mode_enabled_)),
       feature_model_(std::move(rhs.feature_model_)),
+      meta_model_(std::move(rhs.meta_model_)),
       tracer_(std::move(rhs.tracer_)) { }
 
 context::context(
@@ -57,11 +68,13 @@ context::context(
     const boost::optional<dogen::reporting_configuration>& reporting_configuration,
     const bool dry_run_mode_enabled,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
     : diffing_configuration_(diffing_configuration),
       reporting_configuration_(reporting_configuration),
       dry_run_mode_enabled_(dry_run_mode_enabled),
       feature_model_(feature_model),
+      meta_model_(meta_model),
       tracer_(tracer) { }
 
 void context::swap(context& other) noexcept {
@@ -70,6 +83,7 @@ void context::swap(context& other) noexcept {
     swap(reporting_configuration_, other.reporting_configuration_);
     swap(dry_run_mode_enabled_, other.dry_run_mode_enabled_);
     swap(feature_model_, other.feature_model_);
+    swap(meta_model_, other.meta_model_);
     swap(tracer_, other.tracer_);
 }
 
@@ -78,6 +92,7 @@ bool context::operator==(const context& rhs) const {
         reporting_configuration_ == rhs.reporting_configuration_ &&
         dry_run_mode_enabled_ == rhs.dry_run_mode_enabled_ &&
         feature_model_ == rhs.feature_model_ &&
+        meta_model_ == rhs.meta_model_ &&
         tracer_ == rhs.tracer_;
 }
 
@@ -141,6 +156,22 @@ void context::feature_model(const boost::shared_ptr<dogen::variability::entities
 
 void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v) {
     feature_model_ = std::move(v);
+}
+
+const boost::shared_ptr<dogen::physical::entities::meta_model>& context::meta_model() const {
+    return meta_model_;
+}
+
+boost::shared_ptr<dogen::physical::entities::meta_model>& context::meta_model() {
+    return meta_model_;
+}
+
+void context::meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
+    meta_model_ = v;
+}
+
+void context::meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v) {
+    meta_model_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::tracing::tracer>& context::tracer() const {
