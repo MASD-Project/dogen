@@ -1133,7 +1133,7 @@
         },
         {
           "name": "artefacts",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>"
+          "type": "physical::entities::artefact_set"
         }
       ]
     },

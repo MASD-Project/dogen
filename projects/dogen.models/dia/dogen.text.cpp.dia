@@ -16786,13 +16786,13 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="109,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.95,74.95;144.97,79.45"/>
+        <dia:rectangle val="108.95,74.95;130.725,79.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="109,75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.920000000000002"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -16936,7 +16936,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;physical::entities::artefact&gt;&gt;#</dia:string>
+            <dia:string>#physical::entities::artefact_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19941,7 +19941,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="148,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.91,70.8027;148.75,75.8"/>
+        <dia:rectangle val="119.788,70.8027;148.75,75.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19949,8 +19949,8 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
       <dia:attribute name="orth_points">
         <dia:point val="148,75"/>
         <dia:point val="148,71.5477"/>
-        <dia:point val="126.96,71.5477"/>
-        <dia:point val="126.96,75"/>
+        <dia:point val="119.838,71.5477"/>
+        <dia:point val="119.838,75"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

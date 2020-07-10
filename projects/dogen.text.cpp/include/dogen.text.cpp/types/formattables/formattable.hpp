@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/element_fwd.hpp"
-#include "dogen.physical/types/entities/artefact_fwd.hpp"
+#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -46,7 +44,7 @@ public:
     formattable(
         const boost::shared_ptr<dogen::logical::entities::element>& element,
         const dogen::text::cpp::formattables::element_properties& element_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts);
+        const dogen::physical::entities::artefact_set& artefacts);
 
 public:
     const boost::shared_ptr<dogen::logical::entities::element>& element() const;
@@ -59,10 +57,10 @@ public:
     void element_properties(const dogen::text::cpp::formattables::element_properties& v);
     void element_properties(const dogen::text::cpp::formattables::element_properties&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts();
-    void artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v);
-    void artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
+    const dogen::physical::entities::artefact_set& artefacts() const;
+    dogen::physical::entities::artefact_set& artefacts();
+    void artefacts(const dogen::physical::entities::artefact_set& v);
+    void artefacts(const dogen::physical::entities::artefact_set&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -77,7 +75,7 @@ public:
 private:
     boost::shared_ptr<dogen::logical::entities::element> element_;
     dogen::text::cpp::formattables::element_properties element_properties_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_;
+    dogen::physical::entities::artefact_set artefacts_;
 };
 
 }

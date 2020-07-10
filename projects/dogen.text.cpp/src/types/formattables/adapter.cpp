@@ -149,7 +149,7 @@ model adapter::adapt(const transforms::repository& frp,
             BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
         }
         fbl.element(ea.element());
-        fbl.artefacts(ea.artefacts().artefacts_by_archetype());
+        fbl.artefacts(ea.artefacts());
 
         /*
          * Check to see if the element has any formatters. Some

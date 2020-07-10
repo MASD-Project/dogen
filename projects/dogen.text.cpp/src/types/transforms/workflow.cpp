@@ -110,7 +110,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.qualified());
         const auto& ap(get_artefact_properties(e, arch));
-        auto aptr(get_artefact(fbl.artefacts(), arch));
+        auto aptr(get_artefact(fbl.artefacts().artefacts_by_archetype(), arch));
 
         if (!ap.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
