@@ -700,7 +700,7 @@
       ]
     },
     {
-      "name": "entities::DeterminableOrigin",
+      "name": "entities::Provenance",
       "documentation": "Properties related to the origin of the modeling element.\n",
       "stereotypes": [
         "masd::object_template"
@@ -743,7 +743,7 @@
       "name": "entities::Element",
       "parents": [
         "entities::Configurable",
-        "entities::DeterminableOrigin",
+        "entities::Provenance",
         "entities::Nameable"
       ],
       "stereotypes": [

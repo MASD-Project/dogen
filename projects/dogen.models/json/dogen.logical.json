@@ -139,8 +139,8 @@
       ]
     },
     {
-      "name": "entities::DeterminableOrigin",
-      "documentation": "A unit of logical that can be code generated.\n",
+      "name": "entities::Provenance",
+      "documentation": "Details of the origin of this model element.\n",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -261,7 +261,7 @@
       "parents": [
         "entities::Nameable",
         "entities::Documentable",
-        "entities::DeterminableOrigin",
+        "entities::Provenance",
         "entities::Containable",
         "entities::Stereotypable",
         "entities::MetaNameable",
@@ -426,7 +426,7 @@
       "stereotypes": [
         "Nameable",
         "MetaNameable",
-        "DeterminableOrigin"
+        "Provenance"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

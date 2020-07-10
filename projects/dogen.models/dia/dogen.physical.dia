@@ -5960,7 +5960,7 @@ The format used is dependent on the technical space the artefact belongs to.#</d
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#DeterminableOrigin#</dia:string>
+        <dia:string>#Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::object_template#</dia:string>

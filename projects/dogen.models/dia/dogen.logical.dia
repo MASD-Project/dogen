@@ -2220,13 +2220,13 @@ formatting.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#DeterminableOrigin#</dia:string>
+        <dia:string>#Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A unit of logical that can be code generated.#</dia:string>
+        <dia:string>#Details of the origin of this model element.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3045,7 +3045,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, MetaNameable, DeterminableOrigin#</dia:string>
+        <dia:string>#Nameable, MetaNameable, Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Intermediate representation of a masd model.#</dia:string>
