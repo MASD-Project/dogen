@@ -50,7 +50,9 @@ artefact::artefact(
     const std::list<std::string>& relations,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
-    const dogen::physical::entities::enablement_flags& enablement_flags)
+    const dogen::physical::entities::enablement_flags& enablement_flags,
+    const dogen::physical::entities::artefact_properties& artefact_properties,
+    const dogen::physical::entities::enablement_properties& enablement_properties)
     : configuration_(configuration),
       origin_sha1_hash_(origin_sha1_hash),
       logical_name_(logical_name),
@@ -64,7 +66,9 @@ artefact::artefact(
       relations_(relations),
       unified_diff_(unified_diff),
       operation_(operation),
-      enablement_flags_(enablement_flags) { }
+      enablement_flags_(enablement_flags),
+      artefact_properties_(artefact_properties),
+      enablement_properties_(enablement_properties) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -82,6 +86,8 @@ void artefact::swap(artefact& other) noexcept {
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
     swap(enablement_flags_, other.enablement_flags_);
+    swap(artefact_properties_, other.artefact_properties_);
+    swap(enablement_properties_, other.enablement_properties_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -98,7 +104,9 @@ bool artefact::operator==(const artefact& rhs) const {
         relations_ == rhs.relations_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
-        enablement_flags_ == rhs.enablement_flags_;
+        enablement_flags_ == rhs.enablement_flags_ &&
+        artefact_properties_ == rhs.artefact_properties_ &&
+        enablement_properties_ == rhs.enablement_properties_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -313,6 +321,38 @@ void artefact::enablement_flags(const dogen::physical::entities::enablement_flag
 
 void artefact::enablement_flags(const dogen::physical::entities::enablement_flags&& v) {
     enablement_flags_ = std::move(v);
+}
+
+const dogen::physical::entities::artefact_properties& artefact::artefact_properties() const {
+    return artefact_properties_;
+}
+
+dogen::physical::entities::artefact_properties& artefact::artefact_properties() {
+    return artefact_properties_;
+}
+
+void artefact::artefact_properties(const dogen::physical::entities::artefact_properties& v) {
+    artefact_properties_ = v;
+}
+
+void artefact::artefact_properties(const dogen::physical::entities::artefact_properties&& v) {
+    artefact_properties_ = std::move(v);
+}
+
+const dogen::physical::entities::enablement_properties& artefact::enablement_properties() const {
+    return enablement_properties_;
+}
+
+dogen::physical::entities::enablement_properties& artefact::enablement_properties() {
+    return enablement_properties_;
+}
+
+void artefact::enablement_properties(const dogen::physical::entities::enablement_properties& v) {
+    enablement_properties_ = v;
+}
+
+void artefact::enablement_properties(const dogen::physical::entities::enablement_properties&& v) {
+    enablement_properties_ = std::move(v);
 }
 
 }

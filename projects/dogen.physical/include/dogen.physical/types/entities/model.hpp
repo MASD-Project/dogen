@@ -58,10 +58,10 @@ public:
         const dogen::physical::entities::logical_name& logical_name,
         const dogen::physical::entities::meta_name& physical_meta_name,
         const dogen::physical::entities::name& name,
+        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& technical_space,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
-        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts);
 
 public:
@@ -116,6 +116,16 @@ public:
     /**@}*/
 
     /**
+     * @brief All atefact sets in this model, by logical ID.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
+    std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
+    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
+    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
+    /**@}*/
+
+    /**
      * @brief Primary technical space that this model belongs to.
      */
     /**@{*/
@@ -134,16 +144,6 @@ public:
     dogen::physical::entities::outputting_properties& outputting_properties();
     void outputting_properties(const dogen::physical::entities::outputting_properties& v);
     void outputting_properties(const dogen::physical::entities::outputting_properties&& v);
-
-    /**
-     * @brief All atefact sets in this model, by logical ID.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
-    /**@}*/
 
     /**
      * @brief Artefacts that exist in the physical dimension only.
@@ -171,10 +171,10 @@ private:
     dogen::physical::entities::logical_name logical_name_;
     dogen::physical::entities::meta_name physical_meta_name_;
     dogen::physical::entities::name name_;
+    std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string technical_space_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
 };
 

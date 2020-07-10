@@ -37,7 +37,9 @@
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
 #include "dogen.physical/types/entities/enablement_flags.hpp"
+#include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.physical/types/entities/enablement_properties.hpp"
 
 namespace dogen::physical::entities {
 
@@ -68,7 +70,9 @@ public:
         const std::list<std::string>& relations,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
-        const dogen::physical::entities::enablement_flags& enablement_flags);
+        const dogen::physical::entities::enablement_flags& enablement_flags,
+        const dogen::physical::entities::artefact_properties& artefact_properties,
+        const dogen::physical::entities::enablement_properties& enablement_properties);
 
 public:
     /**
@@ -194,6 +198,16 @@ public:
     void enablement_flags(const dogen::physical::entities::enablement_flags&& v);
     /**@}*/
 
+    const dogen::physical::entities::artefact_properties& artefact_properties() const;
+    dogen::physical::entities::artefact_properties& artefact_properties();
+    void artefact_properties(const dogen::physical::entities::artefact_properties& v);
+    void artefact_properties(const dogen::physical::entities::artefact_properties&& v);
+
+    const dogen::physical::entities::enablement_properties& enablement_properties() const;
+    dogen::physical::entities::enablement_properties& enablement_properties();
+    void enablement_properties(const dogen::physical::entities::enablement_properties& v);
+    void enablement_properties(const dogen::physical::entities::enablement_properties&& v);
+
 public:
     bool operator==(const artefact& rhs) const;
     bool operator!=(const artefact& rhs) const {
@@ -219,6 +233,8 @@ private:
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
     dogen::physical::entities::enablement_flags enablement_flags_;
+    dogen::physical::entities::artefact_properties artefact_properties_;
+    dogen::physical::entities::enablement_properties enablement_properties_;
 };
 
 }

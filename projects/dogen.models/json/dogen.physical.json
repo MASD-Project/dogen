@@ -384,7 +384,8 @@
       "name": "entities::model",
       "documentation": "Collection of entities representing objects in physical space.\n",
       "stereotypes": [
-        "Element"
+        "Element",
+        "ArtefactContainer"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -400,11 +401,6 @@
         {
           "name": "outputting_properties",
           "type": "outputting_properties"
-        },
-        {
-          "name": "artefact_sets_by_logical_id",
-          "type": "std::unordered_map<std::string, artefact_set>",
-          "documentation": "All atefact sets in this model, by logical ID.\n"
         },
         {
           "name": "orphan_artefacts",
@@ -676,6 +672,14 @@
           "name": "enablement_flags",
           "type": "enablement_flags",
           "documentation": "Local enablement flags.\n"
+        },
+        {
+          "name": "artefact_properties",
+          "type": "artefact_properties"
+        },
+        {
+          "name": "enablement_properties",
+          "type": "enablement_properties"
         }
       ]
     },
@@ -1520,6 +1524,242 @@
           "name": "archetype_for_role",
           "type": "std::unordered_map<std::string, std::string>",
           "documentation": "Resolves a role into a concrete archetype, in the context of this logical element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::artefact_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "file_path",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "formatting_style",
+          "type": "formatting_styles"
+        },
+        {
+          "name": "formatting_input",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::formatting_styles",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "stock",
+          "type": ""
+        },
+        {
+          "name": "wale",
+          "type": ""
+        },
+        {
+          "name": "stitch",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "entities::enablement_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "facet_enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "entities::artefact_repository",
+      "stereotypes": [
+        "ArtefactContainer"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "extraction_properties",
+          "type": "extraction_properties"
+        },
+        {
+          "name": "global_enablement_properties",
+          "type": "global_enablement_properties"
+        },
+        {
+          "name": "enabled_archetype_for_element",
+          "type": "std::unordered_set<element_archetype>"
+        },
+        {
+          "name": "managed_directories",
+          "type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": "entities::ArtefactContainer",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "artefact_sets_by_logical_id",
+          "type": "std::unordered_map<std::string, artefact_set>",
+          "documentation": "All atefact sets in this model, by logical ID.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::extraction_properties",
+      "documentation": "Properties related to extraction.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp_headers_output_directory",
+          "type": "boost::filesystem::path",
+          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
+        },
+        {
+          "name": "enabled_backends",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "enable_backend_directories",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::global_enablement_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_properties",
+          "type": "std::unordered_map<std::string, backend_properties>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": "archetype_properties",
+          "type": "std::unordered_map<std::string, archetype_properties>"
+        },
+        {
+          "name": "denormalised_archetype_properties",
+          "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::backend_properties",
+      "documentation": "Properties related to the backend.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this backend is enabled.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::denormalised_archetype_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "entities::facet_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, this facet is enabled.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype_properties",
+      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If false, will disable all instances of this archetype.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "entities::element_archetype",
+      "tagged_values": {
+        "masd.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "element",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype",
+          "type": "std::string"
         }
       ]
     }
