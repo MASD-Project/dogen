@@ -132,7 +132,7 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Setup the archetype location repository.
      */
-
+    r.physical_context().meta_model(pmm);
     r.injection_context().physical_meta_model(pmm);
     r.logical_context().physical_meta_model(pmm);
     r.text_context().physical_meta_model(pmm);
