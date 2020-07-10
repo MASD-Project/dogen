@@ -15,49 +15,51 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-10 Fri 12:49]
+#+CAPTION: Clock summary at [2020-07-10 Fri 23:17]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *76:57* |       |       | 100.0 |
+| *Total time*                                                      | *81:34* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 76:57   |       |       | 100.0 |
-| Active                                                            |         | 76:57 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  7:42 |  10.0 |
+| Stories                                                           | 81:34   |       |       | 100.0 |
+| Active                                                            |         | 81:34 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  8:00 |   9.8 |
 | Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.5 |
-| Sprint and product backlog grooming                               |         |       |  5:49 |   7.6 |
+| Sprint and product backlog grooming                               |         |       |  5:49 |   7.1 |
 | Nightly nursing                                                   |         |       |  0:11 |   0.2 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   2.0 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   1.9 |
 | Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   0.8 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.3 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   4.0 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   3.8 |
 | Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.5 |
-| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   4.0 |
-| Split archetype factory from transform                            |         |       | 10:57 |  14.2 |
+| Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   3.7 |
+| Split archetype factory from transform                            |         |       | 10:57 |  13.4 |
 | Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.5 |
-| Remove traits for archetypes                                      |         |       |  0:44 |   1.0 |
-| Analysis on solving relationship problems                         |         |       |  4:45 |   6.2 |
-| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   0.8 |
-| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.5 |
-| Add labels to archetypes                                          |         |       |  2:22 |   3.1 |
-| Add support for CSV values in variability                         |         |       |  0:56 |   1.2 |
-| Add hash map of artefacts in physical model                       |         |       |  2:59 |   3.9 |
-| Analysis on archetype relations for stitch templates              |         |       |  2:07 |   2.8 |
-| Move templating aspects of archetype into a generator type        |         |       |  0:56 |   1.2 |
+| Remove traits for archetypes                                      |         |       |  0:44 |   0.9 |
+| Analysis on solving relationship problems                         |         |       |  4:45 |   5.8 |
+| Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   0.7 |
+| Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.4 |
+| Add labels to archetypes                                          |         |       |  2:22 |   2.9 |
+| Add support for CSV values in variability                         |         |       |  0:56 |   1.1 |
+| Add hash map of artefacts in physical model                       |         |       |  2:59 |   3.7 |
+| Analysis on archetype relations for stitch templates              |         |       |  2:07 |   2.6 |
+| Move templating aspects of archetype into a generator type        |         |       |  0:56 |   1.1 |
 | Split physical relation properties                                |         |       |  0:29 |   0.6 |
 | Rename archetype generator                                        |         |       |  0:19 |   0.4 |
-| Paper: A Comparison of Generative Approaches: XVCL and GenVoca    |         |       |  1:20 |   1.7 |
-| Paper: An evaluation of the Graphical Modeling Framework GMF      |         |       |  1:12 |   1.6 |
-| Problems starting clangd                                          |         |       |  0:50 |   1.1 |
-| Improve org-mode converter                                        |         |       |  5:35 |   7.3 |
-| Add relations between archetypes in the PMM                       |         |       | 12:06 |  15.7 |
-| Analysis on implementing containment with configuration           |         |       |  1:52 |   2.4 |
+| Paper: A Comparison of Generative Approaches: XVCL and GenVoca    |         |       |  1:20 |   1.6 |
+| Paper: An evaluation of the Graphical Modeling Framework GMF      |         |       |  1:12 |   1.5 |
+| Problems starting clangd                                          |         |       |  1:25 |   1.7 |
+| Add relations between archetypes in the PMM                       |         |       | 13:50 |  17.0 |
+| Improve org-mode converter                                        |         |       |  5:35 |   6.8 |
+| Analysis on implementing containment with configuration           |         |       |  1:52 |   2.3 |
+| Create an archetype repository in physical model                  |         |       |  2:00 |   2.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2020-06-03 Wed 21:35]
     :LOGBOOK:
+    CLOCK: [2020-07-10 Fri 22:00]--[2020-07-10 Fri 22:18] =>  0:18
     CLOCK: [2020-06-05 Fri 11:45]--[2020-06-05 Fri 12:00] =>  0:15
     CLOCK: [2020-06-05 Fri 11:29]--[2020-06-05 Fri 11:44] =>  0:15
     CLOCK: [2020-06-05 Fri 10:50]--[2020-06-05 Fri 11:05] =>  0:15
@@ -76,6 +78,14 @@ Release Announcements:
 - [[https://twitter.com/MarcoCraveiro/status/1268840152090267649][twitter]]
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6674605622907949056-3fJa][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+Next sprint:
+
+- Name: Rio de Bentiaba.
+- Foto: https://prazerdeconhecer.files.wordpress.com/2015/09/img_1128.jpg
+- Credit: https://prazerdeconhecer.wordpress.com/2015/09/16/benguela-post/
+- o viajante
+
 
 **** Dogen v1.0.25, "Foz do Cunene"
 
@@ -1891,6 +1901,7 @@ the templates.
 *** COMPLETED Problems starting clangd                                :story:
     CLOSED: [2020-07-10 Fri 11:57]
     :LOGBOOK:
+    CLOCK: [2020-07-10 Fri 15:02]--[2020-07-10 Fri 15:37] =>  0:35
     CLOCK: [2020-07-10 Fri 11:05]--[2020-07-10 Fri 11:55] =>  0:50
     :END:
 
@@ -1901,59 +1912,13 @@ It seems with the LSP update, many functions we were using on our
 config have been removed or deprecated, causing weird errors. These
 have been removed and it seems all is working well again.
 
-*** STARTED Improve org-mode converter                                :story:
+Spent some time configuring the new LSP windows we didn't use before
+(errors list and symbols list).
+
+*** COMPLETED Add relations between archetypes in the PMM             :story:
+    CLOSED: [2020-07-10 Fri 17:22]
     :LOGBOOK:
-    CLOCK: [2020-07-10 Fri 10:35]--[2020-07-10 Fri 10:55] =>  0:20
-    CLOCK: [2020-06-26 Fri 10:00]--[2020-06-26 Fri 11:16] =>  1:16
-    CLOCK: [2020-06-25 Thu 23:00]--[2020-06-25 Thu 23:18] =>  0:18
-    CLOCK: [2020-06-25 Thu 22:31]--[2020-06-25 Thu 22:59] =>  0:28
-    CLOCK: [2020-06-24 Wed 06:39]--[2020-06-24 Wed 08:00] =>  1:21
-    CLOCK: [2020-06-21 Sun 21:51]--[2020-06-21 Sun 23:26] =>  1:35
-    CLOCK: [2020-06-21 Sun 19:28]--[2020-06-21 Sun 19:45] =>  0:17
-    :END:
-
-Work on the org-mode converter on the side to bring it closer to a
-usable state.
-
-Notes:
-
-- consider splitting documentation from model elements. This would
-  allow us to have sections etc in the documentation, whilst at the
-  same time also having a nested structure to describe model
-  structure.
-- need to group model elements by containing element. Need to remove
-  containing element from name.
-- logical model element type should be in =#+tags=. Need spaces to
-  align it properly.
-- consider allowing documentation using org-mode syntax. This would
-  then be converted when we generate the model.
-- preserve the dia object ID and the dia container ID (child
-  node). With this we can recreate the containment relationships.
-- we should aim to make our org models compliant to org-mode
-  syntax. This means we should avoid introducing our own drawers
-  and have different ways of representing meta-data. Instead, we will
-  use the regular meta-data subsystem for all the data transported in
-  a model which cannot be extracted from its structure. The injector
-  transforms then need to check if the data is coming from meta-data
-  or from the properties themselves and throw when an attribute is
-  defined in both places. There are not that many new keys required.
-- we should add a flag "is container". If set and there are no
-  stereotype attributes for the meta-model element, the default is
-  module. If not set, the default is object. This property is conveyed
-  through the meta-data.
-- add simple and qualified name to injection.
-- add =CUSTOM_ID= with a UUID.
-- reduce size of code font and add colouring for latex.
-- add operations to injection.
-- we should try to make the most of the org-mode native concepts. For
-  example, this means we could also support model references as org
-  mode references using =file:projects.org= notation. Models could
-  have a section with all the links that is specific to org mode. This
-  means that from the product file we could have links to all org
-  files in a project.
-
-*** STARTED Add relations between archetypes in the PMM               :story:
-    :LOGBOOK:
+    CLOCK: [2020-07-10 Fri 15:38]--[2020-07-10 Fri 17:22] =>  1:44
     CLOCK: [2020-07-10 Fri 11:56]--[2020-07-10 Fri 12:49] =>  0:53
     CLOCK: [2020-07-10 Fri 10:55]--[2020-07-10 Fri 11:04] =>  0:09
     CLOCK: [2020-07-06 Mon 21:44]--[2020-07-06 Mon 22:04] =>  0:20
@@ -1975,6 +1940,10 @@ Notes:
     CLOCK: [2020-06-26 Fri 11:55]--[2020-06-26 Fri 12:44] =>  0:49
     CLOCK: [2020-06-26 Fri 11:40]--[2020-06-26 Fri 11:54] =>  0:14
     :END:
+
+*Rationale*: this story has progressed as much as possible in
+isolation. We now need to join the dots together and move all related
+transforms into the physical model.
 
 We need to add a new enum in the physical model: =relation_type=.
 
@@ -2034,7 +2003,9 @@ Tasks:
 
 - add relations to all archetypes.
 - generate code that creates the PMM with the new relations.
-- create a transform that resolves all label URNs into archetype URNs.
+- create a transform that resolves all label URNs into archetype
+  URNs. Actually, this can only be done in the context of a logical
+  manifold and therefore requires the physical instance.
 - populate the artefact's archetype.
 - create a transform that takes the archetypes relations and populates
   the artefact's relations with LPPs.
@@ -2062,6 +2033,57 @@ Notes:
   kinds of meta-names.
 - add postfix of =archetype_names_= to make container names clearer in
   the manifold.
+
+*** STARTED Improve org-mode converter                                :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-10 Fri 10:35]--[2020-07-10 Fri 10:55] =>  0:20
+    CLOCK: [2020-06-26 Fri 10:00]--[2020-06-26 Fri 11:16] =>  1:16
+    CLOCK: [2020-06-25 Thu 23:00]--[2020-06-25 Thu 23:18] =>  0:18
+    CLOCK: [2020-06-25 Thu 22:31]--[2020-06-25 Thu 22:59] =>  0:28
+    CLOCK: [2020-06-24 Wed 06:39]--[2020-06-24 Wed 08:00] =>  1:21
+    CLOCK: [2020-06-21 Sun 21:51]--[2020-06-21 Sun 23:26] =>  1:35
+    CLOCK: [2020-06-21 Sun 19:28]--[2020-06-21 Sun 19:45] =>  0:17
+    :END:
+
+Work on the org-mode converter on the side to bring it closer to a
+usable state.
+
+Notes:
+
+- consider splitting documentation from model elements. This would
+  allow us to have sections etc in the documentation, whilst at the
+  same time also having a nested structure to describe model
+  structure.
+- need to group model elements by containing element. Need to remove
+  containing element from name.
+- logical model element type should be in =#+tags=. Need spaces to
+  align it properly.
+- consider allowing documentation using org-mode syntax. This would
+  then be converted when we generate the model.
+- preserve the dia object ID and the dia container ID (child
+  node). With this we can recreate the containment relationships.
+- we should aim to make our org models compliant to org-mode
+  syntax. This means we should avoid introducing our own drawers
+  and have different ways of representing meta-data. Instead, we will
+  use the regular meta-data subsystem for all the data transported in
+  a model which cannot be extracted from its structure. The injector
+  transforms then need to check if the data is coming from meta-data
+  or from the properties themselves and throw when an attribute is
+  defined in both places. There are not that many new keys required.
+- we should add a flag "is container". If set and there are no
+  stereotype attributes for the meta-model element, the default is
+  module. If not set, the default is object. This property is conveyed
+  through the meta-data.
+- add simple and qualified name to injection.
+- add =CUSTOM_ID= with a UUID.
+- reduce size of code font and add colouring for latex.
+- add operations to injection.
+- we should try to make the most of the org-mode native concepts. For
+  example, this means we could also support model references as org
+  mode references using =file:projects.org= notation. Models could
+  have a section with all the links that is specific to org mode. This
+  means that from the product file we could have links to all org
+  files in a project.
 
 *** STARTED Analysis on implementing containment with configuration   :story:
     :LOGBOOK:
@@ -2155,6 +2177,34 @@ Links:
 
 - [[https://www.uml-diagrams.org/stereotype.html][UML Stereotype]]
 - [[https://en.wikipedia.org/wiki/Stereotype_(UML)][Wikipedia - Stereotype (UML)]]
+
+*** STARTED Create an archetype repository in physical model          :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-10 Fri 23:00]--[2020-07-10 Fri 23:17] =>  0:17
+    CLOCK: [2020-07-10 Fri 22:57]--[2020-07-10 Fri 22:59] =>  0:02
+    CLOCK: [2020-07-10 Fri 21:35]--[2020-07-10 Fri 21:50] =>  0:15
+    CLOCK: [2020-07-10 Fri 18:33]--[2020-07-10 Fri 18:59] =>  0:26
+    CLOCK: [2020-07-10 Fri 17:23]--[2020-07-10 Fri 18:23] =>  1:14
+    :END:
+
+We need to now move all physical properties from logical and text
+models into the physical model, create a set of transforms to process
+the physical model in this intermediate stage, and then pass it over
+to the text model for text generation. In order to make things easier,
+we need to do a simple "lift and shift" job from all entities and
+transforms, as much as possible. We can refactor these after they land
+in their resting place. What we must do instead is to move as much as
+possible as quickly as possible before we lose track of the
+relationships.
+
+Notes:
+
+- change =logical_model_to_text_model_transform= to a chain.
+- create a factory that makes archetype repositories from a PMM and a
+  logical model.
+- run the archetype repository chain from the
+  =logical_model_to_text_model_transform= chain.
+- create an adapter that converts archetype repository
 
 *** Update archetype generator to handle decoration                   :story:
 
