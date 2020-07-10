@@ -73,6 +73,17 @@ private:
         }
     }
 
+    physical::entities::logical_name
+    to_logical_name(const logical::entities::name& n) {
+        physical::entities::logical_name r;
+        r.simple(n.simple());
+        r.qualified(n.qualified().dot());
+        r.external_modules(n.location().external_modules());
+        r.model_modules(n.location().model_modules());
+        r.internal_modules(n.location().internal_modules());
+        return r;
+    }
+
     /**
      * @brief Adds an element to the model, performing an expansion
      * across physical space.
@@ -119,7 +130,21 @@ private:
                 const auto pqn(pmn.qualified());
                 BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
 
+                /*
+                 * Populate the provenance properties for both the
+                 * logical and physical dimensions.
+                 */
                 auto art(boost::make_shared<physical::entities::artefact>());
+                art->physical_meta_name(pmn);
+                art->logical_name(to_logical_name(e->name()));
+                art->origin_sha1_hash(e->origin_sha1_hash());
+
+                /*
+                 * Add the element to the manifold. For any position
+                 * in logical space, there can only be one
+                 * corresponding position in physical space as
+                 * represented by the physical meta-element.
+                 */
                 const auto pair(std::make_pair(pqn, art));
                 const auto inserted(arts.insert(pair).second);
                 if (!inserted) {
