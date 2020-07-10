@@ -68,7 +68,7 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
             physical::entities::artefact_set as;
             as.logical_element_id(logical_element_id);
 
-            for (const auto& pair : ea.artefacts()) {
+            for (const auto& pair : ea.artefacts().artefacts_by_archetype()) {
                 const auto archetype_id(pair.first);
                 const auto aptr(pair.second);
                 /*

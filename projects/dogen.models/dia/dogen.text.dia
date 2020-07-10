@@ -8392,13 +8392,13 @@ spaces.#</dia:string>
         <dia:point val="73,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,56.95;108.97,60.65"/>
+        <dia:rectangle val="72.95,56.95;94.725,60.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.920000000000002"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -8519,13 +8519,13 @@ spaces.#</dia:string>
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;physical::entities::artefact&gt;&gt;#</dia:string>
+            <dia:string>#physical::entities::artefact_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Physical artefact that will be produced from the logical element.#</dia:string>
+            <dia:string>#Physical artefacts that will be produced from the logical element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8586,7 +8586,7 @@ spaces.#</dia:string>
         <dia:point val="88.3825,47.2484"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.6325,46.4984;91.16,57.7497"/>
+        <dia:rectangle val="83.7875,46.4984;89.1325,57.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8594,8 +8594,8 @@ spaces.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="88.3825,47.2484"/>
         <dia:point val="88.3825,50"/>
-        <dia:point val="90.96,50"/>
-        <dia:point val="90.96,56.9497"/>
+        <dia:point val="83.8375,50"/>
+        <dia:point val="83.8375,56.9497"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

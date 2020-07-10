@@ -121,22 +121,32 @@ private:
                                      << physical_meta_names.size();
 
             /*
-             * Now, for each physical meta-name, create an entry with the
-             * associated artefact. We only expect one instance of a
-             * physical meta-name.
+             * Create the artefact set, which represents a manifold in
+             * physical space for this logical position. We start by
+             * populating the manifold's logical properties.
              */
-            auto& arts(ea.artefacts());
+            auto& as(ea.artefacts());
+            const auto ln(to_logical_name(e->name()));
+            as.logical_element_id(ln.qualified());
+            as.logical_meta_element_id(mn);
+            auto& aba(as.artefacts_by_archetype());
+
+            /*
+             * Now, for each physical meta-name, create an entry with
+             * the associated artefact. We only expect one instance of
+             * a physical meta-name.
+             */
             for (const auto& pmn : physical_meta_names) {
                 const auto pqn(pmn.qualified());
                 BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
 
                 /*
                  * Populate the provenance properties for both the
-                 * logical and physical dimensions.
+                 * logical and physical dimensions of the artefact.
                  */
                 auto art(boost::make_shared<physical::entities::artefact>());
                 art->physical_meta_name(pmn);
-                art->logical_name(to_logical_name(e->name()));
+                art->logical_name(ln);
                 art->origin_sha1_hash(e->origin_sha1_hash());
 
                 /*
@@ -146,7 +156,7 @@ private:
                  * represented by the physical meta-element.
                  */
                 const auto pair(std::make_pair(pqn, art));
-                const auto inserted(arts.insert(pair).second);
+                const auto inserted(aba.insert(pair).second);
                 if (!inserted) {
                     BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pqn;
                     BOOST_THROW_EXCEPTION(

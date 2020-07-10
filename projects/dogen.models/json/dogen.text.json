@@ -524,8 +524,8 @@
         },
         {
           "name": "artefacts",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>",
-          "documentation": "Physical artefact that will be produced from the logical element.\n"
+          "type": "physical::entities::artefact_set",
+          "documentation": "Physical artefacts that will be produced from the logical element.\n"
         }
       ]
     },

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
 
 namespace boost {
@@ -31,20 +30,11 @@ const boost::shared_ptr<dogen::logical::entities::element>& rhs) {
 
 }
 
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::physical::entities::artefact>& lhs,
-const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
 namespace dogen::text::entities {
 
 element_artefacts::element_artefacts(
     const boost::shared_ptr<dogen::logical::entities::element>& element,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts)
+    const dogen::physical::entities::artefact_set& artefacts)
     : element_(element),
       artefacts_(artefacts) { }
 
@@ -81,19 +71,19 @@ void element_artefacts::element(const boost::shared_ptr<dogen::logical::entities
     element_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& element_artefacts::artefacts() const {
+const dogen::physical::entities::artefact_set& element_artefacts::artefacts() const {
     return artefacts_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& element_artefacts::artefacts() {
+dogen::physical::entities::artefact_set& element_artefacts::artefacts() {
     return artefacts_;
 }
 
-void element_artefacts::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+void element_artefacts::artefacts(const dogen::physical::entities::artefact_set& v) {
     artefacts_ = v;
 }
 
-void element_artefacts::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
+void element_artefacts::artefacts(const dogen::physical::entities::artefact_set&& v) {
     artefacts_ = std::move(v);
 }
 
