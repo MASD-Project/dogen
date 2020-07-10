@@ -45,7 +45,7 @@ adapter::adapt(const transforms::repository& frp,
         auto ptr(ea.element());
         formattable fbl;
         fbl.element(ea.element());
-        fbl.artefacts(ea.artefacts().artefacts_by_archetype());
+        fbl.artefacts(ea.artefacts());
 
         const auto& e(*ptr);
         const auto id(e.name().qualified().dot());

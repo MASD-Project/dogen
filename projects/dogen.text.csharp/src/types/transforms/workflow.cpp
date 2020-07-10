@@ -91,7 +91,8 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             const auto& fmt(*fmt_ptr);
             const auto pn(fmt.archetype().meta_name());
             const auto arch(pn.qualified());
-            auto aptr(get_artefact(formattable.artefacts(), arch));
+            auto aptr(get_artefact(
+                    formattable.artefacts().artefacts_by_archetype(), arch));
 
             BOOST_LOG_SEV(lg, debug) << "Using formatter: "
                                      << fmt.archetype().meta_name().qualified();

@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/formattables/formattable.hpp"
 
 namespace boost {
@@ -31,21 +30,12 @@ const boost::shared_ptr<dogen::logical::entities::element>& rhs) {
 
 }
 
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::physical::entities::artefact>& lhs,
-const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
 namespace dogen::text::csharp::formattables {
 
 formattable::formattable(
     const dogen::text::csharp::formattables::element_properties& element_properties,
     const boost::shared_ptr<dogen::logical::entities::element>& element,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts)
+    const dogen::physical::entities::artefact_set& artefacts)
     : element_properties_(element_properties),
       element_(element),
       artefacts_(artefacts) { }
@@ -101,19 +91,19 @@ void formattable::element(const boost::shared_ptr<dogen::logical::entities::elem
     element_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& formattable::artefacts() const {
+const dogen::physical::entities::artefact_set& formattable::artefacts() const {
     return artefacts_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& formattable::artefacts() {
+dogen::physical::entities::artefact_set& formattable::artefacts() {
     return artefacts_;
 }
 
-void formattable::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+void formattable::artefacts(const dogen::physical::entities::artefact_set& v) {
     artefacts_ = v;
 }
 
-void formattable::artefacts(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
+void formattable::artefacts(const dogen::physical::entities::artefact_set&& v) {
     artefacts_ = std::move(v);
 }
 

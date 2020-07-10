@@ -4890,7 +4890,7 @@ using System;
         <dia:point val="99.7625,34.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.0125,32.95;119.108,36.055"/>
+        <dia:rectangle val="99.0125,32.95;119.107,36.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5444,13 +5444,13 @@ using System;
         <dia:point val="2,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-55.05;37.97,-50.55"/>
+        <dia:rectangle val="1.95,-55.05;23.725,-50.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="2,-55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.920000000000002"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -5594,7 +5594,7 @@ using System;
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;physical::entities::artefact&gt;&gt;#</dia:string>
+            <dia:string>#physical::entities::artefact_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5842,7 +5842,7 @@ using System;
         <dia:point val="2,-41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.25,-50.65;20.16,-40.2"/>
+        <dia:rectangle val="1.25,-50.65;13.0375,-40.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5850,8 +5850,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="2,-41"/>
         <dia:point val="2,-46"/>
-        <dia:point val="19.96,-46"/>
-        <dia:point val="19.96,-50.6"/>
+        <dia:point val="12.8375,-46"/>
+        <dia:point val="12.8375,-50.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5911,17 +5911,17 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="19.96,-55"/>
+        <dia:point val="12.8375,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.21,-63.65;28.775,-54.2"/>
+        <dia:rectangle val="12.0875,-63.65;28.775,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="19.96,-55"/>
-        <dia:point val="19.96,-60"/>
+        <dia:point val="12.8375,-55"/>
+        <dia:point val="12.8375,-60"/>
         <dia:point val="28.575,-60"/>
         <dia:point val="28.575,-63.6"/>
       </dia:attribute>
