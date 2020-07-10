@@ -60,7 +60,6 @@ public:
         const dogen::physical::entities::logical_name& logical_name,
         const dogen::physical::entities::meta_name& physical_meta_name,
         const dogen::physical::entities::name& name,
-        const std::string& archetype_id,
         const std::string& content,
         const bool enabled,
         const bool overwrite,
@@ -120,16 +119,6 @@ public:
     dogen::physical::entities::name& name();
     void name(const dogen::physical::entities::name& v);
     void name(const dogen::physical::entities::name&& v);
-    /**@}*/
-
-    /**
-     * @brief ID of the archetype that this artefact is an instance of.
-     */
-    /**@{*/
-    const std::string& archetype_id() const;
-    std::string& archetype_id();
-    void archetype_id(const std::string& v);
-    void archetype_id(const std::string&& v);
     /**@}*/
 
     /**
@@ -221,7 +210,6 @@ private:
     dogen::physical::entities::logical_name logical_name_;
     dogen::physical::entities::meta_name physical_meta_name_;
     dogen::physical::entities::name name_;
-    std::string archetype_id_;
     std::string content_;
     bool enabled_;
     bool overwrite_;

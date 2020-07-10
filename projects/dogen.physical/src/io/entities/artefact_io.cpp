@@ -115,7 +115,6 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"logical_name\": " << v.logical_name() << ", "
       << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"archetype_id\": " << "\"" << tidy_up_string(v.archetype_id()) << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "

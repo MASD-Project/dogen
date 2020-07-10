@@ -636,11 +636,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "archetype_id",
-          "type": "std::string",
-          "documentation": "ID of the archetype that this artefact is an instance of.\n"
-        },
-        {
           "name": "content",
           "type": "std::string",
           "documentation": "Content of the file.\n"
