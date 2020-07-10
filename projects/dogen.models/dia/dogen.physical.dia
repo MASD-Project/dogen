@@ -982,7 +982,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="32,-108.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,-108.121;74.9,-102.021"/>
+        <dia:rectangle val="31.95,-108.121;74.9,-102.821"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="32,-108.071"/>
@@ -991,7 +991,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="42.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#meta_name_indices#</dia:string>
@@ -1116,29 +1116,6 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Qualified names of facets by qualified names of backends.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#formatter_names_by_backend_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_set&lt;std::string&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Qualified archetype names by qualified backend names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11702,7 +11679,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="49.575,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.825,-102.121;53.625,-97.2"/>
+        <dia:rectangle val="48.825,-102.921;53.625,-97.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11711,7 +11688,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="49.575,-98"/>
         <dia:point val="49.575,-100"/>
         <dia:point val="53.425,-100"/>
-        <dia:point val="53.425,-102.071"/>
+        <dia:point val="53.425,-102.871"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

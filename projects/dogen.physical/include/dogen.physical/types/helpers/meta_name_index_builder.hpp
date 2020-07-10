@@ -38,7 +38,6 @@ private:
     void populate_names(const std::list<entities::meta_name>& mns);
     void populate_archetypes_by_facet_by_backend();
     void populate_facet_names_by_backend_name();
-    void populate_formatter_names_by_backend_name();
 
 public:
     void add(const std::list<entities::meta_name>& mns);

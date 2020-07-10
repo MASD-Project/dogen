@@ -49,7 +49,6 @@ public:
     meta_name_indices(
         const std::list<dogen::physical::entities::meta_name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& by_logical_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
@@ -72,16 +71,6 @@ public:
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name();
     void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
-    /**@}*/
-
-    /**
-     * @brief Qualified archetype names by qualified backend names.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name() const;
-    std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name();
-    void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
-    void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
     /**@}*/
 
     /**
@@ -117,7 +106,6 @@ public:
 private:
     std::list<dogen::physical::entities::meta_name> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
-    std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::physical::entities::archetype_name_set> by_logical_meta_name_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
 };
