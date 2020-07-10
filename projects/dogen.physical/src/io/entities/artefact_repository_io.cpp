@@ -86,6 +86,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_repository\"" << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
+      << "\"identifier\": " << "\"" << tidy_up_string(v.identifier()) << "\"" << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "

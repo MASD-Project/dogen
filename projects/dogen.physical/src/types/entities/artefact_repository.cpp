@@ -24,11 +24,13 @@ namespace dogen::physical::entities {
 
 artefact_repository::artefact_repository(
     const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+    const std::string& identifier,
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
     const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
     const std::list<boost::filesystem::path>& managed_directories)
     : artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
+      identifier_(identifier),
       extraction_properties_(extraction_properties),
       global_enablement_properties_(global_enablement_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
@@ -37,6 +39,7 @@ artefact_repository::artefact_repository(
 void artefact_repository::swap(artefact_repository& other) noexcept {
     using std::swap;
     swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
+    swap(identifier_, other.identifier_);
     swap(extraction_properties_, other.extraction_properties_);
     swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
@@ -45,6 +48,7 @@ void artefact_repository::swap(artefact_repository& other) noexcept {
 
 bool artefact_repository::operator==(const artefact_repository& rhs) const {
     return artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
+        identifier_ == rhs.identifier_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
         global_enablement_properties_ == rhs.global_enablement_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
@@ -71,6 +75,22 @@ void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<s
 
 void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v) {
     artefact_sets_by_logical_id_ = std::move(v);
+}
+
+const std::string& artefact_repository::identifier() const {
+    return identifier_;
+}
+
+std::string& artefact_repository::identifier() {
+    return identifier_;
+}
+
+void artefact_repository::identifier(const std::string& v) {
+    identifier_ = v;
+}
+
+void artefact_repository::identifier(const std::string&& v) {
+    identifier_ = std::move(v);
 }
 
 const dogen::physical::entities::extraction_properties& artefact_repository::extraction_properties() const {

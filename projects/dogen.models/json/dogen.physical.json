@@ -1609,6 +1609,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "identifier",
+          "type": "std::string",
+          "documentation": "Identifier for this repository. Used for logging and tracing only.\n"
+        },
+        {
           "name": "extraction_properties",
           "type": "extraction_properties"
         },

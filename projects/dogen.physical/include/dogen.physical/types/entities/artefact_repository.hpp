@@ -49,6 +49,7 @@ public:
 public:
     artefact_repository(
         const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+        const std::string& identifier,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
         const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
@@ -63,6 +64,16 @@ public:
     std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
     void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
     void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier for this repository. Used for logging and tracing only.
+     */
+    /**@{*/
+    const std::string& identifier() const;
+    std::string& identifier();
+    void identifier(const std::string& v);
+    void identifier(const std::string&& v);
     /**@}*/
 
     const dogen::physical::entities::extraction_properties& extraction_properties() const;
@@ -97,6 +108,7 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
+    std::string identifier_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     dogen::physical::entities::global_enablement_properties global_enablement_properties_;
     std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;

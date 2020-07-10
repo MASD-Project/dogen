@@ -20161,7 +20161,7 @@ element.#</dia:string>
         <dia:point val="178,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.95,-97.05;205.115,-90.95"/>
+        <dia:rectangle val="177.95,-97.05;205.115,-90.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="178,-97"/>
@@ -20170,7 +20170,7 @@ element.#</dia:string>
         <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_repository#</dia:string>
@@ -20260,6 +20260,29 @@ element.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#identifier#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Identifier for this repository. Used for logging and tracing only.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#extraction_properties#</dia:string>
@@ -22028,16 +22051,16 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="191.532,-91"/>
+        <dia:point val="191.532,-90.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.782,-91.75;199.085,-85.4"/>
+        <dia:rectangle val="190.782,-90.95;199.085,-85.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="191.532,-91"/>
+        <dia:point val="191.532,-90.2"/>
         <dia:point val="191.532,-89"/>
         <dia:point val="198.885,-89"/>
         <dia:point val="198.885,-87"/>
