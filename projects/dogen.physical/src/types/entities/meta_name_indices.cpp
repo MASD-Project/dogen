@@ -26,7 +26,7 @@ meta_name_indices::meta_name_indices(
     const std::list<dogen::physical::entities::meta_name>& all,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-    const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name,
+    const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& by_logical_meta_name,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
@@ -105,19 +105,19 @@ void meta_name_indices::formatter_names_by_backend_name(const std::unordered_map
     formatter_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_indices::by_logical_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& meta_name_indices::by_logical_meta_name() const {
     return by_logical_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& meta_name_indices::by_logical_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& meta_name_indices::by_logical_meta_name() {
     return by_logical_meta_name_;
 }
 
-void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
+void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& v) {
     by_logical_meta_name_ = v;
 }
 
-void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v) {
+void meta_name_indices::by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>&& v) {
     by_logical_meta_name_ = std::move(v);
 }
 

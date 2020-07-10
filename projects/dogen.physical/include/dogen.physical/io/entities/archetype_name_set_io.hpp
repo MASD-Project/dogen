@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_FWD_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_ARCHETYPE_NAME_SET_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_ARCHETYPE_NAME_SET_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.physical/types/entities/archetype_name_set.hpp"
+
 namespace dogen::physical::entities {
 
-class meta_name_group;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::archetype_name_set& v);
 
 }
 

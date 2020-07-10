@@ -83,9 +83,15 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::meta_name_group",
+      "name": "entities::archetype_name_set",
+      "documentation": "Groups archetype names for a given logical meta-name.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "logical_meta_element_id",
+          "type": "std::string",
+          "documentation": "Identifier of the meta-element in the logical dimension.\n"
+        },
         {
           "name": "meta_names",
           "type": "std::list<meta_name>",
@@ -120,7 +126,7 @@
         },
         {
           "name": "by_logical_meta_name",
-          "type": "std::unordered_map<std::string, meta_name_group>",
+          "type": "std::unordered_map<std::string, archetype_name_set>",
           "documentation": "Physical meta-names by logical meta-names.\n"
         },
         {

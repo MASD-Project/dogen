@@ -43,7 +43,7 @@ namespace dogen::physical::transforms {
 void compute_name_indices_transform::
 update_physical_meta_names_by_logical_meta_name(
     const physical::entities::archetype& arch,
-    std::unordered_map<std::string, physical::entities::meta_name_group>&
+    std::unordered_map<std::string, physical::entities::archetype_name_set>&
     physical_meta_names_by_logical_meta_name) {
 
     const auto pmn(arch.meta_name());
@@ -67,12 +67,12 @@ update_physical_meta_names_by_logical_meta_name(
     }
 }
 
-std::unordered_map<std::string, physical::entities::meta_name_group>
+std::unordered_map<std::string, physical::entities::archetype_name_set>
 compute_name_indices_transform::
 obtain_physical_meta_names_by_logical_meta_name(
     const physical::entities::meta_model& mm) {
 
-    std::unordered_map<std::string, physical::entities::meta_name_group> r;
+    std::unordered_map<std::string, physical::entities::archetype_name_set> r;
     for (auto& be : mm.backends()) {
         for (auto& fct_pair : be.facets()) {
             auto& fct(fct_pair.second);

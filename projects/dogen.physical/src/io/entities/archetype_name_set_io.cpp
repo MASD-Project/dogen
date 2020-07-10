@@ -21,7 +21,15 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/meta_name_group_io.hpp"
+#include "dogen.physical/io/entities/archetype_name_set_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace std {
 
@@ -35,14 +43,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical
     return s;
 }
 
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
 }
 
 namespace std {
@@ -65,9 +65,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const meta_name_group& v) {
+std::ostream& operator<<(std::ostream& s, const archetype_name_set& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::meta_name_group\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::archetype_name_set\"" << ", "
+      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
       << "\"canonical_locations\": " << v.canonical_locations()
       << " }";

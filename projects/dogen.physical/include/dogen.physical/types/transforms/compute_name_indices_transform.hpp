@@ -41,14 +41,14 @@ private:
      */
     static void update_physical_meta_names_by_logical_meta_name(
         const physical::entities::archetype& arch,
-        std::unordered_map<std::string, physical::entities::meta_name_group>&
+        std::unordered_map<std::string, physical::entities::archetype_name_set>&
         physical_meta_names_by_logical_meta_name);
 
     /**
      * @brief Obtains all of the archetype meta-names in the physical
      * dimension, organised by logical meta-name.
      */
-    static std::unordered_map<std::string, physical::entities::meta_name_group>
+    static std::unordered_map<std::string, physical::entities::archetype_name_set>
     obtain_physical_meta_names_by_logical_meta_name(
         const physical::entities::meta_model& mm);
 

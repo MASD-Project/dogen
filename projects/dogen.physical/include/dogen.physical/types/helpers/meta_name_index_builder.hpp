@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/meta_name_group.hpp"
+#include "dogen.physical/types/entities/archetype_name_set.hpp"
 #include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::helpers {
@@ -43,7 +43,7 @@ private:
 public:
     void add(const std::list<entities::meta_name>& mns);
     void add(const std::unordered_map<std::string,
-        entities::meta_name_group>& by_logical_meta_name);
+        entities::archetype_name_set>& by_logical_meta_name);
 
 public:
     const entities::meta_name_indices& build();

@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/io/entities/meta_name_group_io.hpp"
 #include "dogen.physical/io/entities/meta_name_indices_io.hpp"
+#include "dogen.physical/io/entities/archetype_name_set_io.hpp"
 
 namespace std {
 
@@ -80,7 +80,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

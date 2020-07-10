@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/meta_name_group.hpp"
+#include "dogen.physical/types/entities/archetype_name_set.hpp"
 
 namespace dogen::physical::entities {
 
@@ -50,7 +50,7 @@ public:
         const std::list<dogen::physical::entities::meta_name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name,
+        const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& by_logical_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
@@ -88,10 +88,10 @@ public:
      * @brief Physical meta-names by logical meta-names.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name() const;
-    std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& by_logical_meta_name();
-    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>& v);
-    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::meta_name_group>&& v);
+    const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& by_logical_meta_name() const;
+    std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& by_logical_meta_name();
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>& v);
+    void by_logical_meta_name(const std::unordered_map<std::string, dogen::physical::entities::archetype_name_set>&& v);
     /**@}*/
 
     /**
@@ -118,7 +118,7 @@ private:
     std::list<dogen::physical::entities::meta_name> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
-    std::unordered_map<std::string, dogen::physical::entities::meta_name_group> by_logical_meta_name_;
+    std::unordered_map<std::string, dogen::physical::entities::archetype_name_set> by_logical_meta_name_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
 };
 

@@ -254,7 +254,7 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
 
 void local_enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    physical::entities::meta_name_group>& physical_names_by_meta_name,
+    physical::entities::archetype_name_set>& physical_names_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_enablement_properties,

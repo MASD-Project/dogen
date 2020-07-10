@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.physical/types/entities/meta_name_group.hpp"
+#include "dogen.physical/types/entities/archetype_name_set.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.text/types/entities/element_archetype.hpp"
 #include "dogen.logical/types/entities/artefact_properties.hpp"
@@ -55,7 +55,7 @@ private:
 
     static void compute_enablement_for_element(
         const std::unordered_map<std::string,
-        physical::entities::meta_name_group>&
+        physical::entities::archetype_name_set>&
         physical_names_by_meta_name,
         const std::unordered_map<std::string,
         entities::denormalised_archetype_properties>&

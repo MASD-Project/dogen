@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_META_NAME_GROUP_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ARCHETYPE_NAME_SET_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_ARCHETYPE_NAME_SET_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,19 +33,33 @@
 
 namespace dogen::physical::entities {
 
-class meta_name_group final {
+/**
+ * @brief Groups archetype names for a given logical meta-name.
+ */
+class archetype_name_set final {
 public:
-    meta_name_group() = default;
-    meta_name_group(const meta_name_group&) = default;
-    meta_name_group(meta_name_group&&) = default;
-    ~meta_name_group() = default;
+    archetype_name_set() = default;
+    archetype_name_set(const archetype_name_set&) = default;
+    archetype_name_set(archetype_name_set&&) = default;
+    ~archetype_name_set() = default;
 
 public:
-    meta_name_group(
+    archetype_name_set(
+        const std::string& logical_meta_element_id,
         const std::list<dogen::physical::entities::meta_name>& meta_names,
         const std::unordered_map<std::string, std::string>& canonical_locations);
 
 public:
+    /**
+     * @brief Identifier of the meta-element in the logical dimension.
+     */
+    /**@{*/
+    const std::string& logical_meta_element_id() const;
+    std::string& logical_meta_element_id();
+    void logical_meta_element_id(const std::string& v);
+    void logical_meta_element_id(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief All meta-names that belong to this group.
      */
@@ -68,16 +82,17 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const meta_name_group& rhs) const;
-    bool operator!=(const meta_name_group& rhs) const {
+    bool operator==(const archetype_name_set& rhs) const;
+    bool operator!=(const archetype_name_set& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(meta_name_group& other) noexcept;
-    meta_name_group& operator=(meta_name_group other);
+    void swap(archetype_name_set& other) noexcept;
+    archetype_name_set& operator=(archetype_name_set other);
 
 private:
+    std::string logical_meta_element_id_;
     std::list<dogen::physical::entities::meta_name> meta_names_;
     std::unordered_map<std::string, std::string> canonical_locations_;
 };
@@ -88,8 +103,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::meta_name_group& lhs,
-    dogen::physical::entities::meta_name_group& rhs) {
+    dogen::physical::entities::archetype_name_set& lhs,
+    dogen::physical::entities::archetype_name_set& rhs) {
     lhs.swap(rhs);
 }
 
