@@ -33,7 +33,7 @@
 namespace dogen::text::transforms {
 
 /**
- * @brief Chain responsible for orchestrating all TEXT transforms.
+ * @brief Chain responsible for orchestrating all text transforms.
  */
 class model_to_text_chain final {
 public:

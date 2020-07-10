@@ -85,7 +85,7 @@ apply(const context& ctx, entities::model_set& ms) {
         formatting_transform::apply(ctx, m);
 
         /*
-         * Run all TEXT transforms against the model.
+         * Run all text transforms against the model.
          */
         model_to_text_chain::apply(ctx, m);
     }

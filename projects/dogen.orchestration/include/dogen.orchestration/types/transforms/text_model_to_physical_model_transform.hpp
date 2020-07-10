@@ -32,7 +32,7 @@
 namespace dogen::orchestration::transforms {
 
 /**
- * @brief Converts TEXT models into physical models.
+ * @brief Converts text models into physical models.
  */
 class text_model_to_physical_model_transform final {
 public:
