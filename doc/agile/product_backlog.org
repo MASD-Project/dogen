@@ -78,6 +78,14 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Enable logging in unit tests from the environment                 :story:
+
+At present in order to enable logging we need to change the macros
+used in unit tests. It would be much nicer if one could setup a
+environment variable with the log level. This would mean that in the
+future when we have org-babel integration we could set the variable
+from the org-file and have a link to the log from the org-file.
+
 *** Name clashes between generated code and non-generated code        :story:
 
 We named a type =archetype_generator=. This caused it to be redefined
@@ -14809,6 +14817,40 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+
+*** Consider adding support for LogDevice                             :story:
+
+It would be nice if we could dump types into a distributed log such as
+log device. Similar to AMQP support, we probably could also add
+elements to the logical model to model core concepts of the log, which
+need to be analysed but presumably must be like a topic, etc. We
+should also be able to read and write to the log, etc.
+
+Links:
+
+- [[https://github.com/facebookincubator/LogDevice][LogDevice]]: "LogDevice is a scalable and fault tolerant distributed
+  log system. While a file-system stores and serves data organized as
+  files, a log system stores and delivers data organized as logs. The
+  log can be viewed as a record-oriented, append-only, and trimmable
+  file."
+- [[https://github.com/cdapio/tigon][tigon]]: "Tigon is an open-source, real-time, low-latency,
+  high-throughput stream processing framework."
+
+*** Improve C# primitives                                             :story:
+
+First we need to check if these are already supported. Then we need to
+see if there are any things we're missing from projects already
+implementing such types.
+
+Primitives are in the current C# ref impl model.
+
+Links:
+
+- [[https://github.com/GeirGrusom/IdGenerator][IdGenerator GH]]: "This project adds a source generator to your
+  project that creates identity types. It's used for types that
+  identifies some resource. For example a user id or application id."
+  See template at the bottom of [[https://github.com/GeirGrusom/IdGenerator/blob/master/src/IdGenerator/IdGenerator.cs][this]] file.
 
 *** Consider allowing restrictions on primitives                      :story:
 
