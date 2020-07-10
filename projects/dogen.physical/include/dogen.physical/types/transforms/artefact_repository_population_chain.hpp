@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Populates the artefact repository.
+ */
 class artefact_repository_population_chain final {
 public:
-    artefact_repository_population_chain() = default;
-    artefact_repository_population_chain(const artefact_repository_population_chain&) = default;
-    artefact_repository_population_chain(artefact_repository_population_chain&&) = default;
-    ~artefact_repository_population_chain() = default;
-    artefact_repository_population_chain& operator=(const artefact_repository_population_chain&) = default;
-
-public:
-    bool operator==(const artefact_repository_population_chain& rhs) const;
-    bool operator!=(const artefact_repository_population_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx,
+        const entities::artefact_repository& rp);
 };
 
 }

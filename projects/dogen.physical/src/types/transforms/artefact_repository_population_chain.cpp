@@ -18,12 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "physical.transforms.write_artefacts_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool artefact_repository_population_chain::operator==(const artefact_repository_population_chain& /*rhs*/) const {
-    return true;
+void artefact_repository_population_chain::apply(const context& ctx,
+    const entities::artefact_repository& rp) {
+    tracing::scoped_chain_tracer stp(lg, "artefact repository population",
+        transform_id, rp.identifier(), *ctx.tracer(), rp);
+
+    stp.end_chain(rp);
 }
 
 }
