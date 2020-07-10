@@ -32,6 +32,8 @@ const std::string
 transform_id("physical.transforms.compute_name_indices_transform");
 const std::string canonical_archetype_postfix(".canonical_archetype");
 const std::string duplicate_archetype("Duplicate archetype id: ");
+const std::string duplicate_label(
+    "More than one archetype with label: ");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -62,9 +64,21 @@ update_physical_meta_names_by_logical_meta_name(
         const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-            BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype + qn));
+            BOOST_THROW_EXCEPTION(
+                transform_exception(duplicate_archetype + qn));
         }
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
+    }
+
+    auto& afl(g.archetype_for_label());
+    for (const auto& l : arch.labels()) {
+        const std::string key(l.key() + ":" + l.value());
+        const auto inserted(afl.insert(std::make_pair(key, qn)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
+            BOOST_THROW_EXCEPTION(transform_exception(duplicate_label + qn));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Mapped label " << key << " to " << qn;
     }
 }
 

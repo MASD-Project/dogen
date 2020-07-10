@@ -48,7 +48,8 @@ private:
      * @brief Obtains all of the archetype meta-names in the physical
      * dimension, organised by logical meta-name.
      */
-    static std::unordered_map<std::string, physical::entities::archetype_name_set>
+    static std::unordered_map<std::string,
+                              physical::entities::archetype_name_set>
     obtain_physical_meta_names_by_logical_meta_name(
         const physical::entities::meta_model& mm);
 
