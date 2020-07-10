@@ -70,7 +70,8 @@ std::ostream& operator<<(std::ostream& s, const archetype_name_set& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::archetype_name_set\"" << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
-      << "\"canonical_locations\": " << v.canonical_locations()
+      << "\"canonical_locations\": " << v.canonical_locations() << ", "
+      << "\"archetype_for_label\": " << v.archetype_for_label()
       << " }";
     return(s);
 }

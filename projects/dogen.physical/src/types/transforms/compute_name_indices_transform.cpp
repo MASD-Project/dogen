@@ -49,6 +49,7 @@ update_physical_meta_names_by_logical_meta_name(
     const auto pmn(arch.meta_name());
     const auto lmn(arch.logical_meta_element_id());
     auto& g(physical_meta_names_by_logical_meta_name[lmn]);
+    g.logical_meta_element_id(lmn);
     g.meta_names().push_back(pmn);
 
     auto& cal(g.canonical_locations());
@@ -89,7 +90,7 @@ obtain_physical_meta_names_by_logical_meta_name(
 void compute_name_indices_transform::
 apply(const physical::transforms::minimal_context& ctx,
     physical::entities::meta_model& mm) {
-    tracing::scoped_transform_tracer stp(lg, "compute name indices transform",
+    tracing::scoped_transform_tracer stp(lg, "compute meta-name indices transform",
         transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
 
     /*

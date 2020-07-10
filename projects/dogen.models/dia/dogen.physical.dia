@@ -800,7 +800,7 @@ The meta-model is always expected to be  @e masd.#</dia:string>
         <dia:point val="50,-117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,-117.05;75.96,-112.55"/>
+        <dia:rectangle val="49.95,-117.05;75.96,-111.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,-117"/>
@@ -809,7 +809,7 @@ The meta-model is always expected to be  @e masd.#</dia:string>
         <dia:real val="25.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_name_set#</dia:string>
@@ -958,6 +958,29 @@ The meta-model is always expected to be  @e masd.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Maps a concrete archetype location to its canonical form, if the canonical
 form is supported. Otherwise no such mapping will exist.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#archetype_for_label#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Maps a label to archetype ID within the present logical manifold.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4377,16 +4400,16 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="75.91,-112.6"/>
+        <dia:point val="75.91,-111.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.16,-113.35;78.2,-107.2"/>
+        <dia:rectangle val="75.16,-112.55;78.2,-107.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="75.91,-112.6"/>
+        <dia:point val="75.91,-111.8"/>
         <dia:point val="75.91,-110"/>
         <dia:point val="78,-110"/>
         <dia:point val="78,-108"/>
@@ -4452,7 +4475,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="53.425,-108.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,-112.65;54.175,-107.271"/>
+        <dia:rectangle val="49.95,-111.85;54.175,-107.271"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4461,7 +4484,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="53.425,-108.071"/>
         <dia:point val="53.425,-110"/>
         <dia:point val="50,-110"/>
-        <dia:point val="50,-112.6"/>
+        <dia:point val="50,-111.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

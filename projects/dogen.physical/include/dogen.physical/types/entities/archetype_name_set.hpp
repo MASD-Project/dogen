@@ -47,7 +47,8 @@ public:
     archetype_name_set(
         const std::string& logical_meta_element_id,
         const std::list<dogen::physical::entities::meta_name>& meta_names,
-        const std::unordered_map<std::string, std::string>& canonical_locations);
+        const std::unordered_map<std::string, std::string>& canonical_locations,
+        const std::unordered_map<std::string, std::string>& archetype_for_label);
 
 public:
     /**
@@ -81,6 +82,16 @@ public:
     void canonical_locations(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief Maps a label to archetype ID within the present logical manifold.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::string>& archetype_for_label() const;
+    std::unordered_map<std::string, std::string>& archetype_for_label();
+    void archetype_for_label(const std::unordered_map<std::string, std::string>& v);
+    void archetype_for_label(const std::unordered_map<std::string, std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype_name_set& rhs) const;
     bool operator!=(const archetype_name_set& rhs) const {
@@ -95,6 +106,7 @@ private:
     std::string logical_meta_element_id_;
     std::list<dogen::physical::entities::meta_name> meta_names_;
     std::unordered_map<std::string, std::string> canonical_locations_;
+    std::unordered_map<std::string, std::string> archetype_for_label_;
 };
 
 }

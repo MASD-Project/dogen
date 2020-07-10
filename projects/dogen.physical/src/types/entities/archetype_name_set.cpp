@@ -25,22 +25,26 @@ namespace dogen::physical::entities {
 archetype_name_set::archetype_name_set(
     const std::string& logical_meta_element_id,
     const std::list<dogen::physical::entities::meta_name>& meta_names,
-    const std::unordered_map<std::string, std::string>& canonical_locations)
+    const std::unordered_map<std::string, std::string>& canonical_locations,
+    const std::unordered_map<std::string, std::string>& archetype_for_label)
     : logical_meta_element_id_(logical_meta_element_id),
       meta_names_(meta_names),
-      canonical_locations_(canonical_locations) { }
+      canonical_locations_(canonical_locations),
+      archetype_for_label_(archetype_for_label) { }
 
 void archetype_name_set::swap(archetype_name_set& other) noexcept {
     using std::swap;
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(meta_names_, other.meta_names_);
     swap(canonical_locations_, other.canonical_locations_);
+    swap(archetype_for_label_, other.archetype_for_label_);
 }
 
 bool archetype_name_set::operator==(const archetype_name_set& rhs) const {
     return logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         meta_names_ == rhs.meta_names_ &&
-        canonical_locations_ == rhs.canonical_locations_;
+        canonical_locations_ == rhs.canonical_locations_ &&
+        archetype_for_label_ == rhs.archetype_for_label_;
 }
 
 archetype_name_set& archetype_name_set::operator=(archetype_name_set other) {
@@ -95,6 +99,22 @@ void archetype_name_set::canonical_locations(const std::unordered_map<std::strin
 
 void archetype_name_set::canonical_locations(const std::unordered_map<std::string, std::string>&& v) {
     canonical_locations_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::string>& archetype_name_set::archetype_for_label() const {
+    return archetype_for_label_;
+}
+
+std::unordered_map<std::string, std::string>& archetype_name_set::archetype_for_label() {
+    return archetype_for_label_;
+}
+
+void archetype_name_set::archetype_for_label(const std::unordered_map<std::string, std::string>& v) {
+    archetype_for_label_ = v;
+}
+
+void archetype_name_set::archetype_for_label(const std::unordered_map<std::string, std::string>&& v) {
+    archetype_for_label_ = std::move(v);
 }
 
 }
