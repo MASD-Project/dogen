@@ -1762,6 +1762,62 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "transforms::artefact_repository_population_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::artefact_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::global_enablement_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::local_enablement_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::formatting_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generability_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::formatting_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "styles",
+          "type": "formatting_styles"
+        },
+        {
+          "name": "input",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }
