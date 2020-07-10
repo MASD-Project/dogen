@@ -29,6 +29,9 @@
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Converts a logical model to an archetype repository.
+ */
 class logical_model_to_archetype_repository_transform final {
 public:
     logical_model_to_archetype_repository_transform() = default;

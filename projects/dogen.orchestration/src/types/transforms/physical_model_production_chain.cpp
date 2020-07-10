@@ -80,7 +80,7 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.text_context(), lms));
 
     /*
-     * Run all the text chain against the models.
+     * Run the text chain against the model set.
      */
     text::transforms::model_generation_chain::
         apply(ctx.text_context(), textms);
