@@ -105,34 +105,35 @@ private:
         ea.element(e);
 
         /*
-         * Obtain all of the archetypes associated with this element's
-         * meta-type, if any. If there are none this just means this
-         * element has a meta-type which is cannot be transformed into
-         * text.
+         * Create the artefact set, which represents a manifold in
+         * physical space for this logical position. We start by
+         * populating the manifold's logical properties.
+         */
+        auto& as(ea.artefacts());
+        const auto ln(to_logical_name(e->name()));
+        as.logical_element_id(ln.qualified());
+        const auto mn(e->meta_name().qualified().dot());
+        as.logical_meta_element_id(mn);
+        as.configuration(e->configuration());
+
+        const auto gs(logical::entities::generability_status::generatable);
+        as.is_generatable(e->generability_status() == gs);
+        auto& aba(as.artefacts_by_archetype());
+
+        /*
+         * Now we obtain all of the archetypes associated with this
+         * element's meta-type, if any. If there are none this just
+         * means this element has a meta-type which is cannot be
+         * transformed into text.
          */
         const auto& pmm(physical_meta_model_);
         const auto& in(pmm.indexed_names());
         const auto& lmn(in.archetype_names_by_logical_meta_name());
-        const auto mn(e->meta_name().qualified().dot());
         const auto i(lmn.find(mn));
         if (i != lmn.end()) {
             const auto& physical_meta_names(i->second.meta_names());
             BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
                                      << physical_meta_names.size();
-
-            /*
-             * Create the artefact set, which represents a manifold in
-             * physical space for this logical position. We start by
-             * populating the manifold's logical properties.
-             */
-            auto& as(ea.artefacts());
-            const auto ln(to_logical_name(e->name()));
-            as.logical_element_id(ln.qualified());
-            as.logical_meta_element_id(mn);
-            as.configuration(e->configuration());
-            const auto gs(logical::entities::generability_status::generatable);
-            as.is_generatable(e->generability_status() == gs);
-            auto& aba(as.artefacts_by_archetype());
 
             /*
              * Now, for each physical meta-name, create an entry with
