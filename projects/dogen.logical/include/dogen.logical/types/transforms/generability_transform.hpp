@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
+/**
+ * @brief Updates the generability status of all model elements.
+ */
 class generability_transform final {
 public:
-    generability_transform() = default;
-    generability_transform(const generability_transform&) = default;
-    generability_transform(generability_transform&&) = default;
-    ~generability_transform() = default;
-    generability_transform& operator=(const generability_transform&) = default;
-
-public:
-    bool operator==(const generability_transform& rhs) const;
-    bool operator!=(const generability_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
