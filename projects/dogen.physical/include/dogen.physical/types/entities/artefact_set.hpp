@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
+#include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::physical::entities {
 
@@ -45,12 +46,23 @@ public:
 
 public:
     artefact_set(
+        const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& logical_meta_element_id,
         const std::string& logical_element_id,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
         const std::unordered_map<std::string, std::string>& archetype_for_role);
 
 public:
+    /**
+     * @brief Configuration for this element.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration() const;
+    boost::shared_ptr<dogen::variability::entities::configuration>& configuration();
+    void configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v);
+    void configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v);
+    /**@}*/
+
     /**
      * @brief Identifier of the meta-element in the logical dimension.
      */
@@ -102,6 +114,7 @@ public:
     artefact_set& operator=(artefact_set other);
 
 private:
+    boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string logical_meta_element_id_;
     std::string logical_element_id_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;

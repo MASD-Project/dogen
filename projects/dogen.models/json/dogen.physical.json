@@ -1508,6 +1508,9 @@
     {
       "name": "entities::artefact_set",
       "documentation": "Represents a slice of logical-physical space fixed at one logical point.\n",
+      "stereotypes": [
+        "Configurable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1612,6 +1615,11 @@
           "name": "identifier",
           "type": "std::string",
           "documentation": "Identifier for this repository. Used for logging and tracing only.\n"
+        },
+        {
+          "name": "root_module_logical_id",
+          "type": "std::string",
+          "documentation": "Identifier of the artefact set containing the root module.\n"
         },
         {
           "name": "extraction_properties",

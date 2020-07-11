@@ -50,6 +50,7 @@ public:
     artefact_repository(
         const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& identifier,
+        const std::string& root_module_logical_id,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
         const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
@@ -74,6 +75,16 @@ public:
     std::string& identifier();
     void identifier(const std::string& v);
     void identifier(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier of the artefact set containing the root module.
+     */
+    /**@{*/
+    const std::string& root_module_logical_id() const;
+    std::string& root_module_logical_id();
+    void root_module_logical_id(const std::string& v);
+    void root_module_logical_id(const std::string&& v);
     /**@}*/
 
     const dogen::physical::entities::extraction_properties& extraction_properties() const;
@@ -109,6 +120,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string identifier_;
+    std::string root_module_logical_id_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     dogen::physical::entities::global_enablement_properties global_enablement_properties_;
     std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;

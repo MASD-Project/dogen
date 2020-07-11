@@ -20,6 +20,16 @@
  */
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::variability::entities::configuration>& lhs,
+const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace boost {
 
@@ -33,17 +43,20 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 namespace dogen::physical::entities {
 
 artefact_set::artefact_set(
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& logical_meta_element_id,
     const std::string& logical_element_id,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
     const std::unordered_map<std::string, std::string>& archetype_for_role)
-    : logical_meta_element_id_(logical_meta_element_id),
+    : configuration_(configuration),
+      logical_meta_element_id_(logical_meta_element_id),
       logical_element_id_(logical_element_id),
       artefacts_by_archetype_(artefacts_by_archetype),
       archetype_for_role_(archetype_for_role) { }
 
 void artefact_set::swap(artefact_set& other) noexcept {
     using std::swap;
+    swap(configuration_, other.configuration_);
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(logical_element_id_, other.logical_element_id_);
     swap(artefacts_by_archetype_, other.artefacts_by_archetype_);
@@ -51,7 +64,8 @@ void artefact_set::swap(artefact_set& other) noexcept {
 }
 
 bool artefact_set::operator==(const artefact_set& rhs) const {
-    return logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
+    return configuration_ == rhs.configuration_ &&
+        logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         logical_element_id_ == rhs.logical_element_id_ &&
         artefacts_by_archetype_ == rhs.artefacts_by_archetype_ &&
         archetype_for_role_ == rhs.archetype_for_role_;
@@ -61,6 +75,22 @@ artefact_set& artefact_set::operator=(artefact_set other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::shared_ptr<dogen::variability::entities::configuration>& artefact_set::configuration() const {
+    return configuration_;
+}
+
+boost::shared_ptr<dogen::variability::entities::configuration>& artefact_set::configuration() {
+    return configuration_;
+}
+
+void artefact_set::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v) {
+    configuration_ = v;
+}
+
+void artefact_set::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v) {
+    configuration_ = std::move(v);
 }
 
 const std::string& artefact_set::logical_meta_element_id() const {

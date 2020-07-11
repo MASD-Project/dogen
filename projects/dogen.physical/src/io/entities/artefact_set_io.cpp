@@ -22,6 +22,23 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
+#include "dogen.variability/io/entities/configuration_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::entities::configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -88,6 +105,7 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_set\"" << ", "
+      << "\"configuration\": " << v.configuration() << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"logical_element_id\": " << "\"" << tidy_up_string(v.logical_element_id()) << "\"" << ", "
       << "\"artefacts_by_archetype\": " << v.artefacts_by_archetype() << ", "
