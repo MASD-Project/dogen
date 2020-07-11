@@ -311,9 +311,8 @@ void global_enablement_transform::populate_local_enablement_properties(
 
         if (!as.configuration()) {
             BOOST_LOG_SEV(lg, error) << missing_configuration << id;
-            continue; // FIXME: hack to get build green
-            // BOOST_THROW_EXCEPTION(
-            //     transform_exception(missing_configuration + id));
+            BOOST_THROW_EXCEPTION(
+                transform_exception(missing_configuration + id));
         }
 
         const auto& cfg(*as.configuration());
