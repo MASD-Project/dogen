@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_ARCHETYPE_REPOSITORY_TRANSFORM_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_ARCHETYPE_REPOSITORY_TRANSFORM_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_ARTEFACT_REPOSITORY_TRANSFORM_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_ARTEFACT_REPOSITORY_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,20 +29,17 @@
 
 namespace dogen::orchestration::transforms {
 
-/**
- * @brief Converts a logical model to an archetype repository.
- */
-class logical_model_to_archetype_repository_transform final {
+class physical_artefact_repository_transform final {
 public:
-    logical_model_to_archetype_repository_transform() = default;
-    logical_model_to_archetype_repository_transform(const logical_model_to_archetype_repository_transform&) = default;
-    logical_model_to_archetype_repository_transform(logical_model_to_archetype_repository_transform&&) = default;
-    ~logical_model_to_archetype_repository_transform() = default;
-    logical_model_to_archetype_repository_transform& operator=(const logical_model_to_archetype_repository_transform&) = default;
+    physical_artefact_repository_transform() = default;
+    physical_artefact_repository_transform(const physical_artefact_repository_transform&) = default;
+    physical_artefact_repository_transform(physical_artefact_repository_transform&&) = default;
+    ~physical_artefact_repository_transform() = default;
+    physical_artefact_repository_transform& operator=(const physical_artefact_repository_transform&) = default;
 
 public:
-    bool operator==(const logical_model_to_archetype_repository_transform& rhs) const;
-    bool operator!=(const logical_model_to_archetype_repository_transform& rhs) const {
+    bool operator==(const physical_artefact_repository_transform& rhs) const;
+    bool operator!=(const physical_artefact_repository_transform& rhs) const {
         return !this->operator==(rhs);
     }
 

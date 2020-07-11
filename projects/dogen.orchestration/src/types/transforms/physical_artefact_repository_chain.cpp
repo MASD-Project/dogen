@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.orchestration/types/transforms/logical_model_to_archetype_repository_transform.hpp"
+#include "dogen.orchestration/types/transforms/physical_artefact_repository_chain.hpp"
 
 namespace dogen::orchestration::transforms {
 
-bool logical_model_to_archetype_repository_transform::operator==(const logical_model_to_archetype_repository_transform& /*rhs*/) const {
+bool physical_artefact_repository_chain::operator==(const physical_artefact_repository_chain& /*rhs*/) const {
     return true;
 }
 
