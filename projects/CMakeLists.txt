@@ -178,12 +178,12 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
             "${CMAKE_EXE_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
         set(CMAKE_SHARED_LINKER_FLAGS
             "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
-    # elseif(UNIX AND NOT APPLE)
-    #     # use the Gold linker. Disabled for the moment.
-    #     set(CMAKE_EXE_LINKER_FLAGS
-    #         "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold")
-    #     set(CMAKE_SHARED_LINKER_FLAGS
-    #         "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-fuse-ld=gold")
+    elseif(UNIX AND NOT APPLE)
+        # use the Gold linker.
+        set(CMAKE_EXE_LINKER_FLAGS
+            "${CMAKE_EXE_LINKER_FLAGS} -Wl,-fuse-ld=gold")
+        set(CMAKE_SHARED_LINKER_FLAGS
+            "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-fuse-ld=gold")
     endif()
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
