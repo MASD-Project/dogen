@@ -46,6 +46,8 @@ const std::string duplicate_id("Duplicate ID for element: ");
 const std::string duplicate_physical_name("Duplicate physical name: ");
 const std::string expected_one_output_technical_space(
     "Expected exactly one output technical space.");
+const std::string expected_archetypes("Expected archetypes for: ");
+const std::string unexpected_archetypes("Unexpected archetypes for: ");
 
 }
 
@@ -65,116 +67,20 @@ private:
     /**
      * @brief If this ID was seen already, throws.
      */
-    void ensure_not_yet_processed(const std::string& id) const {
-        const auto i(processed_ids_.find(id));
-        if (i != processed_ids_.end()) {
-            BOOST_LOG_SEV(lg, error) << duplicate_id << id;
-            BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + id));
-        }
-    }
+    void ensure_not_yet_processed(const std::string& id) const;
 
+    /**
+     * @brief Converts a logical name into a physical representation
+     * of a logical name.
+     */
     physical::entities::logical_name
-    to_logical_name(const logical::entities::name& n) {
-        physical::entities::logical_name r;
-        r.simple(n.simple());
-        r.qualified(n.qualified().dot());
-        r.external_modules(n.location().external_modules());
-        r.model_modules(n.location().model_modules());
-        r.internal_modules(n.location().internal_modules());
-        return r;
-    }
+    to_logical_name(const logical::entities::name& n) const;
 
     /**
      * @brief Adds an element to the model, performing an expansion
      * across physical space.
      */
-    void add(boost::shared_ptr<logical::entities::element> e) {
-        /*
-         * Element IDs are expected to be processed exactly only once.
-         */
-        const auto id(e->name().qualified().dot());
-        BOOST_LOG_SEV(lg, debug) << "Adding element: " << id;
-        ensure_not_yet_processed(id);
-        processed_ids_.insert(id);
-
-        /*
-         * The logical part of the element is very straightforward,
-         * just add it to the element_artefacts structure.
-         */
-        text::entities::element_artefacts ea;
-        ea.element(e);
-
-        /*
-         * Create the artefact set, which represents a manifold in
-         * physical space for this logical position. We start by
-         * populating the manifold's logical properties.
-         */
-        auto& as(ea.artefacts());
-        const auto ln(to_logical_name(e->name()));
-        as.logical_element_id(ln.qualified());
-        const auto mn(e->meta_name().qualified().dot());
-        as.logical_meta_element_id(mn);
-        as.configuration(e->configuration());
-
-        const auto gs(logical::entities::generability_status::generatable);
-        as.is_generatable(e->generability_status() == gs);
-        auto& aba(as.artefacts_by_archetype());
-
-        /*
-         * Now we obtain all of the archetypes associated with this
-         * element's meta-type, if any. If there are none this just
-         * means this element has a meta-type which is cannot be
-         * transformed into text.
-         */
-        const auto& pmm(physical_meta_model_);
-        const auto& in(pmm.indexed_names());
-        const auto& lmn(in.archetype_names_by_logical_meta_name());
-        const auto i(lmn.find(mn));
-        if (i != lmn.end()) {
-            const auto& physical_meta_names(i->second.meta_names());
-            BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
-                                     << physical_meta_names.size();
-
-            /*
-             * Now, for each physical meta-name, create an entry with
-             * the associated artefact. We only expect one instance of
-             * a physical meta-name.
-             */
-            for (const auto& pmn : physical_meta_names) {
-                const auto pqn(pmn.qualified());
-                BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
-
-                /*
-                 * Populate the provenance properties for both the
-                 * logical and physical dimensions of the artefact.
-                 */
-                auto art(boost::make_shared<physical::entities::artefact>());
-                art->physical_meta_name(pmn);
-                art->logical_name(ln);
-                art->origin_sha1_hash(e->origin_sha1_hash());
-
-                /*
-                 * Add the element to the manifold. For any position
-                 * in logical space, there can only be one
-                 * corresponding position in physical space as
-                 * represented by the physical meta-element.
-                 */
-                const auto pair(std::make_pair(pqn, art));
-                const auto inserted(aba.insert(pair).second);
-                if (!inserted) {
-                    BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pqn;
-                    BOOST_THROW_EXCEPTION(
-                        transform_exception(duplicate_physical_name + pqn));
-                }
-                BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: "
-                                         << pqn;
-            }
-        } else {
-            BOOST_LOG_SEV(lg, debug) << "No physical names for meta-name: "
-                                     << mn;
-        }
-        result_.elements().push_back(ea);
-    }
+    void add(boost::shared_ptr<logical::entities::element> e);
 
 public:
     void operator()(boost::shared_ptr<logical::entities::element> e) { add(e); }
@@ -187,6 +93,155 @@ private:
     text::entities::model& result_;
     std::unordered_set<std::string> processed_ids_;
 };
+
+void populator::ensure_not_yet_processed(const std::string& id) const {
+    const auto i(processed_ids_.find(id));
+    if (i != processed_ids_.end()) {
+        BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + id));
+    }
+}
+
+physical::entities::logical_name
+populator::to_logical_name(const logical::entities::name& n) const {
+    physical::entities::logical_name r;
+    r.simple(n.simple());
+    r.qualified(n.qualified().dot());
+    r.external_modules(n.location().external_modules());
+    r.model_modules(n.location().model_modules());
+    r.internal_modules(n.location().internal_modules());
+    return r;
+}
+
+void populator::add(boost::shared_ptr<logical::entities::element> e) {
+    /*
+     * Element IDs are expected to be processed exactly only once.
+     */
+    const auto id(e->name().qualified().dot());
+    BOOST_LOG_SEV(lg, debug) << "Adding element: " << id;
+    ensure_not_yet_processed(id);
+    processed_ids_.insert(id);
+
+    /*
+     * The logical part of the element is very straightforward, just
+     * add it to the element_artefacts structure.
+     */
+    text::entities::element_artefacts ea;
+    ea.element(e);
+
+    /*
+     * Create the artefact set, which represents a manifold in
+     * physical space for this logical position. We start by
+     * populating the manifold's logical properties. These just link
+     * it back to its origin.
+     */
+    auto& as(ea.artefacts());
+    const auto ln(to_logical_name(e->name()));
+    as.logical_element_id(ln.qualified());
+    const auto mn(e->meta_name().qualified().dot());
+    as.logical_meta_element_id(mn);
+    as.configuration(e->configuration());
+
+    /*
+     * We mainly care about manifolds that have the potential to be
+     * generatable, though we keep all of them - even the
+     * non-generatable ones. Note that this is only a hint from a
+     * logical perspective though, and does not imply that there will
+     * _actually_ be any generation; that is dependent on the physical
+     * configuration and enablement.
+     */
+    using logical::entities::generability_status;
+    const auto gs(generability_status::generatable);
+    const auto gne(generability_status::generation_not_expected);
+    as.is_generatable(e->generability_status() == gs);
+
+    /*
+     * Obtain all of the archetypes associated with this element's
+     * meta-type, if any. If there are none this just means this
+     * element's logical meta-type is not expected to project into the
+     * physical dimension. If so, the generability status should also
+     * reflect this expectation.
+     */
+    const auto& pmm(physical_meta_model_);
+    const auto& in(pmm.indexed_names());
+    const auto& lmn(in.archetype_names_by_logical_meta_name());
+    const auto i(lmn.find(mn));
+    if (i == lmn.end()) {
+        BOOST_LOG_SEV(lg, debug) << "No physical meta-names found for: " << mn;
+
+        /*
+         * The logical meta-model element hinted we should not expect
+         * a physical representation. If the hints do not match our
+         * findings, we must complain - it indicates some logic error.
+         */
+        if (e->generability_status() != gne) {
+            BOOST_LOG_SEV(lg, error) << expected_archetypes << mn;
+            BOOST_THROW_EXCEPTION(
+                transform_exception(expected_archetypes + mn));
+        }
+
+        /*
+         * We found no archetypes as expected, so populate our empty
+         * manifold.
+         */
+        result_.elements().push_back(ea);
+        return;
+    }
+
+    /*
+     * If we do have physical projects, these must have been expected
+     * by the logical model.
+     */
+    if (e->generability_status() == gne) {
+        BOOST_LOG_SEV(lg, error) << unexpected_archetypes << mn;
+        BOOST_THROW_EXCEPTION(transform_exception(unexpected_archetypes + mn));
+    }
+
+    /*
+     * The element does have a physical representation. We need to
+     * update the manifold with it.
+     */
+    const auto& physical_meta_names(i->second.meta_names());
+    BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
+                             << physical_meta_names.size();
+
+    /*
+     * For each physical meta-name representing an archetype, create
+     * an entry with the associated artefact. The artefact is an
+     * instance of the archetype.
+     */
+    auto& aba(as.artefacts_by_archetype());
+    for (const auto& pmn : physical_meta_names) {
+        const auto pqn(pmn.qualified());
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
+
+        /*
+         * Populate the provenance properties for both the logical and
+         * physical dimensions of the artefact.
+         */
+        auto a(boost::make_shared<physical::entities::artefact>());
+        a->physical_meta_name(pmn);
+        a->logical_name(ln);
+        a->origin_sha1_hash(e->origin_sha1_hash());
+
+        /*
+         * Add the archetype to the manifold. For any position in
+         * logical space, there can only be one corresponding position
+         * in physical space as represented by the physical
+         * meta-element. We only expect one instance of a physical
+         * meta-name.
+         */
+        const auto pair(std::make_pair(pqn, a));
+        const auto inserted(aba.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pqn;
+            BOOST_THROW_EXCEPTION(
+                transform_exception(duplicate_physical_name + pqn));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: " << pqn;
+    }
+    result_.elements().push_back(ea);
+}
 
 }
 
