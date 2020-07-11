@@ -3046,13 +3046,13 @@ user defined stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="174,28"/>
+        <dia:point val="97,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.95,27.95;183.863,31.05"/>
+        <dia:rectangle val="96.95,16.95;106.862,20.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="174,28"/>
+        <dia:point val="97,17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.8125"/>
