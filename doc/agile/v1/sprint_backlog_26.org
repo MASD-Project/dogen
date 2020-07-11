@@ -15,33 +15,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-10 Fri 23:17]
+#+CAPTION: Clock summary at [2020-07-11 Sat 14:16]
 | <75>                                                              |         |       |       |       |
 | Headline                                                          | Time    |       |       |     % |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                      | *81:34* |       |       | 100.0 |
+| *Total time*                                                      | *82:17* |       |       | 100.0 |
 |-------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                           | 81:34   |       |       | 100.0 |
-| Active                                                            |         | 81:34 |       | 100.0 |
-| Edit release notes for previous sprint                            |         |       |  8:00 |   9.8 |
-| Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.5 |
+| Stories                                                           | 82:17   |       |       | 100.0 |
+| Active                                                            |         | 82:17 |       | 100.0 |
+| Edit release notes for previous sprint                            |         |       |  8:00 |   9.7 |
+| Create a demo and presentation for previous sprint                |         |       |  1:11 |   1.4 |
 | Sprint and product backlog grooming                               |         |       |  5:49 |   7.1 |
-| Nightly nursing                                                   |         |       |  0:11 |   0.2 |
-| Merge kernel with physical meta-model                             |         |       |  1:31 |   1.9 |
-| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   0.8 |
+| Build nursing                                                     |         |       |  0:54 |   1.1 |
+| Merge kernel with physical meta-model                             |         |       |  1:31 |   1.8 |
+| Convert =wale_template_reference= to meta-data                    |         |       |  0:37 |   0.7 |
 | Create an emacs mode for wale                                     |         |       |  0:14 |   0.3 |
-| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   3.8 |
-| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.5 |
+| Create a TS agnostic representation of inclusion                  |         |       |  3:04 |   3.7 |
+| Analysis on reducing the number of required wale keys             |         |       |  1:11 |   1.4 |
 | Use PMM to compute =meta_name_indices=                            |         |       |  3:03 |   3.7 |
-| Split archetype factory from transform                            |         |       | 10:57 |  13.4 |
-| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.5 |
+| Split archetype factory from transform                            |         |       | 10:57 |  13.3 |
+| Paper: Using Aspects to Model Product Line Variability            |         |       |  1:11 |   1.4 |
 | Remove traits for archetypes                                      |         |       |  0:44 |   0.9 |
 | Analysis on solving relationship problems                         |         |       |  4:45 |   5.8 |
 | Archetype kind and postfix as parts of a larger pattern           |         |       |  0:36 |   0.7 |
 | Paper: A flexible code generator for MOF-based modeling languages |         |       |  1:08 |   1.4 |
 | Add labels to archetypes                                          |         |       |  2:22 |   2.9 |
 | Add support for CSV values in variability                         |         |       |  0:56 |   1.1 |
-| Add hash map of artefacts in physical model                       |         |       |  2:59 |   3.7 |
+| Add hash map of artefacts in physical model                       |         |       |  2:59 |   3.6 |
 | Analysis on archetype relations for stitch templates              |         |       |  2:07 |   2.6 |
 | Move templating aspects of archetype into a generator type        |         |       |  0:56 |   1.1 |
 | Split physical relation properties                                |         |       |  0:29 |   0.6 |
@@ -49,10 +49,10 @@
 | Paper: A Comparison of Generative Approaches: XVCL and GenVoca    |         |       |  1:20 |   1.6 |
 | Paper: An evaluation of the Graphical Modeling Framework GMF      |         |       |  1:12 |   1.5 |
 | Problems starting clangd                                          |         |       |  1:25 |   1.7 |
-| Add relations between archetypes in the PMM                       |         |       | 13:50 |  17.0 |
+| Add relations between archetypes in the PMM                       |         |       | 13:50 |  16.8 |
 | Improve org-mode converter                                        |         |       |  5:35 |   6.8 |
 | Analysis on implementing containment with configuration           |         |       |  1:52 |   2.3 |
-| Create an archetype repository in physical model                  |         |       |  2:00 |   2.5 |
+| Create an archetype repository in physical model                  |         |       |  2:00 |   2.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -843,14 +843,29 @@ void backend_class_header_transform::apply(const context& ctx, const logical::en
 
 Updates to sprint and product backlog.
 
-*** STARTED Nightly nursing                                           :story:
+*** STARTED Build nursing                                             :story:
     :LOGBOOK:
+    CLOCK: [2020-07-11 Sat 13:33]--[2020-07-11 Sat 14:16] =>  0:43
     CLOCK: [2020-06-05 Fri 12:01]--[2020-06-05 Fri 12:12] =>  0:11
     :END:
 
-Time spent fixing issues with nightly builds, daily checks etc.
+Time spent fixing issues with nightly and continuous builds, daily
+checks etc.
 
 - max builds reached.
+- borked build for some strange reason: GCC 9 Debug
+
+: [1272/1282] Building CXX object projects/dogen.text.csharp/src/CMakeFiles/dogen.text.csharp.lib.dir/types/transforms/visual_studio/solution_transform.cpp.o
+: [1273/1282] Building CXX object projects/dogen.text.csharp/src/CMakeFiles/dogen.text.csharp.lib.dir/types/transforms/visual_studio/visual_studio_factory.cpp.o
+: [1274/1282] Building CXX object projects/dogen.text.csharp/src/CMakeFiles/dogen.text.csharp.lib.dir/types/transforms/visual_studio/visual_studio_transform.cpp.o
+: [1275/1282] Building CXX object projects/dogen.text.csharp/src/CMakeFiles/dogen.text.csharp.lib.dir/types/transforms/workflow.cpp.o
+: [1276/1282] Linking CXX static library stage/bin/libdogen.text.csharp.a
+: [1277/1282] Linking CXX static library stage/bin/libdogen.orchestration.a
+: [1278/1282] Linking CXX static library stage/bin/libdogen.cli.a
+: [1279/1282] Linking CXX executable stage/bin/dogen.orchestration.tests
+: [1280/1282] Linking CXX executable stage/bin/dogen.cli
+: FAILED: : && /usr/lib/ccache/g++-9  -Wall -Wextra -Wconversion -Wno-maybe-uninitialized -pedantic -Werror -Wno-system-headers -Woverloaded-virtual -Wwrite-strings  -frtti -fvisibility-inlines-hidden -fvisibility=hidden -fprofile-abs-path -fprofile-arcs -ftest-coverage -g  -Wl,-fuse-ld=gold projects/dogen.orchestration/tests/CMakeFiles/dogen.orchestration.tests.dir/byproduct_generation_tests.cpp.o projects/dogen.orchestration/tests/CMakeFiles/dogen.orchestration.tests.dir/code_generation_chain_tests.cpp.o projects/dogen.orchestration/tests/CMakeFiles/dogen.orchestration.tests.dir/main.cpp.o projects/dogen.orchestration/tests/CMakeFiles/dogen.orchestration.tests.dir/physical_model_production_chain_tests.cpp.o  -o stage/bin/dogen.orchestration.tests  stage/bin/libdogen.orchestration.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libxml2.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/liblzmad.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libz.a -lm /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_system.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_serialization.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_date_time.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_log.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_thread.a -lpthread /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_filesystem.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_program_options.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_unit_test_framework.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_regex.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_chrono.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_atomic.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_log_setup.a -lpthread -lrt stage/bin/libdogen.injection.org_mode.a stage/bin/libdogen.injection.json.a stage/bin/libdogen.injection.dia.a -lrt stage/bin/libdogen.dia.a stage/bin/libdogen.injection.a stage/bin/libdogen.text.cpp.a stage/bin/libdogen.text.csharp.a stage/bin/libdogen.text.a stage/bin/libdogen.logical.a stage/bin/libdogen.templating.a stage/bin/libdogen.logical.a stage/bin/libdogen.templating.a stage/bin/libdogen.physical.a stage/bin/libdogen.variability.a stage/bin/libdogen.physical.a stage/bin/libdogen.variability.a stage/bin/libdogen.tracing.a stage/bin/libdogen.a stage/bin/libdogen.utility.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libxml2.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/liblzmad.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libz.a -lm /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_system.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_serialization.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_date_time.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_log.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_thread.a -lpthread /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_filesystem.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_program_options.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_unit_test_framework.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_regex.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_chrono.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_atomic.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_log_setup.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libz.a /tmp/vcpkg-export/installed/x64-linux/debug/lib/libboost_serialization.a && :
+: ../../../../projects/dogen.logical/src/types/transforms/pre_assembly_chain.cpp:128: error: undefined reference to 'dogen::logical::transforms::dynamic_stereotypes_transform::apply(dogen::logical::transforms::context const&, dogen::logical::entities::input_model_set&)'
 
 *** COMPLETED Move decorations to their "final" resting place         :story:
     CLOSED: [2020-06-05 Fri 11:15]
