@@ -22,11 +22,10 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
-#include "dogen.text/types/transforms/model_generation_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_logical_input_model_set_chain.hpp"
-#include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/text_model_to_physical_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
@@ -74,16 +73,9 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.logical_context(), lmset));
 
     /*
-     * Obtain the text model set
+     * Obtain the text model set.
      */
-    auto textms(logical_model_to_text_model_transform::
-        apply(ctx.text_context(), lms));
-
-    /*
-     * Run the text chain against the model set.
-     */
-    text::transforms::model_generation_chain::
-        apply(ctx.text_context(), textms);
+    auto textms(text_model_production_chain::apply(ctx, lms));
 
     /*
      * Obtain the physical models.

@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/output_model_set.hpp"
 #include "dogen.text/types/entities/model_set.hpp"

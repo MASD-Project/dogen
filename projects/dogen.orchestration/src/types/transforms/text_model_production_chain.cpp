@@ -18,12 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.logical/io/entities/output_model_set_io.hpp"
+#include "dogen.text/types/transforms/model_generation_chain.hpp"
+#include "dogen.text/io/entities/model_set_io.hpp"
+#include "dogen.orchestration/types/transforms/context.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
+
+namespace {
+
+const std::string
+transform_id("orchestration.transforms.physical_model_production_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::orchestration::transforms {
 
-bool text_model_production_chain::operator==(const text_model_production_chain& /*rhs*/) const {
-    return true;
+text::entities::model_set text_model_production_chain::apply(const context& ctx,
+    const logical::entities::output_model_set& loms) {
+    const auto& tracer(*ctx.injection_context().tracer());
+    tracing::scoped_chain_tracer stp(lg, "text model production chain",
+        transform_id, loms.name().qualified().dot(), tracer, loms);
+
+    /*
+     * Convert the logical model into the text model representation.
+     */
+    auto r(logical_model_to_text_model_transform::
+        apply(ctx.text_context(), loms));
+
+    /*
+     * Run the text chain against the model set.
+     */
+    text::transforms::model_generation_chain::apply(ctx.text_context(), r);
+
+    stp.end_chain(r);
+    return r;
 }
 
 }

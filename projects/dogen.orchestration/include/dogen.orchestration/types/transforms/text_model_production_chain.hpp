@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/output_model_set.hpp"
+#include "dogen.text/types/entities/model_set.hpp"
+#include "dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Produces a text model.
+ */
 class text_model_production_chain final {
 public:
-    text_model_production_chain() = default;
-    text_model_production_chain(const text_model_production_chain&) = default;
-    text_model_production_chain(text_model_production_chain&&) = default;
-    ~text_model_production_chain() = default;
-    text_model_production_chain& operator=(const text_model_production_chain&) = default;
-
-public:
-    bool operator==(const text_model_production_chain& rhs) const;
-    bool operator!=(const text_model_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Apply the transform.
+     */
+    static text::entities::model_set apply(const context& ctx,
+        const logical::entities::output_model_set& loms);
 };
 
 }
