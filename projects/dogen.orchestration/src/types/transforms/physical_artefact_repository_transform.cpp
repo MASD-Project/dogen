@@ -24,6 +24,7 @@
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/physical_artefact_repository_transform.hpp"
 
@@ -47,6 +48,9 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     physical::entities::artefact_repository r;
+    const auto rm(m.root_module()->name().qualified().dot());
+    r.root_module_logical_id(rm);
+
     auto& asbli(r.artefact_sets_by_logical_id());
     for (const auto& ea : m.elements()) {
         const auto lid(ea.element()->name().qualified().dot());

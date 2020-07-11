@@ -129,6 +129,7 @@ private:
             const auto ln(to_logical_name(e->name()));
             as.logical_element_id(ln.qualified());
             as.logical_meta_element_id(mn);
+            as.configuration(e->configuration());
             auto& aba(as.artefacts_by_archetype());
 
             /*
