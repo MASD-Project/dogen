@@ -71,7 +71,7 @@ public:
          * code.
          */
         if (v.is_global_module())
-            v.generability_status(generability_status::generation_not_expected);
+            v.generability_status(generability_status::non_generatable_state);
 
         /*
          * Modules are only generatable for the purposes of
@@ -82,7 +82,7 @@ public:
             BOOST_LOG_SEV(lg, trace) << "Module does not have documentation. "
                                      << "Disabling it. Id: "
                                      << v.name().qualified().dot();
-            v.generability_status(generability_status::generation_not_expected);
+            v.generability_status(generability_status::non_generatable_state);
         }
     }
 
@@ -91,6 +91,10 @@ public:
     }
 
     void operator()(decoration::modeline_group& v) {
+        v.generability_status(generability_status::generation_not_expected);
+    }
+
+    void operator()(decoration::modeline& v) {
         v.generability_status(generability_status::generation_not_expected);
     }
 
@@ -106,17 +110,10 @@ public:
         v.generability_status(generability_status::generation_not_expected);
     }
 
-    void operator()(variability::feature_template_bundle& v) {
-        v.generability_status(generability_status::generation_not_expected);
-    }
-
-    void operator()(variability::feature_bundle& v) {
-        v.generability_status(generability_status::generation_not_expected);
-    }
-
-    void operator()(templating::logic_less_template& v) {
-        v.generability_status(generability_status::generation_not_expected);
-    }
+    // FIXME: for now we still need these as generatable.
+    // void operator()(templating::logic_less_template& v) {
+    //     v.generability_status(generability_status::generation_not_expected);
+    // }
 };
 
 }
