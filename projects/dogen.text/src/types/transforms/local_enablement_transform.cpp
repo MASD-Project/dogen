@@ -39,6 +39,7 @@ const std::string transform_id("text.transforms.local_enablement_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string archetype_not_found("Archetype not found: ");
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
@@ -107,22 +108,13 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
     const auto& lalp(local_enablement_properties);
 
     /*
-     * As we may be processing a segmented entity, not all formatting
-     * needs to be present in the local configuration. For example, an
-     * entity may be segmented into an object and a forward
-     * declaration; in this case, when we are processing the object,
-     * we will still see the forward declaration formatting in the
-     * formattable configuration since the transformer merged all
-     * segments of the element together. However, these are not
-     * present in the local configuration container because we are
-     * only processing one segment at a time. So, we need to ignore
-     * the formatting for the segments we are not processing.
-     * FIXME: check this when element extension is removed.
+     * Archetype must be present in local enablement.
      */
     const auto j(lalp.find(archetype));
     if (j == lalp.end()) {
-        BOOST_LOG_SEV(lg, trace) << "Ignoring formatter: " << archetype;
-        return;
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(archetype_not_found + archetype));
     }
     const auto& lc(j->second);
 
@@ -359,7 +351,7 @@ void local_enablement_transform::compute_enablement_for_element(
 
 void local_enablement_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
+    tracing::scoped_transform_tracer stp(lg, "local enablement",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.physical_meta_model());
