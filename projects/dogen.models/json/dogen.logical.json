@@ -257,6 +257,20 @@
       ]
     },
     {
+      "name": "entities::Generatable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generability_status",
+          "type": "generability_status",
+          "documentation": "The status of this element with regards to generability.\n"
+        }
+      ]
+    },
+    {
       "name": "entities::Element",
       "parents": [
         "entities::Nameable",
@@ -267,7 +281,8 @@
         "entities::MetaNameable",
         "entities::TechnicalSpaceRelationship",
         "entities::Configurable",
-        "entities::Labelable"
+        "entities::Labelable",
+        "entities::Generatable"
       ],
       "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [
@@ -4738,6 +4753,53 @@
           }
         }
       ]
+    },
+    {
+      "name": "entities::generability_status",
+      "documentation": "The status of this element with regards to generability.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "non_generatable_source",
+          "type": "",
+          "documentation": "The element was sourced from a non-target model.\n"
+        },
+        {
+          "name": "generation_not_expected",
+          "type": "",
+          "documentation": "The element is of a type that is expected to have support for generation.\n"
+        },
+        {
+          "name": "non_generatable_state",
+          "type": "",
+          "documentation": "The element is normally generatable, but is in a state that precludes generation.\n"
+        },
+        {
+          "name": "generation_disabled",
+          "type": "",
+          "documentation": "The user requested generation to be disabled.\n"
+        },
+        {
+          "name": "generation_ignored",
+          "type": "",
+          "documentation": "User requested that any changes to this element are to be ignored.\n"
+        },
+        {
+          "name": "generatable",
+          "type": "",
+          "documentation": "The element is generatable.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::generability_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

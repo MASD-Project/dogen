@@ -18,12 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/optional_io.hpp"
+#include "dogen.utility/types/io/unordered_set_io.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/local_enablement_transform.hpp"
 
-namespace dogen::physical::transforms {
+namespace {
 
-bool local_enablement_transform::operator==(const local_enablement_transform& /*rhs*/) const {
-    return true;
+const std::string transform_id("physical.transforms.local_enablement_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string global_configuration_not_found(
+    "Could not find global enablement configuration for formatter: ");
+const std::string duplicate_archetype_name("Duplicate archetype name: ");
+const std::string duplicate_element_archetype("Duplicate element archetype: ");
+const std::string meta_name_not_found("Meta-name not found: ");
+
+template <typename T>
+struct scope_exit {
+    scope_exit(T &&t) : t_{std::move(t)} {}
+    ~scope_exit() { t_(); }
+    T t_;
+};
+
+template <typename T>
+scope_exit<T> make_scope_exit(T &&t) {
+    return scope_exit<T> { std::move(t)}; }
 }
+
+
+namespace dogen::physical::transforms {
 
 }

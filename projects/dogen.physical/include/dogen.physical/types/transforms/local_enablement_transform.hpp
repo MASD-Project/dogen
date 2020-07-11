@@ -25,24 +25,42 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include "dogen.physical/types/entities/archetype_name_set.hpp"
+#include "dogen.physical/types/entities/artefact_properties.hpp"
+#include "dogen.physical/types/entities/enablement_properties.hpp"
+#include "dogen.physical/types/entities/denormalised_archetype_properties.hpp"
+#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class local_enablement_transform final {
-public:
-    local_enablement_transform() = default;
-    local_enablement_transform(const local_enablement_transform&) = default;
-    local_enablement_transform(local_enablement_transform&&) = default;
-    ~local_enablement_transform() = default;
-    local_enablement_transform& operator=(const local_enablement_transform&) = default;
+private:
+    static void compute_enablement_for_artefact_properties(
+        const std::unordered_map<std::string,
+        entities::denormalised_archetype_properties>&
+        global_enablement_properties,
+        const std::unordered_map<std::string,
+        entities::enablement_properties>&
+        local_enablement_properties,
+        const std::string& archetype,
+        entities::artefact_properties& ap);
+
+    static void compute_enablement_for_artefact_set(
+        const std::unordered_map<std::string,
+        entities::archetype_name_set>&
+        physical_names_by_meta_name,
+        const std::unordered_map<std::string,
+        entities::denormalised_archetype_properties>&
+        global_enablement_properties,
+        std::unordered_set<entities::element_archetype>&
+        enabled_archetype_for_element, entities::artefact_set& as);
 
 public:
-    bool operator==(const local_enablement_transform& rhs) const;
-    bool operator!=(const local_enablement_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::artefact_repository& arp);
 };
 
 }

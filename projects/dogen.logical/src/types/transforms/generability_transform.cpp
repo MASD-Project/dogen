@@ -18,26 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/label_io.hpp"
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/io/entities/artefact_properties_io.hpp"
-#include "dogen.logical/io/entities/generability_status_io.hpp"
-#include "dogen.logical/io/entities/enablement_properties_io.hpp"
-#include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
+#include "dogen.logical/types/transforms/generability_transform.hpp"
 
-namespace dogen::logical::entities {
+namespace dogen::logical::transforms {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
+bool generability_transform::operator==(const generability_transform& /*rhs*/) const {
+    return true;
 }
 
 }

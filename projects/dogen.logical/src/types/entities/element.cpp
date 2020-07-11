@@ -30,6 +30,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/io/entities/artefact_properties_io.hpp"
+#include "dogen.logical/io/entities/generability_status_io.hpp"
 #include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
@@ -182,7 +183,8 @@ namespace dogen::logical::entities {
 element::element()
     : origin_type_(static_cast<dogen::logical::entities::origin_types>(0)),
       in_global_module_(static_cast<bool>(0)),
-      intrinsic_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+      intrinsic_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)),
+      generability_status_(static_cast<dogen::logical::entities::generability_status>(0)) { }
 
 element::element(
     const dogen::logical::entities::name& name,
@@ -197,6 +199,7 @@ element::element(
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::logical::entities::label>& labels,
+    const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
@@ -212,6 +215,7 @@ element::element(
       intrinsic_technical_space_(intrinsic_technical_space),
       configuration_(configuration),
       labels_(labels),
+      generability_status_(generability_status),
       artefact_properties_(artefact_properties),
       enablement_properties_(enablement_properties),
       decoration_(decoration) { }
@@ -237,6 +241,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"configuration\": " << configuration_ << ", "
       << "\"labels\": " << labels_ << ", "
+      << "\"generability_status\": " << generability_status_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
       << "\"enablement_properties\": " << enablement_properties_ << ", "
       << "\"decoration\": " << decoration_
@@ -257,6 +262,7 @@ void element::swap(element& other) noexcept {
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(configuration_, other.configuration_);
     swap(labels_, other.labels_);
+    swap(generability_status_, other.generability_status_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(enablement_properties_, other.enablement_properties_);
     swap(decoration_, other.decoration_);
@@ -275,6 +281,7 @@ bool element::compare(const element& rhs) const {
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         configuration_ == rhs.configuration_ &&
         labels_ == rhs.labels_ &&
+        generability_status_ == rhs.generability_status_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
         enablement_properties_ == rhs.enablement_properties_ &&
         decoration_ == rhs.decoration_;
@@ -446,6 +453,14 @@ void element::labels(const std::list<dogen::logical::entities::label>& v) {
 
 void element::labels(const std::list<dogen::logical::entities::label>&& v) {
     labels_ = std::move(v);
+}
+
+dogen::logical::entities::generability_status element::generability_status() const {
+    return generability_status_;
+}
+
+void element::generability_status(const dogen::logical::entities::generability_status v) {
+    generability_status_ = v;
 }
 
 const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& element::artefact_properties() const {
