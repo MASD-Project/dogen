@@ -35,8 +35,7 @@ namespace dogen::physical::transforms {
  */
 class artefact_repository_population_chain final {
 public:
-    static void apply(const context& ctx,
-        const entities::artefact_repository& rp);
+    static void apply(const context& ctx, entities::artefact_repository& arp);
 };
 
 }

@@ -22,6 +22,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
+#include "dogen.physical/types/transforms/global_enablement_transform.hpp"
 #include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
 
 namespace {
@@ -36,12 +37,17 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void artefact_repository_population_chain::apply(const context& ctx,
-    const entities::artefact_repository& rp) {
+void artefact_repository_population_chain::
+apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_chain_tracer stp(lg, "artefact repository population",
-        transform_id, rp.identifier(), *ctx.tracer(), rp);
+        transform_id, arp.identifier(), *ctx.tracer(), arp);
 
-    stp.end_chain(rp);
+    /*
+     * Populates the global enablement properties.
+     */
+    global_enablement_transform::apply(ctx, arp);
+
+    stp.end_chain(arp);
 }
 
 }
