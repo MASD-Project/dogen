@@ -1532,6 +1532,11 @@
           "name": "archetype_for_role",
           "type": "std::unordered_map<std::string, std::string>",
           "documentation": "Resolves a role into a concrete archetype, in the context of this logical element.\n"
+        },
+        {
+          "name": "is_generatable",
+          "type": "bool",
+          "documentation": "If false, the entire artefact set is not generatable.\n"
         }
       ]
     },

@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
@@ -103,13 +104,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_set\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
       << "\"logical_element_id\": " << "\"" << tidy_up_string(v.logical_element_id()) << "\"" << ", "
       << "\"artefacts_by_archetype\": " << v.artefacts_by_archetype() << ", "
-      << "\"archetype_for_role\": " << v.archetype_for_role()
+      << "\"archetype_for_role\": " << v.archetype_for_role() << ", "
+      << "\"is_generatable\": " << v.is_generatable()
       << " }";
     return(s);
 }

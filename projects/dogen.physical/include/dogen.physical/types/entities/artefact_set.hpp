@@ -39,10 +39,12 @@ namespace dogen::physical::entities {
  */
 class artefact_set final {
 public:
-    artefact_set() = default;
     artefact_set(const artefact_set&) = default;
     artefact_set(artefact_set&&) = default;
     ~artefact_set() = default;
+
+public:
+    artefact_set();
 
 public:
     artefact_set(
@@ -50,7 +52,8 @@ public:
         const std::string& logical_meta_element_id,
         const std::string& logical_element_id,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
-        const std::unordered_map<std::string, std::string>& archetype_for_role);
+        const std::unordered_map<std::string, std::string>& archetype_for_role,
+        const bool is_generatable);
 
 public:
     /**
@@ -103,6 +106,14 @@ public:
     void archetype_for_role(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief If false, the entire artefact set is not generatable.
+     */
+    /**@{*/
+    bool is_generatable() const;
+    void is_generatable(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const artefact_set& rhs) const;
     bool operator!=(const artefact_set& rhs) const {
@@ -119,6 +130,7 @@ private:
     std::string logical_element_id_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;
     std::unordered_map<std::string, std::string> archetype_for_role_;
+    bool is_generatable_;
 };
 
 }

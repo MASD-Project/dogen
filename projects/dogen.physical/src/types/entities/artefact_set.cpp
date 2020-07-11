@@ -42,17 +42,22 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 
 namespace dogen::physical::entities {
 
+artefact_set::artefact_set()
+    : is_generatable_(static_cast<bool>(0)) { }
+
 artefact_set::artefact_set(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& logical_meta_element_id,
     const std::string& logical_element_id,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
-    const std::unordered_map<std::string, std::string>& archetype_for_role)
+    const std::unordered_map<std::string, std::string>& archetype_for_role,
+    const bool is_generatable)
     : configuration_(configuration),
       logical_meta_element_id_(logical_meta_element_id),
       logical_element_id_(logical_element_id),
       artefacts_by_archetype_(artefacts_by_archetype),
-      archetype_for_role_(archetype_for_role) { }
+      archetype_for_role_(archetype_for_role),
+      is_generatable_(is_generatable) { }
 
 void artefact_set::swap(artefact_set& other) noexcept {
     using std::swap;
@@ -61,6 +66,7 @@ void artefact_set::swap(artefact_set& other) noexcept {
     swap(logical_element_id_, other.logical_element_id_);
     swap(artefacts_by_archetype_, other.artefacts_by_archetype_);
     swap(archetype_for_role_, other.archetype_for_role_);
+    swap(is_generatable_, other.is_generatable_);
 }
 
 bool artefact_set::operator==(const artefact_set& rhs) const {
@@ -68,7 +74,8 @@ bool artefact_set::operator==(const artefact_set& rhs) const {
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         logical_element_id_ == rhs.logical_element_id_ &&
         artefacts_by_archetype_ == rhs.artefacts_by_archetype_ &&
-        archetype_for_role_ == rhs.archetype_for_role_;
+        archetype_for_role_ == rhs.archetype_for_role_ &&
+        is_generatable_ == rhs.is_generatable_;
 }
 
 artefact_set& artefact_set::operator=(artefact_set other) {
@@ -155,6 +162,14 @@ void artefact_set::archetype_for_role(const std::unordered_map<std::string, std:
 
 void artefact_set::archetype_for_role(const std::unordered_map<std::string, std::string>&& v) {
     archetype_for_role_ = std::move(v);
+}
+
+bool artefact_set::is_generatable() const {
+    return is_generatable_;
+}
+
+void artefact_set::is_generatable(const bool v) {
+    is_generatable_ = v;
 }
 
 }
