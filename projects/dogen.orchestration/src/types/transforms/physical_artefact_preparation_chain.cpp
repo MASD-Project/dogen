@@ -20,18 +20,16 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/output_model_set_io.hpp"
-#include "dogen.text/types/transforms/model_generation_chain.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
+#include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
+#include "dogen.orchestration/types/transforms/physical_artefact_repository_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/physical_artefact_preparation_chain.hpp"
-#include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
-#include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
 
 namespace {
 
 const std::string
-transform_id("orchestration.transforms.physical_model_production_chain");
+transform_id("orchestration.transforms.physical_artefact_preparation_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -40,31 +38,29 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-text::entities::model_set text_model_production_chain::apply(const context& ctx,
-    const logical::entities::output_model_set& loms) {
+void physical_artefact_preparation_chain::apply(const context& ctx,
+    const text::entities::model_set& ms) {
     const auto& tctx(ctx.text_context());
     const auto& tracer(*tctx.tracer());
-    tracing::scoped_chain_tracer stp(lg, "text model production chain",
-        transform_id, loms.name().qualified().dot(), tracer, loms);
+    tracing::scoped_chain_tracer stp(lg, "physical artefact preparation chain",
+        transform_id, ms.name().qualified().dot(), tracer, ms);
 
-    /*
-     * Convert the logical model into the text model representation.
-     */
-    auto r(logical_model_to_text_model_transform::apply(tctx, loms));
+    for (const auto& m : ms.models()) {
+        /*
+         * First we need to extract an artefact repository from each
+         * text model. Note that the artefact repository contains
+         * pointers to the original artefacts in the text model set.
+         */
+        auto ar(physical_artefact_repository_transform::apply(tctx, m));
 
-    /*
-     * Prepare the artefacts for text transformation.
-     */
-    physical_artefact_preparation_chain::apply(ctx, r);
+        /*
+         * Populate all artefacts.
+         */
+        using physical::transforms::artefact_repository_population_chain;
+        artefact_repository_population_chain::apply(ctx.physical_context(), ar);
+    }
 
-    /*
-     * Finally, we can run the text chain against the model set. This
-     * will execute all text transforms.
-     */
-    text::transforms::model_generation_chain::apply(tctx, r);
-
-    stp.end_chain(r);
-    return r;
+    stp.end_chain(ms);
 }
 
 }

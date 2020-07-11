@@ -18,12 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.orchestration/types/transforms/physical_artefact_repository_chain.hpp"
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_ARTEFACT_PREPARATION_CHAIN_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_ARTEFACT_PREPARATION_CHAIN_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen.text/types/entities/model_set.hpp"
+#include "dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
-bool physical_artefact_repository_chain::operator==(const physical_artefact_repository_chain& /*rhs*/) const {
-    return true;
-}
+/**
+ * @brief Prepare the contexts of each artefact with all of the
+ * required information for text transformation.
+ */
+class physical_artefact_preparation_chain final {
+public:
+    static void apply(const context& ctx, const text::entities::model_set& ms);
+};
 
 }
+
+#endif

@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.text/types/entities/model.hpp"
+#include "dogen.text/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
 
 namespace dogen::orchestration::transforms {
 
+/**
+ * @brief Extracts an artefact repository from the text model.
+ */
 class physical_artefact_repository_transform final {
 public:
-    physical_artefact_repository_transform() = default;
-    physical_artefact_repository_transform(const physical_artefact_repository_transform&) = default;
-    physical_artefact_repository_transform(physical_artefact_repository_transform&&) = default;
-    ~physical_artefact_repository_transform() = default;
-    physical_artefact_repository_transform& operator=(const physical_artefact_repository_transform&) = default;
-
-public:
-    bool operator==(const physical_artefact_repository_transform& rhs) const;
-    bool operator!=(const physical_artefact_repository_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static physical::entities::artefact_repository
+    apply(const text::transforms::context& ctx,
+        const text::entities::model& m);
 };
 
 }
