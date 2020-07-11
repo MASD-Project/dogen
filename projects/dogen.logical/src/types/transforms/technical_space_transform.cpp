@@ -27,7 +27,6 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/features/output_technical_space.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
