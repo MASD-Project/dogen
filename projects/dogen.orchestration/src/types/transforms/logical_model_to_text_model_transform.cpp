@@ -130,6 +130,8 @@ private:
             as.logical_element_id(ln.qualified());
             as.logical_meta_element_id(mn);
             as.configuration(e->configuration());
+            const auto gs(logical::entities::generability_status::generatable);
+            as.is_generatable(e->generability_status() == gs);
             auto& aba(as.artefacts_by_archetype());
 
             /*
