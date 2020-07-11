@@ -39,7 +39,6 @@
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/entities/model.hpp"
 
-
 namespace dogen::text::transforms {
 
 class global_enablement_transform final {
