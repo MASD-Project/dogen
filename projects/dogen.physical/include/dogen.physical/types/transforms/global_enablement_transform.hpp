@@ -25,24 +25,92 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/optional.hpp>
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.physical/types/entities/backend_properties.hpp"
+#include "dogen.physical/types/entities/facet_properties.hpp"
+#include "dogen.physical/types/entities/archetype_properties.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/enablement_properties.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class global_enablement_transform final {
-public:
-    global_enablement_transform() = default;
-    global_enablement_transform(const global_enablement_transform&) = default;
-    global_enablement_transform(global_enablement_transform&&) = default;
-    ~global_enablement_transform() = default;
-    global_enablement_transform& operator=(const global_enablement_transform&) = default;
+private:
+    struct backend_feature_group {
+        variability::entities::feature enabled;
+    };
+
+    struct facet_feature_group {
+        variability::entities::feature enabled;
+        variability::entities::feature overwrite;
+    };
+
+    struct global_archetype_feature_group {
+        variability::entities::feature enabled;
+        variability::entities::feature overwrite;
+    };
+
+    struct local_archetype_feature_group {
+        variability::entities::feature facet_enabled;
+        variability::entities::feature archetype_enabled;
+        variability::entities::feature facet_overwrite;
+        variability::entities::feature archetype_overwrite;
+    };
+
+private:
+    static std::unordered_map<std::string, backend_feature_group>
+    make_backend_feature_group(const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp);
+
+    static std::unordered_map<std::string, facet_feature_group>
+    make_facet_feature_group(const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp);
+
+    static std::unordered_map<std::string, global_archetype_feature_group>
+    make_global_archetype_feature_group(
+        const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp);
+
+    static std::unordered_map<std::string, local_archetype_feature_group>
+    make_local_archetype_feature_group(
+        const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp);
+
+private:
+    static std::unordered_map<std::string, entities::backend_properties>
+    obtain_backend_properties(
+        const std::unordered_map<std::string, backend_feature_group>& fgs,
+        const variability::entities::configuration& cfg);
+
+    static std::unordered_map<std::string, entities::facet_properties>
+    obtain_facet_properties(
+        const std::unordered_map<std::string, facet_feature_group>& fgs,
+        const variability::entities::configuration& cfg);
+
+    static std::unordered_map<std::string, entities::archetype_properties>
+    obtain_archetype_properties(
+        const std::unordered_map<std::string,
+        global_archetype_feature_group>& fgs,
+        const variability::entities::configuration& cfg);
+
+    static void populate_global_enablement_properties(
+        const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp,
+        entities::artefact_repository& ar);
+
+    static void populate_local_enablement_properties(
+        const variability::entities::feature_model& fm,
+        const physical::entities::meta_name_indices& nrp,
+        entities::artefact_repository& ar);
 
 public:
-    bool operator==(const global_enablement_transform& rhs) const;
-    bool operator!=(const global_enablement_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::artefact_repository& ar);
 };
 
 }
