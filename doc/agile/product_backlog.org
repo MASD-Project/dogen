@@ -78,6 +78,18 @@ Release Goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Simplify the get for optional features                            :story:
+
+At present we do something like this for optional features:
+
+:            if (s.has_configuration_point(fg.archetype_overwrite)) {
+:                a.enablement_properties().archetype_overwrite(
+:                    s.get_boolean_content(fg.archetype_overwrite));
+:            }
+
+We could simply generate an extra get method which returns an optional
+(=get_optional_...=). The main use case appears to be enablement.
+
 *** Enable logging in unit tests from the environment                 :story:
 
 At present in order to enable logging we need to change the macros
@@ -1171,6 +1183,8 @@ Links:
 - [[https://gpfault.net/posts/dependency-injection-cpp.txt.html][Dependency Injection in C++ Using Variadic Templates]]
 - [[https://github.com/ybainier/hypodermic][hypodermic]] (more run-time DI)
 - [[https://riptutorial.com/Download/castle-windsor.pdf][Castle Windsor tutorial]]
+- [[https://github.com/castleproject/Windsor/blob/master/docs/installers.md][Windsor docs on installers]]. See also [[https://github.com/castleproject/Windsor/blob/master/docs/ioc.md][ioc]] and the docs directory in
+  general.
 
 *** Formatters can only belong to one facet                           :story:
 
