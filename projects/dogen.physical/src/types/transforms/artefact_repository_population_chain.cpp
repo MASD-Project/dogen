@@ -26,6 +26,7 @@
 #include "dogen.physical/types/transforms/local_enablement_transform.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
+#include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
 
 namespace {
@@ -57,11 +58,12 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     local_enablement_transform::apply(ctx, arp);
 
     /*
-     * The formatting and generability transforms have no
-     * dependencies.
+     * There are no particular dependencies on the next set of
+     * transforms.
      */
     formatting_transform::apply(ctx, arp);
     generability_transform::apply(ctx, arp);
+    extraction_properties_transform::apply(ctx, arp);
 
     stp.end_chain(arp);
 }
