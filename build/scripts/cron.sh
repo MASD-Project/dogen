@@ -16,7 +16,7 @@ build_group=Nightly
 logs_dir=../logs
 clang_compiler=clang9
 gcc_compiler=gcc9
-verbosity=--progress
+verbosity=-VV
 
 #
 # C# Ref Impl
