@@ -1839,6 +1839,13 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "transforms::extraction_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
