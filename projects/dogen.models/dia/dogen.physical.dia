@@ -20184,7 +20184,7 @@ element.#</dia:string>
         <dia:point val="178,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.95,-100.05;205.115,-92.35"/>
+        <dia:rectangle val="177.95,-100.05;205.115,-91.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="178,-100"/>
@@ -20193,7 +20193,7 @@ element.#</dia:string>
         <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_repository#</dia:string>
@@ -20410,6 +20410,29 @@ element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#has_generatable_artefacts#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true the repository has at least one generable artefact, false otherwise.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -22097,16 +22120,16 @@ element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="191.532,-92.4"/>
+        <dia:point val="191.532,-91.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.782,-93.15;199.085,-87.4"/>
+        <dia:rectangle val="190.782,-92.35;199.085,-87.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="191.532,-92.4"/>
+        <dia:point val="191.532,-91.6"/>
         <dia:point val="191.532,-90"/>
         <dia:point val="198.885,-90"/>
         <dia:point val="198.885,-89"/>

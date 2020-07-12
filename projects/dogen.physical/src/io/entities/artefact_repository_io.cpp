@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.physical/io/entities/element_archetype_io.hpp"
@@ -83,6 +84,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_repository\"" << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
@@ -91,7 +98,8 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"managed_directories\": " << v.managed_directories()
+      << "\"managed_directories\": " << v.managed_directories() << ", "
+      << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts()
       << " }";
     return(s);
 }

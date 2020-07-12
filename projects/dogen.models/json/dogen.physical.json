@@ -1641,6 +1641,11 @@
         {
           "name": "managed_directories",
           "type": "std::list<boost::filesystem::path>"
+        },
+        {
+          "name": "has_generatable_artefacts",
+          "type": "bool",
+          "documentation": "If true the repository has at least one generable artefact, false otherwise.\n"
         }
       ]
     },

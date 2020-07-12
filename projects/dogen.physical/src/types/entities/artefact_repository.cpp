@@ -22,6 +22,9 @@
 
 namespace dogen::physical::entities {
 
+artefact_repository::artefact_repository()
+    : has_generatable_artefacts_(static_cast<bool>(0)) { }
+
 artefact_repository::artefact_repository(
     const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& identifier,
@@ -29,14 +32,16 @@ artefact_repository::artefact_repository(
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
     const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
-    const std::list<boost::filesystem::path>& managed_directories)
+    const std::list<boost::filesystem::path>& managed_directories,
+    const bool has_generatable_artefacts)
     : artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
       identifier_(identifier),
       root_module_logical_id_(root_module_logical_id),
       extraction_properties_(extraction_properties),
       global_enablement_properties_(global_enablement_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
-      managed_directories_(managed_directories) { }
+      managed_directories_(managed_directories),
+      has_generatable_artefacts_(has_generatable_artefacts) { }
 
 void artefact_repository::swap(artefact_repository& other) noexcept {
     using std::swap;
@@ -47,6 +52,7 @@ void artefact_repository::swap(artefact_repository& other) noexcept {
     swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(managed_directories_, other.managed_directories_);
+    swap(has_generatable_artefacts_, other.has_generatable_artefacts_);
 }
 
 bool artefact_repository::operator==(const artefact_repository& rhs) const {
@@ -56,7 +62,8 @@ bool artefact_repository::operator==(const artefact_repository& rhs) const {
         extraction_properties_ == rhs.extraction_properties_ &&
         global_enablement_properties_ == rhs.global_enablement_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
-        managed_directories_ == rhs.managed_directories_;
+        managed_directories_ == rhs.managed_directories_ &&
+        has_generatable_artefacts_ == rhs.has_generatable_artefacts_;
 }
 
 artefact_repository& artefact_repository::operator=(artefact_repository other) {
@@ -175,6 +182,14 @@ void artefact_repository::managed_directories(const std::list<boost::filesystem:
 
 void artefact_repository::managed_directories(const std::list<boost::filesystem::path>&& v) {
     managed_directories_ = std::move(v);
+}
+
+bool artefact_repository::has_generatable_artefacts() const {
+    return has_generatable_artefacts_;
+}
+
+void artefact_repository::has_generatable_artefacts(const bool v) {
+    has_generatable_artefacts_ = v;
 }
 
 }

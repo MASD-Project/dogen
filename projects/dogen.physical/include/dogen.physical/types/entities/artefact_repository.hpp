@@ -41,10 +41,12 @@ namespace dogen::physical::entities {
 
 class artefact_repository final {
 public:
-    artefact_repository() = default;
     artefact_repository(const artefact_repository&) = default;
     artefact_repository(artefact_repository&&) = default;
     ~artefact_repository() = default;
+
+public:
+    artefact_repository();
 
 public:
     artefact_repository(
@@ -54,7 +56,8 @@ public:
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
         const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
-        const std::list<boost::filesystem::path>& managed_directories);
+        const std::list<boost::filesystem::path>& managed_directories,
+        const bool has_generatable_artefacts);
 
 public:
     /**
@@ -107,6 +110,14 @@ public:
     void managed_directories(const std::list<boost::filesystem::path>& v);
     void managed_directories(const std::list<boost::filesystem::path>&& v);
 
+    /**
+     * @brief If true the repository has at least one generable artefact, false otherwise.
+     */
+    /**@{*/
+    bool has_generatable_artefacts() const;
+    void has_generatable_artefacts(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const artefact_repository& rhs) const;
     bool operator!=(const artefact_repository& rhs) const {
@@ -125,6 +136,7 @@ private:
     dogen::physical::entities::global_enablement_properties global_enablement_properties_;
     std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;
+    bool has_generatable_artefacts_;
 };
 
 }
