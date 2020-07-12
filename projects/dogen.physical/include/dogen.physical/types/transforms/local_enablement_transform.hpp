@@ -40,19 +40,16 @@ namespace dogen::physical::transforms {
 class local_enablement_transform final {
 private:
     static void compute_enablement_for_artefact_properties(
-        const std::unordered_map<std::string,
-        entities::denormalised_archetype_properties>&
+        const entities::denormalised_archetype_properties&
         global_enablement_properties,
-        const std::unordered_map<std::string,
-        entities::enablement_properties>&
+        const entities::enablement_properties&
         local_enablement_properties,
         const std::string& archetype,
         entities::artefact_properties& ap);
 
     static void compute_enablement_for_artefact_set(
         const std::unordered_map<std::string,
-        entities::archetype_name_set>&
-        physical_names_by_meta_name,
+        physical::entities::archetype_name_set>& physical_names_by_meta_name,
         const std::unordered_map<std::string,
         entities::denormalised_archetype_properties>&
         global_enablement_properties,
