@@ -122,13 +122,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "transforms::generability_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::model_to_text_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"

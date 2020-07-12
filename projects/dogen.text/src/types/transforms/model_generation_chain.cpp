@@ -22,11 +22,6 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
-#include "dogen.text/types/transforms/generability_transform.hpp"
-//#include "dogen.text/types/transforms/artefact_properties_transform.hpp"
-//#include "dogen.text/types/transforms/local_enablement_transform.hpp"
-// #include "dogen.text/types/transforms/formatting_transform.hpp"
-//#include "dogen.text/types/transforms/global_enablement_transform.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.text/types/transforms/model_generation_chain.hpp"
 
@@ -46,49 +41,11 @@ void model_generation_chain::
 apply(const context& ctx, entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
         transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
-
     /*
-     * Apply all of the post-processing transforms to the model.
+     * Apply all of the text transforms to the model.
      */
-    for (auto& m : ms.models()) {
-        /*
-         * First we apply the generability transform. We do this after
-         * dynamic transforms to cater for any new elements they may
-         * have inserted.
-         */
-        generability_transform::apply(ctx, m);
-
-        /*
-         * Expand the artefact properties against the suitable archetype
-         * locations. Must be done before enablement transform and any
-         * other transform that populates these properties.
-         */
-        // artefact_properties_transform::apply(ctx, m);
-
-        /*
-         * The archetype location properties transform must be executed
-         * before the enablement transform.
-         */
-        // global_enablement_transform::apply(ctx, m);
-
-        /*
-         * Enablement transform must be applied after the dynamic
-         * transform chain as it needs to compute enablement for any
-         * backend specific types that might have been added.
-         */
-        // local_enablement_transform::apply(ctx, m);
-
-        /*
-         * The formatting transform and the locator properties transform
-         * have no dependencies in the post-processing chain.
-         */
-        // formatting_transform::apply(ctx, m);
-
-        /*
-         * Run all text transforms against the model.
-         */
+    for (auto& m : ms.models())
         model_to_text_chain::apply(ctx, m);
-    }
 
     stp.end_chain(ms);
 }
