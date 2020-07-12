@@ -39,7 +39,6 @@
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.logical/types/transforms/variability_profiles_chain.hpp"
 #include "dogen.logical/types/transforms/labelling_transform.hpp"
-#include "dogen.logical/types/transforms/generability_transform.hpp"
 #include "dogen.logical/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -64,11 +63,6 @@ void pre_assembly_chain::apply(const context& ctx,
      */
     modules_transform::apply(ctx, m);
     containment_transform::apply(ctx, m);
-
-    /*
-     * Generability must be done after modules transform.
-     */
-    generability_transform::apply(ctx, m);
 
     /*
      * Physical transform must be done before containment transform as

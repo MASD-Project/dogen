@@ -48,8 +48,6 @@ licence::licence(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::logical::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
-    const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& short_form,
     const std::string& long_form)
@@ -67,8 +65,6 @@ licence::licence(
       configuration,
       labels,
       generability_status,
-      artefact_properties,
-      enablement_properties,
       decoration),
       short_form_(short_form),
       long_form_(long_form) { }

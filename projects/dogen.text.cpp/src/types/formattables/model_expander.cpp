@@ -48,7 +48,7 @@ void model_expander::expand_canonical_archetypes(
 
 void model_expander::expand_inclusion(
     const variability::entities::feature_model& feature_model,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
@@ -107,7 +107,7 @@ model_expander::expand_cpp_standard(
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element,
     const transforms::repository& frp, const locator& l, model& fm) const {
 

@@ -314,7 +314,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
 #endif
 
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expected_trace_files) {
-    SETUP_TEST_LOG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");
+    SETUP_TEST_LOG_DEBUG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");
 
     const auto t(dogen_product::input_dogen_dia());
     const std::string id("summary_tracing_plain");

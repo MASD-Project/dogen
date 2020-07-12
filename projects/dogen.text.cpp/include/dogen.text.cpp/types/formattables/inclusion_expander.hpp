@@ -30,7 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.text/types/entities/element_archetype.hpp"
+#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
@@ -88,7 +88,7 @@ public:
 
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l, model& fm) const;
 };

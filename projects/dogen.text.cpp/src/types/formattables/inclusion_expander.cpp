@@ -241,7 +241,7 @@ void inclusion_expander::populate_inclusion_dependencies(
 
 void inclusion_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
 

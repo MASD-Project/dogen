@@ -29,7 +29,7 @@
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
-#include "dogen.text/hash/entities/element_archetype_hash.hpp"
+#include "dogen.physical/hash/entities/element_archetype_hash.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
@@ -90,8 +90,6 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),
             pmn.qualified())),
-      new_artefact_properties_(
-          obtain_new_artefact_properties(e, pmn.qualified())),
       physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
@@ -236,19 +234,6 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
     return i->second;
 }
 
-const logical::entities::artefact_properties&
-assistant::obtain_new_artefact_properties(
-    const logical::entities::element& e, const std::string& archetype) const {
-    const auto& ap(e.artefact_properties());
-    const auto i(ap.find(archetype));
-    if (i == ap.end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << archetype;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype));
-    }
-    return i->second;
-}
-
 formattables::facet_properties assistant::
 obtain_facet_properties(const std::string& facet_name) const {
     const auto& fct_props(context_.model().facet_properties());
@@ -270,7 +255,7 @@ assistant::make_namespaces(const logical::entities::name& n,
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    text::entities::element_archetype
+    physical::entities::element_archetype
         ea(element_.name().qualified().dot(), archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
@@ -648,7 +633,7 @@ names_with_enabled_archetype(const std::string& archetype,
         const auto id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
 
-        text::entities::element_archetype ea(id, archetype);
+        physical::entities::element_archetype ea(id, archetype);
         const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());
@@ -665,11 +650,6 @@ assistant::artefact_properties() const {
     return artefact_properties_;
 }
 
-const logical::entities::artefact_properties&
-assistant::new_artefact_properties() const {
-    return new_artefact_properties_;
-}
-
 std::ostream& assistant::stream() {
     return filtering_stream_;
 }
@@ -677,21 +657,16 @@ std::ostream& assistant::stream() {
 void assistant::update_artefact() const {
     const auto fp(artefact_properties_.file_path());
     artefact_.name().simple(fp.filename().generic_string());
-    artefact_.name().qualified(artefact_properties_.file_path());
+    artefact_.name().qualified(fp);
+    // FIXME: origin already populated, check and remvoe.
     artefact_.logical_name().simple(element_.name().simple());
     artefact_.logical_name().qualified(element_.name().qualified().dot());
     artefact_.origin_sha1_hash(element_.origin_sha1_hash());
+
     artefact_.content(stream_.str());
 
-    const auto& ap(element_.artefact_properties());
-    const auto arch(physical_meta_name_.qualified());
-    const auto i(ap.find(arch));
-    if (i == ap.end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + arch));
-    }
-    artefact_.overwrite(i->second.overwrite());
+    const auto& ap(artefact_.artefact_properties());
+    artefact_.overwrite(ap.overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;

@@ -24,13 +24,13 @@
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/origin_types_io.hpp"
-#include "dogen.text/io/entities/element_archetype_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
+#include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.physical/io/entities/element_archetype_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/extraction_properties_io.hpp"
-#include "dogen.text/io/entities/global_enablement_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -133,7 +133,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::text::entities::element_archetype>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -154,6 +154,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
         s << "\"" << (*i).generic_string() << "\"";
     }
     s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -183,9 +201,9 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"all_technical_spaces\": " << v.all_technical_spaces() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
-      << "\"managed_directories\": " << v.managed_directories()
+      << "\"managed_directories\": " << v.managed_directories() << ", "
+      << "\"facet_properties\": " << v.facet_properties()
       << " }";
     return(s);
 }

@@ -152,9 +152,6 @@ private:
     const formattables::artefact_properties& obtain_artefact_properties(
         const std::string& element_id, const std::string& archetype) const;
 
-    const logical::entities::artefact_properties& obtain_new_artefact_properties(
-        const logical::entities::element& e, const std::string& archetype) const;
-
     /**
      * @brief Obtains the facet configuration for the facet
      * identified by facet name.
@@ -376,8 +373,6 @@ public:
 
 public:
     const formattables::artefact_properties& artefact_properties() const;
-    const logical::entities::artefact_properties&
-    new_artefact_properties() const;
 
 public:
     /**
@@ -398,7 +393,6 @@ private:
     const context& context_;
     physical::entities::artefact& artefact_;
     formattables::artefact_properties artefact_properties_;
-    logical::entities::artefact_properties new_artefact_properties_;
     const physical::entities::meta_name physical_meta_name_;
     const bool requires_header_guard_;
 };

@@ -51,9 +51,9 @@ model::model(model&& rhs)
       all_technical_spaces_(std::move(rhs.all_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
-      global_enablement_properties_(std::move(rhs.global_enablement_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)),
-      managed_directories_(std::move(rhs.managed_directories_)) { }
+      managed_directories_(std::move(rhs.managed_directories_)),
+      facet_properties_(std::move(rhs.facet_properties_)) { }
 
 model::model(
     const dogen::logical::entities::name& name,
@@ -68,10 +68,10 @@ model::model(
     const dogen::logical::entities::technical_space output_technical_space,
     const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
-    const std::unordered_set<dogen::text::entities::element_archetype>& enabled_archetype_for_element,
-    const dogen::text::entities::global_enablement_properties& global_enablement_properties,
+    const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
     const dogen::logical::entities::extraction_properties& extraction_properties,
-    const std::list<boost::filesystem::path>& managed_directories)
+    const std::list<boost::filesystem::path>& managed_directories,
+    const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties)
     : name_(name),
       meta_name_(meta_name),
       origin_sha1_hash_(origin_sha1_hash),
@@ -85,9 +85,9 @@ model::model(
       all_technical_spaces_(all_technical_spaces),
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
-      global_enablement_properties_(global_enablement_properties),
       extraction_properties_(extraction_properties),
-      managed_directories_(managed_directories) { }
+      managed_directories_(managed_directories),
+      facet_properties_(facet_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -104,9 +104,9 @@ void model::swap(model& other) noexcept {
     swap(all_technical_spaces_, other.all_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
-    swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(extraction_properties_, other.extraction_properties_);
     swap(managed_directories_, other.managed_directories_);
+    swap(facet_properties_, other.facet_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -123,9 +123,9 @@ bool model::operator==(const model& rhs) const {
         all_technical_spaces_ == rhs.all_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
-        global_enablement_properties_ == rhs.global_enablement_properties_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
-        managed_directories_ == rhs.managed_directories_;
+        managed_directories_ == rhs.managed_directories_ &&
+        facet_properties_ == rhs.facet_properties_;
 }
 
 model& model::operator=(model other) {
@@ -302,36 +302,20 @@ void model::orm_properties(const boost::optional<dogen::logical::entities::orm::
     orm_properties_ = std::move(v);
 }
 
-const std::unordered_set<dogen::text::entities::element_archetype>& model::enabled_archetype_for_element() const {
+const std::unordered_set<dogen::physical::entities::element_archetype>& model::enabled_archetype_for_element() const {
     return enabled_archetype_for_element_;
 }
 
-std::unordered_set<dogen::text::entities::element_archetype>& model::enabled_archetype_for_element() {
+std::unordered_set<dogen::physical::entities::element_archetype>& model::enabled_archetype_for_element() {
     return enabled_archetype_for_element_;
 }
 
-void model::enabled_archetype_for_element(const std::unordered_set<dogen::text::entities::element_archetype>& v) {
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
     enabled_archetype_for_element_ = v;
 }
 
-void model::enabled_archetype_for_element(const std::unordered_set<dogen::text::entities::element_archetype>&& v) {
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>&& v) {
     enabled_archetype_for_element_ = std::move(v);
-}
-
-const dogen::text::entities::global_enablement_properties& model::global_enablement_properties() const {
-    return global_enablement_properties_;
-}
-
-dogen::text::entities::global_enablement_properties& model::global_enablement_properties() {
-    return global_enablement_properties_;
-}
-
-void model::global_enablement_properties(const dogen::text::entities::global_enablement_properties& v) {
-    global_enablement_properties_ = v;
-}
-
-void model::global_enablement_properties(const dogen::text::entities::global_enablement_properties&& v) {
-    global_enablement_properties_ = std::move(v);
 }
 
 const dogen::logical::entities::extraction_properties& model::extraction_properties() const {
@@ -364,6 +348,22 @@ void model::managed_directories(const std::list<boost::filesystem::path>& v) {
 
 void model::managed_directories(const std::list<boost::filesystem::path>&& v) {
     managed_directories_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& model::facet_properties() const {
+    return facet_properties_;
+}
+
+std::unordered_map<std::string, dogen::physical::entities::facet_properties>& model::facet_properties() {
+    return facet_properties_;
+}
+
+void model::facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
+    facet_properties_ = v;
+}
+
+void model::facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>&& v) {
+    facet_properties_ = std::move(v);
 }
 
 }

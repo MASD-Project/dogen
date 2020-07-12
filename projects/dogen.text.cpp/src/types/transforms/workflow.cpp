@@ -24,7 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
-#include "dogen.logical/io/entities/formatting_styles_io.hpp"
+#include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.text.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/transforms/wale_transform.hpp"
@@ -57,19 +57,6 @@ cpp::transforms::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-const logical::entities::artefact_properties&
-workflow::get_artefact_properties(const logical::entities::element& e,
-    const std::string& archetype) const {
-
-    const auto& ap(e.artefact_properties());
-    const auto i(ap.find(archetype));
-    if (i == ap.end()) {
-        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
-        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
-    }
-    return i->second;
-}
-
 boost::shared_ptr<physical::entities::artefact>
 workflow::get_artefact(const std::unordered_map<std::string,
     boost::shared_ptr<physical::entities::artefact>>& artefacts,
@@ -85,7 +72,7 @@ workflow::get_artefact(const std::unordered_map<std::string,
 
 void
 workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
     formattables::formattable& fbl) const {
 
@@ -109,23 +96,22 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto& fmt(*ptr);
         const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.qualified());
-        const auto& ap(get_artefact_properties(e, arch));
         auto aptr(get_artefact(fbl.artefacts().artefacts_by_archetype(), arch));
-
+        const auto& ap(aptr->artefact_properties());
         if (!ap.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
         BOOST_LOG_SEV(lg, debug) << "Archetype is enabled: " << arch;
 
-        using logical::entities::formatting_styles;
+        using physical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters(), tracer);
 
         auto& a(*aptr);
         const auto fs(ap.formatting_style());
-         if (fs == formatting_styles::stock) {
+        if (fs == formatting_styles::stock) {
              const auto id(fmt.archetype().meta_name().qualified());
              BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
              fmt.apply(ctx, e, a);
@@ -158,7 +144,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element, formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();

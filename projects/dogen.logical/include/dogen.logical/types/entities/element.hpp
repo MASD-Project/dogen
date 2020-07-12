@@ -38,10 +38,8 @@
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
-#include "dogen.logical/types/entities/artefact_properties.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
-#include "dogen.logical/types/entities/enablement_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
 
@@ -79,8 +77,6 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::logical::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
 
 public:
@@ -224,16 +220,6 @@ public:
     void generability_status(const dogen::logical::entities::generability_status v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>&& v);
-
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties() const;
-    std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties();
-    void enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v);
-    void enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v);
-
     /**
      * @brief If set, decoration to be added to each generated file.
      */
@@ -266,8 +252,6 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::list<dogen::logical::entities::label> labels_;
     dogen::logical::entities::generability_status generability_status_;
-    std::unordered_map<std::string, dogen::logical::entities::artefact_properties> artefact_properties_;
-    std::unordered_map<std::string, dogen::logical::entities::enablement_properties> enablement_properties_;
     std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
 };
 

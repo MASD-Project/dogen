@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.text/types/entities/element_archetype.hpp"
+#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.text.cpp/types/formattables/dependencies_builder.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group_repository.hpp"
@@ -52,7 +52,7 @@ class dependencies_builder_factory final {
 public:
     dependencies_builder_factory(
         const directive_group_repository& dgrp,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element);
 
 public:
@@ -63,7 +63,7 @@ public:
 
 private:
     const directive_group_repository& inclusion_directives_;
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element_;
 };
 

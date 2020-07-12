@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.text/types/entities/element_archetype.hpp"
+#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
@@ -44,7 +44,7 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const std::unordered_set<text::entities::element_archetype>&
+    context(const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element,
         const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
@@ -53,7 +53,7 @@ public:
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element() const;
 
     const formattables::element_properties& element_properties() const;
@@ -70,7 +70,7 @@ public:
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element_;
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;

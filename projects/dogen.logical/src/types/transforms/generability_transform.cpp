@@ -65,24 +65,28 @@ public:
     }
 
     void operator()(structural::module& v) {
-        /*
-         * Ignore the global module. This is just a pseudo module that
-         * is used as a top-level container and has no expression in
-         * code.
-         */
-        if (v.is_global_module())
+        if (v.is_global_module()) {
+            /*
+             * Ignore the global module. This is just a pseudo module
+             * that is used as a top-level container and has no
+             * expression in code.
+             */
             v.generability_status(generability_status::non_generatable_state);
-
-        /*
-         * Modules are only generatable for the purposes of
-         * documentation. Set them to disabled if there is no
-         * documentation.
-         */
-        if (v.documentation().empty()) {
+        } else if (v.documentation().empty()) {
+            /*
+             * Modules are only generatable for the purposes of
+             * documentation. Set them to disabled if there is no
+             * documentation.
+             */
             BOOST_LOG_SEV(lg, trace) << "Module does not have documentation. "
                                      << "Disabling it. Id: "
                                      << v.name().qualified().dot();
             v.generability_status(generability_status::non_generatable_state);
+        } else {
+            /*
+             * Regular module with documentation should be generated.
+             */
+            v.generability_status(generability_status::generatable);
         }
     }
 

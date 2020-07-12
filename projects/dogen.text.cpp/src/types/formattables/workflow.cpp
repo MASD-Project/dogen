@@ -41,7 +41,7 @@ model workflow::make_model(const transforms::repository& frp,
 void workflow::expand_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element,
     const transforms::repository& frp, const locator& l,
     model& fm) const {

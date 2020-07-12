@@ -60,6 +60,8 @@ void physical_artefact_preparation_chain::apply(const context& ctx,
         artefact_repository_population_chain::apply(ctx.physical_context(), ar);
 
         m.has_generatable_types(ar.has_generatable_artefacts());
+        m.facet_properties(ar.global_enablement_properties().facet_properties());
+        m.enabled_archetype_for_element(ar.enabled_archetype_for_element());
     }
 
     stp.end_chain(ms);

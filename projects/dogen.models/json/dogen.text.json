@@ -75,11 +75,7 @@
         },
         {
           "name": "enabled_archetype_for_element",
-          "type": "std::unordered_set<element_archetype>"
-        },
-        {
-          "name": "global_enablement_properties",
-          "type": "global_enablement_properties"
+          "type": "std::unordered_set<physical::entities::element_archetype>"
         },
         {
           "name": "extraction_properties",
@@ -88,135 +84,10 @@
         {
           "name": "managed_directories",
           "type": "std::list<boost::filesystem::path>"
-        }
-      ]
-    },
-    {
-      "name": "entities::formatting_styles",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stock",
-          "type": ""
-        },
-        {
-          "name": "wale",
-          "type": ""
-        },
-        {
-          "name": "stitch",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "entities::element_archetype",
-      "tagged_values": {
-        "masd.cpp.hash.enabled": "true"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "element",
-          "type": "std::string"
-        },
-        {
-          "name": "archetype",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "entities::backend_properties",
-      "documentation": "Properties related to the backend.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this backend is enabled.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::global_enablement_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_properties",
-          "type": "std::unordered_map<std::string, backend_properties>"
         },
         {
           "name": "facet_properties",
-          "type": "std::unordered_map<std::string, facet_properties>"
-        },
-        {
-          "name": "archetype_properties",
-          "type": "std::unordered_map<std::string, archetype_properties>"
-        },
-        {
-          "name": "denormalised_archetype_properties",
-          "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
-        }
-      ]
-    },
-    {
-      "name": "entities::denormalised_archetype_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "facet_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "facet_overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "archetype_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
-        }
-      ]
-    },
-    {
-      "name": "entities::facet_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this facet is enabled.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "entities::archetype_properties",
-      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If false, will disable all instances of this archetype.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "boost::optional<bool>"
+          "type": "std::unordered_map<std::string, physical::entities::facet_properties>"
         }
       ]
     },
@@ -287,49 +158,7 @@
       ]
     },
     {
-      "name": "transforms::local_enablement_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::artefact_properties_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::formatting_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::formatting_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "style",
-          "type": "entities::formatting_styles"
-        },
-        {
-          "name": "input",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "transforms::model_generation_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::global_enablement_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

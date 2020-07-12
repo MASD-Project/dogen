@@ -13899,7 +13899,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
             <dia:string>#enabled_archetype_for_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;text::entities::element_archetype&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;physical::entities::element_archetype&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

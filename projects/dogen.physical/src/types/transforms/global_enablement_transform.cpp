@@ -46,7 +46,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 static std::string enabled_feature("enabled");
-static std::string overwrite_feature("enabled");
+static std::string overwrite_feature("overwrite");
 
 const std::string root_module_not_found("Could not find root module: ");
 const std::string type_group_not_found(

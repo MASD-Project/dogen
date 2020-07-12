@@ -89,7 +89,7 @@ private:
      * @brief Create the files representation of the formattables model.
      */
     void apply(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::locator& l,
         const variability::entities::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,

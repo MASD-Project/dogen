@@ -78,7 +78,7 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
         // artchetype is going to be empty. This will trigger
         // filtering later.
         // a.name().qualified(fp);
-        a.overwrite(ast.new_artefact_properties().overwrite());
+        a.overwrite(a.artefact_properties().overwrite());
 
         physical::entities::operation op;
         using ot = physical::entities::operation_type;
@@ -104,7 +104,7 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
 
     a.name().qualified(fp);
     a.content(instantiator_.instantiate(stitch_template, external_keys));
-    a.overwrite(ast.new_artefact_properties().overwrite());
+    a.overwrite(a.artefact_properties().overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;

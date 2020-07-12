@@ -73,8 +73,6 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::logical::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const dogen::logical::entities::decoration::editor editor,
         const dogen::logical::entities::decoration::modeline_location location,

@@ -35,7 +35,7 @@
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.text/types/entities/element_archetype.hpp"
+#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/transforms/registrar.hpp"
@@ -60,10 +60,6 @@ public:
     static cpp::transforms::registrar& registrar();
 
 private:
-    const logical::entities::artefact_properties&
-    get_artefact_properties(const logical::entities::element& e,
-        const std::string& archetype) const;
-
     boost::shared_ptr<physical::entities::artefact>
     get_artefact(const std::unordered_map<std::string,
         boost::shared_ptr<physical::entities::artefact>>& artefacts,
@@ -71,13 +67,13 @@ private:
 
 private:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         formattables::formattable& fbl) const;
 
 public:
     void execute(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element, formattables::model& fm) const;
 
 private:

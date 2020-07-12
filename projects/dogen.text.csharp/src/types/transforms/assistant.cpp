@@ -293,15 +293,9 @@ void assistant::update_artefact() {
     artefact_.logical_name().qualified(element_.name().qualified().dot());
     artefact_.content(stream_.str());
 
-    const auto& ap(element_.artefact_properties());
+    const auto& ap(artefact_.artefact_properties());
     const auto arch(physical_meta_name_.qualified());
-    const auto i(ap.find(arch));
-    if (i == ap.end()) {
-        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;
-        BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + arch));
-    }
-    artefact_.overwrite(i->second.overwrite());
+    artefact_.overwrite(ap.overwrite());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;

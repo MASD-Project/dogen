@@ -29,9 +29,7 @@
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/io/entities/artefact_properties_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
-#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -109,42 +107,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::decoration::element_properties>& v) {
@@ -200,8 +162,6 @@ element::element(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::logical::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
-    const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
     : name_(name),
       documentation_(documentation),
@@ -216,8 +176,6 @@ element::element(
       configuration_(configuration),
       labels_(labels),
       generability_status_(generability_status),
-      artefact_properties_(artefact_properties),
-      enablement_properties_(enablement_properties),
       decoration_(decoration) { }
 
 void element::to_stream(std::ostream& s) const {
@@ -242,8 +200,6 @@ void element::to_stream(std::ostream& s) const {
       << "\"configuration\": " << configuration_ << ", "
       << "\"labels\": " << labels_ << ", "
       << "\"generability_status\": " << generability_status_ << ", "
-      << "\"artefact_properties\": " << artefact_properties_ << ", "
-      << "\"enablement_properties\": " << enablement_properties_ << ", "
       << "\"decoration\": " << decoration_
       << " }";
 }
@@ -263,8 +219,6 @@ void element::swap(element& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(labels_, other.labels_);
     swap(generability_status_, other.generability_status_);
-    swap(artefact_properties_, other.artefact_properties_);
-    swap(enablement_properties_, other.enablement_properties_);
     swap(decoration_, other.decoration_);
 }
 
@@ -282,8 +236,6 @@ bool element::compare(const element& rhs) const {
         configuration_ == rhs.configuration_ &&
         labels_ == rhs.labels_ &&
         generability_status_ == rhs.generability_status_ &&
-        artefact_properties_ == rhs.artefact_properties_ &&
-        enablement_properties_ == rhs.enablement_properties_ &&
         decoration_ == rhs.decoration_;
 }
 
@@ -461,38 +413,6 @@ dogen::logical::entities::generability_status element::generability_status() con
 
 void element::generability_status(const dogen::logical::entities::generability_status v) {
     generability_status_ = v;
-}
-
-const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& element::artefact_properties() const {
-    return artefact_properties_;
-}
-
-std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& element::artefact_properties() {
-    return artefact_properties_;
-}
-
-void element::artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& v) {
-    artefact_properties_ = v;
-}
-
-void element::artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>&& v) {
-    artefact_properties_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::enablement_properties() const {
-    return enablement_properties_;
-}
-
-std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::enablement_properties() {
-    return enablement_properties_;
-}
-
-void element::enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
-    enablement_properties_ = v;
-}
-
-void element::enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v) {
-    enablement_properties_ = std::move(v);
 }
 
 const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& element::decoration() const {

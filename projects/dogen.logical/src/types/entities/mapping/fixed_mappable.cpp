@@ -48,8 +48,6 @@ fixed_mappable::fixed_mappable(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::logical::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
-    const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& destination)
     : dogen::logical::entities::element(
@@ -66,8 +64,6 @@ fixed_mappable::fixed_mappable(
       configuration,
       labels,
       generability_status,
-      artefact_properties,
-      enablement_properties,
       decoration),
       destination_(destination) { }
 

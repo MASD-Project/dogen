@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.text/types/entities/element_archetype.hpp"
+#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group_repository.hpp"
 
@@ -45,7 +45,7 @@ class dependencies_builder {
 public:
     dependencies_builder(
         const directive_group_repository& dgrp,
-        const std::unordered_set<text::entities::element_archetype>&
+        const std::unordered_set<physical::entities::element_archetype>&
         enabled_archetype_for_element);
 
 private:
@@ -113,7 +113,7 @@ public:
 private:
     const directive_group_repository& repository_;
     std::list<std::string> dependencies_;
-    const std::unordered_set<text::entities::element_archetype>&
+    const std::unordered_set<physical::entities::element_archetype>&
     enabled_archetype_for_element_;
 };
 

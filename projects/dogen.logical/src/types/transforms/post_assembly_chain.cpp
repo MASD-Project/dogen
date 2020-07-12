@@ -41,6 +41,7 @@
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 #include "dogen.logical/types/transforms/decoration_transform.hpp"
+#include "dogen.logical/types/transforms/generability_transform.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -101,6 +102,11 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
      * as we only want a single global module for all models.
      */
     global_module_transform::apply(ctx, m);
+
+    /*
+     * Generability must be done after stereotypes and modules transform.
+     */
+    generability_transform::apply(ctx, m);
 
     /*
      * Meta-name transform must be applied after all transforms that

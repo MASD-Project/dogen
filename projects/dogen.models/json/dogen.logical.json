@@ -421,14 +421,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "artefact_properties",
-          "type": "std::unordered_map<std::string, artefact_properties>"
-        },
-        {
-          "name": "enablement_properties",
-          "type": "std::unordered_map<std::string, enablement_properties>"
-        },
-        {
           "name": "decoration",
           "type": "std::unordered_map<technical_space, boost::optional<decoration::element_properties>>",
           "documentation": "If set, decoration to be added to each generated file.\n"
@@ -764,53 +756,6 @@
           "name": "sln",
           "type": "",
           "documentation": "Visual studio solution.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::artefact_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "file_path",
-          "type": "boost::filesystem::path"
-        },
-        {
-          "name": "formatting_style",
-          "type": "formatting_styles"
-        },
-        {
-          "name": "formatting_input",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "entities::formatting_styles",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stock",
-          "type": ""
-        },
-        {
-          "name": "wale",
-          "type": ""
-        },
-        {
-          "name": "stitch",
-          "type": ""
         }
       ]
     },
@@ -1450,28 +1395,6 @@
         {
           "name": "location_",
           "type": "entities::location"
-        }
-      ]
-    },
-    {
-      "name": "entities::enablement_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "facet_enabled",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_enabled",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "facet_overwrite",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
         }
       ]
     },

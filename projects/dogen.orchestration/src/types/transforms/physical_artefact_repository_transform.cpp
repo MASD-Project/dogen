@@ -50,6 +50,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
     physical::entities::artefact_repository r;
     const auto rm(m.root_module()->name().qualified().dot());
     r.root_module_logical_id(rm);
+    r.identifier(m.name().qualified().dot());
 
     auto& asbli(r.artefact_sets_by_logical_id());
     for (const auto& ea : m.elements()) {

@@ -28,9 +28,7 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/io/entities/artefact_properties_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
-#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
 namespace dogen::logical::entities {
