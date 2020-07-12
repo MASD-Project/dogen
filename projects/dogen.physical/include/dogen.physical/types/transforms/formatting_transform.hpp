@@ -25,24 +25,43 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/formatting_styles.hpp"
+#include "dogen.physical/types/entities/formatting_configuration.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class formatting_transform final {
-public:
-    formatting_transform() = default;
-    formatting_transform(const formatting_transform&) = default;
-    formatting_transform(formatting_transform&&) = default;
-    ~formatting_transform() = default;
-    formatting_transform& operator=(const formatting_transform&) = default;
+private:
+    static entities::formatting_styles
+    to_formatting_style(const std::string& s);
+
+private:
+    struct feature_group {
+        variability::entities::feature formatting_style;
+        variability::entities::feature formatting_input;
+    };
+
+    static std::unordered_map<std::string, feature_group>
+    make_feature_groups(const variability::entities::feature_model& fm,
+        const std::list<physical::entities::meta_name>& mns);
+
+    static std::unordered_map<std::string, entities::formatting_configuration>
+    make_formatting_configuration(
+        const std::unordered_map<std::string, feature_group>& fgs,
+        const variability::entities::configuration& cfg);
+
+    static void apply(const std::unordered_map<std::string, feature_group> fgs,
+        entities::artefact_set& as);
 
 public:
-    bool operator==(const formatting_transform& rhs) const;
-    bool operator!=(const formatting_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::artefact_repository& ar);
 };
 
 }

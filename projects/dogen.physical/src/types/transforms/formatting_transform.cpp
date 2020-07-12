@@ -18,12 +18,156 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/optional_io.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/backend_properties_io.hpp"
+#include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.physical/io/entities/archetype_properties_io.hpp"
+#include "dogen.physical/io/entities/enablement_properties_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("physical.transforms.formatting_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string stock_style("stock");
+const std::string wale_style("wale");
+const std::string stitch_style("stitch");
+const std::string formatting_style_trait("formatting_style");
+const std::string formatting_input_trait("formatting_input");
+
+const std::string invalid_style("Formatting style is not valid:");
+
+}
 
 namespace dogen::physical::transforms {
 
-bool formatting_transform::operator==(const formatting_transform& /*rhs*/) const {
-    return true;
+entities::formatting_styles
+formatting_transform::to_formatting_style(const std::string& s) {
+    if (s == stock_style)
+        return entities::formatting_styles::stock;
+    else if (s == wale_style)
+        return entities::formatting_styles::wale;
+    else if (s == stitch_style)
+        return entities::formatting_styles::stitch;
+
+    BOOST_LOG_SEV(lg, error) << invalid_style << s;
+    BOOST_THROW_EXCEPTION(transform_exception(invalid_style + s));
 }
+
+std::unordered_map<std::string, formatting_transform::feature_group>
+formatting_transform::make_feature_groups(
+    const variability::entities::feature_model& fm,
+    const std::list<physical::entities::meta_name>& mns) {
+
+    BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
+
+    std::unordered_map<std::string, formatting_transform::feature_group> r;
+    for (const auto& mn : mns) {
+        const auto arch(mn.qualified());
+
+        feature_group fg;
+        const variability::helpers::feature_selector s(fm);
+        const auto fs(formatting_style_trait);
+        fg.formatting_style = s.get_by_name(arch, fs);
+
+        const auto fi(formatting_input_trait);
+        fg.formatting_input = s.get_by_name(arch, fi);
+
+        r[arch] = fg;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Created feature groups.";
+    return r;
+}
+
+std::unordered_map<std::string, entities::formatting_configuration>
+formatting_transform::make_formatting_configuration(
+    const std::unordered_map<std::string, feature_group>& fgs,
+    const variability::entities::configuration& cfg) {
+    std::unordered_map<std::string, entities::formatting_configuration> r;
+
+    const variability::helpers::configuration_selector s(cfg);
+    for (const auto& pair : fgs) {
+        const auto arch(pair.first);
+        const auto& fg(pair.second);
+
+        bool found(false);
+        entities::formatting_configuration fc;
+        const auto fs(fg.formatting_style);
+        if (s.has_configuration_point(fs)) {
+            found = true;
+            fc.styles(to_formatting_style(s.get_text_content(fs)));
+        }
+
+        const auto fi(fg.formatting_input);
+        if (s.has_configuration_point(fi)) {
+            found = true;
+            fc.input(s.get_text_content(fi));
+        }
+
+        if (found)
+            r[arch] = fc;
+    }
+    return r;
+}
+
+void formatting_transform::
+apply(const std::unordered_map<std::string, feature_group> fgs,
+    entities::artefact_set& as) {
+    BOOST_LOG_SEV(lg, trace) << "Transforming: "
+                             << as.logical_element_id();
+
+    const auto cfgs(make_formatting_configuration(fgs, *as.configuration()));
+    for (auto& pair : as.artefacts_by_archetype()) {
+        const auto arch(pair.first);
+        auto& a(*pair.second);
+        auto& ap(a.artefact_properties());
+        const auto i(cfgs.find(arch));
+        if (i == cfgs.end()) {
+            using entities::formatting_styles;
+            ap.formatting_style(formatting_styles::stock);
+            BOOST_LOG_SEV(lg,trace) << "Element has a stock formatter.";
+            continue;
+        }
+        const auto& cfg(i->second);
+        ap.formatting_style(cfg.styles());
+        ap.formatting_input(cfg.input());
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming element";
+}
+
+void formatting_transform::
+apply(const context& ctx, entities::artefact_repository& arp) {
+    tracing::scoped_transform_tracer stp(lg, "formatting transform",
+        transform_id, arp.identifier(), *ctx.tracer(), arp);
+
+    const auto& pmm(*ctx.meta_model());
+    const auto& in(pmm.indexed_names());
+    const auto& fm(*ctx.feature_model());
+    const auto fgs(make_feature_groups(fm, in.all()));
+    for(auto& pair : arp.artefact_sets_by_logical_id()) {
+        auto& as(pair.second);
+        apply(fgs, as);
+    }
+
+    stp.end_transform(arp);
+}
+
 
 }
