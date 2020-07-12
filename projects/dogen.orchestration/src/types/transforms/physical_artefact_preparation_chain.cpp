@@ -39,13 +39,13 @@ auto lg(logger_factory(transform_id));
 namespace dogen::orchestration::transforms {
 
 void physical_artefact_preparation_chain::apply(const context& ctx,
-    const text::entities::model_set& ms) {
+    text::entities::model_set& ms) {
     const auto& tctx(ctx.text_context());
     const auto& tracer(*tctx.tracer());
     tracing::scoped_chain_tracer stp(lg, "physical artefact preparation chain",
         transform_id, ms.name().qualified().dot(), tracer, ms);
 
-    for (const auto& m : ms.models()) {
+    for (auto& m : ms.models()) {
         /*
          * First we need to extract an artefact repository from each
          * text model. Note that the artefact repository contains
@@ -58,6 +58,8 @@ void physical_artefact_preparation_chain::apply(const context& ctx,
          */
         using physical::transforms::artefact_repository_population_chain;
         artefact_repository_population_chain::apply(ctx.physical_context(), ar);
+
+        m.has_generatable_types(ar.has_generatable_artefacts());
     }
 
     stp.end_chain(ms);

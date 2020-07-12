@@ -36,7 +36,7 @@ namespace dogen::orchestration::transforms {
  */
 class physical_artefact_preparation_chain final {
 public:
-    static void apply(const context& ctx, const text::entities::model_set& ms);
+    static void apply(const context& ctx, text::entities::model_set& ms);
 };
 
 }
