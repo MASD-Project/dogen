@@ -280,12 +280,11 @@ void local_enablement_transform::compute_enablement_for_element(
         return;
     }
 
-    const auto& mn(e.meta_name());
-    const auto j(physical_names_by_meta_name.find(mn.qualified().dot()));
+    const auto j(physical_names_by_meta_name.find(mt));
     if (j == physical_names_by_meta_name.end()) {
-        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mn.qualified().dot();
+        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mt;
         BOOST_THROW_EXCEPTION(
-            transformation_error(meta_name_not_found + mn.qualified().dot()));
+            transformation_error(meta_name_not_found + mt));
     }
     const auto& cal(j->second.canonical_locations());
 
