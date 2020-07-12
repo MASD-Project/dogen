@@ -18,12 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("physical.transforms.generability_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool generability_transform::operator==(const generability_transform& /*rhs*/) const {
-    return true;
+void generability_transform::
+apply(const context& ctx, entities::artefact_repository& ar) {
+    tracing::scoped_transform_tracer stp(lg, "generability",
+        transform_id, ar.identifier(), *ctx.tracer(), ar);
+
+    ar.has_generatable_artefacts(false);
+    for(const auto& pair : ar.artefact_sets_by_logical_id()) {
+        const auto& as(pair.second);
+        if (as.is_generatable()) {
+            ar.has_generatable_artefacts(true);
+            break;
+        }
+    }
+
+    stp.end_transform(ar);
 }
 
 }

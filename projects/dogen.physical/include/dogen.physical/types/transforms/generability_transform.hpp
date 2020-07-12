@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class generability_transform final {
 public:
-    generability_transform() = default;
-    generability_transform(const generability_transform&) = default;
-    generability_transform(generability_transform&&) = default;
-    ~generability_transform() = default;
-    generability_transform& operator=(const generability_transform&) = default;
-
-public:
-    bool operator==(const generability_transform& rhs) const;
-    bool operator!=(const generability_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::artefact_repository& ar);
 };
 
 }
