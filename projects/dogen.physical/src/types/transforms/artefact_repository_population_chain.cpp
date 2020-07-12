@@ -23,6 +23,7 @@
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/global_enablement_transform.hpp"
+#include "dogen.physical/types/transforms/local_enablement_transform.hpp"
 #include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
 
 namespace {
@@ -43,9 +44,15 @@ apply(const context& ctx, entities::artefact_repository& arp) {
         transform_id, arp.identifier(), *ctx.tracer(), arp);
 
     /*
-     * Populates the global enablement properties.
+     * The global enablement transform must be executed before the
+     * local one.
      */
     global_enablement_transform::apply(ctx, arp);
+
+    /*
+     * Update enablement for all artefacts.
+     */
+    local_enablement_transform::apply(ctx, arp);
 
     stp.end_chain(arp);
 }
