@@ -25,24 +25,55 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_set>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Expands all extraction properties from meta-data.
+ */
 class extraction_properties_transform final {
-public:
-    extraction_properties_transform() = default;
-    extraction_properties_transform(const extraction_properties_transform&) = default;
-    extraction_properties_transform(extraction_properties_transform&&) = default;
-    ~extraction_properties_transform() = default;
-    extraction_properties_transform& operator=(const extraction_properties_transform&) = default;
+private:
+    struct feature_group {
+        variability::entities::feature cpp_headers_output_directory;
+        variability::entities::feature enable_backend_directories;
+        std::unordered_map<std::string,
+                           variability::entities::feature> enabled;
+    };
+
+    static feature_group make_feature_group(
+        const variability::entities::feature_model& fm,
+        const std::list<physical::entities::meta_name>& mns);
+
+    static boost::filesystem::path
+    obtain_cpp_headers_output_directory(const feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    static std::unordered_set<std::string>
+    obtain_enabled_backends(const feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    static bool obtain_enable_backend_directories(const feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    static entities::extraction_properties make_extraction_properties(
+        const context& ctx, const std::list<physical::entities::meta_name>& mns,
+        const variability::entities::configuration& cfg);
 
 public:
-    bool operator==(const extraction_properties_transform& rhs) const;
-    bool operator!=(const extraction_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * Applies the extraction properties transform to the supplied
+     * model.
+     */
+    static void apply(const context& ctx, entities::artefact_repository& ar);
 };
 
 }
