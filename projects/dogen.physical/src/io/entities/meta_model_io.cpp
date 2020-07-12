@@ -24,7 +24,6 @@
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/io/entities/enablement_flags_io.hpp"
 #include "dogen.physical/io/entities/meta_name_indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -44,24 +43,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical
         s << *i;
     }
     s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -123,7 +104,6 @@ std::ostream& operator<<(std::ostream& s, const meta_model& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
-      << "\"enablement_flags\": " << v.enablement_flags() << ", "
       << "\"template_instantiation_domains\": " << v.template_instantiation_domains() << ", "
       << "\"backends\": " << v.backends() << ", "
       << "\"indexed_names\": " << v.indexed_names()

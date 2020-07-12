@@ -28,7 +28,6 @@ meta_model::meta_model(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
     const std::list<dogen::physical::entities::label>& labels,
-    const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const std::list<dogen::physical::entities::backend>& backends,
     const dogen::physical::entities::meta_name_indices& indexed_names)
@@ -37,7 +36,6 @@ meta_model::meta_model(
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
-      enablement_flags_(enablement_flags),
       template_instantiation_domains_(template_instantiation_domains),
       backends_(backends),
       indexed_names_(indexed_names) { }
@@ -49,7 +47,6 @@ void meta_model::swap(meta_model& other) noexcept {
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
-    swap(enablement_flags_, other.enablement_flags_);
     swap(template_instantiation_domains_, other.template_instantiation_domains_);
     swap(backends_, other.backends_);
     swap(indexed_names_, other.indexed_names_);
@@ -61,7 +58,6 @@ bool meta_model::operator==(const meta_model& rhs) const {
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
-        enablement_flags_ == rhs.enablement_flags_ &&
         template_instantiation_domains_ == rhs.template_instantiation_domains_ &&
         backends_ == rhs.backends_ &&
         indexed_names_ == rhs.indexed_names_;
@@ -151,22 +147,6 @@ void meta_model::labels(const std::list<dogen::physical::entities::label>& v) {
 
 void meta_model::labels(const std::list<dogen::physical::entities::label>&& v) {
     labels_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& meta_model::enablement_flags() const {
-    return enablement_flags_;
-}
-
-std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& meta_model::enablement_flags() {
-    return enablement_flags_;
-}
-
-void meta_model::enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& v) {
-    enablement_flags_ = v;
-}
-
-void meta_model::enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>&& v) {
-    enablement_flags_ = std::move(v);
 }
 
 const std::unordered_map<std::string, std::vector<std::string> >& meta_model::template_instantiation_domains() const {

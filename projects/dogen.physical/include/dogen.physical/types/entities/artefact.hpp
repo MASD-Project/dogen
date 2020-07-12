@@ -36,7 +36,6 @@
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.physical/types/entities/logical_name.hpp"
-#include "dogen.physical/types/entities/enablement_flags.hpp"
 #include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
@@ -70,7 +69,6 @@ public:
         const std::list<std::string>& relations,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
-        const dogen::physical::entities::enablement_flags& enablement_flags,
         const dogen::physical::entities::artefact_properties& artefact_properties,
         const dogen::physical::entities::enablement_properties& enablement_properties);
 
@@ -188,16 +186,6 @@ public:
     void operation(const dogen::physical::entities::operation& v);
     void operation(const dogen::physical::entities::operation&& v);
 
-    /**
-     * @brief Local enablement flags.
-     */
-    /**@{*/
-    const dogen::physical::entities::enablement_flags& enablement_flags() const;
-    dogen::physical::entities::enablement_flags& enablement_flags();
-    void enablement_flags(const dogen::physical::entities::enablement_flags& v);
-    void enablement_flags(const dogen::physical::entities::enablement_flags&& v);
-    /**@}*/
-
     const dogen::physical::entities::artefact_properties& artefact_properties() const;
     dogen::physical::entities::artefact_properties& artefact_properties();
     void artefact_properties(const dogen::physical::entities::artefact_properties& v);
@@ -232,7 +220,6 @@ private:
     std::list<std::string> relations_;
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
-    dogen::physical::entities::enablement_flags enablement_flags_;
     dogen::physical::entities::artefact_properties artefact_properties_;
     dogen::physical::entities::enablement_properties enablement_properties_;
 };

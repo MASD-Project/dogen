@@ -33,7 +33,6 @@
 #include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/enablement_flags.hpp"
 #include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
@@ -57,7 +56,6 @@ public:
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
         const std::list<dogen::physical::entities::label>& labels,
-        const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const std::list<dogen::physical::entities::backend>& backends,
         const dogen::physical::entities::meta_name_indices& indexed_names);
@@ -114,16 +112,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Global enablement flags
-     */
-    /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags() const;
-    std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags();
-    void enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& v);
-    void enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>&& v);
-    /**@}*/
-
-    /**
      * @brief Provides all of the domains to be used for template instantiation.
      *
      * Example of a domain is "masd.facet" which contains the list of all available facets.
@@ -173,7 +161,6 @@ private:
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
     std::list<dogen::physical::entities::label> labels_;
-    std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     std::list<dogen::physical::entities::backend> backends_;
     dogen::physical::entities::meta_name_indices indexed_names_;
