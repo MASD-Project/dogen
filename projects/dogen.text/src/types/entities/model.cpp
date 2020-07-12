@@ -69,7 +69,7 @@ model::model(
     const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
-    const dogen::logical::entities::extraction_properties& extraction_properties,
+    const dogen::physical::entities::extraction_properties& extraction_properties,
     const std::list<boost::filesystem::path>& managed_directories,
     const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties)
     : name_(name),
@@ -318,19 +318,19 @@ void model::enabled_archetype_for_element(const std::unordered_set<dogen::physic
     enabled_archetype_for_element_ = std::move(v);
 }
 
-const dogen::logical::entities::extraction_properties& model::extraction_properties() const {
+const dogen::physical::entities::extraction_properties& model::extraction_properties() const {
     return extraction_properties_;
 }
 
-dogen::logical::entities::extraction_properties& model::extraction_properties() {
+dogen::physical::entities::extraction_properties& model::extraction_properties() {
     return extraction_properties_;
 }
 
-void model::extraction_properties(const dogen::logical::entities::extraction_properties& v) {
+void model::extraction_properties(const dogen::physical::entities::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void model::extraction_properties(const dogen::logical::entities::extraction_properties&& v) {
+void model::extraction_properties(const dogen::physical::entities::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 

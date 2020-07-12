@@ -446,7 +446,7 @@ spaces.#</dia:string>
             <dia:string>#extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical::entities::extraction_properties#</dia:string>
+            <dia:string>#physical::entities::extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

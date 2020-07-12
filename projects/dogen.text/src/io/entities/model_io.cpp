@@ -30,7 +30,7 @@
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/element_archetype_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
-#include "dogen.logical/io/entities/extraction_properties_io.hpp"
+#include "dogen.physical/io/entities/extraction_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

@@ -33,7 +33,6 @@
 #include "dogen.logical/types/transforms/containment_transform.hpp"
 #include "dogen.logical/types/transforms/physical_entities_transform.hpp"
 #include "dogen.logical/types/transforms/mapping_elements_transform.hpp"
-#include "dogen.logical/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.logical/types/transforms/variability_features_transform.hpp"
 #include "dogen.logical/types/transforms/visual_studio_transform.hpp"
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
@@ -83,7 +82,6 @@ void pre_assembly_chain::apply(const context& ctx,
     technical_space_transform::apply(ctx, m);
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
-    extraction_properties_transform::apply(ctx, m);
     variability_features_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
     labelling_transform::apply(ctx, m);

@@ -62,6 +62,7 @@ void physical_artefact_preparation_chain::apply(const context& ctx,
         m.has_generatable_types(ar.has_generatable_artefacts());
         m.facet_properties(ar.global_enablement_properties().facet_properties());
         m.enabled_archetype_for_element(ar.enabled_archetype_for_element());
+        m.extraction_properties(ar.extraction_properties());
     }
 
     stp.end_chain(ms);

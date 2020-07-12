@@ -266,7 +266,6 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     r.references(m.references());
     r.root_module(m.root_module());
     r.orm_properties(m.orm_properties());
-    r.extraction_properties(m.extraction_properties());
     r.origin_sha1_hash(m.origin_sha1_hash());
     r.all_technical_spaces(m.all_technical_spaces());
 

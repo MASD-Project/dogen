@@ -471,10 +471,6 @@
           "type": "boost::optional<orm::model_properties>"
         },
         {
-          "name": "extraction_properties",
-          "type": "extraction_properties"
-        },
-        {
           "name": "structural_elements",
           "type": "structural::element_repository",
           "documentation": "All structural elements in this model.\n"
@@ -1555,33 +1551,6 @@
           "type": ""
         }
       ]
-    },
-    {
-      "name": "entities::extraction_properties",
-      "documentation": "Properties related to extraction.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "cpp_headers_output_directory",
-          "type": "boost::filesystem::path",
-          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
-        },
-        {
-          "name": "enabled_backends",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "enable_backend_directories",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "transforms::extraction_properties_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "entities::input_model_set",

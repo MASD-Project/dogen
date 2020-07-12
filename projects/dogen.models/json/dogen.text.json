@@ -79,7 +79,7 @@
         },
         {
           "name": "extraction_properties",
-          "type": "logical::entities::extraction_properties"
+          "type": "physical::entities::extraction_properties"
         },
         {
           "name": "managed_directories",

@@ -38,7 +38,6 @@
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
-#include "dogen.logical/types/entities/extraction_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.logical/types/entities/orm/element_repository.hpp"
 #include "dogen.logical/types/entities/build/element_repository.hpp"
@@ -80,7 +79,6 @@ public:
         const std::list<dogen::logical::entities::technical_space>& output_technical_spaces,
         const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
-        const dogen::logical::entities::extraction_properties& extraction_properties,
         const dogen::logical::entities::structural::element_repository& structural_elements,
         const dogen::logical::entities::decoration::element_repository& decoration_elements,
         const dogen::logical::entities::variability::element_repository& variability_elements,
@@ -197,11 +195,6 @@ public:
     void orm_properties(const boost::optional<dogen::logical::entities::orm::model_properties>& v);
     void orm_properties(const boost::optional<dogen::logical::entities::orm::model_properties>&& v);
 
-    const dogen::logical::entities::extraction_properties& extraction_properties() const;
-    dogen::logical::entities::extraction_properties& extraction_properties();
-    void extraction_properties(const dogen::logical::entities::extraction_properties& v);
-    void extraction_properties(const dogen::logical::entities::extraction_properties&& v);
-
     /**
      * @brief All structural elements in this model.
      */
@@ -314,7 +307,6 @@ private:
     std::list<dogen::logical::entities::technical_space> output_technical_spaces_;
     std::unordered_set<dogen::logical::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
-    dogen::logical::entities::extraction_properties extraction_properties_;
     dogen::logical::entities::structural::element_repository structural_elements_;
     dogen::logical::entities::decoration::element_repository decoration_elements_;
     dogen::logical::entities::variability::element_repository variability_elements_;
