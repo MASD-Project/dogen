@@ -242,8 +242,8 @@ endif()
 ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
 set(git_retries 0)
 while(git_result LESS 0 AND git_retries LESS 10)
-    message("Failed to update source code from " ${source_url})
-    message("Problems checking out from git repository."
+    message(STATUS "Failed to update source code from " ${source_url})
+    message(STATUS "Problems checking out from git repository."
         " Status: ${git_result}. Retries: ${git_retries}")
     ctest_sleep(60)
     math(EXPR git_retries "${git_retries} + 1")
@@ -254,7 +254,7 @@ if (git_result LESS 0)
     message(FATAL_ERROR "Failed to update source code from git.")
 endif()
 
-message("Successfully updated source code from ${source_url}."
+message(STATUS "Successfully updated source code from ${source_url}."
     " Read ${git_result} new files.")
 
 #
