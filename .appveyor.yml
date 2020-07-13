@@ -1,4 +1,4 @@
-version: 1.0.26.{build}
+version: 1.0.27.{build}
 
 image:
   - Visual Studio 2017
@@ -49,7 +49,7 @@ on_finish:
   - ps: Invoke-WebRequest https://report.ci/upload.py | Select-Object -ExpandProperty Content | python - --name "Windows $env:compiler $env:configuration"
 
 artifacts:
-  - path: build\output\clang-cl\Release\stage\pkg\DOGEN-1.0.26-Windows-AMD64.msi
+  - path: build\output\clang-cl\Release\stage\pkg\DOGEN-1.0.27-Windows-AMD64.msi
     name: x86_64 MSI
 
 notifications:
@@ -73,7 +73,7 @@ deploy:
     subject: masd-project
     repo: main
     package: dogen
-    artifact: build\output\clang-cl\Release\stage\pkg\DOGEN-1.0.26-Windows-AMD64.msi
-    version: 1.0.26
+    artifact: build\output\clang-cl\Release\stage\pkg\DOGEN-1.0.27-Windows-AMD64.msi
+    version: 1.0.27
     publish: true
     override: true

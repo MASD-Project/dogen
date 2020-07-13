@@ -1,0 +1,51 @@
+#+title: Sprint Backlog 27
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) spike(p) }
+
+* Sprint Goals
+
+- finish PMM generation.
+- implement locator and dependencies via PMM.
+- move physical elements and transforms from logical and text models
+  to physical model.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2020-07-14 Tue 00:08]
+| <75>                                |        |      |      |       |
+| Headline                            | Time   |      |      |     % |
+|-------------------------------------+--------+------+------+-------|
+| *Total time*                        | *0:17* |      |      | 100.0 |
+|-------------------------------------+--------+------+------+-------|
+| Stories                             | 0:17   |      |      | 100.0 |
+| Active                              |        | 0:17 |      | 100.0 |
+| Sprint and product backlog grooming |        |      | 0:17 | 100.0 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Release Announcements:
+
+- [[https://twitter.com/MarcoCraveiro/status/1268840152090267649][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6674605622907949056-3fJa][linkedin]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+*** Create a demo and presentation for previous sprint                :story:
+
+Time spent creating the demo and presentation.
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-13 Mon 23:51]--[2020-07-14 Tue 00:08] =>  0:17
+    :END:
+
+Updates to sprint and product backlog.
+
+** Deprecated
