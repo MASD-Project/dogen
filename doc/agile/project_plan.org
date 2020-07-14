@@ -21,7 +21,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  start
-   :allocate: s26
+   :allocate: s27
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -33,7 +33,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s27
+   :allocate: s28
    :END:
 
 - create PDMs
@@ -43,7 +43,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s28
+   :allocate: s29
    :END:
 
 - add proudct and product family level entities to coding.
@@ -52,7 +52,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   26d
    :BLOCKER:  previous-sibling
-   :allocate: s29
+   :allocate: s30
    :END:
 
 - add warning and errors infrastructure
@@ -64,17 +64,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-06-02
+    :start: 2020-07-14
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 26
-   :PROPERTIES:
-   :resource_id: s26
-   :END:
 ** Sprint 27
    :PROPERTIES:
    :resource_id: s27
@@ -90,4 +86,8 @@ Sprints for the project plan.
 ** Sprint 30
    :PROPERTIES:
    :resource_id: s30
+   :END:
+** Sprint 31
+   :PROPERTIES:
+   :resource_id: s31
    :END:
