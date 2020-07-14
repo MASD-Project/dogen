@@ -7,27 +7,29 @@
 
 - finish PMM generation.
 - implement locator and dependencies via PMM.
-- move physical elements and transforms from logical and text models
-  to physical model.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-14 Tue 00:08]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:17* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:17   |      |      | 100.0 |
-| Active                              |        | 0:17 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:17 | 100.0 |
+#+CAPTION: Clock summary at [2020-07-14 Tue 21:54]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *0:45* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 0:45   |      |      | 100.0 |
+| Active                                 |        | 0:45 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 0:28 |  62.2 |
+| Sprint and product backlog grooming    |        |      | 0:17 |  37.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-14 Tue 21:25]--[2020-07-14 Tue 21:53] =>  0:28
+    :END:
 
 Add github release notes for previous sprint.
 

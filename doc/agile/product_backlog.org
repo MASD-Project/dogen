@@ -15850,6 +15850,24 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for cpprouter                             :story:
+
+From the site:
+
+#+begin_quote
+A modern, header-only request router for C++
+
+Routing requests
+
+This library is designed to route requests to an associated
+callback. Requests are matched using a pattern, which may contain
+embedded regular expressions. The data matched with the regular
+expression is then parsed and provided to the callback.
+#+end_quote
+
+Links:
+
+- https://github.com/omartijn/cpprouter
 
 *** Consider adding support for LogDevice                             :story:
 
