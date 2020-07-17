@@ -15850,6 +15850,20 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for static site generators
+
+It should be possible to add meta-model elements that model static
+site generators. We should then be able to generate the site. The
+content files are added as org-babel. We should also add the build
+files scripts to generate the file.
+
+In an ideal world we want to be able to mix and match the static
+generated content with Wt.
+
+Links:
+
+- [[https://lwn.net/Articles/825507/][Hugo: a static-site generator]]
+
 *** Consider adding support for cpprouter                             :story:
 
 From the site:

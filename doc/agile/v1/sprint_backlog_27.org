@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-14 Tue 21:54]
+#+CAPTION: Clock summary at [2020-07-17 Fri 13:10]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *0:45* |      |      | 100.0 |
+| *Total time*                           | *5:25* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 0:45   |      |      | 100.0 |
-| Active                                 |        | 0:45 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 0:28 |  62.2 |
-| Sprint and product backlog grooming    |        |      | 0:17 |  37.8 |
+| Stories                                | 5:25   |      |      | 100.0 |
+| Active                                 |        | 5:25 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 5:08 |  94.8 |
+| Sprint and product backlog grooming    |        |      | 0:17 |   5.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-07-17 Fri 08:30]--[2020-07-17 Fri 13:10] =>  4:40
     CLOCK: [2020-07-14 Tue 21:25]--[2020-07-14 Tue 21:53] =>  0:28
     :END:
 
@@ -38,6 +39,103 @@ Release Announcements:
 - [[https://twitter.com/MarcoCraveiro/status/1268840152090267649][twitter]]
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6674605622907949056-3fJa][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+#+begin_src markdown
+![Rio de Bentiaba](https://prazerdeconhecer.files.wordpress.com/2015/09/img_1128.jpg)
+_Bentiaba river, Namibe, Angola. (C) 2016 [O Viajante](https://prazerdeconhecer.wordpress.com/2015/09/16/benguela-post/)._
+
+**DRAFT: release notes under construction**
+
+# Introduction
+
+Welcome to yet another Dogen sprint! This one was a bit of a [Klingon Release](https://wiki.c2.com/?KlingonProgramming), if we've ever seen one. [Sprint 25](https://github.com/MASD-Project/dogen/releases/tag/v1.0.25) was a hard slog, mind you, but nothing could quite prepare us for what was to come: this sprint was _at least_ twice as hard, lasted almost twice as long - including around 20% extra time compared to what we usually allocate to a sprint - and involved _such_ a degree of abstract thinking (given our modest abilities), we often thought we had lost the plot altogether. To top it all off, after such an intense bout of coding, we still managed to finish _miles off_ of the original sprint goal, which was clearly far too ambitious to begin with. For all of its hardships, the sprint did end on a high note when we finally had time to reflect on what was achieved; and the conceptual model does appear to be nearing its final shape - though, of course, you'd be forgiven for thinking you've heard _that one_ before. Alas, some things never change.
+
+But that's quite enough blabbering - let's look at how and where the action took place.
+
+# User visible changes
+
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail.
+
+[![Sprint 1.0.26 Demo](https://img.youtube.com/vi/nRGHIA2Chxc/0.jpg)](https://youtu.be/nRGHIA2Chxc)
+_Video 1: Sprint 26 Demo._
+
+## Archetype factories and transforms
+
+The only story which is visible to end users this sprint is deeply connected to our physical model changes, so it requires a fair amount of background in order to make sense of it. First and foremost, we have to point out that whilst this is _technically_ a user facing story - in that any user can make use of this feature - in practice it's only meant for those working in Dogen's internals - _e.g._ generating the code generator. A related point to keep in mind is that Dogen uses a _generative architecture_, where we try to generate as much as possible of Dogen using Dogen. With those two important bits of information in hand, let's now take a step back to see how it all fits together.
+
+![M2T transforms in text.cpp](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_text_cpp_physical_elements.png)
+_Figure 1: M2T transforms in ```text.cpp``` model, on Sprint 25._
+
+MASD's logical model contains a set of modeling elements that capture the essential characteristics of the _things_ we want to code-generate. Most of these elements are familiar to programmers because our targets tend to be artefacts created by programmers; these are classes, methods, enumerations and the like, the bricks and mortar we typically associate with the coding activity. However, from a MASD perspective, the story does not end there - and hence why we used the word "things". Ultimately, _any_ artefact that contributes to a software product can be modeled as a logical entity, provided that is some kind of structural commonality that can be abstracted in order to recreate it via code generation. The fact that we model programming constructs is seen as more of a "coincidence" than anything else; what we really care about is locating and extracting _certain kinds_ of structural patterns on files. MASD provides a separation between logical entities and their eventual _physical_ representation as a file; and the mapping between the logical domain and the physical domain is seen as a projection through these spaces; one logical element projects to zero, one or many physical elements. In the physical domain, files are abstracted into _artefacts_ (the _physical model_ or PM), and each artefact is an instance of an _archetype_ (the _physical meta model_ or PMM). These are related in very much the same way a class and an object are: the artefact is an instance of an archetype. Until recently, we had to tell Dogen about the available archetypes "by hand" (a rough approximation): each text template had some boilerplate to inject the details of the archetype into the framework. After a great deal of effort, [Sprint 25](https://github.com/MASD-Project/dogen/releases/tag/v1.0.25) finally brought us to a point where this code was generated by Dogen. This was achieved by treating _archetypes themselves_ as logical concepts, and providing physical projections for these logical elements as we do for any other logical element. Which neatly brings us to the present.
+
+
+
+
+
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_26.org).
+
+## Ephemerides
+
+This sprint saw the 12000th commit to Dogen.
+
+
+
+## Milestones
+
+No milestones where reached this sprint.
+
+## Significant Internal Stories
+
+## Add relations between archetypes in the PMM
+
+##
+
+### MDE Paper of the Week (PofW)
+
+This sprint we spent around 5.2% of the total ask reading four MDE papers. As usual, we published a video on youtube with the review of each paper. The following papers were read:
+
+- [MDE PotW 10: Using Aspects to Model Product Line Variability](https://youtu.be/UlYLsBHjU1I): Groher, Iris, and Markus Voelter. "Using Aspects to Model Product Line Variability." SPLC (2). 2008. [PDF](https://pdfs.semanticscholar.org/4c77/0315cd8151f6c162ac2f99ecc62225f4c94e.pdf?_ga=2.246561604.1739388568.1592151663-6190553.1592151663)
+- [MDE PotW 11: A flexible code generator for MOF based modeling languages](https://youtu.be/9x_pqJOw_FE): Bichler, Lutz. "A flexible code generator for MOF-based modeling languages." 2nd OOPSLA Workshop on Generative Techniques in the context of Model Driven Architecture. 2003. [PDF](https://s23m.com/oopsla2003/bichler.pdf)
+- [MDE PotW 12: A Comparison of Generative Approaches: XVCL and GenVoca](https://youtu.be/_1Xc2L5RpTY): Blair, James, and Don Batory. "A Comparison of Generative Approaches: XVCL and GenVoca." Technical report, The University of Texas at Austin, Department of Computer Sciences (2004). [PDF](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.457.1399&rep=rep1&type=pdf)
+- [MDE PotW 13: An evaluation of the Graphical Modeling Framework GMF](https://youtu.be/XfVGK8XOKmk): Seehusen, Fredrik, and Ketil Stølen. "An evaluation of the graphical modeling framework (gmf) based on the development of the coras tool." International Conference on Theory and Practice of Model Transformations. Springer, Berlin, Heidelberg, 2011. [PDF](http://hjem.ifi.uio.no/ketils/kst/Articles/2011.ICMT.pdf)
+- [MDE PotW 14: Features as transformations: A generative approach to software development](https://youtu.be/OvCgcKHc__Y): Vranić, Valentino, and Roman Táborský. "Features as transformations: A generative approach to software development." Computer Science and Information Systems 13.3 (2016): 759-778. [PDF](https://pdfs.semanticscholar.org/7f20/ee0ef94ba20161611c2ae184e6040f9d2fe1.pdf?_ga=2.47007141.386256099.1594564659-1149343892.1591869910)
+
+## Resourcing
+
+![Sprint 26 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_26_pie_chart.jpg)
+_Figure 5_: Cost of stories for sprint 26.
+
+## Roadmap
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_26_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_26_resource_allocation_graph.png)
+
+# Binaries
+
+You can download binaries from either [Bintray](https://bintray.com/masd-project/main/dogen/1.0.26) or GitHub, as per Table 2. All binaries are 64-bit. For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available in [zip](https://github.com/MASD-Project/dogen/archive/v1.0.26.zip) or [tar.gz](https://github.com/MASD-Project/dogen/archive/v1.0.26.tar.gz) format.
+
+| Operative System | Format | BinTray | GitHub |
+|----------|-------|-----|--------|
+|Linux Debian/Ubuntu | Deb | [dogen_1.0.26_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.26/dogen_1.0.26_amd64-applications.deb) | [dogen_1.0.26_amd64-applications.deb](https://github.com/MASD-Project/dogen/releases/download/v1.0.26/dogen_1.0.26_amd64-applications.deb) |
+|OSX | DMG | [DOGEN-1.0.26-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.26/DOGEN-1.0.26-Darwin-x86_64.dmg) | [DOGEN-1.0.26-Darwin-x86_64.dmg](https://github.com/MASD-Project/dogen/releases/download/v1.0.26/DOGEN-1.0.26-Darwin-x86_64.dmg)|
+|Windows | MSI | [DOGEN-1.0.26-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.26-Windows-AMD64.msi) | [DOGEN-1.0.26-Windows-AMD64.msi](https://github.com/MASD-Project/dogen/releases/download/v1.0.26/DOGEN-1.0.26-Windows-AMD64.msi) |
+
+_Table 2: Binary packages for Dogen._
+
+**Note:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this a trivial undertaking.
+
+# Next Sprint
+
+The sprint goals for the next sprint are carried from the previous sprint:
+
+- finish PMM generation.
+- implement locator and dependencies via PMM.
+
+That's all we have for you on this release. Happy Modeling!
+#end_src
 
 *** Create a demo and presentation for previous sprint                :story:
 
