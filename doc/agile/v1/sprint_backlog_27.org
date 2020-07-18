@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-17 Fri 17:53]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *8:59* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 8:59   |      |      | 100.0 |
-| Active                                             |        | 8:59 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:55 |  77.0 |
-| Create a demo and presentation for previous sprint |        |      | 0:41 |   7.6 |
-| Sprint and product backlog grooming                |        |      | 1:23 |  15.4 |
+#+CAPTION: Clock summary at [2020-07-18 Sat 19:04]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *11:33* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 11:33   |       |      | 100.0 |
+| Active                                             |         | 11:33 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 6:55 |  59.9 |
+| Create a demo and presentation for previous sprint |         |       | 0:41 |   5.9 |
+| Sprint and product backlog grooming                |         |       | 1:23 |  12.0 |
+| Create an =ident= model                            |         |       | 2:34 |  22.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -421,7 +422,12 @@ Notes:
   need to add this as a property (e.g. generatable). If a user tries
   to add a formatter to a non-generatable type we error.
 
-*** Create an =ident= model                                           :story:
+*** STARTED Create an =ident= model                                   :story:
+    :LOGBOOK:
+    CLOCK: [2020-07-18 Sat 18:36]--[2020-07-18 Sat 19:04] =>  0:28
+    CLOCK: [2020-07-18 Sat 17:05]--[2020-07-18 Sat 18:16] =>  1:11
+    CLOCK: [2020-07-18 Sat 12:05]--[2020-07-18 Sat 13:00] =>  0:55
+    :END:
 
 At present we are duplicating a number of concepts related to identity:
 
@@ -474,6 +480,11 @@ where name is =tag= and value is =value=.
 Links:
 
 - [[https://github.com/ISO-TC211/UML-Best-Practices/wiki/Tagged-values][UML-Best-Practices: Tagged values]]
+
+*** Rename =org_mode= model                                           :story:
+
+Seems like a better name for this model. Or perhaps =orgmode=? Just
+don't like =org_mode=.
 
 *** Move decoration to =text= model                                   :story:
 
