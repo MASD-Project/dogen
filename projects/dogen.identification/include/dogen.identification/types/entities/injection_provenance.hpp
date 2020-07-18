@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <iosfwd>
 #include <algorithm>
 #include "dogen.identification/types/entities/uri.hpp"
 #include "dogen.identification/types/entities/sha1_hash.hpp"
@@ -38,15 +37,14 @@ namespace dogen::identification::entities {
 /**
  * @brief Source of a model element in the injection dimension.
  */
-class injection_provenance {
+class injection_provenance final {
 public:
     injection_provenance(const injection_provenance&) = default;
     injection_provenance(injection_provenance&&) = default;
+    ~injection_provenance() = default;
 
 public:
     injection_provenance();
-
-    virtual ~injection_provenance() noexcept = 0;
 
 public:
     injection_provenance(
@@ -55,9 +53,6 @@ public:
         const dogen::identification::entities::sha1_hash& model_sha1_hash,
         const dogen::identification::entities::injection_id& injection_id,
         const dogen::identification::entities::injection_location& location);
-
-public:
-    virtual void to_stream(std::ostream& s) const;
 
 public:
     /**
@@ -108,13 +103,15 @@ public:
     void location(const dogen::identification::entities::injection_location&& v);
     /**@}*/
 
-protected:
-    bool compare(const injection_provenance& rhs) const;
 public:
-    virtual bool equals(const injection_provenance& other) const = 0;
+    bool operator==(const injection_provenance& rhs) const;
+    bool operator!=(const injection_provenance& rhs) const {
+        return !this->operator==(rhs);
+    }
 
-protected:
+public:
     void swap(injection_provenance& other) noexcept;
+    injection_provenance& operator=(injection_provenance other);
 
 private:
     dogen::identification::entities::uri model_uri_;
@@ -124,10 +121,15 @@ private:
     dogen::identification::entities::injection_location location_;
 };
 
-inline injection_provenance::~injection_provenance() noexcept { }
+}
 
-inline bool operator==(const injection_provenance& lhs, const injection_provenance& rhs) {
-    return lhs.equals(rhs);
+namespace std {
+
+template<>
+inline void swap(
+    dogen::identification::entities::injection_provenance& lhs,
+    dogen::identification::entities::injection_provenance& rhs) {
+    lhs.swap(rhs);
 }
 
 }

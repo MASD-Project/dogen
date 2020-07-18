@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <iosfwd>
 #include <algorithm>
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
@@ -35,26 +34,17 @@ namespace dogen::identification::entities {
 /**
  * @brief Source of a model element in the logical dimension.
  */
-class logical_provenance final : public dogen::identification::entities::injection_provenance {
+class logical_provenance final {
 public:
     logical_provenance() = default;
     logical_provenance(const logical_provenance&) = default;
     logical_provenance(logical_provenance&&) = default;
-
-    virtual ~logical_provenance() noexcept { }
+    ~logical_provenance() = default;
 
 public:
     logical_provenance(
-        const dogen::identification::entities::uri& model_uri,
-        const dogen::identification::entities::model_type model_type,
-        const dogen::identification::entities::sha1_hash& model_sha1_hash,
-        const dogen::identification::entities::injection_id& injection_id,
-        const dogen::identification::entities::injection_location& location,
         const dogen::identification::entities::injection_provenance& injection,
         const dogen::identification::entities::logical_id& logical_id);
-
-public:
-    void to_stream(std::ostream& s) const override;
 
 public:
     /**
@@ -82,9 +72,6 @@ public:
     bool operator!=(const logical_provenance& rhs) const {
         return !this->operator==(rhs);
     }
-
-public:
-    bool equals(const dogen::identification::entities::injection_provenance& other) const override;
 
 public:
     void swap(logical_provenance& other) noexcept;

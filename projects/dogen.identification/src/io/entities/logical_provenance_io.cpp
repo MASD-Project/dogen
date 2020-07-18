@@ -26,7 +26,11 @@
 namespace dogen::identification::entities {
 
 std::ostream& operator<<(std::ostream& s, const logical_provenance& v) {
-    v.to_stream(s);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::entities::logical_provenance\"" << ", "
+      << "\"injection\": " << v.injection() << ", "
+      << "\"logical_id\": " << v.logical_id()
+      << " }";
     return(s);
 }
 

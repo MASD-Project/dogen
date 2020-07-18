@@ -29,7 +29,14 @@
 namespace dogen::identification::entities {
 
 std::ostream& operator<<(std::ostream& s, const injection_provenance& v) {
-    v.to_stream(s);
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::entities::injection_provenance\"" << ", "
+      << "\"model_uri\": " << v.model_uri() << ", "
+      << "\"model_type\": " << v.model_type() << ", "
+      << "\"model_sha1_hash\": " << v.model_sha1_hash() << ", "
+      << "\"injection_id\": " << v.injection_id() << ", "
+      << "\"location\": " << v.location()
+      << " }";
     return(s);
 }
 

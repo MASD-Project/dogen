@@ -18,12 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.identification/io/entities/uri_io.hpp"
-#include "dogen.identification/io/entities/sha1_hash_io.hpp"
-#include "dogen.identification/io/entities/model_type_io.hpp"
-#include "dogen.identification/io/entities/injection_id_io.hpp"
-#include "dogen.identification/io/entities/injection_location_io.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::identification::entities {
@@ -43,17 +37,6 @@ injection_provenance::injection_provenance(
       injection_id_(injection_id),
       location_(location) { }
 
-void injection_provenance::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::injection_provenance\"" << ", "
-      << "\"model_uri\": " << model_uri_ << ", "
-      << "\"model_type\": " << model_type_ << ", "
-      << "\"model_sha1_hash\": " << model_sha1_hash_ << ", "
-      << "\"injection_id\": " << injection_id_ << ", "
-      << "\"location\": " << location_
-      << " }";
-}
-
 void injection_provenance::swap(injection_provenance& other) noexcept {
     using std::swap;
     swap(model_uri_, other.model_uri_);
@@ -63,12 +46,18 @@ void injection_provenance::swap(injection_provenance& other) noexcept {
     swap(location_, other.location_);
 }
 
-bool injection_provenance::compare(const injection_provenance& rhs) const {
+bool injection_provenance::operator==(const injection_provenance& rhs) const {
     return model_uri_ == rhs.model_uri_ &&
         model_type_ == rhs.model_type_ &&
         model_sha1_hash_ == rhs.model_sha1_hash_ &&
         injection_id_ == rhs.injection_id_ &&
         location_ == rhs.location_;
+}
+
+injection_provenance& injection_provenance::operator=(injection_provenance other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 const dogen::identification::entities::uri& injection_provenance::model_uri() const {
