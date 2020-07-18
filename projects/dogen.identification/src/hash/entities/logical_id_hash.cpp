@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
-#include "dogen.identification/hash/entities/logical_qualified_representation_hash.hpp"
 
 namespace {
 
@@ -33,14 +32,9 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 namespace dogen::identification::entities {
 
-std::size_t logical_qualified_representation_hasher::hash(const logical_qualified_representation& v) {
+std::size_t logical_id_hasher::hash(const logical_id& v) {
     std::size_t seed(0);
-
-    combine(seed, v.dot());
-    combine(seed, v.colon());
-    combine(seed, v.identifiable());
-    combine(seed, v.id());
-
+    combine(seed, v.value());
     return seed;
 }
 

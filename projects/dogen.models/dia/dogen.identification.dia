@@ -961,13 +961,13 @@ identification within Dogen.
         <dia:point val="43,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,14.95;50.865,18.05"/>
+        <dia:rectangle val="42.95,14.95;57.41,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="43,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -976,7 +976,7 @@ identification within Dogen.
         <dia:string>#logical_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::primitive#</dia:string>
+        <dia:string>#masd::primitive, dogen::hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#ID of the elment in the logical dimension.
@@ -1071,13 +1071,13 @@ identification within Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,15"/>
+        <dia:point val="59,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,14.95;61.2,18.05"/>
+        <dia:rectangle val="58.95,14.95;67.2,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,15"/>
+        <dia:point val="59,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.1500000000000004"/>
@@ -4222,13 +4222,13 @@ written or where it was sourced from.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="53,5"/>
+        <dia:point val="54,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,4.95;64.5625,8.65"/>
+        <dia:rectangle val="53.95,4.95;65.5625,8.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="53,5"/>
+        <dia:point val="54,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.512499999999999"/>
@@ -4416,19 +4416,19 @@ written or where it was sourced from.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="64.5125,8.6"/>
+        <dia:point val="65.5125,8.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.025,7.85;65.2625,15.8"/>
+        <dia:rectangle val="63.025,7.85;66.2625,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="64.5125,8.6"/>
-        <dia:point val="64.5125,13"/>
-        <dia:point val="57.075,13"/>
-        <dia:point val="57.075,15"/>
+        <dia:point val="65.5125,8.6"/>
+        <dia:point val="65.5125,13"/>
+        <dia:point val="63.075,13"/>
+        <dia:point val="63.075,15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4488,19 +4488,19 @@ written or where it was sourced from.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53,8.6"/>
+        <dia:point val="54,8.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.765,7.85;53.75,15.8"/>
+        <dia:rectangle val="53.25,7.85;57.56,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53,8.6"/>
-        <dia:point val="53,13"/>
-        <dia:point val="50.815,13"/>
-        <dia:point val="50.815,15"/>
+        <dia:point val="54,8.6"/>
+        <dia:point val="54,13"/>
+        <dia:point val="57.36,13"/>
+        <dia:point val="57.36,15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4803,7 +4803,7 @@ of Dogen elements.
         <dia:point val="44.41,8.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.66,7.85;47.1075,15.8"/>
+        <dia:rectangle val="43.66,7.85;50.38,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4811,8 +4811,8 @@ of Dogen elements.
       <dia:attribute name="orth_points">
         <dia:point val="44.41,8.6"/>
         <dia:point val="44.41,13"/>
-        <dia:point val="46.9075,13"/>
-        <dia:point val="46.9075,15"/>
+        <dia:point val="50.18,13"/>
+        <dia:point val="50.18,15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4872,17 +4872,17 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="57.075,18"/>
+        <dia:point val="63.075,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.325,17.25;65.405,23.8"/>
+        <dia:rectangle val="62.325,17.25;65.405,23.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="57.075,18"/>
-        <dia:point val="57.075,21"/>
+        <dia:point val="63.075,18"/>
+        <dia:point val="63.075,21"/>
         <dia:point val="65.205,21"/>
         <dia:point val="65.205,23"/>
       </dia:attribute>

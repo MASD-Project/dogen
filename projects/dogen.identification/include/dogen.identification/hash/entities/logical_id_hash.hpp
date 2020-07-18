@@ -18,30 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/hash/entities/logical_id_hash.hpp"
-#include "dogen.identification/hash/entities/logical_qualified_representation_hash.hpp"
+#ifndef DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_ID_HASH_HPP
+#define DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_ID_HASH_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <functional>
+#include "dogen.identification/types/entities/logical_id.hpp"
 
 namespace dogen::identification::entities {
 
-std::size_t logical_qualified_representation_hasher::hash(const logical_qualified_representation& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.dot());
-    combine(seed, v.colon());
-    combine(seed, v.identifiable());
-    combine(seed, v.id());
-
-    return seed;
-}
+struct logical_id_hasher {
+public:
+    static std::size_t hash(const logical_id& v);
+};
 
 }
+
+namespace std {
+
+template<>
+struct hash<dogen::identification::entities::logical_id> {
+public:
+    size_t operator()(const dogen::identification::entities::logical_id& v) const {
+        return dogen::identification::entities::logical_id_hasher::hash(v);
+    }
+};
+
+}
+#endif
