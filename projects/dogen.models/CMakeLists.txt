@@ -108,6 +108,7 @@ if (DOGEN_CLI_EXECUTABLE)
     set(models ${models} ${prefix}.utility)
     set(models ${models} ${prefix}.variability)
     set(models ${models} ${prefix}.relational)
+    set(models ${models} ${prefix}.identification)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)

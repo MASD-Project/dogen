@@ -2400,7 +2400,7 @@ naming files, etc).#</dia:string>
             <dia:string>#location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#location#</dia:string>
+            <dia:string>#logical_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
