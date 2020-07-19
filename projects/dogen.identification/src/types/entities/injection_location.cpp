@@ -27,23 +27,19 @@ injection_location::injection_location()
       column_(static_cast<long>(0)) { }
 
 injection_location::injection_location(
-    const dogen::identification::entities::uri& uri,
     const long line,
     const long column)
-    : uri_(uri),
-      line_(line),
+    : line_(line),
       column_(column) { }
 
 void injection_location::swap(injection_location& other) noexcept {
     using std::swap;
-    swap(uri_, other.uri_);
     swap(line_, other.line_);
     swap(column_, other.column_);
 }
 
 bool injection_location::operator==(const injection_location& rhs) const {
-    return uri_ == rhs.uri_ &&
-        line_ == rhs.line_ &&
+    return line_ == rhs.line_ &&
         column_ == rhs.column_;
 }
 
@@ -51,22 +47,6 @@ injection_location& injection_location::operator=(injection_location other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::identification::entities::uri& injection_location::uri() const {
-    return uri_;
-}
-
-dogen::identification::entities::uri& injection_location::uri() {
-    return uri_;
-}
-
-void injection_location::uri(const dogen::identification::entities::uri& v) {
-    uri_ = v;
-}
-
-void injection_location::uri(const dogen::identification::entities::uri&& v) {
-    uri_ = std::move(v);
 }
 
 long injection_location::line() const {

@@ -18,28 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/stereotype_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const stereotype& v) {
+logical_meta_id::logical_meta_id(const std::string& value)
+    : value_(value) { }
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::stereotype\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
-      << " }";
+const std::string& logical_meta_id::value() const {
+    return value_;
+}
 
-    return s;
+std::string& logical_meta_id::value() {
+    return value_;
+}
+
+void logical_meta_id::value(const std::string& v) {
+    value_ = v;
+}
+
+void logical_meta_id::value(const std::string&& v) {
+    value_ = std::move(v);
+}
+
+bool logical_meta_id::operator==(const logical_meta_id& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void logical_meta_id::swap(logical_meta_id& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+logical_meta_id& logical_meta_id::operator=(logical_meta_id other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 }

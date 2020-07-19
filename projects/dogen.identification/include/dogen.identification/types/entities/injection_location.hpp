@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen.identification/types/entities/uri.hpp"
 
 namespace dogen::identification::entities {
 
@@ -44,21 +43,10 @@ public:
 
 public:
     injection_location(
-        const dogen::identification::entities::uri& uri,
         const long line,
         const long column);
 
 public:
-    /**
-     * @brief URI to the model that contained this element.
-     */
-    /**@{*/
-    const dogen::identification::entities::uri& uri() const;
-    dogen::identification::entities::uri& uri();
-    void uri(const dogen::identification::entities::uri& v);
-    void uri(const dogen::identification::entities::uri&& v);
-    /**@}*/
-
     /**
      * @brief Line number where the element was defined.
      */
@@ -86,7 +74,6 @@ public:
     injection_location& operator=(injection_location other);
 
 private:
-    dogen::identification::entities::uri uri_;
     long line_;
     long column_;
 };

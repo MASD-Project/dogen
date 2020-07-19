@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.identification/io/entities/uri_io.hpp"
+#include "dogen.identification/io/model_id_io.hpp"
 #include "dogen.identification/io/entities/sha1_hash_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.identification/io/entities/injection_id_io.hpp"
@@ -31,7 +31,7 @@ namespace dogen::identification::entities {
 std::ostream& operator<<(std::ostream& s, const injection_provenance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::injection_provenance\"" << ", "
-      << "\"model_uri\": " << v.model_uri() << ", "
+      << "\"model_id\": " << v.model_id() << ", "
       << "\"model_type\": " << v.model_type() << ", "
       << "\"model_sha1_hash\": " << v.model_sha1_hash() << ", "
       << "\"injection_id\": " << v.injection_id() << ", "

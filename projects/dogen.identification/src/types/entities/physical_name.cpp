@@ -24,7 +24,7 @@ namespace dogen::identification::entities {
 
 physical_name::physical_name(
     const std::string& simple,
-    const dogen::identification::entities::uri& qualified)
+    const dogen::identification::entities::physical_id& qualified)
     : simple_(simple),
       qualified_(qualified) { }
 
@@ -61,19 +61,19 @@ void physical_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::uri& physical_name::qualified() const {
+const dogen::identification::entities::physical_id& physical_name::qualified() const {
     return qualified_;
 }
 
-dogen::identification::entities::uri& physical_name::qualified() {
+dogen::identification::entities::physical_id& physical_name::qualified() {
     return qualified_;
 }
 
-void physical_name::qualified(const dogen::identification::entities::uri& v) {
+void physical_name::qualified(const dogen::identification::entities::physical_id& v) {
     qualified_ = v;
 }
 
-void physical_name::qualified(const dogen::identification::entities::uri&& v) {
+void physical_name::qualified(const dogen::identification::entities::physical_id&& v) {
     qualified_ = std::move(v);
 }
 

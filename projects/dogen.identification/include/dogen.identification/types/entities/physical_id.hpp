@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_URI_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_URI_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_PHYSICAL_ID_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_PHYSICAL_ID_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,16 +30,16 @@
 
 namespace dogen::identification::entities {
 /**
- * @brief Simple representation of a URI.
+ * @brief ID for a physical element.
  */
-class uri final {
+class physical_id final {
 public:
-    uri() = default;
-    uri(const uri&) = default;
-    uri(uri&&) = default;
-    ~uri() = default;
+    physical_id() = default;
+    physical_id(const physical_id&) = default;
+    physical_id(physical_id&&) = default;
+    ~physical_id() = default;
 public:
-    explicit uri(const std::string& value);
+    explicit physical_id(const std::string& value);
 
 public:
     /**
@@ -58,14 +58,14 @@ public:
     }
 
 public:
-    bool operator==(const uri& rhs) const;
-    bool operator!=(const uri& rhs) const {
+    bool operator==(const physical_id& rhs) const;
+    bool operator!=(const physical_id& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(uri& other) noexcept;
-    uri& operator=(uri other);
+    void swap(physical_id& other) noexcept;
+    physical_id& operator=(physical_id other);
 
 private:
     std::string value_;
@@ -77,8 +77,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::identification::entities::uri& lhs,
-    dogen::identification::entities::uri& rhs) {
+    dogen::identification::entities::physical_id& lhs,
+    dogen::identification::entities::physical_id& rhs) {
     lhs.swap(rhs);
 }
 

@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include "dogen.identification/io/entities/uri_io.hpp"
 #include "dogen.identification/io/entities/injection_location_io.hpp"
 
 namespace dogen::identification::entities {
@@ -27,7 +26,6 @@ namespace dogen::identification::entities {
 std::ostream& operator<<(std::ostream& s, const injection_location& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::injection_location\"" << ", "
-      << "\"uri\": " << v.uri() << ", "
       << "\"line\": " << v.line() << ", "
       << "\"column\": " << v.column()
       << " }";

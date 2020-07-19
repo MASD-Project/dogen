@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_FWD_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_FWD_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_STEREOTYPE_FWD_HPP
+#define DOGEN_IDENTIFICATION_TYPES_STEREOTYPE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::identification::entities {
+namespace dogen::identification {
 
-class logical_qualified_representation;
+class stereotype;
 
 }
 

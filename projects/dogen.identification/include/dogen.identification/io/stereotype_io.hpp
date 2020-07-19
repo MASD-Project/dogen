@@ -18,12 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/helpers/logical_qualified_representation_builder.hpp"
+#ifndef DOGEN_IDENTIFICATION_IO_STEREOTYPE_IO_HPP
+#define DOGEN_IDENTIFICATION_IO_STEREOTYPE_IO_HPP
 
-namespace dogen::identification::helpers {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool logical_qualified_representation_builder::operator==(const logical_qualified_representation_builder& /*rhs*/) const {
-    return true;
+#include <iosfwd>
+#include "dogen.identification/types/stereotype.hpp"
+
+namespace dogen::identification {
+
+std::ostream&
+operator<<(std::ostream& s, const dogen::identification::stereotype& v);
+
 }
 
-}
+#endif

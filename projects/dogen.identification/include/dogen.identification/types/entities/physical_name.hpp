@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.identification/types/entities/uri.hpp"
+#include "dogen.identification/types/entities/physical_id.hpp"
 
 namespace dogen::identification::entities {
 
@@ -44,7 +44,7 @@ public:
 public:
     physical_name(
         const std::string& simple,
-        const dogen::identification::entities::uri& qualified);
+        const dogen::identification::entities::physical_id& qualified);
 
 public:
     /**
@@ -58,16 +58,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Absolute URI to the file or directory.
-     *
-     * The qualified name indicates the location in the filesystem where it will be
-     * written or where it was sourced from.
+     * @brief ID for a physical element.
      */
     /**@{*/
-    const dogen::identification::entities::uri& qualified() const;
-    dogen::identification::entities::uri& qualified();
-    void qualified(const dogen::identification::entities::uri& v);
-    void qualified(const dogen::identification::entities::uri&& v);
+    const dogen::identification::entities::physical_id& qualified() const;
+    dogen::identification::entities::physical_id& qualified();
+    void qualified(const dogen::identification::entities::physical_id& v);
+    void qualified(const dogen::identification::entities::physical_id&& v);
     /**@}*/
 
 public:
@@ -82,7 +79,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::uri qualified_;
+    dogen::identification::entities::physical_id qualified_;
 };
 
 }

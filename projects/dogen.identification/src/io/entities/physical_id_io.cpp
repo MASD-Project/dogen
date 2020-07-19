@@ -18,17 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_URI_FWD_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_URI_FWD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::identification::entities {
 
-class uri;
+std::ostream& operator<<(std::ostream& s, const physical_id& v) {
 
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::entities::physical_id\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
+
+    return s;
 }
 
-#endif
+}

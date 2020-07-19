@@ -24,7 +24,7 @@ namespace dogen::identification::entities {
 
 logical_meta_name::logical_meta_name(
     const std::string& simple,
-    const dogen::identification::entities::stereotype& qualified)
+    const dogen::identification::entities::logical_meta_id& qualified)
     : simple_(simple),
       qualified_(qualified) { }
 
@@ -61,19 +61,19 @@ void logical_meta_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::stereotype& logical_meta_name::qualified() const {
+const dogen::identification::entities::logical_meta_id& logical_meta_name::qualified() const {
     return qualified_;
 }
 
-dogen::identification::entities::stereotype& logical_meta_name::qualified() {
+dogen::identification::entities::logical_meta_id& logical_meta_name::qualified() {
     return qualified_;
 }
 
-void logical_meta_name::qualified(const dogen::identification::entities::stereotype& v) {
+void logical_meta_name::qualified(const dogen::identification::entities::logical_meta_id& v) {
     qualified_ = v;
 }
 
-void logical_meta_name::qualified(const dogen::identification::entities::stereotype&& v) {
+void logical_meta_name::qualified(const dogen::identification::entities::logical_meta_id&& v) {
     qualified_ = std::move(v);
 }
 

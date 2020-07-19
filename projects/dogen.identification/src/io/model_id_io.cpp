@@ -20,8 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/logical_id_io.hpp"
-#include "dogen.identification/io/entities/logical_qualified_representation_io.hpp"
+#include "dogen.identification/io/model_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,17 +30,16 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::identification::entities {
+namespace dogen::identification {
 
-std::ostream& operator<<(std::ostream& s, const logical_qualified_representation& v) {
+std::ostream& operator<<(std::ostream& s, const model_id& v) {
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::logical_qualified_representation\"" << ", "
-      << "\"dot\": " << "\"" << tidy_up_string(v.dot()) << "\"" << ", "
-      << "\"colon\": " << "\"" << tidy_up_string(v.colon()) << "\"" << ", "
-      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\"" << ", "
-      << "\"id\": " << v.id()
+      << "\"__type__\": " << "\"dogen::identification::model_id\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
-    return(s);
+
+    return s;
 }
 
 }

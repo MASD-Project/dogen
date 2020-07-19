@@ -18,30 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/hash/entities/logical_id_hash.hpp"
-#include "dogen.identification/hash/entities/logical_qualified_representation_hash.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/name_representations_io.hpp"
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
 namespace dogen::identification::entities {
 
-std::size_t logical_qualified_representation_hasher::hash(const logical_qualified_representation& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.dot());
-    combine(seed, v.colon());
-    combine(seed, v.identifiable());
-    combine(seed, v.id());
-
-    return seed;
+std::ostream& operator<<(std::ostream& s, const name_representations& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::entities::name_representations\"" << ", "
+      << "\"dot\": " << "\"" << tidy_up_string(v.dot()) << "\"" << ", "
+      << "\"colon\": " << "\"" << tidy_up_string(v.colon()) << "\"" << ", "
+      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""
+      << " }";
+    return(s);
 }
 
 }

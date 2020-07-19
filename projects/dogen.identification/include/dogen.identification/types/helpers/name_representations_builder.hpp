@@ -18,34 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_HASH_HPP
-#define DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_HASH_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_NAME_REPRESENTATIONS_BUILDER_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_NAME_REPRESENTATIONS_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen.identification/types/entities/logical_qualified_representation.hpp"
+#include <algorithm>
 
-namespace dogen::identification::entities {
+namespace dogen::identification::helpers {
 
-struct logical_qualified_representation_hasher {
+class name_representations_builder final {
 public:
-    static std::size_t hash(const logical_qualified_representation& v);
-};
+    name_representations_builder() = default;
+    name_representations_builder(const name_representations_builder&) = default;
+    name_representations_builder(name_representations_builder&&) = default;
+    ~name_representations_builder() = default;
+    name_representations_builder& operator=(const name_representations_builder&) = default;
 
-}
-
-namespace std {
-
-template<>
-struct hash<dogen::identification::entities::logical_qualified_representation> {
 public:
-    size_t operator()(const dogen::identification::entities::logical_qualified_representation& v) const {
-        return dogen::identification::entities::logical_qualified_representation_hasher::hash(v);
+    bool operator==(const name_representations_builder& rhs) const;
+    bool operator!=(const name_representations_builder& rhs) const {
+        return !this->operator==(rhs);
     }
+
 };
 
 }
+
 #endif

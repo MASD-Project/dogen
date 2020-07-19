@@ -27,8 +27,9 @@
 
 #include <string>
 #include <algorithm>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/logical_location.hpp"
-#include "dogen.identification/types/entities/logical_qualified_representation.hpp"
+#include "dogen.identification/types/entities/name_representations.hpp"
 
 namespace dogen::identification::entities {
 
@@ -58,9 +59,10 @@ public:
 public:
     logical_name(
         const std::string& simple,
+        const dogen::identification::entities::logical_id& qualified,
         const dogen::identification::entities::logical_location& location,
-        const bool is_container,
-        const dogen::identification::entities::logical_qualified_representation& qualified);
+        const dogen::identification::entities::name_representations& representations,
+        const bool is_container);
 
 public:
     /**
@@ -73,6 +75,11 @@ public:
     void simple(const std::string&& v);
     /**@}*/
 
+    const dogen::identification::entities::logical_id& qualified() const;
+    dogen::identification::entities::logical_id& qualified();
+    void qualified(const dogen::identification::entities::logical_id& v);
+    void qualified(const dogen::identification::entities::logical_id&& v);
+
     /**
      * @brief Where the name is located in element space.
      */
@@ -84,21 +91,21 @@ public:
     /**@}*/
 
     /**
+     * @brief Different representations for a name.
+     */
+    /**@{*/
+    const dogen::identification::entities::name_representations& representations() const;
+    dogen::identification::entities::name_representations& representations();
+    void representations(const dogen::identification::entities::name_representations& v);
+    void representations(const dogen::identification::entities::name_representations&& v);
+    /**@}*/
+
+    /**
      * @brief If true, the name indicates an element that can contain other elements.
      */
     /**@{*/
     bool is_container() const;
     void is_container(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Full
-     */
-    /**@{*/
-    const dogen::identification::entities::logical_qualified_representation& qualified() const;
-    dogen::identification::entities::logical_qualified_representation& qualified();
-    void qualified(const dogen::identification::entities::logical_qualified_representation& v);
-    void qualified(const dogen::identification::entities::logical_qualified_representation&& v);
     /**@}*/
 
 public:
@@ -113,9 +120,10 @@ public:
 
 private:
     std::string simple_;
+    dogen::identification::entities::logical_id qualified_;
     dogen::identification::entities::logical_location location_;
+    dogen::identification::entities::name_representations representations_;
     bool is_container_;
-    dogen::identification::entities::logical_qualified_representation qualified_;
 };
 
 }

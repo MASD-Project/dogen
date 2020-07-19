@@ -18,42 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/entities/uri.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/stereotype_io.hpp"
 
-namespace dogen::identification::entities {
-
-uri::uri(const std::string& value)
-    : value_(value) { }
-
-const std::string& uri::value() const {
-    return value_;
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
-std::string& uri::value() {
-    return value_;
-}
+namespace dogen::identification {
 
-void uri::value(const std::string& v) {
-    value_ = v;
-}
+std::ostream& operator<<(std::ostream& s, const stereotype& v) {
 
-void uri::value(const std::string&& v) {
-    value_ = std::move(v);
-}
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::stereotype\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
 
-bool uri::operator==(const uri& rhs) const {
-    return value_ == rhs.value_;
-}
-
-void uri::swap(uri& other) noexcept {
-    using std::swap;
-    swap(value_, other.value_);
-}
-
-uri& uri::operator=(uri other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+    return s;
 }
 
 }

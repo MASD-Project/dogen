@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 
 namespace dogen::identification::entities {
 
@@ -41,7 +41,7 @@ public:
 public:
     logical_meta_name(
         const std::string& simple,
-        const dogen::identification::entities::stereotype& qualified);
+        const dogen::identification::entities::logical_meta_id& qualified);
 
 public:
     /**
@@ -54,10 +54,15 @@ public:
     void simple(const std::string&& v);
     /**@}*/
 
-    const dogen::identification::entities::stereotype& qualified() const;
-    dogen::identification::entities::stereotype& qualified();
-    void qualified(const dogen::identification::entities::stereotype& v);
-    void qualified(const dogen::identification::entities::stereotype&& v);
+    /**
+     * @brief Qualified representation of a logical meta-name.
+     */
+    /**@{*/
+    const dogen::identification::entities::logical_meta_id& qualified() const;
+    dogen::identification::entities::logical_meta_id& qualified();
+    void qualified(const dogen::identification::entities::logical_meta_id& v);
+    void qualified(const dogen::identification::entities::logical_meta_id&& v);
+    /**@}*/
 
 public:
     bool operator==(const logical_meta_name& rhs) const;
@@ -71,7 +76,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::stereotype qualified_;
+    dogen::identification::entities::logical_meta_id qualified_;
 };
 
 }

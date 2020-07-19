@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include "dogen.identification/types/entities/logical_id.hpp"
-#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 
 namespace dogen::identification::entities {
 
@@ -44,7 +44,7 @@ public:
 public:
     logical_meta_physical_id(
         const dogen::identification::entities::logical_id& logical_id,
-        const dogen::identification::entities::stereotype& physical_id);
+        const dogen::identification::entities::physical_meta_id& physical_id);
 
 public:
     /**
@@ -61,10 +61,10 @@ public:
      * @brief ID of the element in the physical dimension.
      */
     /**@{*/
-    const dogen::identification::entities::stereotype& physical_id() const;
-    dogen::identification::entities::stereotype& physical_id();
-    void physical_id(const dogen::identification::entities::stereotype& v);
-    void physical_id(const dogen::identification::entities::stereotype&& v);
+    const dogen::identification::entities::physical_meta_id& physical_id() const;
+    dogen::identification::entities::physical_meta_id& physical_id();
+    void physical_id(const dogen::identification::entities::physical_meta_id& v);
+    void physical_id(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
 public:
@@ -79,7 +79,7 @@ public:
 
 private:
     dogen::identification::entities::logical_id logical_id_;
-    dogen::identification::entities::stereotype physical_id_;
+    dogen::identification::entities::physical_meta_id physical_id_;
 };
 
 }

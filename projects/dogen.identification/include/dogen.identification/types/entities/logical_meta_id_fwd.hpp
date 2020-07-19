@@ -18,20 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.identification/io/entities/logical_id_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_META_ID_FWD_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_META_ID_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const logical_meta_physical_id& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::logical_meta_physical_id\"" << ", "
-      << "\"logical_id\": " << v.logical_id() << ", "
-      << "\"physical_id\": " << v.physical_id()
-      << " }";
-    return(s);
-}
+class logical_meta_id;
 
 }
+
+#endif

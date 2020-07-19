@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_NAME_REPRESENTATIONS_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_NAME_REPRESENTATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,26 +27,24 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.identification/types/entities/logical_id.hpp"
 
 namespace dogen::identification::entities {
 
 /**
- * @brief Fully qualified representation for a logical identifier.
+ * @brief All available representations of a name.
  */
-class logical_qualified_representation final {
+class name_representations final {
 public:
-    logical_qualified_representation() = default;
-    logical_qualified_representation(const logical_qualified_representation&) = default;
-    logical_qualified_representation(logical_qualified_representation&&) = default;
-    ~logical_qualified_representation() = default;
+    name_representations() = default;
+    name_representations(const name_representations&) = default;
+    name_representations(name_representations&&) = default;
+    ~name_representations() = default;
 
 public:
-    logical_qualified_representation(
+    name_representations(
         const std::string& dot,
         const std::string& colon,
-        const std::string& identifiable,
-        const dogen::identification::entities::logical_id& id);
+        const std::string& identifiable);
 
 public:
     /**
@@ -80,31 +78,20 @@ public:
     void identifiable(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief identifier for this element in the logical dimension.
-     */
-    /**@{*/
-    const dogen::identification::entities::logical_id& id() const;
-    dogen::identification::entities::logical_id& id();
-    void id(const dogen::identification::entities::logical_id& v);
-    void id(const dogen::identification::entities::logical_id&& v);
-    /**@}*/
-
 public:
-    bool operator==(const logical_qualified_representation& rhs) const;
-    bool operator!=(const logical_qualified_representation& rhs) const {
+    bool operator==(const name_representations& rhs) const;
+    bool operator!=(const name_representations& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(logical_qualified_representation& other) noexcept;
-    logical_qualified_representation& operator=(logical_qualified_representation other);
+    void swap(name_representations& other) noexcept;
+    name_representations& operator=(name_representations other);
 
 private:
     std::string dot_;
     std::string colon_;
     std::string identifiable_;
-    dogen::identification::entities::logical_id id_;
 };
 
 }
@@ -113,8 +100,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::identification::entities::logical_qualified_representation& lhs,
-    dogen::identification::entities::logical_qualified_representation& rhs) {
+    dogen::identification::entities::name_representations& lhs,
+    dogen::identification::entities::name_representations& rhs) {
     lhs.swap(rhs);
 }
 

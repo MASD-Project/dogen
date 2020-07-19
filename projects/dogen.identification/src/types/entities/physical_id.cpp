@@ -18,39 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.identification/types/entities/physical_id.hpp"
 
 namespace dogen::identification::entities {
 
-stereotype::stereotype(const std::string& value)
+physical_id::physical_id(const std::string& value)
     : value_(value) { }
 
-const std::string& stereotype::value() const {
+const std::string& physical_id::value() const {
     return value_;
 }
 
-std::string& stereotype::value() {
+std::string& physical_id::value() {
     return value_;
 }
 
-void stereotype::value(const std::string& v) {
+void physical_id::value(const std::string& v) {
     value_ = v;
 }
 
-void stereotype::value(const std::string&& v) {
+void physical_id::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-bool stereotype::operator==(const stereotype& rhs) const {
+bool physical_id::operator==(const physical_id& rhs) const {
     return value_ == rhs.value_;
 }
 
-void stereotype::swap(stereotype& other) noexcept {
+void physical_id::swap(physical_id& other) noexcept {
     using std::swap;
     swap(value_, other.value_);
 }
 
-stereotype& stereotype::operator=(stereotype other) {
+physical_id& physical_id::operator=(physical_id other) {
     using std::swap;
     swap(*this, other);
     return *this;

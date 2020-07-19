@@ -18,21 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_IO_ENTITIES_URI_IO_HPP
-#define DOGEN_IDENTIFICATION_IO_ENTITIES_URI_IO_HPP
+#include "dogen.identification/hash/entities/name_representations_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <iosfwd>
-#include "dogen.identification/types/entities/uri.hpp"
-
-namespace dogen::identification::entities {
-
-std::ostream&
-operator<<(std::ostream& s, const dogen::identification::entities::uri& v);
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
 }
 
-#endif
+namespace dogen::identification::entities {
+
+std::size_t name_representations_hasher::hash(const name_representations& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.dot());
+    combine(seed, v.colon());
+    combine(seed, v.identifiable());
+
+    return seed;
+}
+
+}

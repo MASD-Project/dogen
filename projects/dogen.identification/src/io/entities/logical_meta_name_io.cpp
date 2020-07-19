@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/stereotype_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

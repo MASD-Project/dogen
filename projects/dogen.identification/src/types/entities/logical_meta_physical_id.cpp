@@ -24,7 +24,7 @@ namespace dogen::identification::entities {
 
 logical_meta_physical_id::logical_meta_physical_id(
     const dogen::identification::entities::logical_id& logical_id,
-    const dogen::identification::entities::stereotype& physical_id)
+    const dogen::identification::entities::physical_meta_id& physical_id)
     : logical_id_(logical_id),
       physical_id_(physical_id) { }
 
@@ -61,19 +61,19 @@ void logical_meta_physical_id::logical_id(const dogen::identification::entities:
     logical_id_ = std::move(v);
 }
 
-const dogen::identification::entities::stereotype& logical_meta_physical_id::physical_id() const {
+const dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_id() const {
     return physical_id_;
 }
 
-dogen::identification::entities::stereotype& logical_meta_physical_id::physical_id() {
+dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_id() {
     return physical_id_;
 }
 
-void logical_meta_physical_id::physical_id(const dogen::identification::entities::stereotype& v) {
+void logical_meta_physical_id::physical_id(const dogen::identification::entities::physical_meta_id& v) {
     physical_id_ = v;
 }
 
-void logical_meta_physical_id::physical_id(const dogen::identification::entities::stereotype&& v) {
+void logical_meta_physical_id::physical_id(const dogen::identification::entities::physical_meta_id&& v) {
     physical_id_ = std::move(v);
 }
 

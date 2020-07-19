@@ -18,22 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_IO_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_IO_HPP
-#define DOGEN_IDENTIFICATION_IO_ENTITIES_LOGICAL_QUALIFIED_REPRESENTATION_IO_HPP
+#include "dogen.identification/types/helpers/name_representations_builder.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::identification::helpers {
 
-#include <iosfwd>
-#include "dogen.identification/types/entities/logical_qualified_representation.hpp"
-
-namespace dogen::identification::entities {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::identification::entities::logical_qualified_representation& v);
-
+bool name_representations_builder::operator==(const name_representations_builder& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

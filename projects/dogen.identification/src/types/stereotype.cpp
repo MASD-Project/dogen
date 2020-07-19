@@ -18,28 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/uri_io.hpp"
+#include "dogen.identification/types/stereotype.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
+namespace dogen::identification {
+
+stereotype::stereotype(const std::string& value)
+    : value_(value) { }
+
+const std::string& stereotype::value() const {
+    return value_;
 }
 
-namespace dogen::identification::entities {
+std::string& stereotype::value() {
+    return value_;
+}
 
-std::ostream& operator<<(std::ostream& s, const uri& v) {
+void stereotype::value(const std::string& v) {
+    value_ = v;
+}
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::uri\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
-      << " }";
+void stereotype::value(const std::string&& v) {
+    value_ = std::move(v);
+}
 
-    return s;
+bool stereotype::operator==(const stereotype& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void stereotype::swap(stereotype& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+stereotype& stereotype::operator=(stereotype other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 }

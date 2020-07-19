@@ -19,19 +19,27 @@
  *
  */
 #include <ostream>
-#include "dogen.identification/io/entities/logical_id_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const logical_meta_physical_id& v) {
+std::ostream& operator<<(std::ostream& s, const logical_meta_id& v) {
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::logical_meta_physical_id\"" << ", "
-      << "\"logical_id\": " << v.logical_id() << ", "
-      << "\"physical_id\": " << v.physical_id()
+      << "\"__type__\": " << "\"dogen::identification::entities::logical_meta_id\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
-    return(s);
+
+    return s;
 }
 
 }

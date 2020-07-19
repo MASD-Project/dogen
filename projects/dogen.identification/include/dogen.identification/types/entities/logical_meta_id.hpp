@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_STEREOTYPE_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_STEREOTYPE_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_META_ID_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_LOGICAL_META_ID_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,16 +30,16 @@
 
 namespace dogen::identification::entities {
 /**
- * @brief Represents the name of  a stereotype.
+ * @brief ID for a logical meta-element.
  */
-class stereotype final {
+class logical_meta_id final {
 public:
-    stereotype() = default;
-    stereotype(const stereotype&) = default;
-    stereotype(stereotype&&) = default;
-    ~stereotype() = default;
+    logical_meta_id() = default;
+    logical_meta_id(const logical_meta_id&) = default;
+    logical_meta_id(logical_meta_id&&) = default;
+    ~logical_meta_id() = default;
 public:
-    explicit stereotype(const std::string& value);
+    explicit logical_meta_id(const std::string& value);
 
 public:
     /**
@@ -58,14 +58,14 @@ public:
     }
 
 public:
-    bool operator==(const stereotype& rhs) const;
-    bool operator!=(const stereotype& rhs) const {
+    bool operator==(const logical_meta_id& rhs) const;
+    bool operator!=(const logical_meta_id& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(stereotype& other) noexcept;
-    stereotype& operator=(stereotype other);
+    void swap(logical_meta_id& other) noexcept;
+    logical_meta_id& operator=(logical_meta_id other);
 
 private:
     std::string value_;
@@ -77,8 +77,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::identification::entities::stereotype& lhs,
-    dogen::identification::entities::stereotype& rhs) {
+    dogen::identification::entities::logical_meta_id& lhs,
+    dogen::identification::entities::logical_meta_id& rhs) {
     lhs.swap(rhs);
 }
 

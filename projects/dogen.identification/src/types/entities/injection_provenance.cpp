@@ -26,12 +26,12 @@ injection_provenance::injection_provenance()
     : model_type_(static_cast<dogen::identification::entities::model_type>(0)) { }
 
 injection_provenance::injection_provenance(
-    const dogen::identification::entities::uri& model_uri,
+    const dogen::identification::model_id& model_id,
     const dogen::identification::entities::model_type model_type,
     const dogen::identification::entities::sha1_hash& model_sha1_hash,
     const dogen::identification::entities::injection_id& injection_id,
     const dogen::identification::entities::injection_location& location)
-    : model_uri_(model_uri),
+    : model_id_(model_id),
       model_type_(model_type),
       model_sha1_hash_(model_sha1_hash),
       injection_id_(injection_id),
@@ -39,7 +39,7 @@ injection_provenance::injection_provenance(
 
 void injection_provenance::swap(injection_provenance& other) noexcept {
     using std::swap;
-    swap(model_uri_, other.model_uri_);
+    swap(model_id_, other.model_id_);
     swap(model_type_, other.model_type_);
     swap(model_sha1_hash_, other.model_sha1_hash_);
     swap(injection_id_, other.injection_id_);
@@ -47,7 +47,7 @@ void injection_provenance::swap(injection_provenance& other) noexcept {
 }
 
 bool injection_provenance::operator==(const injection_provenance& rhs) const {
-    return model_uri_ == rhs.model_uri_ &&
+    return model_id_ == rhs.model_id_ &&
         model_type_ == rhs.model_type_ &&
         model_sha1_hash_ == rhs.model_sha1_hash_ &&
         injection_id_ == rhs.injection_id_ &&
@@ -60,20 +60,20 @@ injection_provenance& injection_provenance::operator=(injection_provenance other
     return *this;
 }
 
-const dogen::identification::entities::uri& injection_provenance::model_uri() const {
-    return model_uri_;
+const dogen::identification::model_id& injection_provenance::model_id() const {
+    return model_id_;
 }
 
-dogen::identification::entities::uri& injection_provenance::model_uri() {
-    return model_uri_;
+dogen::identification::model_id& injection_provenance::model_id() {
+    return model_id_;
 }
 
-void injection_provenance::model_uri(const dogen::identification::entities::uri& v) {
-    model_uri_ = v;
+void injection_provenance::model_id(const dogen::identification::model_id& v) {
+    model_id_ = v;
 }
 
-void injection_provenance::model_uri(const dogen::identification::entities::uri&& v) {
-    model_uri_ = std::move(v);
+void injection_provenance::model_id(const dogen::identification::model_id&& v) {
+    model_id_ = std::move(v);
 }
 
 dogen::identification::entities::model_type injection_provenance::model_type() const {

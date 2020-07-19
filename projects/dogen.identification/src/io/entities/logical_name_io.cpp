@@ -21,9 +21,10 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_location_io.hpp"
-#include "dogen.identification/io/entities/logical_qualified_representation_io.hpp"
+#include "dogen.identification/io/entities/name_representations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,9 +46,10 @@ std::ostream& operator<<(std::ostream& s, const logical_name& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_name\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"qualified\": " << v.qualified() << ", "
       << "\"location\": " << v.location() << ", "
-      << "\"is_container\": " << v.is_container() << ", "
-      << "\"qualified\": " << v.qualified()
+      << "\"representations\": " << v.representations() << ", "
+      << "\"is_container\": " << v.is_container()
       << " }";
     return(s);
 }
