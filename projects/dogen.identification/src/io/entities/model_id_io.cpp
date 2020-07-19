@@ -18,42 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/model_id.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/model_id_io.hpp"
 
-namespace dogen::identification {
-
-model_id::model_id(const std::string& value)
-    : value_(value) { }
-
-const std::string& model_id::value() const {
-    return value_;
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
-std::string& model_id::value() {
-    return value_;
-}
+namespace dogen::identification::entities {
 
-void model_id::value(const std::string& v) {
-    value_ = v;
-}
+std::ostream& operator<<(std::ostream& s, const model_id& v) {
 
-void model_id::value(const std::string&& v) {
-    value_ = std::move(v);
-}
+    s << " { "
+      << "\"__type__\": " << "\"dogen::identification::entities::model_id\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
+      << " }";
 
-bool model_id::operator==(const model_id& rhs) const {
-    return value_ == rhs.value_;
-}
-
-void model_id::swap(model_id& other) noexcept {
-    using std::swap;
-    swap(value_, other.value_);
-}
-
-model_id& model_id::operator=(model_id other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+    return s;
 }
 
 }

@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.identification/io/model_id_io.hpp"
+#include "dogen.identification/io/entities/model_id_io.hpp"
 #include "dogen.identification/io/entities/sha1_hash_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.identification/io/entities/injection_id_io.hpp"

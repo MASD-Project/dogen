@@ -18,42 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/stereotype.hpp"
+#ifndef DOGEN_IDENTIFICATION_IO_ENTITIES_STEREOTYPE_IO_HPP
+#define DOGEN_IDENTIFICATION_IO_ENTITIES_STEREOTYPE_IO_HPP
 
-namespace dogen::identification {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-stereotype::stereotype(const std::string& value)
-    : value_(value) { }
+#include <iosfwd>
+#include "dogen.identification/types/entities/stereotype.hpp"
 
-const std::string& stereotype::value() const {
-    return value_;
-}
+namespace dogen::identification::entities {
 
-std::string& stereotype::value() {
-    return value_;
-}
-
-void stereotype::value(const std::string& v) {
-    value_ = v;
-}
-
-void stereotype::value(const std::string&& v) {
-    value_ = std::move(v);
-}
-
-bool stereotype::operator==(const stereotype& rhs) const {
-    return value_ == rhs.value_;
-}
-
-void stereotype::swap(stereotype& other) noexcept {
-    using std::swap;
-    swap(value_, other.value_);
-}
-
-stereotype& stereotype::operator=(stereotype other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
+std::ostream&
+operator<<(std::ostream& s, const dogen::identification::entities::stereotype& v);
 
 }
+
+#endif

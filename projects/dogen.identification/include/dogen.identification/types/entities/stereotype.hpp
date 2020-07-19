@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_MODEL_ID_HPP
-#define DOGEN_IDENTIFICATION_TYPES_MODEL_ID_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_STEREOTYPE_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_STEREOTYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,18 +28,18 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::identification {
+namespace dogen::identification::entities {
 /**
- * @brief ID for a model.
+ * @brief Stereotype.
  */
-class model_id final {
+class stereotype final {
 public:
-    model_id() = default;
-    model_id(const model_id&) = default;
-    model_id(model_id&&) = default;
-    ~model_id() = default;
+    stereotype() = default;
+    stereotype(const stereotype&) = default;
+    stereotype(stereotype&&) = default;
+    ~stereotype() = default;
 public:
-    explicit model_id(const std::string& value);
+    explicit stereotype(const std::string& value);
 
 public:
     /**
@@ -58,14 +58,14 @@ public:
     }
 
 public:
-    bool operator==(const model_id& rhs) const;
-    bool operator!=(const model_id& rhs) const {
+    bool operator==(const stereotype& rhs) const;
+    bool operator!=(const stereotype& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(model_id& other) noexcept;
-    model_id& operator=(model_id other);
+    void swap(stereotype& other) noexcept;
+    stereotype& operator=(stereotype other);
 
 private:
     std::string value_;
@@ -77,8 +77,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::identification::model_id& lhs,
-    dogen::identification::model_id& rhs) {
+    dogen::identification::entities::stereotype& lhs,
+    dogen::identification::entities::stereotype& rhs) {
     lhs.swap(rhs);
 }
 

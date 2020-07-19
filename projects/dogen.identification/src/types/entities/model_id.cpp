@@ -18,17 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_MODEL_ID_FWD_HPP
-#define DOGEN_IDENTIFICATION_TYPES_MODEL_ID_FWD_HPP
+#include "dogen.identification/types/entities/model_id.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::identification::entities {
 
-namespace dogen::identification {
+model_id::model_id(const std::string& value)
+    : value_(value) { }
 
-class model_id;
-
+const std::string& model_id::value() const {
+    return value_;
 }
 
-#endif
+std::string& model_id::value() {
+    return value_;
+}
+
+void model_id::value(const std::string& v) {
+    value_ = v;
+}
+
+void model_id::value(const std::string&& v) {
+    value_ = std::move(v);
+}
+
+bool model_id::operator==(const model_id& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void model_id::swap(model_id& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+model_id& model_id::operator=(model_id other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+}

@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_STEREOTYPE_FWD_HPP
-#define DOGEN_IDENTIFICATION_TYPES_STEREOTYPE_FWD_HPP
+#ifndef DOGEN_IDENTIFICATION_IO_ENTITIES_MODEL_ID_IO_HPP
+#define DOGEN_IDENTIFICATION_IO_ENTITIES_MODEL_ID_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::identification {
+#include <iosfwd>
+#include "dogen.identification/types/entities/model_id.hpp"
 
-class stereotype;
+namespace dogen::identification::entities {
+
+std::ostream&
+operator<<(std::ostream& s, const dogen::identification::entities::model_id& v);
 
 }
 

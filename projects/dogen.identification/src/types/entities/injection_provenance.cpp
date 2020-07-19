@@ -26,7 +26,7 @@ injection_provenance::injection_provenance()
     : model_type_(static_cast<dogen::identification::entities::model_type>(0)) { }
 
 injection_provenance::injection_provenance(
-    const dogen::identification::model_id& model_id,
+    const dogen::identification::entities::model_id& model_id,
     const dogen::identification::entities::model_type model_type,
     const dogen::identification::entities::sha1_hash& model_sha1_hash,
     const dogen::identification::entities::injection_id& injection_id,
@@ -60,19 +60,19 @@ injection_provenance& injection_provenance::operator=(injection_provenance other
     return *this;
 }
 
-const dogen::identification::model_id& injection_provenance::model_id() const {
+const dogen::identification::entities::model_id& injection_provenance::model_id() const {
     return model_id_;
 }
 
-dogen::identification::model_id& injection_provenance::model_id() {
+dogen::identification::entities::model_id& injection_provenance::model_id() {
     return model_id_;
 }
 
-void injection_provenance::model_id(const dogen::identification::model_id& v) {
+void injection_provenance::model_id(const dogen::identification::entities::model_id& v) {
     model_id_ = v;
 }
 
-void injection_provenance::model_id(const dogen::identification::model_id&& v) {
+void injection_provenance::model_id(const dogen::identification::entities::model_id&& v) {
     model_id_ = std::move(v);
 }
 

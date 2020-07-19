@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen.identification/types/model_id.hpp"
+#include "dogen.identification/types/entities/model_id.hpp"
 #include "dogen.identification/types/entities/sha1_hash.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.identification/types/entities/injection_id.hpp"
@@ -48,7 +48,7 @@ public:
 
 public:
     injection_provenance(
-        const dogen::identification::model_id& model_id,
+        const dogen::identification::entities::model_id& model_id,
         const dogen::identification::entities::model_type model_type,
         const dogen::identification::entities::sha1_hash& model_sha1_hash,
         const dogen::identification::entities::injection_id& injection_id,
@@ -59,10 +59,10 @@ public:
      * @brief ID for a model.
      */
     /**@{*/
-    const dogen::identification::model_id& model_id() const;
-    dogen::identification::model_id& model_id();
-    void model_id(const dogen::identification::model_id& v);
-    void model_id(const dogen::identification::model_id&& v);
+    const dogen::identification::entities::model_id& model_id() const;
+    dogen::identification::entities::model_id& model_id();
+    void model_id(const dogen::identification::entities::model_id& v);
+    void model_id(const dogen::identification::entities::model_id&& v);
     /**@}*/
 
     /**
@@ -114,7 +114,7 @@ public:
     injection_provenance& operator=(injection_provenance other);
 
 private:
-    dogen::identification::model_id model_id_;
+    dogen::identification::entities::model_id model_id_;
     dogen::identification::entities::model_type model_type_;
     dogen::identification::entities::sha1_hash model_sha1_hash_;
     dogen::identification::entities::injection_id injection_id_;

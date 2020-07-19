@@ -18,28 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/stereotype_io.hpp"
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_MODEL_ID_FWD_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_MODEL_ID_FWD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace dogen::identification {
+namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const stereotype& v) {
-
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::stereotype\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
-      << " }";
-
-    return s;
-}
+class model_id;
 
 }
+
+#endif
