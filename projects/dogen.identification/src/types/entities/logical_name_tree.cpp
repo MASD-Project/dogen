@@ -29,7 +29,7 @@ logical_name_tree::logical_name_tree()
       is_floating_point_(static_cast<bool>(0)) { }
 
 logical_name_tree::logical_name_tree(
-    const dogen::identification::entities::qualified_name_representations& qualified,
+    const dogen::identification::entities::qualified_representations& qualified,
     const dogen::identification::entities::logical_name& current,
     const std::list<dogen::identification::entities::logical_name_tree>& children,
     const bool are_children_opaque,
@@ -71,19 +71,19 @@ logical_name_tree& logical_name_tree::operator=(logical_name_tree other) {
     return *this;
 }
 
-const dogen::identification::entities::qualified_name_representations& logical_name_tree::qualified() const {
+const dogen::identification::entities::qualified_representations& logical_name_tree::qualified() const {
     return qualified_;
 }
 
-dogen::identification::entities::qualified_name_representations& logical_name_tree::qualified() {
+dogen::identification::entities::qualified_representations& logical_name_tree::qualified() {
     return qualified_;
 }
 
-void logical_name_tree::qualified(const dogen::identification::entities::qualified_name_representations& v) {
+void logical_name_tree::qualified(const dogen::identification::entities::qualified_representations& v) {
     qualified_ = v;
 }
 
-void logical_name_tree::qualified(const dogen::identification::entities::qualified_name_representations&& v) {
+void logical_name_tree::qualified(const dogen::identification::entities::qualified_representations&& v) {
     qualified_ = std::move(v);
 }
 

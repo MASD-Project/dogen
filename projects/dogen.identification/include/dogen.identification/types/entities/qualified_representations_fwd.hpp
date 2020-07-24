@@ -18,28 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/qualified_name_representations_io.hpp"
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_REPRESENTATIONS_FWD_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_REPRESENTATIONS_FWD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const qualified_name_representations& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::qualified_name_representations\"" << ", "
-      << "\"dot\": " << "\"" << tidy_up_string(v.dot()) << "\"" << ", "
-      << "\"colon\": " << "\"" << tidy_up_string(v.colon()) << "\"" << ", "
-      << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""
-      << " }";
-    return(s);
-}
+class qualified_representations;
 
 }
+
+#endif

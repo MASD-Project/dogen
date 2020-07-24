@@ -21,7 +21,7 @@
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.identification/hash/entities/logical_name_hash.hpp"
 #include "dogen.identification/hash/entities/logical_location_hash.hpp"
-#include "dogen.identification/hash/entities/qualified_name_representations_hash.hpp"
+#include "dogen.identification/hash/entities/qualified_representations_hash.hpp"
 
 namespace {
 

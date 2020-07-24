@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/entities/qualified_name_representations.hpp"
+#include "dogen.identification/types/entities/qualified_representations.hpp"
 
 namespace dogen::identification::entities {
 
-qualified_name_representations::qualified_name_representations(
+qualified_representations::qualified_representations(
     const std::string& dot,
     const std::string& colon,
     const std::string& identifiable)
@@ -30,70 +30,70 @@ qualified_name_representations::qualified_name_representations(
       colon_(colon),
       identifiable_(identifiable) { }
 
-void qualified_name_representations::swap(qualified_name_representations& other) noexcept {
+void qualified_representations::swap(qualified_representations& other) noexcept {
     using std::swap;
     swap(dot_, other.dot_);
     swap(colon_, other.colon_);
     swap(identifiable_, other.identifiable_);
 }
 
-bool qualified_name_representations::operator==(const qualified_name_representations& rhs) const {
+bool qualified_representations::operator==(const qualified_representations& rhs) const {
     return dot_ == rhs.dot_ &&
         colon_ == rhs.colon_ &&
         identifiable_ == rhs.identifiable_;
 }
 
-qualified_name_representations& qualified_name_representations::operator=(qualified_name_representations other) {
+qualified_representations& qualified_representations::operator=(qualified_representations other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& qualified_name_representations::dot() const {
+const std::string& qualified_representations::dot() const {
     return dot_;
 }
 
-std::string& qualified_name_representations::dot() {
+std::string& qualified_representations::dot() {
     return dot_;
 }
 
-void qualified_name_representations::dot(const std::string& v) {
+void qualified_representations::dot(const std::string& v) {
     dot_ = v;
 }
 
-void qualified_name_representations::dot(const std::string&& v) {
+void qualified_representations::dot(const std::string&& v) {
     dot_ = std::move(v);
 }
 
-const std::string& qualified_name_representations::colon() const {
+const std::string& qualified_representations::colon() const {
     return colon_;
 }
 
-std::string& qualified_name_representations::colon() {
+std::string& qualified_representations::colon() {
     return colon_;
 }
 
-void qualified_name_representations::colon(const std::string& v) {
+void qualified_representations::colon(const std::string& v) {
     colon_ = v;
 }
 
-void qualified_name_representations::colon(const std::string&& v) {
+void qualified_representations::colon(const std::string&& v) {
     colon_ = std::move(v);
 }
 
-const std::string& qualified_name_representations::identifiable() const {
+const std::string& qualified_representations::identifiable() const {
     return identifiable_;
 }
 
-std::string& qualified_name_representations::identifiable() {
+std::string& qualified_representations::identifiable() {
     return identifiable_;
 }
 
-void qualified_name_representations::identifiable(const std::string& v) {
+void qualified_representations::identifiable(const std::string& v) {
     identifiable_ = v;
 }
 
-void qualified_name_representations::identifiable(const std::string&& v) {
+void qualified_representations::identifiable(const std::string&& v) {
     identifiable_ = std::move(v);
 }
 

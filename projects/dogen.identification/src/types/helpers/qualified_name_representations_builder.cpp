@@ -51,9 +51,9 @@ add(const entities::logical_name_tree& nt) {
     colon_printer_.add_child(nt.qualified().colon());
 }
 
-entities::qualified_name_representations
+entities::qualified_representations
 qualified_name_representations_builder::build() {
-    entities::qualified_name_representations r;
+    entities::qualified_representations r;
 
     r.dot(dot_printer_.print());
     r.colon(colon_printer_.print());
@@ -61,7 +61,7 @@ qualified_name_representations_builder::build() {
     return r;
 }
 
-entities::qualified_name_representations
+entities::qualified_representations
 qualified_name_representations_builder::
 build(const entities::logical_name& n, const bool model_name_mode) {
     dot_printer_.add(n, model_name_mode);

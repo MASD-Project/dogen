@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/logical_location.hpp"
-#include "dogen.identification/types/entities/qualified_name_representations.hpp"
+#include "dogen.identification/types/entities/qualified_representations.hpp"
 
 namespace dogen::identification::entities {
 
@@ -59,7 +59,7 @@ public:
 public:
     logical_name(
         const std::string& simple,
-        const dogen::identification::entities::qualified_name_representations& qualified,
+        const dogen::identification::entities::qualified_representations& qualified,
         const dogen::identification::entities::logical_id& id,
         const dogen::identification::entities::logical_location& location,
         const bool is_container);
@@ -79,10 +79,10 @@ public:
      * @brief Contains the name according to different representations.
      */
     /**@{*/
-    const dogen::identification::entities::qualified_name_representations& qualified() const;
-    dogen::identification::entities::qualified_name_representations& qualified();
-    void qualified(const dogen::identification::entities::qualified_name_representations& v);
-    void qualified(const dogen::identification::entities::qualified_name_representations&& v);
+    const dogen::identification::entities::qualified_representations& qualified() const;
+    dogen::identification::entities::qualified_representations& qualified();
+    void qualified(const dogen::identification::entities::qualified_representations& v);
+    void qualified(const dogen::identification::entities::qualified_representations&& v);
     /**@}*/
 
     /**
@@ -125,7 +125,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::qualified_name_representations qualified_;
+    dogen::identification::entities::qualified_representations qualified_;
     dogen::identification::entities::logical_id id_;
     dogen::identification::entities::logical_location location_;
     bool is_container_;

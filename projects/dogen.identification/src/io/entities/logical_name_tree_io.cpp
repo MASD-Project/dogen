@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_name_tree_io.hpp"
-#include "dogen.identification/io/entities/qualified_name_representations_io.hpp"
+#include "dogen.identification/io/entities/qualified_representations_io.hpp"
 
 namespace std {
 

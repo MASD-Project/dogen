@@ -24,7 +24,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_location_io.hpp"
-#include "dogen.identification/io/entities/qualified_name_representations_io.hpp"
+#include "dogen.identification/io/entities/qualified_representations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

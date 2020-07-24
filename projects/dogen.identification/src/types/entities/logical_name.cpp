@@ -27,7 +27,7 @@ logical_name::logical_name()
 
 logical_name::logical_name(
     const std::string& simple,
-    const dogen::identification::entities::qualified_name_representations& qualified,
+    const dogen::identification::entities::qualified_representations& qualified,
     const dogen::identification::entities::logical_id& id,
     const dogen::identification::entities::logical_location& location,
     const bool is_container)
@@ -76,19 +76,19 @@ void logical_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::qualified_name_representations& logical_name::qualified() const {
+const dogen::identification::entities::qualified_representations& logical_name::qualified() const {
     return qualified_;
 }
 
-dogen::identification::entities::qualified_name_representations& logical_name::qualified() {
+dogen::identification::entities::qualified_representations& logical_name::qualified() {
     return qualified_;
 }
 
-void logical_name::qualified(const dogen::identification::entities::qualified_name_representations& v) {
+void logical_name::qualified(const dogen::identification::entities::qualified_representations& v) {
     qualified_ = v;
 }
 
-void logical_name::qualified(const dogen::identification::entities::qualified_name_representations&& v) {
+void logical_name::qualified(const dogen::identification::entities::qualified_representations&& v) {
     qualified_ = std::move(v);
 }
 

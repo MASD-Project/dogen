@@ -2628,19 +2628,19 @@ that are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,33.95;17.985,39.25"/>
+        <dia:rectangle val="2.95,33.95;15.1,39.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.934999999999999"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#qualified_name_representations#</dia:string>
+        <dia:string>#qualified_representations#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::hashable#</dia:string>
@@ -3290,19 +3290,19 @@ can only have one and only one name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="12.335,29.6"/>
+        <dia:point val="11.3725,29.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.4175,28.85;13.085,34.8"/>
+        <dia:rectangle val="8.975,28.85;12.1225,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="12.335,29.6"/>
-        <dia:point val="12.335,32"/>
-        <dia:point val="10.4675,32"/>
-        <dia:point val="10.4675,34"/>
+        <dia:point val="11.3725,29.6"/>
+        <dia:point val="11.3725,32"/>
+        <dia:point val="9.025,32"/>
+        <dia:point val="9.025,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10328,13 +10328,13 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="4,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,25.95;20.72,29.65"/>
+        <dia:rectangle val="3.95,25.95;18.795,29.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="4,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -10432,7 +10432,7 @@ C++ pointers, references and so on.#</dia:string>
             <dia:string>#qualified#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#qualified_name_representations#</dia:string>
+            <dia:string>#qualified_representations#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10496,17 +10496,17 @@ C++ pointers, references and so on.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="12.335,26"/>
+        <dia:point val="11.3725,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.7875,22.15;13.085,27.6"/>
+        <dia:rectangle val="9.7875,22.15;12.1225,27.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="12.335,26"/>
-        <dia:point val="12.335,24"/>
+        <dia:point val="11.3725,26"/>
+        <dia:point val="11.3725,24"/>
         <dia:point val="9.8375,24"/>
         <dia:point val="9.8375,22.2"/>
       </dia:attribute>

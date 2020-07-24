@@ -28,7 +28,7 @@
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.identification/types/helpers/pretty_printer.hpp"
-#include "dogen.identification/types/entities/qualified_name_representations.hpp"
+#include "dogen.identification/types/entities/qualified_representations.hpp"
 
 namespace dogen::identification::helpers {
 
@@ -55,12 +55,12 @@ public:
      *
      * @pre Add must have been called at least once.
      */
-    entities::qualified_name_representations build();
+    entities::qualified_representations build();
 
     /**
      * @brief Builds the representation for the supplied name.
      */
-    entities::qualified_name_representations
+    entities::qualified_representations
     build(const entities::logical_name& n, const bool model_name_mode);
 
 private:
