@@ -4684,19 +4684,19 @@ of Dogen elements.
         <dia:point val="77,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.95,4.95;95.645,8.65"/>
+        <dia:rectangle val="76.95,4.95;91.41,8.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="77,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.594999999999999"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#string_processor#</dia:string>
+        <dia:string>#identifiable_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -4786,7 +4786,7 @@ of Dogen elements.
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#to_identifiable#</dia:string>
+            <dia:string>#make#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11413,7 +11413,7 @@ Temporary data structure used to build trees of logical names.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#node#</dia:string>
+            <dia:string>#parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::weak_ptr&lt;node&gt;#</dia:string>
