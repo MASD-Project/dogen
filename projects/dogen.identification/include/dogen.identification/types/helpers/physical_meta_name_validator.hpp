@@ -25,24 +25,49 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::identification::helpers {
 
+/**
+ * @brief Checks the validity of physical meta-names.
+ *
+ * Note that the components of the meta-name are hierarchical, so
+ * archetypes require a backend, part and facet and parts require a
+ * backend. The exception is facet, which does not require a part.
+ */
 class physical_meta_name_validator final {
-public:
-    physical_meta_name_validator() = default;
-    physical_meta_name_validator(const physical_meta_name_validator&) = default;
-    physical_meta_name_validator(physical_meta_name_validator&&) = default;
-    ~physical_meta_name_validator() = default;
-    physical_meta_name_validator& operator=(const physical_meta_name_validator&) = default;
+private:
+    /**
+     * @brief Validation rules that are common to all types of names.
+     */
+    static void common_validation(const entities::physical_meta_name& mn,
+        const bool is_meta_model);
 
 public:
-    bool operator==(const physical_meta_name_validator& rhs) const;
-    bool operator!=(const physical_meta_name_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Checks if the meta-name is valid as a meta-model name.
+     */
+    static void validate_meta_model_name(
+        const entities::physical_meta_name& mn);
 
+    /**
+     * @brief Checks if the meta-name is valid as a backend name.
+     */
+    static void validate_backend_name(
+        const entities::physical_meta_name& mn);
+
+    /**
+     * @brief Checks if the name is valid as a facet name.
+     */
+    static void validate_facet_name(
+        const entities::physical_meta_name& mn);
+
+    /**
+     * @brief Checks if the name is valid as an archetype name.
+     */
+    static void validate_archetype_name(
+        const entities::physical_meta_name& mn);
 };
 
 }
