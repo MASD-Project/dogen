@@ -191,14 +191,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "static_stereotypes",
-          "type": "std::list<static_stereotypes>",
-          "documentation": "Stereotypes that are part of the dogen UML profile, and so are well-known to the\nmodel.\n"
-        },
-        {
-          "name": "dynamic_stereotypes",
-          "type": "std::list<identification::entities::stereotype>",
-          "documentation": "Stereotypes that are not part of the masd UML profile. These are user defined.\n"
+          "name": "stereotypes",
+          "type": "stereotypes",
+          "documentation": "All stereotypes associated with this element.\n"
         }
       ]
     },

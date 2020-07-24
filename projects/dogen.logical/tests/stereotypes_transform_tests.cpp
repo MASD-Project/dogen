@@ -51,7 +51,6 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 using dogen::logical::entities::static_stereotypes;
 using dogen::utility::test::contains_checker;
 using dogen::logical::transforms::transformation_error;
-using dogen::utility::test::asserter;
 using dogen::logical::transforms::stereotypes_transform;
 using dogen::logical::test::mock_context_factory;
 
@@ -86,7 +85,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
     auto& o(*(m.structural_elements().objects().begin()->second));
-    o.static_stereotypes().push_back(static_stereotypes::visitable);
+    o.stereotypes().static_stereotypes()
+        .push_back(static_stereotypes::visitable);
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -107,7 +107,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             auto& o(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
             o.is_visitation_root(true);
-            o.static_stereotypes().push_back(static_stereotypes::visitable);
+            o.stereotypes().static_stereotypes()
+                .push_back(static_stereotypes::visitable);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;

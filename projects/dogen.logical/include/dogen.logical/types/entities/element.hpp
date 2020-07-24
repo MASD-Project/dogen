@@ -34,10 +34,9 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/label.hpp"
+#include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.identification/types/entities/stereotype.hpp"
-#include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
@@ -71,8 +70,7 @@ public:
         const std::string& origin_sha1_hash,
         const std::string& contained_by,
         const bool in_global_module,
-        const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-        const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
+        const dogen::logical::entities::stereotypes& stereotypes,
         const dogen::logical::entities::name& meta_name,
         const dogen::logical::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -151,24 +149,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are part of the dogen UML profile, and so are well-known to the
-     * model.
+     * @brief All stereotypes associated with this element.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>&& v);
-    /**@}*/
-
-    /**
-     * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
-     */
-    /**@{*/
-    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes() const;
-    std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
-    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
+    const dogen::logical::entities::stereotypes& stereotypes() const;
+    dogen::logical::entities::stereotypes& stereotypes();
+    void stereotypes(const dogen::logical::entities::stereotypes& v);
+    void stereotypes(const dogen::logical::entities::stereotypes&& v);
     /**@}*/
 
     /**
@@ -246,8 +233,7 @@ private:
     std::string origin_sha1_hash_;
     std::string contained_by_;
     bool in_global_module_;
-    std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
-    std::list<dogen::identification::entities::stereotype> dynamic_stereotypes_;
+    dogen::logical::entities::stereotypes stereotypes_;
     dogen::logical::entities::name meta_name_;
     dogen::logical::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;

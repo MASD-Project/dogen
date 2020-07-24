@@ -69,7 +69,7 @@
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/entities/physical/archetype_kind.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
-#include "dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
+#include "dogen.logical/types/entities/stereotypes.hpp"
 
 namespace dogen::orchestration::helpers {
 
@@ -164,7 +164,7 @@ private:
      * injection element.
      */
     void populate_element(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie,
         const bool is_container, logical::entities::element& e) const;
 
@@ -175,7 +175,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::object>
     to_object(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -184,7 +184,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::object_template>
     to_object_template(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -193,7 +193,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::exception>
     to_exception(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -202,7 +202,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::primitive>
     to_primitive(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -211,7 +211,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::enumeration>
     to_enumeration(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -220,7 +220,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::module>
     to_module(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -229,7 +229,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::builtin>
     to_builtin(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -238,7 +238,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::entry_point>
     to_entry_point(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -247,7 +247,7 @@ public:
      */
     boost::shared_ptr<logical::entities::structural::assistant>
     to_assistant(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -257,7 +257,7 @@ public:
      */
     boost::shared_ptr<logical::entities::decoration::modeline_group>
     to_modeline_group(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -266,7 +266,7 @@ public:
      */
     boost::shared_ptr<logical::entities::decoration::modeline>
     to_modeline(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -275,7 +275,7 @@ public:
      */
     boost::shared_ptr<logical::entities::decoration::generation_marker>
     to_generation_marker(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -284,7 +284,7 @@ public:
      */
     boost::shared_ptr<logical::entities::decoration::licence>
     to_licence(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 private:
@@ -318,7 +318,7 @@ public:
      */
     boost::shared_ptr<logical::entities::variability::profile>
     to_variability_profile(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -328,7 +328,7 @@ public:
      */
     boost::shared_ptr<logical::entities::variability::profile_template>
     to_variability_profile_template(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -338,7 +338,7 @@ public:
      */
     boost::shared_ptr<logical::entities::variability::feature_template_bundle>
     to_variability_feature_template_bundle(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -348,7 +348,7 @@ public:
      */
     boost::shared_ptr<logical::entities::variability::feature_bundle>
     to_variability_feature_bundle(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -358,7 +358,7 @@ public:
      */
     boost::shared_ptr<logical::entities::variability::initializer>
     to_variability_initializer(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -368,7 +368,7 @@ public:
      */
     boost::shared_ptr<logical::entities::mapping::fixed_mappable>
     to_fixed_mappable(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -378,7 +378,7 @@ public:
      */
     boost::shared_ptr<logical::entities::mapping::extensible_mappable>
     to_extensible_mappable(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -388,7 +388,7 @@ public:
      */
     boost::shared_ptr<logical::entities::templating::logic_less_template>
     to_logic_less_template(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -398,7 +398,7 @@ public:
      */
     boost::shared_ptr<logical::entities::serialization::type_registrar>
     to_type_registrar(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -408,7 +408,7 @@ public:
      */
     boost::shared_ptr<logical::entities::visual_studio::solution>
     to_visual_studio_solution(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -417,7 +417,7 @@ public:
      */
     boost::shared_ptr<logical::entities::visual_studio::project>
     to_visual_studio_project(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -426,7 +426,7 @@ public:
      */
     boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
     to_visual_studio_msbuild_targets(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -436,7 +436,7 @@ public:
      */
     boost::shared_ptr<logical::entities::orm::common_odb_options>
     to_orm_common_odb_options(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -446,7 +446,7 @@ public:
      */
     boost::shared_ptr<logical::entities::build::cmakelists>
     to_build_cmakelists(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
 public:
@@ -456,7 +456,7 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::backend>
     to_physical_backend(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -465,7 +465,7 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::facet>
     to_physical_facet(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -474,7 +474,7 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::archetype>
     to_physical_archetype(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -483,7 +483,7 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::archetype_kind>
     to_physical_archetype_kind(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
     /**
@@ -492,7 +492,7 @@ public:
      */
     boost::shared_ptr<logical::entities::physical::part>
     to_physical_part(const logical::entities::location& l,
-        const stereotypes_conversion_result& scr,
+        const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 };
 

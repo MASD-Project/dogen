@@ -86,7 +86,7 @@ is_element_type(const entities::static_stereotypes ss) {
 void stereotypes_transform::transform_static_stereotypes(
     entities::structural::object& o, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
-                             << o.static_stereotypes();
+                             << o.stereotypes().static_stereotypes();
 
     /*
      * First we process all of the well-known stereotypes, collecting
@@ -94,7 +94,7 @@ void stereotypes_transform::transform_static_stereotypes(
      */
     using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_stereotypes;
-    for (const auto ss : o.static_stereotypes()) {
+    for (const auto ss : o.stereotypes().static_stereotypes()) {
         if (is_element_type(ss)) {
             /*
              * We can safely ignore any element type information as
@@ -136,10 +136,10 @@ void stereotypes_transform::transform_static_stereotypes(
 void stereotypes_transform::transform_dynamic_stereotypes(
     entities::structural::object& o, const entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
-                             << o.dynamic_stereotypes();
+                             << o.stereotypes().dynamic_stereotypes();
 
     std::list<identification::entities::stereotype> unknown_stereotypes;
-    for (const auto& us : o.dynamic_stereotypes()) {
+    for (const auto& us : o.stereotypes().dynamic_stereotypes()) {
         /*
          * Attempt to process the stereotype as an object template. If
          * it isn't then is definitely not one of ours. This is
@@ -404,7 +404,8 @@ apply(entities::structural::object& o, entities::model& m) {
      * If there are no stereotypes of either type, then there is no
      * point in proceeding.
      */
-    if (o.static_stereotypes().empty() && o.dynamic_stereotypes().empty()) {
+    if (o.stereotypes().static_stereotypes().empty() &&
+        o.stereotypes().dynamic_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
@@ -420,8 +421,9 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
     /*
      * Primitives do not support any unknown stereotypes.
      */
-    if (!p.dynamic_stereotypes().empty()) {
-        const auto s(boost::lexical_cast<std::string>(p.dynamic_stereotypes()));
+    const auto& ds(p.stereotypes().dynamic_stereotypes());
+    if (!ds.empty()) {
+        const auto s(boost::lexical_cast<std::string>(ds));
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
@@ -430,7 +432,8 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
      * If there are no well-known stereotypes, then there is no point
      * in proceeding.
      */
-    if (p.static_stereotypes().empty()) {
+    const auto& ss(p.stereotypes().static_stereotypes());
+    if (ss.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
@@ -441,7 +444,7 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
      */
     using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_static_stereotypes;
-    for (const auto st : p.static_stereotypes()) {
+    for (const auto st : ss) {
         if (is_element_type(st)) {
             /*
              * We can safely ignore any element type information as

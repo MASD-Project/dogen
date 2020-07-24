@@ -24,12 +24,11 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/label_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
-#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
@@ -39,34 +38,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::static_stereotypes>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::stereotype>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace boost {
@@ -156,8 +127,7 @@ element::element(
     const std::string& origin_sha1_hash,
     const std::string& contained_by,
     const bool in_global_module,
-    const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
+    const dogen::logical::entities::stereotypes& stereotypes,
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -170,8 +140,7 @@ element::element(
       origin_sha1_hash_(origin_sha1_hash),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
-      static_stereotypes_(static_stereotypes),
-      dynamic_stereotypes_(dynamic_stereotypes),
+      stereotypes_(stereotypes),
       meta_name_(meta_name),
       intrinsic_technical_space_(intrinsic_technical_space),
       configuration_(configuration),
@@ -194,8 +163,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(origin_sha1_hash_) << "\"" << ", "
       << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
-      << "\"static_stereotypes\": " << static_stereotypes_ << ", "
-      << "\"dynamic_stereotypes\": " << dynamic_stereotypes_ << ", "
+      << "\"stereotypes\": " << stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"configuration\": " << configuration_ << ", "
@@ -213,8 +181,7 @@ void element::swap(element& other) noexcept {
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
-    swap(static_stereotypes_, other.static_stereotypes_);
-    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
+    swap(stereotypes_, other.stereotypes_);
     swap(meta_name_, other.meta_name_);
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(configuration_, other.configuration_);
@@ -230,8 +197,7 @@ bool element::compare(const element& rhs) const {
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
-        static_stereotypes_ == rhs.static_stereotypes_ &&
-        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         meta_name_ == rhs.meta_name_ &&
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         configuration_ == rhs.configuration_ &&
@@ -320,36 +286,20 @@ void element::in_global_module(const bool v) {
     in_global_module_ = v;
 }
 
-const std::list<dogen::logical::entities::static_stereotypes>& element::static_stereotypes() const {
-    return static_stereotypes_;
+const dogen::logical::entities::stereotypes& element::stereotypes() const {
+    return stereotypes_;
 }
 
-std::list<dogen::logical::entities::static_stereotypes>& element::static_stereotypes() {
-    return static_stereotypes_;
+dogen::logical::entities::stereotypes& element::stereotypes() {
+    return stereotypes_;
 }
 
-void element::static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>& v) {
-    static_stereotypes_ = v;
+void element::stereotypes(const dogen::logical::entities::stereotypes& v) {
+    stereotypes_ = v;
 }
 
-void element::static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>&& v) {
-    static_stereotypes_ = std::move(v);
-}
-
-const std::list<dogen::identification::entities::stereotype>& element::dynamic_stereotypes() const {
-    return dynamic_stereotypes_;
-}
-
-std::list<dogen::identification::entities::stereotype>& element::dynamic_stereotypes() {
-    return dynamic_stereotypes_;
-}
-
-void element::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v) {
-    dynamic_stereotypes_ = v;
-}
-
-void element::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
-    dynamic_stereotypes_ = std::move(v);
+void element::stereotypes(const dogen::logical::entities::stereotypes&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const dogen::logical::entities::name& element::meta_name() const {

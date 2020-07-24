@@ -25,13 +25,11 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.identification/types/entities/stereotype.hpp"
-#include "dogen.logical/types/entities/static_stereotypes.hpp"
+#include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::logical::entities::structural {
@@ -53,8 +51,7 @@ public:
         const std::string& documentation,
         const dogen::logical::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-        const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
+        const dogen::logical::entities::stereotypes& stereotypes,
         const std::string& value);
 
 public:
@@ -93,24 +90,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are part of the dogen UML profile, and so are well-known to the
-     * model.
+     * @brief All stereotypes associated with this element.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>&& v);
-    /**@}*/
-
-    /**
-     * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
-     */
-    /**@{*/
-    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes() const;
-    std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
-    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
+    const dogen::logical::entities::stereotypes& stereotypes() const;
+    dogen::logical::entities::stereotypes& stereotypes();
+    void stereotypes(const dogen::logical::entities::stereotypes& v);
+    void stereotypes(const dogen::logical::entities::stereotypes&& v);
     /**@}*/
 
     /**
@@ -139,8 +125,7 @@ private:
     std::string documentation_;
     dogen::logical::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
-    std::list<dogen::identification::entities::stereotype> dynamic_stereotypes_;
+    dogen::logical::entities::stereotypes stereotypes_;
     std::string value_;
 };
 

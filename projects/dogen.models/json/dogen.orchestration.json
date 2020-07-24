@@ -147,28 +147,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::stereotypes_helper",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::stereotypes_conversion_result",
-      "documentation": "Aggregates the result of parsing a CSV string with well-known stereotypes and\nuser defined stereotypes.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "static_stereotypes",
-          "type": "std::list<logical::entities::static_stereotypes>"
-        },
-        {
-          "name": "dynamic_stereotypes",
-          "type": "std::list<identification::entities::stereotype>"
-        }
-      ]
-    },
-    {
       "name": "transforms::transform_exception",
       "stereotypes": [
         "masd::exception"

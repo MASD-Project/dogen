@@ -21,9 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.identification/io/entities/stereotype_io.hpp"
+#include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/io/entities/structural/enumerator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -50,34 +49,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::static_stereotypes>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::stereotype>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::logical::entities::structural {
 
 std::ostream& operator<<(std::ostream& s, const enumerator& v) {
@@ -86,8 +57,7 @@ std::ostream& operator<<(std::ostream& s, const enumerator& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
-      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
-      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
+      << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);

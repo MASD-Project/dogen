@@ -84,7 +84,7 @@ private:
      * @brief Update the dynamic stereotypes for the supplied element.
      */
     void update(logical::entities::element& e) {
-        e.dynamic_stereotypes(obtain_non_realised_bindings(e));
+        e.stereotypes().dynamic_stereotypes(obtain_non_realised_bindings(e));
     }
 
     /**
@@ -112,17 +112,20 @@ public:
     void operator()(logical::entities::structural::object_template &v) {
         update(v);
         for (auto& attr : v.local_attributes())
-            attr.dynamic_stereotypes(obtain_non_realised_bindings(attr));
+            attr.stereotypes().dynamic_stereotypes(
+                obtain_non_realised_bindings(attr));
     }
     void operator()(logical::entities::structural::enumeration& v) {
         update(v);
         for (auto& enm : v.enumerators())
-            enm.dynamic_stereotypes(obtain_non_realised_bindings(enm));
+            enm.stereotypes().dynamic_stereotypes(
+                obtain_non_realised_bindings(enm));
     }
     void operator()(logical::entities::structural::object& v) {
         update(v);
         for (auto& attr : v.local_attributes())
-            attr.dynamic_stereotypes(obtain_non_realised_bindings(attr));
+            attr.stereotypes().dynamic_stereotypes(
+                obtain_non_realised_bindings(attr));
     }
 
     /*

@@ -29,7 +29,7 @@
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.orchestration/types/helpers/adaptation_exception.hpp"
-#include "dogen.orchestration/types/helpers/stereotypes_helper.hpp"
+#include "dogen.logical/types/helpers/stereotypes_helper.hpp"
 #include "dogen.orchestration/types/helpers/adapter.hpp"
 
 namespace {
@@ -214,9 +214,9 @@ adapter::to_attribute(const logical::entities::name& owner,
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
 
-    helpers::stereotypes_helper h;
-    const auto scr(h.from_primitives(ia.stereotypes()));
-    const auto& ds(scr.dynamic_stereotypes());
+    logical::helpers::stereotypes_helper h;
+    const auto sts(h.from_primitives(ia.stereotypes()));
+    const auto& ds(sts.dynamic_stereotypes());
     r.configuration()->profile_bindings(to_potential_binding(ds));
 
     return r;
@@ -241,16 +241,16 @@ adapter::to_enumerator(const logical::entities::name& owner,
     r.configuration(ia.configuration());
     r.configuration()->name().qualified(r.name().qualified().dot());
 
-    helpers::stereotypes_helper h;
-    const auto scr(h.from_primitives(ia.stereotypes()));
-    const auto& ds(scr.dynamic_stereotypes());
+    logical::helpers::stereotypes_helper h;
+    const auto sts(h.from_primitives(ia.stereotypes()));
+    const auto& ds(sts.dynamic_stereotypes());
     r.configuration()->profile_bindings(to_potential_binding(ds));
 
     return r;
 }
 
 void adapter::populate_element(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie,
     const bool is_container, logical::entities::element& e) const {
 
@@ -259,17 +259,23 @@ void adapter::populate_element(const logical::entities::location& l,
      * any meta-data from it.
      */
     e.configuration(ie.configuration());
-    const auto& ds(scr.dynamic_stereotypes());
+    const auto& ds(sts.dynamic_stereotypes());
     e.configuration()->profile_bindings(to_potential_binding(ds));
     e.name(to_name(l, ie.name().simple(), is_container));
     e.configuration()->name().qualified(e.name().qualified().dot());
+
+    /*
+     * Next populate the static stereotypes. Note that we are not
+     * populating the dynamic stereotypes here. This is because they
+     * require more complex transforms in the logical model chains.
+     */
+    e.stereotypes().static_stereotypes(sts.static_stereotypes());
 
     /*
      * Finally, populate all other attributes.
      */
     e.origin_type(logical::entities::origin_types::not_yet_determined);
     e.documentation(ie.documentation());
-    e.static_stereotypes(scr.static_stereotypes());
     e.origin_sha1_hash(ie.provenance().model_sha1_hash().value());
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
@@ -277,13 +283,13 @@ void adapter::populate_element(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::structural::object>
 adapter::to_object(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to object: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::object>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     r->is_associative_container(ie.is_associative_container());
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
 
@@ -298,13 +304,13 @@ adapter::to_object(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::structural::object_template>
 adapter::to_object_template(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element "
                              << "to object template: " << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::object_template>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->local_attributes().push_back(to_attribute(r->name(), attr));
@@ -317,39 +323,39 @@ adapter::to_object_template(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::structural::exception>
 adapter::to_exception(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::exception>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::structural::primitive>
 adapter::to_primitive(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to primitive: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::primitive>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::structural::enumeration>
 adapter::to_enumeration(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to enumeration: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::enumeration>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->enumerators().push_back(to_enumerator(r->name(), attr));
@@ -359,26 +365,26 @@ adapter::to_enumeration(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::structural::module> adapter::
 to_module(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to module: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::module>());
-    populate_element(l, scr, ie, true/*is_container*/, *r);
+    populate_element(l, sts, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::structural::builtin>
 adapter::to_builtin(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to builtin: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::builtin>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
 
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
@@ -391,46 +397,46 @@ adapter::to_builtin(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::structural::entry_point>
 adapter::to_entry_point(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::entry_point>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::structural::assistant>
 adapter::to_assistant(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to assistant: "
                              << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::assistant>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<modeline_group>
 adapter::to_modeline_group(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline_group>());
-    populate_element(l, scr, ie, true/*is_container*/, *r);
+    populate_element(l, sts, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<modeline>
 adapter::to_modeline(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes())
         r->fields().push_back(to_modeline_field(r->name(), attr));
@@ -440,10 +446,10 @@ adapter::to_modeline(const logical::entities::location& l,
 
 boost::shared_ptr<generation_marker>
 adapter::to_generation_marker(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<generation_marker>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -477,10 +483,10 @@ adapter::to_generation_marker(const logical::entities::location& l,
 
 boost::shared_ptr<licence>
 adapter::to_licence(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     auto r(boost::make_shared<licence>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -569,11 +575,11 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
 
 boost::shared_ptr<logical::entities::variability::profile>
 adapter::to_variability_profile(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::variability::profile;
     auto r(boost::make_shared<profile>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
@@ -586,11 +592,11 @@ adapter::to_variability_profile(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::variability::profile_template>
 adapter::to_variability_profile_template(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::variability::profile_template;
     auto r(boost::make_shared<profile_template>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
@@ -604,12 +610,12 @@ adapter::to_variability_profile_template(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::variability::feature_template_bundle>
 adapter::to_variability_feature_template_bundle(
-    const logical::entities::location &l,
-    const stereotypes_conversion_result &scr,
-    const injection::entities::element &ie) const {
+    const logical::entities::location& l,
+    const logical::entities::stereotypes& sts,
+    const injection::entities::element& ie) const {
     using logical::entities::variability::feature_template_bundle;
     auto r(boost::make_shared<feature_template_bundle>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
         logical::entities::variability::feature_template ft;
@@ -621,12 +627,12 @@ adapter::to_variability_feature_template_bundle(
 }
 
 boost::shared_ptr<logical::entities::variability::feature_bundle>
-adapter::to_variability_feature_bundle(const logical::entities::location &l,
-    const stereotypes_conversion_result &scr,
-    const injection::entities::element &ie) const {
+adapter::to_variability_feature_bundle(const logical::entities::location& l,
+    const logical::entities::stereotypes& sts,
+    const injection::entities::element& ie) const {
     using logical::entities::variability::feature_bundle;
     auto r(boost::make_shared<feature_bundle>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
         logical::entities::variability::feature f;
@@ -640,45 +646,45 @@ adapter::to_variability_feature_bundle(const logical::entities::location &l,
 boost::shared_ptr<
     logical::entities::variability::initializer
     >
-adapter::to_variability_initializer(const logical::entities::location &l,
-    const stereotypes_conversion_result &scr,
+adapter::to_variability_initializer(const logical::entities::location& l,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element &ie) const {
     using logical::entities::variability::initializer;
     auto r(boost::make_shared<initializer>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::mapping::fixed_mappable>
 adapter::to_fixed_mappable(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::mapping::fixed_mappable;
     auto r(boost::make_shared<fixed_mappable>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::mapping::extensible_mappable>
 adapter::to_extensible_mappable(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::mapping::extensible_mappable;
     auto r(boost::make_shared<extensible_mappable>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::templating::logic_less_template>
 adapter::to_logic_less_template(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::templating::logic_less_template;
     auto r(boost::make_shared<logic_less_template>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -698,22 +704,22 @@ adapter::to_logic_less_template(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::serialization::type_registrar>
 adapter::to_type_registrar(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::serialization::type_registrar;
     auto r(boost::make_shared<type_registrar>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::visual_studio::solution>
 adapter::to_visual_studio_solution(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::solution;
     auto r(boost::make_shared<solution>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -734,11 +740,11 @@ adapter::to_visual_studio_solution(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::visual_studio::project>
 adapter::to_visual_studio_project(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::project;
     auto r(boost::make_shared<project>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -759,66 +765,66 @@ adapter::to_visual_studio_project(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
 adapter::to_visual_studio_msbuild_targets(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::visual_studio::msbuild_targets;
     auto r(boost::make_shared<msbuild_targets>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::orm::common_odb_options>
 adapter::to_orm_common_odb_options(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::orm::common_odb_options;
     auto r(boost::make_shared<common_odb_options>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::build::cmakelists>
 adapter::to_build_cmakelists(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::build::cmakelists;
     auto r(boost::make_shared<cmakelists>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::physical::backend>
 adapter::to_physical_backend(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::physical::backend;
     auto r(boost::make_shared<backend>());
-    populate_element(l, scr, ie, true/*is_container*/, *r);
+    populate_element(l, sts, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::physical::facet>
 adapter::to_physical_facet(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::physical::facet;
     auto r(boost::make_shared<facet>());
-    populate_element(l, scr, ie, true/*is_container*/, *r);
+    populate_element(l, sts, ie, true/*is_container*/, *r);
     ensure_empty(r->name().qualified().dot(), ie.attributes());
     return r;
 }
 
 boost::shared_ptr<logical::entities::physical::archetype>
 adapter::to_physical_archetype(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::physical::archetype;
     auto r(boost::make_shared<archetype>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
         const auto n(ia.name().simple());
@@ -838,9 +844,9 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         auto& cfg(*tt.configuration());
         cfg.name().qualified(id);
 
-        helpers::stereotypes_helper h;
-        const auto scr(h.from_primitives(ia.stereotypes()));
-        const auto& ds(scr.dynamic_stereotypes());
+        logical::helpers::stereotypes_helper h;
+        const auto sts(h.from_primitives(ia.stereotypes()));
+        const auto& ds(sts.dynamic_stereotypes());
         cfg.profile_bindings(to_potential_binding(ds));
     }
 
@@ -849,11 +855,11 @@ adapter::to_physical_archetype(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::physical::archetype_kind>
 adapter::to_physical_archetype_kind(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::physical::archetype_kind;
     auto r(boost::make_shared<archetype_kind>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name().simple());
@@ -874,11 +880,11 @@ adapter::to_physical_archetype_kind(const logical::entities::location& l,
 
 boost::shared_ptr<logical::entities::physical::part>
 adapter::to_physical_part(const logical::entities::location& l,
-    const stereotypes_conversion_result& scr,
+    const logical::entities::stereotypes& sts,
     const injection::entities::element& ie) const {
     using logical::entities::physical::part;
     auto r(boost::make_shared<part>());
-    populate_element(l, scr, ie, false/*is_container*/, *r);
+    populate_element(l, sts, ie, false/*is_container*/, *r);
 
     const std::string path_contribution_none("none");
     const std::string path_contribution_as_directories("as_directories");

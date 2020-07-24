@@ -44,9 +44,8 @@
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/location_builder.hpp"
-#include "dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen.logical/types/helpers/stereotypes_helper.hpp"
 #include "dogen.orchestration/types/features/model_location.hpp"
-#include "dogen.orchestration/types/helpers/stereotypes_helper.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_to_logical_model_transform.hpp"
@@ -132,7 +131,7 @@ injection_model_to_logical_model_transform::compute_element_type(
      * stereotypes, and determine the course of action based on how
      * many we got back.
      */
-    helpers::stereotypes_helper h;
+    logical::helpers::stereotypes_helper h;
     const auto et(h.extract_element_types(sts));
     switch (et.size()) {
     case 0:
@@ -167,7 +166,7 @@ process_element(const helpers::adapter& ad,
     const injection::entities::element& e, logical::entities::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Injection stereotypes: " << e.stereotypes();
-    helpers::stereotypes_helper h;
+    logical::helpers::stereotypes_helper h;
     const auto scr(h.from_primitives(e.stereotypes()));
     const auto& st(scr.static_stereotypes());
     BOOST_LOG_SEV(lg, debug) << "Static stereotypes: " << st;
@@ -354,9 +353,9 @@ apply(const context& ctx, const injection::entities::model& m) {
     rm.is_root(true);
     rm.origin_sha1_hash(m.provenance().model_sha1_hash().value());
 
-    helpers::stereotypes_helper h;
-    const auto scr(h.from_primitives(m.stereotypes()));
-    rm.dynamic_stereotypes(scr.dynamic_stereotypes());
+    logical::helpers::stereotypes_helper h;
+    const auto sts(h.from_primitives(m.stereotypes()));
+    rm.stereotypes(sts);
     rm.documentation(m.documentation());
     insert(r.root_module(), r.structural_elements().modules());
 
