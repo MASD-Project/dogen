@@ -75,10 +75,15 @@ public:
     void simple(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Contains the name according to different representations.
+     */
+    /**@{*/
     const dogen::identification::entities::name_representations& representations() const;
     dogen::identification::entities::name_representations& representations();
     void representations(const dogen::identification::entities::name_representations& v);
     void representations(const dogen::identification::entities::name_representations&& v);
+    /**@}*/
 
     const dogen::identification::entities::logical_id& qualified() const;
     dogen::identification::entities::logical_id& qualified();

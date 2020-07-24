@@ -61,10 +61,15 @@ public:
         const bool is_floating_point);
 
 public:
+    /**
+     * @brief Contains the name according to different representations.
+     */
+    /**@{*/
     const dogen::identification::entities::name_representations& representations() const;
     dogen::identification::entities::name_representations& representations();
     void representations(const dogen::identification::entities::name_representations& v);
     void representations(const dogen::identification::entities::name_representations&& v);
+    /**@}*/
 
     /**
      * @brief Name for the current level of the tree.
