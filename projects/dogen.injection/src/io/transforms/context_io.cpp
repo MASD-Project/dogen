@@ -23,7 +23,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
-#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.variability/io/entities/feature_model_io.hpp"
 
 namespace std {
@@ -43,22 +42,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesy
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -123,7 +106,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::injection::transforms::context\"" << ", "
       << "\"data_directories\": " << v.data_directories() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
-      << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
       << "\"tracer\": " << v.tracer() << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"variability_overrides\": " << v.variability_overrides()

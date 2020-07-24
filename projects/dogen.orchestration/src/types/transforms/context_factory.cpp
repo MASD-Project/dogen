@@ -61,7 +61,7 @@ context_factory::make_variability_context(const configuration& cfg,
 
 injection::transforms::context context_factory::make_injection_context(
     const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
-    boost::shared_ptr<physical::entities::meta_model> pmm) {
+    boost::shared_ptr<physical::entities::meta_model> /*pmm*/) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
 
     /*
@@ -71,11 +71,6 @@ injection::transforms::context context_factory::make_injection_context(
     const auto lib_dir(utility::filesystem::library_directory());
     const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
     r.data_directories(lib_dirs);
-
-    /*
-     * Setup the physical data structures.
-     */
-    r.physical_meta_model(pmm);
 
     /*
      * Setup the tracer. Note that we do it regardless of whether
@@ -133,7 +128,6 @@ make_context(const configuration& cfg, const std::string& activity,
      * Setup the archetype location repository.
      */
     r.physical_context().meta_model(pmm);
-    r.injection_context().physical_meta_model(pmm);
     r.logical_context().physical_meta_model(pmm);
     r.text_context().physical_meta_model(pmm);
 
