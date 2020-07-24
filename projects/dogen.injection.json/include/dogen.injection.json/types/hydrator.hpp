@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/entities/element.hpp"
@@ -47,7 +48,7 @@ private:
     /**
      * @brief Reads the stereotypes, if any exists.
      */
-    std::list<std::string>
+    std::list<identification::entities::stereotype>
     read_stereotypes(const boost::property_tree::ptree& pt) const;
 
     /**

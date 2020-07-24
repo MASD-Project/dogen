@@ -26,6 +26,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
@@ -56,11 +57,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::stereotype>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -156,7 +157,7 @@ element::element(
     const std::string& contained_by,
     const bool in_global_module,
     const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -335,19 +336,19 @@ void element::static_stereotypes(const std::list<dogen::logical::entities::stati
     static_stereotypes_ = std::move(v);
 }
 
-const std::list<std::string>& element::dynamic_stereotypes() const {
+const std::list<dogen::identification::entities::stereotype>& element::dynamic_stereotypes() const {
     return dynamic_stereotypes_;
 }
 
-std::list<std::string>& element::dynamic_stereotypes() {
+std::list<dogen::identification::entities::stereotype>& element::dynamic_stereotypes() {
     return dynamic_stereotypes_;
 }
 
-void element::dynamic_stereotypes(const std::list<std::string>& v) {
+void element::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v) {
     dynamic_stereotypes_ = v;
 }
 
-void element::dynamic_stereotypes(const std::list<std::string>&& v) {
+void element::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
     dynamic_stereotypes_ = std::move(v);
 }
 

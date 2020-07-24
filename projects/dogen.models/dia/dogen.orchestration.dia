@@ -2876,7 +2876,7 @@ user defined stereotypes.#</dia:string>
             <dia:string>#dynamic_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::list&lt;identification::entities::stereotype&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5852,7 +5852,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="152.768,40.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.018,39.65;159.469,45.6"/>
+        <dia:rectangle val="152.018,39.65;159.469,44.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6455,7 +6455,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="94,31.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.25,30.85;97,37.5497"/>
+        <dia:rectangle val="93.25,30.85;97,36.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6527,7 +6527,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="123.375,31.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.403,30.85;124.125,37.6"/>
+        <dia:rectangle val="121.403,30.85;124.125,36.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6599,7 +6599,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="121.453,39.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.525,38.85;122.203,45.5496"/>
+        <dia:rectangle val="111.525,38.85;122.203,44.7496"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6671,7 +6671,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="91.365,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.615,28.35;94.05,32.7"/>
+        <dia:rectangle val="90.615,28.35;94.05,31.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6743,7 +6743,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="72,29.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.935,28.35;72.75,32.7"/>
+        <dia:rectangle val="67.935,28.35;72.75,31.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

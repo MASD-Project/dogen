@@ -132,12 +132,13 @@ void adapter::ensure_empty(const std::string& element_id,
     BOOST_THROW_EXCEPTION(adaptation_exception(msg));
 }
 
-std::list<variability::entities::potential_binding> adapter::
-to_potential_binding(const std::list<std::string>& stereotypes) const {
+std::list<variability::entities::potential_binding>
+adapter::to_potential_binding(
+    const std::list<identification::entities::stereotype>& stereotypes) const {
     std::list<variability::entities::potential_binding> r;
-    for (const auto& s : stereotypes) {
+    for (const auto& st : stereotypes) {
         variability::entities::potential_binding pb;
-        pb.name(s);
+        pb.name(st.value());
         pb.realized(false);
         r.push_back(pb);
     }
@@ -214,7 +215,7 @@ adapter::to_attribute(const logical::entities::name& owner,
     r.configuration()->name().qualified(r.name().qualified().dot());
 
     helpers::stereotypes_helper h;
-    const auto scr(h.from_string(ia.stereotypes()));
+    const auto scr(h.from_primitives(ia.stereotypes()));
     const auto& ds(scr.dynamic_stereotypes());
     r.configuration()->profile_bindings(to_potential_binding(ds));
 
@@ -241,7 +242,7 @@ adapter::to_enumerator(const logical::entities::name& owner,
     r.configuration()->name().qualified(r.name().qualified().dot());
 
     helpers::stereotypes_helper h;
-    const auto scr(h.from_string(ia.stereotypes()));
+    const auto scr(h.from_primitives(ia.stereotypes()));
     const auto& ds(scr.dynamic_stereotypes());
     r.configuration()->profile_bindings(to_potential_binding(ds));
 
@@ -838,7 +839,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
         cfg.name().qualified(id);
 
         helpers::stereotypes_helper h;
-        const auto scr(h.from_string(ia.stereotypes()));
+        const auto scr(h.from_primitives(ia.stereotypes()));
         const auto& ds(scr.dynamic_stereotypes());
         cfg.profile_bindings(to_potential_binding(ds));
     }

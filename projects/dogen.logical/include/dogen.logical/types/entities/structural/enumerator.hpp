@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
@@ -53,7 +54,7 @@ public:
         const dogen::logical::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes,
+        const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
         const std::string& value);
 
 public:
@@ -106,10 +107,10 @@ public:
      * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
      */
     /**@{*/
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes() const;
+    std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
     /**@}*/
 
     /**
@@ -139,7 +140,7 @@ private:
     dogen::logical::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
+    std::list<dogen::identification::entities::stereotype> dynamic_stereotypes_;
     std::string value_;
 };
 

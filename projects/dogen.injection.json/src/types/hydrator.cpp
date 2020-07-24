@@ -90,15 +90,18 @@ hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<std::string>
+std::list<identification::entities::stereotype>
 hydrator::read_stereotypes(const boost::property_tree::ptree& pt) const {
-    std::list<std::string> r;
+    std::list<identification::entities::stereotype> r;
     const auto i(pt.find(stereotypes_key));
     if (i == pt.not_found() || i->second.empty())
         return r;
 
-    for (auto j(i->second.begin()); j != i->second.end(); ++j)
-        r.push_back(j->second.get_value<std::string>());
+    using identification::entities::stereotype;
+    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+        const stereotype st(j->second.get_value<std::string>());
+        r.push_back(st);
+    }
 
     return r;
 }

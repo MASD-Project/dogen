@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/io/entities/model_io.hpp"
@@ -123,8 +124,8 @@ create_location(const context& ctx, const injection::entities::model& m) {
 }
 
 logical::entities::static_stereotypes
-injection_model_to_logical_model_transform::
-compute_element_type(const std::list<logical::entities::static_stereotypes>& st,
+injection_model_to_logical_model_transform::compute_element_type(
+    const std::list<logical::entities::static_stereotypes>& sts,
     const std::string& fallback_element_type) {
     /*
      * Extract the element type information from the supplied static
@@ -132,7 +133,7 @@ compute_element_type(const std::list<logical::entities::static_stereotypes>& st,
      * many we got back.
      */
     helpers::stereotypes_helper h;
-    const auto et(h.extract_element_types(st));
+    const auto et(h.extract_element_types(sts));
     switch (et.size()) {
     case 0:
         /*
@@ -140,8 +141,10 @@ compute_element_type(const std::list<logical::entities::static_stereotypes>& st,
          * fallback stereotype suggested by the frontend. If none was
          * suggested, well, we tried out best. Just return invalid.
          */
-        if (!fallback_element_type.empty())
-            return h.from_string(fallback_element_type);
+        if (!fallback_element_type.empty()) {
+            identification::entities::stereotype st(fallback_element_type);
+            return h.from_primitive(st);
+        }
         return logical::entities::static_stereotypes::invalid;
     case 1:
         /*
@@ -165,7 +168,7 @@ process_element(const helpers::adapter& ad,
 
     BOOST_LOG_SEV(lg, debug) << "Injection stereotypes: " << e.stereotypes();
     helpers::stereotypes_helper h;
-    const auto scr(h.from_string(e.stereotypes()));
+    const auto scr(h.from_primitives(e.stereotypes()));
     const auto& st(scr.static_stereotypes());
     BOOST_LOG_SEV(lg, debug) << "Static stereotypes: " << st;
 
@@ -352,7 +355,7 @@ apply(const context& ctx, const injection::entities::model& m) {
     rm.origin_sha1_hash(m.provenance().model_sha1_hash().value());
 
     helpers::stereotypes_helper h;
-    const auto scr(h.from_string(m.stereotypes()));
+    const auto scr(h.from_primitives(m.stereotypes()));
     rm.dynamic_stereotypes(scr.dynamic_stereotypes());
     rm.documentation(m.documentation());
     insert(r.root_module(), r.structural_elements().modules());

@@ -35,7 +35,7 @@ namespace dogen::injection::entities {
 attribute::attribute(
     const std::list<dogen::identification::entities::tagged_value>& tagged_values,
     const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
-    const std::list<std::string>& stereotypes,
+    const std::list<dogen::identification::entities::stereotype>& stereotypes,
     const std::string& documentation,
     const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -115,19 +115,19 @@ void attribute::tagged_values_overrides(const std::list<dogen::identification::e
     tagged_values_overrides_ = std::move(v);
 }
 
-const std::list<std::string>& attribute::stereotypes() const {
+const std::list<dogen::identification::entities::stereotype>& attribute::stereotypes() const {
     return stereotypes_;
 }
 
-std::list<std::string>& attribute::stereotypes() {
+std::list<dogen::identification::entities::stereotype>& attribute::stereotypes() {
     return stereotypes_;
 }
 
-void attribute::stereotypes(const std::list<std::string>& v) {
+void attribute::stereotypes(const std::list<dogen::identification::entities::stereotype>& v) {
     stereotypes_ = v;
 }
 
-void attribute::stereotypes(const std::list<std::string>&& v) {
+void attribute::stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
     stereotypes_ = std::move(v);
 }
 

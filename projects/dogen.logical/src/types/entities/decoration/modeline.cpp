@@ -56,7 +56,7 @@ modeline::modeline(
     const std::string& contained_by,
     const bool in_global_module,
     const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,

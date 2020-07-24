@@ -19,10 +19,11 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.identification/types/entities/injection_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
+#include "dogen.identification/types/entities/injection_id.hpp"
 #include "dogen.injection.dia/types/adaptation_error.hpp"
 #include "dogen.injection.dia/types/adapter.hpp"
 
@@ -85,10 +86,15 @@ void adapter::process_stereotypes(const processed_object& po,
         e.fallback_element_type(module_element);
 
     /*
-     * Split and copy across the user-supplied stereotypes.
+     * Split the user-supplied stereotype CSV strings, and convert
+     * them to the strong type representation of stereotype.
      */
     using utility::string::splitter;
-    e.stereotypes(splitter::split_csv(po.stereotypes()));
+    const auto splitted(splitter::split_csv(po.stereotypes()));
+    for(const auto& s : splitted) {
+        identification::entities::stereotype st(s);
+        e.stereotypes().push_back(st);
+    }
     BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << e.stereotypes();
 }
 

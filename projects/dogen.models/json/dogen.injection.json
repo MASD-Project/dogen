@@ -294,7 +294,7 @@
       "attributes": [
         {
           "name": "stereotypes",
-          "type": "std::list<std::string>"
+          "type": "std::list<identification::entities::stereotype>"
         }
       ]
     },

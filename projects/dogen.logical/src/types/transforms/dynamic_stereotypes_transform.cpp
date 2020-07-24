@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -57,7 +58,8 @@ private:
      * profile bindings.
      */
     template<typename Configurable>
-    std::list<std::string> obtain_non_realised_bindings(Configurable &c) {
+    std::list<identification::entities::stereotype>
+    obtain_non_realised_bindings(Configurable &c) {
         const auto& n(c.configuration()->name());
         const auto& qn(n.qualified());
         BOOST_LOG_SEV(lg, trace) << "Extracting: " << n.simple()
@@ -68,11 +70,12 @@ private:
          * that matched the name. In that case, we consider it to be a
          * dynamic stereotype, to be used elsewhere.
          */
-        std::list<std::string> r;
+        using identification::entities::stereotype;
+        std::list<stereotype> r;
         const auto& pbs(c.configuration()->profile_bindings());
         for (const auto& pb : pbs) {
             if (!pb.realized())
-                r.push_back(pb.name());
+                r.push_back(stereotype(pb.name()));
         }
         return r;
     }

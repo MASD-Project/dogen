@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.orchestration/io/helpers/stereotypes_conversion_result_io.hpp"
 
@@ -37,21 +37,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::stereotype>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;

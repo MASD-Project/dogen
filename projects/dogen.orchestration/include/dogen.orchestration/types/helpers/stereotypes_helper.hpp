@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.orchestration/types/helpers/stereotypes_conversion_result.hpp"
 
@@ -39,15 +40,15 @@ namespace dogen::orchestration::helpers {
 class stereotypes_helper final {
 public:
     /**
-     * @brief Converts a string with a single well-known stereotype
-     * into its enum.
+     * @brief Converts a single well-known stereotype into its enum.
      *
-     * @note The string must not have any leading or trailing spaces
-     * or other artefacts and must match exactly the definition of a
-     * well-known logical stereotype, e.g. 'logical::object', etc.
+     * @note The stereotype primitive must not have any leading or
+     * trailing spaces or other artefacts and must match exactly the
+     * definition of a well-known logical stereotype,
+     * e.g. 'logical::object', etc.
      */
     logical::entities::static_stereotypes
-    from_string(const std::string& s) const;
+    from_primitive(const identification::entities::stereotype& st) const;
 
 public:
     /**
@@ -57,17 +58,19 @@ public:
     stereotypes_conversion_result from_csv_string(const std::string& s) const;
 
     /**
-     * @brief Given a list of stereotypes as strings, returns the set
-     * of well-known stereotypes as well as those it does not know of.
+     * @brief Given a list of stereotypes, returns the set of
+     * well-known stereotypes as well as those it does not know of.
      */
     stereotypes_conversion_result
-    from_string(const std::list<std::string>& stereotypes) const;
+    from_primitives(const std::list<identification::entities::stereotype>&
+        stereotypes) const;
 
     /**
-     * @brief Converts a well-known stereotype to its string representation.
+     * @brief Converts a well-known stereotype to its primitive
+     * representation.
      */
-    std::string
-    to_string(const logical::entities::static_stereotypes ss) const;
+    identification::entities::stereotype
+    to_primitive(const logical::entities::static_stereotypes ss) const;
 
 public:
     /**

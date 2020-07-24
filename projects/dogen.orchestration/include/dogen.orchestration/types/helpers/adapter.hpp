@@ -100,8 +100,9 @@ private:
     /**
      * @brief Creates a list of potential bindings from a list of stereotypes.
      */
-    std::list<variability::entities::potential_binding>
-    to_potential_binding(const std::list<std::string>& stereotypes) const;
+    std::list<variability::entities::potential_binding> to_potential_binding(
+        const std::list<identification::entities::stereotype>& stereotypes
+        ) const;
 
 private:
     /**

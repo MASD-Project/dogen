@@ -32,6 +32,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.logical/types/entities/orm/attribute_properties.hpp"
@@ -58,7 +59,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::logical::entities::name& name,
         const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes,
+        const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
         const std::string& unparsed_type,
         const dogen::logical::entities::name_tree& parsed_type,
         const bool is_immutable,
@@ -117,10 +118,10 @@ public:
      * @brief Stereotypes that are not part of the masd UML profile. These are user defined.
      */
     /**@{*/
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes() const;
+    std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
     /**@}*/
 
     /**
@@ -204,7 +205,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::logical::entities::name name_;
     std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
+    std::list<dogen::identification::entities::stereotype> dynamic_stereotypes_;
     std::string unparsed_type_;
     dogen::logical::entities::name_tree parsed_type_;
     bool is_immutable_;

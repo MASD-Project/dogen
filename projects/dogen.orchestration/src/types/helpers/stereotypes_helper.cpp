@@ -25,9 +25,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.utility/types/exception/invalid_enum_value.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.orchestration/types/helpers/stereotypes_helper.hpp"
+
+using dogen::identification::entities::stereotype;
 
 namespace {
 
@@ -37,60 +40,59 @@ transform_id("orchestration.helpers.stereotypes_helper");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string stereotype_visitable("masd::visitable");
-const std::string stereotype_fluent("masd::fluent");
-const std::string stereotype_immutable("masd::immutable");
-const std::string stereotype_structural_object("masd::object");
-const std::string stereotype_structural_object_template("masd::object_template");
-const std::string stereotype_structural_exception("masd::exception");
-const std::string stereotype_structural_primitive("masd::primitive");
-const std::string stereotype_structural_enumeration("masd::enumeration");
-const std::string stereotype_structural_module("masd::module");
-const std::string stereotype_structural_builtin("masd::builtin");
-const std::string stereotype_structural_entry_point("masd::entry_point");
-const std::string stereotype_structural_assistant("masd::assistant");
-const std::string stereotype_orm_object("masd::orm::object");
-const std::string stereotype_orm_value("masd::orm::value");
-const std::string stereotype_decoration_modeline_group(
+const stereotype stereotype_visitable("masd::visitable");
+const stereotype stereotype_fluent("masd::fluent");
+const stereotype stereotype_immutable("masd::immutable");
+const stereotype stereotype_structural_object("masd::object");
+const stereotype stereotype_structural_object_template("masd::object_template");
+const stereotype stereotype_structural_exception("masd::exception");
+const stereotype stereotype_structural_primitive("masd::primitive");
+const stereotype stereotype_structural_enumeration("masd::enumeration");
+const stereotype stereotype_structural_module("masd::module");
+const stereotype stereotype_structural_builtin("masd::builtin");
+const stereotype stereotype_structural_entry_point("masd::entry_point");
+const stereotype stereotype_structural_assistant("masd::assistant");
+const stereotype stereotype_orm_object("masd::orm::object");
+const stereotype stereotype_orm_value("masd::orm::value");
+const stereotype stereotype_decoration_modeline_group(
     "masd::decoration::modeline_group");
-const std::string stereotype_decoration_modeline("masd::decoration::modeline");
-const std::string stereotype_decoration_generation_marker(
+const stereotype stereotype_decoration_modeline("masd::decoration::modeline");
+const stereotype stereotype_decoration_generation_marker(
     "masd::decoration::generation_marker");
-const std::string stereotype_decoration_licence("masd::decoration::licence");
-const std::string stereotype_variability_profile(
+const stereotype stereotype_decoration_licence("masd::decoration::licence");
+const stereotype stereotype_variability_profile(
     "masd::variability::profile");
-const std::string stereotype_variability_profile_template(
+const stereotype stereotype_variability_profile_template(
     "masd::variability::profile_template");
-const std::string stereotype_variability_feature_template_bundle(
+const stereotype stereotype_variability_feature_template_bundle(
     "masd::variability::feature_template_bundle");
-const std::string stereotype_variability_feature_bundle(
+const stereotype stereotype_variability_feature_bundle(
     "masd::variability::feature_bundle");
-const std::string stereotype_variability_initializer(
+const stereotype stereotype_variability_initializer(
     "masd::variability::initializer");
-const std::string stereotype_mapping_fixed_mappable(
+const stereotype stereotype_mapping_fixed_mappable(
     "masd::mapping::fixed_mappable");
-const std::string stereotype_mapping_extensible_mappable(
+const stereotype stereotype_mapping_extensible_mappable(
     "masd::mapping::extensible_mappable");
-const std::string stereotype_templating_logic_less_templates(
+const stereotype stereotype_templating_logic_less_templates(
     "masd::templating::logic_less_templates");
-const std::string stereotype_serialization_type_registrar(
+const stereotype stereotype_serialization_type_registrar(
     "masd::serialization::type_registrar");
-const std::string stereotype_visual_studio_solution(
+const stereotype stereotype_visual_studio_solution(
     "masd::visual_studio::solution");
-const std::string stereotype_visual_studio_project(
+const stereotype stereotype_visual_studio_project(
     "masd::visual_studio::project");
-const std::string stereotype_visual_studio_msbuild_targets(
+const stereotype stereotype_visual_studio_msbuild_targets(
     "masd::visual_studio::msbuild_targets");
-const std::string stereotype_orm_common_odb_options(
+const stereotype stereotype_orm_common_odb_options(
     "masd::orm::common_odb_options");
-const std::string stereotype_build_cmakelists("masd::build::cmakelists");
-const std::string stereotype_physical_backend("masd::physical::backend");
-const std::string stereotype_physical_facet("masd::physical::facet");
-const std::string stereotype_physical_archetype("masd::physical::archetype");
-const std::string stereotype_physical_archetype_kind(
+const stereotype stereotype_build_cmakelists("masd::build::cmakelists");
+const stereotype stereotype_physical_backend("masd::physical::backend");
+const stereotype stereotype_physical_facet("masd::physical::facet");
+const stereotype stereotype_physical_archetype("masd::physical::archetype");
+const stereotype stereotype_physical_archetype_kind(
     "masd::physical::archetype_kind");
-const std::string stereotype_physical_part("masd::physical::part");
-
+const stereotype stereotype_physical_part("masd::physical::part");
 
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
@@ -100,82 +102,83 @@ namespace dogen::orchestration::helpers {
 
 using logical::entities::static_stereotypes;
 
-static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
-    BOOST_LOG_SEV(lg, debug) << "Converting stereotype: " << s;
+static_stereotypes
+stereotypes_helper::from_primitive(const stereotype& st) const {
+   BOOST_LOG_SEV(lg, debug) << "Converting stereotype: " << st;
 
-    if (s == stereotype_visitable)
+    if (st == stereotype_visitable)
         return static_stereotypes::visitable;
-    else if (s == stereotype_fluent)
+    else if (st == stereotype_fluent)
         return static_stereotypes::fluent;
-    else if (s == stereotype_immutable)
+    else if (st == stereotype_immutable)
         return static_stereotypes::immutable;
-    else if (s == stereotype_structural_object)
+    else if (st == stereotype_structural_object)
         return static_stereotypes::structural_object;
-    else if (s == stereotype_structural_object_template)
+    else if (st == stereotype_structural_object_template)
         return static_stereotypes::structural_object_template;
-    else if (s == stereotype_structural_exception)
+    else if (st == stereotype_structural_exception)
         return static_stereotypes::structural_exception;
-    else if (s == stereotype_structural_primitive)
+    else if (st == stereotype_structural_primitive)
         return static_stereotypes::structural_primitive;
-    else if (s == stereotype_structural_enumeration)
+    else if (st == stereotype_structural_enumeration)
         return static_stereotypes::structural_enumeration;
-    else if (s == stereotype_structural_module)
+    else if (st == stereotype_structural_module)
         return static_stereotypes::structural_module;
-    else if (s == stereotype_structural_builtin)
+    else if (st == stereotype_structural_builtin)
         return static_stereotypes::structural_builtin;
-    else if (s == stereotype_structural_entry_point)
+    else if (st == stereotype_structural_entry_point)
         return static_stereotypes::structural_entry_point;
-    else if (s == stereotype_structural_assistant)
+    else if (st == stereotype_structural_assistant)
         return static_stereotypes::structural_assistant;
-    else if (s == stereotype_orm_object)
+    else if (st == stereotype_orm_object)
         return static_stereotypes::orm_object;
-    else if (s == stereotype_orm_value)
+    else if (st == stereotype_orm_value)
         return static_stereotypes::orm_value;
-    else if (s == stereotype_decoration_modeline_group)
+    else if (st == stereotype_decoration_modeline_group)
         return static_stereotypes::decoration_modeline_group;
-    else if (s == stereotype_decoration_modeline)
+    else if (st == stereotype_decoration_modeline)
         return static_stereotypes::decoration_modeline;
-    else if (s == stereotype_decoration_generation_marker)
+    else if (st == stereotype_decoration_generation_marker)
         return static_stereotypes::decoration_generation_marker;
-    else if (s == stereotype_decoration_licence)
+    else if (st == stereotype_decoration_licence)
         return static_stereotypes::decoration_licence;
-    else if (s == stereotype_variability_profile)
+    else if (st == stereotype_variability_profile)
         return static_stereotypes::variability_profile;
-    else if (s == stereotype_variability_profile_template)
+    else if (st == stereotype_variability_profile_template)
         return static_stereotypes::variability_profile_template;
-    else if (s == stereotype_variability_feature_template_bundle)
+    else if (st == stereotype_variability_feature_template_bundle)
         return static_stereotypes::variability_feature_template_bundle;
-    else if (s == stereotype_variability_feature_bundle)
+    else if (st == stereotype_variability_feature_bundle)
         return static_stereotypes::variability_feature_bundle;
-    else if (s == stereotype_variability_initializer)
+    else if (st == stereotype_variability_initializer)
         return static_stereotypes::variability_initializer;
-    else if (s == stereotype_mapping_fixed_mappable)
+    else if (st == stereotype_mapping_fixed_mappable)
         return static_stereotypes::mapping_fixed_mappable;
-    else if (s == stereotype_mapping_extensible_mappable)
+    else if (st == stereotype_mapping_extensible_mappable)
         return static_stereotypes::mapping_extensible_mappable;
-    else if (s == stereotype_templating_logic_less_templates)
+    else if (st == stereotype_templating_logic_less_templates)
         return static_stereotypes::templating_logic_less_template;
-    else if (s == stereotype_serialization_type_registrar)
+    else if (st == stereotype_serialization_type_registrar)
         return static_stereotypes::serialization_type_registrar;
-    else if (s == stereotype_visual_studio_solution)
+    else if (st == stereotype_visual_studio_solution)
         return static_stereotypes::visual_studio_solution;
-    else if (s == stereotype_visual_studio_project)
+    else if (st == stereotype_visual_studio_project)
         return static_stereotypes::visual_studio_project;
-    else if (s == stereotype_visual_studio_msbuild_targets)
+    else if (st == stereotype_visual_studio_msbuild_targets)
         return static_stereotypes::visual_studio_msbuild_targets;
-    else if (s == stereotype_orm_common_odb_options)
+    else if (st == stereotype_orm_common_odb_options)
         return static_stereotypes::orm_common_odb_options;
-    else if (s == stereotype_build_cmakelists)
+    else if (st == stereotype_build_cmakelists)
         return static_stereotypes::build_cmakelists;
-    else if (s == stereotype_physical_backend)
+    else if (st == stereotype_physical_backend)
         return static_stereotypes::physical_backend;
-    else if (s == stereotype_physical_facet)
+    else if (st == stereotype_physical_facet)
         return static_stereotypes::physical_facet;
-    else if (s == stereotype_physical_archetype)
+    else if (st == stereotype_physical_archetype)
         return static_stereotypes::physical_archetype;
-    else if (s == stereotype_physical_archetype_kind)
+    else if (st == stereotype_physical_archetype_kind)
         return static_stereotypes::physical_archetype_kind;
-    else if (s == stereotype_physical_part)
+    else if (st == stereotype_physical_part)
         return static_stereotypes::physical_part;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
@@ -191,28 +194,32 @@ stereotypes_helper::from_csv_string(const std::string& s) const {
     }
 
     using utility::string::splitter;
-    const auto stereotypes(splitter::split_csv(s));
-    return from_string(stereotypes);
+    const auto splitted(splitter::split_csv(s));
+    std::list<stereotype> stereotypes;
+    for (const auto& s : splitted)
+        stereotypes.push_back(stereotype(s));
+
+    return from_primitives(stereotypes);
 }
 
 stereotypes_conversion_result stereotypes_helper::
-from_string(const std::list<std::string>& stereotypes) const {
+from_primitives(const std::list<stereotype>& stereotypes) const {
     stereotypes_conversion_result r;
     if (stereotypes.empty())
         return r;
 
-    for (const auto& stereotype : stereotypes) {
-        const auto ss(from_string(stereotype));
+    for (const auto& st : stereotypes) {
+        const auto ss(from_primitive(st));
         if (ss != static_stereotypes::invalid)
             r.static_stereotypes().push_back(ss);
         else
-            r.dynamic_stereotypes().push_back(stereotype);
+            r.dynamic_stereotypes().push_back(st);
     }
     return r;
 }
 
-std::string stereotypes_helper::
-to_string(const static_stereotypes ss) const {
+identification::entities::stereotype stereotypes_helper::
+to_primitive(const static_stereotypes ss) const {
     switch(ss) {
     case static_stereotypes::visitable: return stereotype_visitable;
     case static_stereotypes::fluent: return stereotype_fluent;

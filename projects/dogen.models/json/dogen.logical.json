@@ -192,7 +192,7 @@
         },
         {
           "name": "dynamic_stereotypes",
-          "type": "std::list<std::string>",
+          "type": "std::list<identification::entities::stereotype>",
           "documentation": "Stereotypes that are not part of the masd UML profile. These are user defined.\n"
         }
       ]

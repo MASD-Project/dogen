@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
@@ -136,7 +138,7 @@ void stereotypes_transform::transform_dynamic_stereotypes(
     BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
                              << o.dynamic_stereotypes();
 
-    std::list<std::string> unknown_stereotypes;
+    std::list<identification::entities::stereotype> unknown_stereotypes;
     for (const auto& us : o.dynamic_stereotypes()) {
         /*
          * Attempt to process the stereotype as an object template. If
@@ -156,7 +158,18 @@ void stereotypes_transform::transform_dynamic_stereotypes(
      * use an unsupported feature.
      */
     if (!unknown_stereotypes.empty()) {
-        const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
+        std::ostringstream ss;
+        ss << invalid_stereotypes << "'";
+        bool is_first(true);
+        for (const auto& us : unknown_stereotypes) {
+            if (!is_first)
+                ss << ", ";
+            is_first = false;
+            ss << us.value();
+        }
+        ss << "'.";
+
+        const auto s(ss.str());
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
@@ -368,11 +381,13 @@ expand_visitable(entities::structural::object& o, entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
-bool stereotypes_transform::try_as_object_template(const std::string& s,
+bool stereotypes_transform::try_as_object_template(
+    const identification::entities::stereotype& st,
     entities::structural::object& o, const entities::model& m) {
 
+    const auto n(st.value());
     using helpers::resolver;
-    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, m));
+    const auto oot(resolver::try_resolve_object_template_name(o.name(), n, m));
     if (!oot)
         return false;
 

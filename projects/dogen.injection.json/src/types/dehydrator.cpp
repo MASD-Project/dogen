@@ -73,17 +73,17 @@ void dehydrator::insert_tagged_values(std::ostream& s,
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
-    const std::list<std::string>& st) {
+    const std::list<identification::entities::stereotype>& sts) {
 
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("stereotypes");
     s << " : [";
 
     bool is_first(true);
-    for (const auto& stereotype : st) {
+    for (const auto& st : sts) {
         if (!is_first)
             s << ", ";
-        uf.insert_quoted(stereotype);
+        uf.insert_quoted(st.value());
         is_first = false;
     }
     s << " ]";

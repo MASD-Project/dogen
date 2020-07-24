@@ -49,7 +49,7 @@ private:
     create_location(const context& ctx, const injection::entities::model& m);
 
     static logical::entities::static_stereotypes compute_element_type(
-        const std::list<logical::entities::static_stereotypes>& st,
+        const std::list<logical::entities::static_stereotypes>& sts,
         const std::string& fallback_element_type);
 
     static void process_element(const helpers::adapter& ad,

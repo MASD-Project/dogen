@@ -43,8 +43,10 @@ const std::string some_key("some_key");
 const std::string some_value("some_value");
 const std::string first_parent("a::b::c");
 const std::string second_parent("a");
-const std::string a_stereotype("some stereotype");
-const std::string another_stereotype("another");
+
+using dogen::identification::entities::stereotype;
+const stereotype a_stereotype("some stereotype");
+const stereotype another_stereotype("another");
 
 const std::string missing_elements("Missing mandatory elements");
 
@@ -151,7 +153,8 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(e.stereotypes().size() == 2);
     BOOST_CHECK(e.stereotypes().back() == a_stereotype);
-    BOOST_CHECK(e.stereotypes().front() == "masd::object");
+    dogen::identification::entities::stereotype st("masd::object");
+    BOOST_CHECK(e.stereotypes().front() == st);
 
     BOOST_CHECK(e.attributes().empty());
 }
@@ -188,7 +191,8 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(a.stereotypes().size() == 2);
     BOOST_CHECK(a.stereotypes().front() == a_stereotype);
-    BOOST_CHECK(a.stereotypes().back() == "masd::fluent");
+    dogen::identification::entities::stereotype st("masd::fluent");
+    BOOST_CHECK(a.stereotypes().back() == st);
 }
 
 BOOST_AUTO_TEST_CASE(empty_elements_model_results_in_empty_model) {

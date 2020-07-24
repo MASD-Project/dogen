@@ -26,8 +26,8 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.logical/types/entities/static_stereotypes.hpp"
 
 namespace dogen::orchestration::helpers {
@@ -46,7 +46,7 @@ public:
 public:
     stereotypes_conversion_result(
         const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes);
+        const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes);
 
 public:
     const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes() const;
@@ -54,10 +54,10 @@ public:
     void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>& v);
     void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>&& v);
 
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes() const;
+    std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
+    void dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
 
 public:
     bool operator==(const stereotypes_conversion_result& rhs) const;
@@ -71,7 +71,7 @@ public:
 
 private:
     std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
+    std::list<dogen::identification::entities::stereotype> dynamic_stereotypes_;
 };
 
 }

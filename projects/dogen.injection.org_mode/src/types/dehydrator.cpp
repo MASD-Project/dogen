@@ -48,17 +48,17 @@ void dehydrator::insert_tagged_values(std::ostream& s,
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
-    const std::list<std::string>& st) {
-    if (st.empty())
+    const std::list<identification::entities::stereotype>& sts) {
+    if (sts.empty())
         return;
 
     s << ":masd.injection.stereotypes: ";
 
     bool is_first(true);
-    for (const auto& stereotype : st) {
+    for (const auto& st : sts) {
         if (!is_first)
             s << ", ";
-        s << stereotype;
+        s << st.value();
         is_first = false;
     }
     s << std::endl;

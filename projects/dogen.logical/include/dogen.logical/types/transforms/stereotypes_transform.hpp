@@ -116,7 +116,8 @@ private:
      * @brief Try to expand the stereotype as an object
      * template. Returns true on success, false otherwise.
      */
-    static bool try_as_object_template(const std::string& s,
+    static bool try_as_object_template(
+        const identification::entities::stereotype& st,
         entities::structural::object& o, const entities::model& m);
 
     /**

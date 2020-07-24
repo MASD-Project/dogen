@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.identification/types/entities/name.hpp"
+#include "dogen.identification/types/entities/stereotype.hpp"
 #include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
@@ -47,7 +48,7 @@ public:
     attribute(
         const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
-        const std::list<std::string>& stereotypes,
+        const std::list<dogen::identification::entities::stereotype>& stereotypes,
         const std::string& documentation,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -71,10 +72,10 @@ public:
     void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v);
     /**@}*/
 
-    const std::list<std::string>& stereotypes() const;
-    std::list<std::string>& stereotypes();
-    void stereotypes(const std::list<std::string>& v);
-    void stereotypes(const std::list<std::string>&& v);
+    const std::list<dogen::identification::entities::stereotype>& stereotypes() const;
+    std::list<dogen::identification::entities::stereotype>& stereotypes();
+    void stereotypes(const std::list<dogen::identification::entities::stereotype>& v);
+    void stereotypes(const std::list<dogen::identification::entities::stereotype>&& v);
 
     /**
      * @brief Code comments.
@@ -147,7 +148,7 @@ public:
 private:
     std::list<dogen::identification::entities::tagged_value> tagged_values_;
     std::list<dogen::identification::entities::tagged_value> tagged_values_overrides_;
-    std::list<std::string> stereotypes_;
+    std::list<dogen::identification::entities::stereotype> stereotypes_;
     std::string documentation_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;

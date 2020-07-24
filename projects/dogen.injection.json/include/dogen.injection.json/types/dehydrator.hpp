@@ -46,7 +46,7 @@ private:
     static void insert_tagged_values(std::ostream& s,
         const std::list<identification::entities::tagged_value>& tvs);
     static void insert_stereotypes(std::ostream& s,
-        const std::list<std::string>& st);
+        const std::list<identification::entities::stereotype>& sts);
     static void insert_parents(std::ostream& s,
         const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,

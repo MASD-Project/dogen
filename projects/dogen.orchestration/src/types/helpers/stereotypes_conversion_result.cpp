@@ -24,7 +24,7 @@ namespace dogen::orchestration::helpers {
 
 stereotypes_conversion_result::stereotypes_conversion_result(
     const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes)
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes)
     : static_stereotypes_(static_stereotypes),
       dynamic_stereotypes_(dynamic_stereotypes) { }
 
@@ -61,19 +61,19 @@ void stereotypes_conversion_result::static_stereotypes(const std::list<dogen::lo
     static_stereotypes_ = std::move(v);
 }
 
-const std::list<std::string>& stereotypes_conversion_result::dynamic_stereotypes() const {
+const std::list<dogen::identification::entities::stereotype>& stereotypes_conversion_result::dynamic_stereotypes() const {
     return dynamic_stereotypes_;
 }
 
-std::list<std::string>& stereotypes_conversion_result::dynamic_stereotypes() {
+std::list<dogen::identification::entities::stereotype>& stereotypes_conversion_result::dynamic_stereotypes() {
     return dynamic_stereotypes_;
 }
 
-void stereotypes_conversion_result::dynamic_stereotypes(const std::list<std::string>& v) {
+void stereotypes_conversion_result::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v) {
     dynamic_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::dynamic_stereotypes(const std::list<std::string>&& v) {
+void stereotypes_conversion_result::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
     dynamic_stereotypes_ = std::move(v);
 }
 

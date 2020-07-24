@@ -37,7 +37,7 @@ enumerator::enumerator(
     const dogen::logical::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
+    const std::list<dogen::identification::entities::stereotype>& dynamic_stereotypes,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
@@ -135,19 +135,19 @@ void enumerator::static_stereotypes(const std::list<dogen::logical::entities::st
     static_stereotypes_ = std::move(v);
 }
 
-const std::list<std::string>& enumerator::dynamic_stereotypes() const {
+const std::list<dogen::identification::entities::stereotype>& enumerator::dynamic_stereotypes() const {
     return dynamic_stereotypes_;
 }
 
-std::list<std::string>& enumerator::dynamic_stereotypes() {
+std::list<dogen::identification::entities::stereotype>& enumerator::dynamic_stereotypes() {
     return dynamic_stereotypes_;
 }
 
-void enumerator::dynamic_stereotypes(const std::list<std::string>& v) {
+void enumerator::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>& v) {
     dynamic_stereotypes_ = v;
 }
 
-void enumerator::dynamic_stereotypes(const std::list<std::string>&& v) {
+void enumerator::dynamic_stereotypes(const std::list<dogen::identification::entities::stereotype>&& v) {
     dynamic_stereotypes_ = std::move(v);
 }
 
