@@ -18,27 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
-#include "dogen.utility/types/log/logger.hpp"
-#include "dogen.identification/types/helpers/physical_qualified_meta_name_builder.hpp"
-#include "dogen.identification/types/helpers/building_error.hpp"
-// #include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
-#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
-
-namespace {
-
-using namespace dogen::utility::log;
-auto lg(logger_factory("identification.helpers.physical_meta_name_builder"));
-
-const std::string meta_model_name("masd");
-
-const std::string empty_backend("Backend cannot be empty.");
-const std::string empty_facet("Facet cannot be empty.");
-const std::string empty_archetype(
-    "Part and facet supplied but archetype is missing.");
-
-}
+#include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
 
 namespace dogen::identification::helpers {
+
+bool physical_meta_name_validator::operator==(const physical_meta_name_validator& /*rhs*/) const {
+    return true;
+}
 
 }

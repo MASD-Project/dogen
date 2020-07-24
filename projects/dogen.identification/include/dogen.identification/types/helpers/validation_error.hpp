@@ -18,48 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_VALIDATION_ERROR_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include <boost/exception/info.hpp>
 
 namespace dogen::identification::helpers {
 
 /**
- * @brief Builds a physical name.
+ * @brief An error occurred during validation.
  */
-class physical_meta_name_builder final {
+class validation_error : public virtual std::exception, public virtual boost::exception {
 public:
-    /**
-     * @brief Adds a meta-model to the name.
-     */
-    physical_meta_name_builder& meta_model(const std::string& s);
-
-    /**
-     * @brief Adds a backend to the name.
-     */
-    physical_meta_name_builder& backend(const std::string& s);
-
-    /**
-     * @brief Adds a facet to the name.
-     */
-    physical_meta_name_builder& facet(const std::string& s);
-
-    /**
-     * @brief Adds an archetype to the name.
-     */
-    physical_meta_name_builder& archetype(const std::string& s);
+    validation_error() = default;
+    ~validation_error() noexcept = default;
 
 public:
-    entities::physical_meta_name build();
+    explicit validation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    entities::physical_meta_name meta_name_;
+    const std::string message_;
 };
 
 }

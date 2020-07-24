@@ -18,48 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_VALIDATOR_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_NAME_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include <algorithm>
 
 namespace dogen::identification::helpers {
 
-/**
- * @brief Builds a physical name.
- */
-class physical_meta_name_builder final {
+class physical_meta_name_validator final {
 public:
-    /**
-     * @brief Adds a meta-model to the name.
-     */
-    physical_meta_name_builder& meta_model(const std::string& s);
-
-    /**
-     * @brief Adds a backend to the name.
-     */
-    physical_meta_name_builder& backend(const std::string& s);
-
-    /**
-     * @brief Adds a facet to the name.
-     */
-    physical_meta_name_builder& facet(const std::string& s);
-
-    /**
-     * @brief Adds an archetype to the name.
-     */
-    physical_meta_name_builder& archetype(const std::string& s);
+    physical_meta_name_validator() = default;
+    physical_meta_name_validator(const physical_meta_name_validator&) = default;
+    physical_meta_name_validator(physical_meta_name_validator&&) = default;
+    ~physical_meta_name_validator() = default;
+    physical_meta_name_validator& operator=(const physical_meta_name_validator&) = default;
 
 public:
-    entities::physical_meta_name build();
+    bool operator==(const physical_meta_name_validator& rhs) const;
+    bool operator!=(const physical_meta_name_validator& rhs) const {
+        return !this->operator==(rhs);
+    }
 
-private:
-    entities::physical_meta_name meta_name_;
 };
 
 }
