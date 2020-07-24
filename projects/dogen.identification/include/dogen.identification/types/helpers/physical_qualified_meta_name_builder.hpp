@@ -25,24 +25,59 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_location.hpp"
 
 namespace dogen::identification::helpers {
 
+/**
+ * @brief Builds qualified names according to the geometry of physical
+ * space.
+ *
+ * If the names and locations are not valid for the requests in
+ * question, we throw.
+ */
 class physical_qualified_meta_name_builder final {
 public:
-    physical_qualified_meta_name_builder() = default;
-    physical_qualified_meta_name_builder(const physical_qualified_meta_name_builder&) = default;
-    physical_qualified_meta_name_builder(physical_qualified_meta_name_builder&&) = default;
-    ~physical_qualified_meta_name_builder() = default;
-    physical_qualified_meta_name_builder& operator=(const physical_qualified_meta_name_builder&) = default;
+    /**
+     * @brief Builds a qualified name for the meta-model region in
+     * physical space.
+     */
+    /**@{*/
+    static std::string
+    build_meta_model(const entities::physical_meta_location& l);
+    static std::string build_meta_model(const entities::physical_meta_name& mn);
+    /**@}*/
 
-public:
-    bool operator==(const physical_qualified_meta_name_builder& rhs) const;
-    bool operator!=(const physical_qualified_meta_name_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Builds a qualified name for the backend region in
+     * physical space.
+     */
+    /**@{*/
+    static std::string build_backend(const entities::physical_meta_location& l);
+    static std::string build_backend(const entities::physical_meta_name& n);
+    /**@}*/
 
+    /**
+     * @brief Builds a qualified name for the facet region in physical
+     * space.
+     */
+    /**@{*/
+    static std::string build_facet(const entities::physical_meta_location& l,
+        const bool add_canonical = false);
+    static std::string build_facet(const entities::physical_meta_name& n,
+        const bool add_canonical = false);
+    /**@}*/
+
+    /**
+     * @brief Builds a qualified name for the complete archetype.
+     */
+    /**@{*/
+    static std::string
+    build_archetype(const entities::physical_meta_location& l);
+    static std::string build_archetype(const entities::physical_meta_name& n);
+    /**@}*/
 };
 
 }
