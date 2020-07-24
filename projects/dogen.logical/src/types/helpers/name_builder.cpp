@@ -27,7 +27,6 @@
 #include "dogen.logical/io/entities/location_io.hpp"
 #include "dogen.logical/types/helpers/separators.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
-#include "dogen.logical/types/helpers/string_processor.hpp"
 #include "dogen.logical/types/helpers/pretty_printer.hpp"
 #include "dogen.logical/types/helpers/fully_qualified_representation_builder.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
