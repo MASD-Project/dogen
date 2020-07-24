@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 
 namespace dogen::identification::helpers {
 
-bool physical_meta_name_factory::operator==(const physical_meta_name_factory& /*rhs*/) const {
-    return true;
+entities::physical_meta_name
+physical_meta_name_factory::make(const std::string& backend,
+    const std::string& facet, const std::string& archetype) {
+    physical_meta_name_builder b;
+    b.backend(backend);
+    b.facet(facet);
+    b.archetype(archetype);
+    return b.build();
 }
 
 }

@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::identification::helpers {
 
+/**
+ * @brief Constructs physical names.
+ */
 class physical_meta_name_factory final {
 public:
-    physical_meta_name_factory() = default;
-    physical_meta_name_factory(const physical_meta_name_factory&) = default;
-    physical_meta_name_factory(physical_meta_name_factory&&) = default;
-    ~physical_meta_name_factory() = default;
-    physical_meta_name_factory& operator=(const physical_meta_name_factory&) = default;
-
-public:
-    bool operator==(const physical_meta_name_factory& rhs) const;
-    bool operator!=(const physical_meta_name_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static entities::physical_meta_name make(const std::string& backend,
+        const std::string& facet, const std::string& archetype);
 };
 
 }
