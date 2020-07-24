@@ -25,51 +25,66 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
 #include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_location.hpp"
+#include "dogen.identification/types/helpers/logical_location_builder.hpp"
 
 namespace dogen::identification::helpers {
 
-class logical_name_builder final {
+/**
+ * @brief Builds a name.
+ *
+ * If setup in model name mode, the following will hold:
+ *
+ * @li the simple name will be set from the model name (and cannot be
+ * set individually);
+ * @li the model name will not contribute to the qualified name.
+ */
+class logical_name_builder {
 public:
-    logical_name_builder() = default;
-    logical_name_builder(const logical_name_builder&) = default;
-    logical_name_builder(logical_name_builder&&) = default;
-    ~logical_name_builder() = default;
+    explicit logical_name_builder(const bool model_name_mode_ = false);
 
 public:
-    explicit logical_name_builder(const dogen::identification::entities::logical_name& name_);
+    void simple_name(const std::string& sn);
+    void model_name(const std::string& mn);
+    void model_name(const entities::logical_location& l);
+    void external_modules(const std::string& em);
+    void external_modules(const std::list<std::string>& em);
+    void model_modules(const std::string& mm);
+    void model_modules(const std::list<std::string>& mm);
+    void internal_modules(const std::string& im);
+    void internal_modules(const std::list<std::string>& im);
+    void location(const entities::logical_location& l);
+    void is_container(const bool is_container);
 
 public:
-    const dogen::identification::entities::logical_name& name_() const;
-    dogen::identification::entities::logical_name& name_();
-    void name_(const dogen::identification::entities::logical_name& v);
-    void name_(const dogen::identification::entities::logical_name&& v);
+    entities::logical_name build();
 
 public:
-    bool operator==(const logical_name_builder& rhs) const;
-    bool operator!=(const logical_name_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief One shot-builder method that, given a list of names,
+     * performs some heuristics to build a vaguely plausible name.
+     *
+     * @param names List of names. By copy non-const by design.
+     */
+    static entities::logical_name build(std::list<std::string> names);
 
-public:
-    void swap(logical_name_builder& other) noexcept;
-    logical_name_builder& operator=(logical_name_builder other);
+    /**
+     * @brief One shot-builder method that, given a string encoded
+     * with a list of names, splits it into a list of names and
+     * performs some heuristics to build a vaguely plausible name.
+     *
+     * @param names String encodes a list of names.
+     */
+    static entities::logical_name build(const std::string& names);
 
 private:
-    dogen::identification::entities::logical_name name__;
+    const bool model_name_mode_;
+    entities::logical_name name_;
+    logical_location_builder location_builder_;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::identification::helpers::logical_name_builder& lhs,
-    dogen::identification::helpers::logical_name_builder& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

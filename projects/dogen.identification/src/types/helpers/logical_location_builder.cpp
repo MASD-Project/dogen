@@ -18,42 +18,83 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
+#include "dogen.identification/io/entities/logical_location_io.hpp"
+#include "dogen.identification/types/helpers/building_error.hpp"
 #include "dogen.identification/types/helpers/logical_location_builder.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("identification.helpers.logical_location_builder"));
+
+const std::string empty_model_modules("Model modules are empty.");
+const std::string empty_internal_modules("Internal modules are empty.");
+
+}
 
 namespace dogen::identification::helpers {
 
-logical_location_builder::logical_location_builder(const dogen::identification::entities::logical_location& location_)
-    : location__(location_) { }
+void logical_location_builder::external_modules(const std::string& em) {
+    if (em.empty())
+        return;
 
-void logical_location_builder::swap(logical_location_builder& other) noexcept {
-    using std::swap;
-    swap(location__, other.location__);
+    using utility::string::splitter;
+    location_.external_modules(splitter::split_scoped(em));
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
 }
 
-bool logical_location_builder::operator==(const logical_location_builder& rhs) const {
-    return location__ == rhs.location__;
+void
+logical_location_builder::external_modules(const std::list<std::string>& em) {
+    location_.external_modules(em);
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
 }
 
-logical_location_builder& logical_location_builder::operator=(logical_location_builder other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+void logical_location_builder::model_modules(const std::string& mm) {
+    if (mm.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_model_modules));
+    }
+
+    using utility::string::splitter;
+    location_.model_modules(splitter::split_scoped(mm));
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
 }
 
-const dogen::identification::entities::logical_location& logical_location_builder::location_() const {
-    return location__;
+void logical_location_builder::
+model_modules(const std::list<std::string>& mm) {
+    location_.model_modules(mm);
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
 }
 
-dogen::identification::entities::logical_location& logical_location_builder::location_() {
-    return location__;
+void logical_location_builder::internal_modules(const std::string& im) {
+    if (im.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_internal_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
+    }
+
+    using utility::string::splitter;
+    location_.internal_modules(splitter::split_scoped(im));
+    BOOST_LOG_SEV(lg, debug) << "Added internal modules: " << im;
 }
 
-void logical_location_builder::location_(const dogen::identification::entities::logical_location& v) {
-    location__ = v;
+void logical_location_builder::internal_modules(
+    const std::list<std::string>& im) {
+    location_.internal_modules(im);
+    BOOST_LOG_SEV(lg, debug) << "Added internal models: " << im;
 }
 
-void logical_location_builder::location_(const dogen::identification::entities::logical_location&& v) {
-    location__ = std::move(v);
+void logical_location_builder::location(const entities::logical_location& l) {
+    location_ = l;
+}
+
+entities::logical_location logical_location_builder::build() {
+    BOOST_LOG_SEV(lg, debug) << "Built location: " << location_;
+    return location_;
 }
 
 }

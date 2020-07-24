@@ -20,23 +20,27 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.identification/io/entities/logical_location_io.hpp"
+#include "dogen.identification/io/entities/logical_name_tree_io.hpp"
 #include "dogen.identification/io/entities/name_representations_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name_tree>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
     return s;
+}
+
 }
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const logical_name& v) {
+std::ostream& operator<<(std::ostream& s, const logical_name_tree& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -44,12 +48,14 @@ std::ostream& operator<<(std::ostream& s, const logical_name& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::logical_name\"" << ", "
-      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"__type__\": " << "\"dogen::identification::entities::logical_name_tree\"" << ", "
       << "\"representations\": " << v.representations() << ", "
-      << "\"qualified\": " << v.qualified() << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"is_container\": " << v.is_container()
+      << "\"current\": " << v.current() << ", "
+      << "\"children\": " << v.children() << ", "
+      << "\"are_children_opaque\": " << v.are_children_opaque() << ", "
+      << "\"is_circular_dependency\": " << v.is_circular_dependency() << ", "
+      << "\"is_current_simple_type\": " << v.is_current_simple_type() << ", "
+      << "\"is_floating_point\": " << v.is_floating_point()
       << " }";
     return(s);
 }

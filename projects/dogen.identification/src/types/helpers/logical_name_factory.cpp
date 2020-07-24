@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/types/helpers/building_error.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.identification/types/helpers/logical_name_factory.hpp"
 
 namespace dogen::identification::helpers {
-
-bool logical_name_factory::operator==(const logical_name_factory& /*rhs*/) const {
-    return true;
-}
 
 }

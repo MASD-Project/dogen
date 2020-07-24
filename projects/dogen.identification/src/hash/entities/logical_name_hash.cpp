@@ -39,9 +39,9 @@ std::size_t logical_name_hasher::hash(const logical_name& v) {
     std::size_t seed(0);
 
     combine(seed, v.simple());
+    combine(seed, v.representations());
     combine(seed, v.qualified());
     combine(seed, v.location());
-    combine(seed, v.representations());
     combine(seed, v.is_container());
 
     return seed;

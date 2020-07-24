@@ -18,38 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PARSING_ERROR_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PARSING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
 #include <string>
-#include "dogen.identification/types/entities/logical_location.hpp"
+#include <boost/exception/info.hpp>
 
 namespace dogen::identification::helpers {
 
 /**
- * @brief Builds a location.
+ * @brief A fatal error has occurred while parsing.
  */
-class logical_location_builder final {
+class parsing_error : public virtual std::exception, public virtual boost::exception {
 public:
-    void external_modules(const std::string& em);
-    void external_modules(const std::list<std::string>& em);
-    void model_modules(const std::string& mm);
-    void model_modules(const std::list<std::string>& mm);
-    void internal_modules(const std::string& im);
-    void internal_modules(const std::list<std::string>& im);
-
-    void location(const entities::logical_location& l);
+    parsing_error() = default;
+    ~parsing_error() noexcept = default;
 
 public:
-    entities::logical_location build();
+    explicit parsing_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    entities::logical_location location_;
+    const std::string message_;
 };
 
 }

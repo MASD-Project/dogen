@@ -18,38 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_NEW_LOGICAL_NAME_TREE_PARSER_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_NEW_LOGICAL_NAME_TREE_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen.identification/types/entities/logical_location.hpp"
+#include <algorithm>
 
 namespace dogen::identification::helpers {
 
-/**
- * @brief Builds a location.
- */
-class logical_location_builder final {
+class new_logical_name_tree_parser final {
 public:
-    void external_modules(const std::string& em);
-    void external_modules(const std::list<std::string>& em);
-    void model_modules(const std::string& mm);
-    void model_modules(const std::list<std::string>& mm);
-    void internal_modules(const std::string& im);
-    void internal_modules(const std::list<std::string>& im);
-
-    void location(const entities::logical_location& l);
+    new_logical_name_tree_parser() = default;
+    new_logical_name_tree_parser(const new_logical_name_tree_parser&) = default;
+    new_logical_name_tree_parser(new_logical_name_tree_parser&&) = default;
+    ~new_logical_name_tree_parser() = default;
+    new_logical_name_tree_parser& operator=(const new_logical_name_tree_parser&) = default;
 
 public:
-    entities::logical_location build();
+    bool operator==(const new_logical_name_tree_parser& rhs) const;
+    bool operator!=(const new_logical_name_tree_parser& rhs) const {
+        return !this->operator==(rhs);
+    }
 
-private:
-    entities::logical_location location_;
 };
 
 }

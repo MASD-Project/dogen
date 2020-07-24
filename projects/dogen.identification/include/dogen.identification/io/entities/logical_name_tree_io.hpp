@@ -18,39 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_IO_ENTITIES_LOGICAL_NAME_TREE_IO_HPP
+#define DOGEN_IDENTIFICATION_IO_ENTITIES_LOGICAL_NAME_TREE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include "dogen.identification/types/entities/logical_location.hpp"
+#include <iosfwd>
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 
-namespace dogen::identification::helpers {
+namespace dogen::identification::entities {
 
-/**
- * @brief Builds a location.
- */
-class logical_location_builder final {
-public:
-    void external_modules(const std::string& em);
-    void external_modules(const std::list<std::string>& em);
-    void model_modules(const std::string& mm);
-    void model_modules(const std::list<std::string>& mm);
-    void internal_modules(const std::string& im);
-    void internal_modules(const std::list<std::string>& im);
-
-    void location(const entities::logical_location& l);
-
-public:
-    entities::logical_location build();
-
-private:
-    entities::logical_location location_;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::identification::entities::logical_name_tree& v);
 
 }
 

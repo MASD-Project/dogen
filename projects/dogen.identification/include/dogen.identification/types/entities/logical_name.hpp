@@ -59,9 +59,9 @@ public:
 public:
     logical_name(
         const std::string& simple,
+        const dogen::identification::entities::name_representations& representations,
         const dogen::identification::entities::logical_id& qualified,
         const dogen::identification::entities::logical_location& location,
-        const dogen::identification::entities::name_representations& representations,
         const bool is_container);
 
 public:
@@ -74,6 +74,11 @@ public:
     void simple(const std::string& v);
     void simple(const std::string&& v);
     /**@}*/
+
+    const dogen::identification::entities::name_representations& representations() const;
+    dogen::identification::entities::name_representations& representations();
+    void representations(const dogen::identification::entities::name_representations& v);
+    void representations(const dogen::identification::entities::name_representations&& v);
 
     const dogen::identification::entities::logical_id& qualified() const;
     dogen::identification::entities::logical_id& qualified();
@@ -88,16 +93,6 @@ public:
     dogen::identification::entities::logical_location& location();
     void location(const dogen::identification::entities::logical_location& v);
     void location(const dogen::identification::entities::logical_location&& v);
-    /**@}*/
-
-    /**
-     * @brief Different representations for a name.
-     */
-    /**@{*/
-    const dogen::identification::entities::name_representations& representations() const;
-    dogen::identification::entities::name_representations& representations();
-    void representations(const dogen::identification::entities::name_representations& v);
-    void representations(const dogen::identification::entities::name_representations&& v);
     /**@}*/
 
     /**
@@ -120,9 +115,9 @@ public:
 
 private:
     std::string simple_;
+    dogen::identification::entities::name_representations representations_;
     dogen::identification::entities::logical_id qualified_;
     dogen::identification::entities::logical_location location_;
-    dogen::identification::entities::name_representations representations_;
     bool is_container_;
 };
 

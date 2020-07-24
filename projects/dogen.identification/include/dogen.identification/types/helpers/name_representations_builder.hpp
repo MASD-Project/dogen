@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/helpers/pretty_printer.hpp"
+#include "dogen.identification/types/entities/fully_qualified_representation.hpp"
 
 namespace dogen::identification::helpers {
 

@@ -18,40 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_LOGICAL_LOCATION_BUILDER_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <list>
-#include <string>
-#include "dogen.identification/types/entities/logical_location.hpp"
+#include "dogen.identification/types/helpers/legacy_logical_name_tree_parser.hpp"
 
 namespace dogen::identification::helpers {
 
-/**
- * @brief Builds a location.
- */
-class logical_location_builder final {
-public:
-    void external_modules(const std::string& em);
-    void external_modules(const std::list<std::string>& em);
-    void model_modules(const std::string& mm);
-    void model_modules(const std::list<std::string>& mm);
-    void internal_modules(const std::string& im);
-    void internal_modules(const std::list<std::string>& im);
-
-    void location(const entities::logical_location& l);
-
-public:
-    entities::logical_location build();
-
-private:
-    entities::logical_location location_;
-};
-
+bool legacy_logical_name_tree_parser::operator==(const legacy_logical_name_tree_parser& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}
