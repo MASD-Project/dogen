@@ -22,37 +22,37 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
 #include "dogen.identification/types/helpers/identifiable_factory.hpp"
-#include "dogen.identification/types/helpers/name_representations_builder.hpp"
+#include "dogen.identification/types/helpers/qualified_name_representations_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 
 auto
-lg(logger_factory("identification.helpers.name_representations_builder"));
+lg(logger_factory("identification.helpers.qualified_name_representations_builder"));
 
 }
 
 namespace dogen::identification::helpers {
 
-name_representations_builder::
-name_representations_builder()
+qualified_name_representations_builder::
+qualified_name_representations_builder()
     : dot_printer_(separators::dots),
       colon_printer_(separators::double_colons) {}
 
-void name_representations_builder::add(const entities::logical_name& n) {
+void qualified_name_representations_builder::add(const entities::logical_name& n) {
     dot_printer_.add(n.qualified().dot());
     colon_printer_.add(n.qualified().colon());
 }
 
-void name_representations_builder::
+void qualified_name_representations_builder::
 add(const entities::logical_name_tree& nt) {
     dot_printer_.add_child(nt.qualified().dot());
     colon_printer_.add_child(nt.qualified().colon());
 }
 
 entities::qualified_name_representations
-name_representations_builder::build() {
+qualified_name_representations_builder::build() {
     entities::qualified_name_representations r;
 
     r.dot(dot_printer_.print());
@@ -62,7 +62,7 @@ name_representations_builder::build() {
 }
 
 entities::qualified_name_representations
-name_representations_builder::
+qualified_name_representations_builder::
 build(const entities::logical_name& n, const bool model_name_mode) {
     dot_printer_.add(n, model_name_mode);
     colon_printer_.add(n, model_name_mode);

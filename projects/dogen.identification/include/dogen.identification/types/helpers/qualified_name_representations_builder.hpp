@@ -36,9 +36,9 @@ namespace dogen::identification::helpers {
  * @brief Builds a fully qualified representation of a qualifiable
  * model element such as a name or a name tree.
  */
-class name_representations_builder final {
+class qualified_name_representations_builder final {
 public:
-    name_representations_builder();
+    qualified_name_representations_builder();
 
 public:
     /**
