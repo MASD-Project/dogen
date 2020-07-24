@@ -52,12 +52,6 @@ public:
 
 public:
     /**
-     * @brief Given a CSV-separated string, returns the set of
-     * well-known stereotypes as well as those it does not know of.
-     */
-    stereotypes_conversion_result from_csv_string(const std::string& s) const;
-
-    /**
      * @brief Given a list of stereotypes, returns the set of
      * well-known stereotypes as well as those it does not know of.
      */

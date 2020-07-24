@@ -186,22 +186,6 @@ stereotypes_helper::from_primitive(const stereotype& st) const {
     return static_stereotypes::invalid;
 }
 
-stereotypes_conversion_result
-stereotypes_helper::from_csv_string(const std::string& s) const {
-    if (s.empty()) {
-        stereotypes_conversion_result r;
-        return r;
-    }
-
-    using utility::string::splitter;
-    const auto splitted(splitter::split_csv(s));
-    std::list<stereotype> stereotypes;
-    for (const auto& s : splitted)
-        stereotypes.push_back(stereotype(s));
-
-    return from_primitives(stereotypes);
-}
-
 stereotypes_conversion_result stereotypes_helper::
 from_primitives(const std::list<stereotype>& stereotypes) const {
     stereotypes_conversion_result r;

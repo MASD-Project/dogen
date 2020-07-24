@@ -13,12 +13,17 @@
     "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
     "masd.injection.reference": "dogen.physical",
+    "masd.injection.reference": "dogen.identification",
     "masd.injection.input_technical_space": "cpp",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
     {
       "name": "entities",
+      "documentation": "Entities that define the logical model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -4688,6 +4693,30 @@
     },
     {
       "name": "transforms::generability_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::stereotypes",
+      "documentation": "Stereotype information associated with this element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "static_stereotypes",
+          "type": "std::list<static_stereotypes>",
+          "documentation": "Stereotypes that are part of the dogen UML profile, and so are well-known to the\nmodel.\n"
+        },
+        {
+          "name": "dynamic_stereotypes",
+          "type": "std::list<identification::entities::stereotype>",
+          "documentation": "Stereotypes that are not part of the masd UML profile. These are user defined.\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::stereotypes_helper",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
