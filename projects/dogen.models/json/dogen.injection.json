@@ -13,6 +13,7 @@
     "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
     "masd.injection.reference": "dogen.physical",
+    "masd.injection.reference": "dogen.identification",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
@@ -317,7 +318,8 @@
       "attributes": [
         {
           "name": "name",
-          "type": "std::string"
+          "type": "identification::entities::name",
+          "documentation": "Name of the injection element.\n"
         }
       ]
     },

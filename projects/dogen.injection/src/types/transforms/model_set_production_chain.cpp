@@ -113,7 +113,7 @@ model_set_production_chain::apply(const context& ctx,
      * Create the model set.
      */
     r.target(models.front());
-    BOOST_LOG_SEV(lg, trace) << "Target: " << r.target().name();
+    BOOST_LOG_SEV(lg, trace) << "Target: " << r.target().name().simple();
 
     models.pop_front();
     r.references(models);

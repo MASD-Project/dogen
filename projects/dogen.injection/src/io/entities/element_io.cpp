@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.injection/io/entities/element_io.hpp"
+#include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.injection/io/entities/attribute_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 
@@ -119,7 +120,7 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "

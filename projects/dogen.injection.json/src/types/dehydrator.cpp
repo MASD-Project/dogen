@@ -114,7 +114,7 @@ void dehydrator::insert_attribute(std::ostream& s,
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
     s << " : ";
-    uf.insert_quoted_escaped(a.name());
+    uf.insert_quoted_escaped(a.name().simple());
     s << comma_space;
     uf.insert_quoted("type");
     s << " : ";
@@ -153,7 +153,7 @@ void dehydrator::insert_element(std::ostream& s,
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
     s << " : ";
-    uf.insert_quoted_escaped(e.name());
+    uf.insert_quoted_escaped(e.name().simple());
 
     if (!e.parents().empty()) {
         s << comma_space;

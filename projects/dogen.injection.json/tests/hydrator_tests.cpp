@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(m.elements().size() == 1);
     const auto& e(m.elements().front());
-    BOOST_CHECK(e.name() == type_name);
+    BOOST_CHECK(e.name().simple() == type_name);
     BOOST_CHECK(e.documentation() == documentation);
 
     BOOST_REQUIRE(e.parents().size() == 2);
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(m.elements().size() == 1);
     const auto& e(m.elements().front());
-    BOOST_CHECK(e.name() == type_name);
+    BOOST_CHECK(e.name().simple() == type_name);
     BOOST_CHECK(e.documentation().empty());
 
     BOOST_REQUIRE(e.parents().size() == 1);
@@ -178,7 +178,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(e.attributes().size() == 1);
     const auto& a(e.attributes().front());
-    BOOST_CHECK(a.name() == attribute_name);
+    BOOST_CHECK(a.name().simple() == attribute_name);
     BOOST_CHECK(a.type() == attribute_type);
     BOOST_CHECK(a.documentation() == documentation);
 

@@ -30,6 +30,7 @@
 #include <utility>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::injection::entities {
@@ -47,7 +48,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
         const std::list<std::string>& stereotypes,
         const std::string& documentation,
-        const std::string& name,
+        const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const std::string& origin_element_id,
@@ -89,10 +90,15 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    /**
+     * @brief Name of the injection element.
+     */
+    /**@{*/
+    const dogen::identification::entities::name& name() const;
+    dogen::identification::entities::name& name();
+    void name(const dogen::identification::entities::name& v);
+    void name(const dogen::identification::entities::name&& v);
+    /**@}*/
 
     /**
      * @brief Configuration for this element.
@@ -164,7 +170,7 @@ private:
     std::list<std::pair<std::string, std::string> > tagged_values_overrides_;
     std::list<std::string> stereotypes_;
     std::string documentation_;
-    std::string name_;
+    dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     std::string origin_element_id_;

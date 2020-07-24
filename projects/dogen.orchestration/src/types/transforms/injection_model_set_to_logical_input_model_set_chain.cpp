@@ -38,7 +38,7 @@ namespace dogen::orchestration::transforms {
 logical::entities::input_model_set
 injection_model_set_to_logical_input_model_set_chain::
 apply(const context& ctx, const injection::entities::model_set& ms) {
-    const auto model_name(ms.target().name());
+    const auto model_name(ms.target().name().simple());
     tracing::scoped_chain_tracer stp(lg,
         "injection model set to logical model set", transform_id, model_name,
         *ctx.logical_context().tracer());

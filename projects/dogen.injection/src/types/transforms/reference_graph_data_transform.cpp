@@ -39,17 +39,18 @@ namespace dogen::injection::transforms {
 entities::reference_graph_data reference_graph_data_transform::
 obtain_references_for_model(const entities::model_set& ms) {
     entities::reference_graph_data r;
-    r.root(ms.target().name());
-    r.edges_per_model()[ms.target().name()] = ms.target().references();
+    const auto sn(ms.target().name().simple());
+    r.root(sn);
+    r.edges_per_model()[sn] = ms.target().references();
     for (const auto& m : ms.references())
-        r.edges_per_model()[m.name()] = m.references();
+        r.edges_per_model()[m.name().simple()] = m.references();
 
     return r;
 }
 
 void reference_graph_data_transform::
 apply(const context& ctx, entities::model_set& ms) {
-    const auto mn(ms.target().name());
+    const auto mn(ms.target().name().simple());
     tracing::scoped_transform_tracer stp(lg, "reference graph data transform",
         transform_id, mn, *ctx.tracer());
 

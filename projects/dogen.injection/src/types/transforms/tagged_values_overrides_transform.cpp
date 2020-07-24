@@ -53,7 +53,7 @@ namespace dogen::injection::transforms {
 void tagged_values_overrides_transform::
 apply(const transforms::context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "tagged values overrides transform", transform_id, m.name(),
+        "tagged values overrides transform", transform_id, m.name().simple(),
         *ctx.tracer(), m);
 
     /*
@@ -110,9 +110,9 @@ apply(const transforms::context& ctx, entities::model& m) {
          */
         BOOST_LOG_SEV(lg, trace) << "Override model name: '"
                                  << model_name << "'";
-        if (!model_name.empty() && m.name() != model_name) {
+        if (!model_name.empty() && m.name().simple() != model_name) {
             BOOST_LOG_SEV(lg, trace) << "Override does not apply to model."
-                                     << " Model: " << m.name()
+                                     << " Model: " << m.name().simple()
                                      << " Variability override model: "
                                      <<  model_name;
             continue;
@@ -163,14 +163,14 @@ apply(const transforms::context& ctx, entities::model& m) {
           /*
            *  Only one element is expected to match.
            */
-            if (e.name() == element_name) {
+            if (e.name().simple() == element_name) {
                 if (found) {
                     BOOST_LOG_SEV(lg, error) << multiple_elements << vo;
                     BOOST_THROW_EXCEPTION(
                         transformation_error(multiple_elements + vo));
                 }
                 BOOST_LOG_SEV(lg, trace) << "Override matches element: "
-                                         << e.name();
+                                         << e.name().simple();
             } else
                 continue;
 
@@ -184,7 +184,7 @@ apply(const transforms::context& ctx, entities::model& m) {
                     pair({ tokens.front(), tokens.back() });
                 e.tagged_values_overrides().push_back(pair);
                 BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
-                                         << e.name();
+                                         << e.name().simple();
                 continue;
             }
 
@@ -195,14 +195,14 @@ apply(const transforms::context& ctx, entities::model& m) {
                 /*
                  *  Only one element is expected to match.
                  */
-                if (a.name() == attribute_name) {
+                if (a.name().simple() == attribute_name) {
                     if (found) {
                         BOOST_LOG_SEV(lg, error) << multiple_attributes << vo;
                         BOOST_THROW_EXCEPTION(
                             transformation_error(multiple_attributes + vo));
                     }
                     BOOST_LOG_SEV(lg, trace) << "Override matches attribute: "
-                                             << a.name();
+                                             << a.name().simple();
 
                     /*
                      * If we have no attribute name, the override is for the
@@ -213,7 +213,7 @@ apply(const transforms::context& ctx, entities::model& m) {
                         pair({ tokens.front(), tokens.back() });
                     a.tagged_values_overrides().push_back(pair);
                     BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
-                                             << a.name();
+                                             << a.name().simple();
                     continue;
                 }
             }

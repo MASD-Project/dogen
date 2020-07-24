@@ -118,7 +118,7 @@ hydrator::read_parents(const boost::property_tree::ptree& pt) const {
 injection::entities::attribute hydrator::
 read_attribute(const boost::property_tree::ptree& pt) const {
     injection::entities::attribute r;
-    r.name(pt.get<std::string>(name_key));
+    r.name().simple(pt.get<std::string>(name_key));
     r.type(pt.get<std::string>(type_key));
     r.value(pt.get<std::string>(value_key, empty));
     r.documentation(read_documentation(pt));
@@ -131,7 +131,7 @@ read_attribute(const boost::property_tree::ptree& pt) const {
 injection::entities::element hydrator::read_element(
     const boost::property_tree::ptree& pt, const std::string& id) const {
     injection::entities::element r;
-    r.name(pt.get<std::string>(name_key));
+    r.name().simple(pt.get<std::string>(name_key));
     r.documentation(read_documentation(pt));
     r.parents(read_parents(pt));
     r.tagged_values(read_tagged_values(pt));
@@ -228,7 +228,7 @@ hydrator::hydrate(const boost::filesystem::path& p) const {
     }
 
     auto r(hydrate(s));
-    r.name(p.stem().generic_string());
+    r.name().simple(p.stem().generic_string());
 
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;

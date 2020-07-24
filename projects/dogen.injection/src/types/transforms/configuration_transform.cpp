@@ -45,15 +45,15 @@ inline void create_configuration(
     const auto& tv(nat.tagged_values());
     const auto& otv(nat.tagged_values_overrides());
     nat.configuration(f.make_shared_ptr(tv, otv, bp));
-    nat.configuration()->name().simple(nat.name());
+    nat.configuration()->name().simple(nat.name().simple());
 }
 
 void configuration_transform::
 apply(const transforms::context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "configuration transform",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
-    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().simple()
                              << "Total elements: " << m.elements().size();
 
     const auto& fm(*ctx.feature_model());

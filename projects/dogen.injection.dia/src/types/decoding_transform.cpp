@@ -111,7 +111,7 @@ decoding_transform::obtain_model(const std::string& name,
     visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(b.build());
-    r.name(name);
+    r.name().simple(name);
 
     BOOST_LOG_SEV(lg, debug) << "Generated injection model.";
     return r;

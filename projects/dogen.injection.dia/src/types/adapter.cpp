@@ -61,7 +61,7 @@ adapter::adapt(const processed_attribute& a) {
     validate_dia_name(a.name());
 
     injection::entities::attribute r;
-    r.name(a.name());
+    r.name().simple(a.name());
     r.type(a.type());
     r.value(a.value());
     r.documentation(a.comment().documentation());
@@ -97,7 +97,7 @@ adapt(const processed_object& po, const std::string& contained_by,
     validate_dia_name(po.name());
 
     injection::entities::element r;
-    r.name(qualified_name(contained_by, po.name()));
+    r.name().simple(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
     r.tagged_values(po.comment().tagged_values());

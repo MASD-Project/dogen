@@ -307,7 +307,8 @@ process_element(const helpers::adapter& ad,
 logical::entities::model injection_model_to_logical_model_transform::
 apply(const context& ctx, const injection::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "injection model to logical model transform", transform_id, m.name(),
+        "injection model to logical model transform",
+        transform_id, m.name().simple(),
         *ctx.logical_context().tracer(), m);
 
     /*
@@ -331,7 +332,7 @@ apply(const context& ctx, const injection::entities::model& m) {
      */
     const helpers::adapter ad;
     for (const auto& e : m.elements()) {
-        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name();
+        BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().simple();
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);
     }

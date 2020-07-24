@@ -45,7 +45,7 @@ element::element(
     const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
-    const std::string& name,
+    const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const std::string& origin_element_id,
@@ -191,19 +191,19 @@ void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::string& element::name() const {
+const dogen::identification::entities::name& element::name() const {
     return name_;
 }
 
-std::string& element::name() {
+dogen::identification::entities::name& element::name() {
     return name_;
 }
 
-void element::name(const std::string& v) {
+void element::name(const dogen::identification::entities::name& v) {
     name_ = v;
 }
 
-void element::name(const std::string&& v) {
+void element::name(const dogen::identification::entities::name&& v) {
     name_ = std::move(v);
 }
 

@@ -41,7 +41,7 @@ namespace dogen::injection::transforms {
 
 void references_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::reference::make_feature_group(fm));

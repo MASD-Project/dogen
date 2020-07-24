@@ -84,7 +84,7 @@ insert_parents(std::ostream& s, const std::list<std::string>& parents) {
 void dehydrator::insert_attribute(std::ostream& s,
     const unsigned int level, const entities::attribute& a) {
     const std::string stars(level, '*');
-    s << stars << " " << a.name() << std::endl;
+    s << stars << " " << a.name().simple() << std::endl;
 
     const auto& tv(a.tagged_values());
     if (!a.type().empty() || !a.value().empty() || !a.stereotypes().empty()
@@ -105,15 +105,16 @@ void dehydrator::insert_attribute(std::ostream& s,
     }
 
     if (!a.documentation().empty()) {
-        if (a.name() == "content") {
+        const auto sn(a.name().simple());
+        if (sn == "content") {
             s << "#+begin_src mustache" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
-        } else if (a.name() == "stitch_template_content") {
+        } else if (sn == "stitch_template_content") {
             s << "#+begin_src fundamental" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
-        } else if (a.name() == "short_form" || a.name() == "long_form") {
+        } else if (sn == "short_form" || sn == "long_form") {
             s << "#+begin_src fundamental" << std::endl
               << a.documentation() << std::endl
               << "#+end_src" << std::endl;
@@ -126,7 +127,7 @@ void dehydrator::insert_element(std::ostream& s,
     const unsigned int level, const entities::element& e) {
 
     const std::string stars(level, '*');
-    s << stars << " " << e.name() << std::endl;
+    s << stars << " " << e.name().simple() << std::endl;
 
     const auto& tv(e.tagged_values());
     if (!e.parents().empty() || !e.stereotypes().empty() || !tv.empty()) {
@@ -164,7 +165,7 @@ void dehydrator::walk_parent_to_child(std::ostream& s, const unsigned int level,
 std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::ostringstream s;
 
-    s << "#+title: " << m.name() << std::endl
+    s << "#+title: " << m.name().simple() << std::endl
       << "#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil"
       << std::endl;
 

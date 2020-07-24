@@ -106,7 +106,7 @@
         <dia:point val="-14,-29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,-29.05;12.745,-17.65"/>
+        <dia:rectangle val="-14.05,-29.05;12.745,-18.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.300000000000001"/>
+        <dia:real val="10.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -142,7 +142,6 @@ identification within Dogen.
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>

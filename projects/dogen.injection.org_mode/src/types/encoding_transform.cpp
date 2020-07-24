@@ -56,7 +56,7 @@ void encoding_transform::
 apply(const transforms::context& ctx, const entities::model& m,
     const boost::filesystem::path& p) {
     tracing::scoped_transform_tracer stp(lg, "Org Mode encoding transform",
-        transform_id, m.name(), *ctx.tracer());
+        transform_id, m.name().simple(), *ctx.tracer());
 
     dehydrator::dehydrate(m, p);
 }

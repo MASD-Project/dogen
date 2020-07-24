@@ -40,7 +40,7 @@ void compute_sha1_transform::apply(const transforms::context& ctx,
         const boost::filesystem::path& p,
     entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "compute sha1 transform",
-        transform_id, m.name(), *ctx.tracer(), m);
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
      * Compute the hash for the injection model.

@@ -188,10 +188,10 @@ adapter::to_name(const std::string& n, const bool is_container) const {
 
 modeline_field adapter::to_modeline_field(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
-    ensure_not_empty(owner.qualified().dot(), ia.name());
+    ensure_not_empty(owner.qualified().dot(), ia.name().simple());
 
     modeline_field r;
-    r.name(ia.name());
+    r.name(ia.name().simple());
     r.value(ia.value());
     return r;
 }
@@ -199,11 +199,11 @@ modeline_field adapter::to_modeline_field(const logical::entities::name& owner,
 logical::entities::attribute
 adapter::to_attribute(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
-    ensure_not_empty(owner.qualified().dot(), ia.name());
+    ensure_not_empty(owner.qualified().dot(), ia.name().simple());
 
     logical::helpers::name_factory f;
     logical::entities::attribute r;
-    r.name(f.build_attribute_name(owner, ia.name()));
+    r.name(f.build_attribute_name(owner, ia.name().simple()));
     r.member_variable_name(r.name().simple() + member_variable_postfix);
     r.getter_setter_name(r.name().simple());
 
@@ -224,7 +224,7 @@ adapter::to_attribute(const logical::entities::name& owner,
 logical::entities::structural::enumerator
 adapter::to_enumerator(const logical::entities::name& owner,
     const injection::entities::attribute& ia) const {
-    ensure_not_empty(owner.qualified().dot(), ia.name());
+    ensure_not_empty(owner.qualified().dot(), ia.name().simple());
 
     if (!ia.type().empty()) {
         const auto t(ia.type());
@@ -234,7 +234,7 @@ adapter::to_enumerator(const logical::entities::name& owner,
 
     logical::helpers::name_factory f;
     logical::entities::structural::enumerator r;
-    r.name(f.build_attribute_name(owner, ia.name()));
+    r.name(f.build_attribute_name(owner, ia.name().simple()));
     r.documentation(ia.documentation());
 
     r.configuration(ia.configuration());
@@ -260,7 +260,7 @@ void adapter::populate_element(const logical::entities::location& l,
     e.configuration(ie.configuration());
     const auto& ds(scr.dynamic_stereotypes());
     e.configuration()->profile_bindings(to_potential_binding(ds));
-    e.name(to_name(l, ie.name(), is_container));
+    e.name(to_name(l, ie.name().simple(), is_container));
     e.configuration()->name().qualified(e.name().qualified().dot());
 
     /*
@@ -279,7 +279,7 @@ adapter::to_object(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to object: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::object>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -300,7 +300,7 @@ adapter::to_object_template(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element "
-                             << "to object template: " << ie.name();
+                             << "to object template: " << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::object_template>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -319,7 +319,7 @@ adapter::to_exception(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::exception>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -332,7 +332,7 @@ adapter::to_primitive(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to primitive: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::primitive>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -345,7 +345,7 @@ adapter::to_enumeration(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to enumeration: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::enumeration>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -361,7 +361,7 @@ to_module(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to module: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::module>());
     populate_element(l, scr, ie, true/*is_container*/, *r);
@@ -374,7 +374,7 @@ adapter::to_builtin(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to builtin: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::builtin>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -393,7 +393,7 @@ adapter::to_entry_point(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::entry_point>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -406,7 +406,7 @@ adapter::to_assistant(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
     const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to assistant: "
-                             << ie.name();
+                             << ie.name().simple();
 
     auto r(boost::make_shared<logical::entities::structural::assistant>());
     populate_element(l, scr, ie, false/*is_container*/, *r);
@@ -445,7 +445,7 @@ adapter::to_generation_marker(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto t(attr.type());
@@ -482,7 +482,7 @@ adapter::to_licence(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         if (n == short_form_attr_name)
@@ -510,7 +510,7 @@ void adapter::populate_abstract_feature(
     const logical::entities::name& bundle_name,
     const injection::entities::attribute& ia,
     logical::entities::variability::abstract_feature& af) const {
-    const auto n(ia.name());
+    const auto n(ia.name().simple());
     ensure_not_empty("Feature name", n);
 
     logical::helpers::name_factory f;
@@ -531,7 +531,7 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
     logical::entities::variability::abstract_profile_entry& ape) const {
     logical::helpers::name_factory f;
 
-    const auto n(attr.name());
+    const auto n(attr.name().simple());
     ensure_not_empty(pn.qualified().dot(), n);
 
     /*
@@ -680,7 +680,7 @@ adapter::to_logic_less_template(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         if (n == content_attr_name)
@@ -715,7 +715,7 @@ adapter::to_visual_studio_solution(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
@@ -740,7 +740,7 @@ adapter::to_visual_studio_project(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
@@ -820,7 +820,7 @@ adapter::to_physical_archetype(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& ia : ie.attributes()) {
-        const auto n(ia.name());
+        const auto n(ia.name().simple());
         const auto id(r->name().qualified().dot());
         ensure_not_empty(id, n);
 
@@ -855,7 +855,7 @@ adapter::to_physical_archetype_kind(const logical::entities::location& l,
     populate_element(l, scr, ie, false/*is_container*/, *r);
 
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(r->name().qualified().dot(), n);
 
         const auto v(attr.value());
@@ -897,7 +897,7 @@ adapter::to_physical_part(const logical::entities::location& l,
 
     const auto qn(r->name().qualified().dot());
     for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
+        const auto n(attr.name().simple());
         ensure_not_empty(qn, n);
 
         const auto t(attr.type());

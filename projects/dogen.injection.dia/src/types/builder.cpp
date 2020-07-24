@@ -185,7 +185,7 @@ void builder::add(const processed_object& po) {
      */
     const auto e(adapter::adapt(po, cby, p));
     model_.elements().push_back(e);
-    BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name();
+    BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name().simple();
 
     /*
      * Now we need to deal with the post-processing. For UML packages,
@@ -193,7 +193,7 @@ void builder::add(const processed_object& po) {
      * to update them with the contents of UML notes.
      */
     if (dot == dia_object_types::uml_large_package) {
-        handle_uml_large_package(po, e.name());
+        handle_uml_large_package(po, e.name().simple());
         return;
     }
 
@@ -203,7 +203,7 @@ void builder::add(const processed_object& po) {
      * of the current object, not its parents (which were handled
      * above).
      */
-    update_parentage(id, e.name());
+    update_parentage(id, e.name().simple());
 
     BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
 }
