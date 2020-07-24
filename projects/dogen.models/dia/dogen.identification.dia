@@ -3040,13 +3040,13 @@ The meta-model is always expected to be  @e masd.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="51,5"/>
+        <dia:point val="52,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,4.95;64.255,9.45"/>
+        <dia:rectangle val="51.95,4.95;65.255,9.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51,5"/>
+        <dia:point val="52,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.205"/>
@@ -3241,17 +3241,17 @@ can only have one and only one name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="57.6025,9.4"/>
+        <dia:point val="58.6025,9.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.8525,8.65;61.66,14.8"/>
+        <dia:rectangle val="57.8525,8.65;61.66,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="57.6025,9.4"/>
-        <dia:point val="57.6025,12"/>
+        <dia:point val="58.6025,9.4"/>
+        <dia:point val="58.6025,12"/>
         <dia:point val="61.46,12"/>
         <dia:point val="61.46,14"/>
       </dia:attribute>
@@ -4664,79 +4664,7 @@ of Dogen elements.
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O36">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="45.075,5"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.325,2.25503;57.8025,5.8"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="45.075,5"/>
-        <dia:point val="45.075,3"/>
-        <dia:point val="57.6025,3"/>
-        <dia:point val="57.6025,5"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O8" connection="1"/>
-        <dia:connection handle="1" to="O22" connection="1"/>
-      </dia:connections>
-      <dia:childnode parent="O0"/>
-    </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O37">
+    <dia:object type="UML - LargePackage" version="0" id="O36">
       <dia:attribute name="obj_pos">
         <dia:point val="72,-15"/>
       </dia:attribute>
@@ -4774,7 +4702,7 @@ of Dogen elements.
         <dia:string>#helpers#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O38">
+    <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
         <dia:point val="125,22"/>
       </dia:attribute>
@@ -4932,9 +4860,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O39">
+    <dia:object type="UML - Class" version="0" id="O38">
       <dia:attribute name="obj_pos">
         <dia:point val="110,9"/>
       </dia:attribute>
@@ -5043,9 +4971,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O40">
+    <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
         <dia:point val="78,9"/>
       </dia:attribute>
@@ -5268,9 +5196,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O41">
+    <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
         <dia:point val="74,-6"/>
       </dia:attribute>
@@ -5606,9 +5534,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O42">
+    <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
         <dia:point val="108,-6"/>
       </dia:attribute>
@@ -6186,9 +6114,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O43">
+    <dia:object type="UML - Association" version="2" id="O42">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -6255,12 +6183,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O42" connection="5"/>
-        <dia:connection handle="1" to="O40" connection="1"/>
+        <dia:connection handle="0" to="O41" connection="5"/>
+        <dia:connection handle="1" to="O39" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O44">
+    <dia:object type="UML - Association" version="2" id="O43">
       <dia:attribute name="name">
         <dia:string>#&lt; builds names using#</dia:string>
       </dia:attribute>
@@ -6327,12 +6255,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O41" connection="1"/>
-        <dia:connection handle="1" to="O42" connection="1"/>
+        <dia:connection handle="0" to="O40" connection="1"/>
+        <dia:connection handle="1" to="O41" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O45">
+    <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
         <dia:point val="130,-6"/>
       </dia:attribute>
@@ -6538,9 +6466,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O46">
+    <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
         <dia:point val="121,9"/>
       </dia:attribute>
@@ -6992,9 +6920,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O47">
+    <dia:object type="UML - Association" version="2" id="O46">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -7061,12 +6989,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O42" connection="7"/>
-        <dia:connection handle="1" to="O46" connection="1"/>
+        <dia:connection handle="0" to="O41" connection="7"/>
+        <dia:connection handle="1" to="O45" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O48">
+    <dia:object type="UML - Class" version="0" id="O47">
       <dia:attribute name="obj_pos">
         <dia:point val="159,-6"/>
       </dia:attribute>
@@ -7175,9 +7103,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O49">
+    <dia:object type="UML - Class" version="0" id="O48">
       <dia:attribute name="obj_pos">
         <dia:point val="75,22"/>
       </dia:attribute>
@@ -7286,9 +7214,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O50">
+    <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
         <dia:point val="85,22"/>
       </dia:attribute>
@@ -7541,9 +7469,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O51">
+    <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
         <dia:point val="114,22"/>
       </dia:attribute>
@@ -7722,9 +7650,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O52">
+    <dia:object type="UML - Association" version="2" id="O51">
       <dia:attribute name="name">
         <dia:string>#&lt; throws#</dia:string>
       </dia:attribute>
@@ -7791,12 +7719,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O50" connection="0"/>
-        <dia:connection handle="1" to="O49" connection="1"/>
+        <dia:connection handle="0" to="O49" connection="0"/>
+        <dia:connection handle="1" to="O48" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O53">
+    <dia:object type="UML - Association" version="2" id="O52">
       <dia:attribute name="name">
         <dia:string>#separates elements using &gt;#</dia:string>
       </dia:attribute>
@@ -7863,12 +7791,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O50" connection="2"/>
-        <dia:connection handle="1" to="O51" connection="1"/>
+        <dia:connection handle="0" to="O49" connection="2"/>
+        <dia:connection handle="1" to="O50" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O54">
+    <dia:object type="UML - Note" version="0" id="O53">
       <dia:attribute name="obj_pos">
         <dia:point val="74,-13"/>
       </dia:attribute>
@@ -7920,9 +7848,9 @@ of Dogen elements.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O55">
+    <dia:object type="UML - Class" version="0" id="O54">
       <dia:attribute name="obj_pos">
         <dia:point val="148,2"/>
       </dia:attribute>
@@ -8080,9 +8008,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O56">
+    <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
         <dia:point val="145,9"/>
       </dia:attribute>
@@ -8414,9 +8342,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O57">
+    <dia:object type="UML - Association" version="2" id="O56">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8483,12 +8411,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O55" connection="6"/>
-        <dia:connection handle="1" to="O56" connection="1"/>
+        <dia:connection handle="0" to="O54" connection="6"/>
+        <dia:connection handle="1" to="O55" connection="1"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O58">
+    <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
         <dia:point val="146,22"/>
       </dia:attribute>
@@ -8872,9 +8800,9 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O59">
+    <dia:object type="UML - Association" version="2" id="O58">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8941,12 +8869,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O58" connection="18"/>
-        <dia:connection handle="1" to="O56" connection="6"/>
+        <dia:connection handle="0" to="O57" connection="18"/>
+        <dia:connection handle="1" to="O55" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O60">
+    <dia:object type="UML - Association" version="2" id="O59">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9013,12 +8941,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O40" connection="4"/>
-        <dia:connection handle="1" to="O39" connection="3"/>
+        <dia:connection handle="0" to="O39" connection="4"/>
+        <dia:connection handle="1" to="O38" connection="3"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O61">
+    <dia:object type="UML - Association" version="2" id="O60">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9085,12 +9013,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O46" connection="3"/>
-        <dia:connection handle="1" to="O39" connection="4"/>
+        <dia:connection handle="0" to="O45" connection="3"/>
+        <dia:connection handle="1" to="O38" connection="4"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O62">
+    <dia:object type="UML - Association" version="2" id="O61">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9131,7 +9059,7 @@ of Dogen elements.
         <dia:point val="117.49,5.4488"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.858,4.6988;118.24,9.75093"/>
+        <dia:rectangle val="113.857,4.6988;118.24,9.75093"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9157,12 +9085,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O42" connection="30"/>
-        <dia:connection handle="1" to="O39" connection="8"/>
+        <dia:connection handle="0" to="O41" connection="30"/>
+        <dia:connection handle="1" to="O38" connection="8"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O63">
+    <dia:object type="UML - Class" version="0" id="O62">
       <dia:attribute name="obj_pos">
         <dia:point val="23,-29"/>
       </dia:attribute>
@@ -9272,7 +9200,7 @@ of Dogen elements.
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O64">
+    <dia:object type="UML - Class" version="0" id="O63">
       <dia:attribute name="obj_pos">
         <dia:point val="23,-24"/>
       </dia:attribute>
@@ -9382,7 +9310,7 @@ of Dogen elements.
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O65">
+    <dia:object type="UML - Association" version="2" id="O64">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9423,7 +9351,7 @@ of Dogen elements.
         <dia:point val="31.8325,1.04993"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.0825,0.299927;32.61,6.6"/>
+        <dia:rectangle val="31.0825,0.299927;32.61,5.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9451,6 +9379,78 @@ of Dogen elements.
       <dia:connections>
         <dia:connection handle="0" to="O3" connection="18"/>
         <dia:connection handle="1" to="O10" connection="1"/>
+      </dia:connections>
+      <dia:childnode parent="O0"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O65">
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="obj_pos">
+        <dia:point val="21.13,16.7"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="20.38,14.355;24.05,17.555"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="21.13,16.7"/>
+        <dia:point val="22.915,16.7"/>
+        <dia:point val="22.915,15.1"/>
+        <dia:point val="24,15.1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O18" connection="9"/>
+        <dia:connection handle="1" to="O7" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -9492,27 +9492,27 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="21.13,16.7"/>
+        <dia:point val="-2,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.38,15.05;24.05,18.3"/>
+        <dia:rectangle val="-2.75,17.55;-0.1225,23.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="21.13,16.7"/>
-        <dia:point val="22.915,16.7"/>
-        <dia:point val="22.915,15.1"/>
-        <dia:point val="24,15.1"/>
+        <dia:point val="-2,23"/>
+        <dia:point val="-2,21"/>
+        <dia:point val="-0.3225,21"/>
+        <dia:point val="-0.3225,17.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
         <dia:enum val="1"/>
         <dia:enum val="0"/>
+        <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -9521,8 +9521,8 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O18" connection="9"/>
-        <dia:connection handle="1" to="O7" connection="3"/>
+        <dia:connection handle="0" to="O29" connection="0"/>
+        <dia:connection handle="1" to="O2" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -9564,19 +9564,19 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-2,23"/>
+        <dia:point val="8.125,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.75,17.55;-0.1225,24.6"/>
+        <dia:rectangle val="7.375,19.95;13.765,23.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-2,23"/>
-        <dia:point val="-2,21"/>
-        <dia:point val="-0.3225,21"/>
-        <dia:point val="-0.3225,17.6"/>
+        <dia:point val="8.125,23"/>
+        <dia:point val="8.125,21"/>
+        <dia:point val="13.565,21"/>
+        <dia:point val="13.565,20"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9593,8 +9593,8 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O29" connection="0"/>
-        <dia:connection handle="1" to="O2" connection="6"/>
+        <dia:connection handle="0" to="O29" connection="2"/>
+        <dia:connection handle="1" to="O18" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -9636,27 +9636,27 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="8.125,23"/>
+        <dia:point val="8.125,24.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.375,19.95;13.765,24.6"/>
+        <dia:rectangle val="7.375,23.35;11.05,24.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="8.125,23"/>
-        <dia:point val="8.125,21"/>
-        <dia:point val="13.565,21"/>
-        <dia:point val="13.565,20"/>
+        <dia:point val="8.125,24.1"/>
+        <dia:point val="8.875,24.1"/>
+        <dia:point val="10.95,24.1"/>
+        <dia:point val="11,24.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
-        <dia:enum val="1"/>
         <dia:enum val="0"/>
         <dia:enum val="1"/>
+        <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -9665,8 +9665,8 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O29" connection="2"/>
-        <dia:connection handle="1" to="O18" connection="6"/>
+        <dia:connection handle="0" to="O29" connection="4"/>
+        <dia:connection handle="1" to="O26" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -9708,19 +9708,19 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="8.125,24.1"/>
+        <dia:point val="21.895,24.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.375,23.35;11.05,25.7"/>
+        <dia:rectangle val="21.145,23.35;25.05,24.955"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="8.125,24.1"/>
-        <dia:point val="8.875,24.1"/>
-        <dia:point val="10.95,24.1"/>
-        <dia:point val="11,24.1"/>
+        <dia:point val="21.895,24.1"/>
+        <dia:point val="22.645,24.1"/>
+        <dia:point val="24.95,24.1"/>
+        <dia:point val="25,24.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -9737,8 +9737,8 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O29" connection="4"/>
-        <dia:connection handle="1" to="O26" connection="3"/>
+        <dia:connection handle="0" to="O26" connection="4"/>
+        <dia:connection handle="1" to="O15" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
@@ -9780,82 +9780,10 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="21.895,24.1"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.145,23.35;25.05,25.7"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="21.895,24.1"/>
-        <dia:point val="22.645,24.1"/>
-        <dia:point val="24.95,24.1"/>
-        <dia:point val="25,24.1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O26" connection="4"/>
-        <dia:connection handle="1" to="O15" connection="3"/>
-      </dia:connections>
-      <dia:childnode parent="O0"/>
-    </dia:object>
-    <dia:object type="UML - Association" version="2" id="O71">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
         <dia:point val="37.665,-2.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.915,-3.95;41.05,-0.7"/>
+        <dia:rectangle val="36.915,-4.64497;41.05,-1.44497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9882,11 +9810,11 @@ of Dogen elements.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O3" connection="11"/>
-        <dia:connection handle="1" to="O74" connection="3"/>
+        <dia:connection handle="1" to="O73" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O72">
+    <dia:object type="UML - Association" version="2" id="O71">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9927,7 +9855,7 @@ of Dogen elements.
         <dia:point val="38.36,15.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.31,15.05;42.75,18.3"/>
+        <dia:rectangle val="38.31,14.355;42.75,17.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9958,7 +9886,7 @@ of Dogen elements.
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O73">
+    <dia:object type="UML - Association" version="2" id="O72">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9999,7 +9927,7 @@ of Dogen elements.
         <dia:point val="156.295,-4.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.545,-5.65;159.05,-3.3"/>
+        <dia:rectangle val="155.545,-5.65;159.05,-4.04497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10025,12 +9953,12 @@ of Dogen elements.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O45" connection="4"/>
-        <dia:connection handle="1" to="O48" connection="3"/>
+        <dia:connection handle="0" to="O44" connection="4"/>
+        <dia:connection handle="1" to="O47" connection="3"/>
       </dia:connections>
-      <dia:childnode parent="O37"/>
+      <dia:childnode parent="O36"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O74">
+    <dia:object type="UML - Class" version="0" id="O73">
       <dia:attribute name="obj_pos">
         <dia:point val="41,-5"/>
       </dia:attribute>
@@ -10143,7 +10071,7 @@ of Dogen elements.
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O75">
+    <dia:object type="UML - Class" version="0" id="O74">
       <dia:attribute name="obj_pos">
         <dia:point val="57,23"/>
       </dia:attribute>
@@ -10254,6 +10182,78 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+      <dia:childnode parent="O0"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O75">
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="obj_pos">
+        <dia:point val="52,6.1"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="49.1,5.35;52.75,7.7"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="52,6.1"/>
+        <dia:point val="51.25,6.1"/>
+        <dia:point val="49.2,6.1"/>
+        <dia:point val="49.15,6.1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O22" connection="3"/>
+        <dia:connection handle="1" to="O8" connection="4"/>
+      </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
   </dia:layer>
