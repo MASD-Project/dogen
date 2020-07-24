@@ -8024,6 +8024,15 @@ Release goals:
 
 ** Candidates
 
+*** Add support for SPDX licences                                     :story:
+
+We should try to create a model with all the SPDX licences, using
+their naming conventions, format etc.
+
+Links:
+
+- [[https://spdx.org/licenses/][SPDX License List]]
+
 *** Tight integration of Dogen and =build2=                           :story:
 
 In an ideal world, we should have a single command for managing the
@@ -16540,6 +16549,16 @@ Links:
 - [[https://github.com/microsoft/cpprestsdk][C++ Rest SDK]]
 - [[https://github.com/omartijn/cpprouter][cpprouter GH]]: A modern, header-only request router for C++. Can be
   used with Beast.
+- [[https://github.com/an-tao/drogon][drogon GH]]: C++14/17-based HTTP application framework. Drogon can be
+  used to easily build various types of web application server
+  programs using C++.
+- [[https://gitlab.com/eidheim/Simple-Web-Server/][Simple-Web-Server GL]]: A very simple, fast, multithreaded, platform
+  independent HTTP and HTTPS server and client library implemented
+  using C++11 and Asio (both Boost.Asio and standalone Asio can be
+  used).
+- [[https://www.techempower.com/benchmarks/#section=data-r19&hw=ph&test=composite][Benchmarks Composite scores]]: benchmarks for several web frameworks.
+- https://github.com/matt-42/lithium: Lithium's goal is to ease the
+  development of C++ high performance HTTP APIs.
 
 *** Consider generating consul service discovery code                 :story:
 
@@ -18031,6 +18050,11 @@ Links:
 - [[https://github.com/shaovoon/csv_stream][csv_stream]]: C++14 CSV Stream based on C API.
 - [[https://github.com/p-ranav/csv][CSV]]: CSV for Modern C++ (C++ 17).
 - [[https://github.com/shaovoon/minicsv_benchmark][benchmark of CSV libaries]]
+- [[https://github.com/ashtum/lazycsv][lazycsv GH]]: lazycsv is a c++17, posix-compliant, single-header
+  library for reading and parsing csv files.
+- [[https://github.com/JamesBoer/Tbl][Tbl GH]]: Tbl is a lightweight CSV (comma separated value) and
+  tab-delimited table reader.
+- [[https://github.com/antonmks/nvParse][nvParse GH]]: Parsing CSV files with GPU
 
 *** Consider generation of validators                                  :epic:
 

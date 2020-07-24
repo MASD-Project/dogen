@@ -87,7 +87,6 @@ Next sprint:
 - Credit: https://prazerdeconhecer.wordpress.com/2015/09/16/benguela-post/
 - o viajante
 
-
 **** Dogen v1.0.25, "Foz do Cunene"
 
 #+caption: Foz do Cunene
