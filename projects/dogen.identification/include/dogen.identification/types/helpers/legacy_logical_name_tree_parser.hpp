@@ -25,24 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_set>
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/logical_location.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 
 namespace dogen::identification::helpers {
 
-class legacy_logical_name_tree_parser final {
+/**
+ * @brief Parses identifiers according to a well-defined syntax, and
+ * generates a tree of names from them.
+ */
+class legacy_logical_name_tree_parser {
 public:
-    legacy_logical_name_tree_parser() = default;
-    legacy_logical_name_tree_parser(const legacy_logical_name_tree_parser&) = default;
-    legacy_logical_name_tree_parser(legacy_logical_name_tree_parser&&) = default;
-    ~legacy_logical_name_tree_parser() = default;
-    legacy_logical_name_tree_parser& operator=(const legacy_logical_name_tree_parser&) = default;
+    /**
+     * @brief Initialises the parser.
+     *
+     * @param ts what technical space syntax to use.
+     */
+    explicit legacy_logical_name_tree_parser(
+        const entities::technical_space ts);
 
 public:
-    bool operator==(const legacy_logical_name_tree_parser& rhs) const;
-    bool operator!=(const legacy_logical_name_tree_parser& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Parse the string into a name tree.
+     */
+    entities::logical_name_tree parse(const std::string& s) const;
 
+private:
+    const entities::technical_space technical_space_;
 };
 
 }
