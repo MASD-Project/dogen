@@ -359,5 +359,4 @@ build_containing_element_name(const entities::name& n) const {
     return b.build();
 }
 
-
 }
