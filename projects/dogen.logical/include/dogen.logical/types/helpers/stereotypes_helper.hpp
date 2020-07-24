@@ -25,24 +25,69 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <utility>
+#include "dogen.identification/types/entities/stereotype.hpp"
+#include "dogen.logical/types/entities/stereotypes.hpp"
+#include "dogen.logical/types/entities/static_stereotypes.hpp"
 
 namespace dogen::logical::helpers {
 
+/**
+ * @brief Converts well-known stereotypes from and to strings.
+ */
 class stereotypes_helper final {
 public:
-    stereotypes_helper() = default;
-    stereotypes_helper(const stereotypes_helper&) = default;
-    stereotypes_helper(stereotypes_helper&&) = default;
-    ~stereotypes_helper() = default;
-    stereotypes_helper& operator=(const stereotypes_helper&) = default;
+    /**
+     * @brief Converts a single well-known stereotype into its enum.
+     *
+     * @note The stereotype primitive must not have any leading or
+     * trailing spaces or other artefacts and must match exactly the
+     * definition of a well-known logical stereotype,
+     * e.g. 'logical::object', etc.
+     */
+    entities::static_stereotypes
+    from_primitive(const identification::entities::stereotype& st) const;
 
 public:
-    bool operator==(const stereotypes_helper& rhs) const;
-    bool operator!=(const stereotypes_helper& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Given a list of stereotypes, returns the set of
+     * well-known stereotypes as well as those it does not know of.
+     */
+    entities::stereotypes
+    from_primitives(const std::list<identification::entities::stereotype>&
+        stereotypes) const;
 
+    /**
+     * @brief Converts a well-known stereotype to its primitive
+     * representation.
+     */
+    identification::entities::stereotype
+    to_primitive(const entities::static_stereotypes ss) const;
+
+public:
+    /**
+     * @brief Returns true if the well-known stereotype denotes a logical
+     * element type, false otherwise.
+     */
+    bool
+    is_element_type(const entities::static_stereotypes ss) const;
+
+    /**
+     * @brief Given a list of well-known stereotypes, extracts those
+     * which are element types.
+     */
+    std::list<entities::static_stereotypes> extract_element_types(
+        const std::list<entities::static_stereotypes>& ss) const;
+
+    /**
+     * @brief Given a list of well-known stereotypes, extracts those
+     * which are not element types.
+     */
+    std::list<entities::static_stereotypes>
+    extract_non_element_types(
+        const std::list<entities::static_stereotypes>& ss) const;
 };
 
 }
