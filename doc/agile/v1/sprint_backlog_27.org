@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-24 Fri 13:07]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *17:33* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 17:33   |       |      | 100.0 |
-| Active                                             |         | 17:33 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 7:15 |  41.3 |
-| Create a demo and presentation for previous sprint |         |       | 0:41 |   3.9 |
-| Sprint and product backlog grooming                |         |       | 1:23 |   7.9 |
-| Nightly nursing and other spikes                   |         |       | 0:59 |   5.6 |
-| Create an =ident= model                            |         |       | 7:15 |  41.3 |
+#+CAPTION: Clock summary at [2020-07-24 Fri 18:50]
+| <75>                                               |         |       |       |       |
+| Headline                                           | Time    |       |       |     % |
+|----------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                       | *22:02* |       |       | 100.0 |
+|----------------------------------------------------+---------+-------+-------+-------|
+| Stories                                            | 22:02   |       |       | 100.0 |
+| Active                                             |         | 22:02 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  32.9 |
+| Create a demo and presentation for previous sprint |         |       |  0:41 |   3.1 |
+| Sprint and product backlog grooming                |         |       |  1:23 |   6.3 |
+| Nightly nursing and other spikes                   |         |       |  0:59 |   4.5 |
+| Create an =ident= model                            |         |       | 11:44 |  53.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -809,6 +809,7 @@ Notes:
 
 *** STARTED Create an =ident= model                                   :story:
     :LOGBOOK:
+    CLOCK: [2020-07-24 Fri 14:21]--[2020-07-24 Fri 18:50] =>  4:29
     CLOCK: [2020-07-24 Fri 13:01]--[2020-07-24 Fri 13:07] =>  0:06
     CLOCK: [2020-07-24 Fri 10:00]--[2020-07-24 Fri 13:00] =>  3:00
     CLOCK: [2020-07-19 Sun 12:42]--[2020-07-19 Sun 12:48] =>  0:06
