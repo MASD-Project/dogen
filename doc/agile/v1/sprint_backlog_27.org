@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-07-19 Sun 01:12]
+#+CAPTION: Clock summary at [2020-07-24 Fri 13:07]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *12:54* |       |      | 100.0 |
+| *Total time*                                       | *17:33* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 12:54   |       |      | 100.0 |
-| Active                                             |         | 12:54 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 6:55 |  53.6 |
-| Create a demo and presentation for previous sprint |         |       | 0:41 |   5.3 |
-| Sprint and product backlog grooming                |         |       | 1:23 |  10.7 |
-| Create an =ident= model                            |         |       | 3:55 |  30.4 |
+| Stories                                            | 17:33   |       |      | 100.0 |
+| Active                                             |         | 17:33 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 7:15 |  41.3 |
+| Create a demo and presentation for previous sprint |         |       | 0:41 |   3.9 |
+| Sprint and product backlog grooming                |         |       | 1:23 |   7.9 |
+| Nightly nursing and other spikes                   |         |       | 0:59 |   5.6 |
+| Create an =ident= model                            |         |       | 7:15 |  41.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -808,6 +809,8 @@ Notes:
 
 *** STARTED Create an =ident= model                                   :story:
     :LOGBOOK:
+    CLOCK: [2020-07-24 Fri 13:01]--[2020-07-24 Fri 13:07] =>  0:06
+    CLOCK: [2020-07-24 Fri 10:00]--[2020-07-24 Fri 13:00] =>  3:00
     CLOCK: [2020-07-19 Sun 12:42]--[2020-07-19 Sun 12:48] =>  0:06
     CLOCK: [2020-07-19 Sun 11:22]--[2020-07-19 Sun 11:30] =>  0:08
     CLOCK: [2020-07-18 Sat 23:51]--[2020-07-19 Sun 01:12] =>  1:21
@@ -840,6 +843,8 @@ Notes:
 - it would be nice if we could move the qualified representation stuff
   into a class that is not directly related to the qualified
   name.
+- remove uses of string processor in variability, use new identity
+  model.
 
 *** Mine the build2 layout terminology                                :story:
 
