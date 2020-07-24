@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_QUALIFIED_META_NAME_BUILDER_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_QUALIFIED_META_NAME_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_ID_BUILDER_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_META_ID_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.identification/types/entities/physical_meta_location.hpp"
 
@@ -38,16 +39,23 @@ namespace dogen::identification::helpers {
  * If the names and locations are not valid for the requests in
  * question, we throw.
  */
-class physical_qualified_meta_name_builder final {
+class physical_meta_id_builder final {
+private:
+    /**
+     * @brief Converts a plain string into an ID.
+     */
+    static entities::physical_meta_id to_meta_id(const std::string& s);
+
 public:
     /**
      * @brief Builds a qualified name for the meta-model region in
      * physical space.
      */
     /**@{*/
-    static std::string
+    static entities::physical_meta_id
     build_meta_model(const entities::physical_meta_location& l);
-    static std::string build_meta_model(const entities::physical_meta_name& mn);
+    static entities::physical_meta_id
+    build_meta_model(const entities::physical_meta_name& mn);
     /**@}*/
 
     /**
@@ -55,8 +63,10 @@ public:
      * physical space.
      */
     /**@{*/
-    static std::string build_backend(const entities::physical_meta_location& l);
-    static std::string build_backend(const entities::physical_meta_name& n);
+    static entities::physical_meta_id
+    build_backend(const entities::physical_meta_location& l);
+    static entities::physical_meta_id
+    build_backend(const entities::physical_meta_name& n);
     /**@}*/
 
     /**
@@ -64,9 +74,11 @@ public:
      * space.
      */
     /**@{*/
-    static std::string build_facet(const entities::physical_meta_location& l,
+    static entities::physical_meta_id
+    build_facet(const entities::physical_meta_location& l,
         const bool add_canonical = false);
-    static std::string build_facet(const entities::physical_meta_name& n,
+    static entities::physical_meta_id
+    build_facet(const entities::physical_meta_name& n,
         const bool add_canonical = false);
     /**@}*/
 
@@ -74,9 +86,10 @@ public:
      * @brief Builds a qualified name for the complete archetype.
      */
     /**@{*/
-    static std::string
+    static entities::physical_meta_id
     build_archetype(const entities::physical_meta_location& l);
-    static std::string build_archetype(const entities::physical_meta_name& n);
+    static entities::physical_meta_id
+    build_archetype(const entities::physical_meta_name& n);
     /**@}*/
 };
 

@@ -4646,7 +4646,7 @@ of Dogen elements.
         <dia:point val="72,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,-16.05;190.05,40.05"/>
+        <dia:rectangle val="71.95,-16.05;192.05,40.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4655,7 +4655,7 @@ of Dogen elements.
         <dia:point val="72,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="118"/>
+        <dia:real val="120"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="55"/>
@@ -8326,19 +8326,19 @@ of Dogen elements.
         <dia:point val="162,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.95,4.95;187.575,12.65"/>
+        <dia:rectangle val="161.95,4.95;189.5,12.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="162,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.524999999999999"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#physical_qualified_meta_name_builder#</dia:string>
+        <dia:string>#physical_meta_id_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -8434,7 +8434,7 @@ of Dogen elements.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#physical_meta_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8482,7 +8482,7 @@ of Dogen elements.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#physical_meta_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8530,7 +8530,7 @@ of Dogen elements.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#physical_meta_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8612,7 +8612,7 @@ of Dogen elements.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#physical_meta_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8660,7 +8660,7 @@ of Dogen elements.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#physical_meta_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8745,17 +8745,17 @@ of Dogen elements.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="174.762,12.6"/>
+        <dia:point val="175.725,12.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="171.007,12.55;174.962,18.8"/>
+        <dia:rectangle val="171.007,12.55;175.925,18.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="174.762,12.6"/>
-        <dia:point val="174.762,16"/>
+        <dia:point val="175.725,12.6"/>
+        <dia:point val="175.725,16"/>
         <dia:point val="171.757,16"/>
         <dia:point val="171.757,18"/>
       </dia:attribute>

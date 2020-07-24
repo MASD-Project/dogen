@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.identification/types/helpers/physical_qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
-// #include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
 namespace {
@@ -40,5 +40,65 @@ const std::string empty_archetype(
 }
 
 namespace dogen::identification::helpers {
+
+physical_meta_name_builder&
+physical_meta_name_builder::meta_model(const std::string& s) {
+    meta_name_.location().meta_model(s);
+    return *this;
+}
+
+physical_meta_name_builder&
+physical_meta_name_builder::backend(const std::string& s) {
+    meta_name_.location().backend(s);
+    return *this;
+}
+
+physical_meta_name_builder&
+physical_meta_name_builder::facet(const std::string& s) {
+    meta_name_.location().facet(s);
+    return *this;
+}
+
+physical_meta_name_builder&
+physical_meta_name_builder::archetype(const std::string& s) {
+    meta_name_.location().archetype(s);
+    return *this;
+}
+
+entities::physical_meta_name physical_meta_name_builder::build() {
+    /*
+     * Meta-model is always hard-coded to MASD. FIXME: replace this
+     * when we implement this properly.
+     */
+    auto& mn(meta_name_);
+    auto& l(mn.location());
+    l.meta_model(meta_model_name);
+
+    /*
+     * Simple and qualified names depend on what has been filled in.
+     */
+    const bool has_backend(!l.backend().empty());
+    const bool has_facet(!l.facet().empty());
+    const bool has_archetype(!l.archetype().empty());
+    if (has_archetype) {
+        mn.simple(l.archetype());
+        mn.qualified(physical_meta_id_builder::build_archetype(l));
+        physical_meta_name_validator::validate_archetype_name(mn);
+    } else if (has_facet) {
+        mn.simple(l.facet());
+        mn.qualified(physical_meta_id_builder::build_facet(l));
+        physical_meta_name_validator::validate_facet_name(mn);
+    } else if (has_backend) {
+        mn.simple(l.backend());
+        mn.qualified(physical_meta_id_builder::build_backend(l));
+        physical_meta_name_validator::validate_backend_name(mn);
+    } else {
+        mn.simple(l.meta_model());
+        mn.qualified(physical_meta_id_builder::build_meta_model(l));
+        physical_meta_name_validator::validate_meta_model_name(mn);
+    }
+
+    return mn;
+}
 
 }

@@ -21,13 +21,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
-#include "dogen.identification/types/helpers/physical_qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(
-        "physical.helpers.physical_qualified_meta_name_builder"));
+        "physical.helpers.physical_meta_id_builder"));
 
 const std::string meta_model_name("masd");
 const std::string canonical_name("canonical_archetype");
@@ -43,22 +43,27 @@ const std::string empty_archetype(
 
 namespace dogen::identification::helpers {
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id
+physical_meta_id_builder::to_meta_id(const std::string& s) {
+    return entities::physical_meta_id(s);
+}
+
+entities::physical_meta_id physical_meta_id_builder::
 build_meta_model(const entities::physical_meta_location& l) {
     const auto& mmn(l.meta_model());
     if (mmn.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_meta_model;
         BOOST_THROW_EXCEPTION(building_error(empty_meta_model));
     }
-    return mmn;
+    return to_meta_id(mmn);
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_meta_model(const entities::physical_meta_name& mn) {
     return build_meta_model(mn.location());
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_backend(const entities::physical_meta_location& l) {
     const auto& b(l.backend());
     if (b.empty()) {
@@ -66,15 +71,15 @@ build_backend(const entities::physical_meta_location& l) {
         BOOST_THROW_EXCEPTION(building_error(empty_backend));
     }
 
-    return build_meta_model(l) + dot + b;
+    return to_meta_id(build_meta_model(l).value() + dot + b);
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_backend(const entities::physical_meta_name& mn) {
     return build_backend(mn.location());
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_facet(const entities::physical_meta_location& l,
     const bool add_canonical) {
 
@@ -85,21 +90,21 @@ build_facet(const entities::physical_meta_location& l,
     }
 
     std::string r;
-    r = build_backend(l) + dot + f;
+    r = build_backend(l).value() + dot + f;
 
     if (add_canonical)
         r += dot + canonical_name;
 
-    return r;
+    return to_meta_id(r);
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_facet(const entities::physical_meta_name& mn,
     const bool add_canonical) {
     return build_facet(mn.location(), add_canonical);
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_archetype(const entities::physical_meta_location& l) {
     std::string r(build_backend(l));
     const bool has_facet(!l.facet().empty());
@@ -110,10 +115,10 @@ build_archetype(const entities::physical_meta_location& l) {
     if (has_archetype)
         r += dot + l.archetype();
 
-    return r;
+    return to_meta_id(r);
 }
 
-std::string physical_qualified_meta_name_builder::
+entities::physical_meta_id physical_meta_id_builder::
 build_archetype(const entities::physical_meta_name& mn) {
     return build_archetype(mn.location());
 }
