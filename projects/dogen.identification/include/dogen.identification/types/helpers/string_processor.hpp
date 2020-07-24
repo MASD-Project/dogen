@@ -25,24 +25,13 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace dogen::identification::helpers {
 
-class string_processor final {
+class string_processor {
 public:
-    string_processor() = default;
-    string_processor(const string_processor&) = default;
-    string_processor(string_processor&&) = default;
-    ~string_processor() = default;
-    string_processor& operator=(const string_processor&) = default;
-
-public:
-    bool operator==(const string_processor& rhs) const;
-    bool operator!=(const string_processor& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string to_identifiable(const std::string& s);
 };
 
 }

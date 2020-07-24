@@ -26,25 +26,46 @@
 #endif
 
 #include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.identification/types/helpers/pretty_printer.hpp"
-#include "dogen.identification/types/entities/fully_qualified_representation.hpp"
+#include "dogen.identification/types/entities/name_representations.hpp"
 
 namespace dogen::identification::helpers {
 
+/**
+ * @brief Builds a fully qualified representation of a qualifiable
+ * model element such as a name or a name tree.
+ */
 class name_representations_builder final {
 public:
-    name_representations_builder() = default;
-    name_representations_builder(const name_representations_builder&) = default;
-    name_representations_builder(name_representations_builder&&) = default;
-    ~name_representations_builder() = default;
-    name_representations_builder& operator=(const name_representations_builder&) = default;
+    name_representations_builder();
 
 public:
-    bool operator==(const name_representations_builder& rhs) const;
-    bool operator!=(const name_representations_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Adds the qualifiable model element to the pretty printers.
+     */
+    /**@{*/
+    void add(const entities::logical_name& n);
+    void add(const entities::logical_name_tree& nt);
+    /**@}*/
 
+public:
+    /**
+     * @brief Builds the representations.
+     *
+     * @pre Add must have been called at least once.
+     */
+    entities::name_representations build();
+
+    /**
+     * @brief Builds the representation for the supplied name.
+     */
+    entities::name_representations
+    build(const entities::logical_name& n, const bool model_name_mode);
+
+private:
+    pretty_printer dot_printer_;
+    pretty_printer colon_printer_;
 };
 
 }

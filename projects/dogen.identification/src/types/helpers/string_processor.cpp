@@ -18,12 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string_view>
+#include <boost/algorithm/string.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/string_processor.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("identification.helpers.string_processor"));
+
+constexpr std::string_view empty;
+constexpr std::string_view comma(",");
+constexpr std::string_view dot(".");
+constexpr std::string_view space(" ");
+constexpr std::string_view less_than("<");
+constexpr std::string_view more_than(">");
+constexpr std::string_view separator("_");
+constexpr std::string_view scope_operator("::");
+
+}
 
 namespace dogen::identification::helpers {
 
-bool string_processor::operator==(const string_processor& /*rhs*/) const {
-    return true;
+std::string string_processor::to_identifiable(const std::string& s) {
+    std::string r(s);
+    BOOST_LOG_SEV(lg, trace) << "Input string: " << r;
+
+    boost::replace_all(r, dot, separator);
+    boost::replace_all(r, scope_operator, separator);
+    boost::replace_all(r, less_than, separator);
+
+    boost::replace_all(r, comma, empty);
+    boost::replace_all(r, more_than, empty);
+    boost::trim(r);
+
+    boost::replace_all(r, space, separator);
+
+    BOOST_LOG_SEV(lg, trace) << "Result: " << r;
+    return r;
 }
 
 }

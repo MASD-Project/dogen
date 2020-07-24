@@ -18,12 +18,57 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/types/helpers/building_error.hpp"
+#include "dogen.identification/types/helpers/string_processor.hpp"
 #include "dogen.identification/types/helpers/name_representations_builder.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+
+auto
+lg(logger_factory("identification.helpers.name_representations_builder"));
+
+}
 
 namespace dogen::identification::helpers {
 
-bool name_representations_builder::operator==(const name_representations_builder& /*rhs*/) const {
-    return true;
+name_representations_builder::
+name_representations_builder()
+    : dot_printer_(separators::dots),
+      colon_printer_(separators::double_colons) {}
+
+void name_representations_builder::add(const entities::logical_name& n) {
+    dot_printer_.add(n.representations().dot());
+    colon_printer_.add(n.representations().colon());
+}
+
+void name_representations_builder::
+add(const entities::logical_name_tree& nt) {
+    dot_printer_.add_child(nt.representations().dot());
+    colon_printer_.add_child(nt.representations().colon());
+}
+
+entities::name_representations
+name_representations_builder::build() {
+    entities::name_representations r;
+
+    r.dot(dot_printer_.print());
+    r.colon(colon_printer_.print());
+
+    string_processor sp;
+    r.identifiable(sp.to_identifiable(r.colon()));
+    return r;
+}
+
+entities::name_representations
+name_representations_builder::
+build(const entities::logical_name& n, const bool model_name_mode) {
+    dot_printer_.add(n, model_name_mode);
+    colon_printer_.add(n, model_name_mode);
+    return build();
 }
 
 }
