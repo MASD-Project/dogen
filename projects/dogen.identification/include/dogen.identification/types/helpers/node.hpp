@@ -47,7 +47,7 @@ public:
 
 public:
     node(
-        const boost::weak_ptr<dogen::identification::helpers::node>& node,
+        const boost::weak_ptr<dogen::identification::helpers::node>& parent,
         const dogen::identification::entities::logical_name& data,
         const std::list<boost::shared_ptr<dogen::identification::helpers::node> >& children);
 
@@ -56,10 +56,10 @@ public:
      * @brief Parent in a tree.
      */
     /**@{*/
-    const boost::weak_ptr<dogen::identification::helpers::node>& node() const;
-    boost::weak_ptr<dogen::identification::helpers::node>& node();
-    void node(const boost::weak_ptr<dogen::identification::helpers::node>& v);
-    void node(const boost::weak_ptr<dogen::identification::helpers::node>&& v);
+    const boost::weak_ptr<dogen::identification::helpers::node>& parent() const;
+    boost::weak_ptr<dogen::identification::helpers::node>& parent();
+    void parent(const boost::weak_ptr<dogen::identification::helpers::node>& v);
+    void parent(const boost::weak_ptr<dogen::identification::helpers::node>&& v);
     /**@}*/
 
     /**
@@ -83,6 +83,7 @@ public:
     /**@}*/
 
 public:
+    /*
     bool operator==(const node& rhs) const;
     bool operator!=(const node& rhs) const {
         return !this->operator==(rhs);
@@ -91,15 +92,15 @@ public:
 public:
     void swap(node& other) noexcept;
     node& operator=(node other);
-
+*/
 private:
-    boost::weak_ptr<dogen::identification::helpers::node> node_;
+    boost::weak_ptr<dogen::identification::helpers::node> parent_;
     dogen::identification::entities::logical_name data_;
     std::list<boost::shared_ptr<dogen::identification::helpers::node> > children_;
 };
 
 }
-
+/*
 namespace std {
 
 template<>
@@ -110,5 +111,5 @@ inline void swap(
 }
 
 }
-
+*/
 #endif

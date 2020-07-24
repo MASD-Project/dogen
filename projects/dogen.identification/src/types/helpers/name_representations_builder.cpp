@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
-#include "dogen.identification/types/helpers/string_processor.hpp"
+#include "dogen.identification/types/helpers/identifiable_factory.hpp"
 #include "dogen.identification/types/helpers/name_representations_builder.hpp"
 
 namespace {
@@ -57,9 +57,7 @@ name_representations_builder::build() {
 
     r.dot(dot_printer_.print());
     r.colon(colon_printer_.print());
-
-    string_processor sp;
-    r.identifiable(sp.to_identifiable(r.colon()));
+    r.identifiable(identifiable_factory::make(r.colon()));
     return r;
 }
 

@@ -23,11 +23,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.identification/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_location_io.hpp"
 #include "dogen.identification/types/helpers/separators.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
-#include "dogen.identification/types/helpers/string_processor.hpp"
 #include "dogen.identification/types/helpers/pretty_printer.hpp"
 #include "dogen.identification/types/helpers/name_representations_builder.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
@@ -112,7 +111,7 @@ entities::logical_name logical_name_builder::build() {
 
     name_representations_builder b;
     const auto fqr(b.build(name_, model_name_mode_));
-    name_.qualified(fqr);
+    name_.representations(fqr);
 
     BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;

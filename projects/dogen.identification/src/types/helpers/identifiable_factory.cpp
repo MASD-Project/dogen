@@ -21,12 +21,12 @@
 #include <string_view>
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.identification/types/helpers/string_processor.hpp"
+#include "dogen.identification/types/helpers/identifiable_factory.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("identification.helpers.string_processor"));
+auto lg(logger_factory("identification.helpers.identifiable_factory"));
 
 constexpr std::string_view empty;
 constexpr std::string_view comma(",");
@@ -41,7 +41,7 @@ constexpr std::string_view scope_operator("::");
 
 namespace dogen::identification::helpers {
 
-std::string string_processor::to_identifiable(const std::string& s) {
+std::string identifiable_factory::make(const std::string& s) {
     std::string r(s);
     BOOST_LOG_SEV(lg, trace) << "Input string: " << r;
 

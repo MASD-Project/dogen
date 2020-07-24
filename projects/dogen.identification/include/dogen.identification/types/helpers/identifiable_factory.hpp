@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_STRING_PROCESSOR_HPP
-#define DOGEN_IDENTIFICATION_TYPES_HELPERS_STRING_PROCESSOR_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_IDENTIFIABLE_FACTORY_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_IDENTIFIABLE_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 
 namespace dogen::identification::helpers {
 
-class string_processor {
+class identifiable_factory {
 public:
-    static std::string to_identifiable(const std::string& s);
+    static std::string make(const std::string& s);
 };
 
 }

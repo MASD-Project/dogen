@@ -34,59 +34,7 @@ namespace dogen::identification::helpers {
 
 class logical_name_tree_builder final {
 public:
-    logical_name_tree_builder() = default;
-    logical_name_tree_builder(const logical_name_tree_builder&) = default;
-    logical_name_tree_builder(logical_name_tree_builder&&) = default;
-    ~logical_name_tree_builder() = default;
-
-public:
-    logical_name_tree_builder(
-        const std::list<std::string>& names_,
-        const boost::shared_ptr<dogen::identification::helpers::node>& root_,
-        const boost::shared_ptr<dogen::identification::helpers::node>& current_);
-
-public:
-    const std::list<std::string>& names_() const;
-    std::list<std::string>& names_();
-    void names_(const std::list<std::string>& v);
-    void names_(const std::list<std::string>&& v);
-
-    const boost::shared_ptr<dogen::identification::helpers::node>& root_() const;
-    boost::shared_ptr<dogen::identification::helpers::node>& root_();
-    void root_(const boost::shared_ptr<dogen::identification::helpers::node>& v);
-    void root_(const boost::shared_ptr<dogen::identification::helpers::node>&& v);
-
-    const boost::shared_ptr<dogen::identification::helpers::node>& current_() const;
-    boost::shared_ptr<dogen::identification::helpers::node>& current_();
-    void current_(const boost::shared_ptr<dogen::identification::helpers::node>& v);
-    void current_(const boost::shared_ptr<dogen::identification::helpers::node>&& v);
-
-public:
-    bool operator==(const logical_name_tree_builder& rhs) const;
-    bool operator!=(const logical_name_tree_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(logical_name_tree_builder& other) noexcept;
-    logical_name_tree_builder& operator=(logical_name_tree_builder other);
-
-private:
-    std::list<std::string> names__;
-    boost::shared_ptr<dogen::identification::helpers::node> root__;
-    boost::shared_ptr<dogen::identification::helpers::node> current__;
 };
-
-}
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::identification::helpers::logical_name_tree_builder& lhs,
-    dogen::identification::helpers::logical_name_tree_builder& rhs) {
-    lhs.swap(rhs);
-}
 
 }
 

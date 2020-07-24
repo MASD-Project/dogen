@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.identification/types/helpers/node.hpp"
-
+/*
 namespace boost {
 
 inline bool operator==(const boost::weak_ptr<dogen::identification::helpers::node>& lhs,
@@ -37,17 +37,18 @@ const boost::shared_ptr<dogen::identification::helpers::node>& rhs) {
 }
 
 }
+*/
 
 namespace dogen::identification::helpers {
 
 node::node(
-    const boost::weak_ptr<dogen::identification::helpers::node>& node,
+    const boost::weak_ptr<dogen::identification::helpers::node>& parent,
     const dogen::identification::entities::logical_name& data,
     const std::list<boost::shared_ptr<dogen::identification::helpers::node> >& children)
-    : node_(node),
+    : parent_(parent),
       data_(data),
       children_(children) { }
-
+/*
 void node::swap(node& other) noexcept {
     using std::swap;
     swap(node_, other.node_);
@@ -66,21 +67,21 @@ node& node::operator=(node other) {
     swap(*this, other);
     return *this;
 }
-
-const boost::weak_ptr<dogen::identification::helpers::node>& node::node() const {
-    return node_;
+*/
+const boost::weak_ptr<dogen::identification::helpers::node>& node::parent() const {
+    return parent_;
 }
 
-boost::weak_ptr<dogen::identification::helpers::node>& node::node() {
-    return node_;
+boost::weak_ptr<dogen::identification::helpers::node>& node::parent() {
+    return parent_;
 }
 
-void node::node(const boost::weak_ptr<dogen::identification::helpers::node>& v) {
-    node_ = v;
+void node::parent(const boost::weak_ptr<dogen::identification::helpers::node>& v) {
+    parent_ = v;
 }
 
-void node::node(const boost::weak_ptr<dogen::identification::helpers::node>&& v) {
-    node_ = std::move(v);
+void node::parent(const boost::weak_ptr<dogen::identification::helpers::node>&& v) {
+    parent_ = std::move(v);
 }
 
 const dogen::identification::entities::logical_name& node::data() const {
