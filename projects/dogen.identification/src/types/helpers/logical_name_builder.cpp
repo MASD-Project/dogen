@@ -110,8 +110,8 @@ entities::logical_name logical_name_builder::build() {
         name_.simple(*name_.location().model_modules().rbegin());
 
     name_representations_builder b;
-    const auto fqr(b.build(name_, model_name_mode_));
-    name_.representations(fqr);
+    const auto qnr(b.build(name_, model_name_mode_));
+    name_.qualified(qnr);
 
     BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;

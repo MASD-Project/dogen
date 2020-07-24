@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.identification/types/helpers/logical_name_factory.hpp"
@@ -276,7 +277,7 @@ entities::logical_name logical_name_factory::build_attribute_name(
 boost::optional<entities::logical_name> logical_name_factory::
 build_containing_element_name(const entities::logical_name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating containing element name for: "
-                             << n.representations().dot();
+                             << n.id();
 
     /*
      * First we determine if the element is placed in the global
@@ -287,7 +288,7 @@ build_containing_element_name(const entities::logical_name& n) const {
     if (in_global_namespace) {
         BOOST_LOG_SEV(lg, debug) << "Element is in global module so, it has"
                                  << " no containing module yet. Type: "
-                                 << n.representations().dot();
+                                 << n.id();
         return boost::optional<entities::logical_name>();
     }
 
@@ -304,7 +305,7 @@ build_containing_element_name(const entities::logical_name& n) const {
     if (at_model_level && n.simple() == mn) {
         BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
                                  << "module will be handled later. Type: "
-                                 << n.representations().dot();
+                                 << n.id();
         return boost::optional<entities::logical_name>();
     }
 

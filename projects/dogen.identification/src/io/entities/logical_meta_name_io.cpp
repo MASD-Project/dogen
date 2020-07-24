@@ -37,7 +37,7 @@ std::ostream& operator<<(std::ostream& s, const logical_meta_name& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_meta_name\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
-      << "\"qualified\": " << v.qualified()
+      << "\"id\": " << v.id()
       << " }";
     return(s);
 }

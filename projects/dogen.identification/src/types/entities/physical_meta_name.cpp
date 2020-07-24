@@ -24,22 +24,22 @@ namespace dogen::identification::entities {
 
 physical_meta_name::physical_meta_name(
     const std::string& simple,
-    const dogen::identification::entities::physical_meta_id& qualified,
+    const dogen::identification::entities::physical_meta_id& id,
     const dogen::identification::entities::physical_meta_location& location)
     : simple_(simple),
-      qualified_(qualified),
+      id_(id),
       location_(location) { }
 
 void physical_meta_name::swap(physical_meta_name& other) noexcept {
     using std::swap;
     swap(simple_, other.simple_);
-    swap(qualified_, other.qualified_);
+    swap(id_, other.id_);
     swap(location_, other.location_);
 }
 
 bool physical_meta_name::operator==(const physical_meta_name& rhs) const {
     return simple_ == rhs.simple_ &&
-        qualified_ == rhs.qualified_ &&
+        id_ == rhs.id_ &&
         location_ == rhs.location_;
 }
 
@@ -65,20 +65,20 @@ void physical_meta_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::physical_meta_id& physical_meta_name::qualified() const {
-    return qualified_;
+const dogen::identification::entities::physical_meta_id& physical_meta_name::id() const {
+    return id_;
 }
 
-dogen::identification::entities::physical_meta_id& physical_meta_name::qualified() {
-    return qualified_;
+dogen::identification::entities::physical_meta_id& physical_meta_name::id() {
+    return id_;
 }
 
-void physical_meta_name::qualified(const dogen::identification::entities::physical_meta_id& v) {
-    qualified_ = v;
+void physical_meta_name::id(const dogen::identification::entities::physical_meta_id& v) {
+    id_ = v;
 }
 
-void physical_meta_name::qualified(const dogen::identification::entities::physical_meta_id&& v) {
-    qualified_ = std::move(v);
+void physical_meta_name::id(const dogen::identification::entities::physical_meta_id&& v) {
+    id_ = std::move(v);
 }
 
 const dogen::identification::entities::physical_meta_location& physical_meta_name::location() const {

@@ -29,14 +29,14 @@ logical_name_tree::logical_name_tree()
       is_floating_point_(static_cast<bool>(0)) { }
 
 logical_name_tree::logical_name_tree(
-    const dogen::identification::entities::name_representations& representations,
+    const dogen::identification::entities::qualified_name_representations& qualified,
     const dogen::identification::entities::logical_name& current,
     const std::list<dogen::identification::entities::logical_name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency,
     const bool is_current_simple_type,
     const bool is_floating_point)
-    : representations_(representations),
+    : qualified_(qualified),
       current_(current),
       children_(children),
       are_children_opaque_(are_children_opaque),
@@ -46,7 +46,7 @@ logical_name_tree::logical_name_tree(
 
 void logical_name_tree::swap(logical_name_tree& other) noexcept {
     using std::swap;
-    swap(representations_, other.representations_);
+    swap(qualified_, other.qualified_);
     swap(current_, other.current_);
     swap(children_, other.children_);
     swap(are_children_opaque_, other.are_children_opaque_);
@@ -56,7 +56,7 @@ void logical_name_tree::swap(logical_name_tree& other) noexcept {
 }
 
 bool logical_name_tree::operator==(const logical_name_tree& rhs) const {
-    return representations_ == rhs.representations_ &&
+    return qualified_ == rhs.qualified_ &&
         current_ == rhs.current_ &&
         children_ == rhs.children_ &&
         are_children_opaque_ == rhs.are_children_opaque_ &&
@@ -71,20 +71,20 @@ logical_name_tree& logical_name_tree::operator=(logical_name_tree other) {
     return *this;
 }
 
-const dogen::identification::entities::name_representations& logical_name_tree::representations() const {
-    return representations_;
+const dogen::identification::entities::qualified_name_representations& logical_name_tree::qualified() const {
+    return qualified_;
 }
 
-dogen::identification::entities::name_representations& logical_name_tree::representations() {
-    return representations_;
+dogen::identification::entities::qualified_name_representations& logical_name_tree::qualified() {
+    return qualified_;
 }
 
-void logical_name_tree::representations(const dogen::identification::entities::name_representations& v) {
-    representations_ = v;
+void logical_name_tree::qualified(const dogen::identification::entities::qualified_name_representations& v) {
+    qualified_ = v;
 }
 
-void logical_name_tree::representations(const dogen::identification::entities::name_representations&& v) {
-    representations_ = std::move(v);
+void logical_name_tree::qualified(const dogen::identification::entities::qualified_name_representations&& v) {
+    qualified_ = std::move(v);
 }
 
 const dogen::identification::entities::logical_name& logical_name_tree::current() const {

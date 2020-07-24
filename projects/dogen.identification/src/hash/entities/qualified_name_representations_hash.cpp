@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/hash/entities/name_representations_hash.hpp"
+#include "dogen.identification/hash/entities/qualified_name_representations_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 namespace dogen::identification::entities {
 
-std::size_t name_representations_hasher::hash(const name_representations& v) {
+std::size_t qualified_name_representations_hasher::hash(const qualified_name_representations& v) {
     std::size_t seed(0);
 
     combine(seed, v.dot());

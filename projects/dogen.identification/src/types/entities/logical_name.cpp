@@ -27,29 +27,29 @@ logical_name::logical_name()
 
 logical_name::logical_name(
     const std::string& simple,
-    const dogen::identification::entities::name_representations& representations,
-    const dogen::identification::entities::logical_id& qualified,
+    const dogen::identification::entities::qualified_name_representations& qualified,
+    const dogen::identification::entities::logical_id& id,
     const dogen::identification::entities::logical_location& location,
     const bool is_container)
     : simple_(simple),
-      representations_(representations),
       qualified_(qualified),
+      id_(id),
       location_(location),
       is_container_(is_container) { }
 
 void logical_name::swap(logical_name& other) noexcept {
     using std::swap;
     swap(simple_, other.simple_);
-    swap(representations_, other.representations_);
     swap(qualified_, other.qualified_);
+    swap(id_, other.id_);
     swap(location_, other.location_);
     swap(is_container_, other.is_container_);
 }
 
 bool logical_name::operator==(const logical_name& rhs) const {
     return simple_ == rhs.simple_ &&
-        representations_ == rhs.representations_ &&
         qualified_ == rhs.qualified_ &&
+        id_ == rhs.id_ &&
         location_ == rhs.location_ &&
         is_container_ == rhs.is_container_;
 }
@@ -76,36 +76,36 @@ void logical_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::name_representations& logical_name::representations() const {
-    return representations_;
-}
-
-dogen::identification::entities::name_representations& logical_name::representations() {
-    return representations_;
-}
-
-void logical_name::representations(const dogen::identification::entities::name_representations& v) {
-    representations_ = v;
-}
-
-void logical_name::representations(const dogen::identification::entities::name_representations&& v) {
-    representations_ = std::move(v);
-}
-
-const dogen::identification::entities::logical_id& logical_name::qualified() const {
+const dogen::identification::entities::qualified_name_representations& logical_name::qualified() const {
     return qualified_;
 }
 
-dogen::identification::entities::logical_id& logical_name::qualified() {
+dogen::identification::entities::qualified_name_representations& logical_name::qualified() {
     return qualified_;
 }
 
-void logical_name::qualified(const dogen::identification::entities::logical_id& v) {
+void logical_name::qualified(const dogen::identification::entities::qualified_name_representations& v) {
     qualified_ = v;
 }
 
-void logical_name::qualified(const dogen::identification::entities::logical_id&& v) {
+void logical_name::qualified(const dogen::identification::entities::qualified_name_representations&& v) {
     qualified_ = std::move(v);
+}
+
+const dogen::identification::entities::logical_id& logical_name::id() const {
+    return id_;
+}
+
+dogen::identification::entities::logical_id& logical_name::id() {
+    return id_;
+}
+
+void logical_name::id(const dogen::identification::entities::logical_id& v) {
+    id_ = v;
+}
+
+void logical_name::id(const dogen::identification::entities::logical_id&& v) {
+    id_ = std::move(v);
 }
 
 const dogen::identification::entities::logical_location& logical_name::location() const {

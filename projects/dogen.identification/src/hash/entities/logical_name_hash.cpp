@@ -21,7 +21,7 @@
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.identification/hash/entities/logical_name_hash.hpp"
 #include "dogen.identification/hash/entities/logical_location_hash.hpp"
-#include "dogen.identification/hash/entities/name_representations_hash.hpp"
+#include "dogen.identification/hash/entities/qualified_name_representations_hash.hpp"
 
 namespace {
 
@@ -39,8 +39,8 @@ std::size_t logical_name_hasher::hash(const logical_name& v) {
     std::size_t seed(0);
 
     combine(seed, v.simple());
-    combine(seed, v.representations());
     combine(seed, v.qualified());
+    combine(seed, v.id());
     combine(seed, v.location());
     combine(seed, v.is_container());
 

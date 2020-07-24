@@ -52,7 +52,7 @@ public:
 public:
     physical_meta_name(
         const std::string& simple,
-        const dogen::identification::entities::physical_meta_id& qualified,
+        const dogen::identification::entities::physical_meta_id& id,
         const dogen::identification::entities::physical_meta_location& location);
 
 public:
@@ -67,13 +67,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified name for a physical meta-element.
+     * @brief Identifier for this physical meta-element.
      */
     /**@{*/
-    const dogen::identification::entities::physical_meta_id& qualified() const;
-    dogen::identification::entities::physical_meta_id& qualified();
-    void qualified(const dogen::identification::entities::physical_meta_id& v);
-    void qualified(const dogen::identification::entities::physical_meta_id&& v);
+    const dogen::identification::entities::physical_meta_id& id() const;
+    dogen::identification::entities::physical_meta_id& id();
+    void id(const dogen::identification::entities::physical_meta_id& v);
+    void id(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
     /**
@@ -98,7 +98,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::physical_meta_id qualified_;
+    dogen::identification::entities::physical_meta_id id_;
     dogen::identification::entities::physical_meta_location location_;
 };
 

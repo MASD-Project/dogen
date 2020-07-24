@@ -54,9 +54,9 @@ void physical_meta_name_validator::common_validation(
     }
 
     /*
-     * Qualified name must be populated.
+     * ID must be populated.
      */
-    if (mn.qualified().value().empty()) {
+    if (mn.id().value().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_qualified;
         BOOST_THROW_EXCEPTION(validation_error(empty_qualified));
     }

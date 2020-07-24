@@ -24,19 +24,19 @@ namespace dogen::identification::entities {
 
 logical_meta_name::logical_meta_name(
     const std::string& simple,
-    const dogen::identification::entities::logical_meta_id& qualified)
+    const dogen::identification::entities::logical_meta_id& id)
     : simple_(simple),
-      qualified_(qualified) { }
+      id_(id) { }
 
 void logical_meta_name::swap(logical_meta_name& other) noexcept {
     using std::swap;
     swap(simple_, other.simple_);
-    swap(qualified_, other.qualified_);
+    swap(id_, other.id_);
 }
 
 bool logical_meta_name::operator==(const logical_meta_name& rhs) const {
     return simple_ == rhs.simple_ &&
-        qualified_ == rhs.qualified_;
+        id_ == rhs.id_;
 }
 
 logical_meta_name& logical_meta_name::operator=(logical_meta_name other) {
@@ -61,20 +61,20 @@ void logical_meta_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::logical_meta_id& logical_meta_name::qualified() const {
-    return qualified_;
+const dogen::identification::entities::logical_meta_id& logical_meta_name::id() const {
+    return id_;
 }
 
-dogen::identification::entities::logical_meta_id& logical_meta_name::qualified() {
-    return qualified_;
+dogen::identification::entities::logical_meta_id& logical_meta_name::id() {
+    return id_;
 }
 
-void logical_meta_name::qualified(const dogen::identification::entities::logical_meta_id& v) {
-    qualified_ = v;
+void logical_meta_name::id(const dogen::identification::entities::logical_meta_id& v) {
+    id_ = v;
 }
 
-void logical_meta_name::qualified(const dogen::identification::entities::logical_meta_id&& v) {
-    qualified_ = std::move(v);
+void logical_meta_name::id(const dogen::identification::entities::logical_meta_id&& v) {
+    id_ = std::move(v);
 }
 
 }

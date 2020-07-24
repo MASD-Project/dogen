@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.identification/io/entities/name_representations_io.hpp"
+#include "dogen.identification/io/entities/qualified_name_representations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,9 +32,9 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen::identification::entities {
 
-std::ostream& operator<<(std::ostream& s, const name_representations& v) {
+std::ostream& operator<<(std::ostream& s, const qualified_name_representations& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::identification::entities::name_representations\"" << ", "
+      << "\"__type__\": " << "\"dogen::identification::entities::qualified_name_representations\"" << ", "
       << "\"dot\": " << "\"" << tidy_up_string(v.dot()) << "\"" << ", "
       << "\"colon\": " << "\"" << tidy_up_string(v.colon()) << "\"" << ", "
       << "\"identifiable\": " << "\"" << tidy_up_string(v.identifiable()) << "\""

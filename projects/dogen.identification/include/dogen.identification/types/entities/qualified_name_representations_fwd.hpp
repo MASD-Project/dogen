@@ -18,34 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_HASH_ENTITIES_NAME_REPRESENTATIONS_HASH_HPP
-#define DOGEN_IDENTIFICATION_HASH_ENTITIES_NAME_REPRESENTATIONS_HASH_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_NAME_REPRESENTATIONS_FWD_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_NAME_REPRESENTATIONS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen.identification/types/entities/name_representations.hpp"
-
 namespace dogen::identification::entities {
 
-struct name_representations_hasher {
-public:
-    static std::size_t hash(const name_representations& v);
-};
+class qualified_name_representations;
 
 }
 
-namespace std {
-
-template<>
-struct hash<dogen::identification::entities::name_representations> {
-public:
-    size_t operator()(const dogen::identification::entities::name_representations& v) const {
-        return dogen::identification::entities::name_representations_hasher::hash(v);
-    }
-};
-
-}
 #endif

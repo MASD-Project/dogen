@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_name_tree_io.hpp"
-#include "dogen.identification/io/entities/name_representations_io.hpp"
+#include "dogen.identification/io/entities/qualified_name_representations_io.hpp"
 
 namespace std {
 
@@ -49,7 +49,7 @@ std::ostream& operator<<(std::ostream& s, const logical_name_tree& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_name_tree\"" << ", "
-      << "\"representations\": " << v.representations() << ", "
+      << "\"qualified\": " << v.qualified() << ", "
       << "\"current\": " << v.current() << ", "
       << "\"children\": " << v.children() << ", "
       << "\"are_children_opaque\": " << v.are_children_opaque() << ", "

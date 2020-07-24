@@ -82,19 +82,19 @@ entities::physical_meta_name physical_meta_name_builder::build() {
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
         mn.simple(l.archetype());
-        mn.qualified(physical_meta_id_builder::build_archetype(l));
+        mn.id(physical_meta_id_builder::build_archetype(l));
         physical_meta_name_validator::validate_archetype_name(mn);
     } else if (has_facet) {
         mn.simple(l.facet());
-        mn.qualified(physical_meta_id_builder::build_facet(l));
+        mn.id(physical_meta_id_builder::build_facet(l));
         physical_meta_name_validator::validate_facet_name(mn);
     } else if (has_backend) {
         mn.simple(l.backend());
-        mn.qualified(physical_meta_id_builder::build_backend(l));
+        mn.id(physical_meta_id_builder::build_backend(l));
         physical_meta_name_validator::validate_backend_name(mn);
     } else {
         mn.simple(l.meta_model());
-        mn.qualified(physical_meta_id_builder::build_meta_model(l));
+        mn.id(physical_meta_id_builder::build_meta_model(l));
         physical_meta_name_validator::validate_meta_model_name(mn);
     }
 

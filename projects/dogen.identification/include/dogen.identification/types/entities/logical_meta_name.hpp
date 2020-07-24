@@ -41,7 +41,7 @@ public:
 public:
     logical_meta_name(
         const std::string& simple,
-        const dogen::identification::entities::logical_meta_id& qualified);
+        const dogen::identification::entities::logical_meta_id& id);
 
 public:
     /**
@@ -55,13 +55,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Qualified representation of a logical meta-name.
+     * @brief Identifier for this logical meta-element.
      */
     /**@{*/
-    const dogen::identification::entities::logical_meta_id& qualified() const;
-    dogen::identification::entities::logical_meta_id& qualified();
-    void qualified(const dogen::identification::entities::logical_meta_id& v);
-    void qualified(const dogen::identification::entities::logical_meta_id&& v);
+    const dogen::identification::entities::logical_meta_id& id() const;
+    dogen::identification::entities::logical_meta_id& id();
+    void id(const dogen::identification::entities::logical_meta_id& v);
+    void id(const dogen::identification::entities::logical_meta_id&& v);
     /**@}*/
 
 public:
@@ -76,7 +76,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::logical_meta_id qualified_;
+    dogen::identification::entities::logical_meta_id id_;
 };
 
 }

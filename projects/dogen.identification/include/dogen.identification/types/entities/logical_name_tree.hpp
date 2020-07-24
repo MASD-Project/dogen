@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/logical_name_tree.hpp"
-#include "dogen.identification/types/entities/name_representations.hpp"
+#include "dogen.identification/types/entities/qualified_name_representations.hpp"
 
 namespace dogen::identification::entities {
 
@@ -52,7 +52,7 @@ public:
 
 public:
     logical_name_tree(
-        const dogen::identification::entities::name_representations& representations,
+        const dogen::identification::entities::qualified_name_representations& qualified,
         const dogen::identification::entities::logical_name& current,
         const std::list<dogen::identification::entities::logical_name_tree>& children,
         const bool are_children_opaque,
@@ -65,10 +65,10 @@ public:
      * @brief Contains the name according to different representations.
      */
     /**@{*/
-    const dogen::identification::entities::name_representations& representations() const;
-    dogen::identification::entities::name_representations& representations();
-    void representations(const dogen::identification::entities::name_representations& v);
-    void representations(const dogen::identification::entities::name_representations&& v);
+    const dogen::identification::entities::qualified_name_representations& qualified() const;
+    dogen::identification::entities::qualified_name_representations& qualified();
+    void qualified(const dogen::identification::entities::qualified_name_representations& v);
+    void qualified(const dogen::identification::entities::qualified_name_representations&& v);
     /**@}*/
 
     /**
@@ -138,7 +138,7 @@ public:
     logical_name_tree& operator=(logical_name_tree other);
 
 private:
-    dogen::identification::entities::name_representations representations_;
+    dogen::identification::entities::qualified_name_representations qualified_;
     dogen::identification::entities::logical_name current_;
     std::list<dogen::identification::entities::logical_name_tree> children_;
     bool are_children_opaque_;

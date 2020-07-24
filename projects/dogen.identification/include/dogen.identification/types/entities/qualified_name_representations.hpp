@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_NAME_REPRESENTATIONS_HPP
-#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_NAME_REPRESENTATIONS_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_NAME_REPRESENTATIONS_HPP
+#define DOGEN_IDENTIFICATION_TYPES_ENTITIES_QUALIFIED_NAME_REPRESENTATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,17 +31,17 @@
 namespace dogen::identification::entities {
 
 /**
- * @brief All available representations of a name.
+ * @brief All available qualified representations of a name.
  */
-class name_representations final {
+class qualified_name_representations final {
 public:
-    name_representations() = default;
-    name_representations(const name_representations&) = default;
-    name_representations(name_representations&&) = default;
-    ~name_representations() = default;
+    qualified_name_representations() = default;
+    qualified_name_representations(const qualified_name_representations&) = default;
+    qualified_name_representations(qualified_name_representations&&) = default;
+    ~qualified_name_representations() = default;
 
 public:
-    name_representations(
+    qualified_name_representations(
         const std::string& dot,
         const std::string& colon,
         const std::string& identifiable);
@@ -79,14 +79,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const name_representations& rhs) const;
-    bool operator!=(const name_representations& rhs) const {
+    bool operator==(const qualified_name_representations& rhs) const;
+    bool operator!=(const qualified_name_representations& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(name_representations& other) noexcept;
-    name_representations& operator=(name_representations other);
+    void swap(qualified_name_representations& other) noexcept;
+    qualified_name_representations& operator=(qualified_name_representations other);
 
 private:
     std::string dot_;
@@ -100,8 +100,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::identification::entities::name_representations& lhs,
-    dogen::identification::entities::name_representations& rhs) {
+    dogen::identification::entities::qualified_name_representations& lhs,
+    dogen::identification::entities::qualified_name_representations& rhs) {
     lhs.swap(rhs);
 }
 
