@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/new_logical_name_tree_parser.hpp"
 
-namespace dogen::identification::helpers {
+namespace {
 
-bool new_logical_name_tree_parser::operator==(const new_logical_name_tree_parser& /*rhs*/) const {
-    return true;
-}
+using namespace dogen::utility::log;
+auto lg2(logger_factory("identification.helpers.new_name_tree_parser"));
 
 }
