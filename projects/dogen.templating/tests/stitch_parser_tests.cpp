@@ -149,11 +149,10 @@ parse(const std::string& s) {
 }
 
 bool find_kvp(
-    const std::list<std::pair<std::string, std::string>>& tagged_values,
-    const std::string& key, const std::string& value) {
-    const auto pair(std::make_pair(key, value));
-    const auto i(std::find(tagged_values.begin(), tagged_values.end(), pair));
-    return i != tagged_values.end();
+    const std::list<dogen::identification::entities::tagged_value>& tvs,
+    const dogen::identification::entities::tagged_value& tv) {
+    const auto i(std::find(tvs.begin(), tvs.end(), tv));
+    return i != tvs.end();
 }
 
 }
@@ -368,7 +367,9 @@ BOOST_AUTO_TEST_CASE(licence_directive_results_in_expected_template) {
     BOOST_CHECK(body.lines().empty());
     const auto& tvs(body.tagged_values());
     BOOST_REQUIRE(tvs.size() == 1);
-    BOOST_CHECK(find_kvp(tvs, licence_name, licence_value));
+    using dogen::identification::entities::tagged_value;
+    const tagged_value tv(licence_name, licence_value);
+    BOOST_CHECK(find_kvp(tvs, tv));
 }
 
 BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
@@ -379,8 +380,12 @@ BOOST_AUTO_TEST_CASE(multiple_directives_results_in_expected_template) {
     BOOST_CHECK(body.lines().empty());
     const auto& tvs(body.tagged_values());
     BOOST_REQUIRE(tvs.size() == 2);
-    BOOST_CHECK(find_kvp(tvs, licence_name, licence_value));
-    BOOST_CHECK(find_kvp(tvs, copyright_notice_name, copyright_notice_value));
+    using dogen::identification::entities::tagged_value;
+    const tagged_value tv1(licence_name, licence_value);
+    BOOST_CHECK(find_kvp(tvs, tv1));
+
+    const tagged_value tv2(copyright_notice_name, copyright_notice_value);
+    BOOST_CHECK(find_kvp(tvs, tv2));
 }
 
 BOOST_AUTO_TEST_CASE(invalid_directive_throws) {
@@ -538,7 +543,9 @@ BOOST_AUTO_TEST_CASE(namespaces_directive_results_in_expected_template) {
     BOOST_CHECK(body.lines().empty());
     const auto& tvs(body.tagged_values());
     BOOST_REQUIRE(tvs.size() == 1);
-    BOOST_CHECK(find_kvp(tvs, namespaces_name, namespaces_value));
+    using dogen::identification::entities::tagged_value;
+    const tagged_value tv(namespaces_name, namespaces_value);
+    BOOST_CHECK(find_kvp(tvs, tv));
 }
 
 BOOST_AUTO_TEST_CASE(line_with_variable_block_results_in_expected_template) {

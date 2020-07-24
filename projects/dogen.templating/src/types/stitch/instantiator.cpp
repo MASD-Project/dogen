@@ -189,10 +189,10 @@ instantiator::create_text_template(const std::string& text_template_as_string,
      * stitch templates at present, so we just default them to
      * empty.
      */
-    const auto& tv(r.body().tagged_values());
-    const std::list<std::pair<std::string, std::string>> otv;
+    const auto& tvs(r.body().tagged_values());
+    const std::list<identification::entities::tagged_value> otvs;
     const auto bp(variability::entities::binding_point::global);
-    const auto cfg(configuration_factory_.make(tv, otv, bp));
+    const auto cfg(configuration_factory_.make(tvs, otvs, bp));
     r.properties(create_properties(cfg));
 
     /*

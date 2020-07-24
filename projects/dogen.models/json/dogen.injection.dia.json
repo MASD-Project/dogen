@@ -204,8 +204,8 @@
         },
         {
           "name": "tagged_values",
-          "type": "std::list<std::pair<std::string,std::string>>",
-          "documentation": "Dogen instructions, in the key-value-pair form.\n"
+          "type": "std::list<identification::entities::tagged_value>",
+          "documentation": "Tagged values extracted from this comment.\n"
         },
         {
           "name": "applicable_to_parent_object",

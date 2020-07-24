@@ -32,6 +32,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
@@ -68,7 +69,7 @@ private:
      * @brief Aggregate entry data by key.
      */
     std::unordered_map<std::string, std::list<std::string>>
-    aggregate_entries(const std::list<std::pair<std::string, std::string>>&
+    aggregate_entries(const std::list<identification::entities::tagged_value>&
         entries) const;
 
 public:
@@ -76,17 +77,17 @@ public:
      * @brief Create a configuration.
      */
     entities::configuration
-    make(const std::list<std::pair<std::string, std::string>>& entries,
-        const std::list<std::pair<std::string, std::string>>& override_entries,
-        const entities::binding_point bp) const;
+    make(const std::list<identification::entities::tagged_value>& entries,
+        const std::list<identification::entities::tagged_value>&
+        override_entries, const entities::binding_point bp) const;
 
     /**
      * @brief Create a configuration as a shared pointer.
      */
     boost::shared_ptr<entities::configuration>
     make_shared_ptr(
-        const std::list<std::pair<std::string, std::string>>& tagged_values,
-        const std::list<std::pair<std::string, std::string>>&
+        const std::list<identification::entities::tagged_value>& tagged_values,
+        const std::list<identification::entities::tagged_value>&
         tagged_values_overrides, const entities::binding_point bp) const;
 
 private:

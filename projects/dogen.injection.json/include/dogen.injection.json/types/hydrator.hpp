@@ -29,6 +29,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/entities/element.hpp"
 #include "dogen.injection/types/entities/attribute.hpp"
@@ -63,7 +64,7 @@ private:
     /**
      * @brief Reads the tagged values, if any exists.
      */
-    std::list<std::pair<std::string, std::string>>
+    std::list<identification::entities::tagged_value>
     read_tagged_values(const boost::property_tree::ptree& pt) const;
 
 private:

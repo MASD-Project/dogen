@@ -95,7 +95,7 @@ profile_adapter::adapt(const variability::entities::feature_model& fm,
         r.parents().push_back(n.qualified().dot());
 
     /*
-     * Create an entries container in the expected format by the
+     * Create a tagged values container in the expected format by the
      * variability sub-system. Note that for collections we can have a
      * single entry with multiple values to make logical
      * representation more sensible; instead of having several
@@ -104,10 +104,11 @@ profile_adapter::adapt(const variability::entities::feature_model& fm,
      * name. However, here we need to project this representation back
      * into a flat list with multiple KVP entries per attribute.
      */
-    std::list<std::pair<std::string, std::string>> entries;
+    using identification::entities::tagged_value;
+    std::list<tagged_value> tvs;
     for (const auto& e : p.entries()) {
         for (const auto& v : e.value())
-            entries.push_back(std::make_pair(e.key(), v));
+            tvs.push_back(tagged_value(e.key(), v));
     }
 
     /*
@@ -130,7 +131,7 @@ profile_adapter::adapt(const variability::entities::feature_model& fm,
      */
     using variability::helpers::configuration_points_factory;
     configuration_points_factory cpf(fm, compatibility_mode);
-    r.configuration_points(cpf.make(entries));
+    r.configuration_points(cpf.make(tvs));
 
     return r;
 }

@@ -26,10 +26,9 @@
 #endif
 
 #include <list>
-#include <string>
-#include <utility>
 #include <algorithm>
 #include "dogen.templating/types/stitch/line.hpp"
+#include "dogen.identification/types/entities/tagged_value.hpp"
 
 namespace dogen::templating::stitch {
 
@@ -42,14 +41,19 @@ public:
 
 public:
     text_template_body(
-        const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const std::list<dogen::templating::stitch::line>& lines);
 
 public:
-    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
-    std::list<std::pair<std::string, std::string> >& tagged_values();
-    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
-    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+    /**
+     * @brief Set of tagged values read from the template.
+     */
+    /**@{*/
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values() const;
+    std::list<dogen::identification::entities::tagged_value>& tagged_values();
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>& v);
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v);
+    /**@}*/
 
     const std::list<dogen::templating::stitch::line>& lines() const;
     std::list<dogen::templating::stitch::line>& lines();
@@ -67,7 +71,7 @@ public:
     text_template_body& operator=(text_template_body other);
 
 private:
-    std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::list<dogen::identification::entities::tagged_value> tagged_values_;
     std::list<dogen::templating::stitch::line> lines_;
 };
 

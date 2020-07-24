@@ -27,7 +27,7 @@ processed_comment::processed_comment()
 
 processed_comment::processed_comment(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values,
     const bool applicable_to_parent_object,
     const std::string& original_content)
     : documentation_(documentation),
@@ -72,19 +72,19 @@ void processed_comment::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& processed_comment::tagged_values() const {
+const std::list<dogen::identification::entities::tagged_value>& processed_comment::tagged_values() const {
     return tagged_values_;
 }
 
-std::list<std::pair<std::string, std::string> >& processed_comment::tagged_values() {
+std::list<dogen::identification::entities::tagged_value>& processed_comment::tagged_values() {
     return tagged_values_;
 }
 
-void processed_comment::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+void processed_comment::tagged_values(const std::list<dogen::identification::entities::tagged_value>& v) {
     tagged_values_ = v;
 }
 
-void processed_comment::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+void processed_comment::tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v) {
     tagged_values_ = std::move(v);
 }
 

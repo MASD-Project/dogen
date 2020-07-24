@@ -78,10 +78,11 @@ processed_comment processed_comment_factory::make(const std::string& c) {
                 BOOST_THROW_EXCEPTION(building_error(separator_not_found));
             }
 
-            const auto key(line.substr(0, pos));
-            const auto value(line.substr(pos + 1));
-            applicable_to_parent_object |= (key == traits::comment());
-            r.tagged_values().push_back(std::make_pair(key, value));
+            identification::entities::tagged_value tv;
+            tv.tag(line.substr(0, pos));
+            tv.value(line.substr(pos + 1));
+            applicable_to_parent_object |= (tv.tag() == traits::comment());
+            r.tagged_values().push_back(tv);
             continue;
         }
 

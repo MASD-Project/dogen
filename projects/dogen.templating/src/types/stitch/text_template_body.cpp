@@ -23,7 +23,7 @@
 namespace dogen::templating::stitch {
 
 text_template_body::text_template_body(
-    const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values,
     const std::list<dogen::templating::stitch::line>& lines)
     : tagged_values_(tagged_values),
       lines_(lines) { }
@@ -45,19 +45,19 @@ text_template_body& text_template_body::operator=(text_template_body other) {
     return *this;
 }
 
-const std::list<std::pair<std::string, std::string> >& text_template_body::tagged_values() const {
+const std::list<dogen::identification::entities::tagged_value>& text_template_body::tagged_values() const {
     return tagged_values_;
 }
 
-std::list<std::pair<std::string, std::string> >& text_template_body::tagged_values() {
+std::list<dogen::identification::entities::tagged_value>& text_template_body::tagged_values() {
     return tagged_values_;
 }
 
-void text_template_body::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+void text_template_body::tagged_values(const std::list<dogen::identification::entities::tagged_value>& v) {
     tagged_values_ = v;
 }
 
-void text_template_body::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+void text_template_body::tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v) {
     tagged_values_ = std::move(v);
 }
 

@@ -30,6 +30,7 @@
 #include <utility>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
@@ -73,12 +74,12 @@ private:
 public:
     std::unordered_map<std::string, entities::configuration_point>
     make(const entities::binding_point bp,
-        const std::list<std::pair<std::string, std::string>>& entries,
+        const std::list<identification::entities::tagged_value>& tvs,
         const std::unordered_map<std::string, std::list<std::string>>&
         aggregated_override_entries) const;
 
-    std::unordered_map<std::string, entities::configuration_point>
-    make(const std::list<std::pair<std::string, std::string>>& entries) const;
+    std::unordered_map<std::string, entities::configuration_point> make(
+        const std::list<identification::entities::tagged_value>& tvs) const;
 
 private:
     const entities::feature_model& feature_model_;

@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.utility/types/io/pair_io.hpp"
+#include "dogen.identification/io/entities/tagged_value_io.hpp"
 #include "dogen.injection.dia/types/building_error.hpp"
 #include "dogen.injection.dia/types/adapter.hpp"
 #include "dogen.injection.dia/types/builder.hpp"

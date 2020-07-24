@@ -2403,7 +2403,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,17.95;-85.25,89.35"/>
+        <dia:rectangle val="-117.05,17.95;-85.25,90.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2415,7 +2415,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="31.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="71.299999999999997"/>
+        <dia:real val="72.099999999999994"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2512,6 +2512,7 @@ For details on the stereotypes see the MASD UML profile.
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
 #DOGEN masd.injection.reference=dogen.injection
+#DOGEN masd.injection.reference=dogen.identification
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
@@ -2766,16 +2767,16 @@ and child relationships between objects.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="-71,67"/>
+        <dia:point val="-72,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,66.95;-46.965,72.25"/>
+        <dia:rectangle val="-72.05,66.95;-46.425,72.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-71,67"/>
+        <dia:point val="-72,67"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.984999999999999"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2896,13 +2897,13 @@ and child relationships between objects.#</dia:string>
             <dia:string>#tagged_values#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::pair&lt;std::string,std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;identification::entities::tagged_value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Dogen instructions, in the key-value-pair form.#</dia:string>
+            <dia:string>#Tagged values extracted from this comment.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3488,7 +3489,7 @@ manageable format.#</dia:string>
         <dia:point val="-15.43,75.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-59.0575,72.15;-14.68,78.055"/>
+        <dia:rectangle val="-59.2875,72.15;-14.68,78.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3496,8 +3497,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-15.43,75.4"/>
         <dia:point val="-15.43,78"/>
-        <dia:point val="-59.0075,78"/>
-        <dia:point val="-59.0075,72.2"/>
+        <dia:point val="-59.2375,78"/>
+        <dia:point val="-59.2375,72.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3630,7 +3631,7 @@ manageable format.#</dia:string>
         <dia:point val="-43,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.065,64.255;-42.25,67.8"/>
+        <dia:rectangle val="-46.525,64.255;-42.25,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3638,8 +3639,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-43,67"/>
         <dia:point val="-43,65"/>
-        <dia:point val="-47.015,65"/>
-        <dia:point val="-47.015,67"/>
+        <dia:point val="-46.475,65"/>
+        <dia:point val="-46.475,67"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3772,7 +3773,7 @@ manageable format.#</dia:string>
         <dia:point val="-53.0875,62.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,61.85;-52.3375,67.8"/>
+        <dia:rectangle val="-72.05,61.85;-52.3375,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3780,8 +3781,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-53.0875,62.6"/>
         <dia:point val="-53.0875,65"/>
-        <dia:point val="-71,65"/>
-        <dia:point val="-71,67"/>
+        <dia:point val="-72,65"/>
+        <dia:point val="-72,67"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

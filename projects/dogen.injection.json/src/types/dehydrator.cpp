@@ -53,20 +53,20 @@ void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
 }
 
 void dehydrator::insert_tagged_values(std::ostream& s,
-    const std::list<std::pair<std::string, std::string>>& tv) {
+    const std::list<identification::entities::tagged_value>& tvs) {
 
     utility::formatters::utility_formatter uf(s);
     uf.insert_quoted("tagged_values");
     s << " : { ";
 
     bool is_first(true);
-    for (const auto& pair : tv) {
+    for (const auto& tv : tvs) {
         if (!is_first)
             s << ", ";
 
-        uf.insert_quoted(pair.first);
+        uf.insert_quoted(tv.tag());
         s << " : ";
-        uf.insert_quoted_escaped(pair.second);
+        uf.insert_quoted_escaped(tv.value());
         is_first = false;
     }
     s << " }";

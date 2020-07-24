@@ -275,11 +275,11 @@
       "attributes": [
         {
           "name": "tagged_values",
-          "type": "std::list<std::pair<std::string, std::string>>"
+          "type": "std::list<identification::entities::tagged_value>"
         },
         {
           "name": "tagged_values_overrides",
-          "type": "std::list<std::pair<std::string, std::string>>",
+          "type": "std::list<identification::entities::tagged_value>",
           "documentation": "Meta-data sourced externally that can be used to override meta-data in model.\n"
         }
       ]

@@ -28,6 +28,7 @@
 #include <string>
 #include <utility>
 #include <boost/exception/info.hpp>
+#include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.templating/types/stitch/line.hpp"
 #include "dogen.templating/types/stitch/block.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"
@@ -83,9 +84,9 @@ private:
         const std::string& input_line) const;
 
     /**
-     * @brief Parse a line with a directive.
+     * @brief Parse a line with a directive into a tagged value.
      */
-    std::pair<std::string, std::string>
+    identification::entities::tagged_value
     parse_directive(const std::string& input_line) const;
 
     /**

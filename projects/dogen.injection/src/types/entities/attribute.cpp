@@ -33,8 +33,8 @@ const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
 namespace dogen::injection::entities {
 
 attribute::attribute(
-    const std::list<std::pair<std::string, std::string> >& tagged_values,
-    const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values,
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const dogen::identification::entities::name& name,
@@ -83,35 +83,35 @@ attribute& attribute::operator=(attribute other) {
     return *this;
 }
 
-const std::list<std::pair<std::string, std::string> >& attribute::tagged_values() const {
+const std::list<dogen::identification::entities::tagged_value>& attribute::tagged_values() const {
     return tagged_values_;
 }
 
-std::list<std::pair<std::string, std::string> >& attribute::tagged_values() {
+std::list<dogen::identification::entities::tagged_value>& attribute::tagged_values() {
     return tagged_values_;
 }
 
-void attribute::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+void attribute::tagged_values(const std::list<dogen::identification::entities::tagged_value>& v) {
     tagged_values_ = v;
 }
 
-void attribute::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+void attribute::tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v) {
     tagged_values_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& attribute::tagged_values_overrides() const {
+const std::list<dogen::identification::entities::tagged_value>& attribute::tagged_values_overrides() const {
     return tagged_values_overrides_;
 }
 
-std::list<std::pair<std::string, std::string> >& attribute::tagged_values_overrides() {
+std::list<dogen::identification::entities::tagged_value>& attribute::tagged_values_overrides() {
     return tagged_values_overrides_;
 }
 
-void attribute::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >& v) {
+void attribute::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v) {
     tagged_values_overrides_ = v;
 }
 
-void attribute::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >&& v) {
+void attribute::tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v) {
     tagged_values_overrides_ = std::move(v);
 }
 

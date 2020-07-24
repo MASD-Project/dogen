@@ -133,8 +133,8 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.stereotypes().back() == another_stereotype);
 
     BOOST_REQUIRE(m.tagged_values().size() == 1);
-    BOOST_CHECK(m.tagged_values().front().first == some_key);
-    BOOST_CHECK(m.tagged_values().front().second == some_value);
+    BOOST_CHECK(m.tagged_values().front().tag() == some_key);
+    BOOST_CHECK(m.tagged_values().front().value() == some_value);
 
     BOOST_REQUIRE(m.elements().size() == 1);
     const auto& e(m.elements().front());
@@ -146,8 +146,8 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
     BOOST_CHECK(e.parents().back() == second_parent);
 
     BOOST_REQUIRE(e.tagged_values().size() == 1);
-    BOOST_CHECK(e.tagged_values().front().first == some_key);
-    BOOST_CHECK(e.tagged_values().front().second == some_value);
+    BOOST_CHECK(e.tagged_values().front().tag() == some_key);
+    BOOST_CHECK(e.tagged_values().front().value() == some_value);
 
     BOOST_REQUIRE(e.stereotypes().size() == 2);
     BOOST_CHECK(e.stereotypes().back() == a_stereotype);
@@ -183,8 +183,8 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
     BOOST_CHECK(a.documentation() == documentation);
 
     BOOST_REQUIRE(a.tagged_values().size() == 1);
-    BOOST_CHECK(a.tagged_values().front().first == some_key);
-    BOOST_CHECK(a.tagged_values().front().second == some_value);
+    BOOST_CHECK(a.tagged_values().front().tag() == some_key);
+    BOOST_CHECK(a.tagged_values().front().value() == some_value);
 
     BOOST_CHECK(a.stereotypes().size() == 2);
     BOOST_CHECK(a.stereotypes().front() == a_stereotype);

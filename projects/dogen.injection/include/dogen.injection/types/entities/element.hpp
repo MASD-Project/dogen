@@ -27,12 +27,12 @@
 
 #include <list>
 #include <string>
-#include <utility>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.identification/types/entities/name.hpp"
 #include "dogen.injection/types/entities/attribute.hpp"
 #include "dogen.identification/types/entities/injection_id.hpp"
+#include "dogen.identification/types/entities/tagged_value.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 
@@ -52,8 +52,8 @@ public:
 
 public:
     element(
-        const std::list<std::pair<std::string, std::string> >& tagged_values,
-        const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
+        const std::list<dogen::identification::entities::tagged_value>& tagged_values,
+        const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides,
         const std::list<std::string>& stereotypes,
         const std::string& documentation,
         const dogen::identification::entities::name& name,
@@ -71,19 +71,19 @@ public:
         const dogen::identification::entities::injection_id& containing_element_id);
 
 public:
-    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
-    std::list<std::pair<std::string, std::string> >& tagged_values();
-    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
-    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values() const;
+    std::list<dogen::identification::entities::tagged_value>& tagged_values();
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>& v);
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v);
 
     /**
      * @brief Meta-data sourced externally that can be used to override meta-data in model.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& tagged_values_overrides() const;
-    std::list<std::pair<std::string, std::string> >& tagged_values_overrides();
-    void tagged_values_overrides(const std::list<std::pair<std::string, std::string> >& v);
-    void tagged_values_overrides(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides() const;
+    std::list<dogen::identification::entities::tagged_value>& tagged_values_overrides();
+    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>& v);
+    void tagged_values_overrides(const std::list<dogen::identification::entities::tagged_value>&& v);
     /**@}*/
 
     const std::list<std::string>& stereotypes() const;
@@ -194,8 +194,8 @@ public:
     element& operator=(element other);
 
 private:
-    std::list<std::pair<std::string, std::string> > tagged_values_;
-    std::list<std::pair<std::string, std::string> > tagged_values_overrides_;
+    std::list<dogen::identification::entities::tagged_value> tagged_values_;
+    std::list<dogen::identification::entities::tagged_value> tagged_values_overrides_;
     std::list<std::string> stereotypes_;
     std::string documentation_;
     dogen::identification::entities::name name_;

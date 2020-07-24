@@ -188,7 +188,7 @@ parse_inline_standard_control_block(const std::string& input_line) const {
     return r;
 }
 
-std::pair<std::string, std::string> parser::
+identification::entities::tagged_value parser::
 parse_directive(const std::string& input_line) const {
 
     auto cooked_line(input_line);
@@ -213,9 +213,10 @@ parse_directive(const std::string& input_line) const {
         BOOST_THROW_EXCEPTION(parsing_error(separator_not_found + cooked_line));
     }
 
-    const auto key(cooked_line.substr(0, pos));
-    const auto value(cooked_line.substr(pos + 1));
-    return std::make_pair(key, value);
+    identification::entities::tagged_value r;
+    r.tag(cooked_line.substr(0, pos));
+    r.value(cooked_line.substr(pos + 1));
+    return r;
 }
 
 line parser::parse_variable(const std::string& input_line) const {
@@ -249,7 +250,7 @@ text_template_body parser::parse(const std::string& s) const {
 
     std::list<line> lines;
     unsigned int line_number(0);
-    std::list<std::pair<std::string, std::string>> tagged_values;
+    std::list<identification::entities::tagged_value> tvs;
     try {
         line output_line;
         bool in_standard_control_block(false), in_directives_block(true);
@@ -273,8 +274,7 @@ text_template_body parser::parse(const std::string& s) const {
                         parsing_error(unexpected_directive));
                 }
 
-                const auto kvp(parse_directive(input_line));
-                tagged_values.push_back(kvp);
+                tvs.push_back(parse_directive(input_line));
                 continue;
             }
 
@@ -369,7 +369,7 @@ text_template_body parser::parse(const std::string& s) const {
     }
 
     text_template_body r;
-    r.tagged_values(tagged_values);
+    r.tagged_values(tvs);
     r.lines(lines);
 
     BOOST_LOG_SEV(lg, debug) << "Finished parsing. Result: " << r;

@@ -2158,16 +2158,16 @@ main stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="18,2"/>
+        <dia:point val="17,2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,1.95;46.27,6.45"/>
+        <dia:rectangle val="16.95,1.95;46.425,6.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18,2"/>
+        <dia:point val="17,2"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2265,7 +2265,7 @@ main stereotypes.#</dia:string>
             <dia:string>#tagged_values#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::pair&lt;std::string, std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;identification::entities::tagged_value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2288,7 +2288,7 @@ main stereotypes.#</dia:string>
             <dia:string>#tagged_values_overrides#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::pair&lt;std::string, std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;identification::entities::tagged_value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5472,17 +5472,17 @@ and, if so, ignore it.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="32.11,6.4"/>
+        <dia:point val="31.6875,6.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.26,6.35;42.1125,16.05"/>
+        <dia:rectangle val="30.8375,6.35;42.1125,16.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="32.11,6.4"/>
-        <dia:point val="32.11,14"/>
+        <dia:point val="31.6875,6.4"/>
+        <dia:point val="31.6875,14"/>
         <dia:point val="42.0625,14"/>
         <dia:point val="42.0625,16"/>
       </dia:attribute>

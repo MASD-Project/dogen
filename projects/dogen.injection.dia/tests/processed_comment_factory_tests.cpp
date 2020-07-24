@@ -24,12 +24,11 @@
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.identification/io/entities/tagged_value_io.hpp"
 #include "dogen.injection.dia/types/building_error.hpp"
 #include "dogen.injection.dia/io/processed_comment_io.hpp"
 #include "dogen.injection.dia/types/processed_comment_factory.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-
-using dogen::utility::test::asserter;
 
 namespace  {
 
@@ -171,9 +170,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_e
     BOOST_CHECK(!r.applicable_to_parent_object());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
 
-    const auto& pair(*r.tagged_values().begin());
-    BOOST_CHECK(pair.first == key_1);
-    BOOST_CHECK(pair.second == value_1);
+    const auto& tv(*r.tagged_values().begin());
+    BOOST_CHECK(tv.tag() == key_1);
+    BOOST_CHECK(tv.value() == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empty_documentation_and_expected_key_value_pair) {
@@ -191,9 +190,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empt
     BOOST_CHECK(!r.applicable_to_parent_object());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
 
-    const auto& pair(*r.tagged_values().begin());
-    BOOST_CHECK(pair.first == key_1);
-    BOOST_CHECK(pair.second == value_1);
+    const auto& tv(*r.tagged_values().begin());
+    BOOST_CHECK(tv.tag() == key_1);
+    BOOST_CHECK(tv.value() == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_key_throws) {
@@ -327,9 +326,9 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_doc
 
     BOOST_CHECK(!r.applicable_to_parent_object());
     BOOST_REQUIRE(r.tagged_values().size() == 1);
-    const auto& pair(*r.tagged_values().begin());
-    BOOST_CHECK(pair.first == key_1);
-    BOOST_CHECK(pair.second == value_1);
+    const auto& tv(*r.tagged_values().begin());
+    BOOST_CHECK(tv.tag() == key_1);
+    BOOST_CHECK(tv.value() == value_1);
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documentation_and_expected_tagged_values) {
@@ -349,18 +348,18 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documen
     BOOST_REQUIRE(r.tagged_values().size() == 4);
 
     auto i(r.tagged_values().begin());
-    BOOST_CHECK(i->first == key_1);
-    BOOST_CHECK(i->second == value_1);
+    BOOST_CHECK(i->tag() == key_1);
+    BOOST_CHECK(i->value() == value_1);
 
-    BOOST_CHECK((++i)->first == key_2);
-    BOOST_CHECK(i->second == value_2);
+    BOOST_CHECK((++i)->tag() == key_2);
+    BOOST_CHECK(i->value() == value_2);
 
-    BOOST_CHECK((++i)->first == key_3);
-    BOOST_CHECK(i->second == value_3);
+    BOOST_CHECK((++i)->tag() == key_3);
+    BOOST_CHECK(i->value() == value_3);
 
     // test duplicate keys
-    BOOST_CHECK((++i)->first == key_1);
-    BOOST_CHECK(i->second == value_1);
+    BOOST_CHECK((++i)->tag() == key_1);
+    BOOST_CHECK(i->value() == value_1);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

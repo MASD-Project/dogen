@@ -7,7 +7,6 @@
     "masd.injection.reference": "cpp.builtins",
     "masd.injection.reference": "cpp.std",
     "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "dogen.profiles",

@@ -148,9 +148,10 @@ apply(const transforms::context& ctx, entities::model& m) {
             /*
              * Apply the override apply to the model itself.
              */
-            const std::pair<std::string, std::string>
-                pair({ tokens.front(), tokens.back() });
-            m.tagged_values_overrides().push_back(pair);
+            identification::entities::tagged_value tv;
+            tv.tag(tokens.front());
+            tv.value(tokens.back());
+            m.tagged_values_overrides().push_back(tv);
             BOOST_LOG_SEV(lg, trace) << "Applied override to model.";
             continue;
         }
@@ -180,9 +181,10 @@ apply(const transforms::context& ctx, entities::model& m) {
              */
             if (attribute_name.empty()) {
                 found = true;
-                const std::pair<std::string, std::string>
-                    pair({ tokens.front(), tokens.back() });
-                e.tagged_values_overrides().push_back(pair);
+                identification::entities::tagged_value tv;
+                tv.tag(tokens.front());
+                tv.value(tokens.back());
+                e.tagged_values_overrides().push_back(tv);
                 BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
                                          << e.name().simple();
                 continue;
@@ -209,9 +211,10 @@ apply(const transforms::context& ctx, entities::model& m) {
                      * element itself.
                      */
                     found = true;
-                    const std::pair<std::string, std::string>
-                        pair({ tokens.front(), tokens.back() });
-                    a.tagged_values_overrides().push_back(pair);
+                    identification::entities::tagged_value tv;
+                    tv.tag(tokens.front());
+                    tv.value(tokens.back());
+                    a.tagged_values_overrides().push_back(tv);
                     BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
                                              << a.name().simple();
                     continue;

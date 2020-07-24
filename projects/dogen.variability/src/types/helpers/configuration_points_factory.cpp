@@ -209,18 +209,18 @@ void configuration_points_factory::validate_binding(const entities::feature& f,
 
 std::unordered_map<std::string, entities::configuration_point>
 configuration_points_factory::make(const entities::binding_point bp,
-    const std::list<std::pair<std::string, std::string>>& entries,
+    const std::list<identification::entities::tagged_value>& tvs,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_override_entries) const {
 
     gatherer g;
     value_factory factory;
     std::unordered_map<std::string, entities::configuration_point> r;
-    for (auto pair : entries) {
+    for (auto tv : tvs) {
         /*
          * Try to obtain a feature for this key, if it exists.
          */
-        const auto& k(pair.first);
+        const auto& k(tv.tag());
         const auto of(try_obtain_feature(k));
         if (!of)
             continue;
@@ -265,7 +265,7 @@ configuration_points_factory::make(const entities::binding_point bp,
         /*
          * Process the tagged value.
          */
-        const auto& v(pair.second);
+        const auto& v(tv.value());
         if (vt == value_type::key_value_pair)
             g.gather_kvp(f, k, v);
         else if (vt == value_type::text_collection)
@@ -327,10 +327,10 @@ configuration_points_factory::make(const entities::binding_point bp,
 
 std::unordered_map<std::string, entities::configuration_point>
 configuration_points_factory::
-make(const std::list<std::pair<std::string, std::string>>& entries) const {
+make(const std::list<identification::entities::tagged_value>& tvs) const {
     std::unordered_map<std::string, std::list<std::string>> aoe;
     const auto bp(entities::binding_point::any);
-    return make(bp, entries, aoe);
+    return make(bp, tvs, aoe);
 }
 
 }

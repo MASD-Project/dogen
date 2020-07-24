@@ -43,18 +43,18 @@ configuration_factory::configuration_factory(
 
 std::unordered_map<std::string, std::list<std::string>>
 configuration_factory::aggregate_entries(
-    const std::list<std::pair<std::string, std::string>>& entries) const {
+    const std::list<identification::entities::tagged_value>& entries) const {
     std::unordered_map<std::string, std::list<std::string>> r;
 
     for (const auto& entry : entries)
-        r[entry.first].push_back(entry.second);
+        r[entry.tag()].push_back(entry.value());
 
     return r;
 }
 
 entities::configuration configuration_factory::make(
-    const std::list<std::pair<std::string, std::string>>& tagged_values,
-    const std::list<std::pair<std::string, std::string>>&
+    const std::list<identification::entities::tagged_value>& tagged_values,
+    const std::list<identification::entities::tagged_value>&
     tagged_values_overrides, const entities::binding_point bp) const {
     const auto& tv(tagged_values);
     const auto atvo(aggregate_entries(tagged_values_overrides));
@@ -66,8 +66,8 @@ entities::configuration configuration_factory::make(
 
 boost::shared_ptr<entities::configuration>
 configuration_factory::make_shared_ptr(
-    const std::list<std::pair<std::string, std::string>>& tagged_values,
-    const std::list<std::pair<std::string, std::string>>&
+    const std::list<identification::entities::tagged_value>& tagged_values,
+    const std::list<identification::entities::tagged_value>&
     tagged_values_overrides, const entities::binding_point bp) const {
     const auto& tv(tagged_values);
     const auto atvo(aggregate_entries(tagged_values_overrides));

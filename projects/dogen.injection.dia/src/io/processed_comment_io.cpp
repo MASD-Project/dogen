@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.injection.dia/io/processed_comment_io.hpp"
+#include "dogen.identification/io/entities/tagged_value_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,20 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
-    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
-
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
-    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::tagged_value>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

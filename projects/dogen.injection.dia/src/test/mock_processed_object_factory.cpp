@@ -116,8 +116,10 @@ make_uml_note_with_marker(const unsigned int n) {
     r.comment().documentation(doxygen_comment);
     r.comment().original_content(s.str());
     r.comment().applicable_to_parent_object(true);
-    const auto pair(std::make_pair(instruction_key, instruction_value));
-    r.comment().tagged_values().push_back(pair);
+    identification::entities::tagged_value tv;
+    tv.tag(instruction_key);
+    tv.value(instruction_value);
+    r.comment().tagged_values().push_back(tv);
     return r;
 }
 

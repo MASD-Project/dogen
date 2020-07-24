@@ -74,17 +74,18 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::list<std::pair<std::string, std::string>>
+std::list<identification::entities::tagged_value>
 hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
-    std::list<std::pair<std::string, std::string>> r;
+    std::list<identification::entities::tagged_value> r;
     const auto i(pt.find(tagged_values_key));
     if (i == pt.not_found() || i->second.empty())
         return r;
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
-        const auto key(j->first);
-        const auto value(j->second.get_value<std::string>());
-        r.push_back(std::make_pair(key, value));
+        identification::entities::tagged_value tv;
+        tv.tag(j->first);
+        tv.value(j->second.get_value<std::string>());
+        r.push_back(tv);
     }
     return r;
 }

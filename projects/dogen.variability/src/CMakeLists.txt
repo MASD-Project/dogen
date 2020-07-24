@@ -43,6 +43,7 @@ target_link_libraries(${lib_target_name}
     dogen.tracing.lib
     dogen.physical.lib
     dogen.utility.lib
+    dogen.identification.lib
     # ${relational_lib}
     ${Boost_LIBRARIES})
 

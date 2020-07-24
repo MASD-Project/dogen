@@ -27,8 +27,8 @@
 
 #include <list>
 #include <string>
-#include <utility>
 #include <algorithm>
+#include "dogen.identification/types/entities/tagged_value.hpp"
 
 namespace dogen::injection::dia {
 
@@ -47,7 +47,7 @@ public:
 public:
     processed_comment(
         const std::string& documentation,
-        const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::list<dogen::identification::entities::tagged_value>& tagged_values,
         const bool applicable_to_parent_object,
         const std::string& original_content);
 
@@ -63,13 +63,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Dogen instructions, in the key-value-pair form.
+     * @brief Tagged values extracted from this comment.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
-    std::list<std::pair<std::string, std::string> >& tagged_values();
-    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
-    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<dogen::identification::entities::tagged_value>& tagged_values() const;
+    std::list<dogen::identification::entities::tagged_value>& tagged_values();
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>& v);
+    void tagged_values(const std::list<dogen::identification::entities::tagged_value>&& v);
     /**@}*/
 
     /**
@@ -102,7 +102,7 @@ public:
 
 private:
     std::string documentation_;
-    std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::list<dogen::identification::entities::tagged_value> tagged_values_;
     bool applicable_to_parent_object_;
     std::string original_content_;
 };

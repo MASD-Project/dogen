@@ -39,12 +39,12 @@ const std::string invalid_enumerator("invalid");
 namespace dogen::injection::org_mode {
 
 void dehydrator::insert_tagged_values(std::ostream& s,
-    const std::list<std::pair<std::string, std::string>>& tv) {
-    if (tv.empty())
+    const std::list<identification::entities::tagged_value>& tvs) {
+    if (tvs.empty())
         return;
 
-    for (const auto& pair : tv)
-        s << ":" << pair.first << ": " << pair.second << std::endl;
+    for (const auto& tv : tvs)
+        s << ":" << tv.tag() << ": " << tv.value() << std::endl;
 }
 
 void dehydrator::insert_stereotypes(std::ostream& s,
@@ -86,11 +86,11 @@ void dehydrator::insert_attribute(std::ostream& s,
     const std::string stars(level, '*');
     s << stars << " " << a.name().simple() << std::endl;
 
-    const auto& tv(a.tagged_values());
+    const auto& tvs(a.tagged_values());
     if (!a.type().empty() || !a.value().empty() || !a.stereotypes().empty()
-        || !tv.empty()) {
+        || !tvs.empty()) {
         s << ":PROPERTIES:" << std::endl;
-        insert_tagged_values(s, tv);
+        insert_tagged_values(s, tvs);
         if (!a.type().empty())
             s << ":masd.injection.type: " << a.type() << std::endl;
 
