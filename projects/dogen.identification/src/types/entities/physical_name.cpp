@@ -24,19 +24,19 @@ namespace dogen::identification::entities {
 
 physical_name::physical_name(
     const std::string& simple,
-    const dogen::identification::entities::physical_id& qualified)
+    const dogen::identification::entities::physical_id& id)
     : simple_(simple),
-      qualified_(qualified) { }
+      id_(id) { }
 
 void physical_name::swap(physical_name& other) noexcept {
     using std::swap;
     swap(simple_, other.simple_);
-    swap(qualified_, other.qualified_);
+    swap(id_, other.id_);
 }
 
 bool physical_name::operator==(const physical_name& rhs) const {
     return simple_ == rhs.simple_ &&
-        qualified_ == rhs.qualified_;
+        id_ == rhs.id_;
 }
 
 physical_name& physical_name::operator=(physical_name other) {
@@ -61,20 +61,20 @@ void physical_name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const dogen::identification::entities::physical_id& physical_name::qualified() const {
-    return qualified_;
+const dogen::identification::entities::physical_id& physical_name::id() const {
+    return id_;
 }
 
-dogen::identification::entities::physical_id& physical_name::qualified() {
-    return qualified_;
+dogen::identification::entities::physical_id& physical_name::id() {
+    return id_;
 }
 
-void physical_name::qualified(const dogen::identification::entities::physical_id& v) {
-    qualified_ = v;
+void physical_name::id(const dogen::identification::entities::physical_id& v) {
+    id_ = v;
 }
 
-void physical_name::qualified(const dogen::identification::entities::physical_id&& v) {
-    qualified_ = std::move(v);
+void physical_name::id(const dogen::identification::entities::physical_id&& v) {
+    id_ = std::move(v);
 }
 
 }

@@ -44,7 +44,7 @@ public:
 public:
     physical_name(
         const std::string& simple,
-        const dogen::identification::entities::physical_id& qualified);
+        const dogen::identification::entities::physical_id& id);
 
 public:
     /**
@@ -61,10 +61,10 @@ public:
      * @brief ID for a physical element.
      */
     /**@{*/
-    const dogen::identification::entities::physical_id& qualified() const;
-    dogen::identification::entities::physical_id& qualified();
-    void qualified(const dogen::identification::entities::physical_id& v);
-    void qualified(const dogen::identification::entities::physical_id&& v);
+    const dogen::identification::entities::physical_id& id() const;
+    dogen::identification::entities::physical_id& id();
+    void id(const dogen::identification::entities::physical_id& v);
+    void id(const dogen::identification::entities::physical_id&& v);
     /**@}*/
 
 public:
@@ -79,7 +79,7 @@ public:
 
 private:
     std::string simple_;
-    dogen::identification::entities::physical_id qualified_;
+    dogen::identification::entities::physical_id id_;
 };
 
 }
