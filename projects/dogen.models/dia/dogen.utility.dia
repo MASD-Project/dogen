@@ -106,7 +106,7 @@
         <dia:point val="2,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-21.05;28.745,-8.85"/>
+        <dia:rectangle val="1.95,-21.05;28.745,-10.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.100000000000001"/>
+        <dia:real val="10.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -9462,7 +9462,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#sha1_hash#</dia:string>
+        <dia:string>#sha1_hasher#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -10823,7 +10823,7 @@ model.
         <dia:point val="15.9925,114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.2425,109.589;16.7425,115.6"/>
+        <dia:rectangle val="7.2425,109.589;16.7425,114.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11536,7 +11536,7 @@ than one element.#</dia:string>
         <dia:point val="42.875,114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.125,107.95;49.8775,115.6"/>
+        <dia:rectangle val="42.125,107.95;49.8775,114.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

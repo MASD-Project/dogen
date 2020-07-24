@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.identification/types/entities/sha1_hash.hpp"
-#include "dogen.utility/types/hash/sha1_hash.hpp"
+#include "dogen.utility/types/hash/sha1_hasher.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/sha1_hash_io.hpp"
@@ -51,7 +51,7 @@ void compute_sha1_transform::apply(const transforms::context& ctx,
                              << " size: " << s.size();
 
     using identification::entities::sha1_hash;
-    const auto h(sha1_hash(utility::hash::sha1_hash(s)));
+    const auto h(sha1_hash(utility::hash::sha1_hasher(s)));
     BOOST_LOG_SEV(lg, debug) << "Hash for file: " << h;
 
     /*

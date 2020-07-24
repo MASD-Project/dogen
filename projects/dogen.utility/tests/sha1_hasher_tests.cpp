@@ -21,12 +21,12 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
-#include "dogen.utility/types/hash/sha1_hash.hpp"
+#include "dogen.utility/types/hash/sha1_hasher.hpp"
 
 namespace {
 
 const std::string test_module("dogen.utility.tests");
-const std::string test_suite("sha1_hash_tests");
+const std::string test_suite("sha1_hasher_tests");
 
 const std::string empty;
 const std::string trivial_non_empty_string(
@@ -48,9 +48,9 @@ const std::string expected_multi_line_hash(
 }
 
 using dogen::utility::test::asserter;
-using dogen::utility::hash::sha1_hash;
+using dogen::utility::hash::sha1_hasher;
 
-BOOST_AUTO_TEST_SUITE(sha1_hash_tests)
+BOOST_AUTO_TEST_SUITE(sha1_hasher_tests)
 
 BOOST_AUTO_TEST_CASE(computing_the_hash_of_a_trivial_non_empty_string_produces_the_exepcted_result) {
     SETUP_TEST_LOG_SOURCE("computing_the_hash_of_a_trivial_non_empty_string_produces_the_exepcted_result");
@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(computing_the_hash_of_a_trivial_non_empty_string_produces_t
     // $ echo -n "Converts a model from one codec to another." | sha1sum
     //    1f45006cda88569c1d44559db1aef695b30d8817  -
     BOOST_LOG_SEV(lg, info) << "input: '" << trivial_non_empty_string << "'";
-    const auto actual(sha1_hash(trivial_non_empty_string));
+    const auto actual(sha1_hasher(trivial_non_empty_string));
     BOOST_CHECK(asserter::assert_object(expected_trivial_hash, actual));
 }
 
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(computing_the_hash_of_an_empty_string_produces_the_exepcted
     // $ touch crap.log && sha1sum crap.log
     //    1f45006cda88569c1d44559db1aef695b30d8817  -
     BOOST_LOG_SEV(lg, info) << "input: '" << empty << "'";
-    const auto actual(sha1_hash(empty));
+    const auto actual(sha1_hasher(empty));
     BOOST_CHECK(asserter::assert_object(expected_empty_hash, actual));
 }
 
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(computing_the_hash_of_a_multi_line_string_produces_the_exep
     // $ touch crap.log && sha1sum crap.log
     //    1f45006cda88569c1d44559db1aef695b30d8817  -
     BOOST_LOG_SEV(lg, info) << "input: '" << multi_line_input << "'";
-    const auto actual(sha1_hash(multi_line_input));
+    const auto actual(sha1_hasher(multi_line_input));
     BOOST_CHECK(asserter::assert_object(expected_multi_line_hash, actual));
 }
 

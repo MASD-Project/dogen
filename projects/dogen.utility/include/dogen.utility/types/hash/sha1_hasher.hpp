@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TYPES_HASH_SHA1_HASH_HPP
-#define DOGEN_UTILITY_TYPES_HASH_SHA1_HASH_HPP
+#ifndef DOGEN_UTILITY_TYPES_HASH_SHA1_HASHER_HPP
+#define DOGEN_UTILITY_TYPES_HASH_SHA1_HASHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@ namespace dogen::utility::hash {
 /**
  * @brief Computes the SHA1 hash for the input string.
  */
-std::string sha1_hash(const std::string& s);
+std::string sha1_hasher(const std::string& s);
 
 }
 

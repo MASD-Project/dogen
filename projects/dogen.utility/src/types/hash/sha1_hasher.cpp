@@ -20,11 +20,11 @@
  */
 #include <sstream>
 #include <boost/uuid/detail/sha1.hpp>
-#include "dogen.utility/types/hash/sha1_hash.hpp"
+#include "dogen.utility/types/hash/sha1_hasher.hpp"
 
 namespace dogen::utility::hash {
 
-std::string sha1_hash(const std::string& s) {
+std::string sha1_hasher(const std::string& s) {
     boost::uuids::detail::sha1 sha1;
     char hash[20];
     sha1.process_bytes(s.c_str(), s.size());
