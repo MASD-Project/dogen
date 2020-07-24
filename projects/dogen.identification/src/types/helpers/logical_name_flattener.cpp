@@ -18,12 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <boost/thread/exceptions.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/types/helpers/flattening_error.hpp"
 #include "dogen.identification/types/helpers/logical_name_flattener.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("identification.helpers.logical_name_flattener"));
+
+const std::string
+unsupported_strategy("Flattening strategy is not supported: ");
+
+}
 
 namespace dogen::identification::helpers {
 
-bool logical_name_flattener::operator==(const logical_name_flattener& /*rhs*/) const {
-    return true;
+logical_name_flattener::logical_name_flattener(const bool detect_model_name)
+    : detect_model_name_(detect_model_name) {}
+
+std::list<std::string>
+logical_name_flattener::flatten(const entities::logical_name& n) const {
+    const auto& l(n.location());
+    std::list<std::string> r(l.external_modules());
+
+    for (const auto& m : l.model_modules())
+        r.push_back(m);
+
+    for (const auto& m : l.internal_modules())
+        r.push_back(m);
+
+    if (detect_model_name_) {
+        /*
+         * if the name belongs to the model's module, we need to
+         * remove the module's simple name from the module path (it is
+         * in both the module path and it is also the module's simple
+         * name).
+         */
+        const bool no_internal_modules(l.internal_modules().empty());
+        const bool has_model_modules(!l.model_modules().empty());
+        const bool is_model_name(no_internal_modules && has_model_modules &&
+            n.simple() == l.model_modules().back());
+
+        if (is_model_name)
+            r.pop_back();
+    } else if (n.is_container()) {
+        /*
+         * For containers, we need to put the simple name into the
+         * list. This ensures that we place them in the correct
+         * namespace.
+         */
+        r.push_back(n.simple());
+    }
+
+    return r;
 }
 
 }

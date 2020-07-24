@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include "dogen.identification/types/entities/logical_name.hpp"
 
 namespace dogen::identification::helpers {
 
 class logical_name_flattener final {
 public:
-    logical_name_flattener() = default;
-    logical_name_flattener(const logical_name_flattener&) = default;
-    logical_name_flattener(logical_name_flattener&&) = default;
-    ~logical_name_flattener() = default;
-    logical_name_flattener& operator=(const logical_name_flattener&) = default;
+    explicit logical_name_flattener(const bool detect_model_name = true);
 
 public:
-    bool operator==(const logical_name_flattener& rhs) const;
-    bool operator!=(const logical_name_flattener& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::list<std::string> flatten(const entities::logical_name& n) const;
 
+private:
+    const bool detect_model_name_;
 };
 
 }
