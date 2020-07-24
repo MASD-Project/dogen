@@ -25,24 +25,46 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <sstream>
+#include <string_view>
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/helpers/separators.hpp"
 
 namespace dogen::identification::helpers {
 
-class pretty_printer final {
+/**
+ * @brief Generates pretty representations of identification entities.
+ */
+class pretty_printer {
 public:
-    pretty_printer() = default;
-    pretty_printer(const pretty_printer&) = default;
-    pretty_printer(pretty_printer&&) = default;
-    ~pretty_printer() = default;
-    pretty_printer& operator=(const pretty_printer&) = default;
+    pretty_printer();
+    explicit pretty_printer(const separators s);
+
+private:
+    std::list<std::string> to_list(const entities::logical_name& n,
+        const bool model_name_mode) const;
+
+private:
+    void print_scoped(std::string_view separator,
+        const std::list<std::string>& l);
+    void print_enclosed(const std::list<std::string>& l);
 
 public:
-    bool operator==(const pretty_printer& rhs) const;
-    bool operator!=(const pretty_printer& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void add(const entities::logical_name& n,
+        const bool model_name_mode = false);
+    void add(const std::string& c);
+    void add_child(const std::string& c);
 
+public:
+    std::string print();
+    void clear();
+
+private:
+    bool has_children_;
+    bool last_child_had_children_;
+    std::ostringstream stream_;
+    const separators separator_;
 };
 
 }
