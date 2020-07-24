@@ -28,7 +28,7 @@
 #include "dogen.identification/types/helpers/separators.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
 #include "dogen.identification/types/helpers/pretty_printer.hpp"
-#include "dogen.identification/types/helpers/qualified_name_representations_builder.hpp"
+#include "dogen.identification/types/helpers/qualified_representations_builder.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
 
 namespace {
@@ -109,7 +109,7 @@ entities::logical_name logical_name_builder::build() {
     if (model_name_mode_)
         name_.simple(*name_.location().model_modules().rbegin());
 
-    qualified_name_representations_builder b;
+    qualified_representations_builder b;
     const auto qnr(b.build(name_, model_name_mode_));
     name_.qualified(qnr);
 
