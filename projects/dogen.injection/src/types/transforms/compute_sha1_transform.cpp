@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.identification/types/entities/sha1_hash.hpp"
 #include "dogen.utility/types/hash/sha1_hash.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/sha1_hash_io.hpp"
 #include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
@@ -37,8 +39,7 @@ auto lg(logger_factory(transform_id));
 namespace dogen::injection::transforms {
 
 void compute_sha1_transform::apply(const transforms::context& ctx,
-        const boost::filesystem::path& p,
-    entities::model& m) {
+    const boost::filesystem::path& p, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "compute sha1 transform",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
@@ -49,15 +50,16 @@ void compute_sha1_transform::apply(const transforms::context& ctx,
     BOOST_LOG_SEV(lg, debug) << "File: " << p.generic_string()
                              << " size: " << s.size();
 
-    const auto h(dogen::utility::hash::sha1_hash(s));
+    using identification::entities::sha1_hash;
+    const auto h(sha1_hash(utility::hash::sha1_hash(s)));
     BOOST_LOG_SEV(lg, debug) << "Hash for file: " << h;
 
     /*
      * Update all modeling elements with it.
      */
-    m.origin_sha1_hash(h);
+    m.provenance().model_sha1_hash(h);
     for (auto& e : m.elements())
-        e.origin_sha1_hash(h);
+        e.provenance().model_sha1_hash(h);
 
     stp.end_transform(m);
 }

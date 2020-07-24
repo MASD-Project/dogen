@@ -24,6 +24,7 @@
 #include "dogen.injection/io/entities/element_io.hpp"
 #include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -129,9 +130,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
-      << "\"origin_containing_element_id\": " << "\"" << tidy_up_string(v.origin_containing_element_id()) << "\"" << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"input_technical_space\": " << "\"" << tidy_up_string(v.input_technical_space()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "

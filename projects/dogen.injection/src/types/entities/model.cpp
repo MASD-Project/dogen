@@ -39,9 +39,7 @@ model::model(
     const std::string& documentation,
     const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::string& origin_sha1_hash,
-    const std::string& origin_element_id,
-    const std::string& origin_containing_element_id,
+    const dogen::identification::entities::injection_provenance& provenance,
     const std::list<dogen::injection::entities::element>& elements,
     const std::string& input_technical_space,
     const std::list<std::string>& references,
@@ -52,9 +50,7 @@ model::model(
       documentation_(documentation),
       name_(name),
       configuration_(configuration),
-      origin_sha1_hash_(origin_sha1_hash),
-      origin_element_id_(origin_element_id),
-      origin_containing_element_id_(origin_containing_element_id),
+      provenance_(provenance),
       elements_(elements),
       input_technical_space_(input_technical_space),
       references_(references),
@@ -68,9 +64,7 @@ void model::swap(model& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
-    swap(origin_element_id_, other.origin_element_id_);
-    swap(origin_containing_element_id_, other.origin_containing_element_id_);
+    swap(provenance_, other.provenance_);
     swap(elements_, other.elements_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(references_, other.references_);
@@ -84,9 +78,7 @@ bool model::operator==(const model& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
-        origin_element_id_ == rhs.origin_element_id_ &&
-        origin_containing_element_id_ == rhs.origin_containing_element_id_ &&
+        provenance_ == rhs.provenance_ &&
         elements_ == rhs.elements_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
         references_ == rhs.references_ &&
@@ -195,52 +187,20 @@ void model::configuration(const boost::shared_ptr<dogen::variability::entities::
     configuration_ = std::move(v);
 }
 
-const std::string& model::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+const dogen::identification::entities::injection_provenance& model::provenance() const {
+    return provenance_;
 }
 
-std::string& model::origin_sha1_hash() {
-    return origin_sha1_hash_;
+dogen::identification::entities::injection_provenance& model::provenance() {
+    return provenance_;
 }
 
-void model::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
+void model::provenance(const dogen::identification::entities::injection_provenance& v) {
+    provenance_ = v;
 }
 
-void model::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
-}
-
-const std::string& model::origin_element_id() const {
-    return origin_element_id_;
-}
-
-std::string& model::origin_element_id() {
-    return origin_element_id_;
-}
-
-void model::origin_element_id(const std::string& v) {
-    origin_element_id_ = v;
-}
-
-void model::origin_element_id(const std::string&& v) {
-    origin_element_id_ = std::move(v);
-}
-
-const std::string& model::origin_containing_element_id() const {
-    return origin_containing_element_id_;
-}
-
-std::string& model::origin_containing_element_id() {
-    return origin_containing_element_id_;
-}
-
-void model::origin_containing_element_id(const std::string& v) {
-    origin_containing_element_id_ = v;
-}
-
-void model::origin_containing_element_id(const std::string&& v) {
-    origin_containing_element_id_ = std::move(v);
+void model::provenance(const dogen::identification::entities::injection_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::list<dogen::injection::entities::element>& model::elements() const {

@@ -47,9 +47,7 @@ element::element(
     const std::string& documentation,
     const dogen::identification::entities::name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::string& origin_sha1_hash,
-    const std::string& origin_element_id,
-    const std::string& origin_containing_element_id,
+    const dogen::identification::entities::injection_provenance& provenance,
     const std::list<std::string>& parents,
     const std::list<dogen::injection::entities::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -58,16 +56,15 @@ element::element(
     const bool can_be_enumeration_underlier,
     const bool is_default_enumeration_type,
     const bool is_associative_container,
-    const bool is_floating_point)
+    const bool is_floating_point,
+    const dogen::identification::entities::injection_id& containing_element_id)
     : tagged_values_(tagged_values),
       tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
       configuration_(configuration),
-      origin_sha1_hash_(origin_sha1_hash),
-      origin_element_id_(origin_element_id),
-      origin_containing_element_id_(origin_containing_element_id),
+      provenance_(provenance),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -76,7 +73,8 @@ element::element(
       can_be_enumeration_underlier_(can_be_enumeration_underlier),
       is_default_enumeration_type_(is_default_enumeration_type),
       is_associative_container_(is_associative_container),
-      is_floating_point_(is_floating_point) { }
+      is_floating_point_(is_floating_point),
+      containing_element_id_(containing_element_id) { }
 
 void element::swap(element& other) noexcept {
     using std::swap;
@@ -86,9 +84,7 @@ void element::swap(element& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
-    swap(origin_element_id_, other.origin_element_id_);
-    swap(origin_containing_element_id_, other.origin_containing_element_id_);
+    swap(provenance_, other.provenance_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -98,6 +94,7 @@ void element::swap(element& other) noexcept {
     swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
     swap(is_associative_container_, other.is_associative_container_);
     swap(is_floating_point_, other.is_floating_point_);
+    swap(containing_element_id_, other.containing_element_id_);
 }
 
 bool element::operator==(const element& rhs) const {
@@ -107,9 +104,7 @@ bool element::operator==(const element& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
-        origin_element_id_ == rhs.origin_element_id_ &&
-        origin_containing_element_id_ == rhs.origin_containing_element_id_ &&
+        provenance_ == rhs.provenance_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -118,7 +113,8 @@ bool element::operator==(const element& rhs) const {
         can_be_enumeration_underlier_ == rhs.can_be_enumeration_underlier_ &&
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
-        is_floating_point_ == rhs.is_floating_point_;
+        is_floating_point_ == rhs.is_floating_point_ &&
+        containing_element_id_ == rhs.containing_element_id_;
 }
 
 element& element::operator=(element other) {
@@ -223,52 +219,20 @@ void element::configuration(const boost::shared_ptr<dogen::variability::entities
     configuration_ = std::move(v);
 }
 
-const std::string& element::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+const dogen::identification::entities::injection_provenance& element::provenance() const {
+    return provenance_;
 }
 
-std::string& element::origin_sha1_hash() {
-    return origin_sha1_hash_;
+dogen::identification::entities::injection_provenance& element::provenance() {
+    return provenance_;
 }
 
-void element::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
+void element::provenance(const dogen::identification::entities::injection_provenance& v) {
+    provenance_ = v;
 }
 
-void element::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
-}
-
-const std::string& element::origin_element_id() const {
-    return origin_element_id_;
-}
-
-std::string& element::origin_element_id() {
-    return origin_element_id_;
-}
-
-void element::origin_element_id(const std::string& v) {
-    origin_element_id_ = v;
-}
-
-void element::origin_element_id(const std::string&& v) {
-    origin_element_id_ = std::move(v);
-}
-
-const std::string& element::origin_containing_element_id() const {
-    return origin_containing_element_id_;
-}
-
-std::string& element::origin_containing_element_id() {
-    return origin_containing_element_id_;
-}
-
-void element::origin_containing_element_id(const std::string& v) {
-    origin_containing_element_id_ = v;
-}
-
-void element::origin_containing_element_id(const std::string&& v) {
-    origin_containing_element_id_ = std::move(v);
+void element::provenance(const dogen::identification::entities::injection_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {
@@ -365,6 +329,22 @@ bool element::is_floating_point() const {
 
 void element::is_floating_point(const bool v) {
     is_floating_point_ = v;
+}
+
+const dogen::identification::entities::injection_id& element::containing_element_id() const {
+    return containing_element_id_;
+}
+
+dogen::identification::entities::injection_id& element::containing_element_id() {
+    return containing_element_id_;
+}
+
+void element::containing_element_id(const dogen::identification::entities::injection_id& v) {
+    containing_element_id_ = v;
+}
+
+void element::containing_element_id(const dogen::identification::entities::injection_id&& v) {
+    containing_element_id_ = std::move(v);
 }
 
 }

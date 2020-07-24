@@ -269,7 +269,7 @@ void adapter::populate_element(const logical::entities::location& l,
     e.origin_type(logical::entities::origin_types::not_yet_determined);
     e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
-    e.origin_sha1_hash(ie.origin_sha1_hash());
+    e.origin_sha1_hash(ie.provenance().model_sha1_hash().value());
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }

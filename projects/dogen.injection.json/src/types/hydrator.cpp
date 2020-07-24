@@ -152,7 +152,8 @@ injection::entities::element hydrator::read_element(
     }
 
     const auto f(false);
-    r.origin_element_id(id);
+    using identification::entities::injection_id;
+    r.provenance().injection_id(injection_id(id));
     r.in_global_module(pt.get(in_global_module_key, f));
     r.is_associative_container(pt.get(is_associative_container_key, f));
     r.can_be_primitive_underlier(pt.get(can_be_primitive_underlier_key, f));

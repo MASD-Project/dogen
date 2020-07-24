@@ -25,6 +25,8 @@
 #include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.injection/io/entities/attribute_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/injection_id_io.hpp"
+#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -122,9 +124,7 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
-      << "\"origin_containing_element_id\": " << "\"" << tidy_up_string(v.origin_containing_element_id()) << "\"" << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes() << ", "
       << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\"" << ", "
@@ -133,7 +133,8 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"can_be_enumeration_underlier\": " << v.can_be_enumeration_underlier() << ", "
       << "\"is_default_enumeration_type\": " << v.is_default_enumeration_type() << ", "
       << "\"is_associative_container\": " << v.is_associative_container() << ", "
-      << "\"is_floating_point\": " << v.is_floating_point()
+      << "\"is_floating_point\": " << v.is_floating_point() << ", "
+      << "\"containing_element_id\": " << v.containing_element_id()
       << " }";
     return(s);
 }

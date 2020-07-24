@@ -133,6 +133,11 @@
         {
           "name": "is_floating_point",
           "type": "bool"
+        },
+        {
+          "name": "containing_element_id",
+          "type": "identification::entities::injection_id",
+          "documentation": "ID of the containing element, if any.\n"
         }
       ]
     },
@@ -347,19 +352,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "origin_sha1_hash",
-          "type": "std::string",
-          "documentation": "SHA1 hash of the original model that contained the element.\n"
-        },
-        {
-          "name": "origin_element_id",
-          "type": "std::string",
-          "documentation": "Identifier within the origin model for the modeling element.\n"
-        },
-        {
-          "name": "origin_containing_element_id",
-          "type": "std::string",
-          "documentation": "Unique identifier for an element containing this element, if any.\n"
+          "name": "provenance",
+          "type": "identification::entities::injection_provenance",
+          "documentation": "Provenance details of this injection element.\n"
         }
       ]
     },

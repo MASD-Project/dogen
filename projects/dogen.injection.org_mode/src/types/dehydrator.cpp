@@ -156,7 +156,7 @@ void dehydrator::walk_parent_to_child(std::ostream& s, const unsigned int level,
     if (i != parent_to_child_map.end()) {
         for (const auto& e : i->second) {
             insert_element(s, level, e);
-            const auto id(e.origin_element_id());
+            const auto id(e.provenance().injection_id().value());
             walk_parent_to_child(s, level + 1, id, parent_to_child_map);
         }
     }
@@ -186,7 +186,7 @@ std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::unordered_map<std::string,
                        std::list<entities::element>> parent_to_child_map;
     for (const auto& e : m.elements()) {
-        auto& n(parent_to_child_map[e.origin_containing_element_id()]);
+        auto& n(parent_to_child_map[e.containing_element_id().value()]);
         n.push_back(e);
     }
 

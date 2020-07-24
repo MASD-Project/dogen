@@ -32,7 +32,9 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.identification/types/entities/name.hpp"
 #include "dogen.injection/types/entities/attribute.hpp"
+#include "dogen.identification/types/entities/injection_id.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::injection::entities {
 
@@ -56,9 +58,7 @@ public:
         const std::string& documentation,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::string& origin_sha1_hash,
-        const std::string& origin_element_id,
-        const std::string& origin_containing_element_id,
+        const dogen::identification::entities::injection_provenance& provenance,
         const std::list<std::string>& parents,
         const std::list<dogen::injection::entities::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -67,7 +67,8 @@ public:
         const bool can_be_enumeration_underlier,
         const bool is_default_enumeration_type,
         const bool is_associative_container,
-        const bool is_floating_point);
+        const bool is_floating_point,
+        const dogen::identification::entities::injection_id& containing_element_id);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -124,33 +125,13 @@ public:
     /**@}*/
 
     /**
-     * @brief SHA1 hash of the original model that contained the element.
+     * @brief Provenance details of this injection element.
      */
     /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier within the origin model for the modeling element.
-     */
-    /**@{*/
-    const std::string& origin_element_id() const;
-    std::string& origin_element_id();
-    void origin_element_id(const std::string& v);
-    void origin_element_id(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Unique identifier for an element containing this element, if any.
-     */
-    /**@{*/
-    const std::string& origin_containing_element_id() const;
-    std::string& origin_containing_element_id();
-    void origin_containing_element_id(const std::string& v);
-    void origin_containing_element_id(const std::string&& v);
+    const dogen::identification::entities::injection_provenance& provenance() const;
+    dogen::identification::entities::injection_provenance& provenance();
+    void provenance(const dogen::identification::entities::injection_provenance& v);
+    void provenance(const dogen::identification::entities::injection_provenance&& v);
     /**@}*/
 
     const std::list<std::string>& parents() const;
@@ -192,6 +173,16 @@ public:
     bool is_floating_point() const;
     void is_floating_point(const bool v);
 
+    /**
+     * @brief ID of the containing element, if any.
+     */
+    /**@{*/
+    const dogen::identification::entities::injection_id& containing_element_id() const;
+    dogen::identification::entities::injection_id& containing_element_id();
+    void containing_element_id(const dogen::identification::entities::injection_id& v);
+    void containing_element_id(const dogen::identification::entities::injection_id&& v);
+    /**@}*/
+
 public:
     bool operator==(const element& rhs) const;
     bool operator!=(const element& rhs) const {
@@ -209,9 +200,7 @@ private:
     std::string documentation_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::string origin_sha1_hash_;
-    std::string origin_element_id_;
-    std::string origin_containing_element_id_;
+    dogen::identification::entities::injection_provenance provenance_;
     std::list<std::string> parents_;
     std::list<dogen::injection::entities::attribute> attributes_;
     std::string fallback_element_type_;
@@ -221,6 +210,7 @@ private:
     bool is_default_enumeration_type_;
     bool is_associative_container_;
     bool is_floating_point_;
+    dogen::identification::entities::injection_id containing_element_id_;
 };
 
 }

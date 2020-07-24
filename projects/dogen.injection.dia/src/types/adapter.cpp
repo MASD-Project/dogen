@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/injection_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
@@ -101,8 +102,10 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.parents(parents);
     r.documentation(po.comment().documentation());
     r.tagged_values(po.comment().tagged_values());
-    r.origin_element_id(po.id());
-    r.origin_containing_element_id(po.child_node_id());
+
+    using identification::entities::injection_id;
+    r.provenance().injection_id(injection_id(po.id()));
+    r.containing_element_id(injection_id(po.child_node_id()));
     process_stereotypes(po, r);
 
     for (const auto& attr : po.attributes())

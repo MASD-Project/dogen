@@ -32,6 +32,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.identification/types/entities/name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::injection::entities {
 
@@ -50,9 +51,7 @@ public:
         const std::string& documentation,
         const dogen::identification::entities::name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::string& origin_sha1_hash,
-        const std::string& origin_element_id,
-        const std::string& origin_containing_element_id,
+        const dogen::identification::entities::injection_provenance& provenance,
         const std::string& type,
         const std::string& value);
 
@@ -111,33 +110,13 @@ public:
     /**@}*/
 
     /**
-     * @brief SHA1 hash of the original model that contained the element.
+     * @brief Provenance details of this injection element.
      */
     /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier within the origin model for the modeling element.
-     */
-    /**@{*/
-    const std::string& origin_element_id() const;
-    std::string& origin_element_id();
-    void origin_element_id(const std::string& v);
-    void origin_element_id(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Unique identifier for an element containing this element, if any.
-     */
-    /**@{*/
-    const std::string& origin_containing_element_id() const;
-    std::string& origin_containing_element_id();
-    void origin_containing_element_id(const std::string& v);
-    void origin_containing_element_id(const std::string&& v);
+    const dogen::identification::entities::injection_provenance& provenance() const;
+    dogen::identification::entities::injection_provenance& provenance();
+    void provenance(const dogen::identification::entities::injection_provenance& v);
+    void provenance(const dogen::identification::entities::injection_provenance&& v);
     /**@}*/
 
     const std::string& type() const;
@@ -172,9 +151,7 @@ private:
     std::string documentation_;
     dogen::identification::entities::name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::string origin_sha1_hash_;
-    std::string origin_element_id_;
-    std::string origin_containing_element_id_;
+    dogen::identification::entities::injection_provenance provenance_;
     std::string type_;
     std::string value_;
 };
