@@ -349,33 +349,6 @@
       ]
     },
     {
-      "name": "entities::logical_name",
-      "documentation": "Physical representation of a logical name.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "simple",
-          "type": "std::string"
-        },
-        {
-          "name": "qualified",
-          "type": "std::string"
-        },
-        {
-          "name": "external_modules",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "model_modules",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "internal_modules",
-          "type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
       "name": "entities::model",
       "documentation": "Collection of entities representing objects in physical space.\n",
       "stereotypes": [
