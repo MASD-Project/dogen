@@ -47,14 +47,12 @@ artefact_set::artefact_set()
 
 artefact_set::artefact_set(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::string& logical_meta_element_id,
-    const std::string& logical_element_id,
+    const dogen::identification::entities::logical_provenance& provenance,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
     const std::unordered_map<std::string, std::string>& archetype_for_role,
     const bool is_generatable)
     : configuration_(configuration),
-      logical_meta_element_id_(logical_meta_element_id),
-      logical_element_id_(logical_element_id),
+      provenance_(provenance),
       artefacts_by_archetype_(artefacts_by_archetype),
       archetype_for_role_(archetype_for_role),
       is_generatable_(is_generatable) { }
@@ -62,8 +60,7 @@ artefact_set::artefact_set(
 void artefact_set::swap(artefact_set& other) noexcept {
     using std::swap;
     swap(configuration_, other.configuration_);
-    swap(logical_meta_element_id_, other.logical_meta_element_id_);
-    swap(logical_element_id_, other.logical_element_id_);
+    swap(provenance_, other.provenance_);
     swap(artefacts_by_archetype_, other.artefacts_by_archetype_);
     swap(archetype_for_role_, other.archetype_for_role_);
     swap(is_generatable_, other.is_generatable_);
@@ -71,8 +68,7 @@ void artefact_set::swap(artefact_set& other) noexcept {
 
 bool artefact_set::operator==(const artefact_set& rhs) const {
     return configuration_ == rhs.configuration_ &&
-        logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
-        logical_element_id_ == rhs.logical_element_id_ &&
+        provenance_ == rhs.provenance_ &&
         artefacts_by_archetype_ == rhs.artefacts_by_archetype_ &&
         archetype_for_role_ == rhs.archetype_for_role_ &&
         is_generatable_ == rhs.is_generatable_;
@@ -100,36 +96,20 @@ void artefact_set::configuration(const boost::shared_ptr<dogen::variability::ent
     configuration_ = std::move(v);
 }
 
-const std::string& artefact_set::logical_meta_element_id() const {
-    return logical_meta_element_id_;
+const dogen::identification::entities::logical_provenance& artefact_set::provenance() const {
+    return provenance_;
 }
 
-std::string& artefact_set::logical_meta_element_id() {
-    return logical_meta_element_id_;
+dogen::identification::entities::logical_provenance& artefact_set::provenance() {
+    return provenance_;
 }
 
-void artefact_set::logical_meta_element_id(const std::string& v) {
-    logical_meta_element_id_ = v;
+void artefact_set::provenance(const dogen::identification::entities::logical_provenance& v) {
+    provenance_ = v;
 }
 
-void artefact_set::logical_meta_element_id(const std::string&& v) {
-    logical_meta_element_id_ = std::move(v);
-}
-
-const std::string& artefact_set::logical_element_id() const {
-    return logical_element_id_;
-}
-
-std::string& artefact_set::logical_element_id() {
-    return logical_element_id_;
-}
-
-void artefact_set::logical_element_id(const std::string& v) {
-    logical_element_id_ = v;
-}
-
-void artefact_set::logical_element_id(const std::string&& v) {
-    logical_element_id_ = std::move(v);
+void artefact_set::provenance(const dogen::identification::entities::logical_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefact_set::artefacts_by_archetype() const {

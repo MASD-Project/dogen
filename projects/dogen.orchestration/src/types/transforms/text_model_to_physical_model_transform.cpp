@@ -53,13 +53,17 @@ apply(const text::transforms::context& ctx,
 
     physical::entities::model_set r;
     for (const auto& m : ms.models()) {
+        using namespace identification::entities;
         physical::entities::model pm;
-        identification::entities::logical_provenance prov;
+        logical_provenance prov;
         prov.logical_name().simple(m.name().simple());
 
-        identification::entities::logical_id id(m.name().qualified().dot());
+        logical_id id(m.name().qualified().dot());
         prov.logical_name().id(id);
         prov.injection(m.provenance());
+
+        logical_meta_id mid(m.meta_name().qualified().dot());
+        prov.logical_meta_name().id(mid);
 
         pm.name().simple(m.name().simple());
         pm.name().qualified(m.name().qualified().dot());
@@ -68,10 +72,8 @@ apply(const text::transforms::context& ctx,
 
         for (const auto& ea : m.elements()) {
             const auto& e(*ea.element());
-            const auto logical_element_id(e.name().qualified().dot());
-
             physical::entities::artefact_set as;
-            as.logical_element_id(logical_element_id);
+            as.provenance(ea.artefacts().provenance());
 
             for (const auto& pair : ea.artefacts().artefacts_by_archetype()) {
                 const auto archetype_id(pair.first);
@@ -100,7 +102,7 @@ apply(const text::transforms::context& ctx,
 
             if (!as.artefacts_by_archetype().empty()) {
                 auto& asbli(pm.artefact_sets_by_logical_id());
-                const auto& leid(as.logical_element_id());
+                const auto& leid(e.name().qualified().dot());
                 auto pair(std::make_pair(leid, as));
                 const bool inserted(asbli.insert(pair).second);
                 if (!inserted) {

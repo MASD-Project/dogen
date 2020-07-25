@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 
 namespace dogen::physical::entities {
 
@@ -49,8 +50,7 @@ public:
 public:
     artefact_set(
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::string& logical_meta_element_id,
-        const std::string& logical_element_id,
+        const dogen::identification::entities::logical_provenance& provenance,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
         const std::unordered_map<std::string, std::string>& archetype_for_role,
         const bool is_generatable);
@@ -67,23 +67,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Identifier of the meta-element in the logical dimension.
+     * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const std::string& logical_meta_element_id() const;
-    std::string& logical_meta_element_id();
-    void logical_meta_element_id(const std::string& v);
-    void logical_meta_element_id(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier of the element in the logical dimension.
-     */
-    /**@{*/
-    const std::string& logical_element_id() const;
-    std::string& logical_element_id();
-    void logical_element_id(const std::string& v);
-    void logical_element_id(const std::string&& v);
+    const dogen::identification::entities::logical_provenance& provenance() const;
+    dogen::identification::entities::logical_provenance& provenance();
+    void provenance(const dogen::identification::entities::logical_provenance& v);
+    void provenance(const dogen::identification::entities::logical_provenance&& v);
     /**@}*/
 
     /**
@@ -126,8 +116,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::string logical_meta_element_id_;
-    std::string logical_element_id_;
+    dogen::identification::entities::logical_provenance provenance_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;
     std::unordered_map<std::string, std::string> archetype_for_role_;
     bool is_generatable_;

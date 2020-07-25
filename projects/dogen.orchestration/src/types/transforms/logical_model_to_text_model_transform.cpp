@@ -106,6 +106,11 @@ populator::make_logical_provenance(const logical::entities::element& e) const {
     identification::entities::logical_provenance r;
     r.injection(e.provenance());
 
+    using identification::entities::logical_meta_id;
+    logical_meta_id mid(e.meta_name().qualified().dot());
+    r.logical_meta_name().id(mid);
+    r.logical_meta_name().simple(e.meta_name().simple());
+
     const auto& n(e.name());
     r.logical_name().simple(n.simple());
 
@@ -147,13 +152,9 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * populating the manifold's logical properties. These just link
      * it back to its origin.
      */
-    // FIXME: replace these properties with a artefact set provenance
-    // and add a logical meta-id to logical provenance.
     auto& as(ea.artefacts());
-    const auto prov(make_logical_provenance(*e));
-    as.logical_element_id(prov.logical_name().id().value());
     const auto mn(e->meta_name().qualified().dot());
-    as.logical_meta_element_id(mn);
+    as.provenance(make_logical_provenance(*e));
     as.configuration(e->configuration());
 
     /*
@@ -235,7 +236,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
          */
         auto a(boost::make_shared<physical::entities::artefact>());
         a->physical_meta_name(pmn);
-        a->provenance(prov);
+        a->provenance(as.provenance());
 
         /*
          * Add the archetype to the manifold. For any position in

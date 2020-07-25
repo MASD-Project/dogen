@@ -194,7 +194,7 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
     std::unordered_set<entities::element_archetype>&
     enabled_archetype_for_element, entities::artefact_set& as) {
 
-    const auto id(as.logical_element_id());
+    const auto id(as.provenance().logical_name().id().value());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
 
     /*
@@ -206,7 +206,7 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
         return;
     }
 
-    const auto mt(as.logical_meta_element_id());
+    const auto mt(as.provenance().logical_meta_name().id().value());
     BOOST_LOG_SEV(lg, trace) << "Logical meta-type: " << mt;
     const auto j(physical_names_by_meta_name.find(mt));
     if (j == physical_names_by_meta_name.end()) {

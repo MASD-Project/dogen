@@ -24,6 +24,7 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/logical_provenance_io.hpp"
 
 namespace boost {
 
@@ -113,8 +114,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_set\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
-      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
-      << "\"logical_element_id\": " << "\"" << tidy_up_string(v.logical_element_id()) << "\"" << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"artefacts_by_archetype\": " << v.artefacts_by_archetype() << ", "
       << "\"archetype_for_role\": " << v.archetype_for_role() << ", "
       << "\"is_generatable\": " << v.is_generatable()

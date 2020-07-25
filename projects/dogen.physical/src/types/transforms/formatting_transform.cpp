@@ -129,8 +129,8 @@ formatting_transform::make_formatting_configuration(
 void formatting_transform::
 apply(const std::unordered_map<std::string, feature_group> fgs,
     entities::artefact_set& as) {
-    BOOST_LOG_SEV(lg, trace) << "Transforming: "
-                             << as.logical_element_id();
+    const auto id(as.provenance().logical_name().id().value());
+    BOOST_LOG_SEV(lg, trace) << "Transforming: " << id;
 
     const auto cfgs(make_formatting_configuration(fgs, *as.configuration()));
     for (auto& pair : as.artefacts_by_archetype()) {
