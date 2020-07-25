@@ -30,9 +30,9 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/label.hpp"
 #include "dogen.physical/types/entities/meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
@@ -55,7 +55,7 @@ public:
         const std::string& override_directory_name,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
-        const std::list<dogen::physical::entities::label>& labels,
+        const std::list<dogen::identification::entities::label>& labels,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const std::list<dogen::physical::entities::backend>& backends,
         const dogen::physical::entities::meta_name_indices& indexed_names);
@@ -105,10 +105,10 @@ public:
      * @brief All labels associated with this element.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::label>& labels() const;
-    std::list<dogen::physical::entities::label>& labels();
-    void labels(const std::list<dogen::physical::entities::label>& v);
-    void labels(const std::list<dogen::physical::entities::label>&& v);
+    const std::list<dogen::identification::entities::label>& labels() const;
+    std::list<dogen::identification::entities::label>& labels();
+    void labels(const std::list<dogen::identification::entities::label>& v);
+    void labels(const std::list<dogen::identification::entities::label>&& v);
     /**@}*/
 
     /**
@@ -160,7 +160,7 @@ private:
     std::string override_directory_name_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
-    std::list<dogen::physical::entities::label> labels_;
+    std::list<dogen::identification::entities::label> labels_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     std::list<dogen::physical::entities::backend> backends_;
     dogen::physical::entities::meta_name_indices indexed_names_;

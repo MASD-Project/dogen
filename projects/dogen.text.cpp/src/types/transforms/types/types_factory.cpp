@@ -74,7 +74,7 @@ physical::entities::facet types_factory::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
-    r.labels().push_back(physical::entities::label("test", "some_label"));
+    r.labels().push_back(identification::entities::label("test", "some_label"));
 
     const auto lambda([&](const auto& arch) {
         const auto id(arch.meta_name().qualified());

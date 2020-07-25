@@ -34,8 +34,8 @@ physical::entities::archetype archetype_class_header_transform_factory::make() {
         physical::entities::constant_relation(
             "archetype:masd.cpp.types.class_header",
             ""/*resolved_urn*/,
-            std::list<physical::entities::label> {
-                physical::entities::label("technical_space", "csharp")
+            std::list<identification::entities::label> {
+                identification::entities::label("technical_space", "csharp")
             },
             "dogen.text.csharp.transforms.model_to_text_transform"
         )

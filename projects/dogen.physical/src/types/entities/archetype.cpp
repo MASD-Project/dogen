@@ -25,7 +25,7 @@ namespace dogen::physical::entities {
 archetype::archetype(
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
-    const std::list<dogen::physical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::list<std::string>& depends,
@@ -117,19 +117,19 @@ void archetype::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
-const std::list<dogen::physical::entities::label>& archetype::labels() const {
+const std::list<dogen::identification::entities::label>& archetype::labels() const {
     return labels_;
 }
 
-std::list<dogen::physical::entities::label>& archetype::labels() {
+std::list<dogen::identification::entities::label>& archetype::labels() {
     return labels_;
 }
 
-void archetype::labels(const std::list<dogen::physical::entities::label>& v) {
+void archetype::labels(const std::list<dogen::identification::entities::label>& v) {
     labels_ = v;
 }
 
-void archetype::labels(const std::list<dogen::physical::entities::label>&& v) {
+void archetype::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
 }
 

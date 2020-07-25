@@ -443,7 +443,7 @@
       "attributes": [
         {
           "name": "labels",
-          "type": "std::list<label>",
+          "type": "std::list<identification::entities::label>",
           "documentation": "All labels associated with this element.\n"
         }
       ]
@@ -1320,23 +1320,6 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "entities::label",
-      "documentation": "A label is a key-value pair that can be used by the processing engine in a flexible way.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "key",
-          "type": "std::string",
-          "documentation": "Key of the label.\n"
-        },
-        {
-          "name": "value",
-          "type": "std::string",
-          "documentation": "Value associated with this label.\n"
-        }
-      ]
     },
     {
       "name": "entities::constant_relation",

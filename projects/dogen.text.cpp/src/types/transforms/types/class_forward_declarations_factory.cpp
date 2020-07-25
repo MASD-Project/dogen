@@ -29,7 +29,7 @@ physical::entities::archetype class_forward_declarations_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "class_forward_declarations"));
     r.logical_meta_element_id("dogen.logical.entities.object");
     r.relations().status(physical::entities::relation_status::relatable);
-    r.labels().push_back(physical::entities::label("roles", "forward declaration"));
+    r.labels().push_back(identification::entities::label("roles", "forward declaration"));
 
     return r;
 }

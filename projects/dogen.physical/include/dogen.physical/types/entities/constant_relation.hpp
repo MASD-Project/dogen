@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.physical/types/entities/label.hpp"
+#include "dogen.identification/types/entities/label.hpp"
 
 namespace dogen::physical::entities {
 
@@ -46,7 +46,7 @@ public:
     constant_relation(
         const std::string& original_urn,
         const std::string& resolved_urn,
-        const std::list<dogen::physical::entities::label>& labels,
+        const std::list<dogen::identification::entities::label>& labels,
         const std::string& logical_model_element_id);
 
 public:
@@ -80,10 +80,10 @@ public:
      * @brief All labels associated with this element.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::label>& labels() const;
-    std::list<dogen::physical::entities::label>& labels();
-    void labels(const std::list<dogen::physical::entities::label>& v);
-    void labels(const std::list<dogen::physical::entities::label>&& v);
+    const std::list<dogen::identification::entities::label>& labels() const;
+    std::list<dogen::identification::entities::label>& labels();
+    void labels(const std::list<dogen::identification::entities::label>& v);
+    void labels(const std::list<dogen::identification::entities::label>&& v);
     /**@}*/
 
     /**
@@ -111,7 +111,7 @@ public:
 private:
     std::string original_urn_;
     std::string resolved_urn_;
-    std::list<dogen::physical::entities::label> labels_;
+    std::list<dogen::identification::entities::label> labels_;
     std::string logical_model_element_id_;
 };
 

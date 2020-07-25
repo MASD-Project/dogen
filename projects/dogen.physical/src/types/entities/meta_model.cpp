@@ -27,7 +27,7 @@ meta_model::meta_model(
     const std::string& override_directory_name,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
-    const std::list<dogen::physical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const std::list<dogen::physical::entities::backend>& backends,
     const dogen::physical::entities::meta_name_indices& indexed_names)
@@ -133,19 +133,19 @@ void meta_model::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
-const std::list<dogen::physical::entities::label>& meta_model::labels() const {
+const std::list<dogen::identification::entities::label>& meta_model::labels() const {
     return labels_;
 }
 
-std::list<dogen::physical::entities::label>& meta_model::labels() {
+std::list<dogen::identification::entities::label>& meta_model::labels() {
     return labels_;
 }
 
-void meta_model::labels(const std::list<dogen::physical::entities::label>& v) {
+void meta_model::labels(const std::list<dogen::identification::entities::label>& v) {
     labels_ = v;
 }
 
-void meta_model::labels(const std::list<dogen::physical::entities::label>&& v) {
+void meta_model::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
 }
 

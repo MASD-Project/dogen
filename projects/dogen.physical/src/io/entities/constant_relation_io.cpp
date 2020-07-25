@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/label_io.hpp"
+#include "dogen.identification/io/entities/label_io.hpp"
 #include "dogen.physical/io/entities/constant_relation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::label>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::label>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/label.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/label.hpp"
 
 namespace dogen::physical::entities {
 
@@ -48,7 +48,7 @@ public:
         const std::string& override_directory_name,
         const std::string& description,
         const dogen::physical::entities::meta_name& meta_name,
-        const std::list<dogen::physical::entities::label>& labels,
+        const std::list<dogen::identification::entities::label>& labels,
         const std::string& default_postfix,
         const std::string& override_postfix,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -99,10 +99,10 @@ public:
      * @brief All labels associated with this element.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::label>& labels() const;
-    std::list<dogen::physical::entities::label>& labels();
-    void labels(const std::list<dogen::physical::entities::label>& v);
-    void labels(const std::list<dogen::physical::entities::label>&& v);
+    const std::list<dogen::identification::entities::label>& labels() const;
+    std::list<dogen::identification::entities::label>& labels();
+    void labels(const std::list<dogen::identification::entities::label>& v);
+    void labels(const std::list<dogen::identification::entities::label>&& v);
     /**@}*/
 
     /**
@@ -157,7 +157,7 @@ private:
     std::string override_directory_name_;
     std::string description_;
     dogen::physical::entities::meta_name meta_name_;
-    std::list<dogen::physical::entities::label> labels_;
+    std::list<dogen::identification::entities::label> labels_;
     std::string default_postfix_;
     std::string override_postfix_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;

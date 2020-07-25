@@ -34,7 +34,7 @@ physical::entities::archetype facet_class_implementation_factory_factory::make()
         physical::entities::constant_relation(
             "archetype:masd.cpp.types.class_header",
             ""/*resolved_urn*/,
-            std::list<physical::entities::label> {},
+            std::list<identification::entities::label> {},
             "dogen.physical.helpers.meta_name_builder"
         )
     );

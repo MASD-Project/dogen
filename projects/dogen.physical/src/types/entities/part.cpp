@@ -30,7 +30,7 @@ part::part(
     const std::string& override_directory_name,
     const std::string& description,
     const dogen::physical::entities::meta_name& meta_name,
-    const std::list<dogen::physical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -140,19 +140,19 @@ void part::meta_name(const dogen::physical::entities::meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
-const std::list<dogen::physical::entities::label>& part::labels() const {
+const std::list<dogen::identification::entities::label>& part::labels() const {
     return labels_;
 }
 
-std::list<dogen::physical::entities::label>& part::labels() {
+std::list<dogen::identification::entities::label>& part::labels() {
     return labels_;
 }
 
-void part::labels(const std::list<dogen::physical::entities::label>& v) {
+void part::labels(const std::list<dogen::identification::entities::label>& v) {
     labels_ = v;
 }
 
-void part::labels(const std::list<dogen::physical::entities::label>&& v) {
+void part::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
 }
 

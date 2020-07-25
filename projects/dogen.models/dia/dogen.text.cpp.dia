@@ -51497,7 +51497,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;
-    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+    r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
 
@@ -51511,11 +51511,11 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#+
                 if (cr.labels().empty()) {
 #&gt;
-            std::list&lt;physical::entities::label&gt; {},
+            std::list&lt;identification::entities::label&gt; {},
 &lt;#+
                 } else {
 #&gt;
-            std::list&lt;physical::entities::label&gt; {
+            std::list&lt;identification::entities::label&gt; {
 &lt;#+
                     utility::formatters::sequence_formatter sf(cr.labels().size());
                     // sf.prefix_configuration().first(": ").not_first("  ");
@@ -51523,7 +51523,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 
                     for(const auto&amp; l : cr.labels()) {
 #&gt;
-                physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;")&lt;#= sf.postfix() #&gt;
+                identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;")&lt;#= sf.postfix() #&gt;
 &lt;#+
                         sf.next();
                     }
@@ -51987,7 +51987,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#+
             for(const auto&amp; l : fct.labels()) {
 #&gt;
-    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+    r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
 #&gt;
@@ -52444,7 +52444,7 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 &lt;#+
             for(const auto&amp; l : be.labels()) {
 #&gt;
-    r.labels().push_back(physical::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
+    r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
 &lt;#+
             }
 #&gt;

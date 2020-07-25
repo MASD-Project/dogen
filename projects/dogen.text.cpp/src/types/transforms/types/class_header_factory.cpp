@@ -29,7 +29,7 @@ physical::entities::archetype class_header_factory::make() {
     r.meta_name(pmnf::make("cpp", "types", "class_header"));
     r.logical_meta_element_id("dogen.logical.entities.object");
     r.relations().status(physical::entities::relation_status::facet_default);
-    r.labels().push_back(physical::entities::label("role", "type_declaration"));
+    r.labels().push_back(identification::entities::label("role", "type_declaration"));
 
     return r;
 }
