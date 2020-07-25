@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::identification::entities {
@@ -44,7 +44,7 @@ public:
 public:
     logical_provenance(
         const dogen::identification::entities::injection_provenance& injection,
-        const dogen::identification::entities::logical_id& logical_id);
+        const dogen::identification::entities::logical_name& logical_name);
 
 public:
     /**
@@ -61,10 +61,10 @@ public:
      * @brief Provenance of the current element in the logical dimension.
      */
     /**@{*/
-    const dogen::identification::entities::logical_id& logical_id() const;
-    dogen::identification::entities::logical_id& logical_id();
-    void logical_id(const dogen::identification::entities::logical_id& v);
-    void logical_id(const dogen::identification::entities::logical_id&& v);
+    const dogen::identification::entities::logical_name& logical_name() const;
+    dogen::identification::entities::logical_name& logical_name();
+    void logical_name(const dogen::identification::entities::logical_name& v);
+    void logical_name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
 public:
@@ -79,7 +79,7 @@ public:
 
 private:
     dogen::identification::entities::injection_provenance injection_;
-    dogen::identification::entities::logical_id logical_id_;
+    dogen::identification::entities::logical_name logical_name_;
 };
 
 }

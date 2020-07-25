@@ -171,8 +171,8 @@
           "documentation": "Provenance of the current element in the injection dimension.\n"
         },
         {
-          "name": "logical_id",
-          "type": "logical_id",
+          "name": "logical_name",
+          "type": "logical_name",
           "documentation": "Provenance of the current element in the logical dimension.\n"
         }
       ]

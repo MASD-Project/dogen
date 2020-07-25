@@ -24,19 +24,19 @@ namespace dogen::identification::entities {
 
 logical_provenance::logical_provenance(
     const dogen::identification::entities::injection_provenance& injection,
-    const dogen::identification::entities::logical_id& logical_id)
+    const dogen::identification::entities::logical_name& logical_name)
     : injection_(injection),
-      logical_id_(logical_id) { }
+      logical_name_(logical_name) { }
 
 void logical_provenance::swap(logical_provenance& other) noexcept {
     using std::swap;
     swap(injection_, other.injection_);
-    swap(logical_id_, other.logical_id_);
+    swap(logical_name_, other.logical_name_);
 }
 
 bool logical_provenance::operator==(const logical_provenance& rhs) const {
     return injection_ == rhs.injection_ &&
-        logical_id_ == rhs.logical_id_;
+        logical_name_ == rhs.logical_name_;
 }
 
 logical_provenance& logical_provenance::operator=(logical_provenance other) {
@@ -61,20 +61,20 @@ void logical_provenance::injection(const dogen::identification::entities::inject
     injection_ = std::move(v);
 }
 
-const dogen::identification::entities::logical_id& logical_provenance::logical_id() const {
-    return logical_id_;
+const dogen::identification::entities::logical_name& logical_provenance::logical_name() const {
+    return logical_name_;
 }
 
-dogen::identification::entities::logical_id& logical_provenance::logical_id() {
-    return logical_id_;
+dogen::identification::entities::logical_name& logical_provenance::logical_name() {
+    return logical_name_;
 }
 
-void logical_provenance::logical_id(const dogen::identification::entities::logical_id& v) {
-    logical_id_ = v;
+void logical_provenance::logical_name(const dogen::identification::entities::logical_name& v) {
+    logical_name_ = v;
 }
 
-void logical_provenance::logical_id(const dogen::identification::entities::logical_id&& v) {
-    logical_id_ = std::move(v);
+void logical_provenance::logical_name(const dogen::identification::entities::logical_name&& v) {
+    logical_name_ = std::move(v);
 }
 
 }

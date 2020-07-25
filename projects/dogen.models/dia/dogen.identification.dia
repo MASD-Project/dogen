@@ -1468,10 +1468,10 @@ identification within Dogen.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#logical_id#</dia:string>
+            <dia:string>#logical_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical_id#</dia:string>
+            <dia:string>#logical_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

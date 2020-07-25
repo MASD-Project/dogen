@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 #include "dogen.identification/io/entities/injection_provenance_io.hpp"
 
@@ -29,7 +29,7 @@ std::ostream& operator<<(std::ostream& s, const logical_provenance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_provenance\"" << ", "
       << "\"injection\": " << v.injection() << ", "
-      << "\"logical_id\": " << v.logical_id()
+      << "\"logical_name\": " << v.logical_name()
       << " }";
     return(s);
 }
