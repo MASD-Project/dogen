@@ -32,7 +32,7 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<logical::entities::name, logical::entities::origin_types>",
+          "type": "std::unordered_map<logical::entities::name, identification::entities::model_type>",
           "documentation": "All other models that this model depends on, mapped to their origin.\n"
         },
         {

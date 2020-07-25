@@ -59,7 +59,7 @@ model::model(
     const dogen::logical::entities::name& name,
     const dogen::logical::entities::name& meta_name,
     const std::string& origin_sha1_hash,
-    const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
+    const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const std::list<dogen::text::entities::element_artefacts>& elements,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
@@ -182,19 +182,19 @@ void model::origin_sha1_hash(const std::string&& v) {
     origin_sha1_hash_ = std::move(v);
 }
 
-const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& model::references() const {
+const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& model::references() {
+std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& v) {
+void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>&& v) {
+void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>&& v) {
     references_ = std::move(v);
 }
 

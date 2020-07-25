@@ -96,7 +96,8 @@ private:
      */
     static boost::shared_ptr<entities::structural::visitor>
     create_visitor(const entities::structural::object& o,
-        const entities::location& l, const entities::origin_types ot,
+        const entities::location& l,
+        const identification::entities::injection_provenance p,
         const std::list<entities::name>& leaves);
 
     /**

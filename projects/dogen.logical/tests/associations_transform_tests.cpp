@@ -53,9 +53,8 @@ const mock_model_factory factory(flags);
 
 }
 
-using dogen::utility::test::contains_checker;
 using dogen::utility::test::asserter;
-using dogen::logical::entities::origin_types;
+using dogen::identification::entities::model_type;
 using dogen::logical::transforms::associations_transform;
 using object_types =
     dogen::logical::test::mock_model_factory::object_types;
@@ -95,7 +94,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_associat
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_associations");
 
     auto m(factory.object_with_attribute(
-            origin_types::target,
+            model_type::target,
             object_types::value_object,
             attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
@@ -207,7 +206,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_associations");
 
     auto m(factory.object_with_group_of_attributes_of_different_types(
-            origin_types::target, true/*repeat_group*/));
+            model_type::target, true/*repeat_group*/));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::apply(mock_context_factory::make(), m);
@@ -264,12 +263,13 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
 BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto mt(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::unsigned_int);
-    auto m(factory.object_with_attribute(ot, objt, pt));
+    auto m(factory.object_with_attribute(mt, objt, pt));
     BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
-    BOOST_REQUIRE(m.structural_elements().objects().begin()->second->local_attributes().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().
+        begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::apply(mock_context_factory::make(), m);
@@ -293,12 +293,13 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_asso
 BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_bool_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto mt(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::boolean);
-    auto m(factory.object_with_attribute(ot, objt, pt));
+    auto m(factory.object_with_attribute(mt, objt, pt));
     BOOST_REQUIRE(m.structural_elements().objects().size() == 1);
-    BOOST_REQUIRE(m.structural_elements().objects().begin()->second->local_attributes().size() == 1);
+    BOOST_REQUIRE(m.structural_elements().objects().
+        begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::apply(mock_context_factory::make(), m);
@@ -322,7 +323,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations
 BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_object_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto ot(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::value_object);
     auto m(factory.object_with_attribute(ot, objt, pt));
@@ -351,7 +352,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associatio
 BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto ot(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::std_pair);
     auto m(factory.object_with_attribute(ot, objt, pt));
@@ -383,7 +384,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_associat
 BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_boost_variant_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto ot(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::boost_variant);
     auto m(factory.object_with_attribute(ot, objt, pt));
@@ -426,7 +427,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ass
 BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_std_string_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto ot(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::std_string);
     auto m(factory.object_with_attribute(ot, objt, pt));
@@ -455,7 +456,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_associ
 BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_associations) {
     SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_attribute_results_in_expected_associations");
 
-    const auto ot(origin_types::target);
+    const auto ot(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::boost_shared_ptr);
     auto m(factory.object_with_attribute(ot, objt, pt));

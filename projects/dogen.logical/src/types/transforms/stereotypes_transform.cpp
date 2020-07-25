@@ -194,7 +194,8 @@ bucket_leaves_by_location(const std::list<entities::name>& leaves) {
 
 boost::shared_ptr<entities::structural::visitor>
 stereotypes_transform::create_visitor(const entities::structural::object& o,
-    const entities::location& l, const entities::origin_types ot,
+    const entities::location& l,
+    const identification::entities::injection_provenance p,
     const std::list<entities::name>& leaves) {
     helpers::name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
@@ -205,7 +206,7 @@ stereotypes_transform::create_visitor(const entities::structural::object& o,
 
     auto r(boost::make_shared<entities::structural::visitor>());
     r->name(n);
-    r->origin_type(ot);
+    r->provenance(p);
     r->documentation(visitor_doc + o.name().simple());
     r->intrinsic_technical_space(entities::technical_space::cpp);
     r->configuration(
@@ -324,7 +325,7 @@ expand_visitable(entities::structural::object& o, entities::model& em) {
      * Preserve the origin type from the root object and generate the
      * visitor base.
      */
-    const auto bv(create_visitor(o, loc, o.origin_type(), bvl));
+    const auto bv(create_visitor(o, loc, o.provenance(), bvl));
     const auto bvn(bv->name());
     o.is_visitation_root(true);
     o.base_visitor(bvn);
@@ -364,14 +365,15 @@ expand_visitable(entities::structural::object& o, entities::model& em) {
         const auto& dv_location(pair.first);
         const auto emmm(em.name().location().model_modules());
         const bool in_target_model(emmm == dv_location.model_modules());
-        const auto ot(in_target_model ?
-            entities::origin_types::target : o.origin_type());
+        auto p(o.provenance());
+        if (in_target_model)
+            p.model_type(identification::entities::model_type::target);
 
         /*
          * Generate the derived visitor and update its leaves.
          */
         const auto& bl(pair.second);
-        auto dv(create_visitor(o, dv_location, ot, bl));
+        auto dv(create_visitor(o, dv_location, p, bl));
         const auto dvn(dv->name());
         dv->parent(bvn);
         update_visited_leaves(bl, visitor_details(bvn, dvn), em);

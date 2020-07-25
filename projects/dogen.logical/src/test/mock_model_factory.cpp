@@ -260,7 +260,7 @@ make_builtin(const std::string& simple_name) {
 void populate_object(entities::structural::object& o, const unsigned int i,
     const entities::name& model_name,
     const unsigned int module_n,
-    const entities::origin_types ot) {
+    const identification::entities::model_type mt) {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
@@ -270,13 +270,13 @@ void populate_object(entities::structural::object& o, const unsigned int i,
 
     o.name(n);
     o.documentation(documentation);
-    o.origin_type(ot);
+    o.provenance().model_type(mt);
 }
 
 void populate_simple_model_attributes(entities::model& m,
-    const unsigned int n, const entities::origin_types ot) {
+    const unsigned int n, const identification::entities::model_type mt) {
     m.name(mock_model_name(n));
-    m.origin_type(ot);
+    m.provenance().model_type(mt);
 }
 
 entities::attribute mock_attribute(const entities::name& owning_element,
@@ -324,8 +324,7 @@ void add_attribute(StatefulAndNameable& sn,
     const bool types_parsed, const unsigned int n = 0,
     const test::mock_model_factory::
     attribute_types pt =
-    test::mock_model_factory::attribute_types::
-    unsigned_int,
+    test::mock_model_factory::attribute_types::unsigned_int,
     boost::optional<entities::name> name =
     boost::optional<entities::name>()) {
 
@@ -543,13 +542,15 @@ void mock_model_factory::handle_model_module(
     if (!add_model_module)
         return;
 
-    const auto module(make_module(m.name(), m.origin_type(), documentation));
+    const auto mt(m.provenance().model_type());
+    const auto module(make_module(m.name(), mt, documentation));
     insert_nameable(m.structural_elements().modules(), module);
 }
 
 entities::structural::builtin mock_model_factory::
 make_builtin(const unsigned int i, const entities::name& model_name,
-    const entities::origin_types ot, const unsigned int module_n) const {
+    const identification::entities::model_type mt,
+    const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
@@ -560,18 +561,19 @@ make_builtin(const unsigned int i, const entities::name& model_name,
     entities::structural::builtin r;
     r.name(n);
     r.documentation(documentation);
-    r.origin_type(ot);
+    r.provenance().model_type(mt);
 
     return r;
 }
 
 boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object(const unsigned int i,
-    const entities::name& model_name, const entities::origin_types ot,
+    const entities::name& model_name,
+    const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
     auto r(boost::make_shared<entities::structural::object>());
-    populate_object(*r, i, model_name, module_n, ot);
+    populate_object(*r, i, model_name, module_n, mt);
 
     return r;
 }
@@ -579,23 +581,25 @@ mock_model_factory::make_object(const unsigned int i,
 boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object_with_attribute(
     const unsigned int i, const entities::name& model_name,
-    const entities::origin_types ot, const unsigned int module_n) const {
+    const identification::entities::model_type mt,
+    const unsigned int module_n) const {
 
-    auto r(make_object(i, model_name, ot, module_n));
+    auto r(make_object(i, model_name, mt, module_n));
     add_attribute(*r, flags_.attributes_indexed(), flags_.types_parsed());
     return r;
 }
 
 boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object(unsigned int i,
-    const entities::origin_types ot, const unsigned int module_n) const {
-    return make_object(i, mock_model_name(i), ot, module_n);
+    const identification::entities::model_type mt,
+    const unsigned int module_n) const {
+    return make_object(i, mock_model_name(i), mt, module_n);
 }
 
 boost::shared_ptr<entities::structural::object_template>
 mock_model_factory::make_object_template(const unsigned int i,
     const entities::name& model_name,
-    const entities::origin_types ot) const {
+    const identification::entities::model_type mt) const {
 
     helpers::name_factory nf;
     const auto otpn(object_template_name(i));
@@ -604,14 +608,15 @@ mock_model_factory::make_object_template(const unsigned int i,
     auto r(boost::make_shared<entities::structural::object_template>());
     r->name(n);
     r->documentation(documentation);
-    r->origin_type(ot);
+    r->provenance().model_type(mt);
 
     return r;
 }
 
 boost::shared_ptr<entities::structural::enumeration> mock_model_factory::
 make_enumeration(const unsigned int i, const entities::name& model_name,
-    const entities::origin_types ot, const unsigned int module_n) const {
+    const identification::entities::model_type mt,
+    const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
@@ -622,7 +627,7 @@ make_enumeration(const unsigned int i, const entities::name& model_name,
     auto r(boost::make_shared<entities::structural::enumeration>());
     r->name(n);
     r->documentation(documentation);
-    r->origin_type(ot);
+    r->provenance().model_type(mt);
 
     entities::name ue;
     ue.simple(unsigned_int);
@@ -644,7 +649,8 @@ make_enumeration(const unsigned int i, const entities::name& model_name,
 
 boost::shared_ptr<entities::structural::exception>
 mock_model_factory::make_exception(const unsigned int i,
-    const entities::name& model_name, const entities::origin_types ot,
+    const entities::name& model_name,
+    const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
@@ -656,32 +662,34 @@ mock_model_factory::make_exception(const unsigned int i,
     auto r(boost::make_shared<entities::structural::exception>());
     r->name(n);
     r->documentation(documentation);
-    r->origin_type(ot);
+    r->provenance().model_type(mt);
 
     return r;
 }
 
 boost::shared_ptr<entities::structural::module>
 mock_model_factory::make_module(const entities::name& n,
-    const entities::origin_types ot, const std::string& documentation) const {
+    const identification::entities::model_type mt,
+    const std::string& documentation) const {
     auto r(boost::make_shared<entities::structural::module>());
     r->name(n);
     r->documentation(documentation);
-    r->origin_type(ot);
+    r->provenance().model_type(mt);
 
     return r;
 }
 
 boost::shared_ptr<entities::structural::module>
 mock_model_factory::make_module(const unsigned int module_n,
-    const entities::name& model_name, const entities::origin_types ot,
+    const entities::name& model_name,
+    const identification::entities::model_type mt,
     const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
 
     helpers::name_factory nf;
     const auto mn(module_name(module_n));
     const auto n(nf.build_module_name(model_name, mn, internal_modules));
-    return make_module(n, ot, documentation);
+    return make_module(n, mt, documentation);
 }
 
 entities::name
@@ -696,38 +704,39 @@ mock_model_factory::make_name(const unsigned int model_n,
 
 entities::model
 mock_model_factory::make_empty_model(
-    const entities::origin_types ot, const unsigned int n,
+    const identification::entities::model_type mt, const unsigned int n,
     const bool add_model_module) const {
     entities::model r;
-    populate_simple_model_attributes(r, n, ot);
+    populate_simple_model_attributes(r, n, mt);
     handle_model_module(add_model_module, r);
     return r;
 }
 
 entities::model mock_model_factory::
-make_single_type_model(const entities::origin_types ot, const unsigned int n,
+make_single_type_model(const identification::entities::model_type mt,
+    const unsigned int n,
     const object_types objt, const bool add_model_module) const {
-    return make_multi_type_model(n, 1, ot, objt, 0, add_model_module);
+    return make_multi_type_model(n, 1, mt, objt, 0, add_model_module);
 }
 
 entities::model mock_model_factory::
-make_single_type_model_in_module(const entities::origin_types ot,
+make_single_type_model_in_module(const identification::entities::model_type mt,
     const unsigned int n,
     const object_types objt, const unsigned int mod_n,
     const bool add_model_module) const {
-    return make_multi_type_model(n, 1, ot, objt, mod_n, add_model_module);
+    return make_multi_type_model(n, 1, mt, objt, mod_n, add_model_module);
 }
 
 entities::model mock_model_factory::
 make_multi_type_model(const unsigned int n, const unsigned int type_n,
-    const entities::origin_types ot, const object_types objt,
+    const identification::entities::model_type mt, const object_types objt,
     const unsigned int mod_n, const bool add_model_module) const {
 
-    entities::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(mt, n, add_model_module));
 
     std::list<std::string> internal_modules;
     for (unsigned int i(0); i < mod_n; ++i) {
-        const auto m(make_module(i, r.name(), ot, internal_modules,
+        const auto m(make_module(i, r.name(), mt, internal_modules,
                 documentation));
         insert_nameable(r.structural_elements().modules(), m);
         internal_modules.push_back(module_name(i));
@@ -736,19 +745,19 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
     switch (objt) {
     case object_types::value_object:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto o(make_object(i, r.name(), ot, mod_n));
+            const auto o(make_object(i, r.name(), mt, mod_n));
             insert_object(r, o);
         }
         break;
     case object_types::enumeration:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(make_enumeration(i, r.name(), ot, mod_n));
+            const auto e(make_enumeration(i, r.name(), mt, mod_n));
             insert_nameable(r.structural_elements().enumerations(), e);
         }
         break;
     case object_types::exception:
         for (unsigned int i(0); i < type_n; ++i) {
-            const auto e(make_exception(i, r.name(), ot, mod_n));
+            const auto e(make_exception(i, r.name(), mt, mod_n));
             insert_nameable(r.structural_elements().exceptions(), e);
         }
         break;
@@ -761,18 +770,19 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
 }
 
 entities::model mock_model_factory::
-make_single_object_template_model(const entities::origin_types ot,
+make_single_object_template_model(const identification::entities::model_type mt,
     const unsigned int n, const bool add_model_module) const {
-    entities::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(mt, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp(make_object_template(0, r.name(), ot));
+    auto otp(make_object_template(0, r.name(), mt));
     add_attribute(*otp, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp);
 
-    auto o(make_object(0, r.name(), ot));
+    auto o(make_object(0, r.name(), mt));
     add_attribute(*o, flags_.attributes_indexed(), flags_.types_parsed(), 1);
 
     instantiate_object_template(flags_.attributes_indexed(), *o, *otp);
@@ -781,28 +791,29 @@ make_single_object_template_model(const entities::origin_types ot,
     return r;
 }
 
-entities::model mock_model_factory::
-make_first_degree_object_templates_model(const entities::origin_types ot,
+entities::model mock_model_factory::make_first_degree_object_templates_model(
+    const identification::entities::model_type mt,
     const unsigned int n, const bool add_model_module) const {
-    entities::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(mt, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), mt));
     add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     otp1->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp1);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
 
-    auto o1(make_object(1, r.name(), ot));
+    auto o1(make_object(1, r.name(), mt));
     add_attribute(*o1, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
     if (flags_.object_templates_indexed())
@@ -814,25 +825,25 @@ make_first_degree_object_templates_model(const entities::origin_types ot,
     return r;
 }
 
-entities::model mock_model_factory::
-make_second_degree_object_templates_model(const entities::origin_types ot,
-    const unsigned int n,
-    const bool add_model_module) const {
-    entities::model r(make_empty_model(ot, n, add_model_module));
+entities::model mock_model_factory::make_second_degree_object_templates_model(
+    const identification::entities::model_type mt,
+    const unsigned int n, const bool add_model_module) const {
+    entities::model r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), mt));
     add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     otp1->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp1);
 
-    auto otp2(make_object_template(2, r.name(), ot));
+    auto otp2(make_object_template(2, r.name(), mt));
     add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
     if (flags_.object_templates_indexed())
@@ -841,18 +852,18 @@ make_second_degree_object_templates_model(const entities::origin_types ot,
     otp2->parents().push_back(otp1->name());
     insert_nameable(r.structural_elements().object_templates(), otp2);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
 
-    auto o1(make_object(1, r.name(), ot));
+    auto o1(make_object(1, r.name(), mt));
     if (flags_.object_templates_indexed())
         instantiate_object_template(flags_.attributes_indexed(), *o1, *otp0);
 
     instantiate_object_template(flags_.attributes_indexed(), *o1, *otp1);
     insert_object(r, o1);
 
-    auto o2(make_object(2, r.name(), ot));
+    auto o2(make_object(2, r.name(), mt));
     add_attribute(*o2, flags_.attributes_indexed(), flags_.types_parsed(), 3);
     if (flags_.object_templates_indexed()) {
         instantiate_object_template(flags_.attributes_indexed(), *o2, *otp0);
@@ -866,57 +877,59 @@ make_second_degree_object_templates_model(const entities::origin_types ot,
 
 entities::model mock_model_factory::
 make_multiple_inheritance_object_templates_model(
-    const entities::origin_types ot, const unsigned int n,
+    const identification::entities::model_type mt, const unsigned int n,
     const bool add_model_module) const {
-    entities::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), mt));
     add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     insert_nameable(r.structural_elements().object_templates(), otp1);
 
-    auto otp2(make_object_template(1, r.name(), ot));
+    auto otp2(make_object_template(1, r.name(), mt));
     add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
     otp2->parents().push_back(otp0->name());
     otp2->parents().push_back(otp1->name());
     insert_nameable(r.structural_elements().object_templates(), otp2);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp2);
     insert_object(r, o0);
     return r;
 }
 
-entities::model mock_model_factory::
-make_diamond_inheritance_object_templates_model(
-    const entities::origin_types ot, const unsigned int n,
+entities::model
+mock_model_factory::make_diamond_inheritance_object_templates_model(
+    const identification::entities::model_type mt, const unsigned int n,
     const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
+    auto r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), mt));
     add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     otp1->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp1);
 
-    auto otp2(make_object_template(2, r.name(), ot));
+    auto otp2(make_object_template(2, r.name(), mt));
     add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
     otp2->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp2);
 
-    auto otp3(make_object_template(3, r.name(), ot));
+    auto otp3(make_object_template(3, r.name(), mt));
     add_attribute(*otp3, flags_.attributes_indexed(), flags_.types_parsed(), 3);
     if (flags_.object_templates_indexed())
         otp3->parents().push_back(otp0->name());
@@ -925,7 +938,7 @@ make_diamond_inheritance_object_templates_model(
     otp3->parents().push_back(otp2->name());
     insert_nameable(r.structural_elements().object_templates(), otp3);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
     if (flags_.object_templates_indexed()) {
         instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
         instantiate_object_template(flags_.attributes_indexed(), *o0, *otp1);
@@ -938,23 +951,24 @@ make_diamond_inheritance_object_templates_model(
 
 entities::model mock_model_factory::
 make_object_with_parent_that_instantiates_object_template(
-    const entities::origin_types ot,
+    const identification::entities::model_type mt,
     const unsigned int n, const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
+    auto r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
 
     insert_object(r, o0);
 
-    auto o1(make_object(1, r.name(), ot));
+    auto o1(make_object(1, r.name(), mt));
     parent_to_child(flags_.attributes_indexed(), *o0, *o1);
     o0->is_parent(true);
     insert_object(r, o1);
@@ -964,23 +978,24 @@ make_object_with_parent_that_instantiates_object_template(
 
 entities::model mock_model_factory::
 make_object_with_parent_that_instantiates_a_child_object_template(
-    const entities::origin_types ot,
+    const identification::entities::model_type mt,
     const unsigned int n, const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
+    auto r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), mt));
     add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     otp1->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp1);
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
 
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp1);
     if (flags_.object_templates_indexed())
@@ -988,7 +1003,7 @@ make_object_with_parent_that_instantiates_a_child_object_template(
 
     insert_object(r, o0);
 
-    auto o1(make_object(1, r.name(), ot));
+    auto o1(make_object(1, r.name(), mt));
     parent_to_child(flags_.attributes_indexed(), *o0, *o1);
     o0->is_parent(true);
     insert_object(r, o1);
@@ -998,11 +1013,11 @@ make_object_with_parent_that_instantiates_a_child_object_template(
 
 entities::model mock_model_factory::
 make_object_template_that_inherits_missing_object_template(
-    const entities::origin_types ot, const unsigned int n,
+    const identification::entities::model_type mt, const unsigned int n,
     const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
-    auto otp0(make_object_template(0, r.name(), ot));
-    auto otp1(make_object_template(1, r.name(), ot));
+    auto r(make_empty_model(mt, n, add_model_module));
+    auto otp0(make_object_template(0, r.name(), mt));
+    auto otp1(make_object_template(1, r.name(), mt));
     otp1->parents().push_back(otp0->name());
     insert_nameable(r.structural_elements().object_templates(), otp1);
     return r;
@@ -1010,17 +1025,18 @@ make_object_template_that_inherits_missing_object_template(
 
 entities::model mock_model_factory::
 make_object_that_instantiates_missing_object_template(
-    const entities::origin_types ot, const unsigned int n,
+    const identification::entities::model_type mt, const unsigned int n,
     const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
+    auto r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
 
-    auto o0(make_object(0, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
 
     instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
@@ -1029,19 +1045,20 @@ make_object_that_instantiates_missing_object_template(
 
 entities::model mock_model_factory::
 make_object_that_instantiates_object_template_with_missing_parent(
-    const entities::origin_types ot,
+    const identification::entities::model_type mt,
     const unsigned int n, const bool add_model_module) const {
-    auto r(make_empty_model(ot, n, add_model_module));
+    auto r(make_empty_model(mt, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
-    r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+    r.structural_elements().builtins().insert(
+        std::make_pair(ui->name().qualified().dot(), ui));
 
-    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp0(make_object_template(0, r.name(), mt));
     add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.structural_elements().object_templates(), otp0);
 
-    auto o0(make_object(0, r.name(), ot));
-    auto o1(make_object(1, r.name(), ot));
+    auto o0(make_object(0, r.name(), mt));
+    auto o1(make_object(1, r.name(), mt));
     parent_to_child(flags_.attributes_indexed(), *o0, *o1);
     o0->is_parent(true);
 
@@ -1051,16 +1068,16 @@ make_object_that_instantiates_object_template_with_missing_parent(
     return r;
 }
 
-entities::model mock_model_factory::
-object_with_both_transparent_and_opaque_associations(
-    const entities::origin_types ot,
+entities::model
+mock_model_factory::object_with_both_transparent_and_opaque_associations(
+    const identification::entities::model_type mt,
     const bool add_model_module) const {
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     const auto mn(mock_model_name(0));
-    auto o1(make_object(1, mn, ot));
+    auto o1(make_object(1, mn, mt));
     insert_object(r, o1);
 
-    auto o0(make_object(0, mn, ot));
+    auto o0(make_object(0, mn, mt));
     const auto vo(attribute_types::value_object);
     const auto tp(flags_.types_parsed());
     auto p0(mock_attribute(o0->name(), tp, 0, vo, o1->name()));
@@ -1085,7 +1102,7 @@ object_with_both_transparent_and_opaque_associations(
     if (flags_.associations_indexed())
         o0->opaque_associations().push_back(o1->name());
 
-    auto o3(make_object(3, mn, ot));
+    auto o3(make_object(3, mn, mt));
     insert_object(r, o3);
 
     auto p2(mock_attribute(o0->name(), tp, 2, bsp, o3->name()));
@@ -1114,15 +1131,15 @@ object_with_both_transparent_and_opaque_associations(
 }
 
 entities::model mock_model_factory::
-object_with_attribute(const entities::origin_types ot,
+object_with_attribute(const identification::entities::model_type mt,
     const object_types objt, const attribute_types pt,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
-    auto o1(make_object(1, mn, ot));
+    auto o1(make_object(1, mn, mt));
 
     auto o0(boost::make_shared<entities::structural::object>());
     if (objt == object_types::value_object)
-        o0 = make_object(0, mn, ot);
+        o0 = make_object(0, mn, mt);
     else {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
         BOOST_THROW_EXCEPTION(helpers::building_error(invalid_object_type));
@@ -1135,7 +1152,7 @@ object_with_attribute(const entities::origin_types ot,
         o0->all_attributes().push_back(p);
 
     helpers::name_factory nf;
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     if (pt == attribute_types::value_object ||
         pt == attribute_types::boost_shared_ptr) {
         insert_object(r, o1);
@@ -1162,7 +1179,8 @@ object_with_attribute(const entities::origin_types ot,
 
     } else if (pt == attribute_types::std_pair) {
         const auto b(test::make_builtin(boolean));
-        r.structural_elements().builtins().insert(std::make_pair(b->name().qualified().dot(), b));
+        r.structural_elements().builtins().insert(
+            std::make_pair(b->name().qualified().dot(), b));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
@@ -1176,13 +1194,15 @@ object_with_attribute(const entities::origin_types ot,
         insert_object(r, o2);
     } else if (pt == attribute_types::boost_variant) {
         const auto b(test::make_builtin(boolean));
-        r.structural_elements().builtins().insert(std::make_pair(b->name().qualified().dot(), b));
+        r.structural_elements().builtins().insert(
+            std::make_pair(b->name().qualified().dot(), b));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
 
         const auto ui(test::make_builtin(unsigned_int));
-        r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+        r.structural_elements().builtins().insert(
+            std::make_pair(ui->name().qualified().dot(), ui));
 
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(ui->name());
@@ -1209,10 +1229,10 @@ object_with_attribute(const entities::origin_types ot,
 std::array<entities::model, 2>
 mock_model_factory::object_with_attribute_type_in_different_model(
     const bool add_model_module) const {
-    const auto tg(entities::origin_types::target);
+    const auto tg(identification::entities::model_type::target);
     auto o0(make_object(0, tg));
 
-    const auto npr(entities::origin_types::non_proxy_reference);
+    const auto npr(identification::entities::model_type::non_pdm_reference);
     auto o1(make_object(1, npr));
 
     add_attribute(*o0, flags_.attributes_indexed(), flags_.types_parsed(),
@@ -1230,11 +1250,11 @@ mock_model_factory::object_with_attribute_type_in_different_model(
 }
 
 entities::model mock_model_factory::
-object_with_missing_attribute_type(const entities::origin_types ot,
+object_with_missing_attribute_type(const identification::entities::model_type mt,
     const bool add_model_module) const {
-    using entities::origin_types;
-    auto o0(make_object(0, origin_types::target));
-    auto o1(make_object(1, origin_types::non_proxy_reference));
+    using identification::entities::model_type;
+    auto o0(make_object(0, model_type::target));
+    auto o1(make_object(1, model_type::non_pdm_reference));
 
     add_attribute(*o0, flags_.attributes_indexed(), flags_.types_parsed(), 0,
         attribute_types::value_object, o1->name());
@@ -1242,28 +1262,29 @@ object_with_missing_attribute_type(const entities::origin_types ot,
     if (flags_.associations_indexed())
         o0->transparent_associations().push_back(o1->name());
 
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     insert_object(r, o0);
 
     return r;
 }
 
-entities::model mock_model_factory::
-object_with_parent_in_the_same_model(const entities::origin_types ot,
+entities::model mock_model_factory::object_with_parent_in_the_same_model(
+    const identification::entities::model_type mt,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
 
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     if (has_attribute) {
         const auto ui(test::make_builtin(unsigned_int));
-        r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+        r.structural_elements().builtins().insert(
+            std::make_pair(ui->name().qualified().dot(), ui));
     }
 
-    auto o0(make_object(0, mn, ot));
+    auto o0(make_object(0, mn, mt));
     if (has_attribute)
         add_attribute(*o0, flags_.attributes_indexed(), flags_.types_parsed());
 
-    auto o1(make_object(1, mn, ot));
+    auto o1(make_object(1, mn, mt));
     if (has_attribute) {
         add_attribute(*o1, flags_.attributes_indexed(),
             flags_.types_parsed(), 1);
@@ -1277,15 +1298,16 @@ object_with_parent_in_the_same_model(const entities::origin_types ot,
     return r;
 }
 
-entities::model mock_model_factory::
-object_with_missing_parent_in_the_same_model(const entities::origin_types ot,
+entities::model
+mock_model_factory::object_with_missing_parent_in_the_same_model(
+    const identification::entities::model_type mt,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
-    auto o0(make_object(0, mn, ot));
-    auto o1(make_object(1, mn, ot));
+    auto o0(make_object(0, mn, mt));
+    auto o1(make_object(1, mn, mt));
     o1->is_parent(true);
     parent_to_child(flags_.attributes_indexed(), *o1, *o0);
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     insert_object(r, o1);
 
     return r;
@@ -1293,10 +1315,10 @@ object_with_missing_parent_in_the_same_model(const entities::origin_types ot,
 
 std::array<entities::model, 2> mock_model_factory::
 object_with_parent_in_different_models(const bool add_model_module) const {
-    const auto tg(entities::origin_types::target);
+    const auto tg(identification::entities::model_type::target);
     auto o0(make_object(0, tg));
 
-    const auto npr(entities::origin_types::non_proxy_reference);
+    const auto npr(identification::entities::model_type::non_pdm_reference);
     auto o1(make_object(1, npr));
     parent_to_child(flags_.attributes_indexed(), *o1, *o0);
     o1->is_parent(true);
@@ -1311,13 +1333,14 @@ object_with_parent_in_different_models(const bool add_model_module) const {
 }
 
 entities::model mock_model_factory::
-object_with_three_children_in_same_model(const entities::origin_types ot,
+object_with_three_children_in_same_model(
+    const identification::entities::model_type mt,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
-    auto o0(make_object(0, mn, ot));
-    auto o1(make_object(1, mn, ot));
-    auto o2(make_object(2, mn, ot));
-    auto o3(make_object(3, mn, ot));
+    auto o0(make_object(0, mn, mt));
+    auto o1(make_object(1, mn, mt));
+    auto o2(make_object(2, mn, mt));
+    auto o3(make_object(3, mn, mt));
 
     parent_to_child(flags_.attributes_indexed(), *o3, *o0);
     parent_to_child(flags_.attributes_indexed(), *o3, *o1);
@@ -1325,7 +1348,7 @@ object_with_three_children_in_same_model(const entities::origin_types ot,
 
     o3->is_parent(true);
 
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     insert_object(r, o0);
     insert_object(r, o1);
     insert_object(r, o2);
@@ -1335,23 +1358,25 @@ object_with_three_children_in_same_model(const entities::origin_types ot,
 }
 
 entities::model mock_model_factory::
-object_with_third_degree_parent_in_same_model(const entities::origin_types ot,
+object_with_third_degree_parent_in_same_model(
+    const identification::entities::model_type mt,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
 
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     if (has_attribute) {
         const auto ui(test::make_builtin(unsigned_int));
-        r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
+        r.structural_elements().builtins().insert(
+            std::make_pair(ui->name().qualified().dot(), ui));
     }
 
-    auto o3(make_object(3, mn, ot));
+    auto o3(make_object(3, mn, mt));
     if (has_attribute) {
         add_attribute(*o3, flags_.attributes_indexed(),
             flags_.types_parsed(), 3);
     }
 
-    auto o2(make_object(2, mn, ot));
+    auto o2(make_object(2, mn, mt));
     if (has_attribute) {
         add_attribute(*o2, flags_.attributes_indexed(),
             flags_.types_parsed(), 2);
@@ -1359,14 +1384,14 @@ object_with_third_degree_parent_in_same_model(const entities::origin_types ot,
 
     parent_to_child(flags_.attributes_indexed(), *o3, *o2, *o3, !add_leaf);
 
-    auto o1(make_object(1, mn, ot));
+    auto o1(make_object(1, mn, mt));
     if (has_attribute) {
         add_attribute(*o1, flags_.attributes_indexed(),
             flags_.types_parsed(), 1);
     }
     parent_to_child(flags_.attributes_indexed(), *o2, *o1, *o3, !add_leaf);
 
-    auto o0(make_object(0, mn, ot));
+    auto o0(make_object(0, mn, mt));
     if (has_attribute)
         add_attribute(*o0, flags_.attributes_indexed(), flags_.types_parsed());
 
@@ -1389,14 +1414,15 @@ object_with_third_degree_parent_in_same_model(const entities::origin_types ot,
     return r;
 }
 
-entities::model mock_model_factory::
-object_with_third_degree_parent_missing(const entities::origin_types ot,
+entities::model
+mock_model_factory::object_with_third_degree_parent_missing(
+    const identification::entities::model_type mt,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
-    auto o0(make_object(0, mn, ot));
-    auto o1(make_object(1, mn, ot));
-    auto o2(make_object(2, mn, ot));
-    auto o3(make_object(3, mn, ot));
+    auto o0(make_object(0, mn, mt));
+    auto o1(make_object(1, mn, mt));
+    auto o2(make_object(2, mn, mt));
+    auto o3(make_object(3, mn, mt));
 
     parent_to_child(flags_.attributes_indexed(), *o1, *o0, *o3, !add_leaf);
     parent_to_child(flags_.attributes_indexed(), *o2, *o1, *o3, !add_leaf);
@@ -1411,7 +1437,7 @@ object_with_third_degree_parent_missing(const entities::origin_types ot,
     o3->is_parent(true);
     o3->leaves().push_back(o0->name());
 
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     insert_object(r, o0);
     insert_object(r, o1);
     insert_object(r, o2);
@@ -1422,9 +1448,9 @@ object_with_third_degree_parent_missing(const entities::origin_types ot,
 std::array<entities::model, 4> mock_model_factory::
 object_with_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    using entities::origin_types;
-    const auto npr(origin_types::non_proxy_reference);
-    auto o0(make_object(0, origin_types::target));
+    using identification::entities::model_type;
+    const auto npr(model_type::non_pdm_reference);
+    auto o0(make_object(0, model_type::target));
     auto o1(make_object(1, npr));
     auto o2(make_object(2, npr));
     auto o3(make_object(3, npr));
@@ -1442,7 +1468,7 @@ object_with_third_degree_parent_in_different_models(
     o3->is_parent(true);
     o3->leaves().push_back(o0->name());
 
-    auto m0(make_empty_model(origin_types::target, 0, add_model_module));
+    auto m0(make_empty_model(model_type::target, 0, add_model_module));
     insert_object(m0, o0);
 
     auto m1(make_empty_model(npr, 1, add_model_module));
@@ -1460,9 +1486,9 @@ object_with_third_degree_parent_in_different_models(
 std::array<entities::model, 4> mock_model_factory::
 object_with_missing_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    using entities::origin_types;
-    const auto npr(origin_types::non_proxy_reference);
-    auto o0(make_object(0, origin_types::target));
+    using identification::entities::model_type;
+    const auto npr(model_type::non_pdm_reference);
+    auto o0(make_object(0, model_type::target));
     auto o1(make_object(1, npr));
     auto o2(make_object(2, npr));
     auto o3(make_object(3, npr));
@@ -1480,7 +1506,7 @@ object_with_missing_third_degree_parent_in_different_models(
     o3->is_parent(true);
     o3->leaves().push_back(o0->name());
 
-    auto m0(make_empty_model(origin_types::target, 0, add_model_module));
+    auto m0(make_empty_model(model_type::target, 0, add_model_module));
     insert_object(m0, o0);
 
     auto m1(make_empty_model(npr, 1, add_model_module));
@@ -1494,19 +1520,19 @@ object_with_missing_third_degree_parent_in_different_models(
 
 entities::model mock_model_factory::
 object_with_group_of_attributes_of_different_types(
-    const entities::origin_types ot,
+    const identification::entities::model_type mt,
     const bool repeat_group, const bool add_model_module) const {
-    auto r(make_empty_model(ot, 0, add_model_module));
+    auto r(make_empty_model(mt, 0, add_model_module));
     const auto mn(r.name());
 
-    auto o0(make_object(0, mn, ot));
+    auto o0(make_object(0, mn, mt));
     const auto lambda([&](const entities::attribute& p) {
             o0->local_attributes().push_back(p);
             if (flags_.attributes_indexed())
                 o0->all_attributes().push_back(p);
         });
 
-    auto o1(make_object(1, mn, ot));
+    auto o1(make_object(1, mn, mt));
     const auto vo(attribute_types::value_object);
     const auto tp(flags_.types_parsed());
     auto p0(mock_attribute(o0->name(), tp, 0, vo, o1->name()));
@@ -1519,7 +1545,7 @@ object_with_group_of_attributes_of_different_types(
     ui->name(p1.parsed_type().current());
     insert_nameable(r.structural_elements().builtins(), ui);
 
-    auto o3(make_object(3, mn, ot));
+    auto o3(make_object(3, mn, mt));
     insert_object(r, o3);
     const auto bsp(attribute_types::boost_shared_ptr);
     auto p2(mock_attribute(o0->name(), tp, 2, bsp, o3->name()));
@@ -1530,7 +1556,7 @@ object_with_group_of_attributes_of_different_types(
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
 
-    auto o4(make_object(4, mn, ot));
+    auto o4(make_object(4, mn, mt));
     insert_object(r, o4);
     auto p3(mock_attribute(o0->name(), tp, 3, vo, o4->name()));
     lambda(p3);

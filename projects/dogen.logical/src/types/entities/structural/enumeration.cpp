@@ -50,8 +50,7 @@ enumeration::enumeration()
 enumeration::enumeration(
     const dogen::logical::entities::name& name,
     const std::string& documentation,
-    const dogen::logical::entities::origin_types origin_type,
-    const std::string& origin_sha1_hash,
+    const dogen::identification::entities::injection_provenance& provenance,
     const std::string& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
@@ -69,8 +68,7 @@ enumeration::enumeration(
     : dogen::logical::entities::element(
       name,
       documentation,
-      origin_type,
-      origin_sha1_hash,
+      provenance,
       contained_by,
       in_global_module,
       stereotypes,

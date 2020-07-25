@@ -661,7 +661,7 @@ void assistant::update_artefact() const {
     // FIXME: origin already populated, check and remvoe.
     artefact_.logical_name().simple(element_.name().simple());
     artefact_.logical_name().qualified(element_.name().qualified().dot());
-    artefact_.origin_sha1_hash(element_.origin_sha1_hash());
+    artefact_.origin_sha1_hash(element_.provenance().model_sha1_hash().value());
 
     artefact_.content(stream_.str());
 

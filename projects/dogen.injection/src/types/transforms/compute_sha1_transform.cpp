@@ -58,8 +58,11 @@ void compute_sha1_transform::apply(const transforms::context& ctx,
      * Update all modeling elements with it.
      */
     m.provenance().model_sha1_hash(h);
+    using identification::entities::model_type;
+    m.provenance().model_type(model_type::not_yet_determined);
+
     for (auto& e : m.elements())
-        e.provenance().model_sha1_hash(h);
+        e.provenance(m.provenance());
 
     stp.end_transform(m);
 }

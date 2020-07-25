@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
@@ -56,7 +56,7 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
     }
 
     using entities::name;
-    using entities::origin_types;
+    using identification::entities::model_type;
     std::list<name> registrar_dependencies;
     using entities::serialization::type_registrar;
     boost::shared_ptr<type_registrar> target_registrar;
@@ -69,8 +69,8 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
          * If we are in the presence of the registrar for the target
          * model, we want to populate all of its data fields.
          */
-        const auto ot(rg.origin_type());
-        if (ot == origin_types::target) {
+        const auto mt(rg.provenance().model_type());
+        if (mt == model_type::target) {
             BOOST_LOG_SEV(lg, debug) << "Target model registrar.";
 
             /*
@@ -106,7 +106,7 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
                  * We can safely ignore types that do not belong to
                  * the target model.
                  */
-                if (o.origin_type() != origin_types::target)
+                if (o.provenance().model_type() != model_type::target)
                     continue;
 
                 o.type_registrar(rg.name());
@@ -119,8 +119,8 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
                 [](const name& a, const name& b) {
                     return a.qualified().dot() < b.qualified().dot();
                 });
-        } else if (ot == origin_types::non_proxy_reference) {
-            BOOST_LOG_SEV(lg, debug) << "Non-proxy reference registrar.";
+        } else if (mt == model_type::non_pdm_reference) {
+            BOOST_LOG_SEV(lg, debug) << "Non-PDM reference registrar.";
 
             /*
              * Figure out if this registrar belongs to a model that
@@ -143,7 +143,7 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
              * as they do not have registration requirements for now.
              */
             BOOST_LOG_SEV(lg, debug) << "Ignoring registrar with other origin: "
-                                     << ot;
+                                     << mt;
         }
     }
 

@@ -34,14 +34,15 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/hash/entities/name_hash.hpp"
-#include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.logical/types/entities/orm/element_repository.hpp"
 #include "dogen.logical/types/entities/build/element_repository.hpp"
 #include "dogen.logical/types/entities/mapping/element_repository.hpp"
+#include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.logical/types/entities/physical/element_repository.hpp"
 #include "dogen.logical/types/entities/decoration/element_repository.hpp"
 #include "dogen.logical/types/entities/structural/element_repository.hpp"
@@ -70,9 +71,8 @@ public:
     model(
         const dogen::logical::entities::name& name,
         const dogen::logical::entities::name& meta_name,
-        const dogen::logical::entities::origin_types origin_type,
-        const std::string& origin_sha1_hash,
-        const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
+        const dogen::identification::entities::injection_provenance& provenance,
+        const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
         const std::unordered_set<dogen::logical::entities::name>& leaves,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const dogen::logical::entities::technical_space input_technical_space,
@@ -113,21 +113,13 @@ public:
     /**@}*/
 
     /**
-     * @brief How was this model element originated.
+     * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    dogen::logical::entities::origin_types origin_type() const;
-    void origin_type(const dogen::logical::entities::origin_types v);
-    /**@}*/
-
-    /**
-     * @brief SHA1 key of the original injection model.
-     */
-    /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
+    const dogen::identification::entities::injection_provenance& provenance() const;
+    dogen::identification::entities::injection_provenance& provenance();
+    void provenance(const dogen::identification::entities::injection_provenance& v);
+    void provenance(const dogen::identification::entities::injection_provenance&& v);
     /**@}*/
 
     /**
@@ -135,10 +127,10 @@ public:
      * origin.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references() const;
-    std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references();
-    void references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& v);
-    void references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>&& v);
+    const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references() const;
+    std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references();
+    void references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v);
+    void references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>&& v);
     /**@}*/
 
     /**
@@ -298,9 +290,8 @@ public:
 private:
     dogen::logical::entities::name name_;
     dogen::logical::entities::name meta_name_;
-    dogen::logical::entities::origin_types origin_type_;
-    std::string origin_sha1_hash_;
-    std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types> references_;
+    dogen::identification::entities::injection_provenance provenance_;
+    std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type> references_;
     std::unordered_set<dogen::logical::entities::name> leaves_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     dogen::logical::entities::technical_space input_technical_space_;

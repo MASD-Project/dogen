@@ -324,7 +324,7 @@ apply(const context& ctx, const injection::entities::model& m) {
     b.model_modules(model_location.model_modules());
     r.name(b.build());
     r.input_technical_space(to_technical_space(m.input_technical_space()));
-    r.origin_sha1_hash(m.provenance().model_sha1_hash().value());
+    r.provenance(m.provenance());
 
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
@@ -351,7 +351,7 @@ apply(const context& ctx, const injection::entities::model& m) {
     rm.configuration(m.configuration());
     rm.configuration()->name().qualified(rm.name().qualified().dot());
     rm.is_root(true);
-    rm.origin_sha1_hash(m.provenance().model_sha1_hash().value());
+    rm.provenance(m.provenance());
 
     logical::helpers::stereotypes_helper h;
     const auto sts(h.from_primitives(m.stereotypes()));

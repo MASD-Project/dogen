@@ -25,11 +25,11 @@
 #include "dogen.logical/io/entities/label_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
+#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -115,16 +115,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 namespace dogen::logical::entities {
 
 element::element()
-    : origin_type_(static_cast<dogen::logical::entities::origin_types>(0)),
-      in_global_module_(static_cast<bool>(0)),
+    : in_global_module_(static_cast<bool>(0)),
       intrinsic_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)),
       generability_status_(static_cast<dogen::logical::entities::generability_status>(0)) { }
 
 element::element(
     const dogen::logical::entities::name& name,
     const std::string& documentation,
-    const dogen::logical::entities::origin_types origin_type,
-    const std::string& origin_sha1_hash,
+    const dogen::identification::entities::injection_provenance& provenance,
     const std::string& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
@@ -136,8 +134,7 @@ element::element(
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
     : name_(name),
       documentation_(documentation),
-      origin_type_(origin_type),
-      origin_sha1_hash_(origin_sha1_hash),
+      provenance_(provenance),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
       stereotypes_(stereotypes),
@@ -159,8 +156,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::logical::entities::element\"" << ", "
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-      << "\"origin_type\": " << origin_type_ << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(origin_sha1_hash_) << "\"" << ", "
+      << "\"provenance\": " << provenance_ << ", "
       << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"stereotypes\": " << stereotypes_ << ", "
@@ -177,8 +173,7 @@ void element::swap(element& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
-    swap(origin_type_, other.origin_type_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(provenance_, other.provenance_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
     swap(stereotypes_, other.stereotypes_);
@@ -193,8 +188,7 @@ void element::swap(element& other) noexcept {
 bool element::compare(const element& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
-        origin_type_ == rhs.origin_type_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        provenance_ == rhs.provenance_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
         stereotypes_ == rhs.stereotypes_ &&
@@ -238,28 +232,20 @@ void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-dogen::logical::entities::origin_types element::origin_type() const {
-    return origin_type_;
+const dogen::identification::entities::injection_provenance& element::provenance() const {
+    return provenance_;
 }
 
-void element::origin_type(const dogen::logical::entities::origin_types v) {
-    origin_type_ = v;
+dogen::identification::entities::injection_provenance& element::provenance() {
+    return provenance_;
 }
 
-const std::string& element::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+void element::provenance(const dogen::identification::entities::injection_provenance& v) {
+    provenance_ = v;
 }
 
-std::string& element::origin_sha1_hash() {
-    return origin_sha1_hash_;
-}
-
-void element::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
-}
-
-void element::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
+void element::provenance(const dogen::identification::entities::injection_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::string& element::contained_by() const {

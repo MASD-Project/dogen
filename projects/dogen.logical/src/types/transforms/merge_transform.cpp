@@ -173,7 +173,7 @@ merge_transform::merge(const entities::model& src, entities::model& dst) {
     /*
      * Update the references of the merged model.
      */
-    const auto p(std::make_pair(src.name(), src.origin_type()));
+    const auto p(std::make_pair(src.name(), src.provenance().model_type()));
     dst.references().insert(p);
 }
 

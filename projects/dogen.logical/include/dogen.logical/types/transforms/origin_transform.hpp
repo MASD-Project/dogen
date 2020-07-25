@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -32,8 +33,8 @@ namespace dogen::logical::transforms {
 
 class origin_transform final {
 private:
-    static entities::origin_types compute_origin_types(
-        const entities::model& m, const bool is_proxy_model);
+    static identification::entities::model_type compute_model_type(
+        const entities::model& m, const bool is_pdm);
 
 public:
     static void apply(const context& ctx, entities::model& m);

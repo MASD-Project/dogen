@@ -256,7 +256,11 @@ void adapter::populate_element(const logical::entities::location& l,
 
     /*
      * Ensure we populate the configuration before we attempt to read
-     * any meta-data from it.
+     * any meta-data from it. We take the dynamic stereotypes and
+     * populate the potential bindings with it; these are stereotypes
+     * that are not well-known so its likely they are referring to
+     * profiles. Subsequent transforms in the logical model will
+     * confirm if these _potential_ bindings are _actual_ bindings.
      */
     e.configuration(ie.configuration());
     const auto& ds(sts.dynamic_stereotypes());
@@ -274,11 +278,12 @@ void adapter::populate_element(const logical::entities::location& l,
     /*
      * Finally, populate all other attributes.
      */
-    e.origin_type(logical::entities::origin_types::not_yet_determined);
+    const auto& em(l.external_modules());
+    const auto& mm(l.model_modules());
+    e.in_global_module(em.empty() && mm.empty());
+    e.provenance(ie.provenance());
     e.documentation(ie.documentation());
-    e.origin_sha1_hash(ie.provenance().model_sha1_hash().value());
-    e.in_global_module(
-        l.external_modules().empty() && l.model_modules().empty());
+
 }
 
 boost::shared_ptr<logical::entities::structural::object>

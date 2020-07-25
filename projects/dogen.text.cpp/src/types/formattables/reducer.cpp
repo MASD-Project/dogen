@@ -39,7 +39,8 @@ void reducer::reduce(model& fm) const {
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
-        if (e.origin_type() != logical::entities::origin_types::target)
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target)
             continue;
 
         reduced.insert(pair);

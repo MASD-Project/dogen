@@ -56,44 +56,46 @@ using namespace entities::visual_studio;
 
 class updater {
 public:
-    explicit updater(const entities::origin_types ot) : origin_types_(ot) {}
+    explicit updater(const identification::entities::model_type mt)
+        : model_type_(mt) {}
 
 public:
-    template<typename DeterminableOrigin>
-    void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
+    template<typename Provenance>
+    void update(Provenance& p) {
+        p.provenance().model_type(model_type_);
+    }
 
 public:
     void operator()(entities::element& v) { update(v); }
 
 private:
-    const entities::origin_types origin_types_;
+    const identification::entities::model_type model_type_;
 };
 
 }
 
-entities::origin_types origin_transform::
-compute_origin_types(const entities::model& m, const bool is_proxy_model) {
-    using entities::origin_types;
-    if (is_proxy_model && m.origin_type() == origin_types::target) {
+identification::entities::model_type origin_transform::
+compute_model_type(const entities::model& m, const bool is_pdm) {
+    using identification::entities::model_type;
+    if (is_pdm && m.provenance().model_type() == model_type::target) {
         const auto& id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(target_cannot_be_proxy + id));
     }
 
-    if (m.origin_type() == origin_types::target)
-        return origin_types::target;
-    else if (is_proxy_model)
-        return origin_types::proxy_reference;
+    if (m.provenance().model_type() == model_type::target)
+        return model_type::target;
+    else if (is_pdm)
+        return model_type::pdm_reference;
 
-    return origin_types::non_proxy_reference;
+    return model_type::non_pdm_reference;
 }
 
 void origin_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
-
 
     /*
      * First we obtain the is proxy model flag from the model's static
@@ -111,8 +113,8 @@ apply(const context& ctx, entities::model& m) {
      * We then use the proxy model flag to compute the appropriate
      * origin type for this model.
      */
-    const auto ot(compute_origin_types(m, scfg.is_proxy_model));
-    m.origin_type(ot);
+    const auto mt(compute_model_type(m, scfg.is_proxy_model));
+    m.provenance().model_type(mt);
 
     /*
      * Finally, we update all model elements with the computed origin
@@ -120,7 +122,7 @@ apply(const context& ctx, entities::model& m) {
      * model element, it will not be code generated as we ignore all
      * non-target elements.
      */
-    updater g(ot);
+    updater g(mt);
     entities::elements_traversal(m, g);
 
     stp.end_transform(m);

@@ -152,14 +152,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "origin_type",
-          "type": "origin_types",
-          "documentation": "How was this model element originated.\n"
-        },
-        {
-          "name": "origin_sha1_hash",
-          "type": "std::string",
-          "documentation": "SHA1 key of the original injection model.\n"
+          "name": "provenance",
+          "type": "identification::entities::injection_provenance",
+          "documentation": "Details of the provenance of this model element.\n"
         }
       ]
     },
@@ -317,36 +312,6 @@
       ]
     },
     {
-      "name": "entities::origin_types",
-      "documentation": "What originated the model element.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "target",
-          "type": "",
-          "documentation": "The element is part of the target model.\n"
-        },
-        {
-          "name": "proxy_reference",
-          "type": "",
-          "documentation": "The element was part of a reference model which is a proxy model.\n"
-        },
-        {
-          "name": "non_proxy_reference",
-          "type": "",
-          "documentation": "The element was part of a reference model which is regular dogen model.\n"
-        },
-        {
-          "name": "not_yet_determined",
-          "type": "",
-          "documentation": "The origin of the element is not yet known\n"
-        }
-      ]
-    },
-    {
       "name": "entities::Stateful",
       "documentation": "Ability to have a state.\n",
       "stereotypes": [
@@ -439,7 +404,7 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<name, origin_types>",
+          "type": "std::unordered_map<name, identification::entities::model_type>",
           "documentation": "All other intermediate models that this model depends on, mapped to their\norigin.\n"
         },
         {

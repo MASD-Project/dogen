@@ -178,8 +178,8 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * be build prior to reduction or else we will not get aspects
      * for referenced models.
      */
-    using logical::entities::origin_types;
-    if (ms->origin_type() != origin_types::target)
+    using identification::entities::model_type;
+    if (ms->provenance().model_type() != model_type::target)
         return;
 
     /*

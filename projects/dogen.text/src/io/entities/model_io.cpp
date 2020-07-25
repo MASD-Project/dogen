@@ -23,9 +23,9 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/element_archetype_io.hpp"
@@ -42,7 +42,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

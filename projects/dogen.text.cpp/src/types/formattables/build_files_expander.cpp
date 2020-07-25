@@ -217,7 +217,7 @@ visit(logical::entities::visual_studio::msbuild_targets& v) {
 
 void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
-    const auto ott(logical::entities::origin_types::target);
+    const auto ott(identification::entities::model_type::target);
     for (auto& pair : fm.formattables()) {
         /*
          * We only want to process target elements; references can be
@@ -225,7 +225,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
          */
         auto& formattable(pair.second);
         const auto& e(*formattable.element());
-        if (e.origin_type() != ott) {
+        if (e.provenance().model_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
@@ -252,7 +252,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
 
         auto& formattable(pair.second);
         auto& e(*formattable.element());
-        if (e.origin_type() != ott) {
+        if (e.provenance().model_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }

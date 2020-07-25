@@ -62,7 +62,7 @@ using dogen::utility::test::contains_checker;
 using dogen::logical::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::logical::transforms::object_templates_transform;
-using dogen::logical::entities::origin_types;
+using dogen::identification::entities::model_type;
 using object_types = dogen::logical::test::mock_model_factory::
     object_types;
 using attribute_types = dogen::logical::test::mock_model_factory::
@@ -100,11 +100,11 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_ob
 BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_object_templates_transform) {
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_is_untouched_by_object_templates_transform");
 
-    const auto ot(origin_types::target);
+    const auto mt(model_type::target);
     const auto objt(object_types::value_object);
     const auto pt(attribute_types::unsigned_int);
-    auto a(factory.object_with_attribute(ot, objt, pt));
-    const auto e(factory.object_with_attribute(ot, objt, pt));
+    auto a(factory.object_with_attribute(mt, objt, pt));
+    const auto e(factory.object_with_attribute(mt, objt, pt));
 
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 

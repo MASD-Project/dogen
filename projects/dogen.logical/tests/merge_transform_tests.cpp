@@ -55,8 +55,7 @@ const std::string too_many_targets("Only one target expected.");
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::logical::entities::origin_types;
+using dogen::identification::entities::model_type;
 using dogen::logical::entities::model;
 using dogen::logical::transforms::merge_transform;
 using dogen::logical::test::mock_context_factory;
@@ -66,12 +65,12 @@ BOOST_AUTO_TEST_SUITE(merge_transform_tests)
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
-    const auto tg(origin_types::target);
+    const auto tg(model_type::target);
     dogen::logical::entities::input_model_set ms;
     ms.target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
-    const auto npr(origin_types::non_proxy_reference);
+    const auto npr(model_type::non_pdm_reference);
     for (unsigned int i(1); i < n; ++i) {
         const auto m(factory.make_single_type_model(npr, i));
         ms.references().push_back(m);
@@ -132,7 +131,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
     dogen::logical::entities::input_model_set ms;
-    const auto tg(origin_types::target);
+    const auto tg(model_type::target);
     ms.target(factory.make_empty_model(tg));
 
     const auto ctx(mock_context_factory::make());

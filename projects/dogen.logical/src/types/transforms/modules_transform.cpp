@@ -175,7 +175,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
         using entities::structural::module;
         auto mod(boost::make_shared<module>());
         mod->name(n);
-        mod->origin_type(m.origin_type());
+        mod->provenance().model_type(m.provenance().model_type());
 
         using variability::entities::configuration;
         mod->configuration(boost::make_shared<configuration>());

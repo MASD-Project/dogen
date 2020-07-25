@@ -333,7 +333,8 @@ void helper_expander::populate_helper_properties(
          * reduction or else we will not get helpers for referenced
          * models.
          */
-        if (e.origin_type() != logical::entities::origin_types::target)
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target)
             continue;
 
         /*

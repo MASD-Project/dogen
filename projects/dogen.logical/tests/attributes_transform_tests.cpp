@@ -93,8 +93,8 @@ bool has_duplicate_attribute_names(const Stateful& s,
 using dogen::utility::test::contains_checker;
 using dogen::logical::transforms::transformation_error;
 using dogen::utility::test::asserter;
+using dogen::identification::entities::model_type;
 using dogen::logical::transforms::attributes_transform;
-using dogen::logical::entities::origin_types;
 using object_types = dogen::logical::test::mock_model_factory::
 object_types;
 using attribute_types = dogen::logical::test::mock_model_factory::
@@ -130,10 +130,10 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_at
 BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_attributes) {
     SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_attributes");
 
-    const auto ot(origin_types::target);
+    const auto mt(model_type::target);
     const auto objt(object_types::value_object);
     const auto at(attribute_types::unsigned_int);
-    auto m(factory.object_with_attribute(ot, objt, at));
+    auto m(factory.object_with_attribute(mt, objt, at));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     attributes_transform::apply(mock_context_factory::make(), m);
@@ -389,7 +389,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_instantia
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_instantiate_object_templates_but_has_attributes_results_in_expected_attributes");
 
     auto m(factory.object_with_third_degree_parent_in_same_model(
-            origin_types::target, true/*has_attribute*/));
+            model_type::target, true/*has_attribute*/));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.structural_elements().objects().size() == 4);

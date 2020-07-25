@@ -242,7 +242,8 @@ public:
      * @brief Creates a built-in.
      */
     entities::structural::builtin make_builtin(const unsigned int i,
-        const entities::name& model_name, const entities::origin_types ot,
+        const entities::name& model_name,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
@@ -250,7 +251,7 @@ public:
      */
     boost::shared_ptr<entities::structural::object>
     make_object(const unsigned int i, const entities::name& model_name,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
@@ -259,14 +260,14 @@ public:
     boost::shared_ptr<entities::structural::object>
     make_object_with_attribute(const unsigned int i,
         const entities::name& model_name,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
     boost::shared_ptr<entities::structural::object> make_object(unsigned int i,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
@@ -275,14 +276,14 @@ public:
     boost::shared_ptr<entities::structural::object_template>
     make_object_template(const unsigned int i,
         const entities::name& model_name,
-        const entities::origin_types ot) const;
+        const identification::entities::model_type nt) const;
 
     /**
      * @brief Create an enumeration.
      */
     boost::shared_ptr<entities::structural::enumeration>
     make_enumeration(const unsigned int i, const entities::name& model_name,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
@@ -290,14 +291,14 @@ public:
      */
     boost::shared_ptr<entities::structural::exception>
     make_exception(const unsigned int i, const entities::name& model_name,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a module from a name.
      */
     boost::shared_ptr<entities::structural::module> make_module(
-        const entities::name& n, const entities::origin_types ot,
+        const entities::name& n, const identification::entities::model_type mt,
         const std::string& documentation = std::string()) const;
 
     /**
@@ -305,7 +306,7 @@ public:
      */
     boost::shared_ptr<entities::structural::module>
     make_module(const unsigned int module_n, const entities::name& model_name,
-        const entities::origin_types ot,
+        const identification::entities::model_type mt,
         const std::list<std::string>& internal_modules,
         const std::string& documentation) const;
 
@@ -320,7 +321,8 @@ public:
      * @brief Builds a model with no elements.
      */
     entities::model make_empty_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
@@ -328,7 +330,8 @@ public:
      * single type with a name also deriving from n.
      */
     entities::model make_single_type_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const bool add_model_module = false) const;
@@ -338,7 +341,8 @@ public:
      * single type with a name also deriving from n, inside mod_n modules.
      */
     entities::model make_single_type_model_in_module(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
@@ -351,7 +355,8 @@ public:
     entities::model make_multi_type_model(
         const unsigned int n,
         const unsigned int type_n,
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
         const bool add_model_module = false) const;
@@ -362,7 +367,8 @@ public:
      * that instantiates it.
      */
     entities::model make_single_object_template_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -372,14 +378,16 @@ public:
      * object template.
      */
     entities::model make_first_degree_object_templates_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
     entities::model make_second_degree_object_templates_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
@@ -387,7 +395,8 @@ public:
      * object template that inherits from both.
      */
     entities::model make_multiple_inheritance_object_templates_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -398,7 +407,8 @@ public:
      * last object template.
      */
     entities::model make_diamond_inheritance_object_templates_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -408,7 +418,8 @@ public:
      */
     entities::model
     make_object_with_parent_that_instantiates_object_template(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -419,7 +430,8 @@ public:
      */
     entities::model
     make_object_with_parent_that_instantiates_a_child_object_template(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -429,7 +441,8 @@ public:
      */
     entities::model
     make_object_template_that_inherits_missing_object_template(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -438,7 +451,8 @@ public:
      * non-existing object template.
      */
     entities::model make_object_that_instantiates_missing_object_template(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -448,7 +462,8 @@ public:
      */
     entities::model
     make_object_that_instantiates_object_template_with_missing_parent(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -459,7 +474,8 @@ public:
      */
     entities::model
     object_with_both_transparent_and_opaque_associations(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool add_model_module = false) const;
 
     /**
@@ -467,7 +483,8 @@ public:
      * current model.
      */
     entities::model object_with_attribute(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const object_types objt = object_types::value_object,
         const attribute_types pt = attribute_types::value_object,
         const bool add_model_module = false) const;
@@ -484,14 +501,16 @@ public:
      * @brief Scenario: object with attribute of missing type.
      */
     entities::model object_with_missing_attribute_type(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
     entities::model object_with_parent_in_the_same_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
@@ -499,7 +518,8 @@ public:
      * @brief Scenario: object with missing parent in current model.
      */
     entities::model object_with_missing_parent_in_the_same_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool add_model_module = false) const;
 
     /**
@@ -513,7 +533,8 @@ public:
      * @brief Scenario: object with three children.
      */
     entities::model object_with_three_children_in_same_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool add_model_module = false) const;
 
     /**
@@ -522,7 +543,8 @@ public:
      */
     entities::model
     object_with_third_degree_parent_in_same_model(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
@@ -531,7 +553,8 @@ public:
      * has missing parent.
      */
     entities::model object_with_third_degree_parent_missing(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool add_model_module = false) const;
 
     /**
@@ -561,7 +584,8 @@ public:
      */
     entities::model
     object_with_group_of_attributes_of_different_types(
-        const entities::origin_types ot = entities::origin_types::target,
+        const identification::entities::model_type mt =
+        identification::entities::model_type::target,
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 

@@ -222,7 +222,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
         auto a(boost::make_shared<physical::entities::artefact>());
         a->physical_meta_name(pmn);
         a->logical_name(ln);
-        a->origin_sha1_hash(e->origin_sha1_hash());
+        a->origin_sha1_hash(e->provenance().model_sha1_hash().value());
 
         /*
          * Add the archetype to the manifold. For any position in
@@ -266,7 +266,7 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     r.references(m.references());
     r.root_module(m.root_module());
     r.orm_properties(m.orm_properties());
-    r.origin_sha1_hash(m.origin_sha1_hash());
+    r.origin_sha1_hash(m.provenance().model_sha1_hash().value());
     r.all_technical_spaces(m.all_technical_spaces());
 
     populator p(*ctx.physical_meta_model(), r);

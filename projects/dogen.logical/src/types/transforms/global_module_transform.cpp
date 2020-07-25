@@ -63,12 +63,12 @@ inline void add_containing_module_to_non_contained_entities(
 }
 
 boost::shared_ptr<entities::structural::module> global_module_transform::
-create_global_module(const entities::origin_types ot) {
+create_global_module(const identification::entities::model_type mt) {
     const std::string gm("global_module");
     const entities::fully_qualified_representation fqr(gm, gm, gm);
     auto r(boost::make_shared<entities::structural::module>());
     r->name().qualified(fqr);
-    r->origin_type(ot);
+    r->provenance().model_type(mt);
     r->documentation(global_module_doc);
     r->is_global_module(true);
     r->intrinsic_technical_space(entities::technical_space::agnostic);
@@ -85,7 +85,7 @@ inject_global_module(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << m.name().qualified().dot();
 
-    const auto gm(create_global_module(m.origin_type()));
+    const auto gm(create_global_module(m.provenance().model_type()));
     const auto r(gm->name());
     const auto i(m.structural_elements().modules().find(r.qualified().dot()));
     if (i != m.structural_elements().modules().end()) {

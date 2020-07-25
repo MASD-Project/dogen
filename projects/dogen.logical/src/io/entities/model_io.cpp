@@ -22,13 +22,14 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/orm/element_repository_io.hpp"
 #include "dogen.logical/io/entities/build/element_repository_io.hpp"
 #include "dogen.logical/io/entities/mapping/element_repository_io.hpp"
+#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.logical/io/entities/physical/element_repository_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_repository_io.hpp"
 #include "dogen.logical/io/entities/structural/element_repository_io.hpp"
@@ -37,17 +38,9 @@
 #include "dogen.logical/io/entities/serialization/element_repository_io.hpp"
 #include "dogen.logical/io/entities/visual_studio/element_repository_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -136,6 +129,14 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::name>& v) {
@@ -161,8 +162,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::logical::entities::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
-      << "\"origin_type\": " << v.origin_type() << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"root_module\": " << v.root_module() << ", "

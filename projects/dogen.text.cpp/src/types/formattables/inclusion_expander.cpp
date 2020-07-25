@@ -203,7 +203,8 @@ void inclusion_expander::populate_inclusion_dependencies(
          * model. However, we do need them around for inclusion
          * directives, so we can't rely on reduction.
          */
-        if (e.origin_type() != logical::entities::origin_types::target)
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target)
             continue;
 
         /*

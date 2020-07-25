@@ -130,7 +130,8 @@ void odb_expander::expand(const locator& l, model& m) const {
          * for referenced models.
          */
         auto& e(*formattable.element());
-        if (e.origin_type() != logical::entities::origin_types::target)
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target)
             continue;
 
         updator g(l);

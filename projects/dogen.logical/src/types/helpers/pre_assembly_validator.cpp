@@ -209,10 +209,10 @@ validate(const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
                              << m.name().qualified().dot();
 
-    using entities::origin_types;
-    const bool ipr(m.origin_type() == origin_types::proxy_reference);
+    using identification::entities::model_type;
+    const bool is_pdm(m.provenance().model_type() == model_type::pdm_reference);
 
-    validator v(m.name(), ipr);
+    validator v(m.name(), is_pdm);
     for (const auto& pair : m.structural_elements().modules())
         v.validate(pair.first, *pair.second);
 

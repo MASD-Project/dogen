@@ -35,12 +35,12 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/label.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
-#include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
 
 namespace dogen::logical::entities {
@@ -66,8 +66,7 @@ public:
     element(
         const dogen::logical::entities::name& name,
         const std::string& documentation,
-        const dogen::logical::entities::origin_types origin_type,
-        const std::string& origin_sha1_hash,
+        const dogen::identification::entities::injection_provenance& provenance,
         const std::string& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
@@ -113,21 +112,13 @@ public:
     /**@}*/
 
     /**
-     * @brief How was this model element originated.
+     * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    dogen::logical::entities::origin_types origin_type() const;
-    void origin_type(const dogen::logical::entities::origin_types v);
-    /**@}*/
-
-    /**
-     * @brief SHA1 key of the original injection model.
-     */
-    /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
+    const dogen::identification::entities::injection_provenance& provenance() const;
+    dogen::identification::entities::injection_provenance& provenance();
+    void provenance(const dogen::identification::entities::injection_provenance& v);
+    void provenance(const dogen::identification::entities::injection_provenance&& v);
     /**@}*/
 
     /**
@@ -229,8 +220,7 @@ protected:
 private:
     dogen::logical::entities::name name_;
     std::string documentation_;
-    dogen::logical::entities::origin_types origin_type_;
-    std::string origin_sha1_hash_;
+    dogen::identification::entities::injection_provenance provenance_;
     std::string contained_by_;
     bool in_global_module_;
     dogen::logical::entities::stereotypes stereotypes_;

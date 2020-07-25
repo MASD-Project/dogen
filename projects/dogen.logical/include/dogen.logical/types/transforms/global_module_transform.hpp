@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
-#include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -44,7 +44,7 @@ private:
      * @brief Creates the module to represent the global namespace.
      */
     static boost::shared_ptr<entities::structural::module>
-    create_global_module(const entities::origin_types ot);
+    create_global_module(const identification::entities::model_type mt);
 
     /**
      * @brief Injects the global module, and makes all modules that do

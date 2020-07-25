@@ -385,7 +385,7 @@ void helper_expander::populate_helper_properties(
          * We only want to process the master segment; the extensions
          * can be ignored.
          */
-        auto& segment(formattable.element());
+        const auto& e(*formattable.element());
 
         /*
          * We only need to generate helpers for the target
@@ -394,7 +394,8 @@ void helper_expander::populate_helper_properties(
          * reduction or else we will not get helpers for referenced
          * models.
          */
-        if (segment->origin_type() != logical::entities::origin_types::target) {
+        using identification::entities::model_type;
+        if (e.provenance().model_type() != model_type::target) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
@@ -402,7 +403,6 @@ void helper_expander::populate_helper_properties(
         /*
          * Update the helper properties, if any exist.
          */
-        const auto& e(*segment);
         helper_properties_generator g(cfg, fff);
         e.accept(g);
         eprops.helper_properties(g.result());

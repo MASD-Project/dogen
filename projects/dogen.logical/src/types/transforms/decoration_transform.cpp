@@ -113,7 +113,8 @@ private:
     const entities::technical_space output_technical_space_;
 };
 
-decoration_updater::decoration_updater(const root_decorations_type& root_decorations,
+decoration_updater::decoration_updater(
+    const root_decorations_type& root_decorations,
     const helpers::decoration_factory& df,
     const boost::optional<decoration_configuration>& root_dc,
     const std::string& root_id,
@@ -146,7 +147,8 @@ bool decoration_updater::requires_decorations(entities::element& e) const {
      * We don't need to generate decorations for any elements which
      * are not part of the target model.
      */
-    if (e.origin_type() != entities::origin_types::target) {
+    using identification::entities::model_type;
+    if (e.provenance().model_type() != model_type::target) {
         BOOST_LOG_SEV(lg, trace) << "Element is not in target model.";
         return false;
     }
@@ -310,8 +312,8 @@ void decoration_transform::apply(const context& ctx, entities::model& m) {
      * technical space.
      */
     const auto gt(ctx.activity_timestamp());
-    const auto h(m.origin_sha1_hash());
-    helpers::decoration_factory df(drp, gt, h);
+    const auto h(m.provenance().model_sha1_hash());
+    helpers::decoration_factory df(drp, gt, h.value());
     root_decorations_type root_decorations;
     BOOST_LOG_SEV(lg, trace) << "Generating all global decorations";
     for (const auto ts : m.all_technical_spaces()) {

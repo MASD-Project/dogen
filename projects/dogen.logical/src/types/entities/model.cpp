@@ -33,14 +33,12 @@ const boost::shared_ptr<dogen::logical::entities::structural::module>& rhs) {
 namespace dogen::logical::entities {
 
 model::model()
-    : origin_type_(static_cast<dogen::logical::entities::origin_types>(0)),
-      input_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+    : input_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
-      origin_type_(std::move(rhs.origin_type_)),
-      origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
+      provenance_(std::move(rhs.provenance_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       root_module_(std::move(rhs.root_module_)),
@@ -63,9 +61,8 @@ model::model(model&& rhs)
 model::model(
     const dogen::logical::entities::name& name,
     const dogen::logical::entities::name& meta_name,
-    const dogen::logical::entities::origin_types origin_type,
-    const std::string& origin_sha1_hash,
-    const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
+    const dogen::identification::entities::injection_provenance& provenance,
+    const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
     const dogen::logical::entities::technical_space input_technical_space,
@@ -85,8 +82,7 @@ model::model(
     const std::unordered_map<std::string, dogen::logical::entities::name>& meta_names)
     : name_(name),
       meta_name_(meta_name),
-      origin_type_(origin_type),
-      origin_sha1_hash_(origin_sha1_hash),
+      provenance_(provenance),
       references_(references),
       leaves_(leaves),
       root_module_(root_module),
@@ -110,8 +106,7 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
-    swap(origin_type_, other.origin_type_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(provenance_, other.provenance_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(root_module_, other.root_module_);
@@ -135,8 +130,7 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
-        origin_type_ == rhs.origin_type_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        provenance_ == rhs.provenance_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         root_module_ == rhs.root_module_ &&
@@ -195,43 +189,35 @@ void model::meta_name(const dogen::logical::entities::name&& v) {
     meta_name_ = std::move(v);
 }
 
-dogen::logical::entities::origin_types model::origin_type() const {
-    return origin_type_;
+const dogen::identification::entities::injection_provenance& model::provenance() const {
+    return provenance_;
 }
 
-void model::origin_type(const dogen::logical::entities::origin_types v) {
-    origin_type_ = v;
+dogen::identification::entities::injection_provenance& model::provenance() {
+    return provenance_;
 }
 
-const std::string& model::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+void model::provenance(const dogen::identification::entities::injection_provenance& v) {
+    provenance_ = v;
 }
 
-std::string& model::origin_sha1_hash() {
-    return origin_sha1_hash_;
+void model::provenance(const dogen::identification::entities::injection_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
-void model::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
-}
-
-void model::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
-}
-
-const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& model::references() const {
+const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& model::references() {
+std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& v) {
+void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>&& v) {
+void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>&& v) {
     references_ = std::move(v);
 }
 

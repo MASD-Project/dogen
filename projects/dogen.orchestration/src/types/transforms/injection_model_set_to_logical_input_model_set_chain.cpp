@@ -52,7 +52,8 @@ apply(const context& ctx, const injection::entities::model_set& ms) {
     logical::entities::input_model_set r;
     using tf = injection_model_to_logical_model_transform;
     r.target(tf::apply(ctx, ms.target()));
-    r.target().origin_type(logical::entities::origin_types::target);
+    using identification::entities::model_type;
+    r.target().provenance().model_type(model_type::target);
 
     /*
      * Now we do the same conversion to the reference models.
