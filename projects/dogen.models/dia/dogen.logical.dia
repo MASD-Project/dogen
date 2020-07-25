@@ -1460,17 +1460,17 @@ purpose.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-99.4675,-85.2"/>
+        <dia:point val="-100.468,-85.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-100.218,-85.95;-85.585,-80.2"/>
+        <dia:rectangle val="-101.218,-85.95;-85.585,-80.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-99.4675,-85.2"/>
-        <dia:point val="-99.4675,-83"/>
+        <dia:point val="-100.468,-85.2"/>
+        <dia:point val="-100.468,-83"/>
         <dia:point val="-85.785,-83"/>
         <dia:point val="-85.785,-81"/>
       </dia:attribute>
@@ -1690,13 +1690,13 @@ The simple name must be unique for a given location.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="-113,-92"/>
+        <dia:point val="-114,-92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.05,-92.05;-85.885,-85.15"/>
+        <dia:rectangle val="-114.05,-92.05;-86.885,-85.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-113,-92"/>
+        <dia:point val="-114,-92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.064999999999998"/>
@@ -4914,13 +4914,13 @@ If not present, user did not make any statements with regards to finality.#</dia
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="-128,-92"/>
+        <dia:point val="-129,-92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.05,-92.05;-114.745,-88.35"/>
+        <dia:rectangle val="-129.05,-92.05;-115.745,-88.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-128,-92"/>
+        <dia:point val="-129,-92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.205"/>
@@ -5266,17 +5266,17 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-121.397,-92.0504"/>
+        <dia:point val="-122.397,-92.0504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-137.87,-94.745;-120.647,-91.2"/>
+        <dia:rectangle val="-137.87,-94.745;-121.647,-91.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-121.397,-92.0504"/>
-        <dia:point val="-121.397,-94"/>
+        <dia:point val="-122.397,-92.0504"/>
+        <dia:point val="-122.397,-94"/>
         <dia:point val="-137.82,-94"/>
         <dia:point val="-137.82,-92"/>
       </dia:attribute>
