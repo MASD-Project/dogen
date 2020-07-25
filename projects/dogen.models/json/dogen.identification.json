@@ -174,6 +174,11 @@
           "name": "logical_name",
           "type": "logical_name",
           "documentation": "Provenance of the current element in the logical dimension.\n"
+        },
+        {
+          "name": "logical_meta_name",
+          "type": "logical_meta_name",
+          "documentation": "Provenance of the current element in the logical dimension as a meta-element.\n"
         }
       ]
     },

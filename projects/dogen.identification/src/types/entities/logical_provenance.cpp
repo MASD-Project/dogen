@@ -24,19 +24,23 @@ namespace dogen::identification::entities {
 
 logical_provenance::logical_provenance(
     const dogen::identification::entities::injection_provenance& injection,
-    const dogen::identification::entities::logical_name& logical_name)
+    const dogen::identification::entities::logical_name& logical_name,
+    const dogen::identification::entities::logical_meta_name& logical_meta_name)
     : injection_(injection),
-      logical_name_(logical_name) { }
+      logical_name_(logical_name),
+      logical_meta_name_(logical_meta_name) { }
 
 void logical_provenance::swap(logical_provenance& other) noexcept {
     using std::swap;
     swap(injection_, other.injection_);
     swap(logical_name_, other.logical_name_);
+    swap(logical_meta_name_, other.logical_meta_name_);
 }
 
 bool logical_provenance::operator==(const logical_provenance& rhs) const {
     return injection_ == rhs.injection_ &&
-        logical_name_ == rhs.logical_name_;
+        logical_name_ == rhs.logical_name_ &&
+        logical_meta_name_ == rhs.logical_meta_name_;
 }
 
 logical_provenance& logical_provenance::operator=(logical_provenance other) {
@@ -75,6 +79,22 @@ void logical_provenance::logical_name(const dogen::identification::entities::log
 
 void logical_provenance::logical_name(const dogen::identification::entities::logical_name&& v) {
     logical_name_ = std::move(v);
+}
+
+const dogen::identification::entities::logical_meta_name& logical_provenance::logical_meta_name() const {
+    return logical_meta_name_;
+}
+
+dogen::identification::entities::logical_meta_name& logical_provenance::logical_meta_name() {
+    return logical_meta_name_;
+}
+
+void logical_provenance::logical_meta_name(const dogen::identification::entities::logical_meta_name& v) {
+    logical_meta_name_ = v;
+}
+
+void logical_provenance::logical_meta_name(const dogen::identification::entities::logical_meta_name&& v) {
+    logical_meta_name_ = std::move(v);
 }
 
 }
