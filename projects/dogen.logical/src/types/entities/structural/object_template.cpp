@@ -89,7 +89,7 @@ object_template::object_template(
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::list<dogen::logical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::list<dogen::logical::entities::attribute>& all_attributes,

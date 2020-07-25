@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/label_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
+#include "dogen.identification/io/entities/label_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"

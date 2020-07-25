@@ -22,9 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/entities/label.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/features/labelling.hpp"
-#include "dogen.logical/types/entities/label.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/labelling_transform.hpp"
@@ -70,9 +70,10 @@ void labels_updater::operator()(entities::element& e) {
         const auto inserted(keys.insert(k).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_key_found << k;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_key_found + k));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_key_found + k));
         }
-        e.labels().push_back(entities::label(k, v));
+        e.labels().push_back(identification::entities::label(k, v));
     }
 }
 

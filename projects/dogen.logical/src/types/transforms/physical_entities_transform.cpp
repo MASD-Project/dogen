@@ -418,10 +418,9 @@ physical_entities_transform::process_relations(const context& ctx,
                 BOOST_LOG_SEV(lg, error) << invalid_label << s;
                 BOOST_THROW_EXCEPTION(transformation_error(invalid_label + s));
             }
-            entities::label lbl;
-            lbl.key(splitted.front());
-            lbl.value(splitted.back());
-            lcr.labels().push_back(lbl);
+
+            using identification::entities::label;
+            lcr.labels().push_back(label(splitted.front(), splitted.back()));
         }
         r.constant().push_back(lcr);
     }

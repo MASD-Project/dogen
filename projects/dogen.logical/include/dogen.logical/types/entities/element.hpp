@@ -33,8 +33,8 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/label.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
+#include "dogen.identification/types/entities/label.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
@@ -73,7 +73,7 @@ public:
         const dogen::logical::entities::name& meta_name,
         const dogen::logical::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::list<dogen::logical::entities::label>& labels,
+        const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
 
@@ -185,10 +185,10 @@ public:
      * @brief All labels associated with this element.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::label>& labels() const;
-    std::list<dogen::logical::entities::label>& labels();
-    void labels(const std::list<dogen::logical::entities::label>& v);
-    void labels(const std::list<dogen::logical::entities::label>&& v);
+    const std::list<dogen::identification::entities::label>& labels() const;
+    std::list<dogen::identification::entities::label>& labels();
+    void labels(const std::list<dogen::identification::entities::label>& v);
+    void labels(const std::list<dogen::identification::entities::label>&& v);
     /**@}*/
 
     /**
@@ -227,7 +227,7 @@ private:
     dogen::logical::entities::name meta_name_;
     dogen::logical::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::list<dogen::logical::entities::label> labels_;
+    std::list<dogen::identification::entities::label> labels_;
     dogen::logical::entities::generability_status generability_status_;
     std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
 };

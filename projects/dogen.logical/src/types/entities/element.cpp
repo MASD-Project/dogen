@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/label_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
+#include "dogen.identification/io/entities/label_io.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
@@ -67,7 +67,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::label>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::label>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -129,7 +129,7 @@ element::element(
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::list<dogen::logical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
     : name_(name),
@@ -328,19 +328,19 @@ void element::configuration(const boost::shared_ptr<dogen::variability::entities
     configuration_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::label>& element::labels() const {
+const std::list<dogen::identification::entities::label>& element::labels() const {
     return labels_;
 }
 
-std::list<dogen::logical::entities::label>& element::labels() {
+std::list<dogen::identification::entities::label>& element::labels() {
     return labels_;
 }
 
-void element::labels(const std::list<dogen::logical::entities::label>& v) {
+void element::labels(const std::list<dogen::identification::entities::label>& v) {
     labels_ = v;
 }
 
-void element::labels(const std::list<dogen::logical::entities::label>&& v) {
+void element::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
 }
 

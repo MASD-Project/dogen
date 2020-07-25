@@ -24,7 +24,7 @@ namespace dogen::logical::entities::physical {
 
 constant_relation::constant_relation(
     const std::string& original_urn,
-    const std::list<dogen::logical::entities::label>& labels,
+    const std::list<dogen::identification::entities::label>& labels,
     const std::string& logical_model_element_id)
     : original_urn_(original_urn),
       labels_(labels),
@@ -65,19 +65,19 @@ void constant_relation::original_urn(const std::string&& v) {
     original_urn_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::label>& constant_relation::labels() const {
+const std::list<dogen::identification::entities::label>& constant_relation::labels() const {
     return labels_;
 }
 
-std::list<dogen::logical::entities::label>& constant_relation::labels() {
+std::list<dogen::identification::entities::label>& constant_relation::labels() {
     return labels_;
 }
 
-void constant_relation::labels(const std::list<dogen::logical::entities::label>& v) {
+void constant_relation::labels(const std::list<dogen::identification::entities::label>& v) {
     labels_ = v;
 }
 
-void constant_relation::labels(const std::list<dogen::logical::entities::label>&& v) {
+void constant_relation::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
 }
 
