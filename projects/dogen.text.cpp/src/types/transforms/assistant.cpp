@@ -658,11 +658,6 @@ void assistant::update_artefact() const {
     const auto fp(artefact_properties_.file_path());
     artefact_.name().simple(fp.filename().generic_string());
     artefact_.name().qualified(fp);
-    // FIXME: origin already populated, check and remvoe.
-    artefact_.logical_name().simple(element_.name().simple());
-    artefact_.logical_name().qualified(element_.name().qualified().dot());
-    artefact_.origin_sha1_hash(element_.provenance().model_sha1_hash().value());
-
     artefact_.content(stream_.str());
 
     const auto& ap(artefact_.artefact_properties());

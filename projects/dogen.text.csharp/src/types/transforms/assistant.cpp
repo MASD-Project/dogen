@@ -58,8 +58,8 @@ assistant::
 assistant(const context& ctx, const logical::entities::element& e,
     const physical::entities::meta_name& mn,
     physical::entities::artefact& a) :
-    element_id_(e.name().qualified().dot()), element_(e), artefact_(a),
-    context_(ctx), artefact_properties_(
+    element_id_(e.name().qualified().dot()), artefact_(a), context_(ctx),
+    artefact_properties_(
         obtain_artefact_properties(mn.qualified())), physical_meta_name_(mn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
@@ -289,8 +289,6 @@ void assistant::update_artefact() {
     const auto fp(artefact_properties_.file_path());
     artefact_.name().simple(fp.filename().generic_string());
     artefact_.name().qualified(artefact_properties_.file_path());
-    artefact_.logical_name().simple(element_.name().simple());
-    artefact_.logical_name().qualified(element_.name().qualified().dot());
     artefact_.content(stream_.str());
 
     const auto& ap(artefact_.artefact_properties());

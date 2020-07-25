@@ -37,10 +37,9 @@ artefact::artefact()
       overwrite_(static_cast<bool>(0)) { }
 
 artefact::artefact(
-    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::string& origin_sha1_hash,
-    const dogen::physical::entities::logical_name& logical_name,
     const dogen::physical::entities::meta_name& physical_meta_name,
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+    const dogen::identification::entities::logical_provenance& provenance,
     const dogen::physical::entities::name& name,
     const std::string& content,
     const bool enabled,
@@ -52,10 +51,9 @@ artefact::artefact(
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::artefact_properties& artefact_properties,
     const dogen::physical::entities::enablement_properties& enablement_properties)
-    : configuration_(configuration),
-      origin_sha1_hash_(origin_sha1_hash),
-      logical_name_(logical_name),
-      physical_meta_name_(physical_meta_name),
+    : physical_meta_name_(physical_meta_name),
+      configuration_(configuration),
+      provenance_(provenance),
       name_(name),
       content_(content),
       enabled_(enabled),
@@ -70,10 +68,9 @@ artefact::artefact(
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
-    swap(configuration_, other.configuration_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
-    swap(logical_name_, other.logical_name_);
     swap(physical_meta_name_, other.physical_meta_name_);
+    swap(configuration_, other.configuration_);
+    swap(provenance_, other.provenance_);
     swap(name_, other.name_);
     swap(content_, other.content_);
     swap(enabled_, other.enabled_);
@@ -88,10 +85,9 @@ void artefact::swap(artefact& other) noexcept {
 }
 
 bool artefact::operator==(const artefact& rhs) const {
-    return configuration_ == rhs.configuration_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
-        logical_name_ == rhs.logical_name_ &&
-        physical_meta_name_ == rhs.physical_meta_name_ &&
+    return physical_meta_name_ == rhs.physical_meta_name_ &&
+        configuration_ == rhs.configuration_ &&
+        provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
         content_ == rhs.content_ &&
         enabled_ == rhs.enabled_ &&
@@ -111,6 +107,22 @@ artefact& artefact::operator=(artefact other) {
     return *this;
 }
 
+const dogen::physical::entities::meta_name& artefact::physical_meta_name() const {
+    return physical_meta_name_;
+}
+
+dogen::physical::entities::meta_name& artefact::physical_meta_name() {
+    return physical_meta_name_;
+}
+
+void artefact::physical_meta_name(const dogen::physical::entities::meta_name& v) {
+    physical_meta_name_ = v;
+}
+
+void artefact::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
+    physical_meta_name_ = std::move(v);
+}
+
 const boost::shared_ptr<dogen::variability::entities::configuration>& artefact::configuration() const {
     return configuration_;
 }
@@ -127,52 +139,20 @@ void artefact::configuration(const boost::shared_ptr<dogen::variability::entitie
     configuration_ = std::move(v);
 }
 
-const std::string& artefact::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+const dogen::identification::entities::logical_provenance& artefact::provenance() const {
+    return provenance_;
 }
 
-std::string& artefact::origin_sha1_hash() {
-    return origin_sha1_hash_;
+dogen::identification::entities::logical_provenance& artefact::provenance() {
+    return provenance_;
 }
 
-void artefact::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
+void artefact::provenance(const dogen::identification::entities::logical_provenance& v) {
+    provenance_ = v;
 }
 
-void artefact::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
-}
-
-const dogen::physical::entities::logical_name& artefact::logical_name() const {
-    return logical_name_;
-}
-
-dogen::physical::entities::logical_name& artefact::logical_name() {
-    return logical_name_;
-}
-
-void artefact::logical_name(const dogen::physical::entities::logical_name& v) {
-    logical_name_ = v;
-}
-
-void artefact::logical_name(const dogen::physical::entities::logical_name&& v) {
-    logical_name_ = std::move(v);
-}
-
-const dogen::physical::entities::meta_name& artefact::physical_meta_name() const {
-    return physical_meta_name_;
-}
-
-dogen::physical::entities::meta_name& artefact::physical_meta_name() {
-    return physical_meta_name_;
-}
-
-void artefact::physical_meta_name(const dogen::physical::entities::meta_name& v) {
-    physical_meta_name_ = v;
-}
-
-void artefact::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
-    physical_meta_name_ = std::move(v);
+void artefact::provenance(const dogen::identification::entities::logical_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const dogen::physical::entities::name& artefact::name() const {

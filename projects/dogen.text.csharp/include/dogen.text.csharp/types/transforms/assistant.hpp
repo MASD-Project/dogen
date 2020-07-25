@@ -151,7 +151,6 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const std::string element_id_;
-    const logical::entities::element& element_;
     physical::entities::artefact& artefact_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;

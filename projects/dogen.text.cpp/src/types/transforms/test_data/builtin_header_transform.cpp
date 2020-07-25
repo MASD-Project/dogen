@@ -79,9 +79,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.provenance().model_sha1_hash().value());
     stp.end_transform(a);
 }
 

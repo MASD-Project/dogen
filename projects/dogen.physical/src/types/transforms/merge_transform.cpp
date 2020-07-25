@@ -53,8 +53,7 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
          * anyway.
          */
         if (first) {
-            r.logical_name(m.logical_name());
-            r.origin_sha1_hash(m.origin_sha1_hash());
+            r.provenance(m.provenance());
             r.name(m.name());
             r.configuration(m.configuration());
             first = false;

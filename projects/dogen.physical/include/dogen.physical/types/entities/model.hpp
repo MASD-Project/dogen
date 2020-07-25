@@ -35,9 +35,9 @@
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.physical/types/entities/artefact_set.hpp"
-#include "dogen.physical/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 
 namespace dogen::physical::entities {
 
@@ -53,10 +53,9 @@ public:
 
 public:
     model(
-        const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const std::string& origin_sha1_hash,
-        const dogen::physical::entities::logical_name& logical_name,
         const dogen::physical::entities::meta_name& physical_meta_name,
+        const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+        const dogen::identification::entities::logical_provenance& provenance,
         const dogen::physical::entities::name& name,
         const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& technical_space,
@@ -65,6 +64,11 @@ public:
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts);
 
 public:
+    const dogen::physical::entities::meta_name& physical_meta_name() const;
+    dogen::physical::entities::meta_name& physical_meta_name();
+    void physical_meta_name(const dogen::physical::entities::meta_name& v);
+    void physical_meta_name(const dogen::physical::entities::meta_name&& v);
+
     /**
      * @brief Configuration for this element.
      */
@@ -76,33 +80,13 @@ public:
     /**@}*/
 
     /**
-     * @brief SHA1 hash of the original model that contained the element.
+     * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Logical model details of the element that originated this physical element.
-     */
-    /**@{*/
-    const dogen::physical::entities::logical_name& logical_name() const;
-    dogen::physical::entities::logical_name& logical_name();
-    void logical_name(const dogen::physical::entities::logical_name& v);
-    void logical_name(const dogen::physical::entities::logical_name&& v);
-    /**@}*/
-
-    /**
-     * @brief Physical model details of the meta-element that originated this element.
-     */
-    /**@{*/
-    const dogen::physical::entities::meta_name& physical_meta_name() const;
-    dogen::physical::entities::meta_name& physical_meta_name();
-    void physical_meta_name(const dogen::physical::entities::meta_name& v);
-    void physical_meta_name(const dogen::physical::entities::meta_name&& v);
+    const dogen::identification::entities::logical_provenance& provenance() const;
+    dogen::identification::entities::logical_provenance& provenance();
+    void provenance(const dogen::identification::entities::logical_provenance& v);
+    void provenance(const dogen::identification::entities::logical_provenance&& v);
     /**@}*/
 
     /**
@@ -166,10 +150,9 @@ public:
     model& operator=(model other);
 
 private:
-    boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    std::string origin_sha1_hash_;
-    dogen::physical::entities::logical_name logical_name_;
     dogen::physical::entities::meta_name physical_meta_name_;
+    boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
+    dogen::identification::entities::logical_provenance provenance_;
     dogen::physical::entities::name name_;
     std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string technical_space_;

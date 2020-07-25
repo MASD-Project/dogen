@@ -43,20 +43,18 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 namespace dogen::physical::entities {
 
 model::model(
-    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const std::string& origin_sha1_hash,
-    const dogen::physical::entities::logical_name& logical_name,
     const dogen::physical::entities::meta_name& physical_meta_name,
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+    const dogen::identification::entities::logical_provenance& provenance,
     const dogen::physical::entities::name& name,
     const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& technical_space,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
     const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts)
-    : configuration_(configuration),
-      origin_sha1_hash_(origin_sha1_hash),
-      logical_name_(logical_name),
-      physical_meta_name_(physical_meta_name),
+    : physical_meta_name_(physical_meta_name),
+      configuration_(configuration),
+      provenance_(provenance),
       name_(name),
       artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
       technical_space_(technical_space),
@@ -66,10 +64,9 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(configuration_, other.configuration_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
-    swap(logical_name_, other.logical_name_);
     swap(physical_meta_name_, other.physical_meta_name_);
+    swap(configuration_, other.configuration_);
+    swap(provenance_, other.provenance_);
     swap(name_, other.name_);
     swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
     swap(technical_space_, other.technical_space_);
@@ -79,10 +76,9 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return configuration_ == rhs.configuration_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
-        logical_name_ == rhs.logical_name_ &&
-        physical_meta_name_ == rhs.physical_meta_name_ &&
+    return physical_meta_name_ == rhs.physical_meta_name_ &&
+        configuration_ == rhs.configuration_ &&
+        provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
         artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
         technical_space_ == rhs.technical_space_ &&
@@ -95,6 +91,22 @@ model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::physical::entities::meta_name& model::physical_meta_name() const {
+    return physical_meta_name_;
+}
+
+dogen::physical::entities::meta_name& model::physical_meta_name() {
+    return physical_meta_name_;
+}
+
+void model::physical_meta_name(const dogen::physical::entities::meta_name& v) {
+    physical_meta_name_ = v;
+}
+
+void model::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
+    physical_meta_name_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::variability::entities::configuration>& model::configuration() const {
@@ -113,52 +125,20 @@ void model::configuration(const boost::shared_ptr<dogen::variability::entities::
     configuration_ = std::move(v);
 }
 
-const std::string& model::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+const dogen::identification::entities::logical_provenance& model::provenance() const {
+    return provenance_;
 }
 
-std::string& model::origin_sha1_hash() {
-    return origin_sha1_hash_;
+dogen::identification::entities::logical_provenance& model::provenance() {
+    return provenance_;
 }
 
-void model::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
+void model::provenance(const dogen::identification::entities::logical_provenance& v) {
+    provenance_ = v;
 }
 
-void model::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
-}
-
-const dogen::physical::entities::logical_name& model::logical_name() const {
-    return logical_name_;
-}
-
-dogen::physical::entities::logical_name& model::logical_name() {
-    return logical_name_;
-}
-
-void model::logical_name(const dogen::physical::entities::logical_name& v) {
-    logical_name_ = v;
-}
-
-void model::logical_name(const dogen::physical::entities::logical_name&& v) {
-    logical_name_ = std::move(v);
-}
-
-const dogen::physical::entities::meta_name& model::physical_meta_name() const {
-    return physical_meta_name_;
-}
-
-dogen::physical::entities::meta_name& model::physical_meta_name() {
-    return physical_meta_name_;
-}
-
-void model::physical_meta_name(const dogen::physical::entities::meta_name& v) {
-    physical_meta_name_ = v;
-}
-
-void model::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
-    physical_meta_name_ = std::move(v);
+void model::provenance(const dogen::identification::entities::logical_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const dogen::physical::entities::name& model::name() const {

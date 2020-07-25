@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
@@ -44,8 +45,8 @@ const std::string duplicate_logical_element(
 
 namespace dogen::orchestration::transforms {
 
-physical::entities::model_set
-text_model_to_physical_model_transform::apply(const text::transforms::context& ctx,
+physical::entities::model_set text_model_to_physical_model_transform::
+apply(const text::transforms::context& ctx,
     const text::entities::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "logical to text model transform",
         transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
@@ -53,9 +54,13 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
     physical::entities::model_set r;
     for (const auto& m : ms.models()) {
         physical::entities::model pm;
-        pm.logical_name().simple(m.name().simple());
-        pm.logical_name().qualified(m.name().qualified().dot());
-        pm.origin_sha1_hash(m.provenance().model_sha1_hash().value());
+        identification::entities::logical_provenance prov;
+        prov.logical_name().simple(m.name().simple());
+
+        identification::entities::logical_id id(m.name().qualified().dot());
+        prov.logical_name().id(id);
+        prov.injection(m.provenance());
+
         pm.name().simple(m.name().simple());
         pm.name().qualified(m.name().qualified().dot());
         pm.configuration(m.root_module()->configuration());

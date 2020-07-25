@@ -697,19 +697,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "origin_sha1_hash",
-          "type": "std::string",
-          "documentation": "SHA1 hash of the original model that contained the element.\n"
-        },
-        {
-          "name": "logical_name",
-          "type": "logical_name",
-          "documentation": "Logical model details of the element that originated this physical element.\n"
-        },
-        {
-          "name": "physical_meta_name",
-          "type": "meta_name",
-          "documentation": "Physical model details of the meta-element that originated this element.\n"
+          "name": "provenance",
+          "type": "identification::entities::logical_provenance",
+          "documentation": "Details of the provenance of this model element.\n"
         }
       ]
     },
@@ -738,7 +728,13 @@
       "stereotypes": [
         "masd::object_template"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "physical_meta_name",
+          "type": "entities::meta_name"
+        }
+      ]
     },
     {
       "name": "entities::outputting_properties",

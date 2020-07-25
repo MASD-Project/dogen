@@ -70,11 +70,10 @@ private:
     void ensure_not_yet_processed(const std::string& id) const;
 
     /**
-     * @brief Converts a logical name into a physical representation
-     * of a logical name.
+     * @brief Creates a logical provenance for an artefact.
      */
-    physical::entities::logical_name
-    to_logical_name(const logical::entities::name& n) const;
+    identification::entities::logical_provenance
+    make_logical_provenance(const logical::entities::element& e) const;
 
     /**
      * @brief Adds an element to the model, performing an expansion
@@ -102,14 +101,27 @@ void populator::ensure_not_yet_processed(const std::string& id) const {
     }
 }
 
-physical::entities::logical_name
-populator::to_logical_name(const logical::entities::name& n) const {
-    physical::entities::logical_name r;
-    r.simple(n.simple());
-    r.qualified(n.qualified().dot());
-    r.external_modules(n.location().external_modules());
-    r.model_modules(n.location().model_modules());
-    r.internal_modules(n.location().internal_modules());
+identification::entities::logical_provenance
+populator::make_logical_provenance(const logical::entities::element& e) const {
+    identification::entities::logical_provenance r;
+    r.injection(e.provenance());
+
+    const auto& n(e.name());
+    r.logical_name().simple(n.simple());
+
+    using identification::entities::logical_id;
+    r.logical_name().id(logical_id(n.qualified().dot()));
+
+    auto& qn(r.logical_name().qualified());
+    qn.dot(n.qualified().dot());
+    qn.colon(n.qualified().colon());
+    qn.identifiable(n.qualified().identifiable());
+
+    auto& l(r.logical_name().location());
+    l.external_modules(n.location().external_modules());
+    l.model_modules(n.location().model_modules());
+    l.internal_modules(n.location().internal_modules());
+
     return r;
 }
 
@@ -135,9 +147,11 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * populating the manifold's logical properties. These just link
      * it back to its origin.
      */
+    // FIXME: replace these properties with a artefact set provenance
+    // and add a logical meta-id to logical provenance.
     auto& as(ea.artefacts());
-    const auto ln(to_logical_name(e->name()));
-    as.logical_element_id(ln.qualified());
+    const auto prov(make_logical_provenance(*e));
+    as.logical_element_id(prov.logical_name().id().value());
     const auto mn(e->meta_name().qualified().dot());
     as.logical_meta_element_id(mn);
     as.configuration(e->configuration());
@@ -221,8 +235,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
          */
         auto a(boost::make_shared<physical::entities::artefact>());
         a->physical_meta_name(pmn);
-        a->logical_name(ln);
-        a->origin_sha1_hash(e->provenance().model_sha1_hash().value());
+        a->provenance(prov);
 
         /*
          * Add the archetype to the manifold. For any position in

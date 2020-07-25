@@ -25,9 +25,9 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
-#include "dogen.physical/io/entities/logical_name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.physical/io/entities/outputting_properties_io.hpp"
+#include "dogen.identification/io/entities/logical_provenance_io.hpp"
 
 namespace boost {
 
@@ -120,10 +120,9 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::model\"" << ", "
-      << "\"configuration\": " << v.configuration() << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"logical_name\": " << v.logical_name() << ", "
       << "\"physical_meta_name\": " << v.physical_meta_name() << ", "
+      << "\"configuration\": " << v.configuration() << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"name\": " << v.name() << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
