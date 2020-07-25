@@ -97,7 +97,7 @@ void common_odb_options_transform::apply(const context& ctx, const logical::enti
     const auto& o(ast.as<common_odb_options>(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!ast.is_cpp_standard_98()) {

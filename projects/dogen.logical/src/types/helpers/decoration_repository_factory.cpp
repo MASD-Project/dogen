@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
 #include "dogen.logical/types/helpers/decoration_repository_factory.hpp"
@@ -87,7 +87,7 @@ void decoration_repository_factory::handle_modeline_group(
     BOOST_LOG_SEV(lg, trace) << "Processing modeline group: " << id;
 
     using logical::entities::decoration::modeline;
-    std::unordered_map<logical::entities::technical_space,
+    std::unordered_map<identification::entities::technical_space,
                        boost::shared_ptr<modeline>> map;
 
     for (const auto& ml : mg->modelines()) {

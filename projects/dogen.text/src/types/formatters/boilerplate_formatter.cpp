@@ -35,11 +35,13 @@ auto lg(logger_factory("text.formatters.boilerplate_formatter"));
 
 namespace dogen::text::formatters {
 
+using identification::entities::technical_space;
+
 boilerplate_formatter::
 boilerplate_formatter(std::ostream& s, const boilerplate_properties& bp)
     : stream_(s), boilerplate_properties_(bp),
       supports_header_guards_(
-          bp.technical_space() == logical::entities::technical_space::cpp) {
+          bp.technical_space() == technical_space::cpp) {
 
     BOOST_LOG_SEV(lg, trace) << "Boilerplate properties: " << bp;
 }

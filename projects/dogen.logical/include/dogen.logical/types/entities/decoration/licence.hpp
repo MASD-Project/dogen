@@ -52,11 +52,11 @@ public:
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
         const dogen::logical::entities::name& meta_name,
-        const dogen::logical::entities::technical_space intrinsic_technical_space,
+        const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& short_form,
         const std::string& long_form);
 

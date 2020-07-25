@@ -27,7 +27,7 @@
 
 #include <string>
 #include <iosfwd>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
@@ -42,9 +42,10 @@ private:
     static entities::name obtain_enumeration_default_underlying_element_name(
         const entities::model& m);
     static std::string obtain_invalid_enumerator_simple_name(
-        const entities::technical_space ts);
-    static entities::structural::enumerator make_invalid_enumerator(
-        const entities::name& n, const entities::technical_space ts);
+        const identification::entities::technical_space ts);
+    static entities::structural::enumerator
+    make_invalid_enumerator(const entities::name& n,
+        const identification::entities::technical_space ts);
 
 public:
     static void apply(const context& ctx, entities::model& m);

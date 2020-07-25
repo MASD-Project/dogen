@@ -24,7 +24,7 @@ namespace dogen::logical::helpers {
 
 mapping::mapping(
     const std::string& agnostic_id,
-    const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space)
+    const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space)
     : agnostic_id_(agnostic_id),
       by_technical_space_(by_technical_space) { }
 
@@ -61,19 +61,19 @@ void mapping::agnostic_id(const std::string&& v) {
     agnostic_id_ = std::move(v);
 }
 
-const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& mapping::by_technical_space() const {
+const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& mapping::by_technical_space() const {
     return by_technical_space_;
 }
 
-std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& mapping::by_technical_space() {
+std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& mapping::by_technical_space() {
     return by_technical_space_;
 }
 
-void mapping::by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& v) {
+void mapping::by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& v) {
     by_technical_space_ = v;
 }
 
-void mapping::by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>&& v) {
+void mapping::by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>&& v) {
     by_technical_space_ = std::move(v);
 }
 

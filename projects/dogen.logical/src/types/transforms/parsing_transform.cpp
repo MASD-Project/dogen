@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -34,7 +35,6 @@
 #include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -61,7 +61,8 @@ const std::string empty_type("Attribute type is empty: ");
 
 namespace dogen::logical::transforms {
 
-void parsing_transform::parse_attributes(const entities::technical_space ts,
+void parsing_transform::
+parse_attributes(const identification::entities::technical_space ts,
     std::list<entities::attribute>& attrs) {
     const helpers::legacy_name_tree_parser ntp(ts);
     for (auto& attr : attrs) {
@@ -82,7 +83,7 @@ void parsing_transform::parse_attributes(const entities::technical_space ts,
 }
 
 void parsing_transform::
-parse_underlying_element(const entities::technical_space ts,
+parse_underlying_element(const identification::entities::technical_space ts,
     entities::structural::primitive& p) {
     const helpers::legacy_name_tree_parser ntp(ts);
     const auto nt(ntp.parse(p.value_attribute().unparsed_type()));

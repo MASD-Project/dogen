@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/output_model_set_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"

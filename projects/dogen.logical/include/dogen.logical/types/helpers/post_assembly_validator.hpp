@@ -31,7 +31,7 @@
 #include <utility>
 #include <unordered_set>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
 #include "dogen.logical/types/helpers/decomposition_result.hpp"
@@ -41,7 +41,7 @@ namespace dogen::logical::helpers {
 class post_assembly_validator final {
 private:
     static bool allow_spaces_in_built_in_types(
-        const entities::technical_space ts);
+        const identification::entities::technical_space ts);
 
 private:
     static void validate_string(const std::string& s,
@@ -52,17 +52,17 @@ private:
         const std::regex& regex, const bool allow_spaces_in_built_in_types);
     static void validate_names(
         const std::list<std::pair<std::string, entities::name>>& names,
-        const entities::technical_space ts);
+        const identification::entities::technical_space ts);
     static void validate_meta_names(
         const std::list<std::pair<std::string, entities::name>>& meta_names);
 
     static void validate_name_tree(const std::unordered_set<std::string>&
-        abstract_elements, const entities::technical_space ts,
+        abstract_elements, const identification::entities::technical_space ts,
         const entities::name_tree& nt,
         const bool inherit_opaqueness_from_parent = false);
     static void validate_name_trees(
         const std::unordered_set<std::string>& abstract_elements,
-        const entities::technical_space ts,
+        const identification::entities::technical_space ts,
         const std::list<std::pair<std::string, entities::name_tree>>& nts);
 
     static void validate_physical_archetypes(const entities::model& m);

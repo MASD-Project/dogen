@@ -208,9 +208,12 @@ stereotypes_transform::create_visitor(const entities::structural::object& o,
     r->name(n);
     r->provenance(p);
     r->documentation(visitor_doc + o.name().simple());
-    r->intrinsic_technical_space(entities::technical_space::cpp);
-    r->configuration(
-        boost::make_shared<variability::entities::configuration>());
+
+    using identification::entities::technical_space;
+    r->intrinsic_technical_space(technical_space::cpp);
+
+    using variability::entities::configuration;
+    r->configuration(boost::make_shared<configuration>());
     r->configuration()->name().simple(r->name().simple());
     r->configuration()->name().qualified(r->name().qualified().dot());
 

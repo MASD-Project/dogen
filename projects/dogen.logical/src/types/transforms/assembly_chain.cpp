@@ -38,7 +38,8 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::logical::transforms {
 
 entities::model assembly_chain::apply(const context& ctx,
-    const entities::technical_space ts, logical::entities::input_model_set ms) {
+    const identification::entities::technical_space ts,
+    logical::entities::input_model_set ms) {
     const auto ms_id(ms.target().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "model assembly chain", transform_id,
         ms_id, *ctx.tracer());

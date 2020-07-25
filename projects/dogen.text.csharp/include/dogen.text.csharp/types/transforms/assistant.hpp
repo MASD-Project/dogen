@@ -85,8 +85,8 @@ public:
      */
     text::formatters::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const logical::entities::element& e,
-        const logical::entities::technical_space ts =
-        logical::entities::technical_space::csharp);
+        const identification::entities::technical_space ts =
+        identification::entities::technical_space::csharp);
 
     /**
      * @brief Returns a scoped namespace formatter.

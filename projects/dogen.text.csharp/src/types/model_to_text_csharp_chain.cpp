@@ -72,9 +72,9 @@ apply(boost::shared_ptr<tracing::tracer> tracer,
     wf.execute(tracer, fm);
 }
 
-logical::entities::technical_space
+identification::entities::technical_space
 model_to_text_csharp_chain::technical_space() const {
-    return logical::entities::technical_space::csharp;
+    return identification::entities::technical_space::csharp;
 }
 
 void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,

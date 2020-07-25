@@ -109,9 +109,9 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-logical::entities::technical_space
+identification::entities::technical_space
 model_to_text_cpp_chain::technical_space() const {
-    return logical::entities::technical_space::cpp;
+    return identification::entities::technical_space::cpp;
 }
 
 void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,

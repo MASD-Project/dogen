@@ -21,8 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
@@ -105,9 +105,9 @@ clone(const entities::model& m) const {
 
 const std::unordered_map<std::string, entities::name>&
 mapper::translations_for_technical_space(const mapping_set& ms,
-    const entities::technical_space from,
-    const entities::technical_space to) const {
-    if (from == entities::technical_space::agnostic) {
+    const identification::entities::technical_space from,
+    const identification::entities::technical_space to) const {
+    if (from == identification::entities::technical_space::agnostic) {
         const auto& blai(ms.by_agnostic_id());
         const auto i(blai.find(to));
         if (i != blai.end())
@@ -125,11 +125,11 @@ mapper::translations_for_technical_space(const mapping_set& ms,
 
 std::unordered_map<std::string, entities::name>
 mapper::injections_for_technical_space(const mapping_set& ms,
-    const entities::technical_space ts,
+    const identification::entities::technical_space ts,
     const entities::model& m) const {
 
     std::unordered_map<std::string, entities::name> r;
-    const auto cpp(entities::technical_space::cpp);
+    const auto cpp(identification::entities::technical_space::cpp);
     if (ts != cpp)
         return r;
 
@@ -165,8 +165,9 @@ mapper::injections_for_technical_space(const mapping_set& ms,
 }
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
-    const entities::technical_space from,
-    const entities::technical_space to, const entities::model& m) const {
+    const identification::entities::technical_space from,
+    const identification::entities::technical_space to,
+    const entities::model& m) const {
     mapping_context r;
     r.translations(translations_for_technical_space(ms, from, to));
     r.injections(injections_for_technical_space(ms, to, m));
@@ -248,13 +249,15 @@ void mapper::map_attributes(const mapping_context& mc,
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
-bool mapper::is_mappable(const entities::technical_space from,
-    const entities::technical_space to) {
-    return from == to || from == entities::technical_space::agnostic;
+bool mapper::is_mappable(const identification::entities::technical_space from,
+    const identification::entities::technical_space to) {
+    using identification::entities::technical_space;
+    return from == to || from == technical_space::agnostic;
 }
 
-entities::model mapper::map(const entities::technical_space from,
-    const entities::technical_space to,
+entities::model mapper::
+map(const identification::entities::technical_space from,
+    const identification::entities::technical_space to,
     const entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: "
                              << m.name().qualified().dot();

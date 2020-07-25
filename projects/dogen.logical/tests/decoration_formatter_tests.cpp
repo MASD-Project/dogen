@@ -28,7 +28,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/generation_marker.hpp"
 #include "dogen.logical/types/formatters/decoration_formatter.hpp"
@@ -309,7 +309,7 @@ boost::shared_ptr<modeline>
 make_modeline(const bool is_top = true) {
     auto r(boost::make_shared<modeline>());
     r->editor(editor::emacs);
-    r->technical_space(technical_space::cpp);
+    r->technical_space(dogen::identification::entities::technical_space::cpp);
 
     modeline_field f;
     f.name(first_field_name);

@@ -56,17 +56,17 @@
         },
         {
           "name": "input_technical_space",
-          "type": "logical::entities::technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Technical space which this model used originally.\n"
         },
         {
           "name": "output_technical_space",
-          "type": "logical::entities::technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Technical space into which to output the model.\n"
         },
         {
           "name": "all_technical_spaces",
-          "type": "std::unordered_set<logical::entities::technical_space>",
+          "type": "std::unordered_set<identification::entities::technical_space>",
           "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
         },
         {
@@ -146,7 +146,7 @@
       "attributes": [
         {
           "name": "transforms_by_technical_space_",
-          "type": "std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>"
+          "type": "std::unordered_map<identification::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>"
         }
       ]
     },
@@ -284,7 +284,7 @@
         },
         {
           "name": "technical_space",
-          "type": "logical::entities::technical_space"
+          "type": "identification::entities::technical_space"
         },
         {
           "name": "generate_preamble",

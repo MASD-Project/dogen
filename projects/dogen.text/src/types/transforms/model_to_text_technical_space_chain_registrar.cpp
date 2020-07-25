@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/types/transforms/registrar_error.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
@@ -73,7 +73,7 @@ void model_to_text_technical_space_chain_registrar::validate() const {
 std::shared_ptr<model_to_text_technical_space_chain>
 model_to_text_technical_space_chain_registrar::
 transform_for_technical_space(
-    const logical::entities::technical_space ts) const {
+    const identification::entities::technical_space ts) const {
     const auto i(transforms_by_technical_space_.find(ts));
     if (i == transforms_by_technical_space_.end())
         return std::shared_ptr<model_to_text_technical_space_chain>();
@@ -82,7 +82,7 @@ transform_for_technical_space(
 }
 
 const std::unordered_map<
-    logical::entities::technical_space,
+    identification::entities::technical_space,
     std::shared_ptr<model_to_text_technical_space_chain>>&
 model_to_text_technical_space_chain_registrar::
 transforms_by_technical_space() const {

@@ -95,7 +95,7 @@ void source_cmakelists_transform::apply(const context& ctx,
     const auto& c(ast.as<cmakelists>(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_dot_separated_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));

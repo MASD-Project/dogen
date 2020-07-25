@@ -23,8 +23,8 @@
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -65,7 +65,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::physical {
 
 facet::facet()
-    : major_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+    : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 facet::facet(
     const dogen::logical::entities::name& name,
@@ -75,13 +75,13 @@ facet::facet(
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
     const dogen::logical::entities::name& meta_name,
-    const dogen::logical::entities::technical_space intrinsic_technical_space,
+    const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
-    const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+    const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
-    const dogen::logical::entities::technical_space major_technical_space,
+    const dogen::identification::entities::technical_space major_technical_space,
     const std::list<std::string>& contains,
     const std::string& meta_model_name,
     const std::string& backend_name,
@@ -187,11 +187,11 @@ void facet::id(const std::string&& v) {
     id_ = std::move(v);
 }
 
-dogen::logical::entities::technical_space facet::major_technical_space() const {
+dogen::identification::entities::technical_space facet::major_technical_space() const {
     return major_technical_space_;
 }
 
-void facet::major_technical_space(const dogen::logical::entities::technical_space v) {
+void facet::major_technical_space(const dogen::identification::entities::technical_space v) {
     major_technical_space_ = v;
 }
 

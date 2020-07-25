@@ -34,8 +34,8 @@ namespace dogen::text::entities {
 
 model::model()
     : has_generatable_types_(static_cast<bool>(0)),
-      input_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)),
-      output_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+      input_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)),
+      output_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -64,9 +64,9 @@ model::model(
     const std::list<dogen::text::entities::element_artefacts>& elements,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
     const bool has_generatable_types,
-    const dogen::logical::entities::technical_space input_technical_space,
-    const dogen::logical::entities::technical_space output_technical_space,
-    const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
+    const dogen::identification::entities::technical_space input_technical_space,
+    const dogen::identification::entities::technical_space output_technical_space,
+    const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
     const dogen::physical::entities::extraction_properties& extraction_properties,
@@ -254,35 +254,35 @@ void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-dogen::logical::entities::technical_space model::input_technical_space() const {
+dogen::identification::entities::technical_space model::input_technical_space() const {
     return input_technical_space_;
 }
 
-void model::input_technical_space(const dogen::logical::entities::technical_space v) {
+void model::input_technical_space(const dogen::identification::entities::technical_space v) {
     input_technical_space_ = v;
 }
 
-dogen::logical::entities::technical_space model::output_technical_space() const {
+dogen::identification::entities::technical_space model::output_technical_space() const {
     return output_technical_space_;
 }
 
-void model::output_technical_space(const dogen::logical::entities::technical_space v) {
+void model::output_technical_space(const dogen::identification::entities::technical_space v) {
     output_technical_space_ = v;
 }
 
-const std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() const {
+const std::unordered_set<dogen::identification::entities::technical_space>& model::all_technical_spaces() const {
     return all_technical_spaces_;
 }
 
-std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() {
+std::unordered_set<dogen::identification::entities::technical_space>& model::all_technical_spaces() {
     return all_technical_spaces_;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>& v) {
     all_technical_spaces_ = v;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>&& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>&& v) {
     all_technical_spaces_ = std::move(v);
 }
 

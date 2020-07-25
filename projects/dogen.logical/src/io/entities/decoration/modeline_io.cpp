@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/decoration/editor_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_field_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_location_io.hpp"
 

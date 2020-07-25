@@ -32,7 +32,7 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/mapping_context.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
@@ -64,17 +64,17 @@ private:
 private:
     const std::unordered_map<std::string, entities::name>&
     translations_for_technical_space(const mapping_set& ms,
-        const entities::technical_space from,
-        const entities::technical_space to) const;
+        const identification::entities::technical_space from,
+        const identification::entities::technical_space to) const;
 
     std::unordered_map<std::string, entities::name>
     injections_for_technical_space(const mapping_set& ms,
-        const entities::technical_space ts,
+        const identification::entities::technical_space ts,
         const entities::model& m) const;
 
     mapping_context create_mapping_context(const mapping_set& ms,
-        const entities::technical_space from,
-        const entities::technical_space to,
+        const identification::entities::technical_space from,
+        const identification::entities::technical_space to,
         const entities::model& m) const;
 
 private:
@@ -85,10 +85,12 @@ private:
         std::list<entities::attribute>& attrs) const;
 
 public:
-    static bool is_mappable(const entities::technical_space from,
-        const entities::technical_space to);
-    entities::model map(const entities::technical_space from,
-        const entities::technical_space to,
+    static bool is_mappable(
+        const identification::entities::technical_space from,
+        const identification::entities::technical_space to);
+    entities::model map(
+        const identification::entities::technical_space from,
+        const identification::entities::technical_space to,
         const entities::model& m) const;
 
 private:

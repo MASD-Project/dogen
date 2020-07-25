@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/physical_relations.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
@@ -116,7 +116,7 @@ process_backends(const context& ctx, entities::model& m) {
          * Read the technical space.
          */
         using boost::lexical_cast;
-        using entities::technical_space;
+        using identification::entities::technical_space;
         const auto mts(scfg.major_technical_space);
         BOOST_LOG_SEV(lg, debug) << "Major technical space: " << mts;
         b.major_technical_space(lexical_cast<technical_space>(mts));

@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/licence_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_fwd.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/decoration/generation_marker_fwd.hpp"
 
 namespace dogen::logical::helpers {
@@ -46,15 +46,15 @@ public:
 
 public:
     decoration_repository(
-        const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space,
+        const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences_by_name,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& generation_markers_by_name);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space() const;
-    std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space();
-    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& v);
-    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >&& v);
+    const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space() const;
+    std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space();
+    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& v);
+    void modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >&& v);
 
     const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences_by_name() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences_by_name();
@@ -77,7 +77,7 @@ public:
     decoration_repository& operator=(decoration_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > > modelines_by_modeline_group_by_technical_space_;
+    std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > > modelines_by_modeline_group_by_technical_space_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> > licences_by_name_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> > generation_markers_by_name_;
 };

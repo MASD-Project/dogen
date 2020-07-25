@@ -53,7 +53,7 @@ const boost::shared_ptr<dogen::logical::entities::decoration::generation_marker>
 namespace dogen::logical::helpers {
 
 decoration_repository::decoration_repository(
-    const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space,
+    const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& modelines_by_modeline_group_by_technical_space,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences_by_name,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& generation_markers_by_name)
     : modelines_by_modeline_group_by_technical_space_(modelines_by_modeline_group_by_technical_space),
@@ -79,19 +79,19 @@ decoration_repository& decoration_repository::operator=(decoration_repository ot
     return *this;
 }
 
-const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& decoration_repository::modelines_by_modeline_group_by_technical_space() const {
+const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& decoration_repository::modelines_by_modeline_group_by_technical_space() const {
     return modelines_by_modeline_group_by_technical_space_;
 }
 
-std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& decoration_repository::modelines_by_modeline_group_by_technical_space() {
+std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& decoration_repository::modelines_by_modeline_group_by_technical_space() {
     return modelines_by_modeline_group_by_technical_space_;
 }
 
-void decoration_repository::modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& v) {
+void decoration_repository::modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >& v) {
     modelines_by_modeline_group_by_technical_space_ = v;
 }
 
-void decoration_repository::modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::logical::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >&& v) {
+void decoration_repository::modelines_by_modeline_group_by_technical_space(const std::unordered_map<std::string, std::unordered_map<dogen::identification::entities::technical_space, boost::shared_ptr<dogen::logical::entities::decoration::modeline> > >&& v) {
     modelines_by_modeline_group_by_technical_space_ = std::move(v);
 }
 

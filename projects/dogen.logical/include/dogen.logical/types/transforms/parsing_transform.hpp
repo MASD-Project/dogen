@@ -27,7 +27,7 @@
 
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -51,13 +51,15 @@ private:
     /**
      * @brief Parses all attributes in the supplied attribute list.
      */
-    static void parse_attributes(const entities::technical_space ts,
+    static void parse_attributes(
+        const identification::entities::technical_space ts,
         std::list<entities::attribute>& attrs);
 
     /**
      * @brief Parses the underlying element in the supplied primitive.
      */
-    static void parse_underlying_element(const entities::technical_space ts,
+    static void parse_underlying_element(
+        const identification::entities::technical_space ts,
         entities::structural::primitive& p);
 
 private:

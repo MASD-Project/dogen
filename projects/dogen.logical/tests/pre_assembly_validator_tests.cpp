@@ -52,8 +52,8 @@ const std::string inconsistent_kvp("Inconsistency between key and value");
 
 using dogen::utility::test::contains_checker;
 using dogen::identification::entities::model_type;
+using dogen::identification::entities::technical_space;
 using dogen::logical::helpers::validation_error;
-using dogen::logical::entities::technical_space;
 using dogen::logical::helpers::pre_assembly_validator;
 
 

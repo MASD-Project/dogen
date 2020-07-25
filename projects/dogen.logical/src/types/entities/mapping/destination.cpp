@@ -23,11 +23,11 @@
 namespace dogen::logical::entities::mapping {
 
 destination::destination()
-    : technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+    : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 destination::destination(
     const dogen::logical::entities::name& name,
-    const dogen::logical::entities::technical_space technical_space)
+    const dogen::identification::entities::technical_space technical_space)
     : name_(name),
       technical_space_(technical_space) { }
 
@@ -64,11 +64,11 @@ void destination::name(const dogen::logical::entities::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::logical::entities::technical_space destination::technical_space() const {
+dogen::identification::entities::technical_space destination::technical_space() const {
     return technical_space_;
 }
 
-void destination::technical_space(const dogen::logical::entities::technical_space v) {
+void destination::technical_space(const dogen::identification::entities::technical_space v) {
     technical_space_ = v;
 }
 

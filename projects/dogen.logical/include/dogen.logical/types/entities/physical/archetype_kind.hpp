@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::logical::entities::physical {
 
@@ -52,13 +52,13 @@ public:
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
         const dogen::logical::entities::name& meta_name,
-        const dogen::logical::entities::technical_space intrinsic_technical_space,
+        const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& id,
-        const dogen::logical::entities::technical_space major_technical_space,
+        const dogen::identification::entities::technical_space major_technical_space,
         const std::string& meta_model_name,
         const std::string& backend_name,
         const std::string& file_extension);
@@ -88,8 +88,8 @@ public:
      * @brief Technical space to which this physical element belongs to.
      */
     /**@{*/
-    dogen::logical::entities::technical_space major_technical_space() const;
-    void major_technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space major_technical_space() const;
+    void major_technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -137,7 +137,7 @@ public:
 
 private:
     std::string id_;
-    dogen::logical::entities::technical_space major_technical_space_;
+    dogen::identification::entities::technical_space major_technical_space_;
     std::string meta_model_name_;
     std::string backend_name_;
     std::string file_extension_;

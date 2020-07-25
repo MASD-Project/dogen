@@ -106,7 +106,7 @@ public:
     std::string description() const override;
 
 public:
-    logical::entities::technical_space technical_space() const override;
+    identification::entities::technical_space technical_space() const override;
 
     void apply(const text::transforms::context& ctx,
         const bool enable_backend_directories,

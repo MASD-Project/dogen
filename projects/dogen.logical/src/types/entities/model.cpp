@@ -33,7 +33,7 @@ const boost::shared_ptr<dogen::logical::entities::structural::module>& rhs) {
 namespace dogen::logical::entities {
 
 model::model()
-    : input_technical_space_(static_cast<dogen::logical::entities::technical_space>(0)) { }
+    : input_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -65,9 +65,9 @@ model::model(
     const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
-    const dogen::logical::entities::technical_space input_technical_space,
-    const std::list<dogen::logical::entities::technical_space>& output_technical_spaces,
-    const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
+    const dogen::identification::entities::technical_space input_technical_space,
+    const std::list<dogen::identification::entities::technical_space>& output_technical_spaces,
+    const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const dogen::logical::entities::structural::element_repository& structural_elements,
     const dogen::logical::entities::decoration::element_repository& decoration_elements,
@@ -253,43 +253,43 @@ void model::root_module(const boost::shared_ptr<dogen::logical::entities::struct
     root_module_ = std::move(v);
 }
 
-dogen::logical::entities::technical_space model::input_technical_space() const {
+dogen::identification::entities::technical_space model::input_technical_space() const {
     return input_technical_space_;
 }
 
-void model::input_technical_space(const dogen::logical::entities::technical_space v) {
+void model::input_technical_space(const dogen::identification::entities::technical_space v) {
     input_technical_space_ = v;
 }
 
-const std::list<dogen::logical::entities::technical_space>& model::output_technical_spaces() const {
+const std::list<dogen::identification::entities::technical_space>& model::output_technical_spaces() const {
     return output_technical_spaces_;
 }
 
-std::list<dogen::logical::entities::technical_space>& model::output_technical_spaces() {
+std::list<dogen::identification::entities::technical_space>& model::output_technical_spaces() {
     return output_technical_spaces_;
 }
 
-void model::output_technical_spaces(const std::list<dogen::logical::entities::technical_space>& v) {
+void model::output_technical_spaces(const std::list<dogen::identification::entities::technical_space>& v) {
     output_technical_spaces_ = v;
 }
 
-void model::output_technical_spaces(const std::list<dogen::logical::entities::technical_space>&& v) {
+void model::output_technical_spaces(const std::list<dogen::identification::entities::technical_space>&& v) {
     output_technical_spaces_ = std::move(v);
 }
 
-const std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() const {
+const std::unordered_set<dogen::identification::entities::technical_space>& model::all_technical_spaces() const {
     return all_technical_spaces_;
 }
 
-std::unordered_set<dogen::logical::entities::technical_space>& model::all_technical_spaces() {
+std::unordered_set<dogen::identification::entities::technical_space>& model::all_technical_spaces() {
     return all_technical_spaces_;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>& v) {
     all_technical_spaces_ = v;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>&& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>&& v) {
     all_technical_spaces_ = std::move(v);
 }
 

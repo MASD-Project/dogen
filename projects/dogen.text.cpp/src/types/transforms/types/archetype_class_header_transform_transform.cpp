@@ -71,7 +71,7 @@ std::list<std::string> archetype_class_header_transform_transform::inclusion_dep
     const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
 
     auto builder(f.make());
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (arch.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
@@ -103,7 +103,7 @@ ast.stream() << "    static const physical::entities::archetype& static_archetyp
 ast.stream() << "    const physical::entities::archetype& archetype() const override;" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "public:" << std::endl;
-            using logical::entities::technical_space;
+            using identification::entities::technical_space;
             if (o.major_technical_space() == technical_space::cpp) {
 ast.stream() << "    std::list<std::string> inclusion_dependencies(" << std::endl;
 ast.stream() << "        const formattables::dependencies_builder_factory& f," << std::endl;

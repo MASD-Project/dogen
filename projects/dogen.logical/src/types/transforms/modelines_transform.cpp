@@ -23,7 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/lexical_cast/entities/decoration/editor_lc.hpp"
 #include "dogen.logical/lexical_cast/entities/decoration/modeline_location_lc.hpp"
 #include "dogen.logical/types/features/decoration_modeline.hpp"
@@ -79,7 +79,7 @@ void modelines_transform::apply(const context& ctx, entities::model& m) {
         using entities::decoration::modeline_location;
         ml.location(lexical_cast<modeline_location>(scfg.location));
 
-        using entities::technical_space;
+        using identification::entities::technical_space;
         ml.technical_space(lexical_cast<technical_space>(scfg.technical_space));
 
         /*

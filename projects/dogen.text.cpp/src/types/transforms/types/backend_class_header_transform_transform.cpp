@@ -73,7 +73,7 @@ std::list<std::string> backend_class_header_transform_transform::inclusion_depen
 
     auto builder(f.make());
     builder.add_as_user("dogen.physical/types/entities/backend.hpp");
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (be.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/registrar.hpp");

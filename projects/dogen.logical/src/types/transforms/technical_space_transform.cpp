@@ -20,12 +20,12 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/features/output_technical_space.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
@@ -47,7 +47,7 @@ const std::string technical_space_not_set("Input technical space must be set.");
 
 namespace dogen::logical::transforms {
 
-using entities::technical_space;
+using identification::entities::technical_space;
 
 void technical_space_transform::
 apply(const context& ctx, entities::model& m) {
@@ -66,7 +66,7 @@ apply(const context& ctx, entities::model& m) {
     /*
      * Ensure the input technical space has been set by now.
      */
-    const auto inv(entities::technical_space::invalid);
+    const auto inv(technical_space::invalid);
     const bool has_input_ts(m.input_technical_space() != inv);
     if (!has_input_ts) {
         BOOST_LOG_SEV(lg, error) << technical_space_not_set;
@@ -104,9 +104,9 @@ apply(const context& ctx, entities::model& m) {
                                  << "  found. Defaulting to input: "
                                  << m.output_technical_spaces();
     } else {
-        std::list<entities::technical_space> ots;
+        std::list<technical_space> ots;
         for (const auto& s : scfg.output_technical_space)
-            ots.push_back(boost::lexical_cast<entities::technical_space>(s));
+            ots.push_back(boost::lexical_cast<technical_space>(s));
 
         m.output_technical_spaces(ots);
         BOOST_LOG_SEV(lg, debug) << "Expanded output technical spaces to: "

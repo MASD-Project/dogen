@@ -23,7 +23,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 
 /*
 #include "dogen.logical/types/name_builder.hpp"
@@ -38,15 +38,13 @@
 #include "dogen.utility/types/test/exception_checkers.hpp"
 #include "dogen.logical/types/helpers/new_name_tree_parser.hpp"
 
-using dogen::utility::test::asserter;
-
 namespace  {
 
 const std::string empty;
 const std::string test_module("dogen.logical.tests");
 const std::string test_suite("name_tree_parser_tests");
 
-const auto cpp(dogen::logical::entities::technical_space::cpp);
+const auto cpp(dogen::identification::entities::technical_space::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::logical::entities::location();
@@ -83,7 +81,6 @@ bool check_parse(const std::string & s)
 }
 
 }
-using dogen::logical::helpers::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(new_name_tree_parser_tests)
 

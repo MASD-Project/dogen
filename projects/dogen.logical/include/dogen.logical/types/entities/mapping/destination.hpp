@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::logical::entities::mapping {
 
@@ -43,7 +43,7 @@ public:
 public:
     destination(
         const dogen::logical::entities::name& name,
-        const dogen::logical::entities::technical_space technical_space);
+        const dogen::identification::entities::technical_space technical_space);
 
 public:
     const dogen::logical::entities::name& name() const;
@@ -51,8 +51,8 @@ public:
     void name(const dogen::logical::entities::name& v);
     void name(const dogen::logical::entities::name&& v);
 
-    dogen::logical::entities::technical_space technical_space() const;
-    void technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
 
 public:
     bool operator==(const destination& rhs) const;
@@ -66,7 +66,7 @@ public:
 
 private:
     dogen::logical::entities::name name_;
-    dogen::logical::entities::technical_space technical_space_;
+    dogen::identification::entities::technical_space technical_space_;
 };
 
 }

@@ -24,7 +24,7 @@
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -63,7 +63,7 @@ public:
         : feature_group_(fg), technical_space_() {}
 
 public:
-    void technical_space(const logical::entities::technical_space ts) {
+    void technical_space(const identification::entities::technical_space ts) {
         technical_space_ = ts;
     }
 
@@ -91,7 +91,7 @@ public:
 
 public:
     const features::mapping::feature_group& feature_group_;
-    logical::entities::technical_space technical_space_;
+    identification::entities::technical_space technical_space_;
     std::unordered_map<std::string,
                        std::list<
                            logical::entities::mapping::destination>

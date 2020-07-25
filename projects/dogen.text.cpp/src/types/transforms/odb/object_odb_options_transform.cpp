@@ -96,7 +96,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
     const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!o.orm_properties()) {

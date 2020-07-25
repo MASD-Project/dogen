@@ -94,7 +94,7 @@ void msbuild_targets_transform::apply(const context& ctx, const logical::entitie
     const auto& c(ast.as<msbuild_targets>(e));
 
     {
-        const auto ts(logical::entities::technical_space::xml);
+        const auto ts(identification::entities::technical_space::xml);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_identifiable_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));

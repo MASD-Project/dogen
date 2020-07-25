@@ -22,7 +22,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"

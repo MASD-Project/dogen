@@ -22,8 +22,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/formatters/comment_style.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/entities/decoration/licence.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
@@ -71,7 +71,7 @@ get_short_form_licence(const std::string& licence_name) const {
 
 boost::shared_ptr<entities::decoration::modeline> decoration_factory::
 get_modeline(const std::string& modeline_group_name,
-    const logical::entities::technical_space ts) const {
+    const identification::entities::technical_space ts) const {
 
     if (modeline_group_name.empty())
         return boost::shared_ptr<entities::decoration::modeline>();
@@ -121,14 +121,14 @@ decoration_factory::make_decoration(const std::string& licence_text,
     const boost::shared_ptr<
     logical::entities::decoration::generation_marker> gm,
     const std::list<std::string>& copyright_notices,
-    const logical::entities::technical_space ts) const {
+    const identification::entities::technical_space ts) const {
 
     /*
      * Create the preamble and postamble for the decoration, taking
      * into account the element's technical space.
      */
     using utility::formatters::comment_style;
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
 
     std::ostringstream preamble_stream;
     formatters::decoration_formatter df;
@@ -168,7 +168,7 @@ decoration_factory::make_decoration(const std::string& licence_text,
 boost::optional<logical::entities::decoration::element_properties>
 decoration_factory::make_global_decoration(
     const boost::optional<helpers::decoration_configuration> root_dc,
-    const logical::entities::technical_space ts) const {
+    const identification::entities::technical_space ts) const {
     /*
      * If there is no decoration configuration there shall be no
      * decoration either.
@@ -209,7 +209,7 @@ decoration_factory::make_local_decoration(const boost::optional<
     logical::entities::decoration::element_properties> global_decoration,
     const boost::optional<helpers::decoration_configuration>& root_dc,
     const boost::optional<helpers::decoration_configuration> element_dc,
-    const logical::entities::technical_space ts) const {
+    const identification::entities::technical_space ts) const {
     BOOST_LOG_SEV(lg, trace) << "Creating local decoration.";
 
     /*

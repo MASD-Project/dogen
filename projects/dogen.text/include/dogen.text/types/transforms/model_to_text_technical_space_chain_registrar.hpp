@@ -30,8 +30,8 @@
 #include <memory>
 #include <unordered_map>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 
 namespace dogen::text::transforms {
@@ -62,18 +62,18 @@ public:
      */
     std::shared_ptr<model_to_text_technical_space_chain>
     transform_for_technical_space(
-        const logical::entities::technical_space ts) const;
+        const identification::entities::technical_space ts) const;
 
     /**
      * @brief Returns all available transforms, by technical space.
      */
     const std::unordered_map<
-        logical::entities::technical_space,
+        identification::entities::technical_space,
         std::shared_ptr<model_to_text_technical_space_chain>>&
     transforms_by_technical_space() const;
 
 private:
-    std::unordered_map<logical::entities::technical_space,
+    std::unordered_map<identification::entities::technical_space,
     std::shared_ptr<model_to_text_technical_space_chain>>
     transforms_by_technical_space_;
 };

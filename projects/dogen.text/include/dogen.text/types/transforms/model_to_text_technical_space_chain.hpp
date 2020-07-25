@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/entities/model.hpp"
 
@@ -64,7 +64,8 @@ public:
     /**
      * @brief Technical space targeted by this transform.
      */
-    virtual logical::entities::technical_space technical_space() const = 0;
+    virtual identification::entities::technical_space
+    technical_space() const = 0;
 
     /**
      * @brief Updates all artefacts with a text representation for

@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.logical/types/helpers/mapping.hpp"
 
@@ -36,7 +36,7 @@ namespace dogen::logical::helpers {
 
 class mappings_validator final {
 private:
-    void validate(const entities::technical_space ts,
+    void validate(const identification::entities::technical_space ts,
         const mapping_value& mv) const;
     void validate(const mapping& m) const;
 

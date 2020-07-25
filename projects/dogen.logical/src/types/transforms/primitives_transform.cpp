@@ -26,7 +26,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
@@ -55,9 +55,9 @@ const std::string missing_underlier(
 
 namespace dogen::logical::transforms {
 
-std::string primitives_transform::
-obtain_value_attribute_simple_name(const entities::technical_space ts) {
-    using entities::technical_space;
+std::string primitives_transform::obtain_value_attribute_simple_name(
+    const identification::entities::technical_space ts) {
+    using identification::entities::technical_space;
     switch(ts) {
     case technical_space::csharp: return csharp_value;
     case technical_space::cpp: return cpp_value;
@@ -69,9 +69,9 @@ obtain_value_attribute_simple_name(const entities::technical_space ts) {
     } }
 }
 
-entities::attribute
-primitives_transform::create_attribute_for_underlying_element(
-    const entities::name& owner, const entities::technical_space ts,
+entities::attribute primitives_transform::
+create_attribute_for_underlying_element(const entities::name& owner,
+    const identification::entities::technical_space ts,
     std::string underlying_element) {
 
     /*

@@ -132,9 +132,10 @@ inline void check_not_in_container(const Container& c, const std::string& str,
     }
 }
 
-bool post_assembly_validator::
-allow_spaces_in_built_in_types(const entities::technical_space l) {
-    return l == entities::technical_space::cpp;
+bool
+post_assembly_validator::allow_spaces_in_built_in_types(
+    const identification::entities::technical_space l) {
+    return l == identification::entities::technical_space::cpp;
 }
 
 void post_assembly_validator::validate_string(const std::string& s,
@@ -233,7 +234,7 @@ void post_assembly_validator::validate_name(const entities::name& n,
 
 void post_assembly_validator::
 validate_names(const std::list<std::pair<std::string, entities::name>>& names,
-    const entities::technical_space l) {
+    const identification::entities::technical_space l) {
     BOOST_LOG_SEV(lg, debug) << "Validating names.";
     std::unordered_set<std::string> ids_done;
 
@@ -303,7 +304,8 @@ void post_assembly_validator::validate_meta_names(
 
 void post_assembly_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
-    const entities::technical_space ts, const entities::name_tree& nt,
+    const identification::entities::technical_space ts,
+    const entities::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
     const auto& ae(abstract_elements);
     const auto id(nt.current().qualified().dot());
@@ -319,7 +321,7 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
 
 void post_assembly_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements,
-    const entities::technical_space ts,
+    const identification::entities::technical_space ts,
     const std::list<std::pair<std::string, entities::name_tree>>& nts) {
     BOOST_LOG_SEV(lg, debug) << "Validating name trees.";
 
@@ -330,7 +332,7 @@ void post_assembly_validator::validate_name_trees(
      * know they are valid. These are just additional checks we
      * perform on these names.
      */
-    if (ts != entities::technical_space::cpp)
+    if (ts != identification::entities::technical_space::cpp)
         return;
 
     for (const auto& pair : nts) {

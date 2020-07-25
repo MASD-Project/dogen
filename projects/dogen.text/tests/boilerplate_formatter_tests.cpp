@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.text/io/formatters/boilerplate_properties_io.hpp"
@@ -154,7 +154,7 @@ const std::string expected_csharp_no_preamble(
 using second dependency
 )");
 
-using dogen::logical::entities::technical_space;
+using dogen::identification::entities::technical_space;
 using dogen::text::formatters::boilerplate_properties;
 
 boilerplate_properties make_all_properties(const technical_space ts) {

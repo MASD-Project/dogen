@@ -290,8 +290,8 @@ public:
      */
     text::formatters::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const logical::entities::element& e,
-        const logical::entities::technical_space ts =
-        logical::entities::technical_space::cpp);
+        const identification::entities::technical_space ts =
+        identification::entities::technical_space::cpp);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -303,7 +303,7 @@ public:
      * @brief Creates the decoration preamble.
      */
     void make_decoration_preamble(const logical::entities::element& e,
-        const logical::entities::technical_space ts);
+        const identification::entities::technical_space ts);
 
 public:
     /**

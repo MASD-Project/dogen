@@ -71,8 +71,8 @@ multiple_namespaces_cpp_nested_configuration_begin(R"(namespace aaa::bbb::ccc {
 const std::string empty_namespace_default_configuration_begin(R"(namespace {
 )");
 
-const auto cpp_ts(dogen::logical::entities::technical_space::cpp);
-const auto csharp_ts(dogen::logical::entities::technical_space::csharp);
+const auto cpp_ts(dogen::identification::entities::technical_space::cpp);
+const auto csharp_ts(dogen::identification::entities::technical_space::csharp);
 const std::list<std::string> empty_namespaces;
 }
 

@@ -30,8 +30,8 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -49,8 +49,8 @@ public:
 public:
     mapping_set(
         const std::string& name,
-        const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id,
-        const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space);
+        const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id,
+        const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space);
 
 public:
     const std::string& name() const;
@@ -58,15 +58,15 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id() const;
-    std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id();
-    void by_agnostic_id(const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& v);
-    void by_agnostic_id(const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >&& v);
+    const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id() const;
+    std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& by_agnostic_id();
+    void by_agnostic_id(const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >& v);
+    void by_agnostic_id(const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> >&& v);
 
-    const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space() const;
-    std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space();
-    void erasures_by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> >& v);
-    void erasures_by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space() const;
+    std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> >& erasures_by_technical_space();
+    void erasures_by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> >& v);
+    void erasures_by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> >&& v);
 
 public:
     bool operator==(const mapping_set& rhs) const;
@@ -80,8 +80,8 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<dogen::logical::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> > by_agnostic_id_;
-    std::unordered_map<dogen::logical::entities::technical_space, std::unordered_set<std::string> > erasures_by_technical_space_;
+    std::unordered_map<dogen::identification::entities::technical_space, std::unordered_map<std::string, dogen::logical::entities::name> > by_agnostic_id_;
+    std::unordered_map<dogen::identification::entities::technical_space, std::unordered_set<std::string> > erasures_by_technical_space_;
 };
 
 }

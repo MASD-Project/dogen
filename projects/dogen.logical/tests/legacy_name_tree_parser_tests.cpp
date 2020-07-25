@@ -41,7 +41,7 @@ const std::string empty;
 const std::string test_module("dogen.logical.tests");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const auto cpp(dogen::logical::entities::technical_space::cpp);
+const auto cpp(dogen::identification::entities::technical_space::cpp);
 
 name_tree make(const dogen::logical::entities::name& n) {
     name_tree r;

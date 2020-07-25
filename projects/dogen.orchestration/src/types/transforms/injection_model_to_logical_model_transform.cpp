@@ -93,8 +93,9 @@ insert(const boost::shared_ptr<Element>& e,
     }
 }
 
-logical::entities::technical_space to_technical_space(const std::string& s) {
-    using logical::entities::technical_space;
+identification::entities::technical_space
+to_technical_space(const std::string& s) {
+    using identification::entities::technical_space;
     if (s == cpp_technical_space)
         return technical_space::cpp;
     else if (s == csharp_technical_space)

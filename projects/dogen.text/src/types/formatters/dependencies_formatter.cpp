@@ -22,7 +22,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/types/formatters/formatting_error.hpp"
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.text/types/formatters/dependencies_formatter.hpp"
@@ -57,10 +57,10 @@ void dependencies_formatter::format_csharp_usings(std::ostream& s,
 }
 
 void dependencies_formatter::format(std::ostream& s,
-    const logical::entities::technical_space ts,
+    const identification::entities::technical_space ts,
     const std::list<std::string>& dependencies) const {
 
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     switch(ts) {
     case technical_space::cpp:
         format_cpp_includes(s, dependencies);

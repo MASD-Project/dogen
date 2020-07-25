@@ -34,7 +34,7 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/types/helpers/parsing_error.hpp"
 #include "dogen.logical/types/helpers/name_tree_builder.hpp"
@@ -86,7 +86,7 @@ const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 }
 
-using dogen::logical::entities::technical_space;
+using dogen::identification::entities::technical_space;
 using dogen::logical::helpers::parsing_error;
 
 template<typename Iterator>
@@ -209,7 +209,7 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen::logical::helpers {
 
 legacy_name_tree_parser::
-legacy_name_tree_parser(const entities::technical_space ts)
+legacy_name_tree_parser(const identification::entities::technical_space ts)
     : technical_space_(ts) {}
 
 entities::name_tree

@@ -39,7 +39,7 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/types/helpers/parsing_error.hpp"
 #include "dogen.logical/types/helpers/name_tree_builder.hpp"
@@ -285,11 +285,11 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
 
 
     std::string scope_operator_for_technical_space(
-        const dogen::logical::entities::technical_space ts) {
+        const dogen::identification::entities::technical_space ts) {
         switch (ts) {
-        case dogen::logical::entities::technical_space::csharp:
+        case dogen::identification::entities::technical_space::csharp:
             return ".";
-        case dogen::logical::entities::technical_space::cpp:
+        case dogen::identification::entities::technical_space::cpp:
             return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(ts));
@@ -320,7 +320,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
 
     std::string scope_str;
     custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener,
-        const dogen::logical::entities::technical_space ts)
+        const dogen::identification::entities::technical_space ts)
           : custom_type_grammar::base_type(custom_type), listener(listener),
             scope_str(scope_operator_for_technical_space(ts))
     {
@@ -409,7 +409,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     }
 
     grammar(listener_t &l,
-        const dogen::logical::entities::technical_space ts)
+        const dogen::identification::entities::technical_space ts)
                 : grammar::base_type(type_name), listener(&l),
                   custom_type{ &l , ts } {
         setup_functors();

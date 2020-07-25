@@ -103,7 +103,7 @@ obtain_artefact_properties(const std::string& archetype) const {
 
 text::formatters::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const logical::entities::element& e,
-    const logical::entities::technical_space ts) {
+    const identification::entities::technical_space ts) {
     text::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
@@ -125,7 +125,7 @@ make_scoped_boilerplate_formatter(const logical::entities::element& e,
 text::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return text::formatters::scoped_namespace_formatter(
-        stream(), logical::entities::technical_space::csharp, ns,
+        stream(), identification::entities::technical_space::csharp, ns,
         true/*add_new_line*/);
 }
 

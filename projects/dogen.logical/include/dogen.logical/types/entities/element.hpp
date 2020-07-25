@@ -35,11 +35,11 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.identification/types/entities/label.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
 
@@ -71,11 +71,11 @@ public:
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
         const dogen::logical::entities::name& meta_name,
-        const dogen::logical::entities::technical_space intrinsic_technical_space,
+        const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
+        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -167,8 +167,8 @@ public:
      * agnostic. Otherwise, the element belongs to a concrete technical space.
      */
     /**@{*/
-    dogen::logical::entities::technical_space intrinsic_technical_space() const;
-    void intrinsic_technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space intrinsic_technical_space() const;
+    void intrinsic_technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -203,10 +203,10 @@ public:
      * @brief If set, decoration to be added to each generated file.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration() const;
-    std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration();
-    void decoration(const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& v);
-    void decoration(const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >&& v);
+    const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration() const;
+    std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration();
+    void decoration(const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& v);
+    void decoration(const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >&& v);
     /**@}*/
 
 protected:
@@ -225,11 +225,11 @@ private:
     bool in_global_module_;
     dogen::logical::entities::stereotypes stereotypes_;
     dogen::logical::entities::name meta_name_;
-    dogen::logical::entities::technical_space intrinsic_technical_space_;
+    dogen::identification::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::list<dogen::identification::entities::label> labels_;
     dogen::logical::entities::generability_status generability_status_;
-    std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
+    std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
 };
 
 inline element::~element() noexcept { }

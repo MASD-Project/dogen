@@ -34,7 +34,7 @@
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/input_model_set.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -67,8 +67,8 @@ private:
 
 private:
     static void insert(const std::string& lam_id, const entities::name& n,
-        const entities::technical_space ts,
-        std::unordered_map<entities::technical_space,
+        const identification::entities::technical_space ts,
+        std::unordered_map<identification::entities::technical_space,
         std::unordered_map<std::string, entities::name>>& map);
 
     static void populate_mapping_set(
@@ -81,12 +81,13 @@ private:
 
 private:
     static entities::model map(const helpers::mapping_set_repository& msrp,
-        const entities::model& src, const entities::technical_space to);
+        const entities::model& src,
+        const identification::entities::technical_space to);
 
 public:
     static logical::entities::input_model_set apply(const context& ctx,
         const logical::entities::input_model_set& src,
-        const entities::technical_space to);
+        const identification::entities::technical_space to);
 };
 
 }

@@ -71,9 +71,12 @@ create_global_module(const identification::entities::model_type mt) {
     r->provenance().model_type(mt);
     r->documentation(global_module_doc);
     r->is_global_module(true);
-    r->intrinsic_technical_space(entities::technical_space::agnostic);
-    r->configuration(
-        boost::make_shared<variability::entities::configuration>());
+
+    using identification::entities::technical_space;
+    r->intrinsic_technical_space(technical_space::agnostic);
+
+    using variability::entities::configuration;
+    r->configuration(boost::make_shared<configuration>());
     r->configuration()->name().simple(gm);
     r->configuration()->name().qualified(fqr.dot());
 

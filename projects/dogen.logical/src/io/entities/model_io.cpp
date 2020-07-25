@@ -22,10 +22,10 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/orm/element_repository_io.hpp"
 #include "dogen.logical/io/entities/build/element_repository_io.hpp"
 #include "dogen.logical/io/entities/mapping/element_repository_io.hpp"
@@ -88,7 +88,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::technical_space>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::technical_space>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -102,7 +102,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::logical::entities::technical_space>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::technical_space>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -26,7 +26,7 @@
 #endif
 
 #include <iostream>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -41,7 +41,7 @@ public:
      * project type, if any such mapping exists.
      */
     static std::string
-    from_technical_space(const entities::technical_space ts);
+    from_technical_space(const identification::entities::technical_space ts);
 };
 
 }

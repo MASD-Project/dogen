@@ -23,7 +23,7 @@
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/entities/mapping/extensible_mappable.hpp"
@@ -116,8 +116,8 @@ void extensible_mapping_transform::validate_mappings(const std::unordered_map<
 }
 
 void extensible_mapping_transform::insert(const std::string& agnostic_id,
-    const entities::name& n, const entities::technical_space ts,
-    std::unordered_map<entities::technical_space,
+    const entities::name& n, const identification::entities::technical_space ts,
+    std::unordered_map<identification::entities::technical_space,
     std::unordered_map<std::string, entities::name>>& map) {
 
     auto& by_id(map[ts]);
@@ -191,9 +191,9 @@ create_repository(const std::unordered_map<std::string,
     return r;
 }
 
-entities::model
-extensible_mapping_transform::map(const helpers::mapping_set_repository& msrp,
-    const entities::model& src, const entities::technical_space to) {
+entities::model extensible_mapping_transform::
+map(const helpers::mapping_set_repository& msrp, const entities::model& src,
+    const identification::entities::technical_space to) {
 
     const helpers::mapper mp(msrp);
     auto r(mp.map(src.input_technical_space(), to, src));
@@ -203,7 +203,7 @@ extensible_mapping_transform::map(const helpers::mapping_set_repository& msrp,
 logical::entities::input_model_set
 extensible_mapping_transform::apply(const context& ctx,
     const logical::entities::input_model_set& src,
-    const entities::technical_space to) {
+    const identification::entities::technical_space to) {
     const auto id(src.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
         id, *ctx.tracer(), src);

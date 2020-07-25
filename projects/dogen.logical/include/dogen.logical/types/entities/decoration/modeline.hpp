@@ -29,8 +29,8 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/editor.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_field.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_location.hpp"
 
@@ -67,15 +67,15 @@ public:
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
         const dogen::logical::entities::name& meta_name,
-        const dogen::logical::entities::technical_space intrinsic_technical_space,
+        const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
-        const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
+        const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const dogen::logical::entities::decoration::editor editor,
         const dogen::logical::entities::decoration::modeline_location location,
         const std::list<dogen::logical::entities::decoration::modeline_field>& fields,
-        const dogen::logical::entities::technical_space technical_space);
+        const dogen::identification::entities::technical_space technical_space);
 
 public:
     using element::accept;
@@ -118,8 +118,8 @@ public:
      * @brief Technical space that this modeline targets.
      */
     /**@{*/
-    dogen::logical::entities::technical_space technical_space() const;
-    void technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space technical_space() const;
+    void technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
 public:
@@ -139,7 +139,7 @@ private:
     dogen::logical::entities::decoration::editor editor_;
     dogen::logical::entities::decoration::modeline_location location_;
     std::list<dogen::logical::entities::decoration::modeline_field> fields_;
-    dogen::logical::entities::technical_space technical_space_;
+    dogen::identification::entities::technical_space technical_space_;
 };
 
 }

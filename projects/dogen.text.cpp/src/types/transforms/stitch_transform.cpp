@@ -90,7 +90,7 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
     /*
      * Since the template exists, we can instantiate it.
      */
-    const auto ts(logical::entities::technical_space::cpp);
+    const auto ts(identification::entities::technical_space::cpp);
     const auto i(e.decoration().find(ts));
     auto dec(i->second);
     const auto external_keys = std::unordered_map<std::string, std::string> {

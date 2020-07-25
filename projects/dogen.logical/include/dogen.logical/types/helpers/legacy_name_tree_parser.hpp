@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/location.hpp"
 #include "dogen.logical/types/entities/name_tree.hpp"
 
@@ -45,7 +45,8 @@ public:
      *
      * @param ts what technical space syntax to use.
      */
-    explicit legacy_name_tree_parser(const entities::technical_space ts);
+    explicit legacy_name_tree_parser(
+        const identification::entities::technical_space ts);
 
 public:
     /**
@@ -54,7 +55,7 @@ public:
     entities::name_tree parse(const std::string& s) const;
 
 private:
-    const entities::technical_space technical_space_;
+    const identification::entities::technical_space technical_space_;
 };
 
 }

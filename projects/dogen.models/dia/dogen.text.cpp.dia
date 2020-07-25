@@ -42014,7 +42014,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
     const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!o.orm_properties()) {
@@ -42241,7 +42241,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
     const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!p.orm_properties()) {
@@ -42777,7 +42777,7 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
     const auto&amp; o(ast.as&lt;common_odb_options&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!ast.is_cpp_standard_98()) {
@@ -43024,7 +43024,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
     const auto&amp; c(ast.as&lt;msbuild_targets&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::xml);
+        const auto ts(identification::entities::technical_space::xml);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_identifiable_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -43315,7 +43315,7 @@ void source_cmakelists_transform::apply(const context&amp; ctx,
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_dot_separated_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -43594,7 +43594,7 @@ void include_cmakelists_transform::apply(const context&amp; ctx,
     const auto&amp; c(ast.as&lt;cmakelists&gt;(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
 #&gt;
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/&lt;#= c.source_directory_name() #&gt;)
@@ -44081,7 +44081,7 @@ void cmakelists_transform::apply(const context&amp; ctx, const logical::entities
 
     {
 
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_dot_separated_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -45072,7 +45072,7 @@ std::list&lt;std::string&gt; archetype_class_header_transform_transform::inclusi
     const auto&amp; arch(assistant::as&lt;logical::entities::physical::archetype&gt;(e));
 
     auto builder(f.make());
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (arch.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
@@ -45106,7 +45106,7 @@ public:
 
 public:
 &lt;#+
-            using logical::entities::technical_space;
+            using identification::entities::technical_space;
             if (o.major_technical_space() == technical_space::cpp) {
 #&gt;
     std::list&lt;std::string&gt; inclusion_dependencies(
@@ -49263,7 +49263,7 @@ std::list&lt;std::string&gt; facet_class_header_transform_transform::inclusion_d
 
     auto builder(f.make());
     builder.add_as_user("dogen.physical/types/entities/facet.hpp");
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (fct.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/registrar.hpp");
@@ -49713,7 +49713,7 @@ std::list&lt;std::string&gt; backend_class_header_transform_transform::inclusion
 
     auto builder(f.make());
     builder.add_as_user("dogen.physical/types/entities/backend.hpp");
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (be.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/registrar.hpp");

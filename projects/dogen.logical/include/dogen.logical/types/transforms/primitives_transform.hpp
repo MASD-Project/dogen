@@ -41,10 +41,11 @@ namespace dogen::logical::transforms {
 class primitives_transform final {
 private:
     static std::string obtain_value_attribute_simple_name(
-        const entities::technical_space ts);
+        const identification::entities::technical_space ts);
 
-    static entities::attribute create_attribute_for_underlying_element(
-        const entities::name& owner, const entities::technical_space ts,
+    static entities::attribute
+    create_attribute_for_underlying_element(const entities::name& owner,
+        const identification::entities::technical_space ts,
         std::string underlying_element);
 
 public:

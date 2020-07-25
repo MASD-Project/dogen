@@ -32,8 +32,8 @@
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/helpers/decoration_repository_factory.hpp"
 #include "dogen.logical/types/formatters/decoration_formatter.hpp"
 #include "dogen.logical/io/helpers/decoration_configuration_io.hpp"
@@ -64,7 +64,7 @@ namespace dogen::logical::transforms {
 
 using helpers::decoration_configuration;
 
-typedef std::unordered_map<entities::technical_space,
+typedef std::unordered_map<identification::entities::technical_space,
                            boost::optional<
                                entities::decoration::element_properties>
                            > root_decorations_type;
@@ -79,7 +79,7 @@ public:
         const boost::optional<decoration_configuration>& root_dc,
         const std::string& root_id,
         const features::decoration::feature_group& fg,
-        const entities::technical_space output_technical_space);
+        const identification::entities::technical_space output_technical_space);
 
 private:
     /**
@@ -97,7 +97,7 @@ private:
      * @brief Processes the decoration for the supplied element,
      * against the supplied technical space.
      */
-    void process_element(const entities::technical_space ts,
+    void process_element(const identification::entities::technical_space ts,
         const boost::optional<decoration_configuration>& dc,
         entities::element& e);
 
@@ -110,7 +110,7 @@ private:
     const boost::optional<decoration_configuration> root_dc_;
     const std::string root_id_;
     const features::decoration::feature_group& feature_group_;
-    const entities::technical_space output_technical_space_;
+    const identification::entities::technical_space output_technical_space_;
 };
 
 decoration_updater::decoration_updater(
@@ -119,7 +119,7 @@ decoration_updater::decoration_updater(
     const boost::optional<decoration_configuration>& root_dc,
     const std::string& root_id,
     const features::decoration::feature_group& fg,
-    const entities::technical_space ots)
+    const identification::entities::technical_space ots)
     : root_decorations_(root_decorations), decoration_factory_(df),
       root_dc_(root_dc), root_id_(root_id), feature_group_(fg),
       output_technical_space_(ots) {}
@@ -175,7 +175,8 @@ bool decoration_updater::requires_decorations(entities::element& e) const {
     return true;
 }
 
-void decoration_updater::process_element(const entities::technical_space ts,
+void decoration_updater::
+process_element(const identification::entities::technical_space ts,
     const boost::optional<decoration_configuration>& dc,
     entities::element& e) {
     const auto i(root_decorations_.find(ts));
@@ -226,8 +227,9 @@ void decoration_updater::operator()(entities::element& e) {
      * space. If that's the case, we need to ensure we use the
      * element's technical space instead.
      */
+    using identification::entities::technical_space;
     const auto its(e.intrinsic_technical_space());
-    const auto ats(entities::technical_space::agnostic);
+    const auto ats(technical_space::agnostic);
     const auto ts(its == ats ? output_technical_space_ : its);
     BOOST_LOG_SEV(lg, trace) << "Element intrinsic technical space: " << its
                              << " Model technical space: "
@@ -239,7 +241,7 @@ void decoration_updater::operator()(entities::element& e) {
      * so that when the formatters create the ODB options, it is
      * available.
      */
-    const auto odb_ts(entities::technical_space::odb);
+    const auto odb_ts(technical_space::odb);
     if (ts != odb_ts) {
         process_element(odb_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
@@ -249,7 +251,7 @@ void decoration_updater::operator()(entities::element& e) {
      * FIXME: hack for XML. We inject it regardless, just so that
      * that when the formatters need it, it is available.
      */
-    const auto xml_ts(entities::technical_space::xml);
+    const auto xml_ts(technical_space::xml);
     if (ts != xml_ts) {
         process_element(xml_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for XML.";
@@ -259,7 +261,7 @@ void decoration_updater::operator()(entities::element& e) {
      * FIXME: hack for CMake. We inject it regardless, just so
      * that when the formatters need it, it is available.
      */
-    const auto cmake_ts(entities::technical_space::cmake);
+    const auto cmake_ts(technical_space::cmake);
     if (ts != cmake_ts) {
         process_element(cmake_ts, dc, e);
         BOOST_LOG_SEV(lg, trace) << "Added decoration for CMake.";

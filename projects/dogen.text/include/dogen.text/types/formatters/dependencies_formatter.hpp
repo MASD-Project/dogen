@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <iosfwd>
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::text::formatters {
 
@@ -51,7 +51,8 @@ private:
         const std::list<std::string>& dependencies) const;
 
 public:
-    void format(std::ostream& s, const logical::entities::technical_space ts,
+    void format(std::ostream& s,
+        const identification::entities::technical_space ts,
         const std::list<std::string>& dependencies) const;
 };
 

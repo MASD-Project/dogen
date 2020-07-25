@@ -36,15 +36,15 @@
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.physical/types/entities/element_archetype.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.physical/hash/entities/element_archetype_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::text::entities {
@@ -73,9 +73,9 @@ public:
         const std::list<dogen::text::entities::element_artefacts>& elements,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const bool has_generatable_types,
-        const dogen::logical::entities::technical_space input_technical_space,
-        const dogen::logical::entities::technical_space output_technical_space,
-        const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
+        const dogen::identification::entities::technical_space input_technical_space,
+        const dogen::identification::entities::technical_space output_technical_space,
+        const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
         const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
         const dogen::physical::entities::extraction_properties& extraction_properties,
@@ -152,16 +152,16 @@ public:
      * @brief Technical space which this model used originally.
      */
     /**@{*/
-    dogen::logical::entities::technical_space input_technical_space() const;
-    void input_technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space input_technical_space() const;
+    void input_technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
      * @brief Technical space into which to output the model.
      */
     /**@{*/
-    dogen::logical::entities::technical_space output_technical_space() const;
-    void output_technical_space(const dogen::logical::entities::technical_space v);
+    dogen::identification::entities::technical_space output_technical_space() const;
+    void output_technical_space(const dogen::identification::entities::technical_space v);
     /**@}*/
 
     /**
@@ -172,10 +172,10 @@ public:
      * spaces.
      */
     /**@{*/
-    const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces() const;
-    std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces();
-    void all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>& v);
-    void all_technical_spaces(const std::unordered_set<dogen::logical::entities::technical_space>&& v);
+    const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces() const;
+    std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces();
+    void all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>& v);
+    void all_technical_spaces(const std::unordered_set<dogen::identification::entities::technical_space>&& v);
     /**@}*/
 
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties() const;
@@ -222,9 +222,9 @@ private:
     std::list<dogen::text::entities::element_artefacts> elements_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     bool has_generatable_types_;
-    dogen::logical::entities::technical_space input_technical_space_;
-    dogen::logical::entities::technical_space output_technical_space_;
-    std::unordered_set<dogen::logical::entities::technical_space> all_technical_spaces_;
+    dogen::identification::entities::technical_space input_technical_space_;
+    dogen::identification::entities::technical_space output_technical_space_;
+    std::unordered_set<dogen::identification::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
     std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;
     dogen::physical::entities::extraction_properties extraction_properties_;

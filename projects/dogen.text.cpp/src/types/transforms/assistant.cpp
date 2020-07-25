@@ -362,7 +362,7 @@ bool assistant::is_test_data_enabled() const {
 
 text::formatters::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const logical::entities::element& e,
-    const logical::entities::technical_space ts) {
+    const identification::entities::technical_space ts) {
     text::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
@@ -385,12 +385,12 @@ make_scoped_boilerplate_formatter(const logical::entities::element& e,
 text::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return text::formatters::scoped_namespace_formatter(
-        stream(), logical::entities::technical_space::cpp,
+        stream(), identification::entities::technical_space::cpp,
         ns, true/*add_new_line*/, requires_nested_namespaces());
 }
 
 void assistant::make_decoration_preamble(const logical::entities::element& e,
-    const logical::entities::technical_space ts) {
+    const identification::entities::technical_space ts) {
 
     const auto i(e.decoration().find(ts));
     if (i != e.decoration().end() && i->second) {

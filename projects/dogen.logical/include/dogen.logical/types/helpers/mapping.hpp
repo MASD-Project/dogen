@@ -29,8 +29,8 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.logical/types/helpers/mapping_value.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.logical/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/hash/entities/technical_space_hash.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -48,7 +48,7 @@ public:
 public:
     mapping(
         const std::string& agnostic_id,
-        const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space);
+        const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space);
 
 public:
     /**
@@ -65,10 +65,10 @@ public:
      * @brief Values of the mapping, by technical space.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space() const;
-    std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space();
-    void by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>& v);
-    void by_technical_space(const std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value>&& v);
+    const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space() const;
+    std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space();
+    void by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& v);
+    void by_technical_space(const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>&& v);
     /**@}*/
 
 public:
@@ -83,7 +83,7 @@ public:
 
 private:
     std::string agnostic_id_;
-    std::unordered_map<dogen::logical::entities::technical_space, dogen::logical::helpers::mapping_value> by_technical_space_;
+    std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value> by_technical_space_;
 };
 
 }

@@ -46,11 +46,12 @@ const std::string unexpected_default_value(
 namespace dogen::logical::helpers {
 
 void mappings_validator::
-validate(const entities::technical_space ts, const mapping_value& mv) const {
+validate(const identification::entities::technical_space ts,
+    const mapping_value& mv) const {
     /*
      * Cannot map agnostic technical space to itself.
      */
-    if (ts == entities::technical_space::agnostic) {
+    if (ts == identification::entities::technical_space::agnostic) {
         BOOST_LOG_SEV(lg, error) << invalid_technical_space;
         BOOST_THROW_EXCEPTION(validation_error(invalid_agnostic_id));
     }

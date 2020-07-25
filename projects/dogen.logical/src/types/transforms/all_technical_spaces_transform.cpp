@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/all_technical_spaces_transform.hpp"
@@ -48,7 +48,7 @@ public:
          * Skip agnostic as it is an abstract technical space.
          */
         const auto ts(e.intrinsic_technical_space());
-        if (ts == entities::technical_space::agnostic)
+        if (ts == identification::entities::technical_space::agnostic)
             return;
 
         const auto inserted(technical_spaces_.insert(ts).second);
@@ -61,12 +61,14 @@ public:
     }
 
 public:
-    const std::unordered_set<logical::entities::technical_space>& result() {
+    const std::unordered_set<identification::entities::technical_space>&
+    result() {
         return technical_spaces_;
     }
 
 private:
-    std::unordered_set<logical::entities::technical_space> technical_spaces_;
+    std::unordered_set<identification::entities::technical_space>
+    technical_spaces_;
 };
 
 void all_technical_spaces_transform::
@@ -97,9 +99,10 @@ apply(const context& ctx, entities::model& m) {
      * Finally, add "fixed" technical spaces.
      * FIXME: hackery for ODB options, XML and CMake.
      */
-    ats.insert(entities::technical_space::odb);
-    ats.insert(entities::technical_space::xml);
-    ats.insert(entities::technical_space::cmake);
+    using identification::entities::technical_space;
+    ats.insert(technical_space::odb);
+    ats.insert(technical_space::xml);
+    ats.insert(technical_space::cmake);
 
     /*
      * Update the model with the information obtained.

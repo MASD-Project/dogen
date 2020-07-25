@@ -54,7 +54,7 @@ private:
      */
     boost::shared_ptr<entities::decoration::modeline>
     get_modeline(const std::string& modeline_group_name,
-        const entities::technical_space ts) const;
+        const identification::entities::technical_space ts) const;
 
     /**
      * @brief Retrieves the generation marker for the supplied name.
@@ -69,7 +69,7 @@ private:
         const boost::shared_ptr<
         logical::entities::decoration::generation_marker> gm,
         const std::list<std::string>& copyright_notices,
-        const logical::entities::technical_space ts) const;
+        const identification::entities::technical_space ts) const;
 
 public:
     /**
@@ -78,7 +78,7 @@ public:
     boost::optional<entities::decoration::element_properties>
     make_global_decoration(
         const boost::optional<helpers::decoration_configuration> root_dc,
-        const entities::technical_space ts) const;
+        const identification::entities::technical_space ts) const;
 
     /**
      * @brief Creates a local decoration.
@@ -88,7 +88,7 @@ public:
         entities::decoration::element_properties> global_decoration,
         const boost::optional<helpers::decoration_configuration>& root_dc,
         const boost::optional<helpers::decoration_configuration> element_dc,
-        const entities::technical_space ts) const;
+        const identification::entities::technical_space ts) const;
 
 private:
     const helpers::decoration_repository& decoration_repository_;

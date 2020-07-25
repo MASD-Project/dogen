@@ -26,7 +26,7 @@
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/features/wale.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/archetype_rendering_transform.hpp"
 
@@ -140,7 +140,7 @@ std::string archetype_rendering_transform::render_stitch_template(
      * decoration to build up the KVP map that will be supplied to the
      * template instantiator. The decoration must exist.
      */
-    const auto ts(logical::entities::technical_space::cpp);
+    const auto ts(identification::entities::technical_space::cpp);
     const auto i(arch.decoration().find(ts));
     if (i == arch.decoration().end()) {
         BOOST_LOG_SEV(lg, error) << missing_decoration << id;

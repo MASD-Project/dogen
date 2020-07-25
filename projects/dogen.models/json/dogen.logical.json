@@ -216,7 +216,7 @@
       "attributes": [
         {
           "name": "intrinsic_technical_space",
-          "type": "technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Describes the intrinsic nature of the modeling element with regards to technical\nspaces.\n\nIf the element can be mapped to a technical space then its intrinsic nature is\nagnostic. Otherwise, the element belongs to a concrete technical space.\n"
         }
       ]
@@ -387,7 +387,7 @@
       "attributes": [
         {
           "name": "decoration",
-          "type": "std::unordered_map<technical_space, boost::optional<decoration::element_properties>>",
+          "type": "std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>",
           "documentation": "If set, decoration to be added to each generated file.\n"
         }
       ]
@@ -418,17 +418,17 @@
         },
         {
           "name": "input_technical_space",
-          "type": "technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Technical space in which this model was written.\n"
         },
         {
           "name": "output_technical_spaces",
-          "type": "std::list<technical_space>",
+          "type": "std::list<identification::entities::technical_space>",
           "documentation": "Technical spaces into which to extract the final model.\n"
         },
         {
           "name": "all_technical_spaces",
-          "type": "std::unordered_set<logical::entities::technical_space>",
+          "type": "std::unordered_set<identification::entities::technical_space>",
           "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
         },
         {
@@ -670,55 +670,6 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "entities::technical_space",
-      "documentation": "Models need to declare upfront the technical space they will target.\n",
-      "stereotypes": [
-        "masd::enumeration",
-        "dogen::convertible"
-      ],
-      "tagged_values": {
-        "masd.cpp.hash.enabled": "true"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "agnostic",
-          "type": "",
-          "documentation": "Abstract technical space which is mapped to concrete technical spaces.\n"
-        },
-        {
-          "name": "cpp",
-          "type": "",
-          "documentation": "The C++ programming language.\n"
-        },
-        {
-          "name": "csharp",
-          "type": "",
-          "documentation": "The C# programming language.\n"
-        },
-        {
-          "name": "cmake",
-          "type": "",
-          "documentation": "CMake meta build system.\n"
-        },
-        {
-          "name": "xml",
-          "type": "",
-          "documentation": "Extensible Markup Language.\n"
-        },
-        {
-          "name": "odb",
-          "type": "",
-          "documentation": "ODB options.\n"
-        },
-        {
-          "name": "sln",
-          "type": "",
-          "documentation": "Visual studio solution.\n"
-        }
-      ]
     },
     {
       "name": "transforms",
@@ -1067,11 +1018,11 @@
         },
         {
           "name": "by_agnostic_id",
-          "type": "std::unordered_map<entities::technical_space, std::unordered_map<std::string, entities::name>>"
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_map<std::string, entities::name>>"
         },
         {
           "name": "erasures_by_technical_space",
-          "type": "std::unordered_map<entities::technical_space, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_set<std::string>>"
         }
       ]
     },
@@ -1109,7 +1060,7 @@
         },
         {
           "name": "by_technical_space",
-          "type": "std::unordered_map<entities::technical_space, mapping_value>",
+          "type": "std::unordered_map<identification::entities::technical_space, mapping_value>",
           "documentation": "Values of the mapping, by technical space.\n"
         }
       ]
@@ -1699,7 +1650,7 @@
         },
         {
           "name": "technical_space",
-          "type": "technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Technical space that this modeline targets.\n"
         }
       ]
@@ -2873,7 +2824,7 @@
         },
         {
           "name": "technical_space",
-          "type": "technical_space"
+          "type": "identification::entities::technical_space"
         }
       ]
     },
@@ -4229,7 +4180,7 @@
       "attributes": [
         {
           "name": "modelines_by_modeline_group_by_technical_space",
-          "type": "std::unordered_map<std::string, std::unordered_map<logical::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
         },
         {
           "name": "licences_by_name",
@@ -4406,7 +4357,7 @@
         },
         {
           "name": "major_technical_space",
-          "type": "technical_space",
+          "type": "identification::entities::technical_space",
           "documentation": "Technical space to which this physical element belongs to.\n"
         }
       ]

@@ -97,7 +97,7 @@ void include_cmakelists_transform::apply(const context& ctx,
     const auto& c(ast.as<cmakelists>(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
 ast.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
        if (ast.is_tests_enabled()) {

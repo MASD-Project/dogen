@@ -27,7 +27,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
@@ -166,11 +166,13 @@ obtain_enumeration_default_underlying_element_name(const entities::model& m) {
     return r;
 }
 
-std::string enumerations_transform::
-obtain_invalid_enumerator_simple_name(const entities::technical_space ts) {
+std::string
+enumerations_transform::obtain_invalid_enumerator_simple_name(
+    const identification::entities::technical_space ts) {
+    using identification::entities::technical_space;
     switch(ts) {
-    case entities::technical_space::csharp: return csharp_invalid;
-    case entities::technical_space::cpp: return cpp_invalid;
+    case technical_space::csharp: return csharp_invalid;
+    case technical_space::cpp: return cpp_invalid;
     default: {
         const auto s(boost::lexical_cast<std::string>(ts));
         BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
@@ -181,7 +183,7 @@ obtain_invalid_enumerator_simple_name(const entities::technical_space ts) {
 
 entities::structural::enumerator
 enumerations_transform::make_invalid_enumerator(const entities::name& n,
-    const entities::technical_space ts) {
+    const identification::entities::technical_space ts) {
     entities::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
