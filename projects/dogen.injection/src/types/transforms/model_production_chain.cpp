@@ -22,7 +22,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
+#include "dogen.injection/types/transforms/provenance_transform.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
 #include "dogen.injection/types/transforms/configuration_transform.hpp"
@@ -73,9 +73,9 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     auto r(t.apply(ctx, p));
 
     /*
-     * Update the SHA1 hash.
+     * Update the provenance properties.
      */
-    compute_sha1_transform::apply(ctx, p, r);
+    provenance_transform::apply(ctx, p, r);
 
     /*
      * Process the variability overrides.

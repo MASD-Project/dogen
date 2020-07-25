@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_INJECTION_TYPES_TRANSFORMS_COMPUTE_SHA1_TRANSFORM_HPP
-#define DOGEN_INJECTION_TYPES_TRANSFORMS_COMPUTE_SHA1_TRANSFORM_HPP
+#ifndef DOGEN_INJECTION_TYPES_TRANSFORMS_PROVENANCE_TRANSFORM_HPP
+#define DOGEN_INJECTION_TYPES_TRANSFORMS_PROVENANCE_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,11 +35,17 @@ namespace dogen::injection::transforms {
  * @brief Computes the SHA1 hash for a model content and updates the
  * model with this value.
  */
-class compute_sha1_transform final {
+class provenance_transform final {
+private:
+    /**
+     * @brief Computes the SHA1 hash for the supplied path.
+     */
+    static identification::entities::sha1_hash
+    compute_shah1_hash(const boost::filesystem::path& p);
+
 public:
     static void apply(const transforms::context& ctx,
-        const boost::filesystem::path& p,
-        entities::model& m);
+        const boost::filesystem::path& p, entities::model& m);
 };
 
 }

@@ -25,11 +25,11 @@
 #include "dogen.identification/io/entities/sha1_hash_io.hpp"
 #include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
+#include "dogen.injection/types/transforms/provenance_transform.hpp"
 
 namespace {
 
-const std::string transform_id("injection.transforms.compute_sha1_transform");
+const std::string transform_id("injection.transforms.provenance_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -38,31 +38,36 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::injection::transforms {
 
-void compute_sha1_transform::apply(const transforms::context& ctx,
-    const boost::filesystem::path& p, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "compute sha1 transform",
-        transform_id, m.name().simple(), *ctx.tracer(), m);
-
-    /*
-     * Compute the hash for the injection model.
-     */
+identification::entities::sha1_hash provenance_transform::
+compute_shah1_hash(const boost::filesystem::path& p) {
     const auto s(utility::filesystem::read_file_content(p));
     BOOST_LOG_SEV(lg, debug) << "File: " << p.generic_string()
                              << " size: " << s.size();
 
     using identification::entities::sha1_hash;
-    const auto h(sha1_hash(utility::hash::sha1_hasher(s)));
-    BOOST_LOG_SEV(lg, debug) << "Hash for file: " << h;
+    const auto r(sha1_hash(utility::hash::sha1_hasher(s)));
+    BOOST_LOG_SEV(lg, debug) << "Hash for file: " << r;
+    return r;
+}
+
+void provenance_transform::apply(const transforms::context& ctx,
+    const boost::filesystem::path& p, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "provenance transform",
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
-     * Update all modeling elements with it.
+     * Update model's provenance properties.
      */
-    m.provenance().model_sha1_hash(h);
+    auto& mp(m.provenance());
+    mp.model_sha1_hash(compute_shah1_hash(p));
     using identification::entities::model_type;
-    m.provenance().model_type(model_type::not_yet_determined);
+    mp.model_type(model_type::not_yet_determined);
 
+    /*
+     * Update elements provenance with the models properties.
+     */
     for (auto& e : m.elements())
-        e.provenance(m.provenance());
+        e.provenance(mp);
 
     stp.end_transform(m);
 }

@@ -505,7 +505,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::compute_sha1_transform",
+      "name": "transforms::provenance_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
