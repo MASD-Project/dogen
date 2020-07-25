@@ -55,6 +55,10 @@ apply(const text::transforms::context& ctx,
     for (const auto& m : ms.models()) {
         using namespace identification::entities;
         physical::entities::model pm;
+
+        /*
+         * Create the provenance for the physical model.
+         */
         logical_provenance prov;
         prov.logical_name().simple(m.name().simple());
 
@@ -64,12 +68,19 @@ apply(const text::transforms::context& ctx,
 
         logical_meta_id mid(m.meta_name().qualified().dot());
         prov.logical_meta_name().id(mid);
+        pm.provenance(prov);
 
+        /*
+         * Update the main model properties.
+         */
         pm.name().simple(m.name().simple());
         pm.name().qualified(m.name().qualified().dot());
         pm.configuration(m.root_module()->configuration());
         pm.managed_directories(m.managed_directories());
 
+        /*
+         * Obtain artefact sets from the text model.
+         */
         for (const auto& ea : m.elements()) {
             const auto& e(*ea.element());
             physical::entities::artefact_set as;
