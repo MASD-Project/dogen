@@ -121,7 +121,7 @@
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, MetaNameable, DeterminableOrigin#</dia:string>
+        <dia:string>#Nameable, MetaNameable, Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Yarn model.#</dia:string>
@@ -4724,28 +4724,28 @@ spaces.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="95,51"/>
+        <dia:point val="92,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,50.95;107.1,54.65"/>
+        <dia:rectangle val="91.95,50.95;115.265,54.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="95,51"/>
+        <dia:point val="92,51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.050000000000001"/>
+        <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#DeterminableOrigin#</dia:string>
+        <dia:string>#Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A unit of logical that can be code generated.#</dia:string>
+        <dia:string>#Details of the origin of this model element.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4828,16 +4828,16 @@ spaces.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#origin_sha1_hash#</dia:string>
+            <dia:string>#provenance#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#identification::entities::injection_provenance#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#SHA1 key of the original injection model.#</dia:string>
+            <dia:string>#Details of the provenance of this model element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4895,17 +4895,17 @@ spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="101.025,51"/>
+        <dia:point val="103.608,51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.275,47.15;107.89,51.8"/>
+        <dia:rectangle val="102.858,47.15;107.89,51.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="101.025,51"/>
-        <dia:point val="101.025,49"/>
+        <dia:point val="103.608,51"/>
+        <dia:point val="103.608,49"/>
         <dia:point val="107.69,49"/>
         <dia:point val="107.69,47.2"/>
       </dia:attribute>

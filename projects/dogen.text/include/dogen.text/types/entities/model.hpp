@@ -45,6 +45,7 @@
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.physical/hash/entities/element_archetype_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
+#include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::text::entities {
 
@@ -66,7 +67,7 @@ public:
     model(
         const dogen::logical::entities::name& name,
         const dogen::logical::entities::name& meta_name,
-        const std::string& origin_sha1_hash,
+        const dogen::identification::entities::injection_provenance& provenance,
         const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
         const std::unordered_set<dogen::logical::entities::name>& leaves,
         const std::list<dogen::text::entities::element_artefacts>& elements,
@@ -93,13 +94,13 @@ public:
     void meta_name(const dogen::logical::entities::name&& v);
 
     /**
-     * @brief SHA1 key of the original injection model.
+     * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const std::string& origin_sha1_hash() const;
-    std::string& origin_sha1_hash();
-    void origin_sha1_hash(const std::string& v);
-    void origin_sha1_hash(const std::string&& v);
+    const dogen::identification::entities::injection_provenance& provenance() const;
+    dogen::identification::entities::injection_provenance& provenance();
+    void provenance(const dogen::identification::entities::injection_provenance& v);
+    void provenance(const dogen::identification::entities::injection_provenance&& v);
     /**@}*/
 
     /**
@@ -215,7 +216,7 @@ public:
 private:
     dogen::logical::entities::name name_;
     dogen::logical::entities::name meta_name_;
-    std::string origin_sha1_hash_;
+    dogen::identification::entities::injection_provenance provenance_;
     std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type> references_;
     std::unordered_set<dogen::logical::entities::name> leaves_;
     std::list<dogen::text::entities::element_artefacts> elements_;

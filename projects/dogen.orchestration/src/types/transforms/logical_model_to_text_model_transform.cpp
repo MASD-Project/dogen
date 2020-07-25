@@ -266,7 +266,7 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     r.references(m.references());
     r.root_module(m.root_module());
     r.orm_properties(m.orm_properties());
-    r.origin_sha1_hash(m.provenance().model_sha1_hash().value());
+    r.provenance(m.provenance());
     r.all_technical_spaces(m.all_technical_spaces());
 
     populator p(*ctx.physical_meta_model(), r);

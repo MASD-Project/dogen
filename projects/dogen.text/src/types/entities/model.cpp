@@ -40,7 +40,7 @@ model::model()
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
-      origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
+      provenance_(std::move(rhs.provenance_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       elements_(std::move(rhs.elements_)),
@@ -58,7 +58,7 @@ model::model(model&& rhs)
 model::model(
     const dogen::logical::entities::name& name,
     const dogen::logical::entities::name& meta_name,
-    const std::string& origin_sha1_hash,
+    const dogen::identification::entities::injection_provenance& provenance,
     const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const std::list<dogen::text::entities::element_artefacts>& elements,
@@ -74,7 +74,7 @@ model::model(
     const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties)
     : name_(name),
       meta_name_(meta_name),
-      origin_sha1_hash_(origin_sha1_hash),
+      provenance_(provenance),
       references_(references),
       leaves_(leaves),
       elements_(elements),
@@ -93,7 +93,7 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
-    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(provenance_, other.provenance_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(elements_, other.elements_);
@@ -112,7 +112,7 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
-        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        provenance_ == rhs.provenance_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         elements_ == rhs.elements_ &&
@@ -166,20 +166,20 @@ void model::meta_name(const dogen::logical::entities::name&& v) {
     meta_name_ = std::move(v);
 }
 
-const std::string& model::origin_sha1_hash() const {
-    return origin_sha1_hash_;
+const dogen::identification::entities::injection_provenance& model::provenance() const {
+    return provenance_;
 }
 
-std::string& model::origin_sha1_hash() {
-    return origin_sha1_hash_;
+dogen::identification::entities::injection_provenance& model::provenance() {
+    return provenance_;
 }
 
-void model::origin_sha1_hash(const std::string& v) {
-    origin_sha1_hash_ = v;
+void model::provenance(const dogen::identification::entities::injection_provenance& v) {
+    provenance_ = v;
 }
 
-void model::origin_sha1_hash(const std::string&& v) {
-    origin_sha1_hash_ = std::move(v);
+void model::provenance(const dogen::identification::entities::injection_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() const {

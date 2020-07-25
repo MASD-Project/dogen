@@ -31,14 +31,7 @@
 #include "dogen.physical/io/entities/element_archetype_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 
 namespace std {
 
@@ -159,6 +152,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
@@ -190,7 +191,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::text::entities::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
-      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"elements\": " << v.elements() << ", "

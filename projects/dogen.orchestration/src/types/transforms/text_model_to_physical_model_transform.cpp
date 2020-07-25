@@ -55,7 +55,7 @@ text_model_to_physical_model_transform::apply(const text::transforms::context& c
         physical::entities::model pm;
         pm.logical_name().simple(m.name().simple());
         pm.logical_name().qualified(m.name().qualified().dot());
-        pm.origin_sha1_hash(m.origin_sha1_hash());
+        pm.origin_sha1_hash(m.provenance().model_sha1_hash().value());
         pm.name().simple(m.name().simple());
         pm.name().qualified(m.name().qualified().dot());
         pm.configuration(m.root_module()->configuration());

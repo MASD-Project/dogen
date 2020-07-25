@@ -26,7 +26,7 @@
       "stereotypes": [
         "Nameable",
         "MetaNameable",
-        "DeterminableOrigin"
+        "Provenance"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -297,17 +297,17 @@
       ]
     },
     {
-      "name": "entities::DeterminableOrigin",
-      "documentation": "A unit of logical that can be code generated.\n",
+      "name": "entities::Provenance",
+      "documentation": "Details of the origin of this model element.\n",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "origin_sha1_hash",
-          "type": "std::string",
-          "documentation": "SHA1 key of the original injection model.\n"
+          "name": "provenance",
+          "type": "identification::entities::injection_provenance",
+          "documentation": "Details of the provenance of this model element.\n"
         }
       ]
     },
