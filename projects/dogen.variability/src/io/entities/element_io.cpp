@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.variability/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.variability/io/entities/element_io.hpp"
 
 namespace dogen::variability::entities {

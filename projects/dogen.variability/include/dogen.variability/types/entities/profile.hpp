@@ -48,7 +48,7 @@ public:
 
 public:
     profile(
-        const dogen::variability::entities::name& name,
+        const dogen::identification::entities::name& name,
         const std::string& description,
         const std::unordered_map<std::string, dogen::variability::entities::configuration_point>& configuration_points,
         const dogen::variability::entities::binding_point binding_point,

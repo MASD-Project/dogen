@@ -52,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 namespace dogen::variability::entities {
 
 configuration_point::configuration_point(
-    const dogen::variability::entities::name& name,
+    const dogen::identification::entities::name& name,
     const std::string& description,
     const boost::shared_ptr<dogen::variability::entities::value>& value)
     : dogen::variability::entities::element(

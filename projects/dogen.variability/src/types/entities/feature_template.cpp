@@ -85,7 +85,7 @@ feature_template::feature_template()
       binding_point_(static_cast<dogen::variability::entities::binding_point>(0)) { }
 
 feature_template::feature_template(
-    const dogen::variability::entities::name& name,
+    const dogen::identification::entities::name& name,
     const std::string& description,
     const boost::shared_ptr<dogen::variability::entities::value>& default_value,
     const dogen::variability::entities::value_type value_type,

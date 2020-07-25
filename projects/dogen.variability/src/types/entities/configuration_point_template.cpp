@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen::variability::entities {
 
 configuration_point_template::configuration_point_template(
-    const dogen::variability::entities::name& name,
+    const dogen::identification::entities::name& name,
     const std::string& description,
     const std::string& instantiation_domain_name,
     const std::list<std::string>& untyped_value)

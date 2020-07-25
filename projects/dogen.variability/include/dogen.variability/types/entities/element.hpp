@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.variability/types/entities/name.hpp"
+#include "dogen.identification/types/entities/name.hpp"
 
 namespace dogen::variability::entities {
 
@@ -45,17 +45,22 @@ public:
 
 public:
     element(
-        const dogen::variability::entities::name& name,
+        const dogen::identification::entities::name& name,
         const std::string& description);
 
 public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    const dogen::variability::entities::name& name() const;
-    dogen::variability::entities::name& name();
-    void name(const dogen::variability::entities::name& v);
-    void name(const dogen::variability::entities::name&& v);
+    /**
+     * @brief Name of this variability element.
+     */
+    /**@{*/
+    const dogen::identification::entities::name& name() const;
+    dogen::identification::entities::name& name();
+    void name(const dogen::identification::entities::name& v);
+    void name(const dogen::identification::entities::name&& v);
+    /**@}*/
 
     /**
      * @brief Human readable description of the feature, used for documentation.
@@ -76,7 +81,7 @@ protected:
     void swap(element& other) noexcept;
 
 private:
-    dogen::variability::entities::name name_;
+    dogen::identification::entities::name name_;
     std::string description_;
 };
 

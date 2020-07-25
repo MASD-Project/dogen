@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.variability/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/name_io.hpp"
 #include "dogen.variability/types/entities/element.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::variability::entities {
 
 element::element(
-    const dogen::variability::entities::name& name,
+    const dogen::identification::entities::name& name,
     const std::string& description)
     : name_(name),
       description_(description) { }
@@ -58,19 +58,19 @@ bool element::compare(const element& rhs) const {
         description_ == rhs.description_;
 }
 
-const dogen::variability::entities::name& element::name() const {
+const dogen::identification::entities::name& element::name() const {
     return name_;
 }
 
-dogen::variability::entities::name& element::name() {
+dogen::identification::entities::name& element::name() {
     return name_;
 }
 
-void element::name(const dogen::variability::entities::name& v) {
+void element::name(const dogen::identification::entities::name& v) {
     name_ = v;
 }
 
-void element::name(const dogen::variability::entities::name&& v) {
+void element::name(const dogen::identification::entities::name&& v) {
     name_ = std::move(v);
 }
 

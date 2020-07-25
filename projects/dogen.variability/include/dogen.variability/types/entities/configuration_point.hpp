@@ -46,7 +46,7 @@ public:
 
 public:
     configuration_point(
-        const dogen::variability::entities::name& name,
+        const dogen::identification::entities::name& name,
         const std::string& description,
         const boost::shared_ptr<dogen::variability::entities::value>& value);
 

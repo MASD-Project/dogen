@@ -49,7 +49,7 @@ public:
 
 public:
     configuration(
-        const dogen::variability::entities::name& name,
+        const dogen::identification::entities::name& name,
         const std::string& description,
         const std::unordered_map<std::string, dogen::variability::entities::configuration_point>& configuration_points,
         const std::list<dogen::variability::entities::potential_binding>& profile_bindings,

@@ -50,23 +50,6 @@
       ]
     },
     {
-      "name": "entities::name",
-      "documentation": "Name of the element in the variability metamodel.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "simple",
-          "type": "std::string",
-          "documentation": "Non-qualified name of the element.\n"
-        },
-        {
-          "name": "qualified",
-          "type": "std::string",
-          "documentation": "Qualified name of the element, using dots to separate the hierarchy.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::binding_point",
       "documentation": "Determines how a feature can be bound to a modeling element.\n",
       "stereotypes": [
@@ -345,6 +328,7 @@
     },
     {
       "name": "entities::Nameable",
+      "documentation": "Elements with the ability of being named.\n",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -352,7 +336,8 @@
       "attributes": [
         {
           "name": "name",
-          "type": "name"
+          "type": "identification::entities::name",
+          "documentation": "Name of this variability element.\n"
         }
       ]
     },

@@ -43,7 +43,7 @@ public:
 
 public:
     configuration_point_template(
-        const dogen::variability::entities::name& name,
+        const dogen::identification::entities::name& name,
         const std::string& description,
         const std::string& instantiation_domain_name,
         const std::list<std::string>& untyped_value);

@@ -67,7 +67,7 @@ profile_template::profile_template()
     : binding_point_(static_cast<dogen::variability::entities::binding_point>(0)) { }
 
 profile_template::profile_template(
-    const dogen::variability::entities::name& name,
+    const dogen::identification::entities::name& name,
     const std::string& description,
     const dogen::variability::entities::binding_point binding_point,
     const std::list<std::string>& parents,
