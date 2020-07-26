@@ -130,6 +130,12 @@ set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
 set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
 set(CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS 50)
 
+# How long to wait between timed-out CTest submissions
+set(submit_retry_delay 30)
+
+# How many times to retry timed-out CTest submissions
+set(submit_retry_count 10)
+
 #
 # Defines for CMake.
 #
@@ -294,4 +300,5 @@ endif()
 #
 # Step: submit build results
 #
-ctest_submit()
+ctest_submit(RETRY_COUNT ${submit_retry_count}
+    RETRY_DELAY ${submit_retry_delay})
