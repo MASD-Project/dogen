@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/archetype_name_set_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
@@ -38,24 +38,16 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";

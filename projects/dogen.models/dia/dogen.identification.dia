@@ -12901,16 +12901,16 @@ Temporary data structure used to build trees of logical names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O95">
       <dia:attribute name="obj_pos">
-        <dia:point val="40,32"/>
+        <dia:point val="36,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,31.95;65.96,37.25"/>
+        <dia:rectangle val="35.95,31.95;65.81,37.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="40,32"/>
+        <dia:point val="36,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.91"/>
+        <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -13054,7 +13054,7 @@ Temporary data structure used to build trees of logical names.#</dia:string>
             <dia:string>#canonical_locations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, physical_meta_id&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13078,7 +13078,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#archetype_for_label#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, physical_meta_id&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13142,17 +13142,17 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="52.955,32"/>
+        <dia:point val="50.88,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.205,26.35;59.8025,33.6"/>
+        <dia:rectangle val="50.13,26.35;59.8025,33.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="52.955,32"/>
-        <dia:point val="52.955,29"/>
+        <dia:point val="50.88,32"/>
+        <dia:point val="50.88,29"/>
         <dia:point val="59.6025,29"/>
         <dia:point val="59.6025,26.4"/>
       </dia:attribute>
@@ -13178,16 +13178,16 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="17,41"/>
+        <dia:point val="11,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,40.95;66.06,46.25"/>
+        <dia:rectangle val="10.95,40.95;65.835,46.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="17,41"/>
+        <dia:point val="11,41"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="49.010000000000005"/>
+        <dia:real val="54.785000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -13308,7 +13308,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#facet_names_by_backend_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_set&lt;std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, std::unordered_set&lt;physical_meta_id&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13331,7 +13331,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#archetype_names_by_logical_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, archetype_name_set&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, archetype_name_set&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13354,7 +13354,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#archetype_names_by_backend_by_facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;physical_meta_id, std::unordered_map&lt;physical_meta_id, std::list&lt;physical_meta_id&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13418,19 +13418,19 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="41.505,41"/>
+        <dia:point val="38.3925,41"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.755,37.15;53.155,42.6"/>
+        <dia:rectangle val="37.6425,37.15;51.08,42.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="41.505,41"/>
-        <dia:point val="41.505,39"/>
-        <dia:point val="52.955,39"/>
-        <dia:point val="52.955,37.2"/>
+        <dia:point val="38.3925,41"/>
+        <dia:point val="38.3925,39"/>
+        <dia:point val="50.88,39"/>
+        <dia:point val="50.88,37.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13731,7 +13731,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="86.8,46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.455,45.25;87.55,50.8"/>
+        <dia:rectangle val="38.3425,45.25;87.55,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13739,8 +13739,8 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="86.8,46"/>
         <dia:point val="86.8,50"/>
-        <dia:point val="41.505,50"/>
-        <dia:point val="41.505,46.2"/>
+        <dia:point val="38.3925,50"/>
+        <dia:point val="38.3925,46.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

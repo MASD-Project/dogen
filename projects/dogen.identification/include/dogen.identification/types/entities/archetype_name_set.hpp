@@ -26,11 +26,12 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::identification::entities {
 
@@ -45,8 +46,8 @@ public:
     archetype_name_set(
         const dogen::identification::entities::logical_meta_id& logical_meta_id,
         const std::list<dogen::identification::entities::physical_meta_name>& meta_names,
-        const std::unordered_map<std::string, std::string>& canonical_locations,
-        const std::unordered_map<std::string, std::string>& archetype_for_label);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& canonical_locations,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_for_label);
 
 public:
     /**
@@ -74,20 +75,20 @@ public:
      * form is supported. Otherwise no such mapping will exist.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& canonical_locations() const;
-    std::unordered_map<std::string, std::string>& canonical_locations();
-    void canonical_locations(const std::unordered_map<std::string, std::string>& v);
-    void canonical_locations(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& canonical_locations() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& canonical_locations();
+    void canonical_locations(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& v);
+    void canonical_locations(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>&& v);
     /**@}*/
 
     /**
      * @brief Maps a label to archetype ID within the present logical manifold.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& archetype_for_label() const;
-    std::unordered_map<std::string, std::string>& archetype_for_label();
-    void archetype_for_label(const std::unordered_map<std::string, std::string>& v);
-    void archetype_for_label(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_for_label() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_for_label();
+    void archetype_for_label(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& v);
+    void archetype_for_label(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>&& v);
     /**@}*/
 
 public:
@@ -103,8 +104,8 @@ public:
 private:
     dogen::identification::entities::logical_meta_id logical_meta_id_;
     std::list<dogen::identification::entities::physical_meta_name> meta_names_;
-    std::unordered_map<std::string, std::string> canonical_locations_;
-    std::unordered_map<std::string, std::string> archetype_for_label_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id> canonical_locations_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id> archetype_for_label_;
 };
 
 }

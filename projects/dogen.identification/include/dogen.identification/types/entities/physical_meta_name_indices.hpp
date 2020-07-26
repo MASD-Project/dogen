@@ -26,12 +26,13 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/archetype_name_set.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::identification::entities {
 
@@ -48,9 +49,9 @@ public:
 public:
     physical_meta_name_indices(
         const std::list<dogen::identification::entities::physical_meta_name>& all,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name,
-        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetype_names_by_backend_by_facet);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& facet_names_by_backend_name,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet);
 
 public:
     /**
@@ -67,30 +68,30 @@ public:
      * @brief Qualified names of facets by qualified names of backends.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name() const;
-    std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name();
-    void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
-    void facet_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& facet_names_by_backend_name() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& facet_names_by_backend_name();
+    void facet_names_by_backend_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& v);
+    void facet_names_by_backend_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >&& v);
     /**@}*/
 
     /**
      * @brief Physical meta-names by logical meta-names.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name() const;
-    std::unordered_map<std::string, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name();
-    void archetype_names_by_logical_meta_name(const std::unordered_map<std::string, dogen::identification::entities::archetype_name_set>& v);
-    void archetype_names_by_logical_meta_name(const std::unordered_map<std::string, dogen::identification::entities::archetype_name_set>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name();
+    void archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& v);
+    void archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>&& v);
     /**@}*/
 
     /**
      * @brief Archetype names by qualified backend and facet names
      */
     /**@{*/
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetype_names_by_backend_by_facet() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetype_names_by_backend_by_facet();
-    void archetype_names_by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v);
-    void archetype_names_by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet();
+    void archetype_names_by_backend_by_facet(const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& v);
+    void archetype_names_by_backend_by_facet(const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >&& v);
     /**@}*/
 
 public:
@@ -105,9 +106,9 @@ public:
 
 private:
     std::list<dogen::identification::entities::physical_meta_name> all_;
-    std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
-    std::unordered_map<std::string, dogen::identification::entities::archetype_name_set> archetype_names_by_logical_meta_name_;
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > archetype_names_by_backend_by_facet_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> > facet_names_by_backend_name_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set> archetype_names_by_logical_meta_name_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > > archetype_names_by_backend_by_facet_;
 };
 
 }

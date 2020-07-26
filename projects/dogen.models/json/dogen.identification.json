@@ -828,12 +828,12 @@
         },
         {
           "name": "canonical_locations",
-          "type": "std::unordered_map<std::string, std::string>",
+          "type": "std::unordered_map<physical_meta_id, physical_meta_id>",
           "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
         },
         {
           "name": "archetype_for_label",
-          "type": "std::unordered_map<std::string, std::string>",
+          "type": "std::unordered_map<physical_meta_id, physical_meta_id>",
           "documentation": "Maps a label to archetype ID within the present logical manifold.\n"
         }
       ]
@@ -850,17 +850,17 @@
         },
         {
           "name": "facet_names_by_backend_name",
-          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>",
+          "type": "std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>",
           "documentation": "Qualified names of facets by qualified names of backends.\n"
         },
         {
           "name": "archetype_names_by_logical_meta_name",
-          "type": "std::unordered_map<std::string, archetype_name_set>",
+          "type": "std::unordered_map<physical_meta_id, archetype_name_set>",
           "documentation": "Physical meta-names by logical meta-names.\n"
         },
         {
           "name": "archetype_names_by_backend_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>",
+          "type": "std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>",
           "documentation": "Archetype names by qualified backend and facet names\n"
         }
       ]

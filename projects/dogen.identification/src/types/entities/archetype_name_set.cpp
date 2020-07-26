@@ -25,8 +25,8 @@ namespace dogen::identification::entities {
 archetype_name_set::archetype_name_set(
     const dogen::identification::entities::logical_meta_id& logical_meta_id,
     const std::list<dogen::identification::entities::physical_meta_name>& meta_names,
-    const std::unordered_map<std::string, std::string>& canonical_locations,
-    const std::unordered_map<std::string, std::string>& archetype_for_label)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& canonical_locations,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_for_label)
     : logical_meta_id_(logical_meta_id),
       meta_names_(meta_names),
       canonical_locations_(canonical_locations),
@@ -85,35 +85,35 @@ void archetype_name_set::meta_names(const std::list<dogen::identification::entit
     meta_names_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& archetype_name_set::canonical_locations() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_name_set::canonical_locations() const {
     return canonical_locations_;
 }
 
-std::unordered_map<std::string, std::string>& archetype_name_set::canonical_locations() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_name_set::canonical_locations() {
     return canonical_locations_;
 }
 
-void archetype_name_set::canonical_locations(const std::unordered_map<std::string, std::string>& v) {
+void archetype_name_set::canonical_locations(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& v) {
     canonical_locations_ = v;
 }
 
-void archetype_name_set::canonical_locations(const std::unordered_map<std::string, std::string>&& v) {
+void archetype_name_set::canonical_locations(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>&& v) {
     canonical_locations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& archetype_name_set::archetype_for_label() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_name_set::archetype_for_label() const {
     return archetype_for_label_;
 }
 
-std::unordered_map<std::string, std::string>& archetype_name_set::archetype_for_label() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& archetype_name_set::archetype_for_label() {
     return archetype_for_label_;
 }
 
-void archetype_name_set::archetype_for_label(const std::unordered_map<std::string, std::string>& v) {
+void archetype_name_set::archetype_for_label(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>& v) {
     archetype_for_label_ = v;
 }
 
-void archetype_name_set::archetype_for_label(const std::unordered_map<std::string, std::string>&& v) {
+void archetype_name_set::archetype_for_label(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::physical_meta_id>&& v) {
     archetype_for_label_ = std::move(v);
 }
 
