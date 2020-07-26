@@ -21,6 +21,7 @@
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -37,6 +38,7 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string empty_path("Artefact has an empty path. ID: ");
 const std::string duplicate_archetype(
     "Found more than one artefact for archetype:");
 const std::string duplicate_logical_element(
@@ -91,24 +93,27 @@ apply(const text::transforms::context& ctx,
             for (const auto& pair : ea.artefacts().artefacts_by_archetype()) {
                 const auto archetype_id(pair.first);
                 const auto aptr(pair.second);
+
                 /*
-                 * FIXME: mega-hack: prune empty artefacts. This is
-                 * needed for now because of how stitch templates are
-                 * handled; if we do not have a template, we are
-                 * producing blank artefacts with empty path and
-                 * contents. This will be addressed with T2T
-                 * transforms.
+                 * FIXME: we are still generating artefacts for global
+                 * module.
                  */
-                if (!aptr->artefact_properties().file_path().empty()) {
-                    auto& aba(as.artefacts_by_archetype());
-                    const auto pair(std::make_pair(archetype_id, aptr));
-                    const bool inserted(aba.insert(pair).second);
-                    if (!inserted) {
-                        BOOST_LOG_SEV(lg, error) << duplicate_archetype
-                                                 << archetype_id;
-                        BOOST_THROW_EXCEPTION(transform_exception(
-                                duplicate_archetype + archetype_id));
-                    }
+                if (aptr->artefact_properties().file_path().empty()) {
+                    BOOST_LOG_SEV(lg, error) << empty_path
+                                             << aptr->name().id();
+                    // BOOST_THROW_EXCEPTION(transform_exception(empty_path +
+                    //         aptr->name().id().value()));
+                    continue;
+                }
+
+                auto& aba(as.artefacts_by_archetype());
+                const auto aa_pair(std::make_pair(archetype_id, aptr));
+                const bool inserted(aba.insert(aa_pair).second);
+                if (!inserted) {
+                    BOOST_LOG_SEV(lg, error) << duplicate_archetype
+                                             << archetype_id;
+                    BOOST_THROW_EXCEPTION(transform_exception(
+                            duplicate_archetype + archetype_id));
                 }
             }
 
