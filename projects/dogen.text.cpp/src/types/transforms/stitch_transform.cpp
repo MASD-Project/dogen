@@ -102,7 +102,9 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
         }
     };
 
-    a.name().qualified(fp);
+    a.name().simple(fp.filename().generic_string());
+    a.name().id(identification::entities::physical_id(fp.generic_string()));
+    a.artefact_properties().file_path(fp);
     a.content(instantiator_.instantiate(stitch_template, external_keys));
     a.overwrite(a.artefact_properties().overwrite());
 

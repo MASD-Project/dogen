@@ -803,6 +803,13 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::physical_id_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

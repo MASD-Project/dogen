@@ -24,6 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -235,6 +236,12 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
          * physical dimensions of the artefact.
          */
         auto a(boost::make_shared<physical::entities::artefact>());
+        a->name().simple(e->name().simple());
+
+        identification::helpers::physical_id_factory f;
+        using namespace identification::entities;
+        logical_id id(e->name().qualified().dot());
+        a->name().id(f.make(id, pqn));
         a->physical_meta_name(pmn);
         a->provenance(as.provenance());
 

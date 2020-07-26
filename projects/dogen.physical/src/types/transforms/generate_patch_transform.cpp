@@ -26,6 +26,7 @@
 #include "dogen/io/diffing_destination_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -56,7 +57,7 @@ std::string generate_patch_transform::collect_diffs(const entities::model& m) {
         for (const auto& a_pair : as.artefacts_by_archetype()) {
             const auto& a(*a_pair.second);
             BOOST_LOG_SEV(lg, trace) << "Processing artefact: "
-                                     << a.name().qualified().filename();
+                                     << a.name().id();
 
             if (a.unified_diff().empty()) {
                 BOOST_LOG_SEV(lg, trace) << "Arefact has no diff.";

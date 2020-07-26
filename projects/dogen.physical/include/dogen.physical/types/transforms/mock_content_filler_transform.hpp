@@ -33,6 +33,9 @@ namespace dogen::physical::transforms {
 /**
  * @brief Handles the (admitedly hacked) case where we generate empty
  * artefacts which cause linker warnings.
+ *
+ * This transform is a massive hack to deal with ranlib warnings on
+ * OSX.
  */
 class mock_content_filler_transform final {
 public:

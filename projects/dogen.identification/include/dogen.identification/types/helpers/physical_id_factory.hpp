@@ -18,21 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_NAME_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_NAME_IO_HPP
+#ifndef DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_ID_FACTORY_HPP
+#define DOGEN_IDENTIFICATION_TYPES_HELPERS_PHYSICAL_ID_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.physical/types/entities/name.hpp"
+#include <string>
+#include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/physical_id.hpp"
 
-namespace dogen::physical::entities {
+namespace dogen::identification::helpers {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::physical::entities::name& v);
+/**
+ * @brief Creates a unique identifier representing points in physical
+ * space.
+ */
+class physical_id_factory final {
+public:
+    static entities::physical_id make(const std::string& logical_id,
+        const std::string& physical_meta_id);
+    static entities::physical_id make(const entities::logical_id& logical_id,
+        const std::string& physical_meta_id);
+    static entities::physical_id make(const entities::logical_id& logical_id,
+        const entities::technical_space& ts);
+};
 
 }
 

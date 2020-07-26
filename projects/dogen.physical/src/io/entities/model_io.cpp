@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/physical_name_io.hpp"
 #include "dogen.physical/io/entities/outputting_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 

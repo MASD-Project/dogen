@@ -21,6 +21,7 @@
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/artefact_set.hpp"
@@ -53,8 +54,18 @@ apply(const text::transforms::context& ctx,
 
     physical::entities::model_set r;
     for (const auto& m : ms.models()) {
-        using namespace identification::entities;
+        /*
+         * Update the main model properties.
+         */
         physical::entities::model pm;
+        pm.configuration(m.root_module()->configuration());
+        pm.name().simple(m.name().simple());
+        pm.managed_directories(m.managed_directories());
+
+        identification::helpers::physical_id_factory f;
+        using namespace identification::entities;
+        logical_id id(m.name().qualified().dot());
+        pm.name().id(f.make(id, m.output_technical_space()));
 
         /*
          * Create the provenance for the physical model.
@@ -62,21 +73,12 @@ apply(const text::transforms::context& ctx,
         logical_provenance prov;
         prov.logical_name().simple(m.name().simple());
 
-        logical_id id(m.name().qualified().dot());
         prov.logical_name().id(id);
         prov.injection(m.provenance());
 
         logical_meta_id mid(m.meta_name().qualified().dot());
         prov.logical_meta_name().id(mid);
         pm.provenance(prov);
-
-        /*
-         * Update the main model properties.
-         */
-        pm.name().simple(m.name().simple());
-        pm.name().qualified(m.name().qualified().dot());
-        pm.configuration(m.root_module()->configuration());
-        pm.managed_directories(m.managed_directories());
 
         /*
          * Obtain artefact sets from the text model.
@@ -97,8 +99,7 @@ apply(const text::transforms::context& ctx,
                  * contents. This will be addressed with T2T
                  * transforms.
                  */
-                const auto& p(aptr->name().qualified());
-                if (!p.empty()) {
+                if (!aptr->artefact_properties().file_path().empty()) {
                     auto& aba(as.artefacts_by_archetype());
                     const auto pair(std::make_pair(archetype_id, aptr));
                     const bool inserted(aba.insert(pair).second);

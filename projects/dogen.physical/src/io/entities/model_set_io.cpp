@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_set_io.hpp"
+#include "dogen.identification/io/entities/physical_name_io.hpp"
 
 namespace std {
 

@@ -99,8 +99,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 
             auto& a(*aptr);
             fmt.apply(ctx, e, a);
-            const auto& p(a.name().qualified());
-
+            const auto& p(a.artefact_properties().file_path());
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
         }
     }

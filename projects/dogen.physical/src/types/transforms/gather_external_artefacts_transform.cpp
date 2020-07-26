@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include "dogen.identification/types/entities/physical_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
@@ -51,7 +52,9 @@ gather_external_artefacts_transform::make_artefact(
     const entities::operation_reason rsn) {
 
     auto r(boost::make_shared<entities::artefact>());
-    r->name().qualified(p);
+    r->name().simple(p.filename().generic_string());
+    r->name().id(identification::entities::physical_id(p.generic_string()));
+    r->artefact_properties().file_path(p);
     r->operation().type(ot);
     r->operation().reason(rsn);
 

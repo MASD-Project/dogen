@@ -22,6 +22,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/helpers/files_by_status_io.hpp"
@@ -55,13 +56,13 @@ namespace dogen::physical::transforms {
 bool generate_diffs_transform::
 process_artefact(const boost::filesystem::path& managed_dir,
     physical::entities::artefact& a) {
-    const auto& p(a.name().qualified());
-    if (p.empty()) {
+    BOOST_LOG_SEV(lg, trace) << "Processing artefact: " << a.name().id();
+    const auto& fp(a.artefact_properties().file_path());
+    if (fp.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_file_name;
         BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
     }
 
-    BOOST_LOG_SEV(lg, trace) << "Processing artefact: " << p.filename();
     BOOST_LOG_SEV(lg, trace) << "Arefact operation: " << a.operation();
 
     /*
@@ -83,7 +84,7 @@ process_artefact(const boost::filesystem::path& managed_dir,
     const auto reason(a.operation().reason());
     using dogen::utility::filesystem::read_file_content;
     const std::string c(reason == operation_reason::newly_generated ?
-        empty : read_file_content(p));
+        empty : read_file_content(fp));
 
     /*
      * Diff the content of the file against the artefact,
@@ -106,7 +107,7 @@ process_artefact(const boost::filesystem::path& managed_dir,
         }());
 
     using helpers::unified_differ;
-    const auto ud(unified_differ::diff(c, a.content(), managed_dir, p, info));
+    const auto ud(unified_differ::diff(c, a.content(), managed_dir, fp, info));
     a.unified_diff(ud);
     return true;
 }

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/algorithm/string/predicate.hpp>
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -73,14 +72,13 @@ apply(const context& ctx, entities::model& m) {
         if (!a.content().empty())
             continue;
 
-        const auto p(a.name().qualified());
-        const auto gs(p.generic_string());
-        if (!boost::ends_with(gs, ".cpp"))
+        const auto& fp(a.artefact_properties().file_path());
+        if (fp.extension() != ".cpp")
             continue;
 
-        // FIXME: massive hack to deal with ranlib warnings on OSX
+        const auto gs(fp.generic_string());
         BOOST_LOG_SEV(lg, debug) << "File requires mock content: " << gs;
-        const auto fn(p.stem().generic_string());
+        const auto fn(fp.stem().generic_string());
         a.content(create_hacked_contents(fn));
     }
 }

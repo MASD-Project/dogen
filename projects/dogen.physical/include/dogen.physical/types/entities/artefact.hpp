@@ -32,9 +32,9 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
+#include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
@@ -59,7 +59,7 @@ public:
         const dogen::physical::entities::meta_name& physical_meta_name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
-        const dogen::physical::entities::name& name,
+        const dogen::identification::entities::physical_name& name,
         const std::string& content,
         const bool enabled,
         const bool overwrite,
@@ -101,10 +101,10 @@ public:
      * @brief Name of the physical element.
      */
     /**@{*/
-    const dogen::physical::entities::name& name() const;
-    dogen::physical::entities::name& name();
-    void name(const dogen::physical::entities::name& v);
-    void name(const dogen::physical::entities::name&& v);
+    const dogen::identification::entities::physical_name& name() const;
+    dogen::identification::entities::physical_name& name();
+    void name(const dogen::identification::entities::physical_name& v);
+    void name(const dogen::identification::entities::physical_name&& v);
     /**@}*/
 
     /**
@@ -194,7 +194,7 @@ private:
     dogen::physical::entities::meta_name physical_meta_name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
-    dogen::physical::entities::name name_;
+    dogen::identification::entities::physical_name name_;
     std::string content_;
     bool enabled_;
     bool overwrite_;

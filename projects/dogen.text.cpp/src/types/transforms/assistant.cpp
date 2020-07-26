@@ -655,13 +655,13 @@ std::ostream& assistant::stream() {
 }
 
 void assistant::update_artefact() const {
-    const auto fp(artefact_properties_.file_path());
-    artefact_.name().simple(fp.filename().generic_string());
-    artefact_.name().qualified(fp);
     artefact_.content(stream_.str());
 
     const auto& ap(artefact_.artefact_properties());
     artefact_.overwrite(ap.overwrite());
+
+    const auto fp(artefact_properties_.file_path());
+    artefact_.artefact_properties().file_path(fp);
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;

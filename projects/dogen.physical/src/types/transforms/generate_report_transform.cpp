@@ -26,6 +26,7 @@
 #include "dogen/io/reporting_style_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -171,14 +172,13 @@ void print_plain_report(std::ostream& s,
     artefacts) {
     for (auto& ptr : artefacts) {
         auto& a(*ptr);
-        const auto p(a.name().qualified());
+        const auto p(a.artefact_properties().file_path());
         if (p.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_file_name;
             BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Processing arefact: "
-                                 << p.filename();
+        BOOST_LOG_SEV(lg, debug) << "Processing arefact: " << a.name().id();
 
         print_operation_type(true/*add_brackets*/, a.operation().type(), s);
         print_operation_reason(true/*add_brackets*/, a.operation().reason(), s);
@@ -203,14 +203,13 @@ void print_org_mode_report(std::ostream& s,
 
     for (auto& ptr : artefacts) {
         auto& a(*ptr);
-        const auto p(a.name().qualified());
+        const auto p(a.artefact_properties().file_path());
         if (p.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_file_name;
             BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Processing arefact: " << p.filename();
-
+        BOOST_LOG_SEV(lg, debug) << "Processing arefact: " << a.name().id();
         const auto& op(a.operation());
         auto rp(p.lexically_relative(managed_dir));
         map[op.type()][op.reason()].insert(rp.generic_string());

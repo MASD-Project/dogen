@@ -145,7 +145,7 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
          */
-        const auto p(a.name().qualified());
+        const auto& p(a.artefact_properties().file_path());
         if (p.empty())
             continue;
 
@@ -215,7 +215,7 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
          */
-        const auto p(a.name().qualified());
+        const auto& p(a.artefact_properties().file_path());
         if (p.empty())
             continue;
 
@@ -280,7 +280,7 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
          */
-        const auto p(a.name().qualified());
+        const auto& p(a.artefact_properties().file_path());
         if (p.empty())
             continue;
 
@@ -345,7 +345,7 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
          */
-        const auto p(a.name().qualified());
+        const auto& p(a.artefact_properties().file_path());
         if (p.empty())
             continue;
 
@@ -401,7 +401,7 @@ bool check_out_of_sync(const boost::filesystem::path& output_dir,
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
          */
-        const auto p(a.name().qualified());
+        const auto& p(a.artefact_properties().file_path());
         if (p.empty())
             continue;
 

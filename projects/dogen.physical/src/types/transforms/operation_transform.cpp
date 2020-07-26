@@ -24,6 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/operation_type_io.hpp"
@@ -51,10 +52,9 @@ namespace dogen::physical::transforms {
 
 void operation_transform::
 apply(entities::artefact& a, const bool force_write) {
-    const auto p(a.name().qualified());
-    const auto gs(p.generic());
-    BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
+    BOOST_LOG_SEV(lg, trace) << "Processing: " << a.name().id();
 
+    const auto p(a.artefact_properties().file_path());
     if (p.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_file_name;
         BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));

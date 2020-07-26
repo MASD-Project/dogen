@@ -46,7 +46,7 @@ model::model(
     const dogen::physical::entities::meta_name& physical_meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
-    const dogen::physical::entities::name& name,
+    const dogen::identification::entities::physical_name& name,
     const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& technical_space,
     const std::list<boost::filesystem::path>& managed_directories,
@@ -141,19 +141,19 @@ void model::provenance(const dogen::identification::entities::logical_provenance
     provenance_ = std::move(v);
 }
 
-const dogen::physical::entities::name& model::name() const {
+const dogen::identification::entities::physical_name& model::name() const {
     return name_;
 }
 
-dogen::physical::entities::name& model::name() {
+dogen::identification::entities::physical_name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::physical::entities::name& v) {
+void model::name(const dogen::identification::entities::physical_name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::physical::entities::name&& v) {
+void model::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
 }
 

@@ -51,7 +51,8 @@ obtain_expected_files(const entities::model& m) {
         const auto& as(as_pair.second);
         for (const auto& a_pair : as.artefacts_by_archetype()) {
             const auto& a(*a_pair.second);
-            r.insert(a.name().qualified().generic_string());
+            const auto& p(a.artefact_properties().file_path());
+            r.insert(p.generic_string());
             for (const auto& d : a.dependencies())
                 r.insert(d.generic_string());
         }
@@ -59,7 +60,8 @@ obtain_expected_files(const entities::model& m) {
 
     for (const auto& aptr : m.orphan_artefacts()) {
         const auto& a(*aptr);
-        r.insert(a.name().qualified().generic_string());
+        const auto& p(a.artefact_properties().file_path());
+        r.insert(p.generic_string());
         for (const auto& d : a.dependencies())
             r.insert(d.generic_string());
     }

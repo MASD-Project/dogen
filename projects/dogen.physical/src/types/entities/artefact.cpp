@@ -40,7 +40,7 @@ artefact::artefact(
     const dogen::physical::entities::meta_name& physical_meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
-    const dogen::physical::entities::name& name,
+    const dogen::identification::entities::physical_name& name,
     const std::string& content,
     const bool enabled,
     const bool overwrite,
@@ -155,19 +155,19 @@ void artefact::provenance(const dogen::identification::entities::logical_provena
     provenance_ = std::move(v);
 }
 
-const dogen::physical::entities::name& artefact::name() const {
+const dogen::identification::entities::physical_name& artefact::name() const {
     return name_;
 }
 
-dogen::physical::entities::name& artefact::name() {
+dogen::identification::entities::physical_name& artefact::name() {
     return name_;
 }
 
-void artefact::name(const dogen::physical::entities::name& v) {
+void artefact::name(const dogen::identification::entities::physical_name& v) {
     name_ = v;
 }
 
-void artefact::name(const dogen::physical::entities::name&& v) {
+void artefact::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
 }
 

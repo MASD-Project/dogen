@@ -27,8 +27,8 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/model.hpp"
+#include "dogen.identification/types/entities/physical_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -44,7 +44,7 @@ public:
 
 public:
     model_set(
-        const dogen::physical::entities::name& name,
+        const dogen::identification::entities::physical_name& name,
         const std::list<dogen::physical::entities::model>& models);
 
 public:
@@ -52,10 +52,10 @@ public:
      * @brief Name of the physical element.
      */
     /**@{*/
-    const dogen::physical::entities::name& name() const;
-    dogen::physical::entities::name& name();
-    void name(const dogen::physical::entities::name& v);
-    void name(const dogen::physical::entities::name&& v);
+    const dogen::identification::entities::physical_name& name() const;
+    dogen::identification::entities::physical_name& name();
+    void name(const dogen::identification::entities::physical_name& v);
+    void name(const dogen::identification::entities::physical_name&& v);
     /**@}*/
 
     /**
@@ -79,7 +79,7 @@ public:
     model_set& operator=(model_set other);
 
 private:
-    dogen::physical::entities::name name_;
+    dogen::identification::entities::physical_name name_;
     std::list<dogen::physical::entities::model> models_;
 };
 
