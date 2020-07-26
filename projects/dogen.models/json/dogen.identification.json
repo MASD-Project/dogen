@@ -810,6 +810,66 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::archetype_name_set",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "logical_meta_id",
+          "type": "logical_meta_id",
+          "documentation": "Identifier of the meta-element in the logical dimension.\n"
+        },
+        {
+          "name": "meta_names",
+          "type": "std::list<physical_meta_name>",
+          "documentation": "All meta-names that belong to this group.\n"
+        },
+        {
+          "name": "canonical_locations",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
+        },
+        {
+          "name": "archetype_for_label",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a label to archetype ID within the present logical manifold.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::physical_meta_name_indices",
+      "documentation": "Containing physical meta-names, indexed as required by use cases.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "all",
+          "type": "std::list<physical_meta_name>",
+          "documentation": "All meta-names.\n"
+        },
+        {
+          "name": "facet_names_by_backend_name",
+          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>",
+          "documentation": "Qualified names of facets by qualified names of backends.\n"
+        },
+        {
+          "name": "archetype_names_by_logical_meta_name",
+          "type": "std::unordered_map<std::string, archetype_name_set>",
+          "documentation": "Physical meta-names by logical meta-names.\n"
+        },
+        {
+          "name": "archetype_names_by_backend_by_facet",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>",
+          "documentation": "Archetype names by qualified backend and facet names\n"
+        }
+      ]
+    },
+    {
+      "name": "helpers::meta_name_index_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
