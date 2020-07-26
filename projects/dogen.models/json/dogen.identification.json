@@ -136,7 +136,8 @@
       "name": "entities::physical_meta_id",
       "documentation": "ID of the meta-element in the physical dimension.\n",
       "stereotypes": [
-        "masd::primitive"
+        "masd::primitive",
+        "dogen::hashable"
       ],
       "tagged_values": {
         "masd.primitive.underlying_element": "std::string"

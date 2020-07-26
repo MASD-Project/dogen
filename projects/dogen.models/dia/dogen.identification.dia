@@ -1070,16 +1070,16 @@ identification within Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="42,22"/>
+        <dia:point val="35,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.95,21.95;50.2,25.05"/>
+        <dia:rectangle val="34.95,21.95;49.41,25.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="42,22"/>
+        <dia:point val="35,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1500000000000004"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1088,7 +1088,7 @@ identification within Dogen.
         <dia:string>#physical_meta_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::primitive#</dia:string>
+        <dia:string>#masd::primitive, dogen::hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#ID of the meta-element in the physical dimension.
@@ -4320,7 +4320,7 @@ can only have one and only one name.#</dia:string>
         <dia:point val="47.025,16.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.025,15.85;47.775,22.8"/>
+        <dia:rectangle val="42.13,15.85;47.775,22.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4328,8 +4328,8 @@ can only have one and only one name.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="47.025,16.6"/>
         <dia:point val="47.025,20"/>
-        <dia:point val="46.075,20"/>
-        <dia:point val="46.075,22"/>
+        <dia:point val="42.18,20"/>
+        <dia:point val="42.18,22"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12868,7 +12868,7 @@ Temporary data structure used to build trees of logical names.#</dia:string>
         <dia:point val="53,23.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.1,22.35;53.75,24.7"/>
+        <dia:rectangle val="49.31,22.35;53.75,24.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12876,8 +12876,8 @@ Temporary data structure used to build trees of logical names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="53,23.1"/>
         <dia:point val="52.25,23.1"/>
-        <dia:point val="50.2,23.1"/>
-        <dia:point val="50.15,23.1"/>
+        <dia:point val="49.41,23.1"/>
+        <dia:point val="49.36,23.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
