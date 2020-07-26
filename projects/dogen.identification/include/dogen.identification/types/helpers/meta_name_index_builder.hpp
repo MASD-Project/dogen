@@ -25,24 +25,31 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/archetype_name_set.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 
 namespace dogen::identification::helpers {
 
 class meta_name_index_builder final {
-public:
-    meta_name_index_builder() = default;
-    meta_name_index_builder(const meta_name_index_builder&) = default;
-    meta_name_index_builder(meta_name_index_builder&&) = default;
-    ~meta_name_index_builder() = default;
-    meta_name_index_builder& operator=(const meta_name_index_builder&) = default;
+private:
+    void validate(const std::list<entities::physical_meta_name>& mns) const;
+    void populate_names(const std::list<entities::physical_meta_name>& mns);
+    void populate_archetypes_by_facet_by_backend();
+    void populate_facet_names_by_backend_name();
 
 public:
-    bool operator==(const meta_name_index_builder& rhs) const;
-    bool operator!=(const meta_name_index_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void add(const std::list<entities::physical_meta_name>& mns);
+    void add(const std::unordered_map<entities::physical_meta_id,
+        entities::archetype_name_set>& by_logical_meta_name);
 
+public:
+    const entities::physical_meta_name_indices& build();
+
+private:
+    entities::physical_meta_name_indices index_;
 };
 
 }
