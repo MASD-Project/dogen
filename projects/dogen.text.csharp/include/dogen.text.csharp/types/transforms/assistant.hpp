@@ -28,7 +28,7 @@
 #include <sstream>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
@@ -47,12 +47,12 @@ namespace dogen::text::csharp::transforms {
 class assistant final {
 public:
     assistant(const context& ctx, const logical::entities::element& e,
-        const physical::entities::meta_name& n,
+        const identification::entities::physical_meta_name& pmn,
         physical::entities::artefact& a);
 
 private:
-    const formattables::artefact_properties&
-    obtain_artefact_properties(const std::string& archetype) const;
+    const formattables::artefact_properties& obtain_artefact_properties(
+        const identification::entities::physical_meta_id& archetype) const;
 
 public:
     template<typename T>
@@ -66,8 +66,8 @@ public:
      * its inheritance properties: sealed or abstract. If non-empty,
      * includes a trailing space.
      */
-    static std::string
-    make_inheritance_keyword_text(const logical::entities::structural::object& o);
+    static std::string make_inheritance_keyword_text(
+        const logical::entities::structural::object& o);
 
 public:
     /**
@@ -154,7 +154,7 @@ private:
     physical::entities::artefact& artefact_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    const physical::entities::meta_name physical_meta_name_;
+    const identification::entities::physical_meta_name physical_meta_name_;
 };
 
 }

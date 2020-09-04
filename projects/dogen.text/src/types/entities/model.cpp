@@ -68,10 +68,10 @@ model::model(
     const dogen::identification::entities::technical_space output_technical_space,
     const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
-    const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
+    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const std::list<boost::filesystem::path>& managed_directories,
-    const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -302,19 +302,19 @@ void model::orm_properties(const boost::optional<dogen::logical::entities::orm::
     orm_properties_ = std::move(v);
 }
 
-const std::unordered_set<dogen::physical::entities::element_archetype>& model::enabled_archetype_for_element() const {
+const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& model::enabled_archetype_for_element() const {
     return enabled_archetype_for_element_;
 }
 
-std::unordered_set<dogen::physical::entities::element_archetype>& model::enabled_archetype_for_element() {
+std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& model::enabled_archetype_for_element() {
     return enabled_archetype_for_element_;
 }
 
-void model::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
     enabled_archetype_for_element_ = v;
 }
 
-void model::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>&& v) {
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v) {
     enabled_archetype_for_element_ = std::move(v);
 }
 
@@ -350,19 +350,19 @@ void model::managed_directories(const std::list<boost::filesystem::path>&& v) {
     managed_directories_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& model::facet_properties() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& model::facet_properties() const {
     return facet_properties_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::facet_properties>& model::facet_properties() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& model::facet_properties() {
     return facet_properties_;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
+void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v) {
     facet_properties_ = v;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>&& v) {
+void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>&& v) {
     facet_properties_ = std::move(v);
 }
 

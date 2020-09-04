@@ -24,6 +24,7 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 
 namespace boost {
@@ -40,14 +41,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
     return s;
 }
 
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
 }
 
 namespace boost {
@@ -68,12 +61,12 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -84,16 +77,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";

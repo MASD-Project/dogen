@@ -24,10 +24,11 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
 
@@ -54,7 +55,7 @@ namespace dogen::physical::transforms {
 extraction_properties_transform::feature_group
 extraction_properties_transform::make_feature_group(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::meta_name>& mns) {
+    const std::list<identification::entities::physical_meta_name>& pmns) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
@@ -65,10 +66,10 @@ extraction_properties_transform::make_feature_group(
     r.enable_backend_directories = s.get_by_name(ekd);
 
     const auto en(enabled_feature);
-    using qnb = physical::helpers::qualified_meta_name_builder;
-    for (const auto& mn : mns) {
-        const auto b(qnb::build_backend(mn));
-        r.enabled[b] = s.get_by_name(b, en);
+    using identification::helpers::physical_meta_id_builder;
+    for (const auto& mn : pmns) {
+        const auto b(physical_meta_id_builder::build_backend(mn));
+        r.enabled[b.value()] = s.get_by_name(b.value(), en);
     }
 
     return r;
@@ -116,7 +117,7 @@ obtain_enable_backend_directories(const feature_group& fg,
 
 entities::extraction_properties
 extraction_properties_transform::make_extraction_properties(const context& ctx,
-    const std::list<physical::entities::meta_name>& mns,
+    const std::list<identification::entities::physical_meta_name>& mns,
     const variability::entities::configuration& cfg) {
 
     const auto fg(make_feature_group(*ctx.feature_model(), mns));
@@ -154,7 +155,7 @@ apply(const context& ctx, entities::artefact_repository& ar) {
     if (i == ar.artefact_sets_by_logical_id().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
         BOOST_THROW_EXCEPTION(
-            transform_exception(root_module_not_found + rmid));
+            transform_exception(root_module_not_found + rmid.value()));
     }
 
     const auto& cfg(*i->second.configuration());

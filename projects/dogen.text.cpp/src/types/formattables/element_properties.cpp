@@ -24,7 +24,7 @@ namespace dogen::text::cpp::formattables {
 
 element_properties::element_properties(
     const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& artefact_properties,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
     const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
@@ -73,19 +73,19 @@ void element_properties::aspect_properties(const dogen::text::cpp::formattables:
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& element_properties::artefact_properties() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& element_properties::artefact_properties() const {
     return artefact_properties_;
 }
 
-std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& element_properties::artefact_properties() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& element_properties::artefact_properties() {
     return artefact_properties_;
 }
 
-void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& v) {
+void element_properties::artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& v) {
     artefact_properties_ = v;
 }
 
-void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>&& v) {
+void element_properties::artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>&& v) {
     artefact_properties_ = std::move(v);
 }
 

@@ -27,7 +27,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/traits.hpp"
@@ -57,7 +57,7 @@ const physical::entities::archetype& solution_transform::archetype() const {
 
 boost::filesystem::path solution_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> solution_transform::
@@ -73,7 +73,7 @@ void solution_transform::apply(const context& ctx, const logical::entities::elem
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
-    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
+    const auto& sln(ast.as<solution>(archetype().meta_name().id().value(), e));
 ast.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 ast.stream() << "# Visual Studio 2012" << std::endl;
     for (const auto& ppb : sln.project_persistence_blocks()) {

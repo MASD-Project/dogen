@@ -30,8 +30,9 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group_repository.hpp"
 
@@ -39,13 +40,13 @@ namespace dogen::text::cpp::formattables {
 
 /**
  * @brief Helps in building the inclusion dependencies for a given
- * formatter.
+ * formatteridentification::entities::logical_meta_physical_id.
  */
 class dependencies_builder {
 public:
     dependencies_builder(
-        const directive_group_repository& dgrp,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const directive_group_repository& dgrp, const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element);
 
 private:
@@ -103,6 +104,24 @@ public:
     void add(const std::list<logical::entities::name>& names,
         const std::string& archetype);
 
+    /**
+     * @brief Adds the inclusion directive for the supplied archetype
+     * and name.
+     */
+    /**@{*/
+    void add(const logical::entities::name& n,
+        const identification::entities::physical_meta_id& archetype);
+    void add(const boost::optional<logical::entities::name>& n,
+        const identification::entities::physical_meta_id& archetype);
+    /**@}*/
+
+    /**
+     * @brief Adds the inclusion directives for the supplied
+     * archetype, for each of the supplied names.
+     */
+    void add(const std::list<logical::entities::name>& names,
+        const identification::entities::physical_meta_id& archetype);
+
 public:
     /**
      * @brief Builds the inclusion dependencies. All additions must
@@ -113,7 +132,8 @@ public:
 private:
     const directive_group_repository& repository_;
     std::list<std::string> dependencies_;
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element_;
 };
 

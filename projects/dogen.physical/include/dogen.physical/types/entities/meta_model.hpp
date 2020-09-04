@@ -31,9 +31,9 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/backend.hpp"
-#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.identification/types/entities/label.hpp"
-#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 
 namespace dogen::physical::entities {
 
@@ -54,11 +54,11 @@ public:
         const std::string& default_directory_name,
         const std::string& override_directory_name,
         const std::string& description,
-        const dogen::physical::entities::meta_name& meta_name,
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const std::list<dogen::physical::entities::backend>& backends,
-        const dogen::physical::entities::meta_name_indices& indexed_names);
+        const dogen::identification::entities::physical_meta_name_indices& indexed_names);
 
 public:
     /**
@@ -95,10 +95,10 @@ public:
      * @brief Meta-name for this meta-element.
      */
     /**@{*/
-    const dogen::physical::entities::meta_name& meta_name() const;
-    dogen::physical::entities::meta_name& meta_name();
-    void meta_name(const dogen::physical::entities::meta_name& v);
-    void meta_name(const dogen::physical::entities::meta_name&& v);
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
     /**@}*/
 
     /**
@@ -139,10 +139,10 @@ public:
      * @brief Repository with all the meta-names in this meta-model, indexed appropriately.
      */
     /**@{*/
-    const dogen::physical::entities::meta_name_indices& indexed_names() const;
-    dogen::physical::entities::meta_name_indices& indexed_names();
-    void indexed_names(const dogen::physical::entities::meta_name_indices& v);
-    void indexed_names(const dogen::physical::entities::meta_name_indices&& v);
+    const dogen::identification::entities::physical_meta_name_indices& indexed_names() const;
+    dogen::identification::entities::physical_meta_name_indices& indexed_names();
+    void indexed_names(const dogen::identification::entities::physical_meta_name_indices& v);
+    void indexed_names(const dogen::identification::entities::physical_meta_name_indices&& v);
     /**@}*/
 
 public:
@@ -159,11 +159,11 @@ private:
     std::string default_directory_name_;
     std::string override_directory_name_;
     std::string description_;
-    dogen::physical::entities::meta_name meta_name_;
+    dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     std::list<dogen::physical::entities::backend> backends_;
-    dogen::physical::entities::meta_name_indices indexed_names_;
+    dogen::identification::entities::physical_meta_name_indices indexed_names_;
 };
 
 }

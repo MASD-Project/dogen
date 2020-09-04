@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group_repository_factory.hpp"
@@ -138,10 +139,10 @@ inclusion_expander::compute_inclusion_dependencies(
 
     for (const auto& fmt : i->second) {
         const auto n(fmt->archetype().meta_name());
-        const auto arch(n.qualified());
+        const auto arch(n.id());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
                                  << " using formatter: "
-                                 << fmt->archetype().meta_name().qualified();
+                                 << fmt->archetype().meta_name().id().value();
 
         /*
          * Obtain the formatter's list of inclusion dependencies. If
@@ -231,7 +232,8 @@ void inclusion_expander::populate_inclusion_dependencies(
             const auto i(art_props.find(arch));
             if (i == art_props.end()) {
                 BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
-                BOOST_THROW_EXCEPTION(expansion_error(missing_archetype + arch));
+                BOOST_THROW_EXCEPTION(
+                    expansion_error(missing_archetype + arch.value()));
             }
             i->second.inclusion_dependencies(pair.second);
         }
@@ -242,7 +244,8 @@ void inclusion_expander::populate_inclusion_dependencies(
 
 void inclusion_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
 

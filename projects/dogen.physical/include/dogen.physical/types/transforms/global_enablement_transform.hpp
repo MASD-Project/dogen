@@ -30,7 +30,8 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.physical/types/entities/backend_properties.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.physical/types/entities/archetype_properties.hpp"
@@ -64,49 +65,57 @@ private:
     };
 
 private:
-    static std::unordered_map<std::string, backend_feature_group>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              backend_feature_group>
     make_backend_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp);
+        const identification::entities::physical_meta_name_indices& idx);
 
-    static std::unordered_map<std::string, facet_feature_group>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              facet_feature_group>
     make_facet_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp);
+        const identification::entities::physical_meta_name_indices& idx);
 
-    static std::unordered_map<std::string, global_archetype_feature_group>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              global_archetype_feature_group>
     make_global_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp);
+        const identification::entities::physical_meta_name_indices& idx);
 
-    static std::unordered_map<std::string, local_archetype_feature_group>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              local_archetype_feature_group>
     make_local_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp);
+        const identification::entities::physical_meta_name_indices& idx);
 
 private:
-    static std::unordered_map<std::string, entities::backend_properties>
-    obtain_backend_properties(
-        const std::unordered_map<std::string, backend_feature_group>& fgs,
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              entities::backend_properties>
+    obtain_backend_properties(const std::unordered_map<
+        identification::entities::physical_meta_id,
+        backend_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
-    static std::unordered_map<std::string, entities::facet_properties>
-    obtain_facet_properties(
-        const std::unordered_map<std::string, facet_feature_group>& fgs,
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              entities::facet_properties>
+    obtain_facet_properties(const std::unordered_map<
+        identification::entities::physical_meta_id, facet_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
-    static std::unordered_map<std::string, entities::archetype_properties>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              entities::archetype_properties>
     obtain_archetype_properties(
-        const std::unordered_map<std::string,
+        const std::unordered_map<identification::entities::physical_meta_id,
         global_archetype_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
     static void populate_global_enablement_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp,
+        const identification::entities::physical_meta_name_indices& idx,
         entities::artefact_repository& ar);
 
     static void populate_local_enablement_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::meta_name_indices& nrp,
+        const identification::entities::physical_meta_name_indices& idx,
         entities::artefact_repository& ar);
 
 public:

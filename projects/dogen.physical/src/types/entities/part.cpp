@@ -29,11 +29,11 @@ part::part(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
     const std::string& description,
-    const dogen::physical::entities::meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::physical::entities::path_configuration& path_configuration,
-    const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
-    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
     const bool requires_relative_path)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
@@ -124,19 +124,19 @@ void part::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name& part::meta_name() const {
+const dogen::identification::entities::physical_meta_name& part::meta_name() const {
     return meta_name_;
 }
 
-dogen::physical::entities::meta_name& part::meta_name() {
+dogen::identification::entities::physical_meta_name& part::meta_name() {
     return meta_name_;
 }
 
-void part::meta_name(const dogen::physical::entities::meta_name& v) {
+void part::meta_name(const dogen::identification::entities::physical_meta_name& v) {
     meta_name_ = v;
 }
 
-void part::meta_name(const dogen::physical::entities::meta_name&& v) {
+void part::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -172,35 +172,35 @@ void part::path_configuration(const dogen::physical::entities::path_configuratio
     path_configuration_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::facet>& part::facets() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& part::facets() const {
     return facets_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::facet>& part::facets() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& part::facets() {
     return facets_;
 }
 
-void part::facets(const std::unordered_map<std::string, dogen::physical::entities::facet>& v) {
+void part::facets(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& v) {
     facets_ = v;
 }
 
-void part::facets(const std::unordered_map<std::string, dogen::physical::entities::facet>&& v) {
+void part::facets(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>&& v) {
     facets_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::archetype>& part::archetypes() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& part::archetypes() const {
     return archetypes_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::archetype>& part::archetypes() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& part::archetypes() {
     return archetypes_;
 }
 
-void part::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v) {
+void part::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v) {
     archetypes_ = v;
 }
 
-void part::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v) {
+void part::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>&& v) {
     archetypes_ = std::move(v);
 }
 

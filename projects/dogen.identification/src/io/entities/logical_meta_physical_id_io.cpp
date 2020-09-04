@@ -29,7 +29,7 @@ std::ostream& operator<<(std::ostream& s, const logical_meta_physical_id& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_meta_physical_id\"" << ", "
       << "\"logical_id\": " << v.logical_id() << ", "
-      << "\"physical_id\": " << v.physical_id()
+      << "\"physical_meta_id\": " << v.physical_meta_id()
       << " }";
     return(s);
 }

@@ -23,7 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/formattables/location_error.hpp"
 #include "dogen.text.csharp/types/transforms/model_to_text_transform.hpp"
@@ -63,28 +63,28 @@ locator::feature_group locator::make_feature_group(
     feature_group r;
     const variability::helpers::feature_selector s(feature_model);
 
-    std::unordered_set<std::string> processed_facets;
-    using qnb = physical::helpers::qualified_meta_name_builder;
+    std::unordered_set<identification::entities::physical_meta_id> processed_facets;
+    using qnb = identification::helpers::physical_meta_id_builder;
     for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto n(fmt.archetype().meta_name());
-        const auto arch(n.qualified());
-        const auto fct(qnb::build_facet(n));
+        const auto pmn(fmt.archetype().meta_name());
+        const auto arch(pmn.id());
+        const auto fct(qnb::build_facet(pmn));
         const auto pf(traits::postfix());
 
         formatter_feature_group fmt_tg;
         const auto pfix(traits::postfix());
-        fmt_tg.archefeature_postfix = s.get_by_name(arch, pfix);
+        fmt_tg.archefeature_postfix = s.get_by_name(arch.value(), pfix);
 
-        auto dir(s.try_get_by_name(fct, traits::directory()));
+        auto dir(s.try_get_by_name(fct.value(), traits::directory()));
         if (dir)
             fmt_tg.facet_directory = *dir;
 
-        auto postfix(s.try_get_by_name(fct, traits::postfix()));
+        auto postfix(s.try_get_by_name(fct.value(), traits::postfix()));
         if (postfix)
             fmt_tg.facet_postfix = *postfix;
 
-        r.formatters_feature_group[arch] = fmt_tg;
+        r.formatters_feature_group[arch.value()] = fmt_tg;
 
         const bool done(processed_facets.find(fct) != processed_facets.end());
         if (fmt_tg.facet_directory && !done) {
@@ -92,7 +92,7 @@ locator::feature_group locator::make_feature_group(
             facet_feature_group fct_tg;
             fct_tg.directory = *fmt_tg.facet_directory;
             fct_tg.postfix = *fmt_tg.facet_postfix;
-            r.facets_feature_group[fct] = fct_tg;
+            r.facets_feature_group[fct.value()] = fct_tg;
         }
     }
 

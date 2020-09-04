@@ -19,8 +19,9 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/enum_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/lexical_cast_factory.hpp"
 
@@ -33,7 +34,7 @@ static logger lg(logger_factory("dogen.text.cpp.transforms.lexical_cast"));
 }
 
 physical::entities::facet lexical_cast_factory::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("cpp");
     b.facet("lexical_cast");
@@ -42,14 +43,15 @@ physical::entities::facet lexical_cast_factory::make() {
     r.meta_name(b.build());
 
     const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().qualified());
+        const auto id(arch.meta_name().id());
         const auto pair(std::make_pair(id, arch));
         const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
         }
     });
 

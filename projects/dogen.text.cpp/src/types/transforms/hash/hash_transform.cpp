@@ -19,11 +19,12 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/hash/hash_transform.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/hash/enum_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_header_transform.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/hash/builtin_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/primitive_header_transform.hpp"
 #include "dogen.text.cpp/types/transforms/hash/class_implementation_transform.hpp"
@@ -36,7 +37,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dogen.text.cpp.transforms.hash"));
 
 physical::entities::facet make_facet() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("cpp");
     b.facet("hash");

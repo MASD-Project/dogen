@@ -77,11 +77,11 @@ public:
     /**
      * @brief Returns all of the available helper transforms.
      */
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<std::string,
-                           std::list<
-                               std::shared_ptr<helper_transform>>>>&
+    const std::unordered_map<std::string,
+                             std::unordered_map<
+                                 identification::entities::physical_meta_id,
+                                 std::list<
+                                     std::shared_ptr<helper_transform>>>>&
     helper_formatters() const;
 
 private:

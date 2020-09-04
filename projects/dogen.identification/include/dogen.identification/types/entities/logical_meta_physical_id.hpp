@@ -44,7 +44,7 @@ public:
 public:
     logical_meta_physical_id(
         const dogen::identification::entities::logical_id& logical_id,
-        const dogen::identification::entities::physical_meta_id& physical_id);
+        const dogen::identification::entities::physical_meta_id& physical_meta_id);
 
 public:
     /**
@@ -61,10 +61,10 @@ public:
      * @brief ID of the element in the physical dimension.
      */
     /**@{*/
-    const dogen::identification::entities::physical_meta_id& physical_id() const;
-    dogen::identification::entities::physical_meta_id& physical_id();
-    void physical_id(const dogen::identification::entities::physical_meta_id& v);
-    void physical_id(const dogen::identification::entities::physical_meta_id&& v);
+    const dogen::identification::entities::physical_meta_id& physical_meta_id() const;
+    dogen::identification::entities::physical_meta_id& physical_meta_id();
+    void physical_meta_id(const dogen::identification::entities::physical_meta_id& v);
+    void physical_meta_id(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
 public:
@@ -79,7 +79,7 @@ public:
 
 private:
     dogen::identification::entities::logical_id logical_id_;
-    dogen::identification::entities::physical_meta_id physical_id_;
+    dogen::identification::entities::physical_meta_id physical_meta_id_;
 };
 
 }

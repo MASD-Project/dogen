@@ -68,7 +68,7 @@
         <dia:point val="-50,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.05,52.95;198.05,147.05"/>
+        <dia:rectangle val="-50.05,52.95;202.05,147.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,7 +77,7 @@
         <dia:point val="-50,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="248"/>
+        <dia:real val="252"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="93"/>
@@ -370,7 +370,7 @@
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -411,13 +411,13 @@ std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
     const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
     builder.add(o.name(), ser_fwd_arch);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
 
     const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
     builder.add(o.opaque_associations(), fwd_arch);
 
-    const auto self_arch(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_arch(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_arch);
 
     using hash = transforms::hash::traits;
@@ -1624,7 +1624,7 @@ inline void swap(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -1840,7 +1840,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -1861,7 +1861,7 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
     const logical::entities::element&amp; e) const {
 
     const auto&amp; o(assistant::as&lt;logical::entities::structural::object&gt;(e));
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(o.name(), carch);
 
@@ -2104,7 +2104,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp;&lt;#= ((o.lo
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -2346,7 +2346,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -2576,7 +2576,7 @@ enum class &lt;#= ye.name().simple() #&gt; : &lt;#= ast.get_qualified_name(ye.un
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/module.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -2782,7 +2782,7 @@ namespace &lt;#= m.name().simple() #&gt; {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -3034,7 +3034,7 @@ inline &lt;#= v.name().simple() #&gt;::~&lt;#= v.name().simple() #&gt;()&lt;#= a
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -3693,7 +3693,7 @@ const &lt;#= ast.get_qualified_name(attr.parsed_type()) #&gt;&amp; &lt;#= sn #&g
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -3930,7 +3930,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -4133,7 +4133,7 @@ operator&lt;&lt;(std::ostream&amp; s,
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -4161,7 +4161,7 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
     builder.add(o.opaque_associations(), ch_fn);
 
     const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(class_implementation_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(class_implementation_transform::static_archetype().meta_name().id().value());
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
 
     if (!io_enabled)
@@ -4360,7 +4360,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -4560,7 +4560,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -4821,7 +4821,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= ye.name().s
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -5057,7 +5057,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -5093,7 +5093,7 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
     builder.add(o.parents(), carch);
@@ -5401,7 +5401,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -5629,7 +5629,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -5653,7 +5653,7 @@ std::list&lt;std::string&gt; class_implementation_transform::inclusion_dependenc
     auto builder(f.make());
     builder.add(o.name(), traits::class_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
     builder.add(o.parents(), carch);
@@ -5986,7 +5986,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -6198,7 +6198,7 @@ private:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -6445,7 +6445,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -6468,11 +6468,11 @@ std::list&lt;std::string&gt; class_header_transform::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
 
-    const auto self_fn(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_fn);
 
     return builder.build();
@@ -7623,13 +7623,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
-        <dia:point val="132,184"/>
+        <dia:point val="136,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,183.95;161.425,190.05"/>
+        <dia:rectangle val="135.95,183.95;165.425,190.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="132,184"/>
+        <dia:point val="136,184"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -7891,13 +7891,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="164,184"/>
+        <dia:point val="168,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="163.95,183.95;171.865,187.05"/>
+        <dia:rectangle val="167.95,183.95;175.865,187.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="164,184"/>
+        <dia:point val="168,184"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -8429,13 +8429,13 @@ facet of the C++ technical space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="86,184"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,183.95;120.815,189.05"/>
+        <dia:rectangle val="89.95,183.95;124.815,189.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="86,184"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="34.765000000000001"/>
@@ -8699,14 +8699,14 @@ for a given C++ entity.#</dia:string>
         <dia:point val="99.5882,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.5175,180.429;103.69,184.328"/>
+        <dia:rectangle val="99.5221,180.434;107.591,184.385"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="99.5882,180.5"/>
-        <dia:point val="103.382,184"/>
+        <dia:point val="107.382,184"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -8721,7 +8721,7 @@ for a given C++ entity.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="101.485,182.75"/>
+        <dia:point val="103.485,182.75"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O50" connection="6"/>
@@ -8881,7 +8881,7 @@ for a given C++ entity.#</dia:string>
         <dia:point val="62.9125,159.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.1625,158.45;86.2,184.8"/>
+        <dia:rectangle val="62.1625,158.45;90.2,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8889,8 +8889,8 @@ for a given C++ entity.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="62.9125,159.2"/>
         <dia:point val="62.9125,168"/>
-        <dia:point val="86,168"/>
-        <dia:point val="86,184"/>
+        <dia:point val="90,168"/>
+        <dia:point val="90,184"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9340,16 +9340,16 @@ and those used to generate them.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="135.786,178"/>
+        <dia:point val="147,179"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="135.736,177.95;150.981,180.55"/>
+        <dia:rectangle val="146.95,178.95;162.195,181.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135.786,178"/>
+        <dia:point val="147,179"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.145"/>
@@ -9379,7 +9379,7 @@ registry of all available formatters.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="136.136,179.244"/>
+            <dia:point val="147.35,180.244"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -9393,17 +9393,17 @@ registry of all available formatters.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O58">
       <dia:attribute name="obj_pos">
-        <dia:point val="143.358,180.5"/>
+        <dia:point val="154.572,181.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.287,180.429;147.012,184.312"/>
+        <dia:rectangle val="150.429,181.431;154.641,184.363"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="143.358,180.5"/>
-        <dia:point val="146.688,184"/>
+        <dia:point val="154.572,181.5"/>
+        <dia:point val="150.688,184"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -9418,7 +9418,7 @@ registry of all available formatters.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="145.022,182.75"/>
+        <dia:point val="152.629,183.25"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O57" connection="6"/>
@@ -9464,19 +9464,19 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="161.375,184"/>
+        <dia:point val="165.375,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.625,181.255;168.107,184.8"/>
+        <dia:rectangle val="164.625,181.255;172.107,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="161.375,184"/>
-        <dia:point val="161.375,182"/>
-        <dia:point val="167.907,182"/>
-        <dia:point val="167.907,184"/>
+        <dia:point val="165.375,184"/>
+        <dia:point val="165.375,182"/>
+        <dia:point val="171.907,182"/>
+        <dia:point val="171.907,184"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9536,19 +9536,19 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="120.765,184"/>
+        <dia:point val="124.765,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.015,181.255;132.2,184.8"/>
+        <dia:rectangle val="124.015,181.255;136.2,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="120.765,184"/>
-        <dia:point val="120.765,182"/>
-        <dia:point val="132,182"/>
-        <dia:point val="132,184"/>
+        <dia:point val="124.765,184"/>
+        <dia:point val="124.765,182"/>
+        <dia:point val="136,182"/>
+        <dia:point val="136,184"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9608,17 +9608,17 @@ registry of all available formatters.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="120.765,189"/>
+        <dia:point val="124.765,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.015,188.25;145.362,194.8"/>
+        <dia:rectangle val="124.015,188.25;145.362,194.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="120.765,189"/>
-        <dia:point val="120.765,192"/>
+        <dia:point val="124.765,189"/>
+        <dia:point val="124.765,192"/>
         <dia:point val="145.162,192"/>
         <dia:point val="145.162,194"/>
       </dia:attribute>
@@ -13528,7 +13528,7 @@ main, or from another initialiser.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -13719,7 +13719,7 @@ void serialize(Archive&amp; ar, &lt;#= ast.get_qualified_name(ye.name()) #&gt;&a
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -13792,16 +13792,16 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,193"/>
+        <dia:point val="41,194"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,192.95;95.37,199.85"/>
+        <dia:rectangle val="40.95,193.95;104.305,200.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,193"/>
+        <dia:point val="41,194"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="51.32"/>
+        <dia:real val="63.254999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -13899,7 +13899,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
             <dia:string>#enabled_archetype_for_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;physical::entities::element_archetype&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;identification::entities::logical_meta_physical_id&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13968,7 +13968,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
             <dia:string>#helpers#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;transforms::helper_transform&gt;&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;transforms::helper_transform&gt;&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15071,13 +15071,13 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
         <dia:point val="80,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,85.95;115.97,92.05"/>
+        <dia:rectangle val="79.95,85.95;126.365,92.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="80,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.920000000000002"/>
+        <dia:real val="46.314999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -15198,7 +15198,7 @@ void enum_header_transform::apply(const context&amp; ctx, const logical::entitie
             <dia:string>#artefact_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::artefact_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, formattables::artefact_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15853,7 +15853,7 @@ and element.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -16025,7 +16025,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -16198,7 +16198,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -16370,7 +16370,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -16542,7 +16542,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -16714,7 +16714,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -16985,7 +16985,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="109,79.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.25,78.65;116.12,86.8"/>
+        <dia:rectangle val="108.25,78.65;126.515,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16993,8 +16993,8 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
       <dia:attribute name="orth_points">
         <dia:point val="109,79.4"/>
         <dia:point val="109,84"/>
-        <dia:point val="115.92,84"/>
-        <dia:point val="115.92,86"/>
+        <dia:point val="126.315,84"/>
+        <dia:point val="126.315,86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -17126,17 +17126,17 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="115.92,92"/>
+        <dia:point val="126.315,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.17,91.25;137.535,115.8"/>
+        <dia:rectangle val="125.565,91.25;137.535,115.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="115.92,92"/>
-        <dia:point val="115.92,96"/>
+        <dia:point val="126.315,92"/>
+        <dia:point val="126.315,96"/>
         <dia:point val="137.335,96"/>
         <dia:point val="137.335,115"/>
       </dia:attribute>
@@ -17198,17 +17198,17 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="97.96,92"/>
+        <dia:point val="103.157,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.3275,91.25;98.71,98.8"/>
+        <dia:rectangle val="91.3275,91.25;103.907,98.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="97.96,92"/>
-        <dia:point val="97.96,96"/>
+        <dia:point val="103.157,92"/>
+        <dia:point val="103.157,96"/>
         <dia:point val="91.3775,96"/>
         <dia:point val="91.3775,98"/>
       </dia:attribute>
@@ -19588,16 +19588,16 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O124">
       <dia:attribute name="obj_pos">
-        <dia:point val="148,75"/>
+        <dia:point val="149,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="147.95,74.95;183.2,83.45"/>
+        <dia:rectangle val="148.95,74.95;193.055,83.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="148,75"/>
+        <dia:point val="149,75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="44.005000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -19764,7 +19764,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
             <dia:string>#facet_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::facet_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, formattables::facet_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19920,17 +19920,17 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="148,75"/>
+        <dia:point val="149,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.788,70.8027;148.75,75.8"/>
+        <dia:rectangle val="119.788,70.8027;149.75,75.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="148,75"/>
-        <dia:point val="148,71.5477"/>
+        <dia:point val="149,75"/>
+        <dia:point val="149,71.5477"/>
         <dia:point val="119.838,71.5477"/>
         <dia:point val="119.838,75"/>
       </dia:attribute>
@@ -20139,7 +20139,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="43.065,141.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.315,83.35;148.2,144.055"/>
+        <dia:rectangle val="42.315,83.35;149.2,144.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20147,8 +20147,8 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
       <dia:attribute name="orth_points">
         <dia:point val="43.065,141.4"/>
         <dia:point val="43.065,144"/>
-        <dia:point val="148,144"/>
-        <dia:point val="148,83.4"/>
+        <dia:point val="149,144"/>
+        <dia:point val="149,83.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20208,19 +20208,19 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="86,189"/>
+        <dia:point val="90,189"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.61,188.25;86.75,193.8"/>
+        <dia:rectangle val="72.5775,188.25;90.75,194.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="86,189"/>
-        <dia:point val="86,191"/>
-        <dia:point val="69.66,191"/>
-        <dia:point val="69.66,193"/>
+        <dia:point val="90,189"/>
+        <dia:point val="90,191"/>
+        <dia:point val="72.6275,191"/>
+        <dia:point val="72.6275,194"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20618,7 +20618,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="161.335,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.585,83.35;165.775,87.8"/>
+        <dia:rectangle val="160.585,83.35;171.202,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20626,8 +20626,8 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
       <dia:attribute name="orth_points">
         <dia:point val="161.335,87"/>
         <dia:point val="161.335,85"/>
-        <dia:point val="165.575,85"/>
-        <dia:point val="165.575,83.4"/>
+        <dia:point val="171.002,85"/>
+        <dia:point val="171.002,83.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20898,7 +20898,7 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:point val="155.955,69.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.205,68.65;165.775,75.8"/>
+        <dia:rectangle val="155.205,68.65;171.202,75.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20906,8 +20906,8 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
       <dia:attribute name="orth_points">
         <dia:point val="155.955,69.4"/>
         <dia:point val="155.955,71.5477"/>
-        <dia:point val="165.575,71.5477"/>
-        <dia:point val="165.575,75"/>
+        <dia:point val="171.002,71.5477"/>
+        <dia:point val="171.002,75"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21724,17 +21724,17 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="183.15,75"/>
+        <dia:point val="193.005,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="179.515,69.35;183.9,75.8"/>
+        <dia:rectangle val="179.515,69.35;193.755,75.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="183.15,75"/>
-        <dia:point val="183.15,71.5477"/>
+        <dia:point val="193.005,75"/>
+        <dia:point val="193.005,71.5477"/>
         <dia:point val="179.565,71.5477"/>
         <dia:point val="179.565,69.4"/>
       </dia:attribute>
@@ -23107,17 +23107,17 @@ void builtin_header_transform::apply(const context&amp; ctx, const logical::enti
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="183.15,83.4"/>
+        <dia:point val="193.005,83.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="177.628,82.65;183.9,87.8"/>
+        <dia:rectangle val="177.628,82.65;193.755,87.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="183.15,83.4"/>
-        <dia:point val="183.15,85"/>
+        <dia:point val="193.005,83.4"/>
+        <dia:point val="193.005,85"/>
         <dia:point val="177.678,85"/>
         <dia:point val="177.678,87"/>
       </dia:attribute>
@@ -28447,7 +28447,7 @@ not a regular" helper.#</dia:string>
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -28476,7 +28476,7 @@ std::list&lt;std::string&gt; primitive_header_transform::inclusion_dependencies(
     const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
     builder.add(p.name(), ser_fwd_arch);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -28820,7 +28820,7 @@ inline void swap(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -29031,7 +29031,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -29233,7 +29233,7 @@ operator&lt;&lt;(std::ostream&amp; s, const &lt;#= qn #&gt;&amp; v);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -29465,7 +29465,7 @@ void primitive_header_transform::apply(const context&amp; ctx, const logical::en
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -29681,7 +29681,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -29890,7 +29890,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -30189,7 +30189,7 @@ void &lt;#= sn #&gt;::swap(&lt;#= sn #&gt;&amp; other)&lt;#= ast.make_noexcept_k
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -30212,7 +30212,7 @@ primitive_implementation_transform::inclusion_dependencies(
 
     using logical::entities::structural::primitive;
     const auto&amp; p(assistant::as&lt;primitive&gt;(e));
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(p.name(), carch);
 
@@ -30424,7 +30424,7 @@ std::size_t &lt;#= sn #&gt;_hasher::hash(const &lt;#= sn #&gt;&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -30453,7 +30453,7 @@ primitive_implementation_transform::inclusion_dependencies(
     builder.add(p.name(), ph_fn);
 
     const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().id().value());
     const bool io_enabled(builder.is_enabled(p.name(), self_fn));
 
     if (!io_enabled)
@@ -30661,7 +30661,7 @@ std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const &lt;#= sn #&gt;&am
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -30685,7 +30685,7 @@ std::list&lt;std::string&gt; primitive_implementation_transform::inclusion_depen
     auto builder(f.make());
     builder.add(p.name(), traits::primitive_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -30945,7 +30945,7 @@ populate(const unsigned int position, result_type&amp; v) {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -30983,7 +30983,7 @@ primitive_implementation_transform::inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -32170,13 +32170,13 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O222">
       <dia:attribute name="obj_pos">
-        <dia:point val="187,75"/>
+        <dia:point val="192,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="186.95,74.95;195.635,81.05"/>
+        <dia:rectangle val="191.95,86.95;200.635,93.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="187,75"/>
+        <dia:point val="192,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -32372,79 +32372,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O223">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="183.15,77.7"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="182.4,75.355;187.05,78.555"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="183.15,77.7"/>
-        <dia:point val="185,77.7"/>
-        <dia:point val="185,76.1"/>
-        <dia:point val="187,76.1"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:connections>
-        <dia:connection handle="0" to="O124" connection="11"/>
-        <dia:connection handle="1" to="O222" connection="3"/>
-      </dia:connections>
-      <dia:childnode parent="O0"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O224">
+    <dia:object type="UML - Class" version="0" id="O223">
       <dia:attribute name="obj_pos">
         <dia:point val="17,126"/>
       </dia:attribute>
@@ -32604,7 +32532,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O225">
+    <dia:object type="UML - Association" version="2" id="O224">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -32672,11 +32600,11 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O109" connection="5"/>
-        <dia:connection handle="1" to="O224" connection="4"/>
+        <dia:connection handle="1" to="O223" connection="4"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O226">
+    <dia:object type="UML - Class" version="0" id="O225">
       <dia:attribute name="obj_pos">
         <dia:point val="-7,126"/>
       </dia:attribute>
@@ -32836,15 +32764,15 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O227">
+    <dia:object type="UML - Class" version="0" id="O226">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,82"/>
+        <dia:point val="130,86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,81.95;132.945,85.65"/>
+        <dia:rectangle val="129.95,85.95;140.945,89.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,82"/>
+        <dia:point val="130,86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.895"/>
@@ -32994,7 +32922,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O228">
+    <dia:object type="UML - Association" version="2" id="O227">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -33032,19 +32960,19 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="115.92,86.7"/>
+        <dia:point val="126.315,86.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.17,81.955;122.05,87.555"/>
+        <dia:rectangle val="125.565,85.95;130.05,87.555"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="115.92,86.7"/>
-        <dia:point val="120,86.7"/>
-        <dia:point val="120,82.7"/>
-        <dia:point val="122,82.7"/>
+        <dia:point val="126.315,86.7"/>
+        <dia:point val="129,86.7"/>
+        <dia:point val="129,86.7"/>
+        <dia:point val="130,86.7"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -33062,11 +32990,11 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O90" connection="4"/>
-        <dia:connection handle="1" to="O227" connection="3"/>
+        <dia:connection handle="1" to="O226" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O229">
+    <dia:object type="UML - Class" version="0" id="O228">
       <dia:attribute name="obj_pos">
         <dia:point val="65,126"/>
       </dia:attribute>
@@ -33226,7 +33154,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O230">
+    <dia:object type="UML - Association" version="2" id="O229">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -33294,19 +33222,19 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O109" connection="7"/>
-        <dia:connection handle="1" to="O229" connection="3"/>
+        <dia:connection handle="1" to="O228" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O231">
+    <dia:object type="UML - Class" version="0" id="O230">
       <dia:attribute name="obj_pos">
-        <dia:point val="81,201"/>
+        <dia:point val="94,202"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.95,200.95;114.275,205.45"/>
+        <dia:rectangle val="93.95,201.95;127.275,206.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="81,201"/>
+        <dia:point val="94,202"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="33.225000000000001"/>
@@ -33475,7 +33403,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O232">
+    <dia:object type="UML - Association" version="2" id="O231">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -33513,19 +33441,19 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="103.382,189.05"/>
+        <dia:point val="107.382,189.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.5625,188.3;104.132,201.8"/>
+        <dia:rectangle val="106.632,188.3;110.812,202.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="103.382,189.05"/>
-        <dia:point val="103.382,191"/>
-        <dia:point val="97.6125,191"/>
-        <dia:point val="97.6125,201"/>
+        <dia:point val="107.382,189.05"/>
+        <dia:point val="107.382,191"/>
+        <dia:point val="110.612,191"/>
+        <dia:point val="110.612,202"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33543,11 +33471,11 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O49" connection="14"/>
-        <dia:connection handle="1" to="O231" connection="1"/>
+        <dia:connection handle="1" to="O230" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O233">
+    <dia:object type="UML - Association" version="2" id="O232">
       <dia:attribute name="name">
         <dia:string>#creates &gt;#</dia:string>
       </dia:attribute>
@@ -33585,17 +33513,17 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="97.6125,205.4"/>
+        <dia:point val="110.612,206.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.8625,199.95;145.362,208.055"/>
+        <dia:rectangle val="109.862,199.95;145.362,208.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="97.6125,205.4"/>
-        <dia:point val="97.6125,208"/>
+        <dia:point val="110.612,206.4"/>
+        <dia:point val="110.612,208"/>
         <dia:point val="145.162,208"/>
         <dia:point val="145.162,200"/>
       </dia:attribute>
@@ -33614,12 +33542,12 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O231" connection="6"/>
+        <dia:connection handle="0" to="O230" connection="6"/>
         <dia:connection handle="1" to="O48" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O234">
+    <dia:object type="UML - LargePackage" version="0" id="O233">
       <dia:attribute name="obj_pos">
         <dia:point val="18,375"/>
       </dia:attribute>
@@ -33658,7 +33586,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O235">
+    <dia:object type="UML - Note" version="0" id="O234">
       <dia:attribute name="obj_pos">
         <dia:point val="20,377"/>
       </dia:attribute>
@@ -33711,9 +33639,9 @@ code.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O236">
+    <dia:object type="UML - Class" version="0" id="O235">
       <dia:attribute name="obj_pos">
         <dia:point val="44,377"/>
       </dia:attribute>
@@ -33853,9 +33781,9 @@ code.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O237">
+    <dia:object type="UML - Class" version="0" id="O236">
       <dia:attribute name="obj_pos">
         <dia:point val="59,377"/>
       </dia:attribute>
@@ -33964,9 +33892,9 @@ code.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O238">
+    <dia:object type="UML - Class" version="0" id="O237">
       <dia:attribute name="obj_pos">
         <dia:point val="20,383"/>
       </dia:attribute>
@@ -34097,7 +34025,7 @@ code.
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #&gt;
@@ -34656,9 +34584,9 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O239">
+    <dia:object type="UML - Association" version="2" id="O238">
       <dia:attribute name="name">
         <dia:string>#updates the inclusion dependencies of &gt;#</dia:string>
       </dia:attribute>
@@ -34730,7 +34658,7 @@ BOOST_AUTO_TEST_SUITE_END()
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O240">
+    <dia:object type="UML - Association" version="2" id="O239">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -34802,7 +34730,7 @@ BOOST_AUTO_TEST_SUITE_END()
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O241">
+    <dia:object type="UML - Class" version="0" id="O240">
       <dia:attribute name="obj_pos">
         <dia:point val="52,383"/>
       </dia:attribute>
@@ -34934,7 +34862,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -35255,9 +35183,9 @@ BOOST_AUTO_TEST_SUITE_END()
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O242">
+    <dia:object type="UML - Class" version="0" id="O241">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,336"/>
       </dia:attribute>
@@ -35388,7 +35316,7 @@ BOOST_AUTO_TEST_SUITE_END()
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -35559,7 +35487,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O243">
+    <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,336"/>
       </dia:attribute>
@@ -35691,7 +35619,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -35900,7 +35828,7 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O244">
+    <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,346"/>
       </dia:attribute>
@@ -36028,7 +35956,7 @@ std::list&lt;dogen::variability::entities::feature_template&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -36111,7 +36039,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O245">
+    <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,346"/>
       </dia:attribute>
@@ -36241,7 +36169,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -36339,7 +36267,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O246">
+    <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
         <dia:point val="-8,154"/>
       </dia:attribute>
@@ -36449,7 +36377,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O247">
+    <dia:object type="UML - Class" version="0" id="O246">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,183"/>
       </dia:attribute>
@@ -37062,7 +36990,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O248">
+    <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,203"/>
       </dia:attribute>
@@ -37221,7 +37149,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O249">
+    <dia:object type="UML - LargePackage" version="0" id="O248">
       <dia:attribute name="obj_pos">
         <dia:point val="88,375"/>
       </dia:attribute>
@@ -37260,7 +37188,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O250">
+    <dia:object type="UML - Note" version="0" id="O249">
       <dia:attribute name="obj_pos">
         <dia:point val="90,377"/>
       </dia:attribute>
@@ -37313,9 +37241,9 @@ string.
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O249"/>
+      <dia:childnode parent="O248"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O251">
+    <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
         <dia:point val="116,377"/>
       </dia:attribute>
@@ -37424,9 +37352,9 @@ string.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O249"/>
+      <dia:childnode parent="O248"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O252">
+    <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
         <dia:point val="133,377"/>
       </dia:attribute>
@@ -37535,9 +37463,9 @@ string.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O249"/>
+      <dia:childnode parent="O248"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O253">
+    <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
         <dia:point val="90,383"/>
       </dia:attribute>
@@ -37663,7 +37591,7 @@ string.
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -37788,9 +37716,9 @@ inline &lt;#= qn #&gt; lexical_cast(const std::string &amp; s) {
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O249"/>
+      <dia:childnode parent="O248"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O254">
+    <dia:object type="UML - Class" version="0" id="O253">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,154"/>
       </dia:attribute>
@@ -37947,7 +37875,7 @@ public:
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O255">
+    <dia:object type="UML - Class" version="0" id="O254">
       <dia:attribute name="obj_pos">
         <dia:point val="-29,154"/>
       </dia:attribute>
@@ -38088,7 +38016,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator&amp; /*l*/, const logical::entities::name&amp; n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) &lt;&lt; not_supported &lt;&lt; n.qualified().dot();
@@ -38097,7 +38025,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -38117,7 +38045,7 @@ boost::filesystem::path {{class.simple_name}}::full_path(
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O256">
+    <dia:object type="UML - Class" version="0" id="O255">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,159"/>
       </dia:attribute>
@@ -38256,12 +38184,12 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -38281,7 +38209,7 @@ boost::filesystem::path {{class.simple_name}}::full_path(
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O257">
+    <dia:object type="UML - Class" version="0" id="O256">
       <dia:attribute name="obj_pos">
         <dia:point val="-24,159"/>
       </dia:attribute>
@@ -38427,7 +38355,7 @@ public:
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O258">
+    <dia:object type="UML - Class" version="0" id="O257">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,164"/>
       </dia:attribute>
@@ -38601,7 +38529,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; a,
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O259">
+    <dia:object type="UML - Class" version="0" id="O258">
       <dia:attribute name="obj_pos">
         <dia:point val="-28,164"/>
       </dia:attribute>
@@ -38773,7 +38701,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O260">
+    <dia:object type="UML - LargePackage" version="0" id="O259">
       <dia:attribute name="obj_pos">
         <dia:point val="88,241"/>
       </dia:attribute>
@@ -38812,7 +38740,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O261">
+    <dia:object type="UML - Note" version="0" id="O260">
       <dia:attribute name="obj_pos">
         <dia:point val="90,243"/>
       </dia:attribute>
@@ -38864,9 +38792,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O260"/>
+      <dia:childnode parent="O259"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O262">
+    <dia:object type="UML - Class" version="0" id="O261">
       <dia:attribute name="obj_pos">
         <dia:point val="110,243"/>
       </dia:attribute>
@@ -38975,9 +38903,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O260"/>
+      <dia:childnode parent="O259"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O263">
+    <dia:object type="UML - Class" version="0" id="O262">
       <dia:attribute name="obj_pos">
         <dia:point val="126,243"/>
       </dia:attribute>
@@ -39086,9 +39014,9 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O260"/>
+      <dia:childnode parent="O259"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O264">
+    <dia:object type="UML - Class" version="0" id="O263">
       <dia:attribute name="obj_pos">
         <dia:point val="90,248"/>
       </dia:attribute>
@@ -39224,7 +39152,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/templating/logic_less_template.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #&gt;
@@ -39273,9 +39201,9 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O260"/>
+      <dia:childnode parent="O259"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O265">
+    <dia:object type="UML - Class" version="0" id="O264">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,311"/>
       </dia:attribute>
@@ -39406,7 +39334,7 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -39471,7 +39399,7 @@ class &lt;#= o.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O266">
+    <dia:object type="UML - Class" version="0" id="O265">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,321"/>
       </dia:attribute>
@@ -39602,7 +39530,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -39667,7 +39595,7 @@ class &lt;#= o.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O267">
+    <dia:object type="UML - Class" version="0" id="O266">
       <dia:attribute name="obj_pos">
         <dia:point val="90,322"/>
       </dia:attribute>
@@ -39799,7 +39727,7 @@ class &lt;#= o.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -39873,7 +39801,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O268">
+    <dia:object type="UML - Class" version="0" id="O267">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,331"/>
       </dia:attribute>
@@ -40004,7 +39932,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -40069,7 +39997,7 @@ class &lt;#= p.name().simple() #&gt;;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O269">
+    <dia:object type="UML - Class" version="0" id="O268">
       <dia:attribute name="obj_pos">
         <dia:point val="90,332"/>
       </dia:attribute>
@@ -40199,7 +40127,7 @@ class &lt;#= p.name().simple() #&gt;;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -40275,7 +40203,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O270">
+    <dia:object type="UML - Class" version="0" id="O269">
       <dia:attribute name="obj_pos">
         <dia:point val="90,337"/>
       </dia:attribute>
@@ -40403,7 +40331,7 @@ void load(Archive&amp; ar, &lt;#= qn #&gt;&amp; v, unsigned int version);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -40476,7 +40404,7 @@ static void register_types(Archive&amp; ar);
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O271">
+    <dia:object type="UML - Class" version="0" id="O270">
       <dia:attribute name="obj_pos">
         <dia:point val="124,337"/>
       </dia:attribute>
@@ -40606,7 +40534,7 @@ static void register_types(Archive&amp; ar);
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
@@ -40647,7 +40575,7 @@ inclusion_dependencies(
     const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(rg.leaves(), ch_fn);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(rg.registrar_dependencies(), carch);
     return builder.build();
 }
@@ -40666,7 +40594,7 @@ void type_registrar_implementation_transform::apply(const context&amp; ctx, cons
             const auto ns(ast.make_namespaces(rg.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto deps(rg.registrar_dependencies());
-            const auto carch(traits::canonical_archetype());
+            const identification::entities::physical_meta_id carch(traits::canonical_archetype());
             const auto leaves(ast.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
@@ -40737,7 +40665,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       <dia:attribute name="templates"/>
       <dia:childnode parent="O21"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O272">
+    <dia:object type="UML - Class" version="0" id="O271">
       <dia:attribute name="obj_pos">
         <dia:point val="-5,164"/>
       </dia:attribute>
@@ -40847,7 +40775,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O273">
+    <dia:object type="UML - LargePackage" version="0" id="O272">
       <dia:attribute name="obj_pos">
         <dia:point val="88,351"/>
       </dia:attribute>
@@ -40886,7 +40814,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O274">
+    <dia:object type="UML - Note" version="0" id="O273">
       <dia:attribute name="obj_pos">
         <dia:point val="90,353"/>
       </dia:attribute>
@@ -40938,9 +40866,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O275">
+    <dia:object type="UML - Class" version="0" id="O274">
       <dia:attribute name="obj_pos">
         <dia:point val="113,353"/>
       </dia:attribute>
@@ -41049,9 +40977,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O276">
+    <dia:object type="UML - Class" version="0" id="O275">
       <dia:attribute name="obj_pos">
         <dia:point val="131,353"/>
       </dia:attribute>
@@ -41160,9 +41088,9 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O277">
+    <dia:object type="UML - Class" version="0" id="O276">
       <dia:attribute name="obj_pos">
         <dia:point val="122,358"/>
       </dia:attribute>
@@ -41300,7 +41228,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/traits.hpp" #&gt;
@@ -41396,9 +41324,9 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O278">
+    <dia:object type="UML - Class" version="0" id="O277">
       <dia:attribute name="obj_pos">
         <dia:point val="90,358"/>
       </dia:attribute>
@@ -41536,7 +41464,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/traits.hpp" #&gt;
@@ -41617,9 +41545,9 @@ EndGlobal
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O279">
+    <dia:object type="UML - Class" version="0" id="O278">
       <dia:attribute name="obj_pos">
         <dia:point val="20,388"/>
       </dia:attribute>
@@ -41749,7 +41677,7 @@ EndGlobal
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -41843,9 +41771,9 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O280">
+    <dia:object type="UML - Class" version="0" id="O279">
       <dia:attribute name="obj_pos">
         <dia:point val="20,362"/>
       </dia:attribute>
@@ -41982,7 +41910,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -42072,7 +42000,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O281">
+    <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
         <dia:point val="50,362"/>
       </dia:attribute>
@@ -42209,7 +42137,7 @@ void object_odb_options_transform::apply(const context&amp; ctx, const logical::
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -42299,7 +42227,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O282">
+    <dia:object type="UML - Class" version="0" id="O281">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,351"/>
       </dia:attribute>
@@ -42429,7 +42357,7 @@ void primitive_odb_options_transform::apply(const context&amp; ctx, const logica
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -42497,7 +42425,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O283">
+    <dia:object type="UML - Class" version="0" id="O282">
       <dia:attribute name="obj_pos">
         <dia:point val="20,164"/>
       </dia:attribute>
@@ -42607,7 +42535,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O284">
+    <dia:object type="UML - Class" version="0" id="O283">
       <dia:attribute name="obj_pos">
         <dia:point val="20,367"/>
       </dia:attribute>
@@ -42744,7 +42672,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/orm/common_odb_options.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -42857,7 +42785,7 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
       <dia:attribute name="templates"/>
       <dia:childnode parent="O29"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O285">
+    <dia:object type="UML - Class" version="0" id="O284">
       <dia:attribute name="obj_pos">
         <dia:point val="90,363"/>
       </dia:attribute>
@@ -42992,7 +42920,7 @@ void common_odb_options_transform::apply(const context&amp; ctx, const logical::
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/make_shared.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/msbuild_targets.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -43106,9 +43034,9 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O273"/>
+      <dia:childnode parent="O272"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O286">
+    <dia:object type="UML - LargePackage" version="0" id="O285">
       <dia:attribute name="obj_pos">
         <dia:point val="18,282"/>
       </dia:attribute>
@@ -43147,7 +43075,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
       </dia:attribute>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O287">
+    <dia:object type="UML - Class" version="0" id="O286">
       <dia:attribute name="obj_pos">
         <dia:point val="52,289"/>
       </dia:attribute>
@@ -43284,7 +43212,7 @@ void msbuild_targets_transform::apply(const context&amp; ctx, const logical::ent
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -43422,9 +43350,9 @@ endif()
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O286"/>
+      <dia:childnode parent="O285"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O288">
+    <dia:object type="UML - Class" version="0" id="O287">
       <dia:attribute name="obj_pos">
         <dia:point val="20,289"/>
       </dia:attribute>
@@ -43561,7 +43489,7 @@ endif()
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/case_conv.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -43634,9 +43562,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O286"/>
+      <dia:childnode parent="O285"/>
     </dia:object>
-    <dia:object type="UML - Note" version="0" id="O289">
+    <dia:object type="UML - Note" version="0" id="O288">
       <dia:attribute name="obj_pos">
         <dia:point val="20,284"/>
       </dia:attribute>
@@ -43688,9 +43616,9 @@ install(
           </dia:attribute>
         </dia:composite>
       </dia:attribute>
-      <dia:childnode parent="O286"/>
+      <dia:childnode parent="O285"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O290">
+    <dia:object type="UML - Class" version="0" id="O289">
       <dia:attribute name="obj_pos">
         <dia:point val="39,284"/>
       </dia:attribute>
@@ -43799,9 +43727,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O286"/>
+      <dia:childnode parent="O285"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O291">
+    <dia:object type="UML - Class" version="0" id="O290">
       <dia:attribute name="obj_pos">
         <dia:point val="55,284"/>
       </dia:attribute>
@@ -43910,9 +43838,9 @@ install(
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O286"/>
+      <dia:childnode parent="O285"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O292">
+    <dia:object type="UML - Class" version="0" id="O291">
       <dia:attribute name="obj_pos">
         <dia:point val="52,388"/>
       </dia:attribute>
@@ -44052,7 +43980,7 @@ install(
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -44173,9 +44101,9 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O234"/>
+      <dia:childnode parent="O233"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O293">
+    <dia:object type="UML - Class" version="0" id="O292">
       <dia:attribute name="obj_pos">
         <dia:point val="-5,159"/>
       </dia:attribute>
@@ -44285,7 +44213,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
       </dia:attribute>
       <dia:attribute name="templates"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O294">
+    <dia:object type="UML - Class" version="0" id="O293">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,341"/>
       </dia:attribute>
@@ -44416,7 +44344,7 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -44587,7 +44515,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O295">
+    <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,341"/>
       </dia:attribute>
@@ -44719,7 +44647,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -44925,7 +44853,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O296">
+    <dia:object type="UML - Class" version="0" id="O295">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,249"/>
       </dia:attribute>
@@ -45055,7 +44983,7 @@ std::list&lt;dogen::variability::entities::feature&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -45183,7 +45111,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O297">
+    <dia:object type="UML - Class" version="0" id="O296">
       <dia:attribute name="obj_pos">
         <dia:point val="-14,183"/>
       </dia:attribute>
@@ -45410,7 +45338,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O298">
+    <dia:object type="UML - Class" version="0" id="O297">
       <dia:attribute name="obj_pos">
         <dia:point val="-14,191"/>
       </dia:attribute>
@@ -45545,7 +45473,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O299">
+    <dia:object type="UML - Class" version="0" id="O298">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,249"/>
       </dia:attribute>
@@ -45676,7 +45604,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -45725,7 +45653,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O300">
+    <dia:object type="UML - Class" version="0" id="O299">
       <dia:attribute name="obj_pos">
         <dia:point val="-14,175"/>
       </dia:attribute>
@@ -45929,7 +45857,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O301">
+    <dia:object type="UML - Class" version="0" id="O300">
       <dia:attribute name="obj_pos">
         <dia:point val="9,183"/>
       </dia:attribute>
@@ -46133,7 +46061,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O302">
+    <dia:object type="UML - Class" version="0" id="O301">
       <dia:attribute name="obj_pos">
         <dia:point val="9,194"/>
       </dia:attribute>
@@ -46244,7 +46172,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O303">
+    <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
         <dia:point val="-18,208"/>
       </dia:attribute>
@@ -46428,7 +46356,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O304">
+    <dia:object type="UML - Generalization" version="1" id="O303">
       <dia:attribute name="obj_pos">
         <dia:point val="16.0075,197"/>
       </dia:attribute>
@@ -46465,12 +46393,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O302" connection="6"/>
-        <dia:connection handle="1" to="O303" connection="1"/>
+        <dia:connection handle="0" to="O301" connection="6"/>
+        <dia:connection handle="1" to="O302" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O305">
+    <dia:object type="UML - Class" version="0" id="O304">
       <dia:attribute name="obj_pos">
         <dia:point val="23,208"/>
       </dia:attribute>
@@ -46677,7 +46605,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O306">
+    <dia:object type="UML - Generalization" version="1" id="O305">
       <dia:attribute name="obj_pos">
         <dia:point val="16.0075,197"/>
       </dia:attribute>
@@ -46714,12 +46642,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O302" connection="6"/>
-        <dia:connection handle="1" to="O305" connection="1"/>
+        <dia:connection handle="0" to="O301" connection="6"/>
+        <dia:connection handle="1" to="O304" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O307">
+    <dia:object type="UML - Class" version="0" id="O306">
       <dia:attribute name="obj_pos">
         <dia:point val="3,200"/>
       </dia:attribute>
@@ -46926,7 +46854,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O308">
+    <dia:object type="UML - Generalization" version="1" id="O307">
       <dia:attribute name="obj_pos">
         <dia:point val="16.0075,197"/>
       </dia:attribute>
@@ -46963,12 +46891,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O302" connection="6"/>
-        <dia:connection handle="1" to="O307" connection="16"/>
+        <dia:connection handle="0" to="O301" connection="6"/>
+        <dia:connection handle="1" to="O306" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O309">
+    <dia:object type="UML - Class" version="0" id="O308">
       <dia:attribute name="obj_pos">
         <dia:point val="-32,223"/>
       </dia:attribute>
@@ -47175,7 +47103,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O310">
+    <dia:object type="UML - Generalization" version="1" id="O309">
       <dia:attribute name="obj_pos">
         <dia:point val="-6.6225,220.4"/>
       </dia:attribute>
@@ -47212,12 +47140,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O334" connection="6"/>
-        <dia:connection handle="1" to="O309" connection="1"/>
+        <dia:connection handle="0" to="O333" connection="6"/>
+        <dia:connection handle="1" to="O308" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O311">
+    <dia:object type="UML - Class" version="0" id="O310">
       <dia:attribute name="obj_pos">
         <dia:point val="-1,223"/>
       </dia:attribute>
@@ -47424,7 +47352,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O312">
+    <dia:object type="UML - Generalization" version="1" id="O311">
       <dia:attribute name="obj_pos">
         <dia:point val="-6.6225,220.4"/>
       </dia:attribute>
@@ -47461,12 +47389,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O334" connection="6"/>
-        <dia:connection handle="1" to="O311" connection="1"/>
+        <dia:connection handle="0" to="O333" connection="6"/>
+        <dia:connection handle="1" to="O310" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O313">
+    <dia:object type="UML - Class" version="0" id="O312">
       <dia:attribute name="obj_pos">
         <dia:point val="32,218"/>
       </dia:attribute>
@@ -47671,7 +47599,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O314">
+    <dia:object type="UML - Generalization" version="1" id="O313">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,214.05"/>
       </dia:attribute>
@@ -47708,12 +47636,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O305" connection="16"/>
-        <dia:connection handle="1" to="O313" connection="16"/>
+        <dia:connection handle="0" to="O304" connection="16"/>
+        <dia:connection handle="1" to="O312" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O315">
+    <dia:object type="UML - Class" version="0" id="O314">
       <dia:attribute name="obj_pos">
         <dia:point val="-17,230"/>
       </dia:attribute>
@@ -47920,7 +47848,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O316">
+    <dia:object type="UML - Generalization" version="1" id="O315">
       <dia:attribute name="obj_pos">
         <dia:point val="-6.6225,220.4"/>
       </dia:attribute>
@@ -47957,12 +47885,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O334" connection="6"/>
-        <dia:connection handle="1" to="O315" connection="16"/>
+        <dia:connection handle="0" to="O333" connection="6"/>
+        <dia:connection handle="1" to="O314" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O317">
+    <dia:object type="UML - Class" version="0" id="O316">
       <dia:attribute name="obj_pos">
         <dia:point val="-48,230"/>
       </dia:attribute>
@@ -48169,7 +48097,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O318">
+    <dia:object type="UML - Generalization" version="1" id="O317">
       <dia:attribute name="obj_pos">
         <dia:point val="-6.6225,220.4"/>
       </dia:attribute>
@@ -48206,12 +48134,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O334" connection="6"/>
-        <dia:connection handle="1" to="O317" connection="16"/>
+        <dia:connection handle="0" to="O333" connection="6"/>
+        <dia:connection handle="1" to="O316" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O319">
+    <dia:object type="UML - Class" version="0" id="O318">
       <dia:attribute name="obj_pos">
         <dia:point val="16,230"/>
       </dia:attribute>
@@ -48416,7 +48344,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O320">
+    <dia:object type="UML - Generalization" version="1" id="O319">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,214"/>
       </dia:attribute>
@@ -48453,12 +48381,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O305" connection="6"/>
-        <dia:connection handle="1" to="O319" connection="1"/>
+        <dia:connection handle="0" to="O304" connection="6"/>
+        <dia:connection handle="1" to="O318" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O321">
+    <dia:object type="UML - Class" version="0" id="O320">
       <dia:attribute name="obj_pos">
         <dia:point val="9,175"/>
       </dia:attribute>
@@ -48662,7 +48590,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O322">
+    <dia:object type="UML - Class" version="0" id="O321">
       <dia:attribute name="obj_pos">
         <dia:point val="47,225"/>
       </dia:attribute>
@@ -48867,7 +48795,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O323">
+    <dia:object type="UML - Generalization" version="1" id="O322">
       <dia:attribute name="obj_pos">
         <dia:point val="38.265,214"/>
       </dia:attribute>
@@ -48904,12 +48832,12 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O305" connection="6"/>
-        <dia:connection handle="1" to="O322" connection="1"/>
+        <dia:connection handle="0" to="O304" connection="6"/>
+        <dia:connection handle="1" to="O321" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O324">
+    <dia:object type="UML - Class" version="0" id="O323">
       <dia:attribute name="obj_pos">
         <dia:point val="32,175"/>
       </dia:attribute>
@@ -49113,7 +49041,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O325">
+    <dia:object type="UML - Class" version="0" id="O324">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,259"/>
       </dia:attribute>
@@ -49244,7 +49172,7 @@ void archetype_class_implementation_transform_transform::apply(const context&amp
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -49331,7 +49259,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O326">
+    <dia:object type="UML - Class" version="0" id="O325">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,259"/>
       </dia:attribute>
@@ -49467,7 +49395,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -49487,7 +49415,8 @@ std::list&lt;std::string&gt; facet_class_implementation_transform_transform::inc
     const auto ch_arch(traits::canonical_archetype());
     builder.add(fct.name(), ch_arch);
     builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -49516,7 +49445,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("&lt;#= fct.name().qualified().dot() #&gt;"));
 
 physical::entities::facet make_facet() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= fct.meta_model_name() #&gt;");
     b.backend("&lt;#= fct.backend_name() #&gt;");
     b.facet("&lt;#= fct.name().simple() #&gt;");
@@ -49566,7 +49495,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O327">
+    <dia:object type="UML - Class" version="0" id="O326">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,269"/>
       </dia:attribute>
@@ -49694,7 +49623,7 @@ const physical::entities::facet&amp; &lt;#= sn #&gt;::facet() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -49781,7 +49710,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O328">
+    <dia:object type="UML - Class" version="0" id="O327">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,269"/>
       </dia:attribute>
@@ -49912,7 +49841,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -49933,7 +49862,8 @@ std::list&lt;std::string&gt; backend_class_implementation_transform_transform::i
 
     builder.add(be.name(), ch_arch);
     builder.add(be.facets(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -49962,7 +49892,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("&lt;#= be.name().qualified().dot() #&gt;"));
 
 physical::entities::backend make_backend() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= be.meta_model_name() #&gt;");
     b.backend("&lt;#= be.backend_name() #&gt;");
 
@@ -49970,14 +49900,14 @@ physical::entities::backend make_backend() {
     r.meta_name(b.build());
 
     const auto lambda([&amp;](const auto&amp; fct) {
-        const auto id(fct.meta_name().qualified());
+        const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_facet("Duplicate facet: ");
             BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_facet &lt;&lt; id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
         }
     });
 
@@ -50032,7 +49962,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O329">
+    <dia:object type="UML - Class" version="0" id="O328">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,282"/>
       </dia:attribute>
@@ -50160,7 +50090,7 @@ const physical::entities::backend&amp; &lt;#= sn #&gt;::backend() const {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -50225,7 +50155,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O330">
+    <dia:object type="UML - Class" version="0" id="O329">
       <dia:attribute name="obj_pos">
         <dia:point val="-15,282"/>
       </dia:attribute>
@@ -50356,7 +50286,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -50404,7 +50334,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O331">
+    <dia:object type="UML - Class" version="0" id="O330">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,287"/>
       </dia:attribute>
@@ -50532,7 +50462,7 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -50597,7 +50527,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O332">
+    <dia:object type="UML - Class" version="0" id="O331">
       <dia:attribute name="obj_pos">
         <dia:point val="-15,287"/>
       </dia:attribute>
@@ -50728,7 +50658,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -50776,7 +50706,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O333">
+    <dia:object type="UML - Class" version="0" id="O332">
       <dia:attribute name="obj_pos">
         <dia:point val="-26,175"/>
       </dia:attribute>
@@ -50887,7 +50817,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O334">
+    <dia:object type="UML - Class" version="0" id="O333">
       <dia:attribute name="obj_pos">
         <dia:point val="-19,216"/>
       </dia:attribute>
@@ -51046,7 +50976,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
       <dia:attribute name="templates"/>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Generalization" version="1" id="O335">
+    <dia:object type="UML - Generalization" version="1" id="O334">
       <dia:attribute name="obj_pos">
         <dia:point val="-1.3875,213.2"/>
       </dia:attribute>
@@ -51083,12 +51013,12 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O303" connection="6"/>
-        <dia:connection handle="1" to="O334" connection="1"/>
+        <dia:connection handle="0" to="O302" connection="6"/>
+        <dia:connection handle="1" to="O333" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O2"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O336">
+    <dia:object type="UML - Class" version="0" id="O335">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,254"/>
       </dia:attribute>
@@ -51220,7 +51150,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -51298,7 +51228,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O337">
+    <dia:object type="UML - Class" version="0" id="O336">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,254"/>
       </dia:attribute>
@@ -51432,7 +51362,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -51450,7 +51380,7 @@ std::list&lt;std::string&gt; archetype_class_implementation_factory_transform::i
     auto builder(f.make());
     const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(arch.name(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_factory.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
     return builder.build();
 }
 
@@ -51472,9 +51402,9 @@ void archetype_class_implementation_factory_transform::apply(const context&amp; 
 
 physical::entities::archetype &lt;#= sn #&gt;::make() {
     physical::entities::archetype r;
-    using pmnf = physical::helpers::meta_name_factory;
+    using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("&lt;#= arch.backend_name() #&gt;", "&lt;#= arch.facet_name() #&gt;", "&lt;#= arch.name().simple() #&gt;"));
-    r.logical_meta_element_id("&lt;#= arch.logical_meta_element_id() #&gt;");
+    r.logical_meta_element_id(identification::entities::logical_meta_id("&lt;#= arch.logical_meta_element_id() #&gt;"));
     r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
 &lt;#+
             for(const auto&amp; l : arch.labels()) {
@@ -51563,7 +51493,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O338">
+    <dia:object type="UML - Class" version="0" id="O337">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,264"/>
       </dia:attribute>
@@ -51695,7 +51625,7 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -51770,7 +51700,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O339">
+    <dia:object type="UML - Class" version="0" id="O338">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,264"/>
       </dia:attribute>
@@ -51906,7 +51836,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
@@ -51930,7 +51860,8 @@ std::list&lt;std::string&gt; facet_class_implementation_factory_transform::inclu
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
 
     return builder.build();
 }
@@ -51959,7 +51890,7 @@ static logger lg(logger_factory("&lt;#= fct.name().qualified().dot() #&gt;"));
 }
 
 physical::entities::facet &lt;#= sn #&gt;::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= fct.meta_model_name() #&gt;");
     b.backend("&lt;#= fct.backend_name() #&gt;");
     b.facet("&lt;#= fct.name().simple() #&gt;");
@@ -51975,14 +51906,15 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 #&gt;
 
     const auto lambda([&amp;](const auto&amp; arch) {
-        const auto id(arch.meta_name().qualified());
+        const auto id(arch.meta_name().id());
         const auto pair(std::make_pair(id, arch));
         const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_archetype &lt;&lt; id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
         }
     });
 
@@ -52025,7 +51957,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O340">
+    <dia:object type="UML - Class" version="0" id="O339">
       <dia:attribute name="obj_pos">
         <dia:point val="-46,274"/>
       </dia:attribute>
@@ -52156,7 +52088,7 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -52232,7 +52164,7 @@ public:
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O341">
+    <dia:object type="UML - Class" version="0" id="O340">
       <dia:attribute name="obj_pos">
         <dia:point val="-16,274"/>
       </dia:attribute>
@@ -52363,7 +52295,7 @@ public:
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/throw_exception.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #&gt;
@@ -52386,7 +52318,8 @@ std::list&lt;std::string&gt; backend_class_implementation_factory_transform::inc
     const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
     builder.add(be.facets(), ch_arch);
 
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -52417,7 +52350,7 @@ static logger lg(logger_factory("&lt;#= be.name().qualified().dot() #&gt;"));
 }
 
 physical::entities::backend &lt;#= sn #&gt;::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= be.meta_model_name() #&gt;");
     b.backend("&lt;#= be.backend_name() #&gt;");
 
@@ -52432,14 +52365,14 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 #&gt;
 
     const auto lambda([&amp;](const auto&amp; fct) {
-        const auto id(fct.meta_name().qualified());
+        const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_facet("Duplicate facet: ");
             BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_facet &lt;&lt; id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
         }
     });
 
@@ -52482,6 +52415,76 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O3"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O341">
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="obj_pos">
+        <dia:point val="193.005,78.5"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="192.255,77.75;196.492,87.8"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="193.005,78.5"/>
+        <dia:point val="196.292,78.5"/>
+        <dia:point val="196.292,87"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O124" connection="13"/>
+        <dia:connection handle="1" to="O222" connection="1"/>
+      </dia:connections>
+      <dia:childnode parent="O0"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

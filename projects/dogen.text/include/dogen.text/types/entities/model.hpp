@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -38,14 +37,16 @@
 #include "dogen.text/types/entities/element_artefacts.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
-#include "dogen.physical/hash/entities/element_archetype_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
 namespace dogen::text::entities {
 
@@ -77,10 +78,10 @@ public:
         const dogen::identification::entities::technical_space output_technical_space,
         const std::unordered_set<dogen::identification::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
-        const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
+        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const std::list<boost::filesystem::path>& managed_directories,
-        const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties);
 
 public:
     const dogen::logical::entities::name& name() const;
@@ -183,10 +184,10 @@ public:
     void orm_properties(const boost::optional<dogen::logical::entities::orm::model_properties>& v);
     void orm_properties(const boost::optional<dogen::logical::entities::orm::model_properties>&& v);
 
-    const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element() const;
-    std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element();
-    void enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>& v);
-    void enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element() const;
+    std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element();
+    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v);
+    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v);
 
     const dogen::physical::entities::extraction_properties& extraction_properties() const;
     dogen::physical::entities::extraction_properties& extraction_properties();
@@ -198,10 +199,10 @@ public:
     void managed_directories(const std::list<boost::filesystem::path>& v);
     void managed_directories(const std::list<boost::filesystem::path>&& v);
 
-    const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties() const;
-    std::unordered_map<std::string, dogen::physical::entities::facet_properties>& facet_properties();
-    void facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v);
-    void facet_properties(const std::unordered_map<std::string, dogen::physical::entities::facet_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties();
+    void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v);
+    void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -226,10 +227,10 @@ private:
     dogen::identification::entities::technical_space output_technical_space_;
     std::unordered_set<dogen::identification::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
-    std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;
+    std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     std::list<boost::filesystem::path> managed_directories_;
-    std::unordered_map<std::string, dogen::physical::entities::facet_properties> facet_properties_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;
 };
 
 }

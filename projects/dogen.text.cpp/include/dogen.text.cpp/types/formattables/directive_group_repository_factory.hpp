@@ -49,7 +49,8 @@ private:
 
     struct feature_group {
         variability::entities::feature inclusion_required;
-        std::unordered_map<std::string, formattater_feature_group>
+        std::unordered_map<identification::entities::physical_meta_id,
+                           formattater_feature_group>
         formattaters_feature_groups;
     };
 
@@ -60,8 +61,9 @@ private:
     bool make_top_level_inclusion_required(const feature_group& fg,
         const variability::entities::configuration& cfg) const;
 
-    boost::optional<directive_group> make_directive_group(
-        const feature_group& fg, const std::string& archetype,
+    boost::optional<directive_group>
+    make_directive_group(const feature_group& fg,
+        const identification::entities::physical_meta_id& archetype,
         const variability::entities::configuration& cfg) const;
 
     bool has_inclusion_directive_overrides(
@@ -83,7 +85,8 @@ public:
 
 private:
     void insert_inclusion_directive(const std::string& id,
-        const std::string& archetype, const directive_group& dg,
+        const identification::entities::physical_meta_id& archetype,
+        const directive_group& dg,
         directive_group_repository& dgrp) const;
 
     void compute_directives(const feature_group& fg,

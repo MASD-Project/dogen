@@ -21,10 +21,10 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/backend_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
-#include "dogen.physical/io/entities/meta_name_indices_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

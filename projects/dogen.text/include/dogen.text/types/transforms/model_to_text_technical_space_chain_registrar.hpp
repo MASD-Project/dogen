@@ -29,7 +29,6 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"

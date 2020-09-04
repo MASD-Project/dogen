@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/odb/common_odb_options_factory.hpp"
 
 namespace dogen::text::cpp::transforms::odb {
 
 physical::entities::archetype common_odb_options_factory::make() {
     physical::entities::archetype r;
-    using pmnf = physical::helpers::meta_name_factory;
+    using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "odb", "common_odb_options"));
-    r.logical_meta_element_id("dogen.logical.entities.orm_common_odb_options");
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.orm_common_odb_options"));
     r.relations().status(physical::entities::relation_status::not_relatable);
 
     return r;

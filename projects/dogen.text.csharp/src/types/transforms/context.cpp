@@ -24,7 +24,8 @@ namespace dogen::text::csharp::transforms {
 
 context::context(const formattables::element_properties& element_properties,
     const formattables::model& fm,
-    const std::unordered_map<std::string, std::unordered_map<std::string,
+    const std::unordered_map<std::string,
+    std::unordered_map<identification::entities::physical_meta_id,
     std::list<std::shared_ptr<helper_transform>>>>& helpers,
     boost::shared_ptr<tracing::tracer> tracer)
     : element_properties_(element_properties), model_(fm),
@@ -41,7 +42,8 @@ const formattables::model& context::model() const {
 const std::unordered_map<
     std::string,
     std::unordered_map<
-        std::string, std::list<std::shared_ptr<helper_transform>>>>&
+        identification::entities::physical_meta_id,
+        std::list<std::shared_ptr<helper_transform>>>>&
     context::helpers() const {
     return helpers_;
 }

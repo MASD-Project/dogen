@@ -18,29 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/location_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
+#ifndef DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_META_ID_HASH_HPP
+#define DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_META_ID_HASH_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-namespace dogen::physical::entities {
+#include <functional>
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 
-std::ostream& operator<<(std::ostream& s, const meta_name& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::meta_name\"" << ", "
-      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
-      << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
-      << "\"location\": " << v.location()
-      << " }";
-    return(s);
-}
+namespace dogen::identification::entities {
+
+struct logical_meta_id_hasher {
+public:
+    static std::size_t hash(const logical_meta_id& v);
+};
 
 }
+
+namespace std {
+
+template<>
+struct hash<dogen::identification::entities::logical_meta_id> {
+public:
+    size_t operator()(const dogen::identification::entities::logical_meta_id& v) const {
+        return dogen::identification::entities::logical_meta_id_hasher::hash(v);
+    }
+};
+
+}
+#endif

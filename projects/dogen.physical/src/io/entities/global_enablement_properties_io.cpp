@@ -19,29 +19,21 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/io/entities/global_enablement_properties_io.hpp"
 #include "dogen.physical/io/entities/denormalised_archetype_properties_io.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::backend_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -54,12 +46,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -72,12 +64,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::archetype_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";
@@ -90,12 +82,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::denormalised_archetype_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";

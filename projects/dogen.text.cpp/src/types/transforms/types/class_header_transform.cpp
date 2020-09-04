@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
@@ -63,12 +63,12 @@ inclusion_support_types class_header_transform::inclusion_support_type() const {
 
 boost::filesystem::path class_header_transform::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path class_header_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> class_header_transform::inclusion_dependencies(
@@ -95,13 +95,13 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
     builder.add(o.name(), ser_fwd_arch);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
 
     const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
     builder.add(o.opaque_associations(), fwd_arch);
 
-    const auto self_arch(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_arch(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_arch);
 
     using hash = transforms::hash::traits;

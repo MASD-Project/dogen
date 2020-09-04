@@ -20,6 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/workflow_error.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
@@ -50,14 +51,16 @@ csharp::transforms::registrar& workflow::registrar() {
 }
 
 boost::shared_ptr<physical::entities::artefact>
-workflow::get_artefact(const std::unordered_map<std::string,
+workflow::get_artefact(const std::unordered_map<
+    identification::entities::physical_meta_id,
     boost::shared_ptr<physical::entities::artefact>>& artefacts,
-    const std::string& archetype) const {
+    const identification::entities::physical_meta_id& archetype) const {
 
     const auto i(artefacts.find(archetype));
     if (i == artefacts.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
-        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+        BOOST_THROW_EXCEPTION(
+            workflow_error(archetype_not_found + archetype.value()));
     }
     return i->second;
 }
@@ -89,13 +92,13 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto& fmts(i->second);
         for (const auto& fmt_ptr : fmts) {
             const auto& fmt(*fmt_ptr);
-            const auto pn(fmt.archetype().meta_name());
-            const auto arch(pn.qualified());
+            const auto pmn(fmt.archetype().meta_name());
+            const auto arch(pmn.id());
             auto aptr(get_artefact(
                     formattable.artefacts().artefacts_by_archetype(), arch));
 
             BOOST_LOG_SEV(lg, debug) << "Using formatter: "
-                                     << fmt.archetype().meta_name().qualified();
+                                     << fmt.archetype().meta_name().id().value();
 
             auto& a(*aptr);
             fmt.apply(ctx, e, a);

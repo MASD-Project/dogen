@@ -29,7 +29,8 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.physical/types/entities/element_archetype.hpp"
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.text.cpp/types/formattables/dependencies_builder.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group_repository.hpp"
@@ -51,8 +52,8 @@ namespace dogen::text::cpp::formattables {
 class dependencies_builder_factory final {
 public:
     dependencies_builder_factory(
-        const directive_group_repository& dgrp,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const directive_group_repository& dgrp, const
+        std::unordered_set<identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element);
 
 public:
@@ -63,7 +64,8 @@ public:
 
 private:
     const directive_group_repository& inclusion_directives_;
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element_;
 };
 

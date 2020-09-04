@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.identification/types/entities/archetype_name_set.hpp"
@@ -42,7 +43,7 @@ private:
 
 public:
     void add(const std::list<entities::physical_meta_name>& mns);
-    void add(const std::unordered_map<entities::physical_meta_id,
+    void add(const std::unordered_map<entities::logical_meta_id,
         entities::archetype_name_set>& by_logical_meta_name);
 
 public:

@@ -18,17 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_ARCHETYPE_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_ARCHETYPE_FWD_HPP
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-namespace dogen::physical::entities {
-
-class element_archetype;
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
 }
 
-#endif
+namespace dogen::identification::entities {
+
+std::size_t logical_meta_id_hasher::hash(const logical_meta_id& v) {
+    std::size_t seed(0);
+    combine(seed, v.value());
+    return seed;
+}
+
+}

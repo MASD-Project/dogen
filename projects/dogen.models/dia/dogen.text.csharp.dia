@@ -1842,7 +1842,7 @@
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -1861,7 +1861,7 @@ void class_transform::apply(const context&amp; ctx, const logical::entities::ele
 
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -2277,7 +2277,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -2295,7 +2295,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -2520,7 +2520,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -2538,7 +2538,7 @@ void class_transform::apply(const context&amp; ctx, const logical::entities::ele
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -2784,7 +2784,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -2802,7 +2802,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -3041,7 +3041,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -3059,7 +3059,7 @@ void class_transform::apply(const context&amp; ctx, const logical::entities::ele
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; o(ast.as&lt;logical::entities::structural::object&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -3378,7 +3378,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -3396,7 +3396,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; ye(ast.as&lt;logical::entities::structural::enumeration&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -3649,7 +3649,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -5622,16 +5622,16 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="11,-68"/>
+        <dia:point val="0,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.95,-68.05;46.2,-63.55"/>
+        <dia:rectangle val="-0.05,-68.05;46.365,-63.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="11,-68"/>
+        <dia:point val="0,-68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="46.314999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -5729,7 +5729,7 @@ using System;
             <dia:string>#artefact_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, formattables::artefact_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, formattables::artefact_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5914,7 +5914,7 @@ using System;
         <dia:point val="12.8375,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.0875,-63.65;28.775,-54.2"/>
+        <dia:rectangle val="12.0875,-63.65;23.3575,-54.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5922,8 +5922,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="12.8375,-55"/>
         <dia:point val="12.8375,-60"/>
-        <dia:point val="28.575,-60"/>
-        <dia:point val="28.575,-63.6"/>
+        <dia:point val="23.1575,-60"/>
+        <dia:point val="23.1575,-63.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7877,17 +7877,17 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="11,-68"/>
+        <dia:point val="0,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.5225,-73.05;11.75,-67.2"/>
+        <dia:rectangle val="-7.5225,-73.05;0.75,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="11,-68"/>
-        <dia:point val="11,-71"/>
+        <dia:point val="0,-68"/>
+        <dia:point val="0,-71"/>
         <dia:point val="-7.4725,-71"/>
         <dia:point val="-7.4725,-73"/>
       </dia:attribute>
@@ -8776,16 +8776,16 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O63">
       <dia:attribute name="obj_pos">
-        <dia:point val="146,10"/>
+        <dia:point val="147,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.95,9.95;197.37,16.05"/>
+        <dia:rectangle val="146.95,9.95;210.305,16.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="146,10"/>
+        <dia:point val="147,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="51.32"/>
+        <dia:real val="63.254999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -8929,7 +8929,7 @@ using System;
             <dia:string>#helpers#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;transforms::helper_transform&gt;&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, std::unordered_map&lt;std::string, std::list&lt;std::shared_ptr&lt;transforms::helper_transform&gt;&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9019,7 +9019,7 @@ using System;
         <dia:point val="162.84,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.95,15.95;163.59,30.8"/>
+        <dia:rectangle val="146.95,15.95;163.59,30.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9027,8 +9027,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="162.84,30"/>
         <dia:point val="162.84,28"/>
-        <dia:point val="146,28"/>
-        <dia:point val="146,16"/>
+        <dia:point val="147,28"/>
+        <dia:point val="147,16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11558,17 +11558,17 @@ using System;
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="46.15,-68"/>
+        <dia:point val="46.315,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.4,-71.745;51.2,-67.2"/>
+        <dia:rectangle val="45.565,-71.745;51.2,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="46.15,-68"/>
-        <dia:point val="46.15,-71"/>
+        <dia:point val="46.315,-68"/>
+        <dia:point val="46.315,-71"/>
         <dia:point val="51,-71"/>
         <dia:point val="51,-68"/>
       </dia:attribute>
@@ -11960,7 +11960,7 @@ using System;
         <dia:point val="183.227,20.9497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="183.177,15.25;198.07,21.7497"/>
+        <dia:rectangle val="183.177,15.25;211.005,21.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11968,8 +11968,8 @@ using System;
       <dia:attribute name="orth_points">
         <dia:point val="183.227,20.9497"/>
         <dia:point val="183.227,18"/>
-        <dia:point val="197.32,18"/>
-        <dia:point val="197.32,16"/>
+        <dia:point val="210.255,18"/>
+        <dia:point val="210.255,16"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12432,7 +12432,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
@@ -13217,17 +13217,17 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="28.575,-68"/>
+        <dia:point val="23.1575,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.99,-76.25;29.325,-67.2"/>
+        <dia:rectangle val="22.4075,-76.25;25.24,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="28.575,-68"/>
-        <dia:point val="28.575,-71"/>
+        <dia:point val="23.1575,-68"/>
+        <dia:point val="23.1575,-71"/>
         <dia:point val="25.04,-71"/>
         <dia:point val="25.04,-76.2"/>
       </dia:attribute>
@@ -13836,7 +13836,7 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency=&lt;iostream&gt; #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -13855,7 +13855,7 @@ void primitive_transform::apply(const context&amp; ctx, const logical::entities:
 
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -14123,7 +14123,7 @@ using System;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -14141,7 +14141,7 @@ void primitive_transform::apply(const context&amp; ctx, const logical::entities:
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -14415,7 +14415,7 @@ using System.Collections.Generic;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
@@ -14433,7 +14433,7 @@ void primitive_transform::apply(const context&amp; ctx, const logical::entities:
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; p(ast.as&lt;logical::entities::structural::primitive&gt;(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -15223,7 +15223,7 @@ const physical::entities::archetype&amp; {{class.simple_name}}::archetype() cons
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator&amp; l, const logical::entities::name&amp; n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 std::list&lt;std::string&gt; {{class.simple_name}}::
@@ -16067,7 +16067,7 @@ std::string {{class.simple_name}}::helper_name() const {
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #&gt;
@@ -16084,7 +16084,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
-    const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; proj(ast.as&lt;project&gt;(archetype().meta_name().id().value(), e));
 
 #&gt;
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -16294,7 +16294,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 &lt;#@ masd.stitch.inclusion_dependency=&lt;boost/algorithm/string/join.hpp&gt; #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #&gt;
@@ -16312,7 +16312,7 @@ void solution_transform::apply(const context&amp; ctx, const logical::entities::
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
-    const auto&amp; sln(ast.as&lt;solution&gt;(archetype().meta_name().qualified(), e));
+    const auto&amp; sln(ast.as&lt;solution&gt;(archetype().meta_name().id().value(), e));
 #&gt;
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
@@ -16609,7 +16609,7 @@ EndGlobal
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #&gt;
@@ -17283,7 +17283,7 @@ using System.Collections;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #&gt;
-&lt;#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #&gt;
+&lt;#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #&gt;
 &lt;#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #&gt;

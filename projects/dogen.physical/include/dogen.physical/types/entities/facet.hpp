@@ -30,8 +30,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/archetype.hpp"
-#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.identification/types/entities/label.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::physical::entities {
 
@@ -47,11 +49,11 @@ public:
         const std::string& default_directory_name,
         const std::string& override_directory_name,
         const std::string& description,
-        const dogen::physical::entities::meta_name& meta_name,
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
         const std::string& default_postfix,
         const std::string& override_postfix,
-        const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id);
 
 public:
@@ -89,10 +91,10 @@ public:
      * @brief Meta-name for this meta-element.
      */
     /**@{*/
-    const dogen::physical::entities::meta_name& meta_name() const;
-    dogen::physical::entities::meta_name& meta_name();
-    void meta_name(const dogen::physical::entities::meta_name& v);
-    void meta_name(const dogen::physical::entities::meta_name&& v);
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
     /**@}*/
 
     /**
@@ -125,10 +127,10 @@ public:
     void override_postfix(const std::string&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes() const;
-    std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes();
-    void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v);
-    void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes();
+    void archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v);
+    void archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>&& v);
 
     /**
      * @brief Maps the logical model element ID to the default archetype for this facet.
@@ -156,11 +158,11 @@ private:
     std::string default_directory_name_;
     std::string override_directory_name_;
     std::string description_;
-    dogen::physical::entities::meta_name meta_name_;
+    dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
     std::string default_postfix_;
     std::string override_postfix_;
-    std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> default_archetype_for_logical_meta_model_id_;
 };
 

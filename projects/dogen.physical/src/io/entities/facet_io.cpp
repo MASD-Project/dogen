@@ -22,8 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/facet_io.hpp"
 #include "dogen.physical/io/entities/archetype_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -42,6 +43,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identifi
         s << *i;
     }
     s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 

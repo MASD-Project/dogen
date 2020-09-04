@@ -37,7 +37,7 @@ artefact::artefact()
       overwrite_(static_cast<bool>(0)) { }
 
 artefact::artefact(
-    const dogen::physical::entities::meta_name& physical_meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
@@ -51,7 +51,7 @@ artefact::artefact(
     const dogen::physical::entities::operation& operation,
     const dogen::physical::entities::artefact_properties& artefact_properties,
     const dogen::physical::entities::enablement_properties& enablement_properties)
-    : physical_meta_name_(physical_meta_name),
+    : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
@@ -68,7 +68,7 @@ artefact::artefact(
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
-    swap(physical_meta_name_, other.physical_meta_name_);
+    swap(meta_name_, other.meta_name_);
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
@@ -85,7 +85,7 @@ void artefact::swap(artefact& other) noexcept {
 }
 
 bool artefact::operator==(const artefact& rhs) const {
-    return physical_meta_name_ == rhs.physical_meta_name_ &&
+    return meta_name_ == rhs.meta_name_ &&
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
@@ -107,20 +107,20 @@ artefact& artefact::operator=(artefact other) {
     return *this;
 }
 
-const dogen::physical::entities::meta_name& artefact::physical_meta_name() const {
-    return physical_meta_name_;
+const dogen::identification::entities::physical_meta_name& artefact::meta_name() const {
+    return meta_name_;
 }
 
-dogen::physical::entities::meta_name& artefact::physical_meta_name() {
-    return physical_meta_name_;
+dogen::identification::entities::physical_meta_name& artefact::meta_name() {
+    return meta_name_;
 }
 
-void artefact::physical_meta_name(const dogen::physical::entities::meta_name& v) {
-    physical_meta_name_ = v;
+void artefact::meta_name(const dogen::identification::entities::physical_meta_name& v) {
+    meta_name_ = v;
 }
 
-void artefact::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
-    physical_meta_name_ = std::move(v);
+void artefact::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::variability::entities::configuration>& artefact::configuration() const {

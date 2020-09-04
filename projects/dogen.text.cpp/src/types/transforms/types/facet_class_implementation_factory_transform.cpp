@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -63,7 +63,7 @@ boost::filesystem::path facet_class_implementation_factory_transform::inclusion_
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -72,7 +72,7 @@ boost::filesystem::path facet_class_implementation_factory_transform::inclusion_
 
 boost::filesystem::path facet_class_implementation_factory_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> facet_class_implementation_factory_transform::inclusion_dependencies(
@@ -87,7 +87,8 @@ std::list<std::string> facet_class_implementation_factory_transform::inclusion_d
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
 
     return builder.build();
 }
@@ -115,7 +116,7 @@ ast.stream() << std::endl;
 ast.stream() << "}" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::facet " << sn << "::make() {" << std::endl;
-ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
+ast.stream() << "    identification::helpers::physical_meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << fct.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << fct.backend_name() << "\");" << std::endl;
 ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;
@@ -127,14 +128,15 @@ ast.stream() << "    r.labels().push_back(identification::entities::label(\"" <<
             }
 ast.stream() << std::endl;
 ast.stream() << "    const auto lambda([&](const auto& arch) {" << std::endl;
-ast.stream() << "        const auto id(arch.meta_name().qualified());" << std::endl;
+ast.stream() << "        const auto id(arch.meta_name().id());" << std::endl;
 ast.stream() << "        const auto pair(std::make_pair(id, arch));" << std::endl;
 ast.stream() << "        const auto inserted(r.archetypes().insert(pair).second);" << std::endl;
 ast.stream() << "        if (!inserted) {" << std::endl;
 ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
 ast.stream() << "            const std::string duplicate_archetype(\"Duplicate archetype: \");" << std::endl;
 ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;" << std::endl;
-ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(" << std::endl;
+ast.stream() << "                transformation_error(duplicate_archetype + id.value()));" << std::endl;
 ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;

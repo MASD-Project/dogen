@@ -21,6 +21,7 @@
 #ifndef DOGEN_TEXT_CPP_TYPES_FORMATTABLES_INCLUSION_EXPANDER_HPP
 #define DOGEN_TEXT_CPP_TYPES_FORMATTABLES_INCLUSION_EXPANDER_HPP
 
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -30,7 +31,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
@@ -74,7 +75,8 @@ private:
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    typedef std::unordered_map<std::string, std::list<std::string>>
+    typedef std::unordered_map<identification::entities::physical_meta_id,
+                               std::list<std::string>>
     element_inclusion_dependencies_type;
 
     element_inclusion_dependencies_type compute_inclusion_dependencies(
@@ -88,7 +90,8 @@ public:
 
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l, model& fm) const;
 };

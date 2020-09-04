@@ -25,7 +25,7 @@ namespace dogen::identification::entities {
 physical_meta_name_indices::physical_meta_name_indices(
     const std::list<dogen::identification::entities::physical_meta_name>& all,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_set<dogen::identification::entities::physical_meta_id> >& facet_names_by_backend_name,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name,
+    const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& archetype_names_by_logical_meta_name,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, std::unordered_map<dogen::identification::entities::physical_meta_id, std::list<dogen::identification::entities::physical_meta_id> > >& archetype_names_by_backend_by_facet)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
@@ -85,19 +85,19 @@ void physical_meta_name_indices::facet_names_by_backend_name(const std::unordere
     facet_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& physical_meta_name_indices::archetype_names_by_logical_meta_name() const {
+const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& physical_meta_name_indices::archetype_names_by_logical_meta_name() const {
     return archetype_names_by_logical_meta_name_;
 }
 
-std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& physical_meta_name_indices::archetype_names_by_logical_meta_name() {
+std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& physical_meta_name_indices::archetype_names_by_logical_meta_name() {
     return archetype_names_by_logical_meta_name_;
 }
 
-void physical_meta_name_indices::archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& v) {
+void physical_meta_name_indices::archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& v) {
     archetype_names_by_logical_meta_name_ = v;
 }
 
-void physical_meta_name_indices::archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>&& v) {
+void physical_meta_name_indices::archetype_names_by_logical_meta_name(const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>&& v) {
     archetype_names_by_logical_meta_name_ = std::move(v);
 }
 

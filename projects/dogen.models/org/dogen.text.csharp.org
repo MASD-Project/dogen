@@ -111,7 +111,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -130,7 +130,7 @@ void class_transform::apply(const context& ctx, const logical::entities::element
 
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -422,7 +422,7 @@ Generates implementation files for enums.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -440,7 +440,7 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -502,7 +502,7 @@ Generates implementation files for exceptions.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -577,7 +577,7 @@ Generates implementation files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
@@ -620,7 +620,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<iostream> #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -639,7 +639,7 @@ void primitive_transform::apply(const context& ctx, const logical::entities::ele
 
     const auto id(e.name().qualified().dot());
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -792,7 +792,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -810,7 +810,7 @@ void class_transform::apply(const context& ctx, const logical::entities::element
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -932,7 +932,7 @@ Generates implementation files for enums.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -950,7 +950,7 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1038,7 +1038,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -1056,7 +1056,7 @@ void primitive_transform::apply(const context& ctx, const logical::entities::ele
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1155,7 +1155,7 @@ Generates implementation files for assistants.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/io/traits.hpp" #>
@@ -1708,7 +1708,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -1726,7 +1726,7 @@ void class_transform::apply(const context& ctx, const logical::entities::element
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().qualified(), e));
+    const auto& o(ast.as<logical::entities::structural::object>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -1921,7 +1921,7 @@ Generates implementation files for enums.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -1939,7 +1939,7 @@ void enum_transform::apply(const context& ctx, const logical::entities::element&
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().qualified(), e));
+    const auto& ye(ast.as<logical::entities::structural::enumeration>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(ast.make_scoped_boilerplate_formatter(e));
@@ -2076,7 +2076,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2094,7 +2094,7 @@ void primitive_transform::apply(const context& ctx, const logical::entities::ele
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));
@@ -2250,7 +2250,7 @@ Generates implementation files for assistants.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/test_data/traits.hpp" #>
@@ -2609,7 +2609,7 @@ Generates visual studio project.
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #>
@@ -2626,7 +2626,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
-    const auto& proj(ast.as<project>(archetype().meta_name().qualified(), e));
+    const auto& proj(ast.as<project>(archetype().meta_name().id().value(), e));
 
 #>
 <?xml version="1.0" encoding="utf-8"?>
@@ -2712,7 +2712,7 @@ Generates visual studio solutions.
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.csharp/types/transforms/visual_studio/traits.hpp" #>
@@ -2730,7 +2730,7 @@ void solution_transform::apply(const context& ctx, const logical::entities::elem
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::solution;
-    const auto& sln(ast.as<solution>(archetype().meta_name().qualified(), e));
+    const auto& sln(ast.as<solution>(archetype().meta_name().id().value(), e));
 #>
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
@@ -3279,7 +3279,7 @@ const physical::entities::archetype& {{class.simple_name}}::archetype() const {
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> {{class.simple_name}}::

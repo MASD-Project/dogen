@@ -19,14 +19,15 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/types/transforms/types/enum_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/class_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/types_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/builtin_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/exception_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/primitive_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 
 namespace dogen::text::csharp::transforms::types {
 namespace {
@@ -37,7 +38,7 @@ static logger lg(logger_factory("dogen.text.csharp.transforms.types"));
 }
 
 physical::entities::facet types_factory::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("csharp");
     b.facet("types");
@@ -46,14 +47,15 @@ physical::entities::facet types_factory::make() {
     r.meta_name(b.build());
 
     const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().qualified());
+        const auto id(arch.meta_name().id());
         const auto pair(std::make_pair(id, arch));
         const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
         }
     });
 

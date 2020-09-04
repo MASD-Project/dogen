@@ -21,6 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_set_io.hpp"
@@ -73,7 +75,7 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
                     const auto& id(rhs_a_pair.first);
                     BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
                     BOOST_THROW_EXCEPTION(
-                        transform_exception(duplicate_archetype + id));
+                        transform_exception(duplicate_archetype + id.value()));
                 }
             }
         }

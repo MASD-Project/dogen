@@ -26,8 +26,10 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
@@ -62,18 +64,19 @@ const std::string missing_configuration(
 namespace dogen::physical::transforms {
 
 std::unordered_map<
-    std::string,
+    identification::entities::physical_meta_id,
     global_enablement_transform::backend_feature_group>
 global_enablement_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& mnrp) {
-    std::unordered_map<std::string, backend_feature_group> r;
+    const identification::entities::physical_meta_name_indices& idx) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       backend_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& pair : mnrp.facet_names_by_backend_name()) {
+    for (const auto& pair : idx.facet_names_by_backend_name()) {
         const auto& backend(pair.first);
         backend_feature_group btg;
-        btg.enabled = s.get_by_name(backend, enabled_feature);
+        btg.enabled = s.get_by_name(backend.value(), enabled_feature);
 
         r.insert(std::make_pair(backend, btg));
     }
@@ -81,19 +84,20 @@ make_backend_feature_group(const variability::entities::feature_model& fm,
 }
 
 std::unordered_map<
-    std::string,
+    identification::entities::physical_meta_id,
     global_enablement_transform::facet_feature_group>
 global_enablement_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& nrp) {
-    std::unordered_map<std::string, facet_feature_group> r;
+    const identification::entities::physical_meta_name_indices& idx) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       facet_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& pair : nrp.facet_names_by_backend_name()) {
+    for (const auto& pair : idx.facet_names_by_backend_name()) {
         for (const auto& fct : pair.second) {
             facet_feature_group ftg;
-            ftg.enabled = s.get_by_name(fct, enabled_feature);
-            ftg.overwrite = s.get_by_name(fct, overwrite_feature);
+            ftg.enabled = s.get_by_name(fct.value(), enabled_feature);
+            ftg.overwrite = s.get_by_name(fct.value(), overwrite_feature);
             r.insert(std::make_pair(fct, ftg));
         }
     }
@@ -101,55 +105,61 @@ make_facet_feature_group(const variability::entities::feature_model& fm,
 }
 
 std::unordered_map<
-    std::string,
+    identification::entities::physical_meta_id,
     global_enablement_transform::global_archetype_feature_group>
 global_enablement_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& nrp) {
-    std::unordered_map<std::string, global_archetype_feature_group> r;
+    const identification::entities::physical_meta_name_indices& idx) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       global_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& n : nrp.all()) {
+    for (const auto& pmn : idx.all()) {
+        const auto id(pmn.id().value());
         global_archetype_feature_group gatg;
-        gatg.enabled = s.get_by_name(n.qualified(), enabled_feature);
-        gatg.overwrite = s.get_by_name(n.qualified(), overwrite_feature);
-        r.insert(std::make_pair(n.qualified(), gatg));
+        gatg.enabled = s.get_by_name(id, enabled_feature);
+        gatg.overwrite = s.get_by_name(id, overwrite_feature);
+        r.insert(std::make_pair(id, gatg));
     }
     return r;
 }
 
 std::unordered_map<
-    std::string,
+    identification::entities::physical_meta_id,
     global_enablement_transform::local_archetype_feature_group>
 global_enablement_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& nrp) {
-    std::unordered_map<std::string, local_archetype_feature_group> r;
+    const identification::entities::physical_meta_name_indices& idx) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    using qnb = physical::helpers::qualified_meta_name_builder;
-    for (const auto& n : nrp.all()) {
+    identification::helpers::physical_meta_id_builder b;
+    for (const auto& mn : idx.all()) {
         local_archetype_feature_group latg;
-        const auto qn(n.qualified());
-        const auto f(qnb::build_facet(n));
-        latg.facet_enabled = s.get_by_name(f, enabled_feature);
-        latg.archetype_enabled = s.get_by_name(qn, enabled_feature);
-        latg.facet_overwrite = s.get_by_name(f, overwrite_feature);
-        latg.archetype_overwrite = s.get_by_name(qn, overwrite_feature);
+        const auto id(mn.id());
+        const auto pmid(b.build_facet(mn));
+        latg.facet_enabled = s.get_by_name(pmid.value(), enabled_feature);
+        latg.archetype_enabled = s.get_by_name(id.value(), enabled_feature);
+        latg.facet_overwrite = s.get_by_name(pmid.value(), overwrite_feature);
+        latg.archetype_overwrite = s.get_by_name(id.value(), overwrite_feature);
 
-        r.insert(std::make_pair(qn, latg));
+        r.insert(std::make_pair(id, latg));
     }
     return r;
 }
 
-std::unordered_map<std::string, entities::backend_properties>
+std::unordered_map<identification::entities::physical_meta_id,
+                   entities::backend_properties>
 global_enablement_transform::obtain_backend_properties(
-    const std::unordered_map<std::string, backend_feature_group>& fgs,
+    const std::unordered_map<identification::entities::physical_meta_id,
+    backend_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating backend properties.";
 
-    std::unordered_map<std::string, entities::backend_properties> r;
+    std::unordered_map<identification::entities::physical_meta_id,
+                       entities::backend_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& pair : fgs) {
         const auto& backend(pair.first);
@@ -164,14 +174,17 @@ global_enablement_transform::obtain_backend_properties(
     return r;
 }
 
-std::unordered_map<std::string, entities::facet_properties>
-global_enablement_transform::obtain_facet_properties(
-    const std::unordered_map<std::string, facet_feature_group>& fgs,
+std::unordered_map<identification::entities::physical_meta_id,
+                   entities::facet_properties>
+global_enablement_transform::
+obtain_facet_properties(const std::unordered_map<
+    identification::entities::physical_meta_id, facet_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating facet properties.";
 
-    std::unordered_map<std::string, entities::facet_properties> r;
+    std::unordered_map<identification::entities::physical_meta_id,
+                       entities::facet_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& pair : fgs) {
         const auto& facet(pair.first);
@@ -188,14 +201,17 @@ global_enablement_transform::obtain_facet_properties(
     return r;
 }
 
-std::unordered_map<std::string, entities::archetype_properties>
+std::unordered_map<identification::entities::physical_meta_id,
+                   entities::archetype_properties>
 global_enablement_transform::obtain_archetype_properties(
-    const std::unordered_map<std::string, global_archetype_feature_group>& fgs,
+    const std::unordered_map<identification::entities::physical_meta_id,
+    global_archetype_feature_group>& fgs,
     const variability::entities::configuration& ra) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating archetype properties.";
 
-    std::unordered_map<std::string, entities::archetype_properties> r;
+    std::unordered_map<identification::entities::physical_meta_id,
+                       entities::archetype_properties> r;
     const variability::helpers::configuration_selector s(ra);
     for (const auto& pair : fgs) {
         const auto& archetype(pair.first);
@@ -215,7 +231,7 @@ global_enablement_transform::obtain_archetype_properties(
 
 void global_enablement_transform::populate_global_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& nrp,
+    const identification::entities::physical_meta_name_indices& nrp,
     entities::artefact_repository& ar) {
 
     const auto bftg(make_backend_feature_group(fm, nrp));
@@ -227,7 +243,7 @@ void global_enablement_transform::populate_global_enablement_properties(
     if (i == ar.artefact_sets_by_logical_id().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
         BOOST_THROW_EXCEPTION(
-            transform_exception(root_module_not_found + rmid));
+            transform_exception(root_module_not_found + rmid.value()));
     }
 
     const auto& cfg(*i->second.configuration());
@@ -249,7 +265,8 @@ void global_enablement_transform::populate_global_enablement_properties(
         const auto i(galp.backend_properties().find(bn));
         if (i == galp.backend_properties().end()) {
             BOOST_LOG_SEV(lg, error) << backend_not_found << bn;
-            BOOST_THROW_EXCEPTION(transform_exception(backend_not_found + bn));
+            BOOST_THROW_EXCEPTION(transform_exception(
+                    backend_not_found + bn.value()));
         }
         const auto& backend(i->second);
 
@@ -262,7 +279,7 @@ void global_enablement_transform::populate_global_enablement_properties(
             if (j == galp.facet_properties().end()) {
                 BOOST_LOG_SEV(lg, error) << facet_not_found << fn;
                 BOOST_THROW_EXCEPTION(
-                    transform_exception(facet_not_found + fn));
+                    transform_exception(facet_not_found + fn.value()));
             }
             const auto& facet(j->second);
 
@@ -281,7 +298,7 @@ void global_enablement_transform::populate_global_enablement_properties(
                 if (k == galp.archetype_properties().end()) {
                     BOOST_LOG_SEV(lg, error) << archetype_not_found << an;
                     BOOST_THROW_EXCEPTION(
-                        transform_exception(archetype_not_found + an));
+                        transform_exception(archetype_not_found + an.value()));
                 }
                 const auto& archetype(k->second);
                 dap.archetype_enabled(archetype.enabled());
@@ -295,7 +312,7 @@ void global_enablement_transform::populate_global_enablement_properties(
 
 void global_enablement_transform::populate_local_enablement_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::meta_name_indices& nrp,
+    const identification::entities::physical_meta_name_indices& nrp,
     entities::artefact_repository& ar) {
     /*
      * Computes all of the possible features for every physical
@@ -312,19 +329,19 @@ void global_enablement_transform::populate_local_enablement_properties(
         if (!as.configuration()) {
             BOOST_LOG_SEV(lg, error) << missing_configuration << id;
             BOOST_THROW_EXCEPTION(
-                transform_exception(missing_configuration + id));
+                transform_exception(missing_configuration + id.value()));
         }
 
         const auto& cfg(*as.configuration());
         const variability::helpers::configuration_selector s(cfg);
         for (auto& a_pair : as.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
-            const auto archetype(a.physical_meta_name().qualified());
+            const auto archetype(a.meta_name().id());
             const auto i(fgs.find(archetype));
             if (i == fgs.end()) {
                 BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
-                BOOST_THROW_EXCEPTION(
-                    transform_exception(type_group_not_found + archetype));
+                BOOST_THROW_EXCEPTION(transform_exception(
+                        type_group_not_found + archetype.value()));
             }
             const auto fg(i->second);
             if (s.has_configuration_point(fg.facet_enabled)) {

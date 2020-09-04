@@ -19,9 +19,12 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_validator.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
 #include "dogen.text.csharp/io/transforms/repository_io.hpp"
 #include "dogen.text.csharp/types/transforms/registrar_error.hpp"
 #include "dogen.text.csharp/types/transforms/registrar.hpp"
@@ -76,8 +79,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     /*
      * Validate the physical name.
      */
-    const auto n(t->archetype().meta_name());
-    physical::helpers::meta_name_validator::validate_archetype_name(n);
+    const auto pmn(t->archetype().meta_name());
+    identification::helpers::physical_meta_name_validator::validate_archetype_name(pmn);
 
     /*
      * Insert it into the main collection of stock transforms.
@@ -87,27 +90,27 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     /*
      * Add the transform to the index by meta-name.
      */
-    const auto mn(t->archetype().logical_meta_element_id());
+    const auto lmn(t->archetype().logical_meta_element_id());
     auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
-    safmt[mn].push_front(t);
+    safmt[lmn.value()].push_front(t);
 
     /*
      * Add transform to the index by archetype name. Inserting the
      * transform into this repository has the helpful side-effect of
      * ensuring the id is unique in physical space.
      */
-    const auto qn(n.qualified());
+    const auto pid(pmn.id());
     auto& safba(transform_repository_.stock_artefact_formatters_by_archetype());
-    const auto pair(std::make_pair(qn, t));
+    const auto pair(std::make_pair(pid, t));
     const auto inserted(safba.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + qn));
+        BOOST_LOG_SEV(lg, error) << duplicate_archetype << pid;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + pid.value()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: "
-                             << t->archetype().meta_name().qualified()
-                             << " against meta name: " << mn;
+                             << t->archetype().meta_name().id().value()
+                             << " against meta name: " << pmn;
 }
 
 void registrar::
@@ -123,8 +126,10 @@ register_helper_transform(std::shared_ptr<helper_transform> ht) {
     }
 
     auto& f(transform_repository_.helper_formatters_[ht->family()]);
-    for (const auto& of : ht->owning_formatters())
-        f[of].push_back(ht);
+    for (const auto& of : ht->owning_formatters()) {
+        identification::entities::physical_meta_id pmid(of);
+        f[pmid].push_back(ht);
+    }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter helper: "
                              << ht->helper_name();

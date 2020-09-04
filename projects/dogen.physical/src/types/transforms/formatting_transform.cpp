@@ -69,24 +69,26 @@ formatting_transform::to_formatting_style(const std::string& s) {
     BOOST_THROW_EXCEPTION(transform_exception(invalid_style + s));
 }
 
-std::unordered_map<std::string, formatting_transform::feature_group>
+std::unordered_map<identification::entities::physical_meta_id,
+                   formatting_transform::feature_group>
 formatting_transform::make_feature_groups(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::meta_name>& mns) {
+    const std::list<identification::entities::physical_meta_name>& pmns) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
 
-    std::unordered_map<std::string, formatting_transform::feature_group> r;
-    for (const auto& mn : mns) {
-        const auto arch(mn.qualified());
+    std::unordered_map<identification::entities::physical_meta_id,
+                       formatting_transform::feature_group> r;
+    for (const auto& pmn : pmns) {
+        const auto arch(pmn.id());
 
         feature_group fg;
         const variability::helpers::feature_selector s(fm);
         const auto fs(formatting_style_trait);
-        fg.formatting_style = s.get_by_name(arch, fs);
+        fg.formatting_style = s.get_by_name(arch.value(), fs);
 
         const auto fi(formatting_input_trait);
-        fg.formatting_input = s.get_by_name(arch, fi);
+        fg.formatting_input = s.get_by_name(arch.value(), fi);
 
         r[arch] = fg;
     }
@@ -95,11 +97,13 @@ formatting_transform::make_feature_groups(
     return r;
 }
 
-std::unordered_map<std::string, entities::formatting_configuration>
+std::unordered_map<identification::entities::physical_meta_id,
+                   entities::formatting_configuration>
 formatting_transform::make_formatting_configuration(
-    const std::unordered_map<std::string, feature_group>& fgs,
-    const variability::entities::configuration& cfg) {
-    std::unordered_map<std::string, entities::formatting_configuration> r;
+    const std::unordered_map<identification::entities::physical_meta_id,
+    feature_group>& fgs, const variability::entities::configuration& cfg) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       entities::formatting_configuration> r;
 
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& pair : fgs) {
@@ -126,8 +130,8 @@ formatting_transform::make_formatting_configuration(
     return r;
 }
 
-void formatting_transform::
-apply(const std::unordered_map<std::string, feature_group> fgs,
+void formatting_transform::apply(const std::unordered_map<
+    identification::entities::physical_meta_id, feature_group> fgs,
     entities::artefact_set& as) {
     const auto id(as.provenance().logical_name().id().value());
     BOOST_LOG_SEV(lg, trace) << "Transforming: " << id;
@@ -168,6 +172,5 @@ apply(const context& ctx, entities::artefact_repository& arp) {
 
     stp.end_transform(arp);
 }
-
 
 }

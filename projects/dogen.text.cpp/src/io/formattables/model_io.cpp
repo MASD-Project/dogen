@@ -25,6 +25,7 @@
 #include "dogen.text.cpp/io/formattables/formattable_io.hpp"
 #include "dogen.text.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen.text.cpp/io/formattables/facet_properties_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -73,12 +74,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";

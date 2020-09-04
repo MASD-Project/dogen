@@ -23,10 +23,11 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen.text.cpp/types/formattables/location_error.hpp"
@@ -87,28 +88,29 @@ locator::make_feature_group(const variability::entities::feature_model& fm,
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
-    std::unordered_set<std::string> processed_facets;
-    using qnb = physical::helpers::qualified_meta_name_builder;
+    using identification::entities::physical_meta_id;
+    std::unordered_set<physical_meta_id> processed_facets;
+    using qnb = identification::helpers::physical_meta_id_builder;
     for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto pn(fmt.archetype().meta_name());
-        const auto arch(pn.qualified());
-        const auto fct(qnb::build_facet(pn));
+        const auto pmn(fmt.archetype().meta_name());
+        const auto arch(pmn.id());
+        const auto fct(qnb::build_facet(pmn));
         const auto pf(traits::postfix());
 
         formatter_feature_group fmt_fg;
         const auto pfix(traits::postfix());
-        fmt_fg.archetype_postfix = s.get_by_name(arch, pfix);
+        fmt_fg.archetype_postfix = s.get_by_name(arch.value(), pfix);
 
-        auto dir(s.try_get_by_name(fct, traits::directory()));
+        auto dir(s.try_get_by_name(fct.value(), traits::directory()));
         if (dir)
             fmt_fg.facet_directory = *dir;
 
-        auto postfix(s.try_get_by_name(fct, traits::postfix()));
+        auto postfix(s.try_get_by_name(fct.value(), traits::postfix()));
         if (postfix)
             fmt_fg.facet_postfix = *postfix;
 
-        r.formatters_feature_group[arch] = fmt_fg;
+        r.formatters_feature_group[arch.value()] = fmt_fg;
 
         const bool done(processed_facets.find(fct) != processed_facets.end());
         if (fmt_fg.facet_directory && !done) {
@@ -116,7 +118,7 @@ locator::make_feature_group(const variability::entities::feature_model& fm,
             facet_feature_group fct_fg;
             fct_fg.directory = *fmt_fg.facet_directory;
             fct_fg.postfix = *fmt_fg.facet_postfix;
-            r.facets_feature_group[fct] = fct_fg;
+            r.facets_feature_group[fct.value()] = fct_fg;
         }
     }
 

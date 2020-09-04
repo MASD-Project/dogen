@@ -30,6 +30,8 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform_fwd.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform_fwd.hpp"
 
@@ -72,7 +74,7 @@ private:
      */
     std::unordered_map<
         std::string,
-        std::unordered_map<std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
                            std::list<
                                std::shared_ptr<helper_transform>>>>&
     helper_formatters();
@@ -103,8 +105,8 @@ public:
      * @brief Returns all available helpers.
      */
     const std::unordered_map<
-    std::string,
-    std::unordered_map<std::string,
+        std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
                        std::list<
                            std::shared_ptr<helper_transform>>>>&
     helper_formatters() const;
@@ -121,7 +123,7 @@ private:
     stock_artefact_formatters_;
     std::unordered_map<
         std::string,
-        std::unordered_map<std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
                            std::list<
                                std::shared_ptr<helper_transform>>>>
     helper_formatters_;

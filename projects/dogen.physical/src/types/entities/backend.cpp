@@ -26,12 +26,12 @@ backend::backend(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
     const std::string& description,
-    const dogen::physical::entities::meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
-    const std::unordered_map<std::string, dogen::physical::entities::part>& parts,
-    const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
-    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
-    const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& archetype_kinds)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& archetype_kinds)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
       description_(description),
@@ -121,19 +121,19 @@ void backend::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name& backend::meta_name() const {
+const dogen::identification::entities::physical_meta_name& backend::meta_name() const {
     return meta_name_;
 }
 
-dogen::physical::entities::meta_name& backend::meta_name() {
+dogen::identification::entities::physical_meta_name& backend::meta_name() {
     return meta_name_;
 }
 
-void backend::meta_name(const dogen::physical::entities::meta_name& v) {
+void backend::meta_name(const dogen::identification::entities::physical_meta_name& v) {
     meta_name_ = v;
 }
 
-void backend::meta_name(const dogen::physical::entities::meta_name&& v) {
+void backend::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -153,67 +153,67 @@ void backend::labels(const std::list<dogen::identification::entities::label>&& v
     labels_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::part>& backend::parts() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& backend::parts() const {
     return parts_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::part>& backend::parts() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& backend::parts() {
     return parts_;
 }
 
-void backend::parts(const std::unordered_map<std::string, dogen::physical::entities::part>& v) {
+void backend::parts(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& v) {
     parts_ = v;
 }
 
-void backend::parts(const std::unordered_map<std::string, dogen::physical::entities::part>&& v) {
+void backend::parts(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>&& v) {
     parts_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::facet>& backend::facets() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& backend::facets() const {
     return facets_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::facet>& backend::facets() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& backend::facets() {
     return facets_;
 }
 
-void backend::facets(const std::unordered_map<std::string, dogen::physical::entities::facet>& v) {
+void backend::facets(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& v) {
     facets_ = v;
 }
 
-void backend::facets(const std::unordered_map<std::string, dogen::physical::entities::facet>&& v) {
+void backend::facets(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>&& v) {
     facets_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::archetype>& backend::archetypes() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& backend::archetypes() const {
     return archetypes_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::archetype>& backend::archetypes() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& backend::archetypes() {
     return archetypes_;
 }
 
-void backend::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v) {
+void backend::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v) {
     archetypes_ = v;
 }
 
-void backend::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v) {
+void backend::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>&& v) {
     archetypes_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() const {
     return archetype_kinds_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() {
     return archetype_kinds_;
 }
 
-void backend::archetype_kinds(const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& v) {
+void backend::archetype_kinds(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& v) {
     archetype_kinds_ = v;
 }
 
-void backend::archetype_kinds(const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>&& v) {
+void backend::archetype_kinds(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>&& v) {
     archetype_kinds_ = std::move(v);
 }
 

@@ -36,6 +36,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
@@ -89,7 +90,8 @@ private:
      * @brief Create the files representation of the formattables model.
      */
     void apply(boost::shared_ptr<tracing::tracer> tracer,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element, const formattables::locator& l,
         const variability::entities::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,

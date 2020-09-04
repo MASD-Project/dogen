@@ -26,11 +26,11 @@ meta_model::meta_model(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
     const std::string& description,
-    const dogen::physical::entities::meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const std::list<dogen::physical::entities::backend>& backends,
-    const dogen::physical::entities::meta_name_indices& indexed_names)
+    const dogen::identification::entities::physical_meta_name_indices& indexed_names)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
       description_(description),
@@ -117,19 +117,19 @@ void meta_model::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name& meta_model::meta_name() const {
+const dogen::identification::entities::physical_meta_name& meta_model::meta_name() const {
     return meta_name_;
 }
 
-dogen::physical::entities::meta_name& meta_model::meta_name() {
+dogen::identification::entities::physical_meta_name& meta_model::meta_name() {
     return meta_name_;
 }
 
-void meta_model::meta_name(const dogen::physical::entities::meta_name& v) {
+void meta_model::meta_name(const dogen::identification::entities::physical_meta_name& v) {
     meta_name_ = v;
 }
 
-void meta_model::meta_name(const dogen::physical::entities::meta_name&& v) {
+void meta_model::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -181,19 +181,19 @@ void meta_model::backends(const std::list<dogen::physical::entities::backend>&& 
     backends_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name_indices& meta_model::indexed_names() const {
+const dogen::identification::entities::physical_meta_name_indices& meta_model::indexed_names() const {
     return indexed_names_;
 }
 
-dogen::physical::entities::meta_name_indices& meta_model::indexed_names() {
+dogen::identification::entities::physical_meta_name_indices& meta_model::indexed_names() {
     return indexed_names_;
 }
 
-void meta_model::indexed_names(const dogen::physical::entities::meta_name_indices& v) {
+void meta_model::indexed_names(const dogen::identification::entities::physical_meta_name_indices& v) {
     indexed_names_ = v;
 }
 
-void meta_model::indexed_names(const dogen::physical::entities::meta_name_indices&& v) {
+void meta_model::indexed_names(const dogen::identification::entities::physical_meta_name_indices&& v) {
     indexed_names_ = std::move(v);
 }
 

@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.csharp/types/formattables/expansion_error.hpp"
 #include "dogen.text.csharp/types/formattables/file_path_expander.hpp"
@@ -55,11 +56,11 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
             const auto arch(pair.first);
             auto& art_props(pair.second);
 
-            const auto i(safba.find(arch));
+            const auto i(safba.find(arch.value()));
             if (i == safba.end()) {
                 BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                 BOOST_THROW_EXCEPTION(
-                    expansion_error(missing_archetype + arch));
+                    expansion_error(missing_archetype + arch.value()));
             }
 
             /*

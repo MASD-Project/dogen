@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/types/entities/archetype_name_set.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 
@@ -41,15 +43,16 @@ private:
      */
     static void update_physical_meta_names_by_logical_meta_name(
         const physical::entities::archetype& arch,
-        std::unordered_map<std::string, physical::entities::archetype_name_set>&
+        std::unordered_map<identification::entities::logical_meta_id,
+        identification::entities::archetype_name_set>&
         physical_meta_names_by_logical_meta_name);
 
     /**
      * @brief Obtains all of the archetype meta-names in the physical
      * dimension, organised by logical meta-name.
      */
-    static std::unordered_map<std::string,
-                              physical::entities::archetype_name_set>
+    static std::unordered_map<identification::entities::logical_meta_id,
+                              identification::entities::archetype_name_set>
     obtain_physical_meta_names_by_logical_meta_name(
         const physical::entities::meta_model& mm);
 

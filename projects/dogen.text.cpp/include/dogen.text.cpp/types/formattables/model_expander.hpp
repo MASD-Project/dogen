@@ -29,7 +29,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
@@ -47,14 +47,17 @@ private:
 
     void expand_inclusion(
         const variability::entities::feature_model& feature_model,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l, model& fm) const;
 
-    void expand_aspects(const variability::entities::feature_model& feature_model,
+    void expand_aspects(
+        const variability::entities::feature_model& feature_model,
         model& fm) const;
 
-    void expand_helpers(const variability::entities::feature_model& feature_model,
+    void expand_helpers(
+        const variability::entities::feature_model& feature_model,
         const transforms::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
@@ -75,7 +78,8 @@ private:
 public:
     void expand(const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const std::unordered_set<physical::entities::element_archetype>&
+        const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element,
         const transforms::repository& frp, const locator& l, model& fm) const;
 };

@@ -32,7 +32,8 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/element_properties.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform.hpp"
@@ -44,41 +45,42 @@ namespace dogen::text::cpp::transforms {
  */
 class context final {
 public:
-    context(const std::unordered_set<physical::entities::element_archetype>&
+    context(const std::unordered_set<
+        identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element,
         const formattables::element_properties& element_properties,
-        const formattables::model& fm, const std::unordered_map<std::string,
-        std::unordered_map<std::string, std::list<std::shared_ptr<
+        const formattables::model& fm,
+        const std::unordered_map<std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
+        std::list<std::shared_ptr<
         helper_transform>>>>& helpers,
         boost::shared_ptr<tracing::tracer> tracer);
 
 public:
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element() const;
 
     const formattables::element_properties& element_properties() const;
 
     const formattables::model& model() const;
 
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<
-            std::string,
+    const std::unordered_map<std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
             std::list<std::shared_ptr<helper_transform>>>>&
         helpers() const;
 
     boost::shared_ptr<tracing::tracer> tracer() const;
 
 private:
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element_;
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;
-    const std::unordered_map<
-        std::string,
-        std::unordered_map<
-            std::string, std::list<
-                             std::shared_ptr<helper_transform>>>>&
+    const std::unordered_map<std::string,
+        std::unordered_map<identification::entities::physical_meta_id,
+                           std::list<std::shared_ptr<helper_transform>>>>&
     helpers_;
     boost::shared_ptr<tracing::tracer> tracer_;
 };

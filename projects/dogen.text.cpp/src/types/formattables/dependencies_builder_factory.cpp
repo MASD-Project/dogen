@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text.cpp/types/formattables/dependencies_builder_factory.hpp"
 
 namespace dogen::text::cpp::formattables {
 
 dependencies_builder_factory::dependencies_builder_factory(
-    const directive_group_repository& dgrp,
-    const std::unordered_set<physical::entities::element_archetype>&
+    const directive_group_repository& dgrp, const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element)
     : inclusion_directives_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}

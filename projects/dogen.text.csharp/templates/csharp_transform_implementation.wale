@@ -2,11 +2,11 @@
 physical::entities::archetype {{class.simple_name}}::static_archetype() const {
     static physical::entities::archetype r([]() {
         physical::entities::archetype r;
-        using pmnf = physical::helpers::meta_name_factory;
+        using pmnf = identification::helpers::physical_meta_name_factory;
         r.meta_name(pmnf::make(csharp::traits::backend_sn(),
             traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
         using lmnf = {{meta_name_factory}};
-        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+        r.logical_meta_element_id(identification::entities::logical_meta_id(lmnf::make_{{meta_element}}_name().qualified().dot());
         return r;
     }());
     return r;
@@ -18,7 +18,7 @@ physical::entities::archetype {{class.simple_name}}::archetype() const {
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, archetype().meta_name().qualified());
+    return l.make_full_path(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> {{class.simple_name}}::

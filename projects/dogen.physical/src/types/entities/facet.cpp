@@ -26,11 +26,11 @@ facet::facet(
     const std::string& default_directory_name,
     const std::string& override_directory_name,
     const std::string& description,
-    const dogen::physical::entities::meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
     const std::string& default_postfix,
     const std::string& override_postfix,
-    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id)
     : default_directory_name_(default_directory_name),
       override_directory_name_(override_directory_name),
@@ -121,19 +121,19 @@ void facet::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name& facet::meta_name() const {
+const dogen::identification::entities::physical_meta_name& facet::meta_name() const {
     return meta_name_;
 }
 
-dogen::physical::entities::meta_name& facet::meta_name() {
+dogen::identification::entities::physical_meta_name& facet::meta_name() {
     return meta_name_;
 }
 
-void facet::meta_name(const dogen::physical::entities::meta_name& v) {
+void facet::meta_name(const dogen::identification::entities::physical_meta_name& v) {
     meta_name_ = v;
 }
 
-void facet::meta_name(const dogen::physical::entities::meta_name&& v) {
+void facet::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -185,19 +185,19 @@ void facet::override_postfix(const std::string&& v) {
     override_postfix_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::archetype>& facet::archetypes() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& facet::archetypes() const {
     return archetypes_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::archetype>& facet::archetypes() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& facet::archetypes() {
     return archetypes_;
 }
 
-void facet::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v) {
+void facet::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v) {
     archetypes_ = v;
 }
 
-void facet::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v) {
+void facet::archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>&& v) {
     archetypes_ = std::move(v);
 }
 

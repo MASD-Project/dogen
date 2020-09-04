@@ -28,6 +28,7 @@
 #include <string>
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_id.hpp"
 
 namespace dogen::identification::helpers {
@@ -42,6 +43,8 @@ public:
         const std::string& physical_meta_id);
     static entities::physical_id make(const entities::logical_id& logical_id,
         const std::string& physical_meta_id);
+    static entities::physical_id make(const entities::logical_id& logical_id,
+        const entities::physical_meta_id& physical_meta_id);
     static entities::physical_id make(const entities::logical_id& logical_id,
         const entities::technical_space& ts);
 };

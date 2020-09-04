@@ -32,13 +32,13 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/operation.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -56,7 +56,7 @@ public:
 
 public:
     artefact(
-        const dogen::physical::entities::meta_name& physical_meta_name,
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
@@ -72,10 +72,15 @@ public:
         const dogen::physical::entities::enablement_properties& enablement_properties);
 
 public:
-    const dogen::physical::entities::meta_name& physical_meta_name() const;
-    dogen::physical::entities::meta_name& physical_meta_name();
-    void physical_meta_name(const dogen::physical::entities::meta_name& v);
-    void physical_meta_name(const dogen::physical::entities::meta_name&& v);
+    /**
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    /**@}*/
 
     /**
      * @brief Configuration for this element.
@@ -191,7 +196,7 @@ public:
     artefact& operator=(artefact other);
 
 private:
-    dogen::physical::entities::meta_name physical_meta_name_;
+    dogen::identification::entities::physical_meta_name meta_name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;

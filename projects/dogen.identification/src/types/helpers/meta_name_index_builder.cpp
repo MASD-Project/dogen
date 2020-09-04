@@ -107,7 +107,7 @@ add(const std::list<entities::physical_meta_name>& mns) {
 }
 
 void meta_name_index_builder::
-add(const std::unordered_map<entities::physical_meta_id,
+add(const std::unordered_map<entities::logical_meta_id,
     entities::archetype_name_set>& by_logical_meta_name) {
     auto& lmn(index_.archetype_names_by_logical_meta_name());
     for (const auto& pair : by_logical_meta_name) {

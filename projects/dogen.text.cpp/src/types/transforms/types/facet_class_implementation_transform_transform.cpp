@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
@@ -63,7 +63,7 @@ boost::filesystem::path facet_class_implementation_transform_transform::inclusio
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -72,7 +72,7 @@ boost::filesystem::path facet_class_implementation_transform_transform::inclusio
 
 boost::filesystem::path facet_class_implementation_transform_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> facet_class_implementation_transform_transform::inclusion_dependencies(
@@ -83,7 +83,8 @@ std::list<std::string> facet_class_implementation_transform_transform::inclusion
     const auto ch_arch(traits::canonical_archetype());
     builder.add(fct.name(), ch_arch);
     builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -111,7 +112,7 @@ ast.stream() << "using namespace dogen::utility::log;" << std::endl;
 ast.stream() << "static logger lg(logger_factory(\"" << fct.name().qualified().dot() << "\"));" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::facet make_facet() {" << std::endl;
-ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
+ast.stream() << "    identification::helpers::physical_meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << fct.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << fct.backend_name() << "\");" << std::endl;
 ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;

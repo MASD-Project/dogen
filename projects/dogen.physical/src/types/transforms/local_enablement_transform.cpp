@@ -24,9 +24,12 @@
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.physical/types/entities/meta_name_indices.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
@@ -62,8 +65,9 @@ namespace dogen::physical::transforms {
 
 void local_enablement_transform::compute_enablement_for_artefact_properties(
     const entities::denormalised_archetype_properties&
-    global_enablement_properties, const entities::enablement_properties&
-    local_enablement_properties, const std::string& archetype,
+    global_enablement_properties,
+    const entities::enablement_properties& local_enablement_properties,
+    const identification::entities::physical_meta_id& archetype,
     entities::artefact_properties& ap) {
 
     const auto& gc(global_enablement_properties);
@@ -186,15 +190,15 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
 }
 
 void local_enablement_transform::compute_enablement_for_artefact_set(
-    const std::unordered_map<std::string,
-    physical::entities::archetype_name_set>& physical_names_by_meta_name,
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::logical_meta_id,
+    identification::entities::archetype_name_set>& physical_names_by_meta_name,
+    const std::unordered_map<identification::entities::physical_meta_id,
     entities::denormalised_archetype_properties>&
     global_enablement_properties,
-    std::unordered_set<entities::element_archetype>&
+    std::unordered_set<identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element, entities::artefact_set& as) {
 
-    const auto id(as.provenance().logical_name().id().value());
+    const auto id(as.provenance().logical_name().id());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
 
     /*
@@ -206,12 +210,13 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
         return;
     }
 
-    const auto mt(as.provenance().logical_meta_name().id().value());
-    BOOST_LOG_SEV(lg, trace) << "Logical meta-type: " << mt;
-    const auto j(physical_names_by_meta_name.find(mt));
+    const auto lmn(as.provenance().logical_meta_name().id());
+    BOOST_LOG_SEV(lg, trace) << "Logical meta-name: " << lmn;
+    const auto j(physical_names_by_meta_name.find(lmn));
     if (j == physical_names_by_meta_name.end()) {
-        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mt;
-        BOOST_THROW_EXCEPTION(transform_exception(meta_name_not_found + mt));
+        BOOST_LOG_SEV(lg, error) << meta_name_not_found << lmn;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(meta_name_not_found + lmn.value()));
     }
     const auto& cal(j->second.canonical_locations());
 
@@ -226,8 +231,8 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
         const auto i(global_enablement_properties.find(arch));
         if (i == global_enablement_properties.end()) {
             BOOST_LOG_SEV(lg, error) << global_configuration_not_found << arch;
-            BOOST_THROW_EXCEPTION(
-                transform_exception(global_configuration_not_found + arch));
+            BOOST_THROW_EXCEPTION(transform_exception(
+                    global_configuration_not_found + arch.value()));
         }
         const auto& gep(i->second);
 
@@ -256,14 +261,14 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
          * If we are enabled, we need to update the enablement
          * index. First, we update it with the concrete archetype.
          */
-        using entities::element_archetype;
+        using identification::entities::logical_meta_physical_id;
         auto& eafe(enabled_archetype_for_element);
-        auto inserted(eafe.insert(element_archetype(id, arch)).second);
+        auto inserted(eafe.insert(logical_meta_physical_id(id, arch)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
                                      << " " << id;
             BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype_name
-                    + arch + " " + id));
+                    + arch.value() + " " + id.value()));
         }
 
         /*
@@ -274,12 +279,12 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
         if (k == cal.end())
             continue;
 
-        inserted = eafe.insert(element_archetype(id, k->second)).second;
+        inserted = eafe.insert(logical_meta_physical_id(id, k->second)).second;
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
                                      << " " << id;
             BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype_name
-                    + arch + " " + id));
+                    + arch.value() + " " + id.value()));
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
@@ -295,7 +300,8 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     const auto& lmn(in.archetype_names_by_logical_meta_name());
     const auto& galp(arp.global_enablement_properties()
         .denormalised_archetype_properties());
-    std::unordered_set<entities::element_archetype> eafe;
+    using identification::entities::logical_meta_physical_id;
+    std::unordered_set<logical_meta_physical_id> eafe;
     for(auto& pair : arp.artefact_sets_by_logical_id()) {
         auto& as(pair.second);
         compute_enablement_for_artefact_set(lmn, galp, eafe, as);

@@ -27,7 +27,8 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.physical/types/entities/archetype_name_set.hpp"
+#include "dogen.identification/types/entities/archetype_name_set.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.physical/types/entities/denormalised_archetype_properties.hpp"
@@ -44,16 +45,17 @@ private:
         global_enablement_properties,
         const entities::enablement_properties&
         local_enablement_properties,
-        const std::string& archetype,
+        const identification::entities::physical_meta_id& archetype,
         entities::artefact_properties& ap);
 
     static void compute_enablement_for_artefact_set(
-        const std::unordered_map<std::string,
-        physical::entities::archetype_name_set>& physical_names_by_meta_name,
-        const std::unordered_map<std::string,
+        const std::unordered_map<identification::entities::logical_meta_id,
+        identification::entities::archetype_name_set>&
+        physical_names_by_meta_name,
+        const std::unordered_map<identification::entities::physical_meta_id,
         entities::denormalised_archetype_properties>&
         global_enablement_properties,
-        std::unordered_set<entities::element_archetype>&
+        std::unordered_set<identification::entities::logical_meta_physical_id>&
         enabled_archetype_for_element, entities::artefact_set& as);
 
 public:

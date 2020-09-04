@@ -32,10 +32,12 @@
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/artefact_set.hpp"
-#include "dogen.physical/types/entities/element_archetype.hpp"
-#include "dogen.physical/hash/entities/element_archetype_hash.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.physical/types/entities/global_enablement_properties.hpp"
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
 namespace dogen::physical::entities {
 
@@ -50,12 +52,12 @@ public:
 
 public:
     artefact_repository(
-        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& identifier,
-        const std::string& root_module_logical_id,
+        const dogen::identification::entities::logical_id& root_module_logical_id,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
-        const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
+        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const std::list<boost::filesystem::path>& managed_directories,
         const bool has_generatable_artefacts);
 
@@ -64,10 +66,10 @@ public:
      * @brief All atefact sets in this model, by logical ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
+    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v);
+    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v);
     /**@}*/
 
     /**
@@ -84,10 +86,10 @@ public:
      * @brief Identifier of the artefact set containing the root module.
      */
     /**@{*/
-    const std::string& root_module_logical_id() const;
-    std::string& root_module_logical_id();
-    void root_module_logical_id(const std::string& v);
-    void root_module_logical_id(const std::string&& v);
+    const dogen::identification::entities::logical_id& root_module_logical_id() const;
+    dogen::identification::entities::logical_id& root_module_logical_id();
+    void root_module_logical_id(const dogen::identification::entities::logical_id& v);
+    void root_module_logical_id(const dogen::identification::entities::logical_id&& v);
     /**@}*/
 
     const dogen::physical::entities::extraction_properties& extraction_properties() const;
@@ -100,10 +102,10 @@ public:
     void global_enablement_properties(const dogen::physical::entities::global_enablement_properties& v);
     void global_enablement_properties(const dogen::physical::entities::global_enablement_properties&& v);
 
-    const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element() const;
-    std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element();
-    void enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>& v);
-    void enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element() const;
+    std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element();
+    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v);
+    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v);
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -129,12 +131,12 @@ public:
     artefact_repository& operator=(artefact_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string identifier_;
-    std::string root_module_logical_id_;
+    dogen::identification::entities::logical_id root_module_logical_id_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     dogen::physical::entities::global_enablement_properties global_enablement_properties_;
-    std::unordered_set<dogen::physical::entities::element_archetype> enabled_archetype_for_element_;
+    std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;
     bool has_generatable_artefacts_;
 };

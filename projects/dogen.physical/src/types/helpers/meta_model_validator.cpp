@@ -21,10 +21,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_validator.hpp"
 #include "dogen.physical/types/helpers/validation_error.hpp"
-#include "dogen.physical/types/helpers/meta_name_validator.hpp"
 #include "dogen.physical/types/helpers/meta_model_validator.hpp"
 
 namespace {
@@ -39,48 +41,65 @@ const std::string facets_missing_canonical_archetype(
 
 }
 
+namespace dogen::identification::entities {
+
+// inline bool
+// operator<(physical_meta_id&& lhs, physical_meta_id&& rhs) {
+//     return lhs.value() < rhs.value();
+// }
+
+inline bool
+operator<(const physical_meta_id& lhs, const physical_meta_id& rhs) {
+    return lhs.value() < rhs.value();
+}
+
+}
+
 namespace dogen::physical::helpers {
+
+using dogen::identification::entities::physical_meta_id;
 
 void meta_model_validator::validate(physical::entities::meta_model& mm) {
     /*
      * Validate the registered canonical transforms.
      */
-    std::set<std::string> facets_found;
-    std::set<std::string> all_facets;
+    std::set<physical_meta_id> facets_found;
+    std::set<physical_meta_id> all_facets;
 
     const auto rs_fd(entities::relation_status::facet_default);
     for (auto& be : mm.backends()) {
         for (auto& fct_pair : be.facets()) {
             auto& fct(fct_pair.second);
             for (auto& arch_pair : fct.archetypes()) {
-                const auto& lmn(arch_pair.first);
+                const auto& pmid(arch_pair.first);
                 auto& arch(arch_pair.second);
 
-                BOOST_LOG_SEV(lg, debug) << "Processing: " << lmn;
+                BOOST_LOG_SEV(lg, debug) << "Processing: " << pmid;
 
-                std::set<std::string> facets_found;
-                std::set<std::string> all_facets;
-                using qnb = physical::helpers::qualified_meta_name_builder;
-
+                identification::helpers::physical_meta_id_builder b;
                 const auto pmn(arch.meta_name());
-                const auto fct(qnb::build_facet(pmn));
+                const auto fct(b.build_facet(pmn));
                 all_facets.insert(fct);
                 if (arch.relations().status() == rs_fd) {
                     continue;
 
+                    // FIXME: this logic is incorrect. Check this when
+                    // we have a stable code base again.
                     /*
                      * We can only have one canonical transform per
                      * type per facet.
                      */
                     const auto i(facets_found.find(fct));
                     if (i != facets_found.end()) {
-                        const auto arch(pmn.qualified());
-                        BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
-                                                 << fct << " archetype: "
-                                                 << pmn.qualified()
-                                                 << " meta name: " << lmn;
+                        const auto arch(pmn.id());
+                        BOOST_LOG_SEV(lg, error)
+                            << more_than_one_canonical_archetype
+                            << fct << " archetype: "
+                            << pmn.id()
+                            << " meta id: " << pmid;
                         BOOST_THROW_EXCEPTION(validation_error(
-                                more_than_one_canonical_archetype + fct));
+                                more_than_one_canonical_archetype +
+                                fct.value()));
                     }
                     facets_found.insert(fct);
                 }
@@ -97,7 +116,7 @@ void meta_model_validator::validate(physical::entities::meta_model& mm) {
      * visual studio where we don't actually require canonical
      * archetypes so we just warn.
      */
-    std::set<std::string> result;
+    std::set<physical_meta_id> result;
     std::set_difference(all_facets.begin(), all_facets.end(),
         facets_found.begin(), facets_found.end(),
         std::inserter(result, result.end()));

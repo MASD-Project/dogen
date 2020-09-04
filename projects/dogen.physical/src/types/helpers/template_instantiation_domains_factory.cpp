@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 
 namespace {
@@ -33,7 +33,8 @@ namespace {
 const std::string transform_id("logical.transforms.parsing_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("physical.template_instantiation_domains_factory"));
+auto lg(logger_factory(
+        "physical.helpers.template_instantiation_domains_factory"));
 
 const std::string backend_postfix(".backend");
 const std::string facet_postfix(".facet");
@@ -46,7 +47,7 @@ namespace dogen::physical::helpers {
 
 std::unordered_map<std::string, std::vector<std::string>>
 template_instantiation_domains_factory::
-make(const std::list<entities::meta_name>& mns) {
+make(const std::list<identification::entities::physical_meta_name>& mns) {
     BOOST_LOG_SEV(lg, debug) << "Building instantiation domains.";
 
     /*
@@ -54,6 +55,7 @@ make(const std::list<entities::meta_name>& mns) {
      * filter out any duplicate backends of facets. We are however not
      * expecting duplicate archetypes, so throw if those show up.
      */
+    using identification::entities::physical_meta_id;
     std::unordered_map<std::string, std::set<std::string>> sorted;
     const auto ensure_inserted(
         [&](const std::string& k, const std::string& v) {
@@ -69,9 +71,10 @@ make(const std::list<entities::meta_name>& mns) {
         /*
          * Meta-model
          */
-        const auto bqn(qualified_meta_name_builder::build_backend(mn));
-        const auto fqn(qualified_meta_name_builder::build_facet(mn));
-        const auto qn(mn.qualified());
+        using qrb = identification::helpers::physical_meta_id_builder;
+        const auto bqn(qrb::build_backend(mn).value());
+        const auto fqn(qrb::build_facet(mn).value());
+        const auto qn(mn.id().value());
 
         sorted[masd_meta_model].insert(bqn);
         sorted[masd_meta_model].insert(fqn);

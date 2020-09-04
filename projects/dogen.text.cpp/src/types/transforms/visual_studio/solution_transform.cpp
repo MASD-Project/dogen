@@ -28,7 +28,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.text.cpp/types/transforms/visual_studio/traits.hpp"
@@ -65,7 +65,7 @@ boost::filesystem::path solution_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -74,7 +74,7 @@ boost::filesystem::path solution_transform::inclusion_path(
 
 boost::filesystem::path solution_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> solution_transform::inclusion_dependencies(

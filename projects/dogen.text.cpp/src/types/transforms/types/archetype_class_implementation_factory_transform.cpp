@@ -27,7 +27,7 @@
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -63,7 +63,7 @@ boost::filesystem::path archetype_class_implementation_factory_transform::inclus
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -72,7 +72,7 @@ boost::filesystem::path archetype_class_implementation_factory_transform::inclus
 
 boost::filesystem::path archetype_class_implementation_factory_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> archetype_class_implementation_factory_transform::inclusion_dependencies(
@@ -82,7 +82,7 @@ std::list<std::string> archetype_class_implementation_factory_transform::inclusi
     auto builder(f.make());
     const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(arch.name(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_factory.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
     return builder.build();
 }
 
@@ -103,9 +103,9 @@ void archetype_class_implementation_factory_transform::apply(const context& ctx,
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::archetype " << sn << "::make() {" << std::endl;
 ast.stream() << "    physical::entities::archetype r;" << std::endl;
-ast.stream() << "    using pmnf = physical::helpers::meta_name_factory;" << std::endl;
+ast.stream() << "    using pmnf = identification::helpers::physical_meta_name_factory;" << std::endl;
 ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
-ast.stream() << "    r.logical_meta_element_id(\"" << arch.logical_meta_element_id() << "\");" << std::endl;
+ast.stream() << "    r.logical_meta_element_id(identification::entities::logical_meta_id(\"" << arch.logical_meta_element_id() << "\"));" << std::endl;
 ast.stream() << "    r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
             for(const auto& l : arch.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;

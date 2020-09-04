@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"

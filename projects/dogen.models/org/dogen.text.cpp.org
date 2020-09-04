@@ -63,7 +63,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -110,7 +110,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
     builder.add(o.opaque_associations(), fwd_arch);
 
-    const auto self_arch(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_arch(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_arch);
 
     using hash = transforms::hash::traits;
@@ -546,7 +546,7 @@ Generates header files for exceptions.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/exception.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -664,7 +664,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -770,7 +770,7 @@ Generates header files for namespaces.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/module.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -852,7 +852,7 @@ Generates header files for visitors.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -980,7 +980,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -1523,7 +1523,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -1579,7 +1579,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -1830,7 +1830,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2010,7 +2010,7 @@ Generates implementation files for feature template bundles
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2189,7 +2189,7 @@ Generates implementation files for feature templates.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2402,7 +2402,7 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2491,7 +2491,7 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -2596,7 +2596,7 @@ Generates forward declarations for classes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -2668,7 +2668,7 @@ Generates forward declarations for visitors.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -2740,7 +2740,7 @@ Generates forward declarations for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -2811,7 +2811,7 @@ Generates implementation file for entry point.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -2886,7 +2886,7 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -3065,7 +3065,7 @@ Generates implementation files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -3293,7 +3293,7 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3415,7 +3415,7 @@ Generates implementation files for archetypes.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3471,7 +3471,7 @@ Generates header files for facet transforms.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3570,7 +3570,7 @@ Generates implementation files for facet transforms.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
@@ -3590,7 +3590,7 @@ std::list<std::string> facet_class_implementation_transform_transform::inclusion
     const auto ch_arch(traits::canonical_archetype());
     builder.add(fct.name(), ch_arch);
     builder.add(fct.archetypes(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -3619,7 +3619,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("<#= fct.name().qualified().dot() #>"));
 
 physical::entities::facet make_facet() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("<#= fct.meta_model_name() #>");
     b.backend("<#= fct.backend_name() #>");
     b.facet("<#= fct.name().simple() #>");
@@ -3673,7 +3673,7 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3767,7 +3767,7 @@ Generates implementation files for archetypes.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3788,7 +3788,7 @@ std::list<std::string> backend_class_implementation_transform_transform::inclusi
 
     builder.add(be.name(), ch_arch);
     builder.add(be.facets(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -3817,7 +3817,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("<#= be.name().qualified().dot() #>"));
 
 physical::entities::backend make_backend() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("<#= be.meta_model_name() #>");
     b.backend("<#= be.backend_name() #>");
 
@@ -3891,7 +3891,7 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -3963,7 +3963,7 @@ Generates implementation files for archetypes.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/part.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4015,7 +4015,7 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4087,7 +4087,7 @@ Generates implementation files for archetypes.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype_kind.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4143,7 +4143,7 @@ Generates header files for archetype factories.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4231,7 +4231,7 @@ Generates implementation files for archetype factories.
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/archetype.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4249,7 +4249,7 @@ std::list<std::string> archetype_class_implementation_factory_transform::inclusi
     auto builder(f.make());
     const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
     builder.add(arch.name(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_factory.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_factory.hpp");
     return builder.build();
 }
 
@@ -4271,9 +4271,9 @@ void archetype_class_implementation_factory_transform::apply(const context& ctx,
 
 physical::entities::archetype <#= sn #>::make() {
     physical::entities::archetype r;
-    using pmnf = physical::helpers::meta_name_factory;
+    using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("<#= arch.backend_name() #>", "<#= arch.facet_name() #>", "<#= arch.name().simple() #>"));
-    r.logical_meta_element_id("<#= arch.logical_meta_element_id() #>");
+    r.logical_meta_element_id(identification::entities::logical_meta_id("<#= arch.logical_meta_element_id() #>"));
     r.relations().status(physical::entities::relation_status::<#= arch.relations().status() #>);
 <#+
             for(const auto& l : arch.labels()) {
@@ -4370,7 +4370,7 @@ Generates header files for facet factories.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4457,7 +4457,7 @@ Generates implementation files for facet factory.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/types/entities/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/facet.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
@@ -4481,7 +4481,7 @@ std::list<std::string> facet_class_implementation_factory_transform::inclusion_d
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
 
     return builder.build();
 }
@@ -4510,7 +4510,7 @@ static logger lg(logger_factory("<#= fct.name().qualified().dot() #>"));
 }
 
 physical::entities::facet <#= sn #>::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("<#= fct.meta_model_name() #>");
     b.backend("<#= fct.backend_name() #>");
     b.facet("<#= fct.name().simple() #>");
@@ -4526,7 +4526,7 @@ physical::entities::facet <#= sn #>::make() {
 #>
 
     const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().qualified());
+        const auto id(arch.meta_name().id());
         const auto pair(std::make_pair(id, arch));
         const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
@@ -4583,7 +4583,7 @@ Generates header files for backend factories.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4666,7 +4666,7 @@ Generates implementation files for backend factories.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/physical/backend.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -4689,7 +4689,7 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
     builder.add(be.facets(), ch_arch);
 
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -4720,7 +4720,7 @@ static logger lg(logger_factory("<#= be.name().qualified().dot() #>"));
 }
 
 physical::entities::backend <#= sn #>::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("<#= be.meta_model_name() #>");
     b.backend("<#= be.backend_name() #>");
 
@@ -4801,7 +4801,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -4893,7 +4893,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -5029,7 +5029,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5110,7 +5110,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5206,7 +5206,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5295,7 +5295,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -5412,7 +5412,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5491,7 +5491,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5519,7 +5519,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     builder.add(o.opaque_associations(), ch_fn);
 
     const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(class_implementation_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(class_implementation_transform::static_archetype().meta_name().id().value());
     const bool io_enabled(builder.is_enabled(o.name(), self_fn));
 
     if (!io_enabled)
@@ -5594,7 +5594,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5670,7 +5670,7 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5775,7 +5775,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5864,7 +5864,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5946,7 +5946,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -5975,7 +5975,7 @@ primitive_implementation_transform::inclusion_dependencies(
     builder.add(p.name(), ph_fn);
 
     const auto io_carch(transforms::io::traits::canonical_archetype());
-    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(primitive_implementation_transform::static_archetype().meta_name().id().value());
     const bool io_enabled(builder.is_enabled(p.name(), self_fn));
 
     if (!io_enabled)
@@ -6067,7 +6067,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -6179,7 +6179,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -6368,7 +6368,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -6434,7 +6434,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -6490,7 +6490,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -6576,7 +6576,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -6711,7 +6711,7 @@ Generates forward declarations for classes.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -6791,7 +6791,7 @@ Generates forward declarations for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
@@ -6871,7 +6871,7 @@ Generates header files for type registrars.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -6950,7 +6950,7 @@ Generates header files for feature bundles.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -7091,7 +7091,7 @@ Generates header files for objects.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -7195,7 +7195,7 @@ Generates implementation files for objects.
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -7428,7 +7428,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -7516,7 +7516,7 @@ Generates implementation files for enumerations.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -7608,7 +7608,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -7723,7 +7723,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -7817,7 +7817,7 @@ Generates implementation files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -7983,7 +7983,7 @@ Generates header files for archetypes.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -8010,7 +8010,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
 
-    const auto self_fn(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_fn);
 
     return builder.build();
@@ -8110,7 +8110,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -8181,7 +8181,7 @@ Generates header files for builtins.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -8232,7 +8232,7 @@ Generates header files for primitives.
 <#@ masd.stitch.inclusion_dependency="dogen.tracing/types/scoped_tracer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/io/entities/element_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -8353,7 +8353,7 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -8456,7 +8456,7 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -8559,7 +8559,7 @@ Generates object options for odb.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/orm/common_odb_options.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -8830,7 +8830,7 @@ Generates tests for objects.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #>
@@ -9399,7 +9399,7 @@ Generates tests for enumeration.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -9728,7 +9728,7 @@ Generates entry point for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -9840,7 +9840,7 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/assistant.hpp" #>
@@ -10181,7 +10181,7 @@ Generates header files for enumerations.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
@@ -10336,7 +10336,7 @@ Generates logic-less templates.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/templating/logic_less_template.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #>
@@ -10417,7 +10417,7 @@ Generates visual studio project.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/traits.hpp" #>
@@ -10529,7 +10529,7 @@ Generates visual studio solutions.
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.text.cpp/types/transforms/visual_studio/traits.hpp" #>
@@ -10623,7 +10623,7 @@ Generates msbuild targets.
 <#@ masd.stitch.inclusion_dependency="dogen.physical/io/entities/artefact_io.hpp" #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/msbuild_targets.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -10760,7 +10760,7 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -10913,7 +10913,7 @@ Generates cmakelists for tests.
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.identification/types/helpers/physical_meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/formatters/sequence_formatter.hpp" #>
@@ -11879,7 +11879,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -11888,7 +11888,7 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 #+end_src
@@ -11923,12 +11923,12 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.{{locator_function}}(n, archetype().meta_name().qualified());
+    return l.{{locator_function}}(n, archetype().meta_name().id().value());
 }
 
 #+end_src

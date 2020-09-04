@@ -19,14 +19,15 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/types/main_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/types_factory.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/types/enum_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/builtin_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/visitor_header_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/types/exception_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/namespace_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_header_factory.hpp"
@@ -67,7 +68,7 @@ static logger lg(logger_factory("dogen.text.cpp.transforms.types"));
 }
 
 physical::entities::facet types_factory::make() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("cpp");
     b.facet("types");
@@ -77,14 +78,15 @@ physical::entities::facet types_factory::make() {
     r.labels().push_back(identification::entities::label("test", "some_label"));
 
     const auto lambda([&](const auto& arch) {
-        const auto id(arch.meta_name().qualified());
+        const auto id(arch.meta_name().id());
         const auto pair(std::make_pair(id, arch));
         const auto inserted(r.archetypes().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
         }
     });
 

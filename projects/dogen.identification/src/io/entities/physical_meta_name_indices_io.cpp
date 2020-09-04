@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/archetype_name_set_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
@@ -72,7 +73,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::identification::entities::archetype_name_set>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_meta_id, dogen::identification::entities::archetype_name_set>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

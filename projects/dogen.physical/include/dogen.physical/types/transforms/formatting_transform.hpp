@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -48,16 +48,19 @@ private:
         variability::entities::feature formatting_input;
     };
 
-    static std::unordered_map<std::string, feature_group>
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              feature_group>
     make_feature_groups(const variability::entities::feature_model& fm,
-        const std::list<physical::entities::meta_name>& mns);
+        const std::list<identification::entities::physical_meta_name>& pmns);
 
-    static std::unordered_map<std::string, entities::formatting_configuration>
-    make_formatting_configuration(
-        const std::unordered_map<std::string, feature_group>& fgs,
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              entities::formatting_configuration>
+    make_formatting_configuration(const std::unordered_map<
+        identification::entities::physical_meta_id, feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
-    static void apply(const std::unordered_map<std::string, feature_group> fgs,
+    static void apply(const std::unordered_map<
+        identification::entities::physical_meta_id, feature_group> fgs,
         entities::artefact_set& as);
 
 public:

@@ -31,13 +31,15 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -53,21 +55,26 @@ public:
 
 public:
     model(
-        const dogen::physical::entities::meta_name& physical_meta_name,
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
-        const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& technical_space,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts);
 
 public:
-    const dogen::physical::entities::meta_name& physical_meta_name() const;
-    dogen::physical::entities::meta_name& physical_meta_name();
-    void physical_meta_name(const dogen::physical::entities::meta_name& v);
-    void physical_meta_name(const dogen::physical::entities::meta_name&& v);
+    /**
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    /**@}*/
 
     /**
      * @brief Configuration for this element.
@@ -103,10 +110,10 @@ public:
      * @brief All atefact sets in this model, by logical ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v);
-    void artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
+    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v);
+    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v);
     /**@}*/
 
     /**
@@ -150,11 +157,11 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::physical::entities::meta_name physical_meta_name_;
+    dogen::identification::entities::physical_meta_name meta_name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
-    std::unordered_map<std::string, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string technical_space_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;

@@ -43,16 +43,16 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 namespace dogen::physical::entities {
 
 model::model(
-    const dogen::physical::entities::meta_name& physical_meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
-    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& technical_space,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
     const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts)
-    : physical_meta_name_(physical_meta_name),
+    : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
@@ -64,7 +64,7 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(physical_meta_name_, other.physical_meta_name_);
+    swap(meta_name_, other.meta_name_);
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
@@ -76,7 +76,7 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return physical_meta_name_ == rhs.physical_meta_name_ &&
+    return meta_name_ == rhs.meta_name_ &&
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
@@ -93,20 +93,20 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::physical::entities::meta_name& model::physical_meta_name() const {
-    return physical_meta_name_;
+const dogen::identification::entities::physical_meta_name& model::meta_name() const {
+    return meta_name_;
 }
 
-dogen::physical::entities::meta_name& model::physical_meta_name() {
-    return physical_meta_name_;
+dogen::identification::entities::physical_meta_name& model::meta_name() {
+    return meta_name_;
 }
 
-void model::physical_meta_name(const dogen::physical::entities::meta_name& v) {
-    physical_meta_name_ = v;
+void model::meta_name(const dogen::identification::entities::physical_meta_name& v) {
+    meta_name_ = v;
 }
 
-void model::physical_meta_name(const dogen::physical::entities::meta_name&& v) {
-    physical_meta_name_ = std::move(v);
+void model::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::variability::entities::configuration>& model::configuration() const {
@@ -157,19 +157,19 @@ void model::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() const {
     return artefact_sets_by_logical_id_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() {
     return artefact_sets_by_logical_id_;
 }
 
-void model::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v) {
+void model::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v) {
     artefact_sets_by_logical_id_ = v;
 }
 
-void model::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v) {
+void model::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v) {
     artefact_sets_by_logical_id_ = std::move(v);
 }
 

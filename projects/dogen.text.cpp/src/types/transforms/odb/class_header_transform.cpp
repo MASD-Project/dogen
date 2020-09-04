@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
@@ -61,12 +61,12 @@ inclusion_support_types class_header_transform::inclusion_support_type() const {
 
 boost::filesystem::path class_header_transform::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path class_header_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> class_header_transform::inclusion_dependencies(
@@ -77,11 +77,11 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
 
-    const auto self_fn(class_header_transform::static_archetype().meta_name().qualified());
+    const auto self_fn(class_header_transform::static_archetype().meta_name().id().value());
     builder.add(o.parents(), self_fn);
 
     return builder.build();

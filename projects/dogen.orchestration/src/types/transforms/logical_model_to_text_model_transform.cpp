@@ -24,6 +24,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
@@ -154,7 +157,8 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * it back to its origin.
      */
     auto& as(ea.artefacts());
-    const auto mn(e->meta_name().qualified().dot());
+    const identification::entities::logical_meta_id
+        mn(e->meta_name().qualified().dot());
     as.provenance(make_logical_provenance(*e));
     as.configuration(e->configuration());
 
@@ -193,7 +197,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
         if (e->generability_status() != gne) {
             BOOST_LOG_SEV(lg, error) << expected_archetypes << mn;
             BOOST_THROW_EXCEPTION(
-                transform_exception(expected_archetypes + mn));
+                transform_exception(expected_archetypes + mn.value()));
         }
 
         /*
@@ -210,12 +214,13 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      */
     if (e->generability_status() == gne) {
         BOOST_LOG_SEV(lg, error) << unexpected_archetypes << mn;
-        BOOST_THROW_EXCEPTION(transform_exception(unexpected_archetypes + mn));
+        BOOST_THROW_EXCEPTION(transform_exception(unexpected_archetypes +
+                mn.value()));
     }
 
     /*
      * The element does have a physical representation. We need to
-     * update the manifold with it.
+     * update the artefact set with it.
      */
     const auto& physical_meta_names(i->second.meta_names());
     BOOST_LOG_SEV(lg, debug) << "Element has physical meta-names: "
@@ -228,8 +233,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      */
     auto& aba(as.artefacts_by_archetype());
     for (const auto& pmn : physical_meta_names) {
-        const auto pqn(pmn.qualified());
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << pqn;
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << pmn.id();
 
         /*
          * Populate the provenance properties for both the logical and
@@ -237,29 +241,29 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
          */
         auto a(boost::make_shared<physical::entities::artefact>());
         a->name().simple(e->name().simple());
+        a->meta_name(pmn);
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
-        logical_id id(e->name().qualified().dot());
-        a->name().id(f.make(id, pqn));
-        a->physical_meta_name(pmn);
+        const logical_id id(e->name().qualified().dot());
+        a->name().id(f.make(id, pmn.id()));
         a->provenance(as.provenance());
 
         /*
-         * Add the archetype to the manifold. For any position in
-         * logical space, there can only be one corresponding position
-         * in physical space as represented by the physical
+         * Add the archetype to the plane. For any position in logical
+         * space, there can only be one corresponding position in
+         * physical space as represented by the physical
          * meta-element. We only expect one instance of a physical
          * meta-name.
          */
-        const auto pair(std::make_pair(pqn, a));
+        const auto pair(std::make_pair(pmn.id(), a));
         const auto inserted(aba.insert(pair).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pqn;
-            BOOST_THROW_EXCEPTION(
-                transform_exception(duplicate_physical_name + pqn));
+            BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pmn.id();
+            BOOST_THROW_EXCEPTION(transform_exception(
+                    duplicate_physical_name + pmn.id().value()));
         }
-        BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: " << pqn;
+        BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: " << pmn;
     }
     result_.elements().push_back(ea);
 }

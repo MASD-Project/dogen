@@ -18,50 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_BUILDER_HPP
-#define DOGEN_PHYSICAL_TYPES_HELPERS_META_NAME_BUILDER_HPP
+#ifndef DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_META_PHYSICAL_ID_HASH_HPP
+#define DOGEN_IDENTIFICATION_HASH_ENTITIES_LOGICAL_META_PHYSICAL_ID_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen.physical/types/entities/meta_name.hpp"
+#include <functional>
+#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 
-namespace dogen::physical::helpers {
+namespace dogen::identification::entities {
 
-/**
- * @brief Builds a physical name.
- */
-class meta_name_builder final {
+struct logical_meta_physical_id_hasher {
 public:
-    /**
-     * @brief Adds a meta-model to the name.
-     */
-    meta_name_builder& meta_model(const std::string& s);
-
-    /**
-     * @brief Adds a backend to the name.
-     */
-    meta_name_builder& backend(const std::string& s);
-
-    /**
-     * @brief Adds a facet to the name.
-     */
-    meta_name_builder& facet(const std::string& s);
-
-    /**
-     * @brief Adds an archetype to the name.
-     */
-    meta_name_builder& archetype(const std::string& s);
-
-public:
-    entities::meta_name build();
-
-private:
-    entities::meta_name meta_name_;
+    static std::size_t hash(const logical_meta_physical_id& v);
 };
 
 }
 
+namespace std {
+
+template<>
+struct hash<dogen::identification::entities::logical_meta_physical_id> {
+public:
+    size_t operator()(const dogen::identification::entities::logical_meta_physical_id& v) const {
+        return dogen::identification::entities::logical_meta_physical_id_hasher::hash(v);
+    }
+};
+
+}
 #endif

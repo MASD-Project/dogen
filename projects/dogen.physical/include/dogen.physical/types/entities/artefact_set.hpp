@@ -31,7 +31,9 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::physical::entities {
 
@@ -51,8 +53,8 @@ public:
     artefact_set(
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
-        const std::unordered_map<std::string, std::string>& archetype_for_role,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
+        const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& archetype_for_role,
         const bool is_generatable);
 
 public:
@@ -80,20 +82,20 @@ public:
      * @brief All artefacts that are contained within this set, organised by archetype.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype();
-    void artefacts_by_archetype(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >& v);
-    void artefacts_by_archetype(const std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype();
+    void artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& v);
+    void artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
     /**@}*/
 
     /**
      * @brief Resolves a role into a concrete archetype, in the context of this logical element.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::string>& archetype_for_role() const;
-    std::unordered_map<std::string, std::string>& archetype_for_role();
-    void archetype_for_role(const std::unordered_map<std::string, std::string>& v);
-    void archetype_for_role(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& archetype_for_role() const;
+    std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& archetype_for_role();
+    void archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& v);
+    void archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>&& v);
     /**@}*/
 
     /**
@@ -117,8 +119,8 @@ public:
 private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;
-    std::unordered_map<std::string, std::string> archetype_for_role_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> > artefacts_by_archetype_;
+    std::unordered_map<std::string, dogen::identification::entities::physical_meta_id> archetype_for_role_;
     bool is_generatable_;
 };
 

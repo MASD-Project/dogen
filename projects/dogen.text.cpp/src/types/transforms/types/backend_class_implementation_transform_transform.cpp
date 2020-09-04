@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -62,7 +62,7 @@ boost::filesystem::path backend_class_implementation_transform_transform::inclus
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -71,7 +71,7 @@ boost::filesystem::path backend_class_implementation_transform_transform::inclus
 
 boost::filesystem::path backend_class_implementation_transform_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> backend_class_implementation_transform_transform::inclusion_dependencies(
@@ -84,7 +84,8 @@ std::list<std::string> backend_class_implementation_transform_transform::inclusi
 
     builder.add(be.name(), ch_arch);
     builder.add(be.facets(), ch_arch);
-    builder.add_as_user("dogen.physical/types/helpers/meta_name_builder.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
+    builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
 
@@ -112,7 +113,7 @@ ast.stream() << "using namespace dogen::utility::log;" << std::endl;
 ast.stream() << "static logger lg(logger_factory(\"" << be.name().qualified().dot() << "\"));" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "physical::entities::backend make_backend() {" << std::endl;
-ast.stream() << "    physical::helpers::meta_name_builder b;" << std::endl;
+ast.stream() << "    identification::helpers::physical_meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << be.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
 ast.stream() << std::endl;
@@ -120,14 +121,14 @@ ast.stream() << "    physical::entities::backend r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    const auto lambda([&](const auto& fct) {" << std::endl;
-ast.stream() << "        const auto id(fct.meta_name().qualified());" << std::endl;
+ast.stream() << "        const auto id(fct.meta_name().id());" << std::endl;
 ast.stream() << "        const auto pair(std::make_pair(id, fct));" << std::endl;
 ast.stream() << "        const auto inserted(r.facets().insert(pair).second);" << std::endl;
 ast.stream() << "        if (!inserted) {" << std::endl;
 ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
 ast.stream() << "            const std::string duplicate_facet(\"Duplicate facet: \");" << std::endl;
 ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;" << std::endl;
-ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));" << std::endl;
 ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;

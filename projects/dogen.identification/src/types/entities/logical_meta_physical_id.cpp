@@ -24,19 +24,19 @@ namespace dogen::identification::entities {
 
 logical_meta_physical_id::logical_meta_physical_id(
     const dogen::identification::entities::logical_id& logical_id,
-    const dogen::identification::entities::physical_meta_id& physical_id)
+    const dogen::identification::entities::physical_meta_id& physical_meta_id)
     : logical_id_(logical_id),
-      physical_id_(physical_id) { }
+      physical_meta_id_(physical_meta_id) { }
 
 void logical_meta_physical_id::swap(logical_meta_physical_id& other) noexcept {
     using std::swap;
     swap(logical_id_, other.logical_id_);
-    swap(physical_id_, other.physical_id_);
+    swap(physical_meta_id_, other.physical_meta_id_);
 }
 
 bool logical_meta_physical_id::operator==(const logical_meta_physical_id& rhs) const {
     return logical_id_ == rhs.logical_id_ &&
-        physical_id_ == rhs.physical_id_;
+        physical_meta_id_ == rhs.physical_meta_id_;
 }
 
 logical_meta_physical_id& logical_meta_physical_id::operator=(logical_meta_physical_id other) {
@@ -61,20 +61,20 @@ void logical_meta_physical_id::logical_id(const dogen::identification::entities:
     logical_id_ = std::move(v);
 }
 
-const dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_id() const {
-    return physical_id_;
+const dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_meta_id() const {
+    return physical_meta_id_;
 }
 
-dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_id() {
-    return physical_id_;
+dogen::identification::entities::physical_meta_id& logical_meta_physical_id::physical_meta_id() {
+    return physical_meta_id_;
 }
 
-void logical_meta_physical_id::physical_id(const dogen::identification::entities::physical_meta_id& v) {
-    physical_id_ = v;
+void logical_meta_physical_id::physical_meta_id(const dogen::identification::entities::physical_meta_id& v) {
+    physical_meta_id_ = v;
 }
 
-void logical_meta_physical_id::physical_id(const dogen::identification::entities::physical_meta_id&& v) {
-    physical_id_ = std::move(v);
+void logical_meta_physical_id::physical_meta_id(const dogen::identification::entities::physical_meta_id&& v) {
+    physical_meta_id_ = std::move(v);
 }
 
 }

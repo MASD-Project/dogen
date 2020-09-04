@@ -47,9 +47,10 @@ public:
 
 private:
     boost::shared_ptr<physical::entities::artefact>
-    get_artefact(const std::unordered_map<std::string,
+    get_artefact(const std::unordered_map<
+        identification::entities::physical_meta_id,
         boost::shared_ptr<physical::entities::artefact>>& artefacts,
-        const std::string& archetype) const;
+        const identification::entities::physical_meta_id& archetype) const;
 
 public:
     void execute(boost::shared_ptr<tracing::tracer> tracer,

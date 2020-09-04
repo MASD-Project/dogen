@@ -27,9 +27,11 @@
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
-#include "dogen.physical/hash/entities/element_archetype_hash.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.text.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.text.cpp/io/formattables/helper_properties_io.hpp"
@@ -84,18 +86,19 @@ const std::string helpless_family("No registered helpers found for family: ");
 namespace dogen::text::cpp::transforms {
 
 assistant::assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::meta_name& pmn, const bool requires_header_guard,
+    const identification::entities::physical_meta_name& pmn,
+    const bool requires_header_guard,
     physical::entities::artefact& a)
     : element_(e), context_(ctx), artefact_(a),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),
-            pmn.qualified())),
+            pmn.id())),
       physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()
                              << " for archetype: "
-                             << physical_meta_name_.qualified();
+                             << physical_meta_name_.id();
 
     utility::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -104,11 +107,12 @@ assistant::assistant(const context& ctx, const logical::entities::element& e,
 }
 
 void assistant::validate() const {
-    const auto& fn(physical_meta_name_.qualified());
+    const auto& fn(physical_meta_name_.id());
     const auto& fp(artefact_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(file_path_not_set + fn));
+        BOOST_THROW_EXCEPTION(
+            formatting_error(file_path_not_set + fn.value()));
     }
 
     if (!requires_header_guard_)
@@ -116,7 +120,8 @@ void assistant::validate() const {
 
     if (fp.header_guard().empty()) {
         BOOST_LOG_SEV(lg, error) << header_guard_not_set << fn;
-        BOOST_THROW_EXCEPTION(formatting_error(header_guard_not_set + fn));
+        BOOST_THROW_EXCEPTION(
+            formatting_error(header_guard_not_set + fn.value()));
     }
 }
 
@@ -220,8 +225,9 @@ const formattables::element_properties& assistant::obtain_element_properties(
     return i->second.element_properties();
 }
 
-const formattables::artefact_properties& assistant::obtain_artefact_properties(
-    const std::string& element_id, const std::string& archetype) const {
+const formattables::artefact_properties&
+assistant::obtain_artefact_properties(const std::string& element_id,
+    const identification::entities::physical_meta_id& archetype) const {
 
     const auto& eprops(obtain_element_properties(element_id));
     const auto i(eprops.artefact_properties().find(archetype));
@@ -229,20 +235,20 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
                                  << archetype;
         BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype));
+            formatting_error(artefact_properties_missing + archetype.value()));
     }
     return i->second;
 }
 
-formattables::facet_properties assistant::
-obtain_facet_properties(const std::string& facet_name) const {
+formattables::facet_properties assistant::obtain_facet_properties(
+    const identification::entities::physical_meta_id& facet_name) const {
     const auto& fct_props(context_.model().facet_properties());
     const auto i(fct_props.find(facet_name));
     if (i == fct_props.end()) {
         BOOST_LOG_SEV(lg, error) << facet_properties_missing
                                  << facet_name;
         BOOST_THROW_EXCEPTION(formatting_error(facet_properties_missing +
-                facet_name));
+                facet_name.value()));
     }
     return i->second;
 }
@@ -254,27 +260,29 @@ assistant::make_namespaces(const logical::entities::name& n,
     return nf.flatten(n);
 }
 
-bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    physical::entities::element_archetype
-        ea(element_.name().qualified().dot(), archetype);
+bool assistant::is_archetype_enabled(
+    const identification::entities::physical_meta_id& archetype) const {
+    identification::entities::logical_id lid(element_.name().qualified().dot());
+    identification::entities::logical_meta_physical_id ea(lid, archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
     return !is_disabled;
 }
 
-bool assistant::is_facet_enabled(const std::string& facet) const {
+bool assistant::is_facet_enabled(
+    const identification::entities::physical_meta_id& facet) const {
     const auto& fct_props(obtain_facet_properties(facet));
     return fct_props.enabled();
 }
 
-std::string assistant::
-get_facet_directory_for_facet(const std::string& facet_name) const {
+std::string assistant::get_facet_directory_for_facet(
+    const identification::entities::physical_meta_id& facet_name) const {
     const auto& fct_props(obtain_facet_properties(facet_name));
     if (fct_props.directory().empty()) {
         BOOST_LOG_SEV(lg, error) << facet_directory_missing << facet_name;
         BOOST_THROW_EXCEPTION(
-            formatting_error(facet_directory_missing + facet_name));
+            formatting_error(facet_directory_missing + facet_name.value()));
     }
     return fct_props.directory();
 }
@@ -327,37 +335,51 @@ bool assistant::requires_stream_manipulators() const {
 
 bool assistant::is_serialization_enabled() const {
     using transforms::serialization::traits;
-    return is_archetype_enabled(traits::canonical_archetype());
+    identification::entities::physical_meta_id
+        ca(traits::canonical_archetype());
+    return is_archetype_enabled(ca);
 }
 
 bool assistant::is_io_enabled() const {
     using transforms::io::traits;
-    return is_archetype_enabled(traits::canonical_archetype());
+    identification::entities::physical_meta_id
+        ca(traits::canonical_archetype());
+    return is_archetype_enabled(ca);
 }
 
 bool assistant::is_lexical_cast_enabled() const {
     using transforms::lexical_cast::traits;
-    return is_archetype_enabled(traits::canonical_archetype());
+    identification::entities::physical_meta_id
+        ca(traits::canonical_archetype());
+    return is_archetype_enabled(ca);
 }
 
 bool assistant::is_odb_facet_enabled() const {
     using transforms::odb::traits;
-    return is_facet_enabled(traits::facet_qn());
+    identification::entities::physical_meta_id
+        fqn(traits::facet_qn());
+    return is_facet_enabled(fqn);
 }
 
 bool assistant::is_tests_enabled() const {
     using transforms::tests::traits;
-    return is_facet_enabled(traits::facet_qn());
+    identification::entities::physical_meta_id
+        fqn(traits::facet_qn());
+    return is_facet_enabled(fqn);
 }
 
 bool assistant::is_hash_enabled() const {
     using transforms::hash::traits;
-    return is_archetype_enabled(traits::canonical_archetype());
+    identification::entities::physical_meta_id
+        ca(traits::canonical_archetype());
+    return is_archetype_enabled(ca);
 }
 
 bool assistant::is_test_data_enabled() const {
     using transforms::test_data::traits;
-    return is_facet_enabled(traits::facet_qn());
+    identification::entities::physical_meta_id
+        fqn(traits::facet_qn());
+    return is_facet_enabled(fqn);
 }
 
 text::formatters::scoped_boilerplate_formatter assistant::
@@ -491,15 +513,15 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
-    const auto j(i->second.find(physical_meta_name_.qualified()));
+    const auto j(i->second.find(physical_meta_name_.id()));
     if (j != i->second.end()) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << physical_meta_name_.qualified();
+                                 << physical_meta_name_.id();
         return j->second;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_meta_name_.qualified();
+                             << physical_meta_name_.id();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
@@ -528,8 +550,9 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      * inheritance relationship, we'll need streaming.
      */
     using tt = transforms::types::traits;
-    const auto cifn(tt::class_implementation_archetype_qn());
-    const auto arch(physical_meta_name_.qualified());
+    identification::entities::physical_meta_id
+        cifn(tt::class_implementation_archetype_qn());
+    const auto arch(physical_meta_name_.id());
     bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }
@@ -625,15 +648,17 @@ bool assistant::requires_hashing_helper_method(
     return false;
 }
 
-std::list<logical::entities::name> assistant::
-names_with_enabled_archetype(const std::string& archetype,
+std::list<logical::entities::name>
+assistant::names_with_enabled_archetype(
+    const identification::entities::physical_meta_id& archetype,
     const std::list<logical::entities::name> names) const {
     std::list<logical::entities::name> r;
     for (const auto& n : names) {
-        const auto id(n.qualified().dot());
-        BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
+        const identification::entities::logical_id lid(n.qualified().dot());
+        BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << lid;
 
-        physical::entities::element_archetype ea(id, archetype);
+
+        identification::entities::logical_meta_physical_id ea(lid, archetype);
         const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());

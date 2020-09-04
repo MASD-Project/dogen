@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -57,12 +57,12 @@ inclusion_support_types primitive_forward_declarations_transform::inclusion_supp
 
 boost::filesystem::path primitive_forward_declarations_transform::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path primitive_forward_declarations_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(

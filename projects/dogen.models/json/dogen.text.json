@@ -75,7 +75,7 @@
         },
         {
           "name": "enabled_archetype_for_element",
-          "type": "std::unordered_set<physical::entities::element_archetype>"
+          "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         },
         {
           "name": "extraction_properties",
@@ -87,7 +87,7 @@
         },
         {
           "name": "facet_properties",
-          "type": "std::unordered_map<std::string, physical::entities::facet_properties>"
+          "type": "std::unordered_map<identification::entities::physical_meta_id, physical::entities::facet_properties>"
         }
       ]
     },

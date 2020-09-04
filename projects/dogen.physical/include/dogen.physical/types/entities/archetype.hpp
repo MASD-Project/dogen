@@ -28,9 +28,11 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.physical/types/entities/meta_name.hpp"
 #include "dogen.physical/types/entities/relations.hpp"
 #include "dogen.identification/types/entities/label.hpp"
+#include "dogen.identification/types/entities/physical_id.hpp"
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -47,7 +49,7 @@ public:
 public:
     archetype(
         const std::string& description,
-        const dogen::physical::entities::meta_name& meta_name,
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
         const std::string& default_postfix,
         const std::string& override_postfix,
@@ -55,8 +57,8 @@ public:
         const std::list<std::string>& generates,
         const std::string& generated_by,
         const std::string& archetype_kind_id,
-        const std::string& logical_meta_element_id,
-        const std::string& part,
+        const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
+        const dogen::identification::entities::physical_id& part,
         const dogen::physical::entities::relations& relations);
 
 public:
@@ -74,10 +76,10 @@ public:
      * @brief Meta-name for this meta-element.
      */
     /**@{*/
-    const dogen::physical::entities::meta_name& meta_name() const;
-    dogen::physical::entities::meta_name& meta_name();
-    void meta_name(const dogen::physical::entities::meta_name& v);
-    void meta_name(const dogen::physical::entities::meta_name&& v);
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
     /**@}*/
 
     /**
@@ -154,20 +156,20 @@ public:
      * @brief ID of the meta-element in the logical model this archetype binds to.
      */
     /**@{*/
-    const std::string& logical_meta_element_id() const;
-    std::string& logical_meta_element_id();
-    void logical_meta_element_id(const std::string& v);
-    void logical_meta_element_id(const std::string&& v);
+    const dogen::identification::entities::logical_meta_id& logical_meta_element_id() const;
+    dogen::identification::entities::logical_meta_id& logical_meta_element_id();
+    void logical_meta_element_id(const dogen::identification::entities::logical_meta_id& v);
+    void logical_meta_element_id(const dogen::identification::entities::logical_meta_id&& v);
     /**@}*/
 
     /**
      * @brief Part in which we are located.
      */
     /**@{*/
-    const std::string& part() const;
-    std::string& part();
-    void part(const std::string& v);
-    void part(const std::string&& v);
+    const dogen::identification::entities::physical_id& part() const;
+    dogen::identification::entities::physical_id& part();
+    void part(const dogen::identification::entities::physical_id& v);
+    void part(const dogen::identification::entities::physical_id&& v);
     /**@}*/
 
     /**
@@ -192,7 +194,7 @@ public:
 
 private:
     std::string description_;
-    dogen::physical::entities::meta_name meta_name_;
+    dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
     std::string default_postfix_;
     std::string override_postfix_;
@@ -200,8 +202,8 @@ private:
     std::list<std::string> generates_;
     std::string generated_by_;
     std::string archetype_kind_id_;
-    std::string logical_meta_element_id_;
-    std::string part_;
+    dogen::identification::entities::logical_meta_id logical_meta_element_id_;
+    dogen::identification::entities::physical_id part_;
     dogen::physical::entities::relations relations_;
 };
 

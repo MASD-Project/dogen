@@ -48,8 +48,9 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     physical::entities::artefact_repository r;
-    const auto rm(m.root_module()->name().qualified().dot());
-    r.root_module_logical_id(rm);
+    const auto rmn(m.root_module()->name());
+    const identification::entities::logical_id id(rmn.qualified().dot());
+    r.root_module_logical_id(id);
     r.identifier(m.name().qualified().dot());
 
     auto& asbli(r.artefact_sets_by_logical_id());

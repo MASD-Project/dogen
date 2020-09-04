@@ -21,7 +21,8 @@
 #include <typeindex>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/inclusion_support_types.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -71,13 +72,13 @@ void canonical_archetype_expander::expand(const transforms::repository& frp,
         if (fmt.inclusion_support_type() != cs)
             continue;
 
-        const auto pn(fmt.archetype().meta_name());
-        const auto arch(pn.qualified());
-        using qnb = physical::helpers::qualified_meta_name_builder;
-        const auto fct(qnb::build_facet(pn));
+        const auto pmn(fmt.archetype().meta_name());
+        const auto arch(pmn.id());
+        identification::helpers::physical_meta_id_builder b;
+        const auto fct(b.build_facet(pmn));
 
-        const auto carch(transforms::traits::canonical_archetype(fct));
-        eprops.canonical_archetype_to_archetype()[carch] = arch;
+        const auto carch(transforms::traits::canonical_archetype(fct.value()));
+        eprops.canonical_archetype_to_archetype()[carch] = arch.value();
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
     }
     BOOST_LOG_SEV(lg, debug) << "Processed element.";

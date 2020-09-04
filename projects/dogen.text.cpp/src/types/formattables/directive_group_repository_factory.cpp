@@ -26,7 +26,8 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -73,8 +74,8 @@ directive_group_repository_factory::make_feature_group(
     r.inclusion_required = s.get_by_name(ir);
 
     for (const auto& f : frp.stock_artefact_formatters()) {
-        const auto n(f->archetype().meta_name());
-        const auto arch(n.qualified());
+        const auto pmn(f->archetype().meta_name());
+        const auto arch(pmn.id());
 
         using transforms::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);
@@ -85,10 +86,10 @@ directive_group_repository_factory::make_feature_group(
 
         formattater_feature_group ffg;
         const auto& pid(traits::primary_inclusion_directive());
-        ffg.primary_inclusion_directive = s.get_by_name(arch, pid);
+        ffg.primary_inclusion_directive = s.get_by_name(arch.value(), pid);
 
         const auto& sid(traits::secondary_inclusion_directive());
-        ffg.secondary_inclusion_directive = s.get_by_name(arch, sid);
+        ffg.secondary_inclusion_directive = s.get_by_name(arch.value(), sid);
 
         r.formattaters_feature_groups[arch] = ffg;
     }
@@ -104,12 +105,12 @@ make_top_level_inclusion_required(const feature_group& fg,
     return s.get_boolean_content_or_default(fg.inclusion_required);
 }
 
-boost::optional<directive_group>
-directive_group_repository_factory::make_directive_group(
-    const feature_group& fg,const std::string& archetype,
+boost::optional<directive_group> directive_group_repository_factory::
+make_directive_group(const feature_group& fg,
+    const identification::entities::physical_meta_id& archetype,
     const variability::entities::configuration& cfg) const {
 
-    if (archetype.empty()) {
+    if (archetype.value().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
         BOOST_THROW_EXCEPTION(expansion_error(empty_archetype));
     }
@@ -135,8 +136,8 @@ directive_group_repository_factory::make_directive_group(
     if (s.has_configuration_point(sid)) {
         if (!found) {
             BOOST_LOG_SEV(lg, error) << secondary_without_primary << archetype;
-            BOOST_THROW_EXCEPTION(
-                expansion_error(secondary_without_primary + archetype));
+            BOOST_THROW_EXCEPTION(expansion_error(
+                    secondary_without_primary + archetype.value()));
         }
 
         r.secondary(s.get_text_collection_content(sid));
@@ -192,9 +193,9 @@ includible_formatters_by_meta_name(const transforms::repository& frp) const {
 }
 
 void directive_group_repository_factory::
-insert_inclusion_directive(const std::string& id, const std::string& archetype,
-    const directive_group& dg,
-    directive_group_repository& dgrp) const {
+insert_inclusion_directive(const std::string& id,
+    const identification::entities::physical_meta_id& archetype,
+    const directive_group& dg, directive_group_repository& dgrp) const {
 
     if (dg.primary().empty()) {
         std::ostringstream s;
@@ -259,8 +260,8 @@ compute_directives(const feature_group& fg,
      */
     const auto cs(transforms::inclusion_support_types::canonical_support);
     for (const auto& fmt : formatters) {
-        const auto pn(fmt->archetype().meta_name());
-        const auto arch(pn.qualified());
+        const auto pmn(fmt->archetype().meta_name());
+        const auto arch(pmn.id());
         BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
 
         const auto ist(fmt->inclusion_support_type());
@@ -289,9 +290,10 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                using qnb = physical::helpers::qualified_meta_name_builder;
-                const auto fct(qnb::build_facet(pn));
-                const auto carch(transforms::traits::canonical_archetype(fct));
+                identification::helpers::physical_meta_id_builder b;
+                const auto fct(b.build_facet(pmn).value());
+                const identification::entities::physical_meta_id
+                    carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, dg, dgrp);
             }
 
@@ -320,9 +322,10 @@ compute_directives(const feature_group& fg,
              * archetype name as well.
              */
             if (requires_canonical_archetype) {
-                using qnb = physical::helpers::qualified_meta_name_builder;
-                const auto fct(qnb::build_facet(pn));
-                const auto carch(transforms::traits::canonical_archetype(fct));
+                identification::helpers::physical_meta_id_builder b;
+                const auto fct(b.build_facet(pmn).value());
+                const identification::entities::physical_meta_id
+                    carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, *dg, dgrp);
             }
         }

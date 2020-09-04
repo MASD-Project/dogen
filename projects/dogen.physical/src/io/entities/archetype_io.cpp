@@ -21,9 +21,11 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/archetype_io.hpp"
-#include "dogen.physical/io/entities/meta_name_io.hpp"
 #include "dogen.physical/io/entities/relations_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
+#include "dogen.identification/io/entities/physical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -75,8 +77,8 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"generates\": " << v.generates() << ", "
       << "\"generated_by\": " << "\"" << tidy_up_string(v.generated_by()) << "\"" << ", "
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
-      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(v.logical_meta_element_id()) << "\"" << ", "
-      << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\"" << ", "
+      << "\"logical_meta_element_id\": " << v.logical_meta_element_id() << ", "
+      << "\"part\": " << v.part() << ", "
       << "\"relations\": " << v.relations()
       << " }";
     return(s);

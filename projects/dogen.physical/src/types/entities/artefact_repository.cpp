@@ -26,12 +26,12 @@ artefact_repository::artefact_repository()
     : has_generatable_artefacts_(static_cast<bool>(0)) { }
 
 artefact_repository::artefact_repository(
-    const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& identifier,
-    const std::string& root_module_logical_id,
+    const dogen::identification::entities::logical_id& root_module_logical_id,
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
-    const std::unordered_set<dogen::physical::entities::element_archetype>& enabled_archetype_for_element,
+    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const std::list<boost::filesystem::path>& managed_directories,
     const bool has_generatable_artefacts)
     : artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
@@ -72,19 +72,19 @@ artefact_repository& artefact_repository::operator=(artefact_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_repository::artefact_sets_by_logical_id() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_repository::artefact_sets_by_logical_id() const {
     return artefact_sets_by_logical_id_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::artefact_set>& artefact_repository::artefact_sets_by_logical_id() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_repository::artefact_sets_by_logical_id() {
     return artefact_sets_by_logical_id_;
 }
 
-void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v) {
+void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v) {
     artefact_sets_by_logical_id_ = v;
 }
 
-void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<std::string, dogen::physical::entities::artefact_set>&& v) {
+void artefact_repository::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v) {
     artefact_sets_by_logical_id_ = std::move(v);
 }
 
@@ -104,19 +104,19 @@ void artefact_repository::identifier(const std::string&& v) {
     identifier_ = std::move(v);
 }
 
-const std::string& artefact_repository::root_module_logical_id() const {
+const dogen::identification::entities::logical_id& artefact_repository::root_module_logical_id() const {
     return root_module_logical_id_;
 }
 
-std::string& artefact_repository::root_module_logical_id() {
+dogen::identification::entities::logical_id& artefact_repository::root_module_logical_id() {
     return root_module_logical_id_;
 }
 
-void artefact_repository::root_module_logical_id(const std::string& v) {
+void artefact_repository::root_module_logical_id(const dogen::identification::entities::logical_id& v) {
     root_module_logical_id_ = v;
 }
 
-void artefact_repository::root_module_logical_id(const std::string&& v) {
+void artefact_repository::root_module_logical_id(const dogen::identification::entities::logical_id&& v) {
     root_module_logical_id_ = std::move(v);
 }
 
@@ -152,19 +152,19 @@ void artefact_repository::global_enablement_properties(const dogen::physical::en
     global_enablement_properties_ = std::move(v);
 }
 
-const std::unordered_set<dogen::physical::entities::element_archetype>& artefact_repository::enabled_archetype_for_element() const {
+const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& artefact_repository::enabled_archetype_for_element() const {
     return enabled_archetype_for_element_;
 }
 
-std::unordered_set<dogen::physical::entities::element_archetype>& artefact_repository::enabled_archetype_for_element() {
+std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& artefact_repository::enabled_archetype_for_element() {
     return enabled_archetype_for_element_;
 }
 
-void artefact_repository::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
+void artefact_repository::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
     enabled_archetype_for_element_ = v;
 }
 
-void artefact_repository::enabled_archetype_for_element(const std::unordered_set<dogen::physical::entities::element_archetype>&& v) {
+void artefact_repository::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v) {
     enabled_archetype_for_element_ = std::move(v);
 }
 

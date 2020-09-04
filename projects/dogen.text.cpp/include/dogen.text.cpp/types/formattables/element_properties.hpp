@@ -31,8 +31,10 @@
 #include <unordered_map>
 #include "dogen.text.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.cpp/types/formattables/test_data_properties.hpp"
+#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 
 namespace dogen::text::cpp::formattables {
 
@@ -49,7 +51,7 @@ public:
 public:
     element_properties(
         const dogen::text::cpp::formattables::aspect_properties& aspect_properties,
-        const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& artefact_properties,
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
         const std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
@@ -60,10 +62,10 @@ public:
     void aspect_properties(const dogen::text::cpp::formattables::aspect_properties& v);
     void aspect_properties(const dogen::text::cpp::formattables::aspect_properties&& v);
 
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& artefact_properties() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties>&& v);
 
     const std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties() const;
     std::list<dogen::text::cpp::formattables::helper_properties>& helper_properties();
@@ -92,7 +94,7 @@ public:
 
 private:
     dogen::text::cpp::formattables::aspect_properties aspect_properties_;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::artefact_properties> artefact_properties_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::text::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
     std::unordered_map<std::string, dogen::text::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;

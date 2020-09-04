@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_header_factory_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 
 physical::entities::archetype archetype_class_header_factory_factory::make() {
     physical::entities::archetype r;
-    using pmnf = physical::helpers::meta_name_factory;
+    using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("cpp", "types", "archetype_class_header_factory"));
-    r.logical_meta_element_id("dogen.logical.entities.physical_archetype");
+    r.logical_meta_element_id(identification::entities::logical_meta_id("dogen.logical.entities.physical_archetype"));
     r.relations().status(physical::entities::relation_status::relatable);
     r.labels().push_back(identification::entities::label("role", "type_declaration"));
 

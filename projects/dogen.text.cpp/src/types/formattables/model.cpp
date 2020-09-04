@@ -29,7 +29,7 @@ model::model(
     const dogen::logical::entities::name& name,
     const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>& facet_properties,
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
     const std::string& odb_sql_name_case,
@@ -120,19 +120,19 @@ void model::formattables(const std::unordered_map<std::string, dogen::text::cpp:
     formattables_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() const {
     return facet_properties_;
 }
 
-std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& model::facet_properties() {
     return facet_properties_;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>& v) {
+void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& v) {
     facet_properties_ = v;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::facet_properties>&& v) {
+void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>&& v) {
     facet_properties_ = std::move(v);
 }
 

@@ -42,7 +42,7 @@ repository::stock_artefact_formatters() {
 
 std::unordered_map<
     std::string, std::unordered_map<
-                     std::string,
+                     identification::entities::physical_meta_id,
                      std::list<
                          std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() {
@@ -69,7 +69,7 @@ repository::stock_artefact_formatters() const {
 
 const std::unordered_map<
     std::string, std::unordered_map<
-                     std::string,
+                     identification::entities::physical_meta_id,
                      std::list<
                          std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() const {

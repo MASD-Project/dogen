@@ -54,6 +54,12 @@ physical_id_factory::make(const entities::logical_id& logical_id,
 
 entities::physical_id
 physical_id_factory::make(const entities::logical_id& logical_id,
+    const entities::physical_meta_id& physical_meta_id) {
+    return make(logical_id.value(), physical_meta_id.value());
+}
+
+entities::physical_id
+physical_id_factory::make(const entities::logical_id& logical_id,
     const entities::technical_space& ts) {
 
     switch(ts) {

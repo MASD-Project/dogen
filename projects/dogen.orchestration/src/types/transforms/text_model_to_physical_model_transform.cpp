@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/physical_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -113,7 +114,7 @@ apply(const text::transforms::context& ctx,
                     BOOST_LOG_SEV(lg, error) << duplicate_archetype
                                              << archetype_id;
                     BOOST_THROW_EXCEPTION(transform_exception(
-                            duplicate_archetype + archetype_id));
+                            duplicate_archetype + archetype_id.value()));
                 }
             }
 

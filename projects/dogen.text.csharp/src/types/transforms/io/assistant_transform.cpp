@@ -25,7 +25,7 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
 #include "dogen.text.csharp/types/transforms/io/traits.hpp"
@@ -54,7 +54,7 @@ const physical::entities::archetype& assistant_transform::archetype() const {
 
 boost::filesystem::path assistant_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, archetype().meta_name().qualified());
+    return l.make_full_path(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> assistant_transform::

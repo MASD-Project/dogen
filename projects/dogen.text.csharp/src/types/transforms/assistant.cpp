@@ -23,6 +23,7 @@
 #include "dogen.utility/types/formatters/indent_filter.hpp"
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
@@ -56,15 +57,15 @@ namespace dogen::text::csharp::transforms {
 
 assistant::
 assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::meta_name& mn,
+    const identification::entities::physical_meta_name& pmn,
     physical::entities::artefact& a) :
     element_id_(e.name().qualified().dot()), artefact_(a), context_(ctx),
     artefact_properties_(
-        obtain_artefact_properties(mn.qualified())), physical_meta_name_(mn) {
+        obtain_artefact_properties(pmn.id())), physical_meta_name_(pmn) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: "
-                             << physical_meta_name_.qualified();
+                             << physical_meta_name_.id();
 
     utility::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -88,15 +89,15 @@ make_inheritance_keyword_text(const logical::entities::structural::object& o) {
     return o.is_final() ? sealed_keyword_text : empty;
 }
 
-const formattables::artefact_properties& assistant::
-obtain_artefact_properties(const std::string& archetype) const {
+const formattables::artefact_properties& assistant::obtain_artefact_properties(
+    const identification::entities::physical_meta_id& archetype) const {
     const auto& eprops(context_.element_properties());
     const auto i(eprops.artefact_properties().find(archetype));
     if (i == eprops.artefact_properties().end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
                                  << archetype;
         BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + archetype));
+            formatting_error(artefact_properties_missing + archetype.value()));
     }
     return i->second;
 }
@@ -225,16 +226,16 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
          * Not all formatters need help, so its fine not to have a
          * helper registered against a particular formatter.
          */
-        const auto j(i->second.find(physical_meta_name_.qualified()));
+        const auto j(i->second.find(physical_meta_name_.id()));
         if (j != i->second.end()) {
             BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                     << physical_meta_name_.qualified();
+                                     << physical_meta_name_.id();
             return j->second;
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << physical_meta_name_.qualified();
+                             << physical_meta_name_.id();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
@@ -289,7 +290,7 @@ void assistant::update_artefact() {
     artefact_.content(stream_.str());
 
     const auto& ap(artefact_.artefact_properties());
-    const auto arch(physical_meta_name_.qualified());
+    const auto arch(physical_meta_name_.id());
     artefact_.overwrite(ap.overwrite());
 
     const auto fp(artefact_properties_.file_path());

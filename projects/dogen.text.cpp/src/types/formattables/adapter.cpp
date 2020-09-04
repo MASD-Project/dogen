@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/io/entities/orm/letter_case_io.hpp"
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
 #include "dogen.text.cpp/types/formattables/artefact_properties.hpp"
@@ -173,14 +174,14 @@ model adapter::adapt(const transforms::repository& frp,
          */
         auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
-            const auto n(fmt->archetype().meta_name());
-            const auto arch(n.qualified());
+            const auto pmn(fmt->archetype().meta_name());
+            const auto arch(pmn.id());
             const auto pair(std::make_pair(arch, artefact_properties()));
             const auto inserted(art_props.insert(pair).second);
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
                 BOOST_THROW_EXCEPTION(
-                    adaptation_error(duplicate_archetype + arch));
+                    adaptation_error(duplicate_archetype + arch.value()));
             }
 
             BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch

@@ -25,7 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.physical/types/transforms/meta_model_assembly_transform.hpp"
 
 namespace {
@@ -50,8 +50,8 @@ apply(const physical::transforms::minimal_context& ctx,
     using physical::entities::meta_model;
     auto r(boost::make_shared<meta_model>());
 
-    helpers::meta_name_builder mnb;
-    mnb.meta_model("masd");
+    identification::helpers::physical_meta_name_builder b;
+    b.meta_model("masd");
 
     for (const auto& be : bes)
         r->backends().push_back(be);

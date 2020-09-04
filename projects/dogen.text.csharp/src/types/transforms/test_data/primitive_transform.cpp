@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
@@ -54,7 +54,7 @@ const physical::entities::archetype& primitive_transform::archetype() const {
 
 boost::filesystem::path primitive_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path(n, archetype().meta_name().qualified());
+    return l.make_full_path(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> primitive_transform::
@@ -69,7 +69,7 @@ void primitive_transform::apply(const context& ctx, const logical::entities::ele
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
-    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().qualified(), e));
+    const auto& p(ast.as<logical::entities::structural::primitive>(archetype().meta_name().id().value(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(ast.get_qualified_name(e.name()));

@@ -22,10 +22,29 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
-#include "dogen.physical/io/entities/element_archetype_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.physical/io/entities/global_enablement_properties_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -37,25 +56,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::artefact_set>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -94,7 +95,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_repository\"" << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
       << "\"identifier\": " << "\"" << tidy_up_string(v.identifier()) << "\"" << ", "
-      << "\"root_module_logical_id\": " << "\"" << tidy_up_string(v.root_module_logical_id()) << "\"" << ", "
+      << "\"root_module_logical_id\": " << v.root_module_logical_id() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "

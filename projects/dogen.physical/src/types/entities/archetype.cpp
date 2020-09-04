@@ -24,7 +24,7 @@ namespace dogen::physical::entities {
 
 archetype::archetype(
     const std::string& description,
-    const dogen::physical::entities::meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
     const std::string& default_postfix,
     const std::string& override_postfix,
@@ -32,8 +32,8 @@ archetype::archetype(
     const std::list<std::string>& generates,
     const std::string& generated_by,
     const std::string& archetype_kind_id,
-    const std::string& logical_meta_element_id,
-    const std::string& part,
+    const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
+    const dogen::identification::entities::physical_id& part,
     const dogen::physical::entities::relations& relations)
     : description_(description),
       meta_name_(meta_name),
@@ -101,19 +101,19 @@ void archetype::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const dogen::physical::entities::meta_name& archetype::meta_name() const {
+const dogen::identification::entities::physical_meta_name& archetype::meta_name() const {
     return meta_name_;
 }
 
-dogen::physical::entities::meta_name& archetype::meta_name() {
+dogen::identification::entities::physical_meta_name& archetype::meta_name() {
     return meta_name_;
 }
 
-void archetype::meta_name(const dogen::physical::entities::meta_name& v) {
+void archetype::meta_name(const dogen::identification::entities::physical_meta_name& v) {
     meta_name_ = v;
 }
 
-void archetype::meta_name(const dogen::physical::entities::meta_name&& v) {
+void archetype::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -229,35 +229,35 @@ void archetype::archetype_kind_id(const std::string&& v) {
     archetype_kind_id_ = std::move(v);
 }
 
-const std::string& archetype::logical_meta_element_id() const {
+const dogen::identification::entities::logical_meta_id& archetype::logical_meta_element_id() const {
     return logical_meta_element_id_;
 }
 
-std::string& archetype::logical_meta_element_id() {
+dogen::identification::entities::logical_meta_id& archetype::logical_meta_element_id() {
     return logical_meta_element_id_;
 }
 
-void archetype::logical_meta_element_id(const std::string& v) {
+void archetype::logical_meta_element_id(const dogen::identification::entities::logical_meta_id& v) {
     logical_meta_element_id_ = v;
 }
 
-void archetype::logical_meta_element_id(const std::string&& v) {
+void archetype::logical_meta_element_id(const dogen::identification::entities::logical_meta_id&& v) {
     logical_meta_element_id_ = std::move(v);
 }
 
-const std::string& archetype::part() const {
+const dogen::identification::entities::physical_id& archetype::part() const {
     return part_;
 }
 
-std::string& archetype::part() {
+dogen::identification::entities::physical_id& archetype::part() {
     return part_;
 }
 
-void archetype::part(const std::string& v) {
+void archetype::part(const dogen::identification::entities::physical_id& v) {
     part_ = v;
 }
 
-void archetype::part(const std::string&& v) {
+void archetype::part(const dogen::identification::entities::physical_id&& v) {
     part_ = std::move(v);
 }
 

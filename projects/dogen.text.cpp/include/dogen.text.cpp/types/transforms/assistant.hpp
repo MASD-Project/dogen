@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.physical/types/entities/meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
@@ -51,7 +51,7 @@ namespace dogen::text::cpp::transforms {
 class assistant final {
 public:
     assistant(const context& ctx, const logical::entities::element& e,
-        const physical::entities::meta_name& pn,
+        const identification::entities::physical_meta_name& pmn,
         const bool requires_header_guard, physical::entities::artefact& a);
 
 private:
@@ -149,8 +149,9 @@ private:
      *
      * @pre Artefact properties must exist for the archetype.
      */
-    const formattables::artefact_properties& obtain_artefact_properties(
-        const std::string& element_id, const std::string& archetype) const;
+    const formattables::artefact_properties&
+    obtain_artefact_properties(const std::string& element_id,
+        const identification::entities::physical_meta_id& archetype) const;
 
     /**
      * @brief Obtains the facet configuration for the facet
@@ -158,25 +159,27 @@ private:
      *
      * @pre Facet configuration must exist for the facet.
      */
-    formattables::facet_properties
-    obtain_facet_properties(const std::string& facet_name) const;
+    formattables::facet_properties obtain_facet_properties(
+        const identification::entities::physical_meta_id& facet_name) const;
 
     /**
      * @brief Returns true if the archetype is enabled, false
      * otherwise.
      */
-    bool is_archetype_enabled(const std::string& archetype) const;
+    bool is_archetype_enabled(
+        const identification::entities::physical_meta_id& archetype) const;
 
     /**
      * @brief Returns true if the facet is enabled, false otherwise.
      */
-    bool is_facet_enabled(const std::string& facet) const;
+    bool is_facet_enabled(
+        const identification::entities::physical_meta_id& facet) const;
 
     /**
      * @brief Returns the folder for the current facet.
      */
     std::string get_facet_directory_for_facet(
-        const std::string& facet_name) const;
+        const identification::entities::physical_meta_id& facet_name) const;
 
 public:
     std::string get_odb_facet_directory() const;
@@ -367,8 +370,8 @@ public:
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
-    std::list<logical::entities::name>
-    names_with_enabled_archetype(const std::string& archetype,
+    std::list<logical::entities::name> names_with_enabled_archetype(
+        const identification::entities::physical_meta_id& archetype,
         const std::list<logical::entities::name> names) const;
 
 public:
@@ -393,7 +396,7 @@ private:
     const context& context_;
     physical::entities::artefact& artefact_;
     formattables::artefact_properties artefact_properties_;
-    const physical::entities::meta_name physical_meta_name_;
+    const identification::entities::physical_meta_name physical_meta_name_;
     const bool requires_header_guard_;
 };
 

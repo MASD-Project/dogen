@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
@@ -66,12 +66,12 @@ inclusion_support_types feature_bundle_header_transform::inclusion_support_type(
 
 boost::filesystem::path feature_bundle_header_transform::inclusion_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path feature_bundle_header_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_header(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> feature_bundle_header_transform::inclusion_dependencies(

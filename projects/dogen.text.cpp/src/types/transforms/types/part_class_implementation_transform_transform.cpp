@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.text.cpp/types/transforms/formatting_error.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -62,7 +62,7 @@ boost::filesystem::path part_class_implementation_transform_transform::inclusion
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
-    static logger lg(logger_factory(archetype().meta_name().qualified()));
+    static logger lg(logger_factory(archetype().meta_name().id().value()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
@@ -71,7 +71,7 @@ boost::filesystem::path part_class_implementation_transform_transform::inclusion
 
 boost::filesystem::path part_class_implementation_transform_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> part_class_implementation_transform_transform::inclusion_dependencies(

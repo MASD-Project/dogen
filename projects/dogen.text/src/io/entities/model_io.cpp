@@ -20,18 +20,18 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
-#include "dogen.physical/io/entities/element_archetype_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/injection_provenance_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
 
@@ -126,7 +126,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::lo
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::physical::entities::element_archetype>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -152,22 +152,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::facet_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << i->first;
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
         s << i->second;
         s << " } ]";

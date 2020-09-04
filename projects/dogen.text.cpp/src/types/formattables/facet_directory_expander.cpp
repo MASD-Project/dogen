@@ -18,15 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text.cpp/types/formattables/facet_directory_expander.hpp"
 
 namespace dogen::text::cpp::formattables {
 
 void facet_directory_expander::expand(const locator& l, model& fm) const {
     for (const auto& pair : l.facet_directories()) {
-        const auto fct(pair.first);
+        identification::entities::physical_meta_id pmid(pair.first);
         const auto fct_dir(pair.second);
-        fm.facet_properties()[fct].directory(fct_dir);
+        fm.facet_properties()[pmid].directory(fct_dir);
     }
 }
 

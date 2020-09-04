@@ -19,10 +19,11 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/meta_name_builder.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/enum_transform.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/class_transform.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/assistant_transform.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/primitive_transform.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/test_data_transform.hpp"
@@ -34,7 +35,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("dogen.text.csharp.transforms.test_data"));
 
 physical::entities::facet make_facet() {
-    physical::helpers::meta_name_builder b;
+    identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("csharp");
     b.facet("test_data");

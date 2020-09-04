@@ -27,7 +27,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
-#include "dogen.physical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/project.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/traits.hpp"
@@ -56,7 +56,7 @@ const physical::entities::archetype& project_transform::archetype() const {
 
 boost::filesystem::path project_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
-    return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().qualified());
+    return l.make_full_path_for_visual_studio_project(n, archetype().meta_name().id().value());
 }
 
 std::list<std::string> project_transform::
@@ -72,7 +72,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 
     assistant ast(ctx, e, archetype().meta_name(), a);
     using logical::entities::visual_studio::project;
-    const auto& proj(ast.as<project>(archetype().meta_name().qualified(), e));
+    const auto& proj(ast.as<project>(archetype().meta_name().id().value(), e));
 
 ast.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 ast.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;

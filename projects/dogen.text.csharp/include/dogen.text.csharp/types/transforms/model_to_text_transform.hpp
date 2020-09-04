@@ -28,8 +28,6 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/meta_name.hpp"
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"

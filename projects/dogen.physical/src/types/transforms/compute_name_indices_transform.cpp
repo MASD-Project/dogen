@@ -20,9 +20,11 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/meta_name_index_builder.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
-#include "dogen.physical/types/helpers/qualified_meta_name_builder.hpp"
-#include "dogen.physical/types/helpers/meta_name_index_builder.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/compute_name_indices_transform.hpp"
 
@@ -45,27 +47,28 @@ namespace dogen::physical::transforms {
 void compute_name_indices_transform::
 update_physical_meta_names_by_logical_meta_name(
     const physical::entities::archetype& arch,
-    std::unordered_map<std::string, physical::entities::archetype_name_set>&
+    std::unordered_map<identification::entities::logical_meta_id,
+    identification::entities::archetype_name_set>&
     physical_meta_names_by_logical_meta_name) {
 
     const auto pmn(arch.meta_name());
-    const auto lmn(arch.logical_meta_element_id());
-    auto& g(physical_meta_names_by_logical_meta_name[lmn]);
-    g.logical_meta_element_id(lmn);
+    const auto lmid(arch.logical_meta_element_id());
+    auto& g(physical_meta_names_by_logical_meta_name[lmid]);
+    g.logical_meta_id(lmid);
     g.meta_names().push_back(pmn);
 
     auto& cal(g.canonical_locations());
-    const auto qn(pmn.qualified());
-    using qnb = physical::helpers::qualified_meta_name_builder;
+    const auto qn(pmn.id());
+    identification::helpers::physical_meta_id_builder b;
     const auto rs_fd(entities::relation_status::facet_default);
     if (arch.relations().status() == rs_fd) {
-        const auto fct_qn(qnb::build_facet(pmn));
-        const auto carch(fct_qn + canonical_archetype_postfix);
+        const auto fct_qn(b.build_facet(pmn));
+        const auto carch(fct_qn.value() + canonical_archetype_postfix);
         const auto inserted(cal.insert(std::make_pair(qn, carch)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
             BOOST_THROW_EXCEPTION(
-                transform_exception(duplicate_archetype + qn));
+                transform_exception(duplicate_archetype + qn.value()));
         }
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
     }
@@ -76,18 +79,20 @@ update_physical_meta_names_by_logical_meta_name(
         const auto inserted(afl.insert(std::make_pair(key, qn)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-            BOOST_THROW_EXCEPTION(transform_exception(duplicate_label + qn));
+            BOOST_THROW_EXCEPTION(transform_exception(
+                    duplicate_label + qn.value()));
         }
         BOOST_LOG_SEV(lg, debug) << "Mapped label " << key << " to " << qn;
     }
 }
 
-std::unordered_map<std::string, physical::entities::archetype_name_set>
-compute_name_indices_transform::
-obtain_physical_meta_names_by_logical_meta_name(
+std::unordered_map<identification::entities::logical_meta_id,
+                   identification::entities::archetype_name_set>
+compute_name_indices_transform::obtain_physical_meta_names_by_logical_meta_name(
     const physical::entities::meta_model& mm) {
 
-    std::unordered_map<std::string, physical::entities::archetype_name_set> r;
+    std::unordered_map<identification::entities::logical_meta_id,
+                       identification::entities::archetype_name_set> r;
     for (auto& be : mm.backends()) {
         for (auto& fct_pair : be.facets()) {
             auto& fct(fct_pair.second);
@@ -104,19 +109,19 @@ obtain_physical_meta_names_by_logical_meta_name(
 void compute_name_indices_transform::
 apply(const physical::transforms::minimal_context& ctx,
     physical::entities::meta_model& mm) {
-    tracing::scoped_transform_tracer stp(lg, "compute meta-name indices transform",
+    tracing::scoped_transform_tracer stp(lg, "compute meta-name indices",
         transform_id, mm.meta_name().simple(), *ctx.tracer(), mm);
 
     /*
      * Obtain the archetypes' physical meta-names by logical model
      * meta-name.
      */
-    auto pmn_by_lmn(obtain_physical_meta_names_by_logical_meta_name(mm));
+    const auto pmn_by_lmn(obtain_physical_meta_names_by_logical_meta_name(mm));
 
     /*
      * Now compute all of the indices.
      */
-    physical::helpers::meta_name_index_builder b;
+    identification::helpers::meta_name_index_builder b;
     b.add(pmn_by_lmn);
     mm.indexed_names(b.build());
 

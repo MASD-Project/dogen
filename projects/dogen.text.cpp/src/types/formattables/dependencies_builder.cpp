@@ -24,7 +24,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.physical/hash/entities/element_archetype_hash.hpp"
+#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 #include "dogen.text.cpp/types/formattables/building_error.hpp"
 #include "dogen.text.cpp/io/formattables/directive_group_io.hpp"
 #include "dogen.text.cpp/types/formattables/dependencies_builder.hpp"
@@ -57,8 +57,8 @@ const std::string archetype_not_found("Cannot find archetype name: ");
 namespace dogen::text::cpp::formattables {
 
 dependencies_builder::dependencies_builder(
-    const directive_group_repository& dgrp,
-    const std::unordered_set<physical::entities::element_archetype>&
+    const directive_group_repository& dgrp, const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element)
     : repository_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}
@@ -80,8 +80,10 @@ dependencies_builder::get_directive_group(
 
 bool dependencies_builder::is_enabled(const logical::entities::name& n,
     const std::string& archetype) const {
-    physical::entities::element_archetype
-        ea(n.qualified().dot(), archetype);
+    using namespace identification::entities;
+    logical_id lid(n.qualified().dot());
+    physical_meta_id pmid(archetype);
+    logical_meta_physical_id ea(lid, pmid);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;
@@ -147,6 +149,24 @@ void dependencies_builder::add(const std::list<logical::entities::name>& names,
     const std::string& archetype) {
     for (const auto& n : names)
         add(n, archetype);
+}
+
+
+void dependencies_builder::add(const logical::entities::name& n,
+    const identification::entities::physical_meta_id& archetype) {
+    return add(n, archetype.value());
+}
+
+void dependencies_builder::
+add(const boost::optional<logical::entities::name>& n,
+    const identification::entities::physical_meta_id& archetype) {
+    return add(n, archetype.value());
+}
+
+void dependencies_builder::
+add(const std::list<logical::entities::name>& names,
+    const identification::entities::physical_meta_id& archetype) {
+    return add(names, archetype.value());
 }
 
 std::list<std::string> dependencies_builder::build() {

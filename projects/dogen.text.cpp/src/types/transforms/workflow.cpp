@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/workflow_error.hpp"
 #include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.text.cpp/io/formattables/artefact_properties_io.hpp"
@@ -58,21 +59,24 @@ cpp::transforms::registrar& workflow::registrar() {
 }
 
 boost::shared_ptr<physical::entities::artefact>
-workflow::get_artefact(const std::unordered_map<std::string,
+workflow::get_artefact(const std::unordered_map<
+    identification::entities::physical_meta_id,
     boost::shared_ptr<physical::entities::artefact>>& artefacts,
-    const std::string& archetype) const {
+    const identification::entities::physical_meta_id& archetype) const {
 
     const auto i(artefacts.find(archetype));
     if (i == artefacts.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
-        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+        BOOST_THROW_EXCEPTION(
+            workflow_error(archetype_not_found + archetype.value()));
     }
     return i->second;
 }
 
 void
 workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element, const formattables::model& fm,
     formattables::formattable& fbl) const {
 
@@ -95,7 +99,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto pn(fmt.archetype().meta_name());
-        const auto arch(pn.qualified());
+        const auto arch(pn.id());
         auto aptr(get_artefact(fbl.artefacts().artefacts_by_archetype(), arch));
         const auto& ap(aptr->artefact_properties());
         if (!ap.enabled()) {
@@ -112,7 +116,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         auto& a(*aptr);
         const auto fs(ap.formatting_style());
         if (fs == formatting_styles::stock) {
-             const auto id(fmt.archetype().meta_name().qualified());
+             const auto id(fmt.archetype().meta_name().id().value());
              BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
              fmt.apply(ctx, e, a);
 
@@ -144,7 +148,8 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
 }
 
 void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
-    const std::unordered_set<physical::entities::element_archetype>&
+    const std::unordered_set<
+    identification::entities::logical_meta_physical_id>&
     enabled_archetype_for_element, formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
