@@ -45,3 +45,5 @@ doc/agile/reports
 
 # org-roam
 org-roam.db
+
+.cache
