@@ -12544,6 +12544,9 @@ Notes:
   [[https://clang.llvm.org/docs/LibFormat.html][libFormat]]. We can use [[https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/ClangFormat.cpp][clang format's code]] to see how to use
   libformat.
 - [[https://github.com/TheLartians/Format.cmake][Format.cmake]]: clang-format for CMake
+- [[https://github.com/cheshirekow/cmake_format][cmake_format]]: "The cmake-format project provides Quality Assurance
+  (QA) tools for cmake".
+- [[https://github.com/BlankSpruce/gersemi][gersemi]]: "A formatter to make your CMake code the real treasure."
 - when we integrate clang format, we will have to change how we
   process overwrite. At present we are just not writing if overwrite
   is on; in the future, we need to physically load the contents from
@@ -15091,6 +15094,53 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for libstud-json                          :story:
+
+From project:
+
+#+begin_quote
+The goal of this library is to provide a pull-style parser (instead of
+push/SAX or DOM) and push-style serializer with clean, modern
+interfaces and conforming, well-tested (and well-fuzzed, including the
+serializer) implementations. In particular, pull-style parsers are not
+very common, and we couldn't find any C++ implementations that also
+satisfy the above requirements.
+#+end_quote
+
+Links:
+
+- [[https://github.com/libstud/libstud-json/][libstud-json]]: "JSON parser/serializer library for C++"
+
+*** Consider adding support for automigrate                           :story:
+
+Interesting tool for SQL migrations.
+
+Links:
+
+- [[https://github.com/abe-winter/automigrate][automig GH]]: "Automigrate is a command-line tool for SQL
+  migrations. Unlike other migration tools, it uses git history to do
+  diffs on create table statements instead of forcing you to write
+  up/down diffs for every change."
+- [[https://abe-winter.github.io/2020/08/03/yr-of-git.html][One year of automatic DB migrations from git]]
+- [[https://www.sqlalchemy.org/][sqlalchemy]]: "SQLAlchemy is the Python SQL toolkit and Object
+  Relational Mapper that gives application developers the full power
+  and flexibility of SQL."
+- [[https://alembic.sqlalchemy.org/en/latest/][Alembic’s documentation]]: "Alembic is a lightweight database
+  migration tool for usage with the SQLAlchemy Database Toolkit for
+  Python."
+
+*** Consider adding support for eCAL                                  :story:
+
+Yet another interprocess communication framework.
+
+
+Links:
+
+- [[https://github.com/continental/ecal][ecal GH]]: The enhanced communication abstraction layer (eCAL) is a
+  middleware that enables scalable, high performance interprocess
+  communication on a single computer node or between different nodes
+  in a computer network.
+
 *** AutoMapper in Dogen                                               :story:
 
 AutoMapper is an interesting C# library:
@@ -15118,7 +15168,7 @@ Links:
 
 - [[https://docs.automapper.org/en/stable/Getting-started.html][AutoMapper: Getting Started Guide]]
 
-*** Consider adding support for aspects in logical model
+*** Consider adding support for aspects in logical model              :story:
 
 At present we avoided having any kind of logging in the generated
 code. This was because we did not want users to be coupled to choices
@@ -15183,7 +15233,7 @@ Links:
 - [[https://en.wikipedia.org/wiki/Aspect-oriented_programming][Aspect-oriented programming]]
 - [[https://stackoverflow.com/questions/325558/aspect-oriented-programming-examples][SO: Aspect-oriented programming examples]]
 
-*** Consider adding support for static site generators
+*** Consider adding support for static site generators                :story:
 
 It should be possible to add meta-model elements that model static
 site generators. We should then be able to generate the site. The
