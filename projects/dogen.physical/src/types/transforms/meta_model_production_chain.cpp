@@ -49,7 +49,6 @@ apply(const physical::transforms::minimal_context& ctx,
     tracing::scoped_chain_tracer stp(lg, "meta model production chain",
         transform_id, "physical-meta-model", *ctx.tracer(), bes);
 
-
     /*
      * Assemble the parts into a meta-model.
      */

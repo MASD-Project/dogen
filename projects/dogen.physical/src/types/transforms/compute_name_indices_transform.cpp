@@ -20,8 +20,8 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/meta_name_index_builder.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
@@ -53,11 +53,13 @@ update_physical_meta_names_by_logical_meta_name(
 
     const auto pmn(arch.meta_name());
     const auto lmid(arch.logical_meta_element_id());
-    auto& g(physical_meta_names_by_logical_meta_name[lmid]);
-    g.logical_meta_id(lmid);
-    g.meta_names().push_back(pmn);
 
-    auto& cal(g.canonical_locations());
+    BOOST_LOG_SEV(lg, debug) << "Populating logical meta element:" << lmid;
+    auto& pmn_by_lmn(physical_meta_names_by_logical_meta_name[lmid]);
+    pmn_by_lmn.logical_meta_id(lmid);
+    pmn_by_lmn.meta_names().push_back(pmn);
+
+    auto& cal(pmn_by_lmn.canonical_locations());
     const auto qn(pmn.id());
     identification::helpers::physical_meta_id_builder b;
     const auto rs_fd(entities::relation_status::facet_default);
@@ -73,7 +75,7 @@ update_physical_meta_names_by_logical_meta_name(
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << qn;
     }
 
-    auto& afl(g.archetype_for_label());
+    auto& afl(pmn_by_lmn.archetype_for_label());
     for (const auto& l : arch.labels()) {
         const std::string key(l.key() + ":" + l.value());
         const auto inserted(afl.insert(std::make_pair(key, qn)).second);
