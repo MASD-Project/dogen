@@ -19,14 +19,14 @@
 * entities
 ** entities::model
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable, MetaNameable, DeterminableOrigin
+:masd.injection.stereotypes: Nameable, MetaNameable, Provenance
 :END:
 
 Yarn model.
 
 *** references
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_name, logical::entities::origin_types>
+:masd.injection.type: std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
 :END:
 
 All other models that this model depends on, mapped to their origin.
@@ -60,21 +60,21 @@ If true the intermediate model has at least one generable type, false otherwise.
 
 *** input_technical_space
 :PROPERTIES:
-:masd.injection.type: logical::entities::technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Technical space which this model used originally.
 
 *** output_technical_space
 :PROPERTIES:
-:masd.injection.type: logical::entities::technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Technical space into which to output the model.
 
 *** all_technical_spaces
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<logical::entities::technical_space>
+:masd.injection.type: std::unordered_set<identification::entities::technical_space>
 :END:
 
 Set of all technical concrete spaces involved in generating this model.
@@ -89,112 +89,19 @@ spaces.
 :END:
 *** enabled_archetype_for_element
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<element_archetype>
-:END:
-*** global_enablement_properties
-:PROPERTIES:
-:masd.injection.type: global_enablement_properties
+:masd.injection.type: std::unordered_set<identification::entities::logical_meta_physical_id>
 :END:
 *** extraction_properties
 :PROPERTIES:
-:masd.injection.type: logical::entities::extraction_properties
+:masd.injection.type: physical::entities::extraction_properties
 :END:
 *** managed_directories
 :PROPERTIES:
 :masd.injection.type: std::list<boost::filesystem::path>
 :END:
-** entities::formatting_styles
-:PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
-:END:
-*** stock
-*** wale
-*** stitch
-** entities::element_archetype
-:PROPERTIES:
-:masd.cpp.hash.enabled: true
-:END:
-*** element
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-*** archetype
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-** entities::backend_properties
-Properties related to the backend.
-
-*** enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, this backend is enabled.
-
-** entities::global_enablement_properties
-*** backend_properties
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, backend_properties>
-:END:
 *** facet_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, facet_properties>
-:END:
-*** archetype_properties
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype_properties>
-:END:
-*** denormalised_archetype_properties
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, denormalised_archetype_properties>
-:END:
-** entities::denormalised_archetype_properties
-*** backend_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** facet_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** facet_overwrite
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** archetype_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** archetype_overwrite
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
-:END:
-** entities::facet_properties
-*** enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, this facet is enabled.
-
-*** overwrite
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-** entities::archetype_properties
-Archetype level properties, applicable to all instances of this archetype.
-
-*** enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If false, will disable all instances of this archetype.
-
-*** overwrite
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, physical::entities::facet_properties>
 :END:
 ** entities::Nameable
 :PROPERTIES:
@@ -210,21 +117,21 @@ If false, will disable all instances of this archetype.
 :END:
 *** meta_name
 :PROPERTIES:
-:masd.injection.type: identification::entities::logical_name
+:masd.injection.type: identification::entities::logical_meta_name
 :END:
-** entities::DeterminableOrigin
+** entities::Provenance
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
 :END:
 
-A unit of logical that can be code generated.
+Details of the origin of this model element.
 
-*** origin_sha1_hash
+*** provenance
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::injection_provenance
 :END:
 
-SHA1 key of the original injection model.
+Details of the provenance of this model element.
 
 ** entities::element_artefacts
 Maps logical elements with the physical artefacts that will be produced from them.
@@ -238,10 +145,10 @@ Logical element that gives rise to the artefact.
 
 *** artefacts
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:masd.injection.type: physical::entities::artefact_set
 :END:
 
-Physical artefact that will be produced from the logical element.
+Physical artefacts that will be produced from the logical element.
 
 ** entities::model_set
 :PROPERTIES:
@@ -258,10 +165,6 @@ Represents a set of related models.
 Models that belong to this set.
 
 * transforms
-** transforms::generability_transform
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
 ** transforms::model_to_text_chain
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
@@ -276,34 +179,9 @@ Models that belong to this set.
 :END:
 *** transforms_by_technical_space_
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>
-:END:
-** transforms::local_enablement_transform
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::artefact_properties_transform
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::formatting_transform
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::formatting_configuration
-*** style
-:PROPERTIES:
-:masd.injection.type: entities::formatting_styles
-:END:
-*** input
-:PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: std::unordered_map<identification::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>
 :END:
 ** transforms::model_generation_chain
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::global_enablement_transform
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -408,7 +286,7 @@ An error has occurred while formatting.
 :END:
 *** technical_space
 :PROPERTIES:
-:masd.injection.type: logical::entities::technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 *** generate_preamble
 :PROPERTIES:

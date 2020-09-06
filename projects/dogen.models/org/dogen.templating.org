@@ -9,6 +9,7 @@
 :masd.injection.reference: masd
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
+:masd.injection.reference: dogen.identification
 :masd.injection.input_technical_space: cpp
 :masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
 :masd.variability.profile: dogen.profiles.base.default_profile
@@ -150,8 +151,11 @@ An error occurred whilst formatting.
 ** stitch::text_template_body
 *** tagged_values
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, std::string>>
+:masd.injection.type: std::list<identification::entities::tagged_value>
 :END:
+
+Set of tagged values read from the template.
+
 *** lines
 :PROPERTIES:
 :masd.injection.type: std::list<line>

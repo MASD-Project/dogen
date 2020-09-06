@@ -104,7 +104,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
     builder.add(o.name(), ser_fwd_arch);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
 
     const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
@@ -1548,9 +1548,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -1608,7 +1605,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
     builder.add(p.name(), ser_fwd_arch);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -3310,7 +3307,7 @@ std::list<std::string> archetype_class_header_transform_transform::inclusion_dep
     const auto& arch(assistant::as<logical::entities::physical::archetype>(e));
 
     auto builder(f.make());
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (arch.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/model_to_text_transform.hpp");
@@ -3344,7 +3341,7 @@ public:
 
 public:
 <#+
-            using logical::entities::technical_space;
+            using identification::entities::technical_space;
             if (o.major_technical_space() == technical_space::cpp) {
 #>
     std::list<std::string> inclusion_dependencies(
@@ -3440,7 +3437,7 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
     const auto& arch(ast.as<logical::entities::physical::archetype>(e));
     ast.update_artefact();
-    a.content(arch.generator().rendered_stitch_template());
+    a.content(arch.text_templating().rendered_stitch_template());
     stp.end_transform(a);
 }
 
@@ -3490,7 +3487,7 @@ std::list<std::string> facet_class_header_transform_transform::inclusion_depende
 
     auto builder(f.make());
     builder.add_as_user("dogen.physical/types/entities/facet.hpp");
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (fct.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/registrar.hpp");
@@ -3590,6 +3587,7 @@ std::list<std::string> facet_class_implementation_transform_transform::inclusion
     const auto ch_arch(traits::canonical_archetype());
     builder.add(fct.name(), ch_arch);
     builder.add(fct.archetypes(), ch_arch);
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
@@ -3692,7 +3690,7 @@ std::list<std::string> backend_class_header_transform_transform::inclusion_depen
 
     auto builder(f.make());
     builder.add_as_user("dogen.physical/types/entities/backend.hpp");
-    using logical::entities::technical_space;
+    using identification::entities::technical_space;
     if (be.major_technical_space() == technical_space::cpp) {
         builder.add_as_user(
             "dogen.text.cpp/types/transforms/registrar.hpp");
@@ -3788,6 +3786,7 @@ std::list<std::string> backend_class_implementation_transform_transform::inclusi
 
     builder.add(be.name(), ch_arch);
     builder.add(be.facets(), ch_arch);
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
@@ -3825,14 +3824,14 @@ physical::entities::backend make_backend() {
     r.meta_name(b.build());
 
     const auto lambda([&](const auto& fct) {
-        const auto id(fct.meta_name().qualified());
+        const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_facet("Duplicate facet: ");
             BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
         }
     });
 
@@ -4273,12 +4272,12 @@ physical::entities::archetype <#= sn #>::make() {
     physical::entities::archetype r;
     using pmnf = identification::helpers::physical_meta_name_factory;
     r.meta_name(pmnf::make("<#= arch.backend_name() #>", "<#= arch.facet_name() #>", "<#= arch.name().simple() #>"));
-    r.logical_meta_element_id(identification::entities::logical_meta_id("<#= arch.logical_meta_element_id() #>"));
+    r.logical_meta_element_id(identification::entities::logical_meta_id("<#= arch.logical_meta_element_id().value() #>"));
     r.relations().status(physical::entities::relation_status::<#= arch.relations().status() #>);
 <#+
             for(const auto& l : arch.labels()) {
 #>
-    r.labels().push_back(physical::entities::label("<#= l.key() #>", "<#= l.value() #>"));
+    r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
 
@@ -4292,11 +4291,11 @@ physical::entities::archetype <#= sn #>::make() {
 <#+
                 if (cr.labels().empty()) {
 #>
-            std::list<physical::entities::label> {},
+            std::list<identification::entities::label> {},
 <#+
                 } else {
 #>
-            std::list<physical::entities::label> {
+            std::list<identification::entities::label> {
 <#+
                     utility::formatters::sequence_formatter sf(cr.labels().size());
                     // sf.prefix_configuration().first(": ").not_first("  ");
@@ -4304,7 +4303,7 @@ physical::entities::archetype <#= sn #>::make() {
 
                     for(const auto& l : cr.labels()) {
 #>
-                physical::entities::label("<#= l.key() #>", "<#= l.value() #>")<#= sf.postfix() #>
+                identification::entities::label("<#= l.key() #>", "<#= l.value() #>")<#= sf.postfix() #>
 <#+
                         sf.next();
                     }
@@ -4481,6 +4480,7 @@ std::list<std::string> facet_class_implementation_factory_transform::inclusion_d
     builder.add(fct.archetypes(), ch_arch);
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
 
     return builder.build();
@@ -4520,7 +4520,7 @@ physical::entities::facet <#= sn #>::make() {
 <#+
             for(const auto& l : fct.labels()) {
 #>
-    r.labels().push_back(physical::entities::label("<#= l.key() #>", "<#= l.value() #>"));
+    r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
 #>
@@ -4533,7 +4533,8 @@ physical::entities::facet <#= sn #>::make() {
             using text::transforms::transformation_error;
             const std::string duplicate_archetype("Duplicate archetype: ");
             BOOST_LOG_SEV(lg, error) << duplicate_archetype << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_archetype + id.value()));
         }
     });
 
@@ -4689,6 +4690,7 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
     builder.add(be.facets(), ch_arch);
 
+    builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
     builder.add_as_user("dogen.text/types/transforms/transformation_error.hpp");
@@ -4729,20 +4731,20 @@ physical::entities::backend <#= sn #>::make() {
 <#+
             for(const auto& l : be.labels()) {
 #>
-    r.labels().push_back(physical::entities::label("<#= l.key() #>", "<#= l.value() #>"));
+    r.labels().push_back(identification::entities::label("<#= l.key() #>", "<#= l.value() #>"));
 <#+
             }
 #>
 
     const auto lambda([&](const auto& fct) {
-        const auto id(fct.meta_name().qualified());
+        const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
         if (!inserted) {
             using text::transforms::transformation_error;
             const std::string duplicate_facet("Duplicate facet: ");
             BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id));
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
         }
     });
 
@@ -4914,7 +4916,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     const logical::entities::element& e) const {
 
     const auto& o(assistant::as<logical::entities::structural::object>(e));
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(o.name(), carch);
 
@@ -5136,9 +5138,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -5318,7 +5317,7 @@ primitive_implementation_transform::inclusion_dependencies(
 
     using logical::entities::structural::primitive;
     const auto& p(assistant::as<primitive>(e));
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(p.name(), carch);
 
@@ -5800,9 +5799,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "FIXME",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -6215,7 +6211,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
     builder.add(o.parents(), carch);
@@ -6460,9 +6456,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -6614,7 +6607,7 @@ primitive_implementation_transform::inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -6991,7 +6984,7 @@ inclusion_dependencies(
     const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(rg.leaves(), ch_fn);
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(rg.registrar_dependencies(), carch);
     return builder.build();
 }
@@ -7010,7 +7003,7 @@ void type_registrar_implementation_transform::apply(const context& ctx, const lo
             const auto ns(ast.make_namespaces(rg.name()));
             auto snf(ast.make_scoped_namespace_formatter(ns));
             const auto deps(rg.registrar_dependencies());
-            const auto carch(traits::canonical_archetype());
+            const identification::entities::physical_meta_id carch(traits::canonical_archetype());
             const auto leaves(ast.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
@@ -7219,7 +7212,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), traits::class_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
     builder.add(o.parents(), carch);
@@ -7633,9 +7626,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -7841,7 +7831,7 @@ std::list<std::string> primitive_implementation_transform::inclusion_dependencie
     auto builder(f.make());
     builder.add(p.name(), traits::primitive_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
@@ -8006,7 +7996,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype_qn());
 
-    const auto carch(traits::canonical_archetype());
+    const identification::entities::physical_meta_id carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
 
@@ -8206,9 +8196,6 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
     tracing::scoped_transform_tracer stp(lg, "builtin header transform",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    a.logical_name().simple(e.name().simple());
-    a.logical_name().qualified(e.name().qualified().dot());
-    a.origin_sha1_hash(e.origin_sha1_hash());
     stp.end_transform(a);
 }
 
@@ -8385,7 +8372,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
     const auto& o(ast.as<logical::entities::structural::object>(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!o.orm_properties()) {
@@ -8488,7 +8475,7 @@ void primitive_odb_options_transform::apply(const context& ctx, const logical::e
     const auto& p(ast.as<logical::entities::structural::primitive>(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!p.orm_properties()) {
@@ -8592,7 +8579,7 @@ void common_odb_options_transform::apply(const context& ctx, const logical::enti
     const auto& o(ast.as<common_odb_options>(e));
 
     {
-        const auto ts(logical::entities::technical_space::odb);
+        const auto ts(identification::entities::technical_space::odb);
         ast.make_decoration_preamble(e, ts);
 
         if (!ast.is_cpp_standard_98()) {
@@ -8733,7 +8720,7 @@ Supplies additional information required for formatting.
 
 *** enabled_archetype_for_element
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<text::entities::element_archetype>
+:masd.injection.type: std::unordered_set<identification::entities::logical_meta_physical_id>
 :END:
 *** element_properties
 :PROPERTIES:
@@ -8745,7 +8732,7 @@ Supplies additional information required for formatting.
 :END:
 *** helpers
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
 :END:
 *** tracer
 :PROPERTIES:
@@ -9869,7 +9856,7 @@ void cmakelists_transform::apply(const context& ctx, const logical::entities::el
 
     {
 
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_dot_separated_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -10655,7 +10642,7 @@ void msbuild_targets_transform::apply(const context& ctx, const logical::entitie
     const auto& c(ast.as<msbuild_targets>(e));
 
     {
-        const auto ts(logical::entities::technical_space::xml);
+        const auto ts(identification::entities::technical_space::xml);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_identifiable_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -10791,7 +10778,7 @@ void source_cmakelists_transform::apply(const context& ctx,
     const auto& c(ast.as<cmakelists>(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
         const auto model_name(ast.get_dot_separated_model_name(c.name()));
         const auto product_name(ast.get_product_name(c.name()));
@@ -10946,7 +10933,7 @@ void include_cmakelists_transform::apply(const context& ctx,
     const auto& c(ast.as<cmakelists>(e));
 
     {
-        const auto ts(logical::entities::technical_space::cmake);
+        const auto ts(identification::entities::technical_space::cmake);
         ast.make_decoration_preamble(e, ts);
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
@@ -11505,7 +11492,7 @@ All of the properties associated with an element.
 :END:
 *** artefact_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::artefact_properties>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>
 :END:
 *** helper_properties
 :PROPERTIES:
@@ -11543,7 +11530,7 @@ All of the properties associated with an element.
 :END:
 *** artefacts
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:masd.injection.type: physical::entities::artefact_set
 :END:
 ** formattables::adapter
 :PROPERTIES:
@@ -11595,15 +11582,15 @@ An error occurred during adaptation.
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::streaming_properties>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
 :END:
 *** formattables
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::formattable>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::formattable>
 :END:
 *** facet_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::facet_properties>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, formattables::facet_properties>
 :END:
 *** cpp_standard
 :PROPERTIES:
@@ -11740,16 +11727,16 @@ An error occurred while the locator was creating a path.
 ** formattables::helper_configuration
 *** helper_families
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, std::string>
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::streaming_properties>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
 :END:
 ** formattables::directive_group_repository
 *** by_id
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_map<std::string, formattables::directive_group>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<std::string, formattables::directive_group>>
 :END:
 ** formattables::directive_group_repository_factory
 :PROPERTIES:

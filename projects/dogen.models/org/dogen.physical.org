@@ -27,103 +27,62 @@ physical dimension of MASD conceptual space.
 :PROPERTIES:
 :masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
+* helpers
+:PROPERTIES:
+:masd.injection.dia.comment: true
+:END:
+
+Helpers for the physical model.
+
+** helpers::template_instantiation_domains_factory
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::building_error
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
+An error occurred while the field factory was building.
+
+** helpers::path_generator
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::file_status_collector
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::files_by_status
+*** unexpected
+:PROPERTIES:
+:masd.injection.type: std::list<boost::filesystem::path>
+:END:
+*** ignored
+:PROPERTIES:
+:masd.injection.type: std::list<boost::filesystem::path>
+:END:
+** helpers::unified_differ
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::meta_model_validator
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::validation_error
+:PROPERTIES:
+:masd.injection.stereotypes: masd::exception
+:END:
+
+An error occurred during validation.
+
 * entities
 :PROPERTIES:
 :masd.injection.dia.comment: true
 :END:
 
 Defines the MASD physical space.
-
-** entities::location
-Location of an entity or set of entities in the hierarchical physical space.
-
-These must be populated in order, e.g. in order to have a backend we must have a
-meta-model; in order to have a facet we must have a backend and in order to have a
-formatter we must have a facet. We may not have any.
-
-*** meta_model
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Top-most container for the physical space.
-
-The meta-model is always expected to be  @e masd.
-
-*** backend
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Name of the backend that owns this field, if any.
-
-*** facet
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Name of the facet that owns this field, if any.
-
-*** archetype
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Name of the archetype that owns this field, if any.
-
-** entities::meta_name_group
-*** meta_names
-:PROPERTIES:
-:masd.injection.type: std::list<meta_name>
-:END:
-
-All meta-names that belong to this group.
-
-*** canonical_locations
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
-:END:
-
-Maps a concrete archetype location to its canonical form, if the canonical
-form is supported. Otherwise no such mapping will exist.
-
-** entities::meta_name_indices
-Containing physical meta-names, indexed as required by use cases.
-
-*** all
-:PROPERTIES:
-:masd.injection.type: std::list<meta_name>
-:END:
-
-All meta-names.
-
-*** facet_names_by_backend_name
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_set<std::string>>
-:END:
-
-Qualified names of facets by qualified names of backends.
-
-*** formatter_names_by_backend_name
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_set<std::string>>
-:END:
-
-Qualified archetype names by qualified backend names.
-
-*** by_logical_meta_name
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, meta_name_group>
-:END:
-
-Physical meta-names by logical meta-names.
-
-*** by_backend_by_facet
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>
-:END:
-
-Archetype names by qualified backend and facet names
 
 ** entities::meta_model
 :PROPERTIES:
@@ -133,13 +92,6 @@ Archetype names by qualified backend and facet names
 Describes the geomtry of physical space.
 
 Provides details of the backends available in the current instance of Dogen.
-
-*** enablement_flags
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, enablement_flags>
-:END:
-
-Global enablement flags
 
 *** template_instantiation_domains
 :PROPERTIES:
@@ -161,7 +113,7 @@ All backends available in this meta-model.
 
 *** indexed_names
 :PROPERTIES:
-:masd.injection.type: meta_name_indices
+:masd.injection.type: identification::entities::physical_meta_name_indices
 :END:
 
 Repository with all the meta-names in this meta-model, indexed appropriately.
@@ -175,19 +127,19 @@ Code generation backend, targeting a given technical space.
 
 *** parts
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, part>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, part>
 :END:
 *** facets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, facet>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet>
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** archetype_kinds
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype_kind>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind>
 :END:
 ** entities::part
 :PROPERTIES:
@@ -199,11 +151,11 @@ Code generation backend, targeting a given technical space.
 :END:
 *** facets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, facet>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet>
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** requires_relative_path
 :PROPERTIES:
@@ -265,7 +217,7 @@ The item contributes a single folder to the path, as a delimited string.
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** default_archetype_for_logical_meta_model_id
 :PROPERTIES:
@@ -292,14 +244,14 @@ ID for the archetype kind that this archetype is an instance of.
 
 *** logical_meta_element_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_meta_id
 :END:
 
 ID of the meta-element in the logical model this archetype binds to.
 
 *** part
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::physical_id
 :END:
 
 Part in which we are located.
@@ -323,32 +275,9 @@ Properties of this archetype with regards to relations.
 :PROPERTIES:
 :masd.injection.type: std::string
 :END:
-** entities::logical_name
-Physical representation of a logical name.
-
-*** simple
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-*** qualified
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-*** external_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-*** model_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-*** internal_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
 ** entities::model
 :PROPERTIES:
-:masd.injection.stereotypes: Element
+:masd.injection.stereotypes: Element, ArtefactContainer
 :END:
 
 Collection of entities representing objects in physical space.
@@ -368,13 +297,6 @@ Primary technical space that this model belongs to.
 :PROPERTIES:
 :masd.injection.type: outputting_properties
 :END:
-*** artefact_sets_by_logical_id
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, artefact_set>
-:END:
-
-All atefact sets in this model, by logical ID.
-
 *** orphan_artefacts
 :PROPERTIES:
 :masd.injection.type: std::list<boost::shared_ptr<physical::entities::artefact>>
@@ -402,7 +324,7 @@ Ability to have a meta-name.
 
 *** meta_name
 :PROPERTIES:
-:masd.injection.type: meta_name
+:masd.injection.type: identification::entities::physical_meta_name
 :END:
 
 Meta-name for this meta-element.
@@ -416,7 +338,7 @@ The ability to attach labels to an element.
 
 *** labels
 :PROPERTIES:
-:masd.injection.type: std::list<label>
+:masd.injection.type: std::list<identification::entities::label>
 :END:
 
 All labels associated with this element.
@@ -470,13 +392,6 @@ Overridden postfix, if any.
 
 Represents an entity in physical space.
 
-*** archetype_id
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-ID of the archetype that this artefact is an instance of.
-
 *** content
 :PROPERTIES:
 :masd.injection.type: std::string
@@ -528,13 +443,14 @@ Unified diff between the in-memory artefact and the file in the filesystem.
 :PROPERTIES:
 :masd.injection.type: operation
 :END:
-*** enablement_flags
+*** artefact_properties
 :PROPERTIES:
-:masd.injection.type: enablement_flags
+:masd.injection.type: artefact_properties
 :END:
-
-Local enablement flags.
-
+*** enablement_properties
+:PROPERTIES:
+:masd.injection.type: enablement_properties
+:END:
 ** entities::Configurable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -549,33 +465,19 @@ Ability to have meta-data associated.
 
 Configuration for this element.
 
-** entities::DeterminableOrigin
+** entities::Provenance
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
 :END:
 
 Properties related to the origin of the modeling element.
 
-*** origin_sha1_hash
+*** provenance
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_provenance
 :END:
 
-SHA1 hash of the original model that contained the element.
-
-*** logical_name
-:PROPERTIES:
-:masd.injection.type: logical_name
-:END:
-
-Logical model details of the element that originated this physical element.
-
-*** physical_meta_name
-:PROPERTIES:
-:masd.injection.type: meta_name
-:END:
-
-Physical model details of the meta-element that originated this element.
+Details of the provenance of this model element.
 
 ** entities::Nameable
 :PROPERTIES:
@@ -586,14 +488,14 @@ Ability to have a name.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::physical_name
 :END:
 
 Name of the physical element.
 
 ** entities::Element
 :PROPERTIES:
-:masd.injection.parent: entities::Configurable, entities::DeterminableOrigin, entities::Nameable
+:masd.injection.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable
 :masd.injection.stereotypes: masd::object_template
 :END:
 ** entities::outputting_properties
@@ -681,78 +583,6 @@ File is unexpected but the user asked us not to delete it.
 *** ignore_regex
 File is unexpected but the user asked us to ignore it via regexes.
 
-** entities::enablement_flags
-*** backend_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** facet_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** facet_overwrite
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** archetype_enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** archetype_overwrite
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
-:END:
-** entities::meta_name
-Name of an element in physical space.
-
-A name represents a point or a region in physical space. It can only be used by one
-physical element. Names can be uniquely identified by their qualified ID.
-
-Name has the following properties: a) two different points or regionsin physical
-space cannot have the same name and b) the same point or region in physical space
-can only have one and only one name.
-
-*** simple
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Simple (non-qualified) name of the physical element at this address.
-
-The simple name must be unique for a given location.
-
-*** qualified
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Qualified name for a physical element.
-
-*** location
-:PROPERTIES:
-:masd.injection.type: location
-:END:
-
-Location for a name in physical space.
-
-** entities::name
-*** simple
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-File or directory simple name.
-
-*** qualified
-:PROPERTIES:
-:masd.injection.type: boost::filesystem::path
-:END:
-
-Absolute path to the file or directory.
-
-The qualified name indicates the location in the filesystem where it will be
-written or where it was sourced from.
-
 ** entities::Associatable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -810,23 +640,6 @@ Archetype can be related to archetypes.
 
 *** facet_default
 FIXME: hack for now
-
-** entities::label
-A label is a key-value pair that can be used by the processing engine in a flexible way.
-
-*** key
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Key of the label.
-
-*** value
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Value associated with this label.
 
 ** entities::constant_relation
 :PROPERTIES:
@@ -945,96 +758,230 @@ Relations against hard-coded values.
 :masd.injection.type: std::string
 :END:
 ** entities::artefact_set
-*** logical_element_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.stereotypes: Configurable, Provenance
 :END:
 
-Identifier for the manifold in logical space where this set exists.
+Represents a slice of logical-physical space fixed at one logical point.
 
 *** artefacts_by_archetype
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<physical::entities::artefact>>
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
 :END:
 
 All artefacts that are contained within this set, organised by archetype.
 
 *** archetype_for_role
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
+:masd.injection.type: std::unordered_map<std::string, identification::entities::physical_meta_id>
 :END:
 
 Resolves a role into a concrete archetype, in the context of this logical element.
 
-* helpers
+*** is_generatable
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.injection.type: bool
 :END:
 
-Helpers for the physical model.
+If false, the entire artefact set is not generatable.
 
-** helpers::template_instantiation_domains_factory
+** entities::artefact_properties
+*** enabled
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.injection.type: bool
 :END:
-** helpers::meta_name_index_builder
+*** overwrite
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.injection.type: bool
 :END:
-** helpers::building_error
+*** file_path
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.injection.type: boost::filesystem::path
+:END:
+*** formatting_style
+:PROPERTIES:
+:masd.injection.type: formatting_styles
+:END:
+*** formatting_input
+:PROPERTIES:
+:masd.injection.type: std::string
+:END:
+** entities::formatting_styles
+:PROPERTIES:
+:masd.injection.stereotypes: masd::enumeration
+:END:
+*** stock
+*** wale
+*** stitch
+** entities::enablement_properties
+*** facet_enabled
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+*** archetype_enabled
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+*** facet_overwrite
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+*** archetype_overwrite
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+** entities::artefact_repository
+:PROPERTIES:
+:masd.injection.stereotypes: ArtefactContainer
+:END:
+*** identifier
+:PROPERTIES:
+:masd.injection.type: std::string
 :END:
 
-An error occurred while the field factory was building.
+Identifier for this repository. Used for logging and tracing only.
 
-** helpers::path_generator
+*** root_module_logical_id
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.injection.type: identification::entities::logical_id
 :END:
-** helpers::file_status_collector
+
+Identifier of the artefact set containing the root module.
+
+*** extraction_properties
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.injection.type: extraction_properties
 :END:
-** helpers::files_by_status
-*** unexpected
+*** global_enablement_properties
+:PROPERTIES:
+:masd.injection.type: global_enablement_properties
+:END:
+*** enabled_archetype_for_element
+:PROPERTIES:
+:masd.injection.type: std::unordered_set<identification::entities::logical_meta_physical_id>
+:END:
+*** managed_directories
 :PROPERTIES:
 :masd.injection.type: std::list<boost::filesystem::path>
 :END:
-*** ignored
+*** has_generatable_artefacts
 :PROPERTIES:
-:masd.injection.type: std::list<boost::filesystem::path>
-:END:
-** helpers::unified_differ
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::meta_name_factory
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::meta_name_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::qualified_meta_name_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::meta_name_validator
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::validation_error
-:PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.injection.type: bool
 :END:
 
-An error occurred during validation.
+If true the repository has at least one generable artefact, false otherwise.
 
-** helpers::meta_model_validator
+** entities::ArtefactContainer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.injection.stereotypes: masd::object_template
+:END:
+*** artefact_sets_by_logical_id
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, artefact_set>
+:END:
+
+All atefact sets in this model, by logical ID.
+
+** entities::extraction_properties
+Properties related to extraction.
+
+*** cpp_headers_output_directory
+:PROPERTIES:
+:masd.injection.type: boost::filesystem::path
+:END:
+
+Directory in which to place C++ header files. Must be a relative path.
+
+*** enabled_backends
+:PROPERTIES:
+:masd.injection.type: std::unordered_set<std::string>
+:END:
+*** enable_backend_directories
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+** entities::global_enablement_properties
+*** backend_properties
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
+:END:
+*** facet_properties
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
+:END:
+*** archetype_properties
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
+:END:
+*** denormalised_archetype_properties
+:PROPERTIES:
+:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
+:END:
+** entities::backend_properties
+Properties related to the backend.
+
+*** enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+
+If true, this backend is enabled.
+
+** entities::denormalised_archetype_properties
+*** backend_enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+*** facet_enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+*** facet_overwrite
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+*** archetype_enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+*** archetype_overwrite
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+** entities::facet_properties
+*** enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+
+If true, this facet is enabled.
+
+*** overwrite
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+** entities::archetype_properties
+Archetype level properties, applicable to all instances of this archetype.
+
+*** enabled
+:PROPERTIES:
+:masd.injection.type: bool
+:END:
+
+If false, will disable all instances of this archetype.
+
+*** overwrite
+:PROPERTIES:
+:masd.injection.type: boost::optional<bool>
+:END:
+** entities::formatting_configuration
+*** styles
+:PROPERTIES:
+:masd.injection.type: formatting_styles
+:END:
+*** input
+:PROPERTIES:
+:masd.injection.type: std::string
 :END:
 * features
 :PROPERTIES:
@@ -1264,6 +1211,13 @@ models and meta-models for the physical model.
 :PROPERTIES:
 :masd.injection.type: boost::shared_ptr<variability::entities::feature_model>
 :END:
+*** meta_model
+:PROPERTIES:
+:masd.injection.type: boost::shared_ptr<entities::meta_model>
+:END:
+
+Meta-model for the physical dimension.
+
 *** tracer
 :PROPERTIES:
 :masd.injection.type: boost::shared_ptr<tracing::tracer>
@@ -1344,6 +1298,30 @@ Smallest possible context required for bootstrapping purposes.
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::compute_template_instantiation_domains
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::artefact_repository_population_chain
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::global_enablement_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::local_enablement_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::formatting_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::generability_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::extraction_properties_transform
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:

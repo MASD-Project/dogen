@@ -98,6 +98,18 @@ An error occurred in the factory whilst making.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
+** transforms::text_model_production_chain
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::physical_artefact_repository_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::physical_artefact_preparation_chain
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * generator
 :PROPERTIES:
 :masd.generalization.parent: dogen::generator
@@ -126,22 +138,6 @@ Helpers for the orchestration model.
 ** helpers::adapter
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::stereotypes_helper
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::stereotypes_conversion_result
-Aggregates the result of parsing a CSV string with well-known stereotypes and
-user defined stereotypes.
-
-*** static_stereotypes
-:PROPERTIES:
-:masd.injection.type: std::list<logical::entities::static_stereotypes>
-:END:
-*** dynamic_stereotypes
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
 :END:
 * features
 :PROPERTIES:

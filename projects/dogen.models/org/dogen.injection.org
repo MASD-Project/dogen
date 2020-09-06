@@ -12,7 +12,7 @@
 :masd.injection.reference: masd
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
-:masd.injection.reference: dogen.physical
+:masd.injection.reference: dogen.identification
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -75,13 +75,6 @@ A registration error has occurred.
 :PROPERTIES:
 :masd.injection.type: boost::shared_ptr<variability::entities::feature_model>
 :END:
-*** physical_meta_model
-:PROPERTIES:
-:masd.injection.type: boost::shared_ptr<physical::entities::meta_model>
-:END:
-
-Meta-model for the physical dimension.
-
 *** tracer
 :PROPERTIES:
 :masd.injection.type: boost::shared_ptr<tracing::tracer>
@@ -129,7 +122,7 @@ Raw set of variability overrides.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::compute_sha1_transform
+** transforms::provenance_transform
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -210,6 +203,13 @@ main stereotypes.
 :PROPERTIES:
 :masd.injection.type: bool
 :END:
+*** containing_element_id
+:PROPERTIES:
+:masd.injection.type: identification::entities::injection_id
+:END:
+
+ID of the containing element, if any.
+
 ** entities::attribute
 :PROPERTIES:
 :masd.injection.stereotypes: Element
@@ -250,11 +250,11 @@ Ability to contain tagged values.
 
 *** tagged_values
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, std::string>>
+:masd.injection.type: std::list<identification::entities::tagged_value>
 :END:
 *** tagged_values_overrides
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, std::string>>
+:masd.injection.type: std::list<identification::entities::tagged_value>
 :END:
 
 Meta-data sourced externally that can be used to override meta-data in model.
@@ -268,7 +268,7 @@ Ability to have stereotypes.
 
 *** stereotypes
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.injection.type: std::list<identification::entities::stereotype>
 :END:
 ** entities::Documentable
 :PROPERTIES:
@@ -296,8 +296,11 @@ Ability to have a name.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::name
 :END:
+
+Name of the injection element.
+
 ** entities::Configurable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -319,26 +322,12 @@ Configuration for this element.
 
 Properties related to the origin of the modeling element.
 
-*** origin_sha1_hash
+*** provenance
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::injection_provenance
 :END:
 
-SHA1 hash of the original model that contained the element.
-
-*** origin_element_id
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Identifier within the origin model for the modeling element.
-
-*** origin_containing_element_id
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Unique identifier for an element containing this element, if any.
+Provenance details of this injection element.
 
 ** entities::Element
 :PROPERTIES:

@@ -10,6 +10,7 @@
 :masd.injection.reference: dogen.variability
 :masd.injection.reference: dogen.tracing
 :masd.injection.reference: dogen.injection
+:masd.injection.reference: dogen.identification
 :masd.injection.reference: masd
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
@@ -257,10 +258,10 @@ Text of the comment, excluding all Dogen instructions.
 
 ** tagged_values
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string,std::string>>
+:masd.injection.type: std::list<identification::entities::tagged_value>
 :END:
 
-Dogen instructions, in the key-value-pair form.
+Tagged values extracted from this comment.
 
 ** applicable_to_parent_object
 :PROPERTIES:

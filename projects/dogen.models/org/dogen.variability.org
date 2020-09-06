@@ -11,6 +11,7 @@
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
 :masd.injection.reference: dogen.tracing
+:masd.injection.reference: dogen.identification
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -76,23 +77,6 @@ Unit of configuration within Dogen. Defines the domain of values.
 :END:
 
 Feature name can be matched partially.
-
-** entities::name
-Name of the element in the variability metamodel.
-
-*** simple
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Non-qualified name of the element.
-
-*** qualified
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Qualified name of the element, using dots to separate the hierarchy.
 
 ** entities::binding_point
 :PROPERTIES:
@@ -319,10 +303,16 @@ Maps a feature name to an instance value
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
 :END:
+
+Elements with the ability of being named.
+
 *** name
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::name
 :END:
+
+Name of this variability element.
+
 ** entities::Describable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template

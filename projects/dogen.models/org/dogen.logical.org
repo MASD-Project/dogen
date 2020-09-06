@@ -13,6 +13,7 @@
 :masd.injection.reference: masd.variability
 :masd.injection.reference: dogen.profiles
 :masd.injection.reference: dogen.physical
+:masd.injection.reference: dogen.identification
 :masd.injection.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
@@ -48,6 +49,12 @@ rules (such as verifying that all types have a definitions,
 etc.).
 
 * entities
+:PROPERTIES:
+:masd.injection.dia.comment: true
+:END:
+
+Entities that define the logical model.
+
 ** entities::attribute
 :PROPERTIES:
 :masd.injection.stereotypes: Documentable, Configurable, Nameable, Stereotypable
@@ -66,7 +73,7 @@ Name must be in one of the supported notations.
 
 *** parsed_type
 :PROPERTIES:
-:masd.injection.type: name_tree
+:masd.injection.type: identification::entities::logical_name_tree
 :END:
 
 Tree of names that represent the type of the attribute, after suitable parsing.
@@ -106,64 +113,6 @@ across all languages. This will have to be revisited in the future.
 
 Name to use for getter and setter.
 
-** entities::name_tree
-:PROPERTIES:
-:masd.injection.stereotypes: Qualifiable
-:END:
-
-Adds support for name composition as a tree-like structure.
-
-A name tree has the responsibility of representing an instantiation of a generic
-type with all of its type parameters, which themselves can also be generic types
-and so on. It may also represent the simpler case of a non-generic type, in which
-case only the parent name is populated and there are no children.
-
-*** current
-:PROPERTIES:
-:masd.injection.type: name
-:END:
-
-Name for the current level of the tree.
-
-*** children
-:PROPERTIES:
-:masd.injection.type: std::list<name_tree>
-:END:
-
-Names of the child elements.
-
-*** are_children_opaque
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, the association with its children can be opaque.
-
-Children are considered opaque when the parent does not require knowledge
-about the childs' internal structure. This is the case, for example, with C and
-C++ pointers, references and so on.
-
-*** is_circular_dependency
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, the presence of the current name causes a circular dependency.
-
-*** is_current_simple_type
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-Returns true if @e current is a simple type such as a built-in or an enumeration.
-
-*** is_floating_point
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, "current" stores a floating point type.
-
 ** entities::Nameable
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -173,7 +122,7 @@ Ability to have a name.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::logical_name
 :END:
 
 Fully qualified name.
@@ -196,26 +145,19 @@ These are expected to follow the grammar of the comment processing tools
 of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
 etc.
 
-** entities::DeterminableOrigin
+** entities::Provenance
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
 :END:
 
-A unit of logical that can be code generated.
+Details of the origin of this model element.
 
-*** origin_type
+*** provenance
 :PROPERTIES:
-:masd.injection.type: origin_types
+:masd.injection.type: identification::entities::injection_provenance
 :END:
 
-How was this model element originated.
-
-*** origin_sha1_hash
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-SHA1 key of the original injection model.
+Details of the provenance of this model element.
 
 ** entities::Containable
 :PROPERTIES:
@@ -226,10 +168,10 @@ The ability to be contained inside a module.
 
 *** contained_by
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_id
 :END:
 
-Name of the module in which we are contained, if any.
+ID of the element in which we are contained, if any.
 
 *** in_global_module
 :PROPERTIES:
@@ -242,20 +184,12 @@ If true, the element is located in the global module.
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
 :END:
-*** static_stereotypes
+*** stereotypes
 :PROPERTIES:
-:masd.injection.type: std::list<static_stereotypes>
+:masd.injection.type: stereotypes
 :END:
 
-Stereotypes that are part of the dogen UML profile, and so are well-known to the
-model.
-
-*** dynamic_stereotypes
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-
-Stereotypes that are not part of the masd UML profile. These are user defined.
+All stereotypes associated with this element.
 
 ** entities::MetaNameable
 :PROPERTIES:
@@ -266,7 +200,7 @@ Ability to have a meta-name.
 
 *** meta_name
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::logical_meta_name
 :END:
 
 Name of the element in the meta-model that this instance conforms to.
@@ -277,7 +211,7 @@ Name of the element in the meta-model that this instance conforms to.
 :END:
 *** intrinsic_technical_space
 :PROPERTIES:
-:masd.injection.type: technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Describes the intrinsic nature of the modeling element with regards to technical
@@ -309,14 +243,25 @@ The ability to attach labels to an element.
 
 *** labels
 :PROPERTIES:
-:masd.injection.type: std::list<label>
+:masd.injection.type: std::list<identification::entities::label>
 :END:
 
 All labels associated with this element.
 
+** entities::Generatable
+:PROPERTIES:
+:masd.injection.stereotypes: masd::object_template
+:END:
+*** generability_status
+:PROPERTIES:
+:masd.injection.type: generability_status
+:END:
+
+The status of this element with regards to generability.
+
 ** entities::Element
 :PROPERTIES:
-:masd.injection.parent: entities::Nameable, entities::Documentable, entities::DeterminableOrigin, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable
+:masd.injection.parent: entities::Nameable, entities::Documentable, entities::Provenance, entities::Containable, entities::Stereotypable, entities::MetaNameable, entities::TechnicalSpaceRelationship, entities::Configurable, entities::Labelable, entities::Generatable
 :masd.injection.stereotypes: masd::object_template
 :END:
 
@@ -325,66 +270,6 @@ A unit of coding that can be code generated.
 We define the Element object template purely to make our life easier
 when creating the element class. It is not required for any other
 purpose.
-
-** entities::name
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable, Qualifiable
-:END:
-
-Name of an element in logical space.
-
-A name represents a point or a region in logical space, and this point or region can
-only be used by one element. Names can be uniquely identified by their qualified ID.
-
-Name has the following properties: a) two different points or regions in logical
-space cannot have the same name and b) the same point in logical space can only
-have one and only one name.
-
-Names are required in addition to just using the qualfied ID representation
-because we use them to infer all sorts of properties for an element (namespaces,
-naming files, etc).
-
-*** simple
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Simple (non-qualified) name of the logical element at this address.
-
-The simple name must be unique for a given location.
-
-*** location
-:PROPERTIES:
-:masd.injection.type: location
-:END:
-
-Where the name is located in element space.
-
-*** is_container
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-
-If true, the name indicates an element that can contain other elements.
-
-** entities::origin_types
-:PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
-:END:
-
-What originated the model element.
-
-*** target
-The element is part of the target model.
-
-*** proxy_reference
-The element was part of a reference model which is a proxy model.
-
-*** non_proxy_reference
-The element was part of a reference model which is regular dogen model.
-
-*** not_yet_determined
-The origin of the element is not yet known
 
 ** entities::Stateful
 :PROPERTIES:
@@ -419,7 +304,7 @@ The set of all attributes directly associated with the type.
 
 *** inherited_attributes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<name, std::list<attribute>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_name, std::list<attribute>>
 :END:
 
 The set of all attributes obtained via inheritance, by parent name.
@@ -441,74 +326,6 @@ If true, do not generate setters for the element's attributes.
 
 If true, generate fluent setters.
 
-** entities::location
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable
-:END:
-
-Identifies a hierarchy of containment within the asset space.
-
-Elements exist at unique points within the asset space called @e
-addresses.  However, certain elements have the ability to contain
-other elements, creating in effect new dimensions in logical space. The
-location class keeps track of these dimensions. Note that the
-attributes of this class are hierarchical, i.e.  external modules
-contain model modules and so forth. These attributes are best thought
-of as a single linked list, where segments of that linked list have
-different meaning. However, because we care about these meanings, we
-implemented the type with a number of linked lists, one per meaning.
-
-A location is not necessarily connected to modules, although these are
-the main model elements that provide containment. For example, inner
-classes are contained within classes; in logical terms it means a
-location should also have an "object" attribute to represent this
-relationship.
-
-Also, note that the location class itself encodes the address of the
-element that owns that location; returning to the linked list idea,
-the tail of the linked list is the name of the element, and the
-remaining linked list provides the location of the element.
-
-*** external_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-
-All modules external to the model itself.
-
-It is sometimes useful to create a model within a set of existing
-modules. In this case, the model does not own the existing modules and
-they are considered "external" to the model. This is useful, for
-example, when declaring a model within a larger project such as @e
-dogen::logical. In this case, @e dogen is the external module.
-
-*** model_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-
-Modules related to just the model itself.
-
-It is only different from the model name if the model name is composite;
-that is, if the model name has multiple fields separated by dots, e.g. @ a.b.
-
-*** internal_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-
-Sub-modules within a model.
-
-*** element
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Name of the owning element, if any.
-
-For coding elements which are located within other logical elements
-that are not modules, such as attributes, inner classes, etc.
-
 ** entities::element
 :PROPERTIES:
 :masd.injection.stereotypes: masd::visitable, Element
@@ -520,31 +337,23 @@ An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
 meta-types (object templates) and non-types (modules and backend specific entities).
 
-*** artefact_properties
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, artefact_properties>
-:END:
-*** enablement_properties
-:PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, enablement_properties>
-:END:
 *** decoration
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<technical_space, boost::optional<decoration::element_properties>>
+:masd.injection.type: std::unordered_map<identification::entities::technical_space, boost::optional<decoration::element_properties>>
 :END:
 
 If set, decoration to be added to each generated file.
 
 ** entities::model
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable, MetaNameable, DeterminableOrigin
+:masd.injection.stereotypes: Nameable, MetaNameable, Provenance
 :END:
 
 Intermediate representation of a masd model.
 
 *** references
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<name, origin_types>
+:masd.injection.type: std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
 :END:
 
 All other intermediate models that this model depends on, mapped to their
@@ -552,7 +361,7 @@ origin.
 
 *** leaves
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<name>
+:masd.injection.type: std::unordered_set<identification::entities::logical_name>
 :END:
 
 All leaf types in this model.
@@ -565,21 +374,21 @@ Leaves are types concrete types which have a parent.
 :END:
 *** input_technical_space
 :PROPERTIES:
-:masd.injection.type: technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Technical space in which this model was written.
 
 *** output_technical_spaces
 :PROPERTIES:
-:masd.injection.type: std::list<technical_space>
+:masd.injection.type: std::list<identification::entities::technical_space>
 :END:
 
 Technical spaces into which to extract the final model.
 
 *** all_technical_spaces
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<logical::entities::technical_space>
+:masd.injection.type: std::unordered_set<identification::entities::technical_space>
 :END:
 
 Set of all technical concrete spaces involved in generating this model.
@@ -591,10 +400,6 @@ spaces.
 *** orm_properties
 :PROPERTIES:
 :masd.injection.type: boost::optional<orm::model_properties>
-:END:
-*** extraction_properties
-:PROPERTIES:
-:masd.injection.type: extraction_properties
 :END:
 *** structural_elements
 :PROPERTIES:
@@ -656,7 +461,7 @@ Elements related to serialization.
 :END:
 *** meta_names
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, name>
+:masd.injection.type: std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>
 :END:
 
 All meta-names by qualified name.
@@ -678,14 +483,14 @@ The ability to handle visitation.
 
 *** base_visitor
 :PROPERTIES:
-:masd.injection.type: boost::optional<name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Base class of the visitor that visits the current element, if any.
 
 *** derived_visitor
 :PROPERTIES:
-:masd.injection.type: boost::optional<name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Derived class of the visitor that visits the current element, if any.
@@ -707,14 +512,14 @@ The element has the ability to associate itself with other elements.
 
 *** transparent_associations
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are involved in aggregation or composition relationships.
 
 *** opaque_associations
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are involved in aggregation or composition relationships via
@@ -724,7 +529,7 @@ This is used to break cycles where required.
 
 *** associative_container_keys
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are keys in an associative container.
@@ -789,28 +594,28 @@ True if the object is related to at least one other object as a parent or a chil
 
 *** root_parents
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Top-most parents at the root of the inheritance hierarchy, if any.
 
 *** parents
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Direct parent of this element, if any.
 
 *** leaves
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are at the bottom of the inheritance tree.
 
 *** type_registrar
 :PROPERTIES:
-:masd.injection.type: boost::optional<name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 ** entities::Relatable
 :PROPERTIES:
@@ -840,80 +645,6 @@ Element has the ability to have relationships with other elements.
 *** always_in_heap
 :PROPERTIES:
 :masd.injection.type: bool
-:END:
-** entities::technical_space
-:PROPERTIES:
-:masd.cpp.hash.enabled: true
-:masd.injection.stereotypes: masd::enumeration, dogen::convertible
-:END:
-
-Models need to declare upfront the technical space they will target.
-
-*** agnostic
-Abstract technical space which is mapped to concrete technical spaces.
-
-*** cpp
-The C++ programming language.
-
-*** csharp
-The C# programming language.
-
-*** cmake
-CMake meta build system.
-
-*** xml
-Extensible Markup Language.
-
-*** odb
-ODB options.
-
-*** sln
-Visual studio solution.
-
-** entities::artefact_properties
-*** enabled
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** overwrite
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
-*** file_path
-:PROPERTIES:
-:masd.injection.type: boost::filesystem::path
-:END:
-*** formatting_style
-:PROPERTIES:
-:masd.injection.type: formatting_styles
-:END:
-*** formatting_input
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-** entities::formatting_styles
-:PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
-:END:
-*** stock
-*** wale
-*** stitch
-** entities::enablement_properties
-*** facet_enabled
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
-:END:
-*** archetype_enabled
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
-:END:
-*** facet_overwrite
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
-:END:
-*** archetype_overwrite
-:PROPERTIES:
-:masd.injection.type: boost::optional<bool>
 :END:
 ** entities::static_stereotypes
 :PROPERTIES:
@@ -959,24 +690,6 @@ Lists all stereotypes defined in the masd UML profile.
 *** physical_archetype
 *** physical_archetype_kind
 *** physical_part
-** entities::extraction_properties
-Properties related to extraction.
-
-*** cpp_headers_output_directory
-:PROPERTIES:
-:masd.injection.type: boost::filesystem::path
-:END:
-
-Directory in which to place C++ header files. Must be a relative path.
-
-*** enabled_backends
-:PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
-:END:
-*** enable_backend_directories
-:PROPERTIES:
-:masd.injection.type: bool
-:END:
 ** entities::input_model_set
 Represents a set of related logical models used as an input to the logical model chains.
 
@@ -995,46 +708,6 @@ Represents a set of related logical models used as an input to the logical model
 
 Maps a fixed mappable name, using the scope notation, to its destination.
 
-** entities::fully_qualified_representation
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable
-:END:
-
-Fully qualified representation for a logical identifier such as a name or name tree.
-
-*** dot
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Qualified identifier using "." as the separator.
-
-*** colon
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Qualified identifier using "::" as the separator.
-
-*** identifiable
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-
-Representation of the identifier that can usable as an identifier on all of the
-supported technical spaces, using the entire name structure.
-
-** entities::Qualifiable
-:PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
-:END:
-
-The model entity can have a qualified representation.
-
-*** qualified
-:PROPERTIES:
-:masd.injection.type: fully_qualified_representation
-:END:
 ** entities::Container
 :PROPERTIES:
 :masd.injection.stereotypes: masd::object_template
@@ -1044,7 +717,7 @@ Has the ability to contain other elements.
 
 *** contains
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.injection.type: std::list<identification::entities::logical_id>
 :END:
 
 All elements contained by this element.
@@ -1138,7 +811,7 @@ List of all the parameters in the preamble, in order of appearence.
 
 **** technical_space
 :PROPERTIES:
-:masd.injection.type: technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Technical space that this modeline targets.
@@ -1270,19 +943,19 @@ as a modeline.
 *** entities::decoration::element_repository
 **** modeline_groups
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<modeline_group>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>
 :END:
 **** modelines
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<modeline>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>
 :END:
 **** licences
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<licence>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>
 :END:
 **** generation_markers
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<generation_marker>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>
 :END:
 ** entities::meta_element
 :PROPERTIES:
@@ -1391,7 +1064,7 @@ Unparsed type, after mapping has taken place.
 
 **** parsed_type
 :PROPERTIES:
-:masd.injection.type: name_tree
+:masd.injection.type: identification::entities::logical_name_tree
 :END:
 
 Mapped type, after parsing has taken place.
@@ -1461,14 +1134,14 @@ Responsible for initialising features and feature templates.
 
 **** feature_template_bundles
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Names of all the templates that this initialiser will register.
 
 **** feature_bundles
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Names of all the features that this initialiser will register.
@@ -1476,19 +1149,19 @@ Names of all the features that this initialiser will register.
 *** entities::variability::element_repository
 **** profile_templates
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<profile_template>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>
 :END:
 **** profiles
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<profile>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>
 :END:
 **** feature_template_bundles
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<feature_template_bundle>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>
 :END:
 **** feature_bundles
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<feature_bundle>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>
 :END:
 **** initializer
 :PROPERTIES:
@@ -1627,7 +1300,7 @@ Set of feature templates associated with this feature template bundle.
 :END:
 **** parents
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Parents of this profile template.
@@ -1956,7 +1629,7 @@ Database to which the mapping applies. If none is supplied, it will apply to all
 *** entities::orm::element_repository
 **** common_odb_options
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<common_odb_options>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>
 :END:
 *** entities::orm::odb_targets
 **** main_target_name
@@ -2013,7 +1686,7 @@ Represents a structural template for masd objects.
 
 **** parents
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 List of object templates that this object template inherits from, if any.
@@ -2046,7 +1719,7 @@ Object is an associative container.
 
 **** object_templates
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 All object templates associated with this object.
@@ -2117,14 +1790,14 @@ Represents an exception which can be thrown.
 :END:
 **** visits
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Elements that are visitable by the visitor.
 
 **** parent
 :PROPERTIES:
-:masd.injection.type: boost::optional<name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 *** entities::structural::primitive
 :PROPERTIES:
@@ -2202,7 +1875,7 @@ or a string.
 
 **** underlying_element
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::logical_name
 :END:
 
 Underlying element of each instance of the enumeration.
@@ -2256,43 +1929,43 @@ It must be castable to instance of the type defined in the enumeration.
 *** entities::structural::element_repository
 **** modules
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<module>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>
 :END:
 **** object_templates
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<object_template>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>
 :END:
 **** builtins
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<builtin>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>
 :END:
 **** enumerations
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<enumeration>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>
 :END:
 **** primitives
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<primitive>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>
 :END:
 **** objects
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<object>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>
 :END:
 **** exceptions
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<exception>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>
 :END:
 **** visitors
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<visitor>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>
 :END:
 **** entry_points
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<entry_point>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>
 :END:
 **** assistants
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<assistant>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>
 :END:
 *** entities::structural::entry_point
 :PROPERTIES:
@@ -2336,20 +2009,20 @@ All the destinations that this source has been mapped to.
 *** entities::mapping::element_repository
 **** extensible_mappables
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<extensible_mappable>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>
 :END:
 **** fixed_mappables
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<fixed_mappable>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>
 :END:
 *** entities::mapping::destination
 **** name
 :PROPERTIES:
-:masd.injection.type: name
+:masd.injection.type: identification::entities::logical_name
 :END:
 **** technical_space
 :PROPERTIES:
-:masd.injection.type: technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 *** entities::mapping::fixed_mappable
 :PROPERTIES:
@@ -2393,7 +2066,7 @@ Content of the logic-less template.
 *** entities::templating::element_repository
 **** logic_less_templates
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<logic_less_template>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>
 :END:
 ** entities::serialization
 :PROPERTIES:
@@ -2433,7 +2106,7 @@ Registrars on other models this registrar depends on.
 *** entities::serialization::element_repository
 **** type_registrars
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<type_registrar>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>
 :END:
 ** entities::visual_studio
 :PROPERTIES:
@@ -2474,21 +2147,21 @@ Formatted name of the project.
 *** entities::visual_studio::element_repository
 **** solutions
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<solution>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>
 :END:
 
 All solutions in this model.
 
 **** projects
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<project>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>
 :END:
 
 All projects in this model.
 
 **** msbuild_targets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<msbuild_targets>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>
 :END:
 *** entities::visual_studio::item_group
 Represents an MSBuild ItemGroup.
@@ -2592,7 +2265,7 @@ namespace.
 *** entities::build::element_repository
 **** cmakelists
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<cmakelists>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>
 :END:
 *** entities::build::cmakelists
 :PROPERTIES:
@@ -2635,23 +2308,23 @@ Logical representation of elements in the physical dimension.
 *** entities::physical::element_repository
 **** backends
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<backend>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>
 :END:
 **** facets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<facet>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>
 :END:
 **** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<archetype>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>
 :END:
 **** parts
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<part>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>
 :END:
 **** archetype_kinds
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<archetype_kind>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>
 :END:
 *** entities::physical::archetype
 :PROPERTIES:
@@ -2690,7 +2363,7 @@ ID for the part this archetype belongs to.
 
 **** logical_meta_element_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_meta_id
 :END:
 
 ID of the meta-element in the logical model this archetype binds to.
@@ -2702,12 +2375,12 @@ ID of the meta-element in the logical model this archetype binds to.
 
 Relation information for this archetype.
 
-**** generator
+**** text_templating
 :PROPERTIES:
-:masd.injection.type: archetype_generator
+:masd.injection.type: archetype_text_templating
 :END:
 
-Properties related to the generator for this archetype.
+Properties related to the text templating for this archetype.
 
 *** entities::physical::backend
 :PROPERTIES:
@@ -2725,21 +2398,21 @@ Name of the physical meta-model containing this element.
 
 **** facets
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 All facets within this backend.
 
 **** parts
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 All parts within this backend.
 
 **** archetype_kinds
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Kinds of archetypes defined in this backend.
@@ -2774,7 +2447,7 @@ Name of the backend containing this element.
 
 **** archetypes
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 All archetypes in this facet.
@@ -2837,7 +2510,7 @@ If true, a relative path should be generated for this part.
 
 **** archetypes
 :PROPERTIES:
-:masd.injection.type: std::list<name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 All archetypes in this part.
@@ -2880,7 +2553,7 @@ Unique identifier in physical space for this element.
 
 **** major_technical_space
 :PROPERTIES:
-:masd.injection.type: technical_space
+:masd.injection.type: identification::entities::technical_space
 :END:
 
 Technical space to which this physical element belongs to.
@@ -2948,7 +2621,7 @@ element.
 :PROPERTIES:
 :masd.injection.type: std::list<hard_coded_relation>
 :END:
-*** entities::physical::archetype_generator
+*** entities::physical::archetype_text_templating
 :PROPERTIES:
 :masd.injection.stereotypes: Configurable
 :END:
@@ -2966,7 +2639,7 @@ Content of the stitch template associated with this archetype, if any exists.
 #+end_src
 **** wale_template
 :PROPERTIES:
-:masd.injection.type: boost::optional<name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 
 Parsed name of the wale template linked to this archetype, if any.
@@ -3006,22 +2679,48 @@ Represents a set of related logical models produced as ouput of the logical mode
 
 All models in this model set.
 
-** entities::label
-A label is a key-value pair that can be used by the processing engine in a flexible way.
-
-*** key
+** entities::generability_status
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.stereotypes: masd::enumeration
 :END:
 
-Key of the label.
+The status of this element with regards to generability.
 
-*** value
+*** non_generatable_source
+The element was sourced from a non-target model.
+
+*** generation_not_expected
+The element is of a type that is expected to have support for generation.
+
+*** non_generatable_state
+The element is normally generatable, but is in a state that precludes generation.
+
+*** generation_disabled
+The user requested generation to be disabled.
+
+*** generation_ignored
+User requested that any changes to this element are to be ignored.
+
+*** generatable
+The element is generatable.
+
+** entities::stereotypes
+Stereotype information associated with this element.
+
+*** static_stereotypes
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: std::list<static_stereotypes>
 :END:
 
-Value associated with this label.
+Stereotypes that are part of the dogen UML profile, and so are well-known to the
+model.
+
+*** dynamic_stereotypes
+:PROPERTIES:
+:masd.injection.type: std::list<identification::entities::stereotype>
+:END:
+
+Stereotypes that are not part of the masd UML profile. These are user defined.
 
 * traits
 :PROPERTIES:
@@ -3173,10 +2872,6 @@ An error occurred whilst applying a transformation.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::extraction_properties_transform
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
 ** transforms::modelines_transform
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
@@ -3245,19 +2940,23 @@ An error occurred whilst applying a transformation.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
+** transforms::generability_transform
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
 * helpers
 ** helpers::decomposition_result
 *** names
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, entities::name>>
+:masd.injection.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>
 :END:
 *** meta_names
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, entities::name>>
+:masd.injection.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>
 :END:
 *** name_trees
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, entities::name_tree>>
+:masd.injection.type: std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>
 :END:
 ** helpers::decomposer
 :PROPERTIES:
@@ -3281,23 +2980,23 @@ An error occurred during validation.
 ** helpers::indices
 *** objects_always_in_heap
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 *** elements_referable_by_attributes
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 *** primitive_underliers
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 *** enumeration_underliers
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 *** abstract_elements
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 ** helpers::indexing_error
 :PROPERTIES:
@@ -3335,15 +3034,15 @@ An error has occurred while mapping element names.
 ** helpers::mapping_context
 *** translations
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, entities::name>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
 :END:
 *** erasures
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.injection.type: std::unordered_set<identification::entities::logical_id>
 :END:
 *** injections
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, entities::name>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>
 :END:
 ** helpers::mapping_set
 Consistent unit of mapping that can be used to translate a model from one technical
@@ -3355,11 +3054,11 @@ space to another.
 :END:
 *** by_agnostic_id
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<entities::technical_space, std::unordered_map<std::string, entities::name>>
+:masd.injection.type: std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>
 :END:
 *** erasures_by_technical_space
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<entities::technical_space, std::unordered_set<std::string>>
+:masd.injection.type: std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>
 :END:
 ** helpers::mapping_set_repository
 Stores all available mapping sets.
@@ -3382,14 +3081,14 @@ space.
 
 *** agnostic_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_id
 :END:
 
 Technical space agnostic ID of the element we're mapping from.
 
 *** by_technical_space
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<entities::technical_space, mapping_value>
+:masd.injection.type: std::unordered_map<identification::entities::technical_space, mapping_value>
 :END:
 
 Values of the mapping, by technical space.
@@ -3403,7 +3102,7 @@ Value of a mapping.
 :END:
 *** default_name
 :PROPERTIES:
-:masd.injection.type: boost::optional<entities::name>
+:masd.injection.type: boost::optional<identification::entities::logical_name>
 :END:
 ** helpers::mapping_actions
 :PROPERTIES:
@@ -3411,157 +3110,6 @@ Value of a mapping.
 :END:
 *** translate
 *** erase
-** helpers::printing_error
-:PROPERTIES:
-:masd.injection.stereotypes: masd::exception
-:END:
-
-An error occurred whilst pretty printing.
-
-** helpers::pretty_printer
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::separators
-:PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
-:END:
-
-Available separators to be used by the pretty printer.
-
-*** angle_brackets
-Enclose name elements in '<' and '>'.
-
-*** double_colons
-Separate name elements with a '::'.
-
-*** dots
-Separate name elements with a '.'.
-
-** helpers::node
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-
-Node in a tree of names.
-
-Temporary data structure used to build trees of names.
-
-*** parent
-:PROPERTIES:
-:masd.injection.type: boost::weak_ptr<node>
-:END:
-
-Parent in a tree.
-
-*** data
-:PROPERTIES:
-:masd.injection.type: entities::name
-:END:
-
-Current node.
-
-*** children
-:PROPERTIES:
-:masd.injection.type: std::list<boost::shared_ptr<node>>
-:END:
-
-Child nodes in a tree.
-
-** helpers::string_processor
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::building_error
-:PROPERTIES:
-:masd.injection.stereotypes: masd::exception
-:END:
-
-An error occurred whilst building.
-
-** helpers::name_tree_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-*** top_level_modules_
-:PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
-:END:
-*** model_location_
-:PROPERTIES:
-:masd.injection.type: entities::location
-:END:
-*** names
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-*** root
-:PROPERTIES:
-:masd.injection.type: std::shared_ptr<node>
-:END:
-*** current
-:PROPERTIES:
-:masd.injection.type: std::shared_ptr<node>
-:END:
-** helpers::legacy_name_tree_parser
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-*** modules
-:PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
-:END:
-*** external_modules
-:PROPERTIES:
-:masd.injection.type: std::list<std::string>
-:END:
-*** model_name
-:PROPERTIES:
-:masd.injection.type: std::string
-:END:
-** helpers::new_name_tree_parser
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::parsing_error
-:PROPERTIES:
-:masd.injection.stereotypes: masd::exception
-:END:
-
-A fatal error has occurred while parsing.
-
-** helpers::fully_qualified_representation_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::name_factory
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::name_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-*** name_
-:PROPERTIES:
-:masd.injection.type: entities::name
-:END:
-** helpers::name_flattener
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::meta_name_factory
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-** helpers::location_builder
-:PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
-:END:
-*** location_
-:PROPERTIES:
-:masd.injection.type: entities::location
-:END:
 ** helpers::visual_studio_project_type_mapper
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
@@ -3581,15 +3129,15 @@ A fatal error has occurred while parsing.
 ** helpers::decoration_repository
 *** modelines_by_modeline_group_by_technical_space
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_map<logical::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>
 :END:
 *** licences_by_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::licence>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>
 :END:
 *** generation_markers_by_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::generation_marker>>
+:masd.injection.type: std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>
 :END:
 ** helpers::decoration_repository_factory
 :PROPERTIES:
@@ -3606,15 +3154,15 @@ A fatal error has occurred while parsing.
 :END:
 *** licence_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_id
 :END:
 *** modeline_group_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_id
 :END:
 *** marker_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.injection.type: identification::entities::logical_id
 :END:
 ** helpers::decoration_configuration_factory
 :PROPERTIES:
@@ -3624,12 +3172,16 @@ A fatal error has occurred while parsing.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
-** helpers::flattening_error
+** helpers::stereotypes_helper
+:PROPERTIES:
+:masd.injection.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::building_error
 :PROPERTIES:
 :masd.injection.stereotypes: masd::exception
 :END:
 
-An error occurred whilst flattening a name.
+An error has occurred in a factory.
 
 * features
 :PROPERTIES:
@@ -4181,7 +3733,7 @@ Where does this profile or profile template bind to.
 
 ** features::physical
 :PROPERTIES:
-:masd.variability.default_binding_point: any
+:masd.variability.default_binding_point: element
 :masd.variability.key_prefix: masd.physical
 :masd.injection.stereotypes: masd::variability::feature_bundle
 :END:
@@ -4226,14 +3778,6 @@ FIXME: optional for now.
 
 Major technical space to which this element belongs to.
 
-*** relation_status
-:PROPERTIES:
-:masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text
-:END:
-
-Relation status for the archetype.
-
 *** wale_template_reference
 :PROPERTIES:
 :masd.variability.is_optional: true
@@ -4241,22 +3785,6 @@ Relation status for the archetype.
 :END:
 
 Name of the wale template that the archetype uses.
-
-*** variable_relation
-:PROPERTIES:
-:masd.variability.is_optional: true
-:masd.injection.type: masd::variability::comma_separated_collection
-:END:
-
-Define a variable relation between the current archetype and another archetype.
-
-*** constant_relation
-:PROPERTIES:
-:masd.variability.is_optional: true
-:masd.injection.type: masd::variability::comma_separated_collection
-:END:
-
-Define a fixed relation between the current archetype and another archetype.
 
 ** features::wale
 :PROPERTIES:
@@ -4344,6 +3872,39 @@ Features related to labels.
 :END:
 
 Labels to attach to modeling elements. Key must be unique.
+
+** features::physical_relations
+:PROPERTIES:
+:masd.variability.default_binding_point: any
+:masd.variability.key_prefix: masd.physical
+:masd.injection.stereotypes: masd::variability::feature_bundle
+:END:
+
+Features related to relations at the physical level.
+
+*** relation_status
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.injection.type: masd::variability::text
+:END:
+
+Relation status for the archetype.
+
+*** variable_relation
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.injection.type: masd::variability::comma_separated_collection
+:END:
+
+Define a variable relation between the current archetype and another archetype.
+
+*** constant_relation
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.injection.type: masd::variability::comma_separated_collection
+:END:
+
+Define a fixed relation between the current archetype and another archetype.
 
 * registrar
 :PROPERTIES:

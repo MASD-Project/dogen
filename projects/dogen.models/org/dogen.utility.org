@@ -56,7 +56,7 @@ An error occurred whilst performing an IO operation.
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
-** hash::sha1_hash
+** hash::sha1_hasher
 :PROPERTIES:
 :masd.injection.stereotypes: dogen::handcrafted::typeable
 :END:
