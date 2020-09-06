@@ -45,8 +45,7 @@ auto lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 void compute_name_indices_transform::
-update_physical_meta_names_by_logical_meta_name(
-    const physical::entities::archetype& arch,
+update_physical_meta_names_by_logical_meta_name(const entities::archetype& arch,
     std::unordered_map<identification::entities::logical_meta_id,
     identification::entities::archetype_name_set>&
     physical_meta_names_by_logical_meta_name) {

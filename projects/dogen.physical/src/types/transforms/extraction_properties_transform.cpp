@@ -86,8 +86,7 @@ obtain_cpp_headers_output_directory(const feature_group& fg,
     return boost::filesystem::path();
 }
 
-std::unordered_set<std::string>
-extraction_properties_transform::
+std::unordered_set<std::string> extraction_properties_transform::
 obtain_enabled_backends(const feature_group& fg,
     const variability::entities::configuration& cfg) {
     std::unordered_set<std::string> r;
