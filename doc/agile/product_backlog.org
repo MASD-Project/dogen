@@ -9768,6 +9768,19 @@ Links:
 
 ** Unclassified
 
+*** Handling empty primitives                                         :story:
+
+In certain cases we may want to represent the notion of an empty /
+optional primitive. This could easily be achieved by having an
+optional of the primitive. However, maybe the primitive itself could
+have support for optionality? Given we use primitives for very simple
+types, we could probably "optimise" it instead of having pointers to
+ints etc.
+
+*** Add equals operator to primitives                                 :story:
+
+At present we need to extract the value in order to make comparisons.
+
 *** Org-mode and rountripping                                         :story:
 
 With org-mode we will be able to sync selected elements from the
@@ -15093,6 +15106,30 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for Matplot++                             :story:
+
+#+begin_quote
+ Matplot++ is a graphics library for data visualization that provides
+ interactive plotting, means for exporting plots in high-quality
+ formats for scientific publications, a compact syntax consistent with
+ similar libraries, dozens of plot categories with specialized
+ algorithms, multiple coding styles, and supports generic backends.
+#+end_quote
+
+Links:
+
+- https://github.com/alandefreitas/matplotplusplus
+
+*** Consider adding support for Crypto3                               :story:
+
+#+begin_quote
+Modern cryptography suite built in C++ with concept-based architecture.
+#+end_quote
+
+Links:
+
+- [[https://github.com/NilFoundation/crypto3][GitHub]]
 
 *** Consider adding support for libstud-json                          :story:
 

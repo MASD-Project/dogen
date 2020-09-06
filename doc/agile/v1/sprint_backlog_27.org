@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-04 Fri 11:30]
+#+CAPTION: Clock summary at [2020-09-06 Sun 11:07]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *43:39* |       |       | 100.0 |
+| *Total time*                                       | *54:18* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 43:39   |       |       | 100.0 |
-| Active                                             |         | 43:39 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  16.6 |
-| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.6 |
-| Sprint and product backlog grooming                |         |       |  1:23 |   3.2 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |  10.0 |
-| Create an =ident= model                            |         |       | 29:58 |  68.7 |
+| Stories                                            | 54:18   |       |       | 100.0 |
+| Active                                             |         | 54:18 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  13.4 |
+| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.3 |
+| Sprint and product backlog grooming                |         |       |  1:23 |   2.5 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   8.0 |
+| Create an =ident= model                            |         |       | 40:37 |  74.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -819,6 +819,16 @@ Notes:
 
 *** STARTED Create an =ident= model                                   :story:
     :LOGBOOK:
+    CLOCK: [2020-09-06 Sun 10:05]--[2020-09-06 Sun 11:07] =>  1:02
+    CLOCK: [2020-09-05 Sat 22:04]--[2020-09-05 Sat 22:10] =>  0:06
+    CLOCK: [2020-09-05 Sat 21:55]--[2020-09-05 Sat 22:03] =>  0:08
+    CLOCK: [2020-09-05 Sat 20:41]--[2020-09-05 Sat 20:59] =>  0:18
+    CLOCK: [2020-09-05 Sat 14:05]--[2020-09-05 Sat 16:12] =>  2:07
+    CLOCK: [2020-09-05 Sat 12:01]--[2020-09-05 Sat 13:30] =>  1:29
+    CLOCK: [2020-09-05 Sat 09:22]--[2020-09-05 Sat 10:00] =>  0:38
+    CLOCK: [2020-09-04 Fri 15:06]--[2020-09-04 Fri 17:58] =>  2:52
+    CLOCK: [2020-09-04 Fri 12:45]--[2020-09-04 Fri 14:29] =>  2:21
+    CLOCK: [2020-09-04 Fri 11:31]--[2020-09-04 Fri 11:46] =>  0:15
     CLOCK: [2020-09-04 Fri 08:37]--[2020-09-04 Fri 11:30] =>  2:53
     CLOCK: [2020-08-05 Wed 17:45]--[2020-08-05 Wed 18:02] =>  0:17
     CLOCK: [2020-08-05 Wed 10:25]--[2020-08-05 Wed 11:46] =>  1:21
@@ -873,6 +883,11 @@ Notes:
   transform.
 - for some reason we are still generating artefacts for the global
   module. Check the is generatable transform in logical model.
+
+*** Replace meta-model IDs with stereotypes                           :story:
+
+We probably already have a story for this, check backlog.
+
 *** Check meta-name validator                                         :story:
 
 The logic looks very strange.
