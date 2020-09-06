@@ -13806,7 +13806,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
-        <dia:enum val="1"/>
+        <dia:enum val="2"/>
       </dia:attribute>
       <dia:attribute name="show_direction">
         <dia:boolean val="false"/>
@@ -13842,7 +13842,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="64.785,41.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.035,40.95;75.05,45.5"/>
+        <dia:rectangle val="64.735,40.955;75.75,44.755"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
