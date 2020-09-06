@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/building_error.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_indices_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.identification/types/helpers/meta_name_index_builder.hpp"
@@ -111,6 +112,7 @@ add(const std::unordered_map<entities::logical_meta_id,
     entities::archetype_name_set>& by_logical_meta_name) {
     auto& lmn(index_.archetype_names_by_logical_meta_name());
     for (const auto& pair : by_logical_meta_name) {
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << pair.first;
         /*
          * We start by inserting the physical meta-names into the
          * overall container with all physical meta-names across all
@@ -124,6 +126,8 @@ add(const std::unordered_map<entities::logical_meta_id,
          */
         const auto& mn(pair.first);
         auto& dst(lmn[mn]);
+        dst.logical_meta_id(src.logical_meta_id());
+        dst.archetype_for_label(src.archetype_for_label());
 
         /*
          * We need to merge the physical meta-names at the logical
