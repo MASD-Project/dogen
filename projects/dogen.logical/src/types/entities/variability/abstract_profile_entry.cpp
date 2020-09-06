@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/variability/abstract_profile_entry.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -77,7 +77,7 @@ namespace dogen::logical::entities::variability {
 abstract_profile_entry::abstract_profile_entry(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& original_key,
     const std::string& key,
     const std::list<std::string>& value)
@@ -151,19 +151,19 @@ void abstract_profile_entry::configuration(const boost::shared_ptr<dogen::variab
     configuration_ = std::move(v);
 }
 
-const dogen::logical::entities::name& abstract_profile_entry::name() const {
+const dogen::identification::entities::logical_name& abstract_profile_entry::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& abstract_profile_entry::name() {
+dogen::identification::entities::logical_name& abstract_profile_entry::name() {
     return name_;
 }
 
-void abstract_profile_entry::name(const dogen::logical::entities::name& v) {
+void abstract_profile_entry::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void abstract_profile_entry::name(const dogen::logical::entities::name&& v) {
+void abstract_profile_entry::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

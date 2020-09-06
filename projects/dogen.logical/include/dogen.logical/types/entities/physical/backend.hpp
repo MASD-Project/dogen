@@ -29,8 +29,9 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::logical::entities::physical {
@@ -50,13 +51,13 @@ public:
 
 public:
     backend(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -64,11 +65,11 @@ public:
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::string& id,
         const dogen::identification::entities::technical_space major_technical_space,
-        const std::list<std::string>& contains,
+        const std::list<dogen::identification::entities::logical_id>& contains,
         const std::string& meta_model_name,
-        const std::list<dogen::logical::entities::name>& facets,
-        const std::list<dogen::logical::entities::name>& parts,
-        const std::list<dogen::logical::entities::name>& archetype_kinds,
+        const std::list<dogen::identification::entities::logical_name>& facets,
+        const std::list<dogen::identification::entities::logical_name>& parts,
+        const std::list<dogen::identification::entities::logical_name>& archetype_kinds,
         const std::string& backend_name);
 
 public:
@@ -104,10 +105,10 @@ public:
      * @brief All elements contained by this element.
      */
     /**@{*/
-    const std::list<std::string>& contains() const;
-    std::list<std::string>& contains();
-    void contains(const std::list<std::string>& v);
-    void contains(const std::list<std::string>&& v);
+    const std::list<dogen::identification::entities::logical_id>& contains() const;
+    std::list<dogen::identification::entities::logical_id>& contains();
+    void contains(const std::list<dogen::identification::entities::logical_id>& v);
+    void contains(const std::list<dogen::identification::entities::logical_id>&& v);
     /**@}*/
 
     /**
@@ -124,30 +125,30 @@ public:
      * @brief All facets within this backend.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& facets() const;
-    std::list<dogen::logical::entities::name>& facets();
-    void facets(const std::list<dogen::logical::entities::name>& v);
-    void facets(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& facets() const;
+    std::list<dogen::identification::entities::logical_name>& facets();
+    void facets(const std::list<dogen::identification::entities::logical_name>& v);
+    void facets(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief All parts within this backend.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& parts() const;
-    std::list<dogen::logical::entities::name>& parts();
-    void parts(const std::list<dogen::logical::entities::name>& v);
-    void parts(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& parts() const;
+    std::list<dogen::identification::entities::logical_name>& parts();
+    void parts(const std::list<dogen::identification::entities::logical_name>& v);
+    void parts(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Kinds of archetypes defined in this backend.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& archetype_kinds() const;
-    std::list<dogen::logical::entities::name>& archetype_kinds();
-    void archetype_kinds(const std::list<dogen::logical::entities::name>& v);
-    void archetype_kinds(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& archetype_kinds() const;
+    std::list<dogen::identification::entities::logical_name>& archetype_kinds();
+    void archetype_kinds(const std::list<dogen::identification::entities::logical_name>& v);
+    void archetype_kinds(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -176,11 +177,11 @@ public:
 private:
     std::string id_;
     dogen::identification::entities::technical_space major_technical_space_;
-    std::list<std::string> contains_;
+    std::list<dogen::identification::entities::logical_id> contains_;
     std::string meta_model_name_;
-    std::list<dogen::logical::entities::name> facets_;
-    std::list<dogen::logical::entities::name> parts_;
-    std::list<dogen::logical::entities::name> archetype_kinds_;
+    std::list<dogen::identification::entities::logical_name> facets_;
+    std::list<dogen::identification::entities::logical_name> parts_;
+    std::list<dogen::identification::entities::logical_name> archetype_kinds_;
     std::string backend_name_;
 };
 

@@ -23,12 +23,12 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
-#include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.csharp/io/formattables/helper_configuration_io.hpp"
@@ -67,7 +67,7 @@ private:
     walk_name_tree(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
-        const logical::entities::name_tree& nt,
+        const identification::entities::logical_name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
@@ -139,7 +139,7 @@ boost::optional<helper_descriptor>
 helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
-    const logical::entities::name_tree& nt,
+    const identification::entities::logical_name_tree& nt,
     std::unordered_set<std::string>& done,
     std::list<helper_properties>& hps) const {
 
@@ -147,7 +147,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
-    logical::helpers::name_flattener nf;
+    identification::helpers::logical_name_flattener nf;
     r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 

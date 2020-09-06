@@ -30,13 +30,13 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
-#include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
+#include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text.csharp/types/transforms/context.hpp"
 #include "dogen.text.csharp/types/formattables/helper_properties.hpp"
 #include "dogen.text.csharp/types/formattables/assistant_properties.hpp"
@@ -74,9 +74,9 @@ public:
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const logical::entities::name& n) const;
+    std::string get_qualified_name(const identification::entities::logical_name& n) const;
     std::string
-    get_qualified_name(const logical::entities::name_tree& nt) const;
+    get_qualified_name(const identification::entities::logical_name_tree& nt) const;
     /**@}*/
 
 public:
@@ -99,7 +99,7 @@ public:
      * @brief returns the c# namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const logical::entities::name& n) const;
+    make_namespaces(const identification::entities::logical_name& n) const;
 
 public:
     std::string

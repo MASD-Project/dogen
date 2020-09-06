@@ -23,7 +23,7 @@
 namespace dogen::logical::helpers {
 
 mapping::mapping(
-    const std::string& agnostic_id,
+    const dogen::identification::entities::logical_id& agnostic_id,
     const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space)
     : agnostic_id_(agnostic_id),
       by_technical_space_(by_technical_space) { }
@@ -45,19 +45,19 @@ mapping& mapping::operator=(mapping other) {
     return *this;
 }
 
-const std::string& mapping::agnostic_id() const {
+const dogen::identification::entities::logical_id& mapping::agnostic_id() const {
     return agnostic_id_;
 }
 
-std::string& mapping::agnostic_id() {
+dogen::identification::entities::logical_id& mapping::agnostic_id() {
     return agnostic_id_;
 }
 
-void mapping::agnostic_id(const std::string& v) {
+void mapping::agnostic_id(const dogen::identification::entities::logical_id& v) {
     agnostic_id_ = v;
 }
 
-void mapping::agnostic_id(const std::string&& v) {
+void mapping::agnostic_id(const dogen::identification::entities::logical_id&& v) {
     agnostic_id_ = std::move(v);
 }
 

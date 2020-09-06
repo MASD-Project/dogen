@@ -50,14 +50,14 @@ private:
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static entities::name inject_global_module(entities::model& m);
+    static identification::entities::logical_name inject_global_module(entities::model& m);
 
     /**
      * @brief Updates the containment relationships in the model
      * related to the global module.
      */
     static void update_element_containment(
-        const entities::name& global_module_name, entities::model& m);
+        const identification::entities::logical_name& global_module_name, entities::model& m);
 
 public:
     /**

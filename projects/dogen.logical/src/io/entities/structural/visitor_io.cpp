@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/structural/visitor_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 
 namespace dogen::logical::entities::structural {
 

@@ -21,7 +21,7 @@
 #include <set>
 #include <algorithm>
 #include <boost/pointer_cast.hpp>
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -41,24 +41,25 @@ const std::string msbuild_target("Compile");
 
 namespace dogen::text::csharp::formattables {
 
-std::unordered_set<std::string>
+std::unordered_set<identification::entities::logical_meta_id>
 project_items_expander::meta_names_for_project_items() {
-    std::unordered_set<std::string> r;
+    std::unordered_set<identification::entities::logical_meta_id> r;
 
-    using ymnf = logical::helpers::meta_name_factory;
-    r.insert(ymnf::make_enumeration_name().qualified().dot());
-    r.insert(ymnf::make_primitive_name().qualified().dot());
-    r.insert(ymnf::make_exception_name().qualified().dot());
-    r.insert(ymnf::make_object_name().qualified().dot());
-    r.insert(ymnf::make_builtin_name().qualified().dot());
-    r.insert(ymnf::make_visitor_name().qualified().dot());
-    r.insert(ymnf::make_assistant_name().qualified().dot());
+    using ymnf = identification::helpers::logical_meta_name_factory;
+    r.insert(ymnf::make_enumeration_name().id());
+    r.insert(ymnf::make_primitive_name().id());
+    r.insert(ymnf::make_exception_name().id());
+    r.insert(ymnf::make_object_name().id());
+    r.insert(ymnf::make_builtin_name().id());
+    r.insert(ymnf::make_visitor_name().id());
+    r.insert(ymnf::make_assistant_name().id());
 
     return r;
 }
 
 
-bool project_items_expander::is_project_item(const std::string& mn) const {
+bool project_items_expander::
+is_project_item(const identification::entities::logical_meta_id& mn) const {
     static const auto mnfpi(meta_names_for_project_items());
     const auto i(mnfpi.find(mn));
     return i != mnfpi.end();
@@ -67,16 +68,16 @@ bool project_items_expander::is_project_item(const std::string& mn) const {
 void project_items_expander::expand(model& fm) const {
     using logical::entities::visual_studio::project;
     boost::shared_ptr<project> proj;
-    using ymnf = logical::helpers::meta_name_factory;
+    using ymnf = identification::helpers::logical_meta_name_factory;
     const auto proj_name(ymnf::make_visual_studio_project_name());
-    const auto proj_qn(proj_name.qualified().dot());
+    const auto proj_qn(proj_name.id());
 
     std::set<std::string> set;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
-        const auto mt(e.meta_name().qualified().dot());
+        const auto mt(e.meta_name().id());
         if (mt == proj_qn) {
             proj = boost::dynamic_pointer_cast<project>(formattable.element());
             continue;

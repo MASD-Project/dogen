@@ -32,27 +32,32 @@ auto lg(logger_factory("logical.helpers.decomposer"));
 
 namespace dogen::logical::helpers {
 
-void decomposer::add_name(const std::string& owner, const entities::name& n) {
+void decomposer::
+add_name(const identification::entities::logical_id& owner,
+    const identification::entities::logical_name& n) {
     result_.names().push_back(std::make_pair(owner, n));
 }
 
 void decomposer::
-add_meta_name(const std::string& owner, const entities::name& n) {
+add_meta_name(const identification::entities::logical_id& owner,
+    const identification::entities::logical_meta_name& n) {
     result_.meta_names().push_back(std::make_pair(owner, n));
 }
 
 void decomposer::
-add_name_tree(const std::string& owner, const entities::name_tree& nt) {
+add_name_tree(const identification::entities::logical_id& owner,
+    const identification::entities::logical_name_tree& nt) {
     result_.name_trees().push_back(std::make_pair(owner, nt));
 }
 
-void decomposer::
-add_names(const std::string& owner, const std::list<entities::name>& names) {
+void decomposer::add_names(const identification::entities::logical_id& owner,
+    const std::list<identification::entities::logical_name>& names) {
     for (const auto& n : names)
         add_name(owner, n);
 }
 
-void decomposer::decompose_attributes(const std::string& owner,
+void decomposer::
+decompose_attributes(const identification::entities::logical_id& owner,
     const std::list<entities::attribute>& attrs) {
     for (const auto& attr : attrs) {
         add_name(owner, attr.name());
@@ -61,8 +66,8 @@ void decomposer::decompose_attributes(const std::string& owner,
 }
 
 void decomposer::decompose_element(const entities::element& e) {
-    add_name(e.name().qualified().dot(), e.name());
-    add_meta_name(e.name().qualified().dot(), e.meta_name());
+    add_name(e.name().id(), e.name());
+    add_meta_name(e.name().id(), e.meta_name());
 }
 
 void decomposer::operator()(const entities::element& e) {
@@ -83,7 +88,7 @@ void decomposer::operator()(const entities::structural::module& m) {
 
 void decomposer::operator()(const entities::structural::object_template& ot) {
     decompose_element(ot);
-    decompose_attributes(ot.name().qualified().dot(), ot.local_attributes());
+    decompose_attributes(ot.name().id(), ot.local_attributes());
 }
 
 void decomposer::operator()(const entities::structural::builtin& b) {
@@ -93,7 +98,7 @@ void decomposer::operator()(const entities::structural::builtin& b) {
 void decomposer::operator()(const entities::structural::enumeration& e) {
     decompose_element(e);
     for (const auto& en : e.enumerators())
-        add_name(e.name().qualified().dot(), en.name());
+        add_name(e.name().id(), en.name());
 }
 
 void decomposer::operator()(const entities::structural::primitive& p) {
@@ -102,7 +107,7 @@ void decomposer::operator()(const entities::structural::primitive& p) {
 
 void decomposer::operator()(const entities::structural::object& o) {
     decompose_element(o);
-    decompose_attributes(o.name().qualified().dot(), o.local_attributes());
+    decompose_attributes(o.name().id(), o.local_attributes());
 }
 
 void decomposer::operator()(const entities::structural::exception& e) {

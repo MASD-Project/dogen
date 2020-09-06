@@ -21,6 +21,7 @@
 #ifndef DOGEN_LOGICAL_TYPES_HELPERS_MAPPER_HPP
 #define DOGEN_LOGICAL_TYPES_HELPERS_MAPPER_HPP
 
+#include "dogen.identification/types/entities/logical_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -29,8 +30,8 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/model.hpp"
@@ -49,10 +50,12 @@ public:
 
 private:
     template<typename Element>
-    std::unordered_map<std::string, boost::shared_ptr<Element>>
-    clone(const std::unordered_map<std::string,
+    std::unordered_map<identification::entities::logical_id,
+                       boost::shared_ptr<Element>>
+    clone(const std::unordered_map<identification::entities::logical_id,
         boost::shared_ptr<Element>>& src) const {
-        std::unordered_map<std::string, boost::shared_ptr<Element>> r;
+        std::unordered_map<identification::entities::logical_id,
+                           boost::shared_ptr<Element>> r;
         for (const auto& pair : src)
             r[pair.first] = boost::make_shared<Element>(*pair.second);
         return r;
@@ -62,12 +65,14 @@ private:
     clone(const entities::model& m) const;
 
 private:
-    const std::unordered_map<std::string, entities::name>&
+    const std::unordered_map<identification::entities::logical_id,
+                             identification::entities::logical_name>&
     translations_for_technical_space(const mapping_set& ms,
         const identification::entities::technical_space from,
         const identification::entities::technical_space to) const;
 
-    std::unordered_map<std::string, entities::name>
+    std::unordered_map<identification::entities::logical_id,
+                       identification::entities::logical_name>
     injections_for_technical_space(const mapping_set& ms,
         const identification::entities::technical_space ts,
         const entities::model& m) const;
@@ -78,8 +83,9 @@ private:
         const entities::model& m) const;
 
 private:
-    entities::name_tree walk_name_tree(const mapping_context& mc,
-        const entities::name_tree& nt,
+    identification::entities::logical_name_tree
+    walk_name_tree(const mapping_context& mc,
+        const identification::entities::logical_name_tree& nt,
         const bool skip_injection = false) const;
     void map_attributes(const mapping_context& mc,
         std::list<entities::attribute>& attrs) const;

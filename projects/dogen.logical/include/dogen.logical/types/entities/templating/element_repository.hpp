@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/templating/logic_less_template_fwd.hpp"
 
 namespace dogen::logical::entities::templating {
@@ -41,13 +42,13 @@ public:
     ~element_repository() = default;
 
 public:
-    explicit element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates);
+    explicit element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates();
-    void logic_less_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& v);
-    void logic_less_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates();
+    void logic_less_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& v);
+    void logic_less_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -60,7 +61,7 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> > logic_less_templates_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> > logic_less_templates_;
 };
 
 }

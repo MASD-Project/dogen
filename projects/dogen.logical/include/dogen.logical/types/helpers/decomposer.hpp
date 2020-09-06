@@ -51,13 +51,15 @@ namespace dogen::logical::helpers {
  */
 class decomposer final {
 private:
-    void add_name(const std::string& owner, const entities::name& n);
-    void add_meta_name(const std::string& owner, const entities::name& n);
-    void add_name_tree(const std::string& owner,
-        const entities::name_tree& nt);
-    void add_names(const std::string& owner,
-        const std::list<entities::name>& names);
-    void decompose_attributes(const std::string& owner,
+    void add_name(const identification::entities::logical_id& owner,
+        const identification::entities::logical_name& n);
+    void add_meta_name(const identification::entities::logical_id& owner,
+        const identification::entities::logical_meta_name& n);
+    void add_name_tree(const identification::entities::logical_id& owner,
+        const identification::entities::logical_name_tree& nt);
+    void add_names(const identification::entities::logical_id& owner,
+        const std::list<identification::entities::logical_name>& names);
+    void decompose_attributes(const identification::entities::logical_id& owner,
         const std::list<entities::attribute>& attrs);
     void decompose_element(const entities::element& e);
 

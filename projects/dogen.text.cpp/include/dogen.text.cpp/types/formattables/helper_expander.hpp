@@ -59,7 +59,8 @@ private:
 
     void populate_helper_properties(const helper_configuration& cfg,
         const transforms::repository& frp,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 public:
     void expand(const variability::entities::feature_model& feature_model,

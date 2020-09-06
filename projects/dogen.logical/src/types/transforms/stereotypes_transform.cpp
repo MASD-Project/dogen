@@ -25,13 +25,14 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/orm/object_properties.hpp"
@@ -63,8 +64,8 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 namespace dogen::logical::transforms {
 
-entities::location stereotypes_transform::
-strip_internal_modules(const entities::location& l) {
+identification::entities::logical_location stereotypes_transform::
+strip_internal_modules(const identification::entities::logical_location& l) {
     auto r(l);
     r.internal_modules().clear();
     return r;
@@ -175,10 +176,12 @@ void stereotypes_transform::transform_dynamic_stereotypes(
     }
 }
 
-std::unordered_map<entities::location,
-                   std::list<entities::name>> stereotypes_transform::
-bucket_leaves_by_location(const std::list<entities::name>& leaves) {
-    std::unordered_map<entities::location, std::list<entities::name>>  r;
+std::unordered_map<identification::entities::logical_location,
+                   std::list<identification::entities::logical_name>>
+stereotypes_transform::bucket_leaves_by_location(
+    const std::list<identification::entities::logical_name>& leaves) {
+    std::unordered_map<identification::entities::logical_location,
+                       std::list<identification::entities::logical_name>>  r;
 
     for (auto l : leaves) {
         /*
@@ -194,10 +197,10 @@ bucket_leaves_by_location(const std::list<entities::name>& leaves) {
 
 boost::shared_ptr<entities::structural::visitor>
 stereotypes_transform::create_visitor(const entities::structural::object& o,
-    const entities::location& l,
+    const identification::entities::logical_location& l,
     const identification::entities::injection_provenance p,
-    const std::list<entities::name>& leaves) {
-    helpers::name_builder b;
+    const std::list<identification::entities::logical_name>& leaves) {
+    identification::helpers::logical_name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
     b.location(l);
 
@@ -230,18 +233,18 @@ stereotypes_transform::create_visitor(const entities::structural::object& o,
     return r;
 }
 
-void stereotypes_transform::
-update_visited_leaves(const std::list<entities::name>& leaves,
+void stereotypes_transform::update_visited_leaves(
+    const std::list<identification::entities::logical_name>& leaves,
     const visitor_details& vd, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating leaves for: "
                              << vd.base.qualified().dot();
 
     for (const auto& l : leaves) {
-        auto i(m.structural_elements().objects().find(l.qualified().dot()));
+        auto i(m.structural_elements().objects().find(l.id()));
         if (i == m.structural_elements().objects().end()) {
-            BOOST_LOG_SEV(lg, error) << leaf_not_found << l.qualified().dot();
+            BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
             BOOST_THROW_EXCEPTION(
-                transformation_error(leaf_not_found + l.qualified().dot()));
+                transformation_error(leaf_not_found + l.id().value()));
         }
 
         auto& o(*i->second);

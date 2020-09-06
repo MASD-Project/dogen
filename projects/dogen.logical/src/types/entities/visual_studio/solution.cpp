@@ -50,13 +50,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::visual_studio {
 
 solution::solution(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,

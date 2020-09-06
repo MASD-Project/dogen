@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/structural/enumerator_io.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 
@@ -48,19 +48,19 @@ enumeration::enumeration()
       add_invalid_enumerator_(static_cast<bool>(0)) { }
 
 enumeration::enumeration(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const dogen::logical::entities::name& underlying_element,
+    const dogen::identification::entities::logical_name& underlying_element,
     const std::list<dogen::logical::entities::structural::enumerator>& enumerators,
     const bool use_implementation_defined_underlying_element,
     const bool use_implementation_defined_enumerator_values,
@@ -152,19 +152,19 @@ enumeration& enumeration::operator=(enumeration other) {
     return *this;
 }
 
-const dogen::logical::entities::name& enumeration::underlying_element() const {
+const dogen::identification::entities::logical_name& enumeration::underlying_element() const {
     return underlying_element_;
 }
 
-dogen::logical::entities::name& enumeration::underlying_element() {
+dogen::identification::entities::logical_name& enumeration::underlying_element() {
     return underlying_element_;
 }
 
-void enumeration::underlying_element(const dogen::logical::entities::name& v) {
+void enumeration::underlying_element(const dogen::identification::entities::logical_name& v) {
     underlying_element_ = v;
 }
 
-void enumeration::underlying_element(const dogen::logical::entities::name&& v) {
+void enumeration::underlying_element(const dogen::identification::entities::logical_name&& v) {
     underlying_element_ = std::move(v);
 }
 

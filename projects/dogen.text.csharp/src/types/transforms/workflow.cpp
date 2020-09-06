@@ -20,6 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text.csharp/types/workflow_error.hpp"
@@ -77,7 +78,7 @@ void workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-        const auto mn(e.meta_name().qualified().dot());
+        const auto mn(e.meta_name().id());
         BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
         const auto& frp(registrar().formatter_repository());

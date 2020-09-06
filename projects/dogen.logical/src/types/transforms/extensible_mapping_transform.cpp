@@ -23,6 +23,7 @@
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
@@ -54,7 +55,7 @@ const std::string duplicate_technical_space(
 
 namespace dogen::logical::transforms {
 
-std::unordered_map<std::string,
+std::unordered_map<identification::entities::logical_id,
                    boost::shared_ptr<
                        entities::mapping::extensible_mappable>
                    >
@@ -68,7 +69,7 @@ obtain_mappables(const logical::entities::input_model_set& ms) {
                 const auto s(pair.first);
                 BOOST_LOG_SEV(lg, error) << duplicate_mappable_id << s;
                 BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_mappable_id + s));
+                    transformation_error(duplicate_mappable_id + s.value()));
             }
         }
     }
@@ -77,7 +78,8 @@ obtain_mappables(const logical::entities::input_model_set& ms) {
 
 std::unordered_map<std::string, std::list<helpers::mapping>>
 extensible_mapping_transform::create_mappings(const std::unordered_map<
-    std::string, boost::shared_ptr<entities::mapping::extensible_mappable>>&
+    identification::entities::logical_id,
+    boost::shared_ptr<entities::mapping::extensible_mappable>>&
     mappables) {
 
     std::unordered_map<std::string, std::list<helpers::mapping>> r;
@@ -115,10 +117,13 @@ void extensible_mapping_transform::validate_mappings(const std::unordered_map<
     v.validate(mappings);
 }
 
-void extensible_mapping_transform::insert(const std::string& agnostic_id,
-    const entities::name& n, const identification::entities::technical_space ts,
+void extensible_mapping_transform::
+insert(const identification::entities::logical_id& agnostic_id,
+    const identification::entities::logical_name& n,
+    const identification::entities::technical_space ts,
     std::unordered_map<identification::entities::technical_space,
-    std::unordered_map<std::string, entities::name>>& map) {
+    std::unordered_map<identification::entities::logical_id,
+    identification::entities::logical_name>>& map) {
 
     auto& by_id(map[ts]);
     const auto pair(std::make_pair(agnostic_id, n));
@@ -126,14 +131,14 @@ void extensible_mapping_transform::insert(const std::string& agnostic_id,
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_agnostic_id << agnostic_id;
         BOOST_THROW_EXCEPTION(
-            transformation_error(duplicate_agnostic_id + agnostic_id));
+            transformation_error(duplicate_agnostic_id + agnostic_id.value()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Mapped: '" << agnostic_id
-                             << "' to '" << n.qualified().dot() << "'";
+                             << "' to '" << n.id() << "'";
 }
 
-void  extensible_mapping_transform::
+void extensible_mapping_transform::
 populate_mapping_set(const std::list<helpers::mapping>& mappings,
     helpers::mapping_set& ms) {
 

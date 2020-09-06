@@ -2418,14 +2418,14 @@ generates the registration code as needed.
 
 **** leaves
 :PROPERTIES:
-:masd.injection.type: std::list<logical::entities::name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 List of all concrete classes which are part of an inheritance tree.
 
 **** registrar_dependencies
 :PROPERTIES:
-:masd.injection.type: std::list<logical::entities::name>
+:masd.injection.type: std::list<identification::entities::logical_name>
 :END:
 
 Registrars on other models this registrar depends on.

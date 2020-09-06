@@ -26,7 +26,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.logical/types/helpers/decomposer.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
@@ -116,11 +119,18 @@ const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
 const std::string invalid_empty_id("Name must have a non-empty id.");
+const std::string invalid_empty_qualified_name(
+    "Invalid empty qualified name. Id: ");
 const std::string invalid_logical_meta_element("Meta-element name not found: ");
 
 }
 
 namespace dogen::logical::helpers {
+
+using identification::entities::technical_space;
+using identification::entities::logical_meta_name;
+using identification::entities::logical_name;
+using identification::entities::logical_id;
 
 template<typename Container>
 inline void check_not_in_container(const Container& c, const std::string& str,
@@ -132,10 +142,9 @@ inline void check_not_in_container(const Container& c, const std::string& str,
     }
 }
 
-bool
-post_assembly_validator::allow_spaces_in_built_in_types(
-    const identification::entities::technical_space l) {
-    return l == identification::entities::technical_space::cpp;
+bool post_assembly_validator::
+allow_spaces_in_built_in_types(const technical_space l) {
+    return l == technical_space::cpp;
 }
 
 void post_assembly_validator::validate_string(const std::string& s,
@@ -182,14 +191,24 @@ void post_assembly_validator::validate_strings(
         validate_string(s, regex);
 }
 
-void post_assembly_validator::validate_name(const entities::name& n,
+void post_assembly_validator::validate_name(const logical_name& n,
     const std::regex& regex, const bool allow_spaces_in_built_in_types) {
     /*
      * All names must have a non-empty id.
      */
-    if (n.qualified().dot().empty()) {
+    if (n.id().value().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_empty_id;
         BOOST_THROW_EXCEPTION(validation_error(invalid_empty_id));
+    }
+
+    /*
+     * Qualified representation must be populated.
+     */
+    if (n.qualified().dot().empty() || n.qualified().colon().empty() ||
+        n.qualified().identifiable().empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_empty_qualified_name << n.id();
+        BOOST_THROW_EXCEPTION(
+            validation_error(invalid_empty_qualified_name + n.id().value()));
     }
 
     /*
@@ -232,17 +251,30 @@ void post_assembly_validator::validate_name(const entities::name& n,
         validate_string(l.element(), regex);
 }
 
-void post_assembly_validator::
-validate_names(const std::list<std::pair<std::string, entities::name>>& names,
-    const identification::entities::technical_space l) {
-    BOOST_LOG_SEV(lg, debug) << "Validating names.";
-    std::unordered_set<std::string> ids_done;
+void post_assembly_validator::validate_meta_name(const logical_meta_name& n,
+    const std::regex& regex) {
+    /*
+     * All meta-names must have a non-empty id.
+     */
+    if (n.id().value().empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_empty_id;
+        BOOST_THROW_EXCEPTION(validation_error(invalid_empty_id));
+    }
 
-    const bool allow_spaces(allow_spaces_in_built_in_types(l));
+    validate_string(n.simple(), regex, false/*check_not_builtin*/);
+}
+
+void post_assembly_validator::
+validate_names(const std::list<std::pair<logical_id, logical_name>>& names,
+    const technical_space ts) {
+    BOOST_LOG_SEV(lg, debug) << "Validating names.";
+    std::unordered_set<identification::entities::logical_id> ids_done;
+
+    const bool allow_spaces(allow_spaces_in_built_in_types(ts));
     for (const auto& pair : names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
-        const auto& id(n.qualified().dot());
+        const auto& id(n.id());
         BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
                                  << " owner id: '" << owner << "'";
 
@@ -254,7 +286,8 @@ validate_names(const std::list<std::pair<std::string, entities::name>>& names,
             const auto inserted(ids_done.insert(id).second);
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_element << id;
-                BOOST_THROW_EXCEPTION(validation_error(duplicate_element + id));
+                BOOST_THROW_EXCEPTION(
+                    validation_error(duplicate_element + id.value()));
             }
 
             /*
@@ -264,38 +297,37 @@ validate_names(const std::list<std::pair<std::string, entities::name>>& names,
 
             BOOST_LOG_SEV(lg, trace) << "Name is valid.";
         } catch (boost::exception& e) {
-            e << errmsg_validation_owner(owner);
+            e << errmsg_validation_owner(owner.value());
             throw;
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished validating names.";
 }
 
-void post_assembly_validator::validate_meta_names(
-    const std::list<std::pair<std::string, entities::name>>& meta_names) {
+void post_assembly_validator::validate_meta_names(const std::list<
+    std::pair<logical_id, logical_meta_name>>& meta_names) {
     BOOST_LOG_SEV(lg, debug) << "Validating all meta-names.";
 
     /*
-     * Note that we can't just simply call validate_names here because
-     * meta-names are known to have duplicates - i.e. we use the same
-     * meta-model element many times).
+     * Note that meta-names are known to have duplicates - i.e. we use
+     * the same meta-model element many times). This is expected.
      */
     for (const auto& pair : meta_names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
-        const auto& id(n.qualified().dot());
+        const auto& id(n.id());
         BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
                                  << " owner id: '" << owner << "'";
 
         try {
             /*
-             * Element name must pass all sanity checks.
+             * Meta name must pass all sanity checks.
              */
-            validate_name(n, strict_name_regex, false/*allow_spaces*/);
+            validate_meta_name(n, strict_name_regex);
 
-            BOOST_LOG_SEV(lg, trace) << "Name is valid.";
+            BOOST_LOG_SEV(lg, trace) << "Meta-name is valid.";
         } catch (boost::exception& e) {
-            e << errmsg_validation_owner(owner);
+            e << errmsg_validation_owner(owner.value());
             throw;
         }
     }
@@ -303,16 +335,18 @@ void post_assembly_validator::validate_meta_names(
 }
 
 void post_assembly_validator::
-validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
+validate_name_tree(const std::unordered_set<
+    identification::entities::logical_id>& abstract_elements,
     const identification::entities::technical_space ts,
-    const entities::name_tree& nt,
+    const identification::entities::logical_name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
     const auto& ae(abstract_elements);
-    const auto id(nt.current().qualified().dot());
+    const auto id(nt.current().id());
     const bool is_abstract(ae.find(id) != ae.end());
     if (is_abstract && !inherit_opaqueness_from_parent) {
         BOOST_LOG_SEV(lg, error) << abstract_instance << id;
-        BOOST_THROW_EXCEPTION(validation_error(abstract_instance + id));
+        BOOST_THROW_EXCEPTION(
+            validation_error(abstract_instance + id.value()));
     }
 
     for (const auto& c : nt.children())
@@ -320,9 +354,10 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
 }
 
 void post_assembly_validator::validate_name_trees(
-    const std::unordered_set<std::string>& abstract_elements,
-    const identification::entities::technical_space ts,
-    const std::list<std::pair<std::string, entities::name_tree>>& nts) {
+    const std::unordered_set<identification::entities::logical_id>&
+    abstract_elements, const identification::entities::technical_space ts,
+    const std::list<std::pair<identification::entities::logical_id,
+    identification::entities::logical_name_tree>>& nts) {
     BOOST_LOG_SEV(lg, debug) << "Validating name trees.";
 
     /*
@@ -344,7 +379,7 @@ void post_assembly_validator::validate_name_trees(
         try {
             validate_name_tree(abstract_elements, ts, nt);
         } catch (boost::exception& e) {
-            e << errmsg_validation_owner(owner);
+            e << errmsg_validation_owner(owner.value());
             throw;
         }
     }
@@ -361,8 +396,8 @@ validate_physical_archetypes(const entities::model& m) {
         const auto i(mns.find(lmeid));
         if (i == mns.end()) {
             BOOST_LOG_SEV(lg, error) << invalid_logical_meta_element << lmeid;
-            BOOST_THROW_EXCEPTION(
-                validation_error(invalid_logical_meta_element + lmeid));
+            BOOST_THROW_EXCEPTION(validation_error(
+                    invalid_logical_meta_element + lmeid.value()));
         }
     }
 }

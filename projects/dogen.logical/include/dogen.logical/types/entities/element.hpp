@@ -32,13 +32,15 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
 #include "dogen.identification/types/entities/label.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
 #include "dogen.logical/types/entities/generability_status.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/logical_meta_name.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
@@ -64,13 +66,13 @@ public:
 
 public:
     element(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -91,10 +93,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
     /**
@@ -122,13 +124,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the module in which we are contained, if any.
+     * @brief ID of the element in which we are contained, if any.
      */
     /**@{*/
-    const std::string& contained_by() const;
-    std::string& contained_by();
-    void contained_by(const std::string& v);
-    void contained_by(const std::string&& v);
+    const dogen::identification::entities::logical_id& contained_by() const;
+    dogen::identification::entities::logical_id& contained_by();
+    void contained_by(const dogen::identification::entities::logical_id& v);
+    void contained_by(const dogen::identification::entities::logical_id&& v);
     /**@}*/
 
     /**
@@ -153,10 +155,10 @@ public:
      * @brief Name of the element in the meta-model that this instance conforms to.
      */
     /**@{*/
-    const dogen::logical::entities::name& meta_name() const;
-    dogen::logical::entities::name& meta_name();
-    void meta_name(const dogen::logical::entities::name& v);
-    void meta_name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_meta_name& meta_name() const;
+    dogen::identification::entities::logical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::logical_meta_name& v);
+    void meta_name(const dogen::identification::entities::logical_meta_name&& v);
     /**@}*/
 
     /**
@@ -218,13 +220,13 @@ protected:
     void swap(element& other) noexcept;
 
 private:
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     std::string documentation_;
     dogen::identification::entities::injection_provenance provenance_;
-    std::string contained_by_;
+    dogen::identification::entities::logical_id contained_by_;
     bool in_global_module_;
     dogen::logical::entities::stereotypes stereotypes_;
-    dogen::logical::entities::name meta_name_;
+    dogen::identification::entities::logical_meta_name meta_name_;
     dogen::identification::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::list<dogen::identification::entities::label> labels_;

@@ -36,18 +36,18 @@
 #include "dogen.logical/types/name_tree_parser.hpp"
 #include "dogen.logical/types/merger.hpp"*/
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/helpers/new_name_tree_parser.hpp"
+#include "dogen.identification/types/helpers/new_logical_name_tree_parser.hpp"
 
 namespace  {
 
 const std::string empty;
 const std::string test_module("dogen.logical.tests");
-const std::string test_suite("name_tree_parser_tests");
+const std::string test_suite("new_logical_name_tree_parser_tests");
 
 const auto cpp(dogen::identification::entities::technical_space::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
-const auto model_location = dogen::logical::entities::location();
+const auto model_location = dogen::identification::entities::logical_location();
 
 
 

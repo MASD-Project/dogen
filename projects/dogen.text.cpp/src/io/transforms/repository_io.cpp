@@ -21,6 +21,7 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -36,7 +37,7 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
 
     for(auto i(value.begin()); i != value.end(); ++i) {
         if (i != value.begin()) s << ", ";
-        s <<  "\"" << (*i)->archetype().meta_name().id().value() << "\"";
+        s <<  "\"" << (*i)->archetype().meta_name().id() << "\"";
     }
     s << " ], ";
     return s;
@@ -68,7 +69,7 @@ inline std::ostream& to_stream(std::ostream& s,
 }
 
 inline std::ostream& to_stream(std::ostream& s,
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::logical_meta_id,
     std::forward_list<std::shared_ptr<model_to_text_transform>>>& safmt) {
     s << "\"stock_artefact_formatters_by_meta_name\": " << "[ ";
 

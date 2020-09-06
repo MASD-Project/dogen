@@ -28,8 +28,8 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 
 namespace dogen::logical::entities::serialization {
 
@@ -52,20 +52,20 @@ public:
 
 public:
     type_registrar(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::list<dogen::logical::entities::name>& leaves,
-        const std::list<dogen::logical::entities::name>& registrar_dependencies);
+        const std::list<dogen::identification::entities::logical_name>& leaves,
+        const std::list<dogen::identification::entities::logical_name>& registrar_dependencies);
 
 public:
     using element::accept;
@@ -82,20 +82,20 @@ public:
      * @brief List of all concrete classes which are part of an inheritance tree.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& leaves() const;
-    std::list<dogen::logical::entities::name>& leaves();
-    void leaves(const std::list<dogen::logical::entities::name>& v);
-    void leaves(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& leaves() const;
+    std::list<dogen::identification::entities::logical_name>& leaves();
+    void leaves(const std::list<dogen::identification::entities::logical_name>& v);
+    void leaves(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Registrars on other models this registrar depends on.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& registrar_dependencies() const;
-    std::list<dogen::logical::entities::name>& registrar_dependencies();
-    void registrar_dependencies(const std::list<dogen::logical::entities::name>& v);
-    void registrar_dependencies(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& registrar_dependencies() const;
+    std::list<dogen::identification::entities::logical_name>& registrar_dependencies();
+    void registrar_dependencies(const std::list<dogen::identification::entities::logical_name>& v);
+    void registrar_dependencies(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
 public:
@@ -112,8 +112,8 @@ public:
     type_registrar& operator=(type_registrar other);
 
 private:
-    std::list<dogen::logical::entities::name> leaves_;
-    std::list<dogen::logical::entities::name> registrar_dependencies_;
+    std::list<dogen::identification::entities::logical_name> leaves_;
+    std::list<dogen::identification::entities::logical_name> registrar_dependencies_;
 };
 
 }

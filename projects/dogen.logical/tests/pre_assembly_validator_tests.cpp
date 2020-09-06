@@ -22,10 +22,11 @@
 #include <array>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -80,15 +81,15 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     const auto mt(model_type::target);
     auto m(factory.make_multi_type_model(0, 2, mt));
 
-    using dogen::logical::entities::fully_qualified_representation;
-    const fully_qualified_representation
-        fqr(invalid_id, invalid_id, invalid_id);
-    m.structural_elements().objects().begin()->second->name().qualified(fqr);
+    using dogen::identification::entities::logical_id;
+    logical_id id(invalid_id);
+    m.structural_elements().objects().begin()->second->name().id(id);
     m.input_technical_space(technical_space::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
     contains_checker<validation_error> c(inconsistent_kvp);
-    BOOST_CHECK_EXCEPTION(pre_assembly_validator::validate(m), validation_error, c);
+    BOOST_CHECK_EXCEPTION(pre_assembly_validator::validate(m),
+        validation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

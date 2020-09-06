@@ -51,18 +51,19 @@ make(const features::decoration::feature_group& fg,
         has_configuration = true;
     }
 
+    using identification::entities::logical_id;
     if (!scfg.licence_name.empty()) {
-        r.licence_name(scfg.licence_name);
+        r.licence_name(logical_id(scfg.licence_name));
         has_configuration = true;
     }
 
     if (!scfg.modeline_group_name.empty()) {
-        r.modeline_group_name(scfg.modeline_group_name);
+        r.modeline_group_name(logical_id(scfg.modeline_group_name));
         has_configuration = true;
     }
 
     if (!scfg.marker_name.empty()) {
-        r.marker_name(scfg.marker_name);
+        r.marker_name(logical_id(scfg.marker_name));
         has_configuration = true;
     }
 

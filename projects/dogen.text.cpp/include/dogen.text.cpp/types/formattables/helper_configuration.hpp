@@ -28,6 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.text.cpp/types/formattables/streaming_properties.hpp"
 
 namespace dogen::text::cpp::formattables {
@@ -41,19 +43,19 @@ public:
 
 public:
     helper_configuration(
-        const std::unordered_map<std::string, std::string>& helper_families,
-        const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties);
+        const std::unordered_map<dogen::identification::entities::logical_id, std::string>& helper_families,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties);
 
 public:
-    const std::unordered_map<std::string, std::string>& helper_families() const;
-    std::unordered_map<std::string, std::string>& helper_families();
-    void helper_families(const std::unordered_map<std::string, std::string>& v);
-    void helper_families(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, std::string>& helper_families() const;
+    std::unordered_map<dogen::identification::entities::logical_id, std::string>& helper_families();
+    void helper_families(const std::unordered_map<dogen::identification::entities::logical_id, std::string>& v);
+    void helper_families(const std::unordered_map<dogen::identification::entities::logical_id, std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties() const;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties();
+    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& v);
+    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>&& v);
 
 public:
     bool operator==(const helper_configuration& rhs) const;
@@ -66,8 +68,8 @@ public:
     helper_configuration& operator=(helper_configuration other);
 
 private:
-    std::unordered_map<std::string, std::string> helper_families_;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
+    std::unordered_map<dogen::identification::entities::logical_id, std::string> helper_families_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
 };
 
 }

@@ -24,13 +24,15 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/features/decoration.hpp"
 #include "dogen.logical/types/helpers/decoration_repository.hpp"
 #include "dogen.logical/types/helpers/decoration_configuration.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/decoration/licence.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
@@ -63,8 +65,10 @@ const std::string unexpected_output_ts(
 namespace dogen::logical::transforms {
 
 using helpers::decoration_configuration;
+using identification::entities::technical_space;
+using identification::entities::logical_meta_name;
 
-typedef std::unordered_map<identification::entities::technical_space,
+typedef std::unordered_map<technical_space,
                            boost::optional<
                                entities::decoration::element_properties>
                            > root_decorations_type;
@@ -79,14 +83,14 @@ public:
         const boost::optional<decoration_configuration>& root_dc,
         const std::string& root_id,
         const features::decoration::feature_group& fg,
-        const identification::entities::technical_space output_technical_space);
+        const technical_space output_technical_space);
 
 private:
     /**
      * @brief Returns true the meta-model element is intrinsically
      * generatable false otherwise.
      */
-    bool is_generatable(const entities::name& meta_name) const;
+    bool is_generatable(const logical_meta_name& meta_name) const;
 
     /**
      * @brief Returns true if the type needs decorations.
@@ -97,7 +101,7 @@ private:
      * @brief Processes the decoration for the supplied element,
      * against the supplied technical space.
      */
-    void process_element(const identification::entities::technical_space ts,
+    void process_element(const technical_space ts,
         const boost::optional<decoration_configuration>& dc,
         entities::element& e);
 
@@ -110,7 +114,7 @@ private:
     const boost::optional<decoration_configuration> root_dc_;
     const std::string root_id_;
     const features::decoration::feature_group& feature_group_;
-    const identification::entities::technical_space output_technical_space_;
+    const technical_space output_technical_space_;
 };
 
 decoration_updater::decoration_updater(
@@ -119,27 +123,28 @@ decoration_updater::decoration_updater(
     const boost::optional<decoration_configuration>& root_dc,
     const std::string& root_id,
     const features::decoration::feature_group& fg,
-    const identification::entities::technical_space ots)
+    const technical_space ots)
     : root_decorations_(root_decorations), decoration_factory_(df),
       root_dc_(root_dc), root_id_(root_id), feature_group_(fg),
       output_technical_space_(ots) {}
 
-bool decoration_updater::is_generatable(const entities::name& meta_name) const {
+bool decoration_updater::
+is_generatable(const logical_meta_name& meta_name) const {
     // FIXME: massive hack for now.
-    using mnf = helpers::meta_name_factory;
+    using mnf = identification::helpers::logical_meta_name_factory;
     static const auto otn(mnf::make_object_template_name());
     static const auto ln(mnf::make_licence_name());
     static const auto mln(mnf::make_modeline_name());
     static const auto mgn(mnf::make_modeline_group_name());
     static const auto gmn(mnf::make_generation_marker_name());
 
-    const auto id(meta_name.qualified().dot());
+    const auto id(meta_name.id().value());
     return
-        id != otn.qualified().dot() &&
-        id != ln.qualified().dot() &&
-        id != mln.qualified().dot() &&
-        id != mgn.qualified().dot() &&
-        id != gmn.qualified().dot();
+        id != otn.id().value() &&
+        id != ln.id().value() &&
+        id != mln.id().value() &&
+        id != mgn.id().value() &&
+        id != gmn.id().value();
 }
 
 bool decoration_updater::requires_decorations(entities::element& e) const {
@@ -159,7 +164,7 @@ bool decoration_updater::requires_decorations(entities::element& e) const {
      */
     if (!is_generatable(e.meta_name())) {
         BOOST_LOG_SEV(lg, trace) << "Element is not generatable: "
-                                 << e.meta_name().qualified().dot();
+                                 << e.meta_name().id();
         return false;
     }
 
@@ -176,7 +181,7 @@ bool decoration_updater::requires_decorations(entities::element& e) const {
 }
 
 void decoration_updater::
-process_element(const identification::entities::technical_space ts,
+process_element(const technical_space ts,
     const boost::optional<decoration_configuration>& dc,
     entities::element& e) {
     const auto i(root_decorations_.find(ts));
@@ -227,7 +232,6 @@ void decoration_updater::operator()(entities::element& e) {
      * space. If that's the case, we need to ensure we use the
      * element's technical space instead.
      */
-    using identification::entities::technical_space;
     const auto its(e.intrinsic_technical_space());
     const auto ats(technical_space::agnostic);
     const auto ts(its == ats ? output_technical_space_ : its);

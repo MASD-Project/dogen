@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
@@ -61,13 +62,13 @@ apply(const context& ctx, entities::model& m) {
          * expect to find the template since resolution already has
          * taken place, but you never know.
          */
-        const auto tid(tt.wale_template()->qualified().dot());
+        const auto tid(tt.wale_template()->id());
         const auto& llt(m.templating_elements().logic_less_templates());
         const auto k(llt.find(tid));
         if (k == llt.end()) {
             BOOST_LOG_SEV(lg, error) << missing_logic_less_template << tid;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(missing_logic_less_template + tid));
+            BOOST_THROW_EXCEPTION(transformation_error(
+                    missing_logic_less_template + tid.value()));
         }
         tt.wale_template_content(k->second->content());
     }

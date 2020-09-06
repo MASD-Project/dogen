@@ -80,7 +80,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      * Validate the physical name.
      */
     const auto pmn(t->archetype().meta_name());
-    identification::helpers::physical_meta_name_validator::validate_archetype_name(pmn);
+    using identification::helpers::physical_meta_name_validator;
+    physical_meta_name_validator::validate_archetype_name(pmn);
 
     /*
      * Insert it into the main collection of stock transforms.
@@ -92,7 +93,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
      */
     const auto lmn(t->archetype().logical_meta_element_id());
     auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
-    safmt[lmn.value()].push_front(t);
+    safmt[lmn].push_front(t);
 
     /*
      * Add transform to the index by archetype name. Inserting the
@@ -105,7 +106,8 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     const auto inserted(safba.insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_archetype << pid;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + pid.value()));
+        BOOST_THROW_EXCEPTION(
+            registrar_error(duplicate_archetype + pid.value()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: "

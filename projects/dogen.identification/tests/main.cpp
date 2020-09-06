@@ -18,22 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_IO_ENTITIES_FULLY_QUALIFIED_REPRESENTATION_IO_HPP
-#define DOGEN_LOGICAL_IO_ENTITIES_FULLY_QUALIFIED_REPRESENTATION_IO_HPP
+#define BOOST_TEST_MODULE dogen.identification.tests
+#include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/test/fixture.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen.logical/types/entities/fully_qualified_representation.hpp"
-
-namespace dogen::logical::entities {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::logical::entities::fully_qualified_representation& v);
-
-}
-
-#endif
+using namespace dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

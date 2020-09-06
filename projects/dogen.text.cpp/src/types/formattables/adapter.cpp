@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.logical/io/entities/orm/letter_case_io.hpp"
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
@@ -123,7 +124,7 @@ model adapter::adapt(const transforms::repository& frp,
     for (const auto& ea : m.elements()) {
         auto ptr(ea.element());
         const auto& e(*ptr);
-        const auto id(e.name().qualified().dot());
+        const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
         /*
@@ -147,7 +148,8 @@ model adapter::adapt(const transforms::repository& frp,
         auto& fbl(i->second);
         if (fbl.element()) {
             BOOST_LOG_SEV(lg, error) << duplicate_master << id;
-            BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
+            BOOST_THROW_EXCEPTION(
+                adaptation_error(duplicate_master + id.value()));
         }
         fbl.element(ea.element());
         fbl.artefacts(ea.artefacts());
@@ -157,7 +159,7 @@ model adapter::adapt(const transforms::repository& frp,
          * elements such as object templates do not have formatters at
          * present.
          */
-        const auto mt(e.meta_name().qualified().dot());
+        const auto mt(e.meta_name().id());
         const auto j(frp.stock_artefact_formatters_by_meta_name().find(mt));
         if (j == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;

@@ -24,6 +24,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/structural/object_io.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"
@@ -60,23 +61,24 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     SETUP_TEST_LOG_SOURCE("expanding_non_visitable_type_does_nothing");
 
     auto a(factory.make_single_type_model());
-    BOOST_REQUIRE(a.structural_elements().objects().size() == 1);
-    BOOST_CHECK(a.structural_elements().objects().begin()->second->contained_by().empty());
-    BOOST_REQUIRE(a.structural_elements().modules().empty());
-    BOOST_REQUIRE(a.structural_elements().builtins().empty());
-    BOOST_REQUIRE(a.structural_elements().enumerations().empty());
-    BOOST_REQUIRE(a.structural_elements().object_templates().empty());
-    BOOST_REQUIRE(a.structural_elements().visitors().empty());
+    const auto& se(a.structural_elements());
+    BOOST_REQUIRE(se.objects().size() == 1);
+    BOOST_CHECK(se.objects().begin()->second->contained_by().value().empty());
+    BOOST_REQUIRE(se.modules().empty());
+    BOOST_REQUIRE(se.builtins().empty());
+    BOOST_REQUIRE(se.enumerations().empty());
+    BOOST_REQUIRE(se.object_templates().empty());
+    BOOST_REQUIRE(se.visitors().empty());
 
     stereotypes_transform::apply(mock_context_factory::make(), a);
 
-    BOOST_CHECK(a.structural_elements().objects().size() == 1);
-    BOOST_CHECK(a.structural_elements().visitors().empty());
-    BOOST_CHECK(a.structural_elements().modules().empty());
-    BOOST_CHECK(a.structural_elements().builtins().empty());
-    BOOST_CHECK(a.structural_elements().enumerations().empty());
-    BOOST_CHECK(a.structural_elements().object_templates().empty());
-    BOOST_CHECK(a.structural_elements().visitors().empty());
+    BOOST_CHECK(se.objects().size() == 1);
+    BOOST_CHECK(se.visitors().empty());
+    BOOST_CHECK(se.modules().empty());
+    BOOST_CHECK(se.builtins().empty());
+    BOOST_CHECK(se.enumerations().empty());
+    BOOST_CHECK(se.object_templates().empty());
+    BOOST_CHECK(se.visitors().empty());
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
@@ -105,7 +107,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
             auto& o(*pair.second);
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitation_root(true);
             o.stereotypes().static_stereotypes()
                 .push_back(static_stereotypes::visitable);
@@ -122,7 +124,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     for (const auto& pair : m.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
-            BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
+            BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             type_one = true;
         }
     }
@@ -130,7 +132,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
 
     BOOST_REQUIRE(m.structural_elements().visitors().size() == 1);
     const auto v(*(m.structural_elements().visitors().begin()->second));
-    BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().id();
     BOOST_CHECK(factory.is_type_name_n_visitor(1, v.name()));
     BOOST_REQUIRE(v.visits().size() == 1);
     BOOST_CHECK(factory.is_type_name_n(0, v.visits().front()));

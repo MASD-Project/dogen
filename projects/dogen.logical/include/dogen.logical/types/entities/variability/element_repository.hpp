@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/variability/profile_fwd.hpp"
 #include "dogen.logical/types/entities/variability/initializer_fwd.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle_fwd.hpp"
@@ -46,32 +47,32 @@ public:
 
 public:
     element_repository(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles,
         const boost::shared_ptr<dogen::logical::entities::variability::initializer>& initializer);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates();
-    void profile_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& v);
-    void profile_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& profile_templates();
+    void profile_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >& v);
+    void profile_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles();
-    void profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> >& v);
-    void profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> >& profiles();
+    void profiles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> >& v);
+    void profiles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles();
-    void feature_template_bundles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& v);
-    void feature_template_bundles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& feature_template_bundles();
+    void feature_template_bundles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >& v);
+    void feature_template_bundles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles();
-    void feature_bundles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& v);
-    void feature_bundles(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& feature_bundles();
+    void feature_bundles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >& v);
+    void feature_bundles(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> >&& v);
 
     const boost::shared_ptr<dogen::logical::entities::variability::initializer>& initializer() const;
     boost::shared_ptr<dogen::logical::entities::variability::initializer>& initializer();
@@ -89,10 +90,10 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile_template> > profile_templates_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::profile> > profiles_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> > feature_template_bundles_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> > feature_bundles_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile_template> > profile_templates_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::profile> > profiles_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_template_bundle> > feature_template_bundles_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::variability::feature_bundle> > feature_bundles_;
     boost::shared_ptr<dogen::logical::entities::variability::initializer> initializer_;
 };
 

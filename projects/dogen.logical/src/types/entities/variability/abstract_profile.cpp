@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/variability/abstract_profile.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,20 +49,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::variability {
 
 abstract_profile::abstract_profile(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& stereotype,
-    const std::list<dogen::logical::entities::name>& parents,
+    const std::list<dogen::identification::entities::logical_name>& parents,
     const std::string& key_prefix)
     : dogen::logical::entities::element(
       name,
@@ -125,19 +125,19 @@ void abstract_profile::stereotype(const std::string&& v) {
     stereotype_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& abstract_profile::parents() const {
+const std::list<dogen::identification::entities::logical_name>& abstract_profile::parents() const {
     return parents_;
 }
 
-std::list<dogen::logical::entities::name>& abstract_profile::parents() {
+std::list<dogen::identification::entities::logical_name>& abstract_profile::parents() {
     return parents_;
 }
 
-void abstract_profile::parents(const std::list<dogen::logical::entities::name>& v) {
+void abstract_profile::parents(const std::list<dogen::identification::entities::logical_name>& v) {
     parents_ = v;
 }
 
-void abstract_profile::parents(const std::list<dogen::logical::entities::name>&& v) {
+void abstract_profile::parents(const std::list<dogen::identification::entities::logical_name>&& v) {
     parents_ = std::move(v);
 }
 

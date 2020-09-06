@@ -25,11 +25,12 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -42,25 +43,25 @@ public:
 
 public:
     mapping_context(
-        const std::unordered_map<std::string, dogen::logical::entities::name>& translations,
-        const std::unordered_set<std::string>& erasures,
-        const std::unordered_map<std::string, dogen::logical::entities::name>& injections);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations,
+        const std::unordered_set<dogen::identification::entities::logical_id>& erasures,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections);
 
 public:
-    const std::unordered_map<std::string, dogen::logical::entities::name>& translations() const;
-    std::unordered_map<std::string, dogen::logical::entities::name>& translations();
-    void translations(const std::unordered_map<std::string, dogen::logical::entities::name>& v);
-    void translations(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations();
+    void translations(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v);
+    void translations(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v);
 
-    const std::unordered_set<std::string>& erasures() const;
-    std::unordered_set<std::string>& erasures();
-    void erasures(const std::unordered_set<std::string>& v);
-    void erasures(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& erasures() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& erasures();
+    void erasures(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void erasures(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_map<std::string, dogen::logical::entities::name>& injections() const;
-    std::unordered_map<std::string, dogen::logical::entities::name>& injections();
-    void injections(const std::unordered_map<std::string, dogen::logical::entities::name>& v);
-    void injections(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections();
+    void injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v);
+    void injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -73,9 +74,9 @@ public:
     mapping_context& operator=(mapping_context other);
 
 private:
-    std::unordered_map<std::string, dogen::logical::entities::name> translations_;
-    std::unordered_set<std::string> erasures_;
-    std::unordered_map<std::string, dogen::logical::entities::name> injections_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> translations_;
+    std::unordered_set<dogen::identification::entities::logical_id> erasures_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> injections_;
 };
 
 }

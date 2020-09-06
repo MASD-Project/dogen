@@ -123,16 +123,16 @@ const boost::shared_ptr<dogen::logical::entities::structural::assistant>& rhs) {
 namespace dogen::logical::entities::structural {
 
 element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::module> >& modules,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& object_templates,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& builtins,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& enumerations,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& primitives,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object> >& objects,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::exception> >& exceptions,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& visitors,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& entry_points,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& assistants)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::module> >& modules,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& object_templates,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& builtins,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& enumerations,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& primitives,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object> >& objects,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::exception> >& exceptions,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& visitors,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& entry_points,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& assistants)
     : modules_(modules),
       object_templates_(object_templates),
       builtins_(builtins),
@@ -177,163 +177,163 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::module> >& element_repository::modules() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::module> >& element_repository::modules() const {
     return modules_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::module> >& element_repository::modules() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::module> >& element_repository::modules() {
     return modules_;
 }
 
-void element_repository::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::module> >& v) {
+void element_repository::modules(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::module> >& v) {
     modules_ = v;
 }
 
-void element_repository::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::module> >&& v) {
+void element_repository::modules(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::module> >&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& element_repository::object_templates() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& element_repository::object_templates() const {
     return object_templates_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& element_repository::object_templates() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& element_repository::object_templates() {
     return object_templates_;
 }
 
-void element_repository::object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& v) {
+void element_repository::object_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object_template> >& v) {
     object_templates_ = v;
 }
 
-void element_repository::object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object_template> >&& v) {
+void element_repository::object_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object_template> >&& v) {
     object_templates_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& element_repository::builtins() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& element_repository::builtins() const {
     return builtins_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& element_repository::builtins() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& element_repository::builtins() {
     return builtins_;
 }
 
-void element_repository::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& v) {
+void element_repository::builtins(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::builtin> >& v) {
     builtins_ = v;
 }
 
-void element_repository::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::builtin> >&& v) {
+void element_repository::builtins(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::builtin> >&& v) {
     builtins_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& element_repository::enumerations() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& element_repository::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& element_repository::enumerations() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& element_repository::enumerations() {
     return enumerations_;
 }
 
-void element_repository::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& v) {
+void element_repository::enumerations(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >& v) {
     enumerations_ = v;
 }
 
-void element_repository::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >&& v) {
+void element_repository::enumerations(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::enumeration> >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& element_repository::primitives() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& element_repository::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& element_repository::primitives() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& element_repository::primitives() {
     return primitives_;
 }
 
-void element_repository::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& v) {
+void element_repository::primitives(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::primitive> >& v) {
     primitives_ = v;
 }
 
-void element_repository::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::primitive> >&& v) {
+void element_repository::primitives(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::primitive> >&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object> >& element_repository::objects() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object> >& element_repository::objects() const {
     return objects_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object> >& element_repository::objects() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object> >& element_repository::objects() {
     return objects_;
 }
 
-void element_repository::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object> >& v) {
+void element_repository::objects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object> >& v) {
     objects_ = v;
 }
 
-void element_repository::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::object> >&& v) {
+void element_repository::objects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::object> >&& v) {
     objects_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::exception> >& element_repository::exceptions() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::exception> >& element_repository::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::exception> >& element_repository::exceptions() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::exception> >& element_repository::exceptions() {
     return exceptions_;
 }
 
-void element_repository::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::exception> >& v) {
+void element_repository::exceptions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::exception> >& v) {
     exceptions_ = v;
 }
 
-void element_repository::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::exception> >&& v) {
+void element_repository::exceptions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::exception> >&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& element_repository::visitors() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& element_repository::visitors() const {
     return visitors_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& element_repository::visitors() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& element_repository::visitors() {
     return visitors_;
 }
 
-void element_repository::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& v) {
+void element_repository::visitors(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::visitor> >& v) {
     visitors_ = v;
 }
 
-void element_repository::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::visitor> >&& v) {
+void element_repository::visitors(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::visitor> >&& v) {
     visitors_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& element_repository::entry_points() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& element_repository::entry_points() const {
     return entry_points_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& element_repository::entry_points() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& element_repository::entry_points() {
     return entry_points_;
 }
 
-void element_repository::entry_points(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& v) {
+void element_repository::entry_points(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >& v) {
     entry_points_ = v;
 }
 
-void element_repository::entry_points(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >&& v) {
+void element_repository::entry_points(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::entry_point> >&& v) {
     entry_points_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& element_repository::assistants() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& element_repository::assistants() const {
     return assistants_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& element_repository::assistants() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& element_repository::assistants() {
     return assistants_;
 }
 
-void element_repository::assistants(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& v) {
+void element_repository::assistants(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::assistant> >& v) {
     assistants_ = v;
 }
 
-void element_repository::assistants(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::structural::assistant> >&& v) {
+void element_repository::assistants(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::structural::assistant> >&& v) {
     assistants_ = std::move(v);
 }
 

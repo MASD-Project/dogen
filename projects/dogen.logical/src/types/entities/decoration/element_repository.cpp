@@ -63,10 +63,10 @@ const boost::shared_ptr<dogen::logical::entities::decoration::generation_marker>
 namespace dogen::logical::entities::decoration {
 
 element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& modeline_groups,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& generation_markers)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& modeline_groups,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& licences,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& generation_markers)
     : modeline_groups_(modeline_groups),
       modelines_(modelines),
       licences_(licences),
@@ -93,67 +93,67 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& element_repository::modeline_groups() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& element_repository::modeline_groups() const {
     return modeline_groups_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& element_repository::modeline_groups() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& element_repository::modeline_groups() {
     return modeline_groups_;
 }
 
-void element_repository::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& v) {
+void element_repository::modeline_groups(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >& v) {
     modeline_groups_ = v;
 }
 
-void element_repository::modeline_groups(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >&& v) {
+void element_repository::modeline_groups(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline_group> >&& v) {
     modeline_groups_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& element_repository::modelines() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& element_repository::modelines() const {
     return modelines_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& element_repository::modelines() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& element_repository::modelines() {
     return modelines_;
 }
 
-void element_repository::modelines(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& v) {
+void element_repository::modelines(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& v) {
     modelines_ = v;
 }
 
-void element_repository::modelines(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >&& v) {
+void element_repository::modelines(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::modeline> >&& v) {
     modelines_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& element_repository::licences() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& element_repository::licences() const {
     return licences_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& element_repository::licences() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& element_repository::licences() {
     return licences_;
 }
 
-void element_repository::licences(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& v) {
+void element_repository::licences(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::licence> >& v) {
     licences_ = v;
 }
 
-void element_repository::licences(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::licence> >&& v) {
+void element_repository::licences(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::licence> >&& v) {
     licences_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& element_repository::generation_markers() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& element_repository::generation_markers() const {
     return generation_markers_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& element_repository::generation_markers() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& element_repository::generation_markers() {
     return generation_markers_;
 }
 
-void element_repository::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& v) {
+void element_repository::generation_markers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >& v) {
     generation_markers_ = v;
 }
 
-void element_repository::generation_markers(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >&& v) {
+void element_repository::generation_markers(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::decoration::generation_marker> >&& v) {
     generation_markers_ = std::move(v);
 }
 

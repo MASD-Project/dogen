@@ -19,25 +19,18 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/name_tree_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/helpers/decomposition_result_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.identification/io/entities/logical_meta_name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_tree_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"first\": " << v.first << ", ";
     s << "\"second\": " << v.second;
     s << " }";
     return s;
@@ -47,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, do
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::entities::name> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -61,10 +54,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::entities::name_tree>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_meta_name>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
-    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"first\": " << v.first << ", ";
     s << "\"second\": " << v.second;
     s << " }";
     return s;
@@ -74,7 +67,34 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, do
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_meta_name> >& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name_tree>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << v.first << ", ";
+    s << "\"second\": " << v.second;
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name_tree> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

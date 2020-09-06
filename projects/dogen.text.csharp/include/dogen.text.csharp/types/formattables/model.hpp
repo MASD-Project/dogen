@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.text.csharp/types/formattables/formattable.hpp"
 #include "dogen.text.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.text.csharp/types/formattables/assistant_properties.hpp"
@@ -45,17 +45,17 @@ public:
 
 public:
     model(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, dogen::text::csharp::formattables::assistant_properties>& assistant_properties);
 
 public:
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
 
     const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables() const;
     std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables();
@@ -88,7 +88,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::formattable> formattables_;
     std::list<std::string> project_items_;
     std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties> aspect_properties_;

@@ -25,7 +25,7 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
@@ -61,12 +61,12 @@ inclusion_support_types visitor_header_transform::inclusion_support_type() const
 }
 
 boost::filesystem::path visitor_header_transform::inclusion_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path visitor_header_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 

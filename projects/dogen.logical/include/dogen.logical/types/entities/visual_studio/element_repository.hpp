@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/visual_studio/project_fwd.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution_fwd.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets_fwd.hpp"
@@ -44,35 +45,35 @@ public:
 
 public:
     element_repository(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets);
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets);
 
 public:
     /**
      * @brief All solutions in this model.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions();
-    void solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& v);
-    void solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions();
+    void solutions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& v);
+    void solutions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >&& v);
     /**@}*/
 
     /**
      * @brief All projects in this model.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects();
-    void projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& v);
-    void projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects();
+    void projects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& v);
+    void projects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets();
-    void msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& v);
-    void msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets();
+    void msbuild_targets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& v);
+    void msbuild_targets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -85,9 +86,9 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> > solutions_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> > projects_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> > msbuild_targets_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> > solutions_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> > projects_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> > msbuild_targets_;
 };
 
 }

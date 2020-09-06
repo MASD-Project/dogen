@@ -29,8 +29,8 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/physical/relations.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::logical::entities::physical {
@@ -51,7 +51,7 @@ public:
     archetype_text_templating(
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& stitch_template_content,
-        const boost::optional<dogen::logical::entities::name>& wale_template,
+        const boost::optional<dogen::identification::entities::logical_name>& wale_template,
         const std::string& wale_template_content,
         const std::string& rendered_stitch_template,
         const dogen::logical::entities::physical::relations& relations);
@@ -81,10 +81,10 @@ public:
      * @brief Parsed name of the wale template linked to this archetype, if any.
      */
     /**@{*/
-    const boost::optional<dogen::logical::entities::name>& wale_template() const;
-    boost::optional<dogen::logical::entities::name>& wale_template();
-    void wale_template(const boost::optional<dogen::logical::entities::name>& v);
-    void wale_template(const boost::optional<dogen::logical::entities::name>&& v);
+    const boost::optional<dogen::identification::entities::logical_name>& wale_template() const;
+    boost::optional<dogen::identification::entities::logical_name>& wale_template();
+    void wale_template(const boost::optional<dogen::identification::entities::logical_name>& v);
+    void wale_template(const boost::optional<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -130,7 +130,7 @@ public:
 private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string stitch_template_content_;
-    boost::optional<dogen::logical::entities::name> wale_template_;
+    boost::optional<dogen::identification::entities::logical_name> wale_template_;
     std::string wale_template_content_;
     std::string rendered_stitch_template_;
     dogen::logical::entities::physical::relations relations_;

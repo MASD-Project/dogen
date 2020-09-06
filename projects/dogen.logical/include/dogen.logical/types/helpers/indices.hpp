@@ -25,9 +25,10 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_set>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -40,37 +41,37 @@ public:
 
 public:
     indices(
-        const std::unordered_set<std::string>& objects_always_in_heap,
-        const std::unordered_set<std::string>& elements_referable_by_attributes,
-        const std::unordered_set<std::string>& primitive_underliers,
-        const std::unordered_set<std::string>& enumeration_underliers,
-        const std::unordered_set<std::string>& abstract_elements);
+        const std::unordered_set<dogen::identification::entities::logical_id>& objects_always_in_heap,
+        const std::unordered_set<dogen::identification::entities::logical_id>& elements_referable_by_attributes,
+        const std::unordered_set<dogen::identification::entities::logical_id>& primitive_underliers,
+        const std::unordered_set<dogen::identification::entities::logical_id>& enumeration_underliers,
+        const std::unordered_set<dogen::identification::entities::logical_id>& abstract_elements);
 
 public:
-    const std::unordered_set<std::string>& objects_always_in_heap() const;
-    std::unordered_set<std::string>& objects_always_in_heap();
-    void objects_always_in_heap(const std::unordered_set<std::string>& v);
-    void objects_always_in_heap(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& objects_always_in_heap() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& objects_always_in_heap();
+    void objects_always_in_heap(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void objects_always_in_heap(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_set<std::string>& elements_referable_by_attributes() const;
-    std::unordered_set<std::string>& elements_referable_by_attributes();
-    void elements_referable_by_attributes(const std::unordered_set<std::string>& v);
-    void elements_referable_by_attributes(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& elements_referable_by_attributes() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& elements_referable_by_attributes();
+    void elements_referable_by_attributes(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void elements_referable_by_attributes(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_set<std::string>& primitive_underliers() const;
-    std::unordered_set<std::string>& primitive_underliers();
-    void primitive_underliers(const std::unordered_set<std::string>& v);
-    void primitive_underliers(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& primitive_underliers() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& primitive_underliers();
+    void primitive_underliers(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void primitive_underliers(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_set<std::string>& enumeration_underliers() const;
-    std::unordered_set<std::string>& enumeration_underliers();
-    void enumeration_underliers(const std::unordered_set<std::string>& v);
-    void enumeration_underliers(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& enumeration_underliers() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& enumeration_underliers();
+    void enumeration_underliers(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void enumeration_underliers(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_set<std::string>& abstract_elements() const;
-    std::unordered_set<std::string>& abstract_elements();
-    void abstract_elements(const std::unordered_set<std::string>& v);
-    void abstract_elements(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_id>& abstract_elements() const;
+    std::unordered_set<dogen::identification::entities::logical_id>& abstract_elements();
+    void abstract_elements(const std::unordered_set<dogen::identification::entities::logical_id>& v);
+    void abstract_elements(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
 public:
     bool operator==(const indices& rhs) const;
@@ -83,11 +84,11 @@ public:
     indices& operator=(indices other);
 
 private:
-    std::unordered_set<std::string> objects_always_in_heap_;
-    std::unordered_set<std::string> elements_referable_by_attributes_;
-    std::unordered_set<std::string> primitive_underliers_;
-    std::unordered_set<std::string> enumeration_underliers_;
-    std::unordered_set<std::string> abstract_elements_;
+    std::unordered_set<dogen::identification::entities::logical_id> objects_always_in_heap_;
+    std::unordered_set<dogen::identification::entities::logical_id> elements_referable_by_attributes_;
+    std::unordered_set<dogen::identification::entities::logical_id> primitive_underliers_;
+    std::unordered_set<dogen::identification::entities::logical_id> enumeration_underliers_;
+    std::unordered_set<dogen::identification::entities::logical_id> abstract_elements_;
 };
 
 }

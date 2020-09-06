@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/log/keywords/ident.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
@@ -43,7 +45,7 @@ const std::string duplicate_id("Duplicate meta-name ID: ");
 
 namespace dogen::logical::transforms {
 
-using mnf = helpers::meta_name_factory;
+using mnf = identification::helpers::logical_meta_name_factory;
 
 class meta_name_updater {
 public:
@@ -214,13 +216,13 @@ public:
 void meta_naming_transform::populate_model_meta_names(entities::model& m) {
     auto& mnc(m.meta_names());
     const auto insert([&](const auto& n) {
-            const auto qn(n.qualified().dot());
-            const auto pair(std::make_pair(qn, n));
+            const auto id(n.id());
+            const auto pair(std::make_pair(id, n));
             const auto inserted(mnc.insert(pair).second);
             if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_id << qn;
-                BOOST_THROW_EXCEPTION(transformation_error(duplicate_id + qn));
-
+                BOOST_LOG_SEV(lg, error) << duplicate_id << id;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_id + id.value()));
             }
         });
 

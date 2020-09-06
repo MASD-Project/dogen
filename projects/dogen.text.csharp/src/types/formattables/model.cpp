@@ -23,7 +23,7 @@
 namespace dogen::text::csharp::formattables {
 
 model::model(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, dogen::text::csharp::formattables::aspect_properties>& aspect_properties,
@@ -57,19 +57,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::logical::entities::name& model::name() const {
+const dogen::identification::entities::logical_name& model::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& model::name() {
+dogen::identification::entities::logical_name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::logical::entities::name& v) {
+void model::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::logical::entities::name&& v) {
+void model::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

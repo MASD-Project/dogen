@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -41,20 +41,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::serialization {
 
 type_registrar::type_registrar(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::list<dogen::logical::entities::name>& leaves,
-    const std::list<dogen::logical::entities::name>& registrar_dependencies)
+    const std::list<dogen::identification::entities::logical_name>& leaves,
+    const std::list<dogen::identification::entities::logical_name>& registrar_dependencies)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -124,35 +124,35 @@ type_registrar& type_registrar::operator=(type_registrar other) {
     return *this;
 }
 
-const std::list<dogen::logical::entities::name>& type_registrar::leaves() const {
+const std::list<dogen::identification::entities::logical_name>& type_registrar::leaves() const {
     return leaves_;
 }
 
-std::list<dogen::logical::entities::name>& type_registrar::leaves() {
+std::list<dogen::identification::entities::logical_name>& type_registrar::leaves() {
     return leaves_;
 }
 
-void type_registrar::leaves(const std::list<dogen::logical::entities::name>& v) {
+void type_registrar::leaves(const std::list<dogen::identification::entities::logical_name>& v) {
     leaves_ = v;
 }
 
-void type_registrar::leaves(const std::list<dogen::logical::entities::name>&& v) {
+void type_registrar::leaves(const std::list<dogen::identification::entities::logical_name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& type_registrar::registrar_dependencies() const {
+const std::list<dogen::identification::entities::logical_name>& type_registrar::registrar_dependencies() const {
     return registrar_dependencies_;
 }
 
-std::list<dogen::logical::entities::name>& type_registrar::registrar_dependencies() {
+std::list<dogen::identification::entities::logical_name>& type_registrar::registrar_dependencies() {
     return registrar_dependencies_;
 }
 
-void type_registrar::registrar_dependencies(const std::list<dogen::logical::entities::name>& v) {
+void type_registrar::registrar_dependencies(const std::list<dogen::identification::entities::logical_name>& v) {
     registrar_dependencies_ = v;
 }
 
-void type_registrar::registrar_dependencies(const std::list<dogen::logical::entities::name>&& v) {
+void type_registrar::registrar_dependencies(const std::list<dogen::identification::entities::logical_name>&& v) {
     registrar_dependencies_ = std::move(v);
 }
 

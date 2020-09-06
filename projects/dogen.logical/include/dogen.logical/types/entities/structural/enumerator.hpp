@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 
 namespace dogen::logical::entities::structural {
@@ -49,7 +49,7 @@ public:
 public:
     enumerator(
         const std::string& documentation,
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::logical::entities::stereotypes& stereotypes,
         const std::string& value);
@@ -73,10 +73,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
     /**
@@ -123,7 +123,7 @@ public:
 
 private:
     std::string documentation_;
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::logical::entities::stereotypes stereotypes_;
     std::string value_;

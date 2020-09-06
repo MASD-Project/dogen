@@ -28,7 +28,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp"
@@ -59,7 +59,7 @@ inclusion_support_types archetype_class_implementation_transform_transform::incl
 }
 
 boost::filesystem::path archetype_class_implementation_transform_transform::inclusion_path(
-    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(logger_factory(archetype().meta_name().id().value()));
@@ -70,7 +70,7 @@ boost::filesystem::path archetype_class_implementation_transform_transform::incl
 }
 
 boost::filesystem::path archetype_class_implementation_transform_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 

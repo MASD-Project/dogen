@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
 namespace boost {
@@ -51,7 +51,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::identification::entities::logical_name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

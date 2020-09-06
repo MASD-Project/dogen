@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -49,43 +50,46 @@ const std::string nullable_primary_key(
 
 namespace dogen::logical::helpers {
 
+using identification::entities::logical_name;
+using identification::entities::logical_id;
+
+
 class validator {
 public:
-    validator(const entities::name& model_name,
-        const bool is_proxy_reference);
+    validator(const logical_name& model_name, const bool is_proxy_reference);
 
 private:
-    void validate_name(const std::string& id, const bool in_global_module,
-        const entities::name& n) const;
+    void validate_name(const logical_id& id, const bool in_global_module,
+        const logical_name& n) const;
 
 public:
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::object_template& ot) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::builtin& b) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::visitor& v) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::enumeration& e) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::object& o) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::exception& e) const;
-    void validate(const std::string& id,
+    void validate(const logical_id& id,
         const entities::structural::module& m) const;
 
 private:
-    const entities::name model_name_;
+    const logical_name model_name_;
     const bool is_proxy_reference_;
 };
 
 validator::
-validator(const entities::name& model_name, const bool is_proxy_reference)
+validator(const logical_name& model_name, const bool is_proxy_reference)
     : model_name_(model_name), is_proxy_reference_(is_proxy_reference) {}
 
 void validator::
-validate_name(const std::string& id, const bool in_global_module,
-    const entities::name& n) const {
+validate_name(const logical_id& id, const bool in_global_module,
+    const identification::entities::logical_name& n) const {
     /*
      * Types in global module are known to have a mismatch between
      * their name and model name, so we need to ignore those.
@@ -108,37 +112,37 @@ validate_name(const std::string& id, const bool in_global_module,
         BOOST_THROW_EXCEPTION(validation_error(s.str()));
     }
 
-    if (id != n.qualified().dot()) {
+    if (id.value() != n.id().value()) {
         std::ostringstream s;
         s << "Inconsistency between key and value ids: "
-          << " key: " << id << " value: " << n.qualified().dot();
+          << " key: " << id << " value: " << n.id();
 
         BOOST_LOG_SEV(lg, error) << s.str();
         BOOST_THROW_EXCEPTION(validation_error(s.str()));
     }
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::object_template& ot) const {
     validate_name(id, ot.in_global_module(), ot.name());
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::builtin& b) const {
     validate_name(id, b.in_global_module(), b.name());
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::visitor& v) const {
     validate_name(id, v.in_global_module(), v.name());
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::enumeration& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::object& o) const {
     validate_name(id, o.in_global_module(), o.name());
 
@@ -166,7 +170,8 @@ void validator::validate(const std::string& id,
          */
         if (!generate_mapping) {
             BOOST_LOG_SEV(lg, error) << generate_mapping_off << id;
-            BOOST_THROW_EXCEPTION(validation_error(generate_mapping_off + id));
+            BOOST_THROW_EXCEPTION(
+                validation_error(generate_mapping_off + id.value()));
         }
 
         const auto& cfg(*attr.orm_properties());
@@ -178,7 +183,8 @@ void validator::validate(const std::string& id,
          */
         if (cfg.is_nullable() && *cfg.is_nullable()) {
             BOOST_LOG_SEV(lg, error) << nullable_primary_key << id;
-            BOOST_THROW_EXCEPTION(validation_error(nullable_primary_key + id));
+            BOOST_THROW_EXCEPTION(
+                validation_error(nullable_primary_key + id.value()));
         }
 
         /*
@@ -188,18 +194,19 @@ void validator::validate(const std::string& id,
          */
         if (has_primary_key) {
             BOOST_LOG_SEV(lg, error) << multiple_primary_keys << id;
-            BOOST_THROW_EXCEPTION(validation_error(multiple_primary_keys + id));
+            BOOST_THROW_EXCEPTION(
+                validation_error(multiple_primary_keys + id.value()));
         }
         has_primary_key = true;
     }
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::exception& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::validate(const std::string& id,
+void validator::validate(const logical_id& id,
     const entities::structural::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }

@@ -31,7 +31,7 @@
 namespace dogen::logical::helpers {
 
 /**
- * @brief An error occurred whilst building.
+ * @brief An error has occurred in a factory.
  */
 class building_error : public virtual std::exception, public virtual boost::exception {
 public:

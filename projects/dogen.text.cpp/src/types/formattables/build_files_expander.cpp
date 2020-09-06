@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/orm/odb_target.hpp"
 #include "dogen.logical/types/entities/orm/odb_targets.hpp"
@@ -62,11 +63,11 @@ using dogen::logical::entities::element_visitor;
 class odb_targets_factory : public element_visitor {
 public:
     odb_targets_factory(const model& fm, const locator& l,
-        const logical::entities::name& model_name);
+        const identification::entities::logical_name& model_name);
 
 private:
     template<typename OdbTargets>
-    OdbTargets generate_targets(const logical::entities::name& n);
+    OdbTargets generate_targets(const identification::entities::logical_name& n);
 
 public:
     using element_visitor::visit;
@@ -85,7 +86,7 @@ private:
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
-    const logical::entities::name& model_name)
+    const identification::entities::logical_name& model_name)
     : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
@@ -94,7 +95,7 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
 
 template<typename OdbTarget>
 OdbTarget odb_targets_factory::
-generate_targets(const logical::entities::name& n) {
+generate_targets(const identification::entities::logical_name& n) {
     OdbTarget r;
     r.name(target_name_ + separator + n.simple());
     r.comment("ODB " + n.simple());

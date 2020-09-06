@@ -21,6 +21,7 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_ADAPTER_HPP
 #define DOGEN_ORCHESTRATION_TYPES_HELPERS_ADAPTER_HPP
 
+#include "dogen.identification/types/entities/logical_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -32,7 +33,7 @@
 #include "dogen.variability/types/entities/potential_binding.hpp"
 #include "dogen.injection/types/entities/attribute.hpp"
 #include "dogen.injection/types/entities/element.hpp"
-#include "dogen.logical/types/entities/location.hpp"
+#include "dogen.identification/types/entities/logical_location.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/enumerator.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
@@ -81,19 +82,23 @@ private:
     /**
      * @brief Ensure the string is not empty.
      */
-    void ensure_not_empty(const std::string& element_id,
+    /**@{*/
+    void ensure_not_empty(
+        const identification::entities::logical_id& element_id,
         const std::string& s) const;
+    void ensure_not_empty(const std::string& s) const;
+    /**@{*/
 
     /**
      * @brief Ensure the string is empty.
      */
-    void ensure_empty(const std::string& element_id,
+    void ensure_empty(const identification::entities::logical_id& element_id,
         const std::string& s) const;
 
     /**
      * @brief Ensure the attributes are empty.
      */
-    void ensure_empty(const std::string& element_id,
+    void ensure_empty(const identification::entities::logical_id& element_id,
         const std::list<injection::entities::attribute>& ias) const;
 
 private:
@@ -115,7 +120,8 @@ private:
      *
      * @pre n must not be empty.
      */
-    logical::entities::name to_name(const logical::entities::location& l,
+    identification::entities::logical_name
+    to_name(const identification::entities::logical_location& l,
         const std::string& n, const bool is_container) const;
 
     /**
@@ -126,7 +132,7 @@ private:
      *
      * @pre n must not be empty.
      */
-    logical::entities::name
+    identification::entities::logical_name
     to_name(const std::string& n, const bool is_container) const;
 
     /**
@@ -136,7 +142,7 @@ private:
      * @pre value of the injector attribute must be empty.
      */
     logical::entities::decoration::modeline_field
-    to_modeline_field(const logical::entities::name& owner,
+    to_modeline_field(const identification::entities::logical_name& owner,
         const injection::entities::attribute& ia) const;
 
     /**
@@ -145,7 +151,7 @@ private:
      * @pre name of the injector attribute must not be empty.
      */
     logical::entities::attribute
-    to_attribute(const logical::entities::name& owner,
+    to_attribute(const identification::entities::logical_name& owner,
         const injection::entities::attribute& ia) const;
 
     /**
@@ -155,7 +161,7 @@ private:
      * @pre type and value of the injector attribute must be empty.
      */
     logical::entities::structural::enumerator
-    to_enumerator(const logical::entities::name& owner,
+    to_enumerator(const identification::entities::logical_name& owner,
         const injection::entities::attribute& ia) const;
 
 private:
@@ -163,7 +169,7 @@ private:
      * @brief Populates the meta-model element attributes using the
      * injection element.
      */
-    void populate_element(const logical::entities::location& l,
+    void populate_element(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie,
         const bool is_container, logical::entities::element& e) const;
@@ -174,7 +180,7 @@ public:
      * masd::object to a logical object.
      */
     boost::shared_ptr<logical::entities::structural::object>
-    to_object(const logical::entities::location& l,
+    to_object(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -183,7 +189,7 @@ public:
      * masd::object_template to a logical object template.
      */
     boost::shared_ptr<logical::entities::structural::object_template>
-    to_object_template(const logical::entities::location& l,
+    to_object_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -192,7 +198,7 @@ public:
      * masd::exception to a logical exception.
      */
     boost::shared_ptr<logical::entities::structural::exception>
-    to_exception(const logical::entities::location& l,
+    to_exception(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -201,7 +207,7 @@ public:
      * masd::primitive to a logical primitive.
      */
     boost::shared_ptr<logical::entities::structural::primitive>
-    to_primitive(const logical::entities::location& l,
+    to_primitive(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -210,7 +216,7 @@ public:
      * masd::enumeration to a logical enumeration.
      */
     boost::shared_ptr<logical::entities::structural::enumeration>
-    to_enumeration(const logical::entities::location& l,
+    to_enumeration(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -219,7 +225,7 @@ public:
      * masd::module to a logical module.
      */
     boost::shared_ptr<logical::entities::structural::module>
-    to_module(const logical::entities::location& l,
+    to_module(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -228,7 +234,7 @@ public:
      * masd::builtin to a logical builtin.
      */
     boost::shared_ptr<logical::entities::structural::builtin>
-    to_builtin(const logical::entities::location& l,
+    to_builtin(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -237,7 +243,7 @@ public:
      * @e masd::entry_point to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::entry_point>
-    to_entry_point(const logical::entities::location& l,
+    to_entry_point(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -246,7 +252,7 @@ public:
      * @e masd::assistant to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::assistant>
-    to_assistant(const logical::entities::location& l,
+    to_assistant(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -256,7 +262,7 @@ public:
      * masd::modeline_group to a logical modeline group.
      */
     boost::shared_ptr<logical::entities::decoration::modeline_group>
-    to_modeline_group(const logical::entities::location& l,
+    to_modeline_group(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -265,7 +271,7 @@ public:
      * masd::modeline to a logical modeline.
      */
     boost::shared_ptr<logical::entities::decoration::modeline>
-    to_modeline(const logical::entities::location& l,
+    to_modeline(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -274,7 +280,7 @@ public:
      * masd::generation_marker to a logical generation marker.
      */
     boost::shared_ptr<logical::entities::decoration::generation_marker>
-    to_generation_marker(const logical::entities::location& l,
+    to_generation_marker(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -283,7 +289,7 @@ public:
      * masd::licence to a logical licence.
      */
     boost::shared_ptr<logical::entities::decoration::licence>
-    to_licence(const logical::entities::location& l,
+    to_licence(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -291,7 +297,8 @@ private:
     /**
      * @brief Populates the abstract profile properties.
      */
-    void populate_abstract_profile(const logical::entities::location& l,
+    void populate_abstract_profile(
+        const identification::entities::logical_location& l,
         const injection::entities::element& ie,
         logical::entities::variability::abstract_profile& ap) const;
 
@@ -299,7 +306,7 @@ private:
      * @brief Populates the abstract profile entry properties.
      */
     void populate_abstract_profile_entry(
-        const logical::entities::name& n,
+        const identification::entities::logical_name& n,
         const injection::entities::attribute& attr,
         logical::entities::variability::abstract_profile_entry& ape) const;
 
@@ -307,7 +314,7 @@ private:
      * @brief Populates the abstract feature properties.
      */
     void populate_abstract_feature(
-        const logical::entities::name& pn,
+        const identification::entities::logical_name& pn,
         const injection::entities::attribute& ia,
         logical::entities::variability::abstract_feature& af) const;
 
@@ -317,7 +324,7 @@ public:
      * masd::to_variability::profile to a variability profile.
      */
     boost::shared_ptr<logical::entities::variability::profile>
-    to_variability_profile(const logical::entities::location& l,
+    to_variability_profile(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -327,7 +334,8 @@ public:
      * template.
      */
     boost::shared_ptr<logical::entities::variability::profile_template>
-    to_variability_profile_template(const logical::entities::location& l,
+    to_variability_profile_template(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -337,7 +345,8 @@ public:
      * feature template bundle.
      */
     boost::shared_ptr<logical::entities::variability::feature_template_bundle>
-    to_variability_feature_template_bundle(const logical::entities::location& l,
+    to_variability_feature_template_bundle(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -347,7 +356,8 @@ public:
      * group.
      */
     boost::shared_ptr<logical::entities::variability::feature_bundle>
-    to_variability_feature_bundle(const logical::entities::location& l,
+    to_variability_feature_bundle(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -357,7 +367,8 @@ public:
      * variability feature template group registrar.
      */
     boost::shared_ptr<logical::entities::variability::initializer>
-    to_variability_initializer(const logical::entities::location& l,
+    to_variability_initializer(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -367,7 +378,7 @@ public:
      * masd::mapping::fixed_mappable to a fixed mappable element.
      */
     boost::shared_ptr<logical::entities::mapping::fixed_mappable>
-    to_fixed_mappable(const logical::entities::location& l,
+    to_fixed_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -377,7 +388,7 @@ public:
      * element.
      */
     boost::shared_ptr<logical::entities::mapping::extensible_mappable>
-    to_extensible_mappable(const logical::entities::location& l,
+    to_extensible_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -387,7 +398,7 @@ public:
      * masd::templating::logic_less_template to a logic-less template.
      */
     boost::shared_ptr<logical::entities::templating::logic_less_template>
-    to_logic_less_template(const logical::entities::location& l,
+    to_logic_less_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -397,7 +408,7 @@ public:
      * masd::serialization::type_registrar to a logic-less template.
      */
     boost::shared_ptr<logical::entities::serialization::type_registrar>
-    to_type_registrar(const logical::entities::location& l,
+    to_type_registrar(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -407,7 +418,8 @@ public:
      * @e masd::visual_studio::solution.
      */
     boost::shared_ptr<logical::entities::visual_studio::solution>
-    to_visual_studio_solution(const logical::entities::location& l,
+    to_visual_studio_solution(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -416,7 +428,8 @@ public:
      * @e masd::visual_studio::project.
      */
     boost::shared_ptr<logical::entities::visual_studio::project>
-    to_visual_studio_project(const logical::entities::location& l,
+    to_visual_studio_project(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -425,7 +438,8 @@ public:
      * @e masd::visual_studio::project.
      */
     boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
-    to_visual_studio_msbuild_targets(const logical::entities::location& l,
+    to_visual_studio_msbuild_targets(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -435,7 +449,8 @@ public:
      * @e masd::orm::common_odb_options.
      */
     boost::shared_ptr<logical::entities::orm::common_odb_options>
-    to_orm_common_odb_options(const logical::entities::location& l,
+    to_orm_common_odb_options(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -445,7 +460,7 @@ public:
      * @e masd::build::cmakelists.
      */
     boost::shared_ptr<logical::entities::build::cmakelists>
-    to_build_cmakelists(const logical::entities::location& l,
+    to_build_cmakelists(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -455,7 +470,7 @@ public:
      * @e masd::physical::backend.
      */
     boost::shared_ptr<logical::entities::physical::backend>
-    to_physical_backend(const logical::entities::location& l,
+    to_physical_backend(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -464,7 +479,7 @@ public:
      * @e masd::physical::facet.
      */
     boost::shared_ptr<logical::entities::physical::facet>
-    to_physical_facet(const logical::entities::location& l,
+    to_physical_facet(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -473,7 +488,7 @@ public:
      * @e masd::physical::archetype.
      */
     boost::shared_ptr<logical::entities::physical::archetype>
-    to_physical_archetype(const logical::entities::location& l,
+    to_physical_archetype(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -482,7 +497,8 @@ public:
      * @e masd::physical::archetype_kind.
      */
     boost::shared_ptr<logical::entities::physical::archetype_kind>
-    to_physical_archetype_kind(const logical::entities::location& l,
+    to_physical_archetype_kind(
+        const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 
@@ -491,7 +507,7 @@ public:
      * @e masd::physical::part.
      */
     boost::shared_ptr<logical::entities::physical::part>
-    to_physical_part(const logical::entities::location& l,
+    to_physical_part(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
         const injection::entities::element& ie) const;
 };

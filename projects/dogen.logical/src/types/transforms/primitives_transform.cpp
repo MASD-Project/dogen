@@ -25,9 +25,10 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/traits.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
+#include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -55,9 +56,11 @@ const std::string missing_underlier(
 
 namespace dogen::logical::transforms {
 
-std::string primitives_transform::obtain_value_attribute_simple_name(
-    const identification::entities::technical_space ts) {
-    using identification::entities::technical_space;
+using identification::entities::logical_name;
+using identification::entities::technical_space;
+
+std::string primitives_transform::
+obtain_value_attribute_simple_name(const technical_space ts) {
     switch(ts) {
     case technical_space::csharp: return csharp_value;
     case technical_space::cpp: return cpp_value;
@@ -70,9 +73,8 @@ std::string primitives_transform::obtain_value_attribute_simple_name(
 }
 
 entities::attribute primitives_transform::
-create_attribute_for_underlying_element(const entities::name& owner,
-    const identification::entities::technical_space ts,
-    std::string underlying_element) {
+create_attribute_for_underlying_element(const logical_name& owner,
+    const technical_space ts, std::string underlying_element) {
 
     /*
      * Obtain the underlying element name from the meta-data. If there
@@ -80,15 +82,16 @@ create_attribute_for_underlying_element(const entities::name& owner,
      */
     const auto ue(boost::algorithm::trim_copy(underlying_element));
     if (ue.empty()) {
-        const auto id(owner.qualified().dot());
+        const auto id(owner.id());
         BOOST_LOG_SEV(lg, error) << missing_underlier << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_underlier + id));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(missing_underlier + id.value()));
     }
 
     /*
      * Create the name for the value attribute.
      */
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     const auto& n(owner);
     const auto sn(obtain_value_attribute_simple_name(ts));
 
@@ -107,7 +110,7 @@ create_attribute_for_underlying_element(const entities::name& owner,
 
 void primitives_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * Obtain the feature groups.

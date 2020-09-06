@@ -21,12 +21,12 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.variability/io/entities/value_type_io.hpp"
 #include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_tree_io.hpp"
 #include "dogen.logical/types/entities/variability/abstract_feature.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -103,13 +103,13 @@ abstract_feature::abstract_feature(abstract_feature&& rhs)
 abstract_feature::abstract_feature(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& original_key,
     const std::string& key,
     const std::string& identifiable_key,
     const std::string& unparsed_type,
     const std::string& mapped_type,
-    const dogen::logical::entities::name_tree& parsed_type,
+    const dogen::identification::entities::logical_name_tree& parsed_type,
     const std::string& default_value,
     const dogen::variability::entities::value_type value_type,
     const boost::optional<dogen::variability::entities::binding_point>& binding_point,
@@ -223,19 +223,19 @@ void abstract_feature::configuration(const boost::shared_ptr<dogen::variability:
     configuration_ = std::move(v);
 }
 
-const dogen::logical::entities::name& abstract_feature::name() const {
+const dogen::identification::entities::logical_name& abstract_feature::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& abstract_feature::name() {
+dogen::identification::entities::logical_name& abstract_feature::name() {
     return name_;
 }
 
-void abstract_feature::name(const dogen::logical::entities::name& v) {
+void abstract_feature::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void abstract_feature::name(const dogen::logical::entities::name&& v) {
+void abstract_feature::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
@@ -319,19 +319,19 @@ void abstract_feature::mapped_type(const std::string&& v) {
     mapped_type_ = std::move(v);
 }
 
-const dogen::logical::entities::name_tree& abstract_feature::parsed_type() const {
+const dogen::identification::entities::logical_name_tree& abstract_feature::parsed_type() const {
     return parsed_type_;
 }
 
-dogen::logical::entities::name_tree& abstract_feature::parsed_type() {
+dogen::identification::entities::logical_name_tree& abstract_feature::parsed_type() {
     return parsed_type_;
 }
 
-void abstract_feature::parsed_type(const dogen::logical::entities::name_tree& v) {
+void abstract_feature::parsed_type(const dogen::identification::entities::logical_name_tree& v) {
     parsed_type_ = v;
 }
 
-void abstract_feature::parsed_type(const dogen::logical::entities::name_tree&& v) {
+void abstract_feature::parsed_type(const dogen::identification::entities::logical_name_tree&& v) {
     parsed_type_ = std::move(v);
 }
 

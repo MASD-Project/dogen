@@ -123,7 +123,7 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> f) {
      */
     const auto mn(f->archetype().logical_meta_element_id());
     auto& safbmt(trp.stock_artefact_formatters_by_meta_name());
-    safbmt[mn.value()].push_front(f);
+    safbmt[mn].push_front(f);
 
     /*
      * Add transform to the index of transforms by archetype

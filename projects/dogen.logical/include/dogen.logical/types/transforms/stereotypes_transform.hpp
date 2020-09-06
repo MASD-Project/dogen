@@ -28,10 +28,10 @@
 #include <list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/hash/entities/logical_location_hash.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
-#include "dogen.logical/hash/entities/location_hash.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
@@ -46,8 +46,8 @@ private:
     /**
      * @brief Strips the internal modules of the supplied location.
      */
-    static entities::location
-    strip_internal_modules(const entities::location& l);
+    static identification::entities::logical_location
+    strip_internal_modules(const identification::entities::logical_location& l);
 
     /**
      * @brief Returns true if the well-known stereotype denotes a
@@ -71,16 +71,20 @@ private:
 
 private:
     struct visitor_details {
-        visitor_details(const entities::name& b) : base(b) { }
-        visitor_details(const entities::name& b, const entities::name& d) :
+        visitor_details(const identification::entities::logical_name& b)
+            : base(b) { }
+        visitor_details(const identification::entities::logical_name& b,
+            const identification::entities::logical_name& d) :
             base(b), derived(d) { }
 
-        entities::name base;
-        boost::optional<entities::name> derived;
+        identification::entities::logical_name base;
+        boost::optional<identification::entities::logical_name> derived;
     };
 
-    static std::unordered_map<entities::location, std::list<entities::name>>
-    bucket_leaves_by_location(const std::list<entities::name>& leaves);
+    static std::unordered_map<identification::entities::logical_location,
+                              std::list<identification::entities::logical_name>>
+    bucket_leaves_by_location(
+        const std::list<identification::entities::logical_name>& leaves);
 
     static void add_visitor_to_model(
         const boost::shared_ptr<entities::structural::visitor> v,
@@ -96,15 +100,16 @@ private:
      */
     static boost::shared_ptr<entities::structural::visitor>
     create_visitor(const entities::structural::object& o,
-        const entities::location& l,
+        const identification::entities::logical_location& l,
         const identification::entities::injection_provenance p,
-        const std::list<entities::name>& leaves);
+        const std::list<identification::entities::logical_name>& leaves);
 
     /**
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    static void update_visited_leaves(const std::list<entities::name>& leaves,
+    static void update_visited_leaves(
+        const std::list<identification::entities::logical_name>& leaves,
         const visitor_details& vd, entities::model& m);
 
     /**

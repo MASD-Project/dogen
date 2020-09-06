@@ -29,10 +29,10 @@
 #include <iosfwd>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/hash/entities/logical_name_hash.hpp"
 
 namespace dogen::logical::entities::structural {
 
@@ -51,13 +51,13 @@ public:
 
 public:
     object_template(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -65,10 +65,10 @@ public:
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::list<dogen::logical::entities::attribute>& all_attributes,
         const std::list<dogen::logical::entities::attribute>& local_attributes,
-        const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes,
+        const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
-        const std::list<dogen::logical::entities::name>& parents,
+        const std::list<dogen::identification::entities::logical_name>& parents,
         const bool is_child);
 
 public:
@@ -119,10 +119,10 @@ public:
      * formatting.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes() const;
-    std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes();
-    void inherited_attributes(const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& v);
-    void inherited_attributes(const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes() const;
+    std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes();
+    void inherited_attributes(const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& v);
+    void inherited_attributes(const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >&& v);
     /**@}*/
 
     /**
@@ -145,10 +145,10 @@ public:
      * @brief List of object templates that this object template inherits from, if any.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& parents() const;
-    std::list<dogen::logical::entities::name>& parents();
-    void parents(const std::list<dogen::logical::entities::name>& v);
-    void parents(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& parents() const;
+    std::list<dogen::identification::entities::logical_name>& parents();
+    void parents(const std::list<dogen::identification::entities::logical_name>& v);
+    void parents(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -175,10 +175,10 @@ public:
 private:
     std::list<dogen::logical::entities::attribute> all_attributes_;
     std::list<dogen::logical::entities::attribute> local_attributes_;
-    std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> > inherited_attributes_;
+    std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
-    std::list<dogen::logical::entities::name> parents_;
+    std::list<dogen::identification::entities::logical_name> parents_;
     bool is_child_;
 };
 

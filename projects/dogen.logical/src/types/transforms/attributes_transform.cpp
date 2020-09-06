@@ -27,10 +27,11 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/attributes_transform.hpp"
 
@@ -52,24 +53,25 @@ const std::string object_template_not_found(
 namespace dogen::logical::transforms {
 
 entities::structural::object& attributes_transform::
-find_object(const entities::name& n, entities::model& m) {
-    const auto id(n.qualified().dot());
-    auto i(m.structural_elements().objects().find(id));
+find_object(const identification::entities::logical_name& n,
+    entities::model& m) {
+    auto i(m.structural_elements().objects().find(n.id()));
     if (i == m.structural_elements().objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << id;
-        BOOST_THROW_EXCEPTION(transformation_error(object_not_found + id));
+        BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(object_not_found + n.id().value()));
     }
     return *i->second;
 }
 
 entities::structural::object_template& attributes_transform::
-find_object_template(const entities::name& n, entities::model& m) {
-    const auto& id(n.qualified().dot());
-    auto i(m.structural_elements().object_templates().find(id));
+find_object_template(const identification::entities::logical_name& n,
+    entities::model& m) {
+    auto i(m.structural_elements().object_templates().find(n.id()));
     if (i == m.structural_elements().object_templates().end()) {
-        BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
+        BOOST_LOG_SEV(lg, error) << object_template_not_found << n.id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(object_template_not_found + id));
+            transformation_error(object_template_not_found + n.id().value()));
     }
     return *i->second;
 }
@@ -105,7 +107,7 @@ void attributes_transform::expand_object(entities::structural::object& o,
      * longer part of the object template and are now part of the
      * object.
      */
-    helpers::name_factory f;
+    identification::helpers::logical_name_factory f;
     for (auto& attr : object_template_attributes) {
         const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
         attr.name(n);

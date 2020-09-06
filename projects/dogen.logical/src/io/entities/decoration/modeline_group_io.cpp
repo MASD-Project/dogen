@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_group_io.hpp"
 

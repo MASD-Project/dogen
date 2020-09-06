@@ -36,10 +36,10 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.text/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.text/types/formatters/scoped_boilerplate_formatter.hpp"
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.text.cpp/types/transforms/context.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
 
@@ -105,8 +105,10 @@ public:
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const logical::entities::name& n) const;
-    std::string get_qualified_name(const logical::entities::name_tree& nt) const;
+    std::string get_qualified_name(
+        const identification::entities::logical_name& n) const;
+    std::string get_qualified_name(
+        const identification::entities::logical_name_tree& nt) const;
     /**@}*/
 
     /**
@@ -115,33 +117,37 @@ public:
      * The qualified namespace contains all modules, but not the
      * element name itself.
      */
-    std::string get_qualified_namespace(const logical::entities::name& n) const;
+    std::string get_qualified_namespace(
+        const identification::entities::logical_name& n) const;
 
     /**
      * @brief Obtains the model name as a string.
      */
     std::string
-    get_identifiable_model_name(const logical::entities::name& n) const;
+    get_identifiable_model_name(
+        const identification::entities::logical_name& n) const;
 
     /**
      * @brief Obtains the model name as a set of strings separated by
      * dots.
      */
     std::string
-    get_dot_separated_model_name(const logical::entities::name& n) const;
+    get_dot_separated_model_name(
+        const identification::entities::logical_name& n) const;
 
     /**
      * @brief Obtains the product name. This is defined to be the
      * first external module, if any exists.
      */
-    std::string get_product_name(const logical::entities::name& n) const;
+    std::string get_product_name(
+        const identification::entities::logical_name& n) const;
 
 private:
     /**
      * @brief
      */
     const formattables::element_properties& obtain_element_properties(
-        const std::string& element_id) const;
+        const identification::entities::logical_id& element_id) const;
 
     /**
      * @brief Obtains the artefact properties for the supplied
@@ -149,8 +155,8 @@ private:
      *
      * @pre Artefact properties must exist for the archetype.
      */
-    const formattables::artefact_properties&
-    obtain_artefact_properties(const std::string& element_id,
+    const formattables::artefact_properties& obtain_artefact_properties(
+        const identification::entities::logical_id& element_id,
         const identification::entities::physical_meta_id& archetype) const;
 
     /**
@@ -236,7 +242,7 @@ public:
      * @brief returns the c++ namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const logical::entities::name& n,
+    make_namespaces(const identification::entities::logical_name& n,
         const bool detect_model_name = true) const;
 
  public:
@@ -354,7 +360,8 @@ public:
     /**@{*/
     std::string streaming_for_type(const formattables::helper_descriptor& hd,
         const std::string& s) const;
-    std::string streaming_for_type(const logical::entities::name& n,
+    std::string streaming_for_type(
+        const identification::entities::logical_name& n,
         const std::string& s) const;
     /**@}*/
 
@@ -370,9 +377,10 @@ public:
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
-    std::list<logical::entities::name> names_with_enabled_archetype(
+    std::list<identification::entities::logical_name>
+    names_with_enabled_archetype(
         const identification::entities::physical_meta_id& archetype,
-        const std::list<logical::entities::name> names) const;
+        const std::list<identification::entities::logical_name> names) const;
 
 public:
     const formattables::artefact_properties& artefact_properties() const;

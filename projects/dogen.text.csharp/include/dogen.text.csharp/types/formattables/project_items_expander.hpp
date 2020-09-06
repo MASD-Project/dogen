@@ -27,14 +27,18 @@
 
 #include <string>
 #include <unordered_set>
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.text.csharp/types/formattables/model.hpp"
 
 namespace dogen::text::csharp::formattables {
 
 class project_items_expander final {
 private:
-    static std::unordered_set<std::string> meta_names_for_project_items();
-    bool is_project_item(const std::string& mn) const;
+    static std::unordered_set<identification::entities::logical_meta_id>
+    meta_names_for_project_items();
+    bool is_project_item(
+        const identification::entities::logical_meta_id& mn) const;
 
 public:
     void expand(model& fm) const;

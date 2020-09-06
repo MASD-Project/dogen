@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -45,9 +46,9 @@ public:
     decoration_configuration(
         const boost::optional<bool>& enabled,
         const std::list<std::string>& copyright_notices,
-        const std::string& licence_name,
-        const std::string& modeline_group_name,
-        const std::string& marker_name);
+        const dogen::identification::entities::logical_id& licence_name,
+        const dogen::identification::entities::logical_id& modeline_group_name,
+        const dogen::identification::entities::logical_id& marker_name);
 
 public:
     const boost::optional<bool>& enabled() const;
@@ -60,20 +61,20 @@ public:
     void copyright_notices(const std::list<std::string>& v);
     void copyright_notices(const std::list<std::string>&& v);
 
-    const std::string& licence_name() const;
-    std::string& licence_name();
-    void licence_name(const std::string& v);
-    void licence_name(const std::string&& v);
+    const dogen::identification::entities::logical_id& licence_name() const;
+    dogen::identification::entities::logical_id& licence_name();
+    void licence_name(const dogen::identification::entities::logical_id& v);
+    void licence_name(const dogen::identification::entities::logical_id&& v);
 
-    const std::string& modeline_group_name() const;
-    std::string& modeline_group_name();
-    void modeline_group_name(const std::string& v);
-    void modeline_group_name(const std::string&& v);
+    const dogen::identification::entities::logical_id& modeline_group_name() const;
+    dogen::identification::entities::logical_id& modeline_group_name();
+    void modeline_group_name(const dogen::identification::entities::logical_id& v);
+    void modeline_group_name(const dogen::identification::entities::logical_id&& v);
 
-    const std::string& marker_name() const;
-    std::string& marker_name();
-    void marker_name(const std::string& v);
-    void marker_name(const std::string&& v);
+    const dogen::identification::entities::logical_id& marker_name() const;
+    dogen::identification::entities::logical_id& marker_name();
+    void marker_name(const dogen::identification::entities::logical_id& v);
+    void marker_name(const dogen::identification::entities::logical_id&& v);
 
 public:
     bool operator==(const decoration_configuration& rhs) const;
@@ -88,9 +89,9 @@ public:
 private:
     boost::optional<bool> enabled_;
     std::list<std::string> copyright_notices_;
-    std::string licence_name_;
-    std::string modeline_group_name_;
-    std::string marker_name_;
+    dogen::identification::entities::logical_id licence_name_;
+    dogen::identification::entities::logical_id modeline_group_name_;
+    dogen::identification::entities::logical_id marker_name_;
 };
 
 }

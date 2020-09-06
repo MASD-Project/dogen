@@ -188,7 +188,7 @@ public:
     /**
      * @brief Returns the model name derived from n.
      */
-    entities::name model_name(const unsigned int n = 0) const;
+    identification::entities::logical_name model_name(const unsigned int n = 0) const;
 
 public:
     /**
@@ -196,7 +196,7 @@ public:
      * naming convention for model @e n.
      */
     /**@{*/
-    bool is_model_n(const unsigned int n, const entities::name& name) const;
+    bool is_model_n(const unsigned int n, const identification::entities::logical_name& name) const;
     bool is_model_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -206,7 +206,7 @@ public:
      */
     /**@{*/
     bool is_type_name_n(const unsigned int n,
-        const entities::name& name) const;
+        const identification::entities::logical_name& name) const;
     bool is_type_name_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -215,7 +215,7 @@ public:
      * naming convention for module @e n.
      */
     bool is_object_template_name_n(const unsigned int n,
-        const entities::name& name) const;
+        const identification::entities::logical_name& name) const;
 
     /**
      * @brief Returns true if the name matches the mock model factory
@@ -229,7 +229,7 @@ public:
      * for visitors.
      */
     bool is_type_name_n_visitor(const unsigned int n,
-        const entities::name& name) const;
+        const identification::entities::logical_name& name) const;
 
     /**
      * @brief If required, adds a module for the model.
@@ -242,7 +242,7 @@ public:
      * @brief Creates a built-in.
      */
     entities::structural::builtin make_builtin(const unsigned int i,
-        const entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
@@ -250,7 +250,7 @@ public:
      * @brief Create a value object.
      */
     boost::shared_ptr<entities::structural::object>
-    make_object(const unsigned int i, const entities::name& model_name,
+    make_object(const unsigned int i, const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
@@ -259,7 +259,7 @@ public:
      */
     boost::shared_ptr<entities::structural::object>
     make_object_with_attribute(const unsigned int i,
-        const entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
@@ -275,14 +275,14 @@ public:
      */
     boost::shared_ptr<entities::structural::object_template>
     make_object_template(const unsigned int i,
-        const entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const identification::entities::model_type nt) const;
 
     /**
      * @brief Create an enumeration.
      */
     boost::shared_ptr<entities::structural::enumeration>
-    make_enumeration(const unsigned int i, const entities::name& model_name,
+    make_enumeration(const unsigned int i, const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
@@ -290,7 +290,7 @@ public:
      * @brief Create an exception.
      */
     boost::shared_ptr<entities::structural::exception>
-    make_exception(const unsigned int i, const entities::name& model_name,
+    make_exception(const unsigned int i, const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const unsigned int module_n = 0) const;
 
@@ -298,14 +298,14 @@ public:
      * @brief Create a module from a name.
      */
     boost::shared_ptr<entities::structural::module> make_module(
-        const entities::name& n, const identification::entities::model_type mt,
+        const identification::entities::logical_name& n, const identification::entities::model_type mt,
         const std::string& documentation = std::string()) const;
 
     /**
      * @brief Create a module from its components.
      */
     boost::shared_ptr<entities::structural::module>
-    make_module(const unsigned int module_n, const entities::name& model_name,
+    make_module(const unsigned int module_n, const identification::entities::logical_name& model_name,
         const identification::entities::model_type mt,
         const std::list<std::string>& internal_modules,
         const std::string& documentation) const;
@@ -314,7 +314,7 @@ public:
     /**
      * @brief Returns a name derived from the input parameters
      */
-    entities::name make_name(const unsigned int model_n = 0,
+    identification::entities::logical_name make_name(const unsigned int model_n = 0,
         const unsigned int simple_n = 0) const;
 
     /**

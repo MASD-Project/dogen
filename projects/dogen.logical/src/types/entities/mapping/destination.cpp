@@ -26,7 +26,7 @@ destination::destination()
     : technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 destination::destination(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const dogen::identification::entities::technical_space technical_space)
     : name_(name),
       technical_space_(technical_space) { }
@@ -48,19 +48,19 @@ destination& destination::operator=(destination other) {
     return *this;
 }
 
-const dogen::logical::entities::name& destination::name() const {
+const dogen::identification::entities::logical_name& destination::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& destination::name() {
+dogen::identification::entities::logical_name& destination::name() {
     return name_;
 }
 
-void destination::name(const dogen::logical::entities::name& v) {
+void destination::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void destination::name(const dogen::logical::entities::name&& v) {
+void destination::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

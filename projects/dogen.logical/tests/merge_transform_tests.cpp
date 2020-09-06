@@ -24,8 +24,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"

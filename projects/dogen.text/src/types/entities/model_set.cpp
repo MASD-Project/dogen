@@ -23,7 +23,7 @@
 namespace dogen::text::entities {
 
 model_set::model_set(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::list<dogen::text::entities::model>& models)
     : name_(name),
       models_(models) { }
@@ -45,19 +45,19 @@ model_set& model_set::operator=(model_set other) {
     return *this;
 }
 
-const dogen::logical::entities::name& model_set::name() const {
+const dogen::identification::entities::logical_name& model_set::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& model_set::name() {
+dogen::identification::entities::logical_name& model_set::name() {
     return name_;
 }
 
-void model_set::name(const dogen::logical::entities::name& v) {
+void model_set::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void model_set::name(const dogen::logical::entities::name&& v) {
+void model_set::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

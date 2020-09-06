@@ -24,12 +24,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/modules_transform.hpp"
@@ -49,50 +50,37 @@ const std::string too_many_containers(
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_id;
+using identification::entities::logical_name;
+using namespace entities::structural;
+
 namespace {
 
 class internal_modules_gatherer {
 private:
-    void process(const entities::name& n);
+    void process(const logical_name& n);
 
 public:
     void operator()(entities::element&) { }
-    void operator()(entities::structural::module& m) {
-        process(m.name());
-    }
-    void operator()(entities::structural::object_template& ot) {
-        process(ot.name());
-    }
-    void operator()(entities::structural::builtin& b) {
-        process(b.name());
-    }
-    void operator()(entities::structural::enumeration& e) {
-        process(e.name());
-    }
-    void operator()(entities::structural::primitive& p) {
-        process(p.name());
-    }
-    void operator()(entities::structural::object& o) {
-        process(o.name());
-    }
-    void operator()(entities::structural::exception& e) {
-        process(e.name());
-    }
-    void operator()(entities::structural::visitor& v) {
-        process(v.name());
-    }
+    void operator()(module& m) { process(m.name()); }
+    void operator()(object_template& ot) { process(ot.name()); }
+    void operator()(builtin& b) { process(b.name()); }
+    void operator()(enumeration& e) { process(e.name()); }
+    void operator()(primitive& p) { process(p.name()); }
+    void operator()(object& o) { process(o.name()); }
+    void operator()(exception& e) { process(e.name()); }
+    void operator()(visitor& v) { process(v.name()); }
 
 public:
     const std::unordered_map<std::string, std::list<std::string>>&
     result();
 
 private:
-    std::unordered_map<
-        std::string, std::list<std::string>
-    > distinct_internal_moduless_;
+    std::unordered_map<std::string, std::list<std::string>>
+    distinct_internal_moduless_;
 };
 
-void internal_modules_gatherer::process(const entities::name& n) {
+void internal_modules_gatherer::process(const logical_name& n) {
     auto im(n.location().internal_modules());
     while (!im.empty()) {
         const std::string key(boost::join(im, separator));
@@ -115,9 +103,8 @@ gather_internal_modules(entities::model& m) {
     return img.result();
 }
 
-bool modules_transform::containing_element_exists(const std::string& id,
+bool modules_transform::containing_element_exists(const logical_id& id,
     const entities::model& m) {
-
     const auto lambda([&](const auto& container) -> bool {
             const auto i(container.find(id));
             return i != container.end();
@@ -142,7 +129,8 @@ bool modules_transform::containing_element_exists(const std::string& id,
 
     if (found > 1) {
         BOOST_LOG_SEV(lg, error) << too_many_containers << id;
-        BOOST_THROW_EXCEPTION(transformation_error(too_many_containers + id));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(too_many_containers + id.value()));
     }
 
     return found == 1;
@@ -151,7 +139,7 @@ bool modules_transform::containing_element_exists(const std::string& id,
 void modules_transform::create_modules(const std::unordered_map<std::string,
     std::list<std::string>>& internal_modules, entities::model& m) {
 
-    helpers::name_factory f;
+    identification::helpers::logical_name_factory f;
     for (const auto& pair : internal_modules) {
         /*
          * For each of the internal module paths, create the
@@ -159,14 +147,14 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
          */
         const auto& im(pair.second);
         const auto n(f.build_module_name(m.name(), im));
-        const auto qn(n.qualified().dot());
+        const auto id(n.id());
 
         /*
          * Check to see if the element name matches any of the
          * possible containing elements in the model. If so, nothing
          * for us to do.
          */
-        if (containing_element_exists(qn, m))
+        if (containing_element_exists(id, m))
             continue;
 
         /*
@@ -181,7 +169,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
         mod->configuration(boost::make_shared<configuration>());
         mod->configuration()->name().simple(n.simple());
         mod->configuration()->name().qualified(n.qualified().dot());
-        m.structural_elements().modules().insert(std::make_pair(qn, mod));
+        m.structural_elements().modules().insert(std::make_pair(id, mod));
     }
 }
 

@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/orm/common_odb_options_fwd.hpp"
 
 namespace dogen::logical::entities::orm {
@@ -41,13 +42,13 @@ public:
     ~element_repository() = default;
 
 public:
-    explicit element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options);
+    explicit element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options();
-    void common_odb_options(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& v);
-    void common_odb_options(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options();
+    void common_odb_options(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& v);
+    void common_odb_options(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -60,7 +61,7 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> > common_odb_options_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> > common_odb_options_;
 };
 
 }

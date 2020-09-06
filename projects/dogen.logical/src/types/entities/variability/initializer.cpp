@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/variability/initializer.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -41,20 +41,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 namespace dogen::logical::entities::variability {
 
 initializer::initializer(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::list<dogen::logical::entities::name>& feature_template_bundles,
-    const std::list<dogen::logical::entities::name>& feature_bundles)
+    const std::list<dogen::identification::entities::logical_name>& feature_template_bundles,
+    const std::list<dogen::identification::entities::logical_name>& feature_bundles)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -124,35 +124,35 @@ initializer& initializer::operator=(initializer other) {
     return *this;
 }
 
-const std::list<dogen::logical::entities::name>& initializer::feature_template_bundles() const {
+const std::list<dogen::identification::entities::logical_name>& initializer::feature_template_bundles() const {
     return feature_template_bundles_;
 }
 
-std::list<dogen::logical::entities::name>& initializer::feature_template_bundles() {
+std::list<dogen::identification::entities::logical_name>& initializer::feature_template_bundles() {
     return feature_template_bundles_;
 }
 
-void initializer::feature_template_bundles(const std::list<dogen::logical::entities::name>& v) {
+void initializer::feature_template_bundles(const std::list<dogen::identification::entities::logical_name>& v) {
     feature_template_bundles_ = v;
 }
 
-void initializer::feature_template_bundles(const std::list<dogen::logical::entities::name>&& v) {
+void initializer::feature_template_bundles(const std::list<dogen::identification::entities::logical_name>&& v) {
     feature_template_bundles_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& initializer::feature_bundles() const {
+const std::list<dogen::identification::entities::logical_name>& initializer::feature_bundles() const {
     return feature_bundles_;
 }
 
-std::list<dogen::logical::entities::name>& initializer::feature_bundles() {
+std::list<dogen::identification::entities::logical_name>& initializer::feature_bundles() {
     return feature_bundles_;
 }
 
-void initializer::feature_bundles(const std::list<dogen::logical::entities::name>& v) {
+void initializer::feature_bundles(const std::list<dogen::identification::entities::logical_name>& v) {
     feature_bundles_ = v;
 }
 
-void initializer::feature_bundles(const std::list<dogen::logical::entities::name>&& v) {
+void initializer::feature_bundles(const std::list<dogen::identification::entities::logical_name>&& v) {
     feature_bundles_ = std::move(v);
 }
 

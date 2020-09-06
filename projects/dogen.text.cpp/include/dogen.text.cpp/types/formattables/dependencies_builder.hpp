@@ -57,14 +57,14 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<directive_group>
-    get_directive_group(const logical::entities::name& n,
+    get_directive_group(const identification::entities::logical_name& n,
         const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const logical::entities::name& n,
+    bool is_enabled(const identification::entities::logical_name& n,
         const std::string& archetype) const;
 
 public:
@@ -92,8 +92,8 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const logical::entities::name& n, const std::string& archetype);
-    void add(const boost::optional<logical::entities::name>& n,
+    void add(const identification::entities::logical_name& n, const std::string& archetype);
+    void add(const boost::optional<identification::entities::logical_name>& n,
         const std::string& archetype);
     /**@}*/
 
@@ -101,7 +101,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<logical::entities::name>& names,
+    void add(const std::list<identification::entities::logical_name>& names,
         const std::string& archetype);
 
     /**
@@ -109,9 +109,9 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const logical::entities::name& n,
+    void add(const identification::entities::logical_name& n,
         const identification::entities::physical_meta_id& archetype);
-    void add(const boost::optional<logical::entities::name>& n,
+    void add(const boost::optional<identification::entities::logical_name>& n,
         const identification::entities::physical_meta_id& archetype);
     /**@}*/
 
@@ -119,7 +119,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<logical::entities::name>& names,
+    void add(const std::list<identification::entities::logical_name>& names,
         const identification::entities::physical_meta_id& archetype);
 
 public:

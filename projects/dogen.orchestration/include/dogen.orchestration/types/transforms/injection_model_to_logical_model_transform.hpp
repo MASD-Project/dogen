@@ -30,9 +30,9 @@
 #include <vector>
 #include <unordered_map>
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/logical_location.hpp"
 #include "dogen.injection/types/entities/model.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.logical/types/entities/location.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.orchestration/types/transforms/context_fwd.hpp"
@@ -45,7 +45,7 @@ namespace dogen::orchestration::transforms {
  */
 class injection_model_to_logical_model_transform final {
 private:
-    static logical::entities::location
+    static identification::entities::logical_location
     create_location(const context& ctx, const injection::entities::model& m);
 
     static logical::entities::static_stereotypes compute_element_type(
@@ -53,7 +53,7 @@ private:
         const std::string& fallback_element_type);
 
     static void process_element(const helpers::adapter& ad,
-        const logical::entities::location& l,
+        const identification::entities::logical_location& l,
         const injection::entities::element& ie,
         logical::entities::model& m);
 

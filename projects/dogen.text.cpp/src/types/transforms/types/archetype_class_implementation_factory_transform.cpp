@@ -29,7 +29,7 @@
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_transform.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
@@ -60,7 +60,7 @@ inclusion_support_types archetype_class_implementation_factory_transform::inclus
 }
 
 boost::filesystem::path archetype_class_implementation_factory_transform::inclusion_path(
-    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(logger_factory(archetype().meta_name().id().value()));
@@ -71,7 +71,7 @@ boost::filesystem::path archetype_class_implementation_factory_transform::inclus
 }
 
 boost::filesystem::path archetype_class_implementation_factory_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_cpp_implementation(n, archetype().meta_name().id().value());
 }
 
@@ -105,7 +105,7 @@ ast.stream() << "physical::entities::archetype " << sn << "::make() {" << std::e
 ast.stream() << "    physical::entities::archetype r;" << std::endl;
 ast.stream() << "    using pmnf = identification::helpers::physical_meta_name_factory;" << std::endl;
 ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
-ast.stream() << "    r.logical_meta_element_id(identification::entities::logical_meta_id(\"" << arch.logical_meta_element_id() << "\"));" << std::endl;
+ast.stream() << "    r.logical_meta_element_id(identification::entities::logical_meta_id(\"" << arch.logical_meta_element_id().value() << "\"));" << std::endl;
 ast.stream() << "    r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
             for(const auto& l : arch.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;

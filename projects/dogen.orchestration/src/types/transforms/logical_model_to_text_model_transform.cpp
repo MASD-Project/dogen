@@ -24,13 +24,16 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
@@ -57,6 +60,9 @@ const std::string unexpected_archetypes("Unexpected archetypes for: ");
 
 namespace dogen::orchestration::transforms {
 
+using identification::entities::logical_id;
+using identification::helpers::logical_meta_name_factory;
+
 namespace {
 
 /**
@@ -71,7 +77,7 @@ private:
     /**
      * @brief If this ID was seen already, throws.
      */
-    void ensure_not_yet_processed(const std::string& id) const;
+    void ensure_not_yet_processed(const logical_id& id) const;
 
     /**
      * @brief Creates a logical provenance for an artefact.
@@ -94,14 +100,15 @@ public:
 private:
     const physical::entities::meta_model& physical_meta_model_;
     text::entities::model& result_;
-    std::unordered_set<std::string> processed_ids_;
+    std::unordered_set<logical_id> processed_ids_;
 };
 
-void populator::ensure_not_yet_processed(const std::string& id) const {
+void populator::ensure_not_yet_processed(const logical_id& id) const {
     const auto i(processed_ids_.find(id));
     if (i != processed_ids_.end()) {
         BOOST_LOG_SEV(lg, error) << duplicate_id << id;
-        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + id));
+        BOOST_THROW_EXCEPTION(
+            transform_exception(duplicate_id + id.value()));
     }
 }
 
@@ -111,7 +118,7 @@ populator::make_logical_provenance(const logical::entities::element& e) const {
     r.injection(e.provenance());
 
     using identification::entities::logical_meta_id;
-    logical_meta_id mid(e.meta_name().qualified().dot());
+    logical_meta_id mid(e.meta_name().id());
     r.logical_meta_name().id(mid);
     r.logical_meta_name().simple(e.meta_name().simple());
 
@@ -138,7 +145,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
     /*
      * Element IDs are expected to be processed exactly only once.
      */
-    const auto id(e->name().qualified().dot());
+    const auto id(e->name().id());
     BOOST_LOG_SEV(lg, debug) << "Adding element: " << id;
     ensure_not_yet_processed(id);
     processed_ids_.insert(id);
@@ -151,19 +158,18 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
     ea.element(e);
 
     /*
-     * Create the artefact set, which represents a manifold in
+     * Create the artefact set, which represents the region in
      * physical space for this logical position. We start by
-     * populating the manifold's logical properties. These just link
-     * it back to its origin.
+     * populating the set's logical properties. These just link it
+     * back to its origin.
      */
     auto& as(ea.artefacts());
-    const identification::entities::logical_meta_id
-        mn(e->meta_name().qualified().dot());
+    const auto mid(e->meta_name().id());
     as.provenance(make_logical_provenance(*e));
     as.configuration(e->configuration());
 
     /*
-     * We mainly care about manifolds that have the potential to be
+     * We mainly care about sets that have the potential to be
      * generatable, though we keep all of them - even the
      * non-generatable ones. Note that this is only a hint from a
      * logical perspective though, and does not imply that there will
@@ -185,9 +191,9 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
     const auto& pmm(physical_meta_model_);
     const auto& in(pmm.indexed_names());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
-    const auto i(lmn.find(mn));
+    const auto i(lmn.find(mid));
     if (i == lmn.end()) {
-        BOOST_LOG_SEV(lg, debug) << "No physical meta-names found for: " << mn;
+        BOOST_LOG_SEV(lg, debug) << "No physical meta-names found for: " << mid;
 
         /*
          * The logical meta-model element hinted we should not expect
@@ -195,9 +201,9 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
          * findings, we must complain - it indicates some logic error.
          */
         if (e->generability_status() != gne) {
-            BOOST_LOG_SEV(lg, error) << expected_archetypes << mn;
+            BOOST_LOG_SEV(lg, error) << expected_archetypes << mid;
             BOOST_THROW_EXCEPTION(
-                transform_exception(expected_archetypes + mn.value()));
+                transform_exception(expected_archetypes + mid.value()));
         }
 
         /*
@@ -213,9 +219,9 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * by the logical model.
      */
     if (e->generability_status() == gne) {
-        BOOST_LOG_SEV(lg, error) << unexpected_archetypes << mn;
-        BOOST_THROW_EXCEPTION(transform_exception(unexpected_archetypes +
-                mn.value()));
+        BOOST_LOG_SEV(lg, error) << unexpected_archetypes << mid;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(unexpected_archetypes + mid.value()));
     }
 
     /*
@@ -261,7 +267,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_physical_name << pmn.id();
             BOOST_THROW_EXCEPTION(transform_exception(
-                    duplicate_physical_name + pmn.id().value()));
+                    duplicate_physical_name + pmn .id().value()));
         }
         BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: " << pmn;
     }
@@ -274,7 +280,7 @@ text::entities::model logical_model_to_text_model_transform::
 apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     text::entities::model r;
     r.name(m.name());
-    r.meta_name(logical::helpers::meta_name_factory::make_model_name());
+    r.meta_name(logical_meta_name_factory::make_model_name());
 
     r.input_technical_space(m.input_technical_space());
     if (m.output_technical_spaces().size() != 1) {

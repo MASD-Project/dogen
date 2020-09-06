@@ -26,11 +26,11 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/helpers/name_flattener.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/visual_studio/project.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
@@ -53,9 +53,10 @@ const std::string too_many_solutions(
 
 namespace dogen::logical::transforms {
 
-std::string
-visual_studio_transform::project_name(const entities::name& n) {
-    logical::helpers::name_flattener nfl(false/*detect_model_name*/);
+std::string visual_studio_transform::
+project_name(const identification::entities::logical_name& n) {
+    using identification::helpers::logical_name_flattener;
+    logical_name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(n));
     const auto r(boost::algorithm::join(ns, dot));
     return r;
@@ -63,9 +64,9 @@ visual_studio_transform::project_name(const entities::name& n) {
 
 void visual_studio_transform::
 apply(const context& ctx, const logical::entities::model& m) {
-    const auto id(m.name().qualified().dot());
+    const auto id(m.name().id());
     tracing::scoped_transform_tracer stp(lg, "visual studio transform",
-        transform_id, id, *ctx.tracer(), m);
+        transform_id, id.value(), *ctx.tracer(), m);
 
     /*
      * We expect to have zero or one projects on a model.

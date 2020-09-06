@@ -30,6 +30,7 @@
 #include <algorithm>
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/physical/relations.hpp"
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/physical/archetype_text_templating.hpp"
 
@@ -50,13 +51,13 @@ public:
 
 public:
     archetype(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -68,7 +69,7 @@ public:
         const std::string& backend_name,
         const std::string& facet_name,
         const std::string& part_id,
-        const std::string& logical_meta_element_id,
+        const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
         const dogen::logical::entities::physical::relations& relations,
         const dogen::logical::entities::physical::archetype_text_templating& text_templating);
 
@@ -145,10 +146,10 @@ public:
      * @brief ID of the meta-element in the logical model this archetype binds to.
      */
     /**@{*/
-    const std::string& logical_meta_element_id() const;
-    std::string& logical_meta_element_id();
-    void logical_meta_element_id(const std::string& v);
-    void logical_meta_element_id(const std::string&& v);
+    const dogen::identification::entities::logical_meta_id& logical_meta_element_id() const;
+    dogen::identification::entities::logical_meta_id& logical_meta_element_id();
+    void logical_meta_element_id(const dogen::identification::entities::logical_meta_id& v);
+    void logical_meta_element_id(const dogen::identification::entities::logical_meta_id&& v);
     /**@}*/
 
     /**
@@ -191,7 +192,7 @@ private:
     std::string backend_name_;
     std::string facet_name_;
     std::string part_id_;
-    std::string logical_meta_element_id_;
+    dogen::identification::entities::logical_meta_id logical_meta_element_id_;
     dogen::logical::entities::physical::relations relations_;
     dogen::logical::entities::physical::archetype_text_templating text_templating_;
 };

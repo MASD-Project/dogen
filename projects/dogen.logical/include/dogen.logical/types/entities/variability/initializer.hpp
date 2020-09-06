@@ -28,8 +28,8 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 
 namespace dogen::logical::entities::variability {
 
@@ -46,20 +46,20 @@ public:
 
 public:
     initializer(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::list<dogen::logical::entities::name>& feature_template_bundles,
-        const std::list<dogen::logical::entities::name>& feature_bundles);
+        const std::list<dogen::identification::entities::logical_name>& feature_template_bundles,
+        const std::list<dogen::identification::entities::logical_name>& feature_bundles);
 
 public:
     using element::accept;
@@ -76,20 +76,20 @@ public:
      * @brief Names of all the templates that this initialiser will register.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& feature_template_bundles() const;
-    std::list<dogen::logical::entities::name>& feature_template_bundles();
-    void feature_template_bundles(const std::list<dogen::logical::entities::name>& v);
-    void feature_template_bundles(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& feature_template_bundles() const;
+    std::list<dogen::identification::entities::logical_name>& feature_template_bundles();
+    void feature_template_bundles(const std::list<dogen::identification::entities::logical_name>& v);
+    void feature_template_bundles(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Names of all the features that this initialiser will register.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& feature_bundles() const;
-    std::list<dogen::logical::entities::name>& feature_bundles();
-    void feature_bundles(const std::list<dogen::logical::entities::name>& v);
-    void feature_bundles(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& feature_bundles() const;
+    std::list<dogen::identification::entities::logical_name>& feature_bundles();
+    void feature_bundles(const std::list<dogen::identification::entities::logical_name>& v);
+    void feature_bundles(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
 public:
@@ -106,8 +106,8 @@ public:
     initializer& operator=(initializer other);
 
 private:
-    std::list<dogen::logical::entities::name> feature_template_bundles_;
-    std::list<dogen::logical::entities::name> feature_bundles_;
+    std::list<dogen::identification::entities::logical_name> feature_template_bundles_;
+    std::list<dogen::identification::entities::logical_name> feature_bundles_;
 };
 
 }

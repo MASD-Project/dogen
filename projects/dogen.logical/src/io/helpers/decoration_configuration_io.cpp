@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/helpers/decoration_configuration_io.hpp"
 
 namespace boost {
@@ -73,9 +74,9 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
       << "\"__type__\": " << "\"dogen::logical::helpers::decoration_configuration\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
-      << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "
-      << "\"modeline_group_name\": " << "\"" << tidy_up_string(v.modeline_group_name()) << "\"" << ", "
-      << "\"marker_name\": " << "\"" << tidy_up_string(v.marker_name()) << "\""
+      << "\"licence_name\": " << v.licence_name() << ", "
+      << "\"modeline_group_name\": " << v.modeline_group_name() << ", "
+      << "\"marker_name\": " << v.marker_name()
       << " }";
     return(s);
 }

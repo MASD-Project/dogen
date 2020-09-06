@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::identification::entities::logical_name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -62,20 +62,20 @@ visitor::visitor(visitor&& rhs)
       parent_(std::move(rhs.parent_)) { }
 
 visitor::visitor(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::list<dogen::logical::entities::name>& visits,
-    const boost::optional<dogen::logical::entities::name>& parent)
+    const std::list<dogen::identification::entities::logical_name>& visits,
+    const boost::optional<dogen::identification::entities::logical_name>& parent)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -145,35 +145,35 @@ visitor& visitor::operator=(visitor other) {
     return *this;
 }
 
-const std::list<dogen::logical::entities::name>& visitor::visits() const {
+const std::list<dogen::identification::entities::logical_name>& visitor::visits() const {
     return visits_;
 }
 
-std::list<dogen::logical::entities::name>& visitor::visits() {
+std::list<dogen::identification::entities::logical_name>& visitor::visits() {
     return visits_;
 }
 
-void visitor::visits(const std::list<dogen::logical::entities::name>& v) {
+void visitor::visits(const std::list<dogen::identification::entities::logical_name>& v) {
     visits_ = v;
 }
 
-void visitor::visits(const std::list<dogen::logical::entities::name>&& v) {
+void visitor::visits(const std::list<dogen::identification::entities::logical_name>&& v) {
     visits_ = std::move(v);
 }
 
-const boost::optional<dogen::logical::entities::name>& visitor::parent() const {
+const boost::optional<dogen::identification::entities::logical_name>& visitor::parent() const {
     return parent_;
 }
 
-boost::optional<dogen::logical::entities::name>& visitor::parent() {
+boost::optional<dogen::identification::entities::logical_name>& visitor::parent() {
     return parent_;
 }
 
-void visitor::parent(const boost::optional<dogen::logical::entities::name>& v) {
+void visitor::parent(const boost::optional<dogen::identification::entities::logical_name>& v) {
     parent_ = v;
 }
 
-void visitor::parent(const boost::optional<dogen::logical::entities::name>&& v) {
+void visitor::parent(const boost::optional<dogen::identification::entities::logical_name>&& v) {
     parent_ = std::move(v);
 }
 

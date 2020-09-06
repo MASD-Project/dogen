@@ -27,9 +27,9 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/hash/entities/logical_name_hash.hpp"
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"

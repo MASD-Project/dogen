@@ -46,21 +46,23 @@ private:
      * @pre If non-empty, licence name must exist in the decoration
      * repository.
      */
-    std::string get_short_form_licence(const std::string& licence_name) const;
+    std::string get_short_form_licence(
+        const identification::entities::logical_id& licence_name) const;
 
     /**
      * @brief Retrieves the modeline for the supplied technical space
      * and modeline group.
      */
-    boost::shared_ptr<entities::decoration::modeline>
-    get_modeline(const std::string& modeline_group_name,
+    boost::shared_ptr<entities::decoration::modeline> get_modeline(
+        const identification::entities::logical_id& modeline_group_name,
         const identification::entities::technical_space ts) const;
 
     /**
      * @brief Retrieves the generation marker for the supplied name.
      */
     boost::shared_ptr<entities::decoration::generation_marker>
-    get_generation_marker(const std::string& generation_marker_name) const;
+    get_generation_marker(const identification::entities::logical_id&
+        generation_marker_name) const;
 
 private:
     boost::optional<logical::entities::decoration::element_properties>

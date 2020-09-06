@@ -43,8 +43,8 @@ const boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable>& rhs)
 namespace dogen::logical::entities::mapping {
 
 element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables)
     : extensible_mappables_(extensible_mappables),
       fixed_mappables_(fixed_mappables) { }
 
@@ -65,35 +65,35 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& element_repository::extensible_mappables() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& element_repository::extensible_mappables() const {
     return extensible_mappables_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& element_repository::extensible_mappables() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& element_repository::extensible_mappables() {
     return extensible_mappables_;
 }
 
-void element_repository::extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& v) {
+void element_repository::extensible_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& v) {
     extensible_mappables_ = v;
 }
 
-void element_repository::extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >&& v) {
+void element_repository::extensible_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >&& v) {
     extensible_mappables_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& element_repository::fixed_mappables() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& element_repository::fixed_mappables() const {
     return fixed_mappables_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& element_repository::fixed_mappables() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& element_repository::fixed_mappables() {
     return fixed_mappables_;
 }
 
-void element_repository::fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& v) {
+void element_repository::fixed_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& v) {
     fixed_mappables_ = v;
 }
 
-void element_repository::fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >&& v) {
+void element_repository::fixed_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >&& v) {
     fixed_mappables_ = std::move(v);
 }
 

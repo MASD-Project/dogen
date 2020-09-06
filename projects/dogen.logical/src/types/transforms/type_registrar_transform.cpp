@@ -55,9 +55,9 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
         return;
     }
 
-    using entities::name;
+    using identification::entities::logical_name;
     using identification::entities::model_type;
-    std::list<name> registrar_dependencies;
+    std::list<logical_name> registrar_dependencies;
     using entities::serialization::type_registrar;
     boost::shared_ptr<type_registrar> target_registrar;
     for (auto& pair : m.serialization_elements().type_registrars()) {
@@ -116,8 +116,8 @@ void type_registrar_transform::apply(const context& ctx, entities::model& m) {
              * We need to ensure the leaves are stable sorted.
              */
             rg.leaves().sort(
-                [](const name& a, const name& b) {
-                    return a.qualified().dot() < b.qualified().dot();
+                [](const logical_name& rhs, const logical_name& lhs) {
+                    return rhs.id().value() < lhs.id().value();
                 });
         } else if (mt == model_type::non_pdm_reference) {
             BOOST_LOG_SEV(lg, debug) << "Non-PDM reference registrar.";

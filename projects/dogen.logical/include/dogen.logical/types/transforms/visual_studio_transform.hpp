@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
@@ -40,7 +40,8 @@ private:
      * @brief Computes the Visual Studio project name for a given
      * model name.
      */
-    static std::string project_name(const entities::name& n);
+    static std::string
+    project_name(const identification::entities::logical_name& n);
 
 public:
     static void apply(const context& ctx, const logical::entities::model& m);

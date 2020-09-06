@@ -17,7 +17,7 @@ physical::entities::archetype {{class.simple_name}}::archetype() const {
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path(n, archetype().meta_name().id().value());
 }
 

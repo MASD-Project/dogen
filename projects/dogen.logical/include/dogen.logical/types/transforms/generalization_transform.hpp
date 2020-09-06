@@ -28,8 +28,9 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
@@ -41,17 +42,17 @@ namespace dogen::logical::transforms {
  */
 class generalization_transform final {
 private:
-    static std::unordered_set<std::string>
+    static std::unordered_set<identification::entities::logical_id>
     update_and_collect_parent_ids(const helpers::indices& idx,
         const variability::entities::feature_model& fm,
         entities::model& m);
 
-    static void walk_up_generalization_tree(const entities::name& leaf,
+    static void walk_up_generalization_tree(
+        const identification::entities::logical_name& leaf,
         entities::model& m, entities::structural::object& o);
 
-    static void populate_generalizable_properties(
-        const std::unordered_set<std::string>& parent_ids,
-        entities::model& m);
+    static void populate_generalizable_properties(const std::unordered_set<
+        identification::entities::logical_id>& parent_ids, entities::model& m);
 
     static void sort_leaves(entities::model& m);
 

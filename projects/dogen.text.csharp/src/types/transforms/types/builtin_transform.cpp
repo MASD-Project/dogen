@@ -25,7 +25,7 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/types/traits.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -52,7 +52,7 @@ const physical::entities::archetype& builtin_transform::archetype() const {
 }
 
 boost::filesystem::path builtin_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path(n, archetype().meta_name().id().value());
 }
 

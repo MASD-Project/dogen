@@ -29,8 +29,8 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 
 namespace dogen::logical::entities::physical {
@@ -50,13 +50,13 @@ public:
 
 public:
     part(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -71,7 +71,7 @@ public:
         const std::string& facet_path_contribution,
         const std::string& internal_modules_path_contribution,
         const bool requires_relative_path,
-        const std::list<dogen::logical::entities::name>& archetypes);
+        const std::list<dogen::identification::entities::logical_name>& archetypes);
 
 public:
     using element::accept;
@@ -174,10 +174,10 @@ public:
      * @brief All archetypes in this part.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& archetypes() const;
-    std::list<dogen::logical::entities::name>& archetypes();
-    void archetypes(const std::list<dogen::logical::entities::name>& v);
-    void archetypes(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& archetypes() const;
+    std::list<dogen::identification::entities::logical_name>& archetypes();
+    void archetypes(const std::list<dogen::identification::entities::logical_name>& v);
+    void archetypes(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
 public:
@@ -203,7 +203,7 @@ private:
     std::string facet_path_contribution_;
     std::string internal_modules_path_contribution_;
     bool requires_relative_path_;
-    std::list<dogen::logical::entities::name> archetypes_;
+    std::list<dogen::identification::entities::logical_name> archetypes_;
 };
 
 }

@@ -20,15 +20,18 @@
  */
 #include <sstream>
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/features/physical.hpp"
 #include "dogen.logical/types/features/physical_relations.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.logical/types/entities/physical/facet.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
@@ -150,7 +153,7 @@ process_backends(const context& ctx, entities::model& m) {
                 if (found) {
                     BOOST_LOG_SEV(lg, error) << ambiguous_name << qn;
                     BOOST_THROW_EXCEPTION(
-                        transformation_error(ambiguous_name + qn));
+                        transformation_error(ambiguous_name + qn.value()));
                 }
 
                 auto& part(*j->second);
@@ -173,7 +176,7 @@ process_backends(const context& ctx, entities::model& m) {
                 if (found) {
                     BOOST_LOG_SEV(lg, error) << ambiguous_name << qn;
                     BOOST_THROW_EXCEPTION(
-                        transformation_error(ambiguous_name + qn));
+                        transformation_error(ambiguous_name + qn.value()));
                 }
 
                 auto& ak(*k->second);
@@ -199,7 +202,7 @@ process_backends(const context& ctx, entities::model& m) {
                                          << " Container: "
                                          << b.name().qualified().dot();
                 BOOST_THROW_EXCEPTION(
-                    transformation_error(unsupported_composition + qn));
+                    transformation_error(unsupported_composition + qn.value()));
             }
         }
     }
@@ -222,7 +225,8 @@ void physical_entities_transform::process_facets(entities::model& m) {
          */
         if (fct.backend_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_facet << id;
-            BOOST_THROW_EXCEPTION(transformation_error(uncontained_facet + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_facet + id.value()));
         }
 
         /*
@@ -276,7 +280,7 @@ void physical_entities_transform::process_facets(entities::model& m) {
                                          << " Container: "
                                          << fct.name().qualified().dot();
                 BOOST_THROW_EXCEPTION(
-                    transformation_error(unsupported_composition + qn));
+                    transformation_error(unsupported_composition + qn.value()));
             }
         }
     }
@@ -299,7 +303,7 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
         if (ak.backend_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_archetype_kind << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(uncontained_archetype_kind + id));
+                transformation_error(uncontained_archetype_kind + id.value()));
         }
 
         /*
@@ -331,7 +335,7 @@ void physical_entities_transform::process_parts(entities::model& m) {
         if (part.backend_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_part << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(uncontained_part + id));
+                transformation_error(uncontained_part + id.value()));
         }
 
         /*
@@ -516,17 +520,18 @@ process_archetypes(const context& ctx, entities::model& m) {
         /*
          * Read all of the associated meta-data. First we get the
          * logical model meta-element ID. It must not be empty, but
-         * otherwise We don't validate it here - this will be done
+         * otherwise we don't validate it here - this will be done
          * later on.
          */
         const auto scfg(physical::make_static_configuration(fg, arch));
         arch.part_id(scfg.part_id);
-        const auto lmen(scfg.logical_meta_element_id);
-        if (lmen.empty()) {
+        if (scfg.logical_meta_element_id.empty()) {
             BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
             BOOST_THROW_EXCEPTION(
                 transformation_error(missing_logical_meta_element));
         }
+        using identification::entities::logical_meta_id;
+        const logical_meta_id lmen(scfg.logical_meta_element_id);
         arch.logical_meta_element_id(lmen);
 
         /*
@@ -543,7 +548,8 @@ process_archetypes(const context& ctx, entities::model& m) {
          */
         const auto wtr(scfg.wale_template_reference);
         if (!wtr.empty()) {
-            const auto n(helpers::name_builder::build(wtr));
+            identification::helpers::logical_name_builder b;
+            const auto n(b.build(wtr));
             tt.wale_template(n);
         }
 
@@ -554,7 +560,7 @@ process_archetypes(const context& ctx, entities::model& m) {
         if (arch.backend_name().empty() || arch.facet_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_archetype << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(uncontained_archetype + id));
+                transformation_error(uncontained_archetype + id.value()));
         }
 
         /*

@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/attribute_io.hpp"
 #include "dogen.logical/io/entities/type_parameters_io.hpp"
 #include "dogen.logical/io/entities/structural/object_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/orm/object_properties_io.hpp"
 
 namespace dogen::logical::entities::structural {

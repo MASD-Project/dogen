@@ -26,14 +26,14 @@ Yarn model.
 
 *** references
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<logical::entities::name, logical::entities::origin_types>
+:masd.injection.type: std::unordered_map<identification::entities::logical_name, logical::entities::origin_types>
 :END:
 
 All other models that this model depends on, mapped to their origin.
 
 *** leaves
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<logical::entities::name>
+:masd.injection.type: std::unordered_set<identification::entities::logical_name>
 :END:
 
 All leaf types in this model.
@@ -202,7 +202,7 @@ If false, will disable all instances of this archetype.
 :END:
 *** name
 :PROPERTIES:
-:masd.injection.type: logical::entities::name
+:masd.injection.type: identification::entities::logical_name
 :END:
 ** entities::MetaNameable
 :PROPERTIES:
@@ -210,7 +210,7 @@ If false, will disable all instances of this archetype.
 :END:
 *** meta_name
 :PROPERTIES:
-:masd.injection.type: logical::entities::name
+:masd.injection.type: identification::entities::logical_name
 :END:
 ** entities::DeterminableOrigin
 :PROPERTIES:

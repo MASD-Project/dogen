@@ -26,7 +26,11 @@
 #include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_location_io.hpp"
 #include "dogen.injection/io/entities/model_io.hpp"
+#include "dogen.identification/types/helpers/logical_location_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -38,12 +42,8 @@
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/entities/structural/assistant.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/location_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
-#include "dogen.logical/types/helpers/location_builder.hpp"
 #include "dogen.logical/types/helpers/stereotypes_helper.hpp"
 #include "dogen.orchestration/types/features/model_location.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
@@ -74,17 +74,19 @@ const std::string unsupported_technical_space(
 const std::string too_many_initializers(
     "Found more than one feature template initializer in model.");
 
-using dogen::logical::entities::location;
-const location empty_location = location();
+using dogen::identification::entities::logical_location;
+const logical_location empty_location = logical_location();
 
 }
 
 namespace dogen::orchestration::transforms {
 
+using dogen::identification::entities::logical_id;
+
 template<typename Element>
 inline void
 insert(const boost::shared_ptr<Element>& e,
-    std::unordered_map<std::string, boost::shared_ptr<Element>>& dst) {
+    std::unordered_map<logical_id, boost::shared_ptr<Element>>& dst) {
     const auto id(e->name().qualified().dot());
     bool inserted(dst.insert(std::make_pair(id, e)).second);
     if (!inserted) {
@@ -107,14 +109,14 @@ to_technical_space(const std::string& s) {
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
 }
 
-logical::entities::location
+identification::entities::logical_location
 injection_model_to_logical_model_transform::
 create_location(const context& ctx, const injection::entities::model& m) {
     const auto& fm(*ctx.logical_context().feature_model());
     const auto fg(features::model_location::make_feature_group(fm));
     const auto scfg(features::model_location::make_static_configuration(fg, m));
 
-    logical::helpers::location_builder b;
+    identification::helpers::logical_location_builder b;
     b.external_modules(scfg.external_modules);
     b.model_modules(scfg.model_modules);
 
@@ -163,7 +165,7 @@ injection_model_to_logical_model_transform::compute_element_type(
 
 void injection_model_to_logical_model_transform::
 process_element(const helpers::adapter& ad,
-    const logical::entities::location& l,
+    const identification::entities::logical_location& l,
     const injection::entities::element& e, logical::entities::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Injection stereotypes: " << e.stereotypes();
@@ -319,7 +321,7 @@ apply(const context& ctx, const injection::entities::model& m) {
      * data from configuration.
      */
     logical::entities::model r;
-    logical::helpers::name_builder b(true/*model_name_mode*/);
+    identification::helpers::logical_name_builder b(true/*model_name_mode*/);
     const auto model_location(create_location(ctx, m));
     b.external_modules(model_location.external_modules());
     b.model_modules(model_location.model_modules());

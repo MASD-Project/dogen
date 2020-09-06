@@ -23,13 +23,14 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
-#include "dogen.logical/types/helpers/name_flattener.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
 #include "dogen.text.cpp/types/formattables/helper_properties.hpp"
 #include "dogen.text.cpp/io/formattables/helper_configuration_io.hpp"
@@ -67,10 +68,11 @@ private:
         const std::string& family) const;
 
     std::string helper_family_for_id(const helper_configuration& cfg,
-        const std::string& id) const;
+        const identification::entities::logical_id& id) const;
 
-    boost::optional<streaming_properties> streaming_properties_for_id(
-        const helper_configuration& cfg, const std::string& id) const;
+    boost::optional<streaming_properties>
+    streaming_properties_for_id(const helper_configuration& cfg,
+        const identification::entities::logical_id& id) const;
 
 private:
     boost::optional<helper_descriptor>
@@ -78,7 +80,7 @@ private:
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent,
-        const logical::entities::name_tree& nt,
+        const identification::entities::logical_name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
@@ -131,13 +133,15 @@ requires_hashing_helper(const helper_expander::facets_for_family_type& fff,
     return j != i->second.end();
 }
 
-std::string helper_properties_generator::helper_family_for_id(
-    const helper_configuration& cfg, const std::string& id) const {
+std::string helper_properties_generator::
+helper_family_for_id(const helper_configuration& cfg,
+    const identification::entities::logical_id& id) const {
 
     const auto i(cfg.helper_families().find(id));
     if (i == cfg.helper_families().end()) {
         BOOST_LOG_SEV(lg, error) << missing_helper_family << id;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_helper_family + id));
+        BOOST_THROW_EXCEPTION(
+            expansion_error(missing_helper_family + id.value()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found helper family for type: " << id
@@ -146,8 +150,9 @@ std::string helper_properties_generator::helper_family_for_id(
 }
 
 boost::optional<formattables::streaming_properties>
-helper_properties_generator::streaming_properties_for_id(
-    const helper_configuration& cfg, const std::string& id) const {
+helper_properties_generator::
+streaming_properties_for_id(const helper_configuration& cfg,
+    const identification::entities::logical_id& id) const {
 
     const auto i(cfg.streaming_properties().find(id));
     if (i == cfg.streaming_properties().end())
@@ -163,15 +168,15 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent,
-    const logical::entities::name_tree& nt,
+    const identification::entities::logical_name_tree& nt,
     std::unordered_set<std::string>& done,
     std::list<helper_properties>& hps) const {
 
-    const auto id(nt.current().qualified().dot());
+    const auto id(nt.current().id());
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
-    logical::helpers::name_flattener nf;
+    identification::helpers::logical_name_flattener nf;
     r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
@@ -371,7 +376,8 @@ helper_expander::facets_for_family(const transforms::repository& frp) const {
 
 void helper_expander::populate_helper_properties(
     const helper_configuration& cfg, const transforms::repository& frp,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    std::unordered_map<identification::entities::logical_id,
+    formattable>& formattables) const {
 
     const auto fff(facets_for_family(frp));
     for (auto& pair : formattables) {

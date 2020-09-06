@@ -32,7 +32,7 @@ const boost::shared_ptr<dogen::logical::entities::build::cmakelists>& rhs) {
 
 namespace dogen::logical::entities::build {
 
-element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists)
+element_repository::element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists)
     : cmakelists_(cmakelists) { }
 
 void element_repository::swap(element_repository& other) noexcept {
@@ -50,19 +50,19 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& element_repository::cmakelists() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& element_repository::cmakelists() const {
     return cmakelists_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& element_repository::cmakelists() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& element_repository::cmakelists() {
     return cmakelists_;
 }
 
-void element_repository::cmakelists(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& v) {
+void element_repository::cmakelists(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& v) {
     cmakelists_ = v;
 }
 
-void element_repository::cmakelists(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >&& v) {
+void element_repository::cmakelists(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >&& v) {
     cmakelists_ = std::move(v);
 }
 

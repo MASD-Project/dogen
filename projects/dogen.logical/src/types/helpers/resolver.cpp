@@ -26,6 +26,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_tree_io.hpp"
+#include "dogen.identification/types/helpers/qualified_representations_builder.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -33,12 +37,9 @@
 #include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/io/entities/attribute_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
-#include "dogen.logical/types/helpers/fully_qualified_representation_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
 #include "dogen.logical/types/helpers/resolution_error.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
 
@@ -59,17 +60,17 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 namespace dogen::logical::helpers {
 
-bool resolver::
-is_floating_point(const entities::model& m, const entities::name& n) {
-    auto i(m.structural_elements().builtins().find(n.qualified().dot()));
+bool resolver::is_floating_point(const entities::model& m,
+    const identification::entities::logical_name& n) {
+    auto i(m.structural_elements().builtins().find(n.id()));
     return i != m.structural_elements().builtins().end() &&
         i->second->is_floating_point();
 }
 
-bool resolver::
-is_builtin(const entities::model& m, const entities::name& n) {
+bool resolver::is_builtin(const entities::model& m,
+    const identification::entities::logical_name& n) {
 
-    auto i(m.structural_elements().builtins().find(n.qualified().dot()));
+    auto i(m.structural_elements().builtins().find(n.id()));
     if (i != m.structural_elements().builtins().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a built-in in model.";
         return true;
@@ -77,10 +78,10 @@ is_builtin(const entities::model& m, const entities::name& n) {
     return false;
 }
 
-bool resolver::
-is_primitive(const entities::model& m, const entities::name& n) {
+bool resolver::is_primitive(const entities::model& m,
+    const identification::entities::logical_name& n) {
 
-    auto i(m.structural_elements().primitives().find(n.qualified().dot()));
+    auto i(m.structural_elements().primitives().find(n.id()));
     if (i != m.structural_elements().primitives().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to a primitive in model.";
         return true;
@@ -88,10 +89,10 @@ is_primitive(const entities::model& m, const entities::name& n) {
     return false;
 }
 
-bool resolver::
-is_enumeration(const entities::model& m, const entities::name& n) {
+bool resolver::is_enumeration(const entities::model& m,
+    const identification::entities::logical_name& n) {
 
-    auto i(m.structural_elements().enumerations().find(n.qualified().dot()));
+    auto i(m.structural_elements().enumerations().find(n.id()));
     if (i != m.structural_elements().enumerations().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an enumeration in model.";
         return true;
@@ -99,10 +100,10 @@ is_enumeration(const entities::model& m, const entities::name& n) {
     return false;
 }
 
-bool resolver::
-is_object(const entities::model& m, const entities::name& n) {
+bool resolver::is_object(const entities::model& m,
+    const identification::entities::logical_name& n) {
 
-    auto i(m.structural_elements().objects().find(n.qualified().dot()));
+    auto i(m.structural_elements().objects().find(n.id()));
     if (i != m.structural_elements().objects().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to an object in model.";
         return true;
@@ -110,10 +111,9 @@ is_object(const entities::model& m, const entities::name& n) {
     return false;
 }
 
-bool resolver::
-is_object_template(const entities::model& m, const entities::name& n) {
-    const auto id(n.qualified().dot());
-    auto i(m.structural_elements().object_templates().find(id));
+bool resolver::is_object_template(const entities::model& m,
+    const identification::entities::logical_name& n) {
+    auto i(m.structural_elements().object_templates().find(n.id()));
     if (i != m.structural_elements().object_templates().end()) {
         BOOST_LOG_SEV(lg, trace) << "Name belongs to object_template in model.";
         return true;
@@ -121,14 +121,13 @@ is_object_template(const entities::model& m, const entities::name& n) {
     return false;
 }
 
-bool resolver::
-is_name_referable(const indices& idx, const entities::name& n) {
-    const auto& id(n.qualified().dot());
+bool resolver::is_name_referable(const indices& idx,
+    const identification::entities::logical_name& n) {
     BOOST_LOG_SEV(lg, trace) << "Checking to see if name is referable: "
-                             << id << " Full name: " << n;
+                             << n.id() << " Full name: " << n;
 
 
-    const auto i(idx.elements_referable_by_attributes().find(id));
+    const auto i(idx.elements_referable_by_attributes().find(n.id()));
     if (i != idx.elements_referable_by_attributes().end())
         return true;
 
@@ -136,9 +135,10 @@ is_name_referable(const indices& idx, const entities::name& n) {
     return false;
 }
 
-entities::name resolver::resolve_name_with_internal_modules(
+identification::entities::logical_name
+resolver::resolve_name_with_internal_modules(
     const entities::model& m, const indices& idx,
-    const entities::name& ctx, const entities::name& n) {
+    const identification::entities::logical_name& ctx, const identification::entities::logical_name& n) {
 
     /*
      * Since the user has bothered to provide an internal module path,
@@ -147,7 +147,7 @@ entities::name resolver::resolve_name_with_internal_modules(
      * path, either to the current package or to elsewhere in the same
      * model as the context.
      */
-    name_factory nf;
+    identification::helpers::logical_name_factory nf;
     {
         const auto r(nf.build_combined_element_name(ctx, n,
                 true/*populate_model_modules_if_blank*/));
@@ -276,9 +276,10 @@ entities::name resolver::resolve_name_with_internal_modules(
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + id));
 }
 
-boost::optional<entities::name> resolver::
-try_resolve_name_with_context_internal_modules(const indices& idx,
-    entities::name ctx, const entities::name& n) {
+boost::optional<identification::entities::logical_name>
+resolver::try_resolve_name_with_context_internal_modules(const indices& idx,
+    identification::entities::logical_name ctx,
+    const identification::entities::logical_name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Context has internal modules.";
 
@@ -292,7 +293,7 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
      * We start at the innermost internal module and make our way
      * upwards.
      */
-    name_factory nf;
+    identification::helpers::logical_name_factory nf;
     auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/));
@@ -323,12 +324,12 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
      * If we didn't find anything, we should not throw as there still
      * are other possibilities left to try.
      */
-    return boost::optional<entities::name>();
+    return boost::optional<identification::entities::logical_name>();
 }
 
-boost::optional<entities::name> resolver::
+boost::optional<identification::entities::logical_name> resolver::
 try_resolve_name_with_context_model_modules(const indices& idx,
-    entities::name ctx, const entities::name& n) {
+    identification::entities::logical_name ctx, const identification::entities::logical_name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Context has model modules.";
 
@@ -342,7 +343,7 @@ try_resolve_name_with_context_model_modules(const indices& idx,
      * We start at the innermost internal module and make our way
      * upwards.
      */
-    name_factory nf;
+    identification::helpers::logical_name_factory nf;
     auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/,
             false/*populate_internal_modules_if_blank*/));
@@ -373,12 +374,12 @@ try_resolve_name_with_context_model_modules(const indices& idx,
      * If we didn't find anything, we should not throw as there still
      * are other possibilities left to try.
      */
-    return boost::optional<entities::name>();
+    return boost::optional<identification::entities::logical_name>();
 }
 
-entities::name resolver::
+identification::entities::logical_name resolver::
 resolve_name(const entities::model& m, const indices& idx,
-    const entities::name& ctx, const entities::name& n) {
+    const identification::entities::logical_name& ctx, const identification::entities::logical_name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Resolving name: " << n.qualified().dot();
     BOOST_LOG_SEV(lg, trace) << "Initial state: " << n;
@@ -415,7 +416,7 @@ resolve_name(const entities::model& m, const indices& idx,
      * provided a name but said nothing else about it, so we assume it
      * refers to something in the current context.
      */
-    name_factory nf;
+    identification::helpers::logical_name_factory nf;
     {
         auto r(nf.build_combined_element_name(ctx, n,
                 true/*populate_model_modules_if_blank*/));
@@ -459,10 +460,10 @@ resolve_name(const entities::model& m, const indices& idx,
 }
 
 void resolver::resolve_name_tree(const entities::model& m,
-    const indices& idx, const entities::name& owner,
-    entities::name_tree& nt) {
+    const indices& idx, const identification::entities::logical_name& owner,
+    identification::entities::logical_name_tree& nt) {
 
-    const entities::name n(resolve_name(m, idx, owner, nt.current()));
+    const identification::entities::logical_name n(resolve_name(m, idx, owner, nt.current()));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: "
                              << nt.current().qualified().dot()
                              << " to: " << n.qualified().dot();
@@ -473,10 +474,10 @@ void resolver::resolve_name_tree(const entities::model& m,
     } else
         nt.is_current_simple_type(is_enumeration(m, n));
 
-    const auto i(idx.objects_always_in_heap().find(n.qualified().dot()));
+    const auto i(idx.objects_always_in_heap().find(n.id()));
     nt.are_children_opaque(i != idx.objects_always_in_heap().end());
 
-    fully_qualified_representation_builder b;
+    identification::helpers::qualified_representations_builder b;
     b.add(n);
 
     /*
@@ -501,7 +502,7 @@ void resolver::resolve_name_tree(const entities::model& m,
 }
 
 void resolver::resolve_attribute(const entities::model& m,
-    const indices& idx, const entities::name& owner,
+    const indices& idx, const identification::entities::logical_name& owner,
     entities::attribute& attr) {
 
     try {
@@ -524,7 +525,7 @@ void resolver::resolve_attribute(const entities::model& m,
 }
 
 void resolver::resolve_attributes(const entities::model& m,
-    const indices& idx, const entities::name& owner,
+    const indices& idx, const identification::entities::logical_name& owner,
     std::list<entities::attribute>& attributes) {
 
     for (auto& attr : attributes)
@@ -635,7 +636,7 @@ resolve_enumerations(const indices& idx, entities::model& m) {
             continue;
 
         const auto ue(e.underlying_element());
-        const auto ue_id(ue.qualified().dot());
+        const auto ue_id(ue.id());
         BOOST_LOG_SEV(lg, trace) << "Underlying element: '" << ue_id << "'";
 
         const auto i(idx.enumeration_underliers().find(ue_id));
@@ -644,7 +645,7 @@ resolve_enumerations(const indices& idx, entities::model& m) {
                                      << " for enumeration: "
                                      << e.name().qualified().dot();
             BOOST_THROW_EXCEPTION(
-                resolution_error(invalid_underlying_type + ue_id));
+                resolution_error(invalid_underlying_type + ue_id.value()));
         }
         BOOST_LOG_SEV(lg, trace) << "Resolved enumeration.";
     }
@@ -671,14 +672,14 @@ resolve_primitives(const indices& idx, entities::model& m) {
         auto& attr(p.value_attribute());
         resolve_attribute(m, idx, p.name(), attr);
 
-        const auto& ue_id(attr.parsed_type().current().qualified().dot());
+        const auto& ue_id(attr.parsed_type().current().id());
         const auto i(idx.primitive_underliers().find(ue_id));
         if (i == idx.primitive_underliers().end()) {
             BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
                                      << " for primitive: "
                                      << p.name().qualified().dot();
             BOOST_THROW_EXCEPTION(
-                resolution_error(invalid_underlying_type + ue_id));
+                resolution_error(invalid_underlying_type + ue_id.value()));
         }
         BOOST_LOG_SEV(lg, trace) << "Resolved primitive.";
     }
@@ -718,7 +719,7 @@ void resolver::resolve_archetypes(const indices& idx, entities::model& m) {
             continue;
 
         const auto original(*arch.text_templating().wale_template());
-        const entities::name resolved(resolve_name(m, idx, n, original));
+        const identification::entities::logical_name resolved(resolve_name(m, idx, n, original));
         BOOST_LOG_SEV(lg, debug) << "Resolved name: "
                                  << original.qualified().dot()
                                  << " to: " << resolved.qualified().dot();
@@ -726,9 +727,9 @@ void resolver::resolve_archetypes(const indices& idx, entities::model& m) {
     }
 }
 
-entities::name resolver::
+identification::entities::logical_name resolver::
 resolve(const entities::model& m, const indices& idx,
-    const entities::name& ctx, const entities::name& n) {
+    const identification::entities::logical_name& ctx, const identification::entities::logical_name& n) {
 
     const auto r(resolve_name(m, idx, ctx, n));
     BOOST_LOG_SEV(lg, trace) << "Resolved name: " << n.qualified().dot()
@@ -736,8 +737,8 @@ resolve(const entities::model& m, const indices& idx,
     return r;
 }
 
-boost::optional<entities::name> resolver::
-try_resolve_object_template_name(entities::name ctx, const std::string& s,
+boost::optional<identification::entities::logical_name> resolver::
+try_resolve_object_template_name(identification::entities::logical_name ctx, const std::string& s,
     const entities::model& m) {
 
     BOOST_LOG_SEV(lg, trace) << "Resolving object template name: " << s;
@@ -746,10 +747,10 @@ try_resolve_object_template_name(entities::name ctx, const std::string& s,
      * We first start at the same level as the context, including any
      * internal modules.
      */
-    entities::name n;
+    identification::entities::logical_name n;
     n.simple(s);
 
-    name_factory nf;
+    identification::helpers::logical_name_factory nf;
     auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/));
@@ -757,7 +758,7 @@ try_resolve_object_template_name(entities::name ctx, const std::string& s,
     BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
     const auto& ots(m.structural_elements().object_templates());
-    auto i(ots.find(r.qualified().dot()));
+    auto i(ots.find(r.id()));
     if (i != ots.end()) {
         BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
@@ -779,7 +780,7 @@ try_resolve_object_template_name(entities::name ctx, const std::string& s,
 
             BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-            i = ots.find(r.qualified().dot());
+            i = ots.find(r.id());
             if (i != ots.end()) {
                 BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
@@ -792,12 +793,12 @@ try_resolve_object_template_name(entities::name ctx, const std::string& s,
      * stereotype name.
      */
     BOOST_LOG_SEV(lg, warn) << "Could not find object template: " << s;
-    return boost::optional<entities::name>();
+    return boost::optional<identification::entities::logical_name>();
 }
 
-boost::optional<entities::name>
-resolver::try_resolve_object_template_name(const entities::name& ctx,
-    const entities::name& n, const entities::model& m) {
+boost::optional<identification::entities::logical_name>
+resolver::try_resolve_object_template_name(const identification::entities::logical_name& ctx,
+    const identification::entities::logical_name& n, const entities::model& m) {
     // FIXME: hack for now, just take simple name. Requires a bit more
     // thinking.
     return try_resolve_object_template_name(ctx, n.simple(), m);

@@ -52,10 +52,10 @@ attribute::attribute(attribute&& rhs)
 attribute::attribute(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const dogen::logical::entities::stereotypes& stereotypes,
     const std::string& unparsed_type,
-    const dogen::logical::entities::name_tree& parsed_type,
+    const dogen::identification::entities::logical_name_tree& parsed_type,
     const bool is_immutable,
     const bool is_fluent,
     const boost::optional<dogen::logical::entities::orm::attribute_properties>& orm_properties,
@@ -140,19 +140,19 @@ void attribute::configuration(const boost::shared_ptr<dogen::variability::entiti
     configuration_ = std::move(v);
 }
 
-const dogen::logical::entities::name& attribute::name() const {
+const dogen::identification::entities::logical_name& attribute::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& attribute::name() {
+dogen::identification::entities::logical_name& attribute::name() {
     return name_;
 }
 
-void attribute::name(const dogen::logical::entities::name& v) {
+void attribute::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void attribute::name(const dogen::logical::entities::name&& v) {
+void attribute::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
@@ -188,19 +188,19 @@ void attribute::unparsed_type(const std::string&& v) {
     unparsed_type_ = std::move(v);
 }
 
-const dogen::logical::entities::name_tree& attribute::parsed_type() const {
+const dogen::identification::entities::logical_name_tree& attribute::parsed_type() const {
     return parsed_type_;
 }
 
-dogen::logical::entities::name_tree& attribute::parsed_type() {
+dogen::identification::entities::logical_name_tree& attribute::parsed_type() {
     return parsed_type_;
 }
 
-void attribute::parsed_type(const dogen::logical::entities::name_tree& v) {
+void attribute::parsed_type(const dogen::identification::entities::logical_name_tree& v) {
     parsed_type_ = v;
 }
 
-void attribute::parsed_type(const dogen::logical::entities::name_tree&& v) {
+void attribute::parsed_type(const dogen::identification::entities::logical_name_tree&& v) {
     parsed_type_ = std::move(v);
 }
 

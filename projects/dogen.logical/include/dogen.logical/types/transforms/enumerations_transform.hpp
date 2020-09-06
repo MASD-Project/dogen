@@ -39,12 +39,12 @@ namespace dogen::logical::transforms {
  */
 class enumerations_transform final {
 private:
-    static entities::name obtain_enumeration_default_underlying_element_name(
+    static identification::entities::logical_name obtain_enumeration_default_underlying_element_name(
         const entities::model& m);
     static std::string obtain_invalid_enumerator_simple_name(
         const identification::entities::technical_space ts);
     static entities::structural::enumerator
-    make_invalid_enumerator(const entities::name& n,
+    make_invalid_enumerator(const identification::entities::logical_name& n,
         const identification::entities::technical_space ts);
 
 public:

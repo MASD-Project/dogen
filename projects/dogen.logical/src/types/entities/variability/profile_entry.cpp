@@ -27,7 +27,7 @@ namespace dogen::logical::entities::variability {
 profile_entry::profile_entry(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& original_key,
     const std::string& key,
     const std::list<std::string>& value)

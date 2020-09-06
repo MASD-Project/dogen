@@ -29,9 +29,11 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.text.cpp/types/formattables/cpp_standards.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.text.cpp/types/formattables/facet_properties.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text.cpp/types/formattables/streaming_properties.hpp"
@@ -50,9 +52,9 @@ public:
 
 public:
     model(
-        const dogen::logical::entities::name& name,
-        const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
-        const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& formattables,
+        const dogen::identification::entities::logical_name& name,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties,
         const dogen::text::cpp::formattables::cpp_standards cpp_standard,
         const std::list<std::string>& odb_databases,
@@ -60,20 +62,20 @@ public:
         const std::list<std::string>& project_items);
 
 public:
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
 
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties() const;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties();
+    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& v);
+    void streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& formattables() const;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& formattables();
-    void formattables(const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& v);
-    void formattables(const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables();
+    void formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& v);
+    void formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>&& v);
 
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties() const;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties();
@@ -109,9 +111,9 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::logical::entities::name name_;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
-    std::unordered_map<std::string, dogen::text::cpp::formattables::formattable> formattables_;
+    dogen::identification::entities::logical_name name_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties> streaming_properties_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable> formattables_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties> facet_properties_;
     dogen::text::cpp::formattables::cpp_standards cpp_standard_;
     std::list<std::string> odb_databases_;

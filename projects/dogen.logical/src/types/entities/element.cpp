@@ -21,14 +21,16 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_name_io.hpp"
 #include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
@@ -120,13 +122,13 @@ element::element()
       generability_status_(static_cast<dogen::logical::entities::generability_status>(0)) { }
 
 element::element(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
@@ -157,7 +159,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"provenance\": " << provenance_ << ", "
-      << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
+      << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"stereotypes\": " << stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
@@ -200,19 +202,19 @@ bool element::compare(const element& rhs) const {
         decoration_ == rhs.decoration_;
 }
 
-const dogen::logical::entities::name& element::name() const {
+const dogen::identification::entities::logical_name& element::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& element::name() {
+dogen::identification::entities::logical_name& element::name() {
     return name_;
 }
 
-void element::name(const dogen::logical::entities::name& v) {
+void element::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void element::name(const dogen::logical::entities::name&& v) {
+void element::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
@@ -248,19 +250,19 @@ void element::provenance(const dogen::identification::entities::injection_proven
     provenance_ = std::move(v);
 }
 
-const std::string& element::contained_by() const {
+const dogen::identification::entities::logical_id& element::contained_by() const {
     return contained_by_;
 }
 
-std::string& element::contained_by() {
+dogen::identification::entities::logical_id& element::contained_by() {
     return contained_by_;
 }
 
-void element::contained_by(const std::string& v) {
+void element::contained_by(const dogen::identification::entities::logical_id& v) {
     contained_by_ = v;
 }
 
-void element::contained_by(const std::string&& v) {
+void element::contained_by(const dogen::identification::entities::logical_id&& v) {
     contained_by_ = std::move(v);
 }
 
@@ -288,19 +290,19 @@ void element::stereotypes(const dogen::logical::entities::stereotypes&& v) {
     stereotypes_ = std::move(v);
 }
 
-const dogen::logical::entities::name& element::meta_name() const {
+const dogen::identification::entities::logical_meta_name& element::meta_name() const {
     return meta_name_;
 }
 
-dogen::logical::entities::name& element::meta_name() {
+dogen::identification::entities::logical_meta_name& element::meta_name() {
     return meta_name_;
 }
 
-void element::meta_name(const dogen::logical::entities::name& v) {
+void element::meta_name(const dogen::identification::entities::logical_meta_name& v) {
     meta_name_ = v;
 }
 
-void element::meta_name(const dogen::logical::entities::name&& v) {
+void element::meta_name(const dogen::identification::entities::logical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 

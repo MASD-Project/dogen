@@ -24,13 +24,14 @@
 namespace dogen::text::csharp::transforms {
 
 std::unordered_map<
-    std::string,
+    identification::entities::logical_meta_id,
     std::forward_list<std::shared_ptr<model_to_text_transform>>>&
 repository::stock_artefact_formatters_by_meta_name() {
     return stock_artefact_formatters_by_meta_name_;
 }
 
-std::unordered_map<std::string, std::shared_ptr<model_to_text_transform>>&
+std::unordered_map<identification::entities::physical_meta_id,
+                   std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters_by_archetype() {
     return stock_artefact_formatters_by_archetype_;
 }
@@ -50,13 +51,13 @@ std::unordered_map<
 }
 
 const std::unordered_map<
-    std::string,
+    identification::entities::logical_meta_id,
     std::forward_list<std::shared_ptr<model_to_text_transform>>>&
 repository::stock_artefact_formatters_by_meta_name() const {
     return stock_artefact_formatters_by_meta_name_;
 }
 
-const std::unordered_map<std::string,
+const std::unordered_map<identification::entities::physical_meta_id,
                          std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters_by_archetype() const {
     return stock_artefact_formatters_by_archetype_;

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
@@ -48,16 +49,17 @@ private:
      * @brief Returns true if there is a containing element in the
      * model, across all containers, for this ID.
      */
-    static bool containing_element_exists(const std::string& id,
+    static bool containing_element_exists(
+        const identification::entities::logical_id& id,
         const entities::model& m);
 
     /**
      * @brief Creates modules for the internal modules which are not
      * yet in model.
      */
-    static void create_modules(const std::unordered_map<std::string,
-        std::list<std::string>>& internal_modules,
-        entities::model& m);
+    static void create_modules(
+        const std::unordered_map<std::string, std::list<std::string>>&
+        internal_modules, entities::model& m);
 
 public:
     static void apply(const context& ctx, entities::model& m);

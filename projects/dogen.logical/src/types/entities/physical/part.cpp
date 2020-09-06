@@ -21,10 +21,10 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/physical/part.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -37,7 +37,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -56,13 +56,13 @@ part::part()
       requires_relative_path_(static_cast<bool>(0)) { }
 
 part::part(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
@@ -77,7 +77,7 @@ part::part(
     const std::string& facet_path_contribution,
     const std::string& internal_modules_path_contribution,
     const bool requires_relative_path,
-    const std::list<dogen::logical::entities::name>& archetypes)
+    const std::list<dogen::identification::entities::logical_name>& archetypes)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -313,19 +313,19 @@ void part::requires_relative_path(const bool v) {
     requires_relative_path_ = v;
 }
 
-const std::list<dogen::logical::entities::name>& part::archetypes() const {
+const std::list<dogen::identification::entities::logical_name>& part::archetypes() const {
     return archetypes_;
 }
 
-std::list<dogen::logical::entities::name>& part::archetypes() {
+std::list<dogen::identification::entities::logical_name>& part::archetypes() {
     return archetypes_;
 }
 
-void part::archetypes(const std::list<dogen::logical::entities::name>& v) {
+void part::archetypes(const std::list<dogen::identification::entities::logical_name>& v) {
     archetypes_ = v;
 }
 
-void part::archetypes(const std::list<dogen::logical::entities::name>&& v) {
+void part::archetypes(const std::list<dogen::identification::entities::logical_name>&& v) {
     archetypes_ = std::move(v);
 }
 

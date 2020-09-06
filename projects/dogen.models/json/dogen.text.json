@@ -32,12 +32,12 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<logical::entities::name, identification::entities::model_type>",
+          "type": "std::unordered_map<identification::entities::logical_name, identification::entities::model_type>",
           "documentation": "All other models that this model depends on, mapped to their origin.\n"
         },
         {
           "name": "leaves",
-          "type": "std::unordered_set<logical::entities::name>",
+          "type": "std::unordered_set<identification::entities::logical_name>",
           "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
@@ -100,7 +100,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "logical::entities::name"
+          "type": "identification::entities::logical_name"
         }
       ]
     },
@@ -113,7 +113,7 @@
       "attributes": [
         {
           "name": "meta_name",
-          "type": "logical::entities::name"
+          "type": "identification::entities::logical_meta_name"
         }
       ]
     },

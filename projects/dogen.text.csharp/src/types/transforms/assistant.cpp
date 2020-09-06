@@ -24,7 +24,7 @@
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.text/types/formatters/boilerplate_properties.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.logical/types/helpers/name_flattener.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.text.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.text.csharp/types/transforms/formatting_error.hpp"
 #include "dogen.text.csharp/types/transforms/assistant.hpp"
@@ -72,12 +72,12 @@ assistant(const context& ctx, const logical::entities::element& e,
 }
 
 std::string
-assistant::get_qualified_name(const logical::entities::name& n) const {
+assistant::get_qualified_name(const identification::entities::logical_name& n) const {
     return n.qualified().dot();
 }
 
 std::string
-assistant::get_qualified_name(const logical::entities::name_tree& nt) const {
+assistant::get_qualified_name(const identification::entities::logical_name_tree& nt) const {
     return nt.qualified().dot();
 }
 
@@ -130,9 +130,9 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-std::list<std::string>
-assistant::make_namespaces(const logical::entities::name& n) const {
-    logical::helpers::name_flattener nf;
+std::list<std::string> assistant::
+make_namespaces(const identification::entities::logical_name& n) const {
+    identification::helpers::logical_name_flattener nf;
     return nf.flatten(n);
 }
 

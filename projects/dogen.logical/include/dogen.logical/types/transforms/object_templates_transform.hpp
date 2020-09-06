@@ -104,22 +104,22 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static  entities::structural::object&
-    find_object(const entities::name& n, entities::model& m);
+    find_object(const identification::entities::logical_name& n, entities::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
     static entities::structural::object_template& resolve_object_template(
-        const entities::name& owner,
-        const entities::name& object_template_name,
+        const identification::entities::logical_name& owner,
+        const identification::entities::logical_name& object_template_name,
         entities::model& m);
 
     /**
      * @brief Removes duplicate names, preserving the original order
      * of elements in the list.
      */
-    static void remove_duplicates(std::list<entities::name>& names);
+    static void remove_duplicates(std::list<identification::entities::logical_name>& names);
 
 private:
     /**
@@ -127,7 +127,7 @@ private:
      */
     static void expand_object(entities::structural::object& o,
         entities::model& m,
-        std::unordered_set<entities::name>& processed_names);
+        std::unordered_set<identification::entities::logical_name>& processed_names);
 
     /**
      * @brief Expands all objects in the model.
@@ -140,7 +140,7 @@ private:
     static void
     expand_object_template(entities::structural::object_template& otp,
         entities::model& m,
-        std::unordered_set<entities::name>& processed_names);
+        std::unordered_set<identification::entities::logical_name>& processed_names);
 
     /**
      * @brief Expands all object templates in the model.

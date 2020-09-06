@@ -21,7 +21,6 @@
 #ifndef DOGEN_TEXT_CPP_TYPES_FORMATTABLES_INCLUSION_EXPANDER_HPP
 #define DOGEN_TEXT_CPP_TYPES_FORMATTABLES_INCLUSION_EXPANDER_HPP
 
-#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -31,7 +30,9 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
@@ -72,7 +73,8 @@ private:
     directive_group_repository create_directive_groups(
         const variability::entities::feature_model& feature_model,
         const transforms::repository& frp, const locator& l,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        const std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 public:
     typedef std::unordered_map<identification::entities::physical_meta_id,
@@ -86,7 +88,8 @@ public:
 
     void populate_inclusion_dependencies(const transforms::repository& frp,
         const dependencies_builder_factory& df,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 public:
     void expand(const variability::entities::feature_model& feature_model,

@@ -26,6 +26,8 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.text.cpp/types/traits.hpp"
@@ -179,11 +181,12 @@ directive_group_repository_factory::remove_non_includible_formatters(
     return r;
 }
 
-std::unordered_map<std::string,
+std::unordered_map<identification::entities::logical_meta_id,
                    directive_group_repository_factory::artefact_formatters_type>
 directive_group_repository_factory::
 includible_formatters_by_meta_name(const transforms::repository& frp) const {
-    std::unordered_map<std::string, artefact_formatters_type> r;
+    std::unordered_map<identification::entities::logical_meta_id,
+                       artefact_formatters_type> r;
     for (const auto& pair : frp.stock_artefact_formatters_by_meta_name()) {
         const auto& mt(pair.first);
         const auto& fmts(pair.second);
@@ -193,7 +196,7 @@ includible_formatters_by_meta_name(const transforms::repository& frp) const {
 }
 
 void directive_group_repository_factory::
-insert_inclusion_directive(const std::string& id,
+insert_inclusion_directive(const identification::entities::logical_id& id,
     const identification::entities::physical_meta_id& archetype,
     const directive_group& dg, directive_group_repository& dgrp) const {
 
@@ -212,7 +215,7 @@ insert_inclusion_directive(const std::string& id,
         return;
 
     BOOST_LOG_SEV(lg, error) << duplicate_element_name << id;
-    BOOST_THROW_EXCEPTION(expansion_error(duplicate_element_name + id));
+    BOOST_THROW_EXCEPTION(expansion_error(duplicate_element_name + id.value()));
 }
 
 void directive_group_repository_factory::
@@ -222,7 +225,7 @@ compute_directives(const feature_group& fg,
     directive_group_repository& dgrp) const {
 
     const auto& n(e.name());
-    const auto id(n.qualified().dot());
+    const auto id(n.id());
     BOOST_LOG_SEV(lg, debug) << "Started computing inclusion directives for: "
                              << id;
 
@@ -336,9 +339,11 @@ compute_directives(const feature_group& fg,
 
 directive_group_repository
 directive_group_repository_factory::make(const feature_group& fg,
-    const std::unordered_map<std::string, artefact_formatters_type>& afmt,
+    const std::unordered_map<identification::entities::logical_meta_id,
+    artefact_formatters_type>& afmt,
     const locator& l,
-    const std::unordered_map<std::string, formattable>& formattables) const {
+    const std::unordered_map<identification::entities::logical_id,
+    formattable>& formattables) const {
 
     /*
      * For all formattables and their associated element segments,
@@ -351,7 +356,7 @@ directive_group_repository_factory::make(const feature_group& fg,
 
         const auto& e(*formattable.element());
         const auto id(e.name().qualified().dot());
-        const auto mt(e.meta_name().qualified().dot());
+        const auto mt(e.meta_name().id());
 
         const auto i(afmt.find(mt));
         if (i == afmt.end() || i->second.empty()) {
@@ -367,7 +372,8 @@ directive_group_repository
 directive_group_repository_factory::
 make(const variability::entities::feature_model& feature_model,
     const transforms::repository& frp, const locator& l,
-    const std::unordered_map<std::string, formattable>& formattables) const {
+    const std::unordered_map<identification::entities::logical_id,
+    formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies "
                              << "group repository.";

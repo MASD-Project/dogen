@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
@@ -112,6 +113,7 @@ entities::logical_name logical_name_builder::build() {
     qualified_representations_builder b;
     const auto qnr(b.build(name_, model_name_mode_));
     name_.qualified(qnr);
+    name_.id(entities::logical_id(qnr.dot()));
 
     BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;

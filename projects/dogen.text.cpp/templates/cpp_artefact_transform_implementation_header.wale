@@ -21,11 +21,11 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 }
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, archetype().meta_name().id().value());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_cpp_header(n, archetype().meta_name().id().value());
 }

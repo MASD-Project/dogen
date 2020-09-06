@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
@@ -48,17 +48,17 @@ namespace dogen::logical::helpers {
 class resolver final {
 private:
     static bool is_floating_point(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
     static bool is_builtin(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
     static bool is_primitive(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
     static bool is_object(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
     static bool is_enumeration(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
     static bool is_object_template(const entities::model& m,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
 
 private:
     /**
@@ -66,55 +66,55 @@ private:
      * referred to from an attribute, false otherwise.
      */
     static bool is_name_referable(const indices& idx,
-        const entities::name& n);
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a name that has internal modules set.
      */
-    static entities::name resolve_name_with_internal_modules(
+    static identification::entities::logical_name resolve_name_with_internal_modules(
         const entities::model& m, const indices& idx,
-        const entities::name& ctx, const entities::name& n);
+        const identification::entities::logical_name& ctx, const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a name where the ctx has internal modules.
      */
-    static boost::optional<entities::name>
+    static boost::optional<identification::entities::logical_name>
     try_resolve_name_with_context_internal_modules(
-        const indices& idx, entities::name ctx, const entities::name& n);
+        const indices& idx, identification::entities::logical_name ctx, const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a name where the ctx has model modules.
      */
-    static boost::optional<entities::name>
+    static boost::optional<identification::entities::logical_name>
     try_resolve_name_with_context_model_modules(
-        const indices& idx, entities::name ctx, const entities::name& n);
+        const indices& idx, identification::entities::logical_name ctx, const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    static entities::name resolve_name(
+    static identification::entities::logical_name resolve_name(
         const entities::model& m, const indices& idx,
-        const entities::name& ctx, const entities::name& n);
+        const identification::entities::logical_name& ctx, const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
     static void resolve_name_tree(const entities::model& m,
-        const indices& idx, const entities::name& owner,
-        entities::name_tree& nt);
+        const indices& idx, const identification::entities::logical_name& owner,
+        identification::entities::logical_name_tree& nt);
 
     /**
      * @brief Resolves all references to types in the supplied attribute.
      */
     static void resolve_attribute(const entities::model& m,
-        const indices& idx, const entities::name& owner,
+        const indices& idx, const identification::entities::logical_name& owner,
         entities::attribute& attr);
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
     static void resolve_attributes(const entities::model& m,
-        const indices& idx, const entities::name& owner,
+        const indices& idx, const identification::entities::logical_name& owner,
         std::list<entities::attribute>& attributes);
 
     /**
@@ -181,20 +181,20 @@ public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    static entities::name resolve(const entities::model& m,
-        const indices& idx, const entities::name& ctx,
-        const entities::name& n);
+    static identification::entities::logical_name resolve(const entities::model& m,
+        const indices& idx, const identification::entities::logical_name& ctx,
+        const identification::entities::logical_name& n);
 
     /**
      * @brief Resolves the name as an object template name.
      */
     /**@{*/
-    static boost::optional<entities::name>
-    try_resolve_object_template_name(entities::name ctx,
+    static boost::optional<identification::entities::logical_name>
+    try_resolve_object_template_name(identification::entities::logical_name ctx,
         const std::string& s, const entities::model& m);
-    static boost::optional<entities::name>
-    try_resolve_object_template_name(const entities::name& ctx,
-        const entities::name& n, const entities::model& m);
+    static boost::optional<identification::entities::logical_name>
+    try_resolve_object_template_name(const identification::entities::logical_name& ctx,
+        const identification::entities::logical_name& n, const entities::model& m);
     /**@}*/
 
 public:

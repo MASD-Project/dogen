@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/lexical_cast/entities/decoration/editor_lc.hpp"
@@ -87,16 +88,18 @@ void modelines_transform::apply(const context& ctx, entities::model& m) {
          * update its list of modelines it contains.
          */
         const auto cby(ml.contained_by());
-        if (cby.empty()) {
+        if (cby.value().empty()) {
             BOOST_LOG_SEV(lg, error) << missing_container << id;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_container + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_container + id.value()));
         }
 
         auto& mgs(m.decoration_elements().modeline_groups());
         const auto i(mgs.find(cby));
         if (i == mgs.end()) {
             BOOST_LOG_SEV(lg, error) << missing_group << cby;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_group + cby));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_group + cby.value()));
         }
         i->second->modelines().push_back(pair.second);
     }

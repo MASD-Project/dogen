@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/types/helpers/mappings_validator.hpp"
 
@@ -84,9 +85,10 @@ void mappings_validator::validate(const mapping& m) const {
     /*
      * Agnostic ID must not be empty.
      */
-    if (id.empty()) {
+    if (id.value().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_agnostic_id << id;
-        BOOST_THROW_EXCEPTION(validation_error(invalid_agnostic_id + id));
+        BOOST_THROW_EXCEPTION(
+            validation_error(invalid_agnostic_id + id.value()));
     }
 
     for (const auto& pair : m.by_technical_space())

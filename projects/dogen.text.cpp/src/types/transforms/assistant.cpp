@@ -28,7 +28,7 @@
 #include "dogen.utility/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.logical/types/helpers/name_flattener.hpp"
+#include "dogen.identification/types/helpers/logical_name_flattener.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
@@ -85,14 +85,16 @@ const std::string helpless_family("No registered helpers found for family: ");
 
 namespace dogen::text::cpp::transforms {
 
+using identification::entities::logical_name;
+using identification::entities::logical_name_tree;
+
 assistant::assistant(const context& ctx, const logical::entities::element& e,
     const identification::entities::physical_meta_name& pmn,
     const bool requires_header_guard,
     physical::entities::artefact& a)
     : element_(e), context_(ctx), artefact_(a),
-      artefact_properties_(
-        obtain_artefact_properties(element_.name().qualified().dot(),
-            pmn.id())),
+      artefact_properties_(obtain_artefact_properties(element_.name().id(),
+              pmn.id())),
       physical_meta_name_(pmn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
@@ -166,17 +168,17 @@ make_setter_return_type(const std::string& containing_type_name,
 }
 
 std::string
-assistant::get_qualified_name(const logical::entities::name& n) const {
+assistant::get_qualified_name(const logical_name& n) const {
     return n.qualified().colon();
 }
 
 std::string
-assistant::get_qualified_name(const logical::entities::name_tree& nt) const {
+assistant::get_qualified_name(const logical_name_tree& nt) const {
     return nt.qualified().colon();
 }
 
 std::string
-assistant::get_qualified_namespace(const logical::entities::name& n) const {
+assistant::get_qualified_namespace(const logical_name& n) const {
     const auto& l(n.location());
     auto ns(l.external_modules());
     for (const auto& m : l.model_modules())
@@ -191,19 +193,19 @@ assistant::get_qualified_namespace(const logical::entities::name& n) const {
 }
 
 std::string assistant::
-get_identifiable_model_name(const logical::entities::name& n) const {
+get_identifiable_model_name(const logical_name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
 
 std::string assistant::
-get_dot_separated_model_name(const logical::entities::name& n) const {
+get_dot_separated_model_name(const logical_name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), dot);
 }
 
 std::string
-assistant::get_product_name(const logical::entities::name& n) const {
+assistant::get_product_name(const logical_name& n) const {
     if (n.location().external_modules().empty())
         return empty;
 
@@ -211,22 +213,23 @@ assistant::get_product_name(const logical::entities::name& n) const {
 }
 
 const formattables::element_properties& assistant::obtain_element_properties(
-    const std::string& element_id) const {
+    const identification::entities::logical_id& element_id) const {
 
-    if (element_id == element_.name().qualified().dot())
+    if (element_id == element_.name().id())
         return context_.element_properties();
 
     const auto& formattables(context_.model().formattables());
     const auto i(formattables.find(element_id));
     if (i == formattables.end()) {
         BOOST_LOG_SEV(lg, error) << element_not_found << element_id;
-        BOOST_THROW_EXCEPTION(formatting_error(element_not_found + element_id));
+        BOOST_THROW_EXCEPTION(
+            formatting_error(element_not_found + element_id.value()));
     }
     return i->second.element_properties();
 }
 
-const formattables::artefact_properties&
-assistant::obtain_artefact_properties(const std::string& element_id,
+const formattables::artefact_properties& assistant::obtain_artefact_properties(
+    const identification::entities::logical_id& element_id,
     const identification::entities::physical_meta_id& archetype) const {
 
     const auto& eprops(obtain_element_properties(element_id));
@@ -254,9 +257,9 @@ formattables::facet_properties assistant::obtain_facet_properties(
 }
 
 std::list<std::string>
-assistant::make_namespaces(const logical::entities::name& n,
+assistant::make_namespaces(const logical_name& n,
     const bool detect_model_name) const {
-    logical::helpers::name_flattener nf(detect_model_name);
+    identification::helpers::logical_name_flattener nf(detect_model_name);
     return nf.flatten(n);
 }
 
@@ -611,11 +614,11 @@ streaming_for_type(const formattables::streaming_properties& sp,
     return stream.str();
 }
 
-std::string assistant::streaming_for_type(const logical::entities::name& n,
+std::string assistant::streaming_for_type(const logical_name& n,
     const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
-    const auto i(str_propss.find(n.qualified().dot()));
+    const auto i(str_propss.find(n.id()));
     if (i == str_propss.end())
         return s;
 
@@ -648,11 +651,11 @@ bool assistant::requires_hashing_helper_method(
     return false;
 }
 
-std::list<logical::entities::name>
+std::list<logical_name>
 assistant::names_with_enabled_archetype(
     const identification::entities::physical_meta_id& archetype,
-    const std::list<logical::entities::name> names) const {
-    std::list<logical::entities::name> r;
+    const std::list<logical_name> names) const {
+    std::list<logical_name> r;
     for (const auto& n : names) {
         const identification::entities::logical_id lid(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << lid;

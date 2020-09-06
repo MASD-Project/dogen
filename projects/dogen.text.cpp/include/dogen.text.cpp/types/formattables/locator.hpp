@@ -33,7 +33,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/locator_configuration.hpp"
 
@@ -50,7 +50,7 @@ public:
         const variability::entities::feature_model& fm,
         const transforms::repository& frp,
         const variability::entities::configuration& rcfg,
-        const logical::entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const bool enable_backend_directories);
 
 private:
@@ -140,7 +140,7 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const logical::entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const locator_configuration& lc,
         const bool enable_backend_directories) const;
 
@@ -151,22 +151,22 @@ private:
      * folders; it starts at the facet and includes the file name.
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
-        const std::string& extension, const logical::entities::name& n) const;
+        const std::string& extension, const identification::entities::logical_name& n) const;
     boost::filesystem::path make_facet_path_temp(const std::string& archetype,
-        const std::string& file_name, const logical::entities::name& n) const;
+        const std::string& file_name, const identification::entities::logical_name& n) const;
 
     /**
      * @brief Makes the first part of the inclusion path.
      */
     boost::filesystem::path
-    make_inclusion_path_prefix(const logical::entities::name& n) const;
+    make_inclusion_path_prefix(const identification::entities::logical_name& n) const;
 
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(const std::string& archetype,
-        const std::string& extension, const logical::entities::name& n) const;
+        const std::string& extension, const identification::entities::logical_name& n) const;
 
 public:
     /**
@@ -228,7 +228,7 @@ public:
      * @brief Generate the inclusion path for C++ headers.
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path to the include directory
@@ -250,7 +250,7 @@ public:
      * @brief Generate the full path for C++ headers.
      */
     boost::filesystem::path make_full_path_for_cpp_header(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relative implementation path for a facet.
@@ -262,80 +262,80 @@ public:
      * @brief Generate the full path for templates.
      */
     boost::filesystem::path make_full_path_for_templates(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation for tests
      */
     boost::filesystem::path make_full_path_for_tests_cpp_implementation(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for entry point under tests.
      */
     boost::filesystem::path make_full_path_for_tests_cpp_main(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in include.
      */
     boost::filesystem::path make_full_path_for_include_cmakelists(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in tests.
      */
     boost::filesystem::path make_full_path_for_tests_cmakelists(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_msbuild_targets(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(
-        const logical::entities::name& n, const std::string& archetype,
+        const identification::entities::logical_name& n, const std::string& archetype,
         bool include_source_directory = true) const;
 
     /**
      * @brief Generate the full path for odb options.
      */
     boost::filesystem::path make_full_path_for_odb_options(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_project(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_solution(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_project(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_solution(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;
 
 private:
-    const logical::entities::name& model_name_;
+    const identification::entities::logical_name& model_name_;
     const locator_configuration configuration_;
     const boost::filesystem::path project_path_;
     const boost::filesystem::path headers_project_path_;

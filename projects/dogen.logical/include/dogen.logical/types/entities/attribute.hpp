@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/entities/stereotypes.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.logical/types/entities/orm/attribute_properties.hpp"
 
 namespace dogen::logical::entities {
@@ -55,10 +55,10 @@ public:
     attribute(
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const dogen::logical::entities::stereotypes& stereotypes,
         const std::string& unparsed_type,
-        const dogen::logical::entities::name_tree& parsed_type,
+        const dogen::identification::entities::logical_name_tree& parsed_type,
         const bool is_immutable,
         const bool is_fluent,
         const boost::optional<dogen::logical::entities::orm::attribute_properties>& orm_properties,
@@ -94,10 +94,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
     /**
@@ -126,10 +126,10 @@ public:
      * @brief Tree of names that represent the type of the attribute, after suitable parsing.
      */
     /**@{*/
-    const dogen::logical::entities::name_tree& parsed_type() const;
-    dogen::logical::entities::name_tree& parsed_type();
-    void parsed_type(const dogen::logical::entities::name_tree& v);
-    void parsed_type(const dogen::logical::entities::name_tree&& v);
+    const dogen::identification::entities::logical_name_tree& parsed_type() const;
+    dogen::identification::entities::logical_name_tree& parsed_type();
+    void parsed_type(const dogen::identification::entities::logical_name_tree& v);
+    void parsed_type(const dogen::identification::entities::logical_name_tree&& v);
     /**@}*/
 
     /**
@@ -189,10 +189,10 @@ public:
 private:
     std::string documentation_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     dogen::logical::entities::stereotypes stereotypes_;
     std::string unparsed_type_;
-    dogen::logical::entities::name_tree parsed_type_;
+    dogen::identification::entities::logical_name_tree parsed_type_;
     bool is_immutable_;
     bool is_fluent_;
     boost::optional<dogen::logical::entities::orm::attribute_properties> orm_properties_;

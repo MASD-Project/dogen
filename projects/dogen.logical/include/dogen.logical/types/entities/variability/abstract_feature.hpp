@@ -30,11 +30,11 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.variability/types/entities/value_type.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 
 namespace dogen::logical::entities::variability {
 
@@ -57,13 +57,13 @@ public:
     abstract_feature(
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& original_key,
         const std::string& key,
         const std::string& identifiable_key,
         const std::string& unparsed_type,
         const std::string& mapped_type,
-        const dogen::logical::entities::name_tree& parsed_type,
+        const dogen::identification::entities::logical_name_tree& parsed_type,
         const std::string& default_value,
         const dogen::variability::entities::value_type value_type,
         const boost::optional<dogen::variability::entities::binding_point>& binding_point,
@@ -102,10 +102,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
     /**
@@ -164,10 +164,10 @@ public:
      * @brief Mapped type, after parsing has taken place.
      */
     /**@{*/
-    const dogen::logical::entities::name_tree& parsed_type() const;
-    dogen::logical::entities::name_tree& parsed_type();
-    void parsed_type(const dogen::logical::entities::name_tree& v);
-    void parsed_type(const dogen::logical::entities::name_tree&& v);
+    const dogen::identification::entities::logical_name_tree& parsed_type() const;
+    dogen::identification::entities::logical_name_tree& parsed_type();
+    void parsed_type(const dogen::identification::entities::logical_name_tree& v);
+    void parsed_type(const dogen::identification::entities::logical_name_tree&& v);
     /**@}*/
 
     /**
@@ -233,13 +233,13 @@ protected:
 private:
     std::string documentation_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     std::string original_key_;
     std::string key_;
     std::string identifiable_key_;
     std::string unparsed_type_;
     std::string mapped_type_;
-    dogen::logical::entities::name_tree parsed_type_;
+    dogen::identification::entities::logical_name_tree parsed_type_;
     std::string default_value_;
     dogen::variability::entities::value_type value_type_;
     boost::optional<dogen::variability::entities::binding_point> binding_point_;

@@ -26,7 +26,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.cpp/types/transforms/assistant.hpp"
@@ -62,7 +62,7 @@ inclusion_support_types msbuild_targets_transform::inclusion_support_type() cons
 }
 
 boost::filesystem::path msbuild_targets_transform::inclusion_path(
-    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+    const formattables::locator& /*l*/, const identification::entities::logical_name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(logger_factory(archetype().meta_name().id().value()));
@@ -73,7 +73,7 @@ boost::filesystem::path msbuild_targets_transform::inclusion_path(
 }
 
 boost::filesystem::path msbuild_targets_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_msbuild_targets(n, archetype().meta_name().id().value());
 }
 

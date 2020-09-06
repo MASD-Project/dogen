@@ -24,6 +24,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/io/entities/physical/relations_io.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/physical/archetype_text_templating_io.hpp"
 
@@ -41,13 +42,13 @@ archetype::archetype()
     : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 archetype::archetype(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
@@ -59,7 +60,7 @@ archetype::archetype(
     const std::string& backend_name,
     const std::string& facet_name,
     const std::string& part_id,
-    const std::string& logical_meta_element_id,
+    const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::logical::entities::physical::relations& relations,
     const dogen::logical::entities::physical::archetype_text_templating& text_templating)
     : dogen::logical::entities::element(
@@ -113,7 +114,7 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(facet_name_) << "\"" << ", "
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
-      << "\"logical_meta_element_id\": " << "\"" << tidy_up_string(logical_meta_element_id_) << "\"" << ", "
+      << "\"logical_meta_element_id\": " << logical_meta_element_id_ << ", "
       << "\"relations\": " << relations_ << ", "
       << "\"text_templating\": " << text_templating_
       << " }";
@@ -247,19 +248,19 @@ void archetype::part_id(const std::string&& v) {
     part_id_ = std::move(v);
 }
 
-const std::string& archetype::logical_meta_element_id() const {
+const dogen::identification::entities::logical_meta_id& archetype::logical_meta_element_id() const {
     return logical_meta_element_id_;
 }
 
-std::string& archetype::logical_meta_element_id() {
+dogen::identification::entities::logical_meta_id& archetype::logical_meta_element_id() {
     return logical_meta_element_id_;
 }
 
-void archetype::logical_meta_element_id(const std::string& v) {
+void archetype::logical_meta_element_id(const dogen::identification::entities::logical_meta_id& v) {
     logical_meta_element_id_ = v;
 }
 
-void archetype::logical_meta_element_id(const std::string&& v) {
+void archetype::logical_meta_element_id(const dogen::identification::entities::logical_meta_id&& v) {
     logical_meta_element_id_ = std::move(v);
 }
 

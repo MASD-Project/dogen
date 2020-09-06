@@ -23,11 +23,11 @@
 namespace dogen::logical::helpers {
 
 indices::indices(
-    const std::unordered_set<std::string>& objects_always_in_heap,
-    const std::unordered_set<std::string>& elements_referable_by_attributes,
-    const std::unordered_set<std::string>& primitive_underliers,
-    const std::unordered_set<std::string>& enumeration_underliers,
-    const std::unordered_set<std::string>& abstract_elements)
+    const std::unordered_set<dogen::identification::entities::logical_id>& objects_always_in_heap,
+    const std::unordered_set<dogen::identification::entities::logical_id>& elements_referable_by_attributes,
+    const std::unordered_set<dogen::identification::entities::logical_id>& primitive_underliers,
+    const std::unordered_set<dogen::identification::entities::logical_id>& enumeration_underliers,
+    const std::unordered_set<dogen::identification::entities::logical_id>& abstract_elements)
     : objects_always_in_heap_(objects_always_in_heap),
       elements_referable_by_attributes_(elements_referable_by_attributes),
       primitive_underliers_(primitive_underliers),
@@ -57,83 +57,83 @@ indices& indices::operator=(indices other) {
     return *this;
 }
 
-const std::unordered_set<std::string>& indices::objects_always_in_heap() const {
+const std::unordered_set<dogen::identification::entities::logical_id>& indices::objects_always_in_heap() const {
     return objects_always_in_heap_;
 }
 
-std::unordered_set<std::string>& indices::objects_always_in_heap() {
+std::unordered_set<dogen::identification::entities::logical_id>& indices::objects_always_in_heap() {
     return objects_always_in_heap_;
 }
 
-void indices::objects_always_in_heap(const std::unordered_set<std::string>& v) {
+void indices::objects_always_in_heap(const std::unordered_set<dogen::identification::entities::logical_id>& v) {
     objects_always_in_heap_ = v;
 }
 
-void indices::objects_always_in_heap(const std::unordered_set<std::string>&& v) {
+void indices::objects_always_in_heap(const std::unordered_set<dogen::identification::entities::logical_id>&& v) {
     objects_always_in_heap_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& indices::elements_referable_by_attributes() const {
+const std::unordered_set<dogen::identification::entities::logical_id>& indices::elements_referable_by_attributes() const {
     return elements_referable_by_attributes_;
 }
 
-std::unordered_set<std::string>& indices::elements_referable_by_attributes() {
+std::unordered_set<dogen::identification::entities::logical_id>& indices::elements_referable_by_attributes() {
     return elements_referable_by_attributes_;
 }
 
-void indices::elements_referable_by_attributes(const std::unordered_set<std::string>& v) {
+void indices::elements_referable_by_attributes(const std::unordered_set<dogen::identification::entities::logical_id>& v) {
     elements_referable_by_attributes_ = v;
 }
 
-void indices::elements_referable_by_attributes(const std::unordered_set<std::string>&& v) {
+void indices::elements_referable_by_attributes(const std::unordered_set<dogen::identification::entities::logical_id>&& v) {
     elements_referable_by_attributes_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& indices::primitive_underliers() const {
+const std::unordered_set<dogen::identification::entities::logical_id>& indices::primitive_underliers() const {
     return primitive_underliers_;
 }
 
-std::unordered_set<std::string>& indices::primitive_underliers() {
+std::unordered_set<dogen::identification::entities::logical_id>& indices::primitive_underliers() {
     return primitive_underliers_;
 }
 
-void indices::primitive_underliers(const std::unordered_set<std::string>& v) {
+void indices::primitive_underliers(const std::unordered_set<dogen::identification::entities::logical_id>& v) {
     primitive_underliers_ = v;
 }
 
-void indices::primitive_underliers(const std::unordered_set<std::string>&& v) {
+void indices::primitive_underliers(const std::unordered_set<dogen::identification::entities::logical_id>&& v) {
     primitive_underliers_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& indices::enumeration_underliers() const {
+const std::unordered_set<dogen::identification::entities::logical_id>& indices::enumeration_underliers() const {
     return enumeration_underliers_;
 }
 
-std::unordered_set<std::string>& indices::enumeration_underliers() {
+std::unordered_set<dogen::identification::entities::logical_id>& indices::enumeration_underliers() {
     return enumeration_underliers_;
 }
 
-void indices::enumeration_underliers(const std::unordered_set<std::string>& v) {
+void indices::enumeration_underliers(const std::unordered_set<dogen::identification::entities::logical_id>& v) {
     enumeration_underliers_ = v;
 }
 
-void indices::enumeration_underliers(const std::unordered_set<std::string>&& v) {
+void indices::enumeration_underliers(const std::unordered_set<dogen::identification::entities::logical_id>&& v) {
     enumeration_underliers_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& indices::abstract_elements() const {
+const std::unordered_set<dogen::identification::entities::logical_id>& indices::abstract_elements() const {
     return abstract_elements_;
 }
 
-std::unordered_set<std::string>& indices::abstract_elements() {
+std::unordered_set<dogen::identification::entities::logical_id>& indices::abstract_elements() {
     return abstract_elements_;
 }
 
-void indices::abstract_elements(const std::unordered_set<std::string>& v) {
+void indices::abstract_elements(const std::unordered_set<dogen::identification::entities::logical_id>& v) {
     abstract_elements_ = v;
 }
 
-void indices::abstract_elements(const std::unordered_set<std::string>&& v) {
+void indices::abstract_elements(const std::unordered_set<dogen::identification::entities::logical_id>&& v) {
     abstract_elements_ = std::move(v);
 }
 

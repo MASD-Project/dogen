@@ -53,9 +53,9 @@ const boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets
 namespace dogen::logical::entities::visual_studio {
 
 element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& solutions,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& projects,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& msbuild_targets)
     : solutions_(solutions),
       projects_(projects),
       msbuild_targets_(msbuild_targets) { }
@@ -79,51 +79,51 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& element_repository::solutions() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& element_repository::solutions() const {
     return solutions_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& element_repository::solutions() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& element_repository::solutions() {
     return solutions_;
 }
 
-void element_repository::solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& v) {
+void element_repository::solutions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >& v) {
     solutions_ = v;
 }
 
-void element_repository::solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >&& v) {
+void element_repository::solutions(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::solution> >&& v) {
     solutions_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& element_repository::projects() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& element_repository::projects() const {
     return projects_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& element_repository::projects() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& element_repository::projects() {
     return projects_;
 }
 
-void element_repository::projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& v) {
+void element_repository::projects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >& v) {
     projects_ = v;
 }
 
-void element_repository::projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >&& v) {
+void element_repository::projects(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::project> >&& v) {
     projects_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() const {
     return msbuild_targets_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() {
     return msbuild_targets_;
 }
 
-void element_repository::msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& v) {
+void element_repository::msbuild_targets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >& v) {
     msbuild_targets_ = v;
 }
 
-void element_repository::msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >&& v) {
+void element_repository::msbuild_targets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::visual_studio::msbuild_targets> >&& v) {
     msbuild_targets_ = std::move(v);
 }
 

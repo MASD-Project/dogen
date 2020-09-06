@@ -29,7 +29,7 @@
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.text.csharp/types/formattables/locator.hpp"
 #include "dogen.text/types/transforms/model_to_text_transform.hpp"
@@ -49,7 +49,7 @@ public:
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path full_path(const formattables::locator& l,
-        const logical::entities::name& n) const = 0;
+        const identification::entities::logical_name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter

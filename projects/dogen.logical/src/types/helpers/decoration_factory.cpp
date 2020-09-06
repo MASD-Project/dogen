@@ -22,13 +22,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/formatters/comment_style.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 #include "dogen.logical/types/entities/decoration/licence.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/formatters/decoration_formatter.hpp"
 #include "dogen.logical/types/helpers/decoration_factory.hpp"
 
@@ -54,9 +54,9 @@ decoration_factory(const helpers::decoration_repository& drp,
     : decoration_repository_(drp), activity_timestamp_(activity_timestamp),
     origin_sha1_hash_(origin_sha1_hash) {}
 
-std::string decoration_factory::
-get_short_form_licence(const std::string& licence_name) const {
-    if (licence_name.empty())
+std::string decoration_factory::get_short_form_licence(
+    const identification::entities::logical_id& licence_name) const {
+    if (licence_name.value().empty())
         return empty;
 
     const auto& map(decoration_repository_.licences_by_name());
@@ -64,16 +64,16 @@ get_short_form_licence(const std::string& licence_name) const {
     if (i == map.end()) {
         BOOST_LOG_SEV(lg, error) << licence_not_found << licence_name;
         BOOST_THROW_EXCEPTION(
-            building_error(licence_not_found + licence_name));
+            building_error(licence_not_found + licence_name.value()));
     }
     return i->second->short_form();
 }
 
 boost::shared_ptr<entities::decoration::modeline> decoration_factory::
-get_modeline(const std::string& modeline_group_name,
+get_modeline(const identification::entities::logical_id& modeline_group_name,
     const identification::entities::technical_space ts) const {
 
-    if (modeline_group_name.empty())
+    if (modeline_group_name.value().empty())
         return boost::shared_ptr<entities::decoration::modeline>();
 
     const auto& drp(decoration_repository_);
@@ -83,7 +83,7 @@ get_modeline(const std::string& modeline_group_name,
         BOOST_LOG_SEV(lg, error) << modeline_group_not_found
                                  << modeline_group_name;
         BOOST_THROW_EXCEPTION(building_error(
-                modeline_group_not_found + modeline_group_name));
+                modeline_group_not_found + modeline_group_name.value()));
     }
 
     const auto& ts_map(i->second);
@@ -99,9 +99,9 @@ get_modeline(const std::string& modeline_group_name,
 }
 
 boost::shared_ptr<logical::entities::decoration::generation_marker>
-decoration_factory::
-get_generation_marker(const std::string& generation_marker_name) const {
-    if (generation_marker_name.empty())
+decoration_factory::get_generation_marker(
+    const identification::entities::logical_id& generation_marker_name) const {
+    if (generation_marker_name.value().empty())
         return boost::shared_ptr<entities::decoration::generation_marker>();
 
     const auto& map(decoration_repository_.generation_markers_by_name());
@@ -110,7 +110,7 @@ get_generation_marker(const std::string& generation_marker_name) const {
         BOOST_LOG_SEV(lg, error) << generation_marker_not_found
                                  << generation_marker_name;
         BOOST_THROW_EXCEPTION(building_error(generation_marker_not_found
-                + generation_marker_name));
+                + generation_marker_name.value()));
     }
     return i->second;
 }
@@ -247,8 +247,9 @@ decoration_factory::make_local_decoration(const boost::optional<
      * decoration. User just got confused.
      */
     if (dc.copyright_notices().empty() &&
-        dc.licence_name().empty() && dc.modeline_group_name().empty() &&
-        dc.marker_name().empty()) {
+        dc.licence_name().value().empty() &&
+        dc.modeline_group_name().value().empty() &&
+        dc.marker_name().value().empty()) {
         BOOST_LOG_SEV(lg, trace) << "No overiddes. Using global decoration.";
         return global_decoration;
     }

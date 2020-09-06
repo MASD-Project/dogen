@@ -28,6 +28,7 @@
 #include <list>
 #include <unordered_map>
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.logical/types/entities/input_model_set.hpp"
 #include "dogen.logical/types/entities/mapping/destination.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
@@ -37,7 +38,7 @@ namespace dogen::logical::transforms {
 
 class mapping_elements_transform final {
 private:
-    static std::unordered_map<std::string,
+    static std::unordered_map<identification::entities::logical_id,
                               std::list<
                                   logical::entities::mapping::destination>
                               >
@@ -45,7 +46,7 @@ private:
         const logical::entities::input_model_set& ms);
 
     static void populate_extensible_mappables(
-        const std::unordered_map<std::string,
+        const std::unordered_map<identification::entities::logical_id,
         std::list<logical::entities::mapping::destination>>&
         destinations_for_target, logical::entities::input_model_set& ms);
 

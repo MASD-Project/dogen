@@ -28,7 +28,7 @@
 #include "dogen.utility/types/formatters/sequence_formatter.hpp"
 #include "dogen.text.csharp/types/traits.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_factory.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/traits.hpp"
 #include "dogen.text.csharp/types/transforms/types/traits.hpp"
@@ -56,7 +56,7 @@ const physical::entities::archetype& solution_transform::archetype() const {
 }
 
 boost::filesystem::path solution_transform::full_path(
-    const formattables::locator& l, const logical::entities::name& n) const {
+    const formattables::locator& l, const identification::entities::logical_name& n) const {
     return l.make_full_path_for_visual_studio_solution(n, archetype().meta_name().id().value());
 }
 

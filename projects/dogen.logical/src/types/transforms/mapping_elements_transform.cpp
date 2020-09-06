@@ -19,12 +19,14 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
-#include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -81,7 +83,7 @@ public:
     void operator()(logical::entities::structural::exception& e) { gather(e); }
 
 public:
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::logical_id,
                               std::list<
                                   logical::entities::mapping::destination>
                               >&
@@ -92,7 +94,7 @@ public:
 public:
     const features::mapping::feature_group& feature_group_;
     identification::entities::technical_space technical_space_;
-    std::unordered_map<std::string,
+    std::unordered_map<identification::entities::logical_id,
                        std::list<
                            logical::entities::mapping::destination>
                        >
@@ -100,7 +102,7 @@ public:
 };
 
 void destination_gatherer::gather(logical::entities::element &e) {
-    const auto id(e.name().qualified().dot());
+    const auto id(e.name().id());
     BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
     using features::mapping;
@@ -109,12 +111,13 @@ void destination_gatherer::gather(logical::entities::element &e) {
 
     using logical::entities::mapping::destination;
     const destination dst(e.name(), technical_space_);
-    result_[scfg.target].push_back(dst);
+    identification::entities::logical_id target_id(scfg.target);
+    result_[target_id].push_back(dst);
 }
 
 }
 
-std::unordered_map<std::string,
+std::unordered_map<identification::entities::logical_id,
                    std::list<
                        logical::entities::mapping::destination>
                    >
@@ -125,7 +128,7 @@ make_destinations(const variability::entities::feature_model &fm,
     destination_gatherer dg(fg);
     dg.technical_space(ms.target().input_technical_space());
 
-    using  logical::entities::elements_traversal;
+    using logical::entities::elements_traversal;
     elements_traversal(ms.target(), dg);
 
     for (const auto &m : ms.references()) {
@@ -137,13 +140,14 @@ make_destinations(const variability::entities::feature_model &fm,
 }
 
 void mapping_elements_transform::populate_extensible_mappables(
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::logical_id,
     std::list<logical::entities::mapping::destination>>&
     destinations_for_target, logical::entities::input_model_set& ms) {
 
     using logical::entities::mapping::destination;
     const auto lambda(
-        [&](const std::string& target, const std::list<destination>& dsts,
+        [&](const identification::entities::logical_id& target,
+            const std::list<destination>& dsts,
             logical::entities::model& m) {
             auto& em(m.mapping_elements().extensible_mappables());
             const auto i(em.find(target));

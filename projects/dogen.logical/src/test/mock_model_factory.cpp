@@ -26,14 +26,14 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/exception/utility_exception.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
 #include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
 #include "dogen.logical/test/mock_model_factory.hpp"
 
@@ -117,31 +117,34 @@ namespace dogen::logical::test {
 
 namespace {
 
-entities::name mock_model_name(unsigned int i) {
-    helpers::name_factory nf;
+identification::entities::logical_name mock_model_name(unsigned int i) {
+    identification::helpers::logical_name_factory nf;
     return nf.build_model_name(model_name(i));
 }
 
-entities::name_tree mock_name_tree(const entities::name& n) {
-    entities::name_tree r;
+identification::entities::logical_name_tree
+mock_name_tree(const identification::entities::logical_name& n) {
+    identification::entities::logical_name_tree r;
     r.current(n);
     return r;
 }
 
-entities::name_tree mock_name_tree_shared_ptr(const entities::name& n) {
-    entities::name_tree r;
-    helpers::name_factory nf;
+identification::entities::logical_name_tree
+mock_name_tree_shared_ptr(const identification::entities::logical_name& n) {
+    identification::entities::logical_name_tree r;
+    identification::helpers::logical_name_factory nf;
     r.current(nf.build_element_name("boost", "shared_ptr"));
     r.are_children_opaque(true);
 
-    entities::name_tree c;
+    identification::entities::logical_name_tree c;
     c.current(n);
-    r.children(std::list<entities::name_tree> { c });
+    r.children(std::list<identification::entities::logical_name_tree> { c });
 
     return r;
 }
 
-std::string mock_unparsed_type(const entities::name& n) {
+std::string
+mock_unparsed_type(const identification::entities::logical_name& n) {
     std::string r;
     for (const auto& mm : n.location().model_modules())
         r += mm + "::";
@@ -153,17 +156,18 @@ std::string mock_unparsed_type(const entities::name& n) {
     return r;
 }
 
-std::string mock_unparsed_type_shared_ptr(const entities::name& n) {
+std::string
+mock_unparsed_type_shared_ptr(const identification::entities::logical_name& n) {
     std::string r("boost::shared_ptr<");
     r += mock_unparsed_type(n);
     r += ">";
     return r;
 }
 
-entities::name_tree
+identification::entities::logical_name_tree
 mock_name_tree(mock_model_factory::attribute_types pt) {
-    entities::name_tree r;
-    helpers::name_factory nf;
+    identification::entities::logical_name_tree r;
+    identification::helpers::logical_name_factory nf;
     using test::mock_model_factory;
     using attribute_types = mock_model_factory::attribute_types;
 
@@ -176,7 +180,7 @@ mock_name_tree(mock_model_factory::attribute_types pt) {
         break;
     case attribute_types::boost_variant: {
         r.current(nf.build_element_name("boost", "variant"));
-        r.children(std::list<entities::name_tree> {
+        r.children(std::list<identification::entities::logical_name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(unsigned_int))
         });
@@ -187,7 +191,7 @@ mock_name_tree(mock_model_factory::attribute_types pt) {
         break;
     case attribute_types::std_pair: {
         r.current(nf.build_element_name("std", "pair"));
-        r.children(std::list<entities::name_tree> {
+        r.children(std::list<identification::entities::logical_name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(boolean))
         });
@@ -249,7 +253,7 @@ std::list<std::string> make_internal_modules(const unsigned int module_n) {
 
 boost::shared_ptr<entities::structural::builtin>
 make_builtin(const std::string& simple_name) {
-    helpers::name_builder b;
+    identification::helpers::logical_name_builder b;
     b.simple_name(simple_name);
 
     auto r(boost::make_shared<entities::structural::builtin>());
@@ -258,15 +262,15 @@ make_builtin(const std::string& simple_name) {
 }
 
 void populate_object(entities::structural::object& o, const unsigned int i,
-    const entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const unsigned int module_n,
     const identification::entities::model_type mt) {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    helpers::name_factory nf;
-    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
+    identification::helpers::logical_name_factory nf;
+    auto n(nf.build_element_in_model(model_name, sn, ipp));
 
     o.name(n);
     o.documentation(documentation);
@@ -279,16 +283,17 @@ void populate_simple_model_attributes(entities::model& m,
     m.provenance().model_type(mt);
 }
 
-entities::attribute mock_attribute(const entities::name& owning_element,
+entities::attribute
+mock_attribute(const identification::entities::logical_name& owning_element,
     const bool types_parsed, const unsigned int n = 0,
     const test::mock_model_factory::
     attribute_types pt =
     test::mock_model_factory::attribute_types::
     unsigned_int,
-    boost::optional<entities::name> name =
-    boost::optional<entities::name>()) {
+    boost::optional<identification::entities::logical_name> name =
+    boost::optional<identification::entities::logical_name>()) {
 
-    helpers::name_factory f;
+    identification::helpers::logical_name_factory f;
     const auto pn(f.build_attribute_name(owning_element, attribute_name(n)));
 
     entities::attribute r;
@@ -325,8 +330,8 @@ void add_attribute(StatefulAndNameable& sn,
     const test::mock_model_factory::
     attribute_types pt =
     test::mock_model_factory::attribute_types::unsigned_int,
-    boost::optional<entities::name> name =
-    boost::optional<entities::name>()) {
+    boost::optional<identification::entities::logical_name> name =
+    boost::optional<identification::entities::logical_name>()) {
 
     const auto p(mock_attribute(sn.name(), types_parsed, n, pt, name));
     sn.local_attributes().push_back(p);
@@ -384,14 +389,15 @@ void parent_to_child(const bool attributes_indexed,
 }
 
 template<typename Nameable>
-void insert_nameable(std::unordered_map<std::string, Nameable>& map,
+void insert_nameable(std::unordered_map<identification::entities::logical_id,
+    Nameable>& map,
     const Nameable& n) {
     map.insert(std::make_pair(n->name().qualified().dot(), n));
 }
 
 void insert_object(entities::model& m,
     const boost::shared_ptr<entities::structural::object>& o) {
-    m.structural_elements().objects().insert(std::make_pair(o->name().qualified().dot(), o));
+    m.structural_elements().objects().insert(std::make_pair(o->name().id(), o));
 }
 
 }
@@ -490,13 +496,13 @@ simple_attribute_name(const unsigned int n) const {
     return ::attribute_name(n);
 }
 
-entities::name mock_model_factory::
+identification::entities::logical_name mock_model_factory::
 model_name(const unsigned int n) const {
     return mock_model_name(n);
 }
 
-bool mock_model_factory::
-is_model_n(const unsigned int n, const entities::name& name) const {
+bool mock_model_factory::is_model_n(const unsigned int n,
+    const identification::entities::logical_name& name) const {
     const auto mmp(name.location().model_modules());
     if (mmp.empty())
         return false;
@@ -510,13 +516,13 @@ is_model_n(const unsigned int n, const std::string& name) const {
     return simple_model_name(n) == name;
 }
 
-bool mock_model_factory::
-is_type_name_n(const unsigned int n, const entities::name& name) const {
+bool mock_model_factory::is_type_name_n(const unsigned int n,
+    const identification::entities::logical_name& name) const {
     return is_type_name_n(n, name.simple());
 }
 
-bool mock_model_factory::is_object_template_name_n(
-    const unsigned int n, const entities::name& name) const {
+bool mock_model_factory::is_object_template_name_n(const unsigned int n,
+    const identification::entities::logical_name& name) const {
     return object_template_name(n) == name.simple();
 }
 
@@ -530,15 +536,15 @@ is_module_n(const unsigned int n, const std::string& name) const {
     return module_name(n) == name;
 }
 
-bool mock_model_factory::is_type_name_n_visitor(
-    const unsigned int n, const entities::name& name) const {
+bool mock_model_factory::is_type_name_n_visitor(const unsigned int n,
+    const identification::entities::logical_name& name) const {
     return
         boost::contains(name.simple(), type_name(n)) &&
         boost::contains(name.simple(), visitor_postfix);
 }
 
-void mock_model_factory::handle_model_module(
-    const bool add_model_module, entities::model& m) const {
+void mock_model_factory::handle_model_module(const bool add_model_module,
+    entities::model& m) const {
     if (!add_model_module)
         return;
 
@@ -547,16 +553,17 @@ void mock_model_factory::handle_model_module(
     insert_nameable(m.structural_elements().modules(), module);
 }
 
-entities::structural::builtin mock_model_factory::
-make_builtin(const unsigned int i, const entities::name& model_name,
+entities::structural::builtin mock_model_factory::make_builtin(
+    const unsigned int i,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    helpers::name_factory nf;
-    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
+    identification::helpers::logical_name_factory nf;
+    auto n(nf.build_element_in_model(model_name, sn, ipp));
 
     entities::structural::builtin r;
     r.name(n);
@@ -568,7 +575,7 @@ make_builtin(const unsigned int i, const entities::name& model_name,
 
 boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object(const unsigned int i,
-    const entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
@@ -579,8 +586,8 @@ mock_model_factory::make_object(const unsigned int i,
 }
 
 boost::shared_ptr<entities::structural::object>
-mock_model_factory::make_object_with_attribute(
-    const unsigned int i, const entities::name& model_name,
+mock_model_factory::make_object_with_attribute(const unsigned int i,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
@@ -598,12 +605,12 @@ mock_model_factory::make_object(unsigned int i,
 
 boost::shared_ptr<entities::structural::object_template>
 mock_model_factory::make_object_template(const unsigned int i,
-    const entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt) const {
 
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     const auto otpn(object_template_name(i));
-    entities::name n(nf.build_element_in_model(model_name, otpn));
+    auto n(nf.build_element_in_model(model_name, otpn));
 
     auto r(boost::make_shared<entities::structural::object_template>());
     r->name(n);
@@ -613,23 +620,24 @@ mock_model_factory::make_object_template(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<entities::structural::enumeration> mock_model_factory::
-make_enumeration(const unsigned int i, const entities::name& model_name,
+boost::shared_ptr<entities::structural::enumeration>
+mock_model_factory::make_enumeration(const unsigned int i,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    helpers::name_factory nf;
-    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
+    identification::helpers::logical_name_factory nf;
+    auto n(nf.build_element_in_model(model_name, sn, ipp));
 
     auto r(boost::make_shared<entities::structural::enumeration>());
     r->name(n);
     r->documentation(documentation);
     r->provenance().model_type(mt);
 
-    entities::name ue;
+    identification::entities::logical_name ue;
     ue.simple(unsigned_int);
     r->underlying_element(ue);
 
@@ -649,15 +657,15 @@ make_enumeration(const unsigned int i, const entities::name& model_name,
 
 boost::shared_ptr<entities::structural::exception>
 mock_model_factory::make_exception(const unsigned int i,
-    const entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    helpers::name_factory nf;
-    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
+    identification::helpers::logical_name_factory nf;
+    auto n(nf.build_element_in_model(model_name, sn, ipp));
 
     auto r(boost::make_shared<entities::structural::exception>());
     r->name(n);
@@ -668,7 +676,7 @@ mock_model_factory::make_exception(const unsigned int i,
 }
 
 boost::shared_ptr<entities::structural::module>
-mock_model_factory::make_module(const entities::name& n,
+mock_model_factory::make_module(const identification::entities::logical_name& n,
     const identification::entities::model_type mt,
     const std::string& documentation) const {
     auto r(boost::make_shared<entities::structural::module>());
@@ -681,22 +689,22 @@ mock_model_factory::make_module(const entities::name& n,
 
 boost::shared_ptr<entities::structural::module>
 mock_model_factory::make_module(const unsigned int module_n,
-    const entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const identification::entities::model_type mt,
     const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
 
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     const auto mn(module_name(module_n));
     const auto n(nf.build_module_name(model_name, mn, internal_modules));
     return make_module(n, mt, documentation);
 }
 
-entities::name
+identification::entities::logical_name
 mock_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
-    helpers::name_builder b;
+    identification::helpers::logical_name_builder b;
     b.simple_name(simple_type_name(simple_n));
     b.model_name(simple_model_name(model_n));
     return b.build();
@@ -1088,7 +1096,7 @@ mock_model_factory::object_with_both_transparent_and_opaque_associations(
     if (flags_.associations_indexed())
         o0->transparent_associations().push_back(o1->name());
 
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     auto o2(boost::make_shared<entities::structural::object>());
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
@@ -1151,7 +1159,7 @@ object_with_attribute(const identification::entities::model_type mt,
     if (flags_.attributes_indexed())
         o0->all_attributes().push_back(p);
 
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     auto r(make_empty_model(mt, 0, add_model_module));
     if (pt == attribute_types::value_object ||
         pt == attribute_types::boost_shared_ptr) {
@@ -1552,7 +1560,7 @@ object_with_group_of_attributes_of_different_types(
     lambda(p2);
 
     auto o2(boost::make_shared<entities::structural::object>());
-    logical::helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
 

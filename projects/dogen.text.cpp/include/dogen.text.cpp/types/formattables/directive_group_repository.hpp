@@ -28,7 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.text.cpp/types/formattables/directive_group.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
 namespace dogen::text::cpp::formattables {
 
@@ -40,13 +42,13 @@ public:
     ~directive_group_repository() = default;
 
 public:
-    explicit directive_group_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id);
+    explicit directive_group_repository(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id();
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& v);
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id() const;
+    std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id();
+    void by_id(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& v);
+    void by_id(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >&& v);
 
 public:
     bool operator==(const directive_group_repository& rhs) const;
@@ -59,7 +61,7 @@ public:
     directive_group_repository& operator=(directive_group_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> > by_id_;
+    std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> > by_id_;
 };
 
 }

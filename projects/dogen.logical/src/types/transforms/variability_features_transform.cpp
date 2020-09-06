@@ -19,16 +19,18 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/types/helpers/identifiable_factory.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/variability/initializer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/helpers/string_processor.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/entities/variability/abstract_feature.hpp"
 #include "dogen.logical/types/transforms/variability_features_transform.hpp"
@@ -52,14 +54,6 @@ const std::string missing_bindings(
     "Binding point must be supplied at either bundle or template level: ");
 const std::string  bundle_generates_nothing(
     "Bundle does not generate either registration or static configuration: ");
-
-}
-
-namespace dogen::logical::entities {
-
-inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.qualified().dot() < rhs.qualified().dot();
-}
 
 }
 
@@ -104,9 +98,10 @@ update(const features::variability_bundle::feature_group& fg,
     auto ftb(dynamic_cast<feature_template_bundle*>(&fb));
     if (ftb) {
         if (scfg.instantiation_domain_name.empty()) {
-            const auto qn(fb.name().qualified().dot());
-            BOOST_LOG_SEV(lg, error) << empty_domain << qn;
-            BOOST_THROW_EXCEPTION(transformation_error(empty_domain + qn));
+            const auto id(fb.name().id());
+            BOOST_LOG_SEV(lg, error) << empty_domain << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(empty_domain + id.value()));
         }
         ftb->instantiation_domain_name(scfg.instantiation_domain_name);
     }
@@ -141,8 +136,8 @@ void variability_features_transform::process_abstract_feature(
     /*
      * Generate an identifiable version of the key.
      */
-    logical::helpers::string_processor sp;
-    af.identifiable_key(sp.to_identifiable(af.key()));
+    identification::helpers::identifiable_factory f;
+    af.identifiable_key(f.make(af.key()));
 
     /*
      * Handle binding.
@@ -252,11 +247,12 @@ process_feature_template_bundles(
          * registration or static configuration or both, but never
          * neither.
          */
-        if (!fb.generate_registration() && !fb.generate_static_configuration()) {
-            const auto id(fb.name().qualified().dot());
+        if (!fb.generate_registration()
+            && !fb.generate_static_configuration()) {
+            const auto id(fb.name().id());
             BOOST_LOG_SEV(lg, error) << bundle_generates_nothing << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(bundle_generates_nothing + id));
+                transformation_error(bundle_generates_nothing + id.value()));
         }
 
         const auto kp(fb.key_prefix());
@@ -298,11 +294,12 @@ process_feature_bundles(const variability::entities::feature_model& fm,
          * registration or static configuration or both, but never
          * neither.
          */
-        if (!fb.generate_registration() && !fb.generate_static_configuration()) {
-            const auto id(fb.name().qualified().dot());
+        if (!fb.generate_registration() &&
+            !fb.generate_static_configuration()) {
+            const auto id(fb.name().id());
             BOOST_LOG_SEV(lg, error) << bundle_generates_nothing << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(bundle_generates_nothing + id));
+                transformation_error(bundle_generates_nothing + id.value()));
         }
 
         const auto kp(fb.key_prefix());
@@ -335,7 +332,13 @@ void variability_features_transform::process_initialiser(entities::model& m) {
         if (fb.generate_registration())
             fti.feature_template_bundles().push_back(fb.name());
     }
-    fti.feature_template_bundles().sort();
+
+    using identification::entities::logical_name;
+    const auto lt([](const logical_name& lhs, const logical_name& rhs) {
+            return lhs.id().value() < rhs.id().value();
+        });
+
+    fti.feature_template_bundles().sort(lt);
 
     /*
      * Obtain the names of all feature bundles, and add them to the
@@ -351,14 +354,14 @@ void variability_features_transform::process_initialiser(entities::model& m) {
         if (f.generate_registration())
             fti.feature_bundles().push_back(f.name());
     }
-    fti.feature_bundles().sort();
+    fti.feature_bundles().sort(lt);
 }
 
 void variability_features_transform::apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "variability entities transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());
     process_feature_template_bundles(fm, fixed_mappings, m);

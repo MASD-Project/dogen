@@ -44,7 +44,7 @@
         },
         {
           "name": "parsed_type",
-          "type": "name_tree",
+          "type": "identification::entities::logical_name_tree",
           "documentation": "Tree of names that represent the type of the attribute, after suitable parsing.\n"
         },
         {
@@ -74,46 +74,6 @@
       ]
     },
     {
-      "name": "entities::name_tree",
-      "documentation": "Adds support for name composition as a tree-like structure.\n\nA name tree has the responsibility of representing an instantiation of a generic\ntype with all of its type parameters, which themselves can also be generic types\nand so on. It may also represent the simpler case of a non-generic type, in which\ncase only the parent name is populated and there are no children.\n",
-      "stereotypes": [
-        "Qualifiable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "current",
-          "type": "name",
-          "documentation": "Name for the current level of the tree.\n"
-        },
-        {
-          "name": "children",
-          "type": "std::list<name_tree>",
-          "documentation": "Names of the child elements.\n"
-        },
-        {
-          "name": "are_children_opaque",
-          "type": "bool",
-          "documentation": "If true, the association with its children can be opaque.\n\nChildren are considered opaque when the parent does not require knowledge\nabout the childs' internal structure. This is the case, for example, with C and\nC++ pointers, references and so on.\n"
-        },
-        {
-          "name": "is_circular_dependency",
-          "type": "bool",
-          "documentation": "If true, the presence of the current name causes a circular dependency.\n"
-        },
-        {
-          "name": "is_current_simple_type",
-          "type": "bool",
-          "documentation": "Returns true if @e current is a simple type such as a built-in or an enumeration.\n"
-        },
-        {
-          "name": "is_floating_point",
-          "type": "bool",
-          "documentation": "If true, \"current\" stores a floating point type.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
@@ -123,7 +83,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "name",
+          "type": "identification::entities::logical_name",
           "documentation": "Fully qualified name.\n"
         }
       ]
@@ -168,8 +128,8 @@
       "attributes": [
         {
           "name": "contained_by",
-          "type": "std::string",
-          "documentation": "Name of the module in which we are contained, if any.\n"
+          "type": "identification::entities::logical_id",
+          "documentation": "ID of the element in which we are contained, if any.\n"
         },
         {
           "name": "in_global_module",
@@ -202,7 +162,7 @@
       "attributes": [
         {
           "name": "meta_name",
-          "type": "name",
+          "type": "identification::entities::logical_meta_name",
           "documentation": "Name of the element in the meta-model that this instance conforms to.\n"
         }
       ]
@@ -286,32 +246,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::name",
-      "documentation": "Name of an element in logical space.\n\nA name represents a point or a region in logical space, and this point or region can\nonly be used by one element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regions in logical\nspace cannot have the same name and b) the same point in logical space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
-      "stereotypes": [
-        "dogen::hashable",
-        "Qualifiable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "simple",
-          "type": "std::string",
-          "documentation": "Simple (non-qualified) name of the logical element at this address.\n\nThe simple name must be unique for a given location.\n"
-        },
-        {
-          "name": "location",
-          "type": "location",
-          "documentation": "Where the name is located in element space.\n"
-        },
-        {
-          "name": "is_container",
-          "type": "bool",
-          "documentation": "If true, the name indicates an element that can contain other elements.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::Stateful",
       "documentation": "Ability to have a state.\n",
       "stereotypes": [
@@ -331,7 +265,7 @@
         },
         {
           "name": "inherited_attributes",
-          "type": "std::unordered_map<name, std::list<attribute>>",
+          "type": "std::unordered_map<identification::entities::logical_name, std::list<attribute>>",
           "documentation": "The set of all attributes obtained via inheritance, by parent name.\n\nNote that we are using name as a key by design (instead of id); it is required for\nformatting.\n"
         },
         {
@@ -343,36 +277,6 @@
           "name": "is_fluent",
           "type": "bool",
           "documentation": "If true, generate fluent setters.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::location",
-      "documentation": "Identifies a hierarchy of containment within the asset space.\n\nElements exist at unique points within the asset space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in logical space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in logical terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
-      "stereotypes": [
-        "dogen::hashable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "external_modules",
-          "type": "std::list<std::string>",
-          "documentation": "All modules external to the model itself.\n\nIt is sometimes useful to create a model within a set of existing\nmodules. In this case, the model does not own the existing modules and\nthey are considered \"external\" to the model. This is useful, for\nexample, when declaring a model within a larger project such as @e\ndogen::logical. In this case, @e dogen is the external module.\n"
-        },
-        {
-          "name": "model_modules",
-          "type": "std::list<std::string>",
-          "documentation": "Modules related to just the model itself.\n\nIt is only different from the model name if the model name is composite;\nthat is, if the model name has multiple fields separated by dots, e.g. @ a.b.\n"
-        },
-        {
-          "name": "internal_modules",
-          "type": "std::list<std::string>",
-          "documentation": "Sub-modules within a model.\n"
-        },
-        {
-          "name": "element",
-          "type": "std::string",
-          "documentation": "Name of the owning element, if any.\n\nFor coding elements which are located within other logical elements\nthat are not modules, such as attributes, inner classes, etc.\n"
         }
       ]
     },
@@ -404,12 +308,12 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<name, identification::entities::model_type>",
+          "type": "std::unordered_map<identification::entities::logical_name, identification::entities::model_type>",
           "documentation": "All other intermediate models that this model depends on, mapped to their\norigin.\n"
         },
         {
           "name": "leaves",
-          "type": "std::unordered_set<name>",
+          "type": "std::unordered_set<identification::entities::logical_name>",
           "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
@@ -483,7 +387,7 @@
         },
         {
           "name": "meta_names",
-          "type": "std::unordered_map<std::string, name>",
+          "type": "std::unordered_map<identification::entities::logical_meta_id, identification::entities::logical_meta_name>",
           "documentation": "All meta-names by qualified name.\n"
         }
       ]
@@ -512,12 +416,12 @@
       "attributes": [
         {
           "name": "base_visitor",
-          "type": "boost::optional<name>",
+          "type": "boost::optional<identification::entities::logical_name>",
           "documentation": "Base class of the visitor that visits the current element, if any.\n"
         },
         {
           "name": "derived_visitor",
-          "type": "boost::optional<name>",
+          "type": "boost::optional<identification::entities::logical_name>",
           "documentation": "Derived class of the visitor that visits the current element, if any.\n"
         },
         {
@@ -540,17 +444,17 @@
       "attributes": [
         {
           "name": "transparent_associations",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Elements that are involved in aggregation or composition relationships.\n"
         },
         {
           "name": "opaque_associations",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Elements that are involved in aggregation or composition relationships via\nindirection.\n\nThis is used to break cycles where required.\n"
         },
         {
           "name": "associative_container_keys",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Elements that are keys in an associative container.\n"
         }
       ]
@@ -600,22 +504,22 @@
         },
         {
           "name": "root_parents",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Top-most parents at the root of the inheritance hierarchy, if any.\n"
         },
         {
           "name": "parents",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Direct parent of this element, if any.\n"
         },
         {
           "name": "leaves",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Elements that are at the bottom of the inheritance tree.\n"
         },
         {
           "name": "type_registrar",
-          "type": "boost::optional<name>"
+          "type": "boost::optional<identification::entities::logical_name>"
         }
       ]
     },
@@ -877,15 +781,15 @@
       "attributes": [
         {
           "name": "names",
-          "type": "std::list<std::pair<std::string, entities::name>>"
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name>>"
         },
         {
           "name": "meta_names",
-          "type": "std::list<std::pair<std::string, entities::name>>"
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_meta_name>>"
         },
         {
           "name": "name_trees",
-          "type": "std::list<std::pair<std::string, entities::name_tree>>"
+          "type": "std::list<std::pair<identification::entities::logical_id, identification::entities::logical_name_tree>>"
         }
       ]
     },
@@ -924,23 +828,23 @@
       "attributes": [
         {
           "name": "objects_always_in_heap",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
           "name": "elements_referable_by_attributes",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
           "name": "primitive_underliers",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
           "name": "enumeration_underliers",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
           "name": "abstract_elements",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         }
       ]
     },
@@ -995,15 +899,15 @@
       "attributes": [
         {
           "name": "translations",
-          "type": "std::unordered_map<std::string, entities::name>"
+          "type": "std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>"
         },
         {
           "name": "erasures",
-          "type": "std::unordered_set<std::string>"
+          "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
           "name": "injections",
-          "type": "std::unordered_map<std::string, entities::name>"
+          "type": "std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>"
         }
       ]
     },
@@ -1018,11 +922,11 @@
         },
         {
           "name": "by_agnostic_id",
-          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_map<std::string, entities::name>>"
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>>"
         },
         {
           "name": "erasures_by_technical_space",
-          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<identification::entities::technical_space, std::unordered_set<identification::entities::logical_id>>"
         }
       ]
     },
@@ -1055,7 +959,7 @@
       "attributes": [
         {
           "name": "agnostic_id",
-          "type": "std::string",
+          "type": "identification::entities::logical_id",
           "documentation": "Technical space agnostic ID of the element we're mapping from.\n"
         },
         {
@@ -1076,7 +980,7 @@
         },
         {
           "name": "default_name",
-          "type": "boost::optional<entities::name>"
+          "type": "boost::optional<identification::entities::logical_name>"
         }
       ]
     },
@@ -1105,210 +1009,11 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::printing_error",
-      "documentation": "An error occurred whilst pretty printing.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::pretty_printer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::separators",
-      "documentation": "Available separators to be used by the pretty printer.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "angle_brackets",
-          "type": "",
-          "documentation": "Enclose name elements in '<' and '>'.\n"
-        },
-        {
-          "name": "double_colons",
-          "type": "",
-          "documentation": "Separate name elements with a '::'.\n"
-        },
-        {
-          "name": "dots",
-          "type": "",
-          "documentation": "Separate name elements with a '.'.\n"
-        }
-      ]
-    },
-    {
-      "name": "helpers::node",
-      "documentation": "Node in a tree of names.\n\nTemporary data structure used to build trees of names.\n",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "parent",
-          "type": "boost::weak_ptr<node>",
-          "documentation": "Parent in a tree.\n"
-        },
-        {
-          "name": "data",
-          "type": "entities::name",
-          "documentation": "Current node.\n"
-        },
-        {
-          "name": "children",
-          "type": "std::list<boost::shared_ptr<node>>",
-          "documentation": "Child nodes in a tree.\n"
-        }
-      ]
-    },
-    {
-      "name": "helpers::string_processor",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::building_error",
-      "documentation": "An error occurred whilst building.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::name_tree_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "top_level_modules_",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "model_location_",
-          "type": "entities::location"
-        },
-        {
-          "name": "names",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "root",
-          "type": "std::shared_ptr<node>"
-        },
-        {
-          "name": "current",
-          "type": "std::shared_ptr<node>"
-        }
-      ]
-    },
-    {
-      "name": "helpers::legacy_name_tree_parser",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "modules",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "external_modules",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "model_name",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "helpers::new_name_tree_parser",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::parsing_error",
-      "documentation": "A fatal error has occurred while parsing.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::fully_qualified_representation_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::name_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::name_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name_",
-          "type": "entities::name"
-        }
-      ]
-    },
-    {
-      "name": "helpers::name_flattener",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::meta_naming_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::meta_name_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::location_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "location_",
-          "type": "entities::location"
-        }
-      ]
     },
     {
       "name": "entities::static_stereotypes",
@@ -1496,45 +1201,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::fully_qualified_representation",
-      "documentation": "Fully qualified representation for a logical identifier such as a name or name tree.\n",
-      "stereotypes": [
-        "dogen::hashable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "dot",
-          "type": "std::string",
-          "documentation": "Qualified identifier using \".\" as the separator.\n"
-        },
-        {
-          "name": "colon",
-          "type": "std::string",
-          "documentation": "Qualified identifier using \"::\" as the separator.\n"
-        },
-        {
-          "name": "identifiable",
-          "type": "std::string",
-          "documentation": "Representation of the identifier that can usable as an identifier on all of the\nsupported technical spaces, using the entire name structure.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::Qualifiable",
-      "documentation": "The model entity can have a qualified representation.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "qualified",
-          "type": "fully_qualified_representation"
-        }
-      ]
-    },
-    {
       "name": "transforms::containment_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1551,7 +1217,7 @@
       "attributes": [
         {
           "name": "contains",
-          "type": "std::list<std::string>",
+          "type": "std::list<identification::entities::logical_id>",
           "documentation": "All elements contained by this element.\n"
         }
       ]
@@ -1808,7 +1474,7 @@
         },
         {
           "name": "parsed_type",
-          "type": "name_tree",
+          "type": "identification::entities::logical_name_tree",
           "documentation": "Mapped type, after parsing has taken place.\n"
         },
         {
@@ -1862,12 +1528,12 @@
       "attributes": [
         {
           "name": "feature_template_bundles",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Names of all the templates that this initialiser will register.\n"
         },
         {
           "name": "feature_bundles",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Names of all the features that this initialiser will register.\n"
         }
       ]
@@ -2049,7 +1715,7 @@
       "attributes": [
         {
           "name": "parents",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "List of object templates that this object template inherits from, if any.\n"
         },
         {
@@ -2077,7 +1743,7 @@
         },
         {
           "name": "object_templates",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "All object templates associated with this object.\n"
         },
         {
@@ -2143,12 +1809,12 @@
       "attributes": [
         {
           "name": "visits",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Elements that are visitable by the visitor.\n"
         },
         {
           "name": "parent",
-          "type": "boost::optional<name>"
+          "type": "boost::optional<identification::entities::logical_name>"
         }
       ]
     },
@@ -2221,7 +1887,7 @@
       "attributes": [
         {
           "name": "underlying_element",
-          "type": "name",
+          "type": "identification::entities::logical_name",
           "documentation": "Underlying element of each instance of the enumeration.\n"
         },
         {
@@ -2270,19 +1936,19 @@
       "attributes": [
         {
           "name": "modeline_groups",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline_group>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline_group>>"
         },
         {
           "name": "modelines",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<modeline>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<modeline>>"
         },
         {
           "name": "licences",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<licence>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<licence>>"
         },
         {
           "name": "generation_markers",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<generation_marker>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<generation_marker>>"
         }
       ]
     },
@@ -2292,19 +1958,19 @@
       "attributes": [
         {
           "name": "profile_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<profile_template>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile_template>>"
         },
         {
           "name": "profiles",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<profile>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<profile>>"
         },
         {
           "name": "feature_template_bundles",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_bundle>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_template_bundle>>"
         },
         {
           "name": "feature_bundles",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_bundle>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<feature_bundle>>"
         },
         {
           "name": "initializer",
@@ -2318,43 +1984,43 @@
       "attributes": [
         {
           "name": "modules",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<module>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<module>>"
         },
         {
           "name": "object_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<object_template>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object_template>>"
         },
         {
           "name": "builtins",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<builtin>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<builtin>>"
         },
         {
           "name": "enumerations",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<enumeration>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<enumeration>>"
         },
         {
           "name": "primitives",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<primitive>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<primitive>>"
         },
         {
           "name": "objects",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<object>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<object>>"
         },
         {
           "name": "exceptions",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<exception>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<exception>>"
         },
         {
           "name": "visitors",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<visitor>>"
         },
         {
           "name": "entry_points",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<entry_point>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<entry_point>>"
         },
         {
           "name": "assistants",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<assistant>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<assistant>>"
         }
       ]
     },
@@ -2806,11 +2472,11 @@
       "attributes": [
         {
           "name": "extensible_mappables",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<extensible_mappable>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<extensible_mappable>>"
         },
         {
           "name": "fixed_mappables",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<fixed_mappable>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<fixed_mappable>>"
         }
       ]
     },
@@ -2820,7 +2486,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "name"
+          "type": "identification::entities::logical_name"
         },
         {
           "name": "technical_space",
@@ -2901,7 +2567,7 @@
       "attributes": [
         {
           "name": "logic_less_templates",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<logic_less_template>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logic_less_template>>"
         }
       ]
     },
@@ -2988,12 +2654,12 @@
       "attributes": [
         {
           "name": "leaves",
-          "type": "std::list<logical::entities::name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
         },
         {
           "name": "registrar_dependencies",
-          "type": "std::list<logical::entities::name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Registrars on other models this registrar depends on.\n"
         }
       ]
@@ -3011,7 +2677,7 @@
       "attributes": [
         {
           "name": "type_registrars",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<type_registrar>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<type_registrar>>"
         }
       ]
     },
@@ -3204,17 +2870,17 @@
       "attributes": [
         {
           "name": "solutions",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<solution>>",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<solution>>",
           "documentation": "All solutions in this model.\n"
         },
         {
           "name": "projects",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<project>>",
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<project>>",
           "documentation": "All projects in this model.\n"
         },
         {
           "name": "msbuild_targets",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<msbuild_targets>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<msbuild_targets>>"
         }
       ]
     },
@@ -3378,7 +3044,7 @@
       "attributes": [
         {
           "name": "common_odb_options",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<common_odb_options>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<common_odb_options>>"
         }
       ]
     },
@@ -3464,7 +3130,7 @@
       "attributes": [
         {
           "name": "cmakelists",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<cmakelists>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<cmakelists>>"
         }
       ]
     },
@@ -3609,7 +3275,7 @@
         },
         {
           "name": "parents",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Parents of this profile template.\n"
         },
         {
@@ -3848,23 +3514,23 @@
       "attributes": [
         {
           "name": "backends",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<backend>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<backend>>"
         },
         {
           "name": "facets",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<facet>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<facet>>"
         },
         {
           "name": "archetypes",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<archetype>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype>>"
         },
         {
           "name": "parts",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<part>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<part>>"
         },
         {
           "name": "archetype_kinds",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<archetype_kind>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<archetype_kind>>"
         }
       ]
     },
@@ -3899,7 +3565,7 @@
         },
         {
           "name": "logical_meta_element_id",
-          "type": "std::string",
+          "type": "identification::entities::logical_meta_id",
           "documentation": "ID of the meta-element in the logical model this archetype binds to.\n"
         },
         {
@@ -3931,17 +3597,17 @@
         },
         {
           "name": "facets",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "All facets within this backend.\n"
         },
         {
           "name": "parts",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "All parts within this backend.\n"
         },
         {
           "name": "archetype_kinds",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "Kinds of archetypes defined in this backend.\n"
         },
         {
@@ -3973,7 +3639,7 @@
         },
         {
           "name": "archetypes",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "All archetypes in this facet.\n"
         }
       ]
@@ -4024,7 +3690,7 @@
         },
         {
           "name": "archetypes",
-          "type": "std::list<name>",
+          "type": "std::list<identification::entities::logical_name>",
           "documentation": "All archetypes in this part.\n"
         }
       ]
@@ -4180,15 +3846,15 @@
       "attributes": [
         {
           "name": "modelines_by_modeline_group_by_technical_space",
-          "type": "std::unordered_map<std::string, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
+          "type": "std::unordered_map<identification::entities::logical_id, std::unordered_map<identification::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
         },
         {
           "name": "licences_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::licence>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::licence>>"
         },
         {
           "name": "generation_markers_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::generation_marker>>"
+          "type": "std::unordered_map<identification::entities::logical_id, boost::shared_ptr<logical::entities::decoration::generation_marker>>"
         }
       ]
     },
@@ -4213,15 +3879,15 @@
         },
         {
           "name": "licence_name",
-          "type": "std::string"
+          "type": "identification::entities::logical_id"
         },
         {
           "name": "modeline_group_name",
-          "type": "std::string"
+          "type": "identification::entities::logical_id"
         },
         {
           "name": "marker_name",
-          "type": "std::string"
+          "type": "identification::entities::logical_id"
         }
       ]
     },
@@ -4363,14 +4029,6 @@
       ]
     },
     {
-      "name": "helpers::flattening_error",
-      "documentation": "An error occurred whilst flattening a name.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "features::labelling",
       "documentation": "Features related to labels.\n",
       "stereotypes": [
@@ -4487,7 +4145,7 @@
         },
         {
           "name": "wale_template",
-          "type": "boost::optional<name>",
+          "type": "boost::optional<identification::entities::logical_name>",
           "documentation": "Parsed name of the wale template linked to this archetype, if any.\n"
         },
         {
@@ -4613,6 +4271,14 @@
       "name": "helpers::stereotypes_helper",
       "stereotypes": [
         "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::building_error",
+      "documentation": "An error has occurred in a factory.\n",
+      "stereotypes": [
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     }

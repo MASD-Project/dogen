@@ -44,7 +44,7 @@ private:
         const identification::entities::technical_space ts);
 
     static entities::attribute
-    create_attribute_for_underlying_element(const entities::name& owner,
+    create_attribute_for_underlying_element(const identification::entities::logical_name& owner,
         const identification::entities::technical_space ts,
         std::string underlying_element);
 

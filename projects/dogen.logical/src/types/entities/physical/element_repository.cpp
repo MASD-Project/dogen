@@ -73,11 +73,11 @@ const boost::shared_ptr<dogen::logical::entities::physical::archetype_kind>& rhs
 namespace dogen::logical::entities::physical {
 
 element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::backend> >& backends,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::facet> >& facets,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& archetypes,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::part> >& parts,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds)
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >& backends,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& facets,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& archetypes,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& parts,
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& archetype_kinds)
     : backends_(backends),
       facets_(facets),
       archetypes_(archetypes),
@@ -107,83 +107,83 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::backend> >& element_repository::backends() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >& element_repository::backends() const {
     return backends_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::backend> >& element_repository::backends() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >& element_repository::backends() {
     return backends_;
 }
 
-void element_repository::backends(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::backend> >& v) {
+void element_repository::backends(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >& v) {
     backends_ = v;
 }
 
-void element_repository::backends(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::backend> >&& v) {
+void element_repository::backends(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::backend> >&& v) {
     backends_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::facet> >& element_repository::facets() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& element_repository::facets() const {
     return facets_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::facet> >& element_repository::facets() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& element_repository::facets() {
     return facets_;
 }
 
-void element_repository::facets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::facet> >& v) {
+void element_repository::facets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >& v) {
     facets_ = v;
 }
 
-void element_repository::facets(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::facet> >&& v) {
+void element_repository::facets(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::facet> >&& v) {
     facets_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& element_repository::archetypes() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& element_repository::archetypes() const {
     return archetypes_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& element_repository::archetypes() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& element_repository::archetypes() {
     return archetypes_;
 }
 
-void element_repository::archetypes(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& v) {
+void element_repository::archetypes(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >& v) {
     archetypes_ = v;
 }
 
-void element_repository::archetypes(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype> >&& v) {
+void element_repository::archetypes(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype> >&& v) {
     archetypes_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::part> >& element_repository::parts() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& element_repository::parts() const {
     return parts_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::part> >& element_repository::parts() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& element_repository::parts() {
     return parts_;
 }
 
-void element_repository::parts(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::part> >& v) {
+void element_repository::parts(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >& v) {
     parts_ = v;
 }
 
-void element_repository::parts(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::part> >&& v) {
+void element_repository::parts(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::part> >&& v) {
     parts_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& element_repository::archetype_kinds() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& element_repository::archetype_kinds() const {
     return archetype_kinds_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& element_repository::archetype_kinds() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& element_repository::archetype_kinds() {
     return archetype_kinds_;
 }
 
-void element_repository::archetype_kinds(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& v) {
+void element_repository::archetype_kinds(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >& v) {
     archetype_kinds_ = v;
 }
 
-void element_repository::archetype_kinds(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >&& v) {
+void element_repository::archetype_kinds(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::physical::archetype_kind> >&& v) {
     archetype_kinds_ = std::move(v);
 }
 

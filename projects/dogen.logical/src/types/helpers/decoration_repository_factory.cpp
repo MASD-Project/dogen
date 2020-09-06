@@ -23,7 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
 #include "dogen.logical/types/helpers/decoration_repository_factory.hpp"
 
@@ -125,7 +125,7 @@ decoration_repository_factory::make(const entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating decoration repository for model: "
                              << m.name().qualified().dot();
 
-    using mnf = logical::helpers::meta_name_factory;
+    using mnf = identification::helpers::logical_meta_name_factory;
     const auto licence_name(mnf::make_licence_name());
     const auto generation_marker_name(mnf::make_generation_marker_name());
     const auto modeline_group_name(mnf::make_modeline_group_name());

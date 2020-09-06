@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/stereotypes_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/structural/enumerator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

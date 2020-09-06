@@ -32,6 +32,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.text.cpp/types/formattables/model.hpp"
 #include "dogen.text.cpp/types/transforms/repository.hpp"
 #include "dogen.text.cpp/types/formattables/locator.hpp"
@@ -80,11 +81,13 @@ public:
     artefact_formatters_type remove_non_includible_formatters(
         const artefact_formatters_type& formatters) const;
 
-    std::unordered_map<std::string, artefact_formatters_type>
+    std::unordered_map<identification::entities::logical_meta_id,
+                       artefact_formatters_type>
     includible_formatters_by_meta_name(const transforms::repository& frp) const;
 
 private:
-    void insert_inclusion_directive(const std::string& id,
+    void insert_inclusion_directive(
+        const identification::entities::logical_id& id,
         const identification::entities::physical_meta_id& archetype,
         const directive_group& dg,
         directive_group_repository& dgrp) const;
@@ -96,16 +99,19 @@ private:
 
     directive_group_repository make(
         const feature_group& fg,
-        const std::unordered_map<std::string, artefact_formatters_type>& afmt,
+        const std::unordered_map<identification::entities::logical_meta_id,
+        artefact_formatters_type>& afmt,
         const locator& l,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        const std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 public:
     directive_group_repository
     make(const variability::entities::feature_model& feature_model,
         const transforms::repository& frp,
         const locator& l,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        const std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 };
 
 }

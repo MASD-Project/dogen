@@ -30,7 +30,9 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
+#include "dogen.identification/types/entities/logical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.text.cpp/types/transforms/helper_transform_fwd.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform_fwd.hpp"
@@ -51,7 +53,7 @@ private:
      * @brief Returns all available file formatters by type indx.
      */
     std::unordered_map<
-        std::string,
+        identification::entities::logical_meta_id,
         std::forward_list<std::shared_ptr<model_to_text_transform>>
     >&
     stock_artefact_formatters_by_meta_name();
@@ -59,7 +61,7 @@ private:
     /**
      * @brief Returns all available file formatters by archetype name.
      */
-    std::unordered_map<std::string,
+    std::unordered_map<identification::entities::physical_meta_id,
                        std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters_by_archetype();
 
@@ -84,14 +86,14 @@ public:
      * @brief Returns all available file formatters by type indx.
      */
     const std::unordered_map<
-    std::string,
-    std::forward_list<std::shared_ptr<model_to_text_transform>>>&
+        identification::entities::logical_meta_id,
+        std::forward_list<std::shared_ptr<model_to_text_transform>>>&
     stock_artefact_formatters_by_meta_name() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
      */
-    const std::unordered_map<std::string,
+    const std::unordered_map<identification::entities::physical_meta_id,
                              std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters_by_archetype() const;
 
@@ -113,10 +115,10 @@ public:
 
 private:
     std::unordered_map<
-        std::string,
+        identification::entities::logical_meta_id,
         std::forward_list<std::shared_ptr<model_to_text_transform>>>
     stock_artefact_formatters_by_meta_name_;
-    std::unordered_map<std::string,
+    std::unordered_map<identification::entities::physical_meta_id,
                        std::shared_ptr<model_to_text_transform>>
     stock_artefact_formatters_by_archetype_;
     std::forward_list<std::shared_ptr<model_to_text_transform>>

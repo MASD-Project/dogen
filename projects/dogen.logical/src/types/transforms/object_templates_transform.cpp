@@ -24,6 +24,7 @@
 #include <unordered_set>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -49,7 +50,7 @@ const std::string object_template_not_found(
 
 }
 
-namespace dogen::logical::entities {
+namespace dogen::identification::entities {
 
 /**
  * @brief Add comparable support for names.
@@ -58,17 +59,19 @@ namespace dogen::logical::entities {
  * implementation of object templates processing. It is used in the
  * set difference.
  */
-inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.qualified().dot() < rhs.qualified().dot();
+inline bool operator<(const logical_name& lhs, const logical_name& rhs) {
+    return lhs.id().value() < rhs.id().value();
 }
 
 }
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_name;
+
 entities::structural::object& object_templates_transform::
-find_object(const entities::name& n, entities::model& m) {
-    auto i(m.structural_elements().objects().find(n.qualified().dot()));
+find_object(const logical_name& n, entities::model& m) {
+    auto i(m.structural_elements().objects().find(n.id()));
     if (i == m.structural_elements().objects().end()) {
         const auto id(n.qualified().dot());
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
@@ -78,20 +81,19 @@ find_object(const entities::name& n, entities::model& m) {
 }
 
 entities::structural::object_template& object_templates_transform::
-resolve_object_template(const entities::name& owner,
-    const entities::name& object_template_name, entities::model& m) {
+resolve_object_template(const logical_name& owner,
+    const logical_name& object_template_name, entities::model& m) {
     using helpers::resolver;
     const auto& n(object_template_name);
     const auto on(resolver::try_resolve_object_template_name(owner, n, m));
     if (!on) {
-        const auto id(n.qualified().dot());
+        const auto id(n.id());
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
-            transformation_error(object_template_not_found + id));
+            transformation_error(object_template_not_found + id.value()));
     }
 
-    auto i(m.structural_elements().object_templates().find(
-            on->qualified().dot()));
+    auto i(m.structural_elements().object_templates().find(on->id()));
     if (i == m.structural_elements().object_templates().end()) {
         const auto id(on->qualified().dot());
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
@@ -102,8 +104,8 @@ resolve_object_template(const entities::name& owner,
 }
 
 void object_templates_transform::
-remove_duplicates(std::list<entities::name>& names) {
-    std::unordered_set<entities::name> processed;
+remove_duplicates(std::list<logical_name>& names) {
+    std::unordered_set<logical_name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
@@ -126,9 +128,8 @@ remove_duplicates(std::list<entities::name>& names) {
 
 void object_templates_transform::
 expand_object(entities::structural::object& o, entities::model& m,
-    std::unordered_set<entities::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding object: "
-                             << o.name().qualified().dot();
+    std::unordered_set<logical_name>& processed_names) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed.";
@@ -146,7 +147,7 @@ expand_object(entities::structural::object& o, entities::model& m,
      * expansion including their parents and so on. We can rely on the
      * object templates'' @e parents container for this.
      */
-    std::list<entities::name> expanded_parents;
+    std::list<logical_name> expanded_parents;
     for (auto& otn : o.object_templates()) {
         auto& ot(resolve_object_template(o.name(), otn, m));
         expanded_parents.push_back(ot.name());
@@ -176,10 +177,10 @@ expand_object(entities::structural::object& o, entities::model& m,
      */
     BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set diff.";
 
-    std::set<entities::name> ours;
+    std::set<logical_name> ours;
     ours.insert(expanded_parents.begin(), expanded_parents.end());
 
-    std::set<entities::name> theirs;
+    std::set<logical_name> theirs;
     const auto& n(o.parents().front());
     auto& parent(find_object(n, m));
     expand_object(parent, m, processed_names);
@@ -192,7 +193,7 @@ expand_object(entities::structural::object& o, entities::model& m,
      * We want to only instantiate object templates which have not yet
      * been instantiated by any of our parents.
      */
-    std::set<entities::name> diff;
+    std::set<logical_name> diff;
     std::set_difference(ours.begin(), ours.end(), theirs.begin(), theirs.end(),
         std::inserter(diff, diff.end()));
 
@@ -210,10 +211,11 @@ expand_object(entities::structural::object& o, entities::model& m,
 }
 
 void object_templates_transform::expand_objects(entities::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << m.structural_elements().objects().size();
+    auto& se(m.structural_elements());
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << se.objects().size();
 
-    std::unordered_set<entities::name> processed_names;
-    for (auto& pair : m.structural_elements().objects()) {
+    std::unordered_set<logical_name> processed_names;
+    for (auto& pair : se.objects()) {
         auto& o(*pair.second);
         expand_object(o, m, processed_names);
     }
@@ -222,7 +224,7 @@ void object_templates_transform::expand_objects(entities::model& m) {
 void object_templates_transform::
 expand_object_template(entities::structural::object_template& otp,
     entities::model& m,
-    std::unordered_set<entities::name>& processed_names) {
+    std::unordered_set<logical_name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand object template: "
                              << otp.name().qualified().dot();
 
@@ -237,7 +239,7 @@ expand_object_template(entities::structural::object_template& otp,
         return;
     }
 
-    std::list<entities::name> expanded_parents;
+    std::list<logical_name> expanded_parents;
     for (auto& n : otp.parents()) {
         auto& parent(resolve_object_template(otp.name(), n, m));
         expand_object_template(parent, m, processed_names);
@@ -253,11 +255,12 @@ expand_object_template(entities::structural::object_template& otp,
 }
 
 void object_templates_transform::expand_object_templates(entities::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Expading object templates: "
-                             << m.structural_elements().object_templates().size();
+    auto& se(m.structural_elements());
+    BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
+                             << se.object_templates().size();
 
-    std::unordered_set<entities::name> processed_names;
-    for (auto& pair : m.structural_elements().object_templates()) {
+    std::unordered_set<logical_name> processed_names;
+    for (auto& pair : se.object_templates()) {
         auto& otp(*pair.second);
         expand_object_template(otp, m, processed_names);
     }

@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.logical/types/helpers/mapping_value.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
 
@@ -47,7 +47,7 @@ public:
 
 public:
     mapping(
-        const std::string& agnostic_id,
+        const dogen::identification::entities::logical_id& agnostic_id,
         const std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value>& by_technical_space);
 
 public:
@@ -55,10 +55,10 @@ public:
      * @brief Technical space agnostic ID of the element we're mapping from.
      */
     /**@{*/
-    const std::string& agnostic_id() const;
-    std::string& agnostic_id();
-    void agnostic_id(const std::string& v);
-    void agnostic_id(const std::string&& v);
+    const dogen::identification::entities::logical_id& agnostic_id() const;
+    dogen::identification::entities::logical_id& agnostic_id();
+    void agnostic_id(const dogen::identification::entities::logical_id& v);
+    void agnostic_id(const dogen::identification::entities::logical_id&& v);
     /**@}*/
 
     /**
@@ -82,7 +82,7 @@ public:
     mapping& operator=(mapping other);
 
 private:
-    std::string agnostic_id_;
+    dogen::identification::entities::logical_id agnostic_id_;
     std::unordered_map<dogen::identification::entities::technical_space, dogen::logical::helpers::mapping_value> by_technical_space_;
 };
 

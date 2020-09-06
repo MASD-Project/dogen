@@ -108,14 +108,14 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static entities::structural::object&
-    find_object(const entities::name& n, entities::model& m);
+    find_object(const identification::entities::logical_name& n, entities::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
     static entities::structural::object_template&
-    find_object_template(const entities::name& n, entities::model& m);
+    find_object_template(const identification::entities::logical_name& n, entities::model& m);
 
 private:
     /**

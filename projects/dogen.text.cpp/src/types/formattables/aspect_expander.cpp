@@ -22,6 +22,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -92,10 +93,11 @@ make_aspect_properties(const feature_group& fg,
     return boost::optional<aspect_properties>();
 }
 
-aspect_expander::aspect_properties_type aspect_expander::
-obtain_aspect_properties(
+aspect_expander::aspect_properties_type
+aspect_expander::obtain_aspect_properties(
     const variability::entities::feature_model& feature_model,
-    const std::unordered_map<std::string, formattable>& formattables) const {
+    const std::unordered_map<identification::entities::logical_id,
+    formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
 
@@ -118,7 +120,8 @@ obtain_aspect_properties(
     return r;
 }
 
-void aspect_expander::walk_name_tree(const logical::entities::name_tree& nt,
+void aspect_expander::
+walk_name_tree(const identification::entities::logical_name_tree& nt,
     const bool is_top_level, const aspect_properties_type& element_aps,
     aspect_properties& ap) const {
 
@@ -128,7 +131,7 @@ void aspect_expander::walk_name_tree(const logical::entities::name_tree& nt,
     if (is_top_level && nt.is_current_simple_type())
         ap.requires_manual_default_constructor(true);
 
-    const auto i(element_aps.find(nt.current().qualified().dot()));
+    const auto i(element_aps.find(nt.current().id()));
     if (i == element_aps.end())
         return;
 
@@ -158,7 +161,8 @@ aspect_properties aspect_expander::compute_aspect_properties(
     return r;
 }
 
-void aspect_expander::populate_aspect_properties(const std::string& element_id,
+void aspect_expander::populate_aspect_properties(
+    const identification::entities::logical_id& element_id,
     const aspect_properties_type& element_aps,
     formattable& formattable) const {
 
@@ -206,7 +210,8 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
 
 void aspect_expander::
 populate_aspect_properties(const aspect_properties_type& element_aps,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    std::unordered_map<identification::entities::logical_id,
+    formattable>& formattables) const {
 
     for (auto& pair : formattables) {
         const auto id(pair.first);

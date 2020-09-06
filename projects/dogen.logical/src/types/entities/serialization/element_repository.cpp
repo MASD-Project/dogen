@@ -32,7 +32,7 @@ const boost::shared_ptr<dogen::logical::entities::serialization::type_registrar>
 
 namespace dogen::logical::entities::serialization {
 
-element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& type_registrars)
+element_repository::element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& type_registrars)
     : type_registrars_(type_registrars) { }
 
 void element_repository::swap(element_repository& other) noexcept {
@@ -50,19 +50,19 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& element_repository::type_registrars() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& element_repository::type_registrars() const {
     return type_registrars_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& element_repository::type_registrars() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& element_repository::type_registrars() {
     return type_registrars_;
 }
 
-void element_repository::type_registrars(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& v) {
+void element_repository::type_registrars(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >& v) {
     type_registrars_ = v;
 }
 
-void element_repository::type_registrars(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >&& v) {
+void element_repository::type_registrars(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::serialization::type_registrar> >&& v) {
     type_registrars_ = std::move(v);
 }
 

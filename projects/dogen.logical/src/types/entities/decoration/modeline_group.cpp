@@ -19,28 +19,20 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/decoration/modeline_io.hpp"
 #include "dogen.logical/types/entities/decoration/modeline.hpp"
 #include "dogen.logical/types/entities/decoration/modeline_group.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_id>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -90,19 +82,19 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 namespace dogen::logical::entities::decoration {
 
 modeline_group::modeline_group(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
     const dogen::logical::entities::generability_status generability_status,
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-    const std::list<std::string>& contains,
+    const std::list<dogen::identification::entities::logical_id>& contains,
     const std::list<boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines)
     : dogen::logical::entities::element(
       name,
@@ -173,19 +165,19 @@ modeline_group& modeline_group::operator=(modeline_group other) {
     return *this;
 }
 
-const std::list<std::string>& modeline_group::contains() const {
+const std::list<dogen::identification::entities::logical_id>& modeline_group::contains() const {
     return contains_;
 }
 
-std::list<std::string>& modeline_group::contains() {
+std::list<dogen::identification::entities::logical_id>& modeline_group::contains() {
     return contains_;
 }
 
-void modeline_group::contains(const std::list<std::string>& v) {
+void modeline_group::contains(const std::list<dogen::identification::entities::logical_id>& v) {
     contains_ = v;
 }
 
-void modeline_group::contains(const std::list<std::string>&& v) {
+void modeline_group::contains(const std::list<dogen::identification::entities::logical_id>&& v) {
     contains_ = std::move(v);
 }
 

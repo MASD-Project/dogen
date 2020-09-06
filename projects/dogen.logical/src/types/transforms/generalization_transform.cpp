@@ -19,17 +19,19 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/features/generalization.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/generalization_transform.hpp"
@@ -49,23 +51,20 @@ const std::string parent_name_conflict(
 
 }
 
-namespace dogen::logical::entities {
-
-inline bool operator<(const name& lhs, const name& rhs) {
-    return lhs.qualified().dot() < rhs.qualified().dot();
-}
-
-}
-
 namespace dogen::logical::transforms {
 
-std::unordered_set<std::string> generalization_transform::
-update_and_collect_parent_ids(const helpers::indices& idx,
-    const variability::entities::feature_model& fm, entities::model& m) {
+
+using identification::entities::logical_id;
+using identification::entities::logical_name;
+
+std::unordered_set<logical_id>
+generalization_transform::update_and_collect_parent_ids(
+    const helpers::indices& idx, const variability::entities::feature_model& fm,
+    entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
-    std::unordered_set<std::string> r;
+    std::unordered_set<logical_id> r;
     using features::generalization;
     const auto fg(generalization::make_feature_group(fm));
     for (auto& pair : m.structural_elements().objects()) {
@@ -112,7 +111,8 @@ update_and_collect_parent_ids(const helpers::indices& idx,
              * Convert the string obtained via meta-data into a logical
              * name and set it as our parent name.
              */
-            const auto pn(helpers::name_builder::build(scfg.parent));
+            identification::helpers::logical_name_builder b;
+            const auto pn(b.build(scfg.parent));
             o.parents().push_back(pn);
         }
 
@@ -137,12 +137,12 @@ update_and_collect_parent_ids(const helpers::indices& idx,
          * Note that we are also gathering the parent names after
          * resolution.
          */
-        std::list<entities::name> resolved_parents;
+        std::list<logical_name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
             resolved_parents.push_back(resolved_pn);
 
-            const auto& pid(resolved_pn.qualified().dot());
+            const auto& pid(resolved_pn.id());
             BOOST_LOG_SEV(lg, trace) << "Resolved parent: " << pid;
             r.insert(pid);
         }
@@ -154,8 +154,8 @@ update_and_collect_parent_ids(const helpers::indices& idx,
     return r;
 }
 
-void generalization_transform::walk_up_generalization_tree(
-    const entities::name &leaf, entities::model& m,
+void generalization_transform::
+walk_up_generalization_tree(const logical_name &leaf, entities::model& m,
     entities::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
@@ -197,7 +197,7 @@ void generalization_transform::walk_up_generalization_tree(
      * Now we climb up the inheritance graph.
      */
     for (const auto& pn : o.parents()) {
-        const auto& pid(pn.qualified().dot());
+        const auto& pid(pn.id());
         BOOST_LOG_SEV(lg, trace) << "Processing parent: " << pid;
 
         /*
@@ -206,7 +206,8 @@ void generalization_transform::walk_up_generalization_tree(
         auto i(m.structural_elements().objects().find(pid));
         if (i == m.structural_elements().objects().end()) {
             BOOST_LOG_SEV(lg, error) << parent_not_found << pid;
-            BOOST_THROW_EXCEPTION(transformation_error(parent_not_found + pid));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(parent_not_found + pid.value()));
         }
 
         auto& parent(*i->second);
@@ -236,7 +237,7 @@ void generalization_transform::walk_up_generalization_tree(
 }
 
 void generalization_transform::populate_generalizable_properties(
-    const std::unordered_set<std::string>& parent_ids, entities::model& m) {
+    const std::unordered_set<logical_id>& parent_ids, entities::model& m) {
 
     for (auto& pair : m.structural_elements().objects()) {
         const auto& id(pair.first);
@@ -271,7 +272,7 @@ void generalization_transform::populate_generalizable_properties(
              if (*o.is_final_requested() && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
                  BOOST_THROW_EXCEPTION(
-                     transformation_error(incompatible_is_final + id));
+                     transformation_error(incompatible_is_final + id.value()));
              }
              o.is_final(*o.is_final_requested());
          } else {
@@ -304,7 +305,10 @@ void generalization_transform::populate_generalizable_properties(
 void generalization_transform::sort_leaves(entities::model& m) {
     for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
-        o.leaves().sort();
+        o.leaves().sort(
+            [](const logical_name& lhs, const logical_name& rhs) {
+                return lhs.id().value() < rhs.id().value();
+            });
     }
 }
 

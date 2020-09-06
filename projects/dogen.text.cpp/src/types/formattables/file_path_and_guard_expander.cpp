@@ -63,7 +63,7 @@ expand(const transforms::repository& frp, const locator& l, model& fm) const {
             const auto arch(pair.first);
             auto& art_props(pair.second);
 
-            const auto i(safba.find(arch.value()));
+            const auto i(safba.find(arch));
             if (i == safba.end()) {
                 BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
                 BOOST_THROW_EXCEPTION(

@@ -34,7 +34,7 @@ namespace dogen::logical::entities::structural {
 
 enumerator::enumerator(
     const std::string& documentation,
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::logical::entities::stereotypes& stereotypes,
     const std::string& value)
@@ -83,19 +83,19 @@ void enumerator::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::logical::entities::name& enumerator::name() const {
+const dogen::identification::entities::logical_name& enumerator::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& enumerator::name() {
+dogen::identification::entities::logical_name& enumerator::name() {
     return name_;
 }
 
-void enumerator::name(const dogen::logical::entities::name& v) {
+void enumerator::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void enumerator::name(const dogen::logical::entities::name&& v) {
+void enumerator::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

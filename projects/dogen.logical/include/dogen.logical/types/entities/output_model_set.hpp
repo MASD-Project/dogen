@@ -27,8 +27,8 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 
 namespace dogen::logical::entities {
 
@@ -44,7 +44,7 @@ public:
 
 public:
     output_model_set(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::list<dogen::logical::entities::model>& models);
 
 public:
@@ -52,10 +52,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
     /**@}*/
 
     /**
@@ -79,7 +79,7 @@ public:
     output_model_set& operator=(output_model_set other);
 
 private:
-    dogen::logical::entities::name name_;
+    dogen::identification::entities::logical_name name_;
     std::list<dogen::logical::entities::model> models_;
 };
 

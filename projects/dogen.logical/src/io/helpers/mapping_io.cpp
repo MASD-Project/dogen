@@ -19,18 +19,10 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include "dogen.logical/io/helpers/mapping_io.hpp"
 #include "dogen.logical/io/helpers/mapping_value_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
 
 namespace std {
 
@@ -55,7 +47,7 @@ namespace dogen::logical::helpers {
 std::ostream& operator<<(std::ostream& s, const mapping& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::logical::helpers::mapping\"" << ", "
-      << "\"agnostic_id\": " << "\"" << tidy_up_string(v.agnostic_id()) << "\"" << ", "
+      << "\"agnostic_id\": " << v.agnostic_id() << ", "
       << "\"by_technical_space\": " << v.by_technical_space()
       << " }";
     return(s);

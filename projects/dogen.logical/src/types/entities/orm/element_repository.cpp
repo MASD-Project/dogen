@@ -32,7 +32,7 @@ const boost::shared_ptr<dogen::logical::entities::orm::common_odb_options>& rhs)
 
 namespace dogen::logical::entities::orm {
 
-element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options)
+element_repository::element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& common_odb_options)
     : common_odb_options_(common_odb_options) { }
 
 void element_repository::swap(element_repository& other) noexcept {
@@ -50,19 +50,19 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& element_repository::common_odb_options() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& element_repository::common_odb_options() const {
     return common_odb_options_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& element_repository::common_odb_options() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& element_repository::common_odb_options() {
     return common_odb_options_;
 }
 
-void element_repository::common_odb_options(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& v) {
+void element_repository::common_odb_options(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >& v) {
     common_odb_options_ = v;
 }
 
-void element_repository::common_odb_options(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >&& v) {
+void element_repository::common_odb_options(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::orm::common_odb_options> >&& v) {
     common_odb_options_ = std::move(v);
 }
 

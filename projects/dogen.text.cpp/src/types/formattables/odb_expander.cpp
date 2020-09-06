@@ -24,6 +24,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/entities/orm/odb_options.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
@@ -59,7 +60,7 @@ public:
 
 private:
     logical::entities::orm::odb_options
-    make_options(const logical::entities::name& n);
+    make_options(const identification::entities::logical_name& n);
 
 public:
     using element_visitor::visit;
@@ -73,7 +74,7 @@ private:
 updator::updator(const locator& l) : locator_(l) {}
 
 logical::entities::orm::odb_options
-updator::make_options(const logical::entities::name& n) {
+updator::make_options(const identification::entities::logical_name& n) {
     logical::entities::orm::odb_options r;
     const auto odb_arch(transforms::odb::traits::class_header_archetype_qn());
     const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(n, odb_arch));

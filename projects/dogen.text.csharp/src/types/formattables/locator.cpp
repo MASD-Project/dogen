@@ -49,7 +49,7 @@ locator::locator(const boost::filesystem::path& output_directory_path,
     const variability::entities::feature_model& fm,
     const transforms::repository& frp,
     const variability::entities::configuration& rcfg,
-    const logical::entities::name& model_name,
+    const identification::entities::logical_name& model_name,
     const bool enable_backend_directories)
     : model_name_(model_name),
       configuration_(make_configuration(fm, frp, rcfg)),
@@ -169,7 +169,7 @@ configuration_for_archetype(const std::string& archetype) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const logical::entities::name& model_name, const locator_configuration& lc,
+    const identification::entities::logical_name& model_name, const locator_configuration& lc,
     const bool enable_backend_directories) const {
 
     boost::filesystem::path r;
@@ -186,7 +186,7 @@ boost::filesystem::path locator::make_project_path(
 
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
-    const logical::entities::name& n) const {
+    const identification::entities::logical_name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -250,7 +250,7 @@ boost::filesystem::path locator::make_relative_path(
 }
 
 boost::filesystem::path locator::make_full_path(
-    const logical::entities::name& n, const std::string& archetype) const {
+    const identification::entities::logical_name& n, const std::string& archetype) const {
 
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, extension, n));
@@ -259,7 +259,7 @@ boost::filesystem::path locator::make_full_path(
 }
 
 boost::filesystem::path locator::make_full_path_for_project(
-    const logical::entities::name& n, const std::string& archetype) const {
+    const identification::entities::logical_name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
@@ -267,7 +267,7 @@ boost::filesystem::path locator::make_full_path_for_project(
 }
 
 boost::filesystem::path locator::make_full_path_for_solution(
-    const logical::entities::name& n, const std::string& archetype) const {
+    const identification::entities::logical_name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
@@ -275,7 +275,7 @@ boost::filesystem::path locator::make_full_path_for_solution(
 }
 
 boost::filesystem::path locator::make_full_path_for_visual_studio_project(
-    const logical::entities::name& n, const std::string& archetype) const {
+    const identification::entities::logical_name& n, const std::string& archetype) const {
     auto temp(n);
     using boost::algorithm::join;
     temp.simple(join(n.location().model_modules(), ".") + ".csproj");
@@ -284,7 +284,7 @@ boost::filesystem::path locator::make_full_path_for_visual_studio_project(
 
 
 boost::filesystem::path locator::make_full_path_for_visual_studio_solution(
-    const logical::entities::name& n, const std::string& archetype) const {
+    const identification::entities::logical_name& n, const std::string& archetype) const {
     auto temp(n);
     using boost::algorithm::join;
     temp.simple(join(n.location().model_modules(), ".") + ".sln");

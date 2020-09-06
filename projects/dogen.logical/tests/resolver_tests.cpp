@@ -94,10 +94,10 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
         if (o.local_attributes().size() == 1) {
             auto& t(o.local_attributes().begin()->parsed_type().current());
             t.location().model_modules().clear();
-            using dogen::logical::entities::fully_qualified_representation;
-            const fully_qualified_representation
-                fqr(t.simple(), t.simple(), t.simple());
-            t.qualified(fqr);
+            using dogen::identification::entities::qualified_representations;
+            const qualified_representations
+                qr(t.simple(), t.simple(), t.simple());
+            t.qualified(qr);
         }
     }
     const auto idx(indexer::index(m));

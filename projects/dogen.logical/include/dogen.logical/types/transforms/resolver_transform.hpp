@@ -26,10 +26,9 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
 

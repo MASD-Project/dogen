@@ -43,7 +43,7 @@ archetype_text_templating::archetype_text_templating(archetype_text_templating&&
 archetype_text_templating::archetype_text_templating(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& stitch_template_content,
-    const boost::optional<dogen::logical::entities::name>& wale_template,
+    const boost::optional<dogen::identification::entities::logical_name>& wale_template,
     const std::string& wale_template_content,
     const std::string& rendered_stitch_template,
     const dogen::logical::entities::physical::relations& relations)
@@ -111,19 +111,19 @@ void archetype_text_templating::stitch_template_content(const std::string&& v) {
     stitch_template_content_ = std::move(v);
 }
 
-const boost::optional<dogen::logical::entities::name>& archetype_text_templating::wale_template() const {
+const boost::optional<dogen::identification::entities::logical_name>& archetype_text_templating::wale_template() const {
     return wale_template_;
 }
 
-boost::optional<dogen::logical::entities::name>& archetype_text_templating::wale_template() {
+boost::optional<dogen::identification::entities::logical_name>& archetype_text_templating::wale_template() {
     return wale_template_;
 }
 
-void archetype_text_templating::wale_template(const boost::optional<dogen::logical::entities::name>& v) {
+void archetype_text_templating::wale_template(const boost::optional<dogen::identification::entities::logical_name>& v) {
     wale_template_ = v;
 }
 
-void archetype_text_templating::wale_template(const boost::optional<dogen::logical::entities::name>&& v) {
+void archetype_text_templating::wale_template(const boost::optional<dogen::identification::entities::logical_name>&& v) {
     wale_template_ = std::move(v);
 }
 

@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
@@ -32,7 +33,7 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/entities/structural/object_template.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/global_module_transform.hpp"
 
@@ -51,23 +52,26 @@ const std::string model_already_has_global_module(
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_name;
+using identification::entities::model_type;
+
 template<typename AssociativeContainerOfContainable>
-inline void add_containing_module_to_non_contained_entities(
-    const entities::name& container_name,
-    AssociativeContainerOfContainable& c) {
+inline void
+add_containing_module_to_non_contained_entities(
+    const logical_name& container_name, AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(*pair.second);
-        if (s.contained_by().empty())
-            s.contained_by(container_name.qualified().dot());
+        if (s.contained_by().value().empty())
+            s.contained_by(container_name.id());
     }
 }
 
-boost::shared_ptr<entities::structural::module> global_module_transform::
-create_global_module(const identification::entities::model_type mt) {
+boost::shared_ptr<entities::structural::module>
+global_module_transform::create_global_module(const model_type mt) {
     const std::string gm("global_module");
-    const entities::fully_qualified_representation fqr(gm, gm, gm);
+    const identification::entities::qualified_representations qr(gm, gm, gm);
     auto r(boost::make_shared<entities::structural::module>());
-    r->name().qualified(fqr);
+    r->name().qualified(qr);
     r->provenance().model_type(mt);
     r->documentation(global_module_doc);
     r->is_global_module(true);
@@ -78,35 +82,33 @@ create_global_module(const identification::entities::model_type mt) {
     using variability::entities::configuration;
     r->configuration(boost::make_shared<configuration>());
     r->configuration()->name().simple(gm);
-    r->configuration()->name().qualified(fqr.dot());
+    r->configuration()->name().qualified(qr.dot());
 
     return r;
 }
 
-entities::name global_module_transform::
-inject_global_module(entities::model& m) {
+logical_name
+global_module_transform::inject_global_module(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
-                             << m.name().qualified().dot();
+                             <<m.name().id();
 
     const auto gm(create_global_module(m.provenance().model_type()));
     const auto r(gm->name());
-    const auto i(m.structural_elements().modules().find(r.qualified().dot()));
+    const auto i(m.structural_elements().modules().find(r.id()));
     if (i != m.structural_elements().modules().end()) {
-        const auto id(m.name().qualified().dot());
+        const auto id(m.name().id());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(model_already_has_global_module + id));
+        BOOST_THROW_EXCEPTION(transformation_error(
+                model_already_has_global_module + id.value()));
     }
-    m.structural_elements().modules().insert(
-        std::make_pair(r.qualified().dot(), gm));
+    m.structural_elements().modules().insert(std::make_pair(r.id(), gm));
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
     return r;
 }
 
-void global_module_transform::
-update_element_containment(const entities::name& global_module_name,
-    entities::model& m) {
+void global_module_transform::update_element_containment(
+    const logical_name& global_module_name, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating element containment.";
 
     const auto& gmn(global_module_name);
@@ -130,8 +132,7 @@ update_element_containment(const entities::name& global_module_name,
     BOOST_LOG_SEV(lg, debug) << "Finished updating element containment.";
 }
 
-void global_module_transform::
-apply(const context& ctx, entities::model& m) {
+void global_module_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

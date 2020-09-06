@@ -27,11 +27,12 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
-#include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/features/enumeration.hpp"
 #include "dogen.logical/types/features/enumerator.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -65,7 +66,7 @@ namespace dogen::logical::transforms {
 namespace {
 
 void populate_enumeration(const features::enumeration::feature_group& fg,
-    const entities::name& default_underlying_element_name,
+    const identification::entities::logical_name& default_underlying_element_name,
     entities::structural::enumeration& e) {
 
     /*
@@ -90,7 +91,8 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
          * Convert the string obtained via meta-data into a logical name and
          * set it as our underlying element name.
          */
-        const auto ue(helpers::name_builder::build(scfg.underlying_element));
+        identification::helpers::logical_name_builder b;
+        const auto ue(b.build(scfg.underlying_element));
         e.underlying_element(ue);
         return;
     }
@@ -125,7 +127,7 @@ void populate_enumerator(const features::enumerator::feature_group &fg,
 
 }
 
-entities::name enumerations_transform::
+identification::entities::logical_name enumerations_transform::
 obtain_enumeration_default_underlying_element_name(const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: "
@@ -136,7 +138,7 @@ obtain_enumeration_default_underlying_element_name(const entities::model& m) {
      * be the default type to use for enumerations. We expect one and
      * only type to have been assigned this role.
      */
-    entities::name r;
+    identification::entities::logical_name r;
     bool found(false);
     for (const auto& pair : m.structural_elements().builtins()) {
         const auto& b(*pair.second);
@@ -182,13 +184,13 @@ enumerations_transform::obtain_invalid_enumerator_simple_name(
 }
 
 entities::structural::enumerator
-enumerations_transform::make_invalid_enumerator(const entities::name& n,
+enumerations_transform::make_invalid_enumerator(const identification::entities::logical_name& n,
     const identification::entities::technical_space ts) {
     entities::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     const auto sn(obtain_invalid_enumerator_simple_name(ts));
     r.name(nf.build_attribute_name(n, sn));
 

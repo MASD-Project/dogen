@@ -23,7 +23,7 @@
 namespace dogen::logical::entities {
 
 output_model_set::output_model_set(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::list<dogen::logical::entities::model>& models)
     : name_(name),
       models_(models) { }
@@ -45,19 +45,19 @@ output_model_set& output_model_set::operator=(output_model_set other) {
     return *this;
 }
 
-const dogen::logical::entities::name& output_model_set::name() const {
+const dogen::identification::entities::logical_name& output_model_set::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& output_model_set::name() {
+dogen::identification::entities::logical_name& output_model_set::name() {
     return name_;
 }
 
-void output_model_set::name(const dogen::logical::entities::name& v) {
+void output_model_set::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void output_model_set::name(const dogen::logical::entities::name&& v) {
+void output_model_set::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 

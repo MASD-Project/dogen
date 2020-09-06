@@ -35,7 +35,8 @@ void reducer::reduce(model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Starting reduction.";
     BOOST_LOG_SEV(lg, debug) << "Original size: " << fm.formattables().size();
 
-    std::unordered_map<std::string, formattable> reduced;
+    using identification::entities::logical_id;
+    std::unordered_map<logical_id, formattable> reduced;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());

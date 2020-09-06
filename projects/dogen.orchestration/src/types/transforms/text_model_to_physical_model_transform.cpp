@@ -24,6 +24,7 @@
 #include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/artefact_set.hpp"
@@ -79,7 +80,7 @@ apply(const text::transforms::context& ctx,
         prov.logical_name().id(id);
         prov.injection(m.provenance());
 
-        logical_meta_id mid(m.meta_name().qualified().dot());
+        logical_meta_id mid(m.meta_name().id());
         prov.logical_meta_name().id(mid);
         pm.provenance(prov);
 

@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/io/entities/physical/part_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 
 namespace dogen::logical::entities::physical {

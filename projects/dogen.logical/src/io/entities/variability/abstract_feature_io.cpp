@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
-#include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.variability/io/entities/value_type_io.hpp"
 #include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_tree_io.hpp"
 #include "dogen.logical/io/entities/variability/abstract_feature_io.hpp"
 
 namespace dogen::logical::entities::variability {

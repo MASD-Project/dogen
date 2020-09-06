@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/mapping/fixed_mappable_fwd.hpp"
 #include "dogen.logical/types/entities/mapping/extensible_mappable_fwd.hpp"
 
@@ -43,19 +44,19 @@ public:
 
 public:
     element_repository(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables);
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables,
+        const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables();
-    void extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& v);
-    void extensible_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& extensible_mappables();
+    void extensible_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >& v);
+    void extensible_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> >&& v);
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables();
-    void fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& v);
-    void fixed_mappables(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& fixed_mappables();
+    void fixed_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >& v);
+    void fixed_mappables(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -68,8 +69,8 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> > extensible_mappables_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> > fixed_mappables_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::extensible_mappable> > extensible_mappables_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::mapping::fixed_mappable> > fixed_mappables_;
 };
 
 }

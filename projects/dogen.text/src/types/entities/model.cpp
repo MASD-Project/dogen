@@ -56,11 +56,11 @@ model::model(model&& rhs)
       facet_properties_(std::move(rhs.facet_properties_)) { }
 
 model::model(
-    const dogen::logical::entities::name& name,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_name& name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
-    const std::unordered_set<dogen::logical::entities::name>& leaves,
+    const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references,
+    const std::unordered_set<dogen::identification::entities::logical_name>& leaves,
     const std::list<dogen::text::entities::element_artefacts>& elements,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
     const bool has_generatable_types,
@@ -134,35 +134,35 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::logical::entities::name& model::name() const {
+const dogen::identification::entities::logical_name& model::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& model::name() {
+dogen::identification::entities::logical_name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::logical::entities::name& v) {
+void model::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::logical::entities::name&& v) {
+void model::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::logical::entities::name& model::meta_name() const {
+const dogen::identification::entities::logical_meta_name& model::meta_name() const {
     return meta_name_;
 }
 
-dogen::logical::entities::name& model::meta_name() {
+dogen::identification::entities::logical_meta_name& model::meta_name() {
     return meta_name_;
 }
 
-void model::meta_name(const dogen::logical::entities::name& v) {
+void model::meta_name(const dogen::identification::entities::logical_meta_name& v) {
     meta_name_ = v;
 }
 
-void model::meta_name(const dogen::logical::entities::name&& v) {
+void model::meta_name(const dogen::identification::entities::logical_meta_name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -182,35 +182,35 @@ void model::provenance(const dogen::identification::entities::injection_provenan
     provenance_ = std::move(v);
 }
 
-const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() const {
+const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& model::references() {
+std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
+void model::references(const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>&& v) {
+void model::references(const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<dogen::logical::entities::name>& model::leaves() const {
+const std::unordered_set<dogen::identification::entities::logical_name>& model::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::logical::entities::name>& model::leaves() {
+std::unordered_set<dogen::identification::entities::logical_name>& model::leaves() {
     return leaves_;
 }
 
-void model::leaves(const std::unordered_set<dogen::logical::entities::name>& v) {
+void model::leaves(const std::unordered_set<dogen::identification::entities::logical_name>& v) {
     leaves_ = v;
 }
 
-void model::leaves(const std::unordered_set<dogen::logical::entities::name>&& v) {
+void model::leaves(const std::unordered_set<dogen::identification::entities::logical_name>&& v) {
     leaves_ = std::move(v);
 }
 

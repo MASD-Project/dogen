@@ -32,7 +32,8 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.text.cpp/types/formattables/formattable.hpp"
 #include "dogen.text.cpp/types/formattables/aspect_properties.hpp"
@@ -56,16 +57,18 @@ private:
         const variability::entities::configuration& cfg) const;
 
 private:
-    typedef std::unordered_map<std::string, aspect_properties>
+    typedef std::unordered_map<identification::entities::logical_id,
+                               aspect_properties>
     aspect_properties_type;
 
     aspect_properties_type
     obtain_aspect_properties(
         const variability::entities::feature_model& feature_model,
-        const std::unordered_map<std::string, formattable>& formattables) const;
+        const std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 private:
-    void walk_name_tree(const logical::entities::name_tree& nt,
+    void walk_name_tree(const identification::entities::logical_name_tree& nt,
         const bool is_top_level, const aspect_properties_type& element_aps,
         aspect_properties& ap) const;
 
@@ -73,13 +76,15 @@ private:
         const aspect_properties_type& element_aps,
         const std::list<logical::entities::attribute>& attrs) const;
 
-    void populate_aspect_properties(const std::string& element_id,
+    void populate_aspect_properties(
+        const identification::entities::logical_id& element_id,
         const aspect_properties_type& element_aps,
         formattable& formattable) const;
 
     void populate_aspect_properties(
         const aspect_properties_type& element_aps,
-        std::unordered_map<std::string, formattable>& formattables) const;
+        std::unordered_map<identification::entities::logical_id,
+        formattable>& formattables) const;
 
 public:
     void expand(const variability::entities::feature_model& feature_model,

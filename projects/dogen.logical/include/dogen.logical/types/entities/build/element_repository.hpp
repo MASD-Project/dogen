@@ -25,11 +25,12 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.logical/types/entities/build/cmakelists_fwd.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
 
 namespace dogen::logical::entities::build {
 
@@ -41,13 +42,13 @@ public:
     ~element_repository() = default;
 
 public:
-    explicit element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists);
+    explicit element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists();
-    void cmakelists(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& v);
-    void cmakelists(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists() const;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& cmakelists();
+    void cmakelists(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >& v);
+    void cmakelists(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> >&& v);
 
 public:
     bool operator==(const element_repository& rhs) const;
@@ -60,7 +61,7 @@ public:
     element_repository& operator=(element_repository other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::build::cmakelists> > cmakelists_;
+    std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::build::cmakelists> > cmakelists_;
 };
 
 }

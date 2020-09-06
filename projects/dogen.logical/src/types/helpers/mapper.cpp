@@ -21,6 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
@@ -43,7 +44,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("logical.helpers.mapper"));
 
-const std::string lam_pointer("lam.pointer");
+const dogen::identification::entities::logical_id lam_pointer("lam.pointer");
 
 const std::string missing_mapping("Mapping not found for ID: ");
 const std::string unsupported_technical_space(
@@ -55,11 +56,12 @@ const std::string root_module_not_found("Root module not found: ");
 
 namespace dogen::logical::helpers {
 
+using identification::entities::logical_name_tree;
+
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
 
-entities::model mapper::
-clone(const entities::model& m) const {
+entities::model mapper::clone(const entities::model& m) const {
     auto r(m);
 
     /*
@@ -92,18 +94,20 @@ clone(const entities::model& m) const {
      * Copy across the modules, and sync up the root module.
      */
     r.structural_elements().modules(clone(m.structural_elements().modules()));
-    const auto rm_id(m.name().qualified().dot());
+    const auto rm_id(m.name().id());
     const auto i(r.structural_elements().modules().find(rm_id));
     if (i == r.structural_elements().modules().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << rm_id;
-        BOOST_THROW_EXCEPTION(mapping_error(root_module_not_found + rm_id));
+        BOOST_THROW_EXCEPTION(
+            mapping_error(root_module_not_found + rm_id.value()));
     }
     r.root_module(i->second);
 
     return r;
 }
 
-const std::unordered_map<std::string, entities::name>&
+const std::unordered_map<identification::entities::logical_id,
+                         identification::entities::logical_name>&
 mapper::translations_for_technical_space(const mapping_set& ms,
     const identification::entities::technical_space from,
     const identification::entities::technical_space to) const {
@@ -123,12 +127,14 @@ mapper::translations_for_technical_space(const mapping_set& ms,
     BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
 }
 
-std::unordered_map<std::string, entities::name>
+std::unordered_map<identification::entities::logical_id,
+                   identification::entities::logical_name>
 mapper::injections_for_technical_space(const mapping_set& ms,
     const identification::entities::technical_space ts,
     const entities::model& m) const {
 
-    std::unordered_map<std::string, entities::name> r;
+    std::unordered_map<identification::entities::logical_id,
+                       identification::entities::logical_name> r;
     const auto cpp(identification::entities::technical_space::cpp);
     if (ts != cpp)
         return r;
@@ -179,9 +185,11 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
     return r;
 }
 
-entities::name_tree mapper::walk_name_tree(const mapping_context& mc,
-    const entities::name_tree& nt, const bool skip_injection) const {
-    const auto id(nt.current().qualified().dot());
+logical_name_tree
+mapper::walk_name_tree(const mapping_context& mc,
+    const logical_name_tree& nt,
+    const bool skip_injection) const {
+    const auto id(nt.current().id());
     if (mc.erasures().find(id) != mc.erasures().end()) {
         /*
          * We need to erase this type from the name tree. We do this
@@ -208,7 +216,7 @@ entities::name_tree mapper::walk_name_tree(const mapping_context& mc,
      * parameter. We do not attempt injections if we are already under
      * an injection or else we would create an infinite loop.
      */
-    entities::name_tree r;
+    logical_name_tree r;
     if (!skip_injection) {
         const auto i(mc.injections().find(id));
         if (i != mc.injections().end()) {

@@ -39,7 +39,7 @@ public:
         const logical::entities::element& e) const override;
 
     boost::filesystem::path full_path(
-        const formattables::locator& l, const logical::entities::name& n) const override;
+        const formattables::locator& l, const identification::entities::logical_name& n) const override;
 
 public:
     void apply(const context& ctx, const logical::entities::element& e,

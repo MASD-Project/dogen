@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/decoration/licence.hpp"

@@ -23,7 +23,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/associations_transform.hpp"
@@ -39,6 +39,9 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_name;
+using identification::entities::logical_name_tree;
+
 /**
  * @brief Removes duplicate names, preserving the original order
  * of elements in the list.
@@ -47,9 +50,9 @@ namespace dogen::logical::transforms {
  * @param processed list of names that have already been processed
  * somewhere else, if any.
  */
-void remove_duplicates(std::list<entities::name>& names,
-    std::unordered_set<entities::name> processed =
-    std::unordered_set<entities::name>()) {
+void remove_duplicates(std::list<logical_name>& names,
+    std::unordered_set<logical_name> processed =
+    std::unordered_set<logical_name>()) {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size() << ". Processed starts with size: "
                              << processed.size();
@@ -81,8 +84,7 @@ void remove_duplicates(std::list<entities::name>& names,
  */
 template<typename Associatable>
 void update_associations(const entities::model& m, Associatable& a,
-    const entities::name_tree& nt,
-    const bool inherit_opaqueness_from_parent) {
+    const logical_name_tree& nt, const bool inherit_opaqueness_from_parent) {
 
     const auto n(nt.current());
     if (inherit_opaqueness_from_parent)
@@ -102,7 +104,7 @@ void update_associations(const entities::model& m, Associatable& a,
      */
     bool is_first(true);
     const auto& objs(m.structural_elements().objects());
-    const auto i(objs.find(n.qualified().dot()));
+    const auto i(objs.find(n.id()));
     const auto is_associative_container(i != objs.end() &&
         i->second->is_associative_container());
 
@@ -120,7 +122,7 @@ void update_associations(const entities::model& m, Associatable& a,
 
 template<typename Associatable>
 void process(Associatable& a) {
-    std::unordered_set<entities::name> transparent_associations;
+    std::unordered_set<logical_name> transparent_associations;
     remove_duplicates(a.transparent_associations());
     for (const auto n : a.transparent_associations())
         transparent_associations.insert(n);

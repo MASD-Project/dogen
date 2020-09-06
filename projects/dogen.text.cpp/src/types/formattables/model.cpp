@@ -26,9 +26,9 @@ model::model()
     : cpp_standard_(static_cast<dogen::text::cpp::formattables::cpp_standards>(0)) { }
 
 model::model(
-    const dogen::logical::entities::name& name,
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
-    const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& formattables,
+    const dogen::identification::entities::logical_name& name,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& streaming_properties,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& formattables,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::text::cpp::formattables::facet_properties>& facet_properties,
     const dogen::text::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
@@ -72,51 +72,51 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::logical::entities::name& model::name() const {
+const dogen::identification::entities::logical_name& model::name() const {
     return name_;
 }
 
-dogen::logical::entities::name& model::name() {
+dogen::identification::entities::logical_name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::logical::entities::name& v) {
+void model::name(const dogen::identification::entities::logical_name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::logical::entities::name&& v) {
+void model::name(const dogen::identification::entities::logical_name&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() const {
     return streaming_properties_;
 }
 
-std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& model::streaming_properties() {
     return streaming_properties_;
 }
 
-void model::streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>& v) {
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>& v) {
     streaming_properties_ = v;
 }
 
-void model::streaming_properties(const std::unordered_map<std::string, dogen::text::cpp::formattables::streaming_properties>&& v) {
+void model::streaming_properties(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& model::formattables() const {
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& model::formattables() const {
     return formattables_;
 }
 
-std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& model::formattables() {
+std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& model::formattables() {
     return formattables_;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>& v) {
+void model::formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>& v) {
     formattables_ = v;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::text::cpp::formattables::formattable>&& v) {
+void model::formattables(const std::unordered_map<dogen::identification::entities::logical_id, dogen::text::cpp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
 }
 

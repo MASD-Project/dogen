@@ -27,6 +27,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/orm/letter_case.hpp"
 #include "dogen.logical/types/features/orm.hpp"

@@ -32,7 +32,7 @@ const boost::shared_ptr<dogen::logical::entities::templating::logic_less_templat
 
 namespace dogen::logical::entities::templating {
 
-element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates)
+element_repository::element_repository(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& logic_less_templates)
     : logic_less_templates_(logic_less_templates) { }
 
 void element_repository::swap(element_repository& other) noexcept {
@@ -50,19 +50,19 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& element_repository::logic_less_templates() const {
+const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& element_repository::logic_less_templates() const {
     return logic_less_templates_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& element_repository::logic_less_templates() {
+std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& element_repository::logic_less_templates() {
     return logic_less_templates_;
 }
 
-void element_repository::logic_less_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& v) {
+void element_repository::logic_less_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >& v) {
     logic_less_templates_ = v;
 }
 
-void element_repository::logic_less_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >&& v) {
+void element_repository::logic_less_templates(const std::unordered_map<dogen::identification::entities::logical_id, boost::shared_ptr<dogen::logical::entities::templating::logic_less_template> >&& v) {
     logic_less_templates_ = std::move(v);
 }
 

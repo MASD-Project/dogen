@@ -22,7 +22,7 @@
 
 namespace dogen::text::cpp::formattables {
 
-directive_group_repository::directive_group_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id)
+directive_group_repository::directive_group_repository(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& by_id)
     : by_id_(by_id) { }
 
 void directive_group_repository::swap(directive_group_repository& other) noexcept {
@@ -40,19 +40,19 @@ directive_group_repository& directive_group_repository::operator=(directive_grou
     return *this;
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& directive_group_repository::by_id() const {
+const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& directive_group_repository::by_id() const {
     return by_id_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& directive_group_repository::by_id() {
+std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& directive_group_repository::by_id() {
     return by_id_;
 }
 
-void directive_group_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& v) {
+void directive_group_repository::by_id(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >& v) {
     by_id_ = v;
 }
 
-void directive_group_repository::by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >&& v) {
+void directive_group_repository::by_id(const std::unordered_map<dogen::identification::entities::logical_id, std::unordered_map<std::string, dogen::text::cpp::formattables::directive_group> >&& v) {
     by_id_ = std::move(v);
 }
 

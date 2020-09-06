@@ -20,10 +20,11 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.logical/types/entities/physical/backend.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -36,11 +37,11 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_id>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << *i;
     }
     s << "] ";
     return s;
@@ -50,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -68,13 +69,13 @@ backend::backend()
     : major_technical_space_(static_cast<dogen::identification::entities::technical_space>(0)) { }
 
 backend::backend(
-    const dogen::logical::entities::name& name,
+    const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
     const dogen::identification::entities::injection_provenance& provenance,
-    const std::string& contained_by,
+    const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
-    const dogen::logical::entities::name& meta_name,
+    const dogen::identification::entities::logical_meta_name& meta_name,
     const dogen::identification::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::list<dogen::identification::entities::label>& labels,
@@ -82,11 +83,11 @@ backend::backend(
     const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& id,
     const dogen::identification::entities::technical_space major_technical_space,
-    const std::list<std::string>& contains,
+    const std::list<dogen::identification::entities::logical_id>& contains,
     const std::string& meta_model_name,
-    const std::list<dogen::logical::entities::name>& facets,
-    const std::list<dogen::logical::entities::name>& parts,
-    const std::list<dogen::logical::entities::name>& archetype_kinds,
+    const std::list<dogen::identification::entities::logical_name>& facets,
+    const std::list<dogen::identification::entities::logical_name>& parts,
+    const std::list<dogen::identification::entities::logical_name>& archetype_kinds,
     const std::string& backend_name)
     : dogen::logical::entities::element(
       name,
@@ -205,19 +206,19 @@ void backend::major_technical_space(const dogen::identification::entities::techn
     major_technical_space_ = v;
 }
 
-const std::list<std::string>& backend::contains() const {
+const std::list<dogen::identification::entities::logical_id>& backend::contains() const {
     return contains_;
 }
 
-std::list<std::string>& backend::contains() {
+std::list<dogen::identification::entities::logical_id>& backend::contains() {
     return contains_;
 }
 
-void backend::contains(const std::list<std::string>& v) {
+void backend::contains(const std::list<dogen::identification::entities::logical_id>& v) {
     contains_ = v;
 }
 
-void backend::contains(const std::list<std::string>&& v) {
+void backend::contains(const std::list<dogen::identification::entities::logical_id>&& v) {
     contains_ = std::move(v);
 }
 
@@ -237,51 +238,51 @@ void backend::meta_model_name(const std::string&& v) {
     meta_model_name_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& backend::facets() const {
+const std::list<dogen::identification::entities::logical_name>& backend::facets() const {
     return facets_;
 }
 
-std::list<dogen::logical::entities::name>& backend::facets() {
+std::list<dogen::identification::entities::logical_name>& backend::facets() {
     return facets_;
 }
 
-void backend::facets(const std::list<dogen::logical::entities::name>& v) {
+void backend::facets(const std::list<dogen::identification::entities::logical_name>& v) {
     facets_ = v;
 }
 
-void backend::facets(const std::list<dogen::logical::entities::name>&& v) {
+void backend::facets(const std::list<dogen::identification::entities::logical_name>&& v) {
     facets_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& backend::parts() const {
+const std::list<dogen::identification::entities::logical_name>& backend::parts() const {
     return parts_;
 }
 
-std::list<dogen::logical::entities::name>& backend::parts() {
+std::list<dogen::identification::entities::logical_name>& backend::parts() {
     return parts_;
 }
 
-void backend::parts(const std::list<dogen::logical::entities::name>& v) {
+void backend::parts(const std::list<dogen::identification::entities::logical_name>& v) {
     parts_ = v;
 }
 
-void backend::parts(const std::list<dogen::logical::entities::name>&& v) {
+void backend::parts(const std::list<dogen::identification::entities::logical_name>&& v) {
     parts_ = std::move(v);
 }
 
-const std::list<dogen::logical::entities::name>& backend::archetype_kinds() const {
+const std::list<dogen::identification::entities::logical_name>& backend::archetype_kinds() const {
     return archetype_kinds_;
 }
 
-std::list<dogen::logical::entities::name>& backend::archetype_kinds() {
+std::list<dogen::identification::entities::logical_name>& backend::archetype_kinds() {
     return archetype_kinds_;
 }
 
-void backend::archetype_kinds(const std::list<dogen::logical::entities::name>& v) {
+void backend::archetype_kinds(const std::list<dogen::identification::entities::logical_name>& v) {
     archetype_kinds_ = v;
 }
 
-void backend::archetype_kinds(const std::list<dogen::logical::entities::name>&& v) {
+void backend::archetype_kinds(const std::list<dogen::identification::entities::logical_name>&& v) {
     archetype_kinds_ = std::move(v);
 }
 

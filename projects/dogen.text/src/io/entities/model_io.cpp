@@ -21,21 +21,22 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_name_io.hpp"
 #include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,7 +54,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::logical::entities::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -33,7 +33,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.text.csharp/types/transforms/repository.hpp"
 #include "dogen.text.csharp/types/formattables/locator_configuration.hpp"
 
@@ -88,7 +88,7 @@ public:
         const variability::entities::feature_model& fm,
         const transforms::repository& frp,
         const variability::entities::configuration& rcfg,
-        const logical::entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const bool enable_backend_directories);
 
 private:
@@ -97,7 +97,7 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const logical::entities::name& model_name,
+        const identification::entities::logical_name& model_name,
         const locator_configuration& lc,
         const bool enable_backend_directories) const;
 
@@ -108,7 +108,7 @@ private:
      * folders; it starts at the facet and includes the file name.
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
-        const std::string& extension, const logical::entities::name& n) const;
+        const std::string& extension, const identification::entities::logical_name& n) const;
 
 public:
     /**
@@ -121,23 +121,23 @@ public:
         const boost::filesystem::path& full_path) const;
 
 public:
-    boost::filesystem::path make_full_path(const logical::entities::name& n,
+    boost::filesystem::path make_full_path(const identification::entities::logical_name& n,
         const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_project(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_solution(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_project(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_solution(
-        const logical::entities::name& n, const std::string& archetype) const;
+        const identification::entities::logical_name& n, const std::string& archetype) const;
 
 private:
-    const logical::entities::name& model_name_;
+    const identification::entities::logical_name& model_name_;
     const locator_configuration configuration_;
     const boost::filesystem::path project_path_;
 };

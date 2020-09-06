@@ -18,15 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <set>
+#include <unordered_set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/entities/logical_id.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/hash/entities/logical_id_hash.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/types/helpers/identifiable_factory.hpp"
+#include "dogen.identification/types/helpers/logical_name_factory.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
-#include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/containment_transform.hpp"
@@ -47,6 +52,9 @@ const std::string duplicate_element(
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_id;
+using identification::entities::logical_name;
+
 namespace {
 
 /**
@@ -65,8 +73,9 @@ private:
      * @pre Element must not already exist in the container.
      */
     template<typename Container>
-    bool try_insert(std::unordered_map<std::string, Container>& cm,
-        const std::string& container_id, const std::string& containee_id) {
+    bool try_insert(
+        std::unordered_map<logical_id, Container>& cm,
+        const logical_id& container_id, const logical_id& containee_id) {
         /*
          * First we check to see if the container exists in the
          * supplied collection. It may not exist if it is of a
@@ -94,8 +103,9 @@ private:
      * @brief Update the containing element with information about the
      * relationship.
      */
-    void update_containing_element(const entities::name& container,
-        const entities::name& containee);
+    void update_containing_element(
+        const logical_name& container,
+        const logical_name& containee);
 
     void update(entities::element& e);
 
@@ -106,15 +116,15 @@ public:
     entities::model& model_;
 };
 
-void updater::update_containing_element(const entities::name& container,
-    const entities::name& containee) {
+void updater::update_containing_element(const logical_name& container,
+    const logical_name& containee) {
     /*
      * Check all of the elements which can contain other elements to
      * see if they are the designated container. If it is, we update
      * the membership list.
      */
-    const auto container_id(container.qualified().dot());
-    const auto containee_id(containee.qualified().dot());
+    const auto container_id(container.id());
+    const auto containee_id(containee.id());
     BOOST_LOG_SEV(lg, debug) << "Looking for container: " << container_id;
 
     /*
@@ -160,7 +170,7 @@ void updater::update_containing_element(const entities::name& container,
      */
     BOOST_LOG_SEV(lg, error) << missing_container << container_id;
     BOOST_THROW_EXCEPTION(
-        transformation_error(missing_container + container_id));
+        transformation_error(missing_container + container_id.value()));
 }
 
 void updater::update(entities::element& e) {
@@ -171,7 +181,7 @@ void updater::update(entities::element& e) {
      * First we must determine what the containing element should look
      * like - or if it should even exist at all.
      */
-    helpers::name_factory nf;
+    identification::helpers::logical_name_factory nf;
     const auto container_name(nf.build_containing_element_name(e.name()));
     if (!container_name) {
         /*
@@ -189,7 +199,7 @@ void updater::update(entities::element& e) {
      * containment relationship with that element and also its
      * reciprocal.
      */
-    const auto container_id(container_name->qualified().dot());
+    const auto container_id(container_name->id());
     update_containing_element(*container_name, e.name());
     e.contained_by(container_id);
     BOOST_LOG_SEV(lg, debug) << "Element added to container: " << container_id;
@@ -208,13 +218,15 @@ private:
         /*
          * First we sort the container.
          */
-        c.contains().sort();
+        c.contains().sort([](const logical_id rhs, const logical_id lhs) {
+                return rhs.value() < lhs.value();
+            });
 
         /*
          * Now we validate for uniqueness: we don't expect duplicate
          * containee ids.
          */
-        std::set<std::string> ids;
+        std::unordered_set<logical_id> ids;
         for (const auto& id : c.contains()) {
             const auto inserted(ids.insert(id).second);
             if (inserted)
@@ -224,7 +236,8 @@ private:
              * It seems we already contained an element with that name.
              */
             BOOST_LOG_SEV(lg, error) << duplicate_element << id;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_element + id));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_element + id.value()));
         }
     }
 

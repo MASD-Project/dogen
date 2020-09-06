@@ -20,9 +20,11 @@
  */
 #include <typeindex>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/hash/entities/logical_meta_id_hash.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.text.cpp/types/transforms/traits.hpp"
 #include "dogen.text.cpp/types/transforms/inclusion_support_types.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -49,14 +51,14 @@ void canonical_archetype_expander::expand(const transforms::repository& frp,
     /*
      * For each element segment, find the corresponding formatters.
      */
-    const auto mt(e.meta_name().qualified().dot());
-    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
+    const auto mid(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mid;
 
     /*
      * Not all elements have formatters; for example, object templates
      * don't have any at present. If so, skip the element.
      */
-    const auto i(safmt.find(mt));
+    const auto i(safmt.find(mid));
     if (i == safmt.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no formatters.";
         return;

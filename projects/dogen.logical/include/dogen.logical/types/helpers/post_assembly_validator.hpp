@@ -30,7 +30,8 @@
 #include <string>
 #include <utility>
 #include <unordered_set>
-#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_name_tree.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
@@ -48,22 +49,29 @@ private:
         const std::regex& regex, bool check_not_builtin = true);
     static void validate_strings(const std::list<std::string>& strings,
         const std::regex& regex);
-    static void validate_name(const entities::name& n,
+    static void validate_name(const identification::entities::logical_name& n,
         const std::regex& regex, const bool allow_spaces_in_built_in_types);
+    static void validate_meta_name(
+        const identification::entities::logical_meta_name& n,
+        const std::regex& regex);
     static void validate_names(
-        const std::list<std::pair<std::string, entities::name>>& names,
+        const std::list<std::pair<identification::entities::logical_id,
+        identification::entities::logical_name>>& names,
         const identification::entities::technical_space ts);
     static void validate_meta_names(
-        const std::list<std::pair<std::string, entities::name>>& meta_names);
+        const std::list<std::pair<identification::entities::logical_id,
+        identification::entities::logical_meta_name>>& meta_names);
 
-    static void validate_name_tree(const std::unordered_set<std::string>&
+    static void validate_name_tree(
+        const std::unordered_set<identification::entities::logical_id>&
         abstract_elements, const identification::entities::technical_space ts,
-        const entities::name_tree& nt,
+        const identification::entities::logical_name_tree& nt,
         const bool inherit_opaqueness_from_parent = false);
-    static void validate_name_trees(
-        const std::unordered_set<std::string>& abstract_elements,
+    static void validate_name_trees(const std::unordered_set<
+        identification::entities::logical_id>& abstract_elements,
         const identification::entities::technical_space ts,
-        const std::list<std::pair<std::string, entities::name_tree>>& nts);
+        const std::list<std::pair<identification::entities::logical_id,
+        identification::entities::logical_name_tree>>& nts);
 
     static void validate_physical_archetypes(const entities::model& m);
 

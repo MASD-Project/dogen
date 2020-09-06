@@ -32,16 +32,17 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.logical/types/entities/name.hpp"
-#include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
+#include "dogen.identification/hash/entities/logical_name_hash.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/logical_meta_name.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/injection_provenance.hpp"
@@ -66,11 +67,11 @@ public:
 
 public:
     model(
-        const dogen::logical::entities::name& name,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_name& name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references,
-        const std::unordered_set<dogen::logical::entities::name>& leaves,
+        const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references,
+        const std::unordered_set<dogen::identification::entities::logical_name>& leaves,
         const std::list<dogen::text::entities::element_artefacts>& elements,
         const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
         const bool has_generatable_types,
@@ -84,15 +85,15 @@ public:
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties);
 
 public:
-    const dogen::logical::entities::name& name() const;
-    dogen::logical::entities::name& name();
-    void name(const dogen::logical::entities::name& v);
-    void name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_name& name() const;
+    dogen::identification::entities::logical_name& name();
+    void name(const dogen::identification::entities::logical_name& v);
+    void name(const dogen::identification::entities::logical_name&& v);
 
-    const dogen::logical::entities::name& meta_name() const;
-    dogen::logical::entities::name& meta_name();
-    void meta_name(const dogen::logical::entities::name& v);
-    void meta_name(const dogen::logical::entities::name&& v);
+    const dogen::identification::entities::logical_meta_name& meta_name() const;
+    dogen::identification::entities::logical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::logical_meta_name& v);
+    void meta_name(const dogen::identification::entities::logical_meta_name&& v);
 
     /**
      * @brief Details of the provenance of this model element.
@@ -108,10 +109,10 @@ public:
      * @brief All other models that this model depends on, mapped to their origin.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references() const;
-    std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& references();
-    void references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>& v);
-    void references(const std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references() const;
+    std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references();
+    void references(const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& v);
+    void references(const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>&& v);
     /**@}*/
 
     /**
@@ -120,10 +121,10 @@ public:
      * Leaves are types concrete types which have a parent.
      */
     /**@{*/
-    const std::unordered_set<dogen::logical::entities::name>& leaves() const;
-    std::unordered_set<dogen::logical::entities::name>& leaves();
-    void leaves(const std::unordered_set<dogen::logical::entities::name>& v);
-    void leaves(const std::unordered_set<dogen::logical::entities::name>&& v);
+    const std::unordered_set<dogen::identification::entities::logical_name>& leaves() const;
+    std::unordered_set<dogen::identification::entities::logical_name>& leaves();
+    void leaves(const std::unordered_set<dogen::identification::entities::logical_name>& v);
+    void leaves(const std::unordered_set<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     const std::list<dogen::text::entities::element_artefacts>& elements() const;
@@ -215,11 +216,11 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::logical::entities::name name_;
-    dogen::logical::entities::name meta_name_;
+    dogen::identification::entities::logical_name name_;
+    dogen::identification::entities::logical_meta_name meta_name_;
     dogen::identification::entities::injection_provenance provenance_;
-    std::unordered_map<dogen::logical::entities::name, dogen::identification::entities::model_type> references_;
-    std::unordered_set<dogen::logical::entities::name> leaves_;
+    std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type> references_;
+    std::unordered_set<dogen::identification::entities::logical_name> leaves_;
     std::list<dogen::text::entities::element_artefacts> elements_;
     boost::shared_ptr<dogen::logical::entities::structural::module> root_module_;
     bool has_generatable_types_;

@@ -30,12 +30,12 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.logical/hash/entities/name_hash.hpp"
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/type_parameters.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.logical/types/entities/orm/object_properties.hpp"
+#include "dogen.identification/hash/entities/logical_name_hash.hpp"
 
 namespace dogen::logical::entities::structural {
 
@@ -61,13 +61,13 @@ public:
 
 public:
     object(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
@@ -75,16 +75,16 @@ public:
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
         const std::list<dogen::logical::entities::attribute>& all_attributes,
         const std::list<dogen::logical::entities::attribute>& local_attributes,
-        const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes,
+        const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::optional<dogen::logical::entities::name>& base_visitor,
-        const boost::optional<dogen::logical::entities::name>& derived_visitor,
+        const boost::optional<dogen::identification::entities::logical_name>& base_visitor,
+        const boost::optional<dogen::identification::entities::logical_name>& derived_visitor,
         const bool is_visitation_root,
         const bool is_visitation_leaf,
-        const std::list<dogen::logical::entities::name>& transparent_associations,
-        const std::list<dogen::logical::entities::name>& opaque_associations,
-        const std::list<dogen::logical::entities::name>& associative_container_keys,
+        const std::list<dogen::identification::entities::logical_name>& transparent_associations,
+        const std::list<dogen::identification::entities::logical_name>& opaque_associations,
+        const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
         const bool is_parent,
         const bool is_child,
         const bool is_leaf,
@@ -92,13 +92,13 @@ public:
         const boost::optional<bool>& is_final_requested,
         const bool is_abstract,
         const bool in_inheritance_relationship,
-        const std::list<dogen::logical::entities::name>& root_parents,
-        const std::list<dogen::logical::entities::name>& parents,
-        const std::list<dogen::logical::entities::name>& leaves,
-        const boost::optional<dogen::logical::entities::name>& type_registrar,
+        const std::list<dogen::identification::entities::logical_name>& root_parents,
+        const std::list<dogen::identification::entities::logical_name>& parents,
+        const std::list<dogen::identification::entities::logical_name>& leaves,
+        const boost::optional<dogen::identification::entities::logical_name>& type_registrar,
         const dogen::logical::entities::type_parameters& type_parameters,
         const bool is_associative_container,
-        const std::list<dogen::logical::entities::name>& object_templates,
+        const std::list<dogen::identification::entities::logical_name>& object_templates,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
         const boost::optional<dogen::logical::entities::orm::object_properties>& orm_properties);
@@ -151,10 +151,10 @@ public:
      * formatting.
      */
     /**@{*/
-    const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes() const;
-    std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& inherited_attributes();
-    void inherited_attributes(const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >& v);
-    void inherited_attributes(const std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> >&& v);
+    const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes() const;
+    std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& inherited_attributes();
+    void inherited_attributes(const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >& v);
+    void inherited_attributes(const std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> >&& v);
     /**@}*/
 
     /**
@@ -177,20 +177,20 @@ public:
      * @brief Base class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<dogen::logical::entities::name>& base_visitor() const;
-    boost::optional<dogen::logical::entities::name>& base_visitor();
-    void base_visitor(const boost::optional<dogen::logical::entities::name>& v);
-    void base_visitor(const boost::optional<dogen::logical::entities::name>&& v);
+    const boost::optional<dogen::identification::entities::logical_name>& base_visitor() const;
+    boost::optional<dogen::identification::entities::logical_name>& base_visitor();
+    void base_visitor(const boost::optional<dogen::identification::entities::logical_name>& v);
+    void base_visitor(const boost::optional<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Derived class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<dogen::logical::entities::name>& derived_visitor() const;
-    boost::optional<dogen::logical::entities::name>& derived_visitor();
-    void derived_visitor(const boost::optional<dogen::logical::entities::name>& v);
-    void derived_visitor(const boost::optional<dogen::logical::entities::name>&& v);
+    const boost::optional<dogen::identification::entities::logical_name>& derived_visitor() const;
+    boost::optional<dogen::identification::entities::logical_name>& derived_visitor();
+    void derived_visitor(const boost::optional<dogen::identification::entities::logical_name>& v);
+    void derived_visitor(const boost::optional<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     bool is_visitation_root() const;
@@ -203,10 +203,10 @@ public:
      * @brief Elements that are involved in aggregation or composition relationships.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& transparent_associations() const;
-    std::list<dogen::logical::entities::name>& transparent_associations();
-    void transparent_associations(const std::list<dogen::logical::entities::name>& v);
-    void transparent_associations(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& transparent_associations() const;
+    std::list<dogen::identification::entities::logical_name>& transparent_associations();
+    void transparent_associations(const std::list<dogen::identification::entities::logical_name>& v);
+    void transparent_associations(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -216,20 +216,20 @@ public:
      * This is used to break cycles where required.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& opaque_associations() const;
-    std::list<dogen::logical::entities::name>& opaque_associations();
-    void opaque_associations(const std::list<dogen::logical::entities::name>& v);
-    void opaque_associations(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& opaque_associations() const;
+    std::list<dogen::identification::entities::logical_name>& opaque_associations();
+    void opaque_associations(const std::list<dogen::identification::entities::logical_name>& v);
+    void opaque_associations(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Elements that are keys in an associative container.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& associative_container_keys() const;
-    std::list<dogen::logical::entities::name>& associative_container_keys();
-    void associative_container_keys(const std::list<dogen::logical::entities::name>& v);
-    void associative_container_keys(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& associative_container_keys() const;
+    std::list<dogen::identification::entities::logical_name>& associative_container_keys();
+    void associative_container_keys(const std::list<dogen::identification::entities::logical_name>& v);
+    void associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -296,36 +296,36 @@ public:
      * @brief Top-most parents at the root of the inheritance hierarchy, if any.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& root_parents() const;
-    std::list<dogen::logical::entities::name>& root_parents();
-    void root_parents(const std::list<dogen::logical::entities::name>& v);
-    void root_parents(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& root_parents() const;
+    std::list<dogen::identification::entities::logical_name>& root_parents();
+    void root_parents(const std::list<dogen::identification::entities::logical_name>& v);
+    void root_parents(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Direct parent of this element, if any.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& parents() const;
-    std::list<dogen::logical::entities::name>& parents();
-    void parents(const std::list<dogen::logical::entities::name>& v);
-    void parents(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& parents() const;
+    std::list<dogen::identification::entities::logical_name>& parents();
+    void parents(const std::list<dogen::identification::entities::logical_name>& v);
+    void parents(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Elements that are at the bottom of the inheritance tree.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& leaves() const;
-    std::list<dogen::logical::entities::name>& leaves();
-    void leaves(const std::list<dogen::logical::entities::name>& v);
-    void leaves(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& leaves() const;
+    std::list<dogen::identification::entities::logical_name>& leaves();
+    void leaves(const std::list<dogen::identification::entities::logical_name>& v);
+    void leaves(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
-    const boost::optional<dogen::logical::entities::name>& type_registrar() const;
-    boost::optional<dogen::logical::entities::name>& type_registrar();
-    void type_registrar(const boost::optional<dogen::logical::entities::name>& v);
-    void type_registrar(const boost::optional<dogen::logical::entities::name>&& v);
+    const boost::optional<dogen::identification::entities::logical_name>& type_registrar() const;
+    boost::optional<dogen::identification::entities::logical_name>& type_registrar();
+    void type_registrar(const boost::optional<dogen::identification::entities::logical_name>& v);
+    void type_registrar(const boost::optional<dogen::identification::entities::logical_name>&& v);
 
     const dogen::logical::entities::type_parameters& type_parameters() const;
     dogen::logical::entities::type_parameters& type_parameters();
@@ -344,10 +344,10 @@ public:
      * @brief All object templates associated with this object.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& object_templates() const;
-    std::list<dogen::logical::entities::name>& object_templates();
-    void object_templates(const std::list<dogen::logical::entities::name>& v);
-    void object_templates(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& object_templates() const;
+    std::list<dogen::identification::entities::logical_name>& object_templates();
+    void object_templates(const std::list<dogen::identification::entities::logical_name>& v);
+    void object_templates(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -387,16 +387,16 @@ public:
 private:
     std::list<dogen::logical::entities::attribute> all_attributes_;
     std::list<dogen::logical::entities::attribute> local_attributes_;
-    std::unordered_map<dogen::logical::entities::name, std::list<dogen::logical::entities::attribute> > inherited_attributes_;
+    std::unordered_map<dogen::identification::entities::logical_name, std::list<dogen::logical::entities::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::optional<dogen::logical::entities::name> base_visitor_;
-    boost::optional<dogen::logical::entities::name> derived_visitor_;
+    boost::optional<dogen::identification::entities::logical_name> base_visitor_;
+    boost::optional<dogen::identification::entities::logical_name> derived_visitor_;
     bool is_visitation_root_;
     bool is_visitation_leaf_;
-    std::list<dogen::logical::entities::name> transparent_associations_;
-    std::list<dogen::logical::entities::name> opaque_associations_;
-    std::list<dogen::logical::entities::name> associative_container_keys_;
+    std::list<dogen::identification::entities::logical_name> transparent_associations_;
+    std::list<dogen::identification::entities::logical_name> opaque_associations_;
+    std::list<dogen::identification::entities::logical_name> associative_container_keys_;
     bool is_parent_;
     bool is_child_;
     bool is_leaf_;
@@ -404,13 +404,13 @@ private:
     boost::optional<bool> is_final_requested_;
     bool is_abstract_;
     bool in_inheritance_relationship_;
-    std::list<dogen::logical::entities::name> root_parents_;
-    std::list<dogen::logical::entities::name> parents_;
-    std::list<dogen::logical::entities::name> leaves_;
-    boost::optional<dogen::logical::entities::name> type_registrar_;
+    std::list<dogen::identification::entities::logical_name> root_parents_;
+    std::list<dogen::identification::entities::logical_name> parents_;
+    std::list<dogen::identification::entities::logical_name> leaves_;
+    boost::optional<dogen::identification::entities::logical_name> type_registrar_;
     dogen::logical::entities::type_parameters type_parameters_;
     bool is_associative_container_;
-    std::list<dogen::logical::entities::name> object_templates_;
+    std::list<dogen::identification::entities::logical_name> object_templates_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
     boost::optional<dogen::logical::entities::orm::object_properties> orm_properties_;

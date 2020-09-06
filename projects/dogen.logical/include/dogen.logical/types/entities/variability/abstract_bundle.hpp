@@ -30,9 +30,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.identification/types/entities/logical_name.hpp"
 
 namespace dogen::logical::entities::variability {
 
@@ -64,21 +64,21 @@ public:
 
 public:
     abstract_bundle(
-        const dogen::logical::entities::name& name,
+        const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
         const dogen::identification::entities::injection_provenance& provenance,
-        const std::string& contained_by,
+        const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
-        const dogen::logical::entities::name& meta_name,
+        const dogen::identification::entities::logical_meta_name& meta_name,
         const dogen::identification::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::list<dogen::identification::entities::label>& labels,
         const dogen::logical::entities::generability_status generability_status,
         const std::unordered_map<dogen::identification::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
-        const std::list<dogen::logical::entities::name>& transparent_associations,
-        const std::list<dogen::logical::entities::name>& opaque_associations,
-        const std::list<dogen::logical::entities::name>& associative_container_keys,
+        const std::list<dogen::identification::entities::logical_name>& transparent_associations,
+        const std::list<dogen::identification::entities::logical_name>& opaque_associations,
+        const std::list<dogen::identification::entities::logical_name>& associative_container_keys,
         const std::string& key_prefix,
         const bool generate_registration,
         const bool generate_static_configuration,
@@ -93,10 +93,10 @@ public:
      * @brief Elements that are involved in aggregation or composition relationships.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& transparent_associations() const;
-    std::list<dogen::logical::entities::name>& transparent_associations();
-    void transparent_associations(const std::list<dogen::logical::entities::name>& v);
-    void transparent_associations(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& transparent_associations() const;
+    std::list<dogen::identification::entities::logical_name>& transparent_associations();
+    void transparent_associations(const std::list<dogen::identification::entities::logical_name>& v);
+    void transparent_associations(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -106,20 +106,20 @@ public:
      * This is used to break cycles where required.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& opaque_associations() const;
-    std::list<dogen::logical::entities::name>& opaque_associations();
-    void opaque_associations(const std::list<dogen::logical::entities::name>& v);
-    void opaque_associations(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& opaque_associations() const;
+    std::list<dogen::identification::entities::logical_name>& opaque_associations();
+    void opaque_associations(const std::list<dogen::identification::entities::logical_name>& v);
+    void opaque_associations(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
      * @brief Elements that are keys in an associative container.
      */
     /**@{*/
-    const std::list<dogen::logical::entities::name>& associative_container_keys() const;
-    std::list<dogen::logical::entities::name>& associative_container_keys();
-    void associative_container_keys(const std::list<dogen::logical::entities::name>& v);
-    void associative_container_keys(const std::list<dogen::logical::entities::name>&& v);
+    const std::list<dogen::identification::entities::logical_name>& associative_container_keys() const;
+    std::list<dogen::identification::entities::logical_name>& associative_container_keys();
+    void associative_container_keys(const std::list<dogen::identification::entities::logical_name>& v);
+    void associative_container_keys(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
     /**
@@ -181,9 +181,9 @@ protected:
     void swap(abstract_bundle& other) noexcept;
 
 private:
-    std::list<dogen::logical::entities::name> transparent_associations_;
-    std::list<dogen::logical::entities::name> opaque_associations_;
-    std::list<dogen::logical::entities::name> associative_container_keys_;
+    std::list<dogen::identification::entities::logical_name> transparent_associations_;
+    std::list<dogen::identification::entities::logical_name> opaque_associations_;
+    std::list<dogen::identification::entities::logical_name> associative_container_keys_;
     std::string key_prefix_;
     bool generate_registration_;
     bool generate_static_configuration_;

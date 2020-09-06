@@ -44,10 +44,10 @@ private:
     /**
      * @brief Retrieve all extensible mappables in the model set.
      */
-    static std::unordered_map<std::string,
-                       boost::shared_ptr<
-                           entities::mapping::extensible_mappable>
-                       >
+    static std::unordered_map<identification::entities::logical_id,
+                              boost::shared_ptr<
+                                  entities::mapping::extensible_mappable>
+                              >
     obtain_mappables(const logical::entities::input_model_set& ms);
 
     /**
@@ -55,7 +55,8 @@ private:
      * mappables.
      */
     static std::unordered_map<std::string, std::list<helpers::mapping>>
-    create_mappings(const std::unordered_map<std::string,
+    create_mappings(
+        const std::unordered_map<identification::entities::logical_id,
         boost::shared_ptr<entities::mapping::extensible_mappable>>&
         mappables);
 
@@ -66,10 +67,12 @@ private:
         std::list<helpers::mapping>>& mappings);
 
 private:
-    static void insert(const std::string& lam_id, const entities::name& n,
+    static void insert(const identification::entities::logical_id& lam_id,
+        const identification::entities::logical_name& n,
         const identification::entities::technical_space ts,
         std::unordered_map<identification::entities::technical_space,
-        std::unordered_map<std::string, entities::name>>& map);
+        std::unordered_map<identification::entities::logical_id,
+        identification::entities::logical_name>>& map);
 
     static void populate_mapping_set(
         const std::list<helpers::mapping>& mappings,

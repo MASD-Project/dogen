@@ -32,9 +32,9 @@ decoration_configuration::decoration_configuration(decoration_configuration&& rh
 decoration_configuration::decoration_configuration(
     const boost::optional<bool>& enabled,
     const std::list<std::string>& copyright_notices,
-    const std::string& licence_name,
-    const std::string& modeline_group_name,
-    const std::string& marker_name)
+    const dogen::identification::entities::logical_id& licence_name,
+    const dogen::identification::entities::logical_id& modeline_group_name,
+    const dogen::identification::entities::logical_id& marker_name)
     : enabled_(enabled),
       copyright_notices_(copyright_notices),
       licence_name_(licence_name),
@@ -96,51 +96,51 @@ void decoration_configuration::copyright_notices(const std::list<std::string>&& 
     copyright_notices_ = std::move(v);
 }
 
-const std::string& decoration_configuration::licence_name() const {
+const dogen::identification::entities::logical_id& decoration_configuration::licence_name() const {
     return licence_name_;
 }
 
-std::string& decoration_configuration::licence_name() {
+dogen::identification::entities::logical_id& decoration_configuration::licence_name() {
     return licence_name_;
 }
 
-void decoration_configuration::licence_name(const std::string& v) {
+void decoration_configuration::licence_name(const dogen::identification::entities::logical_id& v) {
     licence_name_ = v;
 }
 
-void decoration_configuration::licence_name(const std::string&& v) {
+void decoration_configuration::licence_name(const dogen::identification::entities::logical_id&& v) {
     licence_name_ = std::move(v);
 }
 
-const std::string& decoration_configuration::modeline_group_name() const {
+const dogen::identification::entities::logical_id& decoration_configuration::modeline_group_name() const {
     return modeline_group_name_;
 }
 
-std::string& decoration_configuration::modeline_group_name() {
+dogen::identification::entities::logical_id& decoration_configuration::modeline_group_name() {
     return modeline_group_name_;
 }
 
-void decoration_configuration::modeline_group_name(const std::string& v) {
+void decoration_configuration::modeline_group_name(const dogen::identification::entities::logical_id& v) {
     modeline_group_name_ = v;
 }
 
-void decoration_configuration::modeline_group_name(const std::string&& v) {
+void decoration_configuration::modeline_group_name(const dogen::identification::entities::logical_id&& v) {
     modeline_group_name_ = std::move(v);
 }
 
-const std::string& decoration_configuration::marker_name() const {
+const dogen::identification::entities::logical_id& decoration_configuration::marker_name() const {
     return marker_name_;
 }
 
-std::string& decoration_configuration::marker_name() {
+dogen::identification::entities::logical_id& decoration_configuration::marker_name() {
     return marker_name_;
 }
 
-void decoration_configuration::marker_name(const std::string& v) {
+void decoration_configuration::marker_name(const dogen::identification::entities::logical_id& v) {
     marker_name_ = v;
 }
 
-void decoration_configuration::marker_name(const std::string&& v) {
+void decoration_configuration::marker_name(const dogen::identification::entities::logical_id&& v) {
     marker_name_ = std::move(v);
 }
 

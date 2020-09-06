@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.text.cpp/types/transforms/model_to_text_transform.hpp"
@@ -97,11 +98,14 @@ bool include_directive_comparer(
 
 namespace dogen::text::cpp::formattables {
 
-directive_group_repository inclusion_expander::
-create_directive_groups(
+using identification::entities::logical_id;
+
+directive_group_repository
+inclusion_expander::create_directive_groups(
     const variability::entities::feature_model& feature_model,
     const transforms::repository& frp, const locator& l,
-    const std::unordered_map<std::string, formattable>& formattables) const {
+    const std::unordered_map<logical_id,
+    formattable>& formattables) const {
 
     directive_group_repository_factory f;
     return f.make(feature_model, frp, l, formattables);
@@ -130,7 +134,7 @@ inclusion_expander::compute_inclusion_dependencies(
      * element and the formatters that support it.
      */
     element_inclusion_dependencies_type r;
-    const auto mn(e.meta_name().qualified().dot());
+    const auto mn(e.meta_name().id());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
         BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << mn;
@@ -177,9 +181,8 @@ inclusion_expander::compute_inclusion_dependencies(
 }
 
 void inclusion_expander::populate_inclusion_dependencies(
-    const transforms::repository& frp,
-    const dependencies_builder_factory& df,
-    std::unordered_map<std::string, formattable>& formattables) const {
+    const transforms::repository& frp, const dependencies_builder_factory& df,
+    std::unordered_map<logical_id, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies "
                              << "for all formattables. ";
