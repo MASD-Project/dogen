@@ -73,8 +73,7 @@ private:
      * @pre Element must not already exist in the container.
      */
     template<typename Container>
-    bool try_insert(
-        std::unordered_map<logical_id, Container>& cm,
+    bool try_insert(std::unordered_map<logical_id, Container>& cm,
         const logical_id& container_id, const logical_id& containee_id) {
         /*
          * First we check to see if the container exists in the
@@ -94,8 +93,8 @@ private:
         auto& container(*i->second);
         container.contains().push_back(containee_id);
         BOOST_LOG_SEV(lg, debug) << "Added element. Containee: '"
-                                 << containee_id
-                                 << "' Container: '" << container_id << "'";
+                                 << containee_id << "' Container: '"
+                                 << container_id << "'";
         return true;
     }
 
@@ -103,8 +102,7 @@ private:
      * @brief Update the containing element with information about the
      * relationship.
      */
-    void update_containing_element(
-        const logical_name& container,
+    void update_containing_element(const logical_name& container,
         const logical_name& containee);
 
     void update(entities::element& e);

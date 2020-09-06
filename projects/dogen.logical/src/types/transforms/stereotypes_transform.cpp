@@ -25,14 +25,14 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/stereotype_io.hpp"
-#include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
-#include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/orm/object_properties.hpp"
@@ -64,6 +64,8 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 namespace dogen::logical::transforms {
 
+using entities::static_stereotypes;
+
 identification::entities::logical_location stereotypes_transform::
 strip_internal_modules(const identification::entities::logical_location& l) {
     auto r(l);
@@ -73,7 +75,6 @@ strip_internal_modules(const identification::entities::logical_location& l) {
 
 bool stereotypes_transform::
 is_element_type(const entities::static_stereotypes ss) {
-    using entities::static_stereotypes;
     return
         ss == static_stereotypes::structural_object ||
         ss == static_stereotypes::structural_object_template ||
@@ -93,7 +94,6 @@ void stereotypes_transform::transform_static_stereotypes(
      * First we process all of the well-known stereotypes, collecting
      * any invalid ones as we go along.
      */
-    using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_stereotypes;
     for (const auto ss : o.stereotypes().static_stereotypes()) {
         if (is_element_type(ss)) {
@@ -389,8 +389,8 @@ expand_visitable(entities::structural::object& o, entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
-bool stereotypes_transform::try_as_object_template(
-    const identification::entities::stereotype& st,
+bool stereotypes_transform::
+try_as_object_template(const identification::entities::stereotype& st,
     entities::structural::object& o, const entities::model& m) {
 
     const auto n(st.value());
@@ -450,7 +450,6 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
      * Process all of the well-known stereotypes, collecting any
      * invalid ones as we go along.
      */
-    using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_static_stereotypes;
     for (const auto st : ss) {
         if (is_element_type(st)) {
@@ -485,7 +484,7 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
 
 void stereotypes_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     for (auto& pair : m.structural_elements().objects())
         apply(*pair.second, m);

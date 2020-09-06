@@ -56,10 +56,10 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 namespace dogen::logical::transforms {
 
-std::string odb_options_transform::
-to_odb_database(const logical::entities::orm::database_system ds) {
-    using logical::entities::orm::database_system;
+using logical::entities::orm::letter_case;
+using logical::entities::orm::database_system;
 
+std::string odb_options_transform::to_odb_database(const database_system ds) {
     switch (ds) {
     case database_system::mysql: return mysql;
     case database_system::postgresql: return postgresql;
@@ -74,10 +74,7 @@ to_odb_database(const logical::entities::orm::database_system ds) {
     } }
 }
 
-std::string odb_options_transform::
-to_odb_sql_name_case(const logical::entities::orm::letter_case lc) {
-    using logical::entities::orm::letter_case;
-
+std::string odb_options_transform::to_odb_sql_name_case(const letter_case lc) {
     switch (lc) {
     case letter_case::upper_case: return upper_case;
     case letter_case::lower_case: return lower_case;

@@ -174,9 +174,9 @@ void variability_profiles_transform::process_profiles(
 
 void variability_profiles_transform::
 apply(const context& ctx, logical::entities::input_model_set& ms) {
-    const auto model_name(ms.target().name().qualified().dot());
+    const auto id(ms.target().name().id());
     tracing::scoped_transform_tracer stp(lg, "variability profiles",
-        transform_id, model_name, *ctx.tracer());
+        transform_id, id.value(), *ctx.tracer());
 
     const auto& fm(*ctx.feature_model());
     const auto lambda(

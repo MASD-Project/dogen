@@ -38,6 +38,8 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
+using identification::entities::technical_space;
+
 /**
  * @brief Gathers technical space information from model elements.
  */
@@ -48,7 +50,7 @@ public:
          * Skip agnostic as it is an abstract technical space.
          */
         const auto ts(e.intrinsic_technical_space());
-        if (ts == identification::entities::technical_space::agnostic)
+        if (ts == technical_space::agnostic)
             return;
 
         const auto inserted(technical_spaces_.insert(ts).second);
@@ -61,13 +63,13 @@ public:
     }
 
 public:
-    const std::unordered_set<identification::entities::technical_space>&
+    const std::unordered_set<technical_space>&
     result() {
         return technical_spaces_;
     }
 
 private:
-    std::unordered_set<identification::entities::technical_space>
+    std::unordered_set<technical_space>
     technical_spaces_;
 };
 
@@ -97,9 +99,9 @@ apply(const context& ctx, entities::model& m) {
 
     /*
      * Finally, add "fixed" technical spaces.
+     *
      * FIXME: hackery for ODB options, XML and CMake.
      */
-    using identification::entities::technical_space;
     ats.insert(technical_space::odb);
     ats.insert(technical_space::xml);
     ats.insert(technical_space::cmake);

@@ -54,6 +54,8 @@ const std::string duplicate_fm_id("Duplicate fixed mapping ID: ");
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_id;
+
 namespace {
 
 /**
@@ -70,23 +72,21 @@ public:
     }
 
 private:
-    void gather(logical::entities::element& e);
+    void gather(entities::element& e);
 
 public:
-    void operator()(logical::entities::element&) { }
-    void operator()(logical::entities::structural::builtin& b) { gather(b); }
-    void operator()(logical::entities::structural::enumeration& e) {
+    void operator()(entities::element&) { }
+    void operator()(entities::structural::builtin& b) { gather(b); }
+    void operator()(entities::structural::enumeration& e) {
         gather(e);
     }
-    void operator()(logical::entities::structural::primitive& p) { gather(p); }
-    void operator()(logical::entities::structural::object& o) { gather(o); }
-    void operator()(logical::entities::structural::exception& e) { gather(e); }
+    void operator()(entities::structural::primitive& p) { gather(p); }
+    void operator()(entities::structural::object& o) { gather(o); }
+    void operator()(entities::structural::exception& e) { gather(e); }
 
 public:
-    const std::unordered_map<identification::entities::logical_id,
-                              std::list<
-                                  logical::entities::mapping::destination>
-                              >&
+    const std::unordered_map<logical_id,
+                             std::list<entities::mapping::destination>>&
     result() const {
         return result_;
     }
@@ -94,14 +94,12 @@ public:
 public:
     const features::mapping::feature_group& feature_group_;
     identification::entities::technical_space technical_space_;
-    std::unordered_map<identification::entities::logical_id,
-                       std::list<
-                           logical::entities::mapping::destination>
-                       >
+    std::unordered_map<logical_id,
+                       std::list<entities::mapping::destination>>
     result_;
 };
 
-void destination_gatherer::gather(logical::entities::element &e) {
+void destination_gatherer::gather(entities::element &e) {
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
@@ -109,26 +107,24 @@ void destination_gatherer::gather(logical::entities::element &e) {
     const auto scfg(mapping::make_static_configuration(feature_group_, e));
     BOOST_LOG_SEV(lg, trace) << "Read target: " << scfg.target;
 
-    using logical::entities::mapping::destination;
+    using entities::mapping::destination;
     const destination dst(e.name(), technical_space_);
-    identification::entities::logical_id target_id(scfg.target);
+    logical_id target_id(scfg.target);
     result_[target_id].push_back(dst);
 }
 
 }
 
-std::unordered_map<identification::entities::logical_id,
-                   std::list<
-                       logical::entities::mapping::destination>
-                   >
+std::unordered_map<logical_id,
+                   std::list<entities::mapping::destination>>
 mapping_elements_transform::
 make_destinations(const variability::entities::feature_model &fm,
-    const logical::entities::input_model_set &ms) {
+    const entities::input_model_set &ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     destination_gatherer dg(fg);
     dg.technical_space(ms.target().input_technical_space());
 
-    using logical::entities::elements_traversal;
+    using entities::elements_traversal;
     elements_traversal(ms.target(), dg);
 
     for (const auto &m : ms.references()) {
@@ -139,16 +135,14 @@ make_destinations(const variability::entities::feature_model &fm,
     return dg.result();
 }
 
-void mapping_elements_transform::populate_extensible_mappables(
-    const std::unordered_map<identification::entities::logical_id,
-    std::list<logical::entities::mapping::destination>>&
-    destinations_for_target, logical::entities::input_model_set& ms) {
+void mapping_elements_transform::
+populate_extensible_mappables(const std::unordered_map<logical_id,
+    std::list<entities::mapping::destination>>&
+    destinations_for_target, entities::input_model_set& ms) {
 
-    using logical::entities::mapping::destination;
-    const auto lambda(
-        [&](const identification::entities::logical_id& target,
-            const std::list<destination>& dsts,
-            logical::entities::model& m) {
+    using entities::mapping::destination;
+    const auto lambda([&](const logical_id& target,
+            const std::list<destination>& dsts, entities::model& m) {
             auto& em(m.mapping_elements().extensible_mappables());
             const auto i(em.find(target));
             if (i == em.end())
@@ -170,10 +164,10 @@ void mapping_elements_transform::populate_extensible_mappables(
 
 void mapping_elements_transform::
 populate_fixed_mappables(const variability::entities::feature_model& fm,
-    logical::entities::input_model_set& ms) {
+    entities::input_model_set& ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     const auto lambda(
-        [&](logical::entities::model& m) {
+        [&](entities::model& m) {
             auto& maps(m.mapping_elements().fixed_mappables());
             for (auto& pair : maps) {
                 auto& fm(*pair.second);
@@ -198,7 +192,7 @@ populate_fixed_mappables(const variability::entities::feature_model& fm,
 }
 
 void mapping_elements_transform::
-apply(const context& ctx, logical::entities::input_model_set& ms) {
+apply(const context& ctx, entities::input_model_set& ms) {
     const auto& id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping elements transform",
         transform_id, id, *ctx.tracer(), ms);

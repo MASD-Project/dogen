@@ -80,8 +80,8 @@ find_object(const logical_name& n, entities::model& m) {
     return *i->second;
 }
 
-entities::structural::object_template& object_templates_transform::
-resolve_object_template(const logical_name& owner,
+entities::structural::object_template&
+object_templates_transform::resolve_object_template(const logical_name& owner,
     const logical_name& object_template_name, entities::model& m) {
     using helpers::resolver;
     const auto& n(object_template_name);
@@ -103,8 +103,8 @@ resolve_object_template(const logical_name& owner,
     return *i->second;
 }
 
-void object_templates_transform::
-remove_duplicates(std::list<logical_name>& names) {
+void
+object_templates_transform::remove_duplicates(std::list<logical_name>& names) {
     std::unordered_set<logical_name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
@@ -126,9 +126,8 @@ remove_duplicates(std::list<logical_name>& names) {
                              << names.size();
 }
 
-void object_templates_transform::
-expand_object(entities::structural::object& o, entities::model& m,
-    std::unordered_set<logical_name>& processed_names) {
+void object_templates_transform::expand_object(entities::structural::object& o,
+    entities::model& m, std::unordered_set<logical_name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {

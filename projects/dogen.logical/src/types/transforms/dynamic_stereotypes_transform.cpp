@@ -22,9 +22,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.identification/io/entities/stereotype_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.identification/io/entities/stereotype_io.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/io/entities/input_model_set_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
@@ -96,7 +97,7 @@ private:
         if (ds.empty())
             return;
 
-        const auto id(e.name().qualified().dot());
+        const auto id(e.name().id());
         std::ostringstream os;
         os << unexpected_stereotypes << ds << " in element: " << id;
         const auto msg(os.str());

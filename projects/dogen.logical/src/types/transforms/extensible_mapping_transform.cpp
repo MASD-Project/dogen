@@ -55,10 +55,11 @@ const std::string duplicate_technical_space(
 
 namespace dogen::logical::transforms {
 
-std::unordered_map<identification::entities::logical_id,
-                   boost::shared_ptr<
-                       entities::mapping::extensible_mappable>
-                   >
+using identification::entities::logical_id;
+using identification::entities::technical_space;
+
+std::unordered_map<logical_id,
+                   boost::shared_ptr<entities::mapping::extensible_mappable>>
 extensible_mapping_transform::
 obtain_mappables(const logical::entities::input_model_set& ms) {
     auto r(ms.target().mapping_elements().extensible_mappables());
@@ -77,10 +78,9 @@ obtain_mappables(const logical::entities::input_model_set& ms) {
 }
 
 std::unordered_map<std::string, std::list<helpers::mapping>>
-extensible_mapping_transform::create_mappings(const std::unordered_map<
-    identification::entities::logical_id,
-    boost::shared_ptr<entities::mapping::extensible_mappable>>&
-    mappables) {
+extensible_mapping_transform::
+create_mappings(const std::unordered_map<logical_id,
+    boost::shared_ptr<entities::mapping::extensible_mappable>>& mappables) {
 
     std::unordered_map<std::string, std::list<helpers::mapping>> r;
     for(const auto& pair : mappables) {
@@ -111,18 +111,17 @@ extensible_mapping_transform::create_mappings(const std::unordered_map<
     return r;
 }
 
-void extensible_mapping_transform::validate_mappings(const std::unordered_map<
-    std::string, std::list<helpers::mapping>>& mappings)  {
+void extensible_mapping_transform::
+validate_mappings(const std::unordered_map< std::string,
+    std::list<helpers::mapping>>& mappings)  {
     helpers::mappings_validator v;
     v.validate(mappings);
 }
 
-void extensible_mapping_transform::
-insert(const identification::entities::logical_id& agnostic_id,
+void extensible_mapping_transform::insert(const logical_id& agnostic_id,
     const identification::entities::logical_name& n,
-    const identification::entities::technical_space ts,
-    std::unordered_map<identification::entities::technical_space,
-    std::unordered_map<identification::entities::logical_id,
+    const technical_space ts,
+    std::unordered_map<technical_space, std::unordered_map<logical_id,
     identification::entities::logical_name>>& map) {
 
     auto& by_id(map[ts]);
@@ -198,7 +197,7 @@ create_repository(const std::unordered_map<std::string,
 
 entities::model extensible_mapping_transform::
 map(const helpers::mapping_set_repository& msrp, const entities::model& src,
-    const identification::entities::technical_space to) {
+    const technical_space to) {
 
     const helpers::mapper mp(msrp);
     auto r(mp.map(src.input_technical_space(), to, src));
@@ -208,7 +207,7 @@ map(const helpers::mapping_set_repository& msrp, const entities::model& src,
 logical::entities::input_model_set
 extensible_mapping_transform::apply(const context& ctx,
     const logical::entities::input_model_set& src,
-    const identification::entities::technical_space to) {
+    const technical_space to) {
     const auto id(src.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
         id, *ctx.tracer(), src);

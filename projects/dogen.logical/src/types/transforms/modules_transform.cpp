@@ -96,15 +96,15 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 }
 
-std::unordered_map<std::string, std::list<std::string>>  modules_transform::
-gather_internal_modules(entities::model& m) {
+std::unordered_map<std::string, std::list<std::string>>
+modules_transform::gather_internal_modules(entities::model& m) {
     internal_modules_gatherer img;
     entities::elements_traversal(m, img);
     return img.result();
 }
 
-bool modules_transform::containing_element_exists(const logical_id& id,
-    const entities::model& m) {
+bool modules_transform::
+containing_element_exists(const logical_id& id, const entities::model& m) {
     const auto lambda([&](const auto& container) -> bool {
             const auto i(container.find(id));
             return i != container.end();
@@ -175,7 +175,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
 
 void modules_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto im(gather_internal_modules(m));
     create_modules(im, m);

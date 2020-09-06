@@ -43,11 +43,10 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-entities::output_model_set
-model_production_chain::apply(const context& ctx,
-    logical::entities::input_model_set ms) {
+entities::output_model_set model_production_chain::
+apply(const context& ctx, entities::input_model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "logical model production chain",
-        transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
+        transform_id, ms.target().name().id().value(), *ctx.tracer(), ms);
 
     /*
      * We start by applying a set of pre-processing transforms to the

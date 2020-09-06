@@ -55,9 +55,9 @@ variability_profiles_chain::adapt(const context& ctx) {
 
 void variability_profiles_chain::
 apply(const context& ctx, logical::entities::input_model_set& ms) {
-    const auto model_name(ms.target().name().qualified().dot());
+    const auto id(ms.target().name().id());
     tracing::scoped_chain_tracer stp(lg, "variability profiles",
-        transform_id, model_name, *ctx.tracer());
+        transform_id, id.value(), *ctx.tracer());
 
     /*
      * We start by updating all the profile-like meta-model elements

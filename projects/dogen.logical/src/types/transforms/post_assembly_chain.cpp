@@ -58,7 +58,7 @@ namespace dogen::logical::transforms {
 
 void post_assembly_chain::apply(const context& ctx, entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * Visual studio project type transform has no dependencies.

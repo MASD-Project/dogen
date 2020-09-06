@@ -63,10 +63,13 @@ const std::string missing_default(
 
 namespace dogen::logical::transforms {
 
+using identification::entities::logical_name;
+using identification::entities::technical_space;
+
 namespace {
 
 void populate_enumeration(const features::enumeration::feature_group& fg,
-    const identification::entities::logical_name& default_underlying_element_name,
+    const logical_name& default_underlying_element_name,
     entities::structural::enumeration& e) {
 
     /*
@@ -108,26 +111,25 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
 }
 
 void populate_enumerator(const features::enumerator::feature_group &fg,
-                         const unsigned int position,
-                         entities::structural::enumerator &e) {
+    const unsigned int position, entities::structural::enumerator &e) {
 
-  /*
+    /*
    * We try to read the value from variability's configuration. If
    * its not populated we set it ourselves. Note that it is
    * validation's job to ensure the user doesn't start mixing and
    * matching, populating the value for some enumerators but not
    * others.
    */
-  const auto scfg(features::enumerator::make_static_configuration(fg, e));
-  if (scfg.value.empty())
-    e.value(boost::lexical_cast<std::string>(position));
-  else
-    e.value(scfg.value);
+    const auto scfg(features::enumerator::make_static_configuration(fg, e));
+    if (scfg.value.empty())
+        e.value(boost::lexical_cast<std::string>(position));
+    else
+        e.value(scfg.value);
 }
 
 }
 
-identification::entities::logical_name enumerations_transform::
+logical_name enumerations_transform::
 obtain_enumeration_default_underlying_element_name(const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: "
@@ -138,7 +140,7 @@ obtain_enumeration_default_underlying_element_name(const entities::model& m) {
      * be the default type to use for enumerations. We expect one and
      * only type to have been assigned this role.
      */
-    identification::entities::logical_name r;
+    logical_name r;
     bool found(false);
     for (const auto& pair : m.structural_elements().builtins()) {
         const auto& b(*pair.second);
@@ -168,10 +170,8 @@ obtain_enumeration_default_underlying_element_name(const entities::model& m) {
     return r;
 }
 
-std::string
-enumerations_transform::obtain_invalid_enumerator_simple_name(
-    const identification::entities::technical_space ts) {
-    using identification::entities::technical_space;
+std::string enumerations_transform::
+obtain_invalid_enumerator_simple_name(const technical_space ts) {
     switch(ts) {
     case technical_space::csharp: return csharp_invalid;
     case technical_space::cpp: return cpp_invalid;
@@ -184,8 +184,8 @@ enumerations_transform::obtain_invalid_enumerator_simple_name(
 }
 
 entities::structural::enumerator
-enumerations_transform::make_invalid_enumerator(const identification::entities::logical_name& n,
-    const identification::entities::technical_space ts) {
+enumerations_transform::
+make_invalid_enumerator(const logical_name& n, const technical_space ts) {
     entities::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");

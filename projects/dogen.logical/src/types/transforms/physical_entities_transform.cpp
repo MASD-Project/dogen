@@ -242,7 +242,6 @@ void physical_entities_transform::process_facets(entities::model& m) {
         /*
          * Check all of the elements contained within this facet.
          */
-
         for (const auto& qn : fct.contains()) {
             /*
              * Check to see if the contained element is an archetype,
@@ -488,8 +487,7 @@ process_archetypes(const context& ctx, entities::model& m) {
      * First, we organise the parts by their IDs.
      */
     const auto& parts(pe.parts());
-    std::unordered_map<std::string,
-                       boost::shared_ptr<entities::physical::part>>
+    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
         parts_by_ids;
     for (const auto& pair : parts) {
         const auto& part(*pair.second);
@@ -594,7 +592,7 @@ process_archetypes(const context& ctx, entities::model& m) {
 void physical_entities_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "physical entities transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     process_backends(ctx, m);
     process_facets(m);

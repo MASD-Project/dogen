@@ -59,8 +59,8 @@ const std::string  bundle_generates_nothing(
 
 namespace dogen::logical::transforms {
 
-void variability_features_transform::update(
-    const features::variability_templates::feature_group& fg,
+void variability_features_transform::
+update(const features::variability_templates::feature_group& fg,
     entities::variability::abstract_feature& af) {
 
     using features::variability_templates;
@@ -215,8 +215,7 @@ void variability_features_transform::process_abstract_feature(
 }
 
 void variability_features_transform::
-process_feature_template_bundles(
-    const variability::entities::feature_model& fm,
+process_feature_template_bundles(const variability::entities::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     entities::model& m) {
     /*

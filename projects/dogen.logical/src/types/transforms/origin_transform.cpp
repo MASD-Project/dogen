@@ -23,6 +23,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/features/origin.hpp"
@@ -78,10 +79,10 @@ identification::entities::model_type origin_transform::
 compute_model_type(const entities::model& m, const bool is_pdm) {
     using identification::entities::model_type;
     if (is_pdm && m.provenance().model_type() == model_type::target) {
-        const auto& id(m.name().qualified().dot());
+        const auto& id(m.name().id());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
         BOOST_THROW_EXCEPTION(
-            transformation_error(target_cannot_be_proxy + id));
+            transformation_error(target_cannot_be_proxy + id.value()));
     }
 
     if (m.provenance().model_type() == model_type::target)
@@ -95,7 +96,7 @@ compute_model_type(const entities::model& m, const bool is_pdm) {
 void origin_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * First we obtain the is proxy model flag from the model's static
@@ -122,8 +123,8 @@ apply(const context& ctx, entities::model& m) {
      * model element, it will not be code generated as we ignore all
      * non-target elements.
      */
-    updater g(mt);
-    entities::elements_traversal(m, g);
+    updater u(mt);
+    entities::elements_traversal(m, u);
 
     stp.end_transform(m);
 }

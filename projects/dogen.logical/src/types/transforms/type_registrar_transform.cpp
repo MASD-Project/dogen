@@ -45,7 +45,7 @@ namespace dogen::logical::transforms {
 
 void type_registrar_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type registrar transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * If there are no registrars at all then there is nothing to do.

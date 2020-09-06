@@ -152,62 +152,62 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::templating::logic_less_template& v) {
+    void operator()(entities::templating::logic_less_template& v) {
         static const auto n(mnf::make_templating_logic_less_templates_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::serialization::type_registrar& v) {
+    void operator()(entities::serialization::type_registrar& v) {
         static const auto n(mnf::make_serialization_type_registrar_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::visual_studio::solution& v) {
+    void operator()(entities::visual_studio::solution& v) {
         static const auto n(mnf::make_visual_studio_solution_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::visual_studio::project& v) {
+    void operator()(entities::visual_studio::project& v) {
         static const auto n(mnf::make_visual_studio_project_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::visual_studio::msbuild_targets& v) {
+    void operator()(entities::visual_studio::msbuild_targets& v) {
         static const auto n(mnf::make_visual_studio_msbuild_targets_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::orm::common_odb_options& v) {
+    void operator()(entities::orm::common_odb_options& v) {
         static const auto n(mnf::make_orm_common_odb_options_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::build::cmakelists& v) {
+    void operator()(entities::build::cmakelists& v) {
         static const auto n(mnf::make_build_cmakelists_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::physical::backend& v) {
+    void operator()(entities::physical::backend& v) {
         static const auto n(mnf::make_physical_backend_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::physical::facet& v) {
+    void operator()(entities::physical::facet& v) {
         static const auto n(mnf::make_physical_facet_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::physical::archetype& v) {
+    void operator()(entities::physical::archetype& v) {
         static const auto n(mnf::make_physical_archetype_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::physical::archetype_kind& v) {
+    void operator()(entities::physical::archetype_kind& v) {
         static const auto n(mnf::make_physical_archetype_kind_name());
         v.meta_name(n);
     }
 
-    void operator()(logical::entities::physical::part& v) {
+    void operator()(entities::physical::part& v) {
         static const auto n(mnf::make_physical_part_name());
         v.meta_name(n);
     }

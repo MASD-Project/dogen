@@ -39,8 +39,8 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-void type_params_transform::populate_type_parameters(
-    const features::type_parameters::feature_group& fg,
+void type_params_transform::
+populate_type_parameters(const features::type_parameters::feature_group& fg,
     entities::structural::object& o) {
     using features::type_parameters;
     const auto scfg(type_parameters::make_static_configuration(fg, o));
@@ -52,7 +52,7 @@ void type_params_transform::populate_type_parameters(
 
 void type_params_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::type_parameters::make_feature_group(fm));

@@ -23,8 +23,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
-#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.identification/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/lexical_cast/entities/decoration/editor_lc.hpp"
 #include "dogen.logical/lexical_cast/entities/decoration/modeline_location_lc.hpp"
 #include "dogen.logical/types/features/decoration_modeline.hpp"
@@ -50,7 +50,7 @@ namespace dogen::logical::transforms {
 
 void modelines_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modelines transform",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * Obtain the feature group.
