@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-06 Sun 12:24]
+#+CAPTION: Clock summary at [2020-09-06 Sun 13:37]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *55:34* |       |       | 100.0 |
+| *Total time*                                       | *55:43* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 55:34   |       |       | 100.0 |
-| Active                                             |         | 55:34 |       | 100.0 |
+| Stories                                            | 55:43   |       |       | 100.0 |
+| Active                                             |         | 55:43 |       | 100.0 |
 | Edit release notes for previous sprint             |         |       |  7:15 |  13.0 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   1.2 |
 | Sprint and product backlog grooming                |         |       |  1:23 |   2.5 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   7.9 |
-| Create an =ident= model                            |         |       | 41:53 |  75.4 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   7.8 |
+| Create an =ident= model                            |         |       | 42:02 |  75.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -817,8 +817,10 @@ Notes:
   need to add this as a property (e.g. generatable). If a user tries
   to add a formatter to a non-generatable type we error.
 
-*** STARTED Create an =ident= model                                   :story:
+*** COMPLETED Create an =ident= model                                 :story:
+    CLOSED: [2020-09-06 Sun 13:37]
     :LOGBOOK:
+    CLOCK: [2020-09-06 Sun 13:28]--[2020-09-06 Sun 13:37] =>  0:09
     CLOCK: [2020-09-06 Sun 11:08]--[2020-09-06 Sun 12:24] =>  1:16
     CLOCK: [2020-09-06 Sun 10:05]--[2020-09-06 Sun 11:07] =>  1:02
     CLOCK: [2020-09-05 Sat 22:04]--[2020-09-05 Sat 22:10] =>  0:06
