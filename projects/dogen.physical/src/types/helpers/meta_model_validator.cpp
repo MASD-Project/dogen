@@ -43,11 +43,6 @@ const std::string facets_missing_canonical_archetype(
 
 namespace dogen::identification::entities {
 
-// inline bool
-// operator<(physical_meta_id&& lhs, physical_meta_id&& rhs) {
-//     return lhs.value() < rhs.value();
-// }
-
 inline bool
 operator<(const physical_meta_id& lhs, const physical_meta_id& rhs) {
     return lhs.value() < rhs.value();
@@ -67,12 +62,12 @@ void meta_model_validator::validate(physical::entities::meta_model& mm) {
     std::set<physical_meta_id> all_facets;
 
     const auto rs_fd(entities::relation_status::facet_default);
-    for (auto& be : mm.backends()) {
-        for (auto& fct_pair : be.facets()) {
-            auto& fct(fct_pair.second);
-            for (auto& arch_pair : fct.archetypes()) {
+    for (const auto& be : mm.backends()) {
+        for (const auto& fct_pair : be.facets()) {
+            const auto& fct(fct_pair.second);
+            for (const auto& arch_pair : fct.archetypes()) {
                 const auto& pmid(arch_pair.first);
-                auto& arch(arch_pair.second);
+                const auto& arch(arch_pair.second);
 
                 BOOST_LOG_SEV(lg, debug) << "Processing: " << pmid;
 
