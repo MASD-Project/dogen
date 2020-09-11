@@ -215,8 +215,8 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
     }
 
     /*
-     * If we do have physical projects, these must have been expected
-     * by the logical model.
+     * If we do have physical projections, these must have been
+     * expected by the logical model.
      */
     if (e->generability_status() == gne) {
         BOOST_LOG_SEV(lg, error) << unexpected_archetypes << mid;
@@ -225,7 +225,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
     }
 
     /*
-     * The element does have a physical representation. We need to
+     * Since the element has a physical representation, we now need to
      * update the artefact set with it.
      */
     const auto& physical_meta_names(i->second.meta_names());
