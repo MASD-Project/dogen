@@ -54,7 +54,7 @@ void generator::generate(const configuration& cfg,
         /*
          * Bind the tracer to the current scope.
          */
-        const auto& t(*ctx.injection_context().tracer());
+        const auto& t(*ctx.codec_context().tracer());
         tracing::scoped_tracer st(t);
 
         /*

@@ -134,20 +134,20 @@
           <dia:attribute name="string">
             <dia:string>#Provides the C++ backend for the default physical meta-model.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.text.cpp
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=dogen
-#DOGEN masd.injection.reference=dogen.variability
-#DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.logical
-#DOGEN masd.injection.reference=dogen.text
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.injection.input_technical_space=cpp
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.text.cpp
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=dogen
+#DOGEN masd.codec.reference=dogen.variability
+#DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=dogen.logical
+#DOGEN masd.codec.reference=dogen.text
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
+#DOGEN masd.codec.input_technical_space=cpp
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -6600,7 +6600,7 @@ Takes types in the C++ model and creates a file
 representation of these types according to the
 grammar of the C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true
+#DOGEN masd.codec.dia.comment=true
 #DOGEN masd.physical.backend_name=cpp
 #DOGEN masd.physical.major_technical_space=cpp
 #DOGEN masd.label.test=lbl#</dia:string>
@@ -6658,7 +6658,7 @@ grammar of the C++ technical space.
             <dia:string>#Formatters for the types facet of the
 C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true
+#DOGEN masd.codec.dia.comment=true
 #DOGEN masd.label.test=some_label#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -6714,7 +6714,7 @@ C++ technical space.
             <dia:string>#Formatters for the hash facet of the
 C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6769,7 +6769,7 @@ C++ technical space.
             <dia:string>#Formatters for the test_data facet
 of the C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6824,7 +6824,7 @@ of the C++ technical space.
             <dia:string>#Formatters for the io facet of the
 C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6879,7 +6879,7 @@ C++ technical space.
             <dia:string>#Formatters for the odb facet of the
 C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6934,7 +6934,7 @@ C++ technical space.
             <dia:string>#Formatters for the boost serialisation
 facet of the C++ technical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -9317,7 +9317,7 @@ for a given C++ entity.#</dia:string>
             <dia:string>#Formattables contains all types required by the formatters
 and those used to generate them.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -33620,7 +33620,7 @@ template void load(archive::xml_iarchive&amp; ar, &lt;#= qn #&gt;&amp; v, unsign
             <dia:string>#Formatters that generate tests for generated
 code.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -37222,7 +37222,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
             <dia:string>#Formatters related to conversions from and to
 string.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -38773,7 +38773,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
           <dia:attribute name="string">
             <dia:string>#Formatters related to templating.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -40847,7 +40847,7 @@ template void &lt;#= sn #&gt;::register_types(boost::archive::xml_iarchive&amp;&
           <dia:attribute name="string">
             <dia:string>#Formatters related to Visual Studio support.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -43597,7 +43597,7 @@ install(
           <dia:attribute name="string">
             <dia:string>#Formatters related to build files.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

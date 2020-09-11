@@ -51,10 +51,10 @@ target_link_libraries(${lib_target_name}
     dogen.variability.lib
     dogen.dia.lib
     dogen.physical.lib
-    dogen.injection.lib
-    dogen.injection.org_mode.lib
-    dogen.injection.json.lib
-    dogen.injection.dia.lib
+    dogen.codec.lib
+    dogen.codec.org_mode.lib
+    dogen.codec.json.lib
+    dogen.codec.dia.lib
     dogen.logical.lib
     dogen.text.cpp.lib
     dogen.text.csharp.lib

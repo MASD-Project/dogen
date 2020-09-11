@@ -20,16 +20,16 @@
  */
 #include <ostream>
 #include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
-#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 
 namespace dogen::identification::entities {
 
 std::ostream& operator<<(std::ostream& s, const logical_provenance& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::identification::entities::logical_provenance\"" << ", "
-      << "\"injection\": " << v.injection() << ", "
+      << "\"codec\": " << v.codec() << ", "
       << "\"logical_name\": " << v.logical_name() << ", "
       << "\"logical_meta_name\": " << v.logical_meta_name()
       << " }";

@@ -127,7 +127,7 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
     /*
      * Bind the tracer to the current scope.
      */
-    const auto& t(*ctx.injection_context().tracer());
+    const auto& t(*ctx.codec_context().tracer());
     dogen::tracing::scoped_tracer st(t);
 
     /*

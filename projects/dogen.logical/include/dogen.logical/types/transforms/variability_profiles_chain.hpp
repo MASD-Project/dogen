@@ -39,7 +39,7 @@ namespace dogen::logical::transforms {
  * initialising the "user-data" part of the variability
  * subsystem. This is the second phase of variability processing; it
  * presumes that the first phase was already performed - that is, the
- * injection of all of the available features into a feature model.
+ * codec of all of the available features into a feature model.
  *
  * Profiles provide "named configurations" defined by users that allow
  * for the packaging and sharing of configuration. The job of this

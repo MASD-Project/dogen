@@ -45,7 +45,7 @@ public:
     mapping_context(
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations,
         const std::unordered_set<dogen::identification::entities::logical_id>& erasures,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections);
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& codecs);
 
 public:
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations() const;
@@ -58,10 +58,10 @@ public:
     void erasures(const std::unordered_set<dogen::identification::entities::logical_id>& v);
     void erasures(const std::unordered_set<dogen::identification::entities::logical_id>&& v);
 
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections() const;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections();
-    void injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v);
-    void injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v);
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& codecs() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& codecs();
+    void codecs(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v);
+    void codecs(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -76,7 +76,7 @@ public:
 private:
     std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> translations_;
     std::unordered_set<dogen::identification::entities::logical_id> erasures_;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> injections_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name> codecs_;
 };
 
 }

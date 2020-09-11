@@ -29,9 +29,9 @@
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
+#include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
-#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {

@@ -106,12 +106,12 @@ it looks good, then run it against all other dogen models.
 We should try to keep all elements in one screen as much
 as possible, so we can evaluate how they work together.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.palette
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.palette
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

@@ -127,17 +127,17 @@ only of its user. This decoupling was achieved by creating the concept
 of template instantiation domains, which are just sets. These are mapped
 elsewhere from the geometry of physical space.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.variability
-#DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.identification
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.variability
+#DOGEN masd.codec.input_technical_space=cpp
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
+#DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=dogen.identification
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -7724,7 +7724,7 @@ user choices.#</dia:string>
             <dia:string>#Contains all of the types describing variability
 with Masd.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -13656,7 +13656,7 @@ alias.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Features used by the variability model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

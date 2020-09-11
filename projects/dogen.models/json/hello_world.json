@@ -1,11 +1,11 @@
 {
   "documentation": "Welcome to Dogen!\n\nThis is one of the simplest models you can generate, a single class with one\nproperty. You can see the use of comments at the class level and property\nlevel.\n",
   "tagged_values": {
-    "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "dogen.hello_world",
-    "masd.injection.input_technical_space": "cpp",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "masd",
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.hello_world",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "masd",
     "masd.physical.delete_extra_files": "true",
     "masd.physical.delete_empty_directories": "true",
     "masd.cpp.enabled": "true",

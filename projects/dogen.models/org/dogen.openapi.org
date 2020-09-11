@@ -3,56 +3,56 @@
 * document
 ** openapi
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The semantic version number of the OpenAPI Specification version that the OpenAPI document uses.
 
 ** info
 :PROPERTIES:
-:masd.injection.type: info
+:masd.codec.type: info
 :END:
 
 Provides metadata about the API.
 
 ** servers
 :PROPERTIES:
-:masd.injection.type: std::list<server>
+:masd.codec.type: std::list<server>
 :END:
 
 An array of Server Objects, which provide connectivity information to a target server.
 
 ** paths
 :PROPERTIES:
-:masd.injection.type: paths
+:masd.codec.type: paths
 :END:
 
 The available paths and operations for the API.
 
 ** components
 :PROPERTIES:
-:masd.injection.type: components
+:masd.codec.type: components
 :END:
 
 An element to hold various schemas for the specification.
 
 ** security
 :PROPERTIES:
-:masd.injection.type: security_requirements
+:masd.codec.type: security_requirements
 :END:
 
 A declaration of which security mechanisms can be used across the API.
 
 ** tags
 :PROPERTIES:
-:masd.injection.type: tags
+:masd.codec.type: tags
 :END:
 
 A list of tags used by the specification with additional metadata.
 
 ** external_docs
 :PROPERTIES:
-:masd.injection.type: external_documentation
+:masd.codec.type: external_documentation
 :END:
 
 Additional external documentation.
@@ -60,42 +60,42 @@ Additional external documentation.
 * info
 ** title
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The title of the application.
 
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 A short description of the application. CommonMark syntax may be used for rich text representation.
 
 ** terms_of_service
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 A URL to the Terms of Service for the API.
 
 ** contact
 :PROPERTIES:
-:masd.injection.type: contact
+:masd.codec.type: contact
 :END:
 
 The contact information for the exposed API.
 
 ** license
 :PROPERTIES:
-:masd.injection.type: license
+:masd.codec.type: license
 :END:
 
 The license information for the exposed API.
 
 ** version
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The version of the OpenAPI document itself.
@@ -103,21 +103,21 @@ The version of the OpenAPI document itself.
 * server
 ** url
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 A URL to the target host.
 
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 An optional string describing the host designated by the URL.
 
 ** variables
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, server_variable>
+:masd.codec.type: std::unordered_map<std::string, server_variable>
 :END:
 
 A map between a variable name and its value. The value is used for substitution in the server's URL template.
@@ -126,63 +126,63 @@ A map between a variable name and its value. The value is used for substitution 
 * components
 ** schemas
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, schema>
+:masd.codec.type: std::unordered_map<std::string, schema>
 :END:
 
 An object to hold reusable schema objects.
 
 ** responses
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, response>
+:masd.codec.type: std::unordered_map<std::string, response>
 :END:
 
 An object to hold reusable response objects.
 
 ** parameters
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, parameter>
+:masd.codec.type: std::unordered_map<std::string, parameter>
 :END:
 
 An object to hold reusable parameter objects.
 
 ** examples
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, example>
+:masd.codec.type: std::unordered_map<std::string, example>
 :END:
 
 An object to hold reusable examples objects.
 
 ** request_bodies
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, request_body>
+:masd.codec.type: std::unordered_map<std::string, request_body>
 :END:
 
 An object to hold reusable request bodies objects.
 
 ** headers
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, request_header>
+:masd.codec.type: std::unordered_map<std::string, request_header>
 :END:
 
 An object to hold reusable header objects.
 
 ** security_schemes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, security_scheme>
+:masd.codec.type: std::unordered_map<std::string, security_scheme>
 :END:
 
 An object to hold reusable security scheme objects.
 
 ** links
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, link>
+:masd.codec.type: std::unordered_map<std::string, link>
 :END:
 
 An object to hold reusable links objects.
 
 ** callbacks
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, callback>
+:masd.codec.type: std::unordered_map<std::string, callback>
 :END:
 
 An object to hold reusable callbacks objects.
@@ -194,21 +194,21 @@ An object to hold reusable callbacks objects.
 * contact
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The identifying name of the contact person/organization.
 
 ** url
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The URL pointing to the contact information.
 
 ** email
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The email address of the contact person/organization.
@@ -216,14 +216,14 @@ The email address of the contact person/organization.
 * licence
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The license name used for the API.
 
 ** url
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 A URL to the license used for the API.
@@ -231,21 +231,21 @@ A URL to the license used for the API.
 * server_variable
 ** enumeration
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 An enumeration of string values to be used if the substitution options are from a limited set.
 
 ** default_value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The default value to use for substitution.
 
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 An optional description for the server variable.

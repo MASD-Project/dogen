@@ -1,22 +1,22 @@
 #+title: dogen.orchestration
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.orchestration
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: cpp.std
-:masd.injection.reference: dogen
-:masd.injection.reference: dogen.variability
-:masd.injection.reference: dogen.tracing
-:masd.injection.reference: dogen.injection
-:masd.injection.reference: dogen.logical
-:masd.injection.reference: dogen.text
-:masd.injection.reference: dogen.physical
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
-:masd.injection.input_technical_space: cpp
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.orchestration
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: cpp.std
+:masd.codec.reference: dogen
+:masd.codec.reference: dogen.variability
+:masd.codec.reference: dogen.tracing
+:masd.codec.reference: dogen.codec
+:masd.codec.reference: dogen.logical
+:masd.codec.reference: dogen.text
+:masd.codec.reference: dogen.physical
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
+:masd.codec.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -24,7 +24,7 @@ Orchestration-based imlementation of the Dogen product API.
 
 * transforms
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Top-level transforms for Dogen. These are
@@ -32,116 +32,116 @@ the entry points to all transformations.
 
 ** transforms::code_generation_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::context
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
+:masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
 *** variability_context
 :PROPERTIES:
-:masd.injection.type: variability::transforms::context
+:masd.codec.type: variability::transforms::context
 :END:
-*** injection_context
+*** codec_context
 :PROPERTIES:
-:masd.injection.type: injection::transforms::context
+:masd.codec.type: codec::transforms::context
 :END:
 *** logical_context
 :PROPERTIES:
-:masd.injection.type: logical::transforms::context
+:masd.codec.type: logical::transforms::context
 :END:
 *** text_context
 :PROPERTIES:
-:masd.injection.type: text::transforms::context
+:masd.codec.type: text::transforms::context
 :END:
 *** physical_context
 :PROPERTIES:
-:masd.injection.type: physical::transforms::context
+:masd.codec.type: physical::transforms::context
 :END:
 ** transforms::context_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::factory_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred in the factory whilst making.
 
-** transforms::injection_model_to_logical_model_transform
+** transforms::codec_model_to_logical_model_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::injection_model_set_to_logical_input_model_set_chain
+** transforms::codec_model_set_to_logical_input_model_set_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::transform_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** transforms::logical_model_to_text_model_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::physical_model_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::text_model_to_physical_model_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::context_bootstrapping_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::text_model_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::physical_artefact_repository_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::physical_artefact_preparation_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * generator
 :PROPERTIES:
 :masd.generalization.parent: dogen::generator
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * converter
 :PROPERTIES:
 :masd.generalization.parent: dogen::converter
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * injector_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 * helpers
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Helpers for the orchestration model.
 
 ** helpers::adaptation_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** helpers::adapter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * features
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Features for the orchestration model.
@@ -149,8 +149,8 @@ Features for the orchestration model.
 ** features::model_location
 :PROPERTIES:
 :masd.variability.default_binding_point: global
-:masd.variability.key_prefix: masd.injection
-:masd.injection.stereotypes: masd::variability::feature_bundle
+:masd.variability.key_prefix: masd.codec
+:masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 
 Feature group for model location related features.
@@ -158,7 +158,7 @@ Feature group for model location related features.
 *** external_modules
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 External modules containing this model.
@@ -168,7 +168,7 @@ name.
 
 *** model_modules
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Model modules containing this model.
@@ -177,18 +177,18 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
 ** features::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::initializer
+:masd.codec.stereotypes: masd::variability::initializer
 :END:
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
 * spec_dumper
 :PROPERTIES:
 :masd.generalization.parent: dogen::spec_dumper
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:

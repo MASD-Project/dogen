@@ -29,11 +29,11 @@ const std::string references_graph_text_fn("references_graph.txt");
 const std::string references_graph_graphviz_fn("references_graph.dot");
 const std::string physical_name_prefix("00000-configuration-");
 const std::string physical_name_postfix("-initial_input.json");
-const std::string injection_transform_prefix(
-    "00000-injection.dia.decoding_transform-dogen-");
+const std::string codec_transform_prefix(
+    "00000-codec.dia.decoding_transform-dogen-");
 const std::string first_short_name("00000-initial_input.json");
 const std::string second_short_name("00001-input.json");
-const std::string injection_transform_postfix("-input.json");
+const std::string codec_transform_postfix("-input.json");
 const std::regex tracing_regex(".*/tracing/.*");
 const std::regex guid_regex(
     "[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
@@ -137,7 +137,7 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     /*
      * Bind the tracer to the current scope.
      */
-    const auto& t(*ctx.injection_context().tracer());
+    const auto& t(*ctx.codec_context().tracer());
     dogen::tracing::scoped_tracer st(t);
 
     /*
@@ -183,7 +183,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
     bool found_transform_stats(false);
     bool found_references_graph(false);
     bool found_physical_name(false);
-    bool found_injection_dia_transform(false);
+    bool found_codec_dia_transform(false);
     for (const auto& f : files) {
         const auto gs(f.generic_string());
         BOOST_LOG_SEV(lg, debug) << "gs: " << gs;
@@ -223,7 +223,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
             else if (fn == first_short_name)
                 found_physical_name = true;
             else if (fn == second_short_name)
-                found_injection_dia_transform = true;
+                found_codec_dia_transform = true;
         } else {
             if (fn == transform_stats_org_fn)
                 found_transform_stats = true;
@@ -233,18 +233,18 @@ bool are_tracing_files_healthy(const configuration& cfg,
                 boost::ends_with(fn, physical_name_postfix)) {
                 found_physical_name = true;
                 BOOST_LOG_SEV(lg, debug) << "Found archetype location: " << gs;
-            } else if (boost::starts_with(fn, injection_transform_prefix) &&
-                boost::ends_with(fn, injection_transform_postfix)) {
-                found_injection_dia_transform = true;
-                BOOST_LOG_SEV(lg, debug) << "Found injection: " << gs;
+            } else if (boost::starts_with(fn, codec_transform_prefix) &&
+                boost::ends_with(fn, codec_transform_postfix)) {
+                found_codec_dia_transform = true;
+                BOOST_LOG_SEV(lg, debug) << "Found codec: " << gs;
 
                 /*
                  * Ensure filenames have a guid (since we requested it in
                  * the config) and the guid is valid.
                  */
                 auto guid(fn);
-                boost::erase_first(guid, injection_transform_prefix);
-                boost::erase_first(guid, injection_transform_postfix);
+                boost::erase_first(guid, codec_transform_prefix);
+                boost::erase_first(guid, codec_transform_postfix);
                 BOOST_LOG_SEV(lg, debug) << "guid: " << guid;
 
                 if (guid.size() != 36) {
@@ -270,12 +270,12 @@ bool are_tracing_files_healthy(const configuration& cfg,
                              << found_references_graph
                              << " found_physical_name: "
                              << found_physical_name
-                             << " found_injection_dia_transform: "
-                             << found_injection_dia_transform;
+                             << " found_codec_dia_transform: "
+                             << found_codec_dia_transform;
 
     return
         found_transform_stats && found_references_graph &&
-        found_physical_name && found_injection_dia_transform;
+        found_physical_name && found_codec_dia_transform;
 }
 
 }

@@ -73,7 +73,7 @@ private:
 
     std::unordered_map<identification::entities::logical_id,
                        identification::entities::logical_name>
-    injections_for_technical_space(const mapping_set& ms,
+    codecs_for_technical_space(const mapping_set& ms,
         const identification::entities::technical_space ts,
         const entities::model& m) const;
 
@@ -86,7 +86,7 @@ private:
     identification::entities::logical_name_tree
     walk_name_tree(const mapping_context& mc,
         const identification::entities::logical_name_tree& nt,
-        const bool skip_injection = false) const;
+        const bool skip_codec = false) const;
     void map_attributes(const mapping_context& mc,
         std::list<entities::attribute>& attrs) const;
 

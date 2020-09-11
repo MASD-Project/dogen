@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include "dogen.text/io/transforms/context_io.hpp"
+#include "dogen.codec/io/transforms/context_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.physical/io/transforms/context_io.hpp"
-#include "dogen.injection/io/transforms/context_io.hpp"
 #include "dogen.variability/io/transforms/context_io.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 
@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::orchestration::transforms::context\"" << ", "
       << "\"variability_context\": " << v.variability_context() << ", "
-      << "\"injection_context\": " << v.injection_context() << ", "
+      << "\"codec_context\": " << v.codec_context() << ", "
       << "\"logical_context\": " << v.logical_context() << ", "
       << "\"text_context\": " << v.text_context() << ", "
       << "\"physical_context\": " << v.physical_context()

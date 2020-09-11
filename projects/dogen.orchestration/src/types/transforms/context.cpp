@@ -24,12 +24,12 @@ namespace dogen::orchestration::transforms {
 
 context::context(
     const dogen::variability::transforms::context& variability_context,
-    const dogen::injection::transforms::context& injection_context,
+    const dogen::codec::transforms::context& codec_context,
     const dogen::logical::transforms::context& logical_context,
     const dogen::text::transforms::context& text_context,
     const dogen::physical::transforms::context& physical_context)
     : variability_context_(variability_context),
-      injection_context_(injection_context),
+      codec_context_(codec_context),
       logical_context_(logical_context),
       text_context_(text_context),
       physical_context_(physical_context) { }
@@ -37,7 +37,7 @@ context::context(
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(variability_context_, other.variability_context_);
-    swap(injection_context_, other.injection_context_);
+    swap(codec_context_, other.codec_context_);
     swap(logical_context_, other.logical_context_);
     swap(text_context_, other.text_context_);
     swap(physical_context_, other.physical_context_);
@@ -45,7 +45,7 @@ void context::swap(context& other) noexcept {
 
 bool context::operator==(const context& rhs) const {
     return variability_context_ == rhs.variability_context_ &&
-        injection_context_ == rhs.injection_context_ &&
+        codec_context_ == rhs.codec_context_ &&
         logical_context_ == rhs.logical_context_ &&
         text_context_ == rhs.text_context_ &&
         physical_context_ == rhs.physical_context_;
@@ -73,20 +73,20 @@ void context::variability_context(const dogen::variability::transforms::context&
     variability_context_ = std::move(v);
 }
 
-const dogen::injection::transforms::context& context::injection_context() const {
-    return injection_context_;
+const dogen::codec::transforms::context& context::codec_context() const {
+    return codec_context_;
 }
 
-dogen::injection::transforms::context& context::injection_context() {
-    return injection_context_;
+dogen::codec::transforms::context& context::codec_context() {
+    return codec_context_;
 }
 
-void context::injection_context(const dogen::injection::transforms::context& v) {
-    injection_context_ = v;
+void context::codec_context(const dogen::codec::transforms::context& v) {
+    codec_context_ = v;
 }
 
-void context::injection_context(const dogen::injection::transforms::context&& v) {
-    injection_context_ = std::move(v);
+void context::codec_context(const dogen::codec::transforms::context&& v) {
+    codec_context_ = std::move(v);
 }
 
 const dogen::logical::transforms::context& context::logical_context() const {

@@ -1,30 +1,30 @@
 #+title: dogen.templating
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.templating
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: cpp.std
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
-:masd.injection.reference: dogen.identification
-:masd.injection.input_technical_space: cpp
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.templating
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: cpp.std
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
+:masd.codec.reference: dogen.identification
+:masd.codec.input_technical_space: cpp
 :masd.physical.ignore_files_matching_regex: .*/poly-stitch.el.*
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 * wale
 ** wale::text_template
 :PROPERTIES:
-:masd.injection.stereotypes: ConfigurableViaKvps
+:masd.codec.stereotypes: ConfigurableViaKvps
 :END:
 
 Represents a wale text template.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 #+begin_src mustache
@@ -33,26 +33,26 @@ Textual content of the wale template.
 #+end_src
 ** wale::key_extractor
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** wale::instantiator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** wale::formatter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** wale::formatting_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst formatting.
 
 ** wale::extraction_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst extracting a key.
@@ -60,52 +60,52 @@ An error occurred whilst extracting a key.
 * stitch
 ** stitch::parser
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** stitch::block
 *** type
 :PROPERTIES:
-:masd.injection.type: block_types
+:masd.codec.type: block_types
 :END:
 *** content
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** stitch::text_template
 :PROPERTIES:
-:masd.injection.stereotypes: ConfigurableViaKvps
+:masd.codec.stereotypes: ConfigurableViaKvps
 :END:
 
 Domain representation of a stitch template.
 
 *** properties
 :PROPERTIES:
-:masd.injection.type: properties
+:masd.codec.type: properties
 :END:
 
 Properties of the template.
 
 *** body
 :PROPERTIES:
-:masd.injection.type: text_template_body
+:masd.codec.type: text_template_body
 :END:
 
 Body of the text template.
 
 ** stitch::formatter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** stitch::parsing_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst parsing.
 
 ** stitch::formatting_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst formatting.
@@ -113,32 +113,32 @@ An error occurred whilst formatting.
 ** stitch::properties
 *** stream_variable_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** inclusion_dependencies
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 *** containing_namespaces
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 *** wale_template
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** wale_kvps
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
+:masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
 ** stitch::line
 *** blocks
 :PROPERTIES:
-:masd.injection.type: std::list<block>
+:masd.codec.type: std::list<block>
 :END:
 ** stitch::block_types
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 *** text_block
 *** standard_control_block
@@ -146,37 +146,37 @@ An error occurred whilst formatting.
 *** variable_block
 ** stitch::instantiator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** stitch::text_template_body
 *** tagged_values
 :PROPERTIES:
-:masd.injection.type: std::list<identification::entities::tagged_value>
+:masd.codec.type: std::list<identification::entities::tagged_value>
 :END:
 
 Set of tagged values read from the template.
 
 *** lines
 :PROPERTIES:
-:masd.injection.type: std::list<line>
+:masd.codec.type: std::list<line>
 :END:
 ** stitch::instantiation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** stitch::features
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.stitch
-:masd.injection.stereotypes: masd::variability::feature_bundle
+:masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 
 Stitch templating features.
 
 *** stream_variable_name
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "stream_"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "stream_"
 :END:
 
 Which name to use for the variable with the stream.
@@ -184,7 +184,7 @@ Which name to use for the variable with the stream.
 *** relative_output_directory
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Relative path to the output directory.
@@ -192,14 +192,14 @@ Relative path to the output directory.
 *** inclusion_dependency
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text_collection
+:masd.codec.type: masd::variability::text_collection
 :END:
 
 C++ Include header.
 
 *** containing_namespaces
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Namespaces that contain the class represented by the template.
@@ -207,7 +207,7 @@ Namespaces that contain the class represented by the template.
 *** wale.text_template
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Name of the wale text template to instantiate, if any.
@@ -215,28 +215,28 @@ Name of the wale text template to instantiate, if any.
 *** wale.kvp
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::key_value_pair
+:masd.codec.type: masd::variability::key_value_pair
 :END:
 
 Array of wale KVPs to use in template instantiation.
 
 * ConfigurableViaKvps
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Element has the ability to recieve configuration arguments as a set of KVPs.
 
 ** expected_keys
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.codec.type: std::unordered_set<std::string>
 :END:
 
 Set of keys that are expected to be supplied.
 
 ** supplied_kvps
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
+:masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
 
 Key value pairs that were supplied for instantiation.
@@ -244,35 +244,35 @@ Key value pairs that were supplied for instantiation.
 * helpers
 ** helpers::kvp_validator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::validation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred with the supplied KVPs.
 
 ** helpers::kvp_resolver
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::resolution_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred when trying to resolve a key.
 
 * initializer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::initializer
+:masd.codec.stereotypes: masd::variability::initializer
 :END:
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

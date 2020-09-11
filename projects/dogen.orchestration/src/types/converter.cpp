@@ -20,9 +20,9 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection.json/types/initializer.hpp"
-#include "dogen.injection.dia/types/initializer.hpp"
-#include "dogen.injection/types/transforms/model_to_model_chain.hpp"
+#include "dogen.codec.json/types/initializer.hpp"
+#include "dogen.codec.dia/types/initializer.hpp"
+#include "dogen.codec/types/transforms/model_to_model_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/converter.hpp"
 
@@ -44,12 +44,12 @@ void converter::convert(const configuration& cfg,
 
     {
         /*
-         * Bootstrap the injection context.
+         * Bootstrap the codec context.
          */
         using namespace transforms;
         using cbc = context_bootstrapping_chain;
         const auto& a(conversion_activity);
-        const auto ctx(cbc::bootstrap_injection_context(cfg, a));
+        const auto ctx(cbc::bootstrap_codec_context(cfg, a));
 
         /*
          * Bind the tracer to the current scope.
@@ -60,7 +60,7 @@ void converter::convert(const configuration& cfg,
         /*
          * Apply the code generation chain.
          */
-        using namespace dogen::injection::transforms;
+        using namespace dogen::codec::transforms;
         model_to_model_chain::apply(ctx, source, destination);
     }
 

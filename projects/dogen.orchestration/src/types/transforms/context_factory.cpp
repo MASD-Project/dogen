@@ -59,7 +59,7 @@ context_factory::make_variability_context(const configuration& cfg,
     return r;
 }
 
-injection::transforms::context context_factory::make_injection_context(
+codec::transforms::context context_factory::make_codec_context(
     const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
     boost::shared_ptr<physical::entities::meta_model> /*pmm*/) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
@@ -67,7 +67,7 @@ injection::transforms::context context_factory::make_injection_context(
     /*
      * Obtain the share directory.
      */
-    injection::transforms::context r;
+    codec::transforms::context r;
     const auto lib_dir(utility::filesystem::library_directory());
     const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
     r.data_directories(lib_dirs);
@@ -102,12 +102,12 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto lib_dir(utility::filesystem::library_directory());
     const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
-    r.injection_context().data_directories(lib_dirs);
+    r.codec_context().data_directories(lib_dirs);
 
     /*
      * Handle the feature model.
      */
-    r.injection_context().feature_model(fm);
+    r.codec_context().feature_model(fm);
     r.logical_context().feature_model(fm);
     r.text_context().feature_model(fm);
     r.physical_context().feature_model(fm);
@@ -117,7 +117,7 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto cm(vctx.compatibility_mode());
     r.logical_context().compatibility_mode(cm);
-    r.injection_context().compatibility_mode(cm);
+    r.codec_context().compatibility_mode(cm);
 
     /*
      * Populate the output directory.
@@ -135,7 +135,7 @@ make_context(const configuration& cfg, const std::string& activity,
      * Setup the tracer.
      */
     const auto tracer(vctx.tracer());
-    r.injection_context().tracer(tracer);
+    r.codec_context().tracer(tracer);
     r.logical_context().tracer(tracer);
     r.text_context().tracer(tracer);
     r.physical_context().tracer(tracer);
@@ -156,7 +156,7 @@ make_context(const configuration& cfg, const std::string& activity,
      * Populate the variability overrides.
      */
     const auto& vo(cfg.model_processing().variability_overrides());
-    r.injection_context().variability_overrides(vo);
+    r.codec_context().variability_overrides(vo);
 
     /*
      * Populate the generation timestamp.

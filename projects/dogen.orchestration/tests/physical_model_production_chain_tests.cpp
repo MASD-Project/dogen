@@ -116,7 +116,7 @@ apply_physical_model_production(const boost::filesystem::path& target,
     /*
      * Bind the tracer to the current scope.
      */
-    const auto& t(*ctx.injection_context().tracer());
+    const auto& t(*ctx.codec_context().tracer());
     dogen::tracing::scoped_tracer st(t);
 
     /*
@@ -524,28 +524,28 @@ BOOST_AUTO_TEST_CASE(dogen_product_dia_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_dia_produces_expected_model) {
+BOOST_AUTO_TEST_CASE(dogen_codec_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_product_dia_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_dia());
+    const auto t(dogen_product::input_dogen_codec_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_dia_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_injection_dia_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_codec_dia_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_codec_dia_dia_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_dia_dia());
+    const auto t(dogen_product::input_dogen_codec_dia_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_json_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_injection_json_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_codec_json_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_codec_json_dia_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_json_dia());
+    const auto t(dogen_product::input_dogen_codec_json_dia());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
@@ -900,28 +900,28 @@ BOOST_AUTO_TEST_CASE(dogen_product_json_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_json_produces_expected_model) {
+BOOST_AUTO_TEST_CASE(dogen_codec_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_product_json_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_json());
+    const auto t(dogen_product::input_dogen_codec_json());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_dia_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_injection_dia_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_codec_dia_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_codec_dia_json_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_dia_json());
+    const auto t(dogen_product::input_dogen_codec_dia_json());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_injection_json_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_injection_json_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_codec_json_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_codec_json_json_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
-    const auto t(dogen_product::input_dogen_injection_json_json());
+    const auto t(dogen_product::input_dogen_codec_json_json());
     const auto od(dogen_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));

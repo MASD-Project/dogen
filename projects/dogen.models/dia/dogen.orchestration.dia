@@ -96,22 +96,22 @@
           <dia:attribute name="string">
             <dia:string>#Orchestration-based imlementation of the Dogen product API.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.orchestration
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=dogen
-#DOGEN masd.injection.reference=dogen.variability
-#DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.injection
-#DOGEN masd.injection.reference=dogen.logical
-#DOGEN masd.injection.reference=dogen.text
-#DOGEN masd.injection.reference=dogen.physical
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.injection.input_technical_space=cpp
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.orchestration
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=dogen
+#DOGEN masd.codec.reference=dogen.variability
+#DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=dogen.codec
+#DOGEN masd.codec.reference=dogen.logical
+#DOGEN masd.codec.reference=dogen.text
+#DOGEN masd.codec.reference=dogen.physical
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
+#DOGEN masd.codec.input_technical_space=cpp
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -986,10 +986,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#injection_context#</dia:string>
+            <dia:string>#codec_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection::transforms::context#</dia:string>
+            <dia:string>#codec::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1321,13 +1321,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_injection_context#</dia:string>
+            <dia:string>#make_codec_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection::transforms::context#</dia:string>
+            <dia:string>#codec::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1723,7 +1723,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_to_logical_model_transform#</dia:string>
+        <dia:string>#codec_model_to_logical_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1862,7 +1862,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#injection::entities::model#</dia:string>
+                <dia:string>#codec::entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1900,7 +1900,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_set_to_logical_input_model_set_chain#</dia:string>
+        <dia:string>#codec_model_set_to_logical_input_model_set_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -2039,7 +2039,7 @@
                 <dia:string>#ims#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#injection::entities::model_set#</dia:string>
+                <dia:string>#codec::entities::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3086,7 +3086,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Adapts injection types into
+            <dia:string>#Adapts codec types into
 logical types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -3207,7 +3207,7 @@ logical types.#</dia:string>
         <dia:string>#Feature group for model location related features.
 
 #DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.key_prefix=masd.injection#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.codec#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3493,7 +3493,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
           <dia:attribute name="string">
             <dia:string>#Features for the orchestration model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -4085,7 +4085,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
           <dia:attribute name="string">
             <dia:string>#Helpers for the orchestration model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -4140,7 +4140,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
             <dia:string>#Top-level transforms for Dogen. These are
 the entry points to all transformations.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

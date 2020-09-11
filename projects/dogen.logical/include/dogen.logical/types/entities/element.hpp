@@ -40,9 +40,9 @@
 #include "dogen.logical/types/entities/generability_status.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
+#include "dogen.identification/types/entities/codec_provenance.hpp"
 #include "dogen.identification/types/entities/logical_meta_name.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
-#include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
 
 namespace dogen::logical::entities {
@@ -68,7 +68,7 @@ public:
     element(
         const dogen::identification::entities::logical_name& name,
         const std::string& documentation,
-        const dogen::identification::entities::injection_provenance& provenance,
+        const dogen::identification::entities::codec_provenance& provenance,
         const dogen::identification::entities::logical_id& contained_by,
         const bool in_global_module,
         const dogen::logical::entities::stereotypes& stereotypes,
@@ -117,10 +117,10 @@ public:
      * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const dogen::identification::entities::injection_provenance& provenance() const;
-    dogen::identification::entities::injection_provenance& provenance();
-    void provenance(const dogen::identification::entities::injection_provenance& v);
-    void provenance(const dogen::identification::entities::injection_provenance&& v);
+    const dogen::identification::entities::codec_provenance& provenance() const;
+    dogen::identification::entities::codec_provenance& provenance();
+    void provenance(const dogen::identification::entities::codec_provenance& v);
+    void provenance(const dogen::identification::entities::codec_provenance&& v);
     /**@}*/
 
     /**
@@ -222,7 +222,7 @@ protected:
 private:
     dogen::identification::entities::logical_name name_;
     std::string documentation_;
-    dogen::identification::entities::injection_provenance provenance_;
+    dogen::identification::entities::codec_provenance provenance_;
     dogen::identification::entities::logical_id contained_by_;
     bool in_global_module_;
     dogen::logical::entities::stereotypes stereotypes_;

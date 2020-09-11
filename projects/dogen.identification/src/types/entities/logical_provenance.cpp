@@ -23,22 +23,22 @@
 namespace dogen::identification::entities {
 
 logical_provenance::logical_provenance(
-    const dogen::identification::entities::injection_provenance& injection,
+    const dogen::identification::entities::codec_provenance& codec,
     const dogen::identification::entities::logical_name& logical_name,
     const dogen::identification::entities::logical_meta_name& logical_meta_name)
-    : injection_(injection),
+    : codec_(codec),
       logical_name_(logical_name),
       logical_meta_name_(logical_meta_name) { }
 
 void logical_provenance::swap(logical_provenance& other) noexcept {
     using std::swap;
-    swap(injection_, other.injection_);
+    swap(codec_, other.codec_);
     swap(logical_name_, other.logical_name_);
     swap(logical_meta_name_, other.logical_meta_name_);
 }
 
 bool logical_provenance::operator==(const logical_provenance& rhs) const {
-    return injection_ == rhs.injection_ &&
+    return codec_ == rhs.codec_ &&
         logical_name_ == rhs.logical_name_ &&
         logical_meta_name_ == rhs.logical_meta_name_;
 }
@@ -49,20 +49,20 @@ logical_provenance& logical_provenance::operator=(logical_provenance other) {
     return *this;
 }
 
-const dogen::identification::entities::injection_provenance& logical_provenance::injection() const {
-    return injection_;
+const dogen::identification::entities::codec_provenance& logical_provenance::codec() const {
+    return codec_;
 }
 
-dogen::identification::entities::injection_provenance& logical_provenance::injection() {
-    return injection_;
+dogen::identification::entities::codec_provenance& logical_provenance::codec() {
+    return codec_;
 }
 
-void logical_provenance::injection(const dogen::identification::entities::injection_provenance& v) {
-    injection_ = v;
+void logical_provenance::codec(const dogen::identification::entities::codec_provenance& v) {
+    codec_ = v;
 }
 
-void logical_provenance::injection(const dogen::identification::entities::injection_provenance&& v) {
-    injection_ = std::move(v);
+void logical_provenance::codec(const dogen::identification::entities::codec_provenance&& v) {
+    codec_ = std::move(v);
 }
 
 const dogen::identification::entities::logical_name& logical_provenance::logical_name() const {

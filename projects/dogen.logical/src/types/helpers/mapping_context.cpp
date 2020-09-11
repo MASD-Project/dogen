@@ -25,22 +25,22 @@ namespace dogen::logical::helpers {
 mapping_context::mapping_context(
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& translations,
     const std::unordered_set<dogen::identification::entities::logical_id>& erasures,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& injections)
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& codecs)
     : translations_(translations),
       erasures_(erasures),
-      injections_(injections) { }
+      codecs_(codecs) { }
 
 void mapping_context::swap(mapping_context& other) noexcept {
     using std::swap;
     swap(translations_, other.translations_);
     swap(erasures_, other.erasures_);
-    swap(injections_, other.injections_);
+    swap(codecs_, other.codecs_);
 }
 
 bool mapping_context::operator==(const mapping_context& rhs) const {
     return translations_ == rhs.translations_ &&
         erasures_ == rhs.erasures_ &&
-        injections_ == rhs.injections_;
+        codecs_ == rhs.codecs_;
 }
 
 mapping_context& mapping_context::operator=(mapping_context other) {
@@ -81,20 +81,20 @@ void mapping_context::erasures(const std::unordered_set<dogen::identification::e
     erasures_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& mapping_context::injections() const {
-    return injections_;
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& mapping_context::codecs() const {
+    return codecs_;
 }
 
-std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& mapping_context::injections() {
-    return injections_;
+std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& mapping_context::codecs() {
+    return codecs_;
 }
 
-void mapping_context::injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v) {
-    injections_ = v;
+void mapping_context::codecs(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>& v) {
+    codecs_ = v;
 }
 
-void mapping_context::injections(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v) {
-    injections_ = std::move(v);
+void mapping_context::codecs(const std::unordered_map<dogen::identification::entities::logical_id, dogen::identification::entities::logical_name>&& v) {
+    codecs_ = std::move(v);
 }
 
 }

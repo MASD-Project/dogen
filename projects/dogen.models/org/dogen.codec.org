@@ -1,0 +1,454 @@
+#+title: dogen.codec
+#+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
+:PROPERTIES:
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.codec
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: dogen.variability
+:masd.codec.reference: dogen.tracing
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
+:masd.codec.reference: dogen.identification
+:masd.variability.profile: dogen.profiles.base.default_profile
+:END:
+
+Provides support for encoding and decoding of external models.
+
+An external model is defined as:
+
+@li a third-party format that is not owned or controlled by
+    Dogen, such as Dia;
+@li a Dogen format designed for interoperability (JSON).
+
+External models are converted into an intermediate format called
+the @e codec model, because it is the original entry point into
+the dogen processing pipeline. It also reflects the notion that we
+are injecting external technical spaces into the MASD technical
+technical space.
+
+A @e codec must be created for each external model that is to be
+injected, providing a transformation between the native formats
+and the codec model. The codecs are created in their own models,
+following the naming convention codec.X for a given codec X.
+They then register against the codec registrar. Note that for a
+given file extension, there can only be one and only one codec to
+manage it.
+
+* transforms
+** transforms::encoding_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
+** transforms::registrar
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::registrar_error
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
+
+A registration error has occurred.
+
+** transforms::model_production_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::model_to_model_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::context
+:PROPERTIES:
+:masd.cpp.types.class_forward_declarations.enabled: true
+:masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
+:END:
+*** data_directories
+:PROPERTIES:
+:masd.codec.type: std::vector<boost::filesystem::path>
+:END:
+*** feature_model
+:PROPERTIES:
+:masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
+:END:
+*** tracer
+:PROPERTIES:
+:masd.codec.type: boost::shared_ptr<tracing::tracer>
+:END:
+*** compatibility_mode
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** variability_overrides
+:PROPERTIES:
+:masd.codec.type: std::vector<std::string>
+:END:
+
+Raw set of variability overrides.
+
+** transforms::transformation_error
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
+** transforms::decoding_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
+:END:
+** transforms::model_set_production_chain
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::input_technical_space_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::references_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::configuration_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::reference_graph_data_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::tagged_values_overrides_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::provenance_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+* entities
+** entities::model
+:PROPERTIES:
+:masd.codec.stereotypes: Element
+:END:
+
+Represents an external model.
+
+*** elements
+:PROPERTIES:
+:masd.codec.type: std::list<element>
+:END:
+*** input_technical_space
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Technical space to which the model belongs, within the codec space.
+
+*** references
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+*** processed_variability_overrides
+:PROPERTIES:
+:masd.codec.type: std::unordered_set<std::string>
+:END:
+
+All the variability overrides that were processed by this model.
+
+** entities::element
+:PROPERTIES:
+:masd.codec.stereotypes: Element
+:END:
+
+Represents an element from an external model.
+
+*** parents
+:PROPERTIES:
+:masd.codec.type: std::list<std::string>
+:END:
+*** attributes
+:PROPERTIES:
+:masd.codec.type: std::list<attribute>
+:END:
+*** fallback_element_type
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Stereotype conveying element type, to be used when none is provided with the
+main stereotypes.
+
+*** can_be_primitive_underlier
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** in_global_module
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** can_be_enumeration_underlier
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** is_default_enumeration_type
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** is_associative_container
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** is_floating_point
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+*** containing_element_id
+:PROPERTIES:
+:masd.codec.type: identification::entities::codec_id
+:END:
+
+ID of the containing element, if any.
+
+** entities::attribute
+:PROPERTIES:
+:masd.codec.stereotypes: Element
+:END:
+*** type
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+*** value
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Default value for this attribute, if any.
+
+** entities::model_set
+*** target
+:PROPERTIES:
+:masd.codec.type: model
+:END:
+*** references
+:PROPERTIES:
+:masd.codec.type: std::list<model>
+:END:
+*** reference_graph_data
+:PROPERTIES:
+:masd.codec.type: reference_graph_data
+:END:
+
+Stores the data required to build a graph of references for a model set.
+
+** entities::Taggable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to contain tagged values.
+
+*** tagged_values
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::tagged_value>
+:END:
+*** tagged_values_overrides
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::tagged_value>
+:END:
+
+Meta-data sourced externally that can be used to override meta-data in model.
+
+** entities::Stereotypable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to have stereotypes.
+
+*** stereotypes
+:PROPERTIES:
+:masd.codec.type: std::list<identification::entities::stereotype>
+:END:
+** entities::Documentable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to provide documentation.
+
+*** documentation
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Code comments.
+
+These are expected to follow the grammar of the comment processing tools
+of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
+
+** entities::Nameable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to have a name.
+
+*** name
+:PROPERTIES:
+:masd.codec.type: identification::entities::name
+:END:
+
+Name of the codec element.
+
+** entities::Configurable
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Ability to have meta-data associated.
+
+*** configuration
+:PROPERTIES:
+:masd.codec.type: boost::shared_ptr<variability::entities::configuration>
+:END:
+
+Configuration for this element.
+
+** entities::DeterminableOrigin
+:PROPERTIES:
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Properties related to the origin of the modeling element.
+
+*** provenance
+:PROPERTIES:
+:masd.codec.type: identification::entities::codec_provenance
+:END:
+
+Provenance details of this codec element.
+
+** entities::Element
+:PROPERTIES:
+:masd.codec.parent: entities::Taggable, entities::Stereotypable, entities::Documentable, entities::Nameable, entities::Configurable, entities::DeterminableOrigin
+:masd.codec.stereotypes: masd::object_template
+:END:
+
+Consolidates a number of related object templates.
+
+** entities::reference_graph_data
+Contains all the data required to build the graph of references.
+
+*** root
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Has the name of the target model, which is the entry point to the references
+graph.
+
+*** edges_per_model
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<std::string, std::list<std::string>>
+:END:
+
+Contains the list of referenced models for a particular model name.
+
+* helpers
+** helpers::references_resolver
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::reference_resolution_exception
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
+** helpers::references_validator
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::reference_validation_error
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
+
+A cycle was detected in the references graph.
+
+* features
+:PROPERTIES:
+:masd.codec.dia.comment: true
+:END:
+
+Defines all of the features and feature groups used by
+the codec model.
+
+** features::input_technical_space
+:PROPERTIES:
+:masd.variability.default_binding_point: global
+:masd.variability.key_prefix: masd.codec
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+
+Feature bundle for the input technical space.
+
+*** input_technical_space
+:PROPERTIES:
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "agnostic"
+:END:
+
+Input technical space for this model.
+
+** features::reference
+:PROPERTIES:
+:masd.variability.default_binding_point: global
+:masd.variability.key_prefix: masd.codec
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+
+Features related to model referencing.
+
+*** reference
+:PROPERTIES:
+:masd.variability.is_optional: true
+:masd.codec.type: masd::variability::text_collection
+:END:
+
+Imports an external model.
+
+** features::initializer
+:PROPERTIES:
+:masd.codec.stereotypes: masd::variability::initializer
+:END:
+** features::uml
+:PROPERTIES:
+:masd.variability.default_binding_point: any
+:masd.variability.generate_static_configuration: false
+:masd.variability.key_prefix: masd.codec
+:masd.codec.stereotypes: masd::variability::feature_bundle
+:END:
+
+Features related to all UML injectors.
+
+*** dia.comment
+:PROPERTIES:
+:masd.codec.type: masd::variability::boolean
+:END:
+
+If true, the UML comment is linked to the containing package.
+
+If the containing package is the model itself, it is linked to the model's module.
+
+* registrar
+:PROPERTIES:
+:masd.codec.stereotypes: masd::serialization::type_registrar
+:END:
+* main
+:PROPERTIES:
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
+:END:
+* CMakeLists
+:PROPERTIES:
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:END:

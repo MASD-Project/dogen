@@ -198,7 +198,7 @@ stereotypes_transform::bucket_leaves_by_location(
 boost::shared_ptr<entities::structural::visitor>
 stereotypes_transform::create_visitor(const entities::structural::object& o,
     const identification::entities::logical_location& l,
-    const identification::entities::injection_provenance p,
+    const identification::entities::codec_provenance p,
     const std::list<identification::entities::logical_name>& leaves) {
     identification::helpers::logical_name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);

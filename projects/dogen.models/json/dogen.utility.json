@@ -1,15 +1,15 @@
 {
   "documentation": "Assorted utilities used by Dogen.\n",
   "tagged_values": {
-    "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "dogen.utility",
-    "masd.injection.input_technical_space": "cpp",
-    "masd.injection.reference": "cpp.builtins",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "masd",
-    "masd.injection.reference": "masd.variability",
-    "masd.injection.reference": "dogen.profiles",
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.utility",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.profiles",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
@@ -526,7 +526,7 @@
       "name": "formatters",
       "documentation": "Contains all of the formatting primitives\nthat are not associated with any particular\nmodel.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },

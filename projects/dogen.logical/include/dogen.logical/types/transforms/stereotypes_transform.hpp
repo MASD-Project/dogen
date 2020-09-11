@@ -101,7 +101,7 @@ private:
     static boost::shared_ptr<entities::structural::visitor>
     create_visitor(const entities::structural::object& o,
         const identification::entities::logical_location& l,
-        const identification::entities::injection_provenance p,
+        const identification::entities::codec_provenance p,
         const std::list<identification::entities::logical_name>& leaves);
 
     /**

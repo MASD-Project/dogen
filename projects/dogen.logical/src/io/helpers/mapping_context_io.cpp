@@ -62,7 +62,7 @@ std::ostream& operator<<(std::ostream& s, const mapping_context& v) {
       << "\"__type__\": " << "\"dogen::logical::helpers::mapping_context\"" << ", "
       << "\"translations\": " << v.translations() << ", "
       << "\"erasures\": " << v.erasures() << ", "
-      << "\"injections\": " << v.injections()
+      << "\"codecs\": " << v.codecs()
       << " }";
     return(s);
 }

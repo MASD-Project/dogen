@@ -58,7 +58,7 @@ model::model(model&& rhs)
 model::model(
     const dogen::identification::entities::logical_name& name,
     const dogen::identification::entities::logical_meta_name& meta_name,
-    const dogen::identification::entities::injection_provenance& provenance,
+    const dogen::identification::entities::codec_provenance& provenance,
     const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references,
     const std::unordered_set<dogen::identification::entities::logical_name>& leaves,
     const std::list<dogen::text::entities::element_artefacts>& elements,
@@ -166,19 +166,19 @@ void model::meta_name(const dogen::identification::entities::logical_meta_name&&
     meta_name_ = std::move(v);
 }
 
-const dogen::identification::entities::injection_provenance& model::provenance() const {
+const dogen::identification::entities::codec_provenance& model::provenance() const {
     return provenance_;
 }
 
-dogen::identification::entities::injection_provenance& model::provenance() {
+dogen::identification::entities::codec_provenance& model::provenance() {
     return provenance_;
 }
 
-void model::provenance(const dogen::identification::entities::injection_provenance& v) {
+void model::provenance(const dogen::identification::entities::codec_provenance& v) {
     provenance_ = v;
 }
 
-void model::provenance(const dogen::identification::entities::injection_provenance&& v) {
+void model::provenance(const dogen::identification::entities::codec_provenance&& v) {
     provenance_ = std::move(v);
 }
 

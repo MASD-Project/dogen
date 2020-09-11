@@ -1,15 +1,15 @@
 #+title: dogen
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen
-:masd.injection.input_technical_space: cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.std
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -17,44 +17,44 @@ Provides the top-level API for the dogen product.
 
 * configuration
 :PROPERTIES:
-:masd.injection.stereotypes: masd::fluent
+:masd.codec.stereotypes: masd::fluent
 :END:
 ** model_processing
 :PROPERTIES:
-:masd.injection.type: model_processing_configuration
+:masd.codec.type: model_processing_configuration
 :END:
 ** tracing
 :PROPERTIES:
-:masd.injection.type: boost::optional<tracing_configuration>
+:masd.codec.type: boost::optional<tracing_configuration>
 :END:
 
 Configuration for tracing.
 
 ** diffing
 :PROPERTIES:
-:masd.injection.type: boost::optional<diffing_configuration>
+:masd.codec.type: boost::optional<diffing_configuration>
 :END:
 ** reporting
 :PROPERTIES:
-:masd.injection.type: boost::optional<reporting_configuration>
+:masd.codec.type: boost::optional<reporting_configuration>
 :END:
 ** byproduct_directory
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 
 Directory in which to place all files not directly related to generated code.
 
 ** database
 :PROPERTIES:
-:masd.injection.type: boost::optional<database_configuration>
+:masd.codec.type: boost::optional<database_configuration>
 :END:
 
 Configuration related to database connectivity, if any.
 
 * tracing_level
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available levels for tracing transformation.
@@ -63,21 +63,21 @@ Available levels for tracing transformation.
 ** summary
 * tracing_configuration
 :PROPERTIES:
-:masd.injection.stereotypes: masd::fluent
+:masd.codec.stereotypes: masd::fluent
 :END:
 
 Configuration related to transform tracing.
 
 ** level
 :PROPERTIES:
-:masd.injection.type: tracing_level
+:masd.codec.type: tracing_level
 :END:
 
 Dump all available tracing information about transforms.
 
 ** format
 :PROPERTIES:
-:masd.injection.type: tracing_format
+:masd.codec.type: tracing_format
 :END:
 
 Format to use when writting trace files.
@@ -86,7 +86,7 @@ Only valid for the file backend.
 
 ** guids_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Enable GUIDs in probe stats.
@@ -95,7 +95,7 @@ Disabling GUIDs makes comparisons easier.
 
 ** logging_impact
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Additional information to tell tracing about the possible impact of logging.
@@ -105,7 +105,7 @@ required in order to be able to compare like-for-like numbers.
 
 ** use_short_names
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Use short directory and file names. Useful mainly on windows due to path
@@ -113,32 +113,32 @@ size limitations.
 
 ** output_directory
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 ** backend
 :PROPERTIES:
-:masd.injection.type: tracing_backend
+:masd.codec.type: tracing_backend
 :END:
 
 Which backend to use for tracing.
 
 ** run_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Identifier to use for the present run.
 
 ** filter_regexes
 :PROPERTIES:
-:masd.injection.type: std::vector<std::string>
+:masd.codec.type: std::vector<std::string>
 :END:
 
 If supplied, ignore all traces except those which match the supplied regexes.
 
 * tracing_format
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available formats for tracing transformations.
@@ -154,36 +154,36 @@ Dot notation for GraphViz
 
 * configuration_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 
 masd::builder
 
 * diffing_configuration
 :PROPERTIES:
-:masd.injection.stereotypes: masd::fluent
+:masd.codec.stereotypes: masd::fluent
 :END:
 
 Configuration for diff generation.
 
 ** destination
 :PROPERTIES:
-:masd.injection.type: diffing_destination
+:masd.codec.type: diffing_destination
 :END:
 ** output_directory
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 * configuration_validator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * model_processing_configuration
 Configuration related to the behaviour of Dogen whilst processing models.
 
 ** compatibility_mode_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Try to process models even if there are errors.
@@ -193,14 +193,14 @@ forwards compatibility problems: missing types or types that do not exist.
 
 ** dry_run_mode_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, all transforms wil be executed but no code will be emitted.
 
 ** variability_overrides
 :PROPERTIES:
-:masd.injection.type: std::vector<std::string>
+:masd.codec.type: std::vector<std::string>
 :END:
 
 Raw set of variability overrides.
@@ -219,7 +219,7 @@ not as part of a profile).
 
 ** activity_timestamp
 :PROPERTIES:
-:masd.injection.type: boost::posix_time::ptime
+:masd.codec.type: boost::posix_time::ptime
 :END:
 
 Timepoint at which the activity started.
@@ -227,30 +227,30 @@ Timepoint at which the activity started.
 * invalid_configuration_exception
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: false
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 The values supplied for the configuration are not valid.
 
 * generator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 * converter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 * generation_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 * conversion_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 * diffing_destination
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Where to place the diffing results.
@@ -266,15 +266,15 @@ Configuration related to operational reports.
 
 ** style
 :PROPERTIES:
-:masd.injection.type: reporting_style
+:masd.codec.type: reporting_style
 :END:
 ** output_directory
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 * reporting_style
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration, dogen::convertible
+:masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Available formats for operational reports.
@@ -287,60 +287,60 @@ Emacs Org mode.
 
 * mock_configuration_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * database_configuration
 Contains the config
 
 ** host
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Database host to connect to.
 
 ** port
 :PROPERTIES:
-:masd.injection.type: unsigned int
+:masd.codec.type: unsigned int
 :END:
 
 Database port to connect to.
 
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the database to connect to.
 
 ** user
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 User to use in thedatabase connection.
 
 ** password
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** engine
 :PROPERTIES:
-:masd.injection.type: database_engine
+:masd.codec.type: database_engine
 :END:
 
 Which relational database engine to connect to.
 
 ** generate_schema
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, deletes all tables and recreates them. Otherwise, assumes their presence.
 
 * tracing_backend
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available backends to manage tracing information.
@@ -353,7 +353,7 @@ Write tracing information to a relational database.
 
 * database_engine
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Supported relational databases engines.
@@ -366,18 +366,18 @@ Connect to a SQLite database.
 
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
 * specs
 Describes details of the available functionality within this version of Dogen.
 
 ** categories
 :PROPERTIES:
-:masd.injection.type: std::list<spec_category>
+:masd.codec.type: std::list<spec_category>
 :END:
 
 All categories of specifications.
@@ -387,21 +387,21 @@ Describes a category of dogen specifications.
 
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of this group of specs.
 
 ** entries
 :PROPERTIES:
-:masd.injection.type: std::list<spec_entry>
+:masd.codec.type: std::list<spec_entry>
 :END:
 
 Entries describing various aspects of this group.
 
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Purpose of the group.
@@ -411,25 +411,25 @@ Unit of functionality within Dogen.
 
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name for this spec entry.
 
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Human readable text describing this entry.
 
 * spec_dumper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 * dumping_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error ocurred when dumping dogen's specs.

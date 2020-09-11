@@ -1,14 +1,14 @@
 #+title: dogen.identification
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.identification
-:masd.injection.input_technical_space: cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.std
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: masd
-:masd.injection.reference: dogen.profiles
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.identification
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: masd
+:masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -17,7 +17,7 @@ identification within Dogen.
 
 * entities
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Stores all of the entities related to identification
@@ -25,59 +25,59 @@ of Dogen elements.
 
 ** entities::name
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable
+:masd.codec.stereotypes: Nameable
 :END:
 
 General name for modeling elements which do not need any specialisation.
 
 *** qualified
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Qualified name for an element.
 
-** entities::injection_provenance
-Source of a model element in the injection dimension.
+** entities::codec_provenance
+Source of a model element in the codec dimension.
 
 *** model_id
 :PROPERTIES:
-:masd.injection.type: model_id
+:masd.codec.type: model_id
 :END:
 
 ID for a model.
 
 *** model_type
 :PROPERTIES:
-:masd.injection.type: model_type
+:masd.codec.type: model_type
 :END:
 
 Type of the model where this element originates from.
 
 *** model_sha1_hash
 :PROPERTIES:
-:masd.injection.type: sha1_hash
+:masd.codec.type: sha1_hash
 :END:
 
-SHA1 key of the original injection model.
+SHA1 key of the original codec model.
 
-*** injection_id
+*** codec_id
 :PROPERTIES:
-:masd.injection.type: injection_id
+:masd.codec.type: codec_id
 :END:
 
-Identifier for the modeling element in the injection dimension.
+Identifier for the modeling element in the codec dimension.
 
 *** location
 :PROPERTIES:
-:masd.injection.type: injection_location
+:masd.codec.type: codec_location
 :END:
 
 Where the element was located in the original source.
 
 ** entities::model_type
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Types of models with regards to the current generation taking place.
@@ -97,23 +97,23 @@ The origin of the element is not yet known.
 ** entities::sha1_hash
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive
+:masd.codec.stereotypes: masd::primitive
 :END:
 
 Stores a SHA1 hash.
 
-** entities::injection_id
+** entities::codec_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive
+:masd.codec.stereotypes: masd::primitive
 :END:
 
-ID of the elment as sourced from the injection model, if any.
+ID of the elment as sourced from the codec model, if any.
 
 ** entities::logical_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive, dogen::hashable
+:masd.codec.stereotypes: masd::primitive, dogen::hashable
 :END:
 
 ID of the elment in the logical dimension.
@@ -121,24 +121,24 @@ ID of the elment in the logical dimension.
 ** entities::physical_meta_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive, dogen::hashable
+:masd.codec.stereotypes: masd::primitive, dogen::hashable
 :END:
 
 ID of the meta-element in the physical dimension.
 
-** entities::injection_location
-Location of a modeling element in the injection dimension.
+** entities::codec_location
+Location of a modeling element in the codec dimension.
 
 *** line
 :PROPERTIES:
-:masd.injection.type: long
+:masd.codec.type: long
 :END:
 
 Line number where the element was defined.
 
 *** column
 :PROPERTIES:
-:masd.injection.type: long
+:masd.codec.type: long
 :END:
 
 Column number where the element was defined.
@@ -146,23 +146,23 @@ Column number where the element was defined.
 ** entities::logical_provenance
 Source of a model element in the logical dimension.
 
-*** injection
+*** codec
 :PROPERTIES:
-:masd.injection.type: injection_provenance
+:masd.codec.type: codec_provenance
 :END:
 
-Provenance of the current element in the injection dimension.
+Provenance of the current element in the codec dimension.
 
 *** logical_name
 :PROPERTIES:
-:masd.injection.type: logical_name
+:masd.codec.type: logical_name
 :END:
 
 Provenance of the current element in the logical dimension.
 
 *** logical_meta_name
 :PROPERTIES:
-:masd.injection.type: logical_meta_name
+:masd.codec.type: logical_meta_name
 :END:
 
 Provenance of the current element in the logical dimension as a meta-element.
@@ -170,7 +170,7 @@ Provenance of the current element in the logical dimension as a meta-element.
 ** entities::logical_meta_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive, dogen::hashable
+:masd.codec.stereotypes: masd::primitive, dogen::hashable
 :END:
 
 ID for a logical meta-element.
@@ -180,14 +180,14 @@ A label is a key-value pair that can be used by the processing engine in a flexi
 
 *** key
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Key of the label.
 
 *** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Value associated with this label.
@@ -197,21 +197,21 @@ Represents a tagged value in a similar spirit to UMLs.
 
 *** tag
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Tag name.
 
 *** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Value associated with this tag.
 
 ** entities::logical_name
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
+:masd.codec.stereotypes: Nameable, QualifiedRepresentations, dogen::hashable
 :END:
 
 Name of an element in logical space.
@@ -229,35 +229,35 @@ naming files, etc).
 
 *** id
 :PROPERTIES:
-:masd.injection.type: logical_id
+:masd.codec.type: logical_id
 :END:
 
 Identifier for this logical element.
 
 *** location
 :PROPERTIES:
-:masd.injection.type: logical_location
+:masd.codec.type: logical_location
 :END:
 
 Where the name is located in element space.
 
 *** is_container
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, the name indicates an element that can contain other elements.
 
 ** entities::logical_location
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable
+:masd.codec.stereotypes: dogen::hashable
 :END:
 
 Identifies a hierarchy of containment within the logical space.
 
 *** external_modules
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 All modules external to the model itself.
@@ -270,7 +270,7 @@ dogen::logical. In this case, @e dogen is the external module.
 
 *** model_modules
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 Modules related to just the model itself.
@@ -280,14 +280,14 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.
 
 *** internal_modules
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 Sub-modules within a model.
 
 *** element
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the owning element, if any.
@@ -297,28 +297,28 @@ that are not modules, such as attributes, inner classes, etc.
 
 ** entities::qualified_representations
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable
+:masd.codec.stereotypes: dogen::hashable
 :END:
 
 All available qualified representations of a name.
 
 *** dot
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Qualified identifier using "." as the separator.
 
 *** colon
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Qualified identifier using "::" as the separator.
 
 *** identifiable
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Representation of the identifier that can usable as an identifier on all of the
@@ -333,7 +333,7 @@ formatter we must have a facet. We may not have any.
 
 *** meta_model
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Top-most container for the physical space.
@@ -342,28 +342,28 @@ The meta-model is always expected to be  @e masd.
 
 *** backend
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the backend that owns this field, if any.
 
 *** facet
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the facet that owns this field, if any.
 
 *** archetype
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the archetype that owns this field, if any.
 
 ** entities::physical_meta_name
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable
+:masd.codec.stereotypes: Nameable
 :END:
 
 Name of an element in physical space.
@@ -377,25 +377,25 @@ can only have one and only one name.
 
 *** id
 :PROPERTIES:
-:masd.injection.type: physical_meta_id
+:masd.codec.type: physical_meta_id
 :END:
 
 Identifier for this physical meta-element.
 
 *** location
 :PROPERTIES:
-:masd.injection.type: physical_meta_location
+:masd.codec.type: physical_meta_location
 :END:
 
 Location for a meta-name in physical space.
 
 ** entities::logical_meta_name
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable
+:masd.codec.stereotypes: Nameable
 :END:
 *** id
 :PROPERTIES:
-:masd.injection.type: logical_meta_id
+:masd.codec.type: logical_meta_id
 :END:
 
 Identifier for this logical meta-element.
@@ -403,7 +403,7 @@ Identifier for this logical meta-element.
 ** entities::technical_space
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
-:masd.injection.stereotypes: masd::enumeration, dogen::convertible
+:masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Models need to declare upfront the technical space they will target.
@@ -434,49 +434,49 @@ Name of a physical model element.
 
 *** simple
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 File or directory simple name.
 
 *** id
 :PROPERTIES:
-:masd.injection.type: physical_id
+:masd.codec.type: physical_id
 :END:
 
 ID for a physical element.
 
 ** entities::Nameable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a name.
 
 *** simple
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Simple name for a modeling element.
 
 ** entities::logical_meta_physical_id
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::hashable
+:masd.codec.stereotypes: dogen::hashable
 :END:
 
 ID in the logical-physical space.
 
 *** logical_id
 :PROPERTIES:
-:masd.injection.type: logical_id
+:masd.codec.type: logical_id
 :END:
 
 ID of the element in the logical dimension.
 
 *** physical_meta_id
 :PROPERTIES:
-:masd.injection.type: physical_meta_id
+:masd.codec.type: physical_meta_id
 :END:
 
 ID of the element in the physical dimension.
@@ -484,7 +484,7 @@ ID of the element in the physical dimension.
 ** entities::physical_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive
+:masd.codec.stereotypes: masd::primitive
 :END:
 
 ID for a physical element.
@@ -492,7 +492,7 @@ ID for a physical element.
 ** entities::model_id
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive
+:masd.codec.stereotypes: masd::primitive
 :END:
 
 ID for a model.
@@ -500,14 +500,14 @@ ID for a model.
 ** entities::stereotype
 :PROPERTIES:
 :masd.primitive.underlying_element: std::string
-:masd.injection.stereotypes: masd::primitive
+:masd.codec.stereotypes: masd::primitive
 :END:
 
 Stereotype.
 
 ** entities::logical_name_tree
 :PROPERTIES:
-:masd.injection.stereotypes: QualifiedRepresentations
+:masd.codec.stereotypes: QualifiedRepresentations
 :END:
 
 Adds support for name composition as a tree-like structure.
@@ -519,21 +519,21 @@ which case only the parent name is populated and there are no children.
 
 *** current
 :PROPERTIES:
-:masd.injection.type: logical_name
+:masd.codec.type: logical_name
 :END:
 
 Name for the current level of the tree.
 
 *** children
 :PROPERTIES:
-:masd.injection.type: std::list<logical_name_tree>
+:masd.codec.type: std::list<logical_name_tree>
 :END:
 
 Names of the child elements.
 
 *** are_children_opaque
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, the association with its children can be opaque.
@@ -544,35 +544,35 @@ C++ pointers, references and so on.
 
 *** is_circular_dependency
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, the presence of the current name causes a circular dependency.
 
 *** is_current_simple_type
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Returns true if @e current is a simple type such as a built-in or an enumeration.
 
 *** is_floating_point
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, "current" stores a floating point type.
 
 ** entities::QualifiedRepresentations
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Name with multiple qualified representations.
 
 *** qualified
 :PROPERTIES:
-:masd.injection.type: qualified_representations
+:masd.codec.type: qualified_representations
 :END:
 
 Contains the name according to different representations.
@@ -580,21 +580,21 @@ Contains the name according to different representations.
 ** entities::archetype_name_set
 *** logical_meta_id
 :PROPERTIES:
-:masd.injection.type: logical_meta_id
+:masd.codec.type: logical_meta_id
 :END:
 
 Identifier of the meta-element in the logical dimension.
 
 *** meta_names
 :PROPERTIES:
-:masd.injection.type: std::list<physical_meta_name>
+:masd.codec.type: std::list<physical_meta_name>
 :END:
 
 All meta-names that belong to this group.
 
 *** canonical_locations
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<physical_meta_id, physical_meta_id>
+:masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
 :END:
 
 Maps a concrete archetype location to its canonical form, if the canonical
@@ -602,7 +602,7 @@ form is supported. Otherwise no such mapping will exist.
 
 *** archetype_for_label
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<physical_meta_id, physical_meta_id>
+:masd.codec.type: std::unordered_map<physical_meta_id, physical_meta_id>
 :END:
 
 Maps a label to archetype ID within the present logical manifold.
@@ -612,107 +612,107 @@ Containing physical meta-names, indexed as required by use cases.
 
 *** all
 :PROPERTIES:
-:masd.injection.type: std::list<physical_meta_name>
+:masd.codec.type: std::list<physical_meta_name>
 :END:
 
 All meta-names.
 
 *** facet_names_by_backend_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
+:masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_set<physical_meta_id>>
 :END:
 
 Qualified names of facets by qualified names of backends.
 
 *** archetype_names_by_logical_meta_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<logical_meta_id, archetype_name_set>
+:masd.codec.type: std::unordered_map<logical_meta_id, archetype_name_set>
 :END:
 
 Physical meta-names by logical meta-names.
 
 *** archetype_names_by_backend_by_facet
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
+:masd.codec.type: std::unordered_map<physical_meta_id, std::unordered_map<physical_meta_id, std::list<physical_meta_id>>>
 :END:
 
 Archetype names by qualified backend and facet names
 
 * helpers
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Assorted helpers used to construct domain entities.
 
 ** helpers::identifiable_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::building_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst building.
 
 ** helpers::qualified_representations_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** dot_printer_
 :PROPERTIES:
-:masd.injection.type: pretty_printer
+:masd.codec.type: pretty_printer
 :END:
 *** colon_printer_
 :PROPERTIES:
-:masd.injection.type: pretty_printer
+:masd.codec.type: pretty_printer
 :END:
 ** helpers::logical_name_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::logical_name_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** name_
 :PROPERTIES:
-:masd.injection.type: entities::logical_name
+:masd.codec.type: entities::logical_name
 :END:
 ** helpers::logical_name_flattener
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::logical_location_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** location_
 :PROPERTIES:
-:masd.injection.type: entities::logical_location
+:masd.codec.type: entities::logical_location
 :END:
 ** helpers::flattening_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst flattening a name.
 
 ** helpers::printing_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst pretty printing.
 
 ** helpers::pretty_printer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::separators
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Available separators to be used by the pretty printer.
@@ -728,39 +728,39 @@ Separate name elements with a '.'.
 
 ** helpers::physical_meta_name_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::physical_meta_name_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::physical_meta_id_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::logical_name_tree_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** names_
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 *** root_
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<node>
+:masd.codec.type: boost::shared_ptr<node>
 :END:
 *** current_
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<node>
+:masd.codec.type: boost::shared_ptr<node>
 :END:
 ** helpers::legacy_logical_name_tree_parser
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::node
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 
 Node in a tree of logical names.
@@ -769,64 +769,64 @@ Temporary data structure used to build trees of logical names.
 
 *** parent
 :PROPERTIES:
-:masd.injection.type: boost::weak_ptr<node>
+:masd.codec.type: boost::weak_ptr<node>
 :END:
 
 Parent in a tree.
 
 *** data
 :PROPERTIES:
-:masd.injection.type: entities::logical_name
+:masd.codec.type: entities::logical_name
 :END:
 
 Current node.
 
 *** children
 :PROPERTIES:
-:masd.injection.type: std::list<boost::shared_ptr<node>>
+:masd.codec.type: std::list<boost::shared_ptr<node>>
 :END:
 
 Child nodes in a tree.
 
 ** helpers::new_logical_name_tree_parser
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::parsing_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 A fatal error has occurred while parsing.
 
 ** helpers::physical_meta_name_validator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::validation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during validation.
 
 ** helpers::physical_id_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::meta_name_index_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::logical_meta_name_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:

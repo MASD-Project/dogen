@@ -21,9 +21,9 @@
 #include "dogen/config.hpp"
 #include "dogen.text.csharp/types/initializer.hpp"
 #include "dogen.text.cpp/types/initializer.hpp"
-#include "dogen.injection.json/types/initializer.hpp"
-#include "dogen.injection.org_mode/types/initializer.hpp"
-#include "dogen.injection.dia/types/initializer.hpp"
+#include "dogen.codec.json/types/initializer.hpp"
+#include "dogen.codec.org_mode/types/initializer.hpp"
+#include "dogen.codec.dia/types/initializer.hpp"
 #include "dogen.tracing/types/initializer.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.relational/types/initializer.hpp"
@@ -33,9 +33,9 @@
 namespace dogen::cli {
 
 void initializer::initialize() {
-    dogen::injection::org_mode::initializer::initialize();
-    dogen::injection::json::initializer::initialize();
-    dogen::injection::dia::initializer::initialize();
+    dogen::codec::org_mode::initializer::initialize();
+    dogen::codec::json::initializer::initialize();
+    dogen::codec::dia::initializer::initialize();
     dogen::text::csharp::initializer::initialize();
     dogen::text::cpp::initializer::initialize();
     dogen::tracing::initializer::initialize();

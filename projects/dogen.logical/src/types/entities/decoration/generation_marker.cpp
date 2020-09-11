@@ -45,7 +45,7 @@ generation_marker::generation_marker()
 generation_marker::generation_marker(
     const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
-    const dogen::identification::entities::injection_provenance& provenance,
+    const dogen::identification::entities::codec_provenance& provenance,
     const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,

@@ -3,30 +3,30 @@
 * schema_document
 ** id_keyword
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Defines a URI for the schema.
 
 ** schema_keyword
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** title
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** type
 :PROPERTIES:
-:masd.injection.type: type
+:masd.codec.type: type
 :END:
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 * type
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 ** object
 ** array
@@ -37,38 +37,38 @@ Defines a URI for the schema.
 * properties
 ** type
 :PROPERTIES:
-:masd.injection.type: type
+:masd.codec.type: type
 :END:
 ** minimum
 :PROPERTIES:
-:masd.injection.type: unsigned int
+:masd.codec.type: unsigned int
 :END:
 ** maximum
 :PROPERTIES:
-:masd.injection.type: unsigned int
+:masd.codec.type: unsigned int
 :END:
 ** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 * value
 * object
 :PROPERTIES:
-:masd.injection.parent: value
+:masd.codec.parent: value
 :END:
 * array
 :PROPERTIES:
-:masd.injection.parent: value
+:masd.codec.parent: value
 :END:
 * string
 :PROPERTIES:
-:masd.injection.parent: value
+:masd.codec.parent: value
 :END:
 * number
 :PROPERTIES:
-:masd.injection.parent: value
+:masd.codec.parent: value
 :END:
 * boolean
 :PROPERTIES:
-:masd.injection.parent: value
+:masd.codec.parent: value
 :END:

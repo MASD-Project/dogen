@@ -20,11 +20,11 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/types/transforms/model_set_production_chain.hpp"
+#include "dogen.codec/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_input_model_set_chain.hpp"
+#include "dogen.orchestration/types/transforms/codec_model_set_to_logical_input_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/text_model_to_physical_model_transform.hpp"
@@ -49,21 +49,21 @@ physical_model_production_chain::apply(const context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
 
     const auto model_name(target.filename().string());
-    const auto& tracer(*ctx.injection_context().tracer());
+    const auto& tracer(*ctx.codec_context().tracer());
     tracing::scoped_chain_tracer stp(lg, "physical model production chain",
         transform_id, model_name, tracer);
 
     /*
-     * Obtain the injection model set.
+     * Obtain the codec model set.
      */
-    using injection::transforms::model_set_production_chain;
+    using codec::transforms::model_set_production_chain;
     const auto ims(model_set_production_chain::apply(
-            ctx.injection_context(), target));
+            ctx.codec_context(), target));
 
     /*
-     * Convert the injection model set into a logical model set.
+     * Convert the codec model set into a logical model set.
      */
-    const auto lmset(injection_model_set_to_logical_input_model_set_chain::
+    const auto lmset(codec_model_set_to_logical_input_model_set_chain::
         apply(ctx, ims));
 
     /*

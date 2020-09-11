@@ -276,10 +276,10 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.injection/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.injection.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.injection.json/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.injection.org_mode/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.codec/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.codec.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.codec.json/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.codec.org_mode/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.logical/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.orchestration/include
@@ -311,10 +311,10 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.variability)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.json)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.org_mode)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec.json)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.codec.org_mode)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.logical)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration)

@@ -199,7 +199,7 @@ select "TIMESTAMP", "COMPONENT",  "SEVERITY", cast("MESSAGE" as varchar(100))
 from "LOG_EVENT"
 where "TIMESTAMP" between '2019-12-14 20:44:29.017696' and '2019-12-14 20:44:32.266955'
 and "RUN_ID" = 'd92263a0-4965-4a3e-803d-1e2851e96fcc'
-and "COMPONENT" like '%injection%'
+and "COMPONENT" like '%codec%'
 order by "TIMESTAMP";
 
 --
@@ -317,7 +317,7 @@ where "PAYLOAD_TYPE" = 'dogen::dia::diagram';
 
 select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID", cast("PAYLOAD" as varchar(50)) "PAYLOAD"
 from transforms_for_run_id('5036d5a6-d10c-4de8-a83a-25f15347fa40')
-where "PAYLOAD_TYPE" = 'dogen::injection::entities::model';
+where "PAYLOAD_TYPE" = 'dogen::codec::entities::model';
 
 /*
  * Find registrars in logical model.

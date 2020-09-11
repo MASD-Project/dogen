@@ -28,9 +28,9 @@
 #include "dogen.physical/types/transforms/minimal_context.hpp"
 #include "dogen.physical/types/transforms/meta_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
-#include "dogen.injection/io/transforms/context_io.hpp"
+#include "dogen.codec/io/transforms/context_io.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
-#include "dogen.injection/types/features/initializer.hpp"
+#include "dogen.codec/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.text.cpp/types/feature_initializer.hpp"
 #include "dogen.text.csharp/types/feature_initializer.hpp"
@@ -59,7 +59,7 @@ namespace dogen::orchestration::transforms {
 void context_bootstrapping_chain::register_variability_entities(
     variability::helpers::registrar& rg) {
     physical::features::initializer::register_entities(rg);
-    injection::features::initializer::register_entities(rg);
+    codec::features::initializer::register_entities(rg);
     logical::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
@@ -130,8 +130,8 @@ create_variability_feature_model(const variability::transforms::context& ctx) {
     return r;
 }
 
-injection::transforms::context
-context_bootstrapping_chain::bootstrap_injection_context(
+codec::transforms::context
+context_bootstrapping_chain::bootstrap_codec_context(
     const configuration& cfg, const std::string& activity) {
     /*
      * Obtain the tracer.
@@ -146,9 +146,9 @@ context_bootstrapping_chain::bootstrap_injection_context(
     const auto pmm(create_physical_meta_model(t));
 
     /*
-     * Create the injection context.
+     * Create the codec context.
      */
-    const auto r(context_factory::make_injection_context(activity, t, pmm));
+    const auto r(context_factory::make_codec_context(activity, t, pmm));
     stp.end_chain(r);
     return r;
 }

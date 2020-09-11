@@ -1,9 +1,9 @@
 {
   "documentation": "Basic collection types.",
   "tagged_values": {
-    "masd.injection.input_technical_space": "csharp",
-    "masd.injection.is_proxy_model": true,
-    "masd.injection.model_modules": "System.Collections"
+    "masd.codec.input_technical_space": "csharp",
+    "masd.codec.is_proxy_model": true,
+    "masd.codec.model_modules": "System.Collections"
   },
   "elements": [
     {

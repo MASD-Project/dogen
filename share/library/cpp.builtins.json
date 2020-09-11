@@ -1,9 +1,9 @@
 {
   "documentation": "Hardware-provided built-in types.",
   "tagged_values": {
-    "masd.injection.input_technical_space": "cpp",
-    "masd.injection.is_proxy_model": true,
-    "masd.injection.model_modules": "cpp::builtins"
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.is_proxy_model": true,
+    "masd.codec.model_modules": "cpp::builtins"
   },
   "elements": [
     {

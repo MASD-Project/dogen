@@ -75,9 +75,9 @@ private:
 
 private:
     /**
-     * @brief Creates specs for injection related items.
+     * @brief Creates specs for codec related items.
      */
-    spec_category create_injection_category() const;
+    spec_category create_codec_category() const;
 
     /**
      * @brief Creates specs for conversion related items.

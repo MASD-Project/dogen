@@ -145,10 +145,10 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=masd.lam
-#DOGEN masd.injection.input_technical_space=agnostic
-#DOGEN masd.injection.is_proxy_model=true
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=masd.lam
+#DOGEN masd.codec.input_technical_space=agnostic
+#DOGEN masd.codec.is_proxy_model=true
 #DOGEN masd.cpp.enabled=false
 #DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
@@ -648,7 +648,7 @@ space; keep it technical space agnostic.
             <dia:string>#Types that don't belong to any of the more
 specific buckets.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -740,7 +740,7 @@ specific buckets.
           <dia:attribute name="string">
             <dia:string>#Types related to text.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1054,7 +1054,7 @@ specific buckets.
           <dia:attribute name="string">
             <dia:string>#Types that represent numeric quantities.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -2034,7 +2034,7 @@ specific buckets.
           <dia:attribute name="string">
             <dia:string>#Types related to time representation.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3458,7 +3458,7 @@ specific buckets.
           <dia:attribute name="string">
             <dia:string>#Types that contain other types.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

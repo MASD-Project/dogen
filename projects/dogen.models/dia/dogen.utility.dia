@@ -134,15 +134,15 @@
           <dia:attribute name="string">
             <dia:string>#Assorted utilities used by Dogen.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.utility
-#DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.utility
+#DOGEN masd.codec.input_technical_space=cpp
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -9976,7 +9976,7 @@ code: indentation and dividers.#</dia:string>
 that are not associated with any particular
 model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

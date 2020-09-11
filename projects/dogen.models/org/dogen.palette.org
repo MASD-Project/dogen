@@ -1,12 +1,12 @@
 #+title: dogen.palette
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.palette
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.palette
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -24,26 +24,26 @@ as possible, so we can evaluate how they work together.
 
 * palette_test_one_one
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * palette_test_one_two
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 * palette_test_one_three
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::implementation_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
 :END:
 * package
 ** package::palette_test_one_one
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** package::palette_test_one_two
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 ** package::palette_test_one_three
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable::implementation_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::implementation_only
 :END:

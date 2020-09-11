@@ -129,7 +129,7 @@ mapper::translations_for_technical_space(const mapping_set& ms,
 
 std::unordered_map<identification::entities::logical_id,
                    identification::entities::logical_name>
-mapper::injections_for_technical_space(const mapping_set& ms,
+mapper::codecs_for_technical_space(const mapping_set& ms,
     const identification::entities::technical_space ts,
     const entities::model& m) const {
 
@@ -176,7 +176,7 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
     const entities::model& m) const {
     mapping_context r;
     r.translations(translations_for_technical_space(ms, from, to));
-    r.injections(injections_for_technical_space(ms, to, m));
+    r.codecs(codecs_for_technical_space(ms, to, m));
 
     const auto i(ms.erasures_by_technical_space().find(to));
     if (i != ms.erasures_by_technical_space().end())
@@ -188,7 +188,7 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
 logical_name_tree
 mapper::walk_name_tree(const mapping_context& mc,
     const logical_name_tree& nt,
-    const bool skip_injection) const {
+    const bool skip_codec) const {
     const auto id(nt.current().id());
     if (mc.erasures().find(id) != mc.erasures().end()) {
         /*
@@ -209,20 +209,20 @@ mapper::walk_name_tree(const mapping_context& mc,
     }
 
     /*
-     * Now we handle injections. This is the insertion of an
+     * Now we handle codecs. This is the insertion of an
      * additional type above current. For example, we want to inject a
      * pointer element for all abstract classes in C++. Note that by
-     * definitions, injections will always expect exactly one type
-     * parameter. We do not attempt injections if we are already under
-     * an injection or else we would create an infinite loop.
+     * definitions, codecs will always expect exactly one type
+     * parameter. We do not attempt codecs if we are already under
+     * an codec or else we would create an infinite loop.
      */
     logical_name_tree r;
-    if (!skip_injection) {
-        const auto i(mc.injections().find(id));
-        if (i != mc.injections().end()) {
+    if (!skip_codec) {
+        const auto i(mc.codecs().find(id));
+        if (i != mc.codecs().end()) {
             const auto& n(i->second);
             r.current(n);
-            r.children().push_back(walk_name_tree(mc, nt, !skip_injection));
+            r.children().push_back(walk_name_tree(mc, nt, !skip_codec));
             return r;
         }
     }

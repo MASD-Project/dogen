@@ -32,7 +32,7 @@
  * @section logical_0 Overview
  *
  * The logical model strives to provide a technical-space agnostic
- * element representation, designed for code generation. Injection models
+ * element representation, designed for code generation. Codec models
  * are obtained via frontends and transformed into "bare" logical models,
  * at which point they can enter its pipeline. Within it, they are
  * processed until they form a cohesive whole. They are then in a suitable

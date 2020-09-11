@@ -28,11 +28,11 @@ namespace dogen::logical::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_injection_is_proxy_model() {
+make_masd_codec_is_proxy_model() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_proxy_model");
-    r.name().qualified("masd.injection.is_proxy_model");
+    r.name().qualified("masd.codec.is_proxy_model");
     r.description(R"(If true, sets the origin of the model to "proxy model".
 
 )");
@@ -51,7 +51,7 @@ origin::make_feature_group(const dogen::variability::entities::feature_model& fm
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.is_proxy_model = s.get_by_name("masd.injection.is_proxy_model");
+    r.is_proxy_model = s.get_by_name("masd.codec.is_proxy_model");
 
     return r;
 }
@@ -70,7 +70,7 @@ std::list<dogen::variability::entities::feature>
 origin::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_injection_is_proxy_model());
+    r.push_back(make_masd_codec_is_proxy_model());
     return r;
 }
 

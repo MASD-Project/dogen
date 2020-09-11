@@ -30,8 +30,8 @@
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
-#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -124,7 +124,7 @@ element::element()
 element::element(
     const dogen::identification::entities::logical_name& name,
     const std::string& documentation,
-    const dogen::identification::entities::injection_provenance& provenance,
+    const dogen::identification::entities::codec_provenance& provenance,
     const dogen::identification::entities::logical_id& contained_by,
     const bool in_global_module,
     const dogen::logical::entities::stereotypes& stereotypes,
@@ -234,19 +234,19 @@ void element::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::identification::entities::injection_provenance& element::provenance() const {
+const dogen::identification::entities::codec_provenance& element::provenance() const {
     return provenance_;
 }
 
-dogen::identification::entities::injection_provenance& element::provenance() {
+dogen::identification::entities::codec_provenance& element::provenance() {
     return provenance_;
 }
 
-void element::provenance(const dogen::identification::entities::injection_provenance& v) {
+void element::provenance(const dogen::identification::entities::codec_provenance& v) {
     provenance_ = v;
 }
 
-void element::provenance(const dogen::identification::entities::injection_provenance&& v) {
+void element::provenance(const dogen::identification::entities::codec_provenance&& v) {
     provenance_ = std::move(v);
 }
 

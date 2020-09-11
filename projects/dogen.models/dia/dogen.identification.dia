@@ -135,14 +135,14 @@
             <dia:string>#Collection of types related to naming, labelling and general
 identification within Dogen.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.identification
-#DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.identification
+#DOGEN masd.codec.input_technical_space=cpp
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -315,13 +315,13 @@ identification within Dogen.
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_provenance#</dia:string>
+        <dia:string>#codec_provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Source of a model element in the injection dimension.#</dia:string>
+        <dia:string>#Source of a model element in the codec dimension.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -459,7 +459,7 @@ identification within Dogen.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#SHA1 key of the original injection model.#</dia:string>
+            <dia:string>#SHA1 key of the original codec model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -473,16 +473,16 @@ identification within Dogen.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#injection_id#</dia:string>
+            <dia:string>#codec_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection_id#</dia:string>
+            <dia:string>#codec_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Identifier for the modeling element in the injection dimension.#</dia:string>
+            <dia:string>#Identifier for the modeling element in the codec dimension.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -499,7 +499,7 @@ identification within Dogen.
             <dia:string>#location#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection_location#</dia:string>
+            <dia:string>#codec_location#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -859,13 +859,13 @@ identification within Dogen.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_id#</dia:string>
+        <dia:string>#codec_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#ID of the elment as sourced from the injection model, if any.
+        <dia:string>#ID of the elment as sourced from the codec model, if any.
 
 #DOGEN masd.primitive.underlying_element=std::string#</dia:string>
       </dia:attribute>
@@ -1198,13 +1198,13 @@ identification within Dogen.
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_location#</dia:string>
+        <dia:string>#codec_location#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Location of a modeling element in the injection dimension.#</dia:string>
+        <dia:string>#Location of a modeling element in the codec dimension.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1445,16 +1445,16 @@ identification within Dogen.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#injection#</dia:string>
+            <dia:string>#codec#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection_provenance#</dia:string>
+            <dia:string>#codec_provenance#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Provenance of the current element in the injection dimension.#</dia:string>
+            <dia:string>#Provenance of the current element in the codec dimension.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4570,7 +4570,7 @@ can only have one and only one name.#</dia:string>
             <dia:string>#Stores all of the entities related to identification
 of Dogen elements.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -7875,7 +7875,7 @@ of Dogen elements.
           <dia:attribute name="string">
             <dia:string>#Assorted helpers used to construct domain entities.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

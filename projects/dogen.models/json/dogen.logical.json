@@ -1,20 +1,20 @@
 {
-  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section logical_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section logical_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Codec models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
-    "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "dogen.logical",
-    "masd.injection.reference": "cpp.builtins",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "dogen",
-    "masd.injection.reference": "dogen.variability",
-    "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "masd",
-    "masd.injection.reference": "masd.variability",
-    "masd.injection.reference": "dogen.profiles",
-    "masd.injection.reference": "dogen.physical",
-    "masd.injection.reference": "dogen.identification",
-    "masd.injection.input_technical_space": "cpp",
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.logical",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "dogen",
+    "masd.codec.reference": "dogen.variability",
+    "masd.codec.reference": "dogen.tracing",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "masd.variability",
+    "masd.codec.reference": "dogen.profiles",
+    "masd.codec.reference": "dogen.physical",
+    "masd.codec.reference": "dogen.identification",
+    "masd.codec.input_technical_space": "cpp",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
@@ -22,7 +22,7 @@
       "name": "entities",
       "documentation": "Entities that define the logical model.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -113,7 +113,7 @@
       "attributes": [
         {
           "name": "provenance",
-          "type": "identification::entities::injection_provenance",
+          "type": "identification::entities::codec_provenance",
           "documentation": "Details of the provenance of this model element.\n"
         }
       ]
@@ -579,7 +579,7 @@
       "name": "transforms",
       "documentation": "Houses all of the transformations supported by logical.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -906,7 +906,7 @@
           "type": "std::unordered_set<identification::entities::logical_id>"
         },
         {
-          "name": "injections",
+          "name": "codecs",
           "type": "std::unordered_map<identification::entities::logical_id, identification::entities::logical_name>"
         }
       ]
@@ -1233,7 +1233,7 @@
       "name": "entities::decoration",
       "documentation": "Houses all of the meta-modeling elements and\nproperties related to decorations.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -1433,7 +1433,7 @@
       "name": "entities::variability",
       "documentation": "Houses all of the meta-modeling elements related to variability.\n\nThere are two \"kinds\" of entities in this namespace:\n\n@li those that are used to model the data required to code-generate\ndogen's implementation of variability. That is to say, none of these\nelements are directly involved in the processing of variability model\ndata (i.e. the current user model we are processing), but instead they\ngenerate code that injects variability data once compiled and\nintegrated into dogen. These types setup the geometry of variability\nspace: feature bundle and feature bundle templates and related\ntypes.\n\n@li those that inject variability data as part of the processing of\nthe current user model. These types are responsible for instantiating\nconfigurations, within the prevailing geometry of variability\nspace. Example: profile and profile templates.\n\nNow, it is a bit confusing how variability interacts with the\nvariability meta-model elements, and it may appear that we repat\nourselves quite a bit when declaring the variability feature\nbundles. This is a consequence of the two types of uses for\nvariability types described above. Lets explore this in more detail.\n\nIn general, we tend to declare (register) features and create the\nstatic configuration in the same place. This works for almost all\ncases because we normally declare the features where we consume\nthem. Profiles are _different_: a profile is making use of a feature\ndeclared for a feature (simplifying somewhat). That is, at run time, a\nprofile is the instantiation of a feature defined elsewhere. Remember\nthat features are nothing more than a type system designed to give a\n\"strongly typed\" feel to the meta-data. Profiles are just an\ninstantiation of those strong types.\n\nIn theory, profile meta-data should already exist and match exactly\nwhat was defined for features; in practice there is a mismatch, and\nthis is due to how we modeled features and feature bundles: to avoid\nrepetition, we placed some features at the top-level and others in the\nfeatures themselves. This approach does not match the shape required\nfor profiles, so we need to redefine the bundle. However, of course,\nwe do not want to register the features this time around (after all,\nthey already exist) so we need to disable feature registration. In the\nfuture we hope to simplify this by making the shapes align - though\nperhaps it will have the underisable side-effect of hiding all of this\ncomplexity.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -1542,7 +1542,7 @@
       "name": "entities::orm",
       "documentation": "Houses all of the properties related to ORM\nsupport in Dogen.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -1700,7 +1700,7 @@
       "name": "entities::structural",
       "documentation": "Houses all of the meta-modeling elements related\nto structural modeling.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2028,7 +2028,7 @@
       "name": "features",
       "documentation": "Defines all features used by the logical model.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2172,7 +2172,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.injection.is_proxy_model",
+          "name": "masd.codec.is_proxy_model",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, sets the origin of the model to \"proxy model\".\n"
@@ -2447,7 +2447,7 @@
       "name": "entities::mapping",
       "documentation": "Meta-model elements related to mapping domains.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2542,7 +2542,7 @@
       "name": "entities::templating",
       "documentation": "Meta-model elements related to templating .\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2640,7 +2640,7 @@
       "name": "entities::serialization",
       "documentation": "Houses all of the meta-modeling elements related\nto serialisation.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2834,7 +2834,7 @@
       "name": "entities::visual_studio",
       "documentation": "Houses meta-model elements related to\nbuild systems.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -3120,7 +3120,7 @@
       "name": "entities::build",
       "documentation": "Houses all of the meta-modeling elements related\nto building, which don't have their own containing\nnamespace.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -3504,7 +3504,7 @@
       "name": "entities::physical",
       "documentation": "Logical representation of elements in the physical dimension.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -3962,7 +3962,7 @@
       "name": "formatters",
       "documentation": "Contains formatting classes for the logical model.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },

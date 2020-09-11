@@ -115,7 +115,7 @@ void populator::ensure_not_yet_processed(const logical_id& id) const {
 identification::entities::logical_provenance
 populator::make_logical_provenance(const logical::entities::element& e) const {
     identification::entities::logical_provenance r;
-    r.injection(e.provenance());
+    r.codec(e.provenance());
 
     using identification::entities::logical_meta_id;
     logical_meta_id mid(e.meta_name().id());

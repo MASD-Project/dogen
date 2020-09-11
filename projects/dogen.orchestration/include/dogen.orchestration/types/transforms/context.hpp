@@ -27,9 +27,9 @@
 
 #include <algorithm>
 #include "dogen.text/types/transforms/context.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
-#include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -44,7 +44,7 @@ public:
 public:
     context(
         const dogen::variability::transforms::context& variability_context,
-        const dogen::injection::transforms::context& injection_context,
+        const dogen::codec::transforms::context& codec_context,
         const dogen::logical::transforms::context& logical_context,
         const dogen::text::transforms::context& text_context,
         const dogen::physical::transforms::context& physical_context);
@@ -55,10 +55,10 @@ public:
     void variability_context(const dogen::variability::transforms::context& v);
     void variability_context(const dogen::variability::transforms::context&& v);
 
-    const dogen::injection::transforms::context& injection_context() const;
-    dogen::injection::transforms::context& injection_context();
-    void injection_context(const dogen::injection::transforms::context& v);
-    void injection_context(const dogen::injection::transforms::context&& v);
+    const dogen::codec::transforms::context& codec_context() const;
+    dogen::codec::transforms::context& codec_context();
+    void codec_context(const dogen::codec::transforms::context& v);
+    void codec_context(const dogen::codec::transforms::context&& v);
 
     const dogen::logical::transforms::context& logical_context() const;
     dogen::logical::transforms::context& logical_context();
@@ -87,7 +87,7 @@ public:
 
 private:
     dogen::variability::transforms::context variability_context_;
-    dogen::injection::transforms::context injection_context_;
+    dogen::codec::transforms::context codec_context_;
     dogen::logical::transforms::context logical_context_;
     dogen::text::transforms::context text_context_;
     dogen::physical::transforms::context physical_context_;

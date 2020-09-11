@@ -1,15 +1,15 @@
 #+title: dogen.dia
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.dia
-:masd.injection.input_technical_space: cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.std
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.dia
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
 :masd.physical.ignore_files_matching_regex: .*/*.py
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
@@ -18,7 +18,7 @@ Represents a all the data associated with a diagram.
 
 ** attributes
 :PROPERTIES:
-:masd.injection.type: std::vector<attribute>
+:masd.codec.type: std::vector<attribute>
 :END:
 
 All attributes associated with the diagram data.
@@ -28,42 +28,42 @@ Attribute in a Dia diagram.
 
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the attribute.
 
 ** values
 :PROPERTIES:
-:masd.injection.type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
+:masd.codec.type: std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>
 :END:
 
 Values for the attribute.
 
 * composite
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::untestable
+:masd.codec.stereotypes: dogen::untestable
 :END:
 
 Attribute value which is made up of other attributes.
 
 ** type
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Type of the composite node
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::vector<boost::shared_ptr<attribute>>
+:masd.codec.type: std::vector<boost::shared_ptr<attribute>>
 :END:
 
 Underlying Dia attributes.
 
 ** inner_composite
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<composite>
+:masd.codec.type: boost::shared_ptr<composite>
 :END:
 
 Some composites contain an inner composite field.
@@ -73,7 +73,7 @@ Represents a color in a diagram.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of an RGB value in hex.
@@ -83,14 +83,14 @@ Represents a diagram in Dia.
 
 ** diagram_data
 :PROPERTIES:
-:masd.injection.type: diagram_data
+:masd.codec.type: diagram_data
 :END:
 
 Basic diagram definitions.
 
 ** layers
 :PROPERTIES:
-:masd.injection.type: std::vector<layer>
+:masd.codec.type: std::vector<layer>
 :END:
 
 Visual layers on the diagram.
@@ -100,28 +100,28 @@ Represents a layer in a Dia diagram.
 
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the layer.
 
 ** visible
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Whether the layer is visible on screen or not.
 
 ** active
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Whether the layer is active or not.
 
 ** objects
 :PROPERTIES:
-:masd.injection.type: std::vector<object>
+:masd.codec.type: std::vector<object>
 :END:
 
 Dia objects contained in layer.
@@ -131,7 +131,7 @@ Represents a real value.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a real value.
@@ -141,7 +141,7 @@ Represents an integer value.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of an integer value.
@@ -151,42 +151,42 @@ Represents a Dia object.
 
 ** type
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Type of the object.
 
 ** version
 :PROPERTIES:
-:masd.injection.type: int
+:masd.codec.type: int
 :END:
 
 Version of the object.
 
 ** id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Unique identifier for the object in this diagram.
 
 ** connections
 :PROPERTIES:
-:masd.injection.type: std::vector<connection>
+:masd.codec.type: std::vector<connection>
 :END:
 
 Connection details for this object.
 
 ** child_node
 :PROPERTIES:
-:masd.injection.type: boost::optional<child_node>
+:masd.codec.type: boost::optional<child_node>
 :END:
 
 Parenting information for this object.
 
 ** attributes
 :PROPERTIES:
-:masd.injection.type: std::vector<attribute>
+:masd.codec.type: std::vector<attribute>
 :END:
 
 All attributes associated with the object.
@@ -196,7 +196,7 @@ Represents a point in a diagram.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a point with X/Y coordinates.
@@ -206,7 +206,7 @@ Represents a boolean value.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a boolean value.
@@ -221,7 +221,7 @@ a parent pointing to O0.
 
 ** parent
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Parent for this object.
@@ -231,7 +231,7 @@ Represents a string value.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a string value.
@@ -241,22 +241,22 @@ Represents a font in a diagram.
 
 ** family
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** style
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 * enumeration
 Represents a enumeration in a diagram.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a enumeration.
@@ -266,21 +266,21 @@ Connection between entities in a Dia diagram.
 
 ** handle
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Internal handle for the connection.
 
 ** to
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Object we're connected to.
 
 ** connection_slot
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Number of the connection slot we're connected to.
@@ -293,30 +293,30 @@ Represents a rectangle in a diagram.
 
 ** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Text representation of a rectangle with a pair of X/Y coordinates.
 
 * hydrator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 
 Reads a Dia diagram and instatiates the dia model objects.
 
 * hydration_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while reading a diagram.
 
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

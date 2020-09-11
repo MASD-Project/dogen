@@ -29,7 +29,7 @@
 #include "dogen/types/configuration.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.physical/types/transforms/minimal_context.hpp"
-#include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.codec/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
@@ -56,10 +56,10 @@ public:
         template_instantiation_domains);
 
     /**
-     * @brief Creates a transform context required by the injection
+     * @brief Creates a transform context required by the codec
      * chain.
      */
-    static injection::transforms::context make_injection_context(
+    static codec::transforms::context make_codec_context(
         const std::string& activity, boost::shared_ptr<tracing::tracer> tracer,
         boost::shared_ptr<physical::entities::meta_model> pmm);
 

@@ -1,17 +1,17 @@
 #+title: dogen.variability
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.variability
-:masd.injection.input_technical_space: cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.std
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
-:masd.injection.reference: dogen.tracing
-:masd.injection.reference: dogen.identification
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.variability
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
+:masd.codec.reference: dogen.tracing
+:masd.codec.reference: dogen.identification
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -50,7 +50,7 @@ elsewhere from the geometry of physical space.
 
 * entities
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Contains all of the types describing variability
@@ -58,29 +58,29 @@ with Masd.
 
 ** entities::element
 :PROPERTIES:
-:masd.injection.stereotypes: Element
+:masd.codec.stereotypes: Element
 :END:
 
 Represents an element modeling some aspect of variability.
 
 ** entities::feature
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: FeatureElement
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: FeatureElement
 :END:
 
 Unit of configuration within Dogen. Defines the domain of values.
 
 *** is_partially_matchable
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 Feature name can be matched partially.
 
 ** entities::binding_point
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration, dogen::convertible
+:masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 Determines how a feature can be bound to a modeling element.
@@ -105,40 +105,40 @@ Container of all available features, organised for querying.
 
 *** all
 :PROPERTIES:
-:masd.injection.type: std::list<feature>
+:masd.codec.type: std::list<feature>
 :END:
 *** by_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, feature>
+:masd.codec.type: std::unordered_map<std::string, feature>
 :END:
 
 Features by qualified name.
 
 *** partially_matchable
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, feature>
+:masd.codec.type: std::unordered_map<std::string, feature>
 :END:
 
 Features that can be partially matcheable, by qualified name.
 
 ** entities::feature_template
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: FeatureElement, Templateable
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: FeatureElement, Templateable
 :END:
 
 Defines a template that can be used to instantiate features.
 
 *** default_value_overrides
 :PROPERTIES:
-:masd.injection.type: std::list<default_value_override>
+:masd.codec.type: std::list<default_value_override>
 :END:
 
 Overrides for the default value, if any.
 
 ** entities::value_type
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration, dogen::convertible
+:masd.codec.stereotypes: masd::enumeration, dogen::convertible
 :END:
 
 What values can a feature have.
@@ -166,28 +166,28 @@ Represents a collection of CSV input that is split into a collection of text val
 
 ** entities::profile_template
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: Profilable
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: Profilable
 :END:
 
 Holds a set of templates for configuration points.
 
 *** templates
 :PROPERTIES:
-:masd.injection.type: std::list<configuration_point_template>
+:masd.codec.type: std::list<configuration_point_template>
 :END:
 ** entities::configuration_point_template
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: Templateable
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: Templateable
 :END:
 *** untyped_value
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** entities::value
 :PROPERTIES:
-:masd.injection.stereotypes: masd::visitable
+:masd.codec.stereotypes: masd::visitable
 :END:
 
 Base class of all value types.
@@ -196,58 +196,58 @@ Represents a value for a configuration point, a default value for a feature, etc
 
 ** entities::number
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a numeric integral value.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: int
+:masd.codec.type: int
 :END:
 ** entities::text
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a text value.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** entities::text_collection
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a collection of text values.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** entities::boolean
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a boolean value.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** entities::key_value_pair
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a pair of key and value.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::list<std::pair<std::string, std::string>>
+:masd.codec.type: std::list<std::pair<std::string, std::string>>
 :END:
 
 #+begin_src mustache
@@ -257,19 +257,19 @@ source.
 #+end_src
 ** entities::configuration
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: ConfigurationStore
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: ConfigurationStore
 :END:
 *** profile_bindings
 :PROPERTIES:
-:masd.injection.type: std::list<potential_binding>
+:masd.codec.type: std::list<potential_binding>
 :END:
 
 Bindings to profiles.
 
 *** configuration_bindings
 :PROPERTIES:
-:masd.injection.type: std::list<potential_binding>
+:masd.codec.type: std::list<potential_binding>
 :END:
 
 Relationships between this bound configuration and other bound configurations.
@@ -279,113 +279,113 @@ elements.
 
 *** source_binding_point
 :PROPERTIES:
-:masd.injection.type: binding_point
+:masd.codec.type: binding_point
 :END:
 
 Where was this configuration sourced from with regards to binding.
 
 *** from_target
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, this configuration was sourced from an element in the target model.
 
 ** entities::configuration_point
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: Valuable
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: Valuable
 :END:
 
 Maps a feature name to an instance value
 
 ** entities::Nameable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Elements with the ability of being named.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: identification::entities::name
+:masd.codec.type: identification::entities::name
 :END:
 
 Name of this variability element.
 
 ** entities::Describable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Human readable description of the feature, used for documentation.
 
 ** entities::Element
 :PROPERTIES:
-:masd.injection.parent: entities::Nameable, entities::Describable
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::Nameable, entities::Describable
+:masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::Defaultable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** default_value
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<value>
+:masd.codec.type: boost::shared_ptr<value>
 :END:
 
 Default value for element, if any.
 
 ** entities::Typeable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** value_type
 :PROPERTIES:
-:masd.injection.type: value_type
+:masd.codec.type: value_type
 :END:
 
 Type of the value for the feature that will result of the template instantiation.
 
 ** entities::BindActionable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** profile_binding_action
 :PROPERTIES:
-:masd.injection.type: binding_action
+:masd.codec.type: binding_action
 :END:
 *** configuration_binding_action
 :PROPERTIES:
-:masd.injection.type: binding_action
+:masd.codec.type: binding_action
 :END:
 ** entities::Bindable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** binding_point
 :PROPERTIES:
-:masd.injection.type: binding_point
+:masd.codec.type: binding_point
 :END:
 
 How the feature binds against other model elements.
 
 ** entities::FeatureElement
 :PROPERTIES:
-:masd.injection.parent: entities::Element, entities::Defaultable, entities::Typeable, entities::BindActionable, entities::Bindable
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::Element, entities::Defaultable, entities::Typeable, entities::BindActionable, entities::Bindable
+:masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::Templateable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** instantiation_domain_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Name of the domain to use for template instantiation.
@@ -394,48 +394,48 @@ Name of the domain to use for template instantiation.
 
 ** entities::Valuable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** value
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<value>
+:masd.codec.type: boost::shared_ptr<value>
 :END:
 
 Value that has been assigned to this element.
 
 ** entities::ConfigurationStore
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** configuration_points
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, configuration_point>
+:masd.codec.type: std::unordered_map<std::string, configuration_point>
 :END:
 
 All configuration points associated with this element.
 
 ** entities::profile
 :PROPERTIES:
-:masd.injection.parent: entities::element
-:masd.injection.stereotypes: ConfigurationStore, Profilable
+:masd.codec.parent: entities::element
+:masd.codec.stereotypes: ConfigurationStore, Profilable
 :END:
 *** merged
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, the profile has been merged with all of its parents.
 
 *** base_layer_profile
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Which base layer does this profile rely on, if any.
 
 ** entities::binding_action
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 What action to take when binding.
@@ -449,37 +449,37 @@ Copy across the value of the feature from the related element
 ** entities::profile_repository
 *** by_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, profile>
+:masd.codec.type: std::unordered_map<std::string, profile>
 :END:
 *** by_stereotype
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, profile>
+:masd.codec.type: std::unordered_map<std::string, profile>
 :END:
 ** entities::configuration_model_set
 *** models
 :PROPERTIES:
-:masd.injection.type: std::list<configuration_model>
+:masd.codec.type: std::list<configuration_model>
 :END:
 ** entities::configuration_model
 *** global
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<configuration>
+:masd.codec.type: boost::shared_ptr<configuration>
 :END:
 *** local
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::shared_ptr<configuration>>
+:masd.codec.type: std::unordered_map<std::string, boost::shared_ptr<configuration>>
 :END:
 ** entities::profile_template_repository
 *** templates
 :PROPERTIES:
-:masd.injection.type: std::list<profile_template>
+:masd.codec.type: std::list<profile_template>
 :END:
 ** entities::potential_binding
 Contains information about a potential binding.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The name to bind to. This can represent a profile or configuration name, or an
@@ -487,7 +487,7 @@ alias.
 
 *** realized
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, the potential binding was realised into an actual binding.
@@ -497,150 +497,150 @@ Stores a set of feature templates.
 
 *** templates
 :PROPERTIES:
-:masd.injection.type: std::list<feature_template>
+:masd.codec.type: std::list<feature_template>
 :END:
 ** entities::feature_repository
 Stores a set of features.
 
 *** features
 :PROPERTIES:
-:masd.injection.type: std::list<feature>
+:masd.codec.type: std::list<feature>
 :END:
 ** entities::default_value_override
 Stores an override for a default value.
 
 *** key_ends_with
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** default_value
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<value>
+:masd.codec.type: boost::shared_ptr<value>
 :END:
 ** entities::Generalizable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** parents
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** entities::Stereotypable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** stereotype
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** entities::Profilable
 :PROPERTIES:
-:masd.injection.parent: entities::Bindable, entities::Generalizable, entities::Stereotypable
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::Bindable, entities::Generalizable, entities::Stereotypable
+:masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::comma_separated
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a CSV input that is split into a collection of text values.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** entities::comma_separated_collection
 :PROPERTIES:
-:masd.injection.parent: entities::value
+:masd.codec.parent: entities::value
 :END:
 
 Represents a collection of CSV input that is split into a collection of text values.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::list<std::list<std::string>>
+:masd.codec.type: std::list<std::list<std::string>>
 :END:
 * helpers
 ** helpers::feature_selector
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::configuration_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::configuration_point_merger
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::value_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::building_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** helpers::selection_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** helpers::configuration_selector
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::template_instantiator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::instantiation_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst instantiating templates.
 
 ** helpers::registrar
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** templates_repository
 :PROPERTIES:
-:masd.injection.type: entities::feature_template_repository
+:masd.codec.type: entities::feature_template_repository
 :END:
 *** features_repository
 :PROPERTIES:
-:masd.injection.type: entities::feature_repository
+:masd.codec.type: entities::feature_repository
 :END:
 ** helpers::enum_mapper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::enum_mapping_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst mapping enums to or from strings.
 
 ** helpers::relational_adapter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::adaption_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst adapting a model.
 
 ** helpers::configuration_points_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::merging_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst merging.
@@ -648,42 +648,42 @@ An error occurred whilst merging.
 * transforms
 ** transforms::feature_model_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::feature_template_instantiation_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::feature_model_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::profile_repository_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::profile_template_instantiation_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::profile_binding_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::context
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
+:masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
 
 Context for transformations.
 
 *** compatibility_mode
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** template_instantiation_domains
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::vector<std::string>>
+:masd.codec.type: std::unordered_map<std::string, std::vector<std::string>>
 :END:
 
 Provides all of the domains to be used for template instantiation.
@@ -694,35 +694,35 @@ user choices.
 
 *** tracer
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<tracing::tracer>
+:masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
 ** transforms::profile_merging_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::transformation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst applying a transformation.
 
 ** transforms::global_configuration_binding_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::profile_repository_inputs
 *** profiles
 :PROPERTIES:
-:masd.injection.type: std::list<entities::profile>
+:masd.codec.type: std::list<entities::profile>
 :END:
 *** templates
 :PROPERTIES:
-:masd.injection.type: std::list<entities::profile_template>
+:masd.codec.type: std::list<entities::profile_template>
 :END:
 * features
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Features used by the variability model.
@@ -731,7 +731,7 @@ Features used by the variability model.
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.key_prefix: masd.variability
-:masd.injection.stereotypes: masd::variability::feature_bundle
+:masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 
 Features related to profile processing.
@@ -739,24 +739,24 @@ Features related to profile processing.
 *** profile
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Profile associated with this configuration.
 
 ** features::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::initializer
+:masd.codec.stereotypes: masd::variability::initializer
 :END:
 * registrar
 :PROPERTIES:
-:masd.injection.stereotypes: masd::serialization::type_registrar
+:masd.codec.stereotypes: masd::serialization::type_registrar
 :END:
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

@@ -1,18 +1,18 @@
 #+title: dogen.physical
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.physical
-:masd.injection.input_technical_space: cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.std
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: dogen.tracing
-:masd.injection.reference: dogen.variability
-:masd.injection.reference: dogen
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.physical
+:masd.codec.input_technical_space: cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.std
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: dogen.tracing
+:masd.codec.reference: dogen.variability
+:masd.codec.reference: dogen
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -21,72 +21,72 @@ physical dimension of MASD conceptual space.
 
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:
 * helpers
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Helpers for the physical model.
 
 ** helpers::template_instantiation_domains_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::building_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while the field factory was building.
 
 ** helpers::path_generator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::file_status_collector
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::files_by_status
 *** unexpected
 :PROPERTIES:
-:masd.injection.type: std::list<boost::filesystem::path>
+:masd.codec.type: std::list<boost::filesystem::path>
 :END:
 *** ignored
 :PROPERTIES:
-:masd.injection.type: std::list<boost::filesystem::path>
+:masd.codec.type: std::list<boost::filesystem::path>
 :END:
 ** helpers::unified_differ
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::meta_model_validator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** helpers::validation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during validation.
 
 * entities
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Defines the MASD physical space.
 
 ** entities::meta_model
 :PROPERTIES:
-:masd.injection.stereotypes: ContainingMetaElement
+:masd.codec.stereotypes: ContainingMetaElement
 :END:
 
 Describes the geomtry of physical space.
@@ -95,7 +95,7 @@ Provides details of the backends available in the current instance of Dogen.
 
 *** template_instantiation_domains
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::vector<std::string>>
+:masd.codec.type: std::unordered_map<std::string, std::vector<std::string>>
 :END:
 
 Provides all of the domains to be used for template instantiation.
@@ -106,60 +106,60 @@ user choices.
 
 *** backends
 :PROPERTIES:
-:masd.injection.type: std::list<backend>
+:masd.codec.type: std::list<backend>
 :END:
 
 All backends available in this meta-model.
 
 *** indexed_names
 :PROPERTIES:
-:masd.injection.type: identification::entities::physical_meta_name_indices
+:masd.codec.type: identification::entities::physical_meta_name_indices
 :END:
 
 Repository with all the meta-names in this meta-model, indexed appropriately.
 
 ** entities::backend
 :PROPERTIES:
-:masd.injection.stereotypes: ContainingMetaElement
+:masd.codec.stereotypes: ContainingMetaElement
 :END:
 
 Code generation backend, targeting a given technical space.
 
 *** parts
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, part>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part>
 :END:
 *** facets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet>
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** archetype_kinds
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind>
 :END:
 ** entities::part
 :PROPERTIES:
-:masd.injection.stereotypes: ContainingMetaElement
+:masd.codec.stereotypes: ContainingMetaElement
 :END:
 *** path_configuration
 :PROPERTIES:
-:masd.injection.type: path_configuration
+:masd.codec.type: path_configuration
 :END:
 *** facets
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet>
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, this part needs a path relative to its root.
@@ -169,35 +169,35 @@ Describes how paths are handled within a part.
 
 *** external_modules
 :PROPERTIES:
-:masd.injection.type: path_contribution_type
+:masd.codec.type: path_contribution_type
 :END:
 
 What kind of contribution do the external modules make to the final path.
 
 *** model_modules
 :PROPERTIES:
-:masd.injection.type: path_contribution_type
+:masd.codec.type: path_contribution_type
 :END:
 
 What kind of contribution do the model modules make to the final path.
 
 *** facet
 :PROPERTIES:
-:masd.injection.type: path_contribution_type
+:masd.codec.type: path_contribution_type
 :END:
 
 What kind of contribution does the facet make to the final path.
 
 *** internal_modules
 :PROPERTIES:
-:masd.injection.type: path_contribution_type
+:masd.codec.type: path_contribution_type
 :END:
 
 What kind of contribution do the internal modules make to the final path.
 
 ** entities::path_contribution_type
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Different kinds of contributions that can be made to the final path computation.
@@ -213,15 +213,15 @@ The item contributes a single folder to the path, as a delimited string.
 
 ** entities::facet
 :PROPERTIES:
-:masd.injection.stereotypes: ContainingMetaElement, Postfixable
+:masd.codec.stereotypes: ContainingMetaElement, Postfixable
 :END:
 *** archetypes
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype>
 :END:
 *** default_archetype_for_logical_meta_model_id
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, archetype>
+:masd.codec.type: std::unordered_map<std::string, archetype>
 :END:
 
 Maps the logical model element ID to the default archetype for this facet.
@@ -230,171 +230,171 @@ Used to obtain the default archetype for referencing.
 
 ** entities::archetype
 :PROPERTIES:
-:masd.injection.stereotypes: MetaElement, Postfixable, Associatable
+:masd.codec.stereotypes: MetaElement, Postfixable, Associatable
 :END:
 
 Represents a meta-artefact.
 
 *** archetype_kind_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 ID for the archetype kind that this archetype is an instance of.
 
 *** logical_meta_element_id
 :PROPERTIES:
-:masd.injection.type: identification::entities::logical_meta_id
+:masd.codec.type: identification::entities::logical_meta_id
 :END:
 
 ID of the meta-element in the logical model this archetype binds to.
 
 *** part
 :PROPERTIES:
-:masd.injection.type: identification::entities::physical_id
+:masd.codec.type: identification::entities::physical_id
 :END:
 
 Part in which we are located.
 
 *** relations
 :PROPERTIES:
-:masd.injection.type: relations
+:masd.codec.type: relations
 :END:
 
 Properties of this archetype with regards to relations.
 
 ** entities::archetype_kind
 :PROPERTIES:
-:masd.injection.stereotypes: Describable
+:masd.codec.stereotypes: Describable
 :END:
 *** id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** file_extension
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** entities::model
 :PROPERTIES:
-:masd.injection.stereotypes: Element, ArtefactContainer
+:masd.codec.stereotypes: Element, ArtefactContainer
 :END:
 
 Collection of entities representing objects in physical space.
 
 *** technical_space
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Primary technical space that this model belongs to.
 
 *** managed_directories
 :PROPERTIES:
-:masd.injection.type: std::list<boost::filesystem::path>
+:masd.codec.type: std::list<boost::filesystem::path>
 :END:
 *** outputting_properties
 :PROPERTIES:
-:masd.injection.type: outputting_properties
+:masd.codec.type: outputting_properties
 :END:
 *** orphan_artefacts
 :PROPERTIES:
-:masd.injection.type: std::list<boost::shared_ptr<physical::entities::artefact>>
+:masd.codec.type: std::list<boost::shared_ptr<physical::entities::artefact>>
 :END:
 
 Artefacts that exist in the physical dimension only.
 
 ** entities::Describable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** description
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Human readable description of the entity.
 
 ** entities::MetaNameable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a meta-name.
 
 *** meta_name
 :PROPERTIES:
-:masd.injection.type: identification::entities::physical_meta_name
+:masd.codec.type: identification::entities::physical_meta_name
 :END:
 
 Meta-name for this meta-element.
 
 ** entities::Labelable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 The ability to attach labels to an element.
 
 *** labels
 :PROPERTIES:
-:masd.injection.type: std::list<identification::entities::label>
+:masd.codec.type: std::list<identification::entities::label>
 :END:
 
 All labels associated with this element.
 
 ** entities::MetaElement
 :PROPERTIES:
-:masd.injection.parent: entities::Describable, entities::MetaNameable, entities::Labelable
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::Describable, entities::MetaNameable, entities::Labelable
+:masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::ContainingMetaElement
 :PROPERTIES:
-:masd.injection.parent: entities::MetaElement
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::MetaElement
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** default_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Default directory name.
 
 *** override_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Override directory name, if any.
 
 ** entities::Postfixable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** default_postfix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Default postfix for the element.
 
 *** override_postfix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Overridden postfix, if any.
 
 ** entities::artefact
 :PROPERTIES:
-:masd.injection.stereotypes: Element
+:masd.codec.stereotypes: Element
 :END:
 
 Represents an entity in physical space.
 
 *** content
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 #+begin_src mustache
@@ -403,29 +403,29 @@ Content of the file.
 #+end_src
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** overwrite
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** relative_paths
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, boost::filesystem::path>
+:masd.codec.type: std::unordered_map<std::string, boost::filesystem::path>
 :END:
 
 Paths relative to the path ID that keys the container.
 
 *** dependencies
 :PROPERTIES:
-:masd.injection.type: std::vector<boost::filesystem::path>
+:masd.codec.type: std::vector<boost::filesystem::path>
 :END:
 
 Files in the project directory that this file depends on, but which are not generated.
 
 *** relations
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 Artefacts that this artefact depends on.
@@ -434,104 +434,104 @@ The format used is dependent on the technical space the artefact belongs to.
 
 *** unified_diff
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Unified diff between the in-memory artefact and the file in the filesystem.
 
 *** operation
 :PROPERTIES:
-:masd.injection.type: operation
+:masd.codec.type: operation
 :END:
 *** artefact_properties
 :PROPERTIES:
-:masd.injection.type: artefact_properties
+:masd.codec.type: artefact_properties
 :END:
 *** enablement_properties
 :PROPERTIES:
-:masd.injection.type: enablement_properties
+:masd.codec.type: enablement_properties
 :END:
 ** entities::Configurable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have meta-data associated.
 
 *** configuration
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<variability::entities::configuration>
+:masd.codec.type: boost::shared_ptr<variability::entities::configuration>
 :END:
 
 Configuration for this element.
 
 ** entities::Provenance
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Properties related to the origin of the modeling element.
 
 *** provenance
 :PROPERTIES:
-:masd.injection.type: identification::entities::logical_provenance
+:masd.codec.type: identification::entities::logical_provenance
 :END:
 
 Details of the provenance of this model element.
 
 ** entities::Nameable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 Ability to have a name.
 
 *** name
 :PROPERTIES:
-:masd.injection.type: identification::entities::physical_name
+:masd.codec.type: identification::entities::physical_name
 :END:
 
 Name of the physical element.
 
 ** entities::Element
 :PROPERTIES:
-:masd.injection.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.parent: entities::MetaNameable, entities::Configurable, entities::Provenance, entities::Nameable
+:masd.codec.stereotypes: masd::object_template
 :END:
 ** entities::outputting_properties
 Properties related to outputting.
 
 *** force_write
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** delete_extra_files
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** ignore_files_matching_regex
 :PROPERTIES:
-:masd.injection.type: std::vector<std::string>
+:masd.codec.type: std::vector<std::string>
 :END:
 *** delete_empty_directories
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** entities::operation
 Operation to apply to an artefact.
 
 *** type
 :PROPERTIES:
-:masd.injection.type: operation_type
+:masd.codec.type: operation_type
 :END:
 *** reason
 :PROPERTIES:
-:masd.injection.type: operation_reason
+:masd.codec.type: operation_reason
 :END:
 ** entities::operation_type
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Operation to perform to a given artefact.
@@ -551,7 +551,7 @@ Deletes a file.
 ** entities::operation_reason
 :PROPERTIES:
 :masd.cpp.hash.enabled: true
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Reasons for performing an operation.
@@ -585,49 +585,49 @@ File is unexpected but the user asked us to ignore it via regexes.
 
 ** entities::Associatable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 
 The meta-element is associated with other meta-elements
 
 *** depends
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 List of meta-elements this meta-element depends upon, if any.
 
 *** generates
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 List of meta-elements this meta-element is used to generate, if any.
 
 *** generated_by
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Meta-element used to generate this meta-element, if any.
 
 ** entities::model_set
 :PROPERTIES:
-:masd.injection.stereotypes: Nameable
+:masd.codec.stereotypes: Nameable
 :END:
 
 Represents a set of related physical models.
 
 *** models
 :PROPERTIES:
-:masd.injection.type: std::list<model>
+:masd.codec.type: std::list<model>
 :END:
 
 All models that are a member of this set.
 
 ** entities::relation_status
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Status of a given archetype with regards to being related to other archetypes.
@@ -643,14 +643,14 @@ FIXME: hack for now
 
 ** entities::constant_relation
 :PROPERTIES:
-:masd.injection.stereotypes: Urnable, Labelable
+:masd.codec.stereotypes: Urnable, Labelable
 :END:
 
 Represents a relation between archetypes, fixed to a logical model element.
 
 *** logical_model_element_id
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 ID of the logical model element that the relation is fixed against.
@@ -659,22 +659,22 @@ Element must exist in the current loaded models.
 
 ** entities::variable_relation
 :PROPERTIES:
-:masd.injection.stereotypes: Urnable
+:masd.codec.stereotypes: Urnable
 :END:
 *** type
 :PROPERTIES:
-:masd.injection.type: variable_relation_type
+:masd.codec.type: variable_relation_type
 :END:
 
 How these archetypes are related.
 
 ** entities::Urnable
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** original_urn
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 URN which may or may not be an archetype URN.
@@ -685,7 +685,7 @@ to a unique archetype.
 
 *** resolved_urn
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 URN pointing to the archetype.
@@ -694,7 +694,7 @@ URN pointing to the archetype.
 
 ** entities::variable_relation_type
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 
 Lists all of the valid variable relation types.
@@ -725,14 +725,14 @@ Models relationships between archetypes.
 
 *** status
 :PROPERTIES:
-:masd.injection.type: relation_status
+:masd.codec.type: relation_status
 :END:
 
 Status of this archetype with regards to being related to archetypes.
 
 *** constant
 :PROPERTIES:
-:masd.injection.type: std::list<constant_relation>
+:masd.codec.type: std::list<constant_relation>
 :END:
 
 All archetypes this archetype is related to,  over a fixed logical meta-model
@@ -740,7 +740,7 @@ element.
 
 *** variable
 :PROPERTIES:
-:masd.injection.type: std::list<variable_relation>
+:masd.codec.type: std::list<variable_relation>
 :END:
 
 All archetypes this archetype is related to,  over a variable logical meta-model
@@ -748,39 +748,39 @@ element.
 
 *** hard_coded
 :PROPERTIES:
-:masd.injection.type: std::list<hard_coded_relation>
+:masd.codec.type: std::list<hard_coded_relation>
 :END:
 ** entities::hard_coded_relation
 Relations against hard-coded values.
 
 *** value
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** entities::artefact_set
 :PROPERTIES:
-:masd.injection.stereotypes: Configurable, Provenance
+:masd.codec.stereotypes: Configurable, Provenance
 :END:
 
 Represents a slice of logical-physical space fixed at one logical point.
 
 *** artefacts_by_archetype
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, boost::shared_ptr<physical::entities::artefact>>
 :END:
 
 All artefacts that are contained within this set, organised by archetype.
 
 *** archetype_for_role
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, identification::entities::physical_meta_id>
+:masd.codec.type: std::unordered_map<std::string, identification::entities::physical_meta_id>
 :END:
 
 Resolves a role into a concrete archetype, in the context of this logical element.
 
 *** is_generatable
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If false, the entire artefact set is not generatable.
@@ -788,27 +788,27 @@ If false, the entire artefact set is not generatable.
 ** entities::artefact_properties
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** overwrite
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** file_path
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 *** formatting_style
 :PROPERTIES:
-:masd.injection.type: formatting_styles
+:masd.codec.type: formatting_styles
 :END:
 *** formatting_input
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** entities::formatting_styles
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 *** stock
 *** wale
@@ -816,68 +816,68 @@ If false, the entire artefact set is not generatable.
 ** entities::enablement_properties
 *** facet_enabled
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 *** archetype_enabled
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 *** facet_overwrite
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 *** archetype_overwrite
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 ** entities::artefact_repository
 :PROPERTIES:
-:masd.injection.stereotypes: ArtefactContainer
+:masd.codec.stereotypes: ArtefactContainer
 :END:
 *** identifier
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 Identifier for this repository. Used for logging and tracing only.
 
 *** root_module_logical_id
 :PROPERTIES:
-:masd.injection.type: identification::entities::logical_id
+:masd.codec.type: identification::entities::logical_id
 :END:
 
 Identifier of the artefact set containing the root module.
 
 *** extraction_properties
 :PROPERTIES:
-:masd.injection.type: extraction_properties
+:masd.codec.type: extraction_properties
 :END:
 *** global_enablement_properties
 :PROPERTIES:
-:masd.injection.type: global_enablement_properties
+:masd.codec.type: global_enablement_properties
 :END:
 *** enabled_archetype_for_element
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<identification::entities::logical_meta_physical_id>
+:masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
 :END:
 *** managed_directories
 :PROPERTIES:
-:masd.injection.type: std::list<boost::filesystem::path>
+:masd.codec.type: std::list<boost::filesystem::path>
 :END:
 *** has_generatable_artefacts
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true the repository has at least one generable artefact, false otherwise.
 
 ** entities::ArtefactContainer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::object_template
+:masd.codec.stereotypes: masd::object_template
 :END:
 *** artefact_sets_by_logical_id
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, artefact_set>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, artefact_set>
 :END:
 
 All atefact sets in this model, by logical ID.
@@ -887,42 +887,42 @@ Properties related to extraction.
 
 *** cpp_headers_output_directory
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 
 Directory in which to place C++ header files. Must be a relative path.
 
 *** enabled_backends
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<std::string>
+:masd.codec.type: std::unordered_set<std::string>
 :END:
 *** enable_backend_directories
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** entities::global_enablement_properties
 *** backend_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
 :END:
 *** facet_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
 :END:
 *** archetype_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
 :END:
 *** denormalised_archetype_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
 :END:
 ** entities::backend_properties
 Properties related to the backend.
 
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, this backend is enabled.
@@ -930,62 +930,62 @@ If true, this backend is enabled.
 ** entities::denormalised_archetype_properties
 *** backend_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** facet_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** facet_overwrite
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** archetype_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** archetype_overwrite
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 ** entities::facet_properties
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If true, this facet is enabled.
 
 *** overwrite
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** entities::archetype_properties
 Archetype level properties, applicable to all instances of this archetype.
 
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 
 If false, will disable all instances of this archetype.
 
 *** overwrite
 :PROPERTIES:
-:masd.injection.type: boost::optional<bool>
+:masd.codec.type: boost::optional<bool>
 :END:
 ** entities::formatting_configuration
 *** styles
 :PROPERTIES:
-:masd.injection.type: formatting_styles
+:masd.codec.type: formatting_styles
 :END:
 *** input
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 * features
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Features for the MASD physical model.
@@ -993,7 +993,7 @@ Features for the MASD physical model.
 ** features::facet_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.facet
-:masd.injection.stereotypes: masd::variability::feature_template_bundle
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
 :END:
 
 Physical features common to all facets.
@@ -1013,8 +1013,8 @@ Physical features common to all facets.
 :masd.variability.default_value_override.csharp.types: "Types"
 :masd.variability.default_value_override.csharp.io: "Dumpers"
 :masd.variability.default_value_override.csharp.test_data: "SequenceGenerators"
-:masd.injection.type: masd::variability::text
-:masd.injection.value: ""
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
 :END:
 
 Directory in which to place this facet.
@@ -1031,8 +1031,8 @@ Directory in which to place this facet.
 :masd.variability.default_value_override.cpp.serialization: "ser"
 :masd.variability.default_value_override.csharp.io: "Dumper"
 :masd.variability.default_value_override.csharp.test_data: "SequenceGenerator"
-:masd.injection.type: masd::variability::text
-:masd.injection.value: ""
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
 :END:
 
 Postfix to use for all files that belong to this facet.
@@ -1040,8 +1040,8 @@ Postfix to use for all files that belong to this facet.
 *** overwrite
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, the generated files will overwrite existing files.
@@ -1049,7 +1049,7 @@ If true, the generated files will overwrite existing files.
 ** features::archetype_features
 :PROPERTIES:
 :masd.variability.instantiation_domain_name: masd.archetype
-:masd.injection.stereotypes: masd::variability::feature_template_bundle
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
 :END:
 
 Features common to all archetypes.
@@ -1060,8 +1060,8 @@ Features common to all archetypes.
 :masd.variability.default_value_override.forward_declarations: "fwd"
 :masd.variability.default_value_override.factory: "factory"
 :masd.variability.default_value_override.transform: "transform"
-:masd.injection.type: masd::variability::text
-:masd.injection.value: ""
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
 :END:
 
 Postfix to use for all files that belong to this facet.
@@ -1069,29 +1069,29 @@ Postfix to use for all files that belong to this facet.
 *** overwrite
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, the generated files will overwrite existing files.
 
 ** features::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::initializer
+:masd.codec.stereotypes: masd::variability::initializer
 :END:
 ** features::filesystem
 :PROPERTIES:
 :masd.variability.default_binding_point: global
 :masd.variability.key_prefix: masd.physical
-:masd.injection.stereotypes: masd::variability::feature_bundle
+:masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 
 Features related to filesystem operations.
 
 *** force_write
 :PROPERTIES:
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, artefacts are always written to the filesystem.
@@ -1101,8 +1101,8 @@ diff. If no changes are detected, no writting is performed.
 
 *** delete_extra_files
 :PROPERTIES:
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, any files the code generator is not aware of are deleted.
@@ -1112,7 +1112,7 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
 *** ignore_files_matching_regex
 :PROPERTIES:
 :masd.variability.is_optional: true
-:masd.injection.type: masd::variability::text_collection
+:masd.codec.type: masd::variability::text_collection
 :END:
 
 Regular expressions to filter files prior to deletion.
@@ -1121,8 +1121,8 @@ Only applicable if "delete_extra_files" is enabled.
 
 *** delete_empty_directories
 :PROPERTIES:
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, all directories without any files will be deleted.
@@ -1132,8 +1132,8 @@ are themselves empty, the entire directory tree is deleted.
 
 *** enable_backend_directories
 :PROPERTIES:
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, a directory is created for each technical space targeted.
@@ -1146,15 +1146,15 @@ space. If you are targetting more than one, it will automatically be set to true
 :masd.variability.default_binding_point: any
 :masd.variability.generate_static_configuration: false
 :masd.variability.instantiation_domain_name: masd
-:masd.injection.stereotypes: masd::variability::feature_template_bundle
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
 :END:
 
 Enablement related properties.
 
 *** enabled
 :PROPERTIES:
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, decorations are enabled on this modeling element.
@@ -1163,28 +1163,28 @@ If true, decorations are enabled on this modeling element.
 :PROPERTIES:
 :masd.variability.default_binding_point: any
 :masd.variability.instantiation_domain_name: masd.archetype
-:masd.injection.stereotypes: masd::variability::feature_template_bundle
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
 :END:
 
 Features related to formatting.
 
 *** formatting_style
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Style of formatting to use for this archetype.
 
 *** formatting_input
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 If the formatting style requires a template, the name of the template to use.
 
 * transforms
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Contains all of the transforms needed to produce
@@ -1193,139 +1193,139 @@ models and meta-models for the physical model.
 ** transforms::context
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
+:masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
 *** diffing_configuration
 :PROPERTIES:
-:masd.injection.type: boost::optional<diffing_configuration>
+:masd.codec.type: boost::optional<diffing_configuration>
 :END:
 *** reporting_configuration
 :PROPERTIES:
-:masd.injection.type: boost::optional<reporting_configuration>
+:masd.codec.type: boost::optional<reporting_configuration>
 :END:
 *** dry_run_mode_enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** feature_model
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<variability::entities::feature_model>
+:masd.codec.type: boost::shared_ptr<variability::entities::feature_model>
 :END:
 *** meta_model
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<entities::meta_model>
+:masd.codec.type: boost::shared_ptr<entities::meta_model>
 :END:
 
 Meta-model for the physical dimension.
 
 *** tracer
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<tracing::tracer>
+:masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
 ** transforms::transform_exception
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** transforms::file_generation_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::write_artefacts_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::update_outputting_properties_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::remove_files_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::generate_report_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::model_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::generate_diffs_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::gather_external_artefacts_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::generate_patch_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::mock_content_filler_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::operation_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::merge_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::meta_model_production_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::compute_name_indices_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::minimal_context
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::typeable, dogen::pretty_printable
+:masd.codec.stereotypes: dogen::typeable, dogen::pretty_printable
 :END:
 
 Smallest possible context required for bootstrapping purposes.
 
 *** tracer
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<tracing::tracer>
+:masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
 ** transforms::meta_model_assembly_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::compute_template_instantiation_domains
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::artefact_repository_population_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::global_enablement_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::local_enablement_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::formatting_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::generability_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::extraction_properties_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * registrar
 :PROPERTIES:
-:masd.injection.stereotypes: masd::serialization::type_registrar
+:masd.codec.stereotypes: masd::serialization::type_registrar
 :END:

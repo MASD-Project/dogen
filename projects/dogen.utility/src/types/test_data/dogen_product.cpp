@@ -52,9 +52,9 @@ const std::string path_dogen_physical_dia("dogen.physical.dia");
 const std::string path_dogen_product_cpp_dia("dogen.text.cpp.dia");
 const std::string path_dogen_product_csharp_dia("dogen.text.csharp.dia");
 const std::string path_dogen_product_dia("dogen.text.dia");
-const std::string path_dogen_injection_dia("dogen.injection.dia");
-const std::string path_dogen_injection_dia_dia("dogen.injection.dia.dia");
-const std::string path_dogen_injection_json_dia("dogen.injection.json.dia");
+const std::string path_dogen_codec_dia("dogen.codec.dia");
+const std::string path_dogen_codec_dia_dia("dogen.codec.dia.dia");
+const std::string path_dogen_codec_json_dia("dogen.codec.json.dia");
 const std::string path_dogen_orchestration_dia("dogen.orchestration.dia");
 const std::string path_dogen_templating_dia("dogen.templating.dia");
 const std::string path_dogen_tracing_dia("dogen.tracing.dia");
@@ -70,9 +70,9 @@ const std::string path_dogen_product_cpp_json("dogen.text.cpp.json");
 const std::string path_dogen_product_csharp_json(
     "dogen.text.csharp.json");
 const std::string path_dogen_product_json("dogen.text.json");
-const std::string path_dogen_injection_json("dogen.injection.json");
-const std::string path_dogen_injection_dia_json("dogen.injection.dia.json");
-const std::string path_dogen_injection_json_json("dogen.injection.json.json");
+const std::string path_dogen_codec_json("dogen.codec.json");
+const std::string path_dogen_codec_dia_json("dogen.codec.dia.json");
+const std::string path_dogen_codec_json_json("dogen.codec.json.json");
 const std::string path_dogen_orchestration_json("dogen.orchestration.json");
 const std::string path_dogen_templating_json("dogen.templating.json");
 const std::string path_dogen_tracing_json("dogen.tracing.json");
@@ -190,19 +190,19 @@ path dogen_product::input_dogen_product_dia() {
     return dia_models_directory_ / path_dogen_product_dia;
 }
 
-path dogen_product::input_dogen_injection_dia() {
+path dogen_product::input_dogen_codec_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_injection_dia;
+    return dia_models_directory_ / path_dogen_codec_dia;
 }
 
-path dogen_product::input_dogen_injection_dia_dia() {
+path dogen_product::input_dogen_codec_dia_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_injection_dia_dia;
+    return dia_models_directory_ / path_dogen_codec_dia_dia;
 }
 
-path dogen_product::input_dogen_injection_json_dia() {
+path dogen_product::input_dogen_codec_json_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_injection_json_dia;
+    return dia_models_directory_ / path_dogen_codec_json_dia;
 }
 
 path dogen_product::input_dogen_orchestration_dia() {
@@ -270,19 +270,19 @@ path dogen_product::input_dogen_product_json() {
     return json_models_directory_ / path_dogen_product_json;
 }
 
-path dogen_product::input_dogen_injection_json() {
+path dogen_product::input_dogen_codec_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_injection_json;
+    return json_models_directory_ / path_dogen_codec_json;
 }
 
-path dogen_product::input_dogen_injection_dia_json() {
+path dogen_product::input_dogen_codec_dia_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_injection_dia_json;
+    return json_models_directory_ / path_dogen_codec_dia_json;
 }
 
-path dogen_product::input_dogen_injection_json_json() {
+path dogen_product::input_dogen_codec_json_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_injection_json_json;
+    return json_models_directory_ / path_dogen_codec_json_json;
 }
 
 path dogen_product::input_dogen_orchestration_json() {

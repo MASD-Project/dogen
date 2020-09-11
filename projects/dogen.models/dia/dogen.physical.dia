@@ -97,18 +97,18 @@
             <dia:string>#The pysical model defines the core entities that make up the
 physical dimension of MASD conceptual space.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.physical
-#DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.variability
-#DOGEN masd.injection.reference=dogen
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.physical
+#DOGEN masd.codec.input_technical_space=cpp
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=dogen.variability
+#DOGEN masd.codec.reference=dogen
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -11459,7 +11459,7 @@ space. If you are targetting more than one, it will automatically be set to true
             <dia:string>#Contains all of the transforms needed to produce
 models and meta-models for the physical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -11513,7 +11513,7 @@ models and meta-models for the physical model.
           <dia:attribute name="string">
             <dia:string>#Defines the MASD physical space.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -11567,7 +11567,7 @@ models and meta-models for the physical model.
           <dia:attribute name="string">
             <dia:string>#Helpers for the physical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -11621,7 +11621,7 @@ models and meta-models for the physical model.
           <dia:attribute name="string">
             <dia:string>#Features for the MASD physical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

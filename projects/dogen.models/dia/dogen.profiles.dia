@@ -103,11 +103,11 @@ should not produce any output.
 You should be able to reference this model from any technical
 space; keep it technical space agnostic.
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.profiles
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.input_technical_space=agnostic
-#DOGEN masd.injection.is_proxy_model=true
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.profiles
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.input_technical_space=agnostic
+#DOGEN masd.codec.is_proxy_model=true
 #DOGEN masd.cpp.enabled=false
 #DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
@@ -241,7 +241,7 @@ Their objective is to set the initial state from which
 other layers can then configure features.
 
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3344,7 +3344,7 @@ are meant to be applied on top of the base layer.
 These can be used to compose the final configuration
 for the element.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

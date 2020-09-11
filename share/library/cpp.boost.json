@@ -1,9 +1,9 @@
 {
   "documentation": "Boost Library types.",
   "tagged_values": {
-    "masd.injection.input_technical_space": "cpp",
-    "masd.injection.is_proxy_model": true,
-    "masd.injection.model_modules": "boost"
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.is_proxy_model": true,
+    "masd.codec.model_modules": "boost"
   },
   "elements": [
     {

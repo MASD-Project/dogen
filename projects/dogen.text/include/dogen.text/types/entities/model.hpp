@@ -41,11 +41,11 @@
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.identification/hash/entities/logical_name_hash.hpp"
+#include "dogen.identification/types/entities/codec_provenance.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_meta_name.hpp"
 #include "dogen.identification/hash/entities/technical_space_hash.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
-#include "dogen.identification/types/entities/injection_provenance.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
@@ -69,7 +69,7 @@ public:
     model(
         const dogen::identification::entities::logical_name& name,
         const dogen::identification::entities::logical_meta_name& meta_name,
-        const dogen::identification::entities::injection_provenance& provenance,
+        const dogen::identification::entities::codec_provenance& provenance,
         const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& references,
         const std::unordered_set<dogen::identification::entities::logical_name>& leaves,
         const std::list<dogen::text::entities::element_artefacts>& elements,
@@ -99,10 +99,10 @@ public:
      * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const dogen::identification::entities::injection_provenance& provenance() const;
-    dogen::identification::entities::injection_provenance& provenance();
-    void provenance(const dogen::identification::entities::injection_provenance& v);
-    void provenance(const dogen::identification::entities::injection_provenance&& v);
+    const dogen::identification::entities::codec_provenance& provenance() const;
+    dogen::identification::entities::codec_provenance& provenance();
+    void provenance(const dogen::identification::entities::codec_provenance& v);
+    void provenance(const dogen::identification::entities::codec_provenance&& v);
     /**@}*/
 
     /**
@@ -218,7 +218,7 @@ public:
 private:
     dogen::identification::entities::logical_name name_;
     dogen::identification::entities::logical_meta_name meta_name_;
-    dogen::identification::entities::injection_provenance provenance_;
+    dogen::identification::entities::codec_provenance provenance_;
     std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type> references_;
     std::unordered_set<dogen::identification::entities::logical_name> leaves_;
     std::list<dogen::text::entities::element_artefacts> elements_;

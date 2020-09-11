@@ -1,15 +1,15 @@
 {
   "documentation": "Collection of types related to naming, labelling and general\nidentification within Dogen.\n",
   "tagged_values": {
-    "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "dogen.identification",
-    "masd.injection.input_technical_space": "cpp",
-    "masd.injection.reference": "cpp.builtins",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "masd",
-    "masd.injection.reference": "dogen.profiles",
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.identification",
+    "masd.codec.input_technical_space": "cpp",
+    "masd.codec.reference": "cpp.builtins",
+    "masd.codec.reference": "cpp.std",
+    "masd.codec.reference": "cpp.boost",
+    "masd.codec.reference": "dogen.tracing",
+    "masd.codec.reference": "masd",
+    "masd.codec.reference": "dogen.profiles",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
@@ -17,7 +17,7 @@
       "name": "entities",
       "documentation": "Stores all of the entities related to identification\nof Dogen elements.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -37,8 +37,8 @@
       ]
     },
     {
-      "name": "entities::injection_provenance",
-      "documentation": "Source of a model element in the injection dimension.\n",
+      "name": "entities::codec_provenance",
+      "documentation": "Source of a model element in the codec dimension.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -54,16 +54,16 @@
         {
           "name": "model_sha1_hash",
           "type": "sha1_hash",
-          "documentation": "SHA1 key of the original injection model.\n"
+          "documentation": "SHA1 key of the original codec model.\n"
         },
         {
-          "name": "injection_id",
-          "type": "injection_id",
-          "documentation": "Identifier for the modeling element in the injection dimension.\n"
+          "name": "codec_id",
+          "type": "codec_id",
+          "documentation": "Identifier for the modeling element in the codec dimension.\n"
         },
         {
           "name": "location",
-          "type": "injection_location",
+          "type": "codec_location",
           "documentation": "Where the element was located in the original source.\n"
         }
       ]
@@ -110,8 +110,8 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::injection_id",
-      "documentation": "ID of the elment as sourced from the injection model, if any.\n",
+      "name": "entities::codec_id",
+      "documentation": "ID of the elment as sourced from the codec model, if any.\n",
       "stereotypes": [
         "masd::primitive"
       ],
@@ -145,8 +145,8 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::injection_location",
-      "documentation": "Location of a modeling element in the injection dimension.\n",
+      "name": "entities::codec_location",
+      "documentation": "Location of a modeling element in the codec dimension.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -167,9 +167,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "injection",
-          "type": "injection_provenance",
-          "documentation": "Provenance of the current element in the injection dimension.\n"
+          "name": "codec",
+          "type": "codec_provenance",
+          "documentation": "Provenance of the current element in the codec dimension.\n"
         },
         {
           "name": "logical_name",
@@ -488,7 +488,7 @@
       "name": "helpers",
       "documentation": "Assorted helpers used to construct domain entities.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },

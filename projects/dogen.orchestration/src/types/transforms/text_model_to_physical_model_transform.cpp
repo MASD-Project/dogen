@@ -78,7 +78,7 @@ apply(const text::transforms::context& ctx,
         prov.logical_name().simple(m.name().simple());
 
         prov.logical_name().id(id);
-        prov.injection(m.provenance());
+        prov.codec(m.provenance());
 
         logical_meta_id mid(m.meta_name().id());
         prov.logical_meta_name().id(mid);

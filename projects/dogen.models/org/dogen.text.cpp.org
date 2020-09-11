@@ -1,20 +1,20 @@
 #+title: dogen.text.cpp
 #+options: <:nil c:nil todo:nil ^:nil d:nil date:nil author:nil
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.model_modules: dogen.text.cpp
-:masd.injection.reference: cpp.builtins
-:masd.injection.reference: cpp.boost
-:masd.injection.reference: cpp.std
-:masd.injection.reference: dogen
-:masd.injection.reference: dogen.variability
-:masd.injection.reference: dogen.tracing
-:masd.injection.reference: dogen.logical
-:masd.injection.reference: dogen.text
-:masd.injection.reference: masd
-:masd.injection.reference: masd.variability
-:masd.injection.reference: dogen.profiles
-:masd.injection.input_technical_space: cpp
+:masd.codec.dia.comment: true
+:masd.codec.model_modules: dogen.text.cpp
+:masd.codec.reference: cpp.builtins
+:masd.codec.reference: cpp.boost
+:masd.codec.reference: cpp.std
+:masd.codec.reference: dogen
+:masd.codec.reference: dogen.variability
+:masd.codec.reference: dogen.tracing
+:masd.codec.reference: dogen.logical
+:masd.codec.reference: dogen.text
+:masd.codec.reference: masd
+:masd.codec.reference: masd.variability
+:masd.codec.reference: dogen.profiles
+:masd.codec.input_technical_space: cpp
 :masd.variability.profile: dogen.profiles.base.default_profile
 :END:
 
@@ -22,11 +22,11 @@ Provides the C++ backend for the default physical meta-model.
 
 * transforms
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :masd.physical.backend_name: cpp
 :masd.physical.major_technical_space: cpp
 :masd.label.test: lbl
-:masd.injection.stereotypes: masd::physical::backend
+:masd.codec.stereotypes: masd::physical::backend
 :END:
 
 Formatters for the C++ model.
@@ -37,9 +37,9 @@ grammar of the C++ technical space.
 
 ** transforms::types
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :masd.label.test: some_label
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the types facet of the
@@ -49,7 +49,7 @@ C++ technical space.
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.role: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for objects.
@@ -532,7 +532,7 @@ inline void swap(
 :masd.wale.kvp.meta_element: exception
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for exceptions.
@@ -650,7 +650,7 @@ private:
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -756,7 +756,7 @@ enum class <#= ye.name().simple() #> : <#= ast.get_qualified_name(ye.underlying_
 :masd.wale.kvp.archetype.simple_name: namespace_header
 :masd.wale.kvp.meta_element: module
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for namespaces.
@@ -838,7 +838,7 @@ namespace <#= m.name().simple() #> {
 :masd.wale.kvp.meta_element: visitor
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for visitors.
@@ -964,7 +964,7 @@ inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= ast.make_noexcep
 *** transforms::types::class_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
 :END:
 
 Generates implementation files for objects.
@@ -1499,17 +1499,17 @@ const <#= ast.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.nam
 #+end_src
 *** transforms::types::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::types::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::types::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -1556,13 +1556,13 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #+end_src
 *** transforms::types::smart_pointer_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::types::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -1811,7 +1811,7 @@ inline void swap(
 *** transforms::types::primitive_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
 :END:
 
 Generates implementation files for primitives.
@@ -1990,7 +1990,7 @@ void <#= sn #>::swap(<#= sn #>& other)<#= ast.make_noexcept_keyword_text() #> {
 :masd.wale.kvp.archetype.simple_name: feature_template_bundle_header
 :masd.wale.kvp.meta_element: variability_feature_template_bundle
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates implementation files for feature template bundles
@@ -2168,7 +2168,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: feature_template_bundle_implementation
 :masd.wale.kvp.meta_element: variability_feature_template_bundle
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for feature templates.
@@ -2385,7 +2385,7 @@ std::list<dogen::variability::entities::feature_template>
 :masd.wale.kvp.archetype.simple_name: variability_initializer_header
 :masd.wale.kvp.meta_element: variability_initializer
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for feature bundles.
@@ -2472,7 +2472,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: variability_initializer_implementation
 :masd.wale.kvp.meta_element: variability_initializer
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates header files for feature bundles.
@@ -2579,7 +2579,7 @@ register_entities(variability::helpers::registrar& rg) {
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates forward declarations for classes.
@@ -2651,7 +2651,7 @@ class <#= o.name().simple() #>;
 :masd.wale.kvp.meta_element: visitor
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates forward declarations for visitors.
@@ -2723,7 +2723,7 @@ class <#= o.name().simple() #>;
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.label.roles: forward declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates forward declarations for primitives.
@@ -2792,7 +2792,7 @@ class <#= p.name().simple() #>;
 :masd.wale.kvp.archetype.simple_name: main
 :masd.wale.kvp.meta_element: entry_point
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation file for entry point.
@@ -2866,7 +2866,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
 :masd.wale.kvp.archetype.simple_name: feature_bundle_header
 :masd.wale.kvp.meta_element: variability_feature_bundle
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for feature bundles.
@@ -3044,7 +3044,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: feature_bundle_implementation
 :masd.wale.kvp.meta_element: variability_feature_bundle
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for feature bundles.
@@ -3260,7 +3260,7 @@ std::list<dogen::variability::entities::feature>
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.physical.constant_relation: dogen.text.cpp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:cpp
 :masd.physical.constant_relation: dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for archetypes.
@@ -3395,7 +3395,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: archetype_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_archetype
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for archetypes.
@@ -3454,7 +3454,7 @@ void archetype_class_implementation_transform_transform::apply(const context& ct
 :masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.cpp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:cpp
 :masd.physical.constant_relation: dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for facet transforms.
@@ -3550,7 +3550,7 @@ public:
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for facet transforms.
@@ -3657,7 +3657,7 @@ const physical::entities::facet& <#= sn #>::facet() const {
 :masd.wale.kvp.archetype.simple_name: backend_class_header_transform
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for archetypes.
@@ -3748,7 +3748,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: backend_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for archetypes.
@@ -3876,7 +3876,7 @@ const physical::entities::backend& <#= sn #>::backend() const {
 :masd.wale.kvp.archetype.simple_name: part_class_header_transform
 :masd.wale.kvp.meta_element: physical_part
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for archetypes.
@@ -3945,7 +3945,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: part_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_part
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for archetypes.
@@ -4000,7 +4000,7 @@ void part_class_implementation_transform_transform::apply(const context& ctx, co
 :masd.wale.kvp.archetype.simple_name: archetype_kind_class_header_transform
 :masd.wale.kvp.meta_element: physical_archetype_kind
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for archetypes.
@@ -4069,7 +4069,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: archetype_kind_class_implementation_transform
 :masd.wale.kvp.meta_element: physical_archetype_kind
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for archetypes.
@@ -4128,7 +4128,7 @@ void archetype_kind_class_implementation_transform_transform::apply(const contex
 :masd.physical.relation_status: relatable
 :masd.label.role: type_declaration
 :masd.physical.constant_relation: dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates header files for archetype factories.
@@ -4212,7 +4212,7 @@ public:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header
 :masd.physical.variable_relation: self,archetype:masd.cpp.types.archetype_class_header_factory
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for archetype factories.
@@ -4355,7 +4355,7 @@ physical::entities::archetype <#= sn #>::make() {
 :masd.label.role: type_declaration
 :masd.physical.relation_status: relatable
 :masd.physical.constant_relation: dogen.physical.entities.facet,archetype:masd.cpp.types.class_header
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates header files for facet factories.
@@ -4439,7 +4439,7 @@ public:
 :masd.physical.constant_relation: dogen.utility.log.logger,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header
 :masd.physical.constant_relation: dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for facet factory.
@@ -4570,7 +4570,7 @@ physical::entities::facet <#= sn #>::make() {
 :masd.wale.kvp.class.inclusion_support_type: regular_support
 :masd.physical.relation_status: relatable
 :masd.label.role: type_declaration
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates header files for backend factories.
@@ -4650,7 +4650,7 @@ public:
 :masd.wale.kvp.archetype.simple_name: backend_class_implementation_factory
 :masd.wale.kvp.meta_element: physical_backend
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.types
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates implementation files for backend factories.
@@ -4774,12 +4774,12 @@ physical::entities::backend <#= sn #>::make() {
 ** transforms::model_to_text_transform
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:masd.injection.stereotypes: dogen::handcrafted::typeable::header_only
+:masd.codec.stereotypes: dogen::handcrafted::typeable::header_only
 :END:
 ** transforms::hash
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the hash facet of the
@@ -4788,7 +4788,7 @@ C++ technical space.
 *** transforms::hash::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for objects.
@@ -4879,7 +4879,7 @@ public:
 *** transforms::hash::class_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
 :END:
 
 Generates implementation files for objects.
@@ -5016,7 +5016,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 *** transforms::hash::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -5089,16 +5089,16 @@ public:
 #+end_src
 *** transforms::hash::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::hash::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::hash::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -5146,52 +5146,52 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #+end_src
 *** transforms::hash::smart_pointer_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::time_duration_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::ptree_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::associative_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::date_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::optional_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::path_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::pair_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::sequence_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::ptime_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::variant_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::hash::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -5278,7 +5278,7 @@ public:
 *** transforms::hash::primitive_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.hash
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
 :END:
 
 Generates implementation files for primitives.
@@ -5386,8 +5386,8 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
 #+end_src
 ** transforms::io
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the io facet of the
@@ -5396,7 +5396,7 @@ C++ technical space.
 *** transforms::io::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for objects.
@@ -5472,7 +5472,7 @@ operator<<(std::ostream& s,
 *** transforms::io::class_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
 :END:
 
 Generates implementation files for objects.
@@ -5578,7 +5578,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>&<#= (no_arg ? "" : " v
 *** transforms::io::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -5652,7 +5652,7 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v);
 *** transforms::io::enum_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_implementation_configuration
 :END:
 
 Generates implementation files for enumerations.
@@ -5751,16 +5751,16 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
 #+end_src
 *** transforms::io::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::io::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::io::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -5807,46 +5807,46 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #+end_src
 *** transforms::io::associative_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::smart_pointer_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::ptree_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::optional_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::pair_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::sequence_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::variant_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::string_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::io::inserter_implementation_helper
 :PROPERTIES:
 :masd.cpp.types.class_implementation.formatting_style: stitch
 :masd.cpp.types.class_implementation.overwrite: true
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::io::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -5924,7 +5924,7 @@ operator<<(std::ostream& s, const <#= qn #>& v);
 *** transforms::io::primitive_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.io
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
 :END:
 
 Generates implementation files for primitives.
@@ -6038,8 +6038,8 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 #+end_src
 ** transforms::serialization
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the boost serialisation
@@ -6048,7 +6048,7 @@ facet of the C++ technical space.
 *** transforms::serialization::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for objects.
@@ -6158,7 +6158,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 *** transforms::serialization::class_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
 :END:
 
 Generates implementation files for objects.
@@ -6340,16 +6340,16 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 #+end_src
 *** transforms::serialization::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::serialization::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::serialization::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -6416,7 +6416,7 @@ void serialize(Archive& ar, <#= ast.get_qualified_name(ye.name()) #>& v, unsigne
 *** transforms::serialization::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -6464,12 +6464,12 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #+end_src
 *** transforms::serialization::path_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::serialization::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -6552,7 +6552,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 *** transforms::serialization::primitive_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
 :END:
 
 Generates header files for primitives.
@@ -6688,7 +6688,7 @@ template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version
 :masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates forward declarations for classes.
@@ -6770,7 +6770,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 :masd.physical.relation_status: relatable
 :masd.wale.kvp.meta_element: primitive
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_configuration
 :END:
 
 Generates forward declarations for primitives.
@@ -6850,7 +6850,7 @@ void load(Archive& ar, <#= qn #>& v, unsigned int version);
 :masd.wale.kvp.archetype.simple_name: type_registrar_header
 :masd.wale.kvp.meta_element: serialization_type_registrar
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::header_facet_default_configuration
 :END:
 
 Generates header files for type registrars.
@@ -6927,7 +6927,7 @@ static void register_types(Archive& ar);
 :masd.wale.kvp.archetype.simple_name: type_registrar_implementation
 :masd.wale.kvp.meta_element: serialization_type_registrar
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.serialization
-:masd.injection.stereotypes: masd::physical::archetype, dogen::implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::implementation_configuration
 :END:
 
 Generates header files for feature bundles.
@@ -7059,8 +7059,8 @@ template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_nam
 #+end_src
 ** transforms::test_data
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the test_data facet
@@ -7069,7 +7069,7 @@ of the C++ technical space.
 *** transforms::test_data::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for objects.
@@ -7171,7 +7171,7 @@ public:
 *** transforms::test_data::class_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_implementation_configuration
 :END:
 
 Generates implementation files for objects.
@@ -7407,7 +7407,7 @@ populate(const unsigned int position, result_type& v) {
 *** transforms::test_data::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -7492,7 +7492,7 @@ private:
 *** transforms::test_data::enum_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_implementation_configuration
 :END:
 
 Generates implementation files for enumerations.
@@ -7578,16 +7578,16 @@ populate(const unsigned int position, result_type& v) {
 #+end_src
 *** transforms::test_data::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::test_data::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::test_data::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -7634,72 +7634,72 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 #+end_src
 *** transforms::test_data::associative_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::char_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::bool_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::date_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::domain_type_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::number_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::optional_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::pair_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::path_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::ptime_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::ptree_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::sequence_container_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::smart_pointer_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::string_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::time_duration_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::variant_helper
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::cpp::helper_transform
+:masd.codec.stereotypes: dogen::cpp::helper_transform
 :END:
 *** transforms::test_data::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -7791,7 +7791,7 @@ public:
 *** transforms::test_data::primitive_implementation
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.test_data
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_implementation_configuration
 :END:
 
 Generates implementation files for primitives.
@@ -7949,8 +7949,8 @@ populate(const unsigned int position, result_type& v) {
 #+end_src
 ** transforms::odb
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters for the odb facet of the
@@ -7959,7 +7959,7 @@ C++ technical space.
 *** transforms::odb::class_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
-:masd.injection.stereotypes: masd::physical::archetype, dogen::object_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::object_header_configuration
 :END:
 
 Generates header files for archetypes.
@@ -8076,16 +8076,16 @@ void class_header_transform::apply(const context& ctx, const logical::entities::
 #+end_src
 *** transforms::odb::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::odb::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::odb::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -8157,7 +8157,7 @@ void enum_header_transform::apply(const context& ctx, const logical::entities::e
 *** transforms::odb::builtin_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
-:masd.injection.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::builtin_header_configuration
 :END:
 
 Generates header files for builtins.
@@ -8205,7 +8205,7 @@ void builtin_header_transform::apply(const context& ctx, const logical::entities
 *** transforms::odb::primitive_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
-:masd.injection.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::primitive_header_configuration
 :END:
 
 Generates header files for primitives.
@@ -8322,7 +8322,7 @@ void primitive_header_transform::apply(const context& ctx, const logical::entiti
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates object options for odb.
@@ -8425,7 +8425,7 @@ void object_odb_options_transform::apply(const context& ctx, const logical::enti
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates object options for odb.
@@ -8528,7 +8528,7 @@ void primitive_odb_options_transform::apply(const context& ctx, const logical::e
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.odb
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates object options for odb.
@@ -8644,18 +8644,18 @@ void common_odb_options_transform::apply(const context& ctx, const logical::enti
 #+end_src
 ** transforms::registrar
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::registrar_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 There was an error in the registrar.
 
 ** transforms::formatting_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst formatting.
@@ -8664,95 +8664,95 @@ An error occurred whilst formatting.
 :PROPERTIES:
 :masd.cpp.io.enabled: true
 :masd.cpp.io.overwrite: false
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** stock_artefact_formatters_by_meta_name
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>>
+:masd.codec.type: std::unordered_map<std::string, std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>>
 :END:
 *** stock_artefact_formatters_by_archetype
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::shared_ptr<transforms::model_to_text_transform>>
+:masd.codec.type: std::unordered_map<std::string, std::shared_ptr<transforms::model_to_text_transform>>
 :END:
 *** stock_artefact_formatters
 :PROPERTIES:
-:masd.injection.type: std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>
+:masd.codec.type: std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>
 :END:
 *** helper_formatters
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.codec.type: std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
 :END:
 ** transforms::workflow
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** registrar_
 :PROPERTIES:
-:masd.injection.type: transforms::registrar
+:masd.codec.type: transforms::registrar
 :END:
 ** transforms::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::inclusion_constants
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::assistant
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** stream_
 :PROPERTIES:
-:masd.injection.type: std::ostringstream
+:masd.codec.type: std::ostringstream
 :END:
 ** transforms::context
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 
 Supplies additional information required for formatting.
 
 *** enabled_archetype_for_element
 :PROPERTIES:
-:masd.injection.type: std::unordered_set<identification::entities::logical_meta_physical_id>
+:masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
 :END:
 *** element_properties
 :PROPERTIES:
-:masd.injection.type: formattables::element_properties
+:masd.codec.type: formattables::element_properties
 :END:
 *** model
 :PROPERTIES:
-:masd.injection.type: formattables::model
+:masd.codec.type: formattables::model
 :END:
 *** helpers
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>
 :END:
 *** tracer
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<tracing::tracer>
+:masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
 ** transforms::helper_transform
 :PROPERTIES:
 :masd.cpp.types.class_forward_declarations.enabled: true
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::building_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst the factory was building.
 
 ** transforms::inclusion_support_types
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 *** not_supported
 This formatter does not export an inclusion directive.
@@ -8766,20 +8766,20 @@ and element.
 
 ** transforms::wale_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::stitch_transform
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::repository_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::tests
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters that generate tests for generated
@@ -8787,11 +8787,11 @@ code.
 
 *** transforms::tests::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::tests::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::tests::class_implementation
 :PROPERTIES:
@@ -8800,7 +8800,7 @@ code.
 :masd.wale.kvp.archetype.simple_name: class_implementation
 :masd.wale.kvp.meta_element: object
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
-:masd.injection.stereotypes: masd::physical::archetype, dogen::tests_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::tests_configuration
 :END:
 
 Generates tests for objects.
@@ -9368,7 +9368,7 @@ BOOST_AUTO_TEST_SUITE_END()
 :masd.wale.kvp.archetype.simple_name: enum_implementation
 :masd.wale.kvp.meta_element: enumeration
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
-:masd.injection.stereotypes: masd::physical::archetype, dogen::tests_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::tests_configuration
 :END:
 
 Generates tests for enumeration.
@@ -9699,7 +9699,7 @@ BOOST_AUTO_TEST_SUITE_END()
 :masd.wale.kvp.archetype.simple_name: main
 :masd.wale.kvp.meta_element: entry_point
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
-:masd.injection.stereotypes: masd::physical::archetype, dogen::tests_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::tests_configuration
 :END:
 
 Generates entry point for tests.
@@ -9806,7 +9806,7 @@ BOOST_GLOBAL_FIXTURE(exception_fixture);
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.tests
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates cmakelists for tests.
@@ -9937,12 +9937,12 @@ install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)
 :PROPERTIES:
 :masd.variability.generate_static_configuration: false
 :masd.variability.key_prefix: masd.cpp
-:masd.injection.stereotypes: masd::variability::feature_bundle
+:masd.codec.stereotypes: masd::variability::feature_bundle
 :END:
 *** headers_output_directory
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 
 Override location of public c++ headers.
@@ -9950,8 +9950,8 @@ Override location of public c++ headers.
 *** directory
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "cpp"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "cpp"
 :END:
 
 Directory in which to place code for the C++ backend.
@@ -9959,8 +9959,8 @@ Directory in which to place code for the C++ backend.
 *** inclusion_required
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, inclusion is required for this modeling element.
@@ -9968,8 +9968,8 @@ If true, inclusion is required for this modeling element.
 *** source_directory_name
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "src"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "src"
 :END:
 
 Directory in which to place C++ source files.
@@ -9977,8 +9977,8 @@ Directory in which to place C++ source files.
 *** include_directory_name
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "include"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "include"
 :END:
 
 Directory in which to place include headers.
@@ -9986,8 +9986,8 @@ Directory in which to place include headers.
 *** tests_directory_name
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "generated_tests"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "generated_tests"
 :END:
 
 Directory in which to place c++ tests.
@@ -9995,8 +9995,8 @@ Directory in which to place c++ tests.
 *** templates_directory_name
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "templates"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "templates"
 :END:
 
 Directory in which to place text templates.
@@ -10004,8 +10004,8 @@ Directory in which to place text templates.
 *** header_file_extension
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "hpp"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "hpp"
 :END:
 
 Extension to use for C++ header files.
@@ -10013,8 +10013,8 @@ Extension to use for C++ header files.
 *** implementation_file_extension
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "cpp"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "cpp"
 :END:
 
 Extension to use for C++ implementation files.
@@ -10022,8 +10022,8 @@ Extension to use for C++ implementation files.
 *** templates_file_extension
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "wale"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "wale"
 :END:
 
 Extension to use for text templates.
@@ -10031,8 +10031,8 @@ Extension to use for text templates.
 *** enable_unique_file_names
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "true"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "true"
 :END:
 
 If true, make all file names unique within a model.
@@ -10040,8 +10040,8 @@ If true, make all file names unique within a model.
 *** aspect.requires_manual_default_constructor
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, the modeling element requires a manual defaul constructor.
@@ -10049,8 +10049,8 @@ If true, the modeling element requires a manual defaul constructor.
 *** aspect.requires_manual_move_constructor
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, the modeling element requires a manual move constructor.
@@ -10058,8 +10058,8 @@ If true, the modeling element requires a manual move constructor.
 *** aspect.requires_stream_manipulators
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, the modeling element requires stream manipulators.
@@ -10067,8 +10067,8 @@ If true, the modeling element requires stream manipulators.
 *** disable_facet_directories
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, facet directories will not be used.
@@ -10076,8 +10076,8 @@ If true, facet directories will not be used.
 *** standard
 :PROPERTIES:
 :masd.variability.binding_point: global
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "c++-14"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "c++-14"
 :END:
 
 Which version of C++ to use.
@@ -10085,8 +10085,8 @@ Which version of C++ to use.
 *** helper.family
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::text
-:masd.injection.value: "Default"
+:masd.codec.type: masd::variability::text
+:masd.codec.value: "Default"
 :END:
 
 Which family of helpers to use for this modeling element.
@@ -10094,8 +10094,8 @@ Which family of helpers to use for this modeling element.
 *** streaming.string_conversion_method
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::text
-:masd.injection.value: ""
+:masd.codec.type: masd::variability::text
+:masd.codec.value: ""
 :END:
 
 Which conversion method to use to convert strings.
@@ -10103,8 +10103,8 @@ Which conversion method to use to convert strings.
 *** streaming.requires_quoting
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, streaming this type must be preceeded by quoting.
@@ -10112,8 +10112,8 @@ If true, streaming this type must be preceeded by quoting.
 *** streaming.remove_unprintable_characters
 :PROPERTIES:
 :masd.variability.binding_point: element
-:masd.injection.type: masd::variability::boolean
-:masd.injection.value: "false"
+:masd.codec.type: masd::variability::boolean
+:masd.codec.value: "false"
 :END:
 
 If true, streaming this type requires removing unprintable characters.
@@ -10122,20 +10122,20 @@ If true, streaming this type requires removing unprintable characters.
 :PROPERTIES:
 :masd.variability.default_binding_point: element
 :masd.variability.instantiation_domain_name: masd.cpp.archetype
-:masd.injection.stereotypes: masd::variability::feature_template_bundle
+:masd.codec.stereotypes: masd::variability::feature_template_bundle
 :END:
 *** primary_inclusion_directive
 :PROPERTIES:
-:masd.injection.type: masd::variability::text
+:masd.codec.type: masd::variability::text
 :END:
 *** secondary_inclusion_directive
 :PROPERTIES:
-:masd.injection.type: masd::variability::text_collection
+:masd.codec.type: masd::variability::text_collection
 :END:
 ** transforms::lexical_cast
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters related to conversions from and to
@@ -10143,16 +10143,16 @@ string.
 
 *** transforms::lexical_cast::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::lexical_cast::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::lexical_cast::enum_header
 :PROPERTIES:
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.lexical_cast
-:masd.injection.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
+:masd.codec.stereotypes: masd::physical::archetype, dogen::enumeration_header_configuration
 :END:
 
 Generates header files for enumerations.
@@ -10280,19 +10280,19 @@ inline <#= qn #> lexical_cast(const std::string & s) {
 #+end_src
 ** transforms::templates
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters related to templating.
 
 *** transforms::templates::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::templates::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::templates::logic_less_template
 :PROPERTIES:
@@ -10306,7 +10306,7 @@ Formatters related to templating.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.templates
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates logic-less templates.
@@ -10359,19 +10359,19 @@ void logic_less_template_transform::apply(const context& ctx, const logical::ent
 #+end_src
 ** transforms::visual_studio
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters related to Visual Studio support.
 
 *** transforms::visual_studio::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::visual_studio::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::visual_studio::project
 :PROPERTIES:
@@ -10385,7 +10385,7 @@ Formatters related to Visual Studio support.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates visual studio project.
@@ -10497,7 +10497,7 @@ void project_transform::apply(const context& ctx, const logical::entities::eleme
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates visual studio solutions.
@@ -10594,7 +10594,7 @@ EndGlobal
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.visual_studio
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates msbuild targets.
@@ -10711,8 +10711,8 @@ void msbuild_targets_transform::apply(const context& ctx, const logical::entitie
 #+end_src
 ** transforms::build
 :PROPERTIES:
-:masd.injection.dia.comment: true
-:masd.injection.stereotypes: masd::physical::facet
+:masd.codec.dia.comment: true
+:masd.codec.stereotypes: masd::physical::facet
 :END:
 
 Formatters related to build files.
@@ -10729,7 +10729,7 @@ Formatters related to build files.
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates cmakelists for tests.
@@ -10882,7 +10882,7 @@ endif()
 :masd.wale.kvp.containing_namespace: text.cpp.transforms.build
 :masd.physical.wale_template_reference: cpp_artefact_transform_implementation
 :masd.physical.relation_status: not_relatable
-:masd.injection.stereotypes: masd::physical::archetype
+:masd.codec.stereotypes: masd::physical::archetype
 :END:
 
 Generates cmakelists for tests.
@@ -10960,99 +10960,99 @@ install(
 #+end_src
 *** transforms::build::initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 *** transforms::build::traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::public_headers
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::part
+:masd.codec.stereotypes: masd::physical::part
 :END:
 
 Contains the header files that are publicly visible.
 
 *** external_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** model_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_path_components
+:masd.codec.value: as_path_components
 :END:
 *** facet_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_directories
+:masd.codec.value: as_directories
 :END:
 *** internal_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_directories
+:masd.codec.value: as_directories
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.value: true
+:masd.codec.value: true
 :END:
 ** transforms::standard_header_file
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::archetype_kind
+:masd.codec.stereotypes: masd::physical::archetype_kind
 :END:
 
 Header file generated by Dogen.
 
 *** file_extension
 :PROPERTIES:
-:masd.injection.value: hpp
+:masd.codec.value: hpp
 :END:
 ** transforms::implementation
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::part
+:masd.codec.stereotypes: masd::physical::part
 :END:
 
 Contains the implementation files.
 
 *** external_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** model_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_path_components
+:masd.codec.value: as_path_components
 :END:
 *** facet_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_directories
+:masd.codec.value: as_directories
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.value: false
+:masd.codec.value: false
 :END:
 ** transforms::testing
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::part
+:masd.codec.stereotypes: masd::physical::part
 :END:
 
 Contains the test files.
 
 *** external_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** model_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_path_components
+:masd.codec.value: as_path_components
 :END:
 *** facet_path_contribution
 :PROPERTIES:
-:masd.injection.value: as_directories
+:masd.codec.value: as_directories
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.value: false
+:masd.codec.value: false
 :END:
 ** transforms::base_archetype_configuration
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all archetypes.
@@ -11061,329 +11061,329 @@ Contains the configuration common to all archetypes.
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::tests_configuration
-:masd.injection.parent: transforms::base_archetype_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::base_archetype_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to most archetypes in tests.
 
 *** masd.physical.part_id
 :PROPERTIES:
-:masd.injection.value: masd.cpp.testing
+:masd.codec.value: masd.cpp.testing
 :END:
 *** masd.wale.kvp.locator_function
 :PROPERTIES:
-:masd.injection.value: make_full_path_for_tests_cpp_implementation
+:masd.codec.value: make_full_path_for_tests_cpp_implementation
 :END:
 *** masd.physical.wale_template_reference
 :PROPERTIES:
-:masd.injection.value: cpp_artefact_transform_implementation
+:masd.codec.value: cpp_artefact_transform_implementation
 :END:
 *** masd.physical.relation_status
 :PROPERTIES:
-:masd.injection.value: not_relatable
+:masd.codec.value: not_relatable
 :END:
 ** transforms::header_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::header_configuration
-:masd.injection.parent: transforms::base_archetype_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::base_archetype_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all c++ header archetypes.
 
 *** masd.physical.part_id
 :PROPERTIES:
-:masd.injection.value: masd.cpp.public_headers
+:masd.codec.value: masd.cpp.public_headers
 :END:
 *** masd.wale.kvp.locator_function
 :PROPERTIES:
-:masd.injection.value: make_full_path_for_cpp_header
+:masd.codec.value: make_full_path_for_cpp_header
 :END:
 *** masd.physical.wale_template_reference
 :PROPERTIES:
-:masd.injection.value: cpp_artefact_transform_implementation_header
+:masd.codec.value: cpp_artefact_transform_implementation_header
 :END:
 ** transforms::header_facet_default_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::header_facet_default_configuration
-:masd.injection.parent: transforms::header_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::header_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 *** masd.wale.kvp.class.inclusion_support_type
 :PROPERTIES:
-:masd.injection.value: canonical_support
+:masd.codec.value: canonical_support
 :END:
 *** masd.physical.relation_status
 :PROPERTIES:
-:masd.injection.value: facet_default
+:masd.codec.value: facet_default
 :END:
 ** transforms::object_header_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::object_header_configuration
-:masd.injection.parent: transforms::header_facet_default_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::header_facet_default_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all object header archetypes.
 
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.object
+:masd.codec.value: dogen.logical.entities.object
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: class_header_transform
+:masd.codec.value: class_header_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: class_header
+:masd.codec.value: class_header
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: object
+:masd.codec.value: object
 :END:
 ** transforms::enumeration_header_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::enumeration_header_configuration
-:masd.injection.parent: transforms::header_facet_default_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::header_facet_default_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all enumeration header archetypes.
 
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.enumeration
+:masd.codec.value: dogen.logical.entities.enumeration
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: enum_header_transform
+:masd.codec.value: enum_header_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: enum_header
+:masd.codec.value: enum_header
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: enumeration
+:masd.codec.value: enumeration
 :END:
 ** transforms::implementation_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::implementation_configuration
-:masd.injection.parent: transforms::base_archetype_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::base_archetype_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all c++ implementation archetypes.
 
 *** masd.physical.part_id
 :PROPERTIES:
-:masd.injection.value: masd.cpp.implementation
+:masd.codec.value: masd.cpp.implementation
 :END:
 *** masd.wale.kvp.locator_function
 :PROPERTIES:
-:masd.injection.value: make_full_path_for_cpp_implementation
+:masd.codec.value: make_full_path_for_cpp_implementation
 :END:
 *** masd.physical.wale_template_reference
 :PROPERTIES:
-:masd.injection.value: cpp_artefact_transform_implementation
+:masd.codec.value: cpp_artefact_transform_implementation
 :END:
 *** masd.physical.relation_status
 :PROPERTIES:
-:masd.injection.value: not_relatable
+:masd.codec.value: not_relatable
 :END:
 ** transforms::object_implementation_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::object_implementation_configuration
-:masd.injection.parent: transforms::implementation_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::implementation_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.object
+:masd.codec.value: dogen.logical.entities.object
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: class_implementation_transform
+:masd.codec.value: class_implementation_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: class_implementation
+:masd.codec.value: class_implementation
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: object
+:masd.codec.value: object
 :END:
 ** transforms::builtin_header_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::builtin_header_configuration
-:masd.injection.parent: transforms::header_facet_default_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::header_facet_default_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all built header archetypes.
 
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.builtin
+:masd.codec.value: dogen.logical.entities.builtin
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: builtin_header_transform
+:masd.codec.value: builtin_header_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: builtin_header
+:masd.codec.value: builtin_header
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: builtin
+:masd.codec.value: builtin
 :END:
 ** transforms::primitive_header_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::primitive_header_configuration
-:masd.injection.parent: transforms::header_facet_default_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::header_facet_default_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 
 Contains the configuration common to all built header archetypes.
 
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.primitive
+:masd.codec.value: dogen.logical.entities.primitive
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: primitive_header_transform
+:masd.codec.value: primitive_header_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: primitive_header
+:masd.codec.value: primitive_header
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: primitive
+:masd.codec.value: primitive
 :END:
 ** transforms::primitive_implementation_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::primitive_implementation_configuration
-:masd.injection.parent: transforms::implementation_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::implementation_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.primitive
+:masd.codec.value: dogen.logical.entities.primitive
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: primitive_implementation_transform
+:masd.codec.value: primitive_implementation_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: primitive_implementation
+:masd.codec.value: primitive_implementation
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: primitive
+:masd.codec.value: primitive
 :END:
 ** transforms::project
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::part
+:masd.codec.stereotypes: masd::physical::part
 :END:
 
 Top-level project part.
 
 *** external_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** model_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** facet_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.value: false
+:masd.codec.value: false
 :END:
 ** transforms::enumeration_implementation_configuration
 :PROPERTIES:
 :masd.variability.binding_point: entity
 :masd.variability.stereotype: dogen::enumeration_implementation_configuration
-:masd.injection.parent: transforms::implementation_configuration
-:masd.injection.stereotypes: masd::variability::profile
+:masd.codec.parent: transforms::implementation_configuration
+:masd.codec.stereotypes: masd::variability::profile
 :END:
 *** masd.physical.logical_meta_element_id
 :PROPERTIES:
-:masd.injection.value: dogen.logical.entities.enumeration
+:masd.codec.value: dogen.logical.entities.enumeration
 :END:
 *** masd.wale.kvp.class.simple_name
 :PROPERTIES:
-:masd.injection.value: enum_implementation_transform
+:masd.codec.value: enum_implementation_transform
 :END:
 *** masd.wale.kvp.archetype.simple_name
 :PROPERTIES:
-:masd.injection.value: enum_implementation
+:masd.codec.value: enum_implementation
 :END:
 *** masd.wale.kvp.meta_element
 :PROPERTIES:
-:masd.injection.value: enumeration
+:masd.codec.value: enumeration
 :END:
 ** transforms::templating
 :PROPERTIES:
-:masd.injection.stereotypes: masd::physical::part
+:masd.codec.stereotypes: masd::physical::part
 :END:
 *** external_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** model_modules_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** facet_path_contribution
 :PROPERTIES:
-:masd.injection.value: none
+:masd.codec.value: none
 :END:
 *** requires_relative_path
 :PROPERTIES:
-:masd.injection.value: false
+:masd.codec.value: false
 :END:
 ** transforms::transformation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred whilst applying a transform.
 
 * model_to_text_cpp_chain
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * workflow_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 * traits
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * formattables
 :PROPERTIES:
-:masd.injection.dia.comment: true
+:masd.codec.dia.comment: true
 :END:
 
 Formattables contains all types required by the formatters
@@ -11391,19 +11391,19 @@ and those used to generate them.
 
 ** formattables::workflow
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::locator
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::dependencies_builder
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::building_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while the factory was building.
@@ -11411,315 +11411,315 @@ An error occurred while the factory was building.
 ** formattables::artefact_properties
 *** file_path
 :PROPERTIES:
-:masd.injection.type: boost::filesystem::path
+:masd.codec.type: boost::filesystem::path
 :END:
 *** header_guard
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** inclusion_dependencies
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** formattables::dependencies_builder_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::helper_descriptor
 *** family
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** namespaces
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 *** name_identifiable
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** name_qualified
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** name_tree_qualified
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** name_tree_identifiable
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.injection.type: boost::optional<formattables::streaming_properties>
+:masd.codec.type: boost::optional<formattables::streaming_properties>
 :END:
 *** is_simple_type
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** requires_hashing_helper
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** is_circular_dependency
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** is_pointer
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** formattables::helper_properties
 *** current
 :PROPERTIES:
-:masd.injection.type: formattables::helper_descriptor
+:masd.codec.type: formattables::helper_descriptor
 :END:
 *** direct_descendants
 :PROPERTIES:
-:masd.injection.type: std::list<formattables::helper_descriptor>
+:masd.codec.type: std::list<formattables::helper_descriptor>
 :END:
 *** in_inheritance_relationship
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** formattables::element_properties
 All of the properties associated with an element.
 
 *** aspect_properties
 :PROPERTIES:
-:masd.injection.type: formattables::aspect_properties
+:masd.codec.type: formattables::aspect_properties
 :END:
 *** artefact_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, formattables::artefact_properties>
 :END:
 *** helper_properties
 :PROPERTIES:
-:masd.injection.type: std::list<formattables::helper_properties>
+:masd.codec.type: std::list<formattables::helper_properties>
 :END:
 *** canonical_archetype_to_archetype
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, std::string>
+:masd.codec.type: std::unordered_map<std::string, std::string>
 :END:
 *** attribute_level_test_data_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, test_data_properties>
+:masd.codec.type: std::unordered_map<std::string, test_data_properties>
 :END:
 ** formattables::aspect_properties
 *** requires_manual_default_constructor
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** requires_manual_move_constructor
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** requires_stream_manipulators
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** formattables::formattable
 *** element
 :PROPERTIES:
-:masd.injection.type: boost::shared_ptr<logical::entities::element>
+:masd.codec.type: boost::shared_ptr<logical::entities::element>
 :END:
 *** element_properties
 :PROPERTIES:
-:masd.injection.type: formattables::element_properties
+:masd.codec.type: formattables::element_properties
 :END:
 *** artefacts
 :PROPERTIES:
-:masd.injection.type: physical::entities::artefact_set
+:masd.codec.type: physical::entities::artefact_set
 :END:
 ** formattables::adapter
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::inclusion_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::reducer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::model_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::file_path_and_guard_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::aspect_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::helper_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::adaptation_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred during adaptation.
 
 ** formattables::expansion_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** formattables::odb_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::model
 *** name
 :PROPERTIES:
-:masd.injection.type: identification::entities::logical_name
+:masd.codec.type: identification::entities::logical_name
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
 :END:
 *** formattables
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::formattable>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::formattable>
 :END:
 *** facet_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::physical_meta_id, formattables::facet_properties>
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, formattables::facet_properties>
 :END:
 *** cpp_standard
 :PROPERTIES:
-:masd.injection.type: formattables::cpp_standards
+:masd.codec.type: formattables::cpp_standards
 :END:
 *** odb_databases
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 *** odb_sql_name_case
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** project_items
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 ** formattables::facet_properties
 *** directory
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** enabled
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** formattables::facet_directory_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::canonical_archetype_resolver
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::canonical_archetype_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::resolution_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 ** formattables::streaming_properties
 *** requires_quoting
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** string_conversion_method
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** remove_unprintable_characters
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 ** formattables::streaming_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::locator_configuration
 *** facet_configurations
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::locator_facet_configuration>
+:masd.codec.type: std::unordered_map<std::string, formattables::locator_facet_configuration>
 :END:
 *** archetype_configurations
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<std::string, formattables::locator_archetype_configuration>
+:masd.codec.type: std::unordered_map<std::string, formattables::locator_archetype_configuration>
 :END:
 *** include_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** source_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** disable_facet_directories
 :PROPERTIES:
-:masd.injection.type: bool
+:masd.codec.type: bool
 :END:
 *** header_file_extension
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** implementation_file_extension
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** backend_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** tests_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** templates_directory_name
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** templates_file_extension
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** formattables::locator_facet_configuration
 *** directory
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** postfix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** formattables::locator_archetype_configuration
 *** facet_directory
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** facet_postfix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 *** archetype_postfix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** formattables::location_error
 :PROPERTIES:
-:masd.injection.stereotypes: masd::exception
+:masd.codec.stereotypes: masd::exception
 :END:
 
 An error occurred while the locator was creating a path.
@@ -11727,45 +11727,45 @@ An error occurred while the locator was creating a path.
 ** formattables::helper_configuration
 *** helper_families
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, std::string>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, std::string>
 :END:
 *** streaming_properties
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, formattables::streaming_properties>
 :END:
 ** formattables::directive_group_repository
 *** by_id
 :PROPERTIES:
-:masd.injection.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<std::string, formattables::directive_group>>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, std::unordered_map<std::string, formattables::directive_group>>
 :END:
 ** formattables::directive_group_repository_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::directive_group
 Represents the group of inclusion directives associated with a name and an archetype.
 
 *** primary
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 
 The main inclusion directive needed for this element.
 
 *** secondary
 :PROPERTIES:
-:masd.injection.type: std::list<std::string>
+:masd.codec.type: std::list<std::string>
 :END:
 
 Any other directives that are also needed for this element.
 
 ** formattables::build_files_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::cpp_standards
 :PROPERTIES:
-:masd.injection.stereotypes: masd::enumeration
+:masd.codec.stereotypes: masd::enumeration
 :END:
 *** cpp_98
 *** cpp_11
@@ -11773,37 +11773,37 @@ Any other directives that are also needed for this element.
 *** cpp_17
 ** formattables::cpp_standard_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::header_guard_factory
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::test_data_properties
 *** maximum_size
 :PROPERTIES:
-:masd.injection.type: unsigned int
+:masd.codec.type: unsigned int
 :END:
 *** prefix
 :PROPERTIES:
-:masd.injection.type: std::string
+:masd.codec.type: std::string
 :END:
 ** formattables::test_data_properties_expander
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * initializer
 :PROPERTIES:
-:masd.injection.stereotypes: dogen::handcrafted::typeable
+:masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 * feature_initializer
 :PROPERTIES:
-:masd.injection.stereotypes: masd::variability::initializer
+:masd.codec.stereotypes: masd::variability::initializer
 :END:
 * cpp_artefact_transform_header
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -11836,7 +11836,7 @@ public:
 * cpp_artefact_transform_implementation
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -11882,7 +11882,7 @@ boost::filesystem::path {{class.simple_name}}::full_path(
 * cpp_artefact_transform_implementation_header
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -11922,7 +11922,7 @@ boost::filesystem::path {{class.simple_name}}::full_path(
 * cpp_helper_transform_header
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -11943,7 +11943,7 @@ public:
 * cpp_helper_transform_implementation
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -11991,7 +11991,7 @@ bool {{class.simple_name}}::is_enabled(const assistant& a,
 * cpp_helper_transform_implementation_enabled
 :PROPERTIES:
 :masd.cpp.templates.logic_less_template.overwrite: false
-:masd.injection.stereotypes: masd::templating::logic_less_templates
+:masd.codec.stereotypes: masd::templating::logic_less_templates
 :END:
 ** content
 #+begin_src mustache
@@ -12036,13 +12036,13 @@ bool {{class.simple_name}}::is_enabled(const assistant& /*a*/,
 #+end_src
 * registrar
 :PROPERTIES:
-:masd.injection.stereotypes: masd::serialization::type_registrar
+:masd.codec.stereotypes: masd::serialization::type_registrar
 :END:
 * main
 :PROPERTIES:
-:masd.injection.stereotypes: masd::entry_point, dogen::untypable
+:masd.codec.stereotypes: masd::entry_point, dogen::untypable
 :END:
 * CMakeLists
 :PROPERTIES:
-:masd.injection.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
+:masd.codec.stereotypes: masd::build::cmakelists, dogen::handcrafted::cmake
 :END:

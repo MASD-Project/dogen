@@ -32,7 +32,7 @@
 #include "dogen.variability/lexical_cast/entities/value_type_lc.hpp"
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.injection/types/transforms/model_production_chain.hpp"
+#include "dogen.codec/types/transforms/model_production_chain.hpp"
 #include "dogen.text/types/transforms/model_to_text_chain.hpp"
 #include "dogen.orchestration/types/transforms/context_bootstrapping_chain.hpp"
 #include "dogen.orchestration/types/spec_dumper.hpp"
@@ -112,12 +112,12 @@ std::string spec_dumper::process_value_type(
     return r;
 }
 
-spec_category spec_dumper::create_injection_category() const {
+spec_category spec_dumper::create_codec_category() const {
     spec_category r;
-    r.name("Injection");
+    r.name("Codec");
     r.description("Read external formats into Dogen.");
 
-    using injection::transforms::model_production_chain;
+    using codec::transforms::model_production_chain;
     auto& rg(model_production_chain::registrar());
     for (const auto& ext : rg.registered_decoding_extensions()) {
         const auto& d(rg.decoding_transform_for_extension(ext));
@@ -138,7 +138,7 @@ spec_category spec_dumper::create_conversion_category() const {
     r.name("Conversion");
     r.description("Output to an external format from a Dogen model.");
 
-    using injection::transforms::model_production_chain;
+    using codec::transforms::model_production_chain;
     auto& rg(model_production_chain::registrar());
     for (const auto& ext : rg.registered_encoding_extensions()) {
         const auto& d(rg.encoding_transform_for_extension(ext));
@@ -227,11 +227,11 @@ specs spec_dumper::dump(const configuration& cfg) const {
 
     {
         /*
-         * Generate the specs for injection, conversion and
+         * Generate the specs for codec, conversion and
          * generation.
          */
         specs r;
-        r.categories().push_back(create_injection_category());
+        r.categories().push_back(create_codec_category());
         r.categories().push_back(create_conversion_category());
         r.categories().push_back(create_generation_category());
 
@@ -249,7 +249,7 @@ specs spec_dumper::dump(const configuration& cfg) const {
         /*
          * Bind the tracer to the current scope.
          */
-        const auto& t(*ctx.injection_context().tracer());
+        const auto& t(*ctx.codec_context().tracer());
         tracing::scoped_tracer st(t);
 
         /*

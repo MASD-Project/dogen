@@ -31,8 +31,8 @@
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/entities/potential_binding.hpp"
-#include "dogen.injection/types/entities/attribute.hpp"
-#include "dogen.injection/types/entities/element.hpp"
+#include "dogen.codec/types/entities/attribute.hpp"
+#include "dogen.codec/types/entities/element.hpp"
 #include "dogen.identification/types/entities/logical_location.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/enumerator.hpp"
@@ -75,7 +75,7 @@
 namespace dogen::orchestration::helpers {
 
 /**
- * @brief Adapts types from the injection model into the logical model.
+ * @brief Adapts types from the codec model into the logical model.
  */
 class adapter final {
 private:
@@ -99,7 +99,7 @@ private:
      * @brief Ensure the attributes are empty.
      */
     void ensure_empty(const identification::entities::logical_id& element_id,
-        const std::list<injection::entities::attribute>& ias) const;
+        const std::list<codec::entities::attribute>& ias) const;
 
 private:
     /**
@@ -136,23 +136,23 @@ private:
     to_name(const std::string& n, const bool is_container) const;
 
     /**
-     * @brief Converts an injection attribute to a modeline field.
+     * @brief Converts an codec attribute to a modeline field.
      *
      * @pre name and value of the injector attribute must not be empty.
      * @pre value of the injector attribute must be empty.
      */
     logical::entities::decoration::modeline_field
     to_modeline_field(const identification::entities::logical_name& owner,
-        const injection::entities::attribute& ia) const;
+        const codec::entities::attribute& ia) const;
 
     /**
-     * @brief Converts an injection attribute to an logical attribute.
+     * @brief Converts an codec attribute to an logical attribute.
      *
      * @pre name of the injector attribute must not be empty.
      */
     logical::entities::attribute
     to_attribute(const identification::entities::logical_name& owner,
-        const injection::entities::attribute& ia) const;
+        const codec::entities::attribute& ia) const;
 
     /**
      * @brief Converts an injector attribute to an logical enumerator.
@@ -162,136 +162,136 @@ private:
      */
     logical::entities::structural::enumerator
     to_enumerator(const identification::entities::logical_name& owner,
-        const injection::entities::attribute& ia) const;
+        const codec::entities::attribute& ia) const;
 
 private:
     /**
      * @brief Populates the meta-model element attributes using the
-     * injection element.
+     * codec element.
      */
     void populate_element(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie,
+        const codec::entities::element& ie,
         const bool is_container, logical::entities::element& e) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::object to a logical object.
      */
     boost::shared_ptr<logical::entities::structural::object>
     to_object(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::object_template to a logical object template.
      */
     boost::shared_ptr<logical::entities::structural::object_template>
     to_object_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::exception to a logical exception.
      */
     boost::shared_ptr<logical::entities::structural::exception>
     to_exception(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::primitive to a logical primitive.
      */
     boost::shared_ptr<logical::entities::structural::primitive>
     to_primitive(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::enumeration to a logical enumeration.
      */
     boost::shared_ptr<logical::entities::structural::enumeration>
     to_enumeration(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::module to a logical module.
      */
     boost::shared_ptr<logical::entities::structural::module>
     to_module(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::builtin to a logical builtin.
      */
     boost::shared_ptr<logical::entities::structural::builtin>
     to_builtin(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::entry_point to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::entry_point>
     to_entry_point(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::assistant to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::assistant>
     to_assistant(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::modeline_group to a logical modeline group.
      */
     boost::shared_ptr<logical::entities::decoration::modeline_group>
     to_modeline_group(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::modeline to a logical modeline.
      */
     boost::shared_ptr<logical::entities::decoration::modeline>
     to_modeline(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::generation_marker to a logical generation marker.
      */
     boost::shared_ptr<logical::entities::decoration::generation_marker>
     to_generation_marker(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::licence to a logical licence.
      */
     boost::shared_ptr<logical::entities::decoration::licence>
     to_licence(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 private:
     /**
@@ -299,7 +299,7 @@ private:
      */
     void populate_abstract_profile(
         const identification::entities::logical_location& l,
-        const injection::entities::element& ie,
+        const codec::entities::element& ie,
         logical::entities::variability::abstract_profile& ap) const;
 
     /**
@@ -307,7 +307,7 @@ private:
      */
     void populate_abstract_profile_entry(
         const identification::entities::logical_name& n,
-        const injection::entities::attribute& attr,
+        const codec::entities::attribute& attr,
         logical::entities::variability::abstract_profile_entry& ape) const;
 
     /**
@@ -315,21 +315,21 @@ private:
      */
     void populate_abstract_feature(
         const identification::entities::logical_name& pn,
-        const injection::entities::attribute& ia,
+        const codec::entities::attribute& ia,
         logical::entities::variability::abstract_feature& af) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::to_variability::profile to a variability profile.
      */
     boost::shared_ptr<logical::entities::variability::profile>
     to_variability_profile(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::to_variability::profile_template to a variability profile
      * template.
      */
@@ -337,10 +337,10 @@ public:
     to_variability_profile_template(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::variability::feature_template_bundle to a variability
      * feature template bundle.
      */
@@ -348,10 +348,10 @@ public:
     to_variability_feature_template_bundle(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::variability::feature_bundle to a variability feature
      * group.
      */
@@ -359,10 +359,10 @@ public:
     to_variability_feature_bundle(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::variability::initializer to a logical
      * variability feature template group registrar.
      */
@@ -370,146 +370,146 @@ public:
     to_variability_initializer(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::mapping::fixed_mappable to a fixed mappable element.
      */
     boost::shared_ptr<logical::entities::mapping::fixed_mappable>
     to_fixed_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::mapping::extensible_mappable to a extensible mappable
      * element.
      */
     boost::shared_ptr<logical::entities::mapping::extensible_mappable>
     to_extensible_mappable(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::templating::logic_less_template to a logic-less template.
      */
     boost::shared_ptr<logical::entities::templating::logic_less_template>
     to_logic_less_template(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * masd::serialization::type_registrar to a logic-less template.
      */
     boost::shared_ptr<logical::entities::serialization::type_registrar>
     to_type_registrar(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::visual_studio::solution.
      */
     boost::shared_ptr<logical::entities::visual_studio::solution>
     to_visual_studio_solution(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::visual_studio::project.
      */
     boost::shared_ptr<logical::entities::visual_studio::project>
     to_visual_studio_project(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::visual_studio::project.
      */
     boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
     to_visual_studio_msbuild_targets(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::orm::common_odb_options.
      */
     boost::shared_ptr<logical::entities::orm::common_odb_options>
     to_orm_common_odb_options(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::build::cmakelists.
      */
     boost::shared_ptr<logical::entities::build::cmakelists>
     to_build_cmakelists(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
 public:
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::physical::backend.
      */
     boost::shared_ptr<logical::entities::physical::backend>
     to_physical_backend(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::physical::facet.
      */
     boost::shared_ptr<logical::entities::physical::facet>
     to_physical_facet(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::physical::archetype.
      */
     boost::shared_ptr<logical::entities::physical::archetype>
     to_physical_archetype(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::physical::archetype_kind.
      */
     boost::shared_ptr<logical::entities::physical::archetype_kind>
     to_physical_archetype_kind(
         const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 
     /**
-     * @brief Converts an injection element with a stereotype of
+     * @brief Converts an codec element with a stereotype of
      * @e masd::physical::part.
      */
     boost::shared_ptr<logical::entities::physical::part>
     to_physical_part(const identification::entities::logical_location& l,
         const logical::entities::stereotypes& sts,
-        const injection::entities::element& ie) const;
+        const codec::entities::element& ie) const;
 };
 
 }

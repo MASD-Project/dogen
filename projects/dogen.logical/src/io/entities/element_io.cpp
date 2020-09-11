@@ -29,8 +29,8 @@
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.logical/io/entities/generability_status_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
-#include "dogen.identification/io/entities/injection_provenance_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
 
 namespace dogen::logical::entities {

@@ -416,7 +416,7 @@ dimension of MASD's conceptual model.
 @section logical_0 Overview
 
 The logical model strives to provide a technical-space agnostic
-element representation, designed for code generation. Injection models
+element representation, designed for code generation. Codec models
 are obtained via frontends and transformed into "bare" logical models,
 at which point they can enter its pipeline. Within it, they are
 processed until they form a cohesive whole. They are then in a suitable
@@ -440,20 +440,20 @@ together into a bigger model - called the @e merged model.
 rules (such as verifying that all types have a definitions,
 etc.).
 
-#DOGEN masd.injection.dia.comment=true
-#DOGEN masd.injection.model_modules=dogen.logical
-#DOGEN masd.injection.reference=cpp.builtins
-#DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=cpp.boost
-#DOGEN masd.injection.reference=dogen
-#DOGEN masd.injection.reference=dogen.variability
-#DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=masd
-#DOGEN masd.injection.reference=masd.variability
-#DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.injection.reference=dogen.physical
-#DOGEN masd.injection.reference=dogen.identification
-#DOGEN masd.injection.input_technical_space=cpp
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.codec.model_modules=dogen.logical
+#DOGEN masd.codec.reference=cpp.builtins
+#DOGEN masd.codec.reference=cpp.std
+#DOGEN masd.codec.reference=cpp.boost
+#DOGEN masd.codec.reference=dogen
+#DOGEN masd.codec.reference=dogen.variability
+#DOGEN masd.codec.reference=dogen.tracing
+#DOGEN masd.codec.reference=masd
+#DOGEN masd.codec.reference=masd.variability
+#DOGEN masd.codec.reference=dogen.profiles
+#DOGEN masd.codec.reference=dogen.physical
+#DOGEN masd.codec.reference=dogen.identification
+#DOGEN masd.codec.input_technical_space=cpp
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -1368,7 +1368,7 @@ formatting.#</dia:string>
             <dia:string>#provenance#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#identification::entities::injection_provenance#</dia:string>
+            <dia:string>#identification::entities::codec_provenance#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7396,7 +7396,7 @@ lot of repetitive code. The context gathers together all of these.
           <dia:attribute name="string">
             <dia:string>#Houses all of the transformations supported by logical.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -12329,7 +12329,7 @@ lot of repetitive code. The context gathers together all of these.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#injections#</dia:string>
+            <dia:string>#codecs#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;identification::entities::logical_id, identification::entities::logical_name&gt;#</dia:string>
@@ -17446,7 +17446,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
             <dia:string>#Houses all of the meta-modeling elements and
 properties related to decorations.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -19291,7 +19291,7 @@ future we hope to simplify this by making the shapes align - though
 perhaps it will have the underisable side-effect of hiding all of this
 complexity.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -20806,7 +20806,7 @@ Feature templates are expanded into features within the variability model.#</dia
             <dia:string>#Houses all of the properties related to ORM
 support in Dogen.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -24213,7 +24213,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
             <dia:string>#Houses all of the meta-modeling elements related
 to structural modeling.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -25262,7 +25262,7 @@ to structural modeling.
           <dia:attribute name="string">
             <dia:string>#Defines all features used by the logical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -26017,7 +26017,7 @@ technical space targeted.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.is_proxy_model#</dia:string>
+            <dia:string>#masd.codec.is_proxy_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -27589,7 +27589,7 @@ extend the mappings as required.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Meta-model elements related to mapping domains.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -29216,7 +29216,7 @@ At present the system only supports wale templates.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Meta-model elements related to templating .
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -30630,7 +30630,7 @@ generates the registration code as needed.#</dia:string>
             <dia:string>#Houses all of the meta-modeling elements related
 to serialisation.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -32009,7 +32009,7 @@ to serialisation.
             <dia:string>#Houses meta-model elements related to
 build systems.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -36580,7 +36580,7 @@ Maps to a well known MSBuild target.#</dia:string>
 to building, which don't have their own containing
 namespace.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -42910,7 +42910,7 @@ just to avoid problems.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Logical representation of elements in the physical dimension.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -46710,7 +46710,7 @@ FIXME: optional for now.
           <dia:attribute name="string">
             <dia:string>#Contains formatting classes for the logical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -49085,7 +49085,7 @@ FIXME: optional for now.
           <dia:attribute name="comment">
             <dia:string>#URN pointing to an archetype or a label, as it was originally created by the user.
 
- It must have the form "archetype:" if pointing to an archetype, or  "label:" if 
+ It must have the form "archetype:" if pointing to an archetype, or  "label:" if
 pointing to a label, and then is followed by "KEY:VALUE". The label must resolve
 to a unique archetype.#</dia:string>
           </dia:attribute>
@@ -51308,7 +51308,7 @@ model.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Entities that define the logical model.
 
-#DOGEN masd.injection.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

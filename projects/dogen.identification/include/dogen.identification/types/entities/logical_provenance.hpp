@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/codec_provenance.hpp"
 #include "dogen.identification/types/entities/logical_meta_name.hpp"
-#include "dogen.identification/types/entities/injection_provenance.hpp"
 
 namespace dogen::identification::entities {
 
@@ -44,19 +44,19 @@ public:
 
 public:
     logical_provenance(
-        const dogen::identification::entities::injection_provenance& injection,
+        const dogen::identification::entities::codec_provenance& codec,
         const dogen::identification::entities::logical_name& logical_name,
         const dogen::identification::entities::logical_meta_name& logical_meta_name);
 
 public:
     /**
-     * @brief Provenance of the current element in the injection dimension.
+     * @brief Provenance of the current element in the codec dimension.
      */
     /**@{*/
-    const dogen::identification::entities::injection_provenance& injection() const;
-    dogen::identification::entities::injection_provenance& injection();
-    void injection(const dogen::identification::entities::injection_provenance& v);
-    void injection(const dogen::identification::entities::injection_provenance&& v);
+    const dogen::identification::entities::codec_provenance& codec() const;
+    dogen::identification::entities::codec_provenance& codec();
+    void codec(const dogen::identification::entities::codec_provenance& v);
+    void codec(const dogen::identification::entities::codec_provenance&& v);
     /**@}*/
 
     /**
@@ -90,7 +90,7 @@ public:
     logical_provenance& operator=(logical_provenance other);
 
 private:
-    dogen::identification::entities::injection_provenance injection_;
+    dogen::identification::entities::codec_provenance codec_;
     dogen::identification::entities::logical_name logical_name_;
     dogen::identification::entities::logical_meta_name logical_meta_name_;
 };

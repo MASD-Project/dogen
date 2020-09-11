@@ -28,11 +28,11 @@ namespace dogen::orchestration::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_injection_external_modules() {
+make_masd_codec_external_modules() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("external_modules");
-    r.name().qualified("masd.injection.external_modules");
+    r.name().qualified("masd.codec.external_modules");
     r.description(R"(External modules containing this model.
 
 External modules contribute to the namespace of the model but not the model
@@ -46,11 +46,11 @@ name.
 }
 
 dogen::variability::entities::feature
-make_masd_injection_model_modules() {
+make_masd_codec_model_modules() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("model_modules");
-    r.name().qualified("masd.injection.model_modules");
+    r.name().qualified("masd.codec.model_modules");
     r.description(R"(Model modules containing this model.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.
@@ -69,8 +69,8 @@ model_location::make_feature_group(const dogen::variability::entities::feature_m
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.external_modules = s.get_by_name("masd.injection.external_modules");
-    r.model_modules = s.get_by_name("masd.injection.model_modules");
+    r.external_modules = s.get_by_name("masd.codec.external_modules");
+    r.model_modules = s.get_by_name("masd.codec.model_modules");
 
     return r;
 }
@@ -91,8 +91,8 @@ std::list<dogen::variability::entities::feature>
 model_location::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_injection_external_modules());
-    r.push_back(make_masd_injection_model_modules());
+    r.push_back(make_masd_codec_external_modules());
+    r.push_back(make_masd_codec_model_modules());
     return r;
 }
 

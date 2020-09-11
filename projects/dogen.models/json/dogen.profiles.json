@@ -1,11 +1,11 @@
 {
   "documentation": "Top-level model in Dogen that contains all of the shared\ntypes at the meta-model level.\n\nThis model is not intended to be generated. If generated,\nshould not produce any output.\n\nYou should be able to reference this model from any technical\nspace; keep it technical space agnostic.\n",
   "tagged_values": {
-    "masd.injection.dia.comment": "true",
-    "masd.injection.model_modules": "dogen.profiles",
-    "masd.injection.reference": "masd",
-    "masd.injection.input_technical_space": "agnostic",
-    "masd.injection.is_proxy_model": "true",
+    "masd.codec.dia.comment": "true",
+    "masd.codec.model_modules": "dogen.profiles",
+    "masd.codec.reference": "masd",
+    "masd.codec.input_technical_space": "agnostic",
+    "masd.codec.is_proxy_model": "true",
     "masd.cpp.enabled": "false",
     "masd.csharp.enabled": "false"
   },
@@ -14,7 +14,7 @@
       "name": "base",
       "documentation": "The base layer profiles are designed to be applied first.\nTheir objective is to set the initial state from which\nother layers can then configure features.\n\n\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
@@ -232,7 +232,7 @@
       "name": "composable",
       "documentation": "The composable layer is made up of profiles that\nare meant to be applied on top of the base layer.\nThese can be used to compose the final configuration\nfor the element.\n",
       "tagged_values": {
-        "masd.injection.dia.comment": "true"
+        "masd.codec.dia.comment": "true"
       },
       "fallback_element_type": "masd::module"
     },
