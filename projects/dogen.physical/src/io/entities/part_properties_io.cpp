@@ -19,9 +19,8 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/backend_properties_io.hpp"
+#include "dogen.physical/io/entities/part_properties_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -34,18 +33,10 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const part_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::backend_properties\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::part_properties\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"technical_space_version\": " << "\"" << tidy_up_string(v.technical_space_version()) << "\"" << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
       << " }";
     return(s);

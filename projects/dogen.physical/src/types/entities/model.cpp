@@ -51,7 +51,8 @@ model::model(
     const std::string& technical_space,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
-    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts)
+    const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
+    const dogen::physical::entities::meta_model_properties& meta_model_properties)
     : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
@@ -60,7 +61,8 @@ model::model(
       technical_space_(technical_space),
       managed_directories_(managed_directories),
       outputting_properties_(outputting_properties),
-      orphan_artefacts_(orphan_artefacts) { }
+      orphan_artefacts_(orphan_artefacts),
+      meta_model_properties_(meta_model_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -73,6 +75,7 @@ void model::swap(model& other) noexcept {
     swap(managed_directories_, other.managed_directories_);
     swap(outputting_properties_, other.outputting_properties_);
     swap(orphan_artefacts_, other.orphan_artefacts_);
+    swap(meta_model_properties_, other.meta_model_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -84,7 +87,8 @@ bool model::operator==(const model& rhs) const {
         technical_space_ == rhs.technical_space_ &&
         managed_directories_ == rhs.managed_directories_ &&
         outputting_properties_ == rhs.outputting_properties_ &&
-        orphan_artefacts_ == rhs.orphan_artefacts_;
+        orphan_artefacts_ == rhs.orphan_artefacts_ &&
+        meta_model_properties_ == rhs.meta_model_properties_;
 }
 
 model& model::operator=(model other) {
@@ -235,6 +239,22 @@ void model::orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::
 
 void model::orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
     orphan_artefacts_ = std::move(v);
+}
+
+const dogen::physical::entities::meta_model_properties& model::meta_model_properties() const {
+    return meta_model_properties_;
+}
+
+dogen::physical::entities::meta_model_properties& model::meta_model_properties() {
+    return meta_model_properties_;
+}
+
+void model::meta_model_properties(const dogen::physical::entities::meta_model_properties& v) {
+    meta_model_properties_ = v;
+}
+
+void model::meta_model_properties(const dogen::physical::entities::meta_model_properties&& v) {
+    meta_model_properties_ = std::move(v);
 }
 
 }

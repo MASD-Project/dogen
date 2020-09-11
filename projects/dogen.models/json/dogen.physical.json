@@ -286,6 +286,11 @@
           "name": "orphan_artefacts",
           "type": "std::list<boost::shared_ptr<physical::entities::artefact>>",
           "documentation": "Artefacts that exist in the physical dimension only.\n"
+        },
+        {
+          "name": "meta_model_properties",
+          "type": "meta_model_properties",
+          "documentation": "Meta-model configuration supplied by this model.\n"
         }
       ]
     },
@@ -1394,6 +1399,11 @@
           "name": "has_generatable_artefacts",
           "type": "bool",
           "documentation": "If true the repository has at least one generable artefact, false otherwise.\n"
+        },
+        {
+          "name": "meta_model_properties",
+          "type": "meta_model_properties",
+          "documentation": "Meta-model configuration supplied by this model.\n"
         }
       ]
     },
@@ -1454,18 +1464,6 @@
       ]
     },
     {
-      "name": "entities::backend_properties",
-      "documentation": "Properties related to the backend.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this backend is enabled.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::denormalised_archetype_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1487,37 +1485,6 @@
         },
         {
           "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
-        }
-      ]
-    },
-    {
-      "name": "entities::facet_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, this facet is enabled.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "entities::archetype_properties",
-      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If false, will disable all instances of this archetype.\n"
-        },
-        {
-          "name": "overwrite",
           "type": "boost::optional<bool>"
         }
       ]
@@ -1577,6 +1544,140 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::backend_properties",
+      "documentation": "Properties related to the backend.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, the backend is enabled.\n"
+        },
+        {
+          "name": "technical_space_version",
+          "type": "std::string",
+          "documentation": "Technical space version to use.\n"
+        },
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "Name of the directory to use for the backend.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype_kind_properties",
+      "stereotypes": [
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file_extension",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::facet_properties",
+      "documentation": "Properties related to the facet.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, the facet is enabled.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool",
+          "documentation": "If true, all archetypes in this facet will be set to overwrite.\n"
+        },
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "Name of the directory to use for the facet.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to apply to all artefacts in this facet.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype_properties",
+      "documentation": "Properties related to the archetype.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, the archetype is enabled.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "boost::optional<bool>",
+          "documentation": "If true, all artefacts for this archetype will be set to overwrite.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::meta_model_properties",
+      "documentation": "Meta-model configuration supplied by this model.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, backend_properties>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, facet_properties>"
+        },
+        {
+          "name": "archetype_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype_properties>"
+        },
+        {
+          "name": "archetype_kind_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>"
+        },
+        {
+          "name": "part_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, part_properties>"
+        },
+        {
+          "name": "denormalised_archetype_enablement_properties",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>"
+        }
+      ]
+    },
+    {
+      "name": "entities::part_properties",
+      "documentation": "Properties related to the part.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string",
+          "documentation": "Name of the directory to use for the part.\n"
+        }
+      ]
     }
   ]
 }

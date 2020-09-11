@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_FACET_PROPERTIES_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_FACET_PROPERTIES_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ARCHETYPE_KIND_PROPERTIES_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_ARCHETYPE_KIND_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,25 +31,17 @@
 
 namespace dogen::physical::entities {
 
-/**
- * @brief Properties related to the facet.
- */
-class facet_properties final {
+class archetype_kind_properties final {
 public:
-    facet_properties(const facet_properties&) = default;
-    facet_properties(facet_properties&&) = default;
-    ~facet_properties() = default;
+    archetype_kind_properties() = default;
+    archetype_kind_properties(const archetype_kind_properties&) = default;
+    archetype_kind_properties(archetype_kind_properties&&) = default;
+    ~archetype_kind_properties() = default;
 
 public:
-    facet_properties();
-
-public:
-    facet_properties(
+    archetype_kind_properties(
         const dogen::identification::entities::physical_meta_name& meta_name,
-        const bool enabled,
-        const bool overwrite,
-        const std::string& directory,
-        const std::string& postfix);
+        const std::string& file_extension);
 
 public:
     /**
@@ -62,58 +54,24 @@ public:
     void meta_name(const dogen::identification::entities::physical_meta_name&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the facet is enabled.
-     */
-    /**@{*/
-    bool enabled() const;
-    void enabled(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, all archetypes in this facet will be set to overwrite.
-     */
-    /**@{*/
-    bool overwrite() const;
-    void overwrite(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Name of the directory to use for the facet.
-     */
-    /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Postfix to apply to all artefacts in this facet.
-     */
-    /**@{*/
-    const std::string& postfix() const;
-    std::string& postfix();
-    void postfix(const std::string& v);
-    void postfix(const std::string&& v);
-    /**@}*/
+    const std::string& file_extension() const;
+    std::string& file_extension();
+    void file_extension(const std::string& v);
+    void file_extension(const std::string&& v);
 
 public:
-    bool operator==(const facet_properties& rhs) const;
-    bool operator!=(const facet_properties& rhs) const {
+    bool operator==(const archetype_kind_properties& rhs) const;
+    bool operator!=(const archetype_kind_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(facet_properties& other) noexcept;
-    facet_properties& operator=(facet_properties other);
+    void swap(archetype_kind_properties& other) noexcept;
+    archetype_kind_properties& operator=(archetype_kind_properties other);
 
 private:
     dogen::identification::entities::physical_meta_name meta_name_;
-    bool enabled_;
-    bool overwrite_;
-    std::string directory_;
-    std::string postfix_;
+    std::string file_extension_;
 };
 
 }
@@ -122,8 +80,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::facet_properties& lhs,
-    dogen::physical::entities::facet_properties& rhs) {
+    dogen::physical::entities::archetype_kind_properties& lhs,
+    dogen::physical::entities::archetype_kind_properties& rhs) {
     lhs.swap(rhs);
 }
 

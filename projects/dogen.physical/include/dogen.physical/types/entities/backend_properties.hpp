@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -42,15 +44,49 @@ public:
     backend_properties();
 
 public:
-    explicit backend_properties(const bool enabled);
+    backend_properties(
+        const dogen::identification::entities::physical_meta_name& meta_name,
+        const bool enabled,
+        const std::string& technical_space_version,
+        const std::string& directory);
 
 public:
     /**
-     * @brief If true, this backend is enabled.
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, the backend is enabled.
      */
     /**@{*/
     bool enabled() const;
     void enabled(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Technical space version to use.
+     */
+    /**@{*/
+    const std::string& technical_space_version() const;
+    std::string& technical_space_version();
+    void technical_space_version(const std::string& v);
+    void technical_space_version(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the directory to use for the backend.
+     */
+    /**@{*/
+    const std::string& directory() const;
+    std::string& directory();
+    void directory(const std::string& v);
+    void directory(const std::string&& v);
     /**@}*/
 
 public:
@@ -64,7 +100,10 @@ public:
     backend_properties& operator=(backend_properties other);
 
 private:
+    dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
+    std::string technical_space_version_;
+    std::string directory_;
 };
 
 }

@@ -35,6 +35,7 @@
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
+#include "dogen.physical/types/entities/meta_model_properties.hpp"
 #include "dogen.physical/types/entities/global_enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
@@ -59,7 +60,8 @@ public:
         const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const std::list<boost::filesystem::path>& managed_directories,
-        const bool has_generatable_artefacts);
+        const bool has_generatable_artefacts,
+        const dogen::physical::entities::meta_model_properties& meta_model_properties);
 
 public:
     /**
@@ -120,6 +122,16 @@ public:
     void has_generatable_artefacts(const bool v);
     /**@}*/
 
+    /**
+     * @brief Meta-model configuration supplied by this model.
+     */
+    /**@{*/
+    const dogen::physical::entities::meta_model_properties& meta_model_properties() const;
+    dogen::physical::entities::meta_model_properties& meta_model_properties();
+    void meta_model_properties(const dogen::physical::entities::meta_model_properties& v);
+    void meta_model_properties(const dogen::physical::entities::meta_model_properties&& v);
+    /**@}*/
+
 public:
     bool operator==(const artefact_repository& rhs) const;
     bool operator!=(const artefact_repository& rhs) const {
@@ -139,6 +151,7 @@ private:
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;
     bool has_generatable_artefacts_;
+    dogen::physical::entities::meta_model_properties meta_model_properties_;
 };
 
 }

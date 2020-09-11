@@ -37,6 +37,7 @@
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.physical/types/entities/meta_model_properties.hpp"
 #include "dogen.physical/types/entities/outputting_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
@@ -63,7 +64,8 @@ public:
         const std::string& technical_space,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
-        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts);
+        const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
+        const dogen::physical::entities::meta_model_properties& meta_model_properties);
 
 public:
     /**
@@ -146,6 +148,16 @@ public:
     void orphan_artefacts(const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >&& v);
     /**@}*/
 
+    /**
+     * @brief Meta-model configuration supplied by this model.
+     */
+    /**@{*/
+    const dogen::physical::entities::meta_model_properties& meta_model_properties() const;
+    dogen::physical::entities::meta_model_properties& meta_model_properties();
+    void meta_model_properties(const dogen::physical::entities::meta_model_properties& v);
+    void meta_model_properties(const dogen::physical::entities::meta_model_properties&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -166,6 +178,7 @@ private:
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
+    dogen::physical::entities::meta_model_properties meta_model_properties_;
 };
 
 }

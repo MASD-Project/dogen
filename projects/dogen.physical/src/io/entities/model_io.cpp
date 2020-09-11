@@ -26,6 +26,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.identification/io/entities/physical_name_io.hpp"
+#include "dogen.physical/io/entities/meta_model_properties_io.hpp"
 #include "dogen.physical/io/entities/outputting_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
@@ -129,7 +130,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "
-      << "\"orphan_artefacts\": " << v.orphan_artefacts()
+      << "\"orphan_artefacts\": " << v.orphan_artefacts() << ", "
+      << "\"meta_model_properties\": " << v.meta_model_properties()
       << " }";
     return(s);
 }

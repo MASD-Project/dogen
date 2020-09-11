@@ -27,11 +27,12 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
 /**
- * @brief Archetype level properties, applicable to all instances of this archetype.
+ * @brief Properties related to the archetype.
  */
 class archetype_properties final {
 public:
@@ -46,22 +47,38 @@ public:
 
 public:
     archetype_properties(
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
         const boost::optional<bool>& overwrite);
 
 public:
     /**
-     * @brief If false, will disable all instances of this archetype.
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, the archetype is enabled.
      */
     /**@{*/
     bool enabled() const;
     void enabled(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, all artefacts for this archetype will be set to overwrite.
+     */
+    /**@{*/
     const boost::optional<bool>& overwrite() const;
     boost::optional<bool>& overwrite();
     void overwrite(const boost::optional<bool>& v);
     void overwrite(const boost::optional<bool>&& v);
+    /**@}*/
 
 public:
     bool operator==(const archetype_properties& rhs) const;
@@ -74,6 +91,7 @@ public:
     archetype_properties& operator=(archetype_properties other);
 
 private:
+    dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
     boost::optional<bool> overwrite_;
 };

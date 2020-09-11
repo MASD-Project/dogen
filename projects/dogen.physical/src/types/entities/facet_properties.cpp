@@ -27,26 +27,54 @@ facet_properties::facet_properties()
       overwrite_(static_cast<bool>(0)) { }
 
 facet_properties::facet_properties(
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
-    const bool overwrite)
-    : enabled_(enabled),
-      overwrite_(overwrite) { }
+    const bool overwrite,
+    const std::string& directory,
+    const std::string& postfix)
+    : meta_name_(meta_name),
+      enabled_(enabled),
+      overwrite_(overwrite),
+      directory_(directory),
+      postfix_(postfix) { }
 
 void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
+    swap(meta_name_, other.meta_name_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
+    swap(directory_, other.directory_);
+    swap(postfix_, other.postfix_);
 }
 
 bool facet_properties::operator==(const facet_properties& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_;
+    return meta_name_ == rhs.meta_name_ &&
+        enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
+        directory_ == rhs.directory_ &&
+        postfix_ == rhs.postfix_;
 }
 
 facet_properties& facet_properties::operator=(facet_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::identification::entities::physical_meta_name& facet_properties::meta_name() const {
+    return meta_name_;
+}
+
+dogen::identification::entities::physical_meta_name& facet_properties::meta_name() {
+    return meta_name_;
+}
+
+void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
+    meta_name_ = v;
+}
+
+void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 bool facet_properties::enabled() const {
@@ -63,6 +91,38 @@ bool facet_properties::overwrite() const {
 
 void facet_properties::overwrite(const bool v) {
     overwrite_ = v;
+}
+
+const std::string& facet_properties::directory() const {
+    return directory_;
+}
+
+std::string& facet_properties::directory() {
+    return directory_;
+}
+
+void facet_properties::directory(const std::string& v) {
+    directory_ = v;
+}
+
+void facet_properties::directory(const std::string&& v) {
+    directory_ = std::move(v);
+}
+
+const std::string& facet_properties::postfix() const {
+    return postfix_;
+}
+
+std::string& facet_properties::postfix() {
+    return postfix_;
+}
+
+void facet_properties::postfix(const std::string& v) {
+    postfix_ = v;
+}
+
+void facet_properties::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 }

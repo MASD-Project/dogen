@@ -33,7 +33,8 @@ artefact_repository::artefact_repository(
     const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const std::list<boost::filesystem::path>& managed_directories,
-    const bool has_generatable_artefacts)
+    const bool has_generatable_artefacts,
+    const dogen::physical::entities::meta_model_properties& meta_model_properties)
     : artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
       identifier_(identifier),
       root_module_logical_id_(root_module_logical_id),
@@ -41,7 +42,8 @@ artefact_repository::artefact_repository(
       global_enablement_properties_(global_enablement_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       managed_directories_(managed_directories),
-      has_generatable_artefacts_(has_generatable_artefacts) { }
+      has_generatable_artefacts_(has_generatable_artefacts),
+      meta_model_properties_(meta_model_properties) { }
 
 void artefact_repository::swap(artefact_repository& other) noexcept {
     using std::swap;
@@ -53,6 +55,7 @@ void artefact_repository::swap(artefact_repository& other) noexcept {
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(managed_directories_, other.managed_directories_);
     swap(has_generatable_artefacts_, other.has_generatable_artefacts_);
+    swap(meta_model_properties_, other.meta_model_properties_);
 }
 
 bool artefact_repository::operator==(const artefact_repository& rhs) const {
@@ -63,7 +66,8 @@ bool artefact_repository::operator==(const artefact_repository& rhs) const {
         global_enablement_properties_ == rhs.global_enablement_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         managed_directories_ == rhs.managed_directories_ &&
-        has_generatable_artefacts_ == rhs.has_generatable_artefacts_;
+        has_generatable_artefacts_ == rhs.has_generatable_artefacts_ &&
+        meta_model_properties_ == rhs.meta_model_properties_;
 }
 
 artefact_repository& artefact_repository::operator=(artefact_repository other) {
@@ -190,6 +194,22 @@ bool artefact_repository::has_generatable_artefacts() const {
 
 void artefact_repository::has_generatable_artefacts(const bool v) {
     has_generatable_artefacts_ = v;
+}
+
+const dogen::physical::entities::meta_model_properties& artefact_repository::meta_model_properties() const {
+    return meta_model_properties_;
+}
+
+dogen::physical::entities::meta_model_properties& artefact_repository::meta_model_properties() {
+    return meta_model_properties_;
+}
+
+void artefact_repository::meta_model_properties(const dogen::physical::entities::meta_model_properties& v) {
+    meta_model_properties_ = v;
+}
+
+void artefact_repository::meta_model_properties(const dogen::physical::entities::meta_model_properties&& v) {
+    meta_model_properties_ = std::move(v);
 }
 
 }
