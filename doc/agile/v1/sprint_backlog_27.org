@@ -14,20 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-11 Fri 10:21]
+#+CAPTION: Clock summary at [2020-09-11 Fri 11:53]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *57:03* |       |       | 100.0 |
+| *Total time*                                       | *58:30* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 57:03   |       |       | 100.0 |
-| Active                                             |         | 57:03 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  12.7 |
+| Stories                                            | 58:30   |       |       | 100.0 |
+| Active                                             |         | 58:30 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  12.4 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   1.2 |
-| Sprint and product backlog grooming                |         |       |  1:55 |   3.4 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   7.7 |
-| Create an =ident= model                            |         |       | 42:02 |  73.7 |
+| Sprint and product backlog grooming                |         |       |  2:04 |   3.5 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   7.5 |
+| Create an =ident= model                            |         |       | 42:02 |  71.9 |
 | Rename injection to codec                          |         |       |  0:48 |   1.4 |
+| Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
+| Implement meta-name validator correctly            |         |       |  0:17 |   0.5 |
+| Add dependencies to artefacts                      |         |       |  0:54 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -665,6 +668,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 10:48]--[2020-09-11 Fri 10:57] =>  0:09
     CLOCK: [2020-09-11 Fri 09:00]--[2020-09-11 Fri 09:32] =>  0:32
     CLOCK: [2020-07-17 Fri 16:47]--[2020-07-17 Fri 17:53] =>  1:06
     CLOCK: [2020-07-13 Mon 23:51]--[2020-07-14 Tue 00:08] =>  0:17
@@ -956,148 +960,105 @@ good name for this, we should use =codec= which is well understood
 from other domains. After all we are decoding and encoding into
 external formats.
 
-*** Add artefact's archetype to artefact class                        :story:
+*** COMPLETED Add artefact's archetype to artefact class              :story:
+    CLOSED: [2020-09-11 Fri 10:30]
+    :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 10:22]--[2020-09-11 Fri 10:29] =>  0:07
+    :END:
+
+*Rationale*: was already implemented.
 
 For now a simple string would do. In the future we may need a pointer
 and join the PMM to the PM. We'll see how the use cases develop.
 
 Actually we already have the physical meta-name. Just need to check if
-its being populated.
+its being populated. Confirmed.
 
-*** Check meta-name validator                                         :story:
+*** STARTED Implement meta-name validator correctly                   :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 10:30]--[2020-09-11 Fri 10:47] =>  0:17
+    :END:
 
-The logic looks very strange.
+The logic in the meta- name validator is completely wrong. We are
+checking for facet defaults without taking into account the logical
+model element component. Thus, there are fundamental problems with the
+meta-model validator that are not easy to fix. We need a facet default
+for every logical meta-model element. That is, we need to loop through
+all logical meta-model elements and ensure they have a facet default;
+but this should only be done for meta-model elements which support a
+facet default. This cannot be done until:
 
-: void meta_model_validator::validate(physical::entities::meta_model& mm) {
-
-*** Create a logical meta-model                                       :story:
-
-At present we did a quick hack and created the notion of meta-names in
-the logical model. In fact, what we really need is the idea of a
-"meta-element". We don't need this to be done completely cleanly; the
-meta-element is merely just an object really. We just need to have a
-way to add:
-
-- virtual meta-element property to the base type.
-- static meta-element in each leaf.
-- generated code which constructs a static meta-element for each
-  descendant.
-- meta-data to supply meta-element properties. We just need maybe two:
-  stereotype and description.
-- transform that generates the logical meta-model. It should be
-  indexed by stereotype.
-
-Notes:
-
-- the LMM can be part of the boostrapping phase as is the PMM.
-- the stereotype, which is defined in =ident= replaces the meta-name.
-- the meta-name factory, transforms etc are deprecated.
+- we know which elements require a facet default;
+- we have created a logical meta-model.
 
 Merged stories:
 
-*Replace meta-model IDs with stereotypes*
+*Set expectation for facet default*
 
-We probably already have a story for this, check backlog.
+At present we are only warning when a facet does not have a facet
+default. This is because some facets do not have facet defaults (such
+as build, visual studio, etc). However, we know this upfront so on the
+facet factory we should set up the expectation. Then we can throw.
 
-*** Rename =org_mode= model                                           :story:
+*** STARTED Add dependencies to artefacts                             :story:
+     :LOGBOOK:
+     CLOCK: [2020-09-11 Fri 11:20]--[2020-09-11 Fri 11:53] =>  0:33
+     CLOCK: [2020-09-11 Fri 10:58]--[2020-09-11 Fri 11:19] =>  0:21
+     :END:
 
-Seems like a better name for this model. Or perhaps =orgmode=? Just
-don't like =org_mode=.
+ We need to propagate the dependencies between logical model elements
+ into the physical model. We still need to distinguish between "types"
+ of dependencies:
 
-*** Move decoration to =text= model                                   :story:
+ - transparent_associations
+ - opaque_associations
+ - associative_container_keys
+ - parents
 
-Last sprint we thought that decorations belonged to the logical
-model. We were partially right; the part of decorations that refers
-only to the modeling of entities is correctly placed in the logical
-model. However, the transformation of those elements into text needs
-to be placed in the text model. And the output of those
-transformations should rightly belong to the archetype set (preamble,
-postamble) if not to the artefact themselves. However, for this to
-work we need a way to associate technical spaces with artefacts. Then
-we can simply ask for all technical spaces in a plane. Or
-alternatively we could try to generate the decoration using only the
-meta-data. Basically this needs to be done when creating either the
-text model or the artefact repository.
+ Basically, anything which we refer to when we are building the
+ dependencies for inclusion needs to be represented. We could create a
+ data structure for this purpose such as "dependencies". We should also
+ include "namespace" dependencies. These can be obtained by =sort |
+ uniq= of all of the namespaces for which there are dependencies. These
+ are then used for C#.
 
-*** Update archetype generator to handle decoration                   :story:
+ Note however that all dependencies are recorded as logical-physical
+ IDs.
 
-Once relations have been moved into the generator type, we need to
-create a special handling for archetypes.
+ We also need a way to populate the dependencies as a transform. This
+ must be done in =m2t= because we need the formatters. We can rely on
+ the same approach as =inclusion_dependencies= but instead of creating
+ /inclusion dependencies/, we are just creating /dependencies/.
 
-Notes:
+ This will also address the uses of traits, e.g.:
 
-- instead of obtaining all of its relations from the archetype, we
-  need to also query the logical model element. these will supply
-  additional constant relations which need to be transformed into
-  physical counterparts and resolved.
-- relations in archetype can be ignored entirely for the purposes of
-  artefact projection.
-- the archetype transform can then be implemented as a "regular"
-  transform, handling decoration, boilerplate, namespaces, includes,
-  etc. We need to remove the includes from the stitch template.
-- once all of this is done, remove support for includes and
-  configuration from stitch.
+ : const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
 
-*** Create a logical to physical projector                            :story:
+ This is because the traits are used to express dependencies.
 
-The projection logic is now getting really complex. We really need a
-class to take over this work. It should also group model elements by
-type so that we can obtain the archetypes just once instead of
-processing one model element at a time.
+ Notes:
 
-*** Add dependencies to artefacts                                     :story:
-
-We need to propagate the dependencies between logical model elements
-into the physical model. We still need to distinguish between "types"
-of dependencies:
-
-- transparent_associations
-- opaque_associations
-- associative_container_keys
-- parents
-
-Basically, anything which we refer to when we are building the
-dependencies for inclusion needs to be represented. We could create a
-data structure for this purpose such as "dependencies". We should also
-include "namespace" dependencies. These can be obtained by =sort |
-uniq= of all of the namespaces for which there are dependencies. These
-are then used for C#.
-
-Note however that all dependencies are recorded as logical-physical
-IDs.
-
-We also need a way to populate the dependencies as a transform. This
-must be done in =m2t= because we need the formatters. We can rely on
-the same approach as =inclusion_dependencies= but instead of creating
-/inclusion dependencies/, we are just creating /dependencies/.
-
-This will also address the uses of traits, e.g.:
-
-: const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
+ - we did the work to record the relations at the archetype level and
+   started updating the archetypes with these in =text.cpp=. However,
+   we only did a couple of types.
+ - in order to instantiate meta-relations onto the LPS, we need to be
+   able to resolve a relation type such as "transparent" into a
+   concrete archetype. This means the archetype must have a label of
+   that relation type.
+ - artefacts must have relations stored as LPS points with both the
+   logical name and physical meta-name. At this point we no longer care
+   about relation type since it has been resolved.
+ - a part is really a "meta-part". We still need to instantiate it with
+   the actual project path. The physical model needs to contain this
+   instantiation.
+ - artefacts need to know their parts.
+ - archetypes do not have part populated and their type is incorrect
+   (=physical_id=).
 
 *** Replace =facet_default= with labels                               :story:
 
 We need to stop using the enumeration to determine the canonical
 header and use instead the new labelling mechanism.
-
-*** Add file extensions to decoration                                 :story:
-
-Create something really simple:
-
-- extension groups
-- extensions
-
-Model this after modelines and modeline groups. We just need to define
-an extension group that has all the extensions we have currently in
-use. Extensions belong to a TS. Extensions can have a label. If there
-is more than one extension for a given TS they must have a
-label. Example:
-
-=extension_type:odb_headers=
-
-We then need to label archetypes with these. This is only needed for
-cases where there is more than one extension for a given TS (c++
-headers and implementation).
 
 *** Add full path processing to PM                                    :story:
 
@@ -1450,10 +1411,99 @@ meta-data. The only way would be to convert the top-level
 We need to figure out how to implement this. For now we are manually
 adding flags.
 
+*** Update archetype generator to handle decoration                   :story:
+
+Once relations have been moved into the generator type, we need to
+create a special handling for archetypes.
+
+Notes:
+
+- instead of obtaining all of its relations from the archetype, we
+  need to also query the logical model element. these will supply
+  additional constant relations which need to be transformed into
+  physical counterparts and resolved.
+- relations in archetype can be ignored entirely for the purposes of
+  artefact projection.
+- the archetype transform can then be implemented as a "regular"
+  transform, handling decoration, boilerplate, namespaces, includes,
+  etc. We need to remove the includes from the stitch template.
+- once all of this is done, remove support for includes and
+  configuration from stitch.
+
+*** Create a logical meta-model                                       :story:
+
+At present we did a quick hack and created the notion of meta-names in
+the logical model. In fact, what we really need is the idea of a
+"meta-element". We don't need this to be done completely cleanly; the
+meta-element is merely just an object really. We just need to have a
+way to add:
+
+- virtual meta-element property to the base type.
+- static meta-element in each leaf.
+- generated code which constructs a static meta-element for each
+  descendant.
+- meta-data to supply meta-element properties. We just need maybe two:
+  stereotype and description.
+- transform that generates the logical meta-model. It should be
+  indexed by stereotype.
+
+Notes:
+
+- the LMM can be part of the boostrapping phase as is the PMM.
+- the stereotype, which is defined in =ident= replaces the meta-name.
+- the meta-name factory, transforms etc are deprecated.
+
+Merged stories:
+
+*Replace meta-model IDs with stereotypes*
+
+We probably already have a story for this, check backlog.
+
+*** Add file extensions to decoration                                 :story:
+
+Create something really simple:
+
+- extension groups
+- extensions
+
+Model this after modelines and modeline groups. We just need to define
+an extension group that has all the extensions we have currently in
+use. Extensions belong to a TS. Extensions can have a label. If there
+is more than one extension for a given TS they must have a
+label. Example:
+
+=extension_type:odb_headers=
+
+We then need to label archetypes with these. This is only needed for
+cases where there is more than one extension for a given TS (c++
+headers and implementation).
+
+*** Move decoration to =text= model                                   :story:
+
+Last sprint we thought that decorations belonged to the logical
+model. We were partially right; the part of decorations that refers
+only to the modeling of entities is correctly placed in the logical
+model. However, the transformation of those elements into text needs
+to be placed in the text model. And the output of those
+transformations should rightly belong to the archetype set (preamble,
+postamble) if not to the artefact themselves. However, for this to
+work we need a way to associate technical spaces with artefacts. Then
+we can simply ask for all technical spaces in a plane. Or
+alternatively we could try to generate the decoration using only the
+meta-data. Basically this needs to be done when creating either the
+text model or the artefact repository.
+
 *** Consider creating a label for generated files                     :story:
 
 We could label all files which are not generated as "manual". Not
 clear how exactly that would be useful.
+
+*** Create a logical to physical projector                            :story:
+
+The projection logic is now getting really complex. We really need a
+class to take over this work. It should also group model elements by
+type so that we can obtain the archetypes just once instead of
+processing one model element at a time.
 
 *** Replace initialisers with facet-based initialisation              :story:
 
@@ -1466,6 +1516,11 @@ meta-model element and add a formatter for it and code will be
 automatically generated without any manual intervention. Similarly,
 deleting formatters will delete all traces of it from the code
 generator.
+
+*** Rename =org_mode= model                                           :story:
+
+Seems like a better name is needed for this model. Perhaps =orgmode=?
+Or just =org=? Just don't like =org_mode=.
 
 *** Rename "model-to-X" to TLAs                                       :story:
 
