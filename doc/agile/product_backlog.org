@@ -66,7 +66,7 @@ To be done on the Monday morning of the new sprint.
 
 * V2 Release
 
-Release Goals:
+Release goals:
 
 - finish the dogen API and implement all functionality in terms of
   metamodel elements - e.g. no special cases such as profiles,
@@ -15106,6 +15106,35 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider creating wrappers for containers                         :story:
+
+A common pattern we see in Dogen are indices and repositories. These
+tend to contain standard library containers with domain types. For
+example, in =mapping_set= we have =by_agnostic_id= which has:
+
+: std::unordered_map<
+:     identification::entities::technical_space,
+:     std::unordered_map<
+:         identification::entities::logical_id,
+:         identification::entities::logical_name>
+: >
+
+What would be really nice is if we could avoid exposing all of the
+internals of the STL containers and provide only the operations that
+are needed for the domain types in question. This is very experimental
+at present, but the idea is that maybe there is a small subset of
+operations we actually do in these types; if that's the case then we
+could create a meta-type for them, e.g.:
+
+- =repository=
+- =index=
+
+And then enable the operations via meta-data. In many ways this is a
+bit like a primitive: the meta-type would have a =key= and a =value=,
+and then define the set of operations. However, we need to do more
+thinking. We should start by looking at how these containers are being
+used and see if we can abstract the operations from there.
 
 *** Consider adding support for Matplot++                             :story:
 

@@ -5,6 +5,7 @@
 
 * Sprint Goals
 
+- implement the identification model.
 - finish PMM generation.
 - implement locator and dependencies via PMM.
 
@@ -13,19 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-06 Sun 13:37]
+#+CAPTION: Clock summary at [2020-09-11 Fri 10:21]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *55:43* |       |       | 100.0 |
+| *Total time*                                       | *57:03* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 55:43   |       |       | 100.0 |
-| Active                                             |         | 55:43 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  13.0 |
+| Stories                                            | 57:03   |       |       | 100.0 |
+| Active                                             |         | 57:03 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  12.7 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   1.2 |
-| Sprint and product backlog grooming                |         |       |  1:23 |   2.5 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   7.8 |
-| Create an =ident= model                            |         |       | 42:02 |  75.4 |
+| Sprint and product backlog grooming                |         |       |  1:55 |   3.4 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   7.7 |
+| Create an =ident= model                            |         |       | 42:02 |  73.7 |
+| Rename injection to codec                          |         |       |  0:48 |   1.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -663,6 +665,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 09:00]--[2020-09-11 Fri 09:32] =>  0:32
     CLOCK: [2020-07-17 Fri 16:47]--[2020-07-17 Fri 17:53] =>  1:06
     CLOCK: [2020-07-13 Mon 23:51]--[2020-07-14 Tue 00:08] =>  0:17
     :END:
@@ -887,30 +890,63 @@ Notes:
 - for some reason we are still generating artefacts for the global
   module. Check the is generatable transform in logical model.
 
-*** Replace meta-model IDs with stereotypes                           :story:
+*** COMPLETED Add a tagged value class                                :story:
+    CLOSED: [2020-09-11 Fri 09:14]
 
-We probably already have a story for this, check backlog.
+*Rationale: done as part of the identification work*
 
-*** Check meta-name validator                                         :story:
+In the injection model we have a simple c++ pair for tagged values. We
+should create a class for it, using UML terminology: =tagged_value=,
+where name is =tag= and value is =value=.
 
-The logic looks very strange.
+Links:
 
-: void meta_model_validator::validate(physical::entities::meta_model& mm) {
+- [[https://github.com/ISO-TC211/UML-Best-Practices/wiki/Tagged-values][UML-Best-Practices: Tagged values]]
 
-*** Add primitives to feature selector                                :story:
+*** COMPLETED Replace uses of traits in archetype initialisation      :story:
+    CLOSED: [2020-09-11 Fri 09:30]
 
-It would be nice to be able to associate a primitive to the selector,
-so that instead of:
+*Rationale*: this was implemented already.
 
-:             ftg.enabled = s.get_by_name(fct.value(), enabled_feature);
+At present we are relying on the traits class to initialise the
+archetype in the wale template:
 
-We could simply do:
+: physical::entities::archetype {{class.simple_name}}::static_archetype() const {
+:    static physical::entities::archetype r([]() {
+:        physical::entities::archetype r;
+:        using pmnf = physical::helpers::meta_name_factory;
+:        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
+:            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
+:        using lmnf = {{meta_name_factory}};
+:        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
+:        return r;
+:    }());
+:    return r;
+: }
 
-:             ftg.enabled = s.get_by_name(fct, enabled_feature);
+However, given that we now know this template is used only for
+archetypes and we want to enforce a structural consistency, we should
+start to initialise all of these variables as literal strings supplied
+as wale parameters. These should be deduced from the logical model
+element. It is fine to hard-code this because we are designing it
+explicitly for archetypes, not as a general purpose mechanism.
 
-This would also mean that you couldn't use a string by mistake.
+This can only be done when we are generating the PMM via facets and
+backends.
 
-*** Rename injection to codec                                         :story:
+Merged stories:
+
+*Replace traits with calls to the PMM elements*
+
+Where we are using these traits classes, we should really be including
+the formatter and calling for its static name - at least within each
+backend.
+
+*** COMPLETED Rename injection to codec                               :story:
+    CLOSED: [2020-09-11 Fri 10:21]
+    :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 09:33]--[2020-09-11 Fri 10:21] =>  0:48
+    :END:
 
 We need to search the backlog for this. We originally thought
 injection would reflect the fact that this model is designed for input
@@ -920,15 +956,19 @@ good name for this, we should use =codec= which is well understood
 from other domains. After all we are decoding and encoding into
 external formats.
 
-*** Mine the build2 layout terminology                                :story:
+*** Add artefact's archetype to artefact class                        :story:
 
-It seems build2 is modeling a lot of concepts that are similar to ours
-in project layout. We should use their terminology where possible.
+For now a simple string would do. In the future we may need a pointer
+and join the PMM to the PM. We'll see how the use cases develop.
 
-Links:
+Actually we already have the physical meta-name. Just need to check if
+its being populated.
 
-- [[https://build2.org/bdep/doc/bdep-new.xhtml#src-layout][bdep-new source layout]]
-- [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]]
+*** Check meta-name validator                                         :story:
+
+The logic looks very strange.
+
+: void meta_model_validator::validate(physical::entities::meta_model& mm) {
 
 *** Create a logical meta-model                                       :story:
 
@@ -953,15 +993,11 @@ Notes:
 - the stereotype, which is defined in =ident= replaces the meta-name.
 - the meta-name factory, transforms etc are deprecated.
 
-*** Add a tagged value class                                          :story:
+Merged stories:
 
-In the injection model we have a simple c++ pair for tagged values. We
-should create a class for it, using UML terminology: =tagged_value=,
-where name is =tag= and value is =value=.
+*Replace meta-model IDs with stereotypes*
 
-Links:
-
-- [[https://github.com/ISO-TC211/UML-Best-Practices/wiki/Tagged-values][UML-Best-Practices: Tagged values]]
+We probably already have a story for this, check backlog.
 
 *** Rename =org_mode= model                                           :story:
 
@@ -1002,6 +1038,13 @@ Notes:
 - once all of this is done, remove support for includes and
   configuration from stitch.
 
+*** Create a logical to physical projector                            :story:
+
+The projection logic is now getting really complex. We really need a
+class to take over this work. It should also group model elements by
+type so that we can obtain the archetypes just once instead of
+processing one model element at a time.
+
 *** Add dependencies to artefacts                                     :story:
 
 We need to propagate the dependencies between logical model elements
@@ -1028,48 +1071,14 @@ must be done in =m2t= because we need the formatters. We can rely on
 the same approach as =inclusion_dependencies= but instead of creating
 /inclusion dependencies/, we are just creating /dependencies/.
 
-*** Injector types with regards to containment                        :story:
+This will also address the uses of traits, e.g.:
 
-It seems we have two models for injectors:
-
-- those where element containment is represented through nesting,
-  e.g. XML, JSON, org-mode. These can of course be flat too, but its
-  natural to represent elements as containers.
-- those where element containment is represented through "links",
-  e.g. Dia. When we represent containment through links, we need to
-  create a graph of the elements and then transform them into a
-  qualified path.
-
-At present we left it to the dia injector to resolve the link
-containment. It makes more sense to model the containment type in the
-injection model and then to have a transform that does the graphing
-for link models. We also need a transform that does the name nesting
-for nested models. Both do nothing for the converse case. This will
-simplify injector code.
-
-Notes:
-
-- linked models must supply the original model ID as well as container
-  ID. Nested models may or may not supply this information.
-- we should transform nested models into flat models as part of the
-  injection chain. The final model should be a flat model.
-- perhaps we should have a notion of a nested model and a nested
-  element. This way the type system encodes this information.
-
-*** Add artefact's archetype to artefact class                        :story:
-
-For now a simple string would do. In the future we may need a pointer
-and join the PMM to the PM. We'll see how the use cases develop.
+: const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
 
 *** Replace =facet_default= with labels                               :story:
 
 We need to stop using the enumeration to determine the canonical
 header and use instead the new labelling mechanism.
-
-*** Prune non-generatable types from logical model                    :story:
-
-Add a pruning transform that filters out all non-generatable types
-from logical model.
 
 *** Add file extensions to decoration                                 :story:
 
@@ -1165,80 +1174,105 @@ need to ensure the current code supports this correctly. Archetypes
 that live at the project level must be owned by the backend, not the
 part.
 
-*** KVPs with invalid field name still works                          :story:
+*** Implement dependencies in terms of new physical types             :story:
 
-As a test we created an invalid KVP:
+- add dependency types to physical model.
+- add dependency types to logical model, as required.
+- compute dependencies in generation. We need a way to express
+  dependencies as a file dependency as well as a model
+  dependency. This caters for both C++ and C#/Java.
+- remove dependency code from C++ and C# model.
 
-: +#DOGEN masd.labelz.a_labelz=a,b,c
+Notes:
 
-This should have failed because the name of the KVP is =label=, so
-=labelz= shouldn't have matched. However there was no error. We are
-probably adding the =z.= to the key. We need to check how variability
-is handling this.
+- in light of the new physical model, we need a transform that calls
+  the formatter to obtain dependencies. The right way to do this is to
+  have another registrar (=dependencies_transform=?) and to have the
+  formatters implement both interfaces. This means we can simply not
+  implement the interface (and not register) when we have no
+  dependencies - though of course given the existing wale
+  infrastructure, we will then need yet another template for
+  formatters which do not need d
 
-*** Create a logical to physical projector                            :story:
+Merged stories:
 
-The projection logic is now getting really complex. We really need a
-class to take over this work. It should also group model elements by
-type so that we can obtain the archetypes just once instead of
-processing one model element at a time.
+*Formatter dependencies and model processing*
 
-*** Consider creating a label for generated files                     :story:
+At present we are manually adding the includes required by a formatter
+as part of the "inclusion_dependencies" building. There are several
+disadvantages to this approach:
 
-We could label all files which are not generated as "manual". Not
-clear how exactly that would be useful.
+- we are quite far down the pipeline. We've already passed all the
+  model building checks, etc. Thus, there is no way of knowing what
+  the formatter dependencies are. At present this is not a huge
+  problem because we have so few formatters and their dependencies are
+  mainly on the standard library and a few core boost models. However,
+  as we add more formatters this will become a bigger problem. For
+  example, we've added formatters now that require access to
+  variability headers; in an ideal world, we should now need to have a
+  reference to this model (for example, so that when we integrate
+  package management we get the right dependencies, etc).
+- we are hard-coding the header files. At present this is not a big
+  problem. To be honest, we can't see when this would be a big
+  problem, short of models changing their file names and/or
+  locations. Nonetheless, it seems "unclean" to depend on the header
+  file directly.
+- the dependency is on c++ code rather than expressed via a model.
 
-*** Add a PMM enablement satisfiability transform                     :story:
+In an ideal world, we would have some kind of way of declaring a
+formatter meta-model element, with a set of dependencies declared via
+meta-data. These are on the model itself. They must be declared
+against a specific archetype. We then would process these as part of
+resolution. We would then map the header files as part of the existing
+machinery for header files.
 
-For now this transform can simply check that there are no enabled
-archetypes that depend on disabled archetypes. In the future we could
-have a flag that enables archetypes as required.
+However one problem with this approach is that we are generating the
+formatter code using stitch at present. For this to work we would need
+to inject a fragment of code into the stitch template somehow with the
+dependencies. Whilst this is not exactly ideal, the advantage is that
+we could piggy-back on this mechanism to inject the postfix fields as
+well, so that we don't need to define these manually in each
+model. However, this needs some thinking because the complexity of
+defining a formatter will increase yet again. When there are problems,
+it will be hard to troubleshoot.
 
-*** Create a physical ID in logical-physical space                    :story:
+*Move dependencies into archetypes*
 
-Artefacts are points in logical-physical space. They should have an ID
-which is composed by both logical and physical location. We could
-create a very simple builder that concatenates both, for example:
+Actually the dependencies will be generated at the kernel level
+because 99% of the code is kernel specific. However, we need to make
+it an external transform. We need to figure out an interface that
+supplies archetypes with the data needed to create the dependencies
+container.
 
-: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
+Tasks:
 
-The use of =|= would make it really easy to split out IDs as required,
-and to visually figure out which part is which. Note though that the
-ID is an opaque identifier and the splitting happens for
-troubleshooting purposes only, not in the code. With the physical
-model, all references are done using these IDs. So for example, if an
-artefact =a0= depends on artefact =a1=, the dependency is recorded as
-the ID of =a1=. The physical model should also be indexed by ID
-instead of being a list of artefacts.
+- create the locator in the C++ external transform
+- create a dependencies transform that uses the existing include
+  generation code.
 
-*** Make physical model name a qualified name                         :story:
+*Previous understanding*
 
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
+It seems all languages we support have some form of "dependencies":
 
-*** Add a PM enablement satisfiability transform                      :story:
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
 
-To start with, this should just check to see if any of the
-dependencies are disabled. If so it throws. In the future we can add
-solving.
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
 
-*** Add a PM transform to prune disabled artefacts                    :story:
+*Tidy-up of inclusion terminology*
 
-We must first start by expanding the physical space into all possible
-points. Once enablement is performed though we can prune all artefacts
-that are disabled. Note that we cannot prune based on global
-information because archetypes may be enabled locally. However, once
-all of the local information has been processed and the enabled flag
-has been set, we can then remove all of those with the flag set to
-false.
+Random notes:
 
-In a world with solving, we just need to make sure solving is slotted
-in after enablement and before pruning. It should just work.
-
-This transform is done within the =m2t= model, not the =physical=
-model, because we need to remove the artefacts from the =m2t=
-collection.
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
 
 *** Implement locator in physical model                               :story:
 
@@ -1392,106 +1426,6 @@ Notes:
   serialisation. Or we could support two methods of serialisation for
   the same project. The user chooses where to place them.
 
-*** Implement dependencies in terms of new physical types             :story:
-
-- add dependency types to physical model.
-- add dependency types to logical model, as required.
-- compute dependencies in generation. We need a way to express
-  dependencies as a file dependency as well as a model
-  dependency. This caters for both C++ and C#/Java.
-- remove dependency code from C++ and C# model.
-
-Notes:
-
-- in light of the new physical model, we need a transform that calls
-  the formatter to obtain dependencies. The right way to do this is to
-  have another registrar (=dependencies_transform=?) and to have the
-  formatters implement both interfaces. This means we can simply not
-  implement the interface (and not register) when we have no
-  dependencies - though of course given the existing wale
-  infrastructure, we will then need yet another template for
-  formatters which do not need d
-
-Merged stories:
-
-*Formatter dependencies and model processing*
-
-At present we are manually adding the includes required by a formatter
-as part of the "inclusion_dependencies" building. There are several
-disadvantages to this approach:
-
-- we are quite far down the pipeline. We've already passed all the
-  model building checks, etc. Thus, there is no way of knowing what
-  the formatter dependencies are. At present this is not a huge
-  problem because we have so few formatters and their dependencies are
-  mainly on the standard library and a few core boost models. However,
-  as we add more formatters this will become a bigger problem. For
-  example, we've added formatters now that require access to
-  variability headers; in an ideal world, we should now need to have a
-  reference to this model (for example, so that when we integrate
-  package management we get the right dependencies, etc).
-- we are hard-coding the header files. At present this is not a big
-  problem. To be honest, we can't see when this would be a big
-  problem, short of models changing their file names and/or
-  locations. Nonetheless, it seems "unclean" to depend on the header
-  file directly.
-- the dependency is on c++ code rather than expressed via a model.
-
-In an ideal world, we would have some kind of way of declaring a
-formatter meta-model element, with a set of dependencies declared via
-meta-data. These are on the model itself. They must be declared
-against a specific archetype. We then would process these as part of
-resolution. We would then map the header files as part of the existing
-machinery for header files.
-
-However one problem with this approach is that we are generating the
-formatter code using stitch at present. For this to work we would need
-to inject a fragment of code into the stitch template somehow with the
-dependencies. Whilst this is not exactly ideal, the advantage is that
-we could piggy-back on this mechanism to inject the postfix fields as
-well, so that we don't need to define these manually in each
-model. However, this needs some thinking because the complexity of
-defining a formatter will increase yet again. When there are problems,
-it will be hard to troubleshoot.
-
-*Move dependencies into archetypes*
-
-Actually the dependencies will be generated at the kernel level
-because 99% of the code is kernel specific. However, we need to make
-it an external transform. We need to figure out an interface that
-supplies archetypes with the data needed to create the dependencies
-container.
-
-Tasks:
-
-- create the locator in the C++ external transform
-- create a dependencies transform that uses the existing include
-  generation code.
-
-*Previous understanding*
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*Tidy-up of inclusion terminology*
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
-
 *** Top-level "inclusion required" should be "tribool"                :story:
 
 One of the most common use cases for inclusion required is to have it
@@ -1515,6 +1449,152 @@ meta-data. The only way would be to convert the top-level
 
 We need to figure out how to implement this. For now we are manually
 adding flags.
+
+*** Consider creating a label for generated files                     :story:
+
+We could label all files which are not generated as "manual". Not
+clear how exactly that would be useful.
+
+*** Replace initialisers with facet-based initialisation              :story:
+
+Now that we have facets, archetypes, etc as proper meta-model
+elements, it is becoming clear that the initialiser is just a facet in
+disguise. We have enough information to generate all initialisers as
+part of the code generation of facets and backends. Once we do this,
+we have reached the point where it is possible to create a new
+meta-model element and add a formatter for it and code will be
+automatically generated without any manual intervention. Similarly,
+deleting formatters will delete all traces of it from the code
+generator.
+
+*** Rename "model-to-X" to TLAs                                       :story:
+
+Given that model-to-text (M2T) and text-to-model (T2M) - to a lesser
+extent - are well known TLAs in MDE we should make use of these in
+class names. The names we have at present are very long. The
+additional size is not providing any benefits.
+
+*** Injector types with regards to containment                        :story:
+
+It seems we have two models for injectors:
+
+- those where element containment is represented through nesting,
+  e.g. XML, JSON, org-mode. These can of course be flat too, but its
+  natural to represent elements as containers.
+- those where element containment is represented through "links",
+  e.g. Dia. When we represent containment through links, we need to
+  create a graph of the elements and then transform them into a
+  qualified path.
+
+At present we left it to the dia injector to resolve the link
+containment. It makes more sense to model the containment type in the
+injection model and then to have a transform that does the graphing
+for link models. We also need a transform that does the name nesting
+for nested models. Both do nothing for the converse case. This will
+simplify injector code.
+
+Notes:
+
+- linked models must supply the original model ID as well as container
+  ID. Nested models may or may not supply this information.
+- we should transform nested models into flat models as part of the
+  injection chain. The final model should be a flat model.
+- perhaps we should have a notion of a nested model and a nested
+  element. This way the type system encodes this information.
+
+*** Create a physical ID in logical-physical space                    :story:
+
+Artefacts are points in logical-physical space. They should have an ID
+which is composed by both logical and physical location. We could
+create a very simple builder that concatenates both, for example:
+
+: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
+
+The use of =|= would make it really easy to split out IDs as required,
+and to visually figure out which part is which. Note though that the
+ID is an opaque identifier and the splitting happens for
+troubleshooting purposes only, not in the code. With the physical
+model, all references are done using these IDs. So for example, if an
+artefact =a0= depends on artefact =a1=, the dependency is recorded as
+the ID of =a1=. The physical model should also be indexed by ID
+instead of being a list of artefacts.
+
+We already created =logical_meta_physical_id= type so maybe we don't
+need this ID as well.
+
+*** Mine the build2 layout terminology                                :story:
+
+It seems build2 is modeling a lot of concepts that are similar to ours
+in project layout. We should use their terminology where possible.
+
+Links:
+
+- [[https://build2.org/bdep/doc/bdep-new.xhtml#src-layout][bdep-new source layout]]
+- [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]]
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Add a PMM enablement satisfiability transform                     :story:
+
+For now this transform can simply check that there are no enabled
+archetypes that depend on disabled archetypes. In the future we could
+have a flag that enables archetypes as required.
+
+*** Add a PM enablement satisfiability transform                      :story:
+
+To start with, this should just check to see if any of the
+dependencies are disabled. If so it throws. In the future we can add
+solving.
+
+*** KVPs with invalid field name still works                          :story:
+
+As a test we created an invalid KVP:
+
+: +#DOGEN masd.labelz.a_labelz=a,b,c
+
+This should have failed because the name of the KVP is =label=, so
+=labelz= shouldn't have matched. However there was no error. We are
+probably adding the =z.= to the key. We need to check how variability
+is handling this.
+
+*** Add a PM transform to prune disabled artefacts                    :story:
+
+We must first start by expanding the physical space into all possible
+points. Once enablement is performed though we can prune all artefacts
+that are disabled. Note that we cannot prune based on global
+information because archetypes may be enabled locally. However, once
+all of the local information has been processed and the enabled flag
+has been set, we can then remove all of those with the flag set to
+false.
+
+In a world with solving, we just need to make sure solving is slotted
+in after enablement and before pruning. It should just work.
+
+This transform is done within the =m2t= model, not the =physical=
+model, because we need to remove the artefacts from the =m2t=
+collection.
+
+*** Add primitives to feature selector                                :story:
+
+It would be nice to be able to associate a primitive to the selector,
+so that instead of:
+
+:             ftg.enabled = s.get_by_name(fct.value(), enabled_feature);
+
+We could simply do:
+
+:             ftg.enabled = s.get_by_name(fct, enabled_feature);
+
+This would also mean that you couldn't use a string by mistake.
+
+*** Prune non-generatable types from logical model                    :story:
+
+Add a pruning transform that filters out all non-generatable types
+from logical model.
 
 *** Add the notion of a major and a minor technical space             :story:
 
@@ -1544,65 +1624,12 @@ Also, at this point we can then update the physical elements generated
 code to generate the transform code for backend and facet
 (e.g. delegation and aggregation of the result).
 
-*** Replace initialisers with facet-based initialisation              :story:
-
-Now that we have facets, archetypes, etc as proper meta-model
-elements, it is becoming clear that the initialiser is just a facet in
-disguise. We have enough information to generate all initialisers as
-part of the code generation of facets and backends. Once we do this,
-we have reached the point where it is possible to create a new
-meta-model element and add a formatter for it and code will be
-automatically generated without any manual intervention. Similarly,
-deleting formatters will delete all traces of it from the code
-generator.
-*** Replace uses of traits in archetype initialisation                :story:
-
-At present we are relying on the traits class to initialise the
-archetype in the wale template:
-
-: physical::entities::archetype {{class.simple_name}}::static_archetype() const {
-:    static physical::entities::archetype r([]() {
-:        physical::entities::archetype r;
-:        using pmnf = physical::helpers::meta_name_factory;
-:        r.meta_name(pmnf::make(cpp::traits::backend_sn(),
-:            traits::facet_sn(), traits::{{archetype.simple_name}}_archetype_sn()));
-:        using lmnf = {{meta_name_factory}};
-:        r.logical_meta_element_id(lmnf::make_{{meta_element}}_name().qualified().dot());
-:        return r;
-:    }());
-:    return r;
-: }
-
-However, given that we now know this template is used only for
-archetypes and we want to enforce a structural consistency, we should
-start to initialise all of these variables as literal strings supplied
-as wale parameters. These should be deduced from the logical model
-element. It is fine to hard-code this because we are designing it
-explicitly for archetypes, not as a general purpose mechanism.
-
-This can only be done when we are generating the PMM via facets and
-backends.
-
-Merged stories:
-
-*Replace traits with calls to the PMM elements*
-
-Where we are using these traits classes, we should really be including
-the formatter and calling for its static name - at least within each
-backend.
-
 *** Add documentation to archetypes headers                           :story:
 
 At present we are ignoring the documentation we supply with the
 archetype. We need to populate the wale KVPs with it and make use of
 it in the wale template.
 
-*** Rename "model-to-X" to TLAs                                       :story:
-
-Given that model-to-text and text-to-model (to a lesser extent) are
-well known TLAs in MDE we should make use of these in class names. The
-names we have at present are very long. The additional size is not
-providing any benefits.
 *** Order of headers is hard-coded                                    :story:
 
 In inclusion expander, we have hacked the sorting:
