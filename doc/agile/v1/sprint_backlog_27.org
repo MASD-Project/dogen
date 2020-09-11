@@ -14,23 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-11 Fri 11:53]
+#+CAPTION: Clock summary at [2020-09-11 Fri 17:18]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *58:30* |       |       | 100.0 |
+| *Total time*                                       | *61:20* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 58:30   |       |       | 100.0 |
-| Active                                             |         | 58:30 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  12.4 |
-| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.2 |
-| Sprint and product backlog grooming                |         |       |  2:04 |   3.5 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   7.5 |
-| Create an =ident= model                            |         |       | 42:02 |  71.9 |
-| Rename injection to codec                          |         |       |  0:48 |   1.4 |
+| Stories                                            | 61:20   |       |       | 100.0 |
+| Active                                             |         | 61:20 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  11.8 |
+| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.1 |
+| Sprint and product backlog grooming                |         |       |  2:26 |   4.0 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   7.1 |
+| Create an =ident= model                            |         |       | 42:02 |  68.5 |
+| Rename injection to codec                          |         |       |  0:48 |   1.3 |
 | Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
+| Remove support for split projects                  |         |       |  0:07 |   0.2 |
 | Implement meta-name validator correctly            |         |       |  0:17 |   0.5 |
-| Add dependencies to artefacts                      |         |       |  0:54 |   1.5 |
+| Add dependencies to artefacts                      |         |       |  2:28 |   4.0 |
+| Add instances of physical meta-model elements      |         |       |  0:47 |   1.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -668,6 +670,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 15:58]--[2020-09-11 Fri 16:20] =>  0:22
     CLOCK: [2020-09-11 Fri 10:48]--[2020-09-11 Fri 10:57] =>  0:09
     CLOCK: [2020-09-11 Fri 09:00]--[2020-09-11 Fri 09:32] =>  0:32
     CLOCK: [2020-07-17 Fri 16:47]--[2020-07-17 Fri 17:53] =>  1:06
@@ -974,6 +977,33 @@ and join the PMM to the PM. We'll see how the use cases develop.
 Actually we already have the physical meta-name. Just need to check if
 its being populated. Confirmed.
 
+*** CANCELLED Remove support for split projects                       :story:
+    CLOSED: [2020-09-11 Fri 16:06]
+    :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 14:38]--[2020-09-11 Fri 14:45] =>  0:07
+    :END:
+
+*Rationale*: this is not much of a win as explained in story.
+
+At present we allow users to have "split projects": this means you can
+relocate one of the parts outside the project directory. We had a use
+case for this long ago but it has since not been required. This logic
+had a large layer of complexity in the new world where everything is
+data driven because now we need to keep track all of the relocations
+performed in any of the referenced models in order to compute a
+path. And it is likely that the existing implementation does not even
+support cross-model usage correctly. Due to this we should just remove
+it and then re-implement it in the future as the use cases arrive.
+
+Actually to be honest, we cannot get away from reading properties of
+the part, backend etc - so the relative path to the part is only a
+minor thing. Also, we will always need to handle references correctly
+for other reasons so therefore this is not a major block. We should
+carry on supporting split projects. Initially we will only support
+them for the current use case (i.e. you cannot reference split
+models). Eventually when we address the limitations on references we
+can also sort out this issue.
+
 *** STARTED Implement meta-name validator correctly                   :story:
     :LOGBOOK:
     CLOCK: [2020-09-11 Fri 10:30]--[2020-09-11 Fri 10:47] =>  0:17
@@ -1002,6 +1032,9 @@ facet factory we should set up the expectation. Then we can throw.
 
 *** STARTED Add dependencies to artefacts                             :story:
      :LOGBOOK:
+     CLOCK: [2020-09-11 Fri 14:45]--[2020-09-11 Fri 15:38] =>  0:53
+     CLOCK: [2020-09-11 Fri 14:34]--[2020-09-11 Fri 14:37] =>  0:03
+     CLOCK: [2020-09-11 Fri 13:55]--[2020-09-11 Fri 14:33] =>  0:38
      CLOCK: [2020-09-11 Fri 11:20]--[2020-09-11 Fri 11:53] =>  0:33
      CLOCK: [2020-09-11 Fri 10:58]--[2020-09-11 Fri 11:19] =>  0:21
      :END:
@@ -1054,11 +1087,116 @@ facet factory we should set up the expectation. Then we can throw.
  - artefacts need to know their parts.
  - archetypes do not have part populated and their type is incorrect
    (=physical_id=).
+- parts should have a root folder. These are specified through
+  meta-data. The path is relative to the project path. Different
+  models can have different part paths. This means we need to remember
+  them when computing a reference to an artefact. Actually this is
+  only needed because of split projects. We need to deprecate it as it
+  makes things very complicated.
+- parts need a directory name. This must be supplied by meta data with
+  the part name:
+
+: masd.physical.part.folder_name.implementation=src
+
+  Where implementation is a KVP.
+
+- physical model must be split by backend. Backend must have an
+  associated folder name or blank for no folder:
+
+: masd.physical.backend.folder_name.cpp=src
+
+- actually we will have exactly the same problem with facets too. We
+  need to create instances of all the meta-model elements.
+- due to the fact that you can configure physical meta-elements, we
+  have no choice but keep track of the referenced models. This is
+  because we could have overwritten them differently in any of the
+  referenced models.
+- actually we found a much more profound problem, which already exists
+  in dogen: if you configure backend/facet/archetypes differently in
+  say M0 and M1, and if M1 references M0, the paths will not be
+  constructed correctly. That is because we assume that we can
+  reconstruct M0 paths using M1's configuration, which is true at
+  present merely because we use the same variability settings for all
+  models within a product; and on the rare cases we don't, we never
+  make use of these models from other models - e.g. test models. To
+  fix this properly would require a fairly complex set of changes to
+  Dogen: we would need to keep track of the references and their types
+  all the way through to code generation. This will not be
+  easy. However, what we can do is to start introducing the notion of
+  reference models and elements; initially this can be used just to
+  check that all references have the same configuration. Eventually,
+  as use cases arrive we can extend it to implement this per-model
+  configuration properly. This also means that it is not possible to
+  refer to a model that has more than one backend for now from a model
+  that only has a backend.
+
+*** STARTED Add instances of physical meta-model elements             :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-11 Fri 16:31]--[2020-09-11 Fri 17:18] =>  0:47
+    :END:
+
+We made a modeling error with regards to the physical meta-model
+elements. We assumed that the user configuration of the meta-model
+elements could be stored with the PMM. This is incorrect because the
+PMM is created from static data; it is as it was code generated by the
+state of the =text.cpp= and =text.csharp= models. However, users can
+apply their own configuration to these elements: change backend
+directory, facet directory etc. These properties are relative to the
+models the users load. Worse, they are possibly different for each
+reference - though that particular problem will have to be addressed
+separately.
+
+This now causes a big conceptual problem: we assumed that artefacts
+were instances of archetypes but yet there is a need to have an
+archetype instance where the model specific configuration is
+stored. The quick hack, is to create some types that sit in between
+the meta-type and the instance type:
+
+- =backend_instance=
+- =archetype_instance=
+- etc.
+
+This is not very nice but it does solve the problem at hand. We can
+then associate these with physical models. Alternatively we could use
+a more neutral name like =_properties=, =_configuration=...
+
+*** Improve support for references                                    :story:
+
+At present we have limited support for references in the presence of
+variability. This is because once we start changing configuration
+points such as the backend directory, facet directories etc, in a
+model which is referenced from another model then the path resolution
+will start to fail. This is because we expect all models to have the
+same configuration for all configuration elements that affect file
+paths. Since they do at present we never noticed this problem.
+
+The correct solution is to introduce reference models and reference
+elements. These just need to have a small number of properties:
+
+- configuration of root module;
+- model and element logical name, as well as meta-element name.
+
+With this we could also stop creating elements for referenced models
+which would probably result on a major reduction of processing
+time. Then we have two ways of introducing these models:
+
+1. "the best way": do not fully parse reference models at all, just
+   extract the reference properties. This will require a lot of
+   changes on the pipeline.
+2. "the quick hack": for all references, load the codec model into the
+   logical model and then convert it into a reference model. We do a
+   lot of unnecessary processing but it should be easier.
+
+We could even start by taking approach 2 and then eventually move to
+approach 1. Either way we need to do this once we move to the new
+world of dependency generation.
 
 *** Replace =facet_default= with labels                               :story:
 
 We need to stop using the enumeration to determine the canonical
 header and use instead the new labelling mechanism.
+
+The right label is probably =transparent=.
 
 *** Add full path processing to PM                                    :story:
 
