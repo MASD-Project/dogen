@@ -6629,7 +6629,7 @@ grammar of the C++ technical space.
         <dia:point val="-46,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,242.95;-30.42,247.95"/>
+        <dia:rectangle val="-46.05,242.95;-30.805,247.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6638,7 +6638,7 @@ grammar of the C++ technical space.
         <dia:point val="-46,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="15.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.8999999999999995"/>
@@ -6685,7 +6685,7 @@ C++ technical space.
         <dia:point val="20,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,242.95;35.58,247.15"/>
+        <dia:rectangle val="19.95,242.95;34.81,247.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6694,7 +6694,7 @@ C++ technical space.
         <dia:point val="20,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="14.76"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -6740,7 +6740,7 @@ C++ technical space.
         <dia:point val="91,260"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,259.95;106.58,264.15"/>
+        <dia:rectangle val="90.95,259.95;105.04,264.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6749,7 +6749,7 @@ C++ technical space.
         <dia:point val="91,260"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -6795,7 +6795,7 @@ of the C++ technical space.
         <dia:point val="20,300"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,299.95;35.58,304.15"/>
+        <dia:rectangle val="19.95,299.95;34.04,304.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6804,7 +6804,7 @@ of the C++ technical space.
         <dia:point val="20,300"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -6850,7 +6850,7 @@ C++ technical space.
         <dia:point val="20,346"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,345.95;35.58,350.15"/>
+        <dia:rectangle val="19.95,345.95;34.425,350.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6859,7 +6859,7 @@ C++ technical space.
         <dia:point val="20,346"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="14.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -38745,7 +38745,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:point val="90,243"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.95,242.95;105.58,246.35"/>
+        <dia:rectangle val="89.95,242.95;104.04,246.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38754,7 +38754,7 @@ bool {{class.simple_name}}::is_enabled(const assistant&amp; /*a*/,
         <dia:point val="90,243"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -43569,7 +43569,7 @@ install(
         <dia:point val="20,284"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,283.95;35.58,287.35"/>
+        <dia:rectangle val="19.95,283.95;34.04,287.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43578,7 +43578,7 @@ install(
         <dia:point val="20,284"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
