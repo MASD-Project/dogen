@@ -23,8 +23,8 @@
 #include "dogen.physical/io/entities/archetype_io.hpp"
 #include "dogen.physical/io/entities/relations_io.hpp"
 #include "dogen.identification/io/entities/label_io.hpp"
-#include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

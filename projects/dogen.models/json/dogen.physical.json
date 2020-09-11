@@ -233,7 +233,7 @@
         },
         {
           "name": "part",
-          "type": "identification::entities::physical_id",
+          "type": "identification::entities::physical_meta_id",
           "documentation": "Part in which we are located.\n"
         },
         {

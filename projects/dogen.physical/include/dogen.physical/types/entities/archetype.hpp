@@ -30,8 +30,8 @@
 #include <algorithm>
 #include "dogen.physical/types/entities/relations.hpp"
 #include "dogen.identification/types/entities/label.hpp"
-#include "dogen.identification/types/entities/physical_id.hpp"
 #include "dogen.identification/types/entities/logical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
@@ -58,7 +58,7 @@ public:
         const std::string& generated_by,
         const std::string& archetype_kind_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
-        const dogen::identification::entities::physical_id& part,
+        const dogen::identification::entities::physical_meta_id& part,
         const dogen::physical::entities::relations& relations);
 
 public:
@@ -166,10 +166,10 @@ public:
      * @brief Part in which we are located.
      */
     /**@{*/
-    const dogen::identification::entities::physical_id& part() const;
-    dogen::identification::entities::physical_id& part();
-    void part(const dogen::identification::entities::physical_id& v);
-    void part(const dogen::identification::entities::physical_id&& v);
+    const dogen::identification::entities::physical_meta_id& part() const;
+    dogen::identification::entities::physical_meta_id& part();
+    void part(const dogen::identification::entities::physical_meta_id& v);
+    void part(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
     /**
@@ -203,7 +203,7 @@ private:
     std::string generated_by_;
     std::string archetype_kind_id_;
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
-    dogen::identification::entities::physical_id part_;
+    dogen::identification::entities::physical_meta_id part_;
     dogen::physical::entities::relations relations_;
 };
 

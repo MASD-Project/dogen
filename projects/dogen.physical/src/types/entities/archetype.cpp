@@ -33,7 +33,7 @@ archetype::archetype(
     const std::string& generated_by,
     const std::string& archetype_kind_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
-    const dogen::identification::entities::physical_id& part,
+    const dogen::identification::entities::physical_meta_id& part,
     const dogen::physical::entities::relations& relations)
     : description_(description),
       meta_name_(meta_name),
@@ -245,19 +245,19 @@ void archetype::logical_meta_element_id(const dogen::identification::entities::l
     logical_meta_element_id_ = std::move(v);
 }
 
-const dogen::identification::entities::physical_id& archetype::part() const {
+const dogen::identification::entities::physical_meta_id& archetype::part() const {
     return part_;
 }
 
-dogen::identification::entities::physical_id& archetype::part() {
+dogen::identification::entities::physical_meta_id& archetype::part() {
     return part_;
 }
 
-void archetype::part(const dogen::identification::entities::physical_id& v) {
+void archetype::part(const dogen::identification::entities::physical_meta_id& v) {
     part_ = v;
 }
 
-void archetype::part(const dogen::identification::entities::physical_id&& v) {
+void archetype::part(const dogen::identification::entities::physical_meta_id&& v) {
     part_ = std::move(v);
 }
 
