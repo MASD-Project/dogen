@@ -1678,13 +1678,6 @@
           "documentation": "Name of the directory to use for the part.\n"
         }
       ]
-    },
-    {
-      "name": "transforms::meta_model_properties_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }
