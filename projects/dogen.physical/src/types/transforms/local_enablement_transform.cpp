@@ -95,7 +95,7 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
      *
      * Note that the overwrite flag is only relevant if enabled is
      * true. It is not used otherwise. We set it up before enablement
-     * just so we don't have to worry about handling the ""continue""
+     * just so we don't have to worry about handling the "continue"
      * statements.
      */
     auto lambda(
