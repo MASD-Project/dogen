@@ -54,7 +54,7 @@ const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string duplicate_element_archetype("Duplicate element archetype: ");
-const std::string meta_name_not_found("Meta-name not found: ");
+const std::string logical_meta_id_not_found("Logical meta ID not found: ");
 const std::string missing_configuration(
     "Configuration not available for element: ");
 const std::string type_group_not_found(
@@ -78,6 +78,7 @@ namespace dogen::physical::transforms {
 using variability::entities::feature_model;
 using identification::entities::physical_meta_id;
 using identification::entities::physical_meta_name_indices;
+using identification::entities::logical_meta_physical_id;
 
 std::unordered_map<physical_meta_id, enablement_transform::feature_group>
 enablement_transform::make_feature_group(const feature_model& fm,
@@ -302,15 +303,14 @@ void enablement_transform::compute_enablement_for_artefact(
 
 void enablement_transform::compute_enablement_for_artefact_set(
     const std::unordered_map<identification::entities::logical_meta_id,
-    identification::entities::archetype_name_set>& physical_names_by_meta_name,
+    identification::entities::archetype_name_set>& pmn_by_lmid,
     const std::unordered_map<physical_meta_id,
-    entities::denormalised_archetype_properties>&
-    global_enablement_properties,
-    std::unordered_set<identification::entities::logical_meta_physical_id>&
-    enabled_archetype_for_element, entities::artefact_set& as) {
+    entities::denormalised_archetype_properties>& global_enablement_properties,
+    std::unordered_set<logical_meta_physical_id>& enabled_archetype_for_element,
+    entities::artefact_set& as) {
 
-    const auto id(as.provenance().logical_name().id());
-    BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
+    const auto lid(as.provenance().logical_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << lid;
 
     /*
      * Some logical elements do not project into the physical
@@ -321,29 +321,39 @@ void enablement_transform::compute_enablement_for_artefact_set(
         return;
     }
 
-    const auto lmn(as.provenance().logical_meta_name().id());
-    BOOST_LOG_SEV(lg, trace) << "Logical meta-name: " << lmn;
-    const auto j(physical_names_by_meta_name.find(lmn));
-    if (j == physical_names_by_meta_name.end()) {
-        BOOST_LOG_SEV(lg, error) << meta_name_not_found << lmn;
+    /*
+     * Locate all of the physical meta-names associated with a given
+     * logical meta ID; in other words, find the archetypes for a
+     * given logical meta-element. Note that the archetype name set is
+     * always expected to exist, even if it is empty.
+     */
+    const auto lmid(as.provenance().logical_meta_name().id());
+    BOOST_LOG_SEV(lg, trace) << "Logical meta ID: " << lmid;
+    const auto i(pmn_by_lmid.find(lmid));
+    if (i == pmn_by_lmid.end()) {
+        BOOST_LOG_SEV(lg, error) << logical_meta_id_not_found << lmid;
         BOOST_THROW_EXCEPTION(
-            transform_exception(meta_name_not_found + lmn.value()));
+            transform_exception(logical_meta_id_not_found + lmid.value()));
     }
-    const auto& cal(j->second.canonical_locations());
+    const auto& cal(i->second.canonical_locations());
 
+    /*
+     * Now go through all of the artefacts in the artefact set and for
+     * each, compute their enablement properties.
+     */
     for(auto& pair : as.artefacts_by_archetype()) {
-        const auto arch(pair.first);
-        BOOST_LOG_SEV(lg, trace) << "Processing archetype: " << arch;
+        const auto pmid(pair.first);
+        BOOST_LOG_SEV(lg, trace) << "Processing archetype: " << pmid;
 
         /*
          * Global enablement must always be present for all
          * archetypes.
          */
-        const auto i(global_enablement_properties.find(arch));
+        const auto i(global_enablement_properties.find(pmid));
         if (i == global_enablement_properties.end()) {
-            BOOST_LOG_SEV(lg, error) << global_configuration_not_found << arch;
+            BOOST_LOG_SEV(lg, error) << global_configuration_not_found << pmid;
             BOOST_THROW_EXCEPTION(transform_exception(
-                    global_configuration_not_found + arch.value()));
+                    global_configuration_not_found + pmid.value()));
         }
         const auto& gep(i->second);
 
@@ -359,43 +369,40 @@ void enablement_transform::compute_enablement_for_artefact_set(
          * for this artefact.
          */
         auto& art_props(a->artefact_properties());
-        compute_enablement_for_artefact(gep, lep, arch, art_props);
-
+        compute_enablement_for_artefact(gep, lep, pmid, art_props);
         if (!art_props.enabled()) {
             BOOST_LOG_SEV(lg, trace) << "Archetype not enabled.";
             continue;
         }
 
-        BOOST_LOG_SEV(lg, trace) << "Archetype is enabled.";
-
         /*
          * If we are enabled, we need to update the enablement
          * index. First, we update it with the concrete archetype.
          */
-        using identification::entities::logical_meta_physical_id;
+        BOOST_LOG_SEV(lg, trace) << "Archetype is enabled.";
         auto& eafe(enabled_archetype_for_element);
-        auto inserted(eafe.insert(logical_meta_physical_id(id, arch)).second);
+        auto inserted(eafe.insert(logical_meta_physical_id(lid, pmid)).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
-                                     << " " << id;
+            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << pmid
+                                     << " " << lid;
             BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype_name
-                    + arch.value() + " " + id.value()));
+                    + pmid.value() + " " + lid.value()));
         }
 
         /*
          * Then, if this archetype maps to a canonical archetype, we
          * create an entry for the canonical archetype as well.
          */
-        const auto k(cal.find(arch));
-        if (k == cal.end())
+        const auto j(cal.find(pmid));
+        if (j == cal.end())
             continue;
 
-        inserted = eafe.insert(logical_meta_physical_id(id, k->second)).second;
+        inserted = eafe.insert(logical_meta_physical_id(lid, j->second)).second;
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
-                                     << " " << id;
+            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << pmid
+                                     << " " << lid;
             BOOST_THROW_EXCEPTION(transform_exception(duplicate_archetype_name
-                    + arch.value() + " " + id.value()));
+                    + pmid.value() + " " + lid.value()));
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
@@ -407,14 +414,13 @@ apply(const context& ctx, entities::artefact_repository& arp) {
         transform_id, arp.identifier(), *ctx.tracer(), arp);
 
     /*
-     * Update all of the local enablement properties first. The global
-     * properties have been updated as part of the meta-model
-     * properties transform.
+     * First, we update all of the local enablement properties from
+     * configuration. The global properties have been updated as part
+     * of the meta-model properties transform.
      */
-    const auto &fm(*ctx.feature_model());
+    const auto& fm(*ctx.feature_model());
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
-    const auto& lmn(in.archetype_names_by_logical_meta_name());
     const auto fgs(make_feature_group(fm, in));
     populate_enablement_properties(fgs, arp);
 
@@ -423,12 +429,20 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      */
     const auto& gep(arp.global_enablement_properties());
     const auto& dap(gep.denormalised_archetype_properties());
-    using identification::entities::logical_meta_physical_id;
+    const auto& lmn(in.archetype_names_by_logical_meta_name());
     std::unordered_set<logical_meta_physical_id> eafe;
     for(auto& pair : arp.artefact_sets_by_logical_id()) {
         auto& as(pair.second);
         compute_enablement_for_artefact_set(lmn, dap, eafe, as);
     }
+
+    /*
+     * The very badly named archetype for element container keeps
+     * track of which archetypes are enable for a given logical
+     * element. However, we seem to only remember those which are
+     * canonical. This code will be cleaned up with the new
+     * dependencies approach.
+     */
     arp.enabled_archetype_for_element(eafe);
 
     stp.end_transform(arp);

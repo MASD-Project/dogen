@@ -88,8 +88,7 @@ private:
 
     static void compute_enablement_for_artefact_set(
         const std::unordered_map<identification::entities::logical_meta_id,
-        identification::entities::archetype_name_set>&
-        physical_names_by_meta_name,
+        identification::entities::archetype_name_set>& pmn_by_lmid,
         const std::unordered_map<identification::entities::physical_meta_id,
         entities::denormalised_archetype_properties>&
         global_enablement_properties,
