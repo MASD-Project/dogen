@@ -41,72 +41,96 @@
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Populates the meta-model properties.
+ */
 class meta_model_properties_transform final {
 private:
+    /**
+     * @brief Features associated with a backend.
+     */
     struct backend_feature_group {
         variability::entities::feature enabled;
     };
 
+    /**
+     * @brief Features associated with a facet.
+     */
     struct facet_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature overwrite;
     };
 
-    struct global_archetype_feature_group {
+    /**
+     * @brief Features associated with an archetype.
+     */
+    struct archetype_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature overwrite;
     };
 
 private:
+    /**
+     * @brief Creates the feature group for the backend features.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
                               backend_feature_group>
     make_backend_feature_group(const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
+    /**
+     * @brief Creates the feature group for the facet features.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
                               facet_feature_group>
     make_facet_feature_group(const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
+    /**
+     * @brief Creates the feature group for the archetype features.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
-                              global_archetype_feature_group>
-    make_global_archetype_feature_group(
-        const variability::entities::feature_model& fm,
+                              archetype_feature_group>
+    make_archetype_feature_group(const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
 private:
+    /**
+     * @brief Reads the backend configuration.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
                               entities::backend_properties>
     obtain_backend_properties(const std::unordered_map<
-        identification::entities::physical_meta_id,
-        backend_feature_group>& fgs,
+        identification::entities::physical_meta_id, backend_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
+    /**
+     * @brief Reads the facet configuration.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
                               entities::facet_properties>
     obtain_facet_properties(const std::unordered_map<
         identification::entities::physical_meta_id, facet_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
+    /**
+     * @brief Reads the archetype configuration.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
                               entities::archetype_properties>
     obtain_archetype_properties(
         const std::unordered_map<identification::entities::physical_meta_id,
-        global_archetype_feature_group>& fgs,
+        archetype_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
+private:
     static void populate_global_enablement_properties(
         const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx,
-        entities::artefact_repository& ar);
-
-    static void populate_local_enablement_properties(
-        const variability::entities::feature_model& fm,
-        const identification::entities::physical_meta_name_indices& idx,
-        entities::artefact_repository& ar);
+        entities::artefact_repository& arp);
 
 public:
-    static void apply(const context& ctx, entities::artefact_repository& ar);
+    static void apply(const context& ctx, entities::artefact_repository& arp);
 };
 
 }
