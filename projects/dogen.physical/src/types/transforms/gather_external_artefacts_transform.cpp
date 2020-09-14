@@ -54,7 +54,7 @@ gather_external_artefacts_transform::make_artefact(
     auto r(boost::make_shared<entities::artefact>());
     r->name().simple(p.filename().generic_string());
     r->name().id(identification::entities::physical_id(p.generic_string()));
-    r->artefact_properties().file_path(p);
+    r->file_path(p);
     r->operation().type(ot);
     r->operation().reason(rsn);
 

@@ -62,7 +62,7 @@ void remove_files_transform::delete_extra_files(
         const auto& a(*ptr);
         using physical::entities::operation_type;
         if (a.operation().type() == operation_type::remove)
-            unexpected.push_back(a.artefact_properties().file_path());
+            unexpected.push_back(a.file_path());
     }
 
     /*

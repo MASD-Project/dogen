@@ -64,7 +64,7 @@ void wale_transform::apply(const formattables::locator& l,
             const auto ns(ast.make_namespaces(n));
             auto snf(ast.make_scoped_namespace_formatter(ns));
 
-            const auto fi(a.artefact_properties().formatting_input());
+            const auto fi(a.formatting_input());
             if (fi.empty()) {
                 BOOST_LOG_SEV(lg, error) << missing_input;
                 BOOST_THROW_EXCEPTION(formatting_error(missing_input));

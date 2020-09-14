@@ -163,7 +163,7 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
         if (diffs_found > 5)
             break;
 
-        const auto& p(a.artefact_properties().file_path());
+        const auto& p(a.file_path());
         const auto rel(p.lexically_relative(output_dir));
         const auto gs(rel.generic_string());
         if (a.operation().type() == operation_type::remove)
@@ -207,7 +207,7 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
         if (diffs_found > 5)
             break;
 
-        const auto& p(a.artefact_properties().file_path());
+        const auto& p(a.file_path());
         const auto fn(p.filename().generic_string());
         const auto ot(a.operation().type());
         const auto rsn(a.operation().reason());
@@ -265,7 +265,7 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
         if (diffs_found > 5)
             break;
 
-        const auto& p(a.artefact_properties().file_path());
+        const auto& p(a.file_path());
         const auto fn(p.filename().generic_string());
         const auto ot(a.operation().type());
         const auto rsn(a.operation().reason());
@@ -323,7 +323,7 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
         if (diffs_found > 5)
             break;
 
-        const auto& p(a.artefact_properties().file_path());
+        const auto& p(a.file_path());
         const auto fn(p.filename().generic_string());
         const auto ot(a.operation().type());
         const auto rsn(a.operation().reason());
@@ -374,7 +374,7 @@ bool check_out_of_sync(const boost::filesystem::path& output_dir,
 
         const auto ot(a.operation().type());
         const auto rsn(a.operation().reason());
-        const auto& p(a.artefact_properties().file_path());
+        const auto& p(a.file_path());
         const auto rel(p.lexically_relative(output_dir /
                 "cpp_ref_impl.out_of_sync"));
         const auto gs(rel.generic_string());

@@ -517,17 +517,24 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "content",
-          "type": "std::string",
-          "documentation": "Content of the file.\n"
-        },
-        {
           "name": "enabled",
-          "type": "bool"
+          "type": "bool",
+          "documentation": "If true, the artefact is enabled and its content will be computed.\n"
         },
         {
           "name": "overwrite",
-          "type": "bool"
+          "type": "bool",
+          "documentation": "If true, the artefact will be expressed to the filesystem if there are changes.\n"
+        },
+        {
+          "name": "file_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the file corresponding to this artefact.\n"
+        },
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Textual content of the artefact.\n"
         },
         {
           "name": "relative_paths",
@@ -551,16 +558,23 @@
         },
         {
           "name": "operation",
-          "type": "operation"
-        },
-        {
-          "name": "artefact_properties",
-          "type": "artefact_properties"
+          "type": "operation",
+          "documentation": "Operation to be applied to this artefact.\n"
         },
         {
           "name": "enablement_properties",
           "type": "enablement_properties",
           "documentation": "Stores the properties related to the enablement, as read out from configuration.\n"
+        },
+        {
+          "name": "formatting_style",
+          "type": "formatting_styles",
+          "documentation": "What type of M2T transform to use in order to generate the artefact's content.\n"
+        },
+        {
+          "name": "formatting_input",
+          "type": "std::string",
+          "documentation": "Template used as input in order to generate the artefact's content, if any.\n"
         }
       ]
     },
@@ -1291,32 +1305,6 @@
           "name": "is_generatable",
           "type": "bool",
           "documentation": "If false, the entire artefact set is not generatable.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::artefact_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "file_path",
-          "type": "boost::filesystem::path"
-        },
-        {
-          "name": "formatting_style",
-          "type": "formatting_styles"
-        },
-        {
-          "name": "formatting_input",
-          "type": "std::string"
         }
       ]
     },

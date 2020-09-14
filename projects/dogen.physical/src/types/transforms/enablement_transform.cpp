@@ -50,6 +50,7 @@ static logger lg(logger_factory(transform_id));
 static std::string enabled_feature("enabled");
 static std::string overwrite_feature("overwrite");
 
+const std::string null_artefact("Artefact cannot be null: ");
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
@@ -171,11 +172,10 @@ void enablement_transform::populate_enablement_properties(
 void enablement_transform::compute_enablement_for_artefact(
     const entities::denormalised_archetype_properties&
     global_enablement_properties,
-    const entities::enablement_properties& local_enablement_properties,
-    const physical_meta_id& archetype, entities::artefact_properties& ap) {
+    const physical_meta_id& archetype, entities::artefact& a) {
 
     const auto& gc(global_enablement_properties);
-    const auto& lc(local_enablement_properties);
+    const auto& lc(a.enablement_properties());
 
     /*
      * If the overwrite flag is set locally at the archetype or facet
@@ -221,21 +221,21 @@ void enablement_transform::compute_enablement_for_artefact(
                              << gc.facet_overwrite();
 
     if (lc.archetype_overwrite())
-        ap.overwrite(*lc.archetype_overwrite());
+        a.overwrite(*lc.archetype_overwrite());
     else if (lc.facet_overwrite())
-        ap.overwrite(*lc.facet_overwrite());
+        a.overwrite(*lc.facet_overwrite());
     else if (gc.archetype_overwrite())
-        ap.overwrite(*gc.archetype_overwrite());
+        a.overwrite(*gc.archetype_overwrite());
     else
-        ap.overwrite(gc.facet_overwrite());
+        a.overwrite(gc.facet_overwrite());
 
     /*
      * Ensure we log the enablement details with the early returns.
      */
     auto log_scope_exit(make_scope_exit([&]() mutable {
             BOOST_LOG_SEV(lg, trace) << "Enablement for: " << archetype
-                                     << " value: " << ap.enabled()
-                                     << " overwrite: " << ap.overwrite();
+                                     << " value: " << a.enabled()
+                                     << " overwrite: " << a.overwrite();
         }));
 
     /*
@@ -244,7 +244,7 @@ void enablement_transform::compute_enablement_for_artefact(
      */
     if (!gc.backend_enabled()) {
         BOOST_LOG_SEV(lg, trace) << "Backend is disabled.";
-        ap.enabled(false);
+        a.enabled(false);
         return;
     }
 
@@ -254,7 +254,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * configuration.
      */
     if (lc.archetype_enabled()) {
-        ap.enabled(*lc.archetype_enabled());
+        a.enabled(*lc.archetype_enabled());
         return;
     }
 
@@ -276,7 +276,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * level local".
      */
     if (lc.facet_enabled()) {
-        ap.enabled(*lc.facet_enabled());
+        a.enabled(*lc.facet_enabled());
         return;
     }
 
@@ -298,7 +298,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * course support this scenario for local enablement, which is
      * very common.
      */
-    ap.enabled(gc.archetype_enabled() && gc.facet_enabled());
+    a.enabled(gc.archetype_enabled() && gc.facet_enabled());
 }
 
 void enablement_transform::compute_enablement_for_artefact_set(
@@ -343,7 +343,18 @@ void enablement_transform::compute_enablement_for_artefact_set(
      */
     for(auto& pair : as.artefacts_by_archetype()) {
         const auto pmid(pair.first);
-        BOOST_LOG_SEV(lg, trace) << "Processing archetype: " << pmid;
+        BOOST_LOG_SEV(lg, trace) << "Processing artefact for archetype: "
+                                 << pmid;
+
+        /*
+         * Ensure artefact looks vaguely sane.
+         */
+        if (!pair.second) {
+            BOOST_LOG_SEV(lg, error) << null_artefact << pmid;
+            BOOST_THROW_EXCEPTION(
+                transform_exception(null_artefact + pmid.value()));
+        }
+        auto& a(*pair.second);
 
         /*
          * Global enablement must always be present for all
@@ -358,20 +369,12 @@ void enablement_transform::compute_enablement_for_artefact_set(
         const auto& gep(i->second);
 
         /*
-         * Local enablement is local to the current artefact.
+         * Compute the enablement values for this artefact. If it is
+         * not enabled there is no much to be done so bomb out.
          */
-        auto& a(pair.second);
-        const auto& lep(a->enablement_properties());
-
-        /*
-         * Once we got both the global and the local enablement
-         * configuration, we can then compute the enablement values
-         * for this artefact.
-         */
-        auto& art_props(a->artefact_properties());
-        compute_enablement_for_artefact(gep, lep, pmid, art_props);
-        if (!art_props.enabled()) {
-            BOOST_LOG_SEV(lg, trace) << "Archetype not enabled.";
+        compute_enablement_for_artefact(gep, pmid, a);
+        if (!a.enabled()) {
+            BOOST_LOG_SEV(lg, trace) << "Artefact not enabled.";
             continue;
         }
 
@@ -379,7 +382,7 @@ void enablement_transform::compute_enablement_for_artefact_set(
          * If we are enabled, we need to update the enablement
          * index. First, we update it with the concrete archetype.
          */
-        BOOST_LOG_SEV(lg, trace) << "Archetype is enabled.";
+        BOOST_LOG_SEV(lg, trace) << "Artefact is enabled.";
         auto& eafe(enabled_archetype_for_element);
         auto inserted(eafe.insert(logical_meta_physical_id(lid, pmid)).second);
         if (!inserted) {

@@ -24,8 +24,8 @@
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.identification/io/entities/physical_name_io.hpp"
-#include "dogen.physical/io/entities/artefact_properties_io.hpp"
 #include "dogen.physical/io/entities/enablement_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
@@ -115,16 +115,18 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"relative_paths\": " << v.relative_paths() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"relations\": " << v.relations() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
       << "\"operation\": " << v.operation() << ", "
-      << "\"artefact_properties\": " << v.artefact_properties() << ", "
-      << "\"enablement_properties\": " << v.enablement_properties()
+      << "\"enablement_properties\": " << v.enablement_properties() << ", "
+      << "\"formatting_style\": " << v.formatting_style() << ", "
+      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
       << " }";
     return(s);
 }

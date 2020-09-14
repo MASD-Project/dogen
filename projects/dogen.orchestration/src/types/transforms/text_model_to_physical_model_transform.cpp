@@ -100,7 +100,7 @@ apply(const text::transforms::context& ctx,
                  * FIXME: we are still generating artefacts for global
                  * module.
                  */
-                if (aptr->artefact_properties().file_path().empty()) {
+                if (aptr->file_path().empty()) {
                     BOOST_LOG_SEV(lg, error) << empty_path
                                              << aptr->name().id();
                     // BOOST_THROW_EXCEPTION(transform_exception(empty_path +

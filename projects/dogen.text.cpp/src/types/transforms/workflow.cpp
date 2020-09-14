@@ -102,8 +102,7 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
         const auto pn(fmt.archetype().meta_name());
         const auto arch(pn.id());
         auto aptr(get_artefact(fbl.artefacts().artefacts_by_archetype(), arch));
-        const auto& ap(aptr->artefact_properties());
-        if (!ap.enabled()) {
+        if (!aptr->enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
@@ -115,26 +114,26 @@ workflow::execute(boost::shared_ptr<tracing::tracer> tracer,
             frp.helper_formatters(), tracer);
 
         auto& a(*aptr);
-        const auto fs(ap.formatting_style());
+        const auto fs(aptr->formatting_style());
         if (fs == formatting_styles::stock) {
              const auto id(fmt.archetype().meta_name().id().value());
              BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
              fmt.apply(ctx, e, a);
 
-             const auto& p(a.artefact_properties().file_path());
+             const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
          } else if (fs == formatting_styles::wale) {
              BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
              wale_transform f;
              f.apply(locator_, fmt, ctx, e, a);
 
-             const auto& p(a.artefact_properties().file_path());
+             const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
          } else if (fs == formatting_styles::stitch) {
              BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
              stitch_formatter_.apply(fmt, ctx, e, a);
 
-             const auto& p(a.artefact_properties().file_path());
+             const auto& p(aptr->file_path());
              BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
              if (!a.content().empty()) {
                  BOOST_LOG_SEV(lg, debug) << "Template has content.";

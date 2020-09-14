@@ -33,8 +33,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/operation.hpp"
+#include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
-#include "dogen.physical/types/entities/artefact_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
@@ -48,11 +48,13 @@ namespace dogen::physical::entities {
 class artefact final {
 public:
     artefact(const artefact&) = default;
-    artefact(artefact&&) = default;
     ~artefact() = default;
 
 public:
     artefact();
+
+public:
+    artefact(artefact&& rhs);
 
 public:
     artefact(
@@ -60,16 +62,18 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
-        const std::string& content,
         const bool enabled,
         const bool overwrite,
+        const boost::filesystem::path& file_path,
+        const std::string& content,
         const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
         const std::vector<boost::filesystem::path>& dependencies,
         const std::list<std::string>& relations,
         const std::string& unified_diff,
         const dogen::physical::entities::operation& operation,
-        const dogen::physical::entities::artefact_properties& artefact_properties,
-        const dogen::physical::entities::enablement_properties& enablement_properties);
+        const dogen::physical::entities::enablement_properties& enablement_properties,
+        const dogen::physical::entities::formatting_styles formatting_style,
+        const std::string& formatting_input);
 
 public:
     /**
@@ -113,7 +117,33 @@ public:
     /**@}*/
 
     /**
-     * @brief Content of the file.
+     * @brief If true, the artefact is enabled and its content will be computed.
+     */
+    /**@{*/
+    bool enabled() const;
+    void enabled(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the artefact will be expressed to the filesystem if there are changes.
+     */
+    /**@{*/
+    bool overwrite() const;
+    void overwrite(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Full path to the file corresponding to this artefact.
+     */
+    /**@{*/
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief Textual content of the artefact.
      */
     /**@{*/
     const std::string& content() const;
@@ -121,12 +151,6 @@ public:
     void content(const std::string& v);
     void content(const std::string&& v);
     /**@}*/
-
-    bool enabled() const;
-    void enabled(const bool v);
-
-    bool overwrite() const;
-    void overwrite(const bool v);
 
     /**
      * @brief Paths relative to the path ID that keys the container.
@@ -170,15 +194,15 @@ public:
     void unified_diff(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Operation to be applied to this artefact.
+     */
+    /**@{*/
     const dogen::physical::entities::operation& operation() const;
     dogen::physical::entities::operation& operation();
     void operation(const dogen::physical::entities::operation& v);
     void operation(const dogen::physical::entities::operation&& v);
-
-    const dogen::physical::entities::artefact_properties& artefact_properties() const;
-    dogen::physical::entities::artefact_properties& artefact_properties();
-    void artefact_properties(const dogen::physical::entities::artefact_properties& v);
-    void artefact_properties(const dogen::physical::entities::artefact_properties&& v);
+    /**@}*/
 
     /**
      * @brief Stores the properties related to the enablement, as read out from configuration.
@@ -188,6 +212,24 @@ public:
     dogen::physical::entities::enablement_properties& enablement_properties();
     void enablement_properties(const dogen::physical::entities::enablement_properties& v);
     void enablement_properties(const dogen::physical::entities::enablement_properties&& v);
+    /**@}*/
+
+    /**
+     * @brief What type of M2T transform to use in order to generate the artefact's content.
+     */
+    /**@{*/
+    dogen::physical::entities::formatting_styles formatting_style() const;
+    void formatting_style(const dogen::physical::entities::formatting_styles v);
+    /**@}*/
+
+    /**
+     * @brief Template used as input in order to generate the artefact's content, if any.
+     */
+    /**@{*/
+    const std::string& formatting_input() const;
+    std::string& formatting_input();
+    void formatting_input(const std::string& v);
+    void formatting_input(const std::string&& v);
     /**@}*/
 
 public:
@@ -205,16 +247,18 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
-    std::string content_;
     bool enabled_;
     bool overwrite_;
+    boost::filesystem::path file_path_;
+    std::string content_;
     std::unordered_map<std::string, boost::filesystem::path> relative_paths_;
     std::vector<boost::filesystem::path> dependencies_;
     std::list<std::string> relations_;
     std::string unified_diff_;
     dogen::physical::entities::operation operation_;
-    dogen::physical::entities::artefact_properties artefact_properties_;
     dogen::physical::entities::enablement_properties enablement_properties_;
+    dogen::physical::entities::formatting_styles formatting_style_;
+    std::string formatting_input_;
 };
 
 }

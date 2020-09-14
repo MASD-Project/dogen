@@ -172,7 +172,7 @@ void print_plain_report(std::ostream& s,
     artefacts) {
     for (auto& ptr : artefacts) {
         auto& a(*ptr);
-        const auto p(a.artefact_properties().file_path());
+        const auto p(a.file_path());
         if (p.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_file_name;
             BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));
@@ -203,7 +203,7 @@ void print_org_mode_report(std::ostream& s,
 
     for (auto& ptr : artefacts) {
         auto& a(*ptr);
-        const auto p(a.artefact_properties().file_path());
+        const auto p(a.file_path());
         if (p.empty()) {
             BOOST_LOG_SEV(lg, error) << empty_file_name;
             BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));

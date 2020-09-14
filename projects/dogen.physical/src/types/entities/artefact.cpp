@@ -34,37 +34,60 @@ namespace dogen::physical::entities {
 
 artefact::artefact()
     : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)) { }
+      overwrite_(static_cast<bool>(0)),
+      formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
+
+artefact::artefact(artefact&& rhs)
+    : meta_name_(std::move(rhs.meta_name_)),
+      configuration_(std::move(rhs.configuration_)),
+      provenance_(std::move(rhs.provenance_)),
+      name_(std::move(rhs.name_)),
+      enabled_(std::move(rhs.enabled_)),
+      overwrite_(std::move(rhs.overwrite_)),
+      file_path_(std::move(rhs.file_path_)),
+      content_(std::move(rhs.content_)),
+      relative_paths_(std::move(rhs.relative_paths_)),
+      dependencies_(std::move(rhs.dependencies_)),
+      relations_(std::move(rhs.relations_)),
+      unified_diff_(std::move(rhs.unified_diff_)),
+      operation_(std::move(rhs.operation_)),
+      enablement_properties_(std::move(rhs.enablement_properties_)),
+      formatting_style_(std::move(rhs.formatting_style_)),
+      formatting_input_(std::move(rhs.formatting_input_)) { }
 
 artefact::artefact(
     const dogen::identification::entities::physical_meta_name& meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
-    const std::string& content,
     const bool enabled,
     const bool overwrite,
+    const boost::filesystem::path& file_path,
+    const std::string& content,
     const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
     const std::vector<boost::filesystem::path>& dependencies,
     const std::list<std::string>& relations,
     const std::string& unified_diff,
     const dogen::physical::entities::operation& operation,
-    const dogen::physical::entities::artefact_properties& artefact_properties,
-    const dogen::physical::entities::enablement_properties& enablement_properties)
+    const dogen::physical::entities::enablement_properties& enablement_properties,
+    const dogen::physical::entities::formatting_styles formatting_style,
+    const std::string& formatting_input)
     : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
-      content_(content),
       enabled_(enabled),
       overwrite_(overwrite),
+      file_path_(file_path),
+      content_(content),
       relative_paths_(relative_paths),
       dependencies_(dependencies),
       relations_(relations),
       unified_diff_(unified_diff),
       operation_(operation),
-      artefact_properties_(artefact_properties),
-      enablement_properties_(enablement_properties) { }
+      enablement_properties_(enablement_properties),
+      formatting_style_(formatting_style),
+      formatting_input_(formatting_input) { }
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
@@ -72,16 +95,18 @@ void artefact::swap(artefact& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
-    swap(content_, other.content_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
+    swap(file_path_, other.file_path_);
+    swap(content_, other.content_);
     swap(relative_paths_, other.relative_paths_);
     swap(dependencies_, other.dependencies_);
     swap(relations_, other.relations_);
     swap(unified_diff_, other.unified_diff_);
     swap(operation_, other.operation_);
-    swap(artefact_properties_, other.artefact_properties_);
     swap(enablement_properties_, other.enablement_properties_);
+    swap(formatting_style_, other.formatting_style_);
+    swap(formatting_input_, other.formatting_input_);
 }
 
 bool artefact::operator==(const artefact& rhs) const {
@@ -89,16 +114,18 @@ bool artefact::operator==(const artefact& rhs) const {
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
-        content_ == rhs.content_ &&
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
+        file_path_ == rhs.file_path_ &&
+        content_ == rhs.content_ &&
         relative_paths_ == rhs.relative_paths_ &&
         dependencies_ == rhs.dependencies_ &&
         relations_ == rhs.relations_ &&
         unified_diff_ == rhs.unified_diff_ &&
         operation_ == rhs.operation_ &&
-        artefact_properties_ == rhs.artefact_properties_ &&
-        enablement_properties_ == rhs.enablement_properties_;
+        enablement_properties_ == rhs.enablement_properties_ &&
+        formatting_style_ == rhs.formatting_style_ &&
+        formatting_input_ == rhs.formatting_input_;
 }
 
 artefact& artefact::operator=(artefact other) {
@@ -171,22 +198,6 @@ void artefact::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
 }
 
-const std::string& artefact::content() const {
-    return content_;
-}
-
-std::string& artefact::content() {
-    return content_;
-}
-
-void artefact::content(const std::string& v) {
-    content_ = v;
-}
-
-void artefact::content(const std::string&& v) {
-    content_ = std::move(v);
-}
-
 bool artefact::enabled() const {
     return enabled_;
 }
@@ -201,6 +212,38 @@ bool artefact::overwrite() const {
 
 void artefact::overwrite(const bool v) {
     overwrite_ = v;
+}
+
+const boost::filesystem::path& artefact::file_path() const {
+    return file_path_;
+}
+
+boost::filesystem::path& artefact::file_path() {
+    return file_path_;
+}
+
+void artefact::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
+}
+
+void artefact::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
+}
+
+const std::string& artefact::content() const {
+    return content_;
+}
+
+std::string& artefact::content() {
+    return content_;
+}
+
+void artefact::content(const std::string& v) {
+    content_ = v;
+}
+
+void artefact::content(const std::string&& v) {
+    content_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::filesystem::path>& artefact::relative_paths() const {
@@ -283,22 +326,6 @@ void artefact::operation(const dogen::physical::entities::operation&& v) {
     operation_ = std::move(v);
 }
 
-const dogen::physical::entities::artefact_properties& artefact::artefact_properties() const {
-    return artefact_properties_;
-}
-
-dogen::physical::entities::artefact_properties& artefact::artefact_properties() {
-    return artefact_properties_;
-}
-
-void artefact::artefact_properties(const dogen::physical::entities::artefact_properties& v) {
-    artefact_properties_ = v;
-}
-
-void artefact::artefact_properties(const dogen::physical::entities::artefact_properties&& v) {
-    artefact_properties_ = std::move(v);
-}
-
 const dogen::physical::entities::enablement_properties& artefact::enablement_properties() const {
     return enablement_properties_;
 }
@@ -313,6 +340,30 @@ void artefact::enablement_properties(const dogen::physical::entities::enablement
 
 void artefact::enablement_properties(const dogen::physical::entities::enablement_properties&& v) {
     enablement_properties_ = std::move(v);
+}
+
+dogen::physical::entities::formatting_styles artefact::formatting_style() const {
+    return formatting_style_;
+}
+
+void artefact::formatting_style(const dogen::physical::entities::formatting_styles v) {
+    formatting_style_ = v;
+}
+
+const std::string& artefact::formatting_input() const {
+    return formatting_input_;
+}
+
+std::string& artefact::formatting_input() {
+    return formatting_input_;
+}
+
+void artefact::formatting_input(const std::string& v) {
+    formatting_input_ = v;
+}
+
+void artefact::formatting_input(const std::string&& v) {
+    formatting_input_ = std::move(v);
 }
 
 }

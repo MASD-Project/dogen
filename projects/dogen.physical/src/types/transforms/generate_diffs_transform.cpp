@@ -57,7 +57,7 @@ bool generate_diffs_transform::
 process_artefact(const boost::filesystem::path& managed_dir,
     physical::entities::artefact& a) {
     BOOST_LOG_SEV(lg, trace) << "Processing artefact: " << a.name().id();
-    const auto& fp(a.artefact_properties().file_path());
+    const auto& fp(a.file_path());
     if (fp.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_file_name;
         BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));

@@ -140,17 +140,16 @@ void formatting_transform::apply(const std::unordered_map<
     for (auto& pair : as.artefacts_by_archetype()) {
         const auto arch(pair.first);
         auto& a(*pair.second);
-        auto& ap(a.artefact_properties());
         const auto i(cfgs.find(arch));
         if (i == cfgs.end()) {
             using entities::formatting_styles;
-            ap.formatting_style(formatting_styles::stock);
+            a.formatting_style(formatting_styles::stock);
             BOOST_LOG_SEV(lg,trace) << "Element has a stock formatter.";
             continue;
         }
         const auto& cfg(i->second);
-        ap.formatting_style(cfg.styles());
-        ap.formatting_input(cfg.input());
+        a.formatting_style(cfg.styles());
+        a.formatting_input(cfg.input());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming element";

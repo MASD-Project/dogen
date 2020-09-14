@@ -54,7 +54,7 @@ void operation_transform::
 apply(entities::artefact& a, const bool force_write) {
     BOOST_LOG_SEV(lg, trace) << "Processing: " << a.name().id();
 
-    const auto p(a.artefact_properties().file_path());
+    const auto p(a.file_path());
     if (p.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_file_name;
         BOOST_THROW_EXCEPTION(transform_exception(empty_file_name));

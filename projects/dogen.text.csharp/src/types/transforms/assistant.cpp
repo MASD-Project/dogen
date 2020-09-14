@@ -289,12 +289,10 @@ std::ostream& assistant::stream() {
 void assistant::update_artefact() {
     artefact_.content(stream_.str());
 
-    const auto& ap(artefact_.artefact_properties());
-    const auto arch(physical_meta_name_.id());
-    artefact_.overwrite(ap.overwrite());
-
     const auto fp(artefact_properties_.file_path());
-    artefact_.artefact_properties().file_path(fp);
+    artefact_.file_path(fp);
+
+    const auto arch(physical_meta_name_.id());
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;

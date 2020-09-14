@@ -78,7 +78,7 @@ apply(const context& ctx, const entities::model& m) {
         auto& as(as_pair.second);
         for (auto& a_pair : as.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
-            const auto& p(a.artefact_properties().file_path());
+            const auto& p(a.file_path());
             const auto gs(p.generic_string());
             BOOST_LOG_SEV(lg, trace) << "Processing file: " << gs;
 

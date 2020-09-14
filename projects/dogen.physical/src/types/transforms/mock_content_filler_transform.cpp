@@ -72,7 +72,7 @@ apply(const context& ctx, entities::model& m) {
         if (!a.content().empty())
             continue;
 
-        const auto& fp(a.artefact_properties().file_path());
+        const auto& fp(a.file_path());
         if (fp.extension() != ".cpp")
             continue;
 
