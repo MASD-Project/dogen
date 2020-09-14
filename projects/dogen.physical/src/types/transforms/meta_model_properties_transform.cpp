@@ -51,13 +51,9 @@ static std::string enabled_feature("enabled");
 static std::string overwrite_feature("overwrite");
 
 const std::string root_module_not_found("Could not find root module: ");
-const std::string type_group_not_found(
-    "Could not find a type group for archetype: ");
 const std::string backend_not_found("Could not find backend: ");
 const std::string facet_not_found("Could not find facet: ");
 const std::string archetype_not_found("Could not find archetype: ");
-const std::string missing_configuration(
-    "Configuration not available for element: ");
 
 }
 
@@ -120,31 +116,6 @@ meta_model_properties_transform::make_global_archetype_feature_group(
         gatg.enabled = s.get_by_name(id, enabled_feature);
         gatg.overwrite = s.get_by_name(id, overwrite_feature);
         r.insert(std::make_pair(id, gatg));
-    }
-    return r;
-}
-
-std::unordered_map<
-    identification::entities::physical_meta_id,
-    meta_model_properties_transform::local_archetype_feature_group>
-meta_model_properties_transform::make_local_archetype_feature_group(
-    const variability::entities::feature_model& fm,
-    const identification::entities::physical_meta_name_indices& idx) {
-    std::unordered_map<identification::entities::physical_meta_id,
-                       local_archetype_feature_group> r;
-
-    const variability::helpers::feature_selector s(fm);
-    identification::helpers::physical_meta_id_builder b;
-    for (const auto& mn : idx.all()) {
-        local_archetype_feature_group latg;
-        const auto id(mn.id());
-        const auto pmid(b.build_facet(mn));
-        latg.facet_enabled = s.get_by_name(pmid.value(), enabled_feature);
-        latg.archetype_enabled = s.get_by_name(id.value(), enabled_feature);
-        latg.facet_overwrite = s.get_by_name(pmid.value(), overwrite_feature);
-        latg.archetype_overwrite = s.get_by_name(id.value(), overwrite_feature);
-
-        r.insert(std::make_pair(id, latg));
     }
     return r;
 }
@@ -310,63 +281,6 @@ void meta_model_properties_transform::populate_global_enablement_properties(
     }
 }
 
-void meta_model_properties_transform::populate_local_enablement_properties(
-    const variability::entities::feature_model& fm,
-    const identification::entities::physical_meta_name_indices& nrp,
-    entities::artefact_repository& ar) {
-    /*
-     * Computes all of the possible features for every physical
-     * location. Not all of these will be of use to a given element,
-     * because they may not be expressed for that element.
-     */
-    const auto fgs(make_local_archetype_feature_group(fm, nrp));
-
-    for (auto& as_pair : ar.artefact_sets_by_logical_id()) {
-        const auto id(as_pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-        auto& as(as_pair.second);
-
-        if (!as.configuration()) {
-            BOOST_LOG_SEV(lg, error) << missing_configuration << id;
-            BOOST_THROW_EXCEPTION(
-                transform_exception(missing_configuration + id.value()));
-        }
-
-        const auto& cfg(*as.configuration());
-        const variability::helpers::configuration_selector s(cfg);
-        for (auto& a_pair : as.artefacts_by_archetype()) {
-            auto& a(*a_pair.second);
-            const auto archetype(a.meta_name().id());
-            const auto i(fgs.find(archetype));
-            if (i == fgs.end()) {
-                BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
-                BOOST_THROW_EXCEPTION(transform_exception(
-                        type_group_not_found + archetype.value()));
-            }
-            const auto fg(i->second);
-            if (s.has_configuration_point(fg.facet_enabled)) {
-                a.enablement_properties().facet_enabled(
-                    s.get_boolean_content_or_default(fg.facet_enabled));
-            }
-
-            if (s.has_configuration_point(fg.archetype_enabled)) {
-                a.enablement_properties().archetype_enabled(
-                    s.get_boolean_content_or_default(fg.archetype_enabled));
-            }
-
-            if (s.has_configuration_point(fg.facet_overwrite)) {
-                a.enablement_properties().facet_overwrite(
-                    s.get_boolean_content(fg.facet_overwrite));
-            }
-
-            if (s.has_configuration_point(fg.archetype_overwrite)) {
-                a.enablement_properties().archetype_overwrite(
-                    s.get_boolean_content(fg.archetype_overwrite));
-            }
-        }
-    }
-}
-
 void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& ar) {
     tracing::scoped_transform_tracer stp(lg, "global enablement transform",
@@ -376,7 +290,6 @@ apply(const context& ctx, entities::artefact_repository& ar) {
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     populate_global_enablement_properties(fm, in, ar);
-    // populate_local_enablement_properties(fm, in, ar);
 
     stp.end_transform(ar);
 }

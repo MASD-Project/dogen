@@ -57,13 +57,6 @@ private:
         variability::entities::feature overwrite;
     };
 
-    struct local_archetype_feature_group {
-        variability::entities::feature facet_enabled;
-        variability::entities::feature archetype_enabled;
-        variability::entities::feature facet_overwrite;
-        variability::entities::feature archetype_overwrite;
-    };
-
 private:
     static std::unordered_map<identification::entities::physical_meta_id,
                               backend_feature_group>
@@ -78,12 +71,6 @@ private:
     static std::unordered_map<identification::entities::physical_meta_id,
                               global_archetype_feature_group>
     make_global_archetype_feature_group(
-        const variability::entities::feature_model& fm,
-        const identification::entities::physical_meta_name_indices& idx);
-
-    static std::unordered_map<identification::entities::physical_meta_id,
-                              local_archetype_feature_group>
-    make_local_archetype_feature_group(
         const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
