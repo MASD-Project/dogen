@@ -24,6 +24,11 @@
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
@@ -42,11 +47,18 @@ const std::string transform_id("physical.transforms.enablement_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+static std::string enabled_feature("enabled");
+static std::string overwrite_feature("overwrite");
+
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string duplicate_element_archetype("Duplicate element archetype: ");
 const std::string meta_name_not_found("Meta-name not found: ");
+const std::string missing_configuration(
+    "Configuration not available for element: ");
+const std::string type_group_not_found(
+    "Could not find a type group for archetype: ");
 
 template <typename T>
 struct scope_exit {
@@ -62,6 +74,88 @@ scope_exit<T> make_scope_exit(T &&t) {
 
 
 namespace dogen::physical::transforms {
+
+std::unordered_map<
+    identification::entities::physical_meta_id,
+    enablement_transform::local_archetype_feature_group>
+enablement_transform::make_local_archetype_feature_group(
+    const variability::entities::feature_model& fm,
+    const identification::entities::physical_meta_name_indices& idx) {
+    std::unordered_map<identification::entities::physical_meta_id,
+                       local_archetype_feature_group> r;
+
+    const variability::helpers::feature_selector s(fm);
+    identification::helpers::physical_meta_id_builder b;
+    for (const auto& mn : idx.all()) {
+        local_archetype_feature_group latg;
+        const auto id(mn.id());
+        const auto pmid(b.build_facet(mn));
+        latg.facet_enabled = s.get_by_name(pmid.value(), enabled_feature);
+        latg.archetype_enabled = s.get_by_name(id.value(), enabled_feature);
+        latg.facet_overwrite = s.get_by_name(pmid.value(), overwrite_feature);
+        latg.archetype_overwrite = s.get_by_name(id.value(), overwrite_feature);
+
+        r.insert(std::make_pair(id, latg));
+    }
+    return r;
+}
+
+void enablement_transform::populate_local_enablement_properties(
+    const variability::entities::feature_model& fm,
+    const identification::entities::physical_meta_name_indices& nrp,
+    entities::artefact_repository& ar) {
+    /*
+     * Computes all of the possible features for every physical
+     * location. Not all of these will be of use to a given element,
+     * because they may not be expressed for that element.
+     */
+    const auto fgs(make_local_archetype_feature_group(fm, nrp));
+
+    for (auto& as_pair : ar.artefact_sets_by_logical_id()) {
+        const auto id(as_pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+        auto& as(as_pair.second);
+
+        if (!as.configuration()) {
+            BOOST_LOG_SEV(lg, error) << missing_configuration << id;
+            BOOST_THROW_EXCEPTION(
+                transform_exception(missing_configuration + id.value()));
+        }
+
+        const auto& cfg(*as.configuration());
+        const variability::helpers::configuration_selector s(cfg);
+        for (auto& a_pair : as.artefacts_by_archetype()) {
+            auto& a(*a_pair.second);
+            const auto archetype(a.meta_name().id());
+            const auto i(fgs.find(archetype));
+            if (i == fgs.end()) {
+                BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
+                BOOST_THROW_EXCEPTION(transform_exception(
+                        type_group_not_found + archetype.value()));
+            }
+            const auto fg(i->second);
+            if (s.has_configuration_point(fg.facet_enabled)) {
+                a.enablement_properties().facet_enabled(
+                    s.get_boolean_content_or_default(fg.facet_enabled));
+            }
+
+            if (s.has_configuration_point(fg.archetype_enabled)) {
+                a.enablement_properties().archetype_enabled(
+                    s.get_boolean_content_or_default(fg.archetype_enabled));
+            }
+
+            if (s.has_configuration_point(fg.facet_overwrite)) {
+                a.enablement_properties().facet_overwrite(
+                    s.get_boolean_content(fg.facet_overwrite));
+            }
+
+            if (s.has_configuration_point(fg.archetype_overwrite)) {
+                a.enablement_properties().archetype_overwrite(
+                    s.get_boolean_content(fg.archetype_overwrite));
+            }
+        }
+    }
+}
 
 void enablement_transform::compute_enablement_for_artefact_properties(
     const entities::denormalised_archetype_properties&
@@ -93,10 +187,23 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      * case of code generated code. Having said that, it does not make
      * a lot of sense to set overwrite globally to false.
      *
-     * Note that the overwrite flag is only relevant if enabled is
-     * true. It is not used otherwise. We set it up before enablement
-     * just so we don't have to worry about handling the "continue"
-     * statements.
+     * It is important to note the role of profiles here. It makes
+     * very little sense to have a "local" *facet* enablement or
+     * overwrite properties - why would you want to enable or disable
+     * a facet on a given archetype? After all you know the
+     * archetype's name already, you are on it. But when you think of
+     * it from a profile viewpoint, then it makes sense: you don't
+     * want to have to deal with individual archetypes when defining
+     * profiles, you just want to make blanket statements about
+     * enablement at the facet level - else you'd end up having to
+     * describe every single archetype the profile could possibly
+     * apply to. So its kind of "local" but really more like "profile
+     * level local".
+     *
+     * Also, note that the overwrite flag is only relevant if enabled
+     * is true. It is not used otherwise. We set it up before
+     * enablement just so we don't have to worry about handling the
+     * "continue" statements.
      */
     auto lambda(
         [&](auto& optional_flag) {
@@ -292,19 +399,30 @@ void enablement_transform::compute_enablement_for_artefact_set(
 
 void enablement_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
-    tracing::scoped_transform_tracer stp(lg, "local enablement",
+    tracing::scoped_transform_tracer stp(lg, "enablement",
         transform_id, arp.identifier(), *ctx.tracer(), arp);
 
+    /*
+     * Update all of the local enablement properties first. The global
+     * properties have been updated as part of the meta-model
+     * properties transform.
+     */
+    const auto &fm(*ctx.feature_model());
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
-    const auto& galp(arp.global_enablement_properties()
-        .denormalised_archetype_properties());
+    populate_local_enablement_properties(fm, in, arp);
+
+    /*
+     * Now, for each artefact, compute their enablement properties.
+     */
+    const auto& gep(arp.global_enablement_properties());
+    const auto& dap(gep.denormalised_archetype_properties());
     using identification::entities::logical_meta_physical_id;
     std::unordered_set<logical_meta_physical_id> eafe;
     for(auto& pair : arp.artefact_sets_by_logical_id()) {
         auto& as(pair.second);
-        compute_enablement_for_artefact_set(lmn, galp, eafe, as);
+        compute_enablement_for_artefact_set(lmn, dap, eafe, as);
     }
     arp.enabled_archetype_for_element(eafe);
 

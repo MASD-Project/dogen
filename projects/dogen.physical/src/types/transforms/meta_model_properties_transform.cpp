@@ -376,7 +376,7 @@ apply(const context& ctx, entities::artefact_repository& ar) {
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     populate_global_enablement_properties(fm, in, ar);
-    populate_local_enablement_properties(fm, in, ar);
+    // populate_local_enablement_properties(fm, in, ar);
 
     stp.end_transform(ar);
 }

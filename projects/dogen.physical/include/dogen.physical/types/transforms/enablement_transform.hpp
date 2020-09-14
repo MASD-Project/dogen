@@ -27,6 +27,9 @@
 
 #include <string>
 #include <unordered_map>
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.identification/types/entities/archetype_name_set.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.physical/types/entities/artefact_properties.hpp"
@@ -39,6 +42,26 @@
 namespace dogen::physical::transforms {
 
 class enablement_transform final {
+private:
+    struct local_archetype_feature_group {
+        variability::entities::feature facet_enabled;
+        variability::entities::feature archetype_enabled;
+        variability::entities::feature facet_overwrite;
+        variability::entities::feature archetype_overwrite;
+    };
+
+private:
+    static std::unordered_map<identification::entities::physical_meta_id,
+                              local_archetype_feature_group>
+    make_local_archetype_feature_group(
+        const variability::entities::feature_model& fm,
+        const identification::entities::physical_meta_name_indices& idx);
+
+    static void populate_local_enablement_properties(
+        const variability::entities::feature_model& fm,
+        const identification::entities::physical_meta_name_indices& idx,
+        entities::artefact_repository& ar);
+
 private:
     static void compute_enablement_for_artefact_properties(
         const entities::denormalised_archetype_properties&
