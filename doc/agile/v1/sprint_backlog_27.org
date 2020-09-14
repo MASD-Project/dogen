@@ -14,25 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-14 Mon 12:11]
+#+CAPTION: Clock summary at [2020-09-14 Mon 17:37]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *64:48* |       |       | 100.0 |
+| *Total time*                                       | *68:04* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 64:48   |       |       | 100.0 |
-| Active                                             |         | 64:48 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  11.2 |
-| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.1 |
-| Sprint and product backlog grooming                |         |       |  2:26 |   3.8 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   6.7 |
-| Create an =ident= model                            |         |       | 42:02 |  64.9 |
+| Stories                                            | 68:04   |       |       | 100.0 |
+| Active                                             |         | 68:04 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  10.7 |
+| Create a demo and presentation for previous sprint |         |       |  0:41 |   1.0 |
+| Sprint and product backlog grooming                |         |       |  2:26 |   3.6 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   6.4 |
+| Create an =ident= model                            |         |       | 42:02 |  61.8 |
 | Rename injection to codec                          |         |       |  0:48 |   1.2 |
 | Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
 | Remove support for split projects                  |         |       |  0:07 |   0.2 |
 | Implement meta-name validator correctly            |         |       |  0:17 |   0.4 |
-| Add dependencies to artefacts                      |         |       |  2:28 |   3.8 |
-| Add instances of physical meta-model elements      |         |       |  4:15 |   6.6 |
+| Add dependencies to artefacts                      |         |       |  2:28 |   3.6 |
+| Add instances of physical meta-model elements      |         |       |  7:31 |  11.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1132,6 +1132,7 @@ facet factory we should set up the expectation. Then we can throw.
 
 *** STARTED Add instances of physical meta-model elements             :story:
     :LOGBOOK:
+    CLOCK: [2020-09-14 Mon 14:21]--[2020-09-14 Mon 17:37] =>  3:16
     CLOCK: [2020-09-14 Mon 10:50]--[2020-09-14 Mon 12:11] =>  1:21
     CLOCK: [2020-09-14 Mon 09:56]--[2020-09-14 Mon 10:350] =>  0:39
     CLOCK: [2020-09-14 Mon 09:22]--[2020-09-14 Mon 09:38] =>  0:16
