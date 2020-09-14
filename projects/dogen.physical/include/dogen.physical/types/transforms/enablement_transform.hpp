@@ -65,21 +65,20 @@ private:
      */
     static std::unordered_map<identification::entities::physical_meta_id,
                               feature_group>
-    make_feature_group(
-        const variability::entities::feature_model& fm,
+    make_feature_group(const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
     /**
-     * @brief Reads the configuration for each artefact set and then
-     * uses it to populate the correspondent artefacts.
+     * @brief Reads the configuration for each artefact set regarding
+     * enablement, and then uses it to populate the correspondent
+     * artefacts.
      */
-    static void populate_local_enablement_properties(
-        const variability::entities::feature_model& fm,
-        const identification::entities::physical_meta_name_indices& idx,
-        entities::artefact_repository& ar);
+    static void populate_enablement_properties(
+        const std::unordered_map<identification::entities::physical_meta_id,
+        feature_group>& fgs, entities::artefact_repository& ar);
 
 private:
-    static void compute_enablement_for_artefact_properties(
+    static void compute_enablement_for_artefact(
         const entities::denormalised_archetype_properties&
         global_enablement_properties,
         const entities::enablement_properties&

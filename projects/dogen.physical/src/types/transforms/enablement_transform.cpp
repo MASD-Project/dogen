@@ -91,7 +91,10 @@ enablement_transform::make_feature_group(const feature_model& fm,
     /*
      * For each archetype, obtain its facet. Then for the pair facet
      * and archetype, create a feature group for all of the relevant
-     * properties.
+     * properties. Note that we compute all of the possible features
+     * for every physical location. Not all of these will be of use to
+     * a given element, because they may not be expressed for that
+     * element.
      */
     for (const auto& arch_pmn : idx.all()) {
         feature_group fg;
@@ -109,40 +112,38 @@ enablement_transform::make_feature_group(const feature_model& fm,
     return r;
 }
 
-void enablement_transform::populate_local_enablement_properties(
-    const feature_model& fm,
-    const physical_meta_name_indices& nrp,
-    entities::artefact_repository& ar) {
-    /*
-     * Computes all of the possible features for every physical
-     * location. Not all of these will be of use to a given element,
-     * because they may not be expressed for that element.
-     */
-    const auto fgs(make_feature_group(fm, nrp));
-
+void enablement_transform::populate_enablement_properties(
+    const std::unordered_map<identification::entities::physical_meta_id,
+    feature_group>& fgs, entities::artefact_repository& ar) {
     for (auto& as_pair : ar.artefact_sets_by_logical_id()) {
-        const auto id(as_pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-        auto& as(as_pair.second);
+        const auto lid(as_pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << lid;
 
+        auto& as(as_pair.second);
         if (!as.configuration()) {
-            BOOST_LOG_SEV(lg, error) << missing_configuration << id;
+            BOOST_LOG_SEV(lg, error) << missing_configuration << lid;
             BOOST_THROW_EXCEPTION(
-                transform_exception(missing_configuration + id.value()));
+                transform_exception(missing_configuration + lid.value()));
         }
 
+        /*
+         * Obtain the feature group associated with a given point in
+         * physical space and then read its configuration related to
+         * enablement. Note that all archetypes are expected to have a
+         * feature group.
+         */
         const auto& cfg(*as.configuration());
         const variability::helpers::configuration_selector s(cfg);
         for (auto& a_pair : as.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
-            const auto archetype(a.meta_name().id());
-            const auto i(fgs.find(archetype));
+            const auto pmid(a.meta_name().id());
+            const auto i(fgs.find(pmid));
             if (i == fgs.end()) {
-                BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
+                BOOST_LOG_SEV(lg, error) << type_group_not_found << pmid;
                 BOOST_THROW_EXCEPTION(transform_exception(
-                        type_group_not_found + archetype.value()));
+                        type_group_not_found + pmid.value()));
             }
-            const auto fg(i->second);
+            const auto& fg(i->second);
             if (s.has_configuration_point(fg.facet_enabled)) {
                 a.enablement_properties().facet_enabled(
                     s.get_boolean_content_or_default(fg.facet_enabled));
@@ -166,12 +167,11 @@ void enablement_transform::populate_local_enablement_properties(
     }
 }
 
-void enablement_transform::compute_enablement_for_artefact_properties(
+void enablement_transform::compute_enablement_for_artefact(
     const entities::denormalised_archetype_properties&
     global_enablement_properties,
     const entities::enablement_properties& local_enablement_properties,
-    const physical_meta_id& archetype,
-    entities::artefact_properties& ap) {
+    const physical_meta_id& archetype, entities::artefact_properties& ap) {
 
     const auto& gc(global_enablement_properties);
     const auto& lc(local_enablement_properties);
@@ -187,35 +187,22 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      * overwrite locally on a model element (either directly of via
      * profiles); for example, for an handcrafted class, we want to
      * set overwrite to false at the element level. This is normally
-     * done via a profile, but can be conceivable be done directly for
-     * less common configurations - for example adding manual support
-     * for IO for a handcrafted type. The global archetype overwrite
-     * flag is a bit less useful - we haven't got a use case for it
-     * just yet but it is added for (foolish) consistency. Finally,
-     * the global facet level overwrite flag is useful for the general
-     * case of code generated code. Having said that, it does not make
-     * a lot of sense to set overwrite globally to false.
-     *
-     * It is important to note the role of profiles here. It makes
-     * very little sense to have a "local" *facet* enablement or
-     * overwrite properties - why would you want to enable or disable
-     * a facet on a given archetype? After all you know the
-     * archetype's name already, you are on it. But when you think of
-     * it from a profile viewpoint, then it makes sense: you don't
-     * want to have to deal with individual archetypes when defining
-     * profiles, you just want to make blanket statements about
-     * enablement at the facet level - else you'd end up having to
-     * describe every single archetype the profile could possibly
-     * apply to. So its kind of "local" but really more like "profile
-     * level local".
+     * done via a profile, but can be conceivably done at the element
+     * level for less common configurations - for example, by adding
+     * manual support for IO for a handcrafted type. The global
+     * archetype overwrite flag is a bit less useful - we haven't got
+     * a use case for it just yet but it is added for (foolish)
+     * consistency. Finally, the global facet level overwrite flag is
+     * useful for the general case of code generated code (e.g. we
+     * want to always overwrite). Having said that, it does not make a
+     * lot of sense to set overwrite globally to false.
      *
      * Also, note that the overwrite flag is only relevant if enabled
      * is true. It is not used otherwise. We set it up before
      * enablement just so we don't have to worry about handling the
      * "continue" statements.
      */
-    auto lambda(
-        [&](auto& optional_flag) {
+    auto lambda([&](auto& optional_flag) {
             std::ostringstream s;
             if (optional_flag)
                 s << *optional_flag;
@@ -223,8 +210,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
                 s << "<empty>";
             return s.str();
         });
-    BOOST_LOG_SEV(lg, trace) << "Overwrite flags. "
-                             << "Local artchetype: "
+    BOOST_LOG_SEV(lg, trace) << "Overwrite flags. Local archetype: "
                              << lambda(lc.archetype_overwrite())
                              << " Local facet: "
                              << lambda(lc.facet_overwrite())
@@ -245,8 +231,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     /*
      * Ensure we log the enablement details with the early returns.
      */
-    auto log_scope_exit(make_scope_exit(
-        [&]() mutable {
+    auto log_scope_exit(make_scope_exit([&]() mutable {
             BOOST_LOG_SEV(lg, trace) << "Enablement for: " << archetype
                                      << " value: " << ap.enabled()
                                      << " overwrite: " << ap.overwrite();
@@ -274,8 +259,20 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
     /*
      * Check to see if the facet enablement field has been set
-     * locally. If so, it takes precedence over global
-     * configuration.
+     * locally. If so, it takes precedence over global configuration.
+     *
+     * It is important to note the role of profiles here. It makes
+     * very little sense to have a "local" *facet* enablement or
+     * overwrite properties - why would you want to enable or disable
+     * a facet on a given archetype? After all you know the
+     * archetype's name already, you are on it. But when you think of
+     * it from a profile viewpoint, then it makes sense: you don't
+     * want to have to deal with individual archetypes when defining
+     * profiles, you just want to make blanket statements about
+     * enablement at the facet level - else you'd end up having to
+     * describe every single archetype the profile could possibly
+     * apply to. So its kind of "local" but really more like "profile
+     * level local".
      */
     if (lc.facet_enabled()) {
         ap.enabled(*lc.facet_enabled());
@@ -294,15 +291,13 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      * that tend to be manually disabled. However, since archetypes
      * default to enabled, we can't just directly rely on that when
      * set to true. So we check to make sure the facet itself is
-     * enabled. This means that you cannot switch off a facet globally
+     * enabled. This means that you cannot globally switch off a facet
      * but enable only one archetype for that facet. As this seems
-     * like a pretty far-fetched use case, we ignore it for now.
+     * like a pretty far-fetched use case, we ignore it for now. We of
+     * course support this scenario for local enablement, which is
+     * very common.
      */
-    if (gc.archetype_enabled() == false)
-        ap.enabled(false);
-    else
-        ap.enabled(gc.facet_enabled() && gc.archetype_enabled());
-
+    ap.enabled(gc.archetype_enabled() && gc.facet_enabled());
 }
 
 void enablement_transform::compute_enablement_for_artefact_set(
@@ -364,7 +359,7 @@ void enablement_transform::compute_enablement_for_artefact_set(
          * for this artefact.
          */
         auto& art_props(a->artefact_properties());
-        compute_enablement_for_artefact_properties(gep, lep, arch, art_props);
+        compute_enablement_for_artefact(gep, lep, arch, art_props);
 
         if (!art_props.enabled()) {
             BOOST_LOG_SEV(lg, trace) << "Archetype not enabled.";
@@ -420,7 +415,8 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
-    populate_local_enablement_properties(fm, in, arp);
+    const auto fgs(make_feature_group(fm, in));
+    populate_enablement_properties(fgs, arp);
 
     /*
      * Now, for each artefact, compute their enablement properties.
