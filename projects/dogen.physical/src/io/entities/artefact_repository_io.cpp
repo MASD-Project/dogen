@@ -26,7 +26,6 @@
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.physical/io/entities/meta_model_properties_io.hpp"
-#include "dogen.physical/io/entities/global_enablement_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
@@ -98,7 +97,6 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
       << "\"identifier\": " << "\"" << tidy_up_string(v.identifier()) << "\"" << ", "
       << "\"root_module_logical_id\": " << v.root_module_logical_id() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
-      << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts() << ", "

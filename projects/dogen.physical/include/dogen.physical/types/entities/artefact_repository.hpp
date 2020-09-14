@@ -36,7 +36,6 @@
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.physical/types/entities/meta_model_properties.hpp"
-#include "dogen.physical/types/entities/global_enablement_properties.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
@@ -57,7 +56,6 @@ public:
         const std::string& identifier,
         const dogen::identification::entities::logical_id& root_module_logical_id,
         const dogen::physical::entities::extraction_properties& extraction_properties,
-        const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const std::list<boost::filesystem::path>& managed_directories,
         const bool has_generatable_artefacts,
@@ -98,11 +96,6 @@ public:
     dogen::physical::entities::extraction_properties& extraction_properties();
     void extraction_properties(const dogen::physical::entities::extraction_properties& v);
     void extraction_properties(const dogen::physical::entities::extraction_properties&& v);
-
-    const dogen::physical::entities::global_enablement_properties& global_enablement_properties() const;
-    dogen::physical::entities::global_enablement_properties& global_enablement_properties();
-    void global_enablement_properties(const dogen::physical::entities::global_enablement_properties& v);
-    void global_enablement_properties(const dogen::physical::entities::global_enablement_properties&& v);
 
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element() const;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element();
@@ -147,7 +140,6 @@ private:
     std::string identifier_;
     dogen::identification::entities::logical_id root_module_logical_id_;
     dogen::physical::entities::extraction_properties extraction_properties_;
-    dogen::physical::entities::global_enablement_properties global_enablement_properties_;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;
     bool has_generatable_artefacts_;

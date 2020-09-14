@@ -123,11 +123,14 @@ private:
         archetype_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
-private:
-    static void populate_global_enablement_properties(
-        const variability::entities::feature_model& fm,
+    /**
+     * @brief Reads the de-normalised archetype properties.
+     */
+    static std::unordered_map<identification::entities::physical_meta_id,
+                       entities::denormalised_archetype_properties>
+    obtain_denormalised_archetype_properties(
         const identification::entities::physical_meta_name_indices& idx,
-        entities::artefact_repository& arp);
+        const entities::meta_model_properties& mmp);
 
 public:
     static void apply(const context& ctx, entities::artefact_repository& arp);

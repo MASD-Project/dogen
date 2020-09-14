@@ -1384,10 +1384,6 @@
           "type": "extraction_properties"
         },
         {
-          "name": "global_enablement_properties",
-          "type": "global_enablement_properties"
-        },
-        {
           "name": "enabled_archetype_for_element",
           "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         },
@@ -1438,28 +1434,6 @@
         {
           "name": "enable_backend_directories",
           "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "entities::global_enablement_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, backend_properties>"
-        },
-        {
-          "name": "facet_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, facet_properties>"
-        },
-        {
-          "name": "archetype_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype_properties>"
-        },
-        {
-          "name": "denormalised_archetype_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>"
         }
       ]
     },

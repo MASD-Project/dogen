@@ -185,40 +185,22 @@ meta_model_properties_transform::obtain_archetype_properties(
     return r;
 }
 
-void meta_model_properties_transform::populate_global_enablement_properties(
-    const feature_model& fm, const physical_meta_name_indices& idx,
-    entities::artefact_repository& arp) {
+std::unordered_map<physical_meta_id,
+                   entities::denormalised_archetype_properties>
+meta_model_properties_transform::obtain_denormalised_archetype_properties(
+    const identification::entities::physical_meta_name_indices& idx,
+    const entities::meta_model_properties& mmp) {
 
-    const auto bfg(make_backend_feature_group(fm, idx));
-    const auto ffg(make_facet_feature_group(fm, idx));
-    const auto afg(make_archetype_feature_group(fm, idx));
-
-    const auto rmid(arp.root_module_logical_id());
-    const auto i(arp.artefact_sets_by_logical_id().find(rmid));
-    if (i == arp.artefact_sets_by_logical_id().end()) {
-        BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
-        BOOST_THROW_EXCEPTION(
-            transform_exception(root_module_not_found + rmid.value()));
-    }
-
-    const auto& cfg(*i->second.configuration());
-    auto& gep(arp.global_enablement_properties());
-    gep.backend_properties(obtain_backend_properties(bfg, cfg));
-    gep.facet_properties(obtain_facet_properties(ffg, cfg));
-    gep.archetype_properties(obtain_archetype_properties(afg, cfg));
-
-    /*
-     * Now populate the denormalised archetype properties by querying
-     * the containers we've already populated.
-     */
+    std::unordered_map<physical_meta_id,
+                       entities::denormalised_archetype_properties> r;
     for (const auto& backend_pair : idx.archetype_names_by_backend_by_facet()) {
         /*
          * First we locate the backend for the current batch of
          * physical locations.
          */
         const auto& bn(backend_pair.first);
-        const auto i(gep.backend_properties().find(bn));
-        if (i == gep.backend_properties().end()) {
+        const auto i(mmp.backend_properties().find(bn));
+        if (i == mmp.backend_properties().end()) {
             BOOST_LOG_SEV(lg, error) << backend_not_found << bn;
             BOOST_THROW_EXCEPTION(transform_exception(
                     backend_not_found + bn.value()));
@@ -230,8 +212,8 @@ void meta_model_properties_transform::populate_global_enablement_properties(
          */
         for (const auto& facet_pair : backend_pair.second) {
             const auto& fn(facet_pair.first);
-            const auto j(gep.facet_properties().find(fn));
-            if (j == gep.facet_properties().end()) {
+            const auto j(mmp.facet_properties().find(fn));
+            if (j == mmp.facet_properties().end()) {
                 BOOST_LOG_SEV(lg, error) << facet_not_found << fn;
                 BOOST_THROW_EXCEPTION(
                     transform_exception(facet_not_found + fn.value()));
@@ -249,8 +231,8 @@ void meta_model_properties_transform::populate_global_enablement_properties(
                 dap.facet_enabled(facet.enabled());
                 dap.facet_overwrite(facet.overwrite());
 
-                const auto k(gep.archetype_properties().find(an));
-                if (k == gep.archetype_properties().end()) {
+                const auto k(mmp.archetype_properties().find(an));
+                if (k == mmp.archetype_properties().end()) {
                     BOOST_LOG_SEV(lg, error) << archetype_not_found << an;
                     BOOST_THROW_EXCEPTION(
                         transform_exception(archetype_not_found + an.value()));
@@ -258,11 +240,11 @@ void meta_model_properties_transform::populate_global_enablement_properties(
                 const auto& archetype(k->second);
                 dap.archetype_enabled(archetype.enabled());
                 dap.archetype_overwrite(archetype.overwrite());
-                gep.denormalised_archetype_properties()
-                    .insert(std::make_pair(an, dap));
+                r.insert(std::make_pair(an, dap));
             }
         }
     }
+    return r;
 }
 
 void meta_model_properties_transform::
@@ -270,10 +252,47 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_transform_tracer stp(lg, "global enablement transform",
         transform_id, arp.identifier(), *ctx.tracer(), arp);
 
+    /*
+     * Obtain the root module configuration.
+     */
+    const auto rmid(arp.root_module_logical_id());
+    const auto i(arp.artefact_sets_by_logical_id().find(rmid));
+    if (i == arp.artefact_sets_by_logical_id().end()) {
+        BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(root_module_not_found + rmid.value()));
+    }
+    const auto& cfg(*i->second.configuration());
+
     const auto& fm(*ctx.feature_model());
     const auto& pmm(*ctx.meta_model());
-    const auto& in(pmm.indexed_names());
-    populate_global_enablement_properties(fm, in, arp);
+    const auto& idx(pmm.indexed_names());
+    auto& mmp(arp.meta_model_properties());
+
+    /*
+     * Populate the backend properties.
+     */
+    const auto bfg(make_backend_feature_group(fm, idx));
+    mmp.backend_properties(obtain_backend_properties(bfg, cfg));
+
+    /*
+     * Populate the facet properties.
+     */
+    const auto ffg(make_facet_feature_group(fm, idx));
+    mmp.facet_properties(obtain_facet_properties(ffg, cfg));
+
+    /*
+     * Populate the archetype properties.
+     */
+    const auto afg(make_archetype_feature_group(fm, idx));
+    mmp.archetype_properties(obtain_archetype_properties(afg, cfg));
+
+    /*
+     * Now populate the denormalised archetype properties by querying
+     * the containers we've already populated.
+     */
+    mmp.denormalised_archetype_enablement_properties(
+        obtain_denormalised_archetype_properties(idx, mmp));
 
     stp.end_transform(arp);
 }

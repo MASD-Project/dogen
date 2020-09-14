@@ -30,7 +30,6 @@ artefact_repository::artefact_repository(
     const std::string& identifier,
     const dogen::identification::entities::logical_id& root_module_logical_id,
     const dogen::physical::entities::extraction_properties& extraction_properties,
-    const dogen::physical::entities::global_enablement_properties& global_enablement_properties,
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const std::list<boost::filesystem::path>& managed_directories,
     const bool has_generatable_artefacts,
@@ -39,7 +38,6 @@ artefact_repository::artefact_repository(
       identifier_(identifier),
       root_module_logical_id_(root_module_logical_id),
       extraction_properties_(extraction_properties),
-      global_enablement_properties_(global_enablement_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       managed_directories_(managed_directories),
       has_generatable_artefacts_(has_generatable_artefacts),
@@ -51,7 +49,6 @@ void artefact_repository::swap(artefact_repository& other) noexcept {
     swap(identifier_, other.identifier_);
     swap(root_module_logical_id_, other.root_module_logical_id_);
     swap(extraction_properties_, other.extraction_properties_);
-    swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(managed_directories_, other.managed_directories_);
     swap(has_generatable_artefacts_, other.has_generatable_artefacts_);
@@ -63,7 +60,6 @@ bool artefact_repository::operator==(const artefact_repository& rhs) const {
         identifier_ == rhs.identifier_ &&
         root_module_logical_id_ == rhs.root_module_logical_id_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
-        global_enablement_properties_ == rhs.global_enablement_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         managed_directories_ == rhs.managed_directories_ &&
         has_generatable_artefacts_ == rhs.has_generatable_artefacts_ &&
@@ -138,22 +134,6 @@ void artefact_repository::extraction_properties(const dogen::physical::entities:
 
 void artefact_repository::extraction_properties(const dogen::physical::entities::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
-}
-
-const dogen::physical::entities::global_enablement_properties& artefact_repository::global_enablement_properties() const {
-    return global_enablement_properties_;
-}
-
-dogen::physical::entities::global_enablement_properties& artefact_repository::global_enablement_properties() {
-    return global_enablement_properties_;
-}
-
-void artefact_repository::global_enablement_properties(const dogen::physical::entities::global_enablement_properties& v) {
-    global_enablement_properties_ = v;
-}
-
-void artefact_repository::global_enablement_properties(const dogen::physical::entities::global_enablement_properties&& v) {
-    global_enablement_properties_ = std::move(v);
 }
 
 const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& artefact_repository::enabled_archetype_for_element() const {

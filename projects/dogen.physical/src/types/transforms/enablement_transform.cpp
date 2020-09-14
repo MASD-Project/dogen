@@ -427,8 +427,8 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     /*
      * Now, for each artefact, compute their enablement properties.
      */
-    const auto& gep(arp.global_enablement_properties());
-    const auto& dap(gep.denormalised_archetype_properties());
+    const auto& mmp(arp.meta_model_properties());
+    const auto& dap(mmp.denormalised_archetype_enablement_properties());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
     std::unordered_set<logical_meta_physical_id> eafe;
     for(auto& pair : arp.artefact_sets_by_logical_id()) {
