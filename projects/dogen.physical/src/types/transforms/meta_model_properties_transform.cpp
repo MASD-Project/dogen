@@ -249,7 +249,7 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
 
 void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
-    tracing::scoped_transform_tracer stp(lg, "global enablement transform",
+    tracing::scoped_transform_tracer stp(lg, "meta model properties transform",
         transform_id, arp.identifier(), *ctx.tracer(), arp);
 
     /*
@@ -291,7 +291,7 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * Now populate the denormalised archetype properties by querying
      * the containers we've already populated.
      */
-    mmp.denormalised_archetype_enablement_properties(
+    mmp.denormalised_archetype_properties(
         obtain_denormalised_archetype_properties(idx, mmp));
 
     stp.end_transform(arp);

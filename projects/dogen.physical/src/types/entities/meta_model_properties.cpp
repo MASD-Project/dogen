@@ -28,13 +28,13 @@ meta_model_properties::meta_model_properties(
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties>& archetype_kind_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_enablement_properties)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties)
     : backend_properties_(backend_properties),
       facet_properties_(facet_properties),
       archetype_properties_(archetype_properties),
       archetype_kind_properties_(archetype_kind_properties),
       part_properties_(part_properties),
-      denormalised_archetype_enablement_properties_(denormalised_archetype_enablement_properties) { }
+      denormalised_archetype_properties_(denormalised_archetype_properties) { }
 
 void meta_model_properties::swap(meta_model_properties& other) noexcept {
     using std::swap;
@@ -43,7 +43,7 @@ void meta_model_properties::swap(meta_model_properties& other) noexcept {
     swap(archetype_properties_, other.archetype_properties_);
     swap(archetype_kind_properties_, other.archetype_kind_properties_);
     swap(part_properties_, other.part_properties_);
-    swap(denormalised_archetype_enablement_properties_, other.denormalised_archetype_enablement_properties_);
+    swap(denormalised_archetype_properties_, other.denormalised_archetype_properties_);
 }
 
 bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
@@ -52,7 +52,7 @@ bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
         archetype_properties_ == rhs.archetype_properties_ &&
         archetype_kind_properties_ == rhs.archetype_kind_properties_ &&
         part_properties_ == rhs.part_properties_ &&
-        denormalised_archetype_enablement_properties_ == rhs.denormalised_archetype_enablement_properties_;
+        denormalised_archetype_properties_ == rhs.denormalised_archetype_properties_;
 }
 
 meta_model_properties& meta_model_properties::operator=(meta_model_properties other) {
@@ -141,20 +141,20 @@ void meta_model_properties::part_properties(const std::unordered_map<dogen::iden
     part_properties_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& meta_model_properties::denormalised_archetype_enablement_properties() const {
-    return denormalised_archetype_enablement_properties_;
+const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& meta_model_properties::denormalised_archetype_properties() const {
+    return denormalised_archetype_properties_;
 }
 
-std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& meta_model_properties::denormalised_archetype_enablement_properties() {
-    return denormalised_archetype_enablement_properties_;
+std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& meta_model_properties::denormalised_archetype_properties() {
+    return denormalised_archetype_properties_;
 }
 
-void meta_model_properties::denormalised_archetype_enablement_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v) {
-    denormalised_archetype_enablement_properties_ = v;
+void meta_model_properties::denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v) {
+    denormalised_archetype_properties_ = v;
 }
 
-void meta_model_properties::denormalised_archetype_enablement_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v) {
-    denormalised_archetype_enablement_properties_ = std::move(v);
+void meta_model_properties::denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v) {
+    denormalised_archetype_properties_ = std::move(v);
 }
 
 }

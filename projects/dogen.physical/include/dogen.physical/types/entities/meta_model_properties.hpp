@@ -55,7 +55,7 @@ public:
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties>& archetype_kind_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_enablement_properties);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties);
 
 public:
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties() const;
@@ -83,10 +83,10 @@ public:
     void part_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& v);
     void part_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>&& v);
 
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_enablement_properties() const;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_enablement_properties();
-    void denormalised_archetype_enablement_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v);
-    void denormalised_archetype_enablement_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v);
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties() const;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties();
+    void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v);
+    void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v);
 
 public:
     bool operator==(const meta_model_properties& rhs) const;
@@ -104,7 +104,7 @@ private:
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties> archetype_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties> archetype_kind_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties> part_properties_;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties> denormalised_archetype_enablement_properties_;
+    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties> denormalised_archetype_properties_;
 };
 
 }

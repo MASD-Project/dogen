@@ -1633,7 +1633,7 @@
           "type": "std::unordered_map<identification::entities::physical_meta_id, part_properties>"
         },
         {
-          "name": "denormalised_archetype_enablement_properties",
+          "name": "denormalised_archetype_properties",
           "type": "std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>"
         }
       ]

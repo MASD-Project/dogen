@@ -146,7 +146,7 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"archetype_properties\": " << v.archetype_properties() << ", "
       << "\"archetype_kind_properties\": " << v.archetype_kind_properties() << ", "
       << "\"part_properties\": " << v.part_properties() << ", "
-      << "\"denormalised_archetype_enablement_properties\": " << v.denormalised_archetype_enablement_properties()
+      << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties()
       << " }";
     return(s);
 }
