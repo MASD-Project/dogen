@@ -41,9 +41,17 @@
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Calculates the value of the enablement and overwrite
+ * properties for each artefact.
+ */
 class enablement_transform final {
 private:
-    struct local_archetype_feature_group {
+    /**
+     * @brief Stores the configuration at the artefact level for the
+     * archetype enablement.
+     */
+    struct feature_group {
         variability::entities::feature facet_enabled;
         variability::entities::feature archetype_enabled;
         variability::entities::feature facet_overwrite;
@@ -51,12 +59,20 @@ private:
     };
 
 private:
+    /**
+     * @brief Creates the feature groups for all physical meta-model
+     * items.
+     */
     static std::unordered_map<identification::entities::physical_meta_id,
-                              local_archetype_feature_group>
-    make_local_archetype_feature_group(
+                              feature_group>
+    make_feature_group(
         const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx);
 
+    /**
+     * @brief Reads the configuration for each artefact set and then
+     * uses it to populate the correspondent artefacts.
+     */
     static void populate_local_enablement_properties(
         const variability::entities::feature_model& fm,
         const identification::entities::physical_meta_name_indices& idx,

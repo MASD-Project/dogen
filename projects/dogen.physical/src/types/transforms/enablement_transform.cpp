@@ -75,41 +75,50 @@ scope_exit<T> make_scope_exit(T &&t) {
 
 namespace dogen::physical::transforms {
 
-std::unordered_map<
-    identification::entities::physical_meta_id,
-    enablement_transform::local_archetype_feature_group>
-enablement_transform::make_local_archetype_feature_group(
-    const variability::entities::feature_model& fm,
-    const identification::entities::physical_meta_name_indices& idx) {
-    std::unordered_map<identification::entities::physical_meta_id,
-                       local_archetype_feature_group> r;
+using variability::entities::feature_model;
+using identification::entities::physical_meta_id;
+using identification::entities::physical_meta_name_indices;
 
+std::unordered_map<physical_meta_id, enablement_transform::feature_group>
+enablement_transform::make_feature_group(const feature_model& fm,
+    const physical_meta_name_indices& idx) {
+    const auto& ef(enabled_feature);
+    const auto& of(overwrite_feature);
     const variability::helpers::feature_selector s(fm);
     identification::helpers::physical_meta_id_builder b;
-    for (const auto& mn : idx.all()) {
-        local_archetype_feature_group latg;
-        const auto id(mn.id());
-        const auto pmid(b.build_facet(mn));
-        latg.facet_enabled = s.get_by_name(pmid.value(), enabled_feature);
-        latg.archetype_enabled = s.get_by_name(id.value(), enabled_feature);
-        latg.facet_overwrite = s.get_by_name(pmid.value(), overwrite_feature);
-        latg.archetype_overwrite = s.get_by_name(id.value(), overwrite_feature);
+    std::unordered_map<physical_meta_id, feature_group> r;
 
-        r.insert(std::make_pair(id, latg));
+    /*
+     * For each archetype, obtain its facet. Then for the pair facet
+     * and archetype, create a feature group for all of the relevant
+     * properties.
+     */
+    for (const auto& arch_pmn : idx.all()) {
+        feature_group fg;
+        const auto arch_pmid(arch_pmn.id());
+        const auto fct_pmid(b.build_facet(arch_pmn));
+
+        fg.facet_enabled = s.get_by_name(fct_pmid.value(), ef);
+        fg.archetype_enabled = s.get_by_name(arch_pmid.value(), ef);
+
+        fg.facet_overwrite = s.get_by_name(fct_pmid.value(), of);
+        fg.archetype_overwrite = s.get_by_name(arch_pmid.value(), of);
+
+        r.insert(std::make_pair(arch_pmid, fg));
     }
     return r;
 }
 
 void enablement_transform::populate_local_enablement_properties(
-    const variability::entities::feature_model& fm,
-    const identification::entities::physical_meta_name_indices& nrp,
+    const feature_model& fm,
+    const physical_meta_name_indices& nrp,
     entities::artefact_repository& ar) {
     /*
      * Computes all of the possible features for every physical
      * location. Not all of these will be of use to a given element,
      * because they may not be expressed for that element.
      */
-    const auto fgs(make_local_archetype_feature_group(fm, nrp));
+    const auto fgs(make_feature_group(fm, nrp));
 
     for (auto& as_pair : ar.artefact_sets_by_logical_id()) {
         const auto id(as_pair.first);
@@ -161,7 +170,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     const entities::denormalised_archetype_properties&
     global_enablement_properties,
     const entities::enablement_properties& local_enablement_properties,
-    const identification::entities::physical_meta_id& archetype,
+    const physical_meta_id& archetype,
     entities::artefact_properties& ap) {
 
     const auto& gc(global_enablement_properties);
@@ -299,7 +308,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 void enablement_transform::compute_enablement_for_artefact_set(
     const std::unordered_map<identification::entities::logical_meta_id,
     identification::entities::archetype_name_set>& physical_names_by_meta_name,
-    const std::unordered_map<identification::entities::physical_meta_id,
+    const std::unordered_map<physical_meta_id,
     entities::denormalised_archetype_properties>&
     global_enablement_properties,
     std::unordered_set<identification::entities::logical_meta_physical_id>&
