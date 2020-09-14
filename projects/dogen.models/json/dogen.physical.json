@@ -559,7 +559,8 @@
         },
         {
           "name": "enablement_properties",
-          "type": "enablement_properties"
+          "type": "enablement_properties",
+          "documentation": "Stores the properties related to the enablement, as read out from configuration.\n"
         }
       ]
     },
@@ -1342,23 +1343,28 @@
     },
     {
       "name": "entities::enablement_properties",
+      "documentation": "Stores the properties related to the enablement, as read out from configuration.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "facet_enabled",
-          "type": "boost::optional<bool>"
+          "type": "boost::optional<bool>",
+          "documentation": "If supplied and true, the facet is enabled.\n"
         },
         {
           "name": "archetype_enabled",
-          "type": "boost::optional<bool>"
+          "type": "boost::optional<bool>",
+          "documentation": "If supplied and true, the archetype is enabled.\n"
         },
         {
           "name": "facet_overwrite",
-          "type": "boost::optional<bool>"
+          "type": "boost::optional<bool>",
+          "documentation": "If supplied and true, the facet will have overwrite on.\n"
         },
         {
           "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
+          "type": "boost::optional<bool>",
+          "documentation": "If supplied and true, the archetype will have overwrite on.\n"
         }
       ]
     },
@@ -1659,6 +1665,11 @@
           "name": "directory",
           "type": "std::string",
           "documentation": "Name of the directory to use for the part.\n"
+        },
+        {
+          "name": "relative_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Path to the part, relative to the project directory.\n"
         }
       ]
     }

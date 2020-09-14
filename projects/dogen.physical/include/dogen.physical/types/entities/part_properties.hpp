@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
@@ -38,13 +39,16 @@ class part_properties final {
 public:
     part_properties() = default;
     part_properties(const part_properties&) = default;
-    part_properties(part_properties&&) = default;
     ~part_properties() = default;
+
+public:
+    part_properties(part_properties&& rhs);
 
 public:
     part_properties(
         const dogen::identification::entities::physical_meta_name& meta_name,
-        const std::string& directory);
+        const std::string& directory,
+        const boost::filesystem::path& relative_path);
 
 public:
     /**
@@ -67,6 +71,16 @@ public:
     void directory(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Path to the part, relative to the project directory.
+     */
+    /**@{*/
+    const boost::filesystem::path& relative_path() const;
+    boost::filesystem::path& relative_path();
+    void relative_path(const boost::filesystem::path& v);
+    void relative_path(const boost::filesystem::path&& v);
+    /**@}*/
+
 public:
     bool operator==(const part_properties& rhs) const;
     bool operator!=(const part_properties& rhs) const {
@@ -80,6 +94,7 @@ public:
 private:
     dogen::identification::entities::physical_meta_name meta_name_;
     std::string directory_;
+    boost::filesystem::path relative_path_;
 };
 
 }

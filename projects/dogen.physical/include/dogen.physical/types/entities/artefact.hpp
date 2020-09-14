@@ -180,10 +180,15 @@ public:
     void artefact_properties(const dogen::physical::entities::artefact_properties& v);
     void artefact_properties(const dogen::physical::entities::artefact_properties&& v);
 
+    /**
+     * @brief Stores the properties related to the enablement, as read out from configuration.
+     */
+    /**@{*/
     const dogen::physical::entities::enablement_properties& enablement_properties() const;
     dogen::physical::entities::enablement_properties& enablement_properties();
     void enablement_properties(const dogen::physical::entities::enablement_properties& v);
     void enablement_properties(const dogen::physical::entities::enablement_properties&& v);
+    /**@}*/
 
 public:
     bool operator==(const artefact& rhs) const;

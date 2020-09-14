@@ -30,6 +30,9 @@
 
 namespace dogen::physical::entities {
 
+/**
+ * @brief Stores the properties related to the enablement, as read out from configuration.
+ */
 class enablement_properties final {
 public:
     enablement_properties() = default;
@@ -47,25 +50,45 @@ public:
         const boost::optional<bool>& archetype_overwrite);
 
 public:
+    /**
+     * @brief If supplied and true, the facet is enabled.
+     */
+    /**@{*/
     const boost::optional<bool>& facet_enabled() const;
     boost::optional<bool>& facet_enabled();
     void facet_enabled(const boost::optional<bool>& v);
     void facet_enabled(const boost::optional<bool>&& v);
+    /**@}*/
 
+    /**
+     * @brief If supplied and true, the archetype is enabled.
+     */
+    /**@{*/
     const boost::optional<bool>& archetype_enabled() const;
     boost::optional<bool>& archetype_enabled();
     void archetype_enabled(const boost::optional<bool>& v);
     void archetype_enabled(const boost::optional<bool>&& v);
+    /**@}*/
 
+    /**
+     * @brief If supplied and true, the facet will have overwrite on.
+     */
+    /**@{*/
     const boost::optional<bool>& facet_overwrite() const;
     boost::optional<bool>& facet_overwrite();
     void facet_overwrite(const boost::optional<bool>& v);
     void facet_overwrite(const boost::optional<bool>&& v);
+    /**@}*/
 
+    /**
+     * @brief If supplied and true, the archetype will have overwrite on.
+     */
+    /**@{*/
     const boost::optional<bool>& archetype_overwrite() const;
     boost::optional<bool>& archetype_overwrite();
     void archetype_overwrite(const boost::optional<bool>& v);
     void archetype_overwrite(const boost::optional<bool>&& v);
+    /**@}*/
 
 public:
     bool operator==(const enablement_properties& rhs) const;

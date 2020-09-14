@@ -22,21 +22,30 @@
 
 namespace dogen::physical::entities {
 
+part_properties::part_properties(part_properties&& rhs)
+    : meta_name_(std::move(rhs.meta_name_)),
+      directory_(std::move(rhs.directory_)),
+      relative_path_(std::move(rhs.relative_path_)) { }
+
 part_properties::part_properties(
     const dogen::identification::entities::physical_meta_name& meta_name,
-    const std::string& directory)
+    const std::string& directory,
+    const boost::filesystem::path& relative_path)
     : meta_name_(meta_name),
-      directory_(directory) { }
+      directory_(directory),
+      relative_path_(relative_path) { }
 
 void part_properties::swap(part_properties& other) noexcept {
     using std::swap;
     swap(meta_name_, other.meta_name_);
     swap(directory_, other.directory_);
+    swap(relative_path_, other.relative_path_);
 }
 
 bool part_properties::operator==(const part_properties& rhs) const {
     return meta_name_ == rhs.meta_name_ &&
-        directory_ == rhs.directory_;
+        directory_ == rhs.directory_ &&
+        relative_path_ == rhs.relative_path_;
 }
 
 part_properties& part_properties::operator=(part_properties other) {
@@ -75,6 +84,22 @@ void part_properties::directory(const std::string& v) {
 
 void part_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
+}
+
+const boost::filesystem::path& part_properties::relative_path() const {
+    return relative_path_;
+}
+
+boost::filesystem::path& part_properties::relative_path() {
+    return relative_path_;
+}
+
+void part_properties::relative_path(const boost::filesystem::path& v) {
+    relative_path_ = v;
+}
+
+void part_properties::relative_path(const boost::filesystem::path&& v) {
+    relative_path_ = std::move(v);
 }
 
 }

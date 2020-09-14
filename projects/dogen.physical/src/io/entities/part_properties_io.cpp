@@ -37,7 +37,8 @@ std::ostream& operator<<(std::ostream& s, const part_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::part_properties\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
       << " }";
     return(s);
 }
