@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.identification/types/entities/physical_meta_name.hpp"
@@ -49,7 +50,8 @@ public:
     archetype_properties(
         const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
-        const boost::optional<bool>& overwrite);
+        const boost::optional<bool>& overwrite,
+        const std::string& postfix);
 
 public:
     /**
@@ -80,6 +82,16 @@ public:
     void overwrite(const boost::optional<bool>&& v);
     /**@}*/
 
+    /**
+     * @brief Postfix to apply to all artefacts of this archetype.
+     */
+    /**@{*/
+    const std::string& postfix() const;
+    std::string& postfix();
+    void postfix(const std::string& v);
+    void postfix(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype_properties& rhs) const;
     bool operator!=(const archetype_properties& rhs) const {
@@ -94,6 +106,7 @@ private:
     dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
     boost::optional<bool> overwrite_;
+    std::string postfix_;
 };
 
 }

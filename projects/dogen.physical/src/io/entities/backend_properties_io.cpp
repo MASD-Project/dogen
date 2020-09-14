@@ -46,7 +46,8 @@ std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"technical_space_version\": " << "\"" << tidy_up_string(v.technical_space_version()) << "\"" << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
+      << "\"enable_backend_directories\": " << v.enable_backend_directories()
       << " }";
     return(s);
 }

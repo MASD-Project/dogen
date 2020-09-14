@@ -23,17 +23,20 @@
 namespace dogen::physical::entities {
 
 backend_properties::backend_properties()
-    : enabled_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)),
+      enable_backend_directories_(static_cast<bool>(0)) { }
 
 backend_properties::backend_properties(
     const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
     const std::string& technical_space_version,
-    const std::string& directory)
+    const std::string& directory,
+    const bool enable_backend_directories)
     : meta_name_(meta_name),
       enabled_(enabled),
       technical_space_version_(technical_space_version),
-      directory_(directory) { }
+      directory_(directory),
+      enable_backend_directories_(enable_backend_directories) { }
 
 void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
@@ -41,13 +44,15 @@ void backend_properties::swap(backend_properties& other) noexcept {
     swap(enabled_, other.enabled_);
     swap(technical_space_version_, other.technical_space_version_);
     swap(directory_, other.directory_);
+    swap(enable_backend_directories_, other.enable_backend_directories_);
 }
 
 bool backend_properties::operator==(const backend_properties& rhs) const {
     return meta_name_ == rhs.meta_name_ &&
         enabled_ == rhs.enabled_ &&
         technical_space_version_ == rhs.technical_space_version_ &&
-        directory_ == rhs.directory_;
+        directory_ == rhs.directory_ &&
+        enable_backend_directories_ == rhs.enable_backend_directories_;
 }
 
 backend_properties& backend_properties::operator=(backend_properties other) {
@@ -110,6 +115,14 @@ void backend_properties::directory(const std::string& v) {
 
 void backend_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
+}
+
+bool backend_properties::enable_backend_directories() const {
+    return enable_backend_directories_;
+}
+
+void backend_properties::enable_backend_directories(const bool v) {
+    enable_backend_directories_ = v;
 }
 
 }

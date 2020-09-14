@@ -28,27 +28,32 @@ archetype_properties::archetype_properties()
 archetype_properties::archetype_properties(archetype_properties&& rhs)
     : meta_name_(std::move(rhs.meta_name_)),
       enabled_(std::move(rhs.enabled_)),
-      overwrite_(std::move(rhs.overwrite_)) { }
+      overwrite_(std::move(rhs.overwrite_)),
+      postfix_(std::move(rhs.postfix_)) { }
 
 archetype_properties::archetype_properties(
     const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
-    const boost::optional<bool>& overwrite)
+    const boost::optional<bool>& overwrite,
+    const std::string& postfix)
     : meta_name_(meta_name),
       enabled_(enabled),
-      overwrite_(overwrite) { }
+      overwrite_(overwrite),
+      postfix_(postfix) { }
 
 void archetype_properties::swap(archetype_properties& other) noexcept {
     using std::swap;
     swap(meta_name_, other.meta_name_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
+    swap(postfix_, other.postfix_);
 }
 
 bool archetype_properties::operator==(const archetype_properties& rhs) const {
     return meta_name_ == rhs.meta_name_ &&
         enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_;
+        overwrite_ == rhs.overwrite_ &&
+        postfix_ == rhs.postfix_;
 }
 
 archetype_properties& archetype_properties::operator=(archetype_properties other) {
@@ -95,6 +100,22 @@ void archetype_properties::overwrite(const boost::optional<bool>& v) {
 
 void archetype_properties::overwrite(const boost::optional<bool>&& v) {
     overwrite_ = std::move(v);
+}
+
+const std::string& archetype_properties::postfix() const {
+    return postfix_;
+}
+
+std::string& archetype_properties::postfix() {
+    return postfix_;
+}
+
+void archetype_properties::postfix(const std::string& v) {
+    postfix_ = v;
+}
+
+void archetype_properties::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 }

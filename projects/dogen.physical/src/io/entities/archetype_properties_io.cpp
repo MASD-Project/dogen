@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
@@ -38,6 +39,14 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
@@ -51,7 +60,8 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::archetype_properties\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite()
+      << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";
     return(s);
 }

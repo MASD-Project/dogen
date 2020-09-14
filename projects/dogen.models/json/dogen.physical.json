@@ -1541,6 +1541,10 @@
           "name": "directory",
           "type": "std::string",
           "documentation": "Name of the directory to use for the backend.\n"
+        },
+        {
+          "name": "enable_backend_directories",
+          "type": "bool"
         }
       ]
     },
@@ -1604,6 +1608,11 @@
           "name": "overwrite",
           "type": "boost::optional<bool>",
           "documentation": "If true, all artefacts for this archetype will be set to overwrite.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to apply to all artefacts of this archetype.\n"
         }
       ]
     },

@@ -48,7 +48,8 @@ public:
         const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
         const std::string& technical_space_version,
-        const std::string& directory);
+        const std::string& directory,
+        const bool enable_backend_directories);
 
 public:
     /**
@@ -89,6 +90,9 @@ public:
     void directory(const std::string&& v);
     /**@}*/
 
+    bool enable_backend_directories() const;
+    void enable_backend_directories(const bool v);
+
 public:
     bool operator==(const backend_properties& rhs) const;
     bool operator!=(const backend_properties& rhs) const {
@@ -104,6 +108,7 @@ private:
     bool enabled_;
     std::string technical_space_version_;
     std::string directory_;
+    bool enable_backend_directories_;
 };
 
 }
