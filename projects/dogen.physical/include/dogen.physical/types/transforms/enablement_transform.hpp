@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LOCAL_ENABLEMENT_TRANSFORM_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LOCAL_ENABLEMENT_TRANSFORM_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@
 
 namespace dogen::physical::transforms {
 
-class local_enablement_transform final {
+class enablement_transform final {
 private:
     static void compute_enablement_for_artefact_properties(
         const entities::denormalised_archetype_properties&

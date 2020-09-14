@@ -22,8 +22,8 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
-#include "dogen.physical/types/transforms/global_enablement_transform.hpp"
-#include "dogen.physical/types/transforms/local_enablement_transform.hpp"
+#include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
+#include "dogen.physical/types/transforms/enablement_transform.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 #include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
@@ -50,12 +50,12 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * The global enablement transform must be executed before the
      * local one.
      */
-    global_enablement_transform::apply(ctx, arp);
+    meta_model_properties_transform::apply(ctx, arp);
 
     /*
      * Update enablement for all artefacts.
      */
-    local_enablement_transform::apply(ctx, arp);
+    enablement_transform::apply(ctx, arp);
 
     /*
      * There are no particular dependencies on the next set of

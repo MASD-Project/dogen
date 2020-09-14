@@ -33,11 +33,11 @@
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
-#include "dogen.physical/types/transforms/local_enablement_transform.hpp"
+#include "dogen.physical/types/transforms/enablement_transform.hpp"
 
 namespace {
 
-const std::string transform_id("physical.transforms.local_enablement_transform");
+const std::string transform_id("physical.transforms.enablement_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -63,7 +63,7 @@ scope_exit<T> make_scope_exit(T &&t) {
 
 namespace dogen::physical::transforms {
 
-void local_enablement_transform::compute_enablement_for_artefact_properties(
+void enablement_transform::compute_enablement_for_artefact_properties(
     const entities::denormalised_archetype_properties&
     global_enablement_properties,
     const entities::enablement_properties& local_enablement_properties,
@@ -189,7 +189,7 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
 
 }
 
-void local_enablement_transform::compute_enablement_for_artefact_set(
+void enablement_transform::compute_enablement_for_artefact_set(
     const std::unordered_map<identification::entities::logical_meta_id,
     identification::entities::archetype_name_set>& physical_names_by_meta_name,
     const std::unordered_map<identification::entities::physical_meta_id,
@@ -290,7 +290,7 @@ void local_enablement_transform::compute_enablement_for_artefact_set(
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
 }
 
-void local_enablement_transform::
+void enablement_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_transform_tracer stp(lg, "local enablement",
         transform_id, arp.identifier(), *ctx.tracer(), arp);

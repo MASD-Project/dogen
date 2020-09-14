@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_GLOBAL_ENABLEMENT_TRANSFORM_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_GLOBAL_ENABLEMENT_TRANSFORM_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PROPERTIES_TRANSFORM_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_META_MODEL_PROPERTIES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,7 +41,7 @@
 
 namespace dogen::physical::transforms {
 
-class global_enablement_transform final {
+class meta_model_properties_transform final {
 private:
     struct backend_feature_group {
         variability::entities::feature enabled;

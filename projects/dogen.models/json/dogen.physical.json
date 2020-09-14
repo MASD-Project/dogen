@@ -1497,14 +1497,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::global_enablement_transform",
+      "name": "transforms::meta_model_properties_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::local_enablement_transform",
+      "name": "transforms::enablement_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

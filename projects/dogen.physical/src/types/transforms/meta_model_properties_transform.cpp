@@ -37,12 +37,12 @@
 #include "dogen.physical/io/entities/enablement_properties_io.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
-#include "dogen.physical/types/transforms/global_enablement_transform.hpp"
+#include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
 
 namespace {
 
 const std::string
-transform_id("physical.transforms.global_enablement_transform");
+transform_id("physical.transforms.meta_model_properties_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -65,8 +65,8 @@ namespace dogen::physical::transforms {
 
 std::unordered_map<
     identification::entities::physical_meta_id,
-    global_enablement_transform::backend_feature_group>
-global_enablement_transform::
+    meta_model_properties_transform::backend_feature_group>
+meta_model_properties_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& idx) {
     std::unordered_map<identification::entities::physical_meta_id,
@@ -85,8 +85,8 @@ make_backend_feature_group(const variability::entities::feature_model& fm,
 
 std::unordered_map<
     identification::entities::physical_meta_id,
-    global_enablement_transform::facet_feature_group>
-global_enablement_transform::
+    meta_model_properties_transform::facet_feature_group>
+meta_model_properties_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& idx) {
     std::unordered_map<identification::entities::physical_meta_id,
@@ -106,8 +106,8 @@ make_facet_feature_group(const variability::entities::feature_model& fm,
 
 std::unordered_map<
     identification::entities::physical_meta_id,
-    global_enablement_transform::global_archetype_feature_group>
-global_enablement_transform::make_global_archetype_feature_group(
+    meta_model_properties_transform::global_archetype_feature_group>
+meta_model_properties_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& idx) {
     std::unordered_map<identification::entities::physical_meta_id,
@@ -126,8 +126,8 @@ global_enablement_transform::make_global_archetype_feature_group(
 
 std::unordered_map<
     identification::entities::physical_meta_id,
-    global_enablement_transform::local_archetype_feature_group>
-global_enablement_transform::make_local_archetype_feature_group(
+    meta_model_properties_transform::local_archetype_feature_group>
+meta_model_properties_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& idx) {
     std::unordered_map<identification::entities::physical_meta_id,
@@ -151,7 +151,7 @@ global_enablement_transform::make_local_archetype_feature_group(
 
 std::unordered_map<identification::entities::physical_meta_id,
                    entities::backend_properties>
-global_enablement_transform::obtain_backend_properties(
+meta_model_properties_transform::obtain_backend_properties(
     const std::unordered_map<identification::entities::physical_meta_id,
     backend_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
@@ -176,7 +176,7 @@ global_enablement_transform::obtain_backend_properties(
 
 std::unordered_map<identification::entities::physical_meta_id,
                    entities::facet_properties>
-global_enablement_transform::
+meta_model_properties_transform::
 obtain_facet_properties(const std::unordered_map<
     identification::entities::physical_meta_id, facet_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
@@ -203,7 +203,7 @@ obtain_facet_properties(const std::unordered_map<
 
 std::unordered_map<identification::entities::physical_meta_id,
                    entities::archetype_properties>
-global_enablement_transform::obtain_archetype_properties(
+meta_model_properties_transform::obtain_archetype_properties(
     const std::unordered_map<identification::entities::physical_meta_id,
     global_archetype_feature_group>& fgs,
     const variability::entities::configuration& ra) {
@@ -229,7 +229,7 @@ global_enablement_transform::obtain_archetype_properties(
     return r;
 }
 
-void global_enablement_transform::populate_global_enablement_properties(
+void meta_model_properties_transform::populate_global_enablement_properties(
     const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& nrp,
     entities::artefact_repository& ar) {
@@ -310,7 +310,7 @@ void global_enablement_transform::populate_global_enablement_properties(
     }
 }
 
-void global_enablement_transform::populate_local_enablement_properties(
+void meta_model_properties_transform::populate_local_enablement_properties(
     const variability::entities::feature_model& fm,
     const identification::entities::physical_meta_name_indices& nrp,
     entities::artefact_repository& ar) {
@@ -367,7 +367,7 @@ void global_enablement_transform::populate_local_enablement_properties(
     }
 }
 
-void global_enablement_transform::
+void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& ar) {
     tracing::scoped_transform_tracer stp(lg, "global enablement transform",
         transform_id, ar.identifier(), *ctx.tracer(), ar);
