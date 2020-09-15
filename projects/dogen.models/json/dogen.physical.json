@@ -1364,6 +1364,7 @@
     {
       "name": "entities::artefact_repository",
       "stereotypes": [
+        "Provenance",
         "ArtefactContainer"
       ],
       "fallback_element_type": "masd::object",

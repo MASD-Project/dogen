@@ -15434,7 +15434,7 @@ element.#</dia:string>
         <dia:string>#artefact_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#ArtefactContainer#</dia:string>
+        <dia:string>#Provenance, ArtefactContainer#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

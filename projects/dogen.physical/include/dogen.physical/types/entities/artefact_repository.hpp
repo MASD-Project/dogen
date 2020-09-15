@@ -36,6 +36,7 @@
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.physical/types/entities/meta_model_properties.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
@@ -52,6 +53,7 @@ public:
 
 public:
     artefact_repository(
+        const dogen::identification::entities::logical_provenance& provenance,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& identifier,
         const dogen::identification::entities::logical_id& root_module_logical_id,
@@ -62,6 +64,16 @@ public:
         const dogen::physical::entities::meta_model_properties& meta_model_properties);
 
 public:
+    /**
+     * @brief Details of the provenance of this model element.
+     */
+    /**@{*/
+    const dogen::identification::entities::logical_provenance& provenance() const;
+    dogen::identification::entities::logical_provenance& provenance();
+    void provenance(const dogen::identification::entities::logical_provenance& v);
+    void provenance(const dogen::identification::entities::logical_provenance&& v);
+    /**@}*/
+
     /**
      * @brief All atefact sets in this model, by logical ID.
      */
@@ -136,6 +148,7 @@ public:
     artefact_repository& operator=(artefact_repository other);
 
 private:
+    dogen::identification::entities::logical_provenance provenance_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string identifier_;
     dogen::identification::entities::logical_id root_module_logical_id_;

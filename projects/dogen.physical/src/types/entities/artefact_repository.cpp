@@ -26,6 +26,7 @@ artefact_repository::artefact_repository()
     : has_generatable_artefacts_(static_cast<bool>(0)) { }
 
 artefact_repository::artefact_repository(
+    const dogen::identification::entities::logical_provenance& provenance,
     const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& identifier,
     const dogen::identification::entities::logical_id& root_module_logical_id,
@@ -34,7 +35,8 @@ artefact_repository::artefact_repository(
     const std::list<boost::filesystem::path>& managed_directories,
     const bool has_generatable_artefacts,
     const dogen::physical::entities::meta_model_properties& meta_model_properties)
-    : artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
+    : provenance_(provenance),
+      artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
       identifier_(identifier),
       root_module_logical_id_(root_module_logical_id),
       extraction_properties_(extraction_properties),
@@ -45,6 +47,7 @@ artefact_repository::artefact_repository(
 
 void artefact_repository::swap(artefact_repository& other) noexcept {
     using std::swap;
+    swap(provenance_, other.provenance_);
     swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
     swap(identifier_, other.identifier_);
     swap(root_module_logical_id_, other.root_module_logical_id_);
@@ -56,7 +59,8 @@ void artefact_repository::swap(artefact_repository& other) noexcept {
 }
 
 bool artefact_repository::operator==(const artefact_repository& rhs) const {
-    return artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
+    return provenance_ == rhs.provenance_ &&
+        artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
         identifier_ == rhs.identifier_ &&
         root_module_logical_id_ == rhs.root_module_logical_id_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
@@ -70,6 +74,22 @@ artefact_repository& artefact_repository::operator=(artefact_repository other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::identification::entities::logical_provenance& artefact_repository::provenance() const {
+    return provenance_;
+}
+
+dogen::identification::entities::logical_provenance& artefact_repository::provenance() {
+    return provenance_;
+}
+
+void artefact_repository::provenance(const dogen::identification::entities::logical_provenance& v) {
+    provenance_ = v;
+}
+
+void artefact_repository::provenance(const dogen::identification::entities::logical_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_repository::artefact_sets_by_logical_id() const {
