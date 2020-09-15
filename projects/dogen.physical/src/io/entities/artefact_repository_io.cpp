@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
@@ -45,14 +44,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
     return s;
 }
 
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
 }
 
 namespace std {
@@ -96,8 +87,6 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_repository\"" << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
-      << "\"identifier\": " << "\"" << tidy_up_string(v.identifier()) << "\"" << ", "
-      << "\"root_module_logical_id\": " << v.root_module_logical_id() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "

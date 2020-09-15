@@ -1370,16 +1370,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "identifier",
-          "type": "std::string",
-          "documentation": "Identifier for this repository. Used for logging and tracing only.\n"
-        },
-        {
-          "name": "root_module_logical_id",
-          "type": "identification::entities::logical_id",
-          "documentation": "Identifier of the artefact set containing the root module.\n"
-        },
-        {
           "name": "extraction_properties",
           "type": "extraction_properties"
         },

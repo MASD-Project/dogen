@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -55,8 +54,6 @@ public:
     artefact_repository(
         const dogen::identification::entities::logical_provenance& provenance,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
-        const std::string& identifier,
-        const dogen::identification::entities::logical_id& root_module_logical_id,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const std::list<boost::filesystem::path>& managed_directories,
@@ -82,26 +79,6 @@ public:
     std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
     void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v);
     void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier for this repository. Used for logging and tracing only.
-     */
-    /**@{*/
-    const std::string& identifier() const;
-    std::string& identifier();
-    void identifier(const std::string& v);
-    void identifier(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier of the artefact set containing the root module.
-     */
-    /**@{*/
-    const dogen::identification::entities::logical_id& root_module_logical_id() const;
-    dogen::identification::entities::logical_id& root_module_logical_id();
-    void root_module_logical_id(const dogen::identification::entities::logical_id& v);
-    void root_module_logical_id(const dogen::identification::entities::logical_id&& v);
     /**@}*/
 
     const dogen::physical::entities::extraction_properties& extraction_properties() const;
@@ -150,8 +127,6 @@ public:
 private:
     dogen::identification::entities::logical_provenance provenance_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
-    std::string identifier_;
-    dogen::identification::entities::logical_id root_module_logical_id_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;

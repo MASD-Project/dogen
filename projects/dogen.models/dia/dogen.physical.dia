@@ -15419,7 +15419,7 @@ element.#</dia:string>
         <dia:point val="166,-90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.95,-90.05;205.82,-81.55"/>
+        <dia:rectangle val="165.95,-90.05;205.82,-83.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="166,-90"/>
@@ -15428,7 +15428,7 @@ element.#</dia:string>
         <dia:real val="39.769999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_repository#</dia:string>
@@ -15518,52 +15518,6 @@ element.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#identifier#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Identifier for this repository. Used for logging and tracing only.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#root_module_logical_id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#identification::entities::logical_id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Identifier of the artefact set containing the root module.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#extraction_properties#</dia:string>
@@ -20529,17 +20483,17 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="205.77,-85.7"/>
+        <dia:point val="205.77,-87.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="205.02,-89.35;209.05,-84.1"/>
+        <dia:rectangle val="205.02,-89.35;209.05,-85.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="205.77,-85.7"/>
-        <dia:point val="208,-85.7"/>
+        <dia:point val="205.77,-87.3"/>
+        <dia:point val="208,-87.3"/>
         <dia:point val="208,-89.3"/>
         <dia:point val="209,-89.3"/>
       </dia:attribute>
@@ -20558,7 +20512,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O119" connection="13"/>
+        <dia:connection handle="0" to="O119" connection="9"/>
         <dia:connection handle="1" to="O121" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
