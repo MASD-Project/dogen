@@ -121,7 +121,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"meta_model\": " << v.meta_model() << ", "
-      << "\"tracer\": " << v.tracer()
+      << "\"tracer\": " << v.tracer() << ", "
+      << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\""
       << " }";
     return(s);
 }

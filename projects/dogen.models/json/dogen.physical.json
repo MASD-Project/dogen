@@ -882,6 +882,11 @@
         {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "output_directory_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the output directory chosen by the user.\n"
         }
       ]
     },

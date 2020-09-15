@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen/types/diffing_configuration.hpp"
 #include "dogen/types/reporting_configuration.hpp"
@@ -54,7 +55,8 @@ public:
         const bool dry_run_mode_enabled,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model,
-        const boost::shared_ptr<dogen::tracing::tracer>& tracer);
+        const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+        const boost::filesystem::path& output_directory_path);
 
 public:
     const boost::optional<dogen::diffing_configuration>& diffing_configuration() const;
@@ -90,6 +92,16 @@ public:
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>& v);
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v);
 
+    /**
+     * @brief Full path to the output directory chosen by the user.
+     */
+    /**@{*/
+    const boost::filesystem::path& output_directory_path() const;
+    boost::filesystem::path& output_directory_path();
+    void output_directory_path(const boost::filesystem::path& v);
+    void output_directory_path(const boost::filesystem::path&& v);
+    /**@}*/
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -107,6 +119,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::physical::entities::meta_model> meta_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
+    boost::filesystem::path output_directory_path_;
 };
 
 }

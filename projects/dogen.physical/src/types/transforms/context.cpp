@@ -61,7 +61,8 @@ context::context(context&& rhs)
       dry_run_mode_enabled_(std::move(rhs.dry_run_mode_enabled_)),
       feature_model_(std::move(rhs.feature_model_)),
       meta_model_(std::move(rhs.meta_model_)),
-      tracer_(std::move(rhs.tracer_)) { }
+      tracer_(std::move(rhs.tracer_)),
+      output_directory_path_(std::move(rhs.output_directory_path_)) { }
 
 context::context(
     const boost::optional<dogen::diffing_configuration>& diffing_configuration,
@@ -69,13 +70,15 @@ context::context(
     const bool dry_run_mode_enabled,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::physical::entities::meta_model>& meta_model,
-    const boost::shared_ptr<dogen::tracing::tracer>& tracer)
+    const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+    const boost::filesystem::path& output_directory_path)
     : diffing_configuration_(diffing_configuration),
       reporting_configuration_(reporting_configuration),
       dry_run_mode_enabled_(dry_run_mode_enabled),
       feature_model_(feature_model),
       meta_model_(meta_model),
-      tracer_(tracer) { }
+      tracer_(tracer),
+      output_directory_path_(output_directory_path) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -85,6 +88,7 @@ void context::swap(context& other) noexcept {
     swap(feature_model_, other.feature_model_);
     swap(meta_model_, other.meta_model_);
     swap(tracer_, other.tracer_);
+    swap(output_directory_path_, other.output_directory_path_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -93,7 +97,8 @@ bool context::operator==(const context& rhs) const {
         dry_run_mode_enabled_ == rhs.dry_run_mode_enabled_ &&
         feature_model_ == rhs.feature_model_ &&
         meta_model_ == rhs.meta_model_ &&
-        tracer_ == rhs.tracer_;
+        tracer_ == rhs.tracer_ &&
+        output_directory_path_ == rhs.output_directory_path_;
 }
 
 context& context::operator=(context other) {
@@ -188,6 +193,22 @@ void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>& v) {
 
 void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v) {
     tracer_ = std::move(v);
+}
+
+const boost::filesystem::path& context::output_directory_path() const {
+    return output_directory_path_;
+}
+
+boost::filesystem::path& context::output_directory_path() {
+    return output_directory_path_;
+}
+
+void context::output_directory_path(const boost::filesystem::path& v) {
+    output_directory_path_ = v;
+}
+
+void context::output_directory_path(const boost::filesystem::path&& v) {
+    output_directory_path_ = std::move(v);
 }
 
 }
