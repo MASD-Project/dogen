@@ -298,7 +298,8 @@ std::string locator::postfix_for_facet(const std::string& facet) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const identification::entities::logical_name& model_name, const locator_configuration& lc,
+    const identification::entities::logical_name& model_name,
+    const locator_configuration& lc,
     const bool enable_backend_directories) const {
 
     boost::filesystem::path r(output_directory_path);
