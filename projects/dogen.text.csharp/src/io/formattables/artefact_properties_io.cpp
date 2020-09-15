@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.text.csharp/io/formattables/artefact_properties_io.hpp"
 
@@ -48,16 +47,8 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen::text::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::text::csharp::formattables::artefact_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
       << "\"using_dependencies\": " << v.using_dependencies()

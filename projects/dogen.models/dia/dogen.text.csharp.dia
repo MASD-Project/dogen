@@ -6997,7 +6997,7 @@ using System;
         <dia:point val="-16,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,-79.05;1.105,-72.95"/>
+        <dia:rectangle val="-16.05,-79.05;1.105,-74.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-16,-79"/>
@@ -7006,7 +7006,7 @@ using System;
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_properties#</dia:string>
@@ -7096,52 +7096,6 @@ using System;
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#overwrite#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#file_path#</dia:string>
@@ -7880,7 +7834,7 @@ using System;
         <dia:point val="0,-68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.5225,-73.05;0.75,-67.2"/>
+        <dia:rectangle val="-7.5225,-74.65;0.75,-67.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7889,7 +7843,7 @@ using System;
         <dia:point val="0,-68"/>
         <dia:point val="0,-71"/>
         <dia:point val="-7.4725,-71"/>
-        <dia:point val="-7.4725,-73"/>
+        <dia:point val="-7.4725,-74.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -17911,7 +17865,7 @@ of the C# Technical Space.
         <dia:point val="-13,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,41.95;2.58,46.15"/>
+        <dia:rectangle val="-13.05,41.95;2.195,46.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17920,7 +17874,7 @@ of the C# Technical Space.
         <dia:point val="-13,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="15.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -19415,7 +19369,7 @@ the C# Technical Space.
         <dia:point val="46,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,41.95;61.58,46.15"/>
+        <dia:rectangle val="45.95,41.95;60.04,46.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19424,7 +19378,7 @@ the C# Technical Space.
         <dia:point val="46,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -19470,7 +19424,7 @@ the C# Technical Space.
         <dia:point val="104,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,41.95;119.58,46.15"/>
+        <dia:rectangle val="103.95,41.95;118.04,46.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19479,7 +19433,7 @@ the C# Technical Space.
         <dia:point val="104,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="13.99"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>
@@ -19525,7 +19479,7 @@ facet of the C# Technical Space.
         <dia:point val="163,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.95,41.95;178.58,46.15"/>
+        <dia:rectangle val="162.95,41.95;177.81,46.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19534,7 +19488,7 @@ facet of the C# Technical Space.
         <dia:point val="163,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.530000000000001"/>
+        <dia:real val="14.76"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.0999999999999996"/>

@@ -22,42 +22,28 @@
 
 namespace dogen::text::csharp::formattables {
 
-artefact_properties::artefact_properties()
-    : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)) { }
-
 artefact_properties::artefact_properties(artefact_properties&& rhs)
-    : enabled_(std::move(rhs.enabled_)),
-      overwrite_(std::move(rhs.overwrite_)),
-      file_path_(std::move(rhs.file_path_)),
+    : file_path_(std::move(rhs.file_path_)),
       relative_path_(std::move(rhs.relative_path_)),
       using_dependencies_(std::move(rhs.using_dependencies_)) { }
 
 artefact_properties::artefact_properties(
-    const bool enabled,
-    const bool overwrite,
     const boost::filesystem::path& file_path,
     const boost::filesystem::path& relative_path,
     const std::list<std::string>& using_dependencies)
-    : enabled_(enabled),
-      overwrite_(overwrite),
-      file_path_(file_path),
+    : file_path_(file_path),
       relative_path_(relative_path),
       using_dependencies_(using_dependencies) { }
 
 void artefact_properties::swap(artefact_properties& other) noexcept {
     using std::swap;
-    swap(enabled_, other.enabled_);
-    swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
     swap(relative_path_, other.relative_path_);
     swap(using_dependencies_, other.using_dependencies_);
 }
 
 bool artefact_properties::operator==(const artefact_properties& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_ &&
-        file_path_ == rhs.file_path_ &&
+    return file_path_ == rhs.file_path_ &&
         relative_path_ == rhs.relative_path_ &&
         using_dependencies_ == rhs.using_dependencies_;
 }
@@ -66,22 +52,6 @@ artefact_properties& artefact_properties::operator=(artefact_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool artefact_properties::enabled() const {
-    return enabled_;
-}
-
-void artefact_properties::enabled(const bool v) {
-    enabled_ = v;
-}
-
-bool artefact_properties::overwrite() const {
-    return overwrite_;
-}
-
-void artefact_properties::overwrite(const bool v) {
-    overwrite_ = v;
 }
 
 const boost::filesystem::path& artefact_properties::file_path() const {

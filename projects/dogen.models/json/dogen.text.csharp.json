@@ -475,14 +475,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "enabled",
-          "type": "bool"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        },
-        {
           "name": "file_path",
           "type": "boost::filesystem::path"
         },

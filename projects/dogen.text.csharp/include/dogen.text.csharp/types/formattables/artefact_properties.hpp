@@ -34,30 +34,20 @@ namespace dogen::text::csharp::formattables {
 
 class artefact_properties final {
 public:
+    artefact_properties() = default;
     artefact_properties(const artefact_properties&) = default;
     ~artefact_properties() = default;
-
-public:
-    artefact_properties();
 
 public:
     artefact_properties(artefact_properties&& rhs);
 
 public:
     artefact_properties(
-        const bool enabled,
-        const bool overwrite,
         const boost::filesystem::path& file_path,
         const boost::filesystem::path& relative_path,
         const std::list<std::string>& using_dependencies);
 
 public:
-    bool enabled() const;
-    void enabled(const bool v);
-
-    bool overwrite() const;
-    void overwrite(const bool v);
-
     const boost::filesystem::path& file_path() const;
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
@@ -84,8 +74,6 @@ public:
     artefact_properties& operator=(artefact_properties other);
 
 private:
-    bool enabled_;
-    bool overwrite_;
     boost::filesystem::path file_path_;
     boost::filesystem::path relative_path_;
     std::list<std::string> using_dependencies_;
