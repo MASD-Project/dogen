@@ -249,18 +249,19 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
 
 void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
+const auto& lid(arp.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "meta model properties transform",
-        transform_id, arp.identifier(), *ctx.tracer(), arp);
+        transform_id, lid.value(), *ctx.tracer(), arp);
 
     /*
-     * Obtain the root module configuration.
+     * Obtain the root module configuration. Should have the same
+     * logical name as the model itself.
      */
-    const auto rmid(arp.root_module_logical_id());
-    const auto i(arp.artefact_sets_by_logical_id().find(rmid));
+    const auto i(arp.artefact_sets_by_logical_id().find(lid));
     if (i == arp.artefact_sets_by_logical_id().end()) {
-        BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
+        BOOST_LOG_SEV(lg, error) << root_module_not_found << lid;
         BOOST_THROW_EXCEPTION(
-            transform_exception(root_module_not_found + rmid.value()));
+            transform_exception(root_module_not_found + lid.value()));
     }
     const auto& cfg(*i->second.configuration());
 

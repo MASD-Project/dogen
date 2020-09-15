@@ -414,7 +414,8 @@ void enablement_transform::compute_enablement_for_artefact_set(
 void enablement_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_transform_tracer stp(lg, "enablement",
-        transform_id, arp.identifier(), *ctx.tracer(), arp);
+        transform_id, arp.provenance().logical_name().id().value(),
+        *ctx.tracer(), arp);
 
     /*
      * First, we update all of the local enablement properties from

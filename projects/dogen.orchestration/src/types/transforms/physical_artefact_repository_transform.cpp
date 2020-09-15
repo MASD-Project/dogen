@@ -48,12 +48,6 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "physical artefact repository",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    physical::entities::artefact_repository r;
-    const auto rmn(m.root_module()->name());
-    const identification::entities::logical_id id(rmn.qualified().dot());
-    r.root_module_logical_id(id);
-    r.identifier(m.name().qualified().dot());
-
     /*
      * Create the provenance for the physical model.
      */
@@ -61,8 +55,13 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
     prov.logical_name(m.name());
     prov.codec(m.provenance());
     prov.logical_meta_name(m.meta_name());
+
+    physical::entities::artefact_repository r;
     r.provenance(prov);
 
+    /*
+     * Now obtain all of the artefacts.
+     */
     auto& asbli(r.artefact_sets_by_logical_id());
     for (const auto& ea : m.elements()) {
         const auto lid(ea.element()->name().qualified().dot());

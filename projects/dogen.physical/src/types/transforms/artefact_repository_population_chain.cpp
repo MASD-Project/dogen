@@ -44,7 +44,8 @@ namespace dogen::physical::transforms {
 void artefact_repository_population_chain::
 apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_chain_tracer stp(lg, "artefact repository population",
-        transform_id, arp.identifier(), *ctx.tracer(), arp);
+        transform_id, arp.provenance().logical_name().id().value(),
+        *ctx.tracer(), arp);
 
     /*
      * The global enablement transform must be executed before the

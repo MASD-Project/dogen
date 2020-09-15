@@ -142,26 +142,31 @@ extraction_properties_transform::make_extraction_properties(const context& ctx,
 }
 
 void extraction_properties_transform::
-apply(const context& ctx, entities::artefact_repository& ar) {
+apply(const context& ctx, entities::artefact_repository& arp) {
+    const auto& lid(arp.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "extraction properties",
-        transform_id, ar.identifier(), *ctx.tracer(), ar);
+        transform_id, lid.value(), *ctx.tracer(), arp);
 
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
 
-    const auto rmid(ar.root_module_logical_id());
-    const auto i(ar.artefact_sets_by_logical_id().find(rmid));
-    if (i == ar.artefact_sets_by_logical_id().end()) {
-        BOOST_LOG_SEV(lg, error) << root_module_not_found << rmid;
+    /*
+     * Use the model's logical ID to locate the artefact set for the
+     * root module. This contains the configuration for the model
+     * itself.
+     */
+    const auto i(arp.artefact_sets_by_logical_id().find(lid));
+    if (i == arp.artefact_sets_by_logical_id().end()) {
+        BOOST_LOG_SEV(lg, error) << root_module_not_found << lid;
         BOOST_THROW_EXCEPTION(
-            transform_exception(root_module_not_found + rmid.value()));
+            transform_exception(root_module_not_found + lid.value()));
     }
 
     const auto& cfg(*i->second.configuration());
     const auto ep(make_extraction_properties(ctx, in.all(), cfg));
-    ar.extraction_properties(ep);
+    arp.extraction_properties(ep);
 
-    stp.end_transform(ar);
+    stp.end_transform(arp);
 }
 
 }

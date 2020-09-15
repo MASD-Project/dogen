@@ -36,20 +36,21 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::physical::transforms {
 
 void generability_transform::
-apply(const context& ctx, entities::artefact_repository& ar) {
+apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_transform_tracer stp(lg, "generability",
-        transform_id, ar.identifier(), *ctx.tracer(), ar);
+        transform_id, arp.provenance().logical_name().id().value(),
+        *ctx.tracer(), arp);
 
-    ar.has_generatable_artefacts(false);
-    for(const auto& pair : ar.artefact_sets_by_logical_id()) {
+    arp.has_generatable_artefacts(false);
+    for(const auto& pair : arp.artefact_sets_by_logical_id()) {
         const auto& as(pair.second);
         if (as.is_generatable()) {
-            ar.has_generatable_artefacts(true);
+            arp.has_generatable_artefacts(true);
             break;
         }
     }
 
-    stp.end_transform(ar);
+    stp.end_transform(arp);
 }
 
 }
