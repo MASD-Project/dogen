@@ -123,6 +123,7 @@ make_context(const configuration& cfg, const std::string& activity,
      * Populate the output directory.
      */
     r.text_context().output_directory_path(output_directory);
+    r.physical_context().output_directory_path(output_directory);
 
     /*
      * Setup the archetype location repository.
