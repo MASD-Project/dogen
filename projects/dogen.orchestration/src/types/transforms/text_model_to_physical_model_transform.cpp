@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.identification/types/entities/logical_provenance.hpp"
+
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/io/entities/physical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
@@ -68,20 +69,16 @@ apply(const text::transforms::context& ctx,
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
-        logical_id id(m.name().qualified().dot());
+        logical_id id(m.name().id());
         pm.name().id(f.make(id, m.output_technical_space()));
 
         /*
          * Create the provenance for the physical model.
          */
         logical_provenance prov;
-        prov.logical_name().simple(m.name().simple());
-
-        prov.logical_name().id(id);
+        prov.logical_name(m.name());
         prov.codec(m.provenance());
-
-        logical_meta_id mid(m.meta_name().id());
-        prov.logical_meta_name().id(mid);
+        prov.logical_meta_name(m.meta_name());
         pm.provenance(prov);
 
         /*
