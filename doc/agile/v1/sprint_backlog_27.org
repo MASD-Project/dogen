@@ -14,25 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-15 Tue 11:57]
+#+CAPTION: Clock summary at [2020-09-15 Tue 17:51]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *69:21* |       |       | 100.0 |
+| *Total time*                                       | *71:26* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 69:21   |       |       | 100.0 |
-| Active                                             |         | 69:21 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |  10.5 |
+| Stories                                            | 71:26   |       |       | 100.0 |
+| Active                                             |         | 71:26 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |  10.1 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   1.0 |
-| Sprint and product backlog grooming                |         |       |  2:26 |   3.5 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   6.3 |
-| Create an =ident= model                            |         |       | 42:02 |  60.6 |
-| Rename injection to codec                          |         |       |  0:48 |   1.2 |
+| Sprint and product backlog grooming                |         |       |  2:26 |   3.4 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   6.1 |
+| Create an =ident= model                            |         |       | 42:02 |  58.8 |
+| Rename injection to codec                          |         |       |  0:48 |   1.1 |
 | Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
 | Remove support for split projects                  |         |       |  0:07 |   0.2 |
 | Implement meta-name validator correctly            |         |       |  0:17 |   0.4 |
-| Add dependencies to artefacts                      |         |       |  2:28 |   3.6 |
-| Add instances of physical meta-model elements      |         |       |  8:48 |  12.7 |
+| Add dependencies to artefacts                      |         |       |  2:28 |   3.5 |
+| Add instances of physical meta-model elements      |         |       |  8:48 |  12.3 |
+| Add full and relative path processing to PM        |         |       |  2:05 |   2.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1202,22 +1203,11 @@ Notes:
   (e.g. we can declare XML with associated extensions and then use it
   where required).
 
-*** Deprecate managed directories                                     :story:
-
-There should only be one "managed directory" at the input stage, which
-is the component directory (for component models). If parts have
-relative directories off of the component directory then we should add
-to the list of managed directories inside the PM pipeline.
-
-*** Add technical spaces to PM and LM                                 :story:
-
-Technical spaces and their associated versions should be declared by
-the text models and should be part of the PM. The TS should be
-declared on the "global" text model so that backends can reuse them
-(e.g. we can declare XML with associated extensions and then use it
-where required).
-
-*** Add full and relative path processing to PM                       :story:
+*** STARTED Add full and relative path processing to PM               :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-15 Tue 17:50]--[2020-09-15 Tue 17:51] =>  0:01
+    CLOCK: [2020-09-15 Tue 15:45]--[2020-09-15 Tue 17:49] =>  2:04
+    :END:
 
 We need to be able to generate full paths in the PM. This will require
 access to the file extensions. For this we will need new decoration
@@ -1246,6 +1236,21 @@ clear. We need a container with:
 - logical model element ID
 - archetype ID
 - labels
+
+*** Deprecate managed directories                                     :story:
+
+There should only be one "managed directory" at the input stage, which
+is the component directory (for component models). If parts have
+relative directories off of the component directory then we should add
+to the list of managed directories inside the PM pipeline.
+
+*** Add technical spaces to PM and LM                                 :story:
+
+Technical spaces and their associated versions should be declared by
+the text models and should be part of the PM. The TS should be
+declared on the "global" text model so that backends can reuse them
+(e.g. we can declare XML with associated extensions and then use it
+where required).
 
 *** Improve support for references                                    :story:
 
