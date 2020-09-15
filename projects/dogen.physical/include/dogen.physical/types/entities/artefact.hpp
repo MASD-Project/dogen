@@ -29,10 +29,10 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/operation.hpp"
+#include "dogen.physical/types/entities/path_properties.hpp"
 #include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
@@ -65,9 +65,8 @@ public:
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
-        const boost::filesystem::path& file_path_new,
         const std::string& content,
-        const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
+        const dogen::physical::entities::path_properties& path_properties,
         const std::vector<boost::filesystem::path>& dependencies,
         const std::list<std::string>& relations,
         const std::string& unified_diff,
@@ -144,16 +143,6 @@ public:
     /**@}*/
 
     /**
-     * @brief New-world file path based on the component meta-model and its configuration.
-     */
-    /**@{*/
-    const boost::filesystem::path& file_path_new() const;
-    boost::filesystem::path& file_path_new();
-    void file_path_new(const boost::filesystem::path& v);
-    void file_path_new(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
      * @brief Textual content of the artefact.
      */
     /**@{*/
@@ -164,13 +153,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Paths relative to the path ID that keys the container.
+     * @brief Properties related to paths in the filesystem.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::filesystem::path>& relative_paths() const;
-    std::unordered_map<std::string, boost::filesystem::path>& relative_paths();
-    void relative_paths(const std::unordered_map<std::string, boost::filesystem::path>& v);
-    void relative_paths(const std::unordered_map<std::string, boost::filesystem::path>&& v);
+    const dogen::physical::entities::path_properties& path_properties() const;
+    dogen::physical::entities::path_properties& path_properties();
+    void path_properties(const dogen::physical::entities::path_properties& v);
+    void path_properties(const dogen::physical::entities::path_properties&& v);
     /**@}*/
 
     /**
@@ -261,9 +250,8 @@ private:
     bool enabled_;
     bool overwrite_;
     boost::filesystem::path file_path_;
-    boost::filesystem::path file_path_new_;
     std::string content_;
-    std::unordered_map<std::string, boost::filesystem::path> relative_paths_;
+    dogen::physical::entities::path_properties path_properties_;
     std::vector<boost::filesystem::path> dependencies_;
     std::list<std::string> relations_;
     std::string unified_diff_;

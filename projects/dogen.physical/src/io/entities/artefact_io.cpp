@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
+#include "dogen.physical/io/entities/path_properties_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.physical/io/entities/formatting_styles_io.hpp"
 #include "dogen.identification/io/entities/physical_name_io.hpp"
@@ -52,24 +53,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::filesystem::path>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << i->second.generic_string() << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -118,9 +101,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"file_path_new\": " << "\"" << v.file_path_new().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
-      << "\"relative_paths\": " << v.relative_paths() << ", "
+      << "\"path_properties\": " << v.path_properties() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"relations\": " << v.relations() << ", "
       << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "

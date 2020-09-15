@@ -45,9 +45,8 @@ artefact::artefact(artefact&& rhs)
       enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
-      file_path_new_(std::move(rhs.file_path_new_)),
       content_(std::move(rhs.content_)),
-      relative_paths_(std::move(rhs.relative_paths_)),
+      path_properties_(std::move(rhs.path_properties_)),
       dependencies_(std::move(rhs.dependencies_)),
       relations_(std::move(rhs.relations_)),
       unified_diff_(std::move(rhs.unified_diff_)),
@@ -64,9 +63,8 @@ artefact::artefact(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
-    const boost::filesystem::path& file_path_new,
     const std::string& content,
-    const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
+    const dogen::physical::entities::path_properties& path_properties,
     const std::vector<boost::filesystem::path>& dependencies,
     const std::list<std::string>& relations,
     const std::string& unified_diff,
@@ -81,9 +79,8 @@ artefact::artefact(
       enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
-      file_path_new_(file_path_new),
       content_(content),
-      relative_paths_(relative_paths),
+      path_properties_(path_properties),
       dependencies_(dependencies),
       relations_(relations),
       unified_diff_(unified_diff),
@@ -101,9 +98,8 @@ void artefact::swap(artefact& other) noexcept {
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
-    swap(file_path_new_, other.file_path_new_);
     swap(content_, other.content_);
-    swap(relative_paths_, other.relative_paths_);
+    swap(path_properties_, other.path_properties_);
     swap(dependencies_, other.dependencies_);
     swap(relations_, other.relations_);
     swap(unified_diff_, other.unified_diff_);
@@ -121,9 +117,8 @@ bool artefact::operator==(const artefact& rhs) const {
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
-        file_path_new_ == rhs.file_path_new_ &&
         content_ == rhs.content_ &&
-        relative_paths_ == rhs.relative_paths_ &&
+        path_properties_ == rhs.path_properties_ &&
         dependencies_ == rhs.dependencies_ &&
         relations_ == rhs.relations_ &&
         unified_diff_ == rhs.unified_diff_ &&
@@ -235,22 +230,6 @@ void artefact::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const boost::filesystem::path& artefact::file_path_new() const {
-    return file_path_new_;
-}
-
-boost::filesystem::path& artefact::file_path_new() {
-    return file_path_new_;
-}
-
-void artefact::file_path_new(const boost::filesystem::path& v) {
-    file_path_new_ = v;
-}
-
-void artefact::file_path_new(const boost::filesystem::path&& v) {
-    file_path_new_ = std::move(v);
-}
-
 const std::string& artefact::content() const {
     return content_;
 }
@@ -267,20 +246,20 @@ void artefact::content(const std::string&& v) {
     content_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::filesystem::path>& artefact::relative_paths() const {
-    return relative_paths_;
+const dogen::physical::entities::path_properties& artefact::path_properties() const {
+    return path_properties_;
 }
 
-std::unordered_map<std::string, boost::filesystem::path>& artefact::relative_paths() {
-    return relative_paths_;
+dogen::physical::entities::path_properties& artefact::path_properties() {
+    return path_properties_;
 }
 
-void artefact::relative_paths(const std::unordered_map<std::string, boost::filesystem::path>& v) {
-    relative_paths_ = v;
+void artefact::path_properties(const dogen::physical::entities::path_properties& v) {
+    path_properties_ = v;
 }
 
-void artefact::relative_paths(const std::unordered_map<std::string, boost::filesystem::path>&& v) {
-    relative_paths_ = std::move(v);
+void artefact::path_properties(const dogen::physical::entities::path_properties&& v) {
+    path_properties_ = std::move(v);
 }
 
 const std::vector<boost::filesystem::path>& artefact::dependencies() const {

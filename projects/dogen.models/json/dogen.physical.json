@@ -532,19 +532,14 @@
           "documentation": "Full path to the file corresponding to this artefact.\n"
         },
         {
-          "name": "file_path_new",
-          "type": "boost::filesystem::path",
-          "documentation": "New-world file path based on the component meta-model and its configuration.\n"
-        },
-        {
           "name": "content",
           "type": "std::string",
           "documentation": "Textual content of the artefact.\n"
         },
         {
-          "name": "relative_paths",
-          "type": "std::unordered_map<std::string, boost::filesystem::path>",
-          "documentation": "Paths relative to the path ID that keys the container.\n"
+          "name": "path_properties",
+          "type": "path_properties",
+          "documentation": "Properties related to paths in the filesystem.\n"
         },
         {
           "name": "dependencies",
@@ -1687,6 +1682,22 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::path_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the file corresponding to this artefact.\n"
+        },
+        {
+          "name": "relative_paths",
+          "type": "std::unordered_map<identification::entities::physical_meta_id, boost::filesystem::path>",
+          "documentation": "Paths relative to the part's root directory.\n"
+        }
+      ]
     }
   ]
 }
