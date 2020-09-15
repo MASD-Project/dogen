@@ -15107,6 +15107,18 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding =using= statements to models                      :story:
+
+It probably would be quite trivial, once we move over to org-mode, to
+add a top-level section with =using= statements:
+
+: using identification::entities::physical_meta_id
+
+This would then mean that every time we see =physical_meta_id= we
+replace it with the full name. Ideally these should be added at a
+package level and have a recursive use. It should be transparent to
+code generation. If we detect duplicates we should error.
+
 *** Consider creating wrappers for containers                         :story:
 
 A common pattern we see in Dogen are indices and repositories. These
