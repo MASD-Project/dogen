@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -52,6 +53,15 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
     const identification::entities::logical_id id(rmn.qualified().dot());
     r.root_module_logical_id(id);
     r.identifier(m.name().qualified().dot());
+
+    /*
+     * Create the provenance for the physical model.
+     */
+    identification::entities::logical_provenance prov;
+    prov.logical_name(m.name());
+    prov.codec(m.provenance());
+    prov.logical_meta_name(m.meta_name());
+    r.provenance(prov);
 
     auto& asbli(r.artefact_sets_by_logical_id());
     for (const auto& ea : m.elements()) {
