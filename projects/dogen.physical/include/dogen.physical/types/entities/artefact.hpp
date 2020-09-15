@@ -65,6 +65,7 @@ public:
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
+        const boost::filesystem::path& file_path_new,
         const std::string& content,
         const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
         const std::vector<boost::filesystem::path>& dependencies,
@@ -140,6 +141,16 @@ public:
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief New-world file path based on the component meta-model and its configuration.
+     */
+    /**@{*/
+    const boost::filesystem::path& file_path_new() const;
+    boost::filesystem::path& file_path_new();
+    void file_path_new(const boost::filesystem::path& v);
+    void file_path_new(const boost::filesystem::path&& v);
     /**@}*/
 
     /**
@@ -250,6 +261,7 @@ private:
     bool enabled_;
     bool overwrite_;
     boost::filesystem::path file_path_;
+    boost::filesystem::path file_path_new_;
     std::string content_;
     std::unordered_map<std::string, boost::filesystem::path> relative_paths_;
     std::vector<boost::filesystem::path> dependencies_;

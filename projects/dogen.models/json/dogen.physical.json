@@ -532,6 +532,11 @@
           "documentation": "Full path to the file corresponding to this artefact.\n"
         },
         {
+          "name": "file_path_new",
+          "type": "boost::filesystem::path",
+          "documentation": "New-world file path based on the component meta-model and its configuration.\n"
+        },
+        {
           "name": "content",
           "type": "std::string",
           "documentation": "Textual content of the artefact.\n"
@@ -1527,6 +1532,11 @@
           "documentation": "If true, the backend is enabled.\n"
         },
         {
+          "name": "file_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the backend.\n"
+        },
+        {
           "name": "technical_space_version",
           "type": "std::string",
           "documentation": "Technical space version to use.\n"
@@ -1616,6 +1626,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "file_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the component.\n"
+        },
+        {
           "name": "backend_properties",
           "type": "std::unordered_map<identification::entities::physical_meta_id, backend_properties>"
         },
@@ -1650,6 +1665,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "file_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the facet.\n"
+        },
+        {
           "name": "directory",
           "type": "std::string",
           "documentation": "Name of the directory to use for the part.\n"
@@ -1657,9 +1677,16 @@
         {
           "name": "relative_path",
           "type": "boost::filesystem::path",
-          "documentation": "Path to the part, relative to the project directory.\n"
+          "documentation": "Path to the part, relative to the component directory.\n\nOnly required when the part is located outside of the component directory.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::paths_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

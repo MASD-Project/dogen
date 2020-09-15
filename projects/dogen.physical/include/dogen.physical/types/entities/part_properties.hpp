@@ -47,6 +47,7 @@ public:
 public:
     part_properties(
         const dogen::identification::entities::physical_meta_name& meta_name,
+        const boost::filesystem::path& file_path,
         const std::string& directory,
         const boost::filesystem::path& relative_path);
 
@@ -62,6 +63,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Full path to the facet.
+     */
+    /**@{*/
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
      * @brief Name of the directory to use for the part.
      */
     /**@{*/
@@ -72,7 +83,9 @@ public:
     /**@}*/
 
     /**
-     * @brief Path to the part, relative to the project directory.
+     * @brief Path to the part, relative to the component directory.
+     *
+     * Only required when the part is located outside of the component directory.
      */
     /**@{*/
     const boost::filesystem::path& relative_path() const;
@@ -93,6 +106,7 @@ public:
 
 private:
     dogen::identification::entities::physical_meta_name meta_name_;
+    boost::filesystem::path file_path_;
     std::string directory_;
     boost::filesystem::path relative_path_;
 };

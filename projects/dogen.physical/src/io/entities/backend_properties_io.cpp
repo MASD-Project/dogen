@@ -45,6 +45,7 @@ std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::backend_properties\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"enabled\": " << v.enabled() << ", "
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"technical_space_version\": " << "\"" << tidy_up_string(v.technical_space_version()) << "\"" << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"enable_backend_directories\": " << v.enable_backend_directories()

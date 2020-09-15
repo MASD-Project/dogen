@@ -22,14 +22,25 @@
 
 namespace dogen::physical::entities {
 
+meta_model_properties::meta_model_properties(meta_model_properties&& rhs)
+    : file_path_(std::move(rhs.file_path_)),
+      backend_properties_(std::move(rhs.backend_properties_)),
+      facet_properties_(std::move(rhs.facet_properties_)),
+      archetype_properties_(std::move(rhs.archetype_properties_)),
+      archetype_kind_properties_(std::move(rhs.archetype_kind_properties_)),
+      part_properties_(std::move(rhs.part_properties_)),
+      denormalised_archetype_properties_(std::move(rhs.denormalised_archetype_properties_)) { }
+
 meta_model_properties::meta_model_properties(
+    const boost::filesystem::path& file_path,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties>& archetype_kind_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties)
-    : backend_properties_(backend_properties),
+    : file_path_(file_path),
+      backend_properties_(backend_properties),
       facet_properties_(facet_properties),
       archetype_properties_(archetype_properties),
       archetype_kind_properties_(archetype_kind_properties),
@@ -38,6 +49,7 @@ meta_model_properties::meta_model_properties(
 
 void meta_model_properties::swap(meta_model_properties& other) noexcept {
     using std::swap;
+    swap(file_path_, other.file_path_);
     swap(backend_properties_, other.backend_properties_);
     swap(facet_properties_, other.facet_properties_);
     swap(archetype_properties_, other.archetype_properties_);
@@ -47,7 +59,8 @@ void meta_model_properties::swap(meta_model_properties& other) noexcept {
 }
 
 bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
-    return backend_properties_ == rhs.backend_properties_ &&
+    return file_path_ == rhs.file_path_ &&
+        backend_properties_ == rhs.backend_properties_ &&
         facet_properties_ == rhs.facet_properties_ &&
         archetype_properties_ == rhs.archetype_properties_ &&
         archetype_kind_properties_ == rhs.archetype_kind_properties_ &&
@@ -59,6 +72,22 @@ meta_model_properties& meta_model_properties::operator=(meta_model_properties ot
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::filesystem::path& meta_model_properties::file_path() const {
+    return file_path_;
+}
+
+boost::filesystem::path& meta_model_properties::file_path() {
+    return file_path_;
+}
+
+void meta_model_properties::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
+}
+
+void meta_model_properties::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
 }
 
 const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& meta_model_properties::backend_properties() const {

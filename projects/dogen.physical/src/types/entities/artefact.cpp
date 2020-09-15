@@ -45,6 +45,7 @@ artefact::artefact(artefact&& rhs)
       enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
+      file_path_new_(std::move(rhs.file_path_new_)),
       content_(std::move(rhs.content_)),
       relative_paths_(std::move(rhs.relative_paths_)),
       dependencies_(std::move(rhs.dependencies_)),
@@ -63,6 +64,7 @@ artefact::artefact(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
+    const boost::filesystem::path& file_path_new,
     const std::string& content,
     const std::unordered_map<std::string, boost::filesystem::path>& relative_paths,
     const std::vector<boost::filesystem::path>& dependencies,
@@ -79,6 +81,7 @@ artefact::artefact(
       enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
+      file_path_new_(file_path_new),
       content_(content),
       relative_paths_(relative_paths),
       dependencies_(dependencies),
@@ -98,6 +101,7 @@ void artefact::swap(artefact& other) noexcept {
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
+    swap(file_path_new_, other.file_path_new_);
     swap(content_, other.content_);
     swap(relative_paths_, other.relative_paths_);
     swap(dependencies_, other.dependencies_);
@@ -117,6 +121,7 @@ bool artefact::operator==(const artefact& rhs) const {
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
+        file_path_new_ == rhs.file_path_new_ &&
         content_ == rhs.content_ &&
         relative_paths_ == rhs.relative_paths_ &&
         dependencies_ == rhs.dependencies_ &&
@@ -228,6 +233,22 @@ void artefact::file_path(const boost::filesystem::path& v) {
 
 void artefact::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
+}
+
+const boost::filesystem::path& artefact::file_path_new() const {
+    return file_path_new_;
+}
+
+boost::filesystem::path& artefact::file_path_new() {
+    return file_path_new_;
+}
+
+void artefact::file_path_new(const boost::filesystem::path& v) {
+    file_path_new_ = v;
+}
+
+void artefact::file_path_new(const boost::filesystem::path&& v) {
+    file_path_new_ = std::move(v);
 }
 
 const std::string& artefact::content() const {

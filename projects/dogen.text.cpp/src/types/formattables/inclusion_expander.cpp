@@ -33,8 +33,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "text.cpp.formattables.inclusion_expander"));
+static logger lg(logger_factory("text.cpp.formattables.inclusion_expander"));
 
 const char angle_bracket('<');
 const std::string double_quote("\"");
@@ -98,15 +97,14 @@ bool include_directive_comparer(
 
 namespace dogen::text::cpp::formattables {
 
+using variability::entities::feature_model;
 using identification::entities::logical_id;
+using identification::entities::logical_meta_physical_id;
 
 directive_group_repository
-inclusion_expander::create_directive_groups(
-    const variability::entities::feature_model& feature_model,
+inclusion_expander::create_directive_groups(const feature_model& feature_model,
     const transforms::repository& frp, const locator& l,
-    const std::unordered_map<logical_id,
-    formattable>& formattables) const {
-
+    const std::unordered_map<logical_id, formattable>& formattables) const {
     directive_group_repository_factory f;
     return f.make(feature_model, frp, l, formattables);
 }
@@ -245,10 +243,8 @@ void inclusion_expander::populate_inclusion_dependencies(
                              << "for all formattables. ";
 }
 
-void inclusion_expander::expand(
-    const variability::entities::feature_model& feature_model,
-    const std::unordered_set<
-    identification::entities::logical_meta_physical_id>&
+void inclusion_expander::expand(const feature_model& feature_model,
+    const std::unordered_set<logical_meta_physical_id>&
     enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
 

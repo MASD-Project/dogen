@@ -118,6 +118,7 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"file_path_new\": " << "\"" << v.file_path_new().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"relative_paths\": " << v.relative_paths() << ", "
       << "\"dependencies\": " << v.dependencies() << ", "

@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/part_properties.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.physical/types/entities/backend_properties.hpp"
@@ -45,11 +46,14 @@ class meta_model_properties final {
 public:
     meta_model_properties() = default;
     meta_model_properties(const meta_model_properties&) = default;
-    meta_model_properties(meta_model_properties&&) = default;
     ~meta_model_properties() = default;
 
 public:
+    meta_model_properties(meta_model_properties&& rhs);
+
+public:
     meta_model_properties(
+        const boost::filesystem::path& file_path,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
@@ -58,6 +62,16 @@ public:
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties);
 
 public:
+    /**
+     * @brief Full path to the component.
+     */
+    /**@{*/
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
+    /**@}*/
+
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties() const;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties();
     void backend_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& v);
@@ -99,6 +113,7 @@ public:
     meta_model_properties& operator=(meta_model_properties other);
 
 private:
+    boost::filesystem::path file_path_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties> backend_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties> archetype_properties_;

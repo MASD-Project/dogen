@@ -141,6 +141,7 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::meta_model_properties\"" << ", "
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"backend_properties\": " << v.backend_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"archetype_properties\": " << v.archetype_properties() << ", "
