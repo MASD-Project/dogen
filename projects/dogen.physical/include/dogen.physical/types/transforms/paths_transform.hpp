@@ -25,24 +25,39 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/backend_properties.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Computes all filesystem related paths within the physical
+ * space.
+ */
 class paths_transform final {
-public:
-    paths_transform() = default;
-    paths_transform(const paths_transform&) = default;
-    paths_transform(paths_transform&&) = default;
-    ~paths_transform() = default;
-    paths_transform& operator=(const paths_transform&) = default;
+private:
+    /**
+     * @brief Computes the top-level path to the component.
+     */
+    static boost::filesystem::path compute_component_path(const context& ctx,
+        const identification::entities::logical_name& ln);
+
+    /**
+     * @brief Computes the path to the backend.
+     */
+    static void
+    compute_backend_paths(const boost::filesystem::path& component_path,
+        std::unordered_map<identification::entities::physical_meta_id,
+        physical::entities::backend_properties>& bps);
 
 public:
-    bool operator==(const paths_transform& rhs) const;
-    bool operator!=(const paths_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Apply the transform to the supplied repository of artefacts.
+     */
+    static void apply(const context& ctx, entities::artefact_repository& arp);
 };
 
 }

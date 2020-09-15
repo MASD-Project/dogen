@@ -22,11 +22,12 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
-#include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
+#include "dogen.physical/types/transforms/paths_transform.hpp"
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 #include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
+#include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
 #include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
 
 namespace {
@@ -52,6 +53,12 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * local one.
      */
     meta_model_properties_transform::apply(ctx, arp);
+
+    /*
+     * The paths transform must be done after the meta-model
+     * properties transform.
+     */
+    // paths_transform::apply(ctx, arp);
 
     /*
      * Update enablement for all artefacts.
