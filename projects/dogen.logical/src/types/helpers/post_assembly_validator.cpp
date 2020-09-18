@@ -30,6 +30,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
+#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/decomposer.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/types/entities/physical/archetype.hpp"
@@ -122,6 +123,9 @@ const std::string invalid_empty_id("Name must have a non-empty id.");
 const std::string invalid_empty_qualified_name(
     "Invalid empty qualified name. Id: ");
 const std::string invalid_logical_meta_element("Meta-element name not found: ");
+const std::string expected_one_output_technical_space(
+    "Expected exactly one output technical space.");
+
 
 }
 
@@ -403,6 +407,17 @@ validate_physical_archetypes(const entities::model& m) {
 }
 
 void post_assembly_validator::
+validate_technical_spaces(const entities::model& m) {
+    if (m.output_technical_spaces().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << expected_one_output_technical_space
+                                 << " Output technical spaces: "
+                                 << m.output_technical_spaces();
+        BOOST_THROW_EXCEPTION(
+            validation_error(expected_one_output_technical_space));
+    }
+}
+
+void post_assembly_validator::
 validate(const indices& idx, const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
                              << m.name().qualified().dot();
@@ -413,6 +428,7 @@ validate(const indices& idx, const entities::model& m) {
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), ts, dr.name_trees());
     validate_physical_archetypes(m);
+    validate_technical_spaces(m);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

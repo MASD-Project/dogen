@@ -75,7 +75,7 @@ void model_to_text_chain::apply(const text::transforms::context& ctx,
      * throw to let the user know it requested an unsupported
      * transformation.
      */
-    const auto ts(m.output_technical_space());
+    const auto ts(m.logical().output_technical_spaces().front());
     BOOST_LOG_SEV(lg, debug) << "Looking for a transform for technical space: "
                              << ts;
     const auto ptr(registrar().transform_for_technical_space(ts));

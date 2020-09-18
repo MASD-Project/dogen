@@ -124,7 +124,7 @@ void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
      */
     const auto& odp(ctx.output_directory_path());
     const auto& feature_model(*ctx.feature_model());
-    const auto& rcfg(*m.root_module()->configuration());
+    const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& frp(formatters_repository());
     const auto l(make_locator(odp, feature_model, rcfg, frp,
             enable_backend_directories, m));

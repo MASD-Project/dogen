@@ -23,49 +23,13 @@
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
-#include "dogen.identification/io/entities/model_type_io.hpp"
-#include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_name_io.hpp"
-#include "dogen.logical/io/entities/orm/model_properties_io.hpp"
-#include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_name_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_name, dogen::identification::entities::model_type>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace std {
 
@@ -76,51 +40,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::en
         s << *i;
     }
     s << "] ";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::structural::module>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::technical_space>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::orm::model_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
     return s;
 }
 
@@ -186,15 +105,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"provenance\": " << v.provenance() << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"leaves\": " << v.leaves() << ", "
       << "\"elements\": " << v.elements() << ", "
-      << "\"root_module\": " << v.root_module() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
-      << "\"input_technical_space\": " << v.input_technical_space() << ", "
-      << "\"output_technical_space\": " << v.output_technical_space() << ", "
-      << "\"all_technical_spaces\": " << v.all_technical_spaces() << ", "
-      << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "

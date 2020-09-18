@@ -31,47 +31,13 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "references",
-          "type": "std::unordered_map<identification::entities::logical_name, identification::entities::model_type>",
-          "documentation": "All other models that this model depends on, mapped to their origin.\n"
-        },
-        {
-          "name": "leaves",
-          "type": "std::unordered_set<identification::entities::logical_name>",
-          "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
-        },
-        {
           "name": "elements",
           "type": "std::list<element_artefacts>"
-        },
-        {
-          "name": "root_module",
-          "type": "boost::shared_ptr<logical::entities::structural::module>",
-          "documentation": "The module that represents the model.\n"
         },
         {
           "name": "has_generatable_types",
           "type": "bool",
           "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
-        },
-        {
-          "name": "input_technical_space",
-          "type": "identification::entities::technical_space",
-          "documentation": "Technical space which this model used originally.\n"
-        },
-        {
-          "name": "output_technical_space",
-          "type": "identification::entities::technical_space",
-          "documentation": "Technical space into which to output the model.\n"
-        },
-        {
-          "name": "all_technical_spaces",
-          "type": "std::unordered_set<identification::entities::technical_space>",
-          "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
-        },
-        {
-          "name": "orm_properties",
-          "type": "boost::optional<logical::entities::orm::model_properties>"
         },
         {
           "name": "enabled_archetype_for_element",

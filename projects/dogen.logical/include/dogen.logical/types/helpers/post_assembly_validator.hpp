@@ -61,7 +61,6 @@ private:
     static void validate_meta_names(
         const std::list<std::pair<identification::entities::logical_id,
         identification::entities::logical_meta_name>>& meta_names);
-
     static void validate_name_tree(
         const std::unordered_set<identification::entities::logical_id>&
         abstract_elements, const identification::entities::technical_space ts,
@@ -72,8 +71,8 @@ private:
         const identification::entities::technical_space ts,
         const std::list<std::pair<identification::entities::logical_id,
         identification::entities::logical_name_tree>>& nts);
-
     static void validate_physical_archetypes(const entities::model& m);
+    static void validate_technical_spaces(const entities::model& m);
 
 public:
     static void validate(const indices& idx, const entities::model& m);

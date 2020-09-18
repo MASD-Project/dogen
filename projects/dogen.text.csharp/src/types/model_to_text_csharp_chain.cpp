@@ -85,7 +85,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
      * Create the locator.
      */
     const auto mn(m.name());
-    const auto& rcfg(*m.root_module()->configuration());
+    const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& feature_model(*ctx.feature_model());
     const auto odp(ctx.output_directory_path());
     const auto& frp(transforms::workflow::registrar().formatter_repository());

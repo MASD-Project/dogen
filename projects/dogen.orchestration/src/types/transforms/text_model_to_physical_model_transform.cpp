@@ -63,14 +63,14 @@ apply(const text::transforms::context& ctx,
          * Update the main model properties.
          */
         physical::entities::model pm;
-        pm.configuration(m.root_module()->configuration());
+        pm.configuration(m.logical().root_module()->configuration());
         pm.name().simple(m.name().simple());
         pm.managed_directories(m.managed_directories());
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
         logical_id id(m.name().id());
-        pm.name().id(f.make(id, m.output_technical_space()));
+        pm.name().id(f.make(id, m.logical().output_technical_spaces().front()));
 
         /*
          * Create the provenance for the physical model.

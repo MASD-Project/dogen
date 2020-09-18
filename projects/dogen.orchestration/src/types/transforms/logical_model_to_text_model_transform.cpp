@@ -51,8 +51,6 @@ static logger lg(logger_factory(transform_id));
 const std::string empty;
 const std::string duplicate_id("Duplicate ID for element: ");
 const std::string duplicate_physical_name("Duplicate physical name: ");
-const std::string expected_one_output_technical_space(
-    "Expected exactly one output technical space.");
 const std::string expected_archetypes("Expected archetypes for: ");
 const std::string unexpected_archetypes("Unexpected archetypes for: ");
 
@@ -283,24 +281,7 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
 
     r.name(m.name());
     r.meta_name(logical_meta_name_factory::make_model_name());
-
-    r.input_technical_space(m.input_technical_space());
-    if (m.output_technical_spaces().size() != 1) {
-        BOOST_LOG_SEV(lg, error) << expected_one_output_technical_space
-                                 << " Output technical spaces: "
-                                 << m.output_technical_spaces();
-        BOOST_THROW_EXCEPTION(
-            transform_exception(expected_one_output_technical_space));
-    }
-    const auto ts(m.output_technical_spaces().front());
-    r.output_technical_space(ts);
-
-    r.leaves(m.leaves());
-    r.references(m.references());
-    r.root_module(m.root_module());
-    r.orm_properties(m.orm_properties());
     r.provenance(m.provenance());
-    r.all_technical_spaces(m.all_technical_spaces());
 
     populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);

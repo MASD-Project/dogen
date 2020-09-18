@@ -114,8 +114,8 @@ model adapter::adapt(const transforms::repository& frp,
         r.facet_properties().insert(std::make_pair(pair.first, fp));
     }
 
-    if (m.orm_properties()) {
-        const auto op(*m.orm_properties());
+    if (m.logical().orm_properties()) {
+        const auto op(*m.logical().orm_properties());
         r.odb_databases(make_databases(op));
         if (op.letter_case())
             r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
