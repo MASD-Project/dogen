@@ -46,6 +46,14 @@ namespace dogen::physical::transforms {
  */
 class meta_model_properties_transform final {
 private:
+    /*
+     * Top-level features.
+     */
+    struct top_level_feature_group {
+        variability::entities::feature cpp_headers_output_directory;
+        variability::entities::feature enable_backend_directories;
+    };
+
     /**
      * @brief Features associated with a backend.
      */
@@ -78,6 +86,12 @@ private:
 
 private:
     /**
+     * @brief Creates the top-level feature group.
+     */
+    static top_level_feature_group make_top_level_feature_group(
+        const variability::entities::feature_model& fm);
+
+    /**
      * @brief Creates the feature group for the backend features.
      */
     static std::unordered_map<identification::entities::physical_meta_id,
@@ -102,6 +116,22 @@ private:
         const identification::entities::physical_meta_name_indices& idx);
 
 private:
+    /**
+     * @brief Reads the C++ headers output directory from
+     * configuration.
+     */
+    static boost::filesystem::path
+    obtain_cpp_headers_output_directory(const top_level_feature_group& fg,
+        const variability::entities::configuration& cfg);
+
+    /**
+     * @brief Reads the enabled backend directories flag from
+     * configuration.
+     */
+    static bool
+    obtain_enable_backend_directories(const top_level_feature_group& fg,
+        const variability::entities::configuration& cfg);
+
     /**
      * @brief Reads the backend configuration.
      */
@@ -134,10 +164,25 @@ private:
      * @brief Reads the de-normalised archetype properties.
      */
     static std::unordered_map<identification::entities::physical_meta_id,
-                       entities::denormalised_archetype_properties>
+                              entities::denormalised_archetype_properties>
     obtain_denormalised_archetype_properties(
         const identification::entities::physical_meta_name_indices& idx,
         const entities::meta_model_properties& mmp);
+
+    /**
+     * @brief Returns the IDs of all enabled backends.
+     */
+    static std::unordered_set<identification::entities::physical_meta_id>
+    obtain_enabled_backends(const entities::meta_model_properties& mmp);
+
+    /**
+     * @brief Computes the appropriate value for backend directory
+     * enablement.
+     */
+    static void compute_enable_backend_directories(
+        const variability::entities::feature_model& fm,
+        const variability::entities::configuration& cfg,
+        entities::meta_model_properties& mmp);
 
 public:
     static void apply(const context& ctx, entities::artefact_repository& arp);

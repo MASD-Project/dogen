@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id("physical.transforms.enablement_transform");
+const std::string transform_id("physical.transforms.paths_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -64,32 +64,21 @@ compute_backend_paths(const boost::filesystem::path& component_path,
     /*
      * Populate the backend path for each configured backend.
      */
-    const bool backend_directories_should_be_enabled(bps.size() > 1);
     for (auto& pair : bps) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing backend: " << id;
 
-        /*
-         * If the backend directories are not enabled and we did not
-         * expect they should have been, then we can just take the
-         * component path and go on our merry way.
-         */
         auto& bp(pair.second);
-        if (!bp.enable_backend_directories() &&
-            !backend_directories_should_be_enabled) {
-            bp.file_path(component_path);
-            continue;
-        }
+        BOOST_LOG_SEV(lg, trace) << "Enable backend directories: "
+                                 << bp.enable_backend_directories();
 
         /*
-         * If the backend directories should have been enabled but
-         * weren't, we need to throw.
+         * If the backend directories are not enabled, then we can
+         * just take the component path and go on our merry way.
          */
-        if (!bp.enable_backend_directories() &&
-            backend_directories_should_be_enabled)  {
-            BOOST_LOG_SEV(lg, error) << backend_directories_not_enabled;
-            BOOST_THROW_EXCEPTION(
-                transform_exception(backend_directories_not_enabled));
+        if (!bp.enable_backend_directories()) {
+            bp.file_path(component_path);
+            continue;
         }
 
         /*

@@ -19,7 +19,9 @@
  *
  */
 
+#include <boost/log/detail/id.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.utility/types/log/logger.hpp"
@@ -47,13 +49,20 @@ transform_id("physical.transforms.meta_model_properties_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+static const std::string cpp_backend("masd.cpp");
 static std::string enabled_feature("enabled");
+static std::string directory_feature("directory");
 static std::string overwrite_feature("overwrite");
+const std::string cpp_headers_output_directory_feature(
+    "masd.cpp.headers_output_directory");
+const std::string enable_backend_directories_feature(
+    "masd.physical.enable_backend_directories");
 
 const std::string root_module_not_found("Could not find root module: ");
 const std::string backend_not_found("Could not find backend: ");
 const std::string facet_not_found("Could not find facet: ");
 const std::string archetype_not_found("Could not find archetype: ");
+const std::string duplicate_backend("Duplicate backend: ");
 
 }
 
@@ -64,6 +73,21 @@ using variability::helpers::feature_selector;
 using variability::helpers::configuration_selector;
 using identification::entities::physical_meta_id;
 using identification::entities::physical_meta_name_indices;
+
+meta_model_properties_transform::top_level_feature_group
+meta_model_properties_transform::
+make_top_level_feature_group(const variability::entities::feature_model& fm) {
+    top_level_feature_group r;
+    const variability::helpers::feature_selector s(fm);
+
+    const auto chod(cpp_headers_output_directory_feature);
+    r.cpp_headers_output_directory = s.get_by_name(chod);
+
+    const auto ekd(enable_backend_directories_feature);
+    r.enable_backend_directories = s.get_by_name(ekd);
+
+    return r;
+}
 
 std::unordered_map<physical_meta_id,
                    meta_model_properties_transform::backend_feature_group>
@@ -76,6 +100,7 @@ meta_model_properties_transform::make_backend_feature_group(
         const auto& backend(pair.first);
         backend_feature_group fg;
         fg.enabled = s.get_by_name(backend.value(), enabled_feature);
+        fg.directory = s.get_by_name(backend.value(), directory_feature);
         r.insert(std::make_pair(backend, fg));
     }
     return r;
@@ -116,6 +141,24 @@ meta_model_properties_transform::make_archetype_feature_group(
     return r;
 }
 
+boost::filesystem::path meta_model_properties_transform::
+obtain_cpp_headers_output_directory(const top_level_feature_group& fg,
+    const variability::entities::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.cpp_headers_output_directory))
+        return s.get_text_content(fg.cpp_headers_output_directory);
+
+    return boost::filesystem::path();
+}
+
+bool meta_model_properties_transform::
+obtain_enable_backend_directories(const top_level_feature_group& fg,
+    const variability::entities::configuration& cfg) {
+    const variability::helpers::configuration_selector s(cfg);
+    return s.get_boolean_content_or_default(fg.enable_backend_directories);
+}
+
 std::unordered_map<physical_meta_id, entities::backend_properties>
 meta_model_properties_transform::obtain_backend_properties(
     const std::unordered_map<physical_meta_id, backend_feature_group>& fgs,
@@ -131,6 +174,7 @@ meta_model_properties_transform::obtain_backend_properties(
 
         entities::backend_properties bp;
         bp.enabled(s.get_boolean_content_or_default(fg.enabled));
+        bp.directory(s.get_text_content_or_default(fg.directory));
         r[backend] = bp;
     }
 
@@ -247,11 +291,73 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
     return r;
 }
 
+std::unordered_set<identification::entities::physical_meta_id>
+meta_model_properties_transform::
+obtain_enabled_backends(const entities::meta_model_properties& mmp) {
+    std::unordered_set<physical_meta_id> r;
+    for (const auto& pair : mmp.backend_properties()) {
+        const auto id(pair.first);
+        BOOST_LOG_SEV(lg, trace) << "Processing backend: " << id;
+
+        const auto& bep(pair.second);
+        if (!bep.enabled()) {
+            BOOST_LOG_SEV(lg, trace) << "Backend is not enabled.";
+            continue;
+        }
+
+        const auto inserted(r.insert(id).second);
+        if (inserted) {
+            BOOST_LOG_SEV(lg, trace) << "Backend is enabled.";
+            continue;
+        }
+
+        BOOST_LOG_SEV(lg, error) << duplicate_backend << id;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(duplicate_backend + id.value()));
+    }
+    return r;
+}
+
+void meta_model_properties_transform::compute_enable_backend_directories(
+    const variability::entities::feature_model& fm,
+    const variability::entities::configuration& cfg,
+    entities::meta_model_properties& mmp) {
+
+    /*
+     * Read the user supplied configuration.
+     */
+    const auto fg(make_top_level_feature_group(fm));
+    const auto requested(obtain_enable_backend_directories(fg, cfg));
+
+    /*
+     * Determine if we need backend directories.
+     */
+    const auto count(mmp.enabled_backends().size());
+    BOOST_LOG_SEV(lg, debug) << "Total enabled backends: " << count;
+
+    const auto required(count > 1);
+    BOOST_LOG_SEV(lg, debug) << "Backend dirs are required: " << required;
+
+    /*
+     * Backend directories are enabled if they are either required or
+     * requested.
+     */
+    bool enabled(required || requested);
+    mmp.enable_backend_directories(enabled);
+    for (auto& pair : mmp.backend_properties()) {
+        auto& bep(pair.second);
+        bep.enable_backend_directories(enabled);
+    }
+}
+
 void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
-const auto& lid(arp.provenance().logical_name().id());
+    const auto& lid(arp.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "meta model properties",
         transform_id, lid.value(), *ctx.tracer(), arp);
+
+    // FIXME: hackery for parts
+    // const auto cpp_headers_dir(obtain_cpp_headers_output_directory(fg, cfg));
 
     /*
      * Obtain the root module configuration. Should have the same
@@ -294,6 +400,16 @@ const auto& lid(arp.provenance().logical_name().id());
      */
     mmp.denormalised_archetype_properties(
         obtain_denormalised_archetype_properties(idx, mmp));
+
+    /*
+     * Obtain the set of enabled backends.
+     */
+    mmp.enabled_backends(obtain_enabled_backends(mmp));
+
+    /*
+     * Determine if the backend directories are enabled or not.
+     */
+    compute_enable_backend_directories(fm, cfg, mmp);
 
     stp.end_transform(arp);
 }
