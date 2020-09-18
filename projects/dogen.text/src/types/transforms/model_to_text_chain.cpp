@@ -56,10 +56,11 @@ model_to_text_chain::registrar() {
     return *registrar_;
 }
 
-void model_to_text_chain::apply(const text::transforms::context& ctx,
-    text::entities::model& m) {
+void model_to_text_chain::
+apply(const text::transforms::context& ctx, text::entities::model& m) {
+    const auto id(m.provenance().logical_name().id());
     tracing::scoped_chain_tracer stp(lg, "model to text chain", transform_id,
-        m.name().qualified().dot(), *ctx.tracer(), m);
+        id.value(), *ctx.tracer(), m);
 
     /*
      * No point in proceeding if the model has not types to
@@ -87,8 +88,7 @@ void model_to_text_chain::apply(const text::transforms::context& ctx,
     }
 
     const auto& t(*ptr);
-    const auto id(t.id());
-    BOOST_LOG_SEV(lg, debug) << "Found transform: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Found transform: " << t.id();
 
     /*
      * Ensure the transform for the requested technical space is
@@ -98,10 +98,11 @@ void model_to_text_chain::apply(const text::transforms::context& ctx,
      * user know.
      */
     const auto& ek(m.extraction_properties().enabled_backends());
-    const auto is_enabled(ek.find(id) != ek.end());
+    const auto is_enabled(ek.find(t.id()) != ek.end());
     if (!is_enabled) {
-        BOOST_LOG_SEV(lg, error) << disabled_transform << id;
-        BOOST_THROW_EXCEPTION(transformation_error(disabled_transform + id));
+        BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(disabled_transform + t.id()));
     }
 
     /*
@@ -110,7 +111,7 @@ void model_to_text_chain::apply(const text::transforms::context& ctx,
     const bool ekd(m.extraction_properties().enable_backend_directories());
     t.apply(ctx, ekd, m);
 
-    BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << t.id();
     stp.end_chain(m);
 }
 

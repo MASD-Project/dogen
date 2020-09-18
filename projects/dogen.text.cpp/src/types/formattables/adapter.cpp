@@ -105,7 +105,7 @@ model adapter::adapt(const transforms::repository& frp,
                              << " Elements in model: " << m.elements().size();
 
     model r;
-    r.name(m.name());
+    r.name(m.logical().name());
 
     const auto& fp(m.facet_properties());
     for (const auto& pair : fp) {

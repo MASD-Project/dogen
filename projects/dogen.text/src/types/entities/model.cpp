@@ -26,9 +26,7 @@ model::model()
     : has_generatable_types_(static_cast<bool>(0)) { }
 
 model::model(
-    const dogen::identification::entities::logical_name& name,
-    const dogen::identification::entities::logical_meta_name& meta_name,
-    const dogen::identification::entities::codec_provenance& provenance,
+    const dogen::identification::entities::logical_provenance& provenance,
     const std::list<dogen::text::entities::element_artefacts>& elements,
     const bool has_generatable_types,
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
@@ -36,9 +34,7 @@ model::model(
     const std::list<boost::filesystem::path>& managed_directories,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
     const dogen::logical::entities::model& logical)
-    : name_(name),
-      meta_name_(meta_name),
-      provenance_(provenance),
+    : provenance_(provenance),
       elements_(elements),
       has_generatable_types_(has_generatable_types),
       enabled_archetype_for_element_(enabled_archetype_for_element),
@@ -49,8 +45,6 @@ model::model(
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
-    swap(meta_name_, other.meta_name_);
     swap(provenance_, other.provenance_);
     swap(elements_, other.elements_);
     swap(has_generatable_types_, other.has_generatable_types_);
@@ -62,9 +56,7 @@ void model::swap(model& other) noexcept {
 }
 
 bool model::operator==(const model& rhs) const {
-    return name_ == rhs.name_ &&
-        meta_name_ == rhs.meta_name_ &&
-        provenance_ == rhs.provenance_ &&
+    return provenance_ == rhs.provenance_ &&
         elements_ == rhs.elements_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
@@ -80,51 +72,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::identification::entities::logical_name& model::name() const {
-    return name_;
-}
-
-dogen::identification::entities::logical_name& model::name() {
-    return name_;
-}
-
-void model::name(const dogen::identification::entities::logical_name& v) {
-    name_ = v;
-}
-
-void model::name(const dogen::identification::entities::logical_name&& v) {
-    name_ = std::move(v);
-}
-
-const dogen::identification::entities::logical_meta_name& model::meta_name() const {
-    return meta_name_;
-}
-
-dogen::identification::entities::logical_meta_name& model::meta_name() {
-    return meta_name_;
-}
-
-void model::meta_name(const dogen::identification::entities::logical_meta_name& v) {
-    meta_name_ = v;
-}
-
-void model::meta_name(const dogen::identification::entities::logical_meta_name&& v) {
-    meta_name_ = std::move(v);
-}
-
-const dogen::identification::entities::codec_provenance& model::provenance() const {
+const dogen::identification::entities::logical_provenance& model::provenance() const {
     return provenance_;
 }
 
-dogen::identification::entities::codec_provenance& model::provenance() {
+dogen::identification::entities::logical_provenance& model::provenance() {
     return provenance_;
 }
 
-void model::provenance(const dogen::identification::entities::codec_provenance& v) {
+void model::provenance(const dogen::identification::entities::logical_provenance& v) {
     provenance_ = v;
 }
 
-void model::provenance(const dogen::identification::entities::codec_provenance&& v) {
+void model::provenance(const dogen::identification::entities::logical_provenance&& v) {
     provenance_ = std::move(v);
 }
 

@@ -54,8 +54,9 @@ namespace dogen::orchestration::transforms {
 physical::entities::model_set text_model_to_physical_model_transform::
 apply(const text::transforms::context& ctx,
     const text::entities::model_set& ms) {
+    const auto id(ms.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "logical to text model",
-        transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
+        transform_id, id.value(), *ctx.tracer(), ms);
 
     physical::entities::model_set r;
     for (const auto& m : ms.models()) {
@@ -64,22 +65,14 @@ apply(const text::transforms::context& ctx,
          */
         physical::entities::model pm;
         pm.configuration(m.logical().root_module()->configuration());
-        pm.name().simple(m.name().simple());
+        pm.name().simple(m.logical().name().simple());
         pm.managed_directories(m.managed_directories());
+        pm.provenance(ms.provenance());
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
-        logical_id id(m.name().id());
+        logical_id id(m.logical().name().id());
         pm.name().id(f.make(id, m.logical().output_technical_spaces().front()));
-
-        /*
-         * Create the provenance for the physical model.
-         */
-        logical_provenance prov;
-        prov.logical_name(m.name());
-        prov.codec(m.provenance());
-        prov.logical_meta_name(m.meta_name());
-        pm.provenance(prov);
 
         /*
          * Obtain artefact sets from the text model.

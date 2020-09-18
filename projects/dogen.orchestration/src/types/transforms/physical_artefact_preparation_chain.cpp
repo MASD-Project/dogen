@@ -40,10 +40,11 @@ namespace dogen::orchestration::transforms {
 
 void physical_artefact_preparation_chain::apply(const context& ctx,
     text::entities::model_set& ms) {
+    const auto id(ms.provenance().logical_name().id());
     const auto& tctx(ctx.text_context());
     const auto& tracer(*tctx.tracer());
     tracing::scoped_chain_tracer stp(lg, "physical artefact preparation chain",
-        transform_id, ms.name().qualified().dot(), tracer, ms);
+        transform_id, id.value(), tracer, ms);
 
     for (auto& m : ms.models()) {
         /*

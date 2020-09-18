@@ -279,9 +279,14 @@ apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     text::entities::model r;
     r.logical(m);
 
-    r.name(m.name());
-    r.meta_name(logical_meta_name_factory::make_model_name());
-    r.provenance(m.provenance());
+    /*
+     * Create the logical provenance.
+     */
+    identification::entities::logical_provenance prov;
+    prov.logical_name(m.name());
+    prov.codec(m.provenance());
+    prov.logical_meta_name(m.meta_name());
+    r.provenance(prov);
 
     populator p(*ctx.physical_meta_model(), r);
     logical::entities::shared_elements_traversal(m, p);

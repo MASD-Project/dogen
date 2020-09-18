@@ -79,12 +79,14 @@ model_to_text_csharp_chain::technical_space() const {
 
 void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
     const bool enable_backend_directories,  text::entities::model& m) const {
-    tracing::scoped_chain_tracer stp(lg, "C# M2T chain",
-        transform_id, m.name().qualified().dot(), *ctx.tracer());
+    const auto id(m.provenance().logical_name().id());
+    tracing::scoped_chain_tracer stp(lg, "C# M2T chain", transform_id,
+        id.value(), *ctx.tracer());
+
     /*
      * Create the locator.
      */
-    const auto mn(m.name());
+    const auto mn(m.logical().name());
     const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& feature_model(*ctx.feature_model());
     const auto odp(ctx.output_directory_path());

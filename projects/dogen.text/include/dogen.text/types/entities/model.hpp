@@ -33,11 +33,9 @@
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
-#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
-#include "dogen.identification/types/entities/codec_provenance.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
-#include "dogen.identification/types/entities/logical_meta_name.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
@@ -58,9 +56,7 @@ public:
 
 public:
     model(
-        const dogen::identification::entities::logical_name& name,
-        const dogen::identification::entities::logical_meta_name& meta_name,
-        const dogen::identification::entities::codec_provenance& provenance,
+        const dogen::identification::entities::logical_provenance& provenance,
         const std::list<dogen::text::entities::element_artefacts>& elements,
         const bool has_generatable_types,
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
@@ -70,24 +66,14 @@ public:
         const dogen::logical::entities::model& logical);
 
 public:
-    const dogen::identification::entities::logical_name& name() const;
-    dogen::identification::entities::logical_name& name();
-    void name(const dogen::identification::entities::logical_name& v);
-    void name(const dogen::identification::entities::logical_name&& v);
-
-    const dogen::identification::entities::logical_meta_name& meta_name() const;
-    dogen::identification::entities::logical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::logical_meta_name& v);
-    void meta_name(const dogen::identification::entities::logical_meta_name&& v);
-
     /**
      * @brief Details of the provenance of this model element.
      */
     /**@{*/
-    const dogen::identification::entities::codec_provenance& provenance() const;
-    dogen::identification::entities::codec_provenance& provenance();
-    void provenance(const dogen::identification::entities::codec_provenance& v);
-    void provenance(const dogen::identification::entities::codec_provenance&& v);
+    const dogen::identification::entities::logical_provenance& provenance() const;
+    dogen::identification::entities::logical_provenance& provenance();
+    void provenance(const dogen::identification::entities::logical_provenance& v);
+    void provenance(const dogen::identification::entities::logical_provenance&& v);
     /**@}*/
 
     const std::list<dogen::text::entities::element_artefacts>& elements() const;
@@ -144,9 +130,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::identification::entities::logical_name name_;
-    dogen::identification::entities::logical_meta_name meta_name_;
-    dogen::identification::entities::codec_provenance provenance_;
+    dogen::identification::entities::logical_provenance provenance_;
     std::list<dogen::text::entities::element_artefacts> elements_;
     bool has_generatable_types_;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;

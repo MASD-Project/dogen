@@ -71,7 +71,7 @@ formattables::locator model_to_text_cpp_chain::make_locator(
     const transforms::repository& frp, const bool enable_backend_directories,
     const text::entities::model& m) const {
 
-    const auto& mn(m.name());
+    const auto& mn(m.logical().name());
     const auto odp(output_directory_path);
     const auto& ep(m.extraction_properties());
     const auto chodp(ep.cpp_headers_output_directory());
@@ -116,8 +116,9 @@ model_to_text_cpp_chain::technical_space() const {
 
 void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
     const bool enable_backend_directories,  text::entities::model& m) const {
+    const auto id(m.provenance().logical_name().id());
     tracing::scoped_chain_tracer stp(lg, "C++ M2T chain", transform_id,
-        m.name().qualified().dot(), *ctx.tracer());
+        id.value(), *ctx.tracer());
 
     /*
      * Create the locator.

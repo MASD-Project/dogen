@@ -39,8 +39,9 @@ namespace dogen::text::transforms {
 
 void model_generation_chain::
 apply(const context& ctx, entities::model_set& ms) {
+    const auto id(ms.provenance().logical_name().id());
     tracing::scoped_chain_tracer stp(lg, "model generation chain",
-        transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
+        transform_id, id.value(), *ctx.tracer(), ms);
     /*
      * Apply all of the text transforms to the model.
      */

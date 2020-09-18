@@ -45,19 +45,15 @@ namespace dogen::orchestration::transforms {
 
 physical::entities::artefact_repository physical_artefact_repository_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& m) {
+    const auto id(m.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "physical artefact repository",
-        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+        transform_id, id.value(), *ctx.tracer(), m);
 
     /*
-     * Create the provenance for the physical model.
+     * Copy the provenance for the physical model.
      */
-    identification::entities::logical_provenance prov;
-    prov.logical_name(m.name());
-    prov.codec(m.provenance());
-    prov.logical_meta_name(m.meta_name());
-
     physical::entities::artefact_repository r;
-    r.provenance(prov);
+    r.provenance(m.provenance());
 
     /*
      * Now obtain all of the artefacts.

@@ -21,7 +21,7 @@
 #include <ostream>
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
-#include "dogen.identification/io/entities/logical_name_io.hpp"
+#include "dogen.identification/io/entities/logical_provenance_io.hpp"
 
 namespace std {
 
@@ -42,7 +42,7 @@ namespace dogen::text::entities {
 std::ostream& operator<<(std::ostream& s, const model_set& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::entities::model_set\"" << ", "
-      << "\"name\": " << v.name() << ", "
+      << "\"provenance\": " << v.provenance() << ", "
       << "\"models\": " << v.models()
       << " }";
     return(s);

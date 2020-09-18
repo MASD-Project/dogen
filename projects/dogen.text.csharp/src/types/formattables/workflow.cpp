@@ -36,7 +36,7 @@ namespace dogen::text::csharp::formattables {
 model workflow::make_model(const transforms::repository& frp,
     const text::entities::model& m) const {
     model r;
-    r.name(m.name());
+    r.name(m.logical().name());
 
     adapter a;
     r.formattables(a.adapt(frp, m));

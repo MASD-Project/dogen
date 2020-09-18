@@ -24,8 +24,6 @@
       "name": "entities::model",
       "documentation": "Represents the combined logical-physical space.\n",
       "stereotypes": [
-        "Nameable",
-        "MetaNameable",
         "Provenance"
       ],
       "fallback_element_type": "masd::object",
@@ -59,32 +57,6 @@
           "name": "logical",
           "type": "logical::entities::model",
           "documentation": "The logical model representation in the logical-physical space.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::Nameable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "identification::entities::logical_name"
-        }
-      ]
-    },
-    {
-      "name": "entities::MetaNameable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "meta_name",
-          "type": "identification::entities::logical_meta_name"
         }
       ]
     },
@@ -277,7 +249,7 @@
       "attributes": [
         {
           "name": "provenance",
-          "type": "identification::entities::codec_provenance",
+          "type": "identification::entities::logical_provenance",
           "documentation": "Details of the provenance of this model element.\n"
         }
       ]
@@ -336,7 +308,7 @@
       "name": "entities::model_set",
       "documentation": "Represents a set of related models.\n",
       "stereotypes": [
-        "Nameable"
+        "Provenance"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

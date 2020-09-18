@@ -24,11 +24,9 @@
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
-#include "dogen.identification/io/entities/logical_name_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
-#include "dogen.identification/io/entities/codec_provenance_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_name_io.hpp"
+#include "dogen.identification/io/entities/logical_provenance_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
@@ -102,8 +100,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::text::entities::model\"" << ", "
-      << "\"name\": " << v.name() << ", "
-      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "

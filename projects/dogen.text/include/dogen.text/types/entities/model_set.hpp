@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include "dogen.text/types/entities/model.hpp"
-#include "dogen.identification/types/entities/logical_name.hpp"
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 
 namespace dogen::text::entities {
 
@@ -44,14 +44,19 @@ public:
 
 public:
     model_set(
-        const dogen::identification::entities::logical_name& name,
+        const dogen::identification::entities::logical_provenance& provenance,
         const std::list<dogen::text::entities::model>& models);
 
 public:
-    const dogen::identification::entities::logical_name& name() const;
-    dogen::identification::entities::logical_name& name();
-    void name(const dogen::identification::entities::logical_name& v);
-    void name(const dogen::identification::entities::logical_name&& v);
+    /**
+     * @brief Details of the provenance of this model element.
+     */
+    /**@{*/
+    const dogen::identification::entities::logical_provenance& provenance() const;
+    dogen::identification::entities::logical_provenance& provenance();
+    void provenance(const dogen::identification::entities::logical_provenance& v);
+    void provenance(const dogen::identification::entities::logical_provenance&& v);
+    /**@}*/
 
     /**
      * @brief Models that belong to this set.
@@ -74,7 +79,7 @@ public:
     model_set& operator=(model_set other);
 
 private:
-    dogen::identification::entities::logical_name name_;
+    dogen::identification::entities::logical_provenance provenance_;
     std::list<dogen::text::entities::model> models_;
 };
 

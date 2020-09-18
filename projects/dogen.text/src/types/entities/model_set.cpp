@@ -23,19 +23,19 @@
 namespace dogen::text::entities {
 
 model_set::model_set(
-    const dogen::identification::entities::logical_name& name,
+    const dogen::identification::entities::logical_provenance& provenance,
     const std::list<dogen::text::entities::model>& models)
-    : name_(name),
+    : provenance_(provenance),
       models_(models) { }
 
 void model_set::swap(model_set& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
+    swap(provenance_, other.provenance_);
     swap(models_, other.models_);
 }
 
 bool model_set::operator==(const model_set& rhs) const {
-    return name_ == rhs.name_ &&
+    return provenance_ == rhs.provenance_ &&
         models_ == rhs.models_;
 }
 
@@ -45,20 +45,20 @@ model_set& model_set::operator=(model_set other) {
     return *this;
 }
 
-const dogen::identification::entities::logical_name& model_set::name() const {
-    return name_;
+const dogen::identification::entities::logical_provenance& model_set::provenance() const {
+    return provenance_;
 }
 
-dogen::identification::entities::logical_name& model_set::name() {
-    return name_;
+dogen::identification::entities::logical_provenance& model_set::provenance() {
+    return provenance_;
 }
 
-void model_set::name(const dogen::identification::entities::logical_name& v) {
-    name_ = v;
+void model_set::provenance(const dogen::identification::entities::logical_provenance& v) {
+    provenance_ = v;
 }
 
-void model_set::name(const dogen::identification::entities::logical_name&& v) {
-    name_ = std::move(v);
+void model_set::provenance(const dogen::identification::entities::logical_provenance&& v) {
+    provenance_ = std::move(v);
 }
 
 const std::list<dogen::text::entities::model>& model_set::models() const {
