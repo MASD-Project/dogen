@@ -626,7 +626,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_model_dia_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_directory_settings_dia_produces_expected_model) {
-    SETUP_TEST_LOG("cpp_ref_impl_directory_settings_dia_produces_expected_model");
+    SETUP_TEST_LOG_DEBUG("cpp_ref_impl_directory_settings_dia_produces_expected_model");
     using dogen::utility::test_data::cpp_ref_impl_product;
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_dia());
     const auto od(cpp_ref_impl_product::project_directory());
@@ -800,9 +800,9 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_dia_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_CASE(csharprefimpl_directory_settings_dia_produces_expected_model) {
-    SETUP_TEST_LOG("csharprefimpl_directorysettings_dia_produces_expected_model");
+    SETUP_TEST_LOG_DEBUG("csharprefimpl_directory?settings_dia_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_product;
-    const auto t(csharp_ref_impl_product::input_csharprefimpl_directorysettings_dia());
+    const auto t(csharp_ref_impl_product::input_csharprefimpl_directory_settings_dia());
     const auto od(csharp_ref_impl_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
@@ -1002,7 +1002,7 @@ BOOST_AUTO_TEST_CASE(cpp_ref_impl_cpp_model_json_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_CASE(cpp_ref_impl_directory_settings_json_produces_expected_model) {
-    SETUP_TEST_LOG("cpp_ref_impl_directory_settings_json_produces_expected_model");
+    SETUP_TEST_LOG_DEBUG("cpp_ref_impl_directory_settings_json_produces_expected_model");
     using dogen::utility::test_data::cpp_ref_impl_product;
     const auto t(cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_json());
     const auto od(cpp_ref_impl_product::project_directory());
@@ -1176,9 +1176,9 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_json_produces_expected_model) {
 }
 
 BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_json_produces_expected_model) {
-    SETUP_TEST_LOG("csharprefimpl_directorysettings_json_produces_expected_model");
+    SETUP_TEST_LOG_DEBUG("csharprefimpl_directorysettings_json_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_product;
-    const auto t(csharp_ref_impl_product::input_csharprefimpl_directorysettings_json());
+    const auto t(csharp_ref_impl_product::input_csharprefimpl_directory_settings_json());
     const auto od(csharp_ref_impl_product::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));

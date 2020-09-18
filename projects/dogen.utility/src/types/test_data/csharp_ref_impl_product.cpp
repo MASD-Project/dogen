@@ -46,14 +46,14 @@ const std::string models_json_dir("CSharpRefImpl.Models/json");
 
 const std::string path_csharprefimpl_csharpmodel_dia(
     "CSharpRefImpl.CSharpModel.dia");
-const std::string path_csharprefimpl_directorysettings_dia(
+const std::string path_csharprefimpl_directory_settings_dia(
     "CSharpRefImpl.DirectorySettings.dia");
 const std::string path_csharprefimpl_lammodel_dia(
     "CSharpRefImpl.LamModel.dia");
 
 const std::string path_csharprefimpl_csharpmodel_json(
     "CSharpRefImpl.CSharpModel.json");
-const std::string path_csharprefimpl_directorysettings_json(
+const std::string path_csharprefimpl_directory_settings_json(
     "CSharpRefImpl.DirectorySettings.json");
 const std::string path_csharprefimpl_lammodel_json(
     "CSharpRefImpl.LamModel.json");
@@ -137,10 +137,10 @@ path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_dia() {
 }
 
 path csharp_ref_impl_product::
-input_csharprefimpl_directorysettings_dia() {
+input_csharprefimpl_directory_settings_dia() {
     ensure_initialized();
     return dia_models_directory_ /
-        path_csharprefimpl_directorysettings_dia;
+        path_csharprefimpl_directory_settings_dia;
 }
 
 path csharp_ref_impl_product::input_csharprefimpl_lammodel_dia() {
@@ -154,10 +154,10 @@ path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_json() {
 }
 
 path csharp_ref_impl_product::
-input_csharprefimpl_directorysettings_json() {
+input_csharprefimpl_directory_settings_json() {
     ensure_initialized();
     return json_models_directory_ /
-        path_csharprefimpl_directorysettings_json;
+        path_csharprefimpl_directory_settings_json;
 }
 
 path csharp_ref_impl_product::input_csharprefimpl_lammodel_json() {

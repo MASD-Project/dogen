@@ -49,11 +49,11 @@ public:
 
 public:
     static boost::filesystem::path input_csharprefimpl_csharpmodel_dia();
-    static boost::filesystem::path input_csharprefimpl_directorysettings_dia();
+    static boost::filesystem::path input_csharprefimpl_directory_settings_dia();
     static boost::filesystem::path input_csharprefimpl_lammodel_dia();
 
     static boost::filesystem::path input_csharprefimpl_csharpmodel_json();
-    static boost::filesystem::path input_csharprefimpl_directorysettings_json();
+    static boost::filesystem::path input_csharprefimpl_directory_settings_json();
     static boost::filesystem::path input_csharprefimpl_lammodel_json();
 
 private:
