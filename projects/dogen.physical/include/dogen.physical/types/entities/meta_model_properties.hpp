@@ -27,6 +27,7 @@
 
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/part_properties.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
@@ -44,9 +45,11 @@ namespace dogen::physical::entities {
  */
 class meta_model_properties final {
 public:
-    meta_model_properties() = default;
     meta_model_properties(const meta_model_properties&) = default;
     ~meta_model_properties() = default;
+
+public:
+    meta_model_properties();
 
 public:
     meta_model_properties(meta_model_properties&& rhs);
@@ -59,7 +62,9 @@ public:
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties>& archetype_kind_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties,
+        const std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends,
+        const bool enable_backend_directories);
 
 public:
     /**
@@ -102,6 +107,24 @@ public:
     void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v);
     void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v);
 
+    /**
+     * @brief Contains the IDs of all of the backends which are enabled.
+     */
+    /**@{*/
+    const std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends() const;
+    std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends();
+    void enabled_backends(const std::unordered_set<dogen::identification::entities::physical_meta_id>& v);
+    void enabled_backends(const std::unordered_set<dogen::identification::entities::physical_meta_id>&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, backends should have backend-specific directories to store their artefacts.
+     */
+    /**@{*/
+    bool enable_backend_directories() const;
+    void enable_backend_directories(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const meta_model_properties& rhs) const;
     bool operator!=(const meta_model_properties& rhs) const {
@@ -120,6 +143,8 @@ private:
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties> archetype_kind_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties> part_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties> denormalised_archetype_properties_;
+    std::unordered_set<dogen::identification::entities::physical_meta_id> enabled_backends_;
+    bool enable_backend_directories_;
 };
 
 }

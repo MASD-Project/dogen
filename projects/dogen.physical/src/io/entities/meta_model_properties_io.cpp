@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen.physical/io/entities/part_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
@@ -136,9 +137,29 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::physical_meta_id>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::meta_model_properties\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
@@ -147,7 +168,9 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"archetype_properties\": " << v.archetype_properties() << ", "
       << "\"archetype_kind_properties\": " << v.archetype_kind_properties() << ", "
       << "\"part_properties\": " << v.part_properties() << ", "
-      << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties()
+      << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
+      << "\"enabled_backends\": " << v.enabled_backends() << ", "
+      << "\"enable_backend_directories\": " << v.enable_backend_directories()
       << " }";
     return(s);
 }
