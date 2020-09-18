@@ -1375,14 +1375,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "extraction_properties",
-          "type": "extraction_properties"
-        },
-        {
-          "name": "enabled_archetype_for_element",
-          "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
-        },
-        {
           "name": "managed_directories",
           "type": "std::list<boost::filesystem::path>"
         },

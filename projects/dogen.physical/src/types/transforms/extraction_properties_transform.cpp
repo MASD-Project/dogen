@@ -164,7 +164,7 @@ apply(const context& ctx, entities::artefact_repository& arp) {
 
     const auto& cfg(*i->second.configuration());
     const auto ep(make_extraction_properties(ctx, in.all(), cfg));
-    arp.extraction_properties(ep);
+    arp.meta_model_properties().extraction_properties(ep);
 
     stp.end_transform(arp);
 }

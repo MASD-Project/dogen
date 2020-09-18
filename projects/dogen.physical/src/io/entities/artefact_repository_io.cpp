@@ -23,10 +23,8 @@
 #include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/io/entities/artefact_repository_io.hpp"
-#include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.physical/io/entities/meta_model_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
 
@@ -41,20 +39,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
         s << " } ]";
     }
     s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
     return s;
 }
 
@@ -87,8 +71,6 @@ std::ostream& operator<<(std::ostream& s, const artefact_repository& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::artefact_repository\"" << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties() << ", "
-      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts() << ", "
       << "\"meta_model_properties\": " << v.meta_model_properties()

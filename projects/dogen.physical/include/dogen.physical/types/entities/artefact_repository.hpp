@@ -28,16 +28,12 @@
 #include <list>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
-#include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.physical/types/entities/meta_model_properties.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
-#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
 namespace dogen::physical::entities {
 
@@ -54,8 +50,6 @@ public:
     artefact_repository(
         const dogen::identification::entities::logical_provenance& provenance,
         const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
-        const dogen::physical::entities::extraction_properties& extraction_properties,
-        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const std::list<boost::filesystem::path>& managed_directories,
         const bool has_generatable_artefacts,
         const dogen::physical::entities::meta_model_properties& meta_model_properties);
@@ -80,16 +74,6 @@ public:
     void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v);
     void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v);
     /**@}*/
-
-    const dogen::physical::entities::extraction_properties& extraction_properties() const;
-    dogen::physical::entities::extraction_properties& extraction_properties();
-    void extraction_properties(const dogen::physical::entities::extraction_properties& v);
-    void extraction_properties(const dogen::physical::entities::extraction_properties&& v);
-
-    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element() const;
-    std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element();
-    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v);
-    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v);
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -127,8 +111,6 @@ public:
 private:
     dogen::identification::entities::logical_provenance provenance_;
     std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
-    dogen::physical::entities::extraction_properties extraction_properties_;
-    std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     std::list<boost::filesystem::path> managed_directories_;
     bool has_generatable_artefacts_;
     dogen::physical::entities::meta_model_properties meta_model_properties_;

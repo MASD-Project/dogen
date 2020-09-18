@@ -447,7 +447,7 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * canonical. This code will be cleaned up with the new
      * dependencies approach.
      */
-    arp.enabled_archetype_for_element(eafe);
+    arp.meta_model_properties().enabled_archetype_for_element(eafe);
 
     stp.end_transform(arp);
 }
