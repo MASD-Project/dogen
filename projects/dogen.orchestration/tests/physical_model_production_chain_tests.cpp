@@ -799,7 +799,7 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_csharpmodel_dia_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(csharprefimpl_directorysettings_dia_produces_expected_model) {
+BOOST_AUTO_TEST_CASE(csharprefimpl_directory_settings_dia_produces_expected_model) {
     SETUP_TEST_LOG("csharprefimpl_directorysettings_dia_produces_expected_model");
     using dogen::utility::test_data::csharp_ref_impl_product;
     const auto t(csharp_ref_impl_product::input_csharprefimpl_directorysettings_dia());
