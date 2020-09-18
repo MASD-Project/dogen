@@ -291,6 +291,11 @@
           "name": "meta_model_properties",
           "type": "meta_model_properties",
           "documentation": "Meta-model configuration supplied by this model.\n"
+        },
+        {
+          "name": "has_generatable_artefacts",
+          "type": "bool",
+          "documentation": "If true the repository has at least one generable artefact, false otherwise.\n"
         }
       ]
     },
@@ -1645,6 +1650,14 @@
           "name": "enable_backend_directories",
           "type": "bool",
           "documentation": "If true, backends should have backend-specific directories to store their artefacts.\n"
+        },
+        {
+          "name": "extraction_properties",
+          "type": "extraction_properties"
+        },
+        {
+          "name": "enabled_archetype_for_element",
+          "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         }
       ]
     },

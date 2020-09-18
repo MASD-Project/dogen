@@ -59,7 +59,6 @@ const std::string unexpected_archetypes("Unexpected archetypes for: ");
 namespace dogen::orchestration::transforms {
 
 using identification::entities::logical_id;
-using identification::helpers::logical_meta_name_factory;
 
 namespace {
 

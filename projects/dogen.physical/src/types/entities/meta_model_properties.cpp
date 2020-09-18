@@ -34,7 +34,9 @@ meta_model_properties::meta_model_properties(meta_model_properties&& rhs)
       part_properties_(std::move(rhs.part_properties_)),
       denormalised_archetype_properties_(std::move(rhs.denormalised_archetype_properties_)),
       enabled_backends_(std::move(rhs.enabled_backends_)),
-      enable_backend_directories_(std::move(rhs.enable_backend_directories_)) { }
+      enable_backend_directories_(std::move(rhs.enable_backend_directories_)),
+      extraction_properties_(std::move(rhs.extraction_properties_)),
+      enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)) { }
 
 meta_model_properties::meta_model_properties(
     const boost::filesystem::path& file_path,
@@ -45,7 +47,9 @@ meta_model_properties::meta_model_properties(
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties,
     const std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends,
-    const bool enable_backend_directories)
+    const bool enable_backend_directories,
+    const dogen::physical::entities::extraction_properties& extraction_properties,
+    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element)
     : file_path_(file_path),
       backend_properties_(backend_properties),
       facet_properties_(facet_properties),
@@ -54,7 +58,9 @@ meta_model_properties::meta_model_properties(
       part_properties_(part_properties),
       denormalised_archetype_properties_(denormalised_archetype_properties),
       enabled_backends_(enabled_backends),
-      enable_backend_directories_(enable_backend_directories) { }
+      enable_backend_directories_(enable_backend_directories),
+      extraction_properties_(extraction_properties),
+      enabled_archetype_for_element_(enabled_archetype_for_element) { }
 
 void meta_model_properties::swap(meta_model_properties& other) noexcept {
     using std::swap;
@@ -67,6 +73,8 @@ void meta_model_properties::swap(meta_model_properties& other) noexcept {
     swap(denormalised_archetype_properties_, other.denormalised_archetype_properties_);
     swap(enabled_backends_, other.enabled_backends_);
     swap(enable_backend_directories_, other.enable_backend_directories_);
+    swap(extraction_properties_, other.extraction_properties_);
+    swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
 }
 
 bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
@@ -78,7 +86,9 @@ bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
         part_properties_ == rhs.part_properties_ &&
         denormalised_archetype_properties_ == rhs.denormalised_archetype_properties_ &&
         enabled_backends_ == rhs.enabled_backends_ &&
-        enable_backend_directories_ == rhs.enable_backend_directories_;
+        enable_backend_directories_ == rhs.enable_backend_directories_ &&
+        extraction_properties_ == rhs.extraction_properties_ &&
+        enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_;
 }
 
 meta_model_properties& meta_model_properties::operator=(meta_model_properties other) {
@@ -221,6 +231,38 @@ bool meta_model_properties::enable_backend_directories() const {
 
 void meta_model_properties::enable_backend_directories(const bool v) {
     enable_backend_directories_ = v;
+}
+
+const dogen::physical::entities::extraction_properties& meta_model_properties::extraction_properties() const {
+    return extraction_properties_;
+}
+
+dogen::physical::entities::extraction_properties& meta_model_properties::extraction_properties() {
+    return extraction_properties_;
+}
+
+void meta_model_properties::extraction_properties(const dogen::physical::entities::extraction_properties& v) {
+    extraction_properties_ = v;
+}
+
+void meta_model_properties::extraction_properties(const dogen::physical::entities::extraction_properties&& v) {
+    extraction_properties_ = std::move(v);
+}
+
+const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& meta_model_properties::enabled_archetype_for_element() const {
+    return enabled_archetype_for_element_;
+}
+
+std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& meta_model_properties::enabled_archetype_for_element() {
+    return enabled_archetype_for_element_;
+}
+
+void meta_model_properties::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
+    enabled_archetype_for_element_ = v;
+}
+
+void meta_model_properties::enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v) {
+    enabled_archetype_for_element_ = std::move(v);
 }
 
 }

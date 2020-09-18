@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
@@ -120,6 +121,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::model\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
@@ -131,7 +138,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "
       << "\"orphan_artefacts\": " << v.orphan_artefacts() << ", "
-      << "\"meta_model_properties\": " << v.meta_model_properties()
+      << "\"meta_model_properties\": " << v.meta_model_properties() << ", "
+      << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts()
       << " }";
     return(s);
 }

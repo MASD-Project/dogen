@@ -42,6 +42,9 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 
 namespace dogen::physical::entities {
 
+model::model()
+    : has_generatable_artefacts_(static_cast<bool>(0)) { }
+
 model::model(
     const dogen::identification::entities::physical_meta_name& meta_name,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
@@ -52,7 +55,8 @@ model::model(
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
     const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
-    const dogen::physical::entities::meta_model_properties& meta_model_properties)
+    const dogen::physical::entities::meta_model_properties& meta_model_properties,
+    const bool has_generatable_artefacts)
     : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
@@ -62,7 +66,8 @@ model::model(
       managed_directories_(managed_directories),
       outputting_properties_(outputting_properties),
       orphan_artefacts_(orphan_artefacts),
-      meta_model_properties_(meta_model_properties) { }
+      meta_model_properties_(meta_model_properties),
+      has_generatable_artefacts_(has_generatable_artefacts) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -76,6 +81,7 @@ void model::swap(model& other) noexcept {
     swap(outputting_properties_, other.outputting_properties_);
     swap(orphan_artefacts_, other.orphan_artefacts_);
     swap(meta_model_properties_, other.meta_model_properties_);
+    swap(has_generatable_artefacts_, other.has_generatable_artefacts_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -88,7 +94,8 @@ bool model::operator==(const model& rhs) const {
         managed_directories_ == rhs.managed_directories_ &&
         outputting_properties_ == rhs.outputting_properties_ &&
         orphan_artefacts_ == rhs.orphan_artefacts_ &&
-        meta_model_properties_ == rhs.meta_model_properties_;
+        meta_model_properties_ == rhs.meta_model_properties_ &&
+        has_generatable_artefacts_ == rhs.has_generatable_artefacts_;
 }
 
 model& model::operator=(model other) {
@@ -255,6 +262,14 @@ void model::meta_model_properties(const dogen::physical::entities::meta_model_pr
 
 void model::meta_model_properties(const dogen::physical::entities::meta_model_properties&& v) {
     meta_model_properties_ = std::move(v);
+}
+
+bool model::has_generatable_artefacts() const {
+    return has_generatable_artefacts_;
+}
+
+void model::has_generatable_artefacts(const bool v) {
+    has_generatable_artefacts_ = v;
 }
 
 }

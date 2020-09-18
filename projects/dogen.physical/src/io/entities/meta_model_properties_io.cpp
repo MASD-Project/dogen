@@ -24,9 +24,11 @@
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
+#include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.physical/io/entities/meta_model_properties_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/io/entities/archetype_kind_properties_io.hpp"
+#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 #include "dogen.physical/io/entities/denormalised_archetype_properties_io.hpp"
 
 namespace std {
@@ -151,6 +153,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
@@ -170,7 +186,9 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"part_properties\": " << v.part_properties() << ", "
       << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
-      << "\"enable_backend_directories\": " << v.enable_backend_directories()
+      << "\"enable_backend_directories\": " << v.enable_backend_directories() << ", "
+      << "\"extraction_properties\": " << v.extraction_properties() << ", "
+      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element()
       << " }";
     return(s);
 }

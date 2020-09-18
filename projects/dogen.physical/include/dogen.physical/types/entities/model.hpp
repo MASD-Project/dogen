@@ -49,10 +49,12 @@ namespace dogen::physical::entities {
  */
 class model final {
 public:
-    model() = default;
     model(const model&) = default;
     model(model&&) = default;
     ~model() = default;
+
+public:
+    model();
 
 public:
     model(
@@ -65,7 +67,8 @@ public:
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
-        const dogen::physical::entities::meta_model_properties& meta_model_properties);
+        const dogen::physical::entities::meta_model_properties& meta_model_properties,
+        const bool has_generatable_artefacts);
 
 public:
     /**
@@ -158,6 +161,14 @@ public:
     void meta_model_properties(const dogen::physical::entities::meta_model_properties&& v);
     /**@}*/
 
+    /**
+     * @brief If true the repository has at least one generable artefact, false otherwise.
+     */
+    /**@{*/
+    bool has_generatable_artefacts() const;
+    void has_generatable_artefacts(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -179,6 +190,7 @@ private:
     dogen::physical::entities::outputting_properties outputting_properties_;
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
     dogen::physical::entities::meta_model_properties meta_model_properties_;
+    bool has_generatable_artefacts_;
 };
 
 }
