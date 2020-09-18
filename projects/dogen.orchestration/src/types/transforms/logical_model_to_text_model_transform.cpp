@@ -279,6 +279,8 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
 text::entities::model logical_model_to_text_model_transform::
 apply(const text::transforms::context& ctx, const logical::entities::model& m) {
     text::entities::model r;
+    r.logical(m);
+
     r.name(m.name());
     r.meta_name(logical_meta_name_factory::make_model_name());
 
