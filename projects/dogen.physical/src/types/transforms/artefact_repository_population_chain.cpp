@@ -49,16 +49,17 @@ apply(const context& ctx, entities::artefact_repository& arp) {
         *ctx.tracer(), arp);
 
     /*
-     * The global enablement transform must be executed before the
-     * local one.
+     * We start by reading all of the properties associated with the
+     * meta-model. These are in effect, its configuration.
      */
     meta_model_properties_transform::apply(ctx, arp);
 
     /*
-     * The paths transform must be done after the meta-model
-     * properties transform.
+     * The paths and enablement transforms must be done after the
+     * meta-model properties transform, as they use that data as
+     * input.
      */
-    // paths_transform::apply(ctx, arp);
+    paths_transform::apply(ctx, arp);
 
     /*
      * Update enablement for all artefacts.
