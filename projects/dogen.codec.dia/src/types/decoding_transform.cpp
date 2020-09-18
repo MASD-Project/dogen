@@ -139,7 +139,7 @@ decoding_transform::apply(const codec::transforms::context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     const auto model_name(p.stem().generic_string());
-    tracing::scoped_transform_tracer stp(lg, "dia model transform",
+    tracing::scoped_transform_tracer stp(lg, "dia model",
         transform_id, model_name, *ctx.tracer(), diagram);
 
     const auto pos(obtain_processed_objects(diagram));

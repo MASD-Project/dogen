@@ -50,7 +50,7 @@ inline void create_configuration(
 
 void configuration_transform::
 apply(const transforms::context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "configuration transform",
+    tracing::scoped_transform_tracer stp(lg, "configuration",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().simple()

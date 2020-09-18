@@ -89,7 +89,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
 
 void enum_implementation_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "enum implementation transform",
+    tracing::scoped_transform_tracer stp(lg, "enum implementation",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);

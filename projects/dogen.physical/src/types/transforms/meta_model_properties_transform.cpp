@@ -250,7 +250,7 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
 void meta_model_properties_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
 const auto& lid(arp.provenance().logical_name().id());
-    tracing::scoped_transform_tracer stp(lg, "meta model properties transform",
+    tracing::scoped_transform_tracer stp(lg, "meta model properties",
         transform_id, lid.value(), *ctx.tracer(), arp);
 
     /*

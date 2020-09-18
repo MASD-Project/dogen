@@ -77,7 +77,7 @@ std::list<std::string> builtin_header_transform::inclusion_dependencies(
 
 void builtin_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "builtin header transform",
+    tracing::scoped_transform_tracer stp(lg, "builtin header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     stp.end_transform(a);

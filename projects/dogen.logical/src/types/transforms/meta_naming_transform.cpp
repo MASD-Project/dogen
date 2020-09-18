@@ -261,7 +261,7 @@ void meta_naming_transform::populate_model_meta_names(entities::model& m) {
 
 void meta_naming_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
+    tracing::scoped_transform_tracer stp(lg, "meta-naming",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     m.meta_name(mnf::make_model_name());

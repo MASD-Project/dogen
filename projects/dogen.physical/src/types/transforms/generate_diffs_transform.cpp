@@ -114,7 +114,7 @@ process_artefact(const boost::filesystem::path& managed_dir,
 
 void generate_diffs_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "generate diffs transform",
+    tracing::scoped_transform_tracer stp(lg, "generate diffs",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     BOOST_LOG_SEV(lg, debug) << "Finding diffs for model: "

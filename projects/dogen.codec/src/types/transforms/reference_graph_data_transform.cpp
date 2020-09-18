@@ -51,7 +51,7 @@ obtain_references_for_model(const entities::model_set& ms) {
 void reference_graph_data_transform::
 apply(const context& ctx, entities::model_set& ms) {
     const auto mn(ms.target().name().simple());
-    tracing::scoped_transform_tracer stp(lg, "reference graph data transform",
+    tracing::scoped_transform_tracer stp(lg, "reference graph data",
         transform_id, mn, *ctx.tracer());
 
     const auto rfm(obtain_references_for_model(ms));

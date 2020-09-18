@@ -193,7 +193,7 @@ void parsing_transform::parse_feature_bundles(entities::model& m) {
 }
 
 void parsing_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "parsing transform",
+    tracing::scoped_transform_tracer stp(lg, "parsing",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     parse_objects(m);

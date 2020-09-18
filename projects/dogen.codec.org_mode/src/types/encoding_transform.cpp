@@ -55,7 +55,7 @@ std::string encoding_transform::extension() const {
 void encoding_transform::
 apply(const transforms::context& ctx, const entities::model& m,
     const boost::filesystem::path& p) {
-    tracing::scoped_transform_tracer stp(lg, "Org Mode encoding transform",
+    tracing::scoped_transform_tracer stp(lg, "Org Mode encoding",
         transform_id, m.name().simple(), *ctx.tracer());
 
     dehydrator::dehydrate(m, p);

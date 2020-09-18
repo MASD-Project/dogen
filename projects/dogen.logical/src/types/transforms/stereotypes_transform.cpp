@@ -483,7 +483,7 @@ void stereotypes_transform::apply(entities::structural::primitive& p) {
 }
 
 void stereotypes_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
+    tracing::scoped_transform_tracer stp(lg, "stereotypes",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     for (auto& pair : m.structural_elements().objects())

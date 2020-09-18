@@ -231,7 +231,7 @@ void attributes_transform::expand_object_templates(entities::model& m) {
 
 void attributes_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "attributes transform",
+    tracing::scoped_transform_tracer stp(lg, "attributes",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     expand_object_templates(m);

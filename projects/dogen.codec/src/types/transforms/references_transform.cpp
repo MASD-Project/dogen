@@ -40,7 +40,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::codec::transforms {
 
 void references_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "references transform",
+    tracing::scoped_transform_tracer stp(lg, "references",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());

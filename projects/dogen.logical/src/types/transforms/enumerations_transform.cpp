@@ -201,7 +201,7 @@ make_invalid_enumerator(const logical_name& n, const technical_space ts) {
 }
 
 void enumerations_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "enumerations transform",
+    tracing::scoped_transform_tracer stp(lg, "enumerations",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*

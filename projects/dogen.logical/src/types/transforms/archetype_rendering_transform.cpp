@@ -176,7 +176,7 @@ std::string archetype_rendering_transform::render_stitch_template(
 
 void archetype_rendering_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "parsing transform",
+    tracing::scoped_transform_tracer stp(lg, "parsing",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     auto& archs(m.physical_elements().archetypes());

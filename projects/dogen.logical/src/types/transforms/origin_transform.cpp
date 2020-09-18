@@ -95,7 +95,7 @@ compute_model_type(const entities::model& m, const bool is_pdm) {
 
 void origin_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "origin transform",
+    tracing::scoped_transform_tracer stp(lg, "origin",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*

@@ -194,7 +194,7 @@ populate_fixed_mappables(const variability::entities::feature_model& fm,
 void mapping_elements_transform::
 apply(const context& ctx, entities::input_model_set& ms) {
     const auto& id(ms.target().name().qualified().dot());
-    tracing::scoped_transform_tracer stp(lg, "mapping elements transform",
+    tracing::scoped_transform_tracer stp(lg, "mapping elements",
         transform_id, id, *ctx.tracer(), ms);
 
     /*

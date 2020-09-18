@@ -356,7 +356,7 @@ void profile_binding_transform::apply(const context& ctx,
     const entities::feature_model& fm,
     const entities::profile_repository& prp,
     entities::configuration_model_set& cms) {
-    tracing::scoped_transform_tracer stp(lg,  "profile binding transform",
+    tracing::scoped_transform_tracer stp(lg,  "profile binding",
         transform_id, *ctx.tracer(), cms);
 
     for (auto& cm : cms.models())

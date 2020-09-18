@@ -45,7 +45,7 @@ namespace dogen::variability::transforms {
 
 boost::shared_ptr<entities::feature_model> feature_model_transform::
 apply(const context& ctx, const std::list<entities::feature>& features) {
-    tracing::scoped_transform_tracer stp(lg, "feature model transform",
+    tracing::scoped_transform_tracer stp(lg, "feature model",
         transform_id, transform_id, *ctx.tracer(), features);
 
     auto r(boost::make_shared<entities::feature_model>());

@@ -37,7 +37,7 @@ namespace dogen::logical::transforms {
 
 void resolver_transform::apply(const context& ctx,
     const helpers::indices& idx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "resolver transform",
+    tracing::scoped_transform_tracer stp(lg, "resolver",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
     helpers::resolver::resolve(idx, m);
     stp.end_transform(m);

@@ -51,7 +51,7 @@ populate_type_parameters(const features::type_parameters::feature_group& fg,
 }
 
 void type_params_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "type params transform",
+    tracing::scoped_transform_tracer stp(lg, "type params",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());

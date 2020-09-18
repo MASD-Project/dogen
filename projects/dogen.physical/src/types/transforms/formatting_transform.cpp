@@ -157,7 +157,7 @@ void formatting_transform::apply(const std::unordered_map<
 
 void formatting_transform::
 apply(const context& ctx, entities::artefact_repository& arp) {
-    tracing::scoped_transform_tracer stp(lg, "formatting transform",
+    tracing::scoped_transform_tracer stp(lg, "formatting",
         transform_id, arp.provenance().logical_name().id().value(),
         *ctx.tracer(), arp);
 

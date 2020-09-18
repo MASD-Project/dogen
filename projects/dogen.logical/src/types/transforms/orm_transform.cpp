@@ -751,7 +751,7 @@ void orm_transform::transform_modules(
 }
 
 void orm_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "orm transform",
+    tracing::scoped_transform_tracer stp(lg, "orm",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*

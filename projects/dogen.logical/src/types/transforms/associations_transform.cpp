@@ -167,7 +167,7 @@ void associations_transform::process_feature_bundle(const entities::model& m,
 }
 
 void associations_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "associations transform",
+    tracing::scoped_transform_tracer stp(lg, "associations",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     auto& objs(m.structural_elements().objects());

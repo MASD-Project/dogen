@@ -65,7 +65,7 @@ project_name(const identification::entities::logical_name& n) {
 void visual_studio_transform::
 apply(const context& ctx, const logical::entities::model& m) {
     const auto id(m.name().id());
-    tracing::scoped_transform_tracer stp(lg, "visual studio transform",
+    tracing::scoped_transform_tracer stp(lg, "visual studio",
         transform_id, id.value(), *ctx.tracer(), m);
 
     /*

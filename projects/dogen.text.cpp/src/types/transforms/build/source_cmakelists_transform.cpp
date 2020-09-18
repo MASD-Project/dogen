@@ -87,7 +87,7 @@ std::list<std::string> source_cmakelists_transform::inclusion_dependencies(
 
 void source_cmakelists_transform::apply(const context& ctx,
     const logical::entities::element& e, physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "source cmakelists transform",
+    tracing::scoped_transform_tracer stp(lg, "source cmakelists",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);

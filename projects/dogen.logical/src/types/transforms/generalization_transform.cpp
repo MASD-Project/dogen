@@ -314,7 +314,7 @@ void generalization_transform::sort_leaves(entities::model& m) {
 
 void generalization_transform::apply(const context& ctx,
     const helpers::indices& idx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "generalization transform",
+    tracing::scoped_transform_tracer stp(lg, "generalization",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());

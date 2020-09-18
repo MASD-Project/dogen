@@ -49,7 +49,7 @@ const std::string missing_group("Cannot find modeline group: ");
 namespace dogen::logical::transforms {
 
 void modelines_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "modelines transform",
+    tracing::scoped_transform_tracer stp(lg, "modelines",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*

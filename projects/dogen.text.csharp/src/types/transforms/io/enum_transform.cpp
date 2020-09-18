@@ -65,7 +65,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 void enum_transform::apply(const context& ctx, const logical::entities::element& e,
    physical::entities::artefact& a) const {
-   tracing::scoped_transform_tracer stp(lg, "enum transform",
+   tracing::scoped_transform_tracer stp(lg, "enum",
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);

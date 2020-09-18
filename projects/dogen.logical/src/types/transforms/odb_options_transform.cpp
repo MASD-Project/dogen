@@ -99,7 +99,7 @@ make_databases(const logical::entities::orm::model_properties& omp) {
 }
 
 void odb_options_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "ODB options transform",
+    tracing::scoped_transform_tracer stp(lg, "ODB options",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*

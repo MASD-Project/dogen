@@ -74,7 +74,7 @@ std::list<std::string> part_class_header_transform_transform::inclusion_dependen
 
 void part_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "part class header transform",
+    tracing::scoped_transform_tracer stp(lg, "part class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);

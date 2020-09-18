@@ -75,7 +75,7 @@ std::list<std::string> archetype_class_header_factory_transform::inclusion_depen
 
 void archetype_class_header_factory_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "types archetype class header transform",
+    tracing::scoped_transform_tracer stp(lg, "types archetype class header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
     assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);
     const auto& o(ast.as<logical::entities::physical::archetype>(e));

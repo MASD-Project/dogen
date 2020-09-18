@@ -273,7 +273,7 @@ void decoration_updater::operator()(entities::element& e) {
 }
 
 void decoration_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "decoration transform",
+    tracing::scoped_transform_tracer stp(lg, "decoration",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     /*

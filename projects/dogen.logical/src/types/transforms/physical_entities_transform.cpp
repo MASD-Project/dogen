@@ -591,7 +591,7 @@ process_archetypes(const context& ctx, entities::model& m) {
 
 void physical_entities_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "physical entities transform",
+    tracing::scoped_transform_tracer stp(lg, "physical entities",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     process_backends(ctx, m);

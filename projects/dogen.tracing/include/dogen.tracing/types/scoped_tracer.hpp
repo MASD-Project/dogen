@@ -56,7 +56,7 @@ public:
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
           transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
+        BOOST_LOG_SEV(lg_, debug) << "Started chain: " << description << ".";
         tracer_.start_chain(id, transform_instance_id_);
     }
 
@@ -67,7 +67,7 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
+        BOOST_LOG_SEV(lg_, debug) << "Started chain: " << description << ".";
         tracer_.start_chain(id, transform_instance_id_, model_id_);
     }
 
@@ -79,8 +79,8 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description
-                                  << " [" << model_id_ << "]";
+        BOOST_LOG_SEV(lg_, debug) << "Started chain: " << description
+                                  << ". Model: " << model_id_ << ".";
         tracer_.start_chain(id, transform_instance_id_, model_id_, input);
     }
 
@@ -89,7 +89,7 @@ public:
         const auto& tid(transform_instance_id_);
         tracer_.end_chain(transform_id_, tid, model_id_, output);
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
+        BOOST_LOG_SEV(lg_, debug) << "Finished chain: " << description_ << ".";
         dismiss_ = true;
     }
 
@@ -100,7 +100,8 @@ public:
         try {
             tracer_.end_chain(transform_id_, transform_instance_id_);
             using namespace dogen::utility::log;
-            BOOST_LOG_SEV(lg_, debug) << "Finished " << description_<< ".";
+            BOOST_LOG_SEV(lg_, debug) << "Finished chain: "
+                                      << description_<< ".";
         } catch (...) {}
     }
 
@@ -129,7 +130,7 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        BOOST_LOG_SEV(lg_, debug) << "Started transform:" << description;
         tracer_.start_transform(id, transform_instance_id_, model_id);
     }
 
@@ -141,7 +142,7 @@ public:
           model_id_(), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        BOOST_LOG_SEV(lg_, debug) << "Started transform: " << description;
         tracer_.start_transform(id, transform_instance_id_, "", input);
     }
 
@@ -153,8 +154,7 @@ public:
           model_id_(model_id), transform_id_(id),
           transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Started " << description
-                                  << ". Model: " << model_id;
+        BOOST_LOG_SEV(lg_, debug) << "Started transform: " << description;
         tracer_.start_transform(id, transform_instance_id_, model_id, input);
     }
 
@@ -163,7 +163,7 @@ public:
         const auto& tid(transform_instance_id_);
         tracer_.end_transform(transform_id_, tid, model_id_, output);
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "Finished " << description_
+        BOOST_LOG_SEV(lg_, debug) << "Finished transform: " << description_
                                   << ". Model: " << model_id_;
         dismiss_ = true;
     }
@@ -175,7 +175,8 @@ public:
         try {
             tracer_.end_transform(transform_id_, transform_instance_id_);
             using namespace dogen::utility::log;
-            BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
+            BOOST_LOG_SEV(lg_, debug) << "Finished transform: "
+                                      << description_ << ".";
         } catch (...) {}
     }
 

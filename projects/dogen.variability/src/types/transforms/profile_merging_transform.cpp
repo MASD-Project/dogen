@@ -251,7 +251,7 @@ entities::profile_repository
 profile_merging_transform::apply(const context& ctx,
     const entities::feature_model& fm,
     const std::list<entities::profile>& profiles) {
-    tracing::scoped_transform_tracer stp(lg, "profile merging transform",
+    tracing::scoped_transform_tracer stp(lg, "profile merging",
         transform_id, transform_id, *ctx.tracer(), profiles);
 
     /*

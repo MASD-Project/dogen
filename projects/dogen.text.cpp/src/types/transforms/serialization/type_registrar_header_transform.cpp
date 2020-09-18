@@ -75,7 +75,7 @@ std::list<std::string> type_registrar_header_transform::inclusion_dependencies(
 
 void type_registrar_header_transform::apply(const context& ctx, const logical::entities::element& e,
     physical::entities::artefact& a) const {
-    tracing::scoped_transform_tracer stp(lg, "type registrar header transform",
+    tracing::scoped_transform_tracer stp(lg, "type registrar header",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);

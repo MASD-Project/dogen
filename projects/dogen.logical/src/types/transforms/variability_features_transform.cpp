@@ -359,7 +359,7 @@ void variability_features_transform::process_initialiser(entities::model& m) {
 void variability_features_transform::apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "variability entities transform",
+    tracing::scoped_transform_tracer stp(lg, "variability entities",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());

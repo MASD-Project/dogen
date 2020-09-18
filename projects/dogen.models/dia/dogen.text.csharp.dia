@@ -1856,7 +1856,7 @@
 
 void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "class transform",
+    tracing::scoped_transform_tracer stp(lg, "class",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
@@ -2291,7 +2291,7 @@ using System;
 
 void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "enum transform",
+    tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -2534,7 +2534,7 @@ using System;
 
 void class_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "class transform",
+    tracing::scoped_transform_tracer stp(lg, "class",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -2798,7 +2798,7 @@ using System;
 
 void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
    physical::entities::artefact&amp; a) const {
-   tracing::scoped_transform_tracer stp(lg, "enum transform",
+   tracing::scoped_transform_tracer stp(lg, "enum",
        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -3392,7 +3392,7 @@ using System.Collections.Generic;
 
 void enum_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "enum transform",
+    tracing::scoped_transform_tracer stp(lg, "enum",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -3663,7 +3663,7 @@ using System.Collections.Generic;
 
 void exception_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "exception transform",
+    tracing::scoped_transform_tracer stp(lg, "exception",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -12399,7 +12399,7 @@ using System;
 
 void builtin_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "builtin transform",
+    tracing::scoped_transform_tracer stp(lg, "builtin",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     stp.end_transform(a);
@@ -13804,7 +13804,7 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
 
 void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+    tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     const auto id(e.name().qualified().dot());
@@ -14091,7 +14091,7 @@ using System;
 
 void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+    tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -14383,7 +14383,7 @@ using System.Collections.Generic;
 
 void primitive_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "primitive transform",
+    tracing::scoped_transform_tracer stp(lg, "primitive",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -16033,7 +16033,7 @@ std::string {{class.simple_name}}::helper_name() const {
 
 void project_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "project transform",
+    tracing::scoped_transform_tracer stp(lg, "project",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -16261,7 +16261,7 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
 
 void solution_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "solution transform",
+    tracing::scoped_transform_tracer stp(lg, "solution",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -16575,7 +16575,7 @@ EndGlobal
 
 void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+    tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);
@@ -17249,7 +17249,7 @@ using System.Collections;
 
 void assistant_transform::apply(const context&amp; ctx, const logical::entities::element&amp; e,
     physical::entities::artefact&amp; a) const {
-    tracing::scoped_transform_tracer stp(lg, "assistant transform",
+    tracing::scoped_transform_tracer stp(lg, "assistant",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
     assistant ast(ctx, e, archetype().meta_name(), a);

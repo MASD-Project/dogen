@@ -179,7 +179,7 @@ public:
 
 void dynamic_stereotypes_transform::
 apply(const transforms::context& ctx, entities::input_model_set& ms) {
-    tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes transform",
+    tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes",
         transform_id, *ctx.tracer(), ms);
 
     updater u;

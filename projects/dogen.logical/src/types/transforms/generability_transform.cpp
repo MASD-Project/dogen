@@ -123,7 +123,7 @@ public:
 }
 
 void generability_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "generability transform",
+    tracing::scoped_transform_tracer stp(lg, "generability",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     updater u;

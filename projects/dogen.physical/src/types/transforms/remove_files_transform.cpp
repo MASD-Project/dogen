@@ -104,7 +104,7 @@ delete_empty_directories(const entities::model& m) {
 
 void remove_files_transform::
 apply(const context& ctx, const entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "remove files transform",
+    tracing::scoped_transform_tracer stp(lg, "remove files",
         transform_id, m.name().simple(), *ctx.tracer());
 
     /*

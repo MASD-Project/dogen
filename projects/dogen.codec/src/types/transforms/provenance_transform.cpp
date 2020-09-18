@@ -52,7 +52,7 @@ compute_shah1_hash(const boost::filesystem::path& p) {
 
 void provenance_transform::apply(const transforms::context& ctx,
     const boost::filesystem::path& p, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "provenance transform",
+    tracing::scoped_transform_tracer stp(lg, "provenance",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*

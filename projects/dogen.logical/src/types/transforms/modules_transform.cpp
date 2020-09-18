@@ -174,7 +174,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
 }
 
 void modules_transform::apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "modules transform",
+    tracing::scoped_transform_tracer stp(lg, "modules",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto im(gather_internal_modules(m));

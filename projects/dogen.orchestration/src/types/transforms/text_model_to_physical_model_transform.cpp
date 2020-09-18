@@ -54,7 +54,7 @@ namespace dogen::orchestration::transforms {
 physical::entities::model_set text_model_to_physical_model_transform::
 apply(const text::transforms::context& ctx,
     const text::entities::model_set& ms) {
-    tracing::scoped_transform_tracer stp(lg, "logical to text model transform",
+    tracing::scoped_transform_tracer stp(lg, "logical to text model",
         transform_id, ms.name().qualified().dot(), *ctx.tracer(), ms);
 
     physical::entities::model_set r;

@@ -58,7 +58,7 @@ std::string decoding_transform::extension() const {
 entities::model decoding_transform::apply(const transforms::context& ctx,
     const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    tracing::scoped_transform_tracer stp(lg, "JSON decoding transform",
+    tracing::scoped_transform_tracer stp(lg, "JSON decoding",
         transform_id, model_name, *ctx.tracer());
 
     hydrator h;
