@@ -39,7 +39,7 @@ namespace dogen::codec::transforms {
 
 void input_technical_space_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "technical space",
+    tracing::scoped_transform_tracer stp(lg, "input technical space",
         transform_id, m.name().simple(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());

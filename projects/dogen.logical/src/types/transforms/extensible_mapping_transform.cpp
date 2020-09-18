@@ -209,7 +209,7 @@ extensible_mapping_transform::apply(const context& ctx,
     const logical::entities::input_model_set& src,
     const technical_space to) {
     const auto id(src.target().name().qualified().dot());
-    tracing::scoped_transform_tracer stp(lg, "mapping", transform_id,
+    tracing::scoped_transform_tracer stp(lg, "extensible mapping", transform_id,
         id, *ctx.tracer(), src);
 
     /*

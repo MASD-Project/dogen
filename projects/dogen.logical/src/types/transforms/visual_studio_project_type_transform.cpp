@@ -42,9 +42,8 @@ namespace dogen::logical::transforms {
 void visual_studio_project_type_transform::
 apply(const context& ctx, const logical::entities::model& m) {
     const auto id(m.name().id());
-    tracing::scoped_transform_tracer stp(lg,
-        "visual studio project type transform", transform_id, id.value(),
-        *ctx.tracer(), m);
+    tracing::scoped_transform_tracer stp(lg, "visual studio project type",
+        transform_id, id.value(), *ctx.tracer(), m);
 
     const auto ts(m.input_technical_space());
     helpers::visual_studio_project_type_mapper tm;

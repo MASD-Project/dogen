@@ -46,7 +46,7 @@ namespace dogen::logical::transforms {
 
 void logic_less_templates_population_transform::
 apply(const context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "parsing",
+    tracing::scoped_transform_tracer stp(lg, "logic-less templates population",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& pe(m.physical_elements());

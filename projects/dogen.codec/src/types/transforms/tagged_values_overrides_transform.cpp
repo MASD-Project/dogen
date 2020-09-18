@@ -52,9 +52,8 @@ namespace dogen::codec::transforms {
 
 void tagged_values_overrides_transform::
 apply(const transforms::context& ctx, entities::model& m) {
-    tracing::scoped_transform_tracer stp(lg,
-        "tagged values overrides transform", transform_id, m.name().simple(),
-        *ctx.tracer(), m);
+    tracing::scoped_transform_tracer stp(lg, "tagged values overrides",
+        transform_id, m.name().simple(), *ctx.tracer(), m);
 
     /*
      * If there are no variability overrides, there is nothing to do.
