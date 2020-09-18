@@ -32,6 +32,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
 #include "dogen.identification/types/entities/model_type.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
@@ -52,7 +53,7 @@
 namespace dogen::text::entities {
 
 /**
- * @brief Yarn model.
+ * @brief Represents the combined logical-physical space.
  */
 class model final {
 public:
@@ -82,7 +83,8 @@ public:
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const std::list<boost::filesystem::path>& managed_directories,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties);
+        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
+        const dogen::logical::entities::model& logical);
 
 public:
     const dogen::identification::entities::logical_name& name() const;
@@ -205,6 +207,16 @@ public:
     void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v);
     void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>&& v);
 
+    /**
+     * @brief The logical model representation in the logical-physical space.
+     */
+    /**@{*/
+    const dogen::logical::entities::model& logical() const;
+    dogen::logical::entities::model& logical();
+    void logical(const dogen::logical::entities::model& v);
+    void logical(const dogen::logical::entities::model&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -232,6 +244,7 @@ private:
     dogen::physical::entities::extraction_properties extraction_properties_;
     std::list<boost::filesystem::path> managed_directories_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;
+    dogen::logical::entities::model logical_;
 };
 
 }

@@ -22,7 +22,7 @@
     },
     {
       "name": "entities::model",
-      "documentation": "Yarn model.\n",
+      "documentation": "Represents the combined logical-physical space.\n",
       "stereotypes": [
         "Nameable",
         "MetaNameable",
@@ -88,6 +88,11 @@
         {
           "name": "facet_properties",
           "type": "std::unordered_map<identification::entities::physical_meta_id, physical::entities::facet_properties>"
+        },
+        {
+          "name": "logical",
+          "type": "logical::entities::model",
+          "documentation": "The logical model representation in the logical-physical space.\n"
         }
       ]
     },

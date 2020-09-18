@@ -53,7 +53,8 @@ model::model(model&& rhs)
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       extraction_properties_(std::move(rhs.extraction_properties_)),
       managed_directories_(std::move(rhs.managed_directories_)),
-      facet_properties_(std::move(rhs.facet_properties_)) { }
+      facet_properties_(std::move(rhs.facet_properties_)),
+      logical_(std::move(rhs.logical_)) { }
 
 model::model(
     const dogen::identification::entities::logical_name& name,
@@ -71,7 +72,8 @@ model::model(
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const std::list<boost::filesystem::path>& managed_directories,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties)
+    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
+    const dogen::logical::entities::model& logical)
     : name_(name),
       meta_name_(meta_name),
       provenance_(provenance),
@@ -87,7 +89,8 @@ model::model(
       enabled_archetype_for_element_(enabled_archetype_for_element),
       extraction_properties_(extraction_properties),
       managed_directories_(managed_directories),
-      facet_properties_(facet_properties) { }
+      facet_properties_(facet_properties),
+      logical_(logical) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -107,6 +110,7 @@ void model::swap(model& other) noexcept {
     swap(extraction_properties_, other.extraction_properties_);
     swap(managed_directories_, other.managed_directories_);
     swap(facet_properties_, other.facet_properties_);
+    swap(logical_, other.logical_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -125,7 +129,8 @@ bool model::operator==(const model& rhs) const {
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         extraction_properties_ == rhs.extraction_properties_ &&
         managed_directories_ == rhs.managed_directories_ &&
-        facet_properties_ == rhs.facet_properties_;
+        facet_properties_ == rhs.facet_properties_ &&
+        logical_ == rhs.logical_;
 }
 
 model& model::operator=(model other) {
@@ -364,6 +369,22 @@ void model::facet_properties(const std::unordered_map<dogen::identification::ent
 
 void model::facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>&& v) {
     facet_properties_ = std::move(v);
+}
+
+const dogen::logical::entities::model& model::logical() const {
+    return logical_;
+}
+
+dogen::logical::entities::model& model::logical() {
+    return logical_;
+}
+
+void model::logical(const dogen::logical::entities::model& v) {
+    logical_ = v;
+}
+
+void model::logical(const dogen::logical::entities::model&& v) {
+    logical_ = std::move(v);
 }
 
 }

@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.identification/io/entities/model_type_io.hpp"
 #include "dogen.logical/io/entities/structural/module_io.hpp"
@@ -197,7 +198,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
-      << "\"facet_properties\": " << v.facet_properties()
+      << "\"facet_properties\": " << v.facet_properties() << ", "
+      << "\"logical\": " << v.logical()
       << " }";
     return(s);
 }

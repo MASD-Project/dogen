@@ -106,7 +106,7 @@
         <dia:point val="71,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,33.95;117.365,47.25"/>
+        <dia:rectangle val="70.95,33.95;117.365,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="71,34"/>
@@ -115,7 +115,7 @@
         <dia:real val="46.314999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="14.000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -124,7 +124,7 @@
         <dia:string>#Nameable, MetaNameable, Provenance#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Yarn model.#</dia:string>
+        <dia:string>#Represents the combined logical-physical space.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -499,6 +499,29 @@ spaces.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#logical#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#logical::entities::model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#The logical model representation in the logical-physical space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4724,16 +4747,16 @@ spaces.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="92,51"/>
+        <dia:point val="93,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.95,50.95;115.265,54.65"/>
+        <dia:rectangle val="92.95,52.95;114.725,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="92,51"/>
+        <dia:point val="93,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.215"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -4895,19 +4918,19 @@ spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="103.608,51"/>
+        <dia:point val="103.838,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.858,47.15;117.515,51.8"/>
+        <dia:rectangle val="103.088,47.95;117.515,53.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="103.608,51"/>
-        <dia:point val="103.608,49"/>
-        <dia:point val="117.315,49"/>
-        <dia:point val="117.315,47.2"/>
+        <dia:point val="103.838,53"/>
+        <dia:point val="103.838,51"/>
+        <dia:point val="117.315,51"/>
+        <dia:point val="117.315,48"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5261,13 +5284,13 @@ spaces.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,51"/>
+        <dia:point val="68,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,50.95;88.725,54.65"/>
+        <dia:rectangle val="67.95,52.95;89.725,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,51"/>
+        <dia:point val="68,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.675000000000001"/>
@@ -5455,19 +5478,19 @@ spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="71,47.2"/>
+        <dia:point val="71,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.25,46.45;78.0375,51.7496"/>
+        <dia:rectangle val="70.25,47.25;79.0375,53.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="71,47.2"/>
-        <dia:point val="71,49"/>
-        <dia:point val="77.8375,49"/>
-        <dia:point val="77.8375,50.9496"/>
+        <dia:point val="71,48"/>
+        <dia:point val="71,51"/>
+        <dia:point val="78.8375,51"/>
+        <dia:point val="78.8375,53"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5485,7 +5508,7 @@ spaces.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O1" connection="5"/>
-        <dia:connection handle="1" to="O36" connection="12"/>
+        <dia:connection handle="1" to="O36" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
