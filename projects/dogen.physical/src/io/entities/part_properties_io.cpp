@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/part_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,7 +35,6 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const part_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::part_properties\"" << ", "
-      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""

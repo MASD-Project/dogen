@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -48,7 +47,6 @@ public:
 
 public:
     backend_properties(
-        const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
         const boost::filesystem::path& file_path,
         const std::string& technical_space_version,
@@ -56,16 +54,6 @@ public:
         const bool enable_backend_directories);
 
 public:
-    /**
-     * @brief Meta-name for this meta-element.
-     */
-    /**@{*/
-    const dogen::identification::entities::physical_meta_name& meta_name() const;
-    dogen::identification::entities::physical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::physical_meta_name& v);
-    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
-    /**@}*/
-
     /**
      * @brief If true, the backend is enabled.
      */
@@ -118,7 +106,6 @@ public:
     backend_properties& operator=(backend_properties other);
 
 private:
-    dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
     boost::filesystem::path file_path_;
     std::string technical_space_version_;

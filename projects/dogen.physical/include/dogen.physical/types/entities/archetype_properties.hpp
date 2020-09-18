@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -48,22 +47,11 @@ public:
 
 public:
     archetype_properties(
-        const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
         const boost::optional<bool>& overwrite,
         const std::string& postfix);
 
 public:
-    /**
-     * @brief Meta-name for this meta-element.
-     */
-    /**@{*/
-    const dogen::identification::entities::physical_meta_name& meta_name() const;
-    dogen::identification::entities::physical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::physical_meta_name& v);
-    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
-    /**@}*/
-
     /**
      * @brief If true, the archetype is enabled.
      */
@@ -103,7 +91,6 @@ public:
     archetype_properties& operator=(archetype_properties other);
 
 private:
-    dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
     boost::optional<bool> overwrite_;
     std::string postfix_;

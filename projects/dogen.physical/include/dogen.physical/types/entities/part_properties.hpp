@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -46,22 +45,11 @@ public:
 
 public:
     part_properties(
-        const dogen::identification::entities::physical_meta_name& meta_name,
         const boost::filesystem::path& file_path,
         const std::string& directory,
         const boost::filesystem::path& relative_path);
 
 public:
-    /**
-     * @brief Meta-name for this meta-element.
-     */
-    /**@{*/
-    const dogen::identification::entities::physical_meta_name& meta_name() const;
-    dogen::identification::entities::physical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::physical_meta_name& v);
-    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
-    /**@}*/
-
     /**
      * @brief Full path to the facet.
      */
@@ -105,7 +93,6 @@ public:
     part_properties& operator=(part_properties other);
 
 private:
-    dogen::identification::entities::physical_meta_name meta_name_;
     boost::filesystem::path file_path_;
     std::string directory_;
     boost::filesystem::path relative_path_;

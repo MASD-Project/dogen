@@ -22,7 +22,6 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -43,7 +42,6 @@ std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::backend_properties\"" << ", "
-      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"technical_space_version\": " << "\"" << tidy_up_string(v.technical_space_version()) << "\"" << ", "

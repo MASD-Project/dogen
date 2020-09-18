@@ -26,32 +26,27 @@ archetype_properties::archetype_properties()
     : enabled_(static_cast<bool>(0)) { }
 
 archetype_properties::archetype_properties(archetype_properties&& rhs)
-    : meta_name_(std::move(rhs.meta_name_)),
-      enabled_(std::move(rhs.enabled_)),
+    : enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       postfix_(std::move(rhs.postfix_)) { }
 
 archetype_properties::archetype_properties(
-    const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
     const boost::optional<bool>& overwrite,
     const std::string& postfix)
-    : meta_name_(meta_name),
-      enabled_(enabled),
+    : enabled_(enabled),
       overwrite_(overwrite),
       postfix_(postfix) { }
 
 void archetype_properties::swap(archetype_properties& other) noexcept {
     using std::swap;
-    swap(meta_name_, other.meta_name_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(postfix_, other.postfix_);
 }
 
 bool archetype_properties::operator==(const archetype_properties& rhs) const {
-    return meta_name_ == rhs.meta_name_ &&
-        enabled_ == rhs.enabled_ &&
+    return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         postfix_ == rhs.postfix_;
 }
@@ -60,22 +55,6 @@ archetype_properties& archetype_properties::operator=(archetype_properties other
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::identification::entities::physical_meta_name& archetype_properties::meta_name() const {
-    return meta_name_;
-}
-
-dogen::identification::entities::physical_meta_name& archetype_properties::meta_name() {
-    return meta_name_;
-}
-
-void archetype_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
-    meta_name_ = v;
-}
-
-void archetype_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
-    meta_name_ = std::move(v);
 }
 
 bool archetype_properties::enabled() const {

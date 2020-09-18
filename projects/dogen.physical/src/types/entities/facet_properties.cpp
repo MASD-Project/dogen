@@ -27,20 +27,17 @@ facet_properties::facet_properties()
       overwrite_(static_cast<bool>(0)) { }
 
 facet_properties::facet_properties(
-    const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
     const bool overwrite,
     const std::string& directory,
     const std::string& postfix)
-    : meta_name_(meta_name),
-      enabled_(enabled),
+    : enabled_(enabled),
       overwrite_(overwrite),
       directory_(directory),
       postfix_(postfix) { }
 
 void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
-    swap(meta_name_, other.meta_name_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(directory_, other.directory_);
@@ -48,8 +45,7 @@ void facet_properties::swap(facet_properties& other) noexcept {
 }
 
 bool facet_properties::operator==(const facet_properties& rhs) const {
-    return meta_name_ == rhs.meta_name_ &&
-        enabled_ == rhs.enabled_ &&
+    return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         directory_ == rhs.directory_ &&
         postfix_ == rhs.postfix_;
@@ -59,22 +55,6 @@ facet_properties& facet_properties::operator=(facet_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::identification::entities::physical_meta_name& facet_properties::meta_name() const {
-    return meta_name_;
-}
-
-dogen::identification::entities::physical_meta_name& facet_properties::meta_name() {
-    return meta_name_;
-}
-
-void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
-    meta_name_ = v;
-}
-
-void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
-    meta_name_ = std::move(v);
 }
 
 bool facet_properties::enabled() const {

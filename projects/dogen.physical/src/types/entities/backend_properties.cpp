@@ -27,22 +27,19 @@ backend_properties::backend_properties()
       enable_backend_directories_(static_cast<bool>(0)) { }
 
 backend_properties::backend_properties(backend_properties&& rhs)
-    : meta_name_(std::move(rhs.meta_name_)),
-      enabled_(std::move(rhs.enabled_)),
+    : enabled_(std::move(rhs.enabled_)),
       file_path_(std::move(rhs.file_path_)),
       technical_space_version_(std::move(rhs.technical_space_version_)),
       directory_(std::move(rhs.directory_)),
       enable_backend_directories_(std::move(rhs.enable_backend_directories_)) { }
 
 backend_properties::backend_properties(
-    const dogen::identification::entities::physical_meta_name& meta_name,
     const bool enabled,
     const boost::filesystem::path& file_path,
     const std::string& technical_space_version,
     const std::string& directory,
     const bool enable_backend_directories)
-    : meta_name_(meta_name),
-      enabled_(enabled),
+    : enabled_(enabled),
       file_path_(file_path),
       technical_space_version_(technical_space_version),
       directory_(directory),
@@ -50,7 +47,6 @@ backend_properties::backend_properties(
 
 void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
-    swap(meta_name_, other.meta_name_);
     swap(enabled_, other.enabled_);
     swap(file_path_, other.file_path_);
     swap(technical_space_version_, other.technical_space_version_);
@@ -59,8 +55,7 @@ void backend_properties::swap(backend_properties& other) noexcept {
 }
 
 bool backend_properties::operator==(const backend_properties& rhs) const {
-    return meta_name_ == rhs.meta_name_ &&
-        enabled_ == rhs.enabled_ &&
+    return enabled_ == rhs.enabled_ &&
         file_path_ == rhs.file_path_ &&
         technical_space_version_ == rhs.technical_space_version_ &&
         directory_ == rhs.directory_ &&
@@ -71,22 +66,6 @@ backend_properties& backend_properties::operator=(backend_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::identification::entities::physical_meta_name& backend_properties::meta_name() const {
-    return meta_name_;
-}
-
-dogen::identification::entities::physical_meta_name& backend_properties::meta_name() {
-    return meta_name_;
-}
-
-void backend_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
-    meta_name_ = v;
-}
-
-void backend_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
-    meta_name_ = std::move(v);
 }
 
 bool backend_properties::enabled() const {

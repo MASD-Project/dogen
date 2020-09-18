@@ -18531,7 +18531,7 @@ element.#</dia:string>
         <dia:point val="173,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,-124.05;187.795,-117.15"/>
+        <dia:rectangle val="172.95,-124.05;187.795,-117.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="173,-124"/>
@@ -18540,13 +18540,13 @@ element.#</dia:string>
         <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#backend_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MetaNameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Properties related to the backend.#</dia:string>
@@ -18893,7 +18893,7 @@ element.#</dia:string>
         <dia:point val="190,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.95,-124.05;199.405,-117.95"/>
+        <dia:rectangle val="189.95,-124.05;199.405,-118.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="190,-124"/>
@@ -18902,13 +18902,13 @@ element.#</dia:string>
         <dia:real val="9.3550000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#facet_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MetaNameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Properties related to the facet.#</dia:string>
@@ -19097,7 +19097,7 @@ element.#</dia:string>
         <dia:point val="201,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="200.95,-124.05;214.255,-118.75"/>
+        <dia:rectangle val="200.95,-124.05;214.255,-119.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="201,-124"/>
@@ -19106,13 +19106,13 @@ element.#</dia:string>
         <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MetaNameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Properties related to the archetype.#</dia:string>
@@ -19633,7 +19633,7 @@ element.#</dia:string>
         <dia:point val="168,-114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.25,-117.25;180.572,-113.2"/>
+        <dia:rectangle val="167.25,-118.05;180.572,-113.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19642,7 +19642,7 @@ element.#</dia:string>
         <dia:point val="168,-114"/>
         <dia:point val="168,-116"/>
         <dia:point val="180.373,-116"/>
-        <dia:point val="180.373,-117.2"/>
+        <dia:point val="180.373,-118"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19705,16 +19705,16 @@ element.#</dia:string>
         <dia:point val="193.852,-114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="193.102,-118.05;194.877,-113.2"/>
+        <dia:rectangle val="193.102,-118.85;194.877,-113.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="193.852,-114"/>
-        <dia:point val="193.852,-116.35"/>
-        <dia:point val="194.678,-116.35"/>
-        <dia:point val="194.678,-118"/>
+        <dia:point val="193.852,-116.75"/>
+        <dia:point val="194.678,-116.75"/>
+        <dia:point val="194.678,-118.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19777,7 +19777,7 @@ element.#</dia:string>
         <dia:point val="219.705,-114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="207.552,-118.85;220.455,-113.2"/>
+        <dia:rectangle val="207.552,-119.65;220.455,-113.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19786,7 +19786,7 @@ element.#</dia:string>
         <dia:point val="219.705,-114"/>
         <dia:point val="219.705,-116"/>
         <dia:point val="207.602,-116"/>
-        <dia:point val="207.602,-118.8"/>
+        <dia:point val="207.602,-119.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19885,7 +19885,7 @@ element.#</dia:string>
         <dia:point val="216,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="215.95,-124.05;231.565,-118.75"/>
+        <dia:rectangle val="215.95,-124.05;231.565,-119.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="216,-124"/>
@@ -19894,13 +19894,13 @@ element.#</dia:string>
         <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#part_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MetaNameable#</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Properties related to the part.#</dia:string>
@@ -20104,7 +20104,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="219.705,-110.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="218.955,-118.85;223.957,-109.645"/>
+        <dia:rectangle val="218.955,-119.65;223.957,-109.645"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20112,7 +20112,7 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="219.705,-110.5"/>
         <dia:point val="223.757,-110.5"/>
-        <dia:point val="223.757,-118.8"/>
+        <dia:point val="223.757,-119.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
