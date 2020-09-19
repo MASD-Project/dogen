@@ -6126,13 +6126,13 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="74,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,57.95;114.975,62.45"/>
+        <dia:rectangle val="73.95,57.95;109.97,62.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="40.924999999999997"/>
+        <dia:real val="35.920000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -6274,10 +6274,10 @@ needed by the remaining chains.#</dia:string>
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#loms#</dia:string>
+                <dia:string>#lm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#logical::entities::output_model_set#</dia:string>
+                <dia:string>#logical::entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6339,7 +6339,7 @@ needed by the remaining chains.#</dia:string>
         <dia:point val="89.8,40.4503"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.05,39.7003;94.6625,59.566"/>
+        <dia:rectangle val="89.05,39.7003;92.16,59.566"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6347,8 +6347,8 @@ needed by the remaining chains.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="89.8,40.4503"/>
         <dia:point val="89.8,43"/>
-        <dia:point val="94.4625,43"/>
-        <dia:point val="94.4625,57.966"/>
+        <dia:point val="91.96,43"/>
+        <dia:point val="91.96,57.966"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -6518,17 +6518,17 @@ needed by the remaining chains.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="94.4625,62.4"/>
+        <dia:point val="91.96,62.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.8575,61.65;95.2125,68.6"/>
+        <dia:rectangle val="89.8575,61.65;92.71,68.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="94.4625,62.4"/>
-        <dia:point val="94.4625,65"/>
+        <dia:point val="91.96,62.4"/>
+        <dia:point val="91.96,65"/>
         <dia:point val="89.9075,65"/>
         <dia:point val="89.9075,67"/>
       </dia:attribute>
