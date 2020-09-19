@@ -57,8 +57,10 @@ model_to_text_csharp_chain::create_formattables_model(
     return fw.execute(feature_model, frp, l, m);
 }
 
-std::string model_to_text_csharp_chain::id() const {
-    return traits::backend_qn();
+identification::entities::physical_meta_id
+model_to_text_csharp_chain::id() const {
+    static identification::entities::physical_meta_id r("masd.csharp");
+    return r;
 }
 
 std::string model_to_text_csharp_chain::description() const {

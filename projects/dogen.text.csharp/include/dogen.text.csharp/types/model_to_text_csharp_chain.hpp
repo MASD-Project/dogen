@@ -68,7 +68,7 @@ private:
 
 public:
     std::string description() const override;
-    std::string id() const override;
+    identification::entities::physical_meta_id id() const override;
 
 public:
     identification::entities::technical_space technical_space() const override;

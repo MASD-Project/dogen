@@ -164,7 +164,7 @@ spec_category spec_dumper::create_generation_category() const {
     for(const auto& pair: rg2.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         spec_entry e;
-        e.name(t.id());
+        e.name(t.id().value());
         e.description(t.description());
         r.entries().push_back(e);
     }

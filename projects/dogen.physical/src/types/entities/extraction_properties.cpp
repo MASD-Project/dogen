@@ -22,33 +22,19 @@
 
 namespace dogen::physical::entities {
 
-extraction_properties::extraction_properties()
-    : enable_backend_directories_(static_cast<bool>(0)) { }
-
 extraction_properties::extraction_properties(extraction_properties&& rhs)
-    : cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)),
-      enabled_backends_(std::move(rhs.enabled_backends_)),
-      enable_backend_directories_(std::move(rhs.enable_backend_directories_)) { }
+    : cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)) { }
 
-extraction_properties::extraction_properties(
-    const boost::filesystem::path& cpp_headers_output_directory,
-    const std::unordered_set<std::string>& enabled_backends,
-    const bool enable_backend_directories)
-    : cpp_headers_output_directory_(cpp_headers_output_directory),
-      enabled_backends_(enabled_backends),
-      enable_backend_directories_(enable_backend_directories) { }
+extraction_properties::extraction_properties(const boost::filesystem::path& cpp_headers_output_directory)
+    : cpp_headers_output_directory_(cpp_headers_output_directory) { }
 
 void extraction_properties::swap(extraction_properties& other) noexcept {
     using std::swap;
     swap(cpp_headers_output_directory_, other.cpp_headers_output_directory_);
-    swap(enabled_backends_, other.enabled_backends_);
-    swap(enable_backend_directories_, other.enable_backend_directories_);
 }
 
 bool extraction_properties::operator==(const extraction_properties& rhs) const {
-    return cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_ &&
-        enabled_backends_ == rhs.enabled_backends_ &&
-        enable_backend_directories_ == rhs.enable_backend_directories_;
+    return cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_;
 }
 
 extraction_properties& extraction_properties::operator=(extraction_properties other) {
@@ -71,30 +57,6 @@ void extraction_properties::cpp_headers_output_directory(const boost::filesystem
 
 void extraction_properties::cpp_headers_output_directory(const boost::filesystem::path&& v) {
     cpp_headers_output_directory_ = std::move(v);
-}
-
-const std::unordered_set<std::string>& extraction_properties::enabled_backends() const {
-    return enabled_backends_;
-}
-
-std::unordered_set<std::string>& extraction_properties::enabled_backends() {
-    return enabled_backends_;
-}
-
-void extraction_properties::enabled_backends(const std::unordered_set<std::string>& v) {
-    enabled_backends_ = v;
-}
-
-void extraction_properties::enabled_backends(const std::unordered_set<std::string>&& v) {
-    enabled_backends_ = std::move(v);
-}
-
-bool extraction_properties::enable_backend_directories() const {
-    return enable_backend_directories_;
-}
-
-void extraction_properties::enable_backend_directories(const bool v) {
-    enable_backend_directories_ = v;
 }
 
 }

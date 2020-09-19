@@ -22,6 +22,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
@@ -98,18 +99,18 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
      * user know.
      */
     const auto& mmp(m.physical().meta_model_properties());
-    const auto& ek(mmp.extraction_properties().enabled_backends());
+    const auto& ek(mmp.enabled_backends());
     const auto is_enabled(ek.find(t.id()) != ek.end());
     if (!is_enabled) {
         BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
         BOOST_THROW_EXCEPTION(
-            transformation_error(disabled_transform + t.id()));
+            transformation_error(disabled_transform + t.id().value()));
     }
 
     /*
      * Generate artefacts for all elements in model.
      */
-    const bool ekd(mmp.extraction_properties().enable_backend_directories());
+    const bool ekd(mmp.enable_backend_directories());
     t.apply(ctx, ekd, m);
 
     BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << t.id();

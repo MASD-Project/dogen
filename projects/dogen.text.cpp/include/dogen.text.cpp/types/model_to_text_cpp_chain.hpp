@@ -104,7 +104,7 @@ private:
     managed_directories(const formattables::locator& l) const;
 
 public:
-    std::string id() const override;
+    identification::entities::physical_meta_id id() const override;
     std::string description() const override;
 
 public:

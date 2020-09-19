@@ -44,28 +44,17 @@ class extraction_properties_transform final {
 private:
     struct feature_group {
         variability::entities::feature cpp_headers_output_directory;
-        variability::entities::feature enable_backend_directories;
-        std::unordered_map<std::string, variability::entities::feature> enabled;
     };
 
-    static feature_group make_feature_group(
-        const variability::entities::feature_model& fm,
-        const std::list<identification::entities::physical_meta_name>& pmns);
+    static feature_group
+    make_feature_group(const variability::entities::feature_model& fm);
 
     static boost::filesystem::path
     obtain_cpp_headers_output_directory(const feature_group& fg,
         const variability::entities::configuration& cfg);
 
-    static std::unordered_set<std::string>
-    obtain_enabled_backends(const feature_group& fg,
-        const variability::entities::configuration& cfg);
-
-    static bool obtain_enable_backend_directories(const feature_group& fg,
-        const variability::entities::configuration& cfg);
-
     static entities::extraction_properties
     make_extraction_properties(const context& ctx,
-        const std::list<identification::entities::physical_meta_name>& pmns,
         const variability::entities::configuration& cfg);
 
 public:

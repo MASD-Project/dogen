@@ -30,6 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/technical_space.hpp"
 #include "dogen.text/types/transforms/context.hpp"
 #include "dogen.text/types/entities/model.hpp"
@@ -51,9 +52,10 @@ public:
 
 public:
     /**
-     * @brief Returns the identity of this transform.
+     * @brief Returns the identity of this transform in physical
+     * space.
      */
-    virtual std::string id() const = 0;
+    virtual identification::entities::physical_meta_id id() const = 0;
 
     /**
      * @brief Returns a human readable description of this transform.

@@ -1389,14 +1389,6 @@
           "name": "cpp_headers_output_directory",
           "type": "boost::filesystem::path",
           "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
-        },
-        {
-          "name": "enabled_backends",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "enable_backend_directories",
-          "type": "bool"
         }
       ]
     },

@@ -15577,7 +15577,7 @@ element.#</dia:string>
         <dia:point val="199,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="198.95,-112.05;220.34,-107.55"/>
+        <dia:rectangle val="198.95,-112.05;220.34,-109.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="199,-112"/>
@@ -15586,7 +15586,7 @@ element.#</dia:string>
         <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#extraction_properties#</dia:string>
@@ -15688,52 +15688,6 @@ element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place C++ header files. Must be a relative path.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enabled_backends#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enable_backend_directories#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20641,7 +20595,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="216.705,-101"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="209.595,-107.6;217.455,-99.4"/>
+        <dia:rectangle val="209.595,-109.201;217.455,-99.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20650,7 +20604,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="216.705,-101"/>
         <dia:point val="216.705,-103"/>
         <dia:point val="209.645,-103"/>
-        <dia:point val="209.645,-107.55"/>
+        <dia:point val="209.645,-109.151"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20668,7 +20622,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O145" connection="2"/>
-        <dia:connection handle="1" to="O120" connection="14"/>
+        <dia:connection handle="1" to="O120" connection="10"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>

@@ -42,9 +42,6 @@ static logger lg(logger_factory(transform_id));
 
 const std::string cpp_headers_output_directory_feature(
     "masd.cpp.headers_output_directory");
-const std::string enable_backend_directories_feature(
-    "masd.physical.enable_backend_directories");
-const std::string enabled_feature("enabled");
 
 const std::string root_module_not_found("Could not find root module: ");
 
@@ -53,24 +50,13 @@ const std::string root_module_not_found("Could not find root module: ");
 namespace dogen::physical::transforms {
 
 extraction_properties_transform::feature_group
-extraction_properties_transform::make_feature_group(
-    const variability::entities::feature_model& fm,
-    const std::list<identification::entities::physical_meta_name>& pmns) {
+extraction_properties_transform::
+make_feature_group(const variability::entities::feature_model& fm) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
     const auto chod(cpp_headers_output_directory_feature);
     r.cpp_headers_output_directory = s.get_by_name(chod);
-
-    const auto ekd(enable_backend_directories_feature);
-    r.enable_backend_directories = s.get_by_name(ekd);
-
-    const auto en(enabled_feature);
-    using identification::helpers::physical_meta_id_builder;
-    for (const auto& mn : pmns) {
-        const auto b(physical_meta_id_builder::build_backend(mn));
-        r.enabled[b.value()] = s.get_by_name(b.value(), en);
-    }
 
     return r;
 }
@@ -86,57 +72,14 @@ obtain_cpp_headers_output_directory(const feature_group& fg,
     return boost::filesystem::path();
 }
 
-std::unordered_set<std::string> extraction_properties_transform::
-obtain_enabled_backends(const feature_group& fg,
-    const variability::entities::configuration& cfg) {
-    std::unordered_set<std::string> r;
-    const variability::helpers::configuration_selector s(cfg);
-    for (const auto& pair : fg.enabled) {
-        const auto& b(pair.first);
-        const auto& f(pair.second);
-        const bool enabled(s.get_boolean_content_or_default(f));
-        if (!enabled) {
-            BOOST_LOG_SEV(lg, trace) << "Backend disabled: " << b;
-            continue;
-        }
-
-        r.insert(b);
-    }
-
-    BOOST_LOG_SEV(lg, trace) << "Enabled backends: " << r;
-    return r;
-}
-
-bool extraction_properties_transform::
-obtain_enable_backend_directories(const feature_group& fg,
-    const variability::entities::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    return s.get_boolean_content_or_default(fg.enable_backend_directories);
-}
-
 entities::extraction_properties
 extraction_properties_transform::make_extraction_properties(const context& ctx,
-    const std::list<identification::entities::physical_meta_name>& mns,
     const variability::entities::configuration& cfg) {
 
-    const auto fg(make_feature_group(*ctx.feature_model(), mns));
+    const auto fg(make_feature_group(*ctx.feature_model()));
     entities::extraction_properties r;
     r.cpp_headers_output_directory(
         obtain_cpp_headers_output_directory(fg, cfg));
-
-    r.enabled_backends(obtain_enabled_backends(fg, cfg));
-    if (r.enabled_backends().size() > 1) {
-        /*
-         * If the user requested more than one backend, we have no
-         * option but to create directories for each.
-         */
-        BOOST_LOG_SEV(lg, warn) << "More than one backend is enabled: "
-                                << r.enabled_backends().size()
-                                << ". Forcing enable_backend_directories.";
-        r.enable_backend_directories(true);
-    } else
-        r.enable_backend_directories(
-            obtain_enable_backend_directories(fg, cfg));
 
     return r;
 }
@@ -145,10 +88,6 @@ void extraction_properties_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "extraction properties",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
-
-    const auto& pmm(*ctx.meta_model());
-    const auto& in(pmm.indexed_names());
-
     /*
      * Use the model's logical ID to locate the artefact set for the
      * root module. This contains the configuration for the model
@@ -163,7 +102,7 @@ apply(const context& ctx, entities::model& m) {
     }
 
     const auto& cfg(*i->second.configuration());
-    const auto ep(make_extraction_properties(ctx, in.all(), cfg));
+    const auto ep(make_extraction_properties(ctx, cfg));
     m.meta_model_properties().extraction_properties(ep);
 
     stp.end_transform(m);

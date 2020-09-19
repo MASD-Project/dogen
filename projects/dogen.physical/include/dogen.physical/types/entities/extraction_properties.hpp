@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
-#include <unordered_set>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen::physical::entities {
@@ -37,20 +35,15 @@ namespace dogen::physical::entities {
  */
 class extraction_properties final {
 public:
+    extraction_properties() = default;
     extraction_properties(const extraction_properties&) = default;
     ~extraction_properties() = default;
-
-public:
-    extraction_properties();
 
 public:
     extraction_properties(extraction_properties&& rhs);
 
 public:
-    extraction_properties(
-        const boost::filesystem::path& cpp_headers_output_directory,
-        const std::unordered_set<std::string>& enabled_backends,
-        const bool enable_backend_directories);
+    explicit extraction_properties(const boost::filesystem::path& cpp_headers_output_directory);
 
 public:
     /**
@@ -62,14 +55,6 @@ public:
     void cpp_headers_output_directory(const boost::filesystem::path& v);
     void cpp_headers_output_directory(const boost::filesystem::path&& v);
     /**@}*/
-
-    const std::unordered_set<std::string>& enabled_backends() const;
-    std::unordered_set<std::string>& enabled_backends();
-    void enabled_backends(const std::unordered_set<std::string>& v);
-    void enabled_backends(const std::unordered_set<std::string>&& v);
-
-    bool enable_backend_directories() const;
-    void enable_backend_directories(const bool v);
 
 public:
     bool operator==(const extraction_properties& rhs) const;
@@ -83,8 +68,6 @@ public:
 
 private:
     boost::filesystem::path cpp_headers_output_directory_;
-    std::unordered_set<std::string> enabled_backends_;
-    bool enable_backend_directories_;
 };
 
 }

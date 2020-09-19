@@ -81,8 +81,10 @@ formattables::locator model_to_text_cpp_chain::make_locator(
     return r;
 }
 
-std::string model_to_text_cpp_chain::id() const {
-    return traits::backend_qn();
+identification::entities::physical_meta_id
+model_to_text_cpp_chain::id() const {
+    static identification::entities::physical_meta_id r("masd.cpp");
+    return r;
 }
 
 std::string model_to_text_cpp_chain::description() const {

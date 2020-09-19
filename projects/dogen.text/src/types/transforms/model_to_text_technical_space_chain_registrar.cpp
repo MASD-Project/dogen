@@ -21,6 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
 #include "dogen.text/types/transforms/registrar_error.hpp"
 #include "dogen.text/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
