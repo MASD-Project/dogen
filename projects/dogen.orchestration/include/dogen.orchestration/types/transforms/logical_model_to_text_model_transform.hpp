@@ -41,8 +41,7 @@ private:
     /**
      * @brief Transform a logical model into its text counterpart.
      */
-    static text::entities::model
-    apply(const text::transforms::context& ctx,
+    static text::entities::model apply(const text::transforms::context& ctx,
         const logical::entities::model& lm);
 
 public:
