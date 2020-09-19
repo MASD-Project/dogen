@@ -14,27 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-19 Sat 08:23]
+#+CAPTION: Clock summary at [2020-09-19 Sat 14:13]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *77:44* |       |       | 100.0 |
+| *Total time*                                       | *80:38* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 77:44   |       |       | 100.0 |
-| Active                                             |         | 77:44 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |   9.3 |
-| Create a demo and presentation for previous sprint |         |       |  0:41 |   0.9 |
-| Sprint and product backlog grooming                |         |       |  2:26 |   3.1 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   5.6 |
-| Create an =ident= model                            |         |       | 42:02 |  54.1 |
+| Stories                                            | 80:38   |       |       | 100.0 |
+| Active                                             |         | 80:38 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |   9.0 |
+| Create a demo and presentation for previous sprint |         |       |  0:41 |   0.8 |
+| Sprint and product backlog grooming                |         |       |  2:26 |   3.0 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   5.4 |
+| Create an =ident= model                            |         |       | 42:02 |  52.1 |
 | Rename injection to codec                          |         |       |  0:48 |   1.0 |
-| Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
-| Remove support for split projects                  |         |       |  0:07 |   0.2 |
+| Add artefact's archetype to artefact class         |         |       |  0:07 |   0.1 |
+| Remove support for split projects                  |         |       |  0:07 |   0.1 |
+| Create a logical to physical projector             |         |       |  0:45 |   0.9 |
+| Clean up the Logical-physical model                |         |       |  5:00 |   6.2 |
 | Implement meta-name validator correctly            |         |       |  0:17 |   0.4 |
-| Add dependencies to artefacts                      |         |       |  2:28 |   3.2 |
-| Add instances of physical meta-model elements      |         |       |  8:48 |  11.3 |
-| Add full and relative path processing to PM        |         |       |  5:32 |   7.1 |
-| Logical-physical model                             |         |       |  2:51 |   3.7 |
+| Add dependencies to artefacts                      |         |       |  2:28 |   3.1 |
+| Add instances of physical meta-model elements      |         |       |  8:48 |  10.9 |
+| Add full and relative path processing to PM        |         |       |  5:32 |   6.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1006,6 +1007,61 @@ them for the current use case (i.e. you cannot reference split
 models). Eventually when we address the limitations on references we
 can also sort out this issue.
 
+*** COMPLETED Create a logical to physical projector                  :story:
+    CLOSED: [2020-09-19 Sat 13:48]
+    :LOGBOOK:
+    CLOCK: [2020-09-19 Sat 12:45]--[2020-09-19 Sat 13:30] =>  1:03
+    :END:
+
+The projection logic is now getting really complex. We really need a
+class to take over this work. It should also group model elements by
+type so that we can obtain the archetypes just once instead of
+processing one model element at a time.
+
+*** COMPLETED Clean up the Logical-physical model                     :story:
+    CLOSED: [2020-09-19 Sat 14:13]
+    :LOGBOOK:
+    CLOCK: [2020-09-19 Sat 13:31]--[2020-09-19 Sat 14:13] =>  0:42
+    CLOCK: [2020-09-19 Sat 13:31]--[2020-09-19 Sat 13:48] =>  0:17
+    CLOCK: [2020-09-19 Sat 12:01]--[2020-09-19 Sat 12:45] =>  0:44
+    CLOCK: [2020-09-19 Sat 09:31]--[2020-09-19 Sat 09:57] =>  0:26
+    CLOCK: [2020-09-19 Sat 06:57]--[2020-09-19 Sat 08:23] =>  1:26
+    CLOCK: [2020-09-18 Fri 16:05]--[2020-09-18 Fri 17:30] =>  1:25
+    :END:
+
+Thus far we have avoided creating a logical physical model (LPM). This
+is mainly because we didn't really know where it should go. However,
+as the clean up related to the extraction properties revealed, the
+text model /is/ the LPM. What we have done so far obscures this
+because we selectively copied properties from both the logical and
+physical models and made a few minor modifications to these bits. In
+reality, it would be much cleaner if this model had only three
+attributes:
+
+- the logical model;
+- the physical model;
+- the LPM.
+
+The LPM is very simple, just a pairing of logical element to
+=artefact_set=.
+
+This means we can clean up a lot of stuff:
+
+- remove all duplicate data structures and associated transforms;
+- remove the artefact repository - we can now directly store the
+  entire PM in the LPM.
+
+Notes:
+
+- start by copying across the logical model and delete all
+  properties.
+- rename elements in text model.
+- remove properties from extraction properties.
+- transforms need to return physical IDs.
+- check orchestration physical transforms as we seem to be doing a lot
+  of silly things there.
+- rename artefact set to physical region to match text model.
+
 *** STARTED Implement meta-name validator correctly                   :story:
     :LOGBOOK:
     CLOCK: [2020-09-11 Fri 10:30]--[2020-09-11 Fri 10:47] =>  0:17
@@ -1245,40 +1301,31 @@ clear. We need a container with:
 - archetype ID
 - labels
 
-*** STARTED Logical-physical model                                    :story:
-    :LOGBOOK:
-    CLOCK: [2020-09-19 Sat 06:57]--[2020-09-19 Sat 08:23] =>  1:26
-    CLOCK: [2020-09-18 Fri 16:05]--[2020-09-18 Fri 17:30] =>  1:25
-    :END:
+*** Add a validator for text model                                    :story:
 
-Thus far we have avoided creating a logical physical model (LPM). This
-is mainly because we didn't really know where it should go. However,
-as the clean up related to the extraction properties revealed, the
-text model /is/ the LPM. What we have done so far obscures this
-because we selectively copied properties from both the logical and
-physical models and made a few minor modifications to these bits. In
-reality, it would be much cleaner if this model had only three
-attributes:
+The validator should check the paths. This can also be done in
+physical model.
 
-- the logical model;
-- the physical model;
-- the LPM.
+:                 /*
+:                  * FIXME: we are still generating artefacts for global
+:                  * module.
+:                  */
+:                 if (aptr->file_path().empty()) {
+:                     BOOST_LOG_SEV(lg, error) << empty_path
+:                                              << aptr->name().id();
+:                     // BOOST_THROW_EXCEPTION(transform_exception(empty_path +
+:                     //         aptr->name().id().value()));
+:                     continue;
+:                 }
 
-The LPM is very simple, just a pairing of logical element to
-=artefact_set=.
+*** Implement backend and facet transform                             :story:
 
-This means we can clean up a lot of stuff:
+The backend transform should:
 
-- remove all duplicate data structures and associated transforms;
-- remove the artefact repository - we can now directly store the
-  entire PM in the LPM.
+- return the ID of the backend;
+- use the facet and archetype transforms to process all elements.
 
-Notes:
-
-- start by copying across the logical model and delete all
-  properties.
-- rename elements in text model.
-- remove properties from extraction properties.
+Check backlog for a story on this.
 
 *** Empty path ID error in logs                                       :story:
 
@@ -1289,6 +1336,10 @@ We now generate lots of these:
 : 2020-09-18 11:38:49.874512 [ERROR] [orchestration.transforms.text_model_to_physical_model_transform] Artefact has an empty path. ID:  { "__type__": "dogen::identification::entities::physical_id", "value": "<masd.lam><masd.cpp.types.namespace_header>" }
 : 2020-09-18 11:38:49.874516 [ERROR] [orchestration.transforms.text_model_to_physical_model_transform] Artefact has an empty path. ID:  { "__type__": "dogen::identification::entities::physical_id", "value": "<masd.lam.text><masd.cpp.types.namespace_header>" }
 : 2020-09-18 11:38:49.874520 [ERROR] [orchestration.transforms.text_model_to_physical_model_transform] Artefact has an empty path. ID:  { "__type__": "dogen::identification::entities::physical_id", "value": "<cpp_ref_impl.profiles.composable><masd.cpp.types.namespace_heade
+
+Once this is fixed we can probably get rid of
+=text_model_to_physical_model_transform=. It is just doing the
+filtering of paths now.
 
 *** Deprecate managed directories                                     :story:
 
@@ -1761,13 +1812,6 @@ text model or the artefact repository.
 
 We could label all files which are not generated as "manual". Not
 clear how exactly that would be useful.
-
-*** Create a logical to physical projector                            :story:
-
-The projection logic is now getting really complex. We really need a
-class to take over this work. It should also group model elements by
-type so that we can obtain the archetypes just once instead of
-processing one model element at a time.
 
 *** Replace initialisers with facet-based initialisation              :story:
 

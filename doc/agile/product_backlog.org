@@ -15107,6 +15107,21 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding support for =libcudacxx=                          :story:
+
+#+begin_quote
+libcu++, the NVIDIA C++ Standard Library, is the C++ Standard Library
+for your entire system. It provides a heterogeneous implementation of
+the C++ Standard Library that can be used in and between CPU and GPU
+code.
+#+end_quote
+
+Links:
+
+- [[https://github.com/NVIDIA/libcudacxx][GH]]
+- [[https://news.ycombinator.com/item?id=24526145][HN post]]
+- [[https://docs.nvidia.com/cuda/thrust/index.html][thrust]]
+
 *** Consider adding =using= statements to models                      :story:
 
 It probably would be quite trivial, once we move over to org-mode, to
