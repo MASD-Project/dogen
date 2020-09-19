@@ -106,8 +106,8 @@ model adapter::adapt(const transforms::repository& frp,
 
     model r;
     r.name(m.logical().name());
-
-    const auto& fp(m.facet_properties());
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& fp(mmp.facet_properties());
     for (const auto& pair : fp) {
         facet_properties fp;
         fp.enabled(pair.second.enabled());

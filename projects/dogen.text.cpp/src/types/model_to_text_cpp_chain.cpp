@@ -73,7 +73,8 @@ formattables::locator model_to_text_cpp_chain::make_locator(
 
     const auto& mn(m.logical().name());
     const auto odp(output_directory_path);
-    const auto& ep(m.extraction_properties());
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& ep(mmp.extraction_properties());
     const auto chodp(ep.cpp_headers_output_directory());
     const auto ekd(enable_backend_directories);
     const formattables::locator r(odp, chodp, fm, frp, cfg, mn, ekd);
@@ -134,11 +135,12 @@ void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
      * Generate the formattables model.
      */
     auto fm(create_formattables_model(feature_model, rcfg, frp, l, m));
-    const auto& eafe(m.enabled_archetype_for_element());
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
     apply(ctx.tracer(), eafe, l, feature_model, cf, fm);
-    m.managed_directories(managed_directories(l));
+    m.physical().managed_directories(managed_directories(l));
 }
 
 }

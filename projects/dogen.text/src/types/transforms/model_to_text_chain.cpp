@@ -66,7 +66,7 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
      * No point in proceeding if the model has not types to
      * transform to text.
      */
-    if (!m.has_generatable_types()) {
+    if (!m.physical().has_generatable_artefacts()) {
         BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
         return;
     }
@@ -97,7 +97,8 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
      * backend for technical space X - so we need to throw to let the
      * user know.
      */
-    const auto& ek(m.extraction_properties().enabled_backends());
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& ek(mmp.extraction_properties().enabled_backends());
     const auto is_enabled(ek.find(t.id()) != ek.end());
     if (!is_enabled) {
         BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
@@ -108,7 +109,7 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
     /*
      * Generate artefacts for all elements in model.
      */
-    const bool ekd(m.extraction_properties().enable_backend_directories());
+    const bool ekd(mmp.extraction_properties().enable_backend_directories());
     t.apply(ctx, ekd, m);
 
     BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << t.id();

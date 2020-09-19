@@ -27,19 +27,10 @@
 
 #include <list>
 #include <algorithm>
-#include <unordered_map>
-#include <unordered_set>
-#include <boost/filesystem/path.hpp>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
-#include "dogen.physical/types/entities/facet_properties.hpp"
-#include "dogen.physical/types/entities/extraction_properties.hpp"
-#include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
-#include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
-#include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
 namespace dogen::text::entities {
 
@@ -48,24 +39,17 @@ namespace dogen::text::entities {
  */
 class model final {
 public:
+    model() = default;
     model(const model&) = default;
     model(model&&) = default;
     ~model() = default;
 
 public:
-    model();
-
-public:
     model(
         const dogen::identification::entities::logical_provenance& provenance,
-        const std::list<dogen::text::entities::element_artefacts>& elements,
-        const bool has_generatable_types,
-        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
-        const dogen::physical::entities::extraction_properties& extraction_properties,
-        const std::list<boost::filesystem::path>& managed_directories,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
         const dogen::logical::entities::model& logical,
-        const dogen::physical::entities::model& physical);
+        const dogen::physical::entities::model& physical,
+        const std::list<dogen::text::entities::element_artefacts>& elements);
 
 public:
     /**
@@ -77,39 +61,6 @@ public:
     void provenance(const dogen::identification::entities::logical_provenance& v);
     void provenance(const dogen::identification::entities::logical_provenance&& v);
     /**@}*/
-
-    const std::list<dogen::text::entities::element_artefacts>& elements() const;
-    std::list<dogen::text::entities::element_artefacts>& elements();
-    void elements(const std::list<dogen::text::entities::element_artefacts>& v);
-    void elements(const std::list<dogen::text::entities::element_artefacts>&& v);
-
-    /**
-     * @brief If true the intermediate model has at least one generable type, false otherwise.
-     */
-    /**@{*/
-    bool has_generatable_types() const;
-    void has_generatable_types(const bool v);
-    /**@}*/
-
-    const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element() const;
-    std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element();
-    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v);
-    void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v);
-
-    const dogen::physical::entities::extraction_properties& extraction_properties() const;
-    dogen::physical::entities::extraction_properties& extraction_properties();
-    void extraction_properties(const dogen::physical::entities::extraction_properties& v);
-    void extraction_properties(const dogen::physical::entities::extraction_properties&& v);
-
-    const std::list<boost::filesystem::path>& managed_directories() const;
-    std::list<boost::filesystem::path>& managed_directories();
-    void managed_directories(const std::list<boost::filesystem::path>& v);
-    void managed_directories(const std::list<boost::filesystem::path>&& v);
-
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties() const;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties();
-    void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v);
-    void facet_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>&& v);
 
     /**
      * @brief The logical model representation in the logical-physical space.
@@ -131,6 +82,11 @@ public:
     void physical(const dogen::physical::entities::model&& v);
     /**@}*/
 
+    const std::list<dogen::text::entities::element_artefacts>& elements() const;
+    std::list<dogen::text::entities::element_artefacts>& elements();
+    void elements(const std::list<dogen::text::entities::element_artefacts>& v);
+    void elements(const std::list<dogen::text::entities::element_artefacts>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -143,14 +99,9 @@ public:
 
 private:
     dogen::identification::entities::logical_provenance provenance_;
-    std::list<dogen::text::entities::element_artefacts> elements_;
-    bool has_generatable_types_;
-    std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
-    dogen::physical::entities::extraction_properties extraction_properties_;
-    std::list<boost::filesystem::path> managed_directories_;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;
     dogen::logical::entities::model logical_;
     dogen::physical::entities::model physical_;
+    std::list<dogen::text::entities::element_artefacts> elements_;
 };
 
 }

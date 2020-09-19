@@ -50,15 +50,17 @@ void workflow::expand_model(
     ex.expand(feature_model, rcfg, enabled_archetype_for_element, frp, l, fm);
 }
 
-model workflow::execute(
-    const variability::entities::feature_model& feature_model,
+model
+workflow::execute(const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
     const locator& l, const transforms::repository& frp,
     const text::entities::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(feature_model, rcfg,
-        m.enabled_archetype_for_element(), frp, l, r);
+    const auto& mmp(m.physical().meta_model_properties());
+    const auto& eafe(mmp.enabled_archetype_for_element());
+    expand_model(feature_model, rcfg, eafe, frp, l, r);
+
     return r;
 }
 

@@ -59,14 +59,7 @@ apply(const context& ctx, text::entities::model_set& ms) {
          */
         using physical::transforms::model_population_chain;
         model_population_chain::apply(ctx.physical_context(), pm);
-
         m.physical(pm);
-        m.has_generatable_types(pm.has_generatable_artefacts());
-        m.facet_properties(pm.meta_model_properties().facet_properties());
-        m.enabled_archetype_for_element(
-            pm.meta_model_properties().enabled_archetype_for_element());
-        m.extraction_properties(
-            pm.meta_model_properties().extraction_properties());
     }
 
     stp.end_chain(ms);

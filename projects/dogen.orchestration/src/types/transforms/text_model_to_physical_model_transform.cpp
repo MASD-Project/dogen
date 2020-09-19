@@ -66,7 +66,7 @@ apply(const text::transforms::context& ctx,
         physical::entities::model pm;
         pm.configuration(m.logical().root_module()->configuration());
         pm.name().simple(m.logical().name().simple());
-        pm.managed_directories(m.managed_directories());
+        pm.managed_directories(m.physical().managed_directories());
         pm.provenance(ms.provenance());
 
         identification::helpers::physical_id_factory f;

@@ -29,31 +29,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "elements",
-          "type": "std::list<element_artefacts>"
-        },
-        {
-          "name": "has_generatable_types",
-          "type": "bool",
-          "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
-        },
-        {
-          "name": "enabled_archetype_for_element",
-          "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
-        },
-        {
-          "name": "extraction_properties",
-          "type": "physical::entities::extraction_properties"
-        },
-        {
-          "name": "managed_directories",
-          "type": "std::list<boost::filesystem::path>"
-        },
-        {
-          "name": "facet_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, physical::entities::facet_properties>"
-        },
-        {
           "name": "logical",
           "type": "logical::entities::model",
           "documentation": "The logical model representation in the logical-physical space.\n"
@@ -62,6 +37,10 @@
           "name": "physical",
           "type": "physical::entities::model",
           "documentation": "The physical model representation in the logical-physical space.\n"
+        },
+        {
+          "name": "elements",
+          "type": "std::list<element_artefacts>"
         }
       ]
     },

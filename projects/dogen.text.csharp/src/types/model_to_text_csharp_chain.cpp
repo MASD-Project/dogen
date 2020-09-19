@@ -99,7 +99,7 @@ void model_to_text_csharp_chain::apply(const text::transforms::context& ctx,
      */
     auto fm(create_formattables_model(feature_model, frp, l, m));
     apply(ctx.tracer(), fm);
-    m.managed_directories().push_back(l.project_path());
+    m.physical().managed_directories().push_back(l.project_path());
 }
 
 }

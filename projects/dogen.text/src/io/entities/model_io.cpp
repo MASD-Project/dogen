@@ -19,16 +19,11 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
-#include "dogen.physical/io/entities/facet_properties_io.hpp"
-#include "dogen.physical/io/entities/extraction_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
-#include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
 
 namespace std {
 
@@ -44,72 +39,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::en
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << (*i).generic_string() << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen::text::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::text::entities::model\"" << ", "
       << "\"provenance\": " << v.provenance() << ", "
-      << "\"elements\": " << v.elements() << ", "
-      << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
-      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties() << ", "
-      << "\"managed_directories\": " << v.managed_directories() << ", "
-      << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"logical\": " << v.logical() << ", "
-      << "\"physical\": " << v.physical()
+      << "\"physical\": " << v.physical() << ", "
+      << "\"elements\": " << v.elements()
       << " }";
     return(s);
 }
