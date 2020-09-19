@@ -250,20 +250,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::physical_artefact_repository_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::physical_artefact_preparation_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "helpers::logical_to_physical_projector",
       "stereotypes": [
         "dogen::handcrafted::typeable"
