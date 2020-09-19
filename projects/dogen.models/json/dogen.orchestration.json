@@ -269,6 +269,21 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::logical_to_physical_projector",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::projection_error",
+      "documentation": "An error ocurred whilst projecting elements from one space into another.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
