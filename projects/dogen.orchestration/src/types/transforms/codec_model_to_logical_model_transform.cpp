@@ -164,7 +164,7 @@ codec_model_to_logical_model_transform::compute_element_type(
 }
 
 void codec_model_to_logical_model_transform::
-process_element(const helpers::adapter& ad,
+process_element(const helpers::codec_to_logical_projector& p,
     const identification::entities::logical_location& l,
     const codec::entities::element& e, logical::entities::model& m) {
 
@@ -194,57 +194,57 @@ process_element(const helpers::adapter& ad,
     using ss = logical::entities::static_stereotypes;
     switch (et) {
     case ss::structural_object:
-        insert(ad.to_object(l, scr, e), se.objects());
+        insert(p.to_object(l, scr, e), se.objects());
         break;
     case ss::structural_object_template:
-        insert(ad.to_object_template(l, scr, e), se.object_templates());
+        insert(p.to_object_template(l, scr, e), se.object_templates());
         break;
     case ss::structural_exception:
-        insert(ad.to_exception(l, scr, e), se.exceptions());
+        insert(p.to_exception(l, scr, e), se.exceptions());
         break;
     case ss::structural_primitive:
-        insert(ad.to_primitive(l, scr, e), se.primitives());
+        insert(p.to_primitive(l, scr, e), se.primitives());
         break;
     case ss::structural_enumeration:
-        insert(ad.to_enumeration(l, scr, e), se.enumerations());
+        insert(p.to_enumeration(l, scr, e), se.enumerations());
         break;
     case ss::structural_module:
-        insert(ad.to_module(l, scr, e), se.modules());
+        insert(p.to_module(l, scr, e), se.modules());
         break;
     case ss::structural_builtin:
-        insert(ad.to_builtin(l, scr, e), se.builtins());
+        insert(p.to_builtin(l, scr, e), se.builtins());
         break;
     case ss::structural_entry_point:
-        insert(ad.to_entry_point(l, scr, e), se.entry_points());
+        insert(p.to_entry_point(l, scr, e), se.entry_points());
         break;
     case ss::structural_assistant:
-        insert(ad.to_assistant(l, scr, e), se.assistants());
+        insert(p.to_assistant(l, scr, e), se.assistants());
         break;
    case ss::decoration_modeline_group:
-        insert(ad.to_modeline_group(l, scr, e), de.modeline_groups());
+        insert(p.to_modeline_group(l, scr, e), de.modeline_groups());
         break;
     case ss::decoration_modeline:
-        insert(ad.to_modeline(l, scr, e), de.modelines());
+        insert(p.to_modeline(l, scr, e), de.modelines());
         break;
     case ss::decoration_generation_marker:
-        insert(ad.to_generation_marker(l, scr, e), de.generation_markers());
+        insert(p.to_generation_marker(l, scr, e), de.generation_markers());
         break;
     case ss::decoration_licence:
-        insert(ad.to_licence(l, scr, e), de.licences());
+        insert(p.to_licence(l, scr, e), de.licences());
         break;
     case ss::variability_profile:
-        insert(ad.to_variability_profile(l, scr, e), ve.profiles());
+        insert(p.to_variability_profile(l, scr, e), ve.profiles());
         break;
     case ss::variability_profile_template:
-        insert(ad.to_variability_profile_template(l, scr, e),
+        insert(p.to_variability_profile_template(l, scr, e),
             ve.profile_templates());
         break;
     case ss::variability_feature_template_bundle:
-        insert(ad.to_variability_feature_template_bundle(l, scr, e),
+        insert(p.to_variability_feature_template_bundle(l, scr, e),
             ve.feature_template_bundles());
         break;
     case ss::variability_feature_bundle:
-        insert(ad.to_variability_feature_bundle(l, scr, e),
+        insert(p.to_variability_feature_bundle(l, scr, e),
             ve.feature_bundles());
         break;
     case ss::variability_initializer:
@@ -256,50 +256,50 @@ process_element(const helpers::adapter& ad,
             BOOST_LOG_SEV(lg, error) << too_many_initializers;
             BOOST_THROW_EXCEPTION(transform_exception(too_many_initializers));
         }
-        ve.initializer(ad.to_variability_initializer(l, scr, e));
+        ve.initializer(p.to_variability_initializer(l, scr, e));
         break;
     case ss::mapping_fixed_mappable:
-        insert(ad.to_fixed_mappable(l, scr, e), me.fixed_mappables());
+        insert(p.to_fixed_mappable(l, scr, e), me.fixed_mappables());
         break;
     case ss::mapping_extensible_mappable:
-        insert(ad.to_extensible_mappable(l, scr, e), me.extensible_mappables());
+        insert(p.to_extensible_mappable(l, scr, e), me.extensible_mappables());
         break;
     case ss::templating_logic_less_template:
-        insert(ad.to_logic_less_template(l, scr, e), te.logic_less_templates());
+        insert(p.to_logic_less_template(l, scr, e), te.logic_less_templates());
         break;
     case ss::serialization_type_registrar:
-        insert(ad.to_type_registrar(l, scr, e), sere.type_registrars());
+        insert(p.to_type_registrar(l, scr, e), sere.type_registrars());
         break;
     case ss::visual_studio_solution:
-        insert(ad.to_visual_studio_solution(l, scr, e), vse.solutions());
+        insert(p.to_visual_studio_solution(l, scr, e), vse.solutions());
         break;
     case ss::visual_studio_project:
-        insert(ad.to_visual_studio_project(l, scr, e), vse.projects());
+        insert(p.to_visual_studio_project(l, scr, e), vse.projects());
         break;
     case ss::visual_studio_msbuild_targets:
-        insert(ad.to_visual_studio_msbuild_targets(l, scr, e),
+        insert(p.to_visual_studio_msbuild_targets(l, scr, e),
             vse.msbuild_targets());
         break;
     case ss::orm_common_odb_options:
-        insert(ad.to_orm_common_odb_options(l, scr, e), oe.common_odb_options());
+        insert(p.to_orm_common_odb_options(l, scr, e), oe.common_odb_options());
         break;
     case ss::build_cmakelists:
-        insert(ad.to_build_cmakelists(l, scr, e), be.cmakelists());
+        insert(p.to_build_cmakelists(l, scr, e), be.cmakelists());
         break;
     case ss::physical_backend:
-        insert(ad.to_physical_backend(l, scr, e), pe.backends());
+        insert(p.to_physical_backend(l, scr, e), pe.backends());
         break;
     case ss::physical_facet:
-        insert(ad.to_physical_facet(l, scr, e), pe.facets());
+        insert(p.to_physical_facet(l, scr, e), pe.facets());
         break;
     case ss::physical_archetype:
-        insert(ad.to_physical_archetype(l, scr, e), pe.archetypes());
+        insert(p.to_physical_archetype(l, scr, e), pe.archetypes());
         break;
     case ss::physical_archetype_kind:
-        insert(ad.to_physical_archetype_kind(l, scr, e), pe.archetype_kinds());
+        insert(p.to_physical_archetype_kind(l, scr, e), pe.archetype_kinds());
         break;
     case ss::physical_part:
-        insert(ad.to_physical_part(l, scr, e), pe.parts());
+        insert(p.to_physical_part(l, scr, e), pe.parts());
         break;
 
     default: {
@@ -332,14 +332,14 @@ apply(const context& ctx, const codec::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
     /*
-     * Then we populate all model elements by adapting the codec
-     * elements into logical elements.
+     * Then we populate all model elements by projecting the codec
+     * elements into logical space.
      */
-    const helpers::adapter ad;
+    const helpers::codec_to_logical_projector p;
     for (const auto& e : m.elements()) {
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().simple();
         const auto l(e.in_global_module() ? empty_location : model_location);
-        process_element(ad, l, e, r);
+        process_element(p, l, e, r);
     }
 
     /*

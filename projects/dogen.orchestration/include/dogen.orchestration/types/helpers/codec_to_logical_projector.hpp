@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_ADAPTER_HPP
-#define DOGEN_ORCHESTRATION_TYPES_HELPERS_ADAPTER_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
+#define DOGEN_ORCHESTRATION_TYPES_HELPERS_CODEC_TO_LOGICAL_PROJECTOR_HPP
 
 #include "dogen.identification/types/entities/logical_id.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -75,9 +75,10 @@
 namespace dogen::orchestration::helpers {
 
 /**
- * @brief Adapts types from the codec model into the logical model.
+ * @brief Projects elements from the codec space into the logical
+ * space.
  */
-class adapter final {
+class codec_to_logical_projector final {
 private:
     /**
      * @brief Ensure the string is not empty.

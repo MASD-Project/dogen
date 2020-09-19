@@ -36,7 +36,7 @@
 #include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.orchestration/types/transforms/context_fwd.hpp"
-#include "dogen.orchestration/types/helpers/adapter.hpp"
+#include "dogen.orchestration/types/helpers/codec_to_logical_projector.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -52,7 +52,7 @@ private:
         const std::list<logical::entities::static_stereotypes>& sts,
         const std::string& fallback_element_type);
 
-    static void process_element(const helpers::adapter& ad,
+    static void process_element(const helpers::codec_to_logical_projector& p,
         const identification::entities::logical_location& l,
         const codec::entities::element& ie,
         logical::entities::model& m);

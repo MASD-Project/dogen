@@ -133,14 +133,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "helpers::adaptation_exception",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::adapter",
+      "name": "helpers::codec_to_logical_projector",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

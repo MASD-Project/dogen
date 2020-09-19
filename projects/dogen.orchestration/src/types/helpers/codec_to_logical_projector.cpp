@@ -29,14 +29,15 @@
 #include "dogen.identification/io/entities/logical_location_io.hpp"
 #include "dogen.identification/types/helpers/logical_name_builder.hpp"
 #include "dogen.identification/types/helpers/logical_name_factory.hpp"
-#include "dogen.orchestration/types/helpers/adaptation_exception.hpp"
+#include "dogen.orchestration/types/helpers/projection_error.hpp"
 #include "dogen.logical/types/helpers/stereotypes_helper.hpp"
-#include "dogen.orchestration/types/helpers/adapter.hpp"
+#include "dogen.orchestration/types/helpers/codec_to_logical_projector.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("orchestration.helpers.adapter"));
+static logger
+lg(logger_factory("orchestration.helpers.codec_to_logical_projector"));
 
 const std::string member_variable_postfix("_");
 const std::string short_form_attr_name("short_form");
@@ -96,10 +97,10 @@ bool str_to_bool(const std::string& s) {
     if (s == true_value) return true;
     if (s == false_value) return false;
     BOOST_LOG_SEV(lg, error) << unsupported_value << s;
-    BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
+    BOOST_THROW_EXCEPTION(projection_error(unsupported_value + s));
 }
 
-void adapter::
+void codec_to_logical_projector::
 ensure_not_empty(const logical_id& element_id, const std::string& s) const {
     if (!s.empty())
         return;
@@ -109,18 +110,18 @@ ensure_not_empty(const logical_id& element_id, const std::string& s) const {
 
     const std::string msg(os.str());
     BOOST_LOG_SEV(lg, error) << msg;
-    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
+    BOOST_THROW_EXCEPTION(projection_error(msg));
 }
 
-void adapter::ensure_not_empty(const std::string& s) const {
+void codec_to_logical_projector::ensure_not_empty(const std::string& s) const {
     if (!s.empty())
         return;
 
     BOOST_LOG_SEV(lg, error) << empty_string;
-    BOOST_THROW_EXCEPTION(adaptation_exception(empty_string));
+    BOOST_THROW_EXCEPTION(projection_error(empty_string));
 }
 
-void adapter::
+void codec_to_logical_projector::
 ensure_empty(const logical_id& element_id, const std::string& s) const {
     if (s.empty())
         return;
@@ -130,10 +131,10 @@ ensure_empty(const logical_id& element_id, const std::string& s) const {
 
     const std::string msg(os.str());
     BOOST_LOG_SEV(lg, error) << msg;
-    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
+    BOOST_THROW_EXCEPTION(projection_error(msg));
 }
 
-void adapter::ensure_empty(const logical_id& element_id,
+void codec_to_logical_projector::ensure_empty(const logical_id& element_id,
     const std::list<codec::entities::attribute>& ias) const {
     if (ias.empty())
         return;
@@ -143,11 +144,11 @@ void adapter::ensure_empty(const logical_id& element_id,
 
     const std::string msg(os.str());
     BOOST_LOG_SEV(lg, error) << msg;
-    BOOST_THROW_EXCEPTION(adaptation_exception(msg));
+    BOOST_THROW_EXCEPTION(projection_error(msg));
 }
 
 std::list<variability::entities::potential_binding>
-adapter::to_potential_binding(
+codec_to_logical_projector::to_potential_binding(
     const std::list<identification::entities::stereotype>& stereotypes) const {
     std::list<variability::entities::potential_binding> r;
     for (const auto& st : stereotypes) {
@@ -159,7 +160,7 @@ adapter::to_potential_binding(
     return r;
 }
 
-logical_name adapter::to_name(const logical_location& l,
+logical_name codec_to_logical_projector::to_name(const logical_location& l,
     const std::string& n, const bool is_container) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
@@ -181,8 +182,8 @@ logical_name adapter::to_name(const logical_location& l,
     return b.build();
 }
 
-logical_name
-adapter::to_name(const std::string& n, const bool is_container) const {
+logical_name codec_to_logical_projector::
+to_name(const std::string& n, const bool is_container) const {
     /*
      * Names are expected to be delimited by the scope operator,
      * denoting internal modules.
@@ -199,7 +200,8 @@ adapter::to_name(const std::string& n, const bool is_container) const {
     return b.build();
 }
 
-modeline_field adapter::to_modeline_field(const logical_name& owner,
+modeline_field
+codec_to_logical_projector::to_modeline_field(const logical_name& owner,
     const codec::entities::attribute& ia) const {
     ensure_not_empty(owner.id(), ia.name().simple());
 
@@ -210,7 +212,7 @@ modeline_field adapter::to_modeline_field(const logical_name& owner,
 }
 
 logical::entities::attribute
-adapter::to_attribute(const logical_name& owner,
+codec_to_logical_projector::to_attribute(const logical_name& owner,
     const codec::entities::attribute& ia) const {
     ensure_not_empty(owner.id(), ia.name().simple());
 
@@ -235,14 +237,14 @@ adapter::to_attribute(const logical_name& owner,
 }
 
 logical::entities::structural::enumerator
-adapter::to_enumerator(const logical_name& owner,
+codec_to_logical_projector::to_enumerator(const logical_name& owner,
     const codec::entities::attribute& ia) const {
     ensure_not_empty(owner.id(), ia.name().simple());
 
     if (!ia.type().empty()) {
         const auto t(ia.type());
         BOOST_LOG_SEV(lg, error) << enumerator_with_type << t;
-        BOOST_THROW_EXCEPTION(adaptation_exception(enumerator_with_type + t));
+        BOOST_THROW_EXCEPTION(projection_error(enumerator_with_type + t));
     }
 
     logical_name_factory f;
@@ -261,7 +263,7 @@ adapter::to_enumerator(const logical_name& owner,
     return r;
 }
 
-void adapter::populate_element(const logical_location& l,
+void codec_to_logical_projector::populate_element(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie,
     const bool is_container, logical::entities::element& e) const {
@@ -299,7 +301,7 @@ void adapter::populate_element(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::object>
-adapter::to_object(const logical_location& l,
+codec_to_logical_projector::to_object(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to object: "
@@ -320,7 +322,7 @@ adapter::to_object(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::object_template>
-adapter::to_object_template(const logical_location& l,
+codec_to_logical_projector::to_object_template(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element "
@@ -340,7 +342,7 @@ adapter::to_object_template(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::exception>
-adapter::to_exception(const logical_location& l,
+codec_to_logical_projector::to_exception(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to exception: "
@@ -353,7 +355,7 @@ adapter::to_exception(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::primitive>
-adapter::to_primitive(const logical_location& l,
+codec_to_logical_projector::to_primitive(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to primitive: "
@@ -366,7 +368,7 @@ adapter::to_primitive(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::enumeration>
-adapter::to_enumeration(const logical_location& l,
+codec_to_logical_projector::to_enumeration(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to enumeration: "
@@ -381,7 +383,8 @@ adapter::to_enumeration(const logical_location& l,
     return r;
 }
 
-boost::shared_ptr<logical::entities::structural::module> adapter::
+boost::shared_ptr<logical::entities::structural::module>
+codec_to_logical_projector::
 to_module(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
@@ -395,7 +398,7 @@ to_module(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::builtin>
-adapter::to_builtin(const logical_location& l,
+codec_to_logical_projector::to_builtin(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to builtin: "
@@ -414,7 +417,7 @@ adapter::to_builtin(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::entry_point>
-adapter::to_entry_point(const logical_location& l,
+codec_to_logical_projector::to_entry_point(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to exception: "
@@ -427,7 +430,7 @@ adapter::to_entry_point(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::structural::assistant>
-adapter::to_assistant(const logical_location& l,
+codec_to_logical_projector::to_assistant(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming codec element to assistant: "
@@ -440,7 +443,7 @@ adapter::to_assistant(const logical_location& l,
 }
 
 boost::shared_ptr<modeline_group>
-adapter::to_modeline_group(const logical_location& l,
+codec_to_logical_projector::to_modeline_group(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     auto r(boost::make_shared<modeline_group>());
@@ -450,7 +453,7 @@ adapter::to_modeline_group(const logical_location& l,
 }
 
 boost::shared_ptr<modeline>
-adapter::to_modeline(const logical_location& l,
+codec_to_logical_projector::to_modeline(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     auto r(boost::make_shared<modeline>());
@@ -463,7 +466,7 @@ adapter::to_modeline(const logical_location& l,
 }
 
 boost::shared_ptr<generation_marker>
-adapter::to_generation_marker(const logical_location& l,
+codec_to_logical_projector::to_generation_marker(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     auto r(boost::make_shared<generation_marker>());
@@ -492,7 +495,7 @@ adapter::to_generation_marker(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
@@ -500,7 +503,7 @@ adapter::to_generation_marker(const logical_location& l,
 }
 
 boost::shared_ptr<licence>
-adapter::to_licence(const logical_location& l,
+codec_to_logical_projector::to_licence(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     auto r(boost::make_shared<licence>());
@@ -517,21 +520,21 @@ adapter::to_licence(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
     return r;
 }
 
-void adapter::populate_abstract_profile(const logical_location& l,
+void codec_to_logical_projector::populate_abstract_profile(const logical_location& l,
     const codec::entities::element& ie,
     logical::entities::variability::abstract_profile& ap) const {
     for (const auto& p : ie.parents())
         ap.parents().push_back(to_name(l, p, false/*is_container*/));
 }
 
-void adapter::populate_abstract_feature(
+void codec_to_logical_projector::populate_abstract_feature(
     const logical_name& bundle_name,
     const codec::entities::attribute& ia,
     logical::entities::variability::abstract_feature& af) const {
@@ -551,7 +554,8 @@ void adapter::populate_abstract_feature(
     af.configuration()->name().qualified(af.name().qualified().dot());
 }
 
-void adapter::populate_abstract_profile_entry(const logical_name& pn,
+void codec_to_logical_projector::
+populate_abstract_profile_entry(const logical_name& pn,
     const codec::entities::attribute& attr,
     logical::entities::variability::abstract_profile_entry& ape) const {
     logical_name_factory f;
@@ -592,7 +596,7 @@ void adapter::populate_abstract_profile_entry(const logical_name& pn,
 }
 
 boost::shared_ptr<logical::entities::variability::profile>
-adapter::to_variability_profile(const logical_location& l,
+codec_to_logical_projector::to_variability_profile(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::variability::profile;
@@ -609,7 +613,8 @@ adapter::to_variability_profile(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::variability::profile_template>
-adapter::to_variability_profile_template(const logical_location& l,
+codec_to_logical_projector::
+to_variability_profile_template(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::variability::profile_template;
@@ -627,7 +632,7 @@ adapter::to_variability_profile_template(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::variability::feature_template_bundle>
-adapter::to_variability_feature_template_bundle(
+codec_to_logical_projector::to_variability_feature_template_bundle(
     const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
@@ -645,7 +650,8 @@ adapter::to_variability_feature_template_bundle(
 }
 
 boost::shared_ptr<logical::entities::variability::feature_bundle>
-adapter::to_variability_feature_bundle(const logical_location& l,
+codec_to_logical_projector::
+to_variability_feature_bundle(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::variability::feature_bundle;
@@ -664,7 +670,8 @@ adapter::to_variability_feature_bundle(const logical_location& l,
 boost::shared_ptr<
     logical::entities::variability::initializer
     >
-adapter::to_variability_initializer(const logical_location& l,
+codec_to_logical_projector::
+to_variability_initializer(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element &ie) const {
     using logical::entities::variability::initializer;
@@ -675,7 +682,7 @@ adapter::to_variability_initializer(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::mapping::fixed_mappable>
-adapter::to_fixed_mappable(const logical_location& l,
+codec_to_logical_projector::to_fixed_mappable(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::mapping::fixed_mappable;
@@ -686,7 +693,7 @@ adapter::to_fixed_mappable(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::mapping::extensible_mappable>
-adapter::to_extensible_mappable(const logical_location& l,
+codec_to_logical_projector::to_extensible_mappable(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::mapping::extensible_mappable;
@@ -697,7 +704,7 @@ adapter::to_extensible_mappable(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::templating::logic_less_template>
-adapter::to_logic_less_template(const logical_location& l,
+codec_to_logical_projector::to_logic_less_template(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::templating::logic_less_template;
@@ -713,7 +720,7 @@ adapter::to_logic_less_template(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
@@ -721,7 +728,7 @@ adapter::to_logic_less_template(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::serialization::type_registrar>
-adapter::to_type_registrar(const logical_location& l,
+codec_to_logical_projector::to_type_registrar(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::serialization::type_registrar;
@@ -732,7 +739,7 @@ adapter::to_type_registrar(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::visual_studio::solution>
-adapter::to_visual_studio_solution(const logical_location& l,
+codec_to_logical_projector::to_visual_studio_solution(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::visual_studio::solution;
@@ -749,7 +756,7 @@ adapter::to_visual_studio_solution(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
@@ -757,7 +764,7 @@ adapter::to_visual_studio_solution(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::visual_studio::project>
-adapter::to_visual_studio_project(const logical_location& l,
+codec_to_logical_projector::to_visual_studio_project(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::visual_studio::project;
@@ -774,7 +781,7 @@ adapter::to_visual_studio_project(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
@@ -782,7 +789,8 @@ adapter::to_visual_studio_project(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
-adapter::to_visual_studio_msbuild_targets(const logical_location& l,
+codec_to_logical_projector::
+to_visual_studio_msbuild_targets(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::visual_studio::msbuild_targets;
@@ -793,7 +801,7 @@ adapter::to_visual_studio_msbuild_targets(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::orm::common_odb_options>
-adapter::to_orm_common_odb_options(const logical_location& l,
+codec_to_logical_projector::to_orm_common_odb_options(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::orm::common_odb_options;
@@ -804,7 +812,7 @@ adapter::to_orm_common_odb_options(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::build::cmakelists>
-adapter::to_build_cmakelists(const logical_location& l,
+codec_to_logical_projector::to_build_cmakelists(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::build::cmakelists;
@@ -815,7 +823,7 @@ adapter::to_build_cmakelists(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::physical::backend>
-adapter::to_physical_backend(const logical_location& l,
+codec_to_logical_projector::to_physical_backend(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::physical::backend;
@@ -826,7 +834,7 @@ adapter::to_physical_backend(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::physical::facet>
-adapter::to_physical_facet(const logical_location& l,
+codec_to_logical_projector::to_physical_facet(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::physical::facet;
@@ -837,7 +845,7 @@ adapter::to_physical_facet(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::physical::archetype>
-adapter::to_physical_archetype(const logical_location& l,
+codec_to_logical_projector::to_physical_archetype(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::physical::archetype;
@@ -852,7 +860,7 @@ adapter::to_physical_archetype(const logical_location& l,
         if (n != stitch_template_content_attr_name) {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
 
         auto& tt(r->text_templating());
@@ -872,7 +880,8 @@ adapter::to_physical_archetype(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::physical::archetype_kind>
-adapter::to_physical_archetype_kind(const logical_location& l,
+codec_to_logical_projector::
+to_physical_archetype_kind(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::physical::archetype_kind;
@@ -889,7 +898,7 @@ adapter::to_physical_archetype_kind(const logical_location& l,
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
@@ -897,7 +906,7 @@ adapter::to_physical_archetype_kind(const logical_location& l,
 }
 
 boost::shared_ptr<logical::entities::physical::part>
-adapter::to_physical_part(const logical_location& l,
+codec_to_logical_projector::to_physical_part(const logical_location& l,
     const logical::entities::stereotypes& sts,
     const codec::entities::element& ie) const {
     using logical::entities::physical::part;
@@ -906,7 +915,8 @@ adapter::to_physical_part(const logical_location& l,
 
     const std::string path_contribution_none("none");
     const std::string path_contribution_as_directories("as_directories");
-    const std::string path_contribution_as_path_components("as_path_components");
+    const std::string
+        path_contribution_as_path_components("as_path_components");
 
     const auto is_valid_path_contribution([&](const std::string& s) {
             const bool is_valid(s == path_contribution_none ||
@@ -917,7 +927,7 @@ adapter::to_physical_part(const logical_location& l,
                 return;
 
             BOOST_LOG_SEV(lg, error) << unsupported_value << s;
-            BOOST_THROW_EXCEPTION(adaptation_exception(unsupported_value + s));
+            BOOST_THROW_EXCEPTION(projection_error(unsupported_value + s));
         });
 
     const auto id(r->name().id());
@@ -951,7 +961,7 @@ adapter::to_physical_part(const logical_location& l,
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
-                adaptation_exception(unsupported_attribute + n));
+                projection_error(unsupported_attribute + n));
         }
     }
 
