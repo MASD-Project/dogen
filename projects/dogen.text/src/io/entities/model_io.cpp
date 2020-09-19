@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.text/io/entities/element_artefacts_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/extraction_properties_io.hpp"
@@ -107,7 +108,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
-      << "\"logical\": " << v.logical()
+      << "\"logical\": " << v.logical() << ", "
+      << "\"physical\": " << v.physical()
       << " }";
     return(s);
 }

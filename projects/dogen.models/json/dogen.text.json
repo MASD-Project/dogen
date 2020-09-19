@@ -57,6 +57,11 @@
           "name": "logical",
           "type": "logical::entities::model",
           "documentation": "The logical model representation in the logical-physical space.\n"
+        },
+        {
+          "name": "physical",
+          "type": "physical::entities::model",
+          "documentation": "The physical model representation in the logical-physical space.\n"
         }
       ]
     },

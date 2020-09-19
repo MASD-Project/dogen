@@ -33,7 +33,8 @@ model::model(
     const dogen::physical::entities::extraction_properties& extraction_properties,
     const std::list<boost::filesystem::path>& managed_directories,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
-    const dogen::logical::entities::model& logical)
+    const dogen::logical::entities::model& logical,
+    const dogen::physical::entities::model& physical)
     : provenance_(provenance),
       elements_(elements),
       has_generatable_types_(has_generatable_types),
@@ -41,7 +42,8 @@ model::model(
       extraction_properties_(extraction_properties),
       managed_directories_(managed_directories),
       facet_properties_(facet_properties),
-      logical_(logical) { }
+      logical_(logical),
+      physical_(physical) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -53,6 +55,7 @@ void model::swap(model& other) noexcept {
     swap(managed_directories_, other.managed_directories_);
     swap(facet_properties_, other.facet_properties_);
     swap(logical_, other.logical_);
+    swap(physical_, other.physical_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -63,7 +66,8 @@ bool model::operator==(const model& rhs) const {
         extraction_properties_ == rhs.extraction_properties_ &&
         managed_directories_ == rhs.managed_directories_ &&
         facet_properties_ == rhs.facet_properties_ &&
-        logical_ == rhs.logical_;
+        logical_ == rhs.logical_ &&
+        physical_ == rhs.physical_;
 }
 
 model& model::operator=(model other) {
@@ -190,6 +194,22 @@ void model::logical(const dogen::logical::entities::model& v) {
 
 void model::logical(const dogen::logical::entities::model&& v) {
     logical_ = std::move(v);
+}
+
+const dogen::physical::entities::model& model::physical() const {
+    return physical_;
+}
+
+dogen::physical::entities::model& model::physical() {
+    return physical_;
+}
+
+void model::physical(const dogen::physical::entities::model& v) {
+    physical_ = v;
+}
+
+void model::physical(const dogen::physical::entities::model&& v) {
+    physical_ = std::move(v);
 }
 
 }

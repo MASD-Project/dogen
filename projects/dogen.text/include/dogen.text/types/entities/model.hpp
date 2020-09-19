@@ -31,6 +31,7 @@
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 #include "dogen.logical/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.text/types/entities/element_artefacts.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
@@ -63,7 +64,8 @@ public:
         const dogen::physical::entities::extraction_properties& extraction_properties,
         const std::list<boost::filesystem::path>& managed_directories,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
-        const dogen::logical::entities::model& logical);
+        const dogen::logical::entities::model& logical,
+        const dogen::physical::entities::model& physical);
 
 public:
     /**
@@ -119,6 +121,16 @@ public:
     void logical(const dogen::logical::entities::model&& v);
     /**@}*/
 
+    /**
+     * @brief The physical model representation in the logical-physical space.
+     */
+    /**@{*/
+    const dogen::physical::entities::model& physical() const;
+    dogen::physical::entities::model& physical();
+    void physical(const dogen::physical::entities::model& v);
+    void physical(const dogen::physical::entities::model&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -138,6 +150,7 @@ private:
     std::list<boost::filesystem::path> managed_directories_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;
     dogen::logical::entities::model logical_;
+    dogen::physical::entities::model physical_;
 };
 
 }
