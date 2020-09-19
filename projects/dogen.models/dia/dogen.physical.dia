@@ -8175,7 +8175,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_production_chain#</dia:string>
+        <dia:string>#model_population_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
