@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 
 namespace dogen::orchestration::helpers {
 
+/*
+ * Projects a set of logical elements into regions of physical space.
+*/
 class logical_to_physical_projector final {
 public:
-    logical_to_physical_projector() = default;
-    logical_to_physical_projector(const logical_to_physical_projector&) = default;
-    logical_to_physical_projector(logical_to_physical_projector&&) = default;
-    ~logical_to_physical_projector() = default;
-    logical_to_physical_projector& operator=(const logical_to_physical_projector&) = default;
-
-public:
-    bool operator==(const logical_to_physical_projector& rhs) const;
-    bool operator!=(const logical_to_physical_projector& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<text::entities::logical_physical_region>
+    project(const physical::entities::meta_model& pmm,
+        const logical::entities::model& lm);
 };
 
 }
