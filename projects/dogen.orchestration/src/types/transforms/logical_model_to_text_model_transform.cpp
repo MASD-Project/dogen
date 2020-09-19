@@ -59,12 +59,20 @@ const std::string duplicate_id("Duplicate logical name: ");
 namespace dogen::orchestration::transforms {
 
 physical::entities::model
-logical_model_to_text_model_transform::create_physical_model(
+logical_model_to_text_model_transform::
+create_physical_model(const logical::entities::model& lm,
     const identification::entities::logical_provenance& provenance,
     const std::list<text::entities::logical_physical_region>& regions) {
 
     physical::entities::model r;
+    identification::helpers::physical_id_factory f;
+    using namespace identification::entities;
+    logical_id id(lm.name().id());
+    r.name().id(f.make(id, lm.output_technical_spaces().front()));
+    r.name().simple(lm.name().simple());
+    r.configuration(lm.root_module()->configuration());
     r.provenance(provenance);
+
     auto& asbli(r.artefact_sets_by_logical_id());
     for (const auto& region : regions) {
         const auto lid(region.logical_element()->name().id());
@@ -106,15 +114,14 @@ apply(const context& ctx, const logical::entities::model& lm) {
     /*
      * Now create the physical model from these components.
      */
-    auto pm(create_physical_model(prov, r.logical_physical_regions()));
+    auto pm(create_physical_model(lm, prov, r.logical_physical_regions()));
 
     /*
-     * Finally, execute the
+     * Finally, execute the physical model population chain.
      */
     using physical::transforms::model_population_chain;
     model_population_chain::apply(ctx.physical_context(), pm);
     r.physical(pm);
-
 
     return r;
 }

@@ -42,7 +42,8 @@ private:
     /**
      * @brief Create a physical model from the supplied regions.
      */
-    static physical::entities::model create_physical_model(
+    static physical::entities::model
+    create_physical_model(const logical::entities::model& lm,
         const identification::entities::logical_provenance& provenance,
         const std::list<text::entities::logical_physical_region>& regions);
 
