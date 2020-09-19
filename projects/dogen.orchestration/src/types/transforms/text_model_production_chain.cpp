@@ -24,7 +24,6 @@
 #include "dogen.text/types/transforms/model_generation_chain.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
-#include "dogen.orchestration/types/transforms/physical_artefact_preparation_chain.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
 
@@ -50,12 +49,7 @@ text::entities::model_set text_model_production_chain::apply(const context& ctx,
     /*
      * Convert the logical model into the text model representation.
      */
-    auto r(logical_model_to_text_model_transform::apply(tctx, loms));
-
-    /*
-     * Prepare the artefacts for text transformation.
-     */
-    physical_artefact_preparation_chain::apply(ctx, r);
+    auto r(logical_model_to_text_model_transform::apply(ctx, loms));
 
     /*
      * Finally, we can run the text chain against the model set. This

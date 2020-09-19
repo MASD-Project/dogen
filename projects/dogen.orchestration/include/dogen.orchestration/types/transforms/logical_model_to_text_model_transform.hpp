@@ -21,6 +21,7 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
 #define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
 
+#include "dogen.identification/types/entities/logical_provenance.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -28,7 +29,7 @@
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/entities/output_model_set.hpp"
 #include "dogen.text/types/entities/model_set.hpp"
-#include "dogen.text/types/transforms/context.hpp"
+#include "dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -39,16 +40,23 @@ namespace dogen::orchestration::transforms {
 class logical_model_to_text_model_transform final {
 private:
     /**
+     * @brief Create a physical model from the supplied regions.
+     */
+    static physical::entities::model create_physical_model(
+        const identification::entities::logical_provenance& provenance,
+        const std::list<text::entities::logical_physical_region>& regions);
+
+    /**
      * @brief Transform a logical model into its text counterpart.
      */
-    static text::entities::model apply(const text::transforms::context& ctx,
-        const logical::entities::model& lm);
+    static text::entities::model
+    apply(const context& ctx, const logical::entities::model& lm);
 
 public:
     /**
      * @brief Transform logical models into its text counterparts.
      */
-    static text::entities::model_set apply(const text::transforms::context& ctx,
+    static text::entities::model_set apply(const context& ctx,
         const logical::entities::output_model_set& loms);
 };
 

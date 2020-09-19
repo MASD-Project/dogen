@@ -33,12 +33,14 @@
 #include "dogen.identification/io/entities/physical_meta_name_io.hpp"
 #include "dogen.identification/types/helpers/physical_id_factory.hpp"
 #include "dogen.identification/types/helpers/logical_meta_name_factory.hpp"
-#include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.identification/io/entities/technical_space_io.hpp"
+#include "dogen.logical/io/entities/output_model_set_io.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.physical/types/transforms/model_population_chain.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
+#include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/helpers/logical_to_physical_projector.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
@@ -50,13 +52,38 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string duplicate_id("Duplicate logical name: ");
+
 }
 
 namespace dogen::orchestration::transforms {
 
-text::entities::model
-logical_model_to_text_model_transform::apply(
-    const text::transforms::context& ctx, const logical::entities::model& lm) {
+physical::entities::model
+logical_model_to_text_model_transform::create_physical_model(
+    const identification::entities::logical_provenance& provenance,
+    const std::list<text::entities::logical_physical_region>& regions) {
+
+    physical::entities::model r;
+    r.provenance(provenance);
+    auto& asbli(r.artefact_sets_by_logical_id());
+    for (const auto& region : regions) {
+        const auto lid(region.logical_element()->name().id());
+        const auto pair(std::make_pair(lid, region.physical_artefacts()));
+        const auto inserted(asbli.insert(pair).second);
+        if (inserted)
+            continue;
+
+        BOOST_LOG_SEV(lg, error) << duplicate_id << lid;
+        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + lid.value()));
+    }
+    return r;
+}
+
+text::entities::model logical_model_to_text_model_transform::
+apply(const context& ctx, const logical::entities::model& lm) {
+    /*
+     * The logical model can simply be copied across.
+     */
     text::entities::model r;
     r.logical(lm);
 
@@ -69,18 +96,36 @@ logical_model_to_text_model_transform::apply(
     prov.logical_meta_name(lm.meta_name());
     r.provenance(prov);
 
+    /*
+     * Project logical elements into physical space.
+     */
     helpers::logical_to_physical_projector p;
-    r.logical_physical_regions(p.project(*ctx.physical_meta_model(), lm));
+    const auto& pmm(*ctx.text_context().physical_meta_model());
+    r.logical_physical_regions(p.project(pmm, lm));
+
+    /*
+     * Now create the physical model from these components.
+     */
+    auto pm(create_physical_model(prov, r.logical_physical_regions()));
+
+    /*
+     * Finally, execute the
+     */
+    using physical::transforms::model_population_chain;
+    model_population_chain::apply(ctx.physical_context(), pm);
+    r.physical(pm);
+
 
     return r;
 }
 
 text::entities::model_set logical_model_to_text_model_transform::
-apply(const text::transforms::context& ctx,
-    const logical::entities::output_model_set& loms) {
+apply(const context& ctx, const logical::entities::output_model_set& loms) {
+    const auto id(loms.name().id());
+    const auto& tracer(*ctx.text_context().tracer());
     tracing::scoped_transform_tracer stp(lg,
-        "logical model to text model transform",
-        transform_id, loms.name().qualified().dot(), *ctx.tracer(), loms);
+        "logical model to text model transform", transform_id, id.value(),
+        tracer, loms);
 
     text::entities::model_set r;
     for(const auto& lm : loms.models())
