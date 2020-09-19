@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-18 Fri 18:08]
+#+CAPTION: Clock summary at [2020-09-19 Sat 08:23]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *76:18* |       |       | 100.0 |
+| *Total time*                                       | *77:44* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 76:18   |       |       | 100.0 |
-| Active                                             |         | 76:18 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |   9.5 |
+| Stories                                            | 77:44   |       |       | 100.0 |
+| Active                                             |         | 77:44 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |   9.3 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   0.9 |
-| Sprint and product backlog grooming                |         |       |  2:26 |   3.2 |
-| Nightly nursing and other spikes                   |         |       |  4:22 |   5.7 |
-| Create an =ident= model                            |         |       | 42:02 |  55.1 |
+| Sprint and product backlog grooming                |         |       |  2:26 |   3.1 |
+| Nightly nursing and other spikes                   |         |       |  4:22 |   5.6 |
+| Create an =ident= model                            |         |       | 42:02 |  54.1 |
 | Rename injection to codec                          |         |       |  0:48 |   1.0 |
 | Add artefact's archetype to artefact class         |         |       |  0:07 |   0.2 |
 | Remove support for split projects                  |         |       |  0:07 |   0.2 |
 | Implement meta-name validator correctly            |         |       |  0:17 |   0.4 |
 | Add dependencies to artefacts                      |         |       |  2:28 |   3.2 |
-| Add instances of physical meta-model elements      |         |       |  8:48 |  11.5 |
-| Add full and relative path processing to PM        |         |       |  5:32 |   7.3 |
-| Logical-physical model                             |         |       |  1:25 |   1.9 |
+| Add instances of physical meta-model elements      |         |       |  8:48 |  11.3 |
+| Add full and relative path processing to PM        |         |       |  5:32 |   7.1 |
+| Logical-physical model                             |         |       |  2:51 |   3.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1247,6 +1247,7 @@ clear. We need a container with:
 
 *** STARTED Logical-physical model                                    :story:
     :LOGBOOK:
+    CLOCK: [2020-09-19 Sat 06:57]--[2020-09-19 Sat 08:23] =>  1:26
     CLOCK: [2020-09-18 Fri 16:05]--[2020-09-18 Fri 17:30] =>  1:25
     :END:
 
@@ -1276,6 +1277,8 @@ Notes:
 
 - start by copying across the logical model and delete all
   properties.
+- rename elements in text model.
+- remove properties from extraction properties.
 
 *** Empty path ID error in logs                                       :story:
 
