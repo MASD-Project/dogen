@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
-#include "dogen.physical/types/transforms/model_production_chain.hpp"
+#include "dogen.physical/types/transforms/model_population_chain.hpp"
 #include "dogen.orchestration/types/transforms/physical_artefact_repository_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/physical_artefact_preparation_chain.hpp"
@@ -57,8 +57,8 @@ void physical_artefact_preparation_chain::apply(const context& ctx,
         /*
          * Populate all artefacts.
          */
-        using physical::transforms::model_production_chain;
-        model_production_chain::apply(ctx.physical_context(), ar);
+        using physical::transforms::model_population_chain;
+        model_population_chain::apply(ctx.physical_context(), ar);
 
         m.has_generatable_types(ar.has_generatable_artefacts());
         m.facet_properties(ar.meta_model_properties().facet_properties());

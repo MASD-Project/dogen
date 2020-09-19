@@ -1451,7 +1451,7 @@
       ]
     },
     {
-      "name": "transforms::model_production_chain",
+      "name": "transforms::model_population_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

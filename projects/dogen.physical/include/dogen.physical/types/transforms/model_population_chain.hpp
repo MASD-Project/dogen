@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_MODEL_PRODUCTION_CHAIN_HPP
-#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_MODEL_PRODUCTION_CHAIN_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_MODEL_POPULATION_CHAIN_HPP
+#define DOGEN_PHYSICAL_TYPES_TRANSFORMS_MODEL_POPULATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@ namespace dogen::physical::transforms {
 /**
  * @brief Populates the artefact repository.
  */
-class model_production_chain final {
+class model_population_chain final {
 public:
     static void apply(const context& ctx, entities::artefact_repository& arp);
 };
