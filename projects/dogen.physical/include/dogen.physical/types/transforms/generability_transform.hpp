@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class generability_transform final {
 public:
-    static void apply(const context& ctx, entities::artefact_repository& ar);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -27,7 +27,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
@@ -155,22 +155,20 @@ void formatting_transform::apply(const std::unordered_map<
     BOOST_LOG_SEV(lg, debug) << "Finished transforming element";
 }
 
-void formatting_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
+void formatting_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting",
-        transform_id, arp.provenance().logical_name().id().value(),
-        *ctx.tracer(), arp);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     const auto& fm(*ctx.feature_model());
     const auto fgs(make_feature_groups(fm, in.all()));
-    for(auto& pair : arp.artefact_sets_by_logical_id()) {
+    for(auto& pair : m.artefact_sets_by_logical_id()) {
         auto& as(pair.second);
         apply(fgs, as);
     }
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }

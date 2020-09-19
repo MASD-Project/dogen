@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #include "dogen.text/io/entities/model_io.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
@@ -43,7 +43,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-physical::entities::artefact_repository physical_artefact_repository_transform::
+physical::entities::model physical_artefact_repository_transform::
 apply(const text::transforms::context& ctx, const text::entities::model& m) {
     const auto id(m.provenance().logical_name().id());
     tracing::scoped_transform_tracer stp(lg, "physical artefact repository",
@@ -52,7 +52,7 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
     /*
      * Copy the provenance for the physical model.
      */
-    physical::entities::artefact_repository r;
+    physical::entities::model r;
     r.provenance(m.provenance());
 
     /*

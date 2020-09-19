@@ -38,8 +38,8 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-void physical_artefact_preparation_chain::apply(const context& ctx,
-    text::entities::model_set& ms) {
+void physical_artefact_preparation_chain::
+apply(const context& ctx, text::entities::model_set& ms) {
     const auto id(ms.provenance().logical_name().id());
     const auto& tctx(ctx.text_context());
     const auto& tracer(*tctx.tracer());
@@ -48,24 +48,25 @@ void physical_artefact_preparation_chain::apply(const context& ctx,
 
     for (auto& m : ms.models()) {
         /*
-         * First we need to extract an artefact repository from each
-         * text model. Note that the artefact repository contains
-         * pointers to the original artefacts in the text model set.
+         * First we need to extract a physical model from each text
+         * model. Note that the physical model contains pointers to
+         * the original artefacts in the text model set.
          */
-        auto ar(physical_artefact_repository_transform::apply(tctx, m));
+        auto pm(physical_artefact_repository_transform::apply(tctx, m));
 
         /*
-         * Populate all artefacts.
+         * Now we can populate all artefacts.
          */
         using physical::transforms::model_population_chain;
-        model_population_chain::apply(ctx.physical_context(), ar);
+        model_population_chain::apply(ctx.physical_context(), pm);
 
-        m.has_generatable_types(ar.has_generatable_artefacts());
-        m.facet_properties(ar.meta_model_properties().facet_properties());
+        m.physical(pm);
+        m.has_generatable_types(pm.has_generatable_artefacts());
+        m.facet_properties(pm.meta_model_properties().facet_properties());
         m.enabled_archetype_for_element(
-            ar.meta_model_properties().enabled_archetype_for_element());
+            pm.meta_model_properties().enabled_archetype_for_element());
         m.extraction_properties(
-            ar.meta_model_properties().extraction_properties());
+            pm.meta_model_properties().extraction_properties());
     }
 
     stp.end_chain(ms);

@@ -25,7 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/paths_transform.hpp"
 
 namespace {
@@ -95,19 +95,17 @@ compute_backend_paths(const boost::filesystem::path& component_path,
     }
 }
 
-void paths_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
+void paths_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "paths",
-        transform_id, arp.provenance().logical_name().id().value(),
-        *ctx.tracer(), arp);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * We start by calculating the top-most path which is the
      * component path.
      */
-    const auto& ln(arp.provenance().logical_name());
-    auto& mmp(arp.meta_model_properties());
+    const auto& ln(m.provenance().logical_name());
     const auto cp(compute_component_path(ctx, ln));
+    auto& mmp(m.meta_model_properties());
     mmp.file_path(cp);
 
     /*
@@ -115,7 +113,7 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      */
     compute_backend_paths(cp, mmp.backend_properties());
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }

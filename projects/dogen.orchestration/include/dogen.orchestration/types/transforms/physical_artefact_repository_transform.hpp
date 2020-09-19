@@ -27,7 +27,7 @@
 
 #include "dogen.text/types/entities/model.hpp"
 #include "dogen.text/types/transforms/context.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -36,8 +36,7 @@ namespace dogen::orchestration::transforms {
  */
 class physical_artefact_repository_transform final {
 public:
-    static physical::entities::artefact_repository
-    apply(const text::transforms::context& ctx,
+    static physical::entities::model apply(const text::transforms::context& ctx,
         const text::entities::model& m);
 };
 

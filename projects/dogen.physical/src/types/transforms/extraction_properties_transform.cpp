@@ -27,7 +27,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
@@ -142,10 +142,9 @@ extraction_properties_transform::make_extraction_properties(const context& ctx,
 }
 
 void extraction_properties_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
-    const auto& lid(arp.provenance().logical_name().id());
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "extraction properties",
-        transform_id, lid.value(), *ctx.tracer(), arp);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
@@ -155,8 +154,9 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * root module. This contains the configuration for the model
      * itself.
      */
-    const auto i(arp.artefact_sets_by_logical_id().find(lid));
-    if (i == arp.artefact_sets_by_logical_id().end()) {
+    const auto& lid(m.provenance().logical_name().id());
+    const auto i(m.artefact_sets_by_logical_id().find(lid));
+    if (i == m.artefact_sets_by_logical_id().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << lid;
         BOOST_THROW_EXCEPTION(
             transform_exception(root_module_not_found + lid.value()));
@@ -164,9 +164,9 @@ apply(const context& ctx, entities::artefact_repository& arp) {
 
     const auto& cfg(*i->second.configuration());
     const auto ep(make_extraction_properties(ctx, in.all(), cfg));
-    arp.meta_model_properties().extraction_properties(ep);
+    m.meta_model_properties().extraction_properties(ep);
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }

@@ -32,11 +32,11 @@
 #include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
 #include "dogen.identification/types/entities/archetype_name_set.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.physical/types/entities/denormalised_archetype_properties.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
-#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
@@ -74,7 +74,7 @@ private:
      */
     static void populate_enablement_properties(
         const std::unordered_map<identification::entities::physical_meta_id,
-        feature_group>& fgs, entities::artefact_repository& ar);
+        feature_group>& fgs, entities::model& m);
 
 private:
     static void compute_enablement_for_artefact(
@@ -93,7 +93,7 @@ private:
         enabled_archetype_for_element, entities::artefact_set& as);
 
 public:
-    static void apply(const context& ctx, entities::artefact_repository& arp);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

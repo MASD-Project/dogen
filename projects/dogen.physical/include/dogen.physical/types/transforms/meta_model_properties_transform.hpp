@@ -32,10 +32,10 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
 #include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
-#include "dogen.physical/types/entities/backend_properties.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
+#include "dogen.physical/types/entities/backend_properties.hpp"
 #include "dogen.physical/types/entities/archetype_properties.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
@@ -185,7 +185,7 @@ private:
         entities::meta_model_properties& mmp);
 
 public:
-    static void apply(const context& ctx, entities::artefact_repository& arp);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

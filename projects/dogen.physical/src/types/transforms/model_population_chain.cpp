@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/paths_transform.hpp"
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
@@ -42,39 +42,37 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void model_population_chain::
-apply(const context& ctx, entities::artefact_repository& arp) {
-    tracing::scoped_chain_tracer stp(lg, "artefact repository population",
-        transform_id, arp.provenance().logical_name().id().value(),
-        *ctx.tracer(), arp);
+void model_population_chain::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "model population", transform_id,
+        m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * We start by reading all of the properties associated with the
      * meta-model. These are in effect, its configuration.
      */
-    meta_model_properties_transform::apply(ctx, arp);
+    meta_model_properties_transform::apply(ctx, m);
 
     /*
      * The paths and enablement transforms must be done after the
      * meta-model properties transform, as they use that data as
      * input.
      */
-    paths_transform::apply(ctx, arp);
+    paths_transform::apply(ctx, m);
 
     /*
      * Update enablement for all artefacts.
      */
-    enablement_transform::apply(ctx, arp);
+    enablement_transform::apply(ctx, m);
 
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
-    formatting_transform::apply(ctx, arp);
-    generability_transform::apply(ctx, arp);
-    extraction_properties_transform::apply(ctx, arp);
+    formatting_transform::apply(ctx, m);
+    generability_transform::apply(ctx, m);
+    extraction_properties_transform::apply(ctx, m);
 
-    stp.end_chain(arp);
+    stp.end_chain(m);
 }
 
 }

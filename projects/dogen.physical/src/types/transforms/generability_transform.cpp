@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 
 namespace {
@@ -35,22 +35,20 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void generability_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
+void generability_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generability",
-        transform_id, arp.provenance().logical_name().id().value(),
-        *ctx.tracer(), arp);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
-    arp.has_generatable_artefacts(false);
-    for(const auto& pair : arp.artefact_sets_by_logical_id()) {
+    m.has_generatable_artefacts(false);
+    for(const auto& pair : m.artefact_sets_by_logical_id()) {
         const auto& as(pair.second);
         if (as.is_generatable()) {
-            arp.has_generatable_artefacts(true);
+            m.has_generatable_artefacts(true);
             break;
         }
     }
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }

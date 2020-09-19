@@ -25,17 +25,17 @@
 #pragma once
 #endif
 
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 /**
- * @brief Populates the artefact repository.
+ * @brief Populates the physical model.
  */
 class model_population_chain final {
 public:
-    static void apply(const context& ctx, entities::artefact_repository& arp);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

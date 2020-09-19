@@ -1367,30 +1367,6 @@
       ]
     },
     {
-      "name": "entities::artefact_repository",
-      "stereotypes": [
-        "Provenance",
-        "ArtefactContainer"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "managed_directories",
-          "type": "std::list<boost::filesystem::path>"
-        },
-        {
-          "name": "has_generatable_artefacts",
-          "type": "bool",
-          "documentation": "If true the repository has at least one generable artefact, false otherwise.\n"
-        },
-        {
-          "name": "meta_model_properties",
-          "type": "meta_model_properties",
-          "documentation": "Meta-model configuration supplied by this model.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::ArtefactContainer",
       "stereotypes": [
         "masd::object_template"

@@ -32,7 +32,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
@@ -45,8 +45,7 @@ private:
     struct feature_group {
         variability::entities::feature cpp_headers_output_directory;
         variability::entities::feature enable_backend_directories;
-        std::unordered_map<std::string,
-                           variability::entities::feature> enabled;
+        std::unordered_map<std::string, variability::entities::feature> enabled;
     };
 
     static feature_group make_feature_group(
@@ -74,7 +73,7 @@ public:
      * Applies the extraction properties transform to the supplied
      * model.
      */
-    static void apply(const context& ctx, entities::artefact_repository& ar);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

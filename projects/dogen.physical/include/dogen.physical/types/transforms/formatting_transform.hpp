@@ -32,7 +32,7 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.physical/types/entities/formatting_styles.hpp"
 #include "dogen.physical/types/entities/formatting_configuration.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
@@ -64,7 +64,7 @@ private:
         entities::artefact_set& as);
 
 public:
-    static void apply(const context& ctx, entities::artefact_repository& ar);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

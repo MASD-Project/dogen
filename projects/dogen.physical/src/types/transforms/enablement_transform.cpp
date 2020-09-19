@@ -32,11 +32,11 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
-#include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.identification/types/entities/physical_meta_name_indices.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
 
@@ -116,8 +116,8 @@ enablement_transform::make_feature_group(const feature_model& fm,
 
 void enablement_transform::populate_enablement_properties(
     const std::unordered_map<identification::entities::physical_meta_id,
-    feature_group>& fgs, entities::artefact_repository& ar) {
-    for (auto& as_pair : ar.artefact_sets_by_logical_id()) {
+    feature_group>& fgs, entities::model& m) {
+    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
         const auto lid(as_pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << lid;
 
@@ -411,11 +411,9 @@ void enablement_transform::compute_enablement_for_artefact_set(
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
 }
 
-void enablement_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
+void enablement_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement",
-        transform_id, arp.provenance().logical_name().id().value(),
-        *ctx.tracer(), arp);
+        transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     /*
      * First, we update all of the local enablement properties from
@@ -426,16 +424,16 @@ apply(const context& ctx, entities::artefact_repository& arp) {
     const auto& pmm(*ctx.meta_model());
     const auto& in(pmm.indexed_names());
     const auto fgs(make_feature_group(fm, in));
-    populate_enablement_properties(fgs, arp);
+    populate_enablement_properties(fgs, m);
 
     /*
      * Now, for each artefact, compute their enablement properties.
      */
-    const auto& mmp(arp.meta_model_properties());
+    const auto& mmp(m.meta_model_properties());
     const auto& dap(mmp.denormalised_archetype_properties());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
     std::unordered_set<logical_meta_physical_id> eafe;
-    for(auto& pair : arp.artefact_sets_by_logical_id()) {
+    for(auto& pair : m.artefact_sets_by_logical_id()) {
         auto& as(pair.second);
         compute_enablement_for_artefact_set(lmn, dap, eafe, as);
     }
@@ -447,9 +445,9 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * canonical. This code will be cleaned up with the new
      * dependencies approach.
      */
-    arp.meta_model_properties().enabled_archetype_for_element(eafe);
+    m.meta_model_properties().enabled_archetype_for_element(eafe);
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }

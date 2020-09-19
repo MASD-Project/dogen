@@ -27,14 +27,14 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen.identification/types/entities/logical_name.hpp"
-#include "dogen.physical/types/entities/artefact_repository.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/backend_properties.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 /**
- * @brief Computes all filesystem related paths within the physical
+ * @brief Computes all file-system related paths within physical
  * space.
  */
 class paths_transform final {
@@ -55,9 +55,9 @@ private:
 
 public:
     /**
-     * @brief Apply the transform to the supplied repository of artefacts.
+     * @brief Apply the transform to the supplied model.
      */
-    static void apply(const context& ctx, entities::artefact_repository& arp);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

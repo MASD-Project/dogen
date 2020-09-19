@@ -31,12 +31,12 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
-#include "dogen.physical/types/entities/meta_model.hpp"
-#include "dogen.physical/io/entities/artefact_repository_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
 #include "dogen.physical/io/entities/enablement_properties_io.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
@@ -351,10 +351,10 @@ void meta_model_properties_transform::compute_enable_backend_directories(
 }
 
 void meta_model_properties_transform::
-apply(const context& ctx, entities::artefact_repository& arp) {
-    const auto& lid(arp.provenance().logical_name().id());
+apply(const context& ctx, entities::model& m) {
+    const auto& id(m.name().id());
     tracing::scoped_transform_tracer stp(lg, "meta model properties",
-        transform_id, lid.value(), *ctx.tracer(), arp);
+        transform_id, id.value(), *ctx.tracer(), m);
 
     // FIXME: hackery for parts
     // const auto cpp_headers_dir(obtain_cpp_headers_output_directory(fg, cfg));
@@ -363,18 +363,22 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      * Obtain the root module configuration. Should have the same
      * logical name as the model itself.
      */
-    const auto i(arp.artefact_sets_by_logical_id().find(lid));
-    if (i == arp.artefact_sets_by_logical_id().end()) {
+    const auto& lid(m.provenance().logical_name().id());
+    const auto i(m.artefact_sets_by_logical_id().find(lid));
+    if (i == m.artefact_sets_by_logical_id().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << lid;
         BOOST_THROW_EXCEPTION(
             transform_exception(root_module_not_found + lid.value()));
     }
-    const auto& cfg(*i->second.configuration());
 
+    /*
+     * Setup the variables needed for population.
+     */
+    const auto& cfg(*i->second.configuration());
     const auto& fm(*ctx.feature_model());
     const auto& pmm(*ctx.meta_model());
     const auto& idx(pmm.indexed_names());
-    auto& mmp(arp.meta_model_properties());
+    auto& mmp(m.meta_model_properties());
 
     /*
      * Populate the backend properties.
@@ -411,7 +415,7 @@ apply(const context& ctx, entities::artefact_repository& arp) {
      */
     compute_enable_backend_directories(fm, cfg, mmp);
 
-    stp.end_transform(arp);
+    stp.end_transform(m);
 }
 
 }
