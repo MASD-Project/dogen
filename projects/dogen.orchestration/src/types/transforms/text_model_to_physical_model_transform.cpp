@@ -58,6 +58,10 @@ apply(const text::transforms::context& ctx,
     tracing::scoped_transform_tracer stp(lg, "logical to text model",
         transform_id, id.value(), *ctx.tracer(), ms);
 
+    /*
+     * FIXME: this code is still required because we are filtering out
+     * empty paths. This needs to be investigated.
+     */
     physical::entities::model_set r;
     for (const auto& m : ms.models()) {
         /*
