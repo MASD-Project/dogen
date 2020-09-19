@@ -28,7 +28,7 @@
 #include "dogen.physical/types/transforms/generability_transform.hpp"
 #include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
-#include "dogen.physical/types/transforms/artefact_repository_population_chain.hpp"
+#include "dogen.physical/types/transforms/model_production_chain.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-void artefact_repository_population_chain::
+void model_production_chain::
 apply(const context& ctx, entities::artefact_repository& arp) {
     tracing::scoped_chain_tracer stp(lg, "artefact repository population",
         transform_id, arp.provenance().logical_name().id().value(),
