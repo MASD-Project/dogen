@@ -23,7 +23,7 @@
 #include "dogen.codec/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
-#include "dogen.physical/types/transforms/model_population_chain.hpp"
+#include "dogen.physical/types/transforms/model_post_processing_chain.hpp"
 #include "dogen.orchestration/types/transforms/codec_model_set_to_logical_input_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/text_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
@@ -84,9 +84,10 @@ physical_model_production_chain::apply(const context& ctx,
         apply(ctx.text_context(), textms));
 
     /*
-     * Run all of the physical transforms against the physical models.
+     * Run all of the physical post-processing transforms against the
+     * physical models.
      */
-    const auto r(physical::transforms::model_population_chain::
+    const auto r(physical::transforms::model_post_processing_chain::
         apply(ctx.physical_context(), pms));
 
     stp.end_chain(r);

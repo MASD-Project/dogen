@@ -938,7 +938,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::model_population_chain",
+      "name": "transforms::model_post_processing_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

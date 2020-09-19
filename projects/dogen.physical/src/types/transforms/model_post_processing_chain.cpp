@@ -30,11 +30,11 @@
 #include "dogen.physical/types/transforms/generate_patch_transform.hpp"
 #include "dogen.physical/types/transforms/generate_report_transform.hpp"
 #include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
-#include "dogen.physical/types/transforms/model_population_chain.hpp"
+#include "dogen.physical/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
 
-const std::string transform_id("physical.transforms.model_population_chain");
+const std::string transform_id("physical.transforms.model_post_processing_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -43,7 +43,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::physical::transforms {
 
-entities::model model_population_chain::
+entities::model model_post_processing_chain::
 apply(const context& ctx, const entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "model production chain",
         transform_id, ms.name().simple(), *ctx.tracer(), ms);
