@@ -21,6 +21,7 @@
 #include <unordered_set>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -151,8 +152,8 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * The logical part of the element is very straightforward, just
      * add it to the element_artefacts structure.
      */
-    text::entities::element_artefacts ea;
-    ea.element(e);
+    text::entities::logical_physical_region region;
+    region.logical_element(e);
 
     /*
      * Create the artefact set, which represents the region in
@@ -160,7 +161,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
      * populating the set's logical properties. These just link it
      * back to its origin.
      */
-    auto& as(ea.artefacts());
+    auto& as(region.physical_artefacts());
     const auto mid(e->meta_name().id());
     as.provenance(make_logical_provenance(*e));
     as.configuration(e->configuration());
@@ -205,9 +206,9 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
 
         /*
          * We found no archetypes as expected, so populate our empty
-         * manifold.
+         * region.
          */
-        result_.elements().push_back(ea);
+        result_.logical_physical_regions().push_back(region);
         return;
     }
 
@@ -268,7 +269,7 @@ void populator::add(boost::shared_ptr<logical::entities::element> e) {
         }
         BOOST_LOG_SEV(lg, debug) << "Added artefact. Physical name: " << pmn;
     }
-    result_.elements().push_back(ea);
+    result_.logical_physical_regions().push_back(region);
 }
 
 }

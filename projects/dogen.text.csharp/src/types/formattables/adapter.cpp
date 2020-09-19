@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.text.csharp/types/formattables/adaptation_error.hpp"
@@ -39,17 +40,18 @@ std::unordered_map<std::string, formattable>
 adapter::adapt(const transforms::repository& frp,
     const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
-                             << " Elements in model: " << m.elements().size();
+                             << " Logical elements in model: "
+                             << m.logical_physical_regions().size();
 
     std::unordered_map<std::string, formattable> r;
-    for (const auto& ea : m.elements()) {
-        auto ptr(ea.element());
+    for (const auto& region : m.logical_physical_regions()) {
+        auto ptr(region.logical_element());
         formattable fbl;
-        fbl.element(ea.element());
-        fbl.artefacts(ea.artefacts());
+        fbl.element(region.logical_element());
+        fbl.artefacts(region.physical_artefacts());
 
         const auto& e(*ptr);
-        const auto id(e.name().qualified().dot());
+        const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
         /*
@@ -77,7 +79,7 @@ adapter::adapt(const transforms::repository& frp,
                                      << " to element: " << id;
         }
 
-        r[id] = fbl;
+        r[id.value()] = fbl;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."

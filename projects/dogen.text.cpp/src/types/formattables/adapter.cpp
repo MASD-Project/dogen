@@ -102,7 +102,8 @@ make_databases(const logical::entities::orm::model_properties& omp) const {
 model adapter::adapt(const transforms::repository& frp,
     const text::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting logical model to formattables."
-                             << " Elements in model: " << m.elements().size();
+                             << " Logical elements in model: "
+                             << m.logical_physical_regions().size();
 
     model r;
     r.name(m.logical().name());
@@ -121,8 +122,8 @@ model adapter::adapt(const transforms::repository& frp,
             r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
     }
 
-    for (const auto& ea : m.elements()) {
-        auto ptr(ea.element());
+    for (const auto& region : m.logical_physical_regions()) {
+        auto ptr(region.logical_element());
         const auto& e(*ptr);
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
@@ -151,8 +152,8 @@ model adapter::adapt(const transforms::repository& frp,
             BOOST_THROW_EXCEPTION(
                 adaptation_error(duplicate_master + id.value()));
         }
-        fbl.element(ea.element());
-        fbl.artefacts(ea.artefacts());
+        fbl.element(region.logical_element());
+        fbl.artefacts(region.physical_artefacts());
 
         /*
          * Check to see if the element has any formatters. Some

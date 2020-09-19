@@ -26,25 +26,25 @@ model::model(
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::logical::entities::model& logical,
     const dogen::physical::entities::model& physical,
-    const std::list<dogen::text::entities::element_artefacts>& elements)
+    const std::list<dogen::text::entities::logical_physical_region>& logical_physical_regions)
     : provenance_(provenance),
       logical_(logical),
       physical_(physical),
-      elements_(elements) { }
+      logical_physical_regions_(logical_physical_regions) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(provenance_, other.provenance_);
     swap(logical_, other.logical_);
     swap(physical_, other.physical_);
-    swap(elements_, other.elements_);
+    swap(logical_physical_regions_, other.logical_physical_regions_);
 }
 
 bool model::operator==(const model& rhs) const {
     return provenance_ == rhs.provenance_ &&
         logical_ == rhs.logical_ &&
         physical_ == rhs.physical_ &&
-        elements_ == rhs.elements_;
+        logical_physical_regions_ == rhs.logical_physical_regions_;
 }
 
 model& model::operator=(model other) {
@@ -101,20 +101,20 @@ void model::physical(const dogen::physical::entities::model&& v) {
     physical_ = std::move(v);
 }
 
-const std::list<dogen::text::entities::element_artefacts>& model::elements() const {
-    return elements_;
+const std::list<dogen::text::entities::logical_physical_region>& model::logical_physical_regions() const {
+    return logical_physical_regions_;
 }
 
-std::list<dogen::text::entities::element_artefacts>& model::elements() {
-    return elements_;
+std::list<dogen::text::entities::logical_physical_region>& model::logical_physical_regions() {
+    return logical_physical_regions_;
 }
 
-void model::elements(const std::list<dogen::text::entities::element_artefacts>& v) {
-    elements_ = v;
+void model::logical_physical_regions(const std::list<dogen::text::entities::logical_physical_region>& v) {
+    logical_physical_regions_ = v;
 }
 
-void model::elements(const std::list<dogen::text::entities::element_artefacts>&& v) {
-    elements_ = std::move(v);
+void model::logical_physical_regions(const std::list<dogen::text::entities::logical_physical_region>&& v) {
+    logical_physical_regions_ = std::move(v);
 }
 
 }

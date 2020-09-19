@@ -18,36 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.physical/io/entities/artefact_set_io.hpp"
-#include "dogen.text/io/entities/element_artefacts_io.hpp"
+#ifndef DOGEN_TEXT_TYPES_ENTITIES_LOGICAL_PHYSICAL_REGION_FWD_HPP
+#define DOGEN_TEXT_TYPES_ENTITIES_LOGICAL_PHYSICAL_REGION_FWD_HPP
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::element>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::text::entities {
 
-std::ostream& operator<<(std::ostream& s, const element_artefacts& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::text::entities::element_artefacts\"" << ", "
-      << "\"element\": " << v.element() << ", "
-      << "\"artefacts\": " << v.artefacts()
-      << " }";
-    return(s);
-}
+class logical_physical_region;
 
 }
+
+#endif

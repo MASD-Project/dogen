@@ -21,11 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
-#include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.text/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/physical_artefact_repository_transform.hpp"
 
@@ -59,15 +60,15 @@ apply(const text::transforms::context& ctx, const text::entities::model& m) {
      * Now obtain all of the artefacts.
      */
     auto& asbli(r.artefact_sets_by_logical_id());
-    for (const auto& ea : m.elements()) {
-        const auto lid(ea.element()->name().qualified().dot());
-        const auto pair(std::make_pair(lid, ea.artefacts()));
+    for (const auto& regions : m.logical_physical_regions()) {
+        const auto lid(regions.logical_element()->name().id());
+        const auto pair(std::make_pair(lid, regions.physical_artefacts()));
         const auto inserted(asbli.insert(pair).second);
         if (inserted)
             continue;
 
         BOOST_LOG_SEV(lg, error) << duplicate_id << lid;
-        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + lid));
+        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + lid.value()));
     }
 
     stp.end_transform(r);

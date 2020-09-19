@@ -19,21 +19,21 @@
  *
  */
 #include <ostream>
-#include "dogen.text/io/entities/model_io.hpp"
-#include "dogen.logical/io/entities/model_io.hpp"
-#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/element_io.hpp"
+#include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.text/io/entities/logical_physical_region_io.hpp"
-#include "dogen.identification/io/entities/logical_provenance_io.hpp"
 
-namespace std {
+namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::entities::logical_physical_region>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::element>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
     return s;
 }
 
@@ -41,13 +41,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::text::en
 
 namespace dogen::text::entities {
 
-std::ostream& operator<<(std::ostream& s, const model& v) {
+std::ostream& operator<<(std::ostream& s, const logical_physical_region& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::text::entities::model\"" << ", "
-      << "\"provenance\": " << v.provenance() << ", "
-      << "\"logical\": " << v.logical() << ", "
-      << "\"physical\": " << v.physical() << ", "
-      << "\"logical_physical_regions\": " << v.logical_physical_regions()
+      << "\"__type__\": " << "\"dogen::text::entities::logical_physical_region\"" << ", "
+      << "\"logical_element\": " << v.logical_element() << ", "
+      << "\"physical_artefacts\": " << v.physical_artefacts()
       << " }";
     return(s);
 }

@@ -77,12 +77,13 @@ apply(const text::transforms::context& ctx,
         /*
          * Obtain artefact sets from the text model.
          */
-        for (const auto& ea : m.elements()) {
-            const auto& e(*ea.element());
+        for (const auto& regions : m.logical_physical_regions()) {
+            const auto& e(*regions.logical_element());
             physical::entities::artefact_set as;
-            as.provenance(ea.artefacts().provenance());
+            const auto& artefacts(regions.physical_artefacts());
+            as.provenance(artefacts.provenance());
 
-            for (const auto& pair : ea.artefacts().artefacts_by_archetype()) {
+            for (const auto& pair : artefacts.artefacts_by_archetype()) {
                 const auto archetype_id(pair.first);
                 const auto aptr(pair.second);
 

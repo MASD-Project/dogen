@@ -29,7 +29,7 @@
 #include <algorithm>
 #include "dogen.logical/types/entities/model.hpp"
 #include "dogen.physical/types/entities/model.hpp"
-#include "dogen.text/types/entities/element_artefacts.hpp"
+#include "dogen.text/types/entities/logical_physical_region.hpp"
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 
 namespace dogen::text::entities {
@@ -49,7 +49,7 @@ public:
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::logical::entities::model& logical,
         const dogen::physical::entities::model& physical,
-        const std::list<dogen::text::entities::element_artefacts>& elements);
+        const std::list<dogen::text::entities::logical_physical_region>& logical_physical_regions);
 
 public:
     /**
@@ -82,10 +82,16 @@ public:
     void physical(const dogen::physical::entities::model&& v);
     /**@}*/
 
-    const std::list<dogen::text::entities::element_artefacts>& elements() const;
-    std::list<dogen::text::entities::element_artefacts>& elements();
-    void elements(const std::list<dogen::text::entities::element_artefacts>& v);
-    void elements(const std::list<dogen::text::entities::element_artefacts>&& v);
+    /**
+     * @brief Contains all of the logical-physical regions that make up the logical physical space
+     * for this model.
+     */
+    /**@{*/
+    const std::list<dogen::text::entities::logical_physical_region>& logical_physical_regions() const;
+    std::list<dogen::text::entities::logical_physical_region>& logical_physical_regions();
+    void logical_physical_regions(const std::list<dogen::text::entities::logical_physical_region>& v);
+    void logical_physical_regions(const std::list<dogen::text::entities::logical_physical_region>&& v);
+    /**@}*/
 
 public:
     bool operator==(const model& rhs) const;
@@ -101,7 +107,7 @@ private:
     dogen::identification::entities::logical_provenance provenance_;
     dogen::logical::entities::model logical_;
     dogen::physical::entities::model physical_;
-    std::list<dogen::text::entities::element_artefacts> elements_;
+    std::list<dogen::text::entities::logical_physical_region> logical_physical_regions_;
 };
 
 }
