@@ -30,6 +30,7 @@
 #include "dogen.physical/types/transforms/generate_patch_transform.hpp"
 #include "dogen.physical/types/transforms/generate_report_transform.hpp"
 #include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
+#include "dogen.physical/types/transforms/remove_regions_transform.hpp"
 #include "dogen.physical/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
@@ -53,6 +54,12 @@ apply(const context& ctx, const entities::model_set& ms) {
      * one.
      */
     auto r(physical::transforms::merge_transform::apply(ctx, ms));
+
+    /*
+     * Then, get rid of all physical regions that are not relevant to
+     * file generation.
+     */
+    remove_regions_transform::apply(ctx, r);
 
     /*
      * Now we start the processing proper. We start by reading the
