@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-19 Sat 14:13]
+#+CAPTION: Clock summary at [2020-09-20 Sun 09:40]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *80:38* |       |       | 100.0 |
+| *Total time*                                       | *81:27* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 80:38   |       |       | 100.0 |
-| Active                                             |         | 80:38 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  7:15 |   9.0 |
+| Stories                                            | 81:27   |       |       | 100.0 |
+| Active                                             |         | 81:27 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  7:15 |   8.9 |
 | Create a demo and presentation for previous sprint |         |       |  0:41 |   0.8 |
 | Sprint and product backlog grooming                |         |       |  2:26 |   3.0 |
 | Nightly nursing and other spikes                   |         |       |  4:22 |   5.4 |
-| Create an =ident= model                            |         |       | 42:02 |  52.1 |
+| Create an =ident= model                            |         |       | 42:02 |  51.6 |
 | Rename injection to codec                          |         |       |  0:48 |   1.0 |
 | Add artefact's archetype to artefact class         |         |       |  0:07 |   0.1 |
 | Remove support for split projects                  |         |       |  0:07 |   0.1 |
 | Create a logical to physical projector             |         |       |  0:45 |   0.9 |
-| Clean up the Logical-physical model                |         |       |  5:00 |   6.2 |
-| Implement meta-name validator correctly            |         |       |  0:17 |   0.4 |
-| Add dependencies to artefacts                      |         |       |  2:28 |   3.1 |
-| Add instances of physical meta-model elements      |         |       |  8:48 |  10.9 |
-| Add full and relative path processing to PM        |         |       |  5:32 |   6.9 |
+| Clean up the Logical-physical model                |         |       |  5:49 |   7.1 |
+| Implement meta-name validator correctly            |         |       |  0:17 |   0.3 |
+| Add dependencies to artefacts                      |         |       |  2:28 |   3.0 |
+| Add instances of physical meta-model elements      |         |       |  8:48 |  10.8 |
+| Add full and relative path processing to PM        |         |       |  5:32 |   6.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1021,6 +1021,7 @@ processing one model element at a time.
 *** COMPLETED Clean up the Logical-physical model                     :story:
     CLOSED: [2020-09-19 Sat 14:13]
     :LOGBOOK:
+    CLOCK: [2020-09-20 Sun 08:51]--[2020-09-20 Sun 09:40] =>  0:49
     CLOCK: [2020-09-19 Sat 13:31]--[2020-09-19 Sat 14:13] =>  0:42
     CLOCK: [2020-09-19 Sat 13:31]--[2020-09-19 Sat 13:48] =>  0:17
     CLOCK: [2020-09-19 Sat 12:01]--[2020-09-19 Sat 12:45] =>  0:44

@@ -15163,6 +15163,55 @@ and then define the set of operations. However, we need to do more
 thinking. We should start by looking at how these containers are being
 used and see if we can abstract the operations from there.
 
+Notes:
+
+- in every case where we have containers we have a simple pattern of
+  iteration over the elements (and possibly sub-elements, for
+  containers of containers), e.g.:
+
+:    for (auto& as_pair : m.regions_by_logical_id()) {
+:        auto& as(as_pair.second);
+:        for (auto& a_pair : as.artefacts_by_archetype()) {
+:            auto& a(*a_pair.second);
+:            apply(a, m.outputting_properties().force_write());
+
+  It would be really nice if we could generate a set of top-level
+  functions in the container that would allow iteration at each of
+  these levels via a lambda, const and non-const, e.g.:
+
+: container.for_each([](const X& x) { ... }
+
+  For extra bonus points, we should have an overload with dereferenced
+  pointer.
+- we should find appropriate exceptions in the standard library for
+  all the operations in the container so that we do not have to rely
+  on the presence of a generated exception.
+- we also have a very common get by ID, which throws:
+
+:        const auto i(global_enablement_properties.find(pmid));
+:        if (i == global_enablement_properties.end()) {
+:            BOOST_LOG_SEV(lg, error) << global_configuration_not_found << pmid;
+:            BOOST_THROW_EXCEPTION(transform_exception(
+:                    global_configuration_not_found + pmid.value()));
+:        }
+:        const auto& gep(i->second);
+
+- we also have an insert by ID that checks for duplicates:
+
+:    for (const auto& region : regions) {
+:        const auto lid(region.logical_element()->name().id());
+:        const auto pair(std::make_pair(lid, region.physical_region()));
+:        const auto inserted(rbli.insert(pair).second);
+:        if (inserted)
+:            continue;
+:
+:        BOOST_LOG_SEV(lg, error) << duplicate_id << lid;
+:        BOOST_THROW_EXCEPTION(transform_exception(duplicate_id + lid.value()));
+:    }
+
+  We can detect if we are an associative container and generate this
+  operation. We could have a "strict" and "non-strict" insert.
+
 *** Consider adding support for Matplot++                             :story:
 
 #+begin_quote
