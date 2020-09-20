@@ -73,11 +73,11 @@ create_physical_model(const logical::entities::model& lm,
     r.configuration(lm.root_module()->configuration());
     r.provenance(provenance);
 
-    auto& asbli(r.artefact_sets_by_logical_id());
+    auto& rbli(r.regions_by_logical_id());
     for (const auto& region : regions) {
         const auto lid(region.logical_element()->name().id());
-        const auto pair(std::make_pair(lid, region.physical_artefacts()));
-        const auto inserted(asbli.insert(pair).second);
+        const auto pair(std::make_pair(lid, region.physical_region()));
+        const auto inserted(rbli.insert(pair).second);
         if (inserted)
             continue;
 

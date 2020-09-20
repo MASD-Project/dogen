@@ -64,12 +64,12 @@ entities::model merge_transform::apply(const physical::transforms::context& ctx,
         /*
          * Now we copy the stuff that actually matters.
          */
-        for (const auto& rhs_as_pair : m.artefact_sets_by_logical_id()) {
-            const auto& rhs_as(rhs_as_pair.second);
-            auto& lhs_as(r.artefact_sets_by_logical_id()[rhs_as_pair.first]);
-            auto& lhs_aba(lhs_as.artefacts_by_archetype());
+        for (const auto& rhs_pr_pair : m.regions_by_logical_id()) {
+            const auto& rhs_pr(rhs_pr_pair.second);
+            auto& lhs_pr(r.regions_by_logical_id()[rhs_pr_pair.first]);
+            auto& lhs_aba(lhs_pr.artefacts_by_archetype());
 
-            for (const auto& rhs_a_pair : rhs_as.artefacts_by_archetype()) {
+            for (const auto& rhs_a_pair : rhs_pr.artefacts_by_archetype()) {
                 const bool inserted(lhs_aba.insert(rhs_a_pair).second);
                 if (!inserted) {
                     const auto& id(rhs_a_pair.first);

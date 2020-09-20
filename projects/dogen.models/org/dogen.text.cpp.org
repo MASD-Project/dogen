@@ -11530,7 +11530,7 @@ All of the properties associated with an element.
 :END:
 *** artefacts
 :PROPERTIES:
-:masd.codec.type: physical::entities::artefact_set
+:masd.codec.type: physical::entities::region
 :END:
 ** formattables::adapter
 :PROPERTIES:

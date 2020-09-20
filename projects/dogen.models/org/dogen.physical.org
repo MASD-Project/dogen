@@ -757,7 +757,7 @@ Relations against hard-coded values.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
-** entities::artefact_set
+** entities::region
 :PROPERTIES:
 :masd.codec.stereotypes: Configurable, Provenance
 :END:
@@ -875,9 +875,9 @@ If true the repository has at least one generable artefact, false otherwise.
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
 :END:
-*** artefact_sets_by_logical_id
+*** regions_by_logical_id
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, artefact_set>
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, region>
 :END:
 
 All atefact sets in this model, by logical ID.

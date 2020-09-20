@@ -264,8 +264,7 @@
       "name": "entities::model",
       "documentation": "Collection of entities representing objects in physical space.\n",
       "stereotypes": [
-        "Element",
-        "ArtefactContainer"
+        "Element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -296,6 +295,11 @@
           "name": "has_generatable_artefacts",
           "type": "bool",
           "documentation": "If true the repository has at least one generable artefact, false otherwise.\n"
+        },
+        {
+          "name": "regions_by_logical_id",
+          "type": "std::unordered_map<identification::entities::logical_id, region>",
+          "documentation": "All physical regions in  this model, by logical ID.\n"
         }
       ]
     },
@@ -1293,8 +1297,8 @@
       ]
     },
     {
-      "name": "entities::artefact_set",
-      "documentation": "Represents a slice of logical-physical space fixed at one logical point.\n",
+      "name": "entities::region",
+      "documentation": "Represents a region of logical-physical space fixed at one logical point.\n",
       "stereotypes": [
         "Configurable",
         "Provenance"
@@ -1363,20 +1367,6 @@
           "name": "archetype_overwrite",
           "type": "boost::optional<bool>",
           "documentation": "If supplied and true, the archetype will have overwrite on.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::ArtefactContainer",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "artefact_sets_by_logical_id",
-          "type": "std::unordered_map<identification::entities::logical_id, artefact_set>",
-          "documentation": "All atefact sets in this model, by logical ID.\n"
         }
       ]
     },

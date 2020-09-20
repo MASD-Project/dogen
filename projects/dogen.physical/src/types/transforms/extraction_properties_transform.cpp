@@ -94,8 +94,8 @@ apply(const context& ctx, entities::model& m) {
      * itself.
      */
     const auto& lid(m.provenance().logical_name().id());
-    const auto i(m.artefact_sets_by_logical_id().find(lid));
-    if (i == m.artefact_sets_by_logical_id().end()) {
+    const auto i(m.regions_by_logical_id().find(lid));
+    if (i == m.regions_by_logical_id().end()) {
         BOOST_LOG_SEV(lg, error) << root_module_not_found << lid;
         BOOST_THROW_EXCEPTION(
             transform_exception(root_module_not_found + lid.value()));

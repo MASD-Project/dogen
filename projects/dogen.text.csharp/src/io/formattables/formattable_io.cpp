@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.physical/io/entities/artefact_set_io.hpp"
+#include "dogen.physical/io/entities/region_io.hpp"
 #include "dogen.text.csharp/io/formattables/formattable_io.hpp"
 #include "dogen.text.csharp/io/formattables/element_properties_io.hpp"
 

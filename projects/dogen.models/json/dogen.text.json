@@ -273,8 +273,8 @@
           "documentation": "Logical element that gives rise to the artefact.\n"
         },
         {
-          "name": "physical_artefacts",
-          "type": "physical::entities::artefact_set",
+          "name": "physical_region",
+          "type": "physical::entities::region",
           "documentation": "Physical artefacts that will be produced from the logical element.\n"
         }
       ]

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 
 namespace boost {
@@ -42,10 +42,10 @@ const boost::shared_ptr<dogen::physical::entities::artefact>& rhs) {
 
 namespace dogen::physical::entities {
 
-artefact_set::artefact_set()
+region::region()
     : is_generatable_(static_cast<bool>(0)) { }
 
-artefact_set::artefact_set(
+region::region(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
@@ -57,7 +57,7 @@ artefact_set::artefact_set(
       archetype_for_role_(archetype_for_role),
       is_generatable_(is_generatable) { }
 
-void artefact_set::swap(artefact_set& other) noexcept {
+void region::swap(region& other) noexcept {
     using std::swap;
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
@@ -66,7 +66,7 @@ void artefact_set::swap(artefact_set& other) noexcept {
     swap(is_generatable_, other.is_generatable_);
 }
 
-bool artefact_set::operator==(const artefact_set& rhs) const {
+bool region::operator==(const region& rhs) const {
     return configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         artefacts_by_archetype_ == rhs.artefacts_by_archetype_ &&
@@ -74,81 +74,81 @@ bool artefact_set::operator==(const artefact_set& rhs) const {
         is_generatable_ == rhs.is_generatable_;
 }
 
-artefact_set& artefact_set::operator=(artefact_set other) {
+region& region::operator=(region other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::shared_ptr<dogen::variability::entities::configuration>& artefact_set::configuration() const {
+const boost::shared_ptr<dogen::variability::entities::configuration>& region::configuration() const {
     return configuration_;
 }
 
-boost::shared_ptr<dogen::variability::entities::configuration>& artefact_set::configuration() {
+boost::shared_ptr<dogen::variability::entities::configuration>& region::configuration() {
     return configuration_;
 }
 
-void artefact_set::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v) {
+void region::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v) {
     configuration_ = v;
 }
 
-void artefact_set::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v) {
+void region::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v) {
     configuration_ = std::move(v);
 }
 
-const dogen::identification::entities::logical_provenance& artefact_set::provenance() const {
+const dogen::identification::entities::logical_provenance& region::provenance() const {
     return provenance_;
 }
 
-dogen::identification::entities::logical_provenance& artefact_set::provenance() {
+dogen::identification::entities::logical_provenance& region::provenance() {
     return provenance_;
 }
 
-void artefact_set::provenance(const dogen::identification::entities::logical_provenance& v) {
+void region::provenance(const dogen::identification::entities::logical_provenance& v) {
     provenance_ = v;
 }
 
-void artefact_set::provenance(const dogen::identification::entities::logical_provenance&& v) {
+void region::provenance(const dogen::identification::entities::logical_provenance&& v) {
     provenance_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefact_set::artefacts_by_archetype() const {
+const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& region::artefacts_by_archetype() const {
     return artefacts_by_archetype_;
 }
 
-std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefact_set::artefacts_by_archetype() {
+std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& region::artefacts_by_archetype() {
     return artefacts_by_archetype_;
 }
 
-void artefact_set::artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
+void region::artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& v) {
     artefacts_by_archetype_ = v;
 }
 
-void artefact_set::artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
+void region::artefacts_by_archetype(const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >&& v) {
     artefacts_by_archetype_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& artefact_set::archetype_for_role() const {
+const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& region::archetype_for_role() const {
     return archetype_for_role_;
 }
 
-std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& artefact_set::archetype_for_role() {
+std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& region::archetype_for_role() {
     return archetype_for_role_;
 }
 
-void artefact_set::archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& v) {
+void region::archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>& v) {
     archetype_for_role_ = v;
 }
 
-void artefact_set::archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>&& v) {
+void region::archetype_for_role(const std::unordered_map<std::string, dogen::identification::entities::physical_meta_id>&& v) {
     archetype_for_role_ = std::move(v);
 }
 
-bool artefact_set::is_generatable() const {
+bool region::is_generatable() const {
     return is_generatable_;
 }
 
-void artefact_set::is_generatable(const bool v) {
+void region::is_generatable(const bool v) {
     is_generatable_ = v;
 }
 

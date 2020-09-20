@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ARTEFACT_SET_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_ARTEFACT_SET_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_REGION_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_REGION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,19 +38,19 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Represents a slice of logical-physical space fixed at one logical point.
+ * @brief Represents a region of logical-physical space fixed at one logical point.
  */
-class artefact_set final {
+class region final {
 public:
-    artefact_set(const artefact_set&) = default;
-    artefact_set(artefact_set&&) = default;
-    ~artefact_set() = default;
+    region(const region&) = default;
+    region(region&&) = default;
+    ~region() = default;
 
 public:
-    artefact_set();
+    region();
 
 public:
-    artefact_set(
+    region(
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, boost::shared_ptr<dogen::physical::entities::artefact> >& artefacts_by_archetype,
@@ -107,14 +107,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const artefact_set& rhs) const;
-    bool operator!=(const artefact_set& rhs) const {
+    bool operator==(const region& rhs) const;
+    bool operator!=(const region& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(artefact_set& other) noexcept;
-    artefact_set& operator=(artefact_set other);
+    void swap(region& other) noexcept;
+    region& operator=(region other);
 
 private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
@@ -130,8 +130,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::artefact_set& lhs,
-    dogen::physical::entities::artefact_set& rhs) {
+    dogen::physical::entities::region& lhs,
+    dogen::physical::entities::region& rhs) {
     lhs.swap(rhs);
 }
 

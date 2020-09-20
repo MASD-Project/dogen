@@ -1133,7 +1133,7 @@
         },
         {
           "name": "artefacts",
-          "type": "physical::entities::artefact_set"
+          "type": "physical::entities::region"
         }
       ]
     },

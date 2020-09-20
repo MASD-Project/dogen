@@ -52,9 +52,9 @@ namespace dogen::physical::transforms {
 
 std::string generate_patch_transform::collect_diffs(const entities::model& m) {
     std::ostringstream os;
-    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
-        const auto& as(as_pair.second);
-        for (const auto& a_pair : as.artefacts_by_archetype()) {
+    for (const auto& pr_pair : m.regions_by_logical_id()) {
+        const auto& pr(pr_pair.second);
+        for (const auto& a_pair : pr.artefacts_by_archetype()) {
             const auto& a(*a_pair.second);
             BOOST_LOG_SEV(lg, trace) << "Processing artefact: "
                                      << a.name().id();

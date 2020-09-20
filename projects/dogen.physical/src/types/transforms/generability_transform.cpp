@@ -40,7 +40,7 @@ void generability_transform::apply(const context& ctx, entities::model& m) {
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     m.has_generatable_artefacts(false);
-    for(const auto& pair : m.artefact_sets_by_logical_id()) {
+    for(const auto& pair : m.regions_by_logical_id()) {
         const auto& as(pair.second);
         if (as.is_generatable()) {
             m.has_generatable_artefacts(true);

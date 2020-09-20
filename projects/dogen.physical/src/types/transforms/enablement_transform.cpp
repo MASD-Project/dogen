@@ -117,12 +117,12 @@ enablement_transform::make_feature_group(const feature_model& fm,
 void enablement_transform::populate_enablement_properties(
     const std::unordered_map<identification::entities::physical_meta_id,
     feature_group>& fgs, entities::model& m) {
-    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
-        const auto lid(as_pair.first);
+    for (auto& pr_pair : m.regions_by_logical_id()) {
+        const auto lid(pr_pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << lid;
 
-        auto& as(as_pair.second);
-        if (!as.configuration()) {
+        auto& pr(pr_pair.second);
+        if (!pr.configuration()) {
             BOOST_LOG_SEV(lg, error) << missing_configuration << lid;
             BOOST_THROW_EXCEPTION(
                 transform_exception(missing_configuration + lid.value()));
@@ -134,9 +134,9 @@ void enablement_transform::populate_enablement_properties(
          * enablement. Note that all archetypes are expected to have a
          * feature group.
          */
-        const auto& cfg(*as.configuration());
+        const auto& cfg(*pr.configuration());
         const variability::helpers::configuration_selector s(cfg);
-        for (auto& a_pair : as.artefacts_by_archetype()) {
+        for (auto& a_pair : pr.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
             const auto pmid(a.meta_name().id());
             const auto i(fgs.find(pmid));
@@ -171,11 +171,11 @@ void enablement_transform::populate_enablement_properties(
 
 void enablement_transform::compute_enablement_for_artefact(
     const entities::denormalised_archetype_properties&
-    global_enablement_properties,
-    const physical_meta_id& archetype, entities::artefact& a) {
+    global_enablement_properties, const physical_meta_id& archetype,
+    entities::artefact& a) {
 
-    const auto& gc(global_enablement_properties);
-    const auto& lc(a.enablement_properties());
+    const auto& gep(global_enablement_properties);
+    const auto& lep(a.enablement_properties());
 
     /*
      * If the overwrite flag is set locally at the archetype or facet
@@ -212,22 +212,22 @@ void enablement_transform::compute_enablement_for_artefact(
             return s.str();
         });
     BOOST_LOG_SEV(lg, trace) << "Overwrite flags. Local archetype: "
-                             << lambda(lc.archetype_overwrite())
+                             << lambda(lep.archetype_overwrite())
                              << " Local facet: "
-                             << lambda(lc.facet_overwrite())
+                             << lambda(lep.facet_overwrite())
                              << " Global archetype: "
-                             << lambda(gc.archetype_overwrite())
+                             << lambda(gep.archetype_overwrite())
                              << " Global facet: "
-                             << gc.facet_overwrite();
+                             << gep.facet_overwrite();
 
-    if (lc.archetype_overwrite())
-        a.overwrite(*lc.archetype_overwrite());
-    else if (lc.facet_overwrite())
-        a.overwrite(*lc.facet_overwrite());
-    else if (gc.archetype_overwrite())
-        a.overwrite(*gc.archetype_overwrite());
+    if (lep.archetype_overwrite())
+        a.overwrite(*lep.archetype_overwrite());
+    else if (lep.facet_overwrite())
+        a.overwrite(*lep.facet_overwrite());
+    else if (gep.archetype_overwrite())
+        a.overwrite(*gep.archetype_overwrite());
     else
-        a.overwrite(gc.facet_overwrite());
+        a.overwrite(gep.facet_overwrite());
 
     /*
      * Ensure we log the enablement details with the early returns.
@@ -242,7 +242,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * If the entire backend has been disabled globally, the formatter
      * will be disabled too.
      */
-    if (!gc.backend_enabled()) {
+    if (!gep.backend_enabled()) {
         BOOST_LOG_SEV(lg, trace) << "Backend is disabled.";
         a.enabled(false);
         return;
@@ -253,8 +253,8 @@ void enablement_transform::compute_enablement_for_artefact(
      * locally. If so, it takes precedence over the facet
      * configuration.
      */
-    if (lc.archetype_enabled()) {
-        a.enabled(*lc.archetype_enabled());
+    if (lep.archetype_enabled()) {
+        a.enabled(*lep.archetype_enabled());
         return;
     }
 
@@ -275,8 +275,8 @@ void enablement_transform::compute_enablement_for_artefact(
      * apply to. So its kind of "local" but really more like "profile
      * level local".
      */
-    if (lc.facet_enabled()) {
-        a.enabled(*lc.facet_enabled());
+    if (lep.facet_enabled()) {
+        a.enabled(*lep.facet_enabled());
         return;
     }
 
@@ -298,25 +298,25 @@ void enablement_transform::compute_enablement_for_artefact(
      * course support this scenario for local enablement, which is
      * very common.
      */
-    a.enabled(gc.archetype_enabled() && gc.facet_enabled());
+    a.enabled(gep.archetype_enabled() && gep.facet_enabled());
 }
 
-void enablement_transform::compute_enablement_for_artefact_set(
+void enablement_transform::compute_enablement_for_region(
     const std::unordered_map<identification::entities::logical_meta_id,
     identification::entities::archetype_name_set>& pmn_by_lmid,
     const std::unordered_map<physical_meta_id,
     entities::denormalised_archetype_properties>& global_enablement_properties,
     std::unordered_set<logical_meta_physical_id>& enabled_archetype_for_element,
-    entities::artefact_set& as) {
+    entities::region& pr) {
 
-    const auto lid(as.provenance().logical_name().id());
+    const auto lid(pr.provenance().logical_name().id());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << lid;
 
     /*
      * Some logical elements do not project into the physical
      * dimension. If so, there is nothing to do.
      */
-    if (!as.is_generatable()) {
+    if (!pr.is_generatable()) {
         BOOST_LOG_SEV(lg, trace) << "Element is not generatable.";
         return;
     }
@@ -327,7 +327,7 @@ void enablement_transform::compute_enablement_for_artefact_set(
      * given logical meta-element. Note that the archetype name set is
      * always expected to exist, even if it is empty.
      */
-    const auto lmid(as.provenance().logical_meta_name().id());
+    const auto lmid(pr.provenance().logical_meta_name().id());
     BOOST_LOG_SEV(lg, trace) << "Logical meta ID: " << lmid;
     const auto i(pmn_by_lmid.find(lmid));
     if (i == pmn_by_lmid.end()) {
@@ -341,7 +341,7 @@ void enablement_transform::compute_enablement_for_artefact_set(
      * Now go through all of the artefacts in the artefact set and for
      * each, compute their enablement properties.
      */
-    for(auto& pair : as.artefacts_by_archetype()) {
+    for(auto& pair : pr.artefacts_by_archetype()) {
         const auto pmid(pair.first);
         BOOST_LOG_SEV(lg, trace) << "Processing artefact for archetype: "
                                  << pmid;
@@ -433,9 +433,9 @@ void enablement_transform::apply(const context& ctx, entities::model& m) {
     const auto& dap(mmp.denormalised_archetype_properties());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
     std::unordered_set<logical_meta_physical_id> eafe;
-    for(auto& pair : m.artefact_sets_by_logical_id()) {
+    for(auto& pair : m.regions_by_logical_id()) {
         auto& as(pair.second);
-        compute_enablement_for_artefact_set(lmn, dap, eafe, as);
+        compute_enablement_for_region(lmn, dap, eafe, as);
     }
 
     /*

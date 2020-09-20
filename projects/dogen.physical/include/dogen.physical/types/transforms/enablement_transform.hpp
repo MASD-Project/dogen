@@ -34,7 +34,7 @@
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
 #include "dogen.physical/types/entities/model.hpp"
 #include "dogen.physical/types/transforms/context.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/enablement_properties.hpp"
 #include "dogen.physical/types/entities/denormalised_archetype_properties.hpp"
 
@@ -83,14 +83,14 @@ private:
         const identification::entities::physical_meta_id& archetype,
         entities::artefact& a);
 
-    static void compute_enablement_for_artefact_set(
+    static void compute_enablement_for_region(
         const std::unordered_map<identification::entities::logical_meta_id,
         identification::entities::archetype_name_set>& pmn_by_lmid,
         const std::unordered_map<identification::entities::physical_meta_id,
         entities::denormalised_archetype_properties>&
         global_enablement_properties,
         std::unordered_set<identification::entities::logical_meta_physical_id>&
-        enabled_archetype_for_element, entities::artefact_set& as);
+        enabled_archetype_for_element, entities::region& pr);
 
 public:
     static void apply(const context& ctx, entities::model& m);

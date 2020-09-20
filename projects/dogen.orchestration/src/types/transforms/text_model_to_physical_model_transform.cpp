@@ -28,7 +28,7 @@
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.text/io/entities/model_set_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/text_model_to_physical_model_transform.hpp"
@@ -83,9 +83,9 @@ apply(const text::transforms::context& ctx,
          */
         for (const auto& regions : m.logical_physical_regions()) {
             const auto& e(*regions.logical_element());
-            physical::entities::artefact_set as;
-            const auto& artefacts(regions.physical_artefacts());
-            as.provenance(artefacts.provenance());
+            physical::entities::region pr;
+            const auto& artefacts(regions.physical_region());
+            pr.provenance(artefacts.provenance());
 
             for (const auto& pair : artefacts.artefacts_by_archetype()) {
                 const auto archetype_id(pair.first);
@@ -103,7 +103,7 @@ apply(const text::transforms::context& ctx,
                     continue;
                 }
 
-                auto& aba(as.artefacts_by_archetype());
+                auto& aba(pr.artefacts_by_archetype());
                 const auto aa_pair(std::make_pair(archetype_id, aptr));
                 const bool inserted(aba.insert(aa_pair).second);
                 if (!inserted) {
@@ -114,10 +114,10 @@ apply(const text::transforms::context& ctx,
                 }
             }
 
-            if (!as.artefacts_by_archetype().empty()) {
-                auto& asbli(pm.artefact_sets_by_logical_id());
+            if (!pr.artefacts_by_archetype().empty()) {
+                auto& asbli(pm.regions_by_logical_id());
                 const auto& leid(e.name().qualified().dot());
-                auto pair(std::make_pair(leid, as));
+                auto pair(std::make_pair(leid, pr));
                 const bool inserted(asbli.insert(pair).second);
                 if (!inserted) {
                     BOOST_LOG_SEV(lg, error) << duplicate_logical_element

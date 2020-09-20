@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen.logical/io/entities/element_io.hpp"
-#include "dogen.physical/io/entities/artefact_set_io.hpp"
+#include "dogen.physical/io/entities/region_io.hpp"
 #include "dogen.text/io/entities/logical_physical_region_io.hpp"
 
 namespace boost {
@@ -45,7 +45,7 @@ std::ostream& operator<<(std::ostream& s, const logical_physical_region& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::text::entities::logical_physical_region\"" << ", "
       << "\"logical_element\": " << v.logical_element() << ", "
-      << "\"physical_artefacts\": " << v.physical_artefacts()
+      << "\"physical_region\": " << v.physical_region()
       << " }";
     return(s);
 }

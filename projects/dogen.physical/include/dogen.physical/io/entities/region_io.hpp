@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_ARTEFACT_SET_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_ARTEFACT_SET_IO_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_REGION_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_REGION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 
 namespace dogen::physical::entities {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::physical::entities::artefact_set& v);
+     const dogen::physical::entities::region& v);
 
 }
 

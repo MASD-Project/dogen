@@ -31,8 +31,8 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.physical/types/entities/artefact_fwd.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.identification/types/entities/logical_id.hpp"
 #include "dogen.identification/types/entities/physical_name.hpp"
 #include "dogen.identification/hash/entities/logical_id_hash.hpp"
@@ -62,13 +62,13 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
-        const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
         const std::string& technical_space,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties,
         const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
         const dogen::physical::entities::meta_model_properties& meta_model_properties,
-        const bool has_generatable_artefacts);
+        const bool has_generatable_artefacts,
+        const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& regions_by_logical_id);
 
 public:
     /**
@@ -109,16 +109,6 @@ public:
     dogen::identification::entities::physical_name& name();
     void name(const dogen::identification::entities::physical_name& v);
     void name(const dogen::identification::entities::physical_name&& v);
-    /**@}*/
-
-    /**
-     * @brief All atefact sets in this model, by logical ID.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id() const;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id();
-    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v);
-    void artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v);
     /**@}*/
 
     /**
@@ -169,6 +159,16 @@ public:
     void has_generatable_artefacts(const bool v);
     /**@}*/
 
+    /**
+     * @brief All physical regions in  this model, by logical ID.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& regions_by_logical_id() const;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& regions_by_logical_id();
+    void regions_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& v);
+    void regions_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -184,13 +184,13 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
-    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set> artefact_sets_by_logical_id_;
     std::string technical_space_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
     std::list<boost::shared_ptr<dogen::physical::entities::artefact> > orphan_artefacts_;
     dogen::physical::entities::meta_model_properties meta_model_properties_;
     bool has_generatable_artefacts_;
+    std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region> regions_by_logical_id_;
 };
 
 }

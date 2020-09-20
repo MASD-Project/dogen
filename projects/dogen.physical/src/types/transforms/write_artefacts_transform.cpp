@@ -74,9 +74,9 @@ apply(const context& ctx, const entities::model& m) {
      * operation to the filesystem. Ignore all other artefacts.
      */
     unsigned int files_written(0);
-    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
-        auto& as(as_pair.second);
-        for (auto& a_pair : as.artefacts_by_archetype()) {
+    for (auto& pr_pair : m.regions_by_logical_id()) {
+        auto& pr(pr_pair.second);
+        for (auto& a_pair : pr.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
             const auto& p(a.file_path());
             const auto gs(p.generic_string());

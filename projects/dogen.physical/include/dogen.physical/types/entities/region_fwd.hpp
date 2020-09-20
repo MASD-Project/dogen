@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ARTEFACT_SET_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_ARTEFACT_SET_FWD_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_REGION_FWD_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_REGION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen::physical::entities {
 
-class artefact_set;
+class region;
 
 }
 

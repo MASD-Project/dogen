@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/region_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/io/entities/logical_provenance_io.hpp"
@@ -105,7 +105,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
+std::ostream& operator<<(std::ostream& s, const region& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -113,7 +113,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_set& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::artefact_set\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::region\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"artefacts_by_archetype\": " << v.artefacts_by_archetype() << ", "

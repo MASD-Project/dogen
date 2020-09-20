@@ -22,8 +22,8 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/region_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/io/entities/artefact_set_io.hpp"
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.identification/io/entities/physical_name_io.hpp"
@@ -43,24 +43,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -118,6 +100,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
@@ -133,13 +133,13 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"artefact_sets_by_logical_id\": " << v.artefact_sets_by_logical_id() << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"managed_directories\": " << v.managed_directories() << ", "
       << "\"outputting_properties\": " << v.outputting_properties() << ", "
       << "\"orphan_artefacts\": " << v.orphan_artefacts() << ", "
       << "\"meta_model_properties\": " << v.meta_model_properties() << ", "
-      << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts()
+      << "\"has_generatable_artefacts\": " << v.has_generatable_artefacts() << ", "
+      << "\"regions_by_logical_id\": " << v.regions_by_logical_id()
       << " }";
     return(s);
 }

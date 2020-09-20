@@ -154,9 +154,9 @@ void print_operation_reason(const bool add_brackets,
 std::list<boost::shared_ptr<dogen::physical::entities::artefact>>
 gather_artefacts(const dogen::physical::entities::model& m) {
     std::list<boost::shared_ptr<dogen::physical::entities::artefact>> r;
-    for (const auto& as_pair : m.artefact_sets_by_logical_id()) {
-        const auto& as(as_pair.second);
-        for (const auto& a_pair : as.artefacts_by_archetype())
+    for (const auto& pr_pair : m.regions_by_logical_id()) {
+        const auto& pr(pr_pair.second);
+        for (const auto& a_pair : pr.artefacts_by_archetype())
             r.push_back(a_pair.second);
     }
 

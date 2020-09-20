@@ -157,10 +157,10 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
      * the set's logical properties. These just link it back to its
      * origin.
      */
-    auto& as(region.physical_artefacts());
+    auto& pr(region.physical_region());
     const auto mid(e->meta_name().id());
-    as.provenance(make_logical_provenance(*e));
-    as.configuration(e->configuration());
+    pr.provenance(make_logical_provenance(*e));
+    pr.configuration(e->configuration());
 
     /*
      * We mainly care about sets that have the potential to be
@@ -173,7 +173,7 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
     using logical::entities::generability_status;
     const auto gs(generability_status::generatable);
     const auto gne(generability_status::generation_not_expected);
-    as.is_generatable(e->generability_status() == gs);
+    pr.is_generatable(e->generability_status() == gs);
 
     /*
      * Obtain all of the archetypes associated with this element's
@@ -231,7 +231,7 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
      * an entry with the associated artefact. The artefact is an
      * instance of the archetype.
      */
-    auto& aba(as.artefacts_by_archetype());
+    auto& aba(pr.artefacts_by_archetype());
     for (const auto& pmn : physical_meta_names) {
         BOOST_LOG_SEV(lg, debug) << "Processing: " << pmn.id();
 
@@ -247,7 +247,7 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
         using namespace identification::entities;
         const logical_id id(e->name().qualified().dot());
         a->name().id(f.make(id, pmn.id()));
-        a->provenance(as.provenance());
+        a->provenance(pr.provenance());
 
         /*
          * Add the archetype to the region. For any position in

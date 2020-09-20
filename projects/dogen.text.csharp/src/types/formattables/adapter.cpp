@@ -48,7 +48,7 @@ adapter::adapt(const transforms::repository& frp,
         auto ptr(region.logical_element());
         formattable fbl;
         fbl.element(region.logical_element());
-        fbl.artefacts(region.physical_artefacts());
+        fbl.artefacts(region.physical_region());
 
         const auto& e(*ptr);
         const auto id(e.name().id());

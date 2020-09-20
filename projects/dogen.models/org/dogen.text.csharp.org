@@ -2982,7 +2982,7 @@ Contains the configuration common to all archetypes.
 :END:
 *** artefacts
 :PROPERTIES:
-:masd.codec.type: physical::entities::artefact_set
+:masd.codec.type: physical::entities::region
 :END:
 ** formattables::element_properties
 All of the properties associated with an element.

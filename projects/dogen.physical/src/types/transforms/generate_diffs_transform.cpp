@@ -135,9 +135,9 @@ apply(const context& ctx, entities::model& m) {
     }
 
     const auto md(m.managed_directories().front());
-    for (auto& as_pair : m.artefact_sets_by_logical_id()) {
-        auto& as(as_pair.second);
-        for (const auto& a_pair : as.artefacts_by_archetype()) {
+    for (auto& pr_pair : m.regions_by_logical_id()) {
+        auto& pr(pr_pair.second);
+        for (const auto& a_pair : pr.artefacts_by_archetype()) {
             auto& a(*a_pair.second);
             found_diffs &= process_artefact(md, a);
         }

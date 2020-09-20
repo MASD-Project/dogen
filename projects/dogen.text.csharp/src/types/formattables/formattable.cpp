@@ -35,7 +35,7 @@ namespace dogen::text::csharp::formattables {
 formattable::formattable(
     const dogen::text::csharp::formattables::element_properties& element_properties,
     const boost::shared_ptr<dogen::logical::entities::element>& element,
-    const dogen::physical::entities::artefact_set& artefacts)
+    const dogen::physical::entities::region& artefacts)
     : element_properties_(element_properties),
       element_(element),
       artefacts_(artefacts) { }
@@ -91,19 +91,19 @@ void formattable::element(const boost::shared_ptr<dogen::logical::entities::elem
     element_ = std::move(v);
 }
 
-const dogen::physical::entities::artefact_set& formattable::artefacts() const {
+const dogen::physical::entities::region& formattable::artefacts() const {
     return artefacts_;
 }
 
-dogen::physical::entities::artefact_set& formattable::artefacts() {
+dogen::physical::entities::region& formattable::artefacts() {
     return artefacts_;
 }
 
-void formattable::artefacts(const dogen::physical::entities::artefact_set& v) {
+void formattable::artefacts(const dogen::physical::entities::region& v) {
     artefacts_ = v;
 }
 
-void formattable::artefacts(const dogen::physical::entities::artefact_set&& v) {
+void formattable::artefacts(const dogen::physical::entities::region&& v) {
     artefacts_ = std::move(v);
 }
 

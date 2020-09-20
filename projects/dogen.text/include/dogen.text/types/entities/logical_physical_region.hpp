@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
 
 namespace dogen::text::entities {
 
@@ -46,7 +46,7 @@ public:
 public:
     logical_physical_region(
         const boost::shared_ptr<dogen::logical::entities::element>& logical_element,
-        const dogen::physical::entities::artefact_set& physical_artefacts);
+        const dogen::physical::entities::region& physical_region);
 
 public:
     /**
@@ -63,10 +63,10 @@ public:
      * @brief Physical artefacts that will be produced from the logical element.
      */
     /**@{*/
-    const dogen::physical::entities::artefact_set& physical_artefacts() const;
-    dogen::physical::entities::artefact_set& physical_artefacts();
-    void physical_artefacts(const dogen::physical::entities::artefact_set& v);
-    void physical_artefacts(const dogen::physical::entities::artefact_set&& v);
+    const dogen::physical::entities::region& physical_region() const;
+    dogen::physical::entities::region& physical_region();
+    void physical_region(const dogen::physical::entities::region& v);
+    void physical_region(const dogen::physical::entities::region&& v);
     /**@}*/
 
 public:
@@ -81,7 +81,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::logical::entities::element> logical_element_;
-    dogen::physical::entities::artefact_set physical_artefacts_;
+    dogen::physical::entities::region physical_region_;
 };
 
 }

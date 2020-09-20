@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
-#include "dogen.physical/types/entities/artefact_set.hpp"
 #include "dogen.text.csharp/types/formattables/element_properties.hpp"
 
 namespace dogen::text::csharp::formattables {
@@ -44,7 +44,7 @@ public:
     formattable(
         const dogen::text::csharp::formattables::element_properties& element_properties,
         const boost::shared_ptr<dogen::logical::entities::element>& element,
-        const dogen::physical::entities::artefact_set& artefacts);
+        const dogen::physical::entities::region& artefacts);
 
 public:
     const dogen::text::csharp::formattables::element_properties& element_properties() const;
@@ -57,10 +57,10 @@ public:
     void element(const boost::shared_ptr<dogen::logical::entities::element>& v);
     void element(const boost::shared_ptr<dogen::logical::entities::element>&& v);
 
-    const dogen::physical::entities::artefact_set& artefacts() const;
-    dogen::physical::entities::artefact_set& artefacts();
-    void artefacts(const dogen::physical::entities::artefact_set& v);
-    void artefacts(const dogen::physical::entities::artefact_set&& v);
+    const dogen::physical::entities::region& artefacts() const;
+    dogen::physical::entities::region& artefacts();
+    void artefacts(const dogen::physical::entities::region& v);
+    void artefacts(const dogen::physical::entities::region&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -75,7 +75,7 @@ public:
 private:
     dogen::text::csharp::formattables::element_properties element_properties_;
     boost::shared_ptr<dogen::logical::entities::element> element_;
-    dogen::physical::entities::artefact_set artefacts_;
+    dogen::physical::entities::region artefacts_;
 };
 
 }

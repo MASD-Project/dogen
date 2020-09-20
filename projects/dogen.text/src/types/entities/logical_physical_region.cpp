@@ -34,19 +34,19 @@ namespace dogen::text::entities {
 
 logical_physical_region::logical_physical_region(
     const boost::shared_ptr<dogen::logical::entities::element>& logical_element,
-    const dogen::physical::entities::artefact_set& physical_artefacts)
+    const dogen::physical::entities::region& physical_region)
     : logical_element_(logical_element),
-      physical_artefacts_(physical_artefacts) { }
+      physical_region_(physical_region) { }
 
 void logical_physical_region::swap(logical_physical_region& other) noexcept {
     using std::swap;
     swap(logical_element_, other.logical_element_);
-    swap(physical_artefacts_, other.physical_artefacts_);
+    swap(physical_region_, other.physical_region_);
 }
 
 bool logical_physical_region::operator==(const logical_physical_region& rhs) const {
     return logical_element_ == rhs.logical_element_ &&
-        physical_artefacts_ == rhs.physical_artefacts_;
+        physical_region_ == rhs.physical_region_;
 }
 
 logical_physical_region& logical_physical_region::operator=(logical_physical_region other) {
@@ -71,20 +71,20 @@ void logical_physical_region::logical_element(const boost::shared_ptr<dogen::log
     logical_element_ = std::move(v);
 }
 
-const dogen::physical::entities::artefact_set& logical_physical_region::physical_artefacts() const {
-    return physical_artefacts_;
+const dogen::physical::entities::region& logical_physical_region::physical_region() const {
+    return physical_region_;
 }
 
-dogen::physical::entities::artefact_set& logical_physical_region::physical_artefacts() {
-    return physical_artefacts_;
+dogen::physical::entities::region& logical_physical_region::physical_region() {
+    return physical_region_;
 }
 
-void logical_physical_region::physical_artefacts(const dogen::physical::entities::artefact_set& v) {
-    physical_artefacts_ = v;
+void logical_physical_region::physical_region(const dogen::physical::entities::region& v) {
+    physical_region_ = v;
 }
 
-void logical_physical_region::physical_artefacts(const dogen::physical::entities::artefact_set&& v) {
-    physical_artefacts_ = std::move(v);
+void logical_physical_region::physical_region(const dogen::physical::entities::region&& v) {
+    physical_region_ = std::move(v);
 }
 
 }

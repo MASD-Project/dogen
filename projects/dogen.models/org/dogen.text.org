@@ -145,7 +145,7 @@ Logical element that gives rise to the artefact.
 
 *** artefacts
 :PROPERTIES:
-:masd.codec.type: physical::entities::artefact_set
+:masd.codec.type: physical::entities::region
 :END:
 
 Physical artefacts that will be produced from the logical element.

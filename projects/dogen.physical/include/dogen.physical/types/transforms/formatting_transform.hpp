@@ -61,7 +61,7 @@ private:
 
     static void apply(const std::unordered_map<
         identification::entities::physical_meta_id, feature_group> fgs,
-        entities::artefact_set& as);
+        entities::region& pr);
 
 public:
     static void apply(const context& ctx, entities::model& m);

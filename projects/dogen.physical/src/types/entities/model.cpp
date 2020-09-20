@@ -50,24 +50,24 @@ model::model(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
-    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& artefact_sets_by_logical_id,
     const std::string& technical_space,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties,
     const std::list<boost::shared_ptr<dogen::physical::entities::artefact> >& orphan_artefacts,
     const dogen::physical::entities::meta_model_properties& meta_model_properties,
-    const bool has_generatable_artefacts)
+    const bool has_generatable_artefacts,
+    const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& regions_by_logical_id)
     : meta_name_(meta_name),
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
-      artefact_sets_by_logical_id_(artefact_sets_by_logical_id),
       technical_space_(technical_space),
       managed_directories_(managed_directories),
       outputting_properties_(outputting_properties),
       orphan_artefacts_(orphan_artefacts),
       meta_model_properties_(meta_model_properties),
-      has_generatable_artefacts_(has_generatable_artefacts) { }
+      has_generatable_artefacts_(has_generatable_artefacts),
+      regions_by_logical_id_(regions_by_logical_id) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -75,13 +75,13 @@ void model::swap(model& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
-    swap(artefact_sets_by_logical_id_, other.artefact_sets_by_logical_id_);
     swap(technical_space_, other.technical_space_);
     swap(managed_directories_, other.managed_directories_);
     swap(outputting_properties_, other.outputting_properties_);
     swap(orphan_artefacts_, other.orphan_artefacts_);
     swap(meta_model_properties_, other.meta_model_properties_);
     swap(has_generatable_artefacts_, other.has_generatable_artefacts_);
+    swap(regions_by_logical_id_, other.regions_by_logical_id_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -89,13 +89,13 @@ bool model::operator==(const model& rhs) const {
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
-        artefact_sets_by_logical_id_ == rhs.artefact_sets_by_logical_id_ &&
         technical_space_ == rhs.technical_space_ &&
         managed_directories_ == rhs.managed_directories_ &&
         outputting_properties_ == rhs.outputting_properties_ &&
         orphan_artefacts_ == rhs.orphan_artefacts_ &&
         meta_model_properties_ == rhs.meta_model_properties_ &&
-        has_generatable_artefacts_ == rhs.has_generatable_artefacts_;
+        has_generatable_artefacts_ == rhs.has_generatable_artefacts_ &&
+        regions_by_logical_id_ == rhs.regions_by_logical_id_;
 }
 
 model& model::operator=(model other) {
@@ -166,22 +166,6 @@ void model::name(const dogen::identification::entities::physical_name& v) {
 
 void model::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
-}
-
-const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() const {
-    return artefact_sets_by_logical_id_;
-}
-
-std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& model::artefact_sets_by_logical_id() {
-    return artefact_sets_by_logical_id_;
-}
-
-void model::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>& v) {
-    artefact_sets_by_logical_id_ = v;
-}
-
-void model::artefact_sets_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::artefact_set>&& v) {
-    artefact_sets_by_logical_id_ = std::move(v);
 }
 
 const std::string& model::technical_space() const {
@@ -270,6 +254,22 @@ bool model::has_generatable_artefacts() const {
 
 void model::has_generatable_artefacts(const bool v) {
     has_generatable_artefacts_ = v;
+}
+
+const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& model::regions_by_logical_id() const {
+    return regions_by_logical_id_;
+}
+
+std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& model::regions_by_logical_id() {
+    return regions_by_logical_id_;
+}
+
+void model::regions_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>& v) {
+    regions_by_logical_id_ = v;
+}
+
+void model::regions_by_logical_id(const std::unordered_map<dogen::identification::entities::logical_id, dogen::physical::entities::region>&& v) {
+    regions_by_logical_id_ = std::move(v);
 }
 
 }

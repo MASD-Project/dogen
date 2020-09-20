@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.physical/types/entities/artefact_set.hpp"
+#include "dogen.physical/types/entities/region.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.utility/types/log/logger.hpp"
@@ -132,12 +132,12 @@ formatting_transform::make_formatting_configuration(
 
 void formatting_transform::apply(const std::unordered_map<
     identification::entities::physical_meta_id, feature_group> fgs,
-    entities::artefact_set& as) {
-    const auto id(as.provenance().logical_name().id().value());
+    entities::region& pr) {
+    const auto id(pr.provenance().logical_name().id().value());
     BOOST_LOG_SEV(lg, trace) << "Transforming: " << id;
 
-    const auto cfgs(make_formatting_configuration(fgs, *as.configuration()));
-    for (auto& pair : as.artefacts_by_archetype()) {
+    const auto cfgs(make_formatting_configuration(fgs, *pr.configuration()));
+    for (auto& pair : pr.artefacts_by_archetype()) {
         const auto arch(pair.first);
         auto& a(*pair.second);
         const auto i(cfgs.find(arch));
@@ -163,7 +163,7 @@ void formatting_transform::apply(const context& ctx, entities::model& m) {
     const auto& in(pmm.indexed_names());
     const auto& fm(*ctx.feature_model());
     const auto fgs(make_feature_groups(fm, in.all()));
-    for(auto& pair : m.artefact_sets_by_logical_id()) {
+    for(auto& pair : m.regions_by_logical_id()) {
         auto& as(pair.second);
         apply(fgs, as);
     }

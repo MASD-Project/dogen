@@ -153,7 +153,7 @@ model adapter::adapt(const transforms::repository& frp,
                 adaptation_error(duplicate_master + id.value()));
         }
         fbl.element(region.logical_element());
-        fbl.artefacts(region.physical_artefacts());
+        fbl.artefacts(region.physical_region());
 
         /*
          * Check to see if the element has any formatters. Some

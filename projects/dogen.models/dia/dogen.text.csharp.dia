@@ -5594,7 +5594,7 @@ using System;
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#physical::entities::artefact_set#</dia:string>
+            <dia:string>#physical::entities::region#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
