@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+
+/**
+ * @brief Remove all regions which do not contain generatable
+ * artefacts.
+ */
 class remove_regions_transform final {
 public:
-    remove_regions_transform() = default;
-    remove_regions_transform(const remove_regions_transform&) = default;
-    remove_regions_transform(remove_regions_transform&&) = default;
-    ~remove_regions_transform() = default;
-    remove_regions_transform& operator=(const remove_regions_transform&) = default;
-
-public:
-    bool operator==(const remove_regions_transform& rhs) const;
-    bool operator!=(const remove_regions_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
