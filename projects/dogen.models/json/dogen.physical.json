@@ -1655,6 +1655,13 @@
           "documentation": "Paths relative to the part's root directory.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::remove_regions_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
