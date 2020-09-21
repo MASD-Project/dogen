@@ -251,7 +251,7 @@ while(git_result LESS 0 AND git_retries LESS 10)
     message(STATUS "Failed to update source code from " ${source_url})
     message(STATUS "Problems checking out from git repository."
         " Status: ${git_result}. Retries: ${git_retries}")
-    ctest_sleep(60)
+    ctest_sleep(300)
     math(EXPR git_retries "${git_retries} + 1")
     ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
 endwhile()
