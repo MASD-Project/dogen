@@ -13,16 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-21 Mon 08:24]
-| <75>         |        |     |   |     |
-| Headline     | Time   |   % |   |     |
-|--------------+--------+-----+---+-----|
-| *Total time* | *0:00* | 0.0 |   | 0.0 |
+#+CAPTION: Clock summary at [2020-09-23 Wed 19:32]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *3:05* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 3:05   |      |      | 100.0 |
+| Active                                 |        | 3:05 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 3:05 | 100.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-09-23 Wed 18:41]--[2020-09-23 Wed 19:32] =>  0:51
     CLOCK: [2020-09-21 Mon 19:31]--[2020-09-21 Mon 21:45] =>  2:14
     :END:
 
@@ -38,13 +43,17 @@ Release Announcements:
 ![Navio Indepêndencia](https://live.staticflickr.com/6026/5975302810_7d04dffb62_b.jpg)
 _Abandoned freighter North of Namibe, Angola. (C) Alfred Weidinger, 2011_
 
+**DRAFT: release notes under construction**
+
 # Introduction
 
-We've been working on Dogen for long enough to know that there is no such thing as an easy sprint, but after a sequence of very challenging ones, we were certainly hoping for an easier ride this time round. Alas, not to be. Due to never ending  changes in personal circumstances, both with work and private life, Sprint 27 ended up being an _awfully long sprint_, at a total of 70 days elapsed. To make matters worse, not only was it a bit of a fragmented sprint _in time_ - a bit stop-start, if we're honest - but it was also somewhat disjointed in terms of the work as well. One never ending story occupied the bulk of the work, thought it did have lots of challenging variations; and the remainder - a smattering of smaller stories - was insufficient to make any significant progress towards the sprint goals. Ah, the joys of working on such a long, open-ended project, hey. And to round it all up nicely, we weren't able to do a single MDE Paper of the Week (PofW); these will hopefully resume at the usual cadence next sprint. Nonetheless, though we did not achieve what we set out to achieve, much was indeed achieved, as we shall see in these release notes.
+We've been working on Dogen for long enough to know that there is no such thing as an easy sprint; still, after a long sequence of very challenging ones, we were certainly hoping for an easier ride this time round. Alas, not to be. Due to never ending  changes in personal circumstances, both with work and private life, Sprint 27 ended up being an _awfully long sprint_, with a grand total of 70 elapsed days rather than the 30 or 40 customary ones. To make matters worse, not only was it a bit of a fragmented sprint _in time_ - a bit stop-start, if we're honest - but it was also somewhat disjointed in terms of the work as well. One never ending story occupied the bulk of the work, thought it did have lots of challenging variations; and the remainder - a smattering of smaller stories - were insufficient to make any significant headway towards the sprint goals. Ah, the joys of working on such a long, open-ended project, hey. And to round it all up nicely, we weren't able to do a _single_ MDE Paper of the Week (PofW); there just weren't enough hours in the day, and these were the first ones to fall by the wayside. They will hopefully resume at the usual cadence next sprint.
+
+The picture may sound gloomy, but do not fear. As we shall see in these release notes, we may have not achieved what we set out to achieve originally, but _much else_ was achieved nevertheless - giving us more than sufficient grounds for our unwavering developer optimism. _Omnia mutantur, nihil interit_, as Ovid [would say](https://en.wikipedia.org/wiki/Omnia_mutantur).
 
 # User visible changes
 
-This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there were no user facing features, the video also discusses the work on internal features.
+This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there were no user facing features, the video discusses the work on internal features instead.
 
 [![Sprint 1.0.27 Demo](https://img.youtube.com/vi/J5duq-gw-nI/0.jpg)](https://youtu.be/J5duq-gw-nI)
 _Video 1: Sprint 27 Demo._
@@ -53,21 +62,13 @@ _Video 1: Sprint 27 Demo._
 
 In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_27.org).
 
-## Ephemerides
-
-There were no ephemerides this sprint.
-
-## Milestones
-
-No milestones where reached this sprint.
-
 ## Significant Internal Stories
 
 The story arc of the last few sprints has been centred around _reducing the impedance mismatch_ between Dogen's source code and the conceptual model for the Logical-Physical Space (at times called the LPS). In turn, the LPS stemmed from the work we were doing in cleaning up the text models - in particular the C++ and C# backends; in other words, what we have been trying to achieve for some time now is to remove a _large amount_ of hard-coding and just plain old bad modeling in those two models. For a throw back, see the section _Towards a physical Model_ in the release notes of [Sprint 23](https://github.com/MASD-Project/dogen/releases/tag/v1.0.23). At any rate, every time we try to address what appears to be a fairly straightforward issue, we soon realise it has big implications for the LPS, and then we end up going on yet another wild goose chase to try to find a solution that is in keeping with the conceptual model. Once its all resolved, we then go back to the task at hand and move forwards by a metre or so... until we find the next big issue. It has been this way for a while and sadly this sprint was no different. The main story that consumed just under 51% of the ask was the creation of a new model, the ```identification``` model, which was not directly aligned with the sprint goal. We then worked on a series of smaller stories that were indeed aligned with the goal, but which also required what appears to be a never ending series of mini-spikes. Lets have a quick look at all of these stories.
 
 ###  Create an ```identification``` model
 
-The graph of relationships between the different models in Dogen has been a source of concern for a very long time, as [this blog](https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html) post attests. We are facing the typical engineering trade-offs: on one hand, we do not want cycles between models because that severely impairs testability and comprehension; on the other hand, we do not want a small number of "modelets", which have no well-defined responsibilities beyond simply existing to break up cycles. One such bone of contention has been the strange nature of the relationship between the ```logical``` and ```physical``` models. To be fair, this tangled relationship it is largely a byproduct of the fundamental nature of the LPS, which posits that the logical-physical space is one combined entity; predictably, these two models have a lot of references to each other:
+The graph of relationships between the different models in Dogen has been a source of concern for a very long time, as [this blog](https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html) post attests. We are facing the typical engineering trade-offs: on one hand, we do not want cycles between models because that severely impairs testability and comprehension; on the other hand, we do not want a small number of "modelets", which have no well-defined responsibilities beyond simply existing to break up cycles. One such bone of contention has been the strange nature of the relationship between the ```logical``` and ```physical``` models. To be fair, this tangled relationship is largely a byproduct of the fundamental nature of the LPS, which posits that the logical-physical space is one combined entity. Predictably, these two models have a lot of references to each other:
 
 - the ```logical``` model contains inside of it a model of the ```physical``` entities, which is use to code-generate these entities.
 - the ```physical``` model represents regions of the LPS for a given point in the logical axis of the LPS, and therefore needs to reference the ```logical``` model.
@@ -89,15 +90,17 @@ As you can imagine, and we now know first hand, modifying completely how "identi
 - [MASD - Dogen Coding: Identification Refactor - Part 2](https://www.youtube.com/watch?v=qMqeG2awLac)
 - [MASD - Dogen Coding: Identification Refactor - Part 3](https://www.youtube.com/watch?v=rP8r8FPCFfc)
 
-These videos catch a tiny sliver of the very painful refactor, but they are more than sufficient to give a flavour of the over 42 hours of "joy" we went through. Having said that, in the end we did experience moments of non-sarcastic joy because the code base is now so much better for it. If nothing else, at least now a word cloud will not have ```std::string``` as its most common type - or so one would hope; the hypothesis was not put to the test, probably out of fear. At any rate, we felt this approach was such an improvement that we started to think of all the other types of patterns we have which share similarities with primitives; and how _they_ could also benefit from a similar clean up. However, the reverie quickly ended; at this stage, these are but wishful dreams, a mere gathering of requirements for that one day where our copious free time will allow us to take on a side project of such magnitude. And we were back to the task at hand.
+These videos catch a tiny sliver of the very painful refactor, but they are more than sufficient to give a flavour of the over 42 hours of "joy" we went through. Having said that, in the end we did experience moments of non-sarcastic joy because the code base is now so much better for it. If nothing else, at least now a word cloud will not have ```std::string``` as its most common type - or so one would hope; the hypothesis was not put to the test, probably out of fear. At any rate, we felt this approach was such an improvement that we started to think of all the other types of patterns we have which share similarities with primitives; and how _they_ could also benefit from a similar clean up. However, the reverie quickly ended; at this stage, these are but wishful dreams, a mere gathering of requirements for that one day where our copious free time will allow us to take on a side project of such magnitude. Once backlogged, the dreams quickly faded away and we were back to the task at hand.
 
-doc/blog/images/dogen_codec_model.png
+![Dogen identification](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_identification_model.png)
+_Figure 1: The Dogen Identification model._
 
 ### Rename ```injection``` to ```codec```
 
 A small but very helpful change - nay, _instrumental_ change - on our never ending quest to clean up the conceptual model was the renaming of the ```injection``` models to ```codec```. In order to understand its importance, we need to go back in time via our old favourite imagine of the Dogen pipeline:
 
 ![Dogen Pipeline](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/orchestration_pipeline.png)
+_Figure 2: The Dogen pipeline, circa Sprint 12._
 
 Almost every box in this diagram has changed name, as as our understanding of the domain evolved, though their functional roles remained fairly constant. This sprint it was the turn of the "injection" box. This happened because we begun to realise that there are several "forces" at play:
 
@@ -105,34 +108,41 @@ Almost every box in this diagram has changed name, as as our understanding of th
 - the process of performing the projection can be done by the same set of classes. That is, it's often convenient to declare an _encoder_ and a _decoder_ next to each other because the coding and decoding is functionally very similar.
 - the generation of _text_ from model elements is considered an extraction, as is the plain conversion of models of one type to another. However, given there is a very well understood set of terms regarding the transformation of model elements into text - _e.g._, _model-to-text transforms_ - its not insightful to call this an extraction.
 
-When we took all this factors into account, it became obvious we could not call our encoding and decoding models "injection", given that is not what they do. Instead, we decided to call them "codecs" because they _encode_ and _decode_ elements from the format of one technical space to the format of another. Once the light-bulb went off, all was light and the rename itself was fairly trivial.
+![Codec model](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_codec_model.png)
+_Figure 3: the Dogen Codec model._
 
-doc/blog/images/dogen_identification_model.png
+When we took all this factors into account, it became obvious we could not call these models "injection" or "injectors", because that is not all that they do. We debated calling them "inxtractors" given they were both injectors and extractors, but quickly realised we were entering the terminological domain of "modems" (_i.e._, "modulators" and "demodulators") and so we settled on calling them "codecs" because they _encode_ and _decode_ elements from the format of one technical space to the format of another. Once the light-bulb went off, all was light and the rename itself was fairly trivial.
 
 ### Assorted conceptual model clean ups
 
-A number of small stories worked on were directly or indirectly related to conceptual model clean ups - that is the polishing of the code to make it coherent with our present understanding of the conceptual model. There were:
+A number of small stories worked on were directly or indirectly related to conceptual model clean ups - that is, the polishing of the code to make it coherent with our present understanding of the conceptual model. These were:
 
 - **Create a logical to physical projector**: In the past we had transforms and adapters which had bits of the projection work. Now that we understand projections much better, it makes sense to have dedicated classes responsible for the projection.
-- **Clean up the Logical-physical model**: A bit of a grab-bag story related to all sorts of miscellaneous clean up work done on the ```text``` and ```physical``` models. Whilst the story itself wasn't huge (7% of the ask), it delivered _immense_ amounts of clarity. As an example, instead of duplicating properties from both the ```logical``` and ```physical``` models in the text model, we now have modeled it very clearly as a representation of LPS, in a way that is completely transparent. We also finally renamed the ```artefact_set``` to a physical ```region```, which is in keeping with the LPS, as well as the removal of a large number of duplicate types and properties in the physical model.
+- **Clean up the logical-physical model**: A bit of a grab-bag story related to all sorts of miscellaneous clean up work done on the ```text``` and ```physical``` models. Whilst the story itself wasn't huge (7% of the ask), it delivered _immense_ amounts of clarity. As an example, instead of duplicating properties from both the ```logical``` and ```physical``` models in the text model, we now have modeled it very clearly as a representation of LPS, in a way that is completely transparent (_c.f._, Figure 4). We also finally renamed the ```artefact_set``` to a physical ```region```, which is in keeping with the LPS, as well as the removal of a large number of duplicate types and properties in the physical model.
+
+![Dogen LPS](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_text_model_lps.png)
+_Figure 4: The refactored Dogen Text model._
+
 - **Empty path ID error in logs**: yet another clean up story, this entailed understanding why we were producing so many weird and wonderful warnings in the log files related to empty paths. Turns out we had missed out some of the logic regarding the filtering out of reference models prior to generation - in particular the Platform Definition Models or PDMs - which resulted in us trying to look for paths where none exist. With this clean up we have a proper transform to filter out all artefacts and even whole regions of physical space which are not supposed to exist at the point at which we write files to the file-system (```remove_regions_transform```).
 - **Add instances of physical meta-model elements**: This story was a bit of a mind-bender in terms of the LPS. Thus far we have relied on the usual meta-model taxonomy as prescribed by the [OMG](https://www.omg.org/ocup-2/documents/Meta-ModelingAndtheMOF.pdf). However, with this sprint we started to break with the nice clear cut hierarchical model because we noticed that there is in fact a layer in between the physical meta-model (PMM) and the physical model (PM). This layer comes to be because the PMM is configurable via the variability elements that Dogen supports. This variability means that the _actual_ PMM a given model has could be completely different from another model. Now, of course, we only allow a very restricted form of configuration at this level, but nonetheless its large enough that it requires a large amount of supporting data structures. As we did not quite know what to call these data structures, we decided to go for the suitably incorrect postfix of ```_properties```. Henney would not have been proud, clearly.
 
-dogen_physical_meta_model_properties.png
+![Dogen identification](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/dogen_physical_meta_model_properties.png)
+_Figure 5: Dogen meta-model properties._
 
-- **Add dependencies to artefacts**: work was started but not completed on adding dependencies to artefacts and archetypes, but we then ran into all of the clean ups mentioned above. It shall continue next sprint.
-- **
-
-doc/blog/images/dogen_text_model_lps.png
-
-### MDE Paper of the Week (PofW)
+- **Add dependencies to artefacts**: work was started but not completed on adding dependencies to artefacts and archetypes, but we then ran into all of the clean ups mentioned above. It shall continue next sprint, where we will hopefully describe this story properly.
+- **Add full and relative path processing to PM**: similarly to the previous story, this is a long standing story which is part of the clean up arc. Each sprint we tend to do a bit of progress on it, but sadly, it also generates a large amount of spikes, meaning we never tend to get very far. When we do complete it, we shall provide a complete description of this endeavour.
+- **Other minor stories**: Stories comprising 0.1% to 0.3% of the ask were also completed, but were very minor. For example, we toyed with removing split project support, but in the end concluded this did not provide the bang we expected and, in the end, rolled back the changes.
 
 ## Resourcing
 
+As we've already mentioned, resourcing this sprint was completely dominated by one big ol' massive story: updating the entire code base to use the new ```identification``` model. Weighing in at  51%, it amply demonstrates our inability to break up large stories into small, digestible pieces. In reality, we probably should have had an epic encompassing around 3 or 4 stories, one for each chunk of the pipeline - _e.g._ injection, logical, physical, _etc_. As it was, we bundled all the work into one massive story, which is not ideal for the purposes of analysis. For example, the logical work was the largest of them all, but that is not visible through the lens of the data. OK, so the breaking down of stories was not exactly amazing, but on the plus side we did spend 82% of the total ask on "real engineering", as opposed to the other 18% allocated to "housekeeping". These were scattered over release notes (8.8%), backlog management (3%), demos (just under 1%) and addressing issues with nightlies, at a costly 5.3%. Finally, what was _truly_ not ideal was our utilisation rate of 20% - the lowest since records begun in Sprint 20. Sadly, this particular metric is only a function of our desires to a small degree, and much more a function of the environment we operate in, so there is only so much we can do to optimise it. Overall, and given the constraints, one would have to conclude this was a pretty efficient sprint, though we do hope the utilisation rate can start to climb to number levels in the near future.
+
 ![Sprint 27 stories](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_27_pie_chart.jpg)
-_Figure 3_: Cost of stories for sprint 27.
+_Figure 6_: Cost of stories for sprint 27.
 
 ## Roadmap
+
+Our oracular project plan suffered the traditional updates - that is, move everything forward by a sprint and pray next sprint delivers some action on the sprint goals. To be perfectly honest, there is a very clear pattern asserting itself, which is to say the clean up associated with the LPS is extremely difficult and utterly impossible to estimate. So the always dubious project plan has become of even less value. But since it also works as a roadmap, we'll keep nudging it along - just don't read too much (or anything, really) into those dates. We never did.
 
 ![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_27_project_plan.png)
 
@@ -154,11 +164,12 @@ _Table 1: Binary packages for Dogen._
 
 # Next Sprint
 
-The goal for the next sprint is
+The goals for the next sprint are:
 
--
+- to finish PMM generation;
+- to implement locator and dependencies via PMM.
 
-That's all for this release. Happy Modeling!
+That's all for this release. Happy Modelin!g
 #end_src
 
 *** Create a demo and presentation for previous sprint                :story:
