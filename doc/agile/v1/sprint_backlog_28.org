@@ -13,37 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-23 Wed 19:32]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *3:05* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 3:05   |      |      | 100.0 |
-| Active                                 |        | 3:05 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 3:05 | 100.0 |
-#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+caption: clock summary at [2020-09-23 wed 23:21]
+| <75>                                               |        |      |      |       |
+| headline                                           | time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *total time*                                       | *4:23* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| stories                                            | 4:23   |      |      | 100.0 |
+| active                                             |        | 4:23 |      | 100.0 |
+| edit release notes for previous sprint             |        |      | 3:44 |  85.2 |
+| create a demo and presentation for previous sprint |        |      | 0:39 |  14.8 |
+#+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
-    :LOGBOOK:
-    CLOCK: [2020-09-23 Wed 18:41]--[2020-09-23 Wed 19:32] =>  0:51
-    CLOCK: [2020-09-21 Mon 19:31]--[2020-09-21 Mon 21:45] =>  2:14
-    :END:
+*** started edit release notes for previous sprint                    :story:
+    :logbook:
+    clock: [2020-09-23 wed 22:01]--[2020-09-23 wed 22:40] =>  0:39
+    clock: [2020-09-23 wed 18:41]--[2020-09-23 wed 19:32] =>  0:51
+    clock: [2020-09-21 mon 19:31]--[2020-09-21 mon 21:45] =>  2:14
+    :end:
 
-Add github release notes for previous sprint.
+add github release notes for previous sprint.
 
-Release Announcements:
+release announcements:
 
-- [[https://twitter.com/MarcoCraveiro/status/1284151629391040513][twitter]]
-- [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6674605622907949056-3fJa][linkedin]]
+- [[https://twitter.com/marcocraveiro/status/1308894541135708161][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1027-independ%C3%AAncia-activity-6714660822465048576-fYZV][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 #+begin_src md
 ![Navio Indepêndencia](https://live.staticflickr.com/6026/5975302810_7d04dffb62_b.jpg)
 _Abandoned freighter North of Namibe, Angola. (C) Alfred Weidinger, 2011_
-
-**DRAFT: release notes under construction**
 
 # Introduction
 
@@ -55,7 +55,7 @@ The picture may sound gloomy, but do not fear. As we shall see in these release 
 
 This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. As there were no user facing features, the video discusses the work on internal features instead.
 
-[![Sprint 1.0.27 Demo](https://img.youtube.com/vi/J5duq-gw-nI/0.jpg)](https://youtu.be/J5duq-gw-nI)
+[![Sprint 1.0.27 Demo](https://img.youtube.com/vi/swpKj0rKCpM/0.jpg)](https://youtu.be/swpKj0rKCpM)
 _Video 1: Sprint 27 Demo._
 
 # Development Matters
@@ -169,39 +169,28 @@ The goals for the next sprint are:
 - to finish PMM generation;
 - to implement locator and dependencies via PMM.
 
-That's all for this release. Happy Modelin!g
+That's all for this release. Happy Modeling!
 #end_src
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-09-23 Wed 23:20]
+    :LOGBOOK:
+    CLOCK: [2020-09-23 Wed 22:41]--[2020-09-23 Wed 23:20] =>  0:39
+    :END:
 
 Time spent creating the demo and presentation.
 
 **** Presentation
 
-***** Dogen v1.0.26, "Rio Bentiaba"
+***** Dogen v1.0.27, "Independência"
 
     Marco Craveiro
     Domain Driven Development
-    Released on 13th July 2020
+    Released on 23rd September 2020
 
-***** Archetype Factories and Transforms
-
-- split factory from transform
-
-***** Add Support for CSV Values in Variability
-
-- CSV
-- CSV collection
-
-***** Add Relations Between Archetypes in the PMM
-
-- add all the types related to relations
-
-***** Create an Archetype Repository in Physical Model
-
-- archetype repository artefact set
-- discuss how the chains are now connected.
-
+***** Create an identification model
+***** Rename injection to codec
+***** The logical-physical space
 *** Sprint and product backlog grooming                               :story:
 
 Updates to sprint and product backlog.
@@ -209,18 +198,6 @@ Updates to sprint and product backlog.
 *** Nightly nursing and other spikes                                  :story:
 
 Time spent troubleshooting environmental problems.
-
-- clangd seized up, so did a dist-upgrade and updated all emacs
-  packages.
-- error:
-
-:   SubmitURL: http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen
-:   Upload file: /home/marco/nightly/dogen/build/output/clang9/Debug/Testing/20200726-0000/Update.xml to http://my.cdash.org/submit.php?project=MASD+Project+-+Dogen&FileName=lovelace___clang9-Linux-x86_64-Debug___20200726-0000-Nightly___XML___Update.xml&build=clang9-Linux-x86_64-Debug&site=lovelace&stamp=20200726-0000-Nightly&MD5=807f7da98b878c6b03ab45fa7ed66fe1 Size: 602
-:   Error when uploading file: /home/marco/nightly/dogen/build/output/clang9/Debug/Testing/20200726-0000/Update.xml
-:   Error message was: Operation too slow. Less than 1 bytes/sec transferred the last 120 seconds
-:   Problems when submitting via HTTP
-
-  Need to retry submission.
 
 *** Implement meta-name validator correctly                           :story:
 
