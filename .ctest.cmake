@@ -131,10 +131,10 @@ set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
 set(CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS 50)
 
 # How long to wait between timed-out CTest submissions
-set(submit_retry_delay 30)
+set(retry_delay 300)
 
 # How many times to retry timed-out CTest submissions
-set(submit_retry_count 10)
+set(retry_count 10)
 
 #
 # Defines for CMake.
@@ -247,11 +247,11 @@ endif()
 # update files from git, with retry logic.
 ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
 set(git_retries 0)
-while(git_result LESS 0 AND git_retries LESS 10)
+while(git_result LESS 0 AND git_retries LESS ${retry_count})
     message(STATUS "Failed to update source code from " ${source_url})
     message(STATUS "Problems checking out from git repository."
         " Status: ${git_result}. Retries: ${git_retries}")
-    ctest_sleep(300)
+    ctest_sleep(${retry_delay})
     math(EXPR git_retries "${git_retries} + 1")
     ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
 endwhile()
@@ -300,5 +300,4 @@ endif()
 #
 # Step: submit build results
 #
-ctest_submit(RETRY_COUNT ${submit_retry_count}
-    RETRY_DELAY ${submit_retry_delay})
+ctest_submit(RETRY_COUNT ${retry_count} RETRY_DELAY ${retry_delay})
