@@ -19,106 +19,33 @@
 * entities
 ** entities::model
 :PROPERTIES:
-:masd.codec.stereotypes: Nameable, MetaNameable, Provenance
+:masd.codec.stereotypes: Provenance
 :END:
 
-Yarn model.
+Represents the combined logical-physical space.
 
-*** references
+*** logical
 :PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_name, identification::entities::model_type>
+:masd.codec.type: logical::entities::model
 :END:
 
-All other models that this model depends on, mapped to their origin.
+The logical model representation in the logical-physical space.
 
-*** leaves
+*** physical
 :PROPERTIES:
-:masd.codec.type: std::unordered_set<identification::entities::logical_name>
-:END:
-
-All leaf types in this model.
-
-Leaves are types concrete types which have a parent.
-
-*** elements
-:PROPERTIES:
-:masd.codec.type: std::list<element_artefacts>
-:END:
-*** root_module
-:PROPERTIES:
-:masd.codec.type: boost::shared_ptr<logical::entities::structural::module>
+:masd.codec.type: physical::entities::model
 :END:
 
-The module that represents the model.
+The physical model representation in the logical-physical space.
 
-*** has_generatable_types
+*** logical_physical_regions
 :PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true the intermediate model has at least one generable type, false otherwise.
-
-*** input_technical_space
-:PROPERTIES:
-:masd.codec.type: identification::entities::technical_space
+:masd.codec.type: std::list<logical_physical_region>
 :END:
 
-Technical space which this model used originally.
+Contains all of the logical-physical regions that make up the logical physical space
+for this model.
 
-*** output_technical_space
-:PROPERTIES:
-:masd.codec.type: identification::entities::technical_space
-:END:
-
-Technical space into which to output the model.
-
-*** all_technical_spaces
-:PROPERTIES:
-:masd.codec.type: std::unordered_set<identification::entities::technical_space>
-:END:
-
-Set of all technical concrete spaces involved in generating this model.
-
-Includes the primary technical space (e.g. the output technical space) as well as
-all of the secondary technical spaces. Does not include any abstract technical
-spaces.
-
-*** orm_properties
-:PROPERTIES:
-:masd.codec.type: boost::optional<logical::entities::orm::model_properties>
-:END:
-*** enabled_archetype_for_element
-:PROPERTIES:
-:masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
-:END:
-*** extraction_properties
-:PROPERTIES:
-:masd.codec.type: physical::entities::extraction_properties
-:END:
-*** managed_directories
-:PROPERTIES:
-:masd.codec.type: std::list<boost::filesystem::path>
-:END:
-*** facet_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, physical::entities::facet_properties>
-:END:
-** entities::Nameable
-:PROPERTIES:
-:masd.codec.stereotypes: masd::object_template
-:END:
-*** name
-:PROPERTIES:
-:masd.codec.type: identification::entities::logical_name
-:END:
-** entities::MetaNameable
-:PROPERTIES:
-:masd.codec.stereotypes: masd::object_template
-:END:
-*** meta_name
-:PROPERTIES:
-:masd.codec.type: identification::entities::logical_meta_name
-:END:
 ** entities::Provenance
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
@@ -128,22 +55,23 @@ Details of the origin of this model element.
 
 *** provenance
 :PROPERTIES:
-:masd.codec.type: identification::entities::codec_provenance
+:masd.codec.type: identification::entities::logical_provenance
 :END:
 
 Details of the provenance of this model element.
 
-** entities::element_artefacts
-Maps logical elements with the physical artefacts that will be produced from them.
+** entities::logical_physical_region
+Represents a region of logical-physical space with a single logical element and
+its associated physical elements.
 
-*** element
+*** logical_element
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<logical::entities::element>
 :END:
 
 Logical element that gives rise to the artefact.
 
-*** artefacts
+*** physical_region
 :PROPERTIES:
 :masd.codec.type: physical::entities::region
 :END:
@@ -152,7 +80,7 @@ Physical artefacts that will be produced from the logical element.
 
 ** entities::model_set
 :PROPERTIES:
-:masd.codec.stereotypes: Nameable
+:masd.codec.stereotypes: Provenance
 :END:
 
 Represents a set of related models.

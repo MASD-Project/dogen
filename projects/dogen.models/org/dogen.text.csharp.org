@@ -3033,14 +3033,6 @@ All of the properties associated with an element.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** formattables::artefact_properties
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
 *** file_path
 :PROPERTIES:
 :masd.codec.type: boost::filesystem::path

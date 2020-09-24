@@ -102,14 +102,6 @@ An error occurred in the factory whilst making.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::physical_artefact_repository_transform
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
-** transforms::physical_artefact_preparation_chain
-:PROPERTIES:
-:masd.codec.stereotypes: dogen::handcrafted::typeable
-:END:
 * generator
 :PROPERTIES:
 :masd.generalization.parent: dogen::generator
@@ -131,14 +123,21 @@ An error occurred in the factory whilst making.
 
 Helpers for the orchestration model.
 
-** helpers::adaptation_exception
-:PROPERTIES:
-:masd.codec.stereotypes: masd::exception
-:END:
-** helpers::adapter
+** helpers::codec_to_logical_projector
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
+** helpers::logical_to_physical_projector
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** helpers::projection_error
+:PROPERTIES:
+:masd.codec.stereotypes: masd::exception
+:END:
+
+An error ocurred whilst projecting elements from one space into another.
+
 * features
 :PROPERTIES:
 :masd.codec.dia.comment: true

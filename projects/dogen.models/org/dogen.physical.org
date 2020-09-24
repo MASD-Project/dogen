@@ -251,7 +251,7 @@ ID of the meta-element in the logical model this archetype binds to.
 
 *** part
 :PROPERTIES:
-:masd.codec.type: identification::entities::physical_id
+:masd.codec.type: identification::entities::physical_meta_id
 :END:
 
 Part in which we are located.
@@ -277,7 +277,7 @@ Properties of this archetype with regards to relations.
 :END:
 ** entities::model
 :PROPERTIES:
-:masd.codec.stereotypes: Element, ArtefactContainer
+:masd.codec.stereotypes: Element
 :END:
 
 Collection of entities representing objects in physical space.
@@ -303,6 +303,27 @@ Primary technical space that this model belongs to.
 :END:
 
 Artefacts that exist in the physical dimension only.
+
+*** meta_model_properties
+:PROPERTIES:
+:masd.codec.type: meta_model_properties
+:END:
+
+Meta-model configuration supplied by this model.
+
+*** has_generatable_artefacts
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true the repository has at least one generable artefact, false otherwise.
+
+*** regions_by_logical_id
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::logical_id, region>
+:END:
+
+All physical regions in  this model, by logical ID.
 
 ** entities::Describable
 :PROPERTIES:
@@ -392,29 +413,42 @@ Overridden postfix, if any.
 
 Represents an entity in physical space.
 
+*** enabled
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the artefact is enabled and its content will be computed.
+
+*** overwrite
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the artefact will be expressed to the filesystem if there are changes.
+
+*** file_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the file corresponding to this artefact.
+
 *** content
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
 
 #+begin_src mustache
-Content of the file.
+Textual content of the artefact.
 
 #+end_src
-*** enabled
+*** path_properties
 :PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** relative_paths
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<std::string, boost::filesystem::path>
+:masd.codec.type: path_properties
 :END:
 
-Paths relative to the path ID that keys the container.
+Properties related to paths in the filesystem.
 
 *** dependencies
 :PROPERTIES:
@@ -443,14 +477,30 @@ Unified diff between the in-memory artefact and the file in the filesystem.
 :PROPERTIES:
 :masd.codec.type: operation
 :END:
-*** artefact_properties
-:PROPERTIES:
-:masd.codec.type: artefact_properties
-:END:
+
+Operation to be applied to this artefact.
+
 *** enablement_properties
 :PROPERTIES:
 :masd.codec.type: enablement_properties
 :END:
+
+Stores the properties related to the enablement, as read out from configuration.
+
+*** formatting_style
+:PROPERTIES:
+:masd.codec.type: formatting_styles
+:END:
+
+What type of M2T transform to use in order to generate the artefact's content.
+
+*** formatting_input
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Template used as input in order to generate the artefact's content, if any.
+
 ** entities::Configurable
 :PROPERTIES:
 :masd.codec.stereotypes: masd::object_template
@@ -762,7 +812,7 @@ Relations against hard-coded values.
 :masd.codec.stereotypes: Configurable, Provenance
 :END:
 
-Represents a slice of logical-physical space fixed at one logical point.
+Represents a region of logical-physical space fixed at one logical point.
 
 *** artefacts_by_archetype
 :PROPERTIES:
@@ -785,27 +835,6 @@ Resolves a role into a concrete archetype, in the context of this logical elemen
 
 If false, the entire artefact set is not generatable.
 
-** entities::artefact_properties
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-*** file_path
-:PROPERTIES:
-:masd.codec.type: boost::filesystem::path
-:END:
-*** formatting_style
-:PROPERTIES:
-:masd.codec.type: formatting_styles
-:END:
-*** formatting_input
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
 ** entities::formatting_styles
 :PROPERTIES:
 :masd.codec.stereotypes: masd::enumeration
@@ -814,73 +843,35 @@ If false, the entire artefact set is not generatable.
 *** wale
 *** stitch
 ** entities::enablement_properties
+Stores the properties related to the enablement, as read out from configuration.
+
 *** facet_enabled
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
+
+If supplied and true, the facet is enabled.
+
 *** archetype_enabled
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
+
+If supplied and true, the archetype is enabled.
+
 *** facet_overwrite
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
+
+If supplied and true, the facet will have overwrite on.
+
 *** archetype_overwrite
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
-** entities::artefact_repository
-:PROPERTIES:
-:masd.codec.stereotypes: ArtefactContainer
-:END:
-*** identifier
-:PROPERTIES:
-:masd.codec.type: std::string
-:END:
 
-Identifier for this repository. Used for logging and tracing only.
-
-*** root_module_logical_id
-:PROPERTIES:
-:masd.codec.type: identification::entities::logical_id
-:END:
-
-Identifier of the artefact set containing the root module.
-
-*** extraction_properties
-:PROPERTIES:
-:masd.codec.type: extraction_properties
-:END:
-*** global_enablement_properties
-:PROPERTIES:
-:masd.codec.type: global_enablement_properties
-:END:
-*** enabled_archetype_for_element
-:PROPERTIES:
-:masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
-:END:
-*** managed_directories
-:PROPERTIES:
-:masd.codec.type: std::list<boost::filesystem::path>
-:END:
-*** has_generatable_artefacts
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true the repository has at least one generable artefact, false otherwise.
-
-** entities::ArtefactContainer
-:PROPERTIES:
-:masd.codec.stereotypes: masd::object_template
-:END:
-*** regions_by_logical_id
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::logical_id, region>
-:END:
-
-All atefact sets in this model, by logical ID.
+If supplied and true, the archetype will have overwrite on.
 
 ** entities::extraction_properties
 Properties related to extraction.
@@ -891,41 +882,6 @@ Properties related to extraction.
 :END:
 
 Directory in which to place C++ header files. Must be a relative path.
-
-*** enabled_backends
-:PROPERTIES:
-:masd.codec.type: std::unordered_set<std::string>
-:END:
-*** enable_backend_directories
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** entities::global_enablement_properties
-*** backend_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
-:END:
-*** facet_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
-:END:
-*** archetype_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
-:END:
-*** denormalised_archetype_properties
-:PROPERTIES:
-:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
-:END:
-** entities::backend_properties
-Properties related to the backend.
-
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, this backend is enabled.
 
 ** entities::denormalised_archetype_properties
 *** backend_enabled
@@ -948,32 +904,6 @@ If true, this backend is enabled.
 :PROPERTIES:
 :masd.codec.type: boost::optional<bool>
 :END:
-** entities::facet_properties
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If true, this facet is enabled.
-
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-** entities::archetype_properties
-Archetype level properties, applicable to all instances of this archetype.
-
-*** enabled
-:PROPERTIES:
-:masd.codec.type: bool
-:END:
-
-If false, will disable all instances of this archetype.
-
-*** overwrite
-:PROPERTIES:
-:masd.codec.type: boost::optional<bool>
-:END:
 ** entities::formatting_configuration
 *** styles
 :PROPERTIES:
@@ -983,6 +913,201 @@ If false, will disable all instances of this archetype.
 :PROPERTIES:
 :masd.codec.type: std::string
 :END:
+** entities::backend_properties
+Properties related to the backend.
+
+*** enabled
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the backend is enabled.
+
+*** file_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the backend.
+
+*** technical_space_version
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Technical space version to use.
+
+*** directory
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the directory to use for the backend.
+
+*** enable_backend_directories
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+** entities::archetype_kind_properties
+:PROPERTIES:
+:masd.codec.stereotypes: MetaNameable
+:END:
+*** file_extension
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+** entities::facet_properties
+Properties related to the facet.
+
+*** enabled
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the facet is enabled.
+
+*** overwrite
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, all archetypes in this facet will be set to overwrite.
+
+*** directory
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the directory to use for the facet.
+
+*** postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Postfix to apply to all artefacts in this facet.
+
+** entities::archetype_properties
+Properties related to the archetype.
+
+*** enabled
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, the archetype is enabled.
+
+*** overwrite
+:PROPERTIES:
+:masd.codec.type: boost::optional<bool>
+:END:
+
+If true, all artefacts for this archetype will be set to overwrite.
+
+*** postfix
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Postfix to apply to all artefacts of this archetype.
+
+** entities::meta_model_properties
+Meta-model configuration supplied by this model.
+
+*** file_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the component.
+
+*** backend_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, backend_properties>
+:END:
+*** facet_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, facet_properties>
+:END:
+*** archetype_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_properties>
+:END:
+*** archetype_kind_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, archetype_kind_properties>
+:END:
+*** part_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, part_properties>
+:END:
+*** denormalised_archetype_properties
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>
+:END:
+*** enabled_backends
+:PROPERTIES:
+:masd.codec.type: std::unordered_set<identification::entities::physical_meta_id>
+:END:
+
+Contains the IDs of all of the backends which are enabled.
+
+*** enable_backend_directories
+:PROPERTIES:
+:masd.codec.type: bool
+:END:
+
+If true, backends should have backend-specific directories to store their artefacts.
+
+*** extraction_properties
+:PROPERTIES:
+:masd.codec.type: extraction_properties
+:END:
+*** enabled_archetype_for_element
+:PROPERTIES:
+:masd.codec.type: std::unordered_set<identification::entities::logical_meta_physical_id>
+:END:
+** entities::part_properties
+Properties related to the part.
+
+*** file_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the facet.
+
+*** directory
+:PROPERTIES:
+:masd.codec.type: std::string
+:END:
+
+Name of the directory to use for the part.
+
+*** relative_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Path to the part, relative to the component directory.
+
+Only required when the part is located outside of the component directory.
+
+** entities::path_properties
+*** file_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the file corresponding to this artefact.
+
+*** relative_paths
+:PROPERTIES:
+:masd.codec.type: std::unordered_map<identification::entities::physical_meta_id, boost::filesystem::path>
+:END:
+
+Paths relative to the part's root directory.
+
 * features
 :PROPERTIES:
 :masd.codec.dia.comment: true
@@ -1222,6 +1347,13 @@ Meta-model for the physical dimension.
 :PROPERTIES:
 :masd.codec.type: boost::shared_ptr<tracing::tracer>
 :END:
+*** output_directory_path
+:PROPERTIES:
+:masd.codec.type: boost::filesystem::path
+:END:
+
+Full path to the output directory chosen by the user.
+
 ** transforms::transform_exception
 :PROPERTIES:
 :masd.codec.stereotypes: masd::exception
@@ -1246,7 +1378,7 @@ Meta-model for the physical dimension.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::model_production_chain
+** transforms::model_post_processing_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -1301,15 +1433,15 @@ Smallest possible context required for bootstrapping purposes.
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::artefact_repository_population_chain
+** transforms::model_population_chain
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::global_enablement_transform
+** transforms::meta_model_properties_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
-** transforms::local_enablement_transform
+** transforms::enablement_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
@@ -1322,6 +1454,14 @@ Smallest possible context required for bootstrapping purposes.
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
 ** transforms::extraction_properties_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::paths_transform
+:PROPERTIES:
+:masd.codec.stereotypes: dogen::handcrafted::typeable
+:END:
+** transforms::remove_regions_transform
 :PROPERTIES:
 :masd.codec.stereotypes: dogen::handcrafted::typeable
 :END:
