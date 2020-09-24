@@ -450,20 +450,6 @@ it can be argued that visitor is just a physical projection of the
 object logical element. If we did this we would solve the
 inconsistency without needing to add another element to user models.
 
-*** Check RedHat guidelines on release notes                          :story:
-
-This post seems to contain a lot of interesting information about
-release notes:
-
-- [[http://community.redhat.com/blog/2015/12/guidelines-for-announcing-software-releases/][Guidelines For Announcing Software Releases]]
-
-*** Use GCC to code generate tests in nightly                         :story:
-
-At present we seem to be using the clang binary to code generate the
-code for the gcc build (somehow). This means that if clang fails, GCC
-will behave strangely (loss of all generated tests, massive drop in
-code coverage). We should use GCC for GCC code generation.
-
 *** Consider creating meta-types for transform, chain and context     :story:
 
 These are clearly an established pattern within dogen. It would be
@@ -511,7 +497,7 @@ of a full path to destination, and dump the ouptut to =std::out=. Its
 painful when trying to create a new converter to have to deal with
 files.
 
-*** injection: Encoders and decoders should work in terms of strings  :story:
+*** codecs: encoders and decoders should work in terms of strings     :story:
 
 We should only have strings (or perhaps streams) in the encoder and
 decoder interfaces. The handling of files should be the responsibility
@@ -785,6 +771,35 @@ family. The downside is that we then start building inside of the
 sub-repos (we never want to build at the product family level). This
 may not necessarily be a bad thing.
 
+Merged stories:
+
+*Introduce dogen projects*
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+One interesting thing is that once we have support for projects we can
+make things slightly more efficient:
+
+- cache all system models and other data from filesystem;
+- load exomodels only once for all references; first check to see if
+  there is a cached version and if not execute the exomodel chain
+  again. Actually we may even be able to go up the endomodel chain all
+  the way up to merging.
+
+These should be called "product models" rather than projects. We
+should also consider how "product families" fit in this architecture.
+
 *** Consider making technical spaces a core concept                   :story:
 
 At present we are trying to instantiate a stitch template. It requires
@@ -815,6 +830,7 @@ to define a profile in C# that disables a facet in order to ensure we
 test enablement before we start hacking around with the enablement
 transforms. It will most likely be red - we need to add the pruning
 hack to get rid of disabled artefacts as we do in C++.
+
 *** Investigate doxygen's functionality                               :story:
 
 Seems like an interesting project:
@@ -1610,15 +1626,6 @@ also be marked as handcrafted. We also need to add a part for SQL.
 We are using lisp scripts in the dia and templating projects. These
 need to be modeled and generated. Generation can have just decoration.
 
-*** Consider allowing users to create their own parts                 :story:
-
-It would be nice if one could create our own parts. However the main
-problem is how would you allocate modeling elements to a part. At
-present this is done via the formatter; perhaps we could override this
-in meta-data? This is a very complex task and we need clear use cases
-for it. Alternatively we could state that a user defined part's
-content is ignored entirely.
-
 *** Consider adding descriptions to feature bundles                   :story:
 
 It would be nice if we could add the feature bundle as an entry into
@@ -2174,16 +2181,6 @@ are saying configurations exist in one of two states:
 - post-expansion, in which only fields that are "post-expansion" can
   be read.
 
-*** Refactor archetype model                                          :story:
-
-- rename model to =physical=.
-- create meta-model namespace.
-- add missing meta-types from generation (parts, etc).
-- remove all types from generation which are not yet used.
-- add concept of artefact types (e.g. c++ public header, c++ private
-  header, etc). Associate extensions with artefact types (and perhaps
-  other properties?).
-
 *** Name all transform exceptions consistently                        :story:
 
 It seems on engine we call them "transform exception" but on assets we
@@ -2196,16 +2193,6 @@ Merged stories:
 
 In keeping with the framework guidelines for naming exceptions. We need to
 also look at all other exceptions.
-
-*** Add primitives to the archetypes model                            :story:
-
-Instead of using strings we should use primitives for:
-
-- facets
-- formatters
-- backends
-- simple and qualified names.
-- etc.
 
 *** Replace variability enum mapper with lexical casts                :story:
 
@@ -2578,15 +2565,6 @@ facet depends on the hash facet if the user decides to add a
 =std::unordered_map= of a user defined type to another user defined
 type. We need to make sure we take these run-time dependencies into
 account too.
-
-*** Consider using a primitive for qualified representations          :story:
-
-At present we have a number of maps with =string= as their key. We
-can't tell what that string means. It would be better to have a
-primitive to represent the different kinds of qualified id's we
-have. This would also stop us from making mistakes such as using dot
-notation in a container where we expected colon notation, or just
-using any random string.
 
 *** Invalid stereotypes outside of objects are not detected           :story:
 
@@ -3881,11 +3859,6 @@ ODB level.
 Similarly, we should move the ODB databases into yarn and make that a
 ORM-level concept.
 
-*** Read variability papers                                           :story:
-
-Time spent reading the literature on variability. We should do a
-"journal club" video for each paper, like Numenta does.
-
 ** Feature Heap
 
 New features for this release. These are more nice to haves rather
@@ -4382,33 +4355,6 @@ Tasks:
   CMake.
 - generate a main skeleton if one does not exist.
 - remove options project.
-
-*** Introduce dogen projects                                           :epic:
-
-At present we are manually configuring each dogen target, adding each
-separately to the build system. Perhaps a better approach is to have a
-dogen project file where one can configure all of the targets in one
-go. We don’t necessarily have to call dogen directly – perhaps another
-command line tool is responsible for invoking dogen? The problem here
-is that we’d end up with all dogen models in memory.
-
-At any rate, the project file would contain all models for a given
-product. We could possibly run with “all” or “specific” whereby the
-user would supply one or more projects to code generate. For all
-properties that are common, we’d defined them only once somehow
-(common regexes, log level, etc).
-
-One interesting thing is that once we have support for projects we can
-make things slightly more efficient:
-
-- cache all system models and other data from filesystem;
-- load exomodels only once for all references; first check to see if
-  there is a cached version and if not execute the exomodel chain
-  again. Actually we may even be able to go up the endomodel chain all
-  the way up to merging.
-
-These should be called "product models" rather than projects. We
-should also consider how "product families" fit in this architecture.
 
 *** Support for multiple "generation strategies"                      :story:
 
@@ -4989,20 +4935,16 @@ useful for languages like C# and Java, to control serialisation, etc.
 We should make this approach consistent with deprecation of features
 as per [[*Consider adding "deprecated feature names"][this story]].
 
-*** Investigate telosys
-
-It appears to an interesting code generator, though we cannot locate
-any academic papers.
-
-Links:
-
-- [[http://www.telosys.org/index.html#intro][telosys homepage]]
-- [[https://github.com/telosys-tools-bricks][GH telosys]]
-- [[https://modeling-languages.com/telosys-tools-the-concept-of-lightweight-model-for-code-generation/][Telosys – a lightweight and pragmatic code-generator]]
-
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
+
+*** Use GCC to code generate tests in nightly                         :story:
+
+At present we seem to be using the clang binary to code generate the
+code for the gcc build (somehow). This means that if clang fails, GCC
+will behave strangely (loss of all generated tests, massive drop in
+code coverage). We should use GCC for GCC code generation.
 
 *** Do not throw when getting attribute value                         :story:
 
@@ -5213,11 +5155,6 @@ Notes:
   then adapt the elements. This could be done in engine, as part of
   the injection to assets chain.
 
-*** Replace =operator<= for sorting with lambdas                      :story:
-
-We have used =operator<= a lot for sorting lists. We don't really need
-this since c++ 11, we can just create a simple inline lambda.
-
 *** Create tests for variability overrides                            :story:
 
 We've added all the functionality needed to override meta-data, but we
@@ -5340,7 +5277,7 @@ We should trap the lexical cast exception and provide a proper error
 given the context. We could also calculate the levenshtein distance
 against the existing enums when the errors.
 
-*** Tracing backend is not defaulted                                  :story:
+*** Tracing backend is not defaulted                        :reviewing:story:
 
 Not supplying a tracing backend results in the following error:
 
@@ -8102,6 +8039,11 @@ update, new vcpkg build is triggered and generates new vcpkg zip, with
 a stamp. User updates model to point to the new stamp and pushes. Next
 build will use new vcpkg libraries. Ideally vcpkg builds for all
 supported platforms (this is requested in the product model).
+
+Links:
+
+- [[https://devblogs.microsoft.com/cppblog/vcpkg-accelerate-your-team-development-environment-with-binary-caching-and-manifests/][vcpkg: Accelerate your team development environment with binary
+  caching and manifests]]
 
 *** Tighter integration of Dogen and Emacs                            :story:
 
@@ -15106,6 +15048,97 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** AWS boilerplate generation                                        :story:
+
+Consider generating AWS boilerplate.
+
+#+begin_quote
+The primary objective of this boilerplate is to give you a production
+ready code that reduces the amount of time you would normally have to
+spend on system infrastructure's configuration. It contains a number
+of services that a typical web application has (frontend, backend api,
+admin panel, workers) as well as their continuous deployment. Using
+this boilerplate you can deploy multiple environments, each
+representing a different stage in your pipeline.
+#+end_quote
+
+Links:
+
+- [[https://github.com/apptension/aws-boilerplate][aws-boilerplate GH]]
+
+*** MDE links and information                                         :story:
+
+Research story to gather information about MDE.
+
+Links:
+
+- [[https://modelpractice.wordpress.com/about/][modelpractice]]
+
+*** Org-mode integration with modeling                                :story:
+
+Since org-mode will be very central to all our modeling efforts, we
+need to learn more about it. This story is a general gathering of
+links of org-mode and tools.
+
+Links:
+
+- [[https://kitchingroup.cheme.cmu.edu/blog/2017/01/03/Find-stuff-in-org-mode-anywhere/][Find stuff in org-mode anywhere]]
+- [[https://www.mcls.io/blog/encouraging-a-culture-of-written-communication][Encouraging a Culture of Written Communication]]
+- [[https://github.com/alphapapa/org-rifle][org-rifle]]: What does my rifle do? It searches rapidly through my Org
+  files, quickly bringing me the information I need to defeat the
+  enemy.
+- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
+- [[https://github.com/org-roam/org-roam][org-roam GH]]: Org-roam is a solution for effortless non-hierarchical
+  note-taking with Org-mode. With Org-roam, notes flow naturally,
+  making note-taking fun and easy. Org-roam should also work as a
+  plug-and-play solution for anyone already using Org-mode for their
+  personal wiki.
+- [[https://github.com/bastibe/org-journal][org-journal GH]]: Functions to maintain a simple personal diary /
+  journal using in Emacs.
+- [[http://www.howardism.org/Technical/Emacs/capturing-intro.html][Org Capturing Introduction]]: The following essay attempts to be a
+  gentle introduction to org-capture. I will assume you are familiar
+  with both Org and Emacs, but don’t know anything about org-capture.
+- [[https://github.com/weirdNox/org-noter][org-noter GH]]: Org-noter’s purpose is to let you create notes that
+  are kept in sync when you scroll through the document, but that are
+  external to it - the notes themselves live in an Org-mode file.
+- [[https://github.com/samhedin/rustdoc-to-org][rustdoc-to-org:]] A Pandoc filter that converts rust documentation to
+  .org-files, and a minor mode to go with!
+
+*** Investigate telosys                                               :story:
+
+It appears to an interesting code generator, though we cannot locate
+any academic papers.
+
+Links:
+
+- [[http://www.telosys.org/index.html#intro][telosys homepage]]
+- [[https://github.com/telosys-tools-bricks][GH telosys]]
+- [[https://modeling-languages.com/telosys-tools-the-concept-of-lightweight-model-for-code-generation/][Telosys – a lightweight and pragmatic code-generator]]
+
+*** Consider allowing users to create their own parts                 :story:
+
+It would be nice if one could create our own parts. However the main
+problem is how would you allocate modeling elements to a part. At
+present this is done via the formatter; perhaps we could override this
+in meta-data? This is a very complex task and we need clear use cases
+for it. Alternatively we could state that a user defined part's
+content is ignored entirely.
+
+*** Check RedHat guidelines on release notes                          :story:
+
+This post seems to contain a lot of interesting information about
+release notes:
+
+- [[http://community.redhat.com/blog/2015/12/guidelines-for-announcing-software-releases/][Guidelines For Announcing Software Releases]]
+
+*** Add support for CBadge                                            :story:
+
+It seems we can add badges for CDash.
+
+Links:
+
+- [[https://github.com/brennonbrimhall/CBadge][GH]]
 
 *** Consider adding support for =libcudacxx=                          :story:
 

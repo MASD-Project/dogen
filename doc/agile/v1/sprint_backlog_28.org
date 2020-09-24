@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+caption: clock summary at [2020-09-23 wed 23:21]
+#+CAPTION: Clock summary at [2020-09-24 Thu 20:34]
 | <75>                                               |        |      |      |       |
-| headline                                           | time   |      |      |     % |
+| Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *total time*                                       | *4:23* |      |      | 100.0 |
+| *Total time*                                       | *5:12* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| stories                                            | 4:23   |      |      | 100.0 |
-| active                                             |        | 4:23 |      | 100.0 |
-| edit release notes for previous sprint             |        |      | 3:44 |  85.2 |
-| create a demo and presentation for previous sprint |        |      | 0:39 |  14.8 |
+| Stories                                            | 5:12   |      |      | 100.0 |
+| Active                                             |        | 5:12 |      | 100.0 |
+| edit release notes for previous sprint             |        |      | 3:44 |  71.8 |
+| Create a demo and presentation for previous sprint |        |      | 0:39 |  12.5 |
+| Sprint and product backlog grooming                |        |      | 0:49 |  15.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** started edit release notes for previous sprint                    :story:
+*** COMPLETED edit release notes for previous sprint                  :story:
+    CLOSED: [2020-09-24 Thu 20:34]
     :logbook:
     clock: [2020-09-23 wed 22:01]--[2020-09-23 wed 22:40] =>  0:39
     clock: [2020-09-23 wed 18:41]--[2020-09-23 wed 19:32] =>  0:51
@@ -41,13 +43,13 @@ release announcements:
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_release-dogen-v1027-independ%C3%AAncia-activity-6714660822465048576-fYZV][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-#+begin_src md
+#+begin_src markdown
 ![Navio Indepêndencia](https://live.staticflickr.com/6026/5975302810_7d04dffb62_b.jpg)
 _Abandoned freighter North of Namibe, Angola. (C) Alfred Weidinger, 2011_
 
 # Introduction
 
-We've been working on Dogen for long enough to know that there is no such thing as an easy sprint; still, after a long sequence of very challenging ones, we were certainly hoping for an easier ride this time round. Alas, not to be. Due to never ending  changes in personal circumstances, both with work and private life, Sprint 27 ended up being an _awfully long sprint_, with a grand total of 70 elapsed days rather than the 30 or 40 customary ones. To make matters worse, not only was it a bit of a fragmented sprint _in time_ - a bit stop-start, if we're honest - but it was also somewhat disjointed in terms of the work as well. One never ending story occupied the bulk of the work, thought it did have lots of challenging variations; and the remainder - a smattering of smaller stories - were insufficient to make any significant headway towards the sprint goals. Ah, the joys of working on such a long, open-ended project, hey. And to round it all up nicely, we weren't able to do a _single_ MDE Paper of the Week (PofW); there just weren't enough hours in the day, and these were the first ones to fall by the wayside. They will hopefully resume at the usual cadence next sprint.
+We've been working on Dogen for long enough to know that there is no such thing as an easy sprint; still, after a long sequence of very challenging ones, we were certainly hoping for an easier ride this time round. Alas, not to be. Due to never ending  changes in personal circumstances, both with work and private life, Sprint 27 ended up being an _awfully long sprint_, with a grand total of 70 elapsed days rather than the 30 or 40 customary ones. To make matters worse, not only was it a bit of a fragmented sprint _in time_ - a bit stop-start, if we're honest - but it was also somewhat disjointed in terms of the work as well. One never ending story occupied the bulk of the work, though it did have lots of challenging variations; and the remainder - a smattering of smaller stories - were insufficient to make any significant headway towards the sprint goals. Ah, the joys of working on such a long, open-ended project, hey. And to round it all up nicely, we weren't able to do a _single_ MDE Paper of the Week (PofW); there just weren't enough hours in the day, and these were the first ones to fall by the wayside. They will hopefully resume at the usual cadence next sprint.
 
 The picture may sound gloomy, but do not fear. As we shall see in these release notes, we may have not achieved what we set out to achieve originally, but _much else_ was achieved nevertheless - giving us more than sufficient grounds for our unwavering developer optimism. _Omnia mutantur, nihil interit_, as Ovid [would say](https://en.wikipedia.org/wiki/Omnia_mutantur).
 
@@ -79,7 +81,7 @@ Until this sprint the problem had been resolved by duplicating types from both m
 >
 > Use your words, your classes, your abstractions. Don't do Strings, Lists and integers all over the place. [...] Instead, think about how you can communicate the meaning of the objects in the domain. Kevlin pulls up a wordcloud of the words used most frequently in a codebase (about 38-minute mark in the video): The most common words should tell you something about what the codebase is about. [...] A bad example shows List, Integer, String and such basic structures as the most common words. The better example has PrintingDevice, Paper, Picture. This makes the code less readable, because such generic variables can represent so many different things.
 
-Now, if you have even a passing familiarity with Dogen's source code, you could not have helped but notice that we have a very large number of distinct IDs and meta-IDs all represented as strings. We've known for a long while that this is not ideal, not just because of Henney's points above, but also because we often end up using a string of "type" A as if it were a string of "type" B (e.g. using a logical meta-model ID when we are searching for a physical ID, say). These errors are painful to get to the bottom of. Wouldn't it be nice if the type system could detect them up front? Given these are all related to identification, we thought, might as well address this issue at the same time. And given Dogen already has built-in support for _primitive types_ - that is, wrappers for trivial types such as string - it did seem that we were ready to finally make this change. Designing the new model was surprisingly quick; where the rubber met the road was on refactoring the code base to make use of the shiny new types.
+Now, if you have even a passing familiarity with Dogen's source code, you could not have helped but notice that we have a very large number of distinct IDs and meta-IDs all represented as strings. We've known for a long while that this is not ideal, not just because of Henney's points above, but also because we often end up using a string of "type" A as if it were a string of "type" B (_e.g._ using a logical meta-model ID when we are searching for a physical ID, say). These errors are painful to get to the bottom of. Wouldn't it be nice if the type system could detect them up front? Given these are all related to identification, we thought, might as well address this issue at the same time. And given Dogen already has built-in support for _primitive types_ - that is, wrappers for trivial types such as string - it did seem that we were ready to finally make this change. Designing the new model was surprisingly quick; where the rubber met the road was on refactoring the code base to make use of the shiny new types.
 
 [![Sprint 1.0.27 Demo](https://img.youtube.com/vi/pMqUzX0PU_I/0.jpg)](https://youtu.be/pMqUzX0PU_I)
 _Video 2: Part 1 of 3 of the series of videos on the Identification Refactor._
@@ -102,9 +104,9 @@ A small but very helpful change - nay, _instrumental_ change - on our never endi
 ![Dogen Pipeline](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/blog/images/orchestration_pipeline.png)
 _Figure 2: The Dogen pipeline, circa Sprint 12._
 
-Almost every box in this diagram has changed name, as as our understanding of the domain evolved, though their functional roles remained fairly constant. This sprint it was the turn of the "injection" box. This happened because we begun to realise that there are several "forces" at play:
+Almost every box in this diagram has changed name, as our understanding of the domain evolved, though their functional roles remained fairly constant. This sprint it was the turn of the "injection" box. This happened because we begun to realise that there are several "forces" at play:
 
-- the terms _injection_ and _extraction_ imply the notion that elements are be _projected_ with regards to a technical space; when _into_ a technical space, then its an _injection_, and when _out of_ a technical space, its an _extraction_.
+- the terms _injection_ and _extraction_ imply the notion that elements are to be _projected_ with regards to a technical space; when _into_ a technical space, then its an _injection_, and when _out of_ a technical space, its an _extraction_.
 - the process of performing the projection can be done by the same set of classes. That is, it's often convenient to declare an _encoder_ and a _decoder_ next to each other because the coding and decoding is functionally very similar.
 - the generation of _text_ from model elements is considered an extraction, as is the plain conversion of models of one type to another. However, given there is a very well understood set of terms regarding the transformation of model elements into text - _e.g._, _model-to-text transforms_ - its not insightful to call this an extraction.
 
@@ -191,7 +193,43 @@ Time spent creating the demo and presentation.
 ***** Create an identification model
 ***** Rename injection to codec
 ***** The logical-physical space
-*** Sprint and product backlog grooming                               :story:
+*** COMPLETED Refactor archetype model                                :story:
+    CLOSED: [2020-09-24 Thu 20:34]
+
+*Rationale*: already implemented.
+
+- rename model to =physical=.
+- create meta-model namespace.
+- add missing meta-types from generation (parts, etc).
+- remove all types from generation which are not yet used.
+- add concept of artefact types (e.g. c++ public header, c++ private
+  header, etc). Associate extensions with artefact types (and perhaps
+  other properties?).
+
+*** COMPLETED Consider using a primitive for qualified representations :story:
+    CLOSED: [2020-09-24 Thu 20:34]
+
+*Rationale*: already implemented.
+
+At present we have a number of maps with =string= as their key. We
+can't tell what that string means. It would be better to have a
+primitive to represent the different kinds of qualified id's we
+have. This would also stop us from making mistakes such as using dot
+notation in a container where we expected colon notation, or just
+using any random string.
+
+*** COMPLETED Replace =operator<= for sorting with lambdas            :story:
+    CLOSED: [2020-09-24 Thu 20:34]
+
+*Rationale*: we've done this in most places.
+
+We have used =operator<= a lot for sorting lists. We don't really need
+this since c++ 11, we can just create a simple inline lambda.
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
+    :END:
 
 Updates to sprint and product backlog.
 
@@ -199,28 +237,71 @@ Updates to sprint and product backlog.
 
 Time spent troubleshooting environmental problems.
 
-*** Implement meta-name validator correctly                           :story:
+*** Analysis on Org-mode outstanding work                             :story:
 
-The logic in the meta- name validator is completely wrong. We are
-checking for facet defaults without taking into account the logical
-model element component. Thus, there are fundamental problems with the
-meta-model validator that are not easy to fix. We need a facet default
-for every logical meta-model element. That is, we need to loop through
-all logical meta-model elements and ensure they have a facet default;
-but this should only be done for meta-model elements which support a
-facet default. This cannot be done until:
+Notes:
 
-- we know which elements require a facet default;
-- we have created a logical meta-model.
+- map dogen types to a org-mode tag. The tags must replace =::= with
+  an underscore, e.g. =masd_enumeration= for
+  =masd::enumeration=. Mapping is done by detecting stereotype in the
+  stereotype list and removing it from there. Non-tagged headlines
+  default to documentation (see below).
+- any non-tagged section will be treated as documentation. On
+  generation it will be suitably converted into the language's format
+  for documentation (e.g. doxygen, C# docs etc). We need meta-model
+  elements for these such as "section", etc. Annoyingly, this also
+  means converting expressions such as =some text=. This will be
+  trickier.
+- in an ideal world we would also have entities such as paragraphs and
+  the like, to ensure we can reformat the text as required. For
+  example, the 80 column limitation we have in the input may not be
+  suitable for the end format (this is the case with markdown).
+- we are using qualified names, e.g. =entities::attribute=. These need
+  to be removed. We need to move the graphing logic into =codec=. See
+  story for this.
+- All models should have a unique ID for each element. The ID should
+  be based on GUIDs where possible, though there are some difficulties
+  for cases like Dia. We could create a "fixed" function that
+  generates GUIDs from dia IDs. For example:
 
-Merged stories:
+: <dia:childnode parent="O64"/>
 
-*Set expectation for facet default*
+  We could take the id =O64= and normalise it to say 4 digits: =6400=
+  (noticed we removed the =O= as its not valid in hex); and then use a
+  well-defined GUID prefix:
 
-At present we are only warning when a facet does not have a facet
-default. This is because some facets do not have facet defaults (such
-as build, visual studio, etc). However, we know this upfront so on the
-facet factory we should set up the expectation. Then we can throw.
+: 3dddc237-3771-45be-82c9-937c5cef
+
+  Then we can append the normalised Dia ID to the prefix. This would
+  ensure we always generate the same GUIDs on conversion from Dia. If
+  the GUIds change within Dia, then they will also change in the
+  conversion. This ID is then used as the codec ID. Note that its the
+  responsibility of the decoder to assign "child node IDs". For JSON
+  this must already be populated. For Dia its the =childnode=
+  field. For org-mode, we need to infer it from the structure of the
+  file. In org-mode we just need to use the =:CUSTOM_ID:= attribute:
+
+: :CUSTOM_ID: 7c38f8ef-0c8c-4f17-a7da-7ed7d5eedeff
+
+- qualified names are computed as a transform via the graph in codec
+  model.
+
+Links:
+
+- [[https://writequit.org/articles/emacs-org-mode-generate-ids.html][Emacs Org-mode: Use good header ids!]]
+
+*** Assorted changes to =identification=                              :story:
+
+- use the nameable template for all cases.
+- rename =name= to =codec=name=.
+- add ID to codec name.
+
+*** Analysis of MDE papers to read                                    :story:
+
+Links:
+
+- [[https://ulir.ul.ie/bitstream/handle/10344/2126/2007_Botterweck.pdf;jsessionid=AC6FF39BA414E6065602C7851860C43D?sequence=2][Model-Driven Derivation of Product Architectures]]
+- [[https://madoc.bib.uni-mannheim.de/993/1/abwl_02_05.pdf][A Taxonomy of Metamodel Hierarchies]]
 
 *** Add dependencies to artefacts                                     :story:
 
@@ -819,6 +900,29 @@ meta-data. The only way would be to convert the top-level
 We need to figure out how to implement this. For now we are manually
 adding flags.
 
+*** Implement meta-name validator correctly                           :story:
+
+The logic in the meta- name validator is completely wrong. We are
+checking for facet defaults without taking into account the logical
+model element component. Thus, there are fundamental problems with the
+meta-model validator that are not easy to fix. We need a facet default
+for every logical meta-model element. That is, we need to loop through
+all logical meta-model elements and ensure they have a facet default;
+but this should only be done for meta-model elements which support a
+facet default. This cannot be done until:
+
+- we know which elements require a facet default;
+- we have created a logical meta-model.
+
+Merged stories:
+
+*Set expectation for facet default*
+
+At present we are only warning when a facet does not have a facet
+default. This is because some facets do not have facet defaults (such
+as build, visual studio, etc). However, we know this upfront so on the
+facet factory we should set up the expectation. Then we can throw.
+
 *** Update archetype generator to handle decoration                   :story:
 
 Once relations have been moved into the generator type, we need to
@@ -1103,3 +1207,22 @@ last?). We should try to generate the code in the "natural order" and
 see if the code compiles with latest boost.
 
 ** Deprecated
+
+*** Add primitives to the archetypes model                            :story:
+
+*Rationale*: superseded by refactors.
+
+Instead of using strings we should use primitives for:
+
+- facets
+- formatters
+- backends
+- simple and qualified names.
+- etc.
+
+*** Read variability papers                                           :story:
+
+*Rationale*: We now have the MDE papers section.
+
+Time spent reading the literature on variability. We should do a
+"journal club" video for each paper, like Numenta does.
