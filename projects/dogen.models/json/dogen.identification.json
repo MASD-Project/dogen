@@ -424,13 +424,11 @@
     {
       "name": "entities::physical_name",
       "documentation": "Name of a physical model element.\n",
+      "stereotypes": [
+        "Nameable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "simple",
-          "type": "std::string",
-          "documentation": "File or directory simple name.\n"
-        },
         {
           "name": "id",
           "type": "physical_id",
@@ -871,6 +869,13 @@
     },
     {
       "name": "helpers::meta_name_index_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::logical_meta_name_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

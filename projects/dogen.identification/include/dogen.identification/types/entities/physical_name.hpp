@@ -48,7 +48,7 @@ public:
 
 public:
     /**
-     * @brief File or directory simple name.
+     * @brief Simple name for a modeling element.
      */
     /**@{*/
     const std::string& simple() const;

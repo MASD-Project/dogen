@@ -3830,16 +3830,16 @@ can only have one and only one name.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="55,-6"/>
+        <dia:point val="54,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,-6.05;63.25,-2.35"/>
+        <dia:rectangle val="53.95,-6.05;61.14,-2.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="55,-6"/>
+        <dia:point val="54,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1999999999999993"/>
+        <dia:real val="7.0900000000000007"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -3848,7 +3848,7 @@ can only have one and only one name.#</dia:string>
         <dia:string>#physical_name#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Name of a physical model element.#</dia:string>
@@ -3932,29 +3932,6 @@ can only have one and only one name.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#simple#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#File or directory simple name.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#id#</dia:string>
@@ -4502,17 +4479,17 @@ can only have one and only one name.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.1,-6"/>
+        <dia:point val="57.545,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.35,-10.05;61.1075,-5.2"/>
+        <dia:rectangle val="56.795,-10.05;61.1075,-5.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.1,-6"/>
-        <dia:point val="59.1,-8"/>
+        <dia:point val="57.545,-6"/>
+        <dia:point val="57.545,-8"/>
         <dia:point val="60.9075,-8"/>
         <dia:point val="60.9075,-10"/>
       </dia:attribute>
