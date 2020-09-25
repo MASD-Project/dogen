@@ -45,6 +45,10 @@ namespace dogen::physical::entities {
 
 /**
  * @brief Meta-model configuration supplied by this model.
+ *
+ * The meta-model properties represent a set of variability overrides supplied on top
+ * of the existing physical meta-model. In addition, the properties also contain
+ * computed values on the back of physical transforms.
  */
 class meta_model_properties final {
 public:

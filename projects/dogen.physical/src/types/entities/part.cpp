@@ -31,6 +31,7 @@ part::part(
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
+    const std::string& directory_name,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
@@ -40,6 +41,7 @@ part::part(
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
+      directory_name_(directory_name),
       path_configuration_(path_configuration),
       facets_(facets),
       archetypes_(archetypes),
@@ -52,6 +54,7 @@ void part::swap(part& other) noexcept {
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
+    swap(directory_name_, other.directory_name_);
     swap(path_configuration_, other.path_configuration_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -64,6 +67,7 @@ bool part::operator==(const part& rhs) const {
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
+        directory_name_ == rhs.directory_name_ &&
         path_configuration_ == rhs.path_configuration_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -154,6 +158,22 @@ void part::labels(const std::list<dogen::identification::entities::label>& v) {
 
 void part::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
+}
+
+const std::string& part::directory_name() const {
+    return directory_name_;
+}
+
+std::string& part::directory_name() {
+    return directory_name_;
+}
+
+void part::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void part::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 const dogen::physical::entities::path_configuration& part::path_configuration() const {

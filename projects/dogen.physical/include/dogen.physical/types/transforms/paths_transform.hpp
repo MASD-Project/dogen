@@ -42,7 +42,8 @@ private:
     /**
      * @brief Computes the top-level path to the component.
      */
-    static boost::filesystem::path compute_component_path(const context& ctx,
+    static boost::filesystem::path
+    compute_component_path(const boost::filesystem::path& output_directory,
         const identification::entities::logical_name& ln);
 
     /**

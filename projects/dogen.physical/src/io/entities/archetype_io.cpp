@@ -79,7 +79,8 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
       << "\"logical_meta_element_id\": " << v.logical_meta_element_id() << ", "
       << "\"part\": " << v.part() << ", "
-      << "\"relations\": " << v.relations()
+      << "\"relations\": " << v.relations() << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";
     return(s);
 }

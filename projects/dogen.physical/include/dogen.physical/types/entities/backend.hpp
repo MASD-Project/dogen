@@ -41,7 +41,8 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Code generation backend, targeting a given technical space.
+ * @brief Represents a meta-region in physical space with archetypes for a primary technical
+ * space, and associated secondary technical spaces.
  */
 class backend final {
 public:
@@ -57,6 +58,7 @@ public:
         const std::string& description,
         const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
+        const std::string& directory_name,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
@@ -113,6 +115,16 @@ public:
     void labels(const std::list<dogen::identification::entities::label>&& v);
     /**@}*/
 
+    /**
+     * @brief Default name to use for the directory in the file-system representing this backend.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts() const;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts();
     void parts(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& v);
@@ -149,6 +161,7 @@ private:
     std::string description_;
     dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
+    std::string directory_name_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part> parts_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet> facets_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;

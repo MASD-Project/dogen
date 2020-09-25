@@ -133,6 +133,7 @@ std::ostream& operator<<(std::ostream& s, const backend& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"parts\": " << v.parts() << ", "
       << "\"facets\": " << v.facets() << ", "
       << "\"archetypes\": " << v.archetypes() << ", "

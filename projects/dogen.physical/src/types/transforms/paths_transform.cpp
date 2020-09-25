@@ -47,10 +47,14 @@ const std::string missing_backend_directory(
 
 namespace dogen::physical::transforms {
 
-boost::filesystem::path
-paths_transform::compute_component_path(const context& ctx,
+boost::filesystem::path paths_transform::
+compute_component_path(const boost::filesystem::path& output_directory,
     const identification::entities::logical_name& ln) {
-    boost::filesystem::path r(ctx.output_directory_path());
+    /*
+     * The component path is defined as the directory chosen by the
+     * user for the output plus the model name, separated by dots.
+     */
+    boost::filesystem::path r(output_directory);
     const auto& mm(ln.location().model_modules());
     r /= boost::algorithm::join(mm, dot);
     return r;
@@ -68,6 +72,15 @@ compute_backend_paths(const boost::filesystem::path& component_path,
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing backend: " << id;
 
+        /*
+         * There are two possibilities: either the backend directory
+         * is the same as the component directory - in the case of a
+         * component that only has a single backend, unless the user
+         * said otherwise; or the backend directory is a child of the
+         * component directory, using the directory name from the
+         * backend properties. This is commonly the case for
+         * components with more than one backend.
+         */
         auto& bp(pair.second);
         BOOST_LOG_SEV(lg, trace) << "Enable backend directories: "
                                  << bp.enable_backend_directories();
@@ -101,10 +114,10 @@ void paths_transform::apply(const context& ctx, entities::model& m) {
 
     /*
      * We start by calculating the top-most path which is the
-     * component path.
+     * component path. All other paths will depend on this path.
      */
     const auto& ln(m.provenance().logical_name());
-    const auto cp(compute_component_path(ctx, ln));
+    const auto cp(compute_component_path(ctx.output_directory_path(), ln));
     auto& mmp(m.meta_model_properties());
     mmp.file_path(cp);
 

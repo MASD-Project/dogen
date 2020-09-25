@@ -38,7 +38,7 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Describes the geomtry of physical space.
+ * @brief Describes the geometry of physical space.
  *
  * Provides details of the backends available in the current instance of Dogen.
  */

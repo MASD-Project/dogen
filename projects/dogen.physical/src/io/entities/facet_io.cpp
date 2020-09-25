@@ -96,6 +96,8 @@ std::ostream& operator<<(std::ostream& s, const facet& v) {
       << "\"labels\": " << v.labels() << ", "
       << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
       << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
       << "\"archetypes\": " << v.archetypes() << ", "
       << "\"default_archetype_for_logical_meta_model_id\": " << v.default_archetype_for_logical_meta_model_id()
       << " }";

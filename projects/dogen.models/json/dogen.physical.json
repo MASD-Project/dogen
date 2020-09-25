@@ -65,7 +65,7 @@
     },
     {
       "name": "entities::meta_model",
-      "documentation": "Describes the geomtry of physical space.\n\nProvides details of the backends available in the current instance of Dogen.\n",
+      "documentation": "Describes the geometry of physical space.\n\nProvides details of the backends available in the current instance of Dogen.\n",
       "stereotypes": [
         "ContainingMetaElement"
       ],
@@ -90,12 +90,17 @@
     },
     {
       "name": "entities::backend",
-      "documentation": "Code generation backend, targeting a given technical space.\n",
+      "documentation": "Represents a meta-region in physical space with archetypes for a primary technical\nspace, and associated secondary technical spaces.\n",
       "stereotypes": [
         "ContainingMetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default name to use for the directory in the file-system representing this backend.\n"
+        },
         {
           "name": "parts",
           "type": "std::unordered_map<identification::entities::physical_meta_id, part>"
@@ -116,11 +121,17 @@
     },
     {
       "name": "entities::part",
+      "documentation": "Represents a meta-region in physical space with archetypes for a given part of a\ncomponent in a backend.\n",
       "stereotypes": [
         "ContainingMetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default name to use for the directory in the file-system representing this part.\n"
+        },
         {
           "name": "path_configuration",
           "type": "path_configuration"
@@ -194,12 +205,23 @@
     },
     {
       "name": "entities::facet",
+      "documentation": "Represents a meta-region in physical space with archetypes for a given theme.\n",
       "stereotypes": [
         "ContainingMetaElement",
         "Postfixable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default name to use for the directory in the file-system representing this facet.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to apply to artefacts within this facet, if any.\n"
+        },
         {
           "name": "archetypes",
           "type": "std::unordered_map<identification::entities::physical_meta_id, archetype>"
@@ -240,6 +262,11 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Properties of this archetype with regards to relations.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to apply to artefacts of this archetype, if any.\n"
         }
       ]
     },
@@ -1559,7 +1586,7 @@
     },
     {
       "name": "entities::meta_model_properties",
-      "documentation": "Meta-model configuration supplied by this model.\n",
+      "documentation": "Meta-model configuration supplied by this model.\n\nThe meta-model properties represent a set of variability overrides supplied on top\nof the existing physical meta-model. In addition, the properties also contain \ncomputed values on the back of physical transforms.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

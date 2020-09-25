@@ -59,7 +59,8 @@ public:
         const std::string& archetype_kind_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
         const dogen::identification::entities::physical_meta_id& part,
-        const dogen::physical::entities::relations& relations);
+        const dogen::physical::entities::relations& relations,
+        const std::string& postfix);
 
 public:
     /**
@@ -182,6 +183,16 @@ public:
     void relations(const dogen::physical::entities::relations&& v);
     /**@}*/
 
+    /**
+     * @brief Postfix to apply to artefacts of this archetype, if any.
+     */
+    /**@{*/
+    const std::string& postfix() const;
+    std::string& postfix();
+    void postfix(const std::string& v);
+    void postfix(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -205,6 +216,7 @@ private:
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
     dogen::identification::entities::physical_meta_id part_;
     dogen::physical::entities::relations relations_;
+    std::string postfix_;
 };
 
 }

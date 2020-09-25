@@ -37,6 +37,9 @@
 
 namespace dogen::physical::entities {
 
+/**
+ * @brief Represents a meta-region in physical space with archetypes for a given theme.
+ */
 class facet final {
 public:
     facet() = default;
@@ -53,6 +56,8 @@ public:
         const std::list<dogen::identification::entities::label>& labels,
         const std::string& default_postfix,
         const std::string& override_postfix,
+        const std::string& directory_name,
+        const std::string& postfix,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id);
 
@@ -127,6 +132,26 @@ public:
     void override_postfix(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Default name to use for the directory in the file-system representing this facet.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Postfix to apply to artefacts within this facet, if any.
+     */
+    /**@{*/
+    const std::string& postfix() const;
+    std::string& postfix();
+    void postfix(const std::string& v);
+    void postfix(const std::string&& v);
+    /**@}*/
+
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes() const;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes();
     void archetypes(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& v);
@@ -162,6 +187,8 @@ private:
     std::list<dogen::identification::entities::label> labels_;
     std::string default_postfix_;
     std::string override_postfix_;
+    std::string directory_name_;
+    std::string postfix_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> default_archetype_for_logical_meta_model_id_;
 };

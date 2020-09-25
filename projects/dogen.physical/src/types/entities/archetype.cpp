@@ -34,7 +34,8 @@ archetype::archetype(
     const std::string& archetype_kind_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::identification::entities::physical_meta_id& part,
-    const dogen::physical::entities::relations& relations)
+    const dogen::physical::entities::relations& relations,
+    const std::string& postfix)
     : description_(description),
       meta_name_(meta_name),
       labels_(labels),
@@ -46,7 +47,8 @@ archetype::archetype(
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
-      relations_(relations) { }
+      relations_(relations),
+      postfix_(postfix) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -62,6 +64,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
     swap(relations_, other.relations_);
+    swap(postfix_, other.postfix_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -76,7 +79,8 @@ bool archetype::operator==(const archetype& rhs) const {
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
-        relations_ == rhs.relations_;
+        relations_ == rhs.relations_ &&
+        postfix_ == rhs.postfix_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -275,6 +279,22 @@ void archetype::relations(const dogen::physical::entities::relations& v) {
 
 void archetype::relations(const dogen::physical::entities::relations&& v) {
     relations_ = std::move(v);
+}
+
+const std::string& archetype::postfix() const {
+    return postfix_;
+}
+
+std::string& archetype::postfix() {
+    return postfix_;
+}
+
+void archetype::postfix(const std::string& v) {
+    postfix_ = v;
+}
+
+void archetype::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 }
