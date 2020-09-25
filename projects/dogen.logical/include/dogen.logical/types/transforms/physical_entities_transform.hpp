@@ -48,7 +48,12 @@ private:
     /**
      * @brief Processes all of the logical representations of facets.
      */
-    static void process_facets(entities::model& m);
+    static void process_facets(const context& ctx, entities::model& m);
+
+    /**
+     * @brief Processes all of the logical representations of parts.
+     */
+    static void process_parts(const context& ctx, entities::model& m);
 
     /**
      * @brief Processes all of the logical representations of
@@ -57,21 +62,16 @@ private:
     static void process_archetype_kinds(entities::model& m);
 
     /**
-     * @brief Processes all of the logical representations of parts.
+     * @brief Processes all of the logical representations of
+     * archetypes.
      */
-    static void process_parts(entities::model& m);
+    static void process_archetypes(const context& ctx, entities::model& m);
 
     /**
      * @brief Reads all data related to physical relations.
      */
     static entities::physical::relations process_relations(const context& ctx,
         const variability::entities::configuration& cfg);
-
-    /**
-     * @brief Processes all of the logical representations of
-     * archetypes.
-     */
-    static void process_archetypes(const context& ctx, entities::model& m);
 
 public:
     /**

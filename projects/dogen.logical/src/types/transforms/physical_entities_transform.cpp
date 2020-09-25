@@ -103,10 +103,9 @@ process_backends(const context& ctx, entities::model& m) {
 
     auto& bs(pe.backends());
     for (auto& pair : bs) {
-        const auto bid(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << bid;
+        const auto id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
         auto& b(*pair.second);
-        const auto scfg(physical::make_static_configuration(fg, b));
         b.meta_model_name(meta_model_name);
 
         /*
@@ -118,10 +117,11 @@ process_backends(const context& ctx, entities::model& m) {
          * this property. Once we move to a combined text model, this
          * property should be removed.
          */
+        const auto scfg(physical::make_static_configuration(fg, b));
         if (scfg.backend_name.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_backend_name << bid;
+            BOOST_LOG_SEV(lg, error) << missing_backend_name << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(missing_backend_name + bid.value()));
+                transformation_error(missing_backend_name + id.value()));
         }
         b.backend_name(scfg.backend_name);
 
@@ -129,9 +129,9 @@ process_backends(const context& ctx, entities::model& m) {
          * Backends must supply a directory name.
          */
         if (scfg.directory_name.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_directory_name << bid;
+            BOOST_LOG_SEV(lg, error) << missing_directory_name << id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(missing_directory_name + bid.value()));
+                transformation_error(missing_directory_name + id.value()));
         }
         b.directory_name(scfg.directory_name);
 
@@ -237,25 +237,42 @@ process_backends(const context& ctx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing backends.";
 }
 
-void physical_entities_transform::process_facets(entities::model& m) {
+void physical_entities_transform::
+process_facets(const context& ctx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Processing facets.";
     using features::physical;
     const auto& pe(m.physical_elements());
+    const auto& fm(*ctx.feature_model());
+    const auto fg(physical::make_feature_group(fm));
     auto& fcts(pe.facets());
     for (auto& pair : fcts) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+
         auto& fct(*pair.second);
         fct.meta_model_name(meta_model_name);
 
         /*
          * Facets can only exist in the context of a backend.
          */
+        const auto scfg(physical::make_static_configuration(fg, fct));
         if (fct.backend_name().empty()) {
             BOOST_LOG_SEV(lg, error) << uncontained_facet << id;
             BOOST_THROW_EXCEPTION(
                 transformation_error(uncontained_facet + id.value()));
         }
+
+        /*
+         * Facets may have a directory name.
+         */
+        if (!scfg.directory_name.empty())
+            fct.directory_name(scfg.directory_name);
+
+        /*
+         * Facets may have a postfix.
+         */
+        if (!scfg.postfix.empty())
+            fct.postfix(scfg.postfix);
 
         /*
          * Generate the ID for this facet.
@@ -314,6 +331,158 @@ void physical_entities_transform::process_facets(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing facets.";
 }
 
+void physical_entities_transform::
+process_parts(const context& ctx, entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing parts.";
+    using features::physical;
+    const auto& pe(m.physical_elements());
+    const auto& fm(*ctx.feature_model());
+    const auto fg(physical::make_feature_group(fm));
+
+    auto& parts(pe.parts());
+    for (auto& pair : parts) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+        auto& part(*pair.second);
+        part.meta_model_name(meta_model_name);
+
+        /*
+         * Parts can only exist in the context of a backend.
+         */
+        if (part.backend_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_part << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_part + id.value()));
+        }
+
+        /*
+         * Generate the ID for this part.
+         */
+        std::ostringstream os;
+        os << meta_model_name << separator
+           << part.backend_name() << separator
+           << part.name().simple();
+        part.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << part.id();
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing parts.";
+}
+
+void physical_entities_transform::
+process_archetypes(const context& ctx, entities::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
+
+    using features::physical;
+    const auto& pe(m.physical_elements());
+    const auto& fm(*ctx.feature_model());
+    const auto fg(physical::make_feature_group(fm));
+
+    /*
+     * First, we organise the parts by their IDs.
+     */
+    const auto& parts(pe.parts());
+    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
+        parts_by_ids;
+    for (const auto& pair : parts) {
+        const auto& part(*pair.second);
+        const auto id(part.id());
+        const auto new_pair(std::make_pair(id, pair.second));
+        const auto inserted(parts_by_ids.insert(new_pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_part_id << part.id();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_part_id + part.id()));
+        }
+    }
+
+    /*
+     * Now we can process the archetypes proper.
+     */
+    auto& archs(pe.archetypes());
+    for (auto& pair : archs) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+        auto& arch(*pair.second);
+
+        /*
+         * The meta-model name is hard-coded as we only support one.
+         */
+        arch.meta_model_name(meta_model_name);
+
+        /*
+         * Read all of the associated meta-data. First we get the
+         * logical model meta-element ID. It must not be empty, but
+         * otherwise we don't validate it here - this will be done
+         * later on.
+         */
+        const auto scfg(physical::make_static_configuration(fg, arch));
+        arch.part_id(scfg.part_id);
+        if (scfg.logical_meta_element_id.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_logical_meta_element));
+        }
+        using identification::entities::logical_meta_id;
+        const logical_meta_id lmen(scfg.logical_meta_element_id);
+        arch.logical_meta_element_id(lmen);
+
+        /*
+        * Read all relations for both the archetype and its generator.
+        */
+        arch.relations(process_relations(ctx, *arch.configuration()));
+        auto& tt(arch.text_templating());
+        tt.relations(process_relations(ctx, *tt.configuration()));
+
+        /*
+         * Read the reference to a wale template. Its existence will
+         * be validated later on during resolution. It may be empty
+         * since not all archetypes need a wale template.
+         */
+        const auto wtr(scfg.wale_template_reference);
+        if (!wtr.empty()) {
+            identification::helpers::logical_name_builder b;
+            const auto n(b.build(wtr));
+            tt.wale_template(n);
+        }
+
+        /*
+         * Archetypes can only exist in the context of a backend and a
+         * facet.
+         */
+        if (arch.backend_name().empty() || arch.facet_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << uncontained_archetype << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(uncontained_archetype + id.value()));
+        }
+
+        /*
+         * Generate the ID for this archetype.
+         */
+        std::ostringstream os;
+        const auto sn(arch.name().simple());
+        os << meta_model_name << separator
+           << arch.backend_name() << separator
+           << arch.facet_name() << separator << sn;
+        arch.id(os.str());
+        BOOST_LOG_SEV(lg, debug) << "ID: " << arch.id();
+
+        /*
+         * Locate the containing part and update it.
+         */
+        const auto qn(arch.name().qualified().dot());
+        const auto pid(arch.part_id());
+        const auto j(parts_by_ids.find(pid));
+        if (j == parts_by_ids.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_part << pid;
+            BOOST_THROW_EXCEPTION(transformation_error(missing_part + pid));
+        }
+
+        auto& part(*j->second);
+        part.archetypes().push_back(arch.name());
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished processing archetypes.";
+}
+
 void physical_entities_transform::process_archetype_kinds(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Processing archetype kinds.";
     const auto& pe(m.physical_elements());
@@ -344,38 +513,6 @@ void physical_entities_transform::process_archetype_kinds(entities::model& m) {
         BOOST_LOG_SEV(lg, debug) << "ID: " << ak.id();
     }
     BOOST_LOG_SEV(lg, debug) << "Finished processing archetype kinds.";
-}
-
-void physical_entities_transform::process_parts(entities::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Processing parts.";
-    const auto& pe(m.physical_elements());
-    auto& parts(pe.parts());
-    for (auto& pair : parts) {
-        const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-        auto& part(*pair.second);
-        part.meta_model_name(meta_model_name);
-
-        /*
-         * Parts can only exist in the context of a backend.
-         */
-        if (part.backend_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << uncontained_part << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(uncontained_part + id.value()));
-        }
-
-        /*
-         * Generate the ID for this part.
-         */
-        std::ostringstream os;
-        os << meta_model_name << separator
-           << part.backend_name() << separator
-           << part.name().simple();
-        part.id(os.str());
-        BOOST_LOG_SEV(lg, debug) << "ID: " << part.id();
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished processing parts.";
 }
 
 entities::physical::relations
@@ -503,129 +640,14 @@ physical_entities_transform::process_relations(const context& ctx,
 }
 
 void physical_entities_transform::
-process_archetypes(const context& ctx, entities::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Processing archetypes.";
-
-    using features::physical;
-    const auto& pe(m.physical_elements());
-    const auto& fm(*ctx.feature_model());
-    const auto fg(physical::make_feature_group(fm));
-
-    /*
-     * First, we organise the parts by their IDs.
-     */
-    const auto& parts(pe.parts());
-    std::unordered_map<std::string, boost::shared_ptr<entities::physical::part>>
-        parts_by_ids;
-    for (const auto& pair : parts) {
-        const auto& part(*pair.second);
-        const auto id(part.id());
-        const auto new_pair(std::make_pair(id, pair.second));
-        const auto inserted(parts_by_ids.insert(new_pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_part_id << part.id();
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_part_id + part.id()));
-        }
-    }
-
-    /*
-     * Now we can process the archetypes proper.
-     */
-    auto& archs(pe.archetypes());
-    for (auto& pair : archs) {
-        const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-        auto& arch(*pair.second);
-
-        /*
-         * The meta-model name is hard-coded as we only support one.
-         */
-        arch.meta_model_name(meta_model_name);
-
-        /*
-         * Read all of the associated meta-data. First we get the
-         * logical model meta-element ID. It must not be empty, but
-         * otherwise we don't validate it here - this will be done
-         * later on.
-         */
-        const auto scfg(physical::make_static_configuration(fg, arch));
-        arch.part_id(scfg.part_id);
-        if (scfg.logical_meta_element_id.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_logical_meta_element;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(missing_logical_meta_element));
-        }
-        using identification::entities::logical_meta_id;
-        const logical_meta_id lmen(scfg.logical_meta_element_id);
-        arch.logical_meta_element_id(lmen);
-
-        /*
-        * Read all relations for both the archetype and its generator.
-        */
-        arch.relations(process_relations(ctx, *arch.configuration()));
-        auto& tt(arch.text_templating());
-        tt.relations(process_relations(ctx, *tt.configuration()));
-
-        /*
-         * Read the reference to a wale template. Its existence will
-         * be validated later on during resolution. It may be empty
-         * since not all archetypes need a wale template.
-         */
-        const auto wtr(scfg.wale_template_reference);
-        if (!wtr.empty()) {
-            identification::helpers::logical_name_builder b;
-            const auto n(b.build(wtr));
-            tt.wale_template(n);
-        }
-
-        /*
-         * Archetypes can only exist in the context of a backend and a
-         * facet.
-         */
-        if (arch.backend_name().empty() || arch.facet_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << uncontained_archetype << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(uncontained_archetype + id.value()));
-        }
-
-        /*
-         * Generate the ID for this archetype.
-         */
-        std::ostringstream os;
-        const auto sn(arch.name().simple());
-        os << meta_model_name << separator
-           << arch.backend_name() << separator
-           << arch.facet_name() << separator << sn;
-        arch.id(os.str());
-        BOOST_LOG_SEV(lg, debug) << "ID: " << arch.id();
-
-        /*
-         * Locate the containing part and update it.
-         */
-        const auto qn(arch.name().qualified().dot());
-        const auto pid(arch.part_id());
-        const auto j(parts_by_ids.find(pid));
-        if (j == parts_by_ids.end()) {
-            BOOST_LOG_SEV(lg, error) << missing_part << pid;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_part + pid));
-        }
-
-        auto& part(*j->second);
-        part.archetypes().push_back(arch.name());
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished processing archetypes.";
-}
-
-void physical_entities_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "physical entities",
         transform_id, m.name().id().value(), *ctx.tracer(), m);
 
     process_backends(ctx, m);
-    process_facets(m);
+    process_facets(ctx, m);
+    process_parts(ctx, m);
     process_archetype_kinds(m);
-    process_parts(m);
     process_archetypes(ctx, m);
 
     stp.end_transform(m);

@@ -41,7 +41,8 @@
       ],
       "tagged_values": {
         "masd.codec.dia.comment": "true",
-        "masd.label.test": "some_label"
+        "masd.label.test": "some_label",
+        "masd.physical.directory_name": "types"
       },
       "fallback_element_type": "masd::module"
     },
@@ -89,7 +90,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "hash",
+        "masd.physical.postfix": "hash"
       },
       "fallback_element_type": "masd::module"
     },
@@ -267,7 +270,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "io",
+        "masd.physical.postfix": "io"
       },
       "fallback_element_type": "masd::module"
     },
@@ -354,7 +359,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "serialization",
+        "masd.physical.postfix": "ser"
       },
       "fallback_element_type": "masd::module"
     },
@@ -403,7 +410,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "test_data",
+        "masd.physical.postfix": "td"
       },
       "fallback_element_type": "masd::module"
     },
@@ -490,7 +499,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "odb",
+        "masd.physical.postfix": "odb"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2027,7 +2038,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "generated_tests",
+        "masd.physical.postfix": "tests"
       },
       "fallback_element_type": "masd::module"
     },
@@ -2401,7 +2414,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "lexical_cast",
+        "masd.physical.postfix": "lc"
       },
       "fallback_element_type": "masd::module"
     },

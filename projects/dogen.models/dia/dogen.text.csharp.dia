@@ -134,7 +134,7 @@
         <dia:point val="-17,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,4.15;218.05,70.05"/>
+        <dia:rectangle val="-17.05,4.15;218.05,74.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -146,7 +146,7 @@
         <dia:real val="235"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="64"/>
+        <dia:real val="68"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1684,7 +1684,7 @@
         <dia:point val="-15,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,38.15;42.05,68.05"/>
+        <dia:rectangle val="-15.05,38.15;42.05,71.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1696,7 +1696,7 @@
         <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28"/>
+        <dia:real val="31"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1720,13 +1720,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,48"/>
+        <dia:point val="-13,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,47.95;9.88,51.65"/>
+        <dia:rectangle val="-13.05,48.95;9.88,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,48"/>
+        <dia:point val="-13,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.830000000000002"/>
@@ -2155,13 +2155,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,48"/>
+        <dia:point val="14,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,47.95;38.805,51.65"/>
+        <dia:rectangle val="13.95,48.95;38.805,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,48"/>
+        <dia:point val="14,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -2362,7 +2362,7 @@ using System;
         <dia:point val="44,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,38.15;100.05,68.05"/>
+        <dia:rectangle val="43.95,38.15;100.05,71.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2374,7 +2374,7 @@ using System;
         <dia:real val="56"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28"/>
+        <dia:real val="31"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2398,13 +2398,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,48"/>
+        <dia:point val="46,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,47.95;68.88,51.65"/>
+        <dia:rectangle val="45.95,48.95;68.88,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,48"/>
+        <dia:point val="46,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.830000000000002"/>
@@ -2662,13 +2662,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,48"/>
+        <dia:point val="73,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,47.95;97.805,51.65"/>
+        <dia:rectangle val="72.95,48.95;97.805,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,48"/>
+        <dia:point val="73,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -2883,7 +2883,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:point val="102,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,38.15;159.05,68.05"/>
+        <dia:rectangle val="101.95,38.15;159.05,71.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2895,7 +2895,7 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
         <dia:real val="57"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28"/>
+        <dia:real val="31"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -2919,13 +2919,13 @@ void enum_transform::apply(const context&amp; ctx, const logical::entities::elem
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="104,48"/>
+        <dia:point val="104,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,47.95;126.88,51.65"/>
+        <dia:rectangle val="103.95,48.95;126.88,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="104,48"/>
+        <dia:point val="104,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.830000000000002"/>
@@ -3256,13 +3256,13 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="132,48"/>
+        <dia:point val="132,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,47.95;156.805,51.65"/>
+        <dia:rectangle val="131.95,48.95;156.805,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="132,48"/>
+        <dia:point val="132,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -3527,13 +3527,13 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,53"/>
+        <dia:point val="-13,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,52.95;11.035,56.65"/>
+        <dia:rectangle val="-13.05,53.95;11.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,53"/>
+        <dia:point val="-13,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -3998,13 +3998,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="138,42"/>
+        <dia:point val="144,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="137.95,41.95;150.87,45.65"/>
+        <dia:rectangle val="143.95,41.95;156.87,45.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="138,42"/>
+        <dia:point val="144,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4434,13 +4434,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,42"/>
+        <dia:point val="128,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,41.95;134.87,45.05"/>
+        <dia:rectangle val="127.95,41.95;140.87,45.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,42"/>
+        <dia:point val="128,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4890,7 +4890,7 @@ using System;
         <dia:point val="99.7625,34.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.0125,32.95;119.107,36.055"/>
+        <dia:rectangle val="99.0125,32.95;119.108,36.055"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11946,13 +11946,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,63"/>
+        <dia:point val="-13,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,62.95;1.025,66.05"/>
+        <dia:rectangle val="-13.05,64.95;1.025,68.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,63"/>
+        <dia:point val="-13,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -12264,13 +12264,13 @@ using System;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O92">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,58"/>
+        <dia:point val="-13,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,57.95;10.265,61.65"/>
+        <dia:rectangle val="-13.05,58.95;10.265,62.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,58"/>
+        <dia:point val="-13,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.215"/>
@@ -12889,13 +12889,13 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,59"/>
+        <dia:point val="46,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,58.95;60.025,62.05"/>
+        <dia:rectangle val="45.95,64.95;60.025,68.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,59"/>
+        <dia:point val="46,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -13667,13 +13667,13 @@ void builtin_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O104">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,53"/>
+        <dia:point val="14,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,52.95;38.035,56.65"/>
+        <dia:rectangle val="13.95,53.95;38.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,53"/>
+        <dia:point val="14,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -14247,13 +14247,13 @@ using System.Collections.Generic;
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O106">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,53"/>
+        <dia:point val="46,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,52.95;70.035,56.65"/>
+        <dia:rectangle val="45.95,53.95;70.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,53"/>
+        <dia:point val="46,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -15605,7 +15605,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:point val="161,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="160.95,38.15;216.05,68.05"/>
+        <dia:rectangle val="160.95,38.15;216.05,71.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15617,7 +15617,7 @@ std::string {{class.simple_name}}::helper_name() const {
         <dia:real val="55"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="28"/>
+        <dia:real val="31"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -15863,13 +15863,13 @@ std::string {{class.simple_name}}::helper_name() const {
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="163,48"/>
+        <dia:point val="163,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.95,47.95;174.715,51.65"/>
+        <dia:rectangle val="162.95,48.95;174.715,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="163,48"/>
+        <dia:point val="163,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -16090,13 +16090,13 @@ void project_transform::apply(const context&amp; ctx, const logical::entities::e
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O119">
       <dia:attribute name="obj_pos">
-        <dia:point val="190,48"/>
+        <dia:point val="190,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.95,47.95;201.715,51.65"/>
+        <dia:rectangle val="189.95,48.95;201.715,52.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="190,48"/>
+        <dia:point val="190,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -16412,13 +16412,13 @@ EndGlobal
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O121">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,53"/>
+        <dia:point val="73,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,52.95;97.035,56.65"/>
+        <dia:rectangle val="72.95,53.95;97.035,57.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,53"/>
+        <dia:point val="73,54"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -17843,7 +17843,7 @@ of the C# Technical Space.
         <dia:point val="-13,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,41.95;2.195,46.15"/>
+        <dia:rectangle val="-13.05,41.95;3.735,46.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17852,10 +17852,10 @@ of the C# Technical Space.
         <dia:point val="-13,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.145"/>
+        <dia:real val="16.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="4.8999999999999995"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -17872,7 +17872,8 @@ of the C# Technical Space.
             <dia:string>#M2T transforms for the types facet of
 the C# Technical Space.
 
-#DOGEN masd.codec.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.physical.directory_name=Types#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -19347,7 +19348,7 @@ the C# Technical Space.
         <dia:point val="46,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,41.95;60.04,46.15"/>
+        <dia:rectangle val="45.95,41.95;63.505,47.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19356,10 +19357,10 @@ the C# Technical Space.
         <dia:point val="46,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.99"/>
+        <dia:real val="17.455000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -19376,7 +19377,9 @@ the C# Technical Space.
             <dia:string>#M2T transforms for the io facet of
 the C# Technical Space.
 
-#DOGEN masd.codec.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.physical.directory_name=Dumpers
+#DOGEN masd.physical.postfix=Dumper#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -19402,7 +19405,7 @@ the C# Technical Space.
         <dia:point val="104,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,41.95;118.04,46.15"/>
+        <dia:rectangle val="103.95,41.95;125.74,47.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19411,10 +19414,10 @@ the C# Technical Space.
         <dia:point val="104,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.99"/>
+        <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -19431,7 +19434,9 @@ the C# Technical Space.
             <dia:string>#M2T transforms for the test data
 facet of the C# Technical Space.
 
-#DOGEN masd.codec.dia.comment=true#</dia:string>
+#DOGEN masd.codec.dia.comment=true
+#DOGEN masd.physical.directory_name=SequenceGenerators
+#DOGEN masd.physical.postfix=SequenceGenerator#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

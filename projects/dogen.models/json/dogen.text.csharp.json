@@ -121,7 +121,8 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "Types"
       },
       "fallback_element_type": "masd::module"
     },
@@ -170,7 +171,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "Dumpers",
+        "masd.physical.postfix": "Dumper"
       },
       "fallback_element_type": "masd::module"
     },
@@ -219,7 +222,9 @@
         "masd::physical::facet"
       ],
       "tagged_values": {
-        "masd.codec.dia.comment": "true"
+        "masd.codec.dia.comment": "true",
+        "masd.physical.directory_name": "SequenceGenerators",
+        "masd.physical.postfix": "SequenceGenerator"
       },
       "fallback_element_type": "masd::module"
     },
