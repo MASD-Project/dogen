@@ -27,6 +27,7 @@
       "tagged_values": {
         "masd.codec.dia.comment": "true",
         "masd.physical.backend_name": "cpp",
+        "masd.physical.directory_name": "cpp",
         "masd.physical.major_technical_space": "cpp",
         "masd.label.test": "lbl"
       },

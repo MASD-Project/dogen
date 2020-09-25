@@ -17782,7 +17782,7 @@ using System.Collections.Specialized;
         <dia:point val="-15,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.05,7.95;7.125,16.15"/>
+        <dia:rectangle val="-15.05,7.95;7.125,16.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17794,7 +17794,7 @@ using System.Collections.Specialized;
         <dia:real val="22.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -17816,6 +17816,7 @@ of the C# Technical Space.
 
 #DOGEN masd.codec.dia.comment=true
 #DOGEN masd.physical.backend_name=csharp
+#DOGEN masd.physical.directory_name=cs
 #DOGEN masd.physical.major_technical_space=csharp#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

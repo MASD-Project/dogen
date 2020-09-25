@@ -47,6 +47,7 @@
       "tagged_values": {
         "masd.codec.dia.comment": "true",
         "masd.physical.backend_name": "csharp",
+        "masd.physical.directory_name": "cs",
         "masd.physical.major_technical_space": "csharp"
       },
       "fallback_element_type": "masd::module"

@@ -6568,7 +6568,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:point val="-48,173"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,172.95;-28.955,181.95"/>
+        <dia:rectangle val="-48.05,172.95;-28.955,182.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6580,7 +6580,7 @@ void class_header_transform::apply(const context&amp; ctx, const logical::entiti
         <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.9000000000000004"/>
+        <dia:real val="9.7000000000000011"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6602,6 +6602,7 @@ grammar of the C++ technical space.
 
 #DOGEN masd.codec.dia.comment=true
 #DOGEN masd.physical.backend_name=cpp
+#DOGEN masd.physical.directory_name=cpp
 #DOGEN masd.physical.major_technical_space=cpp
 #DOGEN masd.label.test=lbl#</dia:string>
           </dia:attribute>
