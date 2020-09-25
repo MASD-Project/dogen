@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-25 Fri 11:59]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *8:42* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 8:42   |      |      | 100.0 |
-| Active                                             |        | 8:42 |      | 100.0 |
-| edit release notes for previous sprint             |        |      | 3:44 |  42.9 |
-| Create a demo and presentation for previous sprint |        |      | 0:39 |   7.5 |
-| Sprint and product backlog grooming                |        |      | 1:11 |  13.6 |
-| Rename =name= to =codec= name                      |        |      | 0:20 |   3.8 |
-| Directory names and postfixes are PMM properties   |        |      | 2:14 |  25.7 |
-| Add full and relative path processing to PM        |        |      | 0:34 |   6.5 |
+#+CAPTION: Clock summary at [2020-09-25 Fri 18:02]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *12:49* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 12:49   |       |      | 100.0 |
+| Active                                             |         | 12:49 |      | 100.0 |
+| edit release notes for previous sprint             |         |       | 3:44 |  29.1 |
+| Create a demo and presentation for previous sprint |         |       | 0:39 |   5.1 |
+| Directory names and postfixes are PMM properties   |         |       | 5:27 |  42.5 |
+| Sprint and product backlog grooming                |         |       | 2:05 |  16.3 |
+| Rename =name= to =codec= name                      |         |       | 0:20 |   2.6 |
+| Add full and relative path processing to PM        |         |       | 0:34 |   4.4 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -229,28 +229,12 @@ using any random string.
 We have used =operator<= a lot for sorting lists. We don't really need
 this since c++ 11, we can just create a simple inline lambda.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Directory names and postfixes are PMM properties        :story:
+    CLOSED: [2020-09-25 Fri 18:02]
     :LOGBOOK:
-    CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
-    CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
-    CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
-    :END:
-
-Updates to sprint and product backlog.
-
-*** STARTED Rename =name= to =codec= name                             :story:
-    :LOGBOOK:
-    CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
-    :END:
-
-- add codec ID to name.
-
-Notes:
-
-- variability is also using the name class.
-
-*** STARTED Directory names and postfixes are PMM properties          :story:
-    :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 16:19]--[2020-09-25 Fri 18:01] =>  1:42
+    CLOCK: [2020-09-25 Fri 15:56]--[2020-09-25 Fri 16:18] =>  0:22
+    CLOCK: [2020-09-25 Fri 13:31]--[2020-09-25 Fri 14:40] =>  1:09
     CLOCK: [2020-09-25 Fri 09:45]--[2020-09-25 Fri 11:59] =>  2:14
     :END:
 
@@ -304,6 +288,107 @@ Tasks:
 - add the new attributes to diagrams and read them from meta-data.
 - generate the new attributes.
 - update MMP generation with new attributes.
+- add a part factory.
+
+Notes:
+
+- we tried to model all containment based on parts. That is, all
+  archetypes had to belong to a facet and all facets had to belong to
+  a part. This is a seductive approach because there are no special
+  cases. However, the downside of it is that we need to create two
+  "special" parts in every backend:
+
+  - the component part;
+  - the backend part.
+
+  The component part and backend part may resolve into the same
+  physical location, as a function of variability. Seems a bit painful
+  to have to define these two "special" parts on every
+  backend. Alternatively, we could state that archetypes could be
+  contained by any physical meta-element (apart from archetypes
+  themselves) and then remove these "special" parts. This would then
+  mean that we'd have to query the PMM to look for the right type of
+  meta-element that contains us - or we could create a simple index of
+  PMM ID to directory + postfix as part of the PMM construction. In
+  addition, once we have products, components and projects in the
+  physical model, we will also have the potential to have facets and
+  archetypes contained in any of these. Again, it makes no sense to
+  have to create "parts" purely for symmetry when they add no
+  value. We need to generalise the notion of containment.
+- having said that, there are cases where we may want to have a facet
+  just as a grouping mechanism. For example, the visual studio facet
+  does not contribute to the path but is useful as a grouping of
+  archetypes and also as a variability knob. The part does not have
+  these use cases.
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 14:41]--[2020-09-25 Fri 15:35] =>  0:54
+    CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
+    CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
+    CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
+    :END:
+
+Updates to sprint and product backlog.
+
+*** STARTED Rename =name= to =codec= name                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
+    :END:
+
+- add codec ID to name.
+
+Notes:
+
+- variability is also using the name class.
+
+*** STARTED Add full and relative path processing to PM               :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 09:00]--[2020-09-25 Fri 09:34] =>  0:34
+    :END:
+
+We need to be able to generate full paths in the PM. This will require
+access to the file extensions. For this we will need new decoration
+elements. This must be done as part of the logical model to physical
+model conversion. While we're at it, we should also generate the
+relative paths. Once we have relative paths we should compute the
+header guards from them. These could be generalised to "unique
+identifiers" or some such general name perhaps. That should be a
+separate transform.
+
+Notes:
+
+- we are not yet populating the archetype kind in archetypes so we
+  cannot locate the extensions. Also we did not create all of the
+  required archetype kinds in the text models. The populating should
+  be done via profiles.
+- we must first figure out the number of enabled backends. The
+  meta-model properties will always contain all backends, but not all
+  of them are enabled.
+- we need to populate the part directories. For this we need to know
+  what parts are available for each backend (PMM), and then ensure the
+  part properties have been created. We also need a directory for the
+  part in variability. It is not clear we have support for this in the
+  template instantiation domains - we probably only have backend,
+  facet, archetype.
+
+Merged stories:
+
+*Map archetypes to labels*
+
+We need to add support in the PMM for mapping archetypes to labels. We
+may need to treat certain labels more specially than others - its not
+clear. We need a container with:
+
+- logical model element ID
+- archetype ID
+- labels
+
+*** Allow arbitrary physical containment                              :story:
+
+We need to allow archetypes to be contained by any physical element,
+except for archetypes. We also need to allow facets to belong to any
+physical element other than facets.
 
 *** Move =enabled= and =overwrite= into =enablement_properties=       :story:
 
@@ -552,48 +637,6 @@ Notes:
 *** Nightly nursing and other spikes                                  :story:
 
 Time spent troubleshooting environmental problems.
-
-*** STARTED Add full and relative path processing to PM               :story:
-    :LOGBOOK:
-    CLOCK: [2020-09-25 Fri 09:00]--[2020-09-25 Fri 09:34] =>  0:34
-    :END:
-
-We need to be able to generate full paths in the PM. This will require
-access to the file extensions. For this we will need new decoration
-elements. This must be done as part of the logical model to physical
-model conversion. While we're at it, we should also generate the
-relative paths. Once we have relative paths we should compute the
-header guards from them. These could be generalised to "unique
-identifiers" or some such general name perhaps. That should be a
-separate transform.
-
-Notes:
-
-- we are not yet populating the archetype kind in archetypes so we
-  cannot locate the extensions. Also we did not create all of the
-  required archetype kinds in the text models. The populating should
-  be done via profiles.
-- we must first figure out the number of enabled backends. The
-  meta-model properties will always contain all backends, but not all
-  of them are enabled.
-- we need to populate the part directories. For this we need to know
-  what parts are available for each backend (PMM), and then ensure the
-  part properties have been created. We also need a directory for the
-  part in variability. It is not clear we have support for this in the
-  template instantiation domains - we probably only have backend,
-  facet, archetype.
-
-Merged stories:
-
-*Map archetypes to labels*
-
-We need to add support in the PMM for mapping archetypes to labels. We
-may need to treat certain labels more specially than others - its not
-clear. We need a container with:
-
-- logical model element ID
-- archetype ID
-- labels
 
 *** Add a validator for text model                                    :story:
 

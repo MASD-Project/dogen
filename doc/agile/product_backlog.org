@@ -78,6 +78,35 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Associate git details with components                             :story:
+
+If the model of the component had access to the git repository
+location then we could make use of it. The primary component could
+have links to all of the secondary components; you can then point
+dogen to the primary component and it would create the "standard" git
+layout, e.g.:
+
+: primary.remote
+: primary.local
+: secondary_1.remote
+: secondary_1.local
+: ...
+
+If we had backup remotes, we could also setup the remotes
+(e.g. bitbucket, etc). In effect, dogen would act product level
+operations (build all components, run all tests, etc). It would know
+for each component what the appropriate command is (e.g. build2,
+cmake, dotnet, etc).
+
+Notes:
+
+- should we have a top-level =masd= binary for this kind of stuff?
+  seems like there is a pretty obvious boundary between plain code
+  generation and product level operations such as these. The =masd=
+  component could be built using dogen's libraries, but at least this
+  way we wouldn't have to link against git etc for all of these
+  product level use cases.
+
 *** Consider modeling primitive value as attribute                    :story:
 
 At present we have used meta-data:
@@ -770,6 +799,27 @@ repo. This would allow us to do one single checkout for the entire
 family. The downside is that we then start building inside of the
 sub-repos (we never want to build at the product family level). This
 may not necessarily be a bad thing.
+
+Notes:
+
+- we now have a clear understanding of the complete product model. Its
+  hierarchical structure is as follows:
+
+  - organisation
+  - product family
+  - product
+  - component: primary or secondary. Git repos at this level.
+  - backend: primary technical space (C++, C#), secondary technical
+    spaces (CMake, Visual Studio).
+  - part: implementation (src), public headers (include)
+  - facet: types, etc.
+  - archetypes.
+
+  Its possible for a component and a backend to have facets and/or
+  archetypes. Facets are a form of "relative" partitioning of the
+  physical space, by "topics".
+- the text model will have an instantiation of the MASD product model,
+  from product onwards.
 
 Merged stories:
 
