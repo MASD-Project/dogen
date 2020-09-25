@@ -352,6 +352,28 @@ void meta_model_properties_transform::compute_enable_backend_directories(
     }
 }
 
+void meta_model_properties_transform::compute_directory_names_and_postfixes(
+    const physical::entities::meta_model& mm,
+    entities::meta_model_properties& mmp) {
+
+    for (auto& be : mm.backends()) {
+        const auto& id(be.meta_name().id());
+        const auto i(mmp.backend_properties().find(id));
+        if (i == mmp.backend_properties().end()) {
+            BOOST_LOG_SEV(lg, error) << backend_not_found << id;
+            BOOST_THROW_EXCEPTION(
+                transform_exception(backend_not_found + id.value()));
+        }
+
+        auto& bp(i->second);
+        if (!bp.directory_name().empty())
+            bp.computed_directory_name(bp.directory_name());
+        else
+            bp.computed_directory_name(be.directory_name());
+    }
+}
+
+
 void meta_model_properties_transform::
 apply(const context& ctx, entities::model& m) {
     const auto& id(m.name().id());
@@ -416,6 +438,11 @@ apply(const context& ctx, entities::model& m) {
      * Determine if the backend directories are enabled or not.
      */
     compute_enable_backend_directories(fm, cfg, mmp);
+
+    /*
+     * Finally, compute the directory names and postfixes.
+     */
+    compute_directory_names_and_postfixes(pmm, mmp);
 
     stp.end_transform(m);
 }

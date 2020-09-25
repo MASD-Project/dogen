@@ -184,6 +184,14 @@ private:
         const variability::entities::configuration& cfg,
         entities::meta_model_properties& mmp);
 
+    /**
+     * @brief Compute the directory name and postfix using meta-model
+     * data and the user supplied configuration.
+     */
+    static void compute_directory_names_and_postfixes(
+        const physical::entities::meta_model& mm,
+        entities::meta_model_properties& mmp);
+
 public:
     static void apply(const context& ctx, entities::model& m);
 };
