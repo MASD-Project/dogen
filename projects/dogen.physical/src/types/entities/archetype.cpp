@@ -26,37 +26,32 @@ archetype::archetype(
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
-    const std::string& default_postfix,
-    const std::string& override_postfix,
+    const std::string& postfix,
     const std::list<std::string>& depends,
     const std::list<std::string>& generates,
     const std::string& generated_by,
     const std::string& archetype_kind_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::identification::entities::physical_meta_id& part,
-    const dogen::physical::entities::relations& relations,
-    const std::string& postfix)
+    const dogen::physical::entities::relations& relations)
     : description_(description),
       meta_name_(meta_name),
       labels_(labels),
-      default_postfix_(default_postfix),
-      override_postfix_(override_postfix),
+      postfix_(postfix),
       depends_(depends),
       generates_(generates),
       generated_by_(generated_by),
       archetype_kind_id_(archetype_kind_id),
       logical_meta_element_id_(logical_meta_element_id),
       part_(part),
-      relations_(relations),
-      postfix_(postfix) { }
+      relations_(relations) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
-    swap(default_postfix_, other.default_postfix_);
-    swap(override_postfix_, other.override_postfix_);
+    swap(postfix_, other.postfix_);
     swap(depends_, other.depends_);
     swap(generates_, other.generates_);
     swap(generated_by_, other.generated_by_);
@@ -64,23 +59,20 @@ void archetype::swap(archetype& other) noexcept {
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(part_, other.part_);
     swap(relations_, other.relations_);
-    swap(postfix_, other.postfix_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
     return description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
-        default_postfix_ == rhs.default_postfix_ &&
-        override_postfix_ == rhs.override_postfix_ &&
+        postfix_ == rhs.postfix_ &&
         depends_ == rhs.depends_ &&
         generates_ == rhs.generates_ &&
         generated_by_ == rhs.generated_by_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         part_ == rhs.part_ &&
-        relations_ == rhs.relations_ &&
-        postfix_ == rhs.postfix_;
+        relations_ == rhs.relations_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -137,36 +129,20 @@ void archetype::labels(const std::list<dogen::identification::entities::label>&&
     labels_ = std::move(v);
 }
 
-const std::string& archetype::default_postfix() const {
-    return default_postfix_;
+const std::string& archetype::postfix() const {
+    return postfix_;
 }
 
-std::string& archetype::default_postfix() {
-    return default_postfix_;
+std::string& archetype::postfix() {
+    return postfix_;
 }
 
-void archetype::default_postfix(const std::string& v) {
-    default_postfix_ = v;
+void archetype::postfix(const std::string& v) {
+    postfix_ = v;
 }
 
-void archetype::default_postfix(const std::string&& v) {
-    default_postfix_ = std::move(v);
-}
-
-const std::string& archetype::override_postfix() const {
-    return override_postfix_;
-}
-
-std::string& archetype::override_postfix() {
-    return override_postfix_;
-}
-
-void archetype::override_postfix(const std::string& v) {
-    override_postfix_ = v;
-}
-
-void archetype::override_postfix(const std::string&& v) {
-    override_postfix_ = std::move(v);
+void archetype::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 const std::list<std::string>& archetype::depends() const {
@@ -279,22 +255,6 @@ void archetype::relations(const dogen::physical::entities::relations& v) {
 
 void archetype::relations(const dogen::physical::entities::relations&& v) {
     relations_ = std::move(v);
-}
-
-const std::string& archetype::postfix() const {
-    return postfix_;
-}
-
-std::string& archetype::postfix() {
-    return postfix_;
-}
-
-void archetype::postfix(const std::string& v) {
-    postfix_ = v;
-}
-
-void archetype::postfix(const std::string&& v) {
-    postfix_ = std::move(v);
 }
 
 }

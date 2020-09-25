@@ -26,22 +26,18 @@ part::part()
     : requires_relative_path_(static_cast<bool>(0)) { }
 
 part::part(
-    const std::string& default_directory_name,
-    const std::string& override_directory_name,
+    const std::string& directory_name,
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
-    const std::string& directory_name,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
     const bool requires_relative_path)
-    : default_directory_name_(default_directory_name),
-      override_directory_name_(override_directory_name),
+    : directory_name_(directory_name),
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
-      directory_name_(directory_name),
       path_configuration_(path_configuration),
       facets_(facets),
       archetypes_(archetypes),
@@ -49,12 +45,10 @@ part::part(
 
 void part::swap(part& other) noexcept {
     using std::swap;
-    swap(default_directory_name_, other.default_directory_name_);
-    swap(override_directory_name_, other.override_directory_name_);
+    swap(directory_name_, other.directory_name_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
-    swap(directory_name_, other.directory_name_);
     swap(path_configuration_, other.path_configuration_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -62,12 +56,10 @@ void part::swap(part& other) noexcept {
 }
 
 bool part::operator==(const part& rhs) const {
-    return default_directory_name_ == rhs.default_directory_name_ &&
-        override_directory_name_ == rhs.override_directory_name_ &&
+    return directory_name_ == rhs.directory_name_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
-        directory_name_ == rhs.directory_name_ &&
         path_configuration_ == rhs.path_configuration_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -80,36 +72,20 @@ part& part::operator=(part other) {
     return *this;
 }
 
-const std::string& part::default_directory_name() const {
-    return default_directory_name_;
+const std::string& part::directory_name() const {
+    return directory_name_;
 }
 
-std::string& part::default_directory_name() {
-    return default_directory_name_;
+std::string& part::directory_name() {
+    return directory_name_;
 }
 
-void part::default_directory_name(const std::string& v) {
-    default_directory_name_ = v;
+void part::directory_name(const std::string& v) {
+    directory_name_ = v;
 }
 
-void part::default_directory_name(const std::string&& v) {
-    default_directory_name_ = std::move(v);
-}
-
-const std::string& part::override_directory_name() const {
-    return override_directory_name_;
-}
-
-std::string& part::override_directory_name() {
-    return override_directory_name_;
-}
-
-void part::override_directory_name(const std::string& v) {
-    override_directory_name_ = v;
-}
-
-void part::override_directory_name(const std::string&& v) {
-    override_directory_name_ = std::move(v);
+void part::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 const std::string& part::description() const {
@@ -158,22 +134,6 @@ void part::labels(const std::list<dogen::identification::entities::label>& v) {
 
 void part::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
-}
-
-const std::string& part::directory_name() const {
-    return directory_name_;
-}
-
-std::string& part::directory_name() {
-    return directory_name_;
-}
-
-void part::directory_name(const std::string& v) {
-    directory_name_ = v;
-}
-
-void part::directory_name(const std::string&& v) {
-    directory_name_ = std::move(v);
 }
 
 const dogen::physical::entities::path_configuration& part::path_configuration() const {

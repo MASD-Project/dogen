@@ -23,53 +23,37 @@
 namespace dogen::physical::entities {
 
 facet::facet(
-    const std::string& default_directory_name,
-    const std::string& override_directory_name,
+    const std::string& directory_name,
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
-    const std::string& default_postfix,
-    const std::string& override_postfix,
-    const std::string& directory_name,
     const std::string& postfix,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id)
-    : default_directory_name_(default_directory_name),
-      override_directory_name_(override_directory_name),
+    : directory_name_(directory_name),
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
-      default_postfix_(default_postfix),
-      override_postfix_(override_postfix),
-      directory_name_(directory_name),
       postfix_(postfix),
       archetypes_(archetypes),
       default_archetype_for_logical_meta_model_id_(default_archetype_for_logical_meta_model_id) { }
 
 void facet::swap(facet& other) noexcept {
     using std::swap;
-    swap(default_directory_name_, other.default_directory_name_);
-    swap(override_directory_name_, other.override_directory_name_);
+    swap(directory_name_, other.directory_name_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
-    swap(default_postfix_, other.default_postfix_);
-    swap(override_postfix_, other.override_postfix_);
-    swap(directory_name_, other.directory_name_);
     swap(postfix_, other.postfix_);
     swap(archetypes_, other.archetypes_);
     swap(default_archetype_for_logical_meta_model_id_, other.default_archetype_for_logical_meta_model_id_);
 }
 
 bool facet::operator==(const facet& rhs) const {
-    return default_directory_name_ == rhs.default_directory_name_ &&
-        override_directory_name_ == rhs.override_directory_name_ &&
+    return directory_name_ == rhs.directory_name_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
-        default_postfix_ == rhs.default_postfix_ &&
-        override_postfix_ == rhs.override_postfix_ &&
-        directory_name_ == rhs.directory_name_ &&
         postfix_ == rhs.postfix_ &&
         archetypes_ == rhs.archetypes_ &&
         default_archetype_for_logical_meta_model_id_ == rhs.default_archetype_for_logical_meta_model_id_;
@@ -81,36 +65,20 @@ facet& facet::operator=(facet other) {
     return *this;
 }
 
-const std::string& facet::default_directory_name() const {
-    return default_directory_name_;
+const std::string& facet::directory_name() const {
+    return directory_name_;
 }
 
-std::string& facet::default_directory_name() {
-    return default_directory_name_;
+std::string& facet::directory_name() {
+    return directory_name_;
 }
 
-void facet::default_directory_name(const std::string& v) {
-    default_directory_name_ = v;
+void facet::directory_name(const std::string& v) {
+    directory_name_ = v;
 }
 
-void facet::default_directory_name(const std::string&& v) {
-    default_directory_name_ = std::move(v);
-}
-
-const std::string& facet::override_directory_name() const {
-    return override_directory_name_;
-}
-
-std::string& facet::override_directory_name() {
-    return override_directory_name_;
-}
-
-void facet::override_directory_name(const std::string& v) {
-    override_directory_name_ = v;
-}
-
-void facet::override_directory_name(const std::string&& v) {
-    override_directory_name_ = std::move(v);
+void facet::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 const std::string& facet::description() const {
@@ -159,54 +127,6 @@ void facet::labels(const std::list<dogen::identification::entities::label>& v) {
 
 void facet::labels(const std::list<dogen::identification::entities::label>&& v) {
     labels_ = std::move(v);
-}
-
-const std::string& facet::default_postfix() const {
-    return default_postfix_;
-}
-
-std::string& facet::default_postfix() {
-    return default_postfix_;
-}
-
-void facet::default_postfix(const std::string& v) {
-    default_postfix_ = v;
-}
-
-void facet::default_postfix(const std::string&& v) {
-    default_postfix_ = std::move(v);
-}
-
-const std::string& facet::override_postfix() const {
-    return override_postfix_;
-}
-
-std::string& facet::override_postfix() {
-    return override_postfix_;
-}
-
-void facet::override_postfix(const std::string& v) {
-    override_postfix_ = v;
-}
-
-void facet::override_postfix(const std::string&& v) {
-    override_postfix_ = std::move(v);
-}
-
-const std::string& facet::directory_name() const {
-    return directory_name_;
-}
-
-std::string& facet::directory_name() {
-    return directory_name_;
-}
-
-void facet::directory_name(const std::string& v) {
-    directory_name_ = v;
-}
-
-void facet::directory_name(const std::string&& v) {
-    directory_name_ = std::move(v);
 }
 
 const std::string& facet::postfix() const {

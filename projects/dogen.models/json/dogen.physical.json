@@ -97,11 +97,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory_name",
-          "type": "std::string",
-          "documentation": "Default name to use for the directory in the file-system representing this backend.\n"
-        },
-        {
           "name": "parts",
           "type": "std::unordered_map<identification::entities::physical_meta_id, part>"
         },
@@ -127,11 +122,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory_name",
-          "type": "std::string",
-          "documentation": "Default name to use for the directory in the file-system representing this part.\n"
-        },
         {
           "name": "path_configuration",
           "type": "path_configuration"
@@ -213,16 +203,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory_name",
-          "type": "std::string",
-          "documentation": "Default name to use for the directory in the file-system representing this facet.\n"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to apply to artefacts within this facet, if any.\n"
-        },
-        {
           "name": "archetypes",
           "type": "std::unordered_map<identification::entities::physical_meta_id, archetype>"
         },
@@ -262,11 +242,6 @@
           "name": "relations",
           "type": "relations",
           "documentation": "Properties of this archetype with regards to relations.\n"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to apply to artefacts of this archetype, if any.\n"
         }
       ]
     },
@@ -391,20 +366,16 @@
       "parents": [
         "entities::MetaElement"
       ],
+      "documentation": "The meta-element can contain other meta-elements.\n",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "default_directory_name",
+          "name": "directory_name",
           "type": "std::string",
-          "documentation": "Default directory name.\n"
-        },
-        {
-          "name": "override_directory_name",
-          "type": "std::string",
-          "documentation": "Override directory name, if any.\n"
+          "documentation": "Default name to use for the directory in the file-system representing this element.\n"
         }
       ]
     },
@@ -416,14 +387,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "default_postfix",
+          "name": "postfix",
           "type": "std::string",
-          "documentation": "Default postfix for the element.\n"
-        },
-        {
-          "name": "override_postfix",
-          "type": "std::string",
-          "documentation": "Overridden postfix, if any.\n"
+          "documentation": "Postfix to apply to artefacts within this element, if any.\n"
         }
       ]
     },

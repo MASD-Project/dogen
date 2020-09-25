@@ -128,12 +128,10 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const backend& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::backend\"" << ", "
-      << "\"default_directory_name\": " << "\"" << tidy_up_string(v.default_directory_name()) << "\"" << ", "
-      << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
-      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"parts\": " << v.parts() << ", "
       << "\"facets\": " << v.facets() << ", "
       << "\"archetypes\": " << v.archetypes() << ", "

@@ -23,16 +23,14 @@
 namespace dogen::physical::entities {
 
 meta_model::meta_model(
-    const std::string& default_directory_name,
-    const std::string& override_directory_name,
+    const std::string& directory_name,
     const std::string& description,
     const dogen::identification::entities::physical_meta_name& meta_name,
     const std::list<dogen::identification::entities::label>& labels,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const std::list<dogen::physical::entities::backend>& backends,
     const dogen::identification::entities::physical_meta_name_indices& indexed_names)
-    : default_directory_name_(default_directory_name),
-      override_directory_name_(override_directory_name),
+    : directory_name_(directory_name),
       description_(description),
       meta_name_(meta_name),
       labels_(labels),
@@ -42,8 +40,7 @@ meta_model::meta_model(
 
 void meta_model::swap(meta_model& other) noexcept {
     using std::swap;
-    swap(default_directory_name_, other.default_directory_name_);
-    swap(override_directory_name_, other.override_directory_name_);
+    swap(directory_name_, other.directory_name_);
     swap(description_, other.description_);
     swap(meta_name_, other.meta_name_);
     swap(labels_, other.labels_);
@@ -53,8 +50,7 @@ void meta_model::swap(meta_model& other) noexcept {
 }
 
 bool meta_model::operator==(const meta_model& rhs) const {
-    return default_directory_name_ == rhs.default_directory_name_ &&
-        override_directory_name_ == rhs.override_directory_name_ &&
+    return directory_name_ == rhs.directory_name_ &&
         description_ == rhs.description_ &&
         meta_name_ == rhs.meta_name_ &&
         labels_ == rhs.labels_ &&
@@ -69,36 +65,20 @@ meta_model& meta_model::operator=(meta_model other) {
     return *this;
 }
 
-const std::string& meta_model::default_directory_name() const {
-    return default_directory_name_;
+const std::string& meta_model::directory_name() const {
+    return directory_name_;
 }
 
-std::string& meta_model::default_directory_name() {
-    return default_directory_name_;
+std::string& meta_model::directory_name() {
+    return directory_name_;
 }
 
-void meta_model::default_directory_name(const std::string& v) {
-    default_directory_name_ = v;
+void meta_model::directory_name(const std::string& v) {
+    directory_name_ = v;
 }
 
-void meta_model::default_directory_name(const std::string&& v) {
-    default_directory_name_ = std::move(v);
-}
-
-const std::string& meta_model::override_directory_name() const {
-    return override_directory_name_;
-}
-
-std::string& meta_model::override_directory_name() {
-    return override_directory_name_;
-}
-
-void meta_model::override_directory_name(const std::string& v) {
-    override_directory_name_ = v;
-}
-
-void meta_model::override_directory_name(const std::string&& v) {
-    override_directory_name_ = std::move(v);
+void meta_model::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 const std::string& meta_model::description() const {

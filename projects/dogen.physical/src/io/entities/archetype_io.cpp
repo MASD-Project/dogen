@@ -71,16 +71,14 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
-      << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
-      << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
       << "\"depends\": " << v.depends() << ", "
       << "\"generates\": " << v.generates() << ", "
       << "\"generated_by\": " << "\"" << tidy_up_string(v.generated_by()) << "\"" << ", "
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
       << "\"logical_meta_element_id\": " << v.logical_meta_element_id() << ", "
       << "\"part\": " << v.part() << ", "
-      << "\"relations\": " << v.relations() << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"relations\": " << v.relations()
       << " }";
     return(s);
 }

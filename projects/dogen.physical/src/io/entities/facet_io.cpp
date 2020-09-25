@@ -89,14 +89,10 @@ namespace dogen::physical::entities {
 std::ostream& operator<<(std::ostream& s, const facet& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::facet\"" << ", "
-      << "\"default_directory_name\": " << "\"" << tidy_up_string(v.default_directory_name()) << "\"" << ", "
-      << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"labels\": " << v.labels() << ", "
-      << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
-      << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
-      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
       << "\"archetypes\": " << v.archetypes() << ", "
       << "\"default_archetype_for_logical_meta_model_id\": " << v.default_archetype_for_logical_meta_model_id()

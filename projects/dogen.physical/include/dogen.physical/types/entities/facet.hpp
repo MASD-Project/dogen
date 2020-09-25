@@ -49,37 +49,23 @@ public:
 
 public:
     facet(
-        const std::string& default_directory_name,
-        const std::string& override_directory_name,
+        const std::string& directory_name,
         const std::string& description,
         const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
-        const std::string& default_postfix,
-        const std::string& override_postfix,
-        const std::string& directory_name,
         const std::string& postfix,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& default_archetype_for_logical_meta_model_id);
 
 public:
     /**
-     * @brief Default directory name.
+     * @brief Default name to use for the directory in the file-system representing this element.
      */
     /**@{*/
-    const std::string& default_directory_name() const;
-    std::string& default_directory_name();
-    void default_directory_name(const std::string& v);
-    void default_directory_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Override directory name, if any.
-     */
-    /**@{*/
-    const std::string& override_directory_name() const;
-    std::string& override_directory_name();
-    void override_directory_name(const std::string& v);
-    void override_directory_name(const std::string&& v);
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -113,37 +99,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Default postfix for the element.
-     */
-    /**@{*/
-    const std::string& default_postfix() const;
-    std::string& default_postfix();
-    void default_postfix(const std::string& v);
-    void default_postfix(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Overridden postfix, if any.
-     */
-    /**@{*/
-    const std::string& override_postfix() const;
-    std::string& override_postfix();
-    void override_postfix(const std::string& v);
-    void override_postfix(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Default name to use for the directory in the file-system representing this facet.
-     */
-    /**@{*/
-    const std::string& directory_name() const;
-    std::string& directory_name();
-    void directory_name(const std::string& v);
-    void directory_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Postfix to apply to artefacts within this facet, if any.
+     * @brief Postfix to apply to artefacts within this element, if any.
      */
     /**@{*/
     const std::string& postfix() const;
@@ -180,14 +136,10 @@ public:
     facet& operator=(facet other);
 
 private:
-    std::string default_directory_name_;
-    std::string override_directory_name_;
+    std::string directory_name_;
     std::string description_;
     dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
-    std::string default_postfix_;
-    std::string override_postfix_;
-    std::string directory_name_;
     std::string postfix_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> default_archetype_for_logical_meta_model_id_;

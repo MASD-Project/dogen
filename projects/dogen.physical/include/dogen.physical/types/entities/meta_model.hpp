@@ -51,8 +51,7 @@ public:
 
 public:
     meta_model(
-        const std::string& default_directory_name,
-        const std::string& override_directory_name,
+        const std::string& directory_name,
         const std::string& description,
         const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
@@ -62,23 +61,13 @@ public:
 
 public:
     /**
-     * @brief Default directory name.
+     * @brief Default name to use for the directory in the file-system representing this element.
      */
     /**@{*/
-    const std::string& default_directory_name() const;
-    std::string& default_directory_name();
-    void default_directory_name(const std::string& v);
-    void default_directory_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Override directory name, if any.
-     */
-    /**@{*/
-    const std::string& override_directory_name() const;
-    std::string& override_directory_name();
-    void override_directory_name(const std::string& v);
-    void override_directory_name(const std::string&& v);
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -156,8 +145,7 @@ public:
     meta_model& operator=(meta_model other);
 
 private:
-    std::string default_directory_name_;
-    std::string override_directory_name_;
+    std::string directory_name_;
     std::string description_;
     dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;

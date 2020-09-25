@@ -54,12 +54,10 @@ public:
 
 public:
     part(
-        const std::string& default_directory_name,
-        const std::string& override_directory_name,
+        const std::string& directory_name,
         const std::string& description,
         const dogen::identification::entities::physical_meta_name& meta_name,
         const std::list<dogen::identification::entities::label>& labels,
-        const std::string& directory_name,
         const dogen::physical::entities::path_configuration& path_configuration,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
@@ -67,23 +65,13 @@ public:
 
 public:
     /**
-     * @brief Default directory name.
+     * @brief Default name to use for the directory in the file-system representing this element.
      */
     /**@{*/
-    const std::string& default_directory_name() const;
-    std::string& default_directory_name();
-    void default_directory_name(const std::string& v);
-    void default_directory_name(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Override directory name, if any.
-     */
-    /**@{*/
-    const std::string& override_directory_name() const;
-    std::string& override_directory_name();
-    void override_directory_name(const std::string& v);
-    void override_directory_name(const std::string&& v);
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -114,16 +102,6 @@ public:
     std::list<dogen::identification::entities::label>& labels();
     void labels(const std::list<dogen::identification::entities::label>& v);
     void labels(const std::list<dogen::identification::entities::label>&& v);
-    /**@}*/
-
-    /**
-     * @brief Default name to use for the directory in the file-system representing this part.
-     */
-    /**@{*/
-    const std::string& directory_name() const;
-    std::string& directory_name();
-    void directory_name(const std::string& v);
-    void directory_name(const std::string&& v);
     /**@}*/
 
     const dogen::physical::entities::path_configuration& path_configuration() const;
@@ -160,12 +138,10 @@ public:
     part& operator=(part other);
 
 private:
-    std::string default_directory_name_;
-    std::string override_directory_name_;
+    std::string directory_name_;
     std::string description_;
     dogen::identification::entities::physical_meta_name meta_name_;
     std::list<dogen::identification::entities::label> labels_;
-    std::string directory_name_;
     dogen::physical::entities::path_configuration path_configuration_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet> facets_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype> archetypes_;
