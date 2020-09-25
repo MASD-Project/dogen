@@ -28,10 +28,10 @@ namespace dogen::physical::features {
 namespace {
 
 dogen::variability::entities::feature_template
-make_directory() {
+make_directory_name() {
     using namespace dogen::variability::entities;
     feature_template r;
-    r.name().simple("directory");
+    r.name().simple("directory_name");
     r.description(R"(Directory in which to place this facet.
 
 )");
@@ -148,7 +148,7 @@ facet_features::make_feature_group(const dogen::variability::entities::feature_m
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.directory = s.get_by_name("directory");
+    r.directory_name = s.get_by_name("directory_name");
     r.postfix = s.get_by_name("postfix");
     r.overwrite = s.get_by_name("overwrite");
 
@@ -161,7 +161,7 @@ facet_features::static_configuration facet_features::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.directory = s.get_text_content_or_default(fg.directory);
+    r.directory_name = s.get_text_content_or_default(fg.directory_name);
     r.postfix = s.get_text_content_or_default(fg.postfix);
     r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
     return r;
@@ -171,7 +171,7 @@ std::list<dogen::variability::entities::feature_template>
 facet_features::make_templates() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature_template> r;
-    r.push_back(make_directory());
+    r.push_back(make_directory_name());
     r.push_back(make_postfix());
     r.push_back(make_overwrite());
     return r;

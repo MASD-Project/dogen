@@ -40,7 +40,7 @@ namespace dogen::physical::features {
 class facet_features final {
 public:
     struct feature_group {
-        variability::entities::feature directory;
+        variability::entities::feature directory_name;
         variability::entities::feature postfix;
         variability::entities::feature overwrite;
     };
@@ -50,7 +50,7 @@ public:
 
 public:
     struct static_configuration {
-        std::string directory;
+        std::string directory_name;
         std::string postfix;
         bool overwrite;
 

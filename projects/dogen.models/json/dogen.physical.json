@@ -447,7 +447,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
+          "name": "directory_name",
           "type": "masd::variability::text",
           "value": "\"\"",
           "documentation": "Directory in which to place this facet.\n",

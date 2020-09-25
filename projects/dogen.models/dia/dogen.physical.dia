@@ -3596,7 +3596,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#directory#</dia:string>
+            <dia:string>#directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

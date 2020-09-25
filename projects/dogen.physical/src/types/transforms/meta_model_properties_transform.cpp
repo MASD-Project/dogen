@@ -118,7 +118,7 @@ meta_model_properties_transform::make_facet_feature_group(
             facet_feature_group fg;
             fg.enabled = s.get_by_name(fct.value(), enabled_feature);
             fg.overwrite = s.get_by_name(fct.value(), overwrite_feature);
-            fg.directory_name = s.get_by_name(fct.value(), directory_feature);
+            fg.directory_name = s.get_by_name(fct.value(), "directory_name");
             r.insert(std::make_pair(fct, fg));
         }
     }

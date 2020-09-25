@@ -102,7 +102,7 @@ locator::make_feature_group(const variability::entities::feature_model& fm,
         const auto pfix(traits::postfix());
         fmt_fg.archetype_postfix = s.get_by_name(arch.value(), pfix);
 
-        auto dir(s.try_get_by_name(fct.value(), traits::directory()));
+        auto dir(s.try_get_by_name(fct.value(), "directory_name"));
         if (dir)
             fmt_fg.facet_directory = *dir;
 
