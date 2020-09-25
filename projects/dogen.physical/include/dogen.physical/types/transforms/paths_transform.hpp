@@ -43,14 +43,14 @@ private:
      * @brief Computes the top-level path to the component.
      */
     static boost::filesystem::path
-    compute_component_path(const boost::filesystem::path& output_directory,
+    compute_project_path(const boost::filesystem::path& output_directory,
         const identification::entities::logical_name& ln);
 
     /**
      * @brief Computes the path to the backend.
      */
     static void
-    compute_backend_paths(const boost::filesystem::path& component_path,
+    compute_backend_paths(const boost::filesystem::path& project_path,
         std::unordered_map<identification::entities::physical_meta_id,
         physical::entities::backend_properties>& bps);
 

@@ -48,7 +48,7 @@ const std::string missing_backend_directory(
 namespace dogen::physical::transforms {
 
 boost::filesystem::path paths_transform::
-compute_component_path(const boost::filesystem::path& output_directory,
+compute_project_path(const boost::filesystem::path& output_directory,
     const identification::entities::logical_name& ln) {
     /*
      * The component path is defined as the directory chosen by the
@@ -61,7 +61,7 @@ compute_component_path(const boost::filesystem::path& output_directory,
 }
 
 void paths_transform::
-compute_backend_paths(const boost::filesystem::path& component_path,
+compute_backend_paths(const boost::filesystem::path& project_path,
     std::unordered_map<identification::entities::physical_meta_id,
     physical::entities::backend_properties>& bps) {
 
@@ -90,7 +90,7 @@ compute_backend_paths(const boost::filesystem::path& component_path,
          * just take the component path and go on our merry way.
          */
         if (!bp.enable_backend_directories()) {
-            bp.file_path(component_path);
+            bp.file_path(project_path);
             continue;
         }
 
@@ -104,7 +104,7 @@ compute_backend_paths(const boost::filesystem::path& component_path,
                 transform_exception(missing_backend_directory));
         }
 
-        bp.file_path(component_path / bp.directory_name());
+        bp.file_path(project_path / bp.directory_name());
     }
 }
 
@@ -114,17 +114,20 @@ void paths_transform::apply(const context& ctx, entities::model& m) {
 
     /*
      * We start by calculating the top-most path which is the
-     * component path. All other paths will depend on this path.
+     * project path. All other paths will depend on this path.
      */
     const auto& ln(m.provenance().logical_name());
-    const auto cp(compute_component_path(ctx.output_directory_path(), ln));
+    const auto pp(compute_project_path(ctx.output_directory_path(), ln));
     auto& mmp(m.meta_model_properties());
-    mmp.file_path(cp);
+    mmp.file_path(pp);
 
     /*
-     * Now calculate the backend paths.
+     * Calculate the backend paths.
      */
-    compute_backend_paths(cp, mmp.backend_properties());
+    compute_backend_paths(pp, mmp.backend_properties());
+
+
+
 
     stp.end_transform(m);
 }
