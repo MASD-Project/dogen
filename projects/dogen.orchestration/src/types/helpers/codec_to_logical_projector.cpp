@@ -62,6 +62,7 @@ const std::string internal_modules_path_contribution_name(
     "internal_modules_path_contribution");
 const std::string requires_relative_path_name("requires_relative_path");
 const std::string file_extension_name("file_extension");
+const std::string directory_name_name("directory_name");
 
 const std::string path_contribution_none("none");
 const std::string path_contribution_as_directories("as_directories");
@@ -958,6 +959,11 @@ codec_to_logical_projector::to_physical_part(const logical_location& l,
         } else if (n == requires_relative_path_name) {
             ensure_not_empty(id, v);
             r->requires_relative_path(str_to_bool(v));
+        } else if (n == directory_name_name) {
+            /*
+             * Part may have an empty directory, for now.
+             */
+            r->directory_name(v);
         } else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
