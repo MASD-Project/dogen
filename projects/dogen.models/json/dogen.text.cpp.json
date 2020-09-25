@@ -2621,7 +2621,8 @@
         "masd.physical.relation_status": "relatable",
         "masd.wale.kvp.meta_element": "object",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.label.roles": "forward declaration"
+        "masd.label.roles": "forward declaration",
+        "masd.physical.postfix": "fwd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2647,7 +2648,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.wale.kvp.meta_element": "visitor",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.label.roles": "forward declaration"
+        "masd.label.roles": "forward declaration",
+        "masd.physical.postfix": "fwd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2672,7 +2674,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.relation_status": "relatable",
         "masd.wale.kvp.meta_element": "object",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.serialization"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.serialization",
+        "masd.physical.postfix": "fwd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2698,7 +2701,8 @@
         "masd.physical.relation_status": "relatable",
         "masd.wale.kvp.meta_element": "primitive",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.label.roles": "forward declaration"
+        "masd.label.roles": "forward declaration",
+        "masd.physical.postfix": "fwd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2723,7 +2727,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.relation_status": "relatable",
         "masd.wale.kvp.meta_element": "primitive",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.serialization"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.serialization",
+        "masd.physical.postfix": "fwd"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3201,7 +3206,8 @@
         "masd.wale.kvp.archetype.simple_name": "archetype_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.physical.constant_relation": "dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp"
+        "masd.physical.constant_relation": "dogen.text.csharp.transforms.model_to_text_transform,archetype:masd.cpp.types.class_header,technical_space:csharp",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3282,7 +3288,8 @@
         "masd.wale.kvp.class.simple_name": "archetype_class_implementation_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_archetype",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3806,7 +3813,8 @@
         "masd.wale.kvp.archetype.simple_name": "facet_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.physical.constant_relation": "dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp"
+        "masd.physical.constant_relation": "dogen.text.csharp.transforms.registrar,archetype:masd.cpp.types.class_header,technical_space:csharp",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3831,7 +3839,8 @@
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.physical.variable_relation": "transparent,role:type_declaration",
-        "masd.physical.constant_relation": "dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header"
+        "masd.physical.constant_relation": "dogen.text.transforms.transformation_error,archetype:masd.cpp.types.class_header",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3854,7 +3863,8 @@
         "masd.wale.kvp.class.simple_name": "backend_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "backend_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_backend",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3877,7 +3887,8 @@
         "masd.wale.kvp.class.simple_name": "backend_class_implementation_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "backend_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_backend",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3900,7 +3911,8 @@
         "masd.wale.kvp.class.simple_name": "part_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "part_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_part",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3923,7 +3935,8 @@
         "masd.wale.kvp.class.simple_name": "part_class_implementation_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "part_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_part",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3946,7 +3959,8 @@
         "masd.wale.kvp.class.simple_name": "archetype_kind_class_header_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_header_transform",
         "masd.wale.kvp.meta_element": "physical_archetype_kind",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3969,7 +3983,8 @@
         "masd.wale.kvp.class.simple_name": "archetype_kind_class_implementation_transform_transform",
         "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_implementation_transform",
         "masd.wale.kvp.meta_element": "physical_archetype_kind",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "transform"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4004,7 +4019,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.relation_status": "relatable",
         "masd.label.role": "type_declaration",
-        "masd.physical.constant_relation": "dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header"
+        "masd.physical.constant_relation": "dogen.physical.entities.archetype,archetype:masd.cpp.types.class_header",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4029,7 +4045,8 @@
         "masd.wale.kvp.meta_element": "physical_archetype",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.physical.constant_relation": "dogen.physical.helpers.meta_name_factory,archetype:masd.cpp.types.class_header",
-        "masd.physical.variable_relation": "self,archetype:masd.cpp.types.archetype_class_header_factory"
+        "masd.physical.variable_relation": "self,archetype:masd.cpp.types.archetype_class_header_factory",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4056,7 +4073,8 @@
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.label.role": "type_declaration",
         "masd.physical.relation_status": "relatable",
-        "masd.physical.constant_relation": "dogen.physical.entities.facet,archetype:masd.cpp.types.class_header"
+        "masd.physical.constant_relation": "dogen.physical.entities.facet,archetype:masd.cpp.types.class_header",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4081,7 +4099,8 @@
         "masd.wale.kvp.meta_element": "physical_facet",
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.physical.variable_relation": "transparent,archetype:masd.cpp.types.archetype_class_header_factory",
-        "masd.physical.constant_relation": "dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header"
+        "masd.physical.constant_relation": "dogen.physical.helpers.meta_name_builder,archetype:masd.cpp.types.class_header",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4107,7 +4126,8 @@
         "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
         "masd.wale.kvp.class.inclusion_support_type": "regular_support",
         "masd.physical.relation_status": "relatable",
-        "masd.label.role": "type_declaration"
+        "masd.label.role": "type_declaration",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -4130,7 +4150,8 @@
         "masd.wale.kvp.class.simple_name": "backend_class_implementation_factory_transform",
         "masd.wale.kvp.archetype.simple_name": "backend_class_implementation_factory",
         "masd.wale.kvp.meta_element": "physical_backend",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types"
+        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
+        "masd.physical.postfix": "factory"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
