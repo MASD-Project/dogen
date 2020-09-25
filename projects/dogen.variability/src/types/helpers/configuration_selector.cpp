@@ -39,6 +39,7 @@ auto lg(logger_factory("variability.helpers.configuration_selector"));
 
 const std::string configuration_point_not_found(
     "Configuration point not found: ");
+const std::string unexpected_empty("Supplied string is empty, expected a value.");
 const std::string unexpected_value_type("Unexpected value type.");
 const std::string configuration_point_name("Configuration point: ");
 const std::string not_number(
@@ -77,8 +78,17 @@ ensure_default_value(const entities::feature& f) const {
     }
 }
 
+void configuration_selector::ensure_not_empty(const std::string& s) const {
+    if (s.empty()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_empty;
+        BOOST_THROW_EXCEPTION(selection_exception(unexpected_empty));
+    }
+}
+
 bool configuration_selector::
 has_configuration_point(const std::string& qn) const {
+    ensure_not_empty(qn);
+
     const auto& cps(configuration_.configuration_points());
     const auto i(cps.find(qn));
     return (i != cps.end());
@@ -91,6 +101,8 @@ has_configuration_point(const entities::feature& f) const {
 
 bool configuration_selector::
 has_configuration_point_ending_with(const std::string& s) const {
+    ensure_not_empty(s);
+
     for (const auto& cp : configuration_.configuration_points()) {
         const auto& key(cp.first);
         BOOST_LOG_SEV(lg, trace) << "Key: " << key;
@@ -106,6 +118,7 @@ has_configuration_point_ending_with(const std::string& s) const {
 
 const entities::value& configuration_selector::
 get_configuration_point_value(const std::string& qn) const {
+    ensure_not_empty(qn);
     const auto& cps(configuration_.configuration_points());
     const auto i(cps.find(qn));
     if (i != cps.end())

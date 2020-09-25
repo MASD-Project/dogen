@@ -49,6 +49,11 @@ private:
      */
     void ensure_default_value(const entities::feature& f) const;
 
+    /**
+     * @brief Throws if the string is empty.
+     */
+    void ensure_not_empty(const std::string& s) const;
+
 public:
     /**
      * @brief Returns true if a configuration point exists in the
