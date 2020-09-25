@@ -23,6 +23,7 @@
 #include "dogen.physical/types/features/formatting.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.physical/types/features/facet_features.hpp"
+#include "dogen.physical/types/features/backend_features.hpp"
 #include "dogen.physical/types/features/archetype_features.hpp"
 
 namespace dogen::physical::features {
@@ -30,6 +31,7 @@ namespace dogen::physical::features {
 void initializer::
 register_entities(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::physical::features::archetype_features::make_templates());
+    rg.register_templates(dogen::physical::features::backend_features::make_templates());
     rg.register_templates(dogen::physical::features::enablement::make_templates());
     rg.register_templates(dogen::physical::features::facet_features::make_templates());
     rg.register_templates(dogen::physical::features::formatting::make_templates());

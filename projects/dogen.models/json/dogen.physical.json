@@ -1715,6 +1715,30 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::backend_features",
+      "documentation": "Physical features common to all backends.\n",
+      "stereotypes": [
+        "masd::variability::feature_template_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.instantiation_domain_name": "masd.backend"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory_name",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Directory in which to place this backend.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.default_value_override.cpp": "\"cpp\"",
+            "masd.variability.default_value_override.csharp": "\"cs\""
+          }
+        }
+      ]
     }
   ]
 }
