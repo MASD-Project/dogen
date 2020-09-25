@@ -98,13 +98,13 @@ compute_backend_paths(const boost::filesystem::path& project_path,
          * Since the backend directories have been enabled, we expect
          * a directory name to have been supplied.
          */
-        if (bp.directory_name().empty()) {
+        if (bp.computed_directory_name().empty()) {
             BOOST_LOG_SEV(lg, error) << missing_backend_directory;
             BOOST_THROW_EXCEPTION(
                 transform_exception(missing_backend_directory));
         }
 
-        bp.file_path(project_path / bp.directory_name());
+        bp.file_path(project_path / bp.computed_directory_name());
     }
 }
 
@@ -125,9 +125,6 @@ void paths_transform::apply(const context& ctx, entities::model& m) {
      * Calculate the backend paths.
      */
     compute_backend_paths(pp, mmp.backend_properties());
-
-
-
 
     stp.end_transform(m);
 }
