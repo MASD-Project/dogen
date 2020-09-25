@@ -98,8 +98,8 @@ void adapter::process_stereotypes(const processed_object& po,
     BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << e.stereotypes();
 }
 
-codec::entities::element adapter::
-adapt(const processed_object& po, const std::string& contained_by,
+codec::entities::element
+adapter::adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
     validate_dia_name(po.name());
 
