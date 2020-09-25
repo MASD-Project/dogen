@@ -13,17 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-24 Thu 20:34]
+#+CAPTION: Clock summary at [2020-09-25 Fri 11:59]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *5:12* |      |      | 100.0 |
+| *Total time*                                       | *8:42* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 5:12   |      |      | 100.0 |
-| Active                                             |        | 5:12 |      | 100.0 |
-| edit release notes for previous sprint             |        |      | 3:44 |  71.8 |
-| Create a demo and presentation for previous sprint |        |      | 0:39 |  12.5 |
-| Sprint and product backlog grooming                |        |      | 0:49 |  15.7 |
+| Stories                                            | 8:42   |      |      | 100.0 |
+| Active                                             |        | 8:42 |      | 100.0 |
+| edit release notes for previous sprint             |        |      | 3:44 |  42.9 |
+| Create a demo and presentation for previous sprint |        |      | 0:39 |   7.5 |
+| Sprint and product backlog grooming                |        |      | 1:11 |  13.6 |
+| Rename =name= to =codec= name                      |        |      | 0:20 |   3.8 |
+| Directory names and postfixes are PMM properties   |        |      | 2:14 |  25.7 |
+| Add full and relative path processing to PM        |        |      | 0:34 |   6.5 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -228,16 +231,106 @@ this since c++ 11, we can just create a simple inline lambda.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
+    CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
     CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
     :END:
 
 Updates to sprint and product backlog.
 
-*** Nightly nursing and other spikes                                  :story:
+*** STARTED Rename =name= to =codec= name                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
+    :END:
 
-Time spent troubleshooting environmental problems.
+- add codec ID to name.
 
-*** Analysis on Org-mode outstanding work                             :story:
+Notes:
+
+- variability is also using the name class.
+
+*** STARTED Directory names and postfixes are PMM properties          :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 09:45]--[2020-09-25 Fri 11:59] =>  2:14
+    :END:
+
+Originally we implemented a number of properties as variability with
+suitable defaults:
+
+- backend directory name, facet directory name;
+- facet postfix, archetype postfix;
+
+These were first implemented with lots of hard-coding; eventually we
+added default value overrides, allowing a single template expansion
+to be used across a domain, and then supplying the needed overrides,
+e.g.:
+
+: #DOGEN masd.variability.binding_point=global
+: #DOGEN masd.variability.default_value_override.cpp.types="types"
+: #DOGEN masd.variability.default_value_override.cpp.hash="hash"
+: #DOGEN masd.variability.default_value_override.cpp.tests="generated_tests"
+: #DOGEN masd.variability.default_value_override.cpp.io="io"
+: #DOGEN masd.variability.default_value_override.cpp.lexical_cast="lexical_cast"
+: #DOGEN masd.variability.default_value_override.cpp.templates="templates"
+: #DOGEN masd.variability.default_value_override.cpp.odb="odb"
+: #DOGEN masd.variability.default_value_override.cpp.test_data="test_data"
+: #DOGEN masd.variability.default_value_override.cpp.serialization="serialization"
+: #DOGEN masd.variability.default_value_override.csharp.types="Types"
+: #DOGEN masd.variability.default_value_override.csharp.io="Dumpers"
+: #DOGEN masd.variability.default_value_override.csharp.test_data="SequenceGenerators"
+
+However, it is now becoming clear that there are two sides to this
+problem. First, we need to define the default value for the field
+which is really a property of the PMM. Secondly, we need to allow
+users to override this value, which is really a property of the
+MMP. The MMP value should default to the PMM value if no overrides are
+supplied. We need to move these properties to the correct
+places. These would then be used in their final form by the paths
+transform to compose a path. For now, we must also be backwards
+compatible. We should also make the meta-data "distinct" enough so we
+do not get confused. For example, for PMM:
+
+: masd.physical.backend_directory_name=abc
+
+and for the MMP:
+
+: masd.cpp.directory_name=def
+
+Tasks:
+
+- rename the =directory= attributes in the MMP to =directory_name=.
+- add =directory= and =postfix= to the PMM and to the LM
+  representation of the PMM.
+- add the new attributes to diagrams and read them from meta-data.
+- generate the new attributes.
+- update MMP generation with new attributes.
+
+*** Move =enabled= and =overwrite= into =enablement_properties=       :story:
+
+Since we already have a class for it, it seems to make more sense than
+to have these attributes in the archetype itself.
+
+*** Add descriptions to PMM elements                                  :story:
+
+We need to read a description attribute for:
+
+- backend
+- facet
+- part
+- archetype
+
+And populate these on the LM PMM, and then code generate them. The
+description should be the comment of the associated element.
+
+*** Rename =archetype_name_set=                                       :story:
+
+We haven't yet found the right name for this but the idea is that we
+have a container of all the meta-names which refer to archetypes in a
+region of physical space.
+
+- archetype name meta region? it is only meta-names.
+
+*** Analysis on org-mode outstanding work                             :story:
 
 Notes:
 
@@ -456,7 +549,14 @@ Notes:
   (e.g. we can declare XML with associated extensions and then use it
   where required).
 
-*** Add full and relative path processing to PM                       :story:
+*** Nightly nursing and other spikes                                  :story:
+
+Time spent troubleshooting environmental problems.
+
+*** STARTED Add full and relative path processing to PM               :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-25 Fri 09:00]--[2020-09-25 Fri 09:34] =>  0:34
+    :END:
 
 We need to be able to generate full paths in the PM. This will require
 access to the file extensions. For this we will need new decoration
@@ -476,6 +576,12 @@ Notes:
 - we must first figure out the number of enabled backends. The
   meta-model properties will always contain all backends, but not all
   of them are enabled.
+- we need to populate the part directories. For this we need to know
+  what parts are available for each backend (PMM), and then ensure the
+  part properties have been created. We also need a directory for the
+  part in variability. It is not clear we have support for this in the
+  template instantiation domains - we probably only have backend,
+  facet, archetype.
 
 Merged stories:
 
