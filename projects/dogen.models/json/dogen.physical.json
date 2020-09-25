@@ -1512,13 +1512,19 @@
           "documentation": "Technical space version to use.\n"
         },
         {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Name of the directory to use for the backend.\n"
+          "name": "enable_backend_directories",
+          "type": "bool",
+          "documentation": "Copy of the component level configuration for backend directory enablement.\n"
         },
         {
-          "name": "enable_backend_directories",
-          "type": "bool"
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Directory name as read out from the configuration.\n"
+        },
+        {
+          "name": "computed_directory_name",
+          "type": "std::string",
+          "documentation": "Name of the directory to use for the backend, computed from configuration.\n"
         }
       ]
     },
@@ -1551,14 +1557,24 @@
           "documentation": "If true, all archetypes in this facet will be set to overwrite.\n"
         },
         {
-          "name": "directory",
+          "name": "directory_name",
           "type": "std::string",
-          "documentation": "Name of the directory to use for the facet.\n"
+          "documentation": "Directory name as read out from the configuration.\n"
+        },
+        {
+          "name": "computed_directory_name",
+          "type": "std::string",
+          "documentation": "Computed name of the directory to use for the facet.\n"
         },
         {
           "name": "postfix",
           "type": "std::string",
-          "documentation": "Postfix to apply to all artefacts in this facet.\n"
+          "documentation": "Postfix as read out from the configuration, if any.\n"
+        },
+        {
+          "name": "computed_postfix",
+          "type": "std::string",
+          "documentation": "Computed postfix to apply to all artefacts in this facet.\n"
         }
       ]
     },
@@ -1580,7 +1596,12 @@
         {
           "name": "postfix",
           "type": "std::string",
-          "documentation": "Postfix to apply to all artefacts of this archetype.\n"
+          "documentation": "Postfix as read out from the configuration.\n"
+        },
+        {
+          "name": "computed_postfix",
+          "type": "std::string",
+          "documentation": "Computed postfix to apply to all artefacts of this archetype.\n"
         }
       ]
     },
@@ -1649,14 +1670,19 @@
           "documentation": "Full path to the facet.\n"
         },
         {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Name of the directory to use for the part.\n"
-        },
-        {
           "name": "relative_path",
           "type": "boost::filesystem::path",
           "documentation": "Path to the part, relative to the component directory.\n\nOnly required when the part is located outside of the component directory.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Directory name as read out from the configuration.\n"
+        },
+        {
+          "name": "computed_directory_name",
+          "type": "std::string",
+          "documentation": "Computed name of the directory to use for the part.\n"
         }
       ]
     },

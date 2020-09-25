@@ -50,8 +50,9 @@ public:
         const bool enabled,
         const boost::filesystem::path& file_path,
         const std::string& technical_space_version,
-        const std::string& directory,
-        const bool enable_backend_directories);
+        const bool enable_backend_directories,
+        const std::string& directory_name,
+        const std::string& computed_directory_name);
 
 public:
     /**
@@ -83,17 +84,32 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the directory to use for the backend.
+     * @brief Copy of the component level configuration for backend directory enablement.
      */
     /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
-    /**@}*/
-
     bool enable_backend_directories() const;
     void enable_backend_directories(const bool v);
+    /**@}*/
+
+    /**
+     * @brief Directory name as read out from the configuration.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the directory to use for the backend, computed from configuration.
+     */
+    /**@{*/
+    const std::string& computed_directory_name() const;
+    std::string& computed_directory_name();
+    void computed_directory_name(const std::string& v);
+    void computed_directory_name(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const backend_properties& rhs) const;
@@ -109,8 +125,9 @@ private:
     bool enabled_;
     boost::filesystem::path file_path_;
     std::string technical_space_version_;
-    std::string directory_;
     bool enable_backend_directories_;
+    std::string directory_name_;
+    std::string computed_directory_name_;
 };
 
 }

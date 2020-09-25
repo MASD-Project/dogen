@@ -100,7 +100,7 @@ meta_model_properties_transform::make_backend_feature_group(
         const auto& backend(pair.first);
         backend_feature_group fg;
         fg.enabled = s.get_by_name(backend.value(), enabled_feature);
-        fg.directory = s.get_by_name(backend.value(), directory_feature);
+        fg.directory_name = s.get_by_name(backend.value(), directory_feature);
         r.insert(std::make_pair(backend, fg));
     }
     return r;
@@ -118,6 +118,7 @@ meta_model_properties_transform::make_facet_feature_group(
             facet_feature_group fg;
             fg.enabled = s.get_by_name(fct.value(), enabled_feature);
             fg.overwrite = s.get_by_name(fct.value(), overwrite_feature);
+            fg.directory_name = s.get_by_name(fct.value(), directory_feature);
             r.insert(std::make_pair(fct, fg));
         }
     }
@@ -174,7 +175,7 @@ meta_model_properties_transform::obtain_backend_properties(
 
         entities::backend_properties bp;
         bp.enabled(s.get_boolean_content_or_default(fg.enabled));
-        bp.directory(s.get_text_content_or_default(fg.directory));
+        bp.directory_name(s.get_text_content_or_default(fg.directory_name));
         r[backend] = bp;
     }
 
@@ -198,6 +199,7 @@ meta_model_properties_transform::obtain_facet_properties(
         entities::facet_properties fp;
         fp.enabled(s.get_boolean_content_or_default(fg.enabled));
         fp.overwrite(s.get_boolean_content_or_default(fg.overwrite));
+        fp.directory_name(s.get_text_content_or_default(fg.directory_name));
         r[facet] = fp;
     }
 

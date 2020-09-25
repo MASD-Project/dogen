@@ -59,7 +59,8 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::archetype_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
+      << "\"computed_postfix\": " << "\"" << tidy_up_string(v.computed_postfix()) << "\""
       << " }";
     return(s);
 }

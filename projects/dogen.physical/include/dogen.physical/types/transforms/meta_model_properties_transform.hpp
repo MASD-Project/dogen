@@ -60,7 +60,7 @@ private:
     struct backend_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature technical_space_version;
-        variability::entities::feature directory;
+        variability::entities::feature directory_name;
         variability::entities::feature enable_backend_directories;
     };
 
@@ -70,7 +70,7 @@ private:
     struct facet_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature overwrite;
-        variability::entities::feature directory;
+        variability::entities::feature directory_name;
         variability::entities::feature postfix;
     };
 

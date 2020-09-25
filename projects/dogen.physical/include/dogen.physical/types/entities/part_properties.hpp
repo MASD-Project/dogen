@@ -46,8 +46,9 @@ public:
 public:
     part_properties(
         const boost::filesystem::path& file_path,
-        const std::string& directory,
-        const boost::filesystem::path& relative_path);
+        const boost::filesystem::path& relative_path,
+        const std::string& directory_name,
+        const std::string& computed_directory_name);
 
 public:
     /**
@@ -58,16 +59,6 @@ public:
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the directory to use for the part.
-     */
-    /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
     /**@}*/
 
     /**
@@ -82,6 +73,26 @@ public:
     void relative_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    /**
+     * @brief Directory name as read out from the configuration.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Computed name of the directory to use for the part.
+     */
+    /**@{*/
+    const std::string& computed_directory_name() const;
+    std::string& computed_directory_name();
+    void computed_directory_name(const std::string& v);
+    void computed_directory_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const part_properties& rhs) const;
     bool operator!=(const part_properties& rhs) const {
@@ -94,8 +105,9 @@ public:
 
 private:
     boost::filesystem::path file_path_;
-    std::string directory_;
     boost::filesystem::path relative_path_;
+    std::string directory_name_;
+    std::string computed_directory_name_;
 };
 
 }

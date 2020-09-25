@@ -30,36 +30,41 @@ backend_properties::backend_properties(backend_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       file_path_(std::move(rhs.file_path_)),
       technical_space_version_(std::move(rhs.technical_space_version_)),
-      directory_(std::move(rhs.directory_)),
-      enable_backend_directories_(std::move(rhs.enable_backend_directories_)) { }
+      enable_backend_directories_(std::move(rhs.enable_backend_directories_)),
+      directory_name_(std::move(rhs.directory_name_)),
+      computed_directory_name_(std::move(rhs.computed_directory_name_)) { }
 
 backend_properties::backend_properties(
     const bool enabled,
     const boost::filesystem::path& file_path,
     const std::string& technical_space_version,
-    const std::string& directory,
-    const bool enable_backend_directories)
+    const bool enable_backend_directories,
+    const std::string& directory_name,
+    const std::string& computed_directory_name)
     : enabled_(enabled),
       file_path_(file_path),
       technical_space_version_(technical_space_version),
-      directory_(directory),
-      enable_backend_directories_(enable_backend_directories) { }
+      enable_backend_directories_(enable_backend_directories),
+      directory_name_(directory_name),
+      computed_directory_name_(computed_directory_name) { }
 
 void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(file_path_, other.file_path_);
     swap(technical_space_version_, other.technical_space_version_);
-    swap(directory_, other.directory_);
     swap(enable_backend_directories_, other.enable_backend_directories_);
+    swap(directory_name_, other.directory_name_);
+    swap(computed_directory_name_, other.computed_directory_name_);
 }
 
 bool backend_properties::operator==(const backend_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         file_path_ == rhs.file_path_ &&
         technical_space_version_ == rhs.technical_space_version_ &&
-        directory_ == rhs.directory_ &&
-        enable_backend_directories_ == rhs.enable_backend_directories_;
+        enable_backend_directories_ == rhs.enable_backend_directories_ &&
+        directory_name_ == rhs.directory_name_ &&
+        computed_directory_name_ == rhs.computed_directory_name_;
 }
 
 backend_properties& backend_properties::operator=(backend_properties other) {
@@ -108,28 +113,44 @@ void backend_properties::technical_space_version(const std::string&& v) {
     technical_space_version_ = std::move(v);
 }
 
-const std::string& backend_properties::directory() const {
-    return directory_;
-}
-
-std::string& backend_properties::directory() {
-    return directory_;
-}
-
-void backend_properties::directory(const std::string& v) {
-    directory_ = v;
-}
-
-void backend_properties::directory(const std::string&& v) {
-    directory_ = std::move(v);
-}
-
 bool backend_properties::enable_backend_directories() const {
     return enable_backend_directories_;
 }
 
 void backend_properties::enable_backend_directories(const bool v) {
     enable_backend_directories_ = v;
+}
+
+const std::string& backend_properties::directory_name() const {
+    return directory_name_;
+}
+
+std::string& backend_properties::directory_name() {
+    return directory_name_;
+}
+
+void backend_properties::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void backend_properties::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
+}
+
+const std::string& backend_properties::computed_directory_name() const {
+    return computed_directory_name_;
+}
+
+std::string& backend_properties::computed_directory_name() {
+    return computed_directory_name_;
+}
+
+void backend_properties::computed_directory_name(const std::string& v) {
+    computed_directory_name_ = v;
+}
+
+void backend_properties::computed_directory_name(const std::string&& v) {
+    computed_directory_name_ = std::move(v);
 }
 
 }

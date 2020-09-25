@@ -44,8 +44,10 @@ std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::facet_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
+      << "\"computed_directory_name\": " << "\"" << tidy_up_string(v.computed_directory_name()) << "\"" << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
+      << "\"computed_postfix\": " << "\"" << tidy_up_string(v.computed_postfix()) << "\""
       << " }";
     return(s);
 }

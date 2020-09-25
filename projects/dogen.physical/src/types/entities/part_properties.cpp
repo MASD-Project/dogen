@@ -24,28 +24,33 @@ namespace dogen::physical::entities {
 
 part_properties::part_properties(part_properties&& rhs)
     : file_path_(std::move(rhs.file_path_)),
-      directory_(std::move(rhs.directory_)),
-      relative_path_(std::move(rhs.relative_path_)) { }
+      relative_path_(std::move(rhs.relative_path_)),
+      directory_name_(std::move(rhs.directory_name_)),
+      computed_directory_name_(std::move(rhs.computed_directory_name_)) { }
 
 part_properties::part_properties(
     const boost::filesystem::path& file_path,
-    const std::string& directory,
-    const boost::filesystem::path& relative_path)
+    const boost::filesystem::path& relative_path,
+    const std::string& directory_name,
+    const std::string& computed_directory_name)
     : file_path_(file_path),
-      directory_(directory),
-      relative_path_(relative_path) { }
+      relative_path_(relative_path),
+      directory_name_(directory_name),
+      computed_directory_name_(computed_directory_name) { }
 
 void part_properties::swap(part_properties& other) noexcept {
     using std::swap;
     swap(file_path_, other.file_path_);
-    swap(directory_, other.directory_);
     swap(relative_path_, other.relative_path_);
+    swap(directory_name_, other.directory_name_);
+    swap(computed_directory_name_, other.computed_directory_name_);
 }
 
 bool part_properties::operator==(const part_properties& rhs) const {
     return file_path_ == rhs.file_path_ &&
-        directory_ == rhs.directory_ &&
-        relative_path_ == rhs.relative_path_;
+        relative_path_ == rhs.relative_path_ &&
+        directory_name_ == rhs.directory_name_ &&
+        computed_directory_name_ == rhs.computed_directory_name_;
 }
 
 part_properties& part_properties::operator=(part_properties other) {
@@ -70,22 +75,6 @@ void part_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
 }
 
-const std::string& part_properties::directory() const {
-    return directory_;
-}
-
-std::string& part_properties::directory() {
-    return directory_;
-}
-
-void part_properties::directory(const std::string& v) {
-    directory_ = v;
-}
-
-void part_properties::directory(const std::string&& v) {
-    directory_ = std::move(v);
-}
-
 const boost::filesystem::path& part_properties::relative_path() const {
     return relative_path_;
 }
@@ -100,6 +89,38 @@ void part_properties::relative_path(const boost::filesystem::path& v) {
 
 void part_properties::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
+}
+
+const std::string& part_properties::directory_name() const {
+    return directory_name_;
+}
+
+std::string& part_properties::directory_name() {
+    return directory_name_;
+}
+
+void part_properties::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void part_properties::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
+}
+
+const std::string& part_properties::computed_directory_name() const {
+    return computed_directory_name_;
+}
+
+std::string& part_properties::computed_directory_name() {
+    return computed_directory_name_;
+}
+
+void part_properties::computed_directory_name(const std::string& v) {
+    computed_directory_name_ = v;
+}
+
+void part_properties::computed_directory_name(const std::string&& v) {
+    computed_directory_name_ = std::move(v);
 }
 
 }

@@ -46,8 +46,10 @@ public:
     facet_properties(
         const bool enabled,
         const bool overwrite,
-        const std::string& directory,
-        const std::string& postfix);
+        const std::string& directory_name,
+        const std::string& computed_directory_name,
+        const std::string& postfix,
+        const std::string& computed_postfix);
 
 public:
     /**
@@ -67,23 +69,43 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the directory to use for the facet.
+     * @brief Directory name as read out from the configuration.
      */
     /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
     /**@}*/
 
     /**
-     * @brief Postfix to apply to all artefacts in this facet.
+     * @brief Computed name of the directory to use for the facet.
+     */
+    /**@{*/
+    const std::string& computed_directory_name() const;
+    std::string& computed_directory_name();
+    void computed_directory_name(const std::string& v);
+    void computed_directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Postfix as read out from the configuration, if any.
      */
     /**@{*/
     const std::string& postfix() const;
     std::string& postfix();
     void postfix(const std::string& v);
     void postfix(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Computed postfix to apply to all artefacts in this facet.
+     */
+    /**@{*/
+    const std::string& computed_postfix() const;
+    std::string& computed_postfix();
+    void computed_postfix(const std::string& v);
+    void computed_postfix(const std::string&& v);
     /**@}*/
 
 public:
@@ -99,8 +121,10 @@ public:
 private:
     bool enabled_;
     bool overwrite_;
-    std::string directory_;
+    std::string directory_name_;
+    std::string computed_directory_name_;
     std::string postfix_;
+    std::string computed_postfix_;
 };
 
 }

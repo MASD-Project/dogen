@@ -29,26 +29,34 @@ facet_properties::facet_properties()
 facet_properties::facet_properties(
     const bool enabled,
     const bool overwrite,
-    const std::string& directory,
-    const std::string& postfix)
+    const std::string& directory_name,
+    const std::string& computed_directory_name,
+    const std::string& postfix,
+    const std::string& computed_postfix)
     : enabled_(enabled),
       overwrite_(overwrite),
-      directory_(directory),
-      postfix_(postfix) { }
+      directory_name_(directory_name),
+      computed_directory_name_(computed_directory_name),
+      postfix_(postfix),
+      computed_postfix_(computed_postfix) { }
 
 void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
-    swap(directory_, other.directory_);
+    swap(directory_name_, other.directory_name_);
+    swap(computed_directory_name_, other.computed_directory_name_);
     swap(postfix_, other.postfix_);
+    swap(computed_postfix_, other.computed_postfix_);
 }
 
 bool facet_properties::operator==(const facet_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
-        directory_ == rhs.directory_ &&
-        postfix_ == rhs.postfix_;
+        directory_name_ == rhs.directory_name_ &&
+        computed_directory_name_ == rhs.computed_directory_name_ &&
+        postfix_ == rhs.postfix_ &&
+        computed_postfix_ == rhs.computed_postfix_;
 }
 
 facet_properties& facet_properties::operator=(facet_properties other) {
@@ -73,20 +81,36 @@ void facet_properties::overwrite(const bool v) {
     overwrite_ = v;
 }
 
-const std::string& facet_properties::directory() const {
-    return directory_;
+const std::string& facet_properties::directory_name() const {
+    return directory_name_;
 }
 
-std::string& facet_properties::directory() {
-    return directory_;
+std::string& facet_properties::directory_name() {
+    return directory_name_;
 }
 
-void facet_properties::directory(const std::string& v) {
-    directory_ = v;
+void facet_properties::directory_name(const std::string& v) {
+    directory_name_ = v;
 }
 
-void facet_properties::directory(const std::string&& v) {
-    directory_ = std::move(v);
+void facet_properties::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
+}
+
+const std::string& facet_properties::computed_directory_name() const {
+    return computed_directory_name_;
+}
+
+std::string& facet_properties::computed_directory_name() {
+    return computed_directory_name_;
+}
+
+void facet_properties::computed_directory_name(const std::string& v) {
+    computed_directory_name_ = v;
+}
+
+void facet_properties::computed_directory_name(const std::string&& v) {
+    computed_directory_name_ = std::move(v);
 }
 
 const std::string& facet_properties::postfix() const {
@@ -103,6 +127,22 @@ void facet_properties::postfix(const std::string& v) {
 
 void facet_properties::postfix(const std::string&& v) {
     postfix_ = std::move(v);
+}
+
+const std::string& facet_properties::computed_postfix() const {
+    return computed_postfix_;
+}
+
+std::string& facet_properties::computed_postfix() {
+    return computed_postfix_;
+}
+
+void facet_properties::computed_postfix(const std::string& v) {
+    computed_postfix_ = v;
+}
+
+void facet_properties::computed_postfix(const std::string&& v) {
+    computed_postfix_ = std::move(v);
 }
 
 }

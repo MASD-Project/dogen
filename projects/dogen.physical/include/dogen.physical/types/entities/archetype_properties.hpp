@@ -49,7 +49,8 @@ public:
     archetype_properties(
         const bool enabled,
         const boost::optional<bool>& overwrite,
-        const std::string& postfix);
+        const std::string& postfix,
+        const std::string& computed_postfix);
 
 public:
     /**
@@ -71,13 +72,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Postfix to apply to all artefacts of this archetype.
+     * @brief Postfix as read out from the configuration.
      */
     /**@{*/
     const std::string& postfix() const;
     std::string& postfix();
     void postfix(const std::string& v);
     void postfix(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Computed postfix to apply to all artefacts of this archetype.
+     */
+    /**@{*/
+    const std::string& computed_postfix() const;
+    std::string& computed_postfix();
+    void computed_postfix(const std::string& v);
+    void computed_postfix(const std::string&& v);
     /**@}*/
 
 public:
@@ -94,6 +105,7 @@ private:
     bool enabled_;
     boost::optional<bool> overwrite_;
     std::string postfix_;
+    std::string computed_postfix_;
 };
 
 }
