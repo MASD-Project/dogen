@@ -61,6 +61,7 @@ const std::string enable_backend_directories_feature(
 const std::string root_module_not_found("Could not find root module: ");
 const std::string backend_not_found("Could not find backend: ");
 const std::string facet_not_found("Could not find facet: ");
+const std::string part_not_found("Could not find facet: ");
 const std::string archetype_not_found("Could not find archetype: ");
 const std::string duplicate_backend("Duplicate backend: ");
 
@@ -352,27 +353,70 @@ void meta_model_properties_transform::compute_enable_backend_directories(
     }
 }
 
+template<typename Element, typename Properties>
+inline void compute_directory_name(const Element& e, Properties& p) {
+    const bool has_directory_name_override(!p.directory_name().empty());
+    if (has_directory_name_override)
+        p.computed_directory_name(p.directory_name());
+    else
+        p.computed_directory_name(e.directory_name());
+}
+
+template<typename Element, typename Properties>
+inline void compute_postfix(const Element& e, Properties& p) {
+    const bool has_postfix_override(!p.postfix().empty());
+    if (has_postfix_override)
+        p.computed_postfix(p.postfix());
+    else
+        p.computed_postfix(e.postfix());
+}
+
 void meta_model_properties_transform::compute_directory_names_and_postfixes(
     const physical::entities::meta_model& mm,
     entities::meta_model_properties& mmp) {
 
-    for (auto& be : mm.backends()) {
-        const auto& id(be.meta_name().id());
-        const auto i(mmp.backend_properties().find(id));
+    for (const auto& be : mm.backends()) {
+        const auto& bid(be.meta_name().id());
+        const auto i(mmp.backend_properties().find(bid));
         if (i == mmp.backend_properties().end()) {
-            BOOST_LOG_SEV(lg, error) << backend_not_found << id;
+            BOOST_LOG_SEV(lg, error) << backend_not_found << bid;
             BOOST_THROW_EXCEPTION(
-                transform_exception(backend_not_found + id.value()));
+                transform_exception(backend_not_found + bid.value()));
         }
 
         auto& bp(i->second);
-        if (!bp.directory_name().empty())
-            bp.computed_directory_name(bp.directory_name());
-        else
-            bp.computed_directory_name(be.directory_name());
+        compute_directory_name(be, bp);
+
+        for (auto& pair : be.facets()) {
+            const auto& fid(pair.first);
+             const auto j(mmp.facet_properties().find(fid));
+             if (j == mmp.facet_properties().end()) {
+                 BOOST_LOG_SEV(lg, error) << facet_not_found << fid;
+                 BOOST_THROW_EXCEPTION(
+                     transform_exception(facet_not_found + fid.value()));
+             }
+
+             auto& fctp(j->second);
+             const auto& fct(pair.second);
+             compute_directory_name(fct, fctp);
+             compute_postfix(fct, fctp);
+        }
+
+        for (auto& pair : be.parts()) {
+            const auto& pid(pair.first);
+            const auto k(mmp.part_properties().find(pid));
+            if (k == mmp.part_properties().end()) {
+                BOOST_LOG_SEV(lg, error) << facet_not_found << pid;
+                BOOST_THROW_EXCEPTION(
+                    transform_exception(part_not_found + pid.value()));
+            }
+
+            auto& prtp(k->second);
+            const auto& prt(pair.second);
+            compute_directory_name(prt, prtp);
+        }
     }
 }
-
 
 void meta_model_properties_transform::
 apply(const context& ctx, entities::model& m) {
