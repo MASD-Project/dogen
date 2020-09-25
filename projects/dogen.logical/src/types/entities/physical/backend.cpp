@@ -88,7 +88,8 @@ backend::backend(
     const std::list<dogen::identification::entities::logical_name>& facets,
     const std::list<dogen::identification::entities::logical_name>& parts,
     const std::list<dogen::identification::entities::logical_name>& archetype_kinds,
-    const std::string& backend_name)
+    const std::string& backend_name,
+    const std::string& directory_name)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -109,7 +110,8 @@ backend::backend(
       facets_(facets),
       parts_(parts),
       archetype_kinds_(archetype_kinds),
-      backend_name_(backend_name) { }
+      backend_name_(backend_name),
+      directory_name_(directory_name) { }
 
 void backend::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -140,7 +142,8 @@ void backend::to_stream(std::ostream& s) const {
       << "\"facets\": " << facets_ << ", "
       << "\"parts\": " << parts_ << ", "
       << "\"archetype_kinds\": " << archetype_kinds_ << ", "
-      << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\""
+      << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(directory_name_) << "\""
       << " }";
 }
 
@@ -156,6 +159,7 @@ void backend::swap(backend& other) noexcept {
     swap(parts_, other.parts_);
     swap(archetype_kinds_, other.archetype_kinds_);
     swap(backend_name_, other.backend_name_);
+    swap(directory_name_, other.directory_name_);
 }
 
 bool backend::equals(const dogen::logical::entities::element& other) const {
@@ -173,7 +177,8 @@ bool backend::operator==(const backend& rhs) const {
         facets_ == rhs.facets_ &&
         parts_ == rhs.parts_ &&
         archetype_kinds_ == rhs.archetype_kinds_ &&
-        backend_name_ == rhs.backend_name_;
+        backend_name_ == rhs.backend_name_ &&
+        directory_name_ == rhs.directory_name_;
 }
 
 backend& backend::operator=(backend other) {
@@ -300,6 +305,22 @@ void backend::backend_name(const std::string& v) {
 
 void backend::backend_name(const std::string&& v) {
     backend_name_ = std::move(v);
+}
+
+const std::string& backend::directory_name() const {
+    return directory_name_;
+}
+
+std::string& backend::directory_name() {
+    return directory_name_;
+}
+
+void backend::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void backend::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 }

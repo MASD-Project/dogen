@@ -68,7 +68,9 @@ public:
         const std::list<dogen::identification::entities::logical_id>& contains,
         const std::string& meta_model_name,
         const std::string& backend_name,
-        const std::list<dogen::identification::entities::logical_name>& archetypes);
+        const std::list<dogen::identification::entities::logical_name>& archetypes,
+        const std::string& directory_name,
+        const std::string& postfix);
 
 public:
     using element::accept;
@@ -139,6 +141,26 @@ public:
     void archetypes(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
+    /**
+     * @brief Default directory name to use for this facet.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Default postfix to use for this facet.
+     */
+    /**@{*/
+    const std::string& postfix() const;
+    std::string& postfix();
+    void postfix(const std::string& v);
+    void postfix(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const facet& rhs) const;
     bool operator!=(const facet& rhs) const {
@@ -159,6 +181,8 @@ private:
     std::string meta_model_name_;
     std::string backend_name_;
     std::list<dogen::identification::entities::logical_name> archetypes_;
+    std::string directory_name_;
+    std::string postfix_;
 };
 
 }

@@ -71,7 +71,8 @@ public:
         const std::string& facet_path_contribution,
         const std::string& internal_modules_path_contribution,
         const bool requires_relative_path,
-        const std::list<dogen::identification::entities::logical_name>& archetypes);
+        const std::list<dogen::identification::entities::logical_name>& archetypes,
+        const std::string& directory_name);
 
 public:
     using element::accept;
@@ -180,6 +181,16 @@ public:
     void archetypes(const std::list<dogen::identification::entities::logical_name>&& v);
     /**@}*/
 
+    /**
+     * @brief Default directory name to use for this part.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const part& rhs) const;
     bool operator!=(const part& rhs) const {
@@ -204,6 +215,7 @@ private:
     std::string internal_modules_path_contribution_;
     bool requires_relative_path_;
     std::list<dogen::identification::entities::logical_name> archetypes_;
+    std::string directory_name_;
 };
 
 }

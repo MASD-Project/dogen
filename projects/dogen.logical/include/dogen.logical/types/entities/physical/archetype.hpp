@@ -71,7 +71,8 @@ public:
         const std::string& part_id,
         const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
         const dogen::logical::entities::physical::relations& relations,
-        const dogen::logical::entities::physical::archetype_text_templating& text_templating);
+        const dogen::logical::entities::physical::archetype_text_templating& text_templating,
+        const std::string& postfix);
 
 public:
     using element::accept;
@@ -172,6 +173,16 @@ public:
     void text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v);
     /**@}*/
 
+    /**
+     * @brief Default postfix to use for this archetype.
+     */
+    /**@{*/
+    const std::string& postfix() const;
+    std::string& postfix();
+    void postfix(const std::string& v);
+    void postfix(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -195,6 +206,7 @@ private:
     dogen::identification::entities::logical_meta_id logical_meta_element_id_;
     dogen::logical::entities::physical::relations relations_;
     dogen::logical::entities::physical::archetype_text_templating text_templating_;
+    std::string postfix_;
 };
 
 }

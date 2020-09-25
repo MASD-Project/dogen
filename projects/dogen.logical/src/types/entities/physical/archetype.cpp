@@ -62,7 +62,8 @@ archetype::archetype(
     const std::string& part_id,
     const dogen::identification::entities::logical_meta_id& logical_meta_element_id,
     const dogen::logical::entities::physical::relations& relations,
-    const dogen::logical::entities::physical::archetype_text_templating& text_templating)
+    const dogen::logical::entities::physical::archetype_text_templating& text_templating,
+    const std::string& postfix)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -84,7 +85,8 @@ archetype::archetype(
       part_id_(part_id),
       logical_meta_element_id_(logical_meta_element_id),
       relations_(relations),
-      text_templating_(text_templating) { }
+      text_templating_(text_templating),
+      postfix_(postfix) { }
 
 void archetype::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -116,7 +118,8 @@ void archetype::to_stream(std::ostream& s) const {
       << "\"part_id\": " << "\"" << tidy_up_string(part_id_) << "\"" << ", "
       << "\"logical_meta_element_id\": " << logical_meta_element_id_ << ", "
       << "\"relations\": " << relations_ << ", "
-      << "\"text_templating\": " << text_templating_
+      << "\"text_templating\": " << text_templating_ << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(postfix_) << "\""
       << " }";
 }
 
@@ -133,6 +136,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(logical_meta_element_id_, other.logical_meta_element_id_);
     swap(relations_, other.relations_);
     swap(text_templating_, other.text_templating_);
+    swap(postfix_, other.postfix_);
 }
 
 bool archetype::equals(const dogen::logical::entities::element& other) const {
@@ -151,7 +155,8 @@ bool archetype::operator==(const archetype& rhs) const {
         part_id_ == rhs.part_id_ &&
         logical_meta_element_id_ == rhs.logical_meta_element_id_ &&
         relations_ == rhs.relations_ &&
-        text_templating_ == rhs.text_templating_;
+        text_templating_ == rhs.text_templating_ &&
+        postfix_ == rhs.postfix_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -294,6 +299,22 @@ void archetype::text_templating(const dogen::logical::entities::physical::archet
 
 void archetype::text_templating(const dogen::logical::entities::physical::archetype_text_templating&& v) {
     text_templating_ = std::move(v);
+}
+
+const std::string& archetype::postfix() const {
+    return postfix_;
+}
+
+std::string& archetype::postfix() {
+    return postfix_;
+}
+
+void archetype::postfix(const std::string& v) {
+    postfix_ = v;
+}
+
+void archetype::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 }

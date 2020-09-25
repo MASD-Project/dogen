@@ -108,6 +108,36 @@ make_masd_physical_wale_template_reference() {
     return r;
 }
 
+dogen::variability::entities::feature
+make_masd_physical_directory_name() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("directory_name");
+    r.name().qualified("masd.physical.directory_name");
+    r.description(R"(Name of the directory to use for this physical element.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
+dogen::variability::entities::feature
+make_masd_physical_postfix() {
+    using namespace dogen::variability::entities;
+    feature r;
+    r.name().simple("postfix");
+    r.name().qualified("masd.physical.postfix");
+    r.description(R"(Postfix to use for this physical element.
+
+)");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
 }
 
 physical::feature_group
@@ -120,6 +150,8 @@ physical::make_feature_group(const dogen::variability::entities::feature_model& 
     r.logical_meta_element_id = s.get_by_name("masd.physical.logical_meta_element_id");
     r.major_technical_space = s.get_by_name("masd.physical.major_technical_space");
     r.wale_template_reference = s.get_by_name("masd.physical.wale_template_reference");
+    r.directory_name = s.get_by_name("masd.physical.directory_name");
+    r.postfix = s.get_by_name("masd.physical.postfix");
 
     return r;
 }
@@ -140,6 +172,10 @@ physical::static_configuration physical::make_static_configuration(
         r.major_technical_space = s.get_text_content(fg.major_technical_space);
     if (s.has_configuration_point(fg.wale_template_reference))
         r.wale_template_reference = s.get_text_content(fg.wale_template_reference);
+    if (s.has_configuration_point(fg.directory_name))
+        r.directory_name = s.get_text_content(fg.directory_name);
+    if (s.has_configuration_point(fg.postfix))
+        r.postfix = s.get_text_content(fg.postfix);
     return r;
 }
 
@@ -152,6 +188,8 @@ physical::make_features() {
     r.push_back(make_masd_physical_logical_meta_element_id());
     r.push_back(make_masd_physical_major_technical_space());
     r.push_back(make_masd_physical_wale_template_reference());
+    r.push_back(make_masd_physical_directory_name());
+    r.push_back(make_masd_physical_postfix());
     return r;
 }
 

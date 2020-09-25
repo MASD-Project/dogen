@@ -86,7 +86,9 @@ facet::facet(
     const std::list<dogen::identification::entities::logical_id>& contains,
     const std::string& meta_model_name,
     const std::string& backend_name,
-    const std::list<dogen::identification::entities::logical_name>& archetypes)
+    const std::list<dogen::identification::entities::logical_name>& archetypes,
+    const std::string& directory_name,
+    const std::string& postfix)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -105,7 +107,9 @@ facet::facet(
       contains_(contains),
       meta_model_name_(meta_model_name),
       backend_name_(backend_name),
-      archetypes_(archetypes) { }
+      archetypes_(archetypes),
+      directory_name_(directory_name),
+      postfix_(postfix) { }
 
 void facet::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -134,7 +138,9 @@ void facet::to_stream(std::ostream& s) const {
       << "\"contains\": " << contains_ << ", "
       << "\"meta_model_name\": " << "\"" << tidy_up_string(meta_model_name_) << "\"" << ", "
       << "\"backend_name\": " << "\"" << tidy_up_string(backend_name_) << "\"" << ", "
-      << "\"archetypes\": " << archetypes_
+      << "\"archetypes\": " << archetypes_ << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(directory_name_) << "\"" << ", "
+      << "\"postfix\": " << "\"" << tidy_up_string(postfix_) << "\""
       << " }";
 }
 
@@ -148,6 +154,8 @@ void facet::swap(facet& other) noexcept {
     swap(meta_model_name_, other.meta_model_name_);
     swap(backend_name_, other.backend_name_);
     swap(archetypes_, other.archetypes_);
+    swap(directory_name_, other.directory_name_);
+    swap(postfix_, other.postfix_);
 }
 
 bool facet::equals(const dogen::logical::entities::element& other) const {
@@ -163,7 +171,9 @@ bool facet::operator==(const facet& rhs) const {
         contains_ == rhs.contains_ &&
         meta_model_name_ == rhs.meta_model_name_ &&
         backend_name_ == rhs.backend_name_ &&
-        archetypes_ == rhs.archetypes_;
+        archetypes_ == rhs.archetypes_ &&
+        directory_name_ == rhs.directory_name_ &&
+        postfix_ == rhs.postfix_;
 }
 
 facet& facet::operator=(facet other) {
@@ -258,6 +268,38 @@ void facet::archetypes(const std::list<dogen::identification::entities::logical_
 
 void facet::archetypes(const std::list<dogen::identification::entities::logical_name>&& v) {
     archetypes_ = std::move(v);
+}
+
+const std::string& facet::directory_name() const {
+    return directory_name_;
+}
+
+std::string& facet::directory_name() {
+    return directory_name_;
+}
+
+void facet::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void facet::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
+}
+
+const std::string& facet::postfix() const {
+    return postfix_;
+}
+
+std::string& facet::postfix() {
+    return postfix_;
+}
+
+void facet::postfix(const std::string& v) {
+    postfix_ = v;
+}
+
+void facet::postfix(const std::string&& v) {
+    postfix_ = std::move(v);
 }
 
 }

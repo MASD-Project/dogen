@@ -70,7 +70,8 @@ public:
         const std::list<dogen::identification::entities::logical_name>& facets,
         const std::list<dogen::identification::entities::logical_name>& parts,
         const std::list<dogen::identification::entities::logical_name>& archetype_kinds,
-        const std::string& backend_name);
+        const std::string& backend_name,
+        const std::string& directory_name);
 
 public:
     using element::accept;
@@ -161,6 +162,16 @@ public:
     void backend_name(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Default directory name to use for this backend.
+     */
+    /**@{*/
+    const std::string& directory_name() const;
+    std::string& directory_name();
+    void directory_name(const std::string& v);
+    void directory_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const backend& rhs) const;
     bool operator!=(const backend& rhs) const {
@@ -183,6 +194,7 @@ private:
     std::list<dogen::identification::entities::logical_name> parts_;
     std::list<dogen::identification::entities::logical_name> archetype_kinds_;
     std::string backend_name_;
+    std::string directory_name_;
 };
 
 }

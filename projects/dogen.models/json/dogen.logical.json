@@ -3577,6 +3577,11 @@
           "name": "text_templating",
           "type": "archetype_text_templating",
           "documentation": "Properties related to the text templating for this archetype.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Default postfix to use for this archetype.\n"
         }
       ]
     },
@@ -3614,6 +3619,11 @@
           "name": "backend_name",
           "type": "std::string",
           "documentation": "FIXME: temporary attribute until we can rename the top-level namespaces.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this backend.\n"
         }
       ]
     },
@@ -3641,6 +3651,16 @@
           "name": "archetypes",
           "type": "std::list<identification::entities::logical_name>",
           "documentation": "All archetypes in this facet.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this facet.\n"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Default postfix to use for this facet.\n"
         }
       ]
     },
@@ -3692,6 +3712,11 @@
           "name": "archetypes",
           "type": "std::list<identification::entities::logical_name>",
           "documentation": "All archetypes in this part.\n"
+        },
+        {
+          "name": "directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name to use for this part.\n"
         }
       ]
     },
@@ -3775,6 +3800,22 @@
           "name": "wale_template_reference",
           "type": "masd::variability::text",
           "documentation": "Name of the wale template that the archetype uses.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "directory_name",
+          "type": "masd::variability::text",
+          "documentation": "Name of the directory to use for this physical element.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "postfix",
+          "type": "masd::variability::text",
+          "documentation": "Postfix to use for this physical element.\n",
           "tagged_values": {
             "masd.variability.is_optional": "true"
           }
@@ -4092,7 +4133,7 @@
         {
           "name": "original_urn",
           "type": "std::string",
-          "documentation": "URN pointing to an archetype or a label, as it was originally created by the user.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if \npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
+          "documentation": "URN pointing to an archetype or a label, as it was originally created by the user.\n\n It must have the form \"archetype:\" if pointing to an archetype, or  \"label:\" if\npointing to a label, and then is followed by \"KEY:VALUE\". The label must resolve\nto a unique archetype.\n"
         }
       ]
     },

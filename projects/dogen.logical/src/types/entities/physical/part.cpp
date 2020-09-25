@@ -77,7 +77,8 @@ part::part(
     const std::string& facet_path_contribution,
     const std::string& internal_modules_path_contribution,
     const bool requires_relative_path,
-    const std::list<dogen::identification::entities::logical_name>& archetypes)
+    const std::list<dogen::identification::entities::logical_name>& archetypes,
+    const std::string& directory_name)
     : dogen::logical::entities::element(
       name,
       documentation,
@@ -100,7 +101,8 @@ part::part(
       facet_path_contribution_(facet_path_contribution),
       internal_modules_path_contribution_(internal_modules_path_contribution),
       requires_relative_path_(requires_relative_path),
-      archetypes_(archetypes) { }
+      archetypes_(archetypes),
+      directory_name_(directory_name) { }
 
 void part::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -139,7 +141,8 @@ void part::to_stream(std::ostream& s) const {
       << "\"facet_path_contribution\": " << "\"" << tidy_up_string(facet_path_contribution_) << "\"" << ", "
       << "\"internal_modules_path_contribution\": " << "\"" << tidy_up_string(internal_modules_path_contribution_) << "\"" << ", "
       << "\"requires_relative_path\": " << requires_relative_path_ << ", "
-      << "\"archetypes\": " << archetypes_
+      << "\"archetypes\": " << archetypes_ << ", "
+      << "\"directory_name\": " << "\"" << tidy_up_string(directory_name_) << "\""
       << " }";
 }
 
@@ -157,6 +160,7 @@ void part::swap(part& other) noexcept {
     swap(internal_modules_path_contribution_, other.internal_modules_path_contribution_);
     swap(requires_relative_path_, other.requires_relative_path_);
     swap(archetypes_, other.archetypes_);
+    swap(directory_name_, other.directory_name_);
 }
 
 bool part::equals(const dogen::logical::entities::element& other) const {
@@ -176,7 +180,8 @@ bool part::operator==(const part& rhs) const {
         facet_path_contribution_ == rhs.facet_path_contribution_ &&
         internal_modules_path_contribution_ == rhs.internal_modules_path_contribution_ &&
         requires_relative_path_ == rhs.requires_relative_path_ &&
-        archetypes_ == rhs.archetypes_;
+        archetypes_ == rhs.archetypes_ &&
+        directory_name_ == rhs.directory_name_;
 }
 
 part& part::operator=(part other) {
@@ -327,6 +332,22 @@ void part::archetypes(const std::list<dogen::identification::entities::logical_n
 
 void part::archetypes(const std::list<dogen::identification::entities::logical_name>&& v) {
     archetypes_ = std::move(v);
+}
+
+const std::string& part::directory_name() const {
+    return directory_name_;
+}
+
+std::string& part::directory_name() {
+    return directory_name_;
+}
+
+void part::directory_name(const std::string& v) {
+    directory_name_ = v;
+}
+
+void part::directory_name(const std::string&& v) {
+    directory_name_ = std::move(v);
 }
 
 }
