@@ -53,7 +53,7 @@ std::string traits::overwrite() {
 }
 
 std::string traits::directory() {
-    static std::string r("directory");
+    static std::string r("directory_name");
     return r;
 }
 
@@ -168,7 +168,7 @@ std::string traits::cpp::templates_directory_name() {
 }
 
 std::string traits::cpp::backend_directory_name() {
-    static std::string r("masd.cpp.directory");
+    static std::string r("masd.cpp.directory_name");
     return r;
 }
 

@@ -41,23 +41,6 @@ make_masd_cpp_headers_output_directory() {
 }
 
 dogen::variability::entities::feature
-make_masd_cpp_directory() {
-    using namespace dogen::variability::entities;
-    feature r;
-    r.name().simple("directory");
-    r.name().qualified("masd.cpp.directory");
-    r.description(R"(Directory in which to place code for the C++ backend.
-
-)");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "cpp" }));
-    return r;
-}
-
-dogen::variability::entities::feature
 make_masd_cpp_inclusion_required() {
     using namespace dogen::variability::entities;
     feature r;
@@ -371,7 +354,6 @@ global_features::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_cpp_headers_output_directory());
-    r.push_back(make_masd_cpp_directory());
     r.push_back(make_masd_cpp_inclusion_required());
     r.push_back(make_masd_cpp_source_directory_name());
     r.push_back(make_masd_cpp_include_directory_name());

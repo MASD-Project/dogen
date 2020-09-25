@@ -14669,7 +14669,7 @@ using System;
         <dia:point val="75,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,9.95;105.195,16.85"/>
+        <dia:rectangle val="74.95,9.95;105.195,16.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="75,10"/>
@@ -14678,7 +14678,7 @@ using System;
         <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -14769,29 +14769,6 @@ using System;
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#directory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"cs"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#aspect.requires_static_reference_equals#</dia:string>

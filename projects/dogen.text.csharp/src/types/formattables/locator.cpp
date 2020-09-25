@@ -76,7 +76,7 @@ locator::feature_group locator::make_feature_group(
         const auto pfix(traits::postfix());
         fmt_tg.archefeature_postfix = s.get_by_name(arch.value(), pfix);
 
-        auto dir(s.try_get_by_name(fct.value(), "directory_name"));
+        auto dir(s.try_get_by_name(fct.value(), traits::directory()));
         if (dir)
             fmt_tg.facet_directory = *dir;
 

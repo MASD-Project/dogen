@@ -48,7 +48,7 @@ std::string traits::overwrite() {
 }
 
 std::string traits::directory() {
-    static std::string r("directory");
+    static std::string r("directory_name");
     return r;
 }
 
@@ -63,7 +63,7 @@ std::string traits::empty_part() {
 }
 
 std::string traits::backend_directory_name() {
-    static std::string r("masd.csharp.directory");
+    static std::string r("masd.csharp.directory_name");
     return r;
 }
 

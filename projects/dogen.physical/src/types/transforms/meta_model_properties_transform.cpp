@@ -51,7 +51,7 @@ static logger lg(logger_factory(transform_id));
 
 static const std::string cpp_backend("masd.cpp");
 static std::string enabled_feature("enabled");
-static std::string directory_feature("directory");
+static std::string directory_feature("directory_name");
 static std::string overwrite_feature("overwrite");
 const std::string cpp_headers_output_directory_feature(
     "masd.cpp.headers_output_directory");
@@ -118,7 +118,7 @@ meta_model_properties_transform::make_facet_feature_group(
             facet_feature_group fg;
             fg.enabled = s.get_by_name(fct.value(), enabled_feature);
             fg.overwrite = s.get_by_name(fct.value(), overwrite_feature);
-            fg.directory_name = s.get_by_name(fct.value(), "directory_name");
+            fg.directory_name = s.get_by_name(fct.value(), directory_feature);
             r.insert(std::make_pair(fct, fg));
         }
     }

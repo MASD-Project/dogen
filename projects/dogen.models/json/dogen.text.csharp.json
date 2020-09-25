@@ -883,14 +883,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"cs\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global"
-          }
-        },
-        {
           "name": "aspect.requires_static_reference_equals",
           "type": "masd::variability::boolean",
           "value": "\"true\"",

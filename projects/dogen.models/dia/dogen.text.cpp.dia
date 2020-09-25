@@ -36382,7 +36382,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:point val="-48,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,183.95;-16.265,202.85"/>
+        <dia:rectangle val="-48.05,183.95;-16.265,202.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,184"/>
@@ -36391,7 +36391,7 @@ register_entities(variability::helpers::registrar&amp; rg) {
         <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.800000000000004"/>
+        <dia:real val="18.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -36494,31 +36494,6 @@ register_entities(variability::helpers::registrar&amp; rg) {
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Override location of public c++ headers.
-
-#DOGEN masd.variability.binding_point=global#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#directory#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"cpp"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Directory in which to place code for the C++ backend.
 
 #DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>

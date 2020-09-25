@@ -2209,15 +2209,6 @@
           }
         },
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"cpp\"",
-          "documentation": "Directory in which to place code for the C++ backend.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global"
-          }
-        },
-        {
           "name": "inclusion_required",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
