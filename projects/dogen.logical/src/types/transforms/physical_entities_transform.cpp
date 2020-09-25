@@ -63,6 +63,8 @@ const std::string varibale_relation_type_opaque("opaque");
 const std::string varibale_relation_type_associative_key("associative_key");
 const std::string varibale_relation_type_visitation("visitation");
 
+const std::string missing_backend_name("Backend name was expected: ");
+const std::string missing_directory_name("Directory name was expected: ");
 const std::string invalid_relation_status(
     "Relation status is not valid: ");
 const std::string ambiguous_name("Name maps to more than one element type:");
@@ -101,11 +103,37 @@ process_backends(const context& ctx, entities::model& m) {
 
     auto& bs(pe.backends());
     for (auto& pair : bs) {
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << pair.first;
+        const auto bid(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << bid;
         auto& b(*pair.second);
         const auto scfg(physical::make_static_configuration(fg, b));
-        b.backend_name(scfg.backend_name);
         b.meta_model_name(meta_model_name);
+
+        /*
+         * Backend name is a bit of a hack. In a good world, it should
+         * really be the element name. However, since we are
+         * undergoing many refactorings, at present there is a
+         * mismatch between the element names (e.g. "transforms") and
+         * the desired backend names (e.g. "cpp"). So for now we need
+         * this property. Once we move to a combined text model, this
+         * property should be removed.
+         */
+        if (scfg.backend_name.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_backend_name << bid;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_backend_name + bid.value()));
+        }
+        b.backend_name(scfg.backend_name);
+
+        /*
+         * Backends must supply a directory name.
+         */
+        if (scfg.directory_name.empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_directory_name << bid;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_directory_name + bid.value()));
+        }
+        b.directory_name(scfg.directory_name);
 
         /*
          * Generate the ID for this backend.
