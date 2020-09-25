@@ -123,6 +123,10 @@ ast.stream() << "    b.facet(\"" << fct.name().simple() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::facet r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;
+            if (!fct.directory_name().empty())
+ast.stream() << "    r.directory_name(\"" << fct.directory_name() << "\");" << std::endl;
+            if (!fct.postfix().empty())
+ast.stream() << "    r.postfix(\"" << fct.postfix() << "\");" << std::endl;
             for(const auto& l : fct.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }

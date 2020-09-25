@@ -51302,6 +51302,10 @@ physical::entities::archetype &lt;#= sn #&gt;::make() {
     r.logical_meta_element_id(identification::entities::logical_meta_id("&lt;#= arch.logical_meta_element_id().value() #&gt;"));
     r.relations().status(physical::entities::relation_status::&lt;#= arch.relations().status() #&gt;);
 &lt;#+
+            if (!arch.postfix().empty())
+#&gt;
+    r.postfix("&lt;#= arch.postfix() #&gt;");
+&lt;#+
             for(const auto&amp; l : arch.labels()) {
 #&gt;
     r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
@@ -51795,6 +51799,14 @@ physical::entities::facet &lt;#= sn #&gt;::make() {
     physical::entities::facet r;
     r.meta_name(b.build());
 &lt;#+
+            if (!fct.directory_name().empty())
+#&gt;
+    r.directory_name("&lt;#= fct.directory_name() #&gt;");
+&lt;#+
+            if (!fct.postfix().empty())
+#&gt;
+    r.postfix("&lt;#= fct.postfix() #&gt;");
+&lt;#+
             for(const auto&amp; l : fct.labels()) {
 #&gt;
     r.labels().push_back(identification::entities::label("&lt;#= l.key() #&gt;", "&lt;#= l.value() #&gt;"));
@@ -52255,6 +52267,10 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
 
     physical::entities::backend r;
     r.meta_name(b.build());
+&lt;#+
+            if (!be.directory_name().empty())
+#&gt;
+    r.directory_name("&lt;#= be.directory_name() #&gt;");
 &lt;#+
             for(const auto&amp; l : be.labels()) {
 #&gt;

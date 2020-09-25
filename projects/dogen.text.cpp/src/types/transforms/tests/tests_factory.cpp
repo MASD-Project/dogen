@@ -44,6 +44,7 @@ physical::entities::facet tests_factory::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
+    r.postfix("tests");
 
     const auto lambda([&](const auto& arch) {
         const auto id(arch.meta_name().id());

@@ -123,6 +123,8 @@ ast.stream() << "    b.backend(\"" << be.backend_name() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::backend r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;
+            if (!be.directory_name().empty())
+ast.stream() << "    r.directory_name(\"" << be.directory_name() << "\");" << std::endl;
             for(const auto& l : be.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }

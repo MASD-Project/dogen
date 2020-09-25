@@ -47,6 +47,8 @@ physical::entities::facet test_data_factory::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
+    r.directory_name("test_data");
+    r.postfix("td");
 
     const auto lambda([&](const auto& arch) {
         const auto id(arch.meta_name().id());

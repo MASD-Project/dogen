@@ -50,6 +50,8 @@ physical::entities::facet serialization_factory::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
+    r.directory_name("serialization");
+    r.postfix("ser");
 
     const auto lambda([&](const auto& arch) {
         const auto id(arch.meta_name().id());

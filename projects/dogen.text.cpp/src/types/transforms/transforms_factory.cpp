@@ -50,6 +50,7 @@ physical::entities::backend transforms_factory::make() {
 
     physical::entities::backend r;
     r.meta_name(b.build());
+    r.directory_name("cpp");
     r.labels().push_back(identification::entities::label("test", "lbl"));
 
     const auto lambda([&](const auto& fct) {

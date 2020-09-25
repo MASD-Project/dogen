@@ -107,6 +107,8 @@ ast.stream() << "    using pmnf = identification::helpers::physical_meta_name_fa
 ast.stream() << "    r.meta_name(pmnf::make(\"" << arch.backend_name() << "\", \"" << arch.facet_name() << "\", \"" << arch.name().simple() << "\"));" << std::endl;
 ast.stream() << "    r.logical_meta_element_id(identification::entities::logical_meta_id(\"" << arch.logical_meta_element_id().value() << "\"));" << std::endl;
 ast.stream() << "    r.relations().status(physical::entities::relation_status::" << arch.relations().status() << ");" << std::endl;
+            if (!arch.postfix().empty())
+ast.stream() << "    r.postfix(\"" << arch.postfix() << "\");" << std::endl;
             for(const auto& l : arch.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }

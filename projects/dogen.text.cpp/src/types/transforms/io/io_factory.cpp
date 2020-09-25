@@ -47,6 +47,8 @@ physical::entities::facet io_factory::make() {
 
     physical::entities::facet r;
     r.meta_name(b.build());
+    r.directory_name("io");
+    r.postfix("io");
 
     const auto lambda([&](const auto& arch) {
         const auto id(arch.meta_name().id());
