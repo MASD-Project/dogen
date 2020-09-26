@@ -15189,7 +15189,7 @@ element.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Stores the properties related to the enablement, as read out from configuration.#</dia:string>
+        <dia:string>#Stores the properties related to the enablement.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15281,7 +15281,9 @@ element.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the artefact is enabled and its content will be computed.#</dia:string>
+            <dia:string>#If true, the artefact is enabled and its content will be computed.
+
+The enabled flag is computed from the configuration read out.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15304,7 +15306,9 @@ element.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the artefact will be expressed to the filesystem if there are changes.#</dia:string>
+            <dia:string>#If true, the artefact will be expressed to the filesystem if there are changes.
+
+The overwrite flag is computed from the configuration read out.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

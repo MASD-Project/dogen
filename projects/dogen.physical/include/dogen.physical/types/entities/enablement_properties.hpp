@@ -31,7 +31,7 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Stores the properties related to the enablement, as read out from configuration.
+ * @brief Stores the properties related to the enablement.
  */
 class enablement_properties final {
 public:
@@ -56,6 +56,8 @@ public:
 public:
     /**
      * @brief If true, the artefact is enabled and its content will be computed.
+     *
+     * The enabled flag is computed from the configuration read out.
      */
     /**@{*/
     bool enabled() const;
@@ -64,6 +66,8 @@ public:
 
     /**
      * @brief If true, the artefact will be expressed to the filesystem if there are changes.
+     *
+     * The overwrite flag is computed from the configuration read out.
      */
     /**@{*/
     bool overwrite() const;
