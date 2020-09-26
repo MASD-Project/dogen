@@ -247,6 +247,7 @@
     },
     {
       "name": "entities::archetype_kind",
+      "documentation": "Represents a type of archetypes.\n",
       "stereotypes": [
         "Describable"
       ],

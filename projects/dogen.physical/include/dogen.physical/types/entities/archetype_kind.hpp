@@ -30,6 +30,9 @@
 
 namespace dogen::physical::entities {
 
+/**
+ * @brief Represents a type of archetypes.
+ */
 class archetype_kind final {
 public:
     archetype_kind() = default;
