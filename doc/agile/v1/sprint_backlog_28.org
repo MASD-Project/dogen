@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-25 Fri 18:02]
+#+CAPTION: Clock summary at [2020-09-26 Sat 07:38]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *12:49* |       |      | 100.0 |
+| *Total time*                                       | *13:02* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 12:49   |       |      | 100.0 |
-| Active                                             |         | 12:49 |      | 100.0 |
-| edit release notes for previous sprint             |         |       | 3:44 |  29.1 |
-| Create a demo and presentation for previous sprint |         |       | 0:39 |   5.1 |
-| Directory names and postfixes are PMM properties   |         |       | 5:27 |  42.5 |
-| Sprint and product backlog grooming                |         |       | 2:05 |  16.3 |
+| Stories                                            | 13:02   |       |      | 100.0 |
+| Active                                             |         | 13:02 |      | 100.0 |
+| edit release notes for previous sprint             |         |       | 3:44 |  28.6 |
+| Create a demo and presentation for previous sprint |         |       | 0:39 |   5.0 |
+| Directory names and postfixes are PMM properties   |         |       | 5:27 |  41.8 |
+| Sprint and product backlog grooming                |         |       | 2:18 |  17.6 |
 | Rename =name= to =codec= name                      |         |       | 0:20 |   2.6 |
-| Add full and relative path processing to PM        |         |       | 0:34 |   4.4 |
+| Add full and relative path processing to PM        |         |       | 0:34 |   4.3 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -323,6 +323,7 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-09-26 Sat 07:25]--[2020-09-26 Sat 07:38] =>  0:13
     CLOCK: [2020-09-25 Fri 14:41]--[2020-09-25 Fri 15:35] =>  0:54
     CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
     CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
@@ -383,6 +384,10 @@ clear. We need a container with:
 - logical model element ID
 - archetype ID
 - labels
+
+*** Create a factory transform for parts and archetype kinds          :story:
+
+- integrate their generation into PMM chains.
 
 *** Allow arbitrary physical containment                              :story:
 
