@@ -48,6 +48,8 @@ std::ostream& operator<<(std::ostream& s, const enablement_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::enablement_properties\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "

@@ -33,17 +33,13 @@ const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
 namespace dogen::physical::entities {
 
 artefact::artefact()
-    : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)),
-      formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
+    : formatting_style_(static_cast<dogen::physical::entities::formatting_styles>(0)) { }
 
 artefact::artefact(artefact&& rhs)
     : meta_name_(std::move(rhs.meta_name_)),
       configuration_(std::move(rhs.configuration_)),
       provenance_(std::move(rhs.provenance_)),
       name_(std::move(rhs.name_)),
-      enabled_(std::move(rhs.enabled_)),
-      overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
       content_(std::move(rhs.content_)),
       path_properties_(std::move(rhs.path_properties_)),
@@ -60,8 +56,6 @@ artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const dogen::identification::entities::logical_provenance& provenance,
     const dogen::identification::entities::physical_name& name,
-    const bool enabled,
-    const bool overwrite,
     const boost::filesystem::path& file_path,
     const std::string& content,
     const dogen::physical::entities::path_properties& path_properties,
@@ -76,8 +70,6 @@ artefact::artefact(
       configuration_(configuration),
       provenance_(provenance),
       name_(name),
-      enabled_(enabled),
-      overwrite_(overwrite),
       file_path_(file_path),
       content_(content),
       path_properties_(path_properties),
@@ -95,8 +87,6 @@ void artefact::swap(artefact& other) noexcept {
     swap(configuration_, other.configuration_);
     swap(provenance_, other.provenance_);
     swap(name_, other.name_);
-    swap(enabled_, other.enabled_);
-    swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
     swap(content_, other.content_);
     swap(path_properties_, other.path_properties_);
@@ -114,8 +104,6 @@ bool artefact::operator==(const artefact& rhs) const {
         configuration_ == rhs.configuration_ &&
         provenance_ == rhs.provenance_ &&
         name_ == rhs.name_ &&
-        enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
         content_ == rhs.content_ &&
         path_properties_ == rhs.path_properties_ &&
@@ -196,22 +184,6 @@ void artefact::name(const dogen::identification::entities::physical_name& v) {
 
 void artefact::name(const dogen::identification::entities::physical_name&& v) {
     name_ = std::move(v);
-}
-
-bool artefact::enabled() const {
-    return enabled_;
-}
-
-void artefact::enabled(const bool v) {
-    enabled_ = v;
-}
-
-bool artefact::overwrite() const {
-    return overwrite_;
-}
-
-void artefact::overwrite(const bool v) {
-    overwrite_ = v;
 }
 
 const boost::filesystem::path& artefact::file_path() const {

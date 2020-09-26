@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
@@ -86,20 +85,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const artefact& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::artefact\"" << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"provenance\": " << v.provenance() << ", "
       << "\"name\": " << v.name() << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"path_properties\": " << v.path_properties() << ", "

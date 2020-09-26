@@ -22,24 +22,36 @@
 
 namespace dogen::physical::entities {
 
+enablement_properties::enablement_properties()
+    : enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)) { }
+
 enablement_properties::enablement_properties(enablement_properties&& rhs)
-    : facet_enabled_(std::move(rhs.facet_enabled_)),
+    : enabled_(std::move(rhs.enabled_)),
+      overwrite_(std::move(rhs.overwrite_)),
+      facet_enabled_(std::move(rhs.facet_enabled_)),
       archetype_enabled_(std::move(rhs.archetype_enabled_)),
       facet_overwrite_(std::move(rhs.facet_overwrite_)),
       archetype_overwrite_(std::move(rhs.archetype_overwrite_)) { }
 
 enablement_properties::enablement_properties(
+    const bool enabled,
+    const bool overwrite,
     const boost::optional<bool>& facet_enabled,
     const boost::optional<bool>& archetype_enabled,
     const boost::optional<bool>& facet_overwrite,
     const boost::optional<bool>& archetype_overwrite)
-    : facet_enabled_(facet_enabled),
+    : enabled_(enabled),
+      overwrite_(overwrite),
+      facet_enabled_(facet_enabled),
       archetype_enabled_(archetype_enabled),
       facet_overwrite_(facet_overwrite),
       archetype_overwrite_(archetype_overwrite) { }
 
 void enablement_properties::swap(enablement_properties& other) noexcept {
     using std::swap;
+    swap(enabled_, other.enabled_);
+    swap(overwrite_, other.overwrite_);
     swap(facet_enabled_, other.facet_enabled_);
     swap(archetype_enabled_, other.archetype_enabled_);
     swap(facet_overwrite_, other.facet_overwrite_);
@@ -47,7 +59,9 @@ void enablement_properties::swap(enablement_properties& other) noexcept {
 }
 
 bool enablement_properties::operator==(const enablement_properties& rhs) const {
-    return facet_enabled_ == rhs.facet_enabled_ &&
+    return enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
+        facet_enabled_ == rhs.facet_enabled_ &&
         archetype_enabled_ == rhs.archetype_enabled_ &&
         facet_overwrite_ == rhs.facet_overwrite_ &&
         archetype_overwrite_ == rhs.archetype_overwrite_;
@@ -57,6 +71,22 @@ enablement_properties& enablement_properties::operator=(enablement_properties ot
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool enablement_properties::enabled() const {
+    return enabled_;
+}
+
+void enablement_properties::enabled(const bool v) {
+    enabled_ = v;
+}
+
+bool enablement_properties::overwrite() const {
+    return overwrite_;
+}
+
+void enablement_properties::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 const boost::optional<bool>& enablement_properties::facet_enabled() const {

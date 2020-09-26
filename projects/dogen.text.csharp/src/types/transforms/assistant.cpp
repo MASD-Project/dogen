@@ -296,7 +296,8 @@ void assistant::update_artefact() {
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;
-    op.type(artefact_.overwrite() ? ot::write : ot::create_only);
+    const bool overwrite(artefact_.enablement_properties().overwrite());
+    op.type(overwrite ? ot::write : ot::create_only);
     artefact_.operation(op);
 }
 

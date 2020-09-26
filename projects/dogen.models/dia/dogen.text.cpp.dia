@@ -39168,11 +39168,13 @@ void logic_less_template_transform::apply(const context&amp; ctx, const logical:
     tracing::scoped_transform_tracer stp(lg, "logic less template",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const bool requires_header_guard(false);
+    assistant ast(ctx, e, archetype().meta_name(), requires_header_guard, a);
     ast.update_artefact();
-    a.overwrite(false);
+    a.enablement_properties().overwrite(false);
     stp.end_transform(a);
 }
+
 #&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -50227,13 +50229,13 @@ void part_class_implementation_transform_transform::apply(const context&amp; ctx
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O329">
       <dia:attribute name="obj_pos">
-        <dia:point val="-46,285"/>
+        <dia:point val="-46,290"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.05,284.95;-17.73,288.65"/>
+        <dia:rectangle val="-46.05,289.95;-17.73,293.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-46,285"/>
+        <dia:point val="-46,290"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="28.219999999999999"/>
@@ -50421,13 +50423,13 @@ public:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O330">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,285"/>
+        <dia:point val="-16,290"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,284.95;9.96,288.65"/>
+        <dia:rectangle val="-16.05,289.95;9.96,293.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,285"/>
+        <dia:point val="-16,290"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>

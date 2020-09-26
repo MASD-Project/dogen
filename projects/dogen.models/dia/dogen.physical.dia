@@ -4052,7 +4052,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:point val="116,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="115.95,-79.05;136.185,-66.55"/>
+        <dia:rectangle val="115.95,-79.05;136.185,-68.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="116,-79"/>
@@ -4061,7 +4061,7 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="10.799999999999999"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact#</dia:string>
@@ -4151,52 +4151,6 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the artefact is enabled and its content will be computed.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#overwrite#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, the artefact will be expressed to the filesystem if there are changes.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#file_path#</dia:string>
@@ -15033,13 +14987,13 @@ element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="139,-72"/>
+        <dia:point val="139,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.95,-72.05;147.635,-66.75"/>
+        <dia:rectangle val="138.95,-71.05;147.635,-65.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="139,-72"/>
+        <dia:point val="139,-71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -15217,7 +15171,7 @@ element.#</dia:string>
         <dia:point val="139,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.95,-79.05;156.105,-73.75"/>
+        <dia:rectangle val="138.95,-79.05;156.105,-72.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="139,-79"/>
@@ -15226,7 +15180,7 @@ element.#</dia:string>
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enablement_properties#</dia:string>
@@ -15316,6 +15270,52 @@ element.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#enabled#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the artefact is enabled and its content will be computed.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#overwrite#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the artefact will be expressed to the filesystem if there are changes.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#facet_enabled#</dia:string>
@@ -16953,13 +16953,13 @@ element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O130">
       <dia:attribute name="obj_pos">
-        <dia:point val="151,-72"/>
+        <dia:point val="151,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.95,-72.05;162.84,-68.35"/>
+        <dia:rectangle val="150.95,-71.05;162.84,-67.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="151,-72"/>
+        <dia:point val="151,-71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.790000000000001"/>
@@ -19170,19 +19170,19 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="136.135,-77.9"/>
+        <dia:point val="136.135,-76.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="135.385,-78.65;139.05,-74.645"/>
+        <dia:rectangle val="135.385,-77.05;139.05,-73.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="136.135,-77.9"/>
-        <dia:point val="138,-77.9"/>
-        <dia:point val="138,-75.5"/>
-        <dia:point val="139,-75.5"/>
+        <dia:point val="136.135,-76.3"/>
+        <dia:point val="138,-76.3"/>
+        <dia:point val="138,-73.9"/>
+        <dia:point val="139,-73.9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -19199,8 +19199,8 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O31" connection="4"/>
-        <dia:connection handle="1" to="O118" connection="12"/>
+        <dia:connection handle="0" to="O31" connection="9"/>
+        <dia:connection handle="1" to="O118" connection="16"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -19242,19 +19242,19 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="136.135,-71.5"/>
+        <dia:point val="136.135,-69.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="135.385,-72.25;139.05,-68.445"/>
+        <dia:rectangle val="135.385,-70.65;139.05,-67.445"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="136.135,-71.5"/>
-        <dia:point val="138,-71.5"/>
-        <dia:point val="138,-69.3"/>
-        <dia:point val="139,-69.3"/>
+        <dia:point val="136.135,-69.9"/>
+        <dia:point val="138,-69.9"/>
+        <dia:point val="138,-68.3"/>
+        <dia:point val="139,-68.3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -19271,7 +19271,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O31" connection="21"/>
+        <dia:connection handle="0" to="O31" connection="25"/>
         <dia:connection handle="1" to="O117" connection="8"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
@@ -19281,7 +19281,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
-        <dia:enum val="1"/>
+        <dia:enum val="2"/>
       </dia:attribute>
       <dia:attribute name="show_direction">
         <dia:boolean val="false"/>
@@ -19314,19 +19314,19 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="147.585,-70.9"/>
+        <dia:point val="147.585,-67.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="146.835,-71.65;151.05,-68.445"/>
+        <dia:rectangle val="147.535,-69.85;151.75,-66.645"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="147.585,-70.9"/>
-        <dia:point val="150,-70.9"/>
-        <dia:point val="150,-69.3"/>
-        <dia:point val="151,-69.3"/>
+        <dia:point val="147.585,-67.5"/>
+        <dia:point val="149,-67.5"/>
+        <dia:point val="149,-69.1"/>
+        <dia:point val="151,-69.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -19343,8 +19343,8 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O117" connection="4"/>
-        <dia:connection handle="1" to="O130" connection="10"/>
+        <dia:connection handle="0" to="O117" connection="11"/>
+        <dia:connection handle="1" to="O130" connection="8"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -19793,16 +19793,16 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="126.067,-66.6"/>
+        <dia:point val="126.067,-68.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.317,-67.35;136.47,-62.2"/>
+        <dia:rectangle val="125.317,-68.95;136.47,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="126.067,-66.6"/>
+        <dia:point val="126.067,-68.2"/>
         <dia:point val="126.067,-65"/>
         <dia:point val="136.27,-65"/>
         <dia:point val="136.27,-63"/>

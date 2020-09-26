@@ -89,9 +89,11 @@ void logic_less_template_transform::apply(const context& ctx, const logical::ent
     tracing::scoped_transform_tracer stp(lg, "logic less template",
         transform_id, e.name().qualified().dot(), *ctx.tracer(), e);
 
-    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);
+    const bool requires_header_guard(false);
+    assistant ast(ctx, e, archetype().meta_name(), requires_header_guard, a);
     ast.update_artefact();
-    a.overwrite(false);
+    a.enablement_properties().overwrite(false);
     stp.end_transform(a);
 }
+
 }

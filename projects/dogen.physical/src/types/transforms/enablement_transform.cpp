@@ -175,7 +175,7 @@ void enablement_transform::compute_enablement_for_artefact(
     entities::artefact& a) {
 
     const auto& gep(global_enablement_properties);
-    const auto& lep(a.enablement_properties());
+    auto& lep(a.enablement_properties());
 
     /*
      * If the overwrite flag is set locally at the archetype or facet
@@ -221,21 +221,21 @@ void enablement_transform::compute_enablement_for_artefact(
                              << gep.facet_overwrite();
 
     if (lep.archetype_overwrite())
-        a.overwrite(*lep.archetype_overwrite());
+        lep.overwrite(*lep.archetype_overwrite());
     else if (lep.facet_overwrite())
-        a.overwrite(*lep.facet_overwrite());
+        lep.overwrite(*lep.facet_overwrite());
     else if (gep.archetype_overwrite())
-        a.overwrite(*gep.archetype_overwrite());
+        lep.overwrite(*gep.archetype_overwrite());
     else
-        a.overwrite(gep.facet_overwrite());
+        lep.overwrite(gep.facet_overwrite());
 
     /*
      * Ensure we log the enablement details with the early returns.
      */
     auto log_scope_exit(make_scope_exit([&]() mutable {
             BOOST_LOG_SEV(lg, trace) << "Enablement for: " << archetype
-                                     << " value: " << a.enabled()
-                                     << " overwrite: " << a.overwrite();
+                                     << " value: " << lep.enabled()
+                                     << " overwrite: " << lep.overwrite();
         }));
 
     /*
@@ -244,7 +244,7 @@ void enablement_transform::compute_enablement_for_artefact(
      */
     if (!gep.backend_enabled()) {
         BOOST_LOG_SEV(lg, trace) << "Backend is disabled.";
-        a.enabled(false);
+        lep.enabled(false);
         return;
     }
 
@@ -254,7 +254,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * configuration.
      */
     if (lep.archetype_enabled()) {
-        a.enabled(*lep.archetype_enabled());
+        lep.enabled(*lep.archetype_enabled());
         return;
     }
 
@@ -276,7 +276,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * level local".
      */
     if (lep.facet_enabled()) {
-        a.enabled(*lep.facet_enabled());
+        lep.enabled(*lep.facet_enabled());
         return;
     }
 
@@ -298,7 +298,7 @@ void enablement_transform::compute_enablement_for_artefact(
      * course support this scenario for local enablement, which is
      * very common.
      */
-    a.enabled(gep.archetype_enabled() && gep.facet_enabled());
+    lep.enabled(gep.archetype_enabled() && gep.facet_enabled());
 }
 
 void enablement_transform::compute_enablement_for_region(
@@ -373,7 +373,7 @@ void enablement_transform::compute_enablement_for_region(
          * not enabled there is no much to be done so bomb out.
          */
         compute_enablement_for_artefact(gep, pmid, a);
-        if (!a.enabled()) {
+        if (!a.enablement_properties().enabled()) {
             BOOST_LOG_SEV(lg, trace) << "Artefact not enabled.";
             continue;
         }

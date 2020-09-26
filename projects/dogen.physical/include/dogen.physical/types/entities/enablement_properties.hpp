@@ -35,21 +35,41 @@ namespace dogen::physical::entities {
  */
 class enablement_properties final {
 public:
-    enablement_properties() = default;
     enablement_properties(const enablement_properties&) = default;
     ~enablement_properties() = default;
+
+public:
+    enablement_properties();
 
 public:
     enablement_properties(enablement_properties&& rhs);
 
 public:
     enablement_properties(
+        const bool enabled,
+        const bool overwrite,
         const boost::optional<bool>& facet_enabled,
         const boost::optional<bool>& archetype_enabled,
         const boost::optional<bool>& facet_overwrite,
         const boost::optional<bool>& archetype_overwrite);
 
 public:
+    /**
+     * @brief If true, the artefact is enabled and its content will be computed.
+     */
+    /**@{*/
+    bool enabled() const;
+    void enabled(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, the artefact will be expressed to the filesystem if there are changes.
+     */
+    /**@{*/
+    bool overwrite() const;
+    void overwrite(const bool v);
+    /**@}*/
+
     /**
      * @brief If supplied and true, the facet is enabled.
      */
@@ -101,6 +121,8 @@ public:
     enablement_properties& operator=(enablement_properties other);
 
 private:
+    bool enabled_;
+    bool overwrite_;
     boost::optional<bool> facet_enabled_;
     boost::optional<bool> archetype_enabled_;
     boost::optional<bool> facet_overwrite_;

@@ -519,16 +519,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "enabled",
-          "type": "bool",
-          "documentation": "If true, the artefact is enabled and its content will be computed.\n"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool",
-          "documentation": "If true, the artefact will be expressed to the filesystem if there are changes.\n"
-        },
-        {
           "name": "file_path",
           "type": "boost::filesystem::path",
           "documentation": "Full path to the file corresponding to this artefact.\n"
@@ -1341,6 +1331,16 @@
       "documentation": "Stores the properties related to the enablement, as read out from configuration.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
+        {
+          "name": "enabled",
+          "type": "bool",
+          "documentation": "If true, the artefact is enabled and its content will be computed.\n"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool",
+          "documentation": "If true, the artefact will be expressed to the filesystem if there are changes.\n"
+        },
         {
           "name": "facet_enabled",
           "type": "boost::optional<bool>",

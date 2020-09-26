@@ -62,8 +62,6 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const dogen::identification::entities::logical_provenance& provenance,
         const dogen::identification::entities::physical_name& name,
-        const bool enabled,
-        const bool overwrite,
         const boost::filesystem::path& file_path,
         const std::string& content,
         const dogen::physical::entities::path_properties& path_properties,
@@ -114,22 +112,6 @@ public:
     dogen::identification::entities::physical_name& name();
     void name(const dogen::identification::entities::physical_name& v);
     void name(const dogen::identification::entities::physical_name&& v);
-    /**@}*/
-
-    /**
-     * @brief If true, the artefact is enabled and its content will be computed.
-     */
-    /**@{*/
-    bool enabled() const;
-    void enabled(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the artefact will be expressed to the filesystem if there are changes.
-     */
-    /**@{*/
-    bool overwrite() const;
-    void overwrite(const bool v);
     /**@}*/
 
     /**
@@ -247,8 +229,6 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     dogen::identification::entities::logical_provenance provenance_;
     dogen::identification::entities::physical_name name_;
-    bool enabled_;
-    bool overwrite_;
     boost::filesystem::path file_path_;
     std::string content_;
     dogen::physical::entities::path_properties path_properties_;

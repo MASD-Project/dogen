@@ -81,7 +81,8 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
 
         physical::entities::operation op;
         using ot = physical::entities::operation_type;
-        op.type(a.overwrite() ? ot::write : ot::create_only);
+        const bool overwrite(a.enablement_properties().overwrite());
+        op.type(overwrite ? ot::write : ot::create_only);
         a.operation(op);
         return;
     }
@@ -108,7 +109,8 @@ void stitch_transform::apply(const model_to_text_transform& stock_transform,
 
     physical::entities::operation op;
     using ot = physical::entities::operation_type;
-    op.type(a.overwrite() ? ot::write : ot::create_only);
+    const bool overwrite(a.enablement_properties().overwrite());
+    op.type(overwrite ? ot::write : ot::create_only);
     a.operation(op);
 
     a.dependencies().push_back(stitch_template);
