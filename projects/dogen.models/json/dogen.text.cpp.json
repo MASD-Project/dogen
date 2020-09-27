@@ -3948,54 +3948,6 @@
       ]
     },
     {
-      "name": "transforms::types::archetype_kind_class_header_transform",
-      "documentation": "Generates header files for archetypes.\n",
-      "stereotypes": [
-        "masd::physical::archetype",
-        "dogen::header_facet_default_configuration"
-      ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype_kind",
-        "masd.wale.kvp.class.simple_name": "archetype_kind_class_header_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_header_transform",
-        "masd.wale.kvp.meta_element": "physical_archetype_kind",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.physical.postfix": "transform"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stitch_template_content",
-          "type": "",
-          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/io/shared_ptr_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.tracing/types/scoped_tracer.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/io/entities/element_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/io/entities/artefact_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/physical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/physical/archetype_kind.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/logical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> archetype_kind_class_header_transform_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid archetype_kind_class_header_transform_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    tracing::scoped_transform_tracer stp(lg, \"archetype kind class header\",\n        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);\n\n    assistant ast(ctx, e, archetype().meta_name(), true/*requires_header_guard*/, a);\n    const auto& o(ast.as<logical::entities::physical::archetype_kind>(e));\n\n    {\n        auto sbf(ast.make_scoped_boilerplate_formatter(o));\n        {\n            const auto ns(ast.make_namespaces(o.name()));\n            auto snf(ast.make_scoped_namespace_formatter(ns));\n#>\n\nclass <#= o.name().simple() #> final : public model_to_text_transform {\npublic:\n<#+\n        } // snf\n#>\n\n<#+\n    } // sbf\n    ast.update_artefact();\n    stp.end_transform(a);\n}\n\n#>\n"
-        }
-      ]
-    },
-    {
-      "name": "transforms::types::archetype_kind_class_implementation_transform",
-      "documentation": "Generates implementation files for archetypes.\n",
-      "stereotypes": [
-        "masd::physical::archetype",
-        "dogen::implementation_configuration"
-      ],
-      "tagged_values": {
-        "masd.physical.logical_meta_element_id": "dogen.logical.entities.physical_archetype_kind",
-        "masd.wale.kvp.class.simple_name": "archetype_kind_class_implementation_transform_transform",
-        "masd.wale.kvp.archetype.simple_name": "archetype_kind_class_implementation_transform",
-        "masd.wale.kvp.meta_element": "physical_archetype_kind",
-        "masd.wale.kvp.containing_namespace": "text.cpp.transforms.types",
-        "masd.physical.postfix": "transform"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "stitch_template_content",
-          "type": "",
-          "documentation": "<#@ masd.stitch.stream_variable_name=ast.stream() #>\n<#@ masd.stitch.containing_namespaces=dogen::text::cpp::transforms::types #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/io/shared_ptr_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.tracing/types/scoped_tracer.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/io/entities/element_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.physical/io/entities/artefact_io.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/formatting_error.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.utility/types/log/logger.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/physical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.logical/types/entities/physical/archetype_kind.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.identification/types/helpers/logical_meta_name_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/assistant.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_transform.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_factory.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/traits.hpp\" #>\n<#@ masd.stitch.inclusion_dependency=\"dogen.text.cpp/types/transforms/types/traits.hpp\" #>\n<#$ stitch.wale.template_instantiation_result #>\n<#+\n\nstd::list<std::string> archetype_kind_class_implementation_transform_transform::inclusion_dependencies(\n    const formattables::dependencies_builder_factory& /*f*/,\n    const logical::entities::element& /*e*/) const {\n    static std::list<std::string> r;\n    return r;\n}\n\nvoid archetype_kind_class_implementation_transform_transform::apply(const context& ctx, const logical::entities::element& e,\n    physical::entities::artefact& a) const {\n    tracing::scoped_transform_tracer stp(lg, \"archetype kind class implementation\",\n        transform_id, e.name().qualified().dot(), *ctx.tracer(), e);\n\n    assistant ast(ctx, e, archetype().meta_name(), false/*requires_header_guard*/, a);\n    ast.update_artefact();\n    stp.end_transform(a);\n}\n\n#>\n"
-        }
-      ]
-    },
-    {
       "name": "transforms::transformation_error",
       "documentation": "An error occurred whilst applying a transform.\n",
       "stereotypes": [

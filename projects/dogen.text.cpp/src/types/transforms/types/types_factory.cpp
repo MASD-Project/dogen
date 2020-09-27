@@ -54,14 +54,12 @@
 #include "dogen.text.cpp/types/transforms/types/part_class_implementation_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_factory.hpp"
-#include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
 namespace {
@@ -100,9 +98,7 @@ physical::entities::facet types_factory::make() {
     lambda(archetype_class_implementation_factory_factory::make());
     lambda(archetype_class_implementation_transform_factory::make());
     lambda(archetype_kind_class_header_factory_factory::make());
-    lambda(archetype_kind_class_header_transform_factory::make());
     lambda(archetype_kind_class_implementation_factory_factory::make());
-    lambda(archetype_kind_class_implementation_transform_factory::make());
     lambda(backend_class_header_factory_factory::make());
     lambda(backend_class_header_transform_factory::make());
     lambda(backend_class_implementation_factory_factory::make());
