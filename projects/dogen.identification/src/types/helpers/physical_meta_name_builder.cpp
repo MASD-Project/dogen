@@ -54,6 +54,12 @@ physical_meta_name_builder::backend(const std::string& s) {
 }
 
 physical_meta_name_builder&
+physical_meta_name_builder::part(const std::string& s) {
+    meta_name_.location().part(s);
+    return *this;
+}
+
+physical_meta_name_builder&
 physical_meta_name_builder::facet(const std::string& s) {
     meta_name_.location().facet(s);
     return *this;
@@ -67,23 +73,27 @@ physical_meta_name_builder::archetype(const std::string& s) {
 
 entities::physical_meta_name physical_meta_name_builder::build() {
     /*
-     * Meta-model is always hard-coded to MASD. FIXME: replace this
-     * when we implement this properly.
+     * Meta-model is always hard-coded to MASD.
      */
     auto& mn(meta_name_);
     auto& l(mn.location());
     l.meta_model(meta_model_name);
 
     /*
-     * Simple and qualified names depend on what has been filled in.
+     * Simple and qualified meta-names depend on what has been filled in.
      */
     const bool has_backend(!l.backend().empty());
+    const bool has_part(!l.part().empty());
     const bool has_facet(!l.facet().empty());
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
         mn.simple(l.archetype());
         mn.id(physical_meta_id_builder::build_archetype(l));
         physical_meta_name_validator::validate_archetype_name(mn);
+    } else if (has_part) {
+        mn.simple(l.part());
+        mn.id(physical_meta_id_builder::build_part(l));
+        physical_meta_name_validator::validate_part_name(mn);
     } else if (has_facet) {
         mn.simple(l.facet());
         mn.id(physical_meta_id_builder::build_facet(l));

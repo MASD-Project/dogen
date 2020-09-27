@@ -31,27 +31,32 @@
 namespace dogen::identification::helpers {
 
 /**
- * @brief Builds a physical name.
+ * @brief Builds a physical meta-name.
  */
 class physical_meta_name_builder final {
 public:
     /**
-     * @brief Adds a meta-model to the name.
+     * @brief Adds a meta-model to the meta-name.
      */
     physical_meta_name_builder& meta_model(const std::string& s);
 
     /**
-     * @brief Adds a backend to the name.
+     * @brief Adds a backend to the meta-name.
      */
     physical_meta_name_builder& backend(const std::string& s);
 
     /**
-     * @brief Adds a facet to the name.
+     * @brief Adds a part to the meta-name.
+     */
+    physical_meta_name_builder& part(const std::string& s);
+
+    /**
+     * @brief Adds a facet to the meta-name.
      */
     physical_meta_name_builder& facet(const std::string& s);
 
     /**
-     * @brief Adds an archetype to the name.
+     * @brief Adds an archetype to the meta-name.
      */
     physical_meta_name_builder& archetype(const std::string& s);
 

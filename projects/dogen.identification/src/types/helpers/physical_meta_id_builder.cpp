@@ -35,6 +35,7 @@ const std::string dot(".");
 
 const std::string empty_meta_model("Meta-model cannot be empty.");
 const std::string empty_backend("Backend cannot be empty.");
+const std::string empty_part("Part cannot be empty.");
 const std::string empty_facet("Facet cannot be empty.");
 const std::string empty_archetype(
     "Part and facet supplied but archetype is missing.");
@@ -77,6 +78,22 @@ build_backend(const entities::physical_meta_location& l) {
 entities::physical_meta_id physical_meta_id_builder::
 build_backend(const entities::physical_meta_name& mn) {
     return build_backend(mn.location());
+}
+
+entities::physical_meta_id physical_meta_id_builder::
+build_part(const entities::physical_meta_location& l) {
+    const auto& b(l.part());
+    if (b.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_part;
+        BOOST_THROW_EXCEPTION(building_error(empty_part));
+    }
+
+    return to_meta_id(build_meta_model(l).value() + dot + b);
+}
+
+entities::physical_meta_id physical_meta_id_builder::
+build_part(const entities::physical_meta_name& mn) {
+    return build_part(mn.location());
 }
 
 entities::physical_meta_id physical_meta_id_builder::

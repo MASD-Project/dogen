@@ -33,16 +33,16 @@
 namespace dogen::identification::helpers {
 
 /**
- * @brief Builds qualified names according to the geometry of physical
- * space.
+ * @brief Builds qualified meta-names according to the geometry of
+ * physical space.
  *
- * If the names and locations are not valid for the requests in
+ * If the meta-names and locations are not valid for the requests in
  * question, we throw.
  */
 class physical_meta_id_builder final {
 private:
     /**
-     * @brief Converts a plain string into an ID.
+     * @brief Converts a plain string into a physical meta-ID.
      */
     static entities::physical_meta_id to_meta_id(const std::string& s);
 
@@ -67,6 +67,17 @@ public:
     build_backend(const entities::physical_meta_location& l);
     static entities::physical_meta_id
     build_backend(const entities::physical_meta_name& n);
+    /**@}*/
+
+    /**
+     * @brief Builds a qualified name for the part region in
+     * physical space.
+     */
+    /**@{*/
+    static entities::physical_meta_id
+    build_part(const entities::physical_meta_location& l);
+    static entities::physical_meta_id
+    build_part(const entities::physical_meta_name& n);
     /**@}*/
 
     /**

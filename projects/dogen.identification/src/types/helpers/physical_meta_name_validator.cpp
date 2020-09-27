@@ -33,6 +33,7 @@ const std::string empty_simple("Simple name is empty.");
 const std::string empty_qualified("Qualified name is empty.");
 const std::string empty_meta_model("Meta-model name is empty.");
 const std::string empty_backend("Backend name is empty.");
+const std::string empty_part("Part name is empty.");
 const std::string empty_facet("Facet name is empty.");
 const std::string non_empty_backend("Backend name is not empty.");
 const std::string non_empty_facet("Facet name is not empty.");
@@ -116,9 +117,17 @@ validate_backend_name(const entities::physical_meta_name& mn) {
     common_validation(mn, false/*is_meta_model*/);
 
     /*
-     * Facet must not be populated.
+     * Backend must be populated.
      */
     const auto& l(mn.location());
+    if (l.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_backend;
+        BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+    }
+
+    /*
+     * Facet must not be populated.
+     */
     if (!l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << non_empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
@@ -134,13 +143,68 @@ validate_backend_name(const entities::physical_meta_name& mn) {
 }
 
 void physical_meta_name_validator::
+validate_part_name(const entities::physical_meta_name& mn) {
+    common_validation(mn, false/*is_meta_model*/);
+    /*
+     * Backend must be populated.
+     */
+    const auto& l(mn.location());
+    if (l.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_backend;
+        BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+    }
+
+    /*
+     * Part must be populated.
+     */
+    if (l.part().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_part;
+        BOOST_THROW_EXCEPTION(validation_error(empty_part));
+    }
+
+    /*
+     * Facet must not be populated.
+     */
+    if (!l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
+    }
+
+    /*
+     * Archetype must not be populated.
+     */
+    if (!l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
+    }
+}
+
+
+void physical_meta_name_validator::
 validate_facet_name(const entities::physical_meta_name& mn) {
     common_validation(mn, false/*is_meta_model*/);
 
     /*
-     * Facet must be populated.
+     * Backend must be populated.
      */
     const auto& l(mn.location());
+    if (l.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_backend;
+        BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+    }
+
+    /*
+     * Part must be populated. FIXME: disabled until part processing
+     * is implemented correctly.
+     */
+    if (l.part().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_part;
+        // BOOST_THROW_EXCEPTION(validation_error(empty_part));
+    }
+
+    /*
+     * Facet must be populated.
+     */
     if (l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(empty_facet));

@@ -39,7 +39,8 @@ namespace dogen::identification::helpers {
 class physical_meta_name_validator final {
 private:
     /**
-     * @brief Validation rules that are common to all types of names.
+     * @brief Validation rules that are common to all types of
+     * meta-names.
      */
     static void common_validation(const entities::physical_meta_name& mn,
         const bool is_meta_model);
@@ -55,6 +56,12 @@ public:
      * @brief Checks if the meta-name is valid as a backend name.
      */
     static void validate_backend_name(
+        const entities::physical_meta_name& mn);
+
+    /**
+     * @brief Checks if the name is valid as a facet name.
+     */
+    static void validate_part_name(
         const entities::physical_meta_name& mn);
 
     /**
