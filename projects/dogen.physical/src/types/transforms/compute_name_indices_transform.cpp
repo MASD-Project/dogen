@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.identification/io/entities/logical_meta_id_io.hpp"
@@ -79,9 +80,12 @@ update_physical_meta_names_by_logical_meta_name(const entities::archetype& arch,
         const std::string key(l.key() + ":" + l.value());
         const auto inserted(afl.insert(std::make_pair(key, qn)).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_archetype << qn;
-            BOOST_THROW_EXCEPTION(transform_exception(
-                    duplicate_label + qn.value()));
+            std::ostringstream os;
+            os << duplicate_archetype << key << " ID: " << qn.value();
+            const auto msg(os.str());
+
+            BOOST_LOG_SEV(lg, error) << msg;
+            BOOST_THROW_EXCEPTION(transform_exception(msg));
         }
         BOOST_LOG_SEV(lg, debug) << "Mapped label " << key << " to " << qn;
     }

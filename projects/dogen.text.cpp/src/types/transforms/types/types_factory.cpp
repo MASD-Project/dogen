@@ -34,6 +34,7 @@
 #include "dogen.text.cpp/types/transforms/types/class_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/feature_bundle_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/primitive_implementation_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/part_class_header_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/class_forward_declarations_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_header_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_header_transform_factory.hpp"
@@ -47,7 +48,9 @@
 #include "dogen.text.cpp/types/transforms/types/primitive_forward_declarations_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_header_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_header_transform_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/part_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_factory_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/archetype_kind_class_header_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/part_class_implementation_transform_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/backend_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/facet_class_implementation_transform_factory.hpp"
@@ -57,6 +60,7 @@
 #include "dogen.text.cpp/types/transforms/types/feature_template_bundle_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/variability_initializer_implementation_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_class_implementation_transform_factory.hpp"
+#include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_factory_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/archetype_kind_class_implementation_transform_factory.hpp"
 
 namespace dogen::text::cpp::transforms::types {
@@ -95,7 +99,9 @@ physical::entities::facet types_factory::make() {
     lambda(archetype_class_header_transform_factory::make());
     lambda(archetype_class_implementation_factory_factory::make());
     lambda(archetype_class_implementation_transform_factory::make());
+    lambda(archetype_kind_class_header_factory_factory::make());
     lambda(archetype_kind_class_header_transform_factory::make());
+    lambda(archetype_kind_class_implementation_factory_factory::make());
     lambda(archetype_kind_class_implementation_transform_factory::make());
     lambda(backend_class_header_factory_factory::make());
     lambda(backend_class_header_transform_factory::make());
@@ -117,7 +123,9 @@ physical::entities::facet types_factory::make() {
     lambda(feature_template_bundle_implementation_factory::make());
     lambda(main_factory::make());
     lambda(namespace_header_factory::make());
+    lambda(part_class_header_factory_factory::make());
     lambda(part_class_header_transform_factory::make());
+    lambda(part_class_implementation_factory_factory::make());
     lambda(part_class_implementation_transform_factory::make());
     lambda(primitive_forward_declarations_factory::make());
     lambda(primitive_header_factory::make());

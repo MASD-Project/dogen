@@ -144,11 +144,24 @@ struct traits {
     static std::string part_class_header_transform_archetype_sn();
 
     /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string part_class_header_factory_archetype_qn();
+    static std::string part_class_header_factory_archetype_sn();
+
+    /**
      * @brief Name of the archetype for the class implementation
      * archetype.
      */
     static std::string part_class_implementation_transform_archetype_qn();
     static std::string part_class_implementation_transform_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string part_class_implementation_factory_archetype_qn();
+    static std::string part_class_implementation_factory_archetype_sn();
 
     /**
      * @brief Name of the archetype for the class header archetype.
@@ -157,11 +170,24 @@ struct traits {
     static std::string archetype_kind_class_header_transform_archetype_sn();
 
     /**
+     * @brief Name of the archetype for the class header archetype.
+     */
+    static std::string archetype_kind_class_header_factory_archetype_qn();
+    static std::string archetype_kind_class_header_factory_archetype_sn();
+
+    /**
      * @brief Name of the archetype for the class implementation
      * archetype.
      */
     static std::string archetype_kind_class_implementation_transform_archetype_qn();
     static std::string archetype_kind_class_implementation_transform_archetype_sn();
+
+    /**
+     * @brief Name of the archetype for the class implementation
+     * archetype.
+     */
+    static std::string archetype_kind_class_implementation_factory_archetype_qn();
+    static std::string archetype_kind_class_implementation_factory_archetype_sn();
 
     /**
      * @brief Name of the forward declaration's archetype.
