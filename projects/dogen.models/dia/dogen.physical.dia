@@ -698,13 +698,13 @@ physical dimension of MASD conceptual space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="67,-106"/>
+        <dia:point val="62,-106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,-106.05;102.2,-100.75"/>
+        <dia:rectangle val="61.95,-106.05;97.2,-100.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="67,-106"/>
+        <dia:point val="62,-106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.149999999999999"/>
@@ -888,13 +888,13 @@ user choices.#</dia:string>
         <dia:point val="25,-106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,-106.05;62.51,-99.95"/>
+        <dia:rectangle val="24.95,-106.05;58.66,-99.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="25,-106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.460000000000001"/>
+        <dia:real val="33.609999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -999,7 +999,7 @@ space, and associated secondary technical spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Parts by part ID.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1022,7 +1022,7 @@ space, and associated secondary technical spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Facets by facet ID.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1045,7 +1045,7 @@ space, and associated secondary technical spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Archetypes by archetype ID.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1062,13 +1062,13 @@ space, and associated secondary technical spaces.#</dia:string>
             <dia:string>#archetype_kinds#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;identification::entities::physical_meta_id, archetype_kind&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, archetype_kind&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Archetype kinds by ID.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1680,13 +1680,13 @@ component in a backend.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="40,-114"/>
+        <dia:point val="39,-114"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,-114.05;74.43,-109.55"/>
+        <dia:rectangle val="38.95,-114.05;73.43,-109.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="40,-114"/>
+        <dia:point val="39,-114"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="34.380000000000003"/>
@@ -3006,17 +3006,17 @@ Used to obtain the default archetype for referencing.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="62.46,-100"/>
+        <dia:point val="58.61,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.71,-100.75;74.3475,-94.2488"/>
+        <dia:rectangle val="57.86,-100.75;74.3475,-94.2488"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="62.46,-100"/>
-        <dia:point val="62.46,-96"/>
+        <dia:point val="58.61,-100"/>
+        <dia:point val="58.61,-96"/>
         <dia:point val="74.1475,-96"/>
         <dia:point val="74.1475,-95.0488"/>
       </dia:attribute>
@@ -17400,19 +17400,19 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="62.46,-106"/>
+        <dia:point val="58.61,-106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.14,-109.65;63.21,-105.2"/>
+        <dia:rectangle val="56.14,-109.65;59.36,-105.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="62.46,-106"/>
-        <dia:point val="62.46,-108"/>
-        <dia:point val="57.19,-108"/>
-        <dia:point val="57.19,-109.6"/>
+        <dia:point val="58.61,-106"/>
+        <dia:point val="58.61,-108"/>
+        <dia:point val="56.19,-108"/>
+        <dia:point val="56.19,-109.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20733,19 +20733,19 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="67,-104.9"/>
+        <dia:point val="62,-104.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.41,-105.65;67.75,-100.9"/>
+        <dia:rectangle val="58.56,-105.65;62.75,-100.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67,-104.9"/>
-        <dia:point val="65,-104.9"/>
-        <dia:point val="65,-102.5"/>
-        <dia:point val="62.46,-102.5"/>
+        <dia:point val="62,-104.9"/>
+        <dia:point val="60,-104.9"/>
+        <dia:point val="60,-102.5"/>
+        <dia:point val="58.61,-102.5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

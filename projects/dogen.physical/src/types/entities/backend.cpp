@@ -30,7 +30,7 @@ backend::backend(
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part>& parts,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet>& facets,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype>& archetypes,
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& archetype_kinds)
+    const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& archetype_kinds)
     : directory_name_(directory_name),
       description_(description),
       meta_name_(meta_name),
@@ -181,19 +181,19 @@ void backend::archetypes(const std::unordered_map<dogen::identification::entitie
     archetypes_ = std::move(v);
 }
 
-const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() const {
+const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() const {
     return archetype_kinds_;
 }
 
-std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() {
+std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& backend::archetype_kinds() {
     return archetype_kinds_;
 }
 
-void backend::archetype_kinds(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>& v) {
+void backend::archetype_kinds(const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>& v) {
     archetype_kinds_ = v;
 }
 
-void backend::archetype_kinds(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind>&& v) {
+void backend::archetype_kinds(const std::unordered_map<std::string, dogen::physical::entities::archetype_kind>&& v) {
     archetype_kinds_ = std::move(v);
 }
 

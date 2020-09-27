@@ -98,19 +98,23 @@
       "attributes": [
         {
           "name": "parts",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, part>"
+          "type": "std::unordered_map<identification::entities::physical_meta_id, part>",
+          "documentation": "Parts by part ID.\n"
         },
         {
           "name": "facets",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, facet>"
+          "type": "std::unordered_map<identification::entities::physical_meta_id, facet>",
+          "documentation": "Facets by facet ID.\n"
         },
         {
           "name": "archetypes",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype>"
+          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype>",
+          "documentation": "Archetypes by archetype ID.\n"
         },
         {
           "name": "archetype_kinds",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, archetype_kind>"
+          "type": "std::unordered_map<std::string, archetype_kind>",
+          "documentation": "Archetype kinds by ID.\n"
         }
       ]
     },
