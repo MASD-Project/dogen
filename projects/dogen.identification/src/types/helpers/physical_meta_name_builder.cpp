@@ -76,12 +76,12 @@ entities::physical_meta_name physical_meta_name_builder::build() {
      * Meta-model is always hard-coded to MASD.
      */
     auto& mn(meta_name_);
-    auto& l(mn.location());
-    l.meta_model(meta_model_name);
+    mn.location().meta_model(meta_model_name);
 
     /*
      * Simple and qualified meta-names depend on what has been filled in.
      */
+    const auto& l(mn.location());
     const bool has_backend(!l.backend().empty());
     const bool has_part(!l.part().empty());
     const bool has_facet(!l.facet().empty());
@@ -90,14 +90,14 @@ entities::physical_meta_name physical_meta_name_builder::build() {
         mn.simple(l.archetype());
         mn.id(physical_meta_id_builder::build_archetype(l));
         physical_meta_name_validator::validate_archetype_name(mn);
-    } else if (has_part) {
-        mn.simple(l.part());
-        mn.id(physical_meta_id_builder::build_part(l));
-        physical_meta_name_validator::validate_part_name(mn);
     } else if (has_facet) {
         mn.simple(l.facet());
         mn.id(physical_meta_id_builder::build_facet(l));
         physical_meta_name_validator::validate_facet_name(mn);
+    } else if (has_part) {
+        mn.simple(l.part());
+        mn.id(physical_meta_id_builder::build_part(l));
+        physical_meta_name_validator::validate_part_name(mn);
     } else if (has_backend) {
         mn.simple(l.backend());
         mn.id(physical_meta_id_builder::build_backend(l));

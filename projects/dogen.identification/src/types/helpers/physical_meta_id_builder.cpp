@@ -82,13 +82,13 @@ build_backend(const entities::physical_meta_name& mn) {
 
 entities::physical_meta_id physical_meta_id_builder::
 build_part(const entities::physical_meta_location& l) {
-    const auto& b(l.part());
-    if (b.empty()) {
+    const auto& p(l.part());
+    if (p.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_part;
         BOOST_THROW_EXCEPTION(building_error(empty_part));
     }
 
-    return to_meta_id(build_meta_model(l).value() + dot + b);
+    return to_meta_id(build_backend(l).value() + dot + p);
 }
 
 entities::physical_meta_id physical_meta_id_builder::
