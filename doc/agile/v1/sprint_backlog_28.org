@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-26 Sat 07:38]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *13:02* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 13:02   |       |      | 100.0 |
-| Active                                             |         | 13:02 |      | 100.0 |
-| edit release notes for previous sprint             |         |       | 3:44 |  28.6 |
-| Create a demo and presentation for previous sprint |         |       | 0:39 |   5.0 |
-| Directory names and postfixes are PMM properties   |         |       | 5:27 |  41.8 |
-| Sprint and product backlog grooming                |         |       | 2:18 |  17.6 |
-| Rename =name= to =codec= name                      |         |       | 0:20 |   2.6 |
-| Add full and relative path processing to PM        |         |       | 0:34 |   4.3 |
+#+CAPTION: Clock summary at [2020-09-27 Sun 13:59]
+| <75>                                                        |         |       |      |       |
+| Headline                                                    | Time    |       |      |     % |
+|-------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                | *16:31* |       |      | 100.0 |
+|-------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                     | 16:31   |       |      | 100.0 |
+| Active                                                      |         | 16:31 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |  22.6 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   3.9 |
+| Sprint and product backlog grooming                         |         |       | 2:18 |  13.9 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  33.0 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.9 |
+| Rename =name= to =codec= name                               |         |       | 0:20 |   2.0 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |  14.8 |
+| Create a factory transform for parts and archetype kinds    |         |       | 1:17 |   7.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -196,6 +198,17 @@ Time spent creating the demo and presentation.
 ***** Create an identification model
 ***** Rename injection to codec
 ***** The logical-physical space
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-26 Sat 07:25]--[2020-09-26 Sat 07:38] =>  0:13
+    CLOCK: [2020-09-25 Fri 14:41]--[2020-09-25 Fri 15:35] =>  0:54
+    CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
+    CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
+    CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
+    :END:
+
+Updates to sprint and product backlog.
+
 *** COMPLETED Refactor archetype model                                :story:
     CLOSED: [2020-09-24 Thu 20:34]
 
@@ -321,16 +334,14 @@ Notes:
   archetypes and also as a variability knob. The part does not have
   these use cases.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Move =enabled= and =overwrite= into =enablement_properties= :story:
+    CLOSED: [2020-09-26 Sat 13:31]
     :LOGBOOK:
-    CLOCK: [2020-09-26 Sat 07:25]--[2020-09-26 Sat 07:38] =>  0:13
-    CLOCK: [2020-09-25 Fri 14:41]--[2020-09-25 Fri 15:35] =>  0:54
-    CLOCK: [2020-09-25 Fri 09:35]--[2020-09-25 Fri 09:45] =>  0:10
-    CLOCK: [2020-09-25 Fri 08:30]--[2020-09-25 Fri 08:42] =>  0:12
-    CLOCK: [2020-09-24 Thu 19:45]--[2020-09-24 Thu 20:34] =>  0:49
+    CLOCK: [2020-09-26 Sat 13:12]--[2020-09-26 Sat 13:31] =>  0:19
     :END:
 
-Updates to sprint and product backlog.
+Since we already have a class for it, it seems to make more sense than
+to have these attributes in the archetype itself.
 
 *** STARTED Rename =name= to =codec= name                             :story:
     :LOGBOOK:
@@ -345,6 +356,11 @@ Notes:
 
 *** STARTED Add full and relative path processing to PM               :story:
     :LOGBOOK:
+    CLOCK: [2020-09-26 Sat 15:43]--[2020-09-26 Sat 16:05] =>  0:22
+    CLOCK: [2020-09-26 Sat 15:23]--[2020-09-26 Sat 15:31] =>  0:08
+    CLOCK: [2020-09-26 Sat 14:35]--[2020-09-26 Sat 15:13] =>  0:48
+    CLOCK: [2020-09-26 Sat 13:32]--[2020-09-26 Sat 14:00] =>  0:28
+    CLOCK: [2020-09-26 Sat 12:55]--[2020-09-26 Sat 13:12] =>  0:17
     CLOCK: [2020-09-25 Fri 09:00]--[2020-09-25 Fri 09:34] =>  0:34
     :END:
 
@@ -372,6 +388,9 @@ Notes:
   part in variability. It is not clear we have support for this in the
   template instantiation domains - we probably only have backend,
   facet, archetype.
+- guiding principle: there should be a direct mapping between the two
+  hierarchical spaces: the definition meta-model of the physical space
+  and its instances in the file-system.
 
 Merged stories:
 
@@ -385,20 +404,29 @@ clear. We need a container with:
 - archetype ID
 - labels
 
-*** Create a factory transform for parts and archetype kinds          :story:
+*** STARTED Create a factory transform for parts and archetype kinds  :story:
+    :LOGBOOK:
+    CLOCK: [2020-09-27 Sun 13:50]--[2020-09-27 Sun 13:59] =>  0:09
+    CLOCK: [2020-09-27 Sun 13:26]--[2020-09-27 Sun 13:40] =>  0:14
+    CLOCK: [2020-09-27 Sun 12:31]--[2020-09-27 Sun 13:25] =>  0:54
+    :END:
 
 - integrate their generation into PMM chains.
+
+Notes:
+
+- it does not make a lot of sense to have an archetype kind
+  transform. That is, as with TSs, archetype kinds only provide
+  attributes (e.g. data) about physical space, but they won't be
+  expressed as actual physical elements. Parts however are connected
+  to the transforms; they will in the future be used as part of the
+  transform chain.
 
 *** Allow arbitrary physical containment                              :story:
 
 We need to allow archetypes to be contained by any physical element,
 except for archetypes. We also need to allow facets to belong to any
 physical element other than facets.
-
-*** Move =enabled= and =overwrite= into =enablement_properties=       :story:
-
-Since we already have a class for it, it seems to make more sense than
-to have these attributes in the archetype itself.
 
 *** Add descriptions to PMM elements                                  :story:
 
@@ -683,6 +711,12 @@ the text models and should be part of the PM. The TS should be
 declared on the "global" text model so that backends can reuse them
 (e.g. we can declare XML with associated extensions and then use it
 where required).
+
+Notes:
+
+- TS should also have a physical name. However, they are not
+  associated with a backend. Actually they don't need a physical name
+  but they need some kind of identification.
 
 *** Improve support for references                                    :story:
 
