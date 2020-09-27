@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-09-27 Sun 13:59]
+#+CAPTION: Clock summary at [2020-09-27 Sun 16:56]
 | <75>                                                        |         |       |      |       |
 | Headline                                                    | Time    |       |      |     % |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                | *16:31* |       |      | 100.0 |
+| *Total time*                                                | *18:59* |       |      | 100.0 |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                     | 16:31   |       |      | 100.0 |
-| Active                                                      |         | 16:31 |      | 100.0 |
-| edit release notes for previous sprint                      |         |       | 3:44 |  22.6 |
-| Create a demo and presentation for previous sprint          |         |       | 0:39 |   3.9 |
-| Sprint and product backlog grooming                         |         |       | 2:18 |  13.9 |
-| Directory names and postfixes are PMM properties            |         |       | 5:27 |  33.0 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.9 |
-| Rename =name= to =codec= name                               |         |       | 0:20 |   2.0 |
-| Add full and relative path processing to PM                 |         |       | 2:27 |  14.8 |
-| Create a factory transform for parts and archetype kinds    |         |       | 1:17 |   7.8 |
+| Stories                                                     | 18:59   |       |      | 100.0 |
+| Active                                                      |         | 18:59 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |  19.7 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   3.4 |
+| Sprint and product backlog grooming                         |         |       | 2:18 |  12.1 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  28.7 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.7 |
+| Rename =name= to =codec= name                               |         |       | 0:20 |   1.8 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |  12.9 |
+| Create a factory transform for parts and archetype kinds    |         |       | 3:45 |  19.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -406,6 +406,7 @@ clear. We need a container with:
 
 *** STARTED Create a factory transform for parts and archetype kinds  :story:
     :LOGBOOK:
+    CLOCK: [2020-09-27 Sun 14:28]--[2020-09-27 Sun 16:56] =>  2:28
     CLOCK: [2020-09-27 Sun 13:50]--[2020-09-27 Sun 13:59] =>  0:09
     CLOCK: [2020-09-27 Sun 13:26]--[2020-09-27 Sun 13:40] =>  0:14
     CLOCK: [2020-09-27 Sun 12:31]--[2020-09-27 Sun 13:25] =>  0:54
@@ -421,6 +422,11 @@ Notes:
   expressed as actual physical elements. Parts however are connected
   to the transforms; they will in the future be used as part of the
   transform chain.
+- do we instantiate template domains over parts? We need to do so in
+  order to support directory overrides. The problem is that in order
+  for the part to become part of the topology of physical space, we
+  now need to make sure we can still convert archetypes into facets. A
+  lot of the code is going to break once we add path.
 
 *** Allow arbitrary physical containment                              :story:
 
