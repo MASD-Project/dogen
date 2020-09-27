@@ -117,6 +117,7 @@ ast.stream() << "physical::entities::part " << sn << "::make() {" << std::endl;
 ast.stream() << "    identification::helpers::physical_meta_name_builder b;" << std::endl;
 ast.stream() << "    b.meta_model(\"" << part.meta_model_name() << "\");" << std::endl;
 ast.stream() << "    b.backend(\"" << part.backend_name() << "\");" << std::endl;
+ast.stream() << "    b.part(\"" << part.name().simple() << "\");" << std::endl;
 ast.stream() << std::endl;
 ast.stream() << "    physical::entities::part r;" << std::endl;
 ast.stream() << "    r.meta_name(b.build());" << std::endl;

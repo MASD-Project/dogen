@@ -61,7 +61,7 @@ const std::string enable_backend_directories_feature(
 const std::string root_module_not_found("Could not find root module: ");
 const std::string backend_not_found("Could not find backend: ");
 const std::string facet_not_found("Could not find facet: ");
-const std::string part_not_found("Could not find facet: ");
+const std::string part_not_found("Could not find part: ");
 const std::string archetype_not_found("Could not find archetype: ");
 const std::string duplicate_backend("Duplicate backend: ");
 
@@ -402,19 +402,20 @@ void meta_model_properties_transform::compute_directory_names_and_postfixes(
              compute_postfix(fct, fctp);
         }
 
-        for (auto& pair : be.parts()) {
-            const auto& pid(pair.first);
-            const auto k(mmp.part_properties().find(pid));
-            if (k == mmp.part_properties().end()) {
-                BOOST_LOG_SEV(lg, error) << facet_not_found << pid;
-                BOOST_THROW_EXCEPTION(
-                    transform_exception(part_not_found + pid.value()));
-            }
+        // FIXME
+        // for (auto& pair : be.parts()) {
+        //     const auto& pid(pair.first);
+        //     const auto k(mmp.part_properties().find(pid));
+        //     if (k == mmp.part_properties().end()) {
+        //         BOOST_LOG_SEV(lg, error) << facet_not_found << pid;
+        //         BOOST_THROW_EXCEPTION(
+        //             transform_exception(part_not_found + pid.value()));
+        //     }
 
-            auto& prtp(k->second);
-            const auto& prt(pair.second);
-            compute_directory_name(prt, prtp);
-        }
+        //     auto& prtp(k->second);
+        //     const auto& prt(pair.second);
+        //     compute_directory_name(prt, prtp);
+        // }
     }
 }
 

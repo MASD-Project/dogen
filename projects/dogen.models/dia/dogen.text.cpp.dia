@@ -51860,6 +51860,9 @@ std::list&lt;std::string&gt; backend_class_implementation_factory_transform::inc
     const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
     builder.add(be.archetype_kinds(), ak_ch_arch);
 
+    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
+    builder.add(be.parts(), part_ch_arch);
+
     builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
@@ -51950,6 +51953,28 @@ physical::entities::backend &lt;#= sn #&gt;::make() {
                 for (const auto&amp; n : be.archetype_kinds()) {
 #&gt;
     ak_inserter(&lt;#= n.simple() #&gt;_factory::make());
+&lt;#+
+                }
+            }
+
+            if (!be.parts().empty()) {
+#&gt;
+
+    const auto part_inserter([&amp;](const auto&amp; part) {
+        const auto id(part.meta_name().id());
+        const auto pair(std::make_pair(id, part));
+        const auto inserted(r.parts().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate part: ");
+            BOOST_LOG_SEV(lg, error) &lt;&lt; duplicate_facet &lt;&lt; id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
+        }
+    });
+&lt;#+
+                for (const auto&amp; n : be.parts()) {
+#&gt;
+    part_inserter(&lt;#= n.simple() #&gt;_factory::make());
 &lt;#+
                 }
             }
@@ -52656,6 +52681,7 @@ physical::entities::part &lt;#= sn #&gt;::make() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("&lt;#= part.meta_model_name() #&gt;");
     b.backend("&lt;#= part.backend_name() #&gt;");
+    b.part("&lt;#= part.name().simple() #&gt;");
 
     physical::entities::part r;
     r.meta_name(b.build());

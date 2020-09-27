@@ -89,6 +89,9 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
     builder.add(be.archetype_kinds(), ak_ch_arch);
 
+    const auto part_ch_arch(traits::part_class_header_factory_archetype_qn());
+    builder.add(be.parts(), part_ch_arch);
+
     builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
     builder.add_as_user("dogen.utility/types/log/logger.hpp");
@@ -166,6 +169,24 @@ ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
                 for (const auto& n : be.archetype_kinds()) {
 ast.stream() << "    ak_inserter(" << n.simple() << "_factory::make());" << std::endl;
+                }
+            }
+
+            if (!be.parts().empty()) {
+ast.stream() << std::endl;
+ast.stream() << "    const auto part_inserter([&](const auto& part) {" << std::endl;
+ast.stream() << "        const auto id(part.meta_name().id());" << std::endl;
+ast.stream() << "        const auto pair(std::make_pair(id, part));" << std::endl;
+ast.stream() << "        const auto inserted(r.parts().insert(pair).second);" << std::endl;
+ast.stream() << "        if (!inserted) {" << std::endl;
+ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
+ast.stream() << "            const std::string duplicate_facet(\"Duplicate part: \");" << std::endl;
+ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    });" << std::endl;
+                for (const auto& n : be.parts()) {
+ast.stream() << "    part_inserter(" << n.simple() << "_factory::make());" << std::endl;
                 }
             }
 ast.stream() << "    return r;" << std::endl;

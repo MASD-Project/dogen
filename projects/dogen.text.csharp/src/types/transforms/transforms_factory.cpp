@@ -24,6 +24,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.csharp/types/transforms/transforms_factory.hpp"
 #include "dogen.text.csharp/types/transforms/types/types_factory.hpp"
+#include "dogen.text.csharp/types/transforms/implementation_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.csharp/types/transforms/test_data/test_data_factory.hpp"
 #include "dogen.text.csharp/types/transforms/visual_studio/visual_studio_factory.hpp"
@@ -61,6 +62,19 @@ physical::entities::backend transforms_factory::make() {
     fct_inserter(test_data::test_data_factory::make());
     fct_inserter(types::types_factory::make());
     fct_inserter(visual_studio::visual_studio_factory::make());
+
+    const auto part_inserter([&](const auto& part) {
+        const auto id(part.meta_name().id());
+        const auto pair(std::make_pair(id, part));
+        const auto inserted(r.parts().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate part: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
+        }
+    });
+    part_inserter(implementation_factory::make());
     return r;
 }
 

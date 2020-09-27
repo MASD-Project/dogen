@@ -21,13 +21,18 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.text.cpp/types/transforms/io/io_factory.hpp"
 #include "dogen.text.cpp/types/transforms/odb/odb_factory.hpp"
+#include "dogen.text.cpp/types/transforms/project_factory.hpp"
+#include "dogen.text.cpp/types/transforms/testing_factory.hpp"
 #include "dogen.text/types/transforms/transformation_error.hpp"
 #include "dogen.text.cpp/types/transforms/hash/hash_factory.hpp"
+#include "dogen.text.cpp/types/transforms/templating_factory.hpp"
 #include "dogen.text.cpp/types/transforms/transforms_factory.hpp"
 #include "dogen.text.cpp/types/transforms/build/build_factory.hpp"
 #include "dogen.text.cpp/types/transforms/tests/tests_factory.hpp"
 #include "dogen.text.cpp/types/transforms/types/types_factory.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
+#include "dogen.text.cpp/types/transforms/implementation_factory.hpp"
+#include "dogen.text.cpp/types/transforms/public_headers_factory.hpp"
 #include "dogen.text.cpp/types/transforms/templates/templates_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_factory.hpp"
 #include "dogen.text.cpp/types/transforms/standard_header_file_factory.hpp"
@@ -89,6 +94,23 @@ physical::entities::backend transforms_factory::make() {
         }
     });
     ak_inserter(standard_header_file_factory::make());
+
+    const auto part_inserter([&](const auto& part) {
+        const auto id(part.meta_name().id());
+        const auto pair(std::make_pair(id, part));
+        const auto inserted(r.parts().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate part: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + id.value()));
+        }
+    });
+    part_inserter(implementation_factory::make());
+    part_inserter(project_factory::make());
+    part_inserter(public_headers_factory::make());
+    part_inserter(templating_factory::make());
+    part_inserter(testing_factory::make());
     return r;
 }
 

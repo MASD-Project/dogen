@@ -36,6 +36,7 @@ physical::entities::part public_headers_factory::make() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("cpp");
+    b.part("public_headers");
 
     physical::entities::part r;
     r.meta_name(b.build());

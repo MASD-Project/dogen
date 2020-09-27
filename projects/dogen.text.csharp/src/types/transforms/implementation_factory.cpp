@@ -36,6 +36,7 @@ physical::entities::part implementation_factory::make() {
     identification::helpers::physical_meta_name_builder b;
     b.meta_model("masd");
     b.backend("csharp");
+    b.part("implementation");
 
     physical::entities::part r;
     r.meta_name(b.build());
