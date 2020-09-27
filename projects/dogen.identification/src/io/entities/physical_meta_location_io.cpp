@@ -37,6 +37,7 @@ std::ostream& operator<<(std::ostream& s, const physical_meta_location& v) {
       << "\"__type__\": " << "\"dogen::identification::entities::physical_meta_location\"" << ", "
       << "\"meta_model\": " << "\"" << tidy_up_string(v.meta_model()) << "\"" << ", "
       << "\"backend\": " << "\"" << tidy_up_string(v.backend()) << "\"" << ", "
+      << "\"part\": " << "\"" << tidy_up_string(v.part()) << "\"" << ", "
       << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "
       << "\"archetype\": " << "\"" << tidy_up_string(v.archetype()) << "\""
       << " }";

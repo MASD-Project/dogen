@@ -48,6 +48,7 @@ public:
     physical_meta_location(
         const std::string& meta_model,
         const std::string& backend,
+        const std::string& part,
         const std::string& facet,
         const std::string& archetype);
 
@@ -65,7 +66,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the backend that owns this field, if any.
+     * @brief Name of the backend where this element is located, if any.
      */
     /**@{*/
     const std::string& backend() const;
@@ -75,7 +76,17 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the facet that owns this field, if any.
+     * @brief Name of the part where this element is located, if any.
+     */
+    /**@{*/
+    const std::string& part() const;
+    std::string& part();
+    void part(const std::string& v);
+    void part(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the facet where this element is located, if any.
      */
     /**@{*/
     const std::string& facet() const;
@@ -85,7 +96,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the archetype that owns this field, if any.
+     * @brief Name of the archetype for this element, if applicable.
      */
     /**@{*/
     const std::string& archetype() const;
@@ -107,6 +118,7 @@ public:
 private:
     std::string meta_model_;
     std::string backend_;
+    std::string part_;
     std::string facet_;
     std::string archetype_;
 };

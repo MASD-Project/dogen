@@ -2832,7 +2832,7 @@ supported technical spaces, using the entire name structure.#</dia:string>
         <dia:point val="56,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.95,12.95;66.97,18.25"/>
+        <dia:rectangle val="55.95,12.95;66.97,19.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="56,13"/>
@@ -2841,7 +2841,7 @@ supported technical spaces, using the entire name structure.#</dia:string>
         <dia:real val="10.92"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#physical_meta_location#</dia:string>
@@ -2971,7 +2971,30 @@ The meta-model is always expected to be  @e masd.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the backend that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the backend where this element is located, if any.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#part#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name of the part where this element is located, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2994,7 +3017,7 @@ The meta-model is always expected to be  @e masd.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the facet that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the facet where this element is located, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3017,7 +3040,7 @@ The meta-model is always expected to be  @e masd.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the archetype that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the archetype for this element, if applicable.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3243,7 +3266,7 @@ can only have one and only one name.#</dia:string>
         <dia:point val="58.6025,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="57.8525,18.15;61.66,22.8"/>
+        <dia:rectangle val="57.8525,18.95;61.66,22.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3252,7 +3275,7 @@ can only have one and only one name.#</dia:string>
         <dia:point val="58.6025,22"/>
         <dia:point val="58.6025,20"/>
         <dia:point val="61.46,20"/>
-        <dia:point val="61.46,18.2"/>
+        <dia:point val="61.46,19"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

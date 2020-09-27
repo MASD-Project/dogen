@@ -25,10 +25,12 @@ namespace dogen::identification::entities {
 physical_meta_location::physical_meta_location(
     const std::string& meta_model,
     const std::string& backend,
+    const std::string& part,
     const std::string& facet,
     const std::string& archetype)
     : meta_model_(meta_model),
       backend_(backend),
+      part_(part),
       facet_(facet),
       archetype_(archetype) { }
 
@@ -36,6 +38,7 @@ void physical_meta_location::swap(physical_meta_location& other) noexcept {
     using std::swap;
     swap(meta_model_, other.meta_model_);
     swap(backend_, other.backend_);
+    swap(part_, other.part_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
@@ -43,6 +46,7 @@ void physical_meta_location::swap(physical_meta_location& other) noexcept {
 bool physical_meta_location::operator==(const physical_meta_location& rhs) const {
     return meta_model_ == rhs.meta_model_ &&
         backend_ == rhs.backend_ &&
+        part_ == rhs.part_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
 }
@@ -83,6 +87,22 @@ void physical_meta_location::backend(const std::string& v) {
 
 void physical_meta_location::backend(const std::string&& v) {
     backend_ = std::move(v);
+}
+
+const std::string& physical_meta_location::part() const {
+    return part_;
+}
+
+std::string& physical_meta_location::part() {
+    return part_;
+}
+
+void physical_meta_location::part(const std::string& v) {
+    part_ = v;
+}
+
+void physical_meta_location::part(const std::string&& v) {
+    part_ = std::move(v);
 }
 
 const std::string& physical_meta_location::facet() const {

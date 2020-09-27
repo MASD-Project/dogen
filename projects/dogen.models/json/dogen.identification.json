@@ -324,17 +324,22 @@
         {
           "name": "backend",
           "type": "std::string",
-          "documentation": "Name of the backend that owns this field, if any.\n"
+          "documentation": "Name of the backend where this element is located, if any.\n"
+        },
+        {
+          "name": "part",
+          "type": "std::string",
+          "documentation": "Name of the part where this element is located, if any.\n"
         },
         {
           "name": "facet",
           "type": "std::string",
-          "documentation": "Name of the facet that owns this field, if any.\n"
+          "documentation": "Name of the facet where this element is located, if any.\n"
         },
         {
           "name": "archetype",
           "type": "std::string",
-          "documentation": "Name of the archetype that owns this field, if any.\n"
+          "documentation": "Name of the archetype for this element, if applicable.\n"
         }
       ]
     },
