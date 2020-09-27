@@ -360,7 +360,8 @@ directive_group_repository_factory::make(const feature_group& fg,
 
         const auto i(afmt.find(mt));
         if (i == afmt.end() || i->second.empty()) {
-            BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
+            BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id
+                                     << " meta-type: " << mt.value();
             continue;
         }
         compute_directives(fg, e, i->second, l, r);

@@ -45,7 +45,7 @@ physical::entities::backend transforms_factory::make() {
     r.meta_name(b.build());
     r.directory_name("cs");
 
-    const auto lambda([&](const auto& fct) {
+    const auto fct_inserter([&](const auto& fct) {
         const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
@@ -57,10 +57,10 @@ physical::entities::backend transforms_factory::make() {
         }
     });
 
-    lambda(io::io_factory::make());
-    lambda(test_data::test_data_factory::make());
-    lambda(types::types_factory::make());
-    lambda(visual_studio::visual_studio_factory::make());
+    fct_inserter(io::io_factory::make());
+    fct_inserter(test_data::test_data_factory::make());
+    fct_inserter(types::types_factory::make());
+    fct_inserter(visual_studio::visual_studio_factory::make());
     return r;
 }
 

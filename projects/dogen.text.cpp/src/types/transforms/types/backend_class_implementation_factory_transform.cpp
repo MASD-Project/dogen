@@ -83,8 +83,11 @@ std::list<std::string> backend_class_implementation_factory_transform::inclusion
     const auto be_ch_arch(traits::backend_class_header_factory_archetype_qn());
     builder.add(be.name(), be_ch_arch);
 
-    const auto ch_arch(traits::facet_class_header_factory_archetype_qn());
-    builder.add(be.facets(), ch_arch);
+    const auto fct_ch_arch(traits::facet_class_header_factory_archetype_qn());
+    builder.add(be.facets(), fct_ch_arch);
+
+    const auto ak_ch_arch(traits::archetype_kind_class_header_factory_archetype_qn());
+    builder.add(be.archetype_kinds(), ak_ch_arch);
 
     builder.add_as_user("dogen.identification/io/entities/physical_meta_id_io.hpp");
     builder.add_as_user("dogen.identification/types/helpers/physical_meta_name_builder.hpp");
@@ -128,8 +131,10 @@ ast.stream() << "    r.directory_name(\"" << be.directory_name() << "\");" << st
             for(const auto& l : be.labels()) {
 ast.stream() << "    r.labels().push_back(identification::entities::label(\"" << l.key() << "\", \"" << l.value() << "\"));" << std::endl;
             }
+
+            if (!be.facets().empty()) {
 ast.stream() << std::endl;
-ast.stream() << "    const auto lambda([&](const auto& fct) {" << std::endl;
+ast.stream() << "    const auto fct_inserter([&](const auto& fct) {" << std::endl;
 ast.stream() << "        const auto id(fct.meta_name().id());" << std::endl;
 ast.stream() << "        const auto pair(std::make_pair(id, fct));" << std::endl;
 ast.stream() << "        const auto inserted(r.facets().insert(pair).second);" << std::endl;
@@ -141,8 +146,27 @@ ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicat
 ast.stream() << "        }" << std::endl;
 ast.stream() << "    });" << std::endl;
 ast.stream() << std::endl;
-            for (const auto& n : be.facets()) {
-ast.stream() << "    lambda(" << n.simple() << "::" << n.simple() << "_factory::make());" << std::endl;
+                for (const auto& n : be.facets()) {
+                    // Bit of a hack: facets work as namespaces.
+ast.stream() << "    fct_inserter(" << n.simple() << "::" << n.simple() << "_factory::make());" << std::endl;
+                }
+            }
+
+            if (!be.archetype_kinds().empty()) {
+ast.stream() << std::endl;
+ast.stream() << "    const auto ak_inserter([&](const auto& ak) {" << std::endl;
+ast.stream() << "        const auto pair(std::make_pair(ak.id(), ak));" << std::endl;
+ast.stream() << "        const auto inserted(r.archetype_kinds().insert(pair).second);" << std::endl;
+ast.stream() << "        if (!inserted) {" << std::endl;
+ast.stream() << "            using text::transforms::transformation_error;" << std::endl;
+ast.stream() << "            const std::string duplicate_facet(\"Duplicate archetype kind: \");" << std::endl;
+ast.stream() << "            BOOST_LOG_SEV(lg, error) << duplicate_facet << ak.id();" << std::endl;
+ast.stream() << "            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + ak.id()));" << std::endl;
+ast.stream() << "        }" << std::endl;
+ast.stream() << "    });" << std::endl;
+                for (const auto& n : be.archetype_kinds()) {
+ast.stream() << "    ak_inserter(" << n.simple() << "_factory::make());" << std::endl;
+                }
             }
 ast.stream() << "    return r;" << std::endl;
 ast.stream() << "}" << std::endl;

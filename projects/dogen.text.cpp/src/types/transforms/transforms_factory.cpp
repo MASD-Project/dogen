@@ -30,6 +30,7 @@
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.text.cpp/types/transforms/templates/templates_factory.hpp"
 #include "dogen.text.cpp/types/transforms/test_data/test_data_factory.hpp"
+#include "dogen.text.cpp/types/transforms/standard_header_file_factory.hpp"
 #include "dogen.identification/types/helpers/physical_meta_name_builder.hpp"
 #include "dogen.text.cpp/types/transforms/lexical_cast/lexical_cast_factory.hpp"
 #include "dogen.text.cpp/types/transforms/serialization/serialization_factory.hpp"
@@ -53,7 +54,7 @@ physical::entities::backend transforms_factory::make() {
     r.directory_name("cpp");
     r.labels().push_back(identification::entities::label("test", "lbl"));
 
-    const auto lambda([&](const auto& fct) {
+    const auto fct_inserter([&](const auto& fct) {
         const auto id(fct.meta_name().id());
         const auto pair(std::make_pair(id, fct));
         const auto inserted(r.facets().insert(pair).second);
@@ -65,17 +66,29 @@ physical::entities::backend transforms_factory::make() {
         }
     });
 
-    lambda(build::build_factory::make());
-    lambda(hash::hash_factory::make());
-    lambda(io::io_factory::make());
-    lambda(lexical_cast::lexical_cast_factory::make());
-    lambda(odb::odb_factory::make());
-    lambda(serialization::serialization_factory::make());
-    lambda(templates::templates_factory::make());
-    lambda(test_data::test_data_factory::make());
-    lambda(tests::tests_factory::make());
-    lambda(types::types_factory::make());
-    lambda(visual_studio::visual_studio_factory::make());
+    fct_inserter(build::build_factory::make());
+    fct_inserter(hash::hash_factory::make());
+    fct_inserter(io::io_factory::make());
+    fct_inserter(lexical_cast::lexical_cast_factory::make());
+    fct_inserter(odb::odb_factory::make());
+    fct_inserter(serialization::serialization_factory::make());
+    fct_inserter(templates::templates_factory::make());
+    fct_inserter(test_data::test_data_factory::make());
+    fct_inserter(tests::tests_factory::make());
+    fct_inserter(types::types_factory::make());
+    fct_inserter(visual_studio::visual_studio_factory::make());
+
+    const auto ak_inserter([&](const auto& ak) {
+        const auto pair(std::make_pair(ak.id(), ak));
+        const auto inserted(r.archetype_kinds().insert(pair).second);
+        if (!inserted) {
+            using text::transforms::transformation_error;
+            const std::string duplicate_facet("Duplicate archetype kind: ");
+            BOOST_LOG_SEV(lg, error) << duplicate_facet << ak.id();
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_facet + ak.id()));
+        }
+    });
+    ak_inserter(standard_header_file_factory::make());
     return r;
 }
 
