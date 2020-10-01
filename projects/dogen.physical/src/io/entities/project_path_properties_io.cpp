@@ -47,7 +47,6 @@ std::ostream& operator<<(std::ostream& s, const project_path_properties& v) {
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(v.header_file_extension()) << "\"" << ", "
       << "\"implementation_file_extension\": " << "\"" << tidy_up_string(v.implementation_file_extension()) << "\"" << ", "
-      << "\"backend_directory_name\": " << "\"" << tidy_up_string(v.backend_directory_name()) << "\"" << ", "
       << "\"tests_directory_name\": " << "\"" << tidy_up_string(v.tests_directory_name()) << "\"" << ", "
       << "\"templates_directory_name\": " << "\"" << tidy_up_string(v.templates_directory_name()) << "\"" << ", "
       << "\"templates_file_extension\": " << "\"" << tidy_up_string(v.templates_file_extension()) << "\"" << ", "

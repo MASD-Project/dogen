@@ -165,10 +165,6 @@ obtain_project_path_properties(const variability::entities::feature_model& fm,
     r.disable_facet_directories(scfg.disable_facet_directories);
     r.header_file_extension(scfg.header_file_extension);
     r.implementation_file_extension(scfg.implementation_file_extension);
-
-    // FIXME: backend dir name
-    // r.backend_directory_name(scfg.)
-
     r.tests_directory_name(scfg.tests_directory_name);
     r.templates_directory_name(scfg.templates_directory_name);
     r.templates_file_extension(scfg.templates_file_extension);

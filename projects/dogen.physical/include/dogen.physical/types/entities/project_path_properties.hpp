@@ -49,7 +49,6 @@ public:
         const bool disable_facet_directories,
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
-        const std::string& backend_directory_name,
         const std::string& tests_directory_name,
         const std::string& templates_directory_name,
         const std::string& templates_file_extension,
@@ -80,11 +79,6 @@ public:
     std::string& implementation_file_extension();
     void implementation_file_extension(const std::string& v);
     void implementation_file_extension(const std::string&& v);
-
-    const std::string& backend_directory_name() const;
-    std::string& backend_directory_name();
-    void backend_directory_name(const std::string& v);
-    void backend_directory_name(const std::string&& v);
 
     const std::string& tests_directory_name() const;
     std::string& tests_directory_name();
@@ -138,7 +132,6 @@ private:
     bool disable_facet_directories_;
     std::string header_file_extension_;
     std::string implementation_file_extension_;
-    std::string backend_directory_name_;
     std::string tests_directory_name_;
     std::string templates_directory_name_;
     std::string templates_file_extension_;

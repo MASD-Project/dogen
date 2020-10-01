@@ -1724,10 +1724,6 @@
           "type": "std::string"
         },
         {
-          "name": "backend_directory_name",
-          "type": "std::string"
-        },
-        {
           "name": "tests_directory_name",
           "type": "std::string"
         },

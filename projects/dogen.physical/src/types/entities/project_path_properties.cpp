@@ -33,7 +33,6 @@ project_path_properties::project_path_properties(
     const bool disable_facet_directories,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
-    const std::string& backend_directory_name,
     const std::string& tests_directory_name,
     const std::string& templates_directory_name,
     const std::string& templates_file_extension,
@@ -45,7 +44,6 @@ project_path_properties::project_path_properties(
       disable_facet_directories_(disable_facet_directories),
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
-      backend_directory_name_(backend_directory_name),
       tests_directory_name_(tests_directory_name),
       templates_directory_name_(templates_directory_name),
       templates_file_extension_(templates_file_extension),
@@ -60,7 +58,6 @@ void project_path_properties::swap(project_path_properties& other) noexcept {
     swap(disable_facet_directories_, other.disable_facet_directories_);
     swap(header_file_extension_, other.header_file_extension_);
     swap(implementation_file_extension_, other.implementation_file_extension_);
-    swap(backend_directory_name_, other.backend_directory_name_);
     swap(tests_directory_name_, other.tests_directory_name_);
     swap(templates_directory_name_, other.templates_directory_name_);
     swap(templates_file_extension_, other.templates_file_extension_);
@@ -75,7 +72,6 @@ bool project_path_properties::operator==(const project_path_properties& rhs) con
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
-        backend_directory_name_ == rhs.backend_directory_name_ &&
         tests_directory_name_ == rhs.tests_directory_name_ &&
         templates_directory_name_ == rhs.templates_directory_name_ &&
         templates_file_extension_ == rhs.templates_file_extension_ &&
@@ -160,22 +156,6 @@ void project_path_properties::implementation_file_extension(const std::string& v
 
 void project_path_properties::implementation_file_extension(const std::string&& v) {
     implementation_file_extension_ = std::move(v);
-}
-
-const std::string& project_path_properties::backend_directory_name() const {
-    return backend_directory_name_;
-}
-
-std::string& project_path_properties::backend_directory_name() {
-    return backend_directory_name_;
-}
-
-void project_path_properties::backend_directory_name(const std::string& v) {
-    backend_directory_name_ = v;
-}
-
-void project_path_properties::backend_directory_name(const std::string&& v) {
-    backend_directory_name_ = std::move(v);
 }
 
 const std::string& project_path_properties::tests_directory_name() const {
