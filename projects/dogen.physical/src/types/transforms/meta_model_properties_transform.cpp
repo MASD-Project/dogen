@@ -438,9 +438,6 @@ apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "meta model properties",
         transform_id, id.value(), *ctx.tracer(), m);
 
-    // FIXME: hackery for parts
-    // const auto cpp_headers_dir(obtain_cpp_headers_output_directory(fg, cfg));
-
     /*
      * Obtain the root module configuration. Should have the same
      * logical name as the model itself.
@@ -461,6 +458,11 @@ apply(const context& ctx, entities::model& m) {
     const auto& pmm(*ctx.meta_model());
     const auto& idx(pmm.indexed_names());
     auto& mmp(m.meta_model_properties());
+
+    /*
+     * Copy across the project output directory.
+     */
+    mmp.output_directory_path(ctx.output_directory_path());
 
     /*
      * Populate the backend properties.
