@@ -54,7 +54,8 @@ public:
         const std::string& templates_directory_name,
         const std::string& templates_file_extension,
         const bool enable_unique_file_names,
-        const std::string& headers_output_directory);
+        const std::string& headers_output_directory,
+        const bool enable_backend_directories);
 
 public:
     const std::string& include_directory_name() const;
@@ -113,6 +114,14 @@ public:
     void headers_output_directory(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief If true, backends should have backend-specific directories to store their artefacts.
+     */
+    /**@{*/
+    bool enable_backend_directories() const;
+    void enable_backend_directories(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const project_path_properties& rhs) const;
     bool operator!=(const project_path_properties& rhs) const {
@@ -135,6 +144,7 @@ private:
     std::string templates_file_extension_;
     bool enable_unique_file_names_;
     std::string headers_output_directory_;
+    bool enable_backend_directories_;
 };
 
 }

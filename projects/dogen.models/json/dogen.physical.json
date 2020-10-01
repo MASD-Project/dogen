@@ -1604,11 +1604,6 @@
           "documentation": "Contains the IDs of all of the backends which are enabled.\n"
         },
         {
-          "name": "enable_backend_directories",
-          "type": "bool",
-          "documentation": "If true, backends should have backend-specific directories to store their artefacts.\n"
-        },
-        {
           "name": "enabled_archetype_for_element",
           "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         },
@@ -1752,6 +1747,11 @@
           "name": "headers_output_directory",
           "type": "std::string",
           "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
+        },
+        {
+          "name": "enable_backend_directories",
+          "type": "bool",
+          "documentation": "If true, backends should have backend-specific directories to store their artefacts.\n"
         }
       ]
     },

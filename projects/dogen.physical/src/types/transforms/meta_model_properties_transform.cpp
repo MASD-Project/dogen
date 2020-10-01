@@ -346,7 +346,7 @@ void meta_model_properties_transform::compute_enable_backend_directories(
      * requested.
      */
     bool enabled(required || requested);
-    mmp.enable_backend_directories(enabled);
+    mmp.project_path_properties().enable_backend_directories(enabled);
     for (auto& pair : mmp.backend_properties()) {
         auto& bep(pair.second);
         bep.enable_backend_directories(enabled);

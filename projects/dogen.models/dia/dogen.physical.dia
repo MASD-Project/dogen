@@ -18389,13 +18389,13 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O136">
       <dia:attribute name="obj_pos">
-        <dia:point val="211,-69"/>
+        <dia:point val="211,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="210.95,-69.05;223.545,-65.35"/>
+        <dia:rectangle val="210.95,-67.05;223.545,-63.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="211,-69"/>
+        <dia:point val="211,-67"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.495000000000001"/>
@@ -18990,7 +18990,7 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
         <dia:point val="156,-82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.95,-82.05;207.755,-70.35"/>
+        <dia:rectangle val="155.95,-82.05;207.755,-71.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="156,-82"/>
@@ -18999,7 +18999,7 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
         <dia:real val="51.704999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.600000000000001"/>
+        <dia:real val="10.800000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#meta_model_properties#</dia:string>
@@ -19269,29 +19269,6 @@ computed values on the back of physical transforms.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Contains the IDs of all of the backends which are enabled.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#enable_backend_directories#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, backends should have backend-specific directories to store their artefacts.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20337,16 +20314,16 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O148">
       <dia:attribute name="obj_pos">
-        <dia:point val="156,-70.4"/>
+        <dia:point val="156,-71.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="151.322,-71.15;156.75,-66.2"/>
+        <dia:rectangle val="151.322,-71.95;156.75,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="156,-70.4"/>
+        <dia:point val="156,-71.2"/>
         <dia:point val="156,-68"/>
         <dia:point val="151.373,-68"/>
         <dia:point val="151.373,-67"/>
@@ -20418,16 +20395,16 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O149">
       <dia:attribute name="obj_pos">
-        <dia:point val="207.705,-70.4"/>
+        <dia:point val="207.705,-71.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="199.707,-71.15;208.455,-66.2"/>
+        <dia:rectangle val="199.707,-71.95;208.455,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="207.705,-70.4"/>
+        <dia:point val="207.705,-71.2"/>
         <dia:point val="207.705,-68"/>
         <dia:point val="199.757,-68"/>
         <dia:point val="199.757,-67"/>
@@ -21198,19 +21175,19 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O157">
       <dia:attribute name="obj_pos">
-        <dia:point val="207.705,-72.9"/>
+        <dia:point val="207.705,-73.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="206.955,-73.65;211.05,-67.045"/>
+        <dia:rectangle val="206.955,-74.45;211.05,-65.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="207.705,-72.9"/>
-        <dia:point val="210,-72.9"/>
-        <dia:point val="210,-67.9"/>
-        <dia:point val="211,-67.9"/>
+        <dia:point val="207.705,-73.7"/>
+        <dia:point val="210,-73.7"/>
+        <dia:point val="210,-65.9"/>
+        <dia:point val="211,-65.9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -21272,7 +21249,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:color val="#000000ff"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O139" connection="27"/>
+        <dia:connection handle="0" to="O139" connection="25"/>
         <dia:connection handle="1" to="O136" connection="3"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
@@ -21525,7 +21502,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="211,-82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="210.95,-82.05;228.105,-71.15"/>
+        <dia:rectangle val="210.95,-82.05;228.105,-70.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="211,-82"/>
@@ -21534,7 +21511,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.800000000000001"/>
+        <dia:real val="11.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_path_properties#</dia:string>
@@ -21869,6 +21846,29 @@ Only required when the part is located outside of the component directory.#</dia
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place C++ header files. Must be a relative path.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#enable_backend_directories#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, backends should have backend-specific directories to store their artefacts.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -22258,16 +22258,16 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O163">
       <dia:attribute name="obj_pos">
-        <dia:point val="181.852,-70.4"/>
+        <dia:point val="181.852,-71.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.322,-71.15;182.602,-65.4"/>
+        <dia:rectangle val="173.322,-71.95;182.602,-65.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="181.852,-70.4"/>
+        <dia:point val="181.852,-71.2"/>
         <dia:point val="181.852,-68"/>
         <dia:point val="173.373,-68"/>
         <dia:point val="173.373,-67"/>
@@ -22561,7 +22561,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="168.645,-92.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="168.595,-92.25;182.602,-80.4491"/>
+        <dia:rectangle val="168.595,-92.25;182.602,-80.4489"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22570,7 +22570,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="168.645,-92.2"/>
         <dia:point val="168.645,-85"/>
         <dia:point val="181.852,-85"/>
-        <dia:point val="181.852,-82.0491"/>
+        <dia:point val="181.852,-82.0489"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -22633,7 +22633,7 @@ Only required when the part is located outside of the component directory.#</dia
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O165" connection="6"/>
-        <dia:connection handle="1" to="O139" connection="32"/>
+        <dia:connection handle="1" to="O139" connection="30"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>

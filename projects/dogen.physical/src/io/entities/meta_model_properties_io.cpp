@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include "dogen.physical/io/entities/part_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
@@ -171,12 +170,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::meta_model_properties\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
@@ -187,7 +180,6 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"part_properties\": " << v.part_properties() << ", "
       << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
-      << "\"enable_backend_directories\": " << v.enable_backend_directories() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"project_path_properties\": " << v.project_path_properties() << ", "
       << "\"extraction_properties\": " << v.extraction_properties()

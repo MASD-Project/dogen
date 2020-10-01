@@ -110,8 +110,8 @@ apply(const text::transforms::context& ctx, text::entities::model& m) {
     /*
      * Generate artefacts for all elements in model.
      */
-    const bool ekd(mmp.enable_backend_directories());
-    t.apply(ctx, ekd, m);
+    const bool ebd(mmp.project_path_properties().enable_backend_directories());
+    t.apply(ctx, ebd, m);
 
     BOOST_LOG_SEV(lg, debug) << "Updated artefacts with transform: " << t.id();
     stp.end_chain(m);
