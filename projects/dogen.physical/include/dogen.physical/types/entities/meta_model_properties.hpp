@@ -62,6 +62,7 @@ public:
 
 public:
     meta_model_properties(
+        const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& file_path,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
@@ -75,6 +76,16 @@ public:
         const dogen::physical::entities::extraction_properties& extraction_properties);
 
 public:
+    /**
+     * @brief Full path to the output directory chosen by the user.
+     */
+    /**@{*/
+    const boost::filesystem::path& output_directory_path() const;
+    boost::filesystem::path& output_directory_path();
+    void output_directory_path(const boost::filesystem::path& v);
+    void output_directory_path(const boost::filesystem::path&& v);
+    /**@}*/
+
     /**
      * @brief Full path to the component.
      */
@@ -151,6 +162,7 @@ public:
     meta_model_properties& operator=(meta_model_properties other);
 
 private:
+    boost::filesystem::path output_directory_path_;
     boost::filesystem::path file_path_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties> backend_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties> facet_properties_;

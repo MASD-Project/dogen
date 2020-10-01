@@ -1570,6 +1570,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "output_directory_path",
+          "type": "boost::filesystem::path",
+          "documentation": "Full path to the output directory chosen by the user.\n"
+        },
+        {
           "name": "file_path",
           "type": "boost::filesystem::path",
           "documentation": "Full path to the component.\n"

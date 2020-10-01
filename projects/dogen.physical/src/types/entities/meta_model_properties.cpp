@@ -23,7 +23,8 @@
 namespace dogen::physical::entities {
 
 meta_model_properties::meta_model_properties(meta_model_properties&& rhs)
-    : file_path_(std::move(rhs.file_path_)),
+    : output_directory_path_(std::move(rhs.output_directory_path_)),
+      file_path_(std::move(rhs.file_path_)),
       backend_properties_(std::move(rhs.backend_properties_)),
       facet_properties_(std::move(rhs.facet_properties_)),
       archetype_properties_(std::move(rhs.archetype_properties_)),
@@ -36,6 +37,7 @@ meta_model_properties::meta_model_properties(meta_model_properties&& rhs)
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 meta_model_properties::meta_model_properties(
+    const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& file_path,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::backend_properties>& backend_properties,
     const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::facet_properties>& facet_properties,
@@ -47,7 +49,8 @@ meta_model_properties::meta_model_properties(
     const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
     const dogen::physical::entities::project_path_properties& project_path_properties,
     const dogen::physical::entities::extraction_properties& extraction_properties)
-    : file_path_(file_path),
+    : output_directory_path_(output_directory_path),
+      file_path_(file_path),
       backend_properties_(backend_properties),
       facet_properties_(facet_properties),
       archetype_properties_(archetype_properties),
@@ -61,6 +64,7 @@ meta_model_properties::meta_model_properties(
 
 void meta_model_properties::swap(meta_model_properties& other) noexcept {
     using std::swap;
+    swap(output_directory_path_, other.output_directory_path_);
     swap(file_path_, other.file_path_);
     swap(backend_properties_, other.backend_properties_);
     swap(facet_properties_, other.facet_properties_);
@@ -75,7 +79,8 @@ void meta_model_properties::swap(meta_model_properties& other) noexcept {
 }
 
 bool meta_model_properties::operator==(const meta_model_properties& rhs) const {
-    return file_path_ == rhs.file_path_ &&
+    return output_directory_path_ == rhs.output_directory_path_ &&
+        file_path_ == rhs.file_path_ &&
         backend_properties_ == rhs.backend_properties_ &&
         facet_properties_ == rhs.facet_properties_ &&
         archetype_properties_ == rhs.archetype_properties_ &&
@@ -92,6 +97,22 @@ meta_model_properties& meta_model_properties::operator=(meta_model_properties ot
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::filesystem::path& meta_model_properties::output_directory_path() const {
+    return output_directory_path_;
+}
+
+boost::filesystem::path& meta_model_properties::output_directory_path() {
+    return output_directory_path_;
+}
+
+void meta_model_properties::output_directory_path(const boost::filesystem::path& v) {
+    output_directory_path_ = v;
+}
+
+void meta_model_properties::output_directory_path(const boost::filesystem::path&& v) {
+    output_directory_path_ = std::move(v);
 }
 
 const boost::filesystem::path& meta_model_properties::file_path() const {
