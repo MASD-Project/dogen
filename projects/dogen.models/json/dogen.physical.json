@@ -1772,7 +1772,8 @@
           "type": "masd::variability::text",
           "documentation": "Override location of public c++ headers.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.is_optional": "true"
           }
         },
         {

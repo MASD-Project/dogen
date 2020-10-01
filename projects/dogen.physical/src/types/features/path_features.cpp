@@ -222,7 +222,8 @@ path_features::static_configuration path_features::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.headers_output_directory = s.get_text_content(fg.headers_output_directory);
+    if (s.has_configuration_point(fg.headers_output_directory))
+        r.headers_output_directory = s.get_text_content(fg.headers_output_directory);
     r.source_directory_name = s.get_text_content_or_default(fg.source_directory_name);
     r.include_directory_name = s.get_text_content_or_default(fg.include_directory_name);
     r.tests_directory_name = s.get_text_content_or_default(fg.tests_directory_name);

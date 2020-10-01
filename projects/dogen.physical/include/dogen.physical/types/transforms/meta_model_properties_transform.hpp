@@ -50,7 +50,6 @@ private:
      * Top-level features.
      */
     struct top_level_feature_group {
-        variability::entities::feature cpp_headers_output_directory;
         variability::entities::feature enable_backend_directories;
     };
 
@@ -120,16 +119,15 @@ private:
      * @brief Reads the C++ headers output directory from
      * configuration.
      */
-    static boost::filesystem::path
-    obtain_cpp_headers_output_directory(const top_level_feature_group& fg,
+    static bool
+    obtain_enable_backend_directories(const top_level_feature_group& fg,
         const variability::entities::configuration& cfg);
 
     /**
-     * @brief Reads the enabled backend directories flag from
-     * configuration.
+     * @brief Read the project path configuration.
      */
-    static bool
-    obtain_enable_backend_directories(const top_level_feature_group& fg,
+    static entities::project_path_properties obtain_project_path_properties(
+        const variability::entities::feature_model& fm,
         const variability::entities::configuration& cfg);
 
     /**

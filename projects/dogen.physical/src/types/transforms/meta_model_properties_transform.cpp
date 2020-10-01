@@ -31,6 +31,7 @@
 #include "dogen.identification/io/entities/logical_id_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.identification/types/helpers/physical_meta_id_builder.hpp"
+#include "dogen.physical/types/features/path_features.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
@@ -82,7 +83,6 @@ make_top_level_feature_group(const variability::entities::feature_model& fm) {
     const variability::helpers::feature_selector s(fm);
 
     const auto chod(cpp_headers_output_directory_feature);
-    r.cpp_headers_output_directory = s.get_by_name(chod);
 
     const auto ekd(enable_backend_directories_feature);
     r.enable_backend_directories = s.get_by_name(ekd);
@@ -143,22 +143,39 @@ meta_model_properties_transform::make_archetype_feature_group(
     return r;
 }
 
-boost::filesystem::path meta_model_properties_transform::
-obtain_cpp_headers_output_directory(const top_level_feature_group& fg,
-    const variability::entities::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.cpp_headers_output_directory))
-        return s.get_text_content(fg.cpp_headers_output_directory);
-
-    return boost::filesystem::path();
-}
-
 bool meta_model_properties_transform::
 obtain_enable_backend_directories(const top_level_feature_group& fg,
     const variability::entities::configuration& cfg) {
     const variability::helpers::configuration_selector s(cfg);
     return s.get_boolean_content_or_default(fg.enable_backend_directories);
+}
+
+
+entities::project_path_properties meta_model_properties_transform::
+obtain_project_path_properties(const variability::entities::feature_model& fm,
+    const variability::entities::configuration& cfg) {
+
+    using features::path_features;
+    const auto fg(path_features::make_feature_group(fm));
+    const auto scfg(path_features::make_static_configuration(fg, cfg));
+
+    entities::project_path_properties r;
+    r.include_directory_name(scfg.include_directory_name);
+    r.source_directory_name(scfg.source_directory_name);
+    r.disable_facet_directories(scfg.disable_facet_directories);
+    r.header_file_extension(scfg.header_file_extension);
+    r.implementation_file_extension(scfg.implementation_file_extension);
+
+    // FIXME: backend dir name
+    // r.backend_directory_name(scfg.)
+
+    r.tests_directory_name(scfg.tests_directory_name);
+    r.templates_directory_name(scfg.templates_directory_name);
+    r.templates_file_extension(scfg.templates_file_extension);
+    r.enable_unique_file_names(scfg.enable_unique_file_names);
+    r.headers_output_directory(scfg.headers_output_directory);
+
+    return r;
 }
 
 std::unordered_map<physical_meta_id, entities::backend_properties>
@@ -466,6 +483,11 @@ apply(const context& ctx, entities::model& m) {
      */
     const auto afg(make_archetype_feature_group(fm, idx));
     mmp.archetype_properties(obtain_archetype_properties(afg, cfg));
+
+    /*
+     * Populate the path properties.
+     */
+    mmp.project_path_properties(obtain_project_path_properties(fm,cfg));
 
     /*
      * Now populate the denormalised archetype properties by querying

@@ -22011,7 +22011,8 @@ Only required when the part is located outside of the component directory.#</dia
           <dia:attribute name="comment">
             <dia:string>#Override location of public c++ headers.
 
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
