@@ -1627,6 +1627,10 @@
         {
           "name": "enabled_archetype_for_element",
           "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
+        },
+        {
+          "name": "project_path_properties",
+          "type": "project_path_properties"
         }
       ]
     },
@@ -1707,6 +1711,156 @@
             "masd.variability.binding_point": "global",
             "masd.variability.default_value_override.cpp": "\"cpp\"",
             "masd.variability.default_value_override.csharp": "\"cs\""
+          }
+        }
+      ]
+    },
+    {
+      "name": "entities::project_path_properties",
+      "documentation": "Legacy type containing all proprties related to paths.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "include_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "disable_facet_directories",
+          "type": "bool"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "templates_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "templates_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "enable_unique_file_names",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "features::path_features",
+      "documentation": "Set of features related to path processing.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "true",
+        "masd.variability.key_prefix": "masd.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "headers_output_directory",
+          "type": "masd::variability::text",
+          "documentation": "Override location of public c++ headers.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "source_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"src\"",
+          "documentation": "Directory in which to place C++ source files.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "include_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"include\"",
+          "documentation": "Directory in which to place include headers.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"generated_tests\"",
+          "documentation": "Directory in which to place c++ tests.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "templates_directory_name",
+          "type": "masd::variability::text",
+          "value": "\"templates\"",
+          "documentation": "Directory in which to place text templates.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "header_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"hpp\"",
+          "documentation": "Extension to use for C++ header files.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"cpp\"",
+          "documentation": "Extension to use for C++ implementation files.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "templates_file_extension",
+          "type": "masd::variability::text",
+          "value": "\"wale\"",
+          "documentation": "Extension to use for text templates.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "enable_unique_file_names",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, make all file names unique within a model.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
+          }
+        },
+        {
+          "name": "disable_facet_directories",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, facet directories will not be used.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global"
           }
         }
       ]

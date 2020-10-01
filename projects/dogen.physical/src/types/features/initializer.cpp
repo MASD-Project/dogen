@@ -22,6 +22,7 @@
 #include "dogen.physical/types/features/filesystem.hpp"
 #include "dogen.physical/types/features/formatting.hpp"
 #include "dogen.physical/types/features/initializer.hpp"
+#include "dogen.physical/types/features/path_features.hpp"
 #include "dogen.physical/types/features/facet_features.hpp"
 #include "dogen.physical/types/features/backend_features.hpp"
 #include "dogen.physical/types/features/archetype_features.hpp"
@@ -36,6 +37,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::physical::features::facet_features::make_templates());
     rg.register_templates(dogen::physical::features::formatting::make_templates());
     rg.register_features(dogen::physical::features::filesystem::make_features());
+    rg.register_features(dogen::physical::features::path_features::make_features());
 }
 
 }

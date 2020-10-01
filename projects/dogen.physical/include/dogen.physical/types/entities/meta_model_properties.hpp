@@ -35,6 +35,7 @@
 #include "dogen.physical/types/entities/archetype_properties.hpp"
 #include "dogen.physical/types/entities/extraction_properties.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.physical/types/entities/project_path_properties.hpp"
 #include "dogen.physical/types/entities/archetype_kind_properties.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
@@ -73,7 +74,8 @@ public:
         const std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends,
         const bool enable_backend_directories,
         const dogen::physical::entities::extraction_properties& extraction_properties,
-        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element);
+        const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
+        const dogen::physical::entities::project_path_properties& project_path_properties);
 
 public:
     /**
@@ -144,6 +146,11 @@ public:
     void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& v);
     void enabled_archetype_for_element(const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>&& v);
 
+    const dogen::physical::entities::project_path_properties& project_path_properties() const;
+    dogen::physical::entities::project_path_properties& project_path_properties();
+    void project_path_properties(const dogen::physical::entities::project_path_properties& v);
+    void project_path_properties(const dogen::physical::entities::project_path_properties&& v);
+
 public:
     bool operator==(const meta_model_properties& rhs) const;
     bool operator!=(const meta_model_properties& rhs) const {
@@ -166,6 +173,7 @@ private:
     bool enable_backend_directories_;
     dogen::physical::entities::extraction_properties extraction_properties_;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
+    dogen::physical::entities::project_path_properties project_path_properties_;
 };
 
 }
