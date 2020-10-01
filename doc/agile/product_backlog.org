@@ -78,6 +78,908 @@ Release goals:
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Allow arbitrary physical containment                              :story:
+
+We need to allow archetypes to be contained by any physical element,
+except for archetypes. We also need to allow facets to belong to any
+physical element other than facets.
+
+*** Add descriptions to PMM elements                                  :story:
+
+We need to read a description attribute for:
+
+- backend
+- facet
+- part
+- archetype
+
+And populate these on the LM PMM, and then code generate them. The
+description should be the comment of the associated element.
+
+*** Rename =archetype_name_set=                                       :story:
+
+We haven't yet found the right name for this but the idea is that we
+have a container of all the meta-names which refer to archetypes in a
+region of physical space.
+
+- archetype name meta region? it is only meta-names.
+
+*** Allow arbitrary physical containment                              :story:
+
+We need to allow archetypes to be contained by any physical element,
+except for archetypes. We also need to allow facets to belong to any
+physical element other than facets.
+
+*** Add descriptions to PMM elements                                  :story:
+
+We need to read a description attribute for:
+
+- backend
+- facet
+- part
+- archetype
+
+And populate these on the LM PMM, and then code generate them. The
+description should be the comment of the associated element.
+
+*** Rename =archetype_name_set=                                       :story:
+
+We haven't yet found the right name for this but the idea is that we
+have a container of all the meta-names which refer to archetypes in a
+region of physical space.
+
+- archetype name meta region? it is only meta-names.
+
+*** Add dependencies to artefacts                                     :story:
+
+ We need to propagate the dependencies between logical model elements
+ into the physical model. We still need to distinguish between "types"
+ of dependencies:
+
+ - transparent_associations
+ - opaque_associations
+ - associative_container_keys
+ - parents
+
+ Basically, anything which we refer to when we are building the
+ dependencies for inclusion needs to be represented. We could create a
+ data structure for this purpose such as "dependencies". We should also
+ include "namespace" dependencies. These can be obtained by =sort |
+ uniq= of all of the namespaces for which there are dependencies. These
+ are then used for C#.
+
+ Note however that all dependencies are recorded as logical-physical
+ IDs.
+
+ We also need a way to populate the dependencies as a transform. This
+ must be done in =m2t= because we need the formatters. We can rely on
+ the same approach as =inclusion_dependencies= but instead of creating
+ /inclusion dependencies/, we are just creating /dependencies/.
+
+ This will also address the uses of traits, e.g.:
+
+ : const auto ch_arch(traits::archetype_class_header_factory_archetype_qn());
+
+ This is because the traits are used to express dependencies.
+
+ Notes:
+
+ - we did the work to record the relations at the archetype level and
+   started updating the archetypes with these in =text.cpp=. However,
+   we only did a couple of types.
+ - in order to instantiate meta-relations onto the LPS, we need to be
+   able to resolve a relation type such as "transparent" into a
+   concrete archetype. This means the archetype must have a label of
+   that relation type.
+ - artefacts must have relations stored as LPS points with both the
+   logical name and physical meta-name. At this point we no longer care
+   about relation type since it has been resolved.
+ - a part is really a "meta-part". We still need to instantiate it with
+   the actual project path. The physical model needs to contain this
+   instantiation.
+ - artefacts need to know their parts.
+ - archetypes do not have part populated and their type is incorrect
+   (=physical_id=).
+- parts should have a root folder. These are specified through
+  meta-data. The path is relative to the project path. Different
+  models can have different part paths. This means we need to remember
+  them when computing a reference to an artefact. Actually this is
+  only needed because of split projects. We need to deprecate it as it
+  makes things very complicated.
+- parts need a directory name. This must be supplied by meta data with
+  the part name:
+
+: masd.physical.part.folder_name.implementation=src
+
+  Where implementation is a KVP.
+
+- physical model must be split by backend. Backend must have an
+  associated folder name or blank for no folder:
+
+: masd.physical.backend.folder_name.cpp=src
+
+- actually we will have exactly the same problem with facets too. We
+  need to create instances of all the meta-model elements.
+- due to the fact that you can configure physical meta-elements, we
+  have no choice but keep track of the referenced models. This is
+  because we could have overwritten them differently in any of the
+  referenced models.
+- actually we found a much more profound problem, which already exists
+  in dogen: if you configure backend/facet/archetypes differently in
+  say M0 and M1, and if M1 references M0, the paths will not be
+  constructed correctly. That is because we assume that we can
+  reconstruct M0 paths using M1's configuration, which is true at
+  present merely because we use the same variability settings for all
+  models within a product; and on the rare cases we don't, we never
+  make use of these models from other models - e.g. test models. To
+  fix this properly would require a fairly complex set of changes to
+  Dogen: we would need to keep track of the references and their types
+  all the way through to code generation. This will not be
+  easy. However, what we can do is to start introducing the notion of
+  reference models and elements; initially this can be used just to
+  check that all references have the same configuration. Eventually,
+  as use cases arrive we can extend it to implement this per-model
+  configuration properly. This also means that it is not possible to
+  refer to a model that has more than one backend for now from a model
+  that only has a backend.
+
+*** Add instances of physical meta-model elements                     :story:
+
+We made a modeling error with regards to the physical meta-model
+elements. We assumed that the user configuration of the meta-model
+elements could be stored with the PMM. This is incorrect because the
+PMM is created from static data; it is as it was code generated by the
+state of the =text.cpp= and =text.csharp= models. However, users can
+apply their own configuration to these elements: change backend
+directory, facet directory etc. These properties are relative to the
+models the users load. Worse, they are possibly different for each
+reference - though that particular problem will have to be addressed
+separately.
+
+This now causes a big conceptual problem: we assumed that artefacts
+were instances of archetypes but yet there is a need to have an
+archetype instance where the model specific configuration is
+stored. The quick hack, is to create some types that sit in between
+the meta-type and the instance type:
+
+- =backend_instance=
+- =archetype_instance=
+- etc.
+
+This is not very nice but it does solve the problem at hand. We can
+then associate these with physical models. Alternatively we could use
+a more neutral name like =_properties=, =_configuration=... Actually
+we already had some suitable types for enablement, they can be
+repurposed for this.
+
+Notes:
+
+- add transform to populate meta-model properties
+- update enablement to use the properties, deprecate existing ones.
+- merge local enablement transform with the reading of local
+  properties; merge global enablement transform with the reading of
+  meta-model properties. Add comments on local facet (for
+  profiles). Add the missing properties to the global field groups.
+- actually we can just rename both transforms instead of creating new
+  ones.
+- backends and parts also need a file path, just like artefacts.
+- the meta-model properties also need a file path, which represents
+  the component path. Paths can then be computed "recursively": the
+  backend path is the component path plus the backend directory and so
+  forth.
+- that which we called "meta-model" in the PM is really the "component
+  meta-model". In the future as we model more physical aspects we will
+  have other kinds of meta-models (product, family, etc.). The "model"
+  is really the component model because its an instance of a
+  component. The product model will be made up of artefacts and will
+  have parts and so forth but it will be different from the component
+  model. Or perhaps we will just have other kinds of components inside
+  the product model. In which case we need to consider having a notion
+  of "component types" and possibly "component groups"
+  (e.g. "projects").
+- technical spaces and their associated versions should be declared by
+  the text models and should be part of the PM. The TS should be
+  declared on the "global" text model so that backends can reuse them
+  (e.g. we can declare XML with associated extensions and then use it
+  where required).
+
+*** Add a validator for text model                                    :story:
+
+The validator should check the paths. This can also be done in
+physical model.
+
+:                 /*
+:                  * FIXME: we are still generating artefacts for global
+:                  * module.
+:                  */
+:                 if (aptr->file_path().empty()) {
+:                     BOOST_LOG_SEV(lg, error) << empty_path
+:                                              << aptr->name().id();
+:                     // BOOST_THROW_EXCEPTION(transform_exception(empty_path +
+:                     //         aptr->name().id().value()));
+:                     continue;
+:                 }
+
+*** Implement backend and facet transform                             :story:
+
+The backend transform should:
+
+- return the ID of the backend;
+- use the facet and archetype transforms to process all elements.
+
+Check backlog for a story on this.
+
+*** Deprecate managed directories                                     :story:
+
+There should only be one "managed directory" at the input stage, which
+is the component directory (for component models). If parts have
+relative directories off of the component directory then we should add
+to the list of managed directories inside the PM pipeline.
+
+*** Add technical spaces to PM and LM                                 :story:
+
+Technical spaces and their associated versions should be declared by
+the text models and should be part of the PM. The TS should be
+declared on the "global" text model so that backends can reuse them
+(e.g. we can declare XML with associated extensions and then use it
+where required).
+
+Notes:
+
+- TS should also have a physical name. However, they are not
+  associated with a backend. Actually they don't need a physical name
+  but they need some kind of identification.
+
+*** Improve support for references                                    :story:
+
+At present we have limited support for references in the presence of
+variability. This is because once we start changing configuration
+points such as the backend directory, facet directories etc, in a
+model which is referenced from another model then the path resolution
+will start to fail. This is because we expect all models to have the
+same configuration for all configuration elements that affect file
+paths. Since they do at present we never noticed this problem.
+
+The correct solution is to introduce reference models and reference
+elements. These just need to have a small number of properties:
+
+- configuration of root module;
+- model and element logical name, as well as meta-element name.
+
+With this we could also stop creating elements for referenced models
+which would probably result on a major reduction of processing
+time. Then we have two ways of introducing these models:
+
+1. "the best way": do not fully parse reference models at all, just
+   extract the reference properties. This will require a lot of
+   changes on the pipeline.
+2. "the quick hack": for all references, load the codec model into the
+   logical model and then convert it into a reference model. We do a
+   lot of unnecessary processing but it should be easier.
+
+We could even start by taking approach 2 and then eventually move to
+approach 1. Either way we need to do this once we move to the new
+world of dependency generation.
+
+*** Replace =facet_default= with labels                               :story:
+
+We need to stop using the enumeration to determine the canonical
+header and use instead the new labelling mechanism.
+
+The right label is probably =transparent=.
+
+*** Add dependency generation to PM                                   :story:
+
+We should store the dependencies in the following format:
+
+- relative path
+- dot notation
+- colon notation
+- header guard: not very nice but its the easiest way to solve this
+  problem for now.
+
+Archetypes should record their own information for this. This involves
+reading meta-data for certain cases (e.g. PDMs). One archetype can
+have more than one of these entries. We could map this like an RPM:
+
+- provides
+- requires
+
+or
+
+- exports
+- imports
+
+Once we are generating the provides/exports we can then use the maps
+to populate the imports.
+
+Merged stories:
+
+*Add dependencies between artefacts in the PM*
+
+During logical model conversion, we need to create a map in the
+physical model capturing for each artefact:
+
+- id of the dependent element
+- archetype
+- relation type
+
+Note however that the full purpose of this transform is to resolve
+this triplet into a relative path to create a dependency. So we may
+not need to store this in the model and just have it in the transform
+as an intermediate state.
+
+For C# dependencies are written as the fully qualified element
+name. We then need further processing to determine what the using
+statements should be. As we do not have any usings at present this
+will have to be handled in another story. For now we should just make
+sure we record the dependencies.
+
+*** Add archetype ownership model                                     :story:
+
+Archetypes can be owned by either a part or directly by a backend. In
+the future, they can also be owned by a product, a component, etc. We
+don't need to worry about this yet. Parts are owned by a backend. We
+need to ensure the current code supports this correctly. Archetypes
+that live at the project level must be owned by the backend, not the
+part.
+
+*** Implement dependencies in terms of new physical types             :story:
+
+- add dependency types to physical model.
+- add dependency types to logical model, as required.
+- compute dependencies in generation. We need a way to express
+  dependencies as a file dependency as well as a model
+  dependency. This caters for both C++ and C#/Java.
+- remove dependency code from C++ and C# model.
+
+Notes:
+
+- in light of the new physical model, we need a transform that calls
+  the formatter to obtain dependencies. The right way to do this is to
+  have another registrar (=dependencies_transform=?) and to have the
+  formatters implement both interfaces. This means we can simply not
+  implement the interface (and not register) when we have no
+  dependencies - though of course given the existing wale
+  infrastructure, we will then need yet another template for
+  formatters which do not need d
+
+Merged stories:
+
+*Formatter dependencies and model processing*
+
+At present we are manually adding the includes required by a formatter
+as part of the "inclusion_dependencies" building. There are several
+disadvantages to this approach:
+
+- we are quite far down the pipeline. We've already passed all the
+  model building checks, etc. Thus, there is no way of knowing what
+  the formatter dependencies are. At present this is not a huge
+  problem because we have so few formatters and their dependencies are
+  mainly on the standard library and a few core boost models. However,
+  as we add more formatters this will become a bigger problem. For
+  example, we've added formatters now that require access to
+  variability headers; in an ideal world, we should now need to have a
+  reference to this model (for example, so that when we integrate
+  package management we get the right dependencies, etc).
+- we are hard-coding the header files. At present this is not a big
+  problem. To be honest, we can't see when this would be a big
+  problem, short of models changing their file names and/or
+  locations. Nonetheless, it seems "unclean" to depend on the header
+  file directly.
+- the dependency is on c++ code rather than expressed via a model.
+
+In an ideal world, we would have some kind of way of declaring a
+formatter meta-model element, with a set of dependencies declared via
+meta-data. These are on the model itself. They must be declared
+against a specific archetype. We then would process these as part of
+resolution. We would then map the header files as part of the existing
+machinery for header files.
+
+However one problem with this approach is that we are generating the
+formatter code using stitch at present. For this to work we would need
+to inject a fragment of code into the stitch template somehow with the
+dependencies. Whilst this is not exactly ideal, the advantage is that
+we could piggy-back on this mechanism to inject the postfix fields as
+well, so that we don't need to define these manually in each
+model. However, this needs some thinking because the complexity of
+defining a formatter will increase yet again. When there are problems,
+it will be hard to troubleshoot.
+
+*Move dependencies into archetypes*
+
+Actually the dependencies will be generated at the kernel level
+because 99% of the code is kernel specific. However, we need to make
+it an external transform. We need to figure out an interface that
+supplies archetypes with the data needed to create the dependencies
+container.
+
+Tasks:
+
+- create the locator in the C++ external transform
+- create a dependencies transform that uses the existing include
+  generation code.
+
+*Previous understanding*
+
+It seems all languages we support have some form of "dependencies":
+
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
+
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
+
+*Tidy-up of inclusion terminology*
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Implement locator in physical model                               :story:
+
+Use PMM entities to generate artefact paths, within =m2t=.
+
+Merged stories:
+
+*Create a archetypes locator*
+
+We need to move all functionality which is not kernel specific into
+yarn for the locator. This will exist in the helpers namespace. We
+then need to implement the C++ locator as a composite of yarn
+locator.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit
+ad-hoc. We could potentially create a pattern. Say for C++, we have
+the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine
+  the placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or
+  "natural" location inside of facet.
+- archetype location: used to determine the facet and archetype
+  postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location
+(a given artefact has a fixed placement). So a naive approach to this
+seems to imply one could create a data driven locator, that works for
+all languages if supplied suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project
+  sub-directories". There is a mapping between the artefact location
+  and a project sub-directory.
+- there is a mapping between the artefact location and the facet and
+  artefact postfixes.
+- extensions are a slight complication: a) we want to allow users to
+  override header/implementation extensions, but to do it so for the
+  entire project (except maybe for ODB files). However, what yarn's
+  locator needs is a mapping of artefact location to  extension. It
+  would be a tad cumbersome to have to specify extensions one artefact
+  location at a time. So someone has to read a kernel level
+  configuration parameter with the artefact extensions and expand it
+  to the required mappings. Whilst dealing with this we also have the
+  issue of elements which have extension in their names such as visual
+  studio projects and solutions. The correct solution is to implement
+  these using element extensions, and to remove the extension from the
+  element name.
+- each kernel can supply its configuration to yarn's locator via the
+  kernel interface. This is fairly static so it can be supplied early
+  on during initialisation.
+- there is still something not quite right. We are performing a
+  mapping between some logical space (the modeling space) and the
+  physical space (paths in the filesystem). Some modeling elements
+  such as the various CMakeLists.txt do not have enough information at
+  the logical level to tell us about their location; at present the
+  formatter itself gives us this hint ("include cmakelists" or "source
+  cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the
+  archetype location and the physical space. Although, if this is the
+  only case of a modeling element not mapping uniquely, perhaps we
+  should do exactly this.
+- However, we still have inclusion paths to worry about. As we done
+  with the source/include directories, we need to somehow create a
+  concept of inclusion path which is not language specific; "relative
+  path" and "requires relative path" perhaps? These could be a
+  function of archetype location.
+
+Merged stories:
+
+*Generate file paths as a transform*
+
+We need to understand how file paths are being generated at present;
+they should be a transform inside generation.
+
+*Create the notion of project destinations*
+
+At present we have conflated the notion of a facet, which is a logical
+concept, with the notion of the folders in which files are placed - a
+physical concept. We started thinking about addressing this problem by
+adding the "intra-backend segment properties", but as the name
+indicates, we were not thinking about this the right way. In truth,
+what we really need is to map facets (better: archetype locations) to
+"destinations".
+
+For example, we could define a few project destinations:
+
+: masd.generation.destination.name="types_headers"
+: masd.generation.destination.folder="include/masd.cpp_ref_impl.northwind/types"
+: masd.generation.destination.name=top_level (global?)
+: masd.generation.destination.folder=""
+: masd.generation.destination.name="types_src"
+: masd.generation.destination.folder="src/types"
+: masd.generation.destination.name="tests"
+: masd.generation.destination.folder="tests"
+
+And so on. Then we can associate each formatter with a destination:
+
+: masd.generation.cpp.types.class_header.destination=types_headers
+
+Notes:
+
+- these should be in archetypes models.
+- with this we can now map any formatter to any folder, particularly
+  if this is done at the element level. That is, you can easily define
+  a global mapping for all formatters, and then override it
+  locally. This solves the long standing problem of creating say types
+  in tests and so forth. With this approach you can create anything
+  anywhere.
+- we need to have some tests that ensure we don't end up with multiple
+  files with the same name at the same destination. This is a
+  particular problem for CMake. One alternative is to allow the
+  merging of CMake files, but we don't yet have a use case for
+  this. The solution would be to have a "merged file flag" and then
+  disable all other facets.
+- this will work very nicely with profiles: we can create a few out of
+  the box profiles for users such as flat project, common facets and
+  so on. Users can simply apply the stereotype to their models. These
+  are akin to "destination themes". However, we will also need some
+  kind of "variable replacement" so we can support cases like
+  =include/masd.cpp_ref_impl.northwind/types=. In fact, we also have
+  the same problem when it comes to modules. A proper path is
+  something like:
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_folders}=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_dots}.=
+  - =include/${model_modules_as_dots}/types/${internal_modules_as_underscores}_=
+
+  This is *extremely* flexible. The user can now create a folder
+  structure that depends on package names etc or choose to flatten it
+  and can do so for one or all facets. This means for example that we
+  could use nested folders for =include=, not use model modules for
+  =src= and then flatten it all for =tests=.
+- actually it is a bit of a mistake to think of these destinations as
+  purely physical. In reality, we may also need them to contribute to
+  namespaces. For example, in java the folders and namespaces must
+  match. We could solve this by having a "module contribution" in the
+  destination. These would then be used to construct the namespace for
+  a given facet. Look for java story on backlog for this.
+- this also addresses the issue of having multiple serialisation
+  formats and choosing one, but having sensible folder names. For
+  example, we could have boost serialisation mapped to a destination
+  called =serialisation=. Or we could map it to say RapidJSON
+  serialisation. Or we could support two methods of serialisation for
+  the same project. The user chooses where to place them.
+
+*** Top-level "inclusion required" should be "tribool"                :story:
+
+One of the most common use cases for inclusion required is to have it
+set to true for all types where we provide an override, but false for
+all other cases. This makes sense in terms of use cases:
+
+- either we need to supply some includes; in which case where we do
+  not supply includes we do not want the system to automatically
+  compute include paths;
+- or we don't supply any includes, in which case:
+  - we either don't require any includes at all (hardware built-ins);
+  - or we want all includes to be computed by the system.
+
+The problem is that we do not have a way to express this logic in the
+meta-data. The only way would be to convert the top-level
+=requires_includes= to an enumeration:
+
+- yes, compute them
+- yes, where supplied
+- no
+
+We need to figure out how to implement this. For now we are manually
+adding flags.
+
+*** Implement meta-name validator correctly                           :story:
+
+The logic in the meta- name validator is completely wrong. We are
+checking for facet defaults without taking into account the logical
+model element component. Thus, there are fundamental problems with the
+meta-model validator that are not easy to fix. We need a facet default
+for every logical meta-model element. That is, we need to loop through
+all logical meta-model elements and ensure they have a facet default;
+but this should only be done for meta-model elements which support a
+facet default. This cannot be done until:
+
+- we know which elements require a facet default;
+- we have created a logical meta-model.
+
+Merged stories:
+
+*Set expectation for facet default*
+
+At present we are only warning when a facet does not have a facet
+default. This is because some facets do not have facet defaults (such
+as build, visual studio, etc). However, we know this upfront so on the
+facet factory we should set up the expectation. Then we can throw.
+
+*** Update archetype generator to handle decoration                   :story:
+
+Once relations have been moved into the generator type, we need to
+create a special handling for archetypes.
+
+Notes:
+
+- instead of obtaining all of its relations from the archetype, we
+  need to also query the logical model element. these will supply
+  additional constant relations which need to be transformed into
+  physical counterparts and resolved.
+- relations in archetype can be ignored entirely for the purposes of
+  artefact projection.
+- the archetype transform can then be implemented as a "regular"
+  transform, handling decoration, boilerplate, namespaces, includes,
+  etc. We need to remove the includes from the stitch template.
+- once all of this is done, remove support for includes and
+  configuration from stitch.
+
+*** Create a logical meta-model                                       :story:
+
+At present we did a quick hack and created the notion of meta-names in
+the logical model. In fact, what we really need is the idea of a
+"meta-element". We don't need this to be done completely cleanly; the
+meta-element is merely just an object really. We just need to have a
+way to add:
+
+- virtual meta-element property to the base type.
+- static meta-element in each leaf.
+- generated code which constructs a static meta-element for each
+  descendant.
+- meta-data to supply meta-element properties. We just need maybe two:
+  stereotype and description.
+- transform that generates the logical meta-model. It should be
+  indexed by stereotype.
+
+Notes:
+
+- the LMM can be part of the boostrapping phase as is the PMM.
+- the stereotype, which is defined in =ident= replaces the meta-name.
+- the meta-name factory, transforms etc are deprecated.
+
+Merged stories:
+
+*Replace meta-model IDs with stereotypes*
+
+We probably already have a story for this, check backlog.
+
+*** Add file extensions to decoration                                 :story:
+
+Create something really simple:
+
+- extension groups
+- extensions
+
+Model this after modelines and modeline groups. We just need to define
+an extension group that has all the extensions we have currently in
+use. Extensions belong to a TS. Extensions can have a label. If there
+is more than one extension for a given TS they must have a
+label. Example:
+
+=extension_type:odb_headers=
+
+We then need to label archetypes with these. This is only needed for
+cases where there is more than one extension for a given TS (c++
+headers and implementation).
+
+*** Move decoration to =text= model                                   :story:
+
+Last sprint we thought that decorations belonged to the logical
+model. We were partially right; the part of decorations that refers
+only to the modeling of entities is correctly placed in the logical
+model. However, the transformation of those elements into text needs
+to be placed in the text model. And the output of those
+transformations should rightly belong to the archetype set (preamble,
+postamble) if not to the artefact themselves. However, for this to
+work we need a way to associate technical spaces with artefacts. Then
+we can simply ask for all technical spaces in a plane. Or
+alternatively we could try to generate the decoration using only the
+meta-data. Basically this needs to be done when creating either the
+text model or the artefact repository.
+
+*** Consider creating a label for generated files                     :story:
+
+We could label all files which are not generated as "manual". Not
+clear how exactly that would be useful.
+
+*** Replace initialisers with facet-based initialisation              :story:
+
+Now that we have facets, archetypes, etc as proper meta-model
+elements, it is becoming clear that the initialiser is just a facet in
+disguise. We have enough information to generate all initialisers as
+part of the code generation of facets and backends. Once we do this,
+we have reached the point where it is possible to create a new
+meta-model element and add a formatter for it and code will be
+automatically generated without any manual intervention. Similarly,
+deleting formatters will delete all traces of it from the code
+generator.
+
+
+
+*** Injector types with regards to containment                        :story:
+
+It seems we have two models for injectors:
+
+- those where element containment is represented through nesting,
+  e.g. XML, JSON, org-mode. These can of course be flat too, but its
+  natural to represent elements as containers.
+- those where element containment is represented through "links",
+  e.g. Dia. When we represent containment through links, we need to
+  create a graph of the elements and then transform them into a
+  qualified path.
+
+At present we left it to the dia injector to resolve the link
+containment. It makes more sense to model the containment type in the
+injection model and then to have a transform that does the graphing
+for link models. We also need a transform that does the name nesting
+for nested models. Both do nothing for the converse case. This will
+simplify injector code.
+
+Notes:
+
+- linked models must supply the original model ID as well as container
+  ID. Nested models may or may not supply this information.
+- we should transform nested models into flat models as part of the
+  injection chain. The final model should be a flat model.
+- perhaps we should have a notion of a nested model and a nested
+  element. This way the type system encodes this information.
+
+*** Create a physical ID in logical-physical space                    :story:
+
+Artefacts are points in logical-physical space. They should have an ID
+which is composed by both logical and physical location. We could
+create a very simple builder that concatenates both, for example:
+
+: <dogen><variability><entities><default_value_override>|<masd><cpp><types><class_header>
+
+The use of =|= would make it really easy to split out IDs as required,
+and to visually figure out which part is which. Note though that the
+ID is an opaque identifier and the splitting happens for
+troubleshooting purposes only, not in the code. With the physical
+model, all references are done using these IDs. So for example, if an
+artefact =a0= depends on artefact =a1=, the dependency is recorded as
+the ID of =a1=. The physical model should also be indexed by ID
+instead of being a list of artefacts.
+
+We already created =logical_meta_physical_id= type so maybe we don't
+need this ID as well.
+
+*** Mine the build2 layout terminology                                :story:
+
+It seems build2 is modeling a lot of concepts that are similar to ours
+in project layout. We should use their terminology where possible.
+
+Links:
+
+- [[https://build2.org/bdep/doc/bdep-new.xhtml#src-layout][bdep-new source layout]]
+- [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]]
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Add a PMM enablement satisfiability transform                     :story:
+
+For now this transform can simply check that there are no enabled
+archetypes that depend on disabled archetypes. In the future we could
+have a flag that enables archetypes as required.
+
+*** Add a PM enablement satisfiability transform                      :story:
+
+To start with, this should just check to see if any of the
+dependencies are disabled. If so it throws. In the future we can add
+solving.
+
+*** KVPs with invalid field name still works                          :story:
+
+As a test we created an invalid KVP:
+
+: +#DOGEN masd.labelz.a_labelz=a,b,c
+
+This should have failed because the name of the KVP is =label=, so
+=labelz= shouldn't have matched. However there was no error. We are
+probably adding the =z.= to the key. We need to check how variability
+is handling this.
+
+*** Add a PM transform to prune disabled artefacts                    :story:
+
+We must first start by expanding the physical space into all possible
+points. Once enablement is performed though we can prune all artefacts
+that are disabled. Note that we cannot prune based on global
+information because archetypes may be enabled locally. However, once
+all of the local information has been processed and the enabled flag
+has been set, we can then remove all of those with the flag set to
+false.
+
+In a world with solving, we just need to make sure solving is slotted
+in after enablement and before pruning. It should just work.
+
+This transform is done within the =m2t= model, not the =physical=
+model, because we need to remove the artefacts from the =m2t=
+collection.
+
+*** Add primitives to feature selector                                :story:
+
+It would be nice to be able to associate a primitive to the selector,
+so that instead of:
+
+:             ftg.enabled = s.get_by_name(fct.value(), enabled_feature);
+
+We could simply do:
+
+:             ftg.enabled = s.get_by_name(fct, enabled_feature);
+
+This would also mean that you couldn't use a string by mistake.
+
+*** Prune non-generatable types from logical model                    :story:
+
+Add a pruning transform that filters out all non-generatable types
+from logical model.
+
+*** Add the notion of a major and a minor technical space             :story:
+
+When we move visual studio and other elements out of the current
+technical spaces, we will need some way of distinguishing between a
+"primary" technical space (e.g. C++, C# etc) and a "secondary"
+technical space (e.g. visual studio, etc). We could use emacs'
+convention and call these major and minor technical spaces.
+
+This should be a property of the backend.
+
+*** Create a common formatter interface                               :story:
+
+Once all language specific properties have been moved into their
+rightful places, we should be able to define a formatter interface
+that is suitable for both c++ and c# in generation. We should then
+also be able to move all of the registration code into generation. We
+then need to look at all containers of formatters etc to see what
+should be done at generation level.
+
+Once we have a common formatter interface, we can add the formatters
+themselves to the =element_artefacts= tuple. Then we can just iterate
+through the tuples and call the formatter instead having to do
+look-ups.
+
+Also, at this point we can then update the physical elements generated
+code to generate the transform code for backend and facet
+(e.g. delegation and aggregation of the result).
+
+*** Add documentation to archetypes headers                           :story:
+
+At present we are ignoring the documentation we supply with the
+archetype. We need to populate the wale KVPs with it and make use of
+it in the wale template.
+
 *** Associate git details with components                             :story:
 
 If the model of the component had access to the git repository
@@ -4989,6 +5891,19 @@ as per [[*Consider adding "deprecated feature names"][this story]].
 
 Stories that deal with cleaning up the code base.
 
+*** Detect duplicate attributes via validator                         :story:
+
+At present if we add two attributes with the same name, we get a weird
+exception in the guts of the logical model:
+
+: 2020-10-01 11:25:07.331325 [TRACE] [logical.helpers.configuration_model_set_adapter] Extracting: tests_directory_name (dogen.physical.entities.project_path_properties.tests_directory_name)
+: 2020-10-01 11:25:07.331328 [TRACE] [logical.helpers.configuration_model_set_adapter] Extracting: tests_directory_name (dogen.physical.entities.project_path_properties.tests_directory_name)
+: 2020-10-01 11:25:07.331331 [ERROR] [logical.helpers.configuration_model_set_adapter] Duplicate qualified name for configuration: dogen.physical.entities.project_path_properties.tests_directory_name
+
+It would be more user friendly if we had a validator, probably even at
+the codec level, that throws if there are attributes with duplicate
+names.
+
 *** Use GCC to code generate tests in nightly                         :story:
 
 At present we seem to be using the clang binary to code generate the
@@ -6882,20 +7797,6 @@ And for models:
 We could also add the search path, e.g. looked in directories X, Y and
 Z.
 
-*** Improve errors in dia objects                                     :story:
-
-At present when adding blanks (spaces) in a dia object we get the
-following error:
-
-: 2014-11-09 23:05:58.936785 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::unordered_map<std::string, facet_settings>
-: 2014-11-09 23:05:58.938301 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
-: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
-: [P12tag_workflow] = Code generation failure.
-
-There is no clue as to which object caused the error. Add a class name
-and dia object ID to the exception. We should add a test for this as well.
-
 *** Improve error messages on empty meta-data                         :story:
 
 Consider a meta-data entry without a value, in a dia diagram (model
@@ -7101,31 +8002,6 @@ Notes:
   database is detected.
 - if foreign keys are used we need to detect them and ensure we
   populate the data accordingly.
-
-*** Handling of unsupported dia objects                               :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of Dia shapes that are
-not supported by dogen so that my diagrams can be as expressive as
-required.
-#+end_quote
-
-At present when we try to use a dia object that dogen knows nothing
-about we get an error; for example using a standard line results in:
-
-: 2014-09-10 08:09:43.480906 [ERROR] [dia_to_sml.processor] Invalid value for object type: Standard - Line
-: 2014-09-10 08:09:43.487060 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/processor.cpp(124): Throw in function dogen::dia_to_sml::object_types dogen::dia_to_sml::processor::parse_object_type(const std::string &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
-: std::exception::what: Invalid value for object type: Standard - Line
-
-However, it may make more sense to just ignore these. To do so we
-could relax the code in processor (object_types):
-
-:    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-:    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
-
-We should also consider having a =strict= command line option to
-enable/disable this behaviour.
 
 *** Add warning for unused references                                 :story:
 
@@ -7497,23 +8373,6 @@ make use of it, we should error. The user must then go and disable
 explicitly the facet on the affected object via the meta data. We
 should not silently disable facets.
 
-*** Detect invalid child nodes in dia diagram                         :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know when there are invalid child
-nodes in diagram so that I can fix them.
-#+end_quote
-
-When copying a set of classes from a diagram, where these classes
-where contained in a package, dia seems to copy across the =childnode=
-id. This is a problem because when pasted in a new diagram, if those
-classes are not in a package there is now the potential for total
-mismatching - for instance, they could be children of an
-association. Dogen should validate that children belong to UML
-elements which can have children, and if not issue good error
-messages - perhaps even talking about the possible cause for the
-error.
-
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one
@@ -7636,12 +8495,6 @@ has less than two connections is less than helpful:
 We should really try to detail which object ID failed, as well as
 details of the connected object if possible, etc.
 
-*** Add tests for duplicate identifiers in Dia                        :story:
-
-Detect if a diagram defines the same class or package multiple
-times. Should throw an exception. We should also detect multiple
-properties with the same name.
-
 *** Add run spec targets for each test                                :story:
 
 We could piggy back on the ctest functionality and add a target for
@@ -7669,12 +8522,6 @@ become very readable.
 
 At present we are validating that all built-in types work but we don't
 check that an invalid type doesn't work.
-
-*** Split library into JSON and dia                                   :story:
-
-We should supply the PDMs models as both. This is a good test for PDMs
-to make sure that all functionality is available on both. Actually
-this story may be superseded by the work on the core library.
 
 *** Create or update samples folder                                   :story:
 
@@ -8165,7 +9012,7 @@ There is nothing stopping us from using a GtkBuilder / Glade XML file
 to do the boiler plate setup of the UI. With a bit more work one could
 potentially even generate the bindings for a presentation model.
 
-*** Investigate support for automatic diagram updates                  :epic:
+*** Investigate support for automatic model updates                    :epic:
 
 For classes that are manually generated, it would be really nice if we
 could update the properties of the class in the diagram from the
@@ -8195,6 +9042,7 @@ code. Implementation-wise we'd have to:
 - integrate clang libraries with dogen;
 - create tool - or perhaps we should just have an "update diagram"
   mode in dogen?
+
 *** Code generation as a service                                       :epic:
 
 *Latest Understanding*
@@ -8616,6 +9464,7 @@ Links:
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 - [[https://github.com/federicotdn/verb][verb]]: Verb is a package for Emacs which allows you to organize and
   send HTTP requests.
+- [[https://github.com/PoiScript/orgize][orgize GH]]: A Rust library for parsing orgmode files.
 
 *** Dogen studio: builds and binaries for users                       :story:
 
@@ -10598,25 +11447,6 @@ We should look at these articles for ideas on how to create generators
 that use coroutines.
 
 - [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
-
-*** Allow placing types in the global module in Dia                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to code-generate certain types in the
-global namespace so that I don't have to manually code them.
-#+end_quote
-
-At present all types in a Dia diagram are placed in the model
-module. However, there may be cases where one may wish to place types
-in the global module. At present this is only done in the hardware
-model, and that is supplied via JSON. However, we may need to do this
-from Dia. Find example use cases for this first.
-
-In terms of implementation, a trait could be added to dia
-=dia.use_global_module=. This would force the type to be contained
-directly in the global module rather than the model module. If the
-trait is used in the model or a package, all types in the containing
-scope will inherit it.
 
 *** Add support for =std::forward_list=                               :story:
 
@@ -18435,35 +19265,6 @@ that I can create "bridge" APIs.
 Once we have proper C support, it should be doable to have a C++ facet
 that automatically exposes a C interface.
 
-*** Add conversion (encoding) support for Dia                         :story:
-
-Approach:
-
-- create an XML schema from the DTD and use the XSD tool to generate
-  serialisation code. See how many differences we get by doing trivial
-  document updates (in particular, updating colours of elements). If
-  this works, we can replace the existing dia model with the XSD
-  generated code.
-
-Use cases:
-
-- update the colours of the diagram according to the dogen palette.
-- it would be nice if one could take a JSON model and generate a dia
-  diagram for it. This is non-trivial because it would require
-  computing all of the sizes and locations for all UML elements.
-- we could then allow users to submit models in say JSON, eCore etc
-  and produce a PNG of the model so they could visualise it. We could
-  also try to consume dia as a shared library instead of running the
-  full program - e.g. create a service that takes in a dia diagram and
-  returns the PNG.
-- automatic diagram updates (see story below).
-
-Related stories:
-
-- [[*Add support for XSD tool][Add support for XSD tool]]
-- [[*Improvements to dia model][Improvements to dia model]]
-- [[*Investigate support for automatic diagram updates][Investigate support for automatic diagram updates]]
-
 *** Improvements to Dogen's dia model                                 :story:
 
 Assorted notes on cleaning-up the dia model:
@@ -18563,71 +19364,6 @@ directly so that I don't have to rely on CMake.
 At present we rely on CMake as the C++ meta-build system. There is
 nothing stopping us from supporting more native build systems such as
 Visual Studio. Consider adding direct support for Visual Studio.
-
-*** Improve the integration of dogen with dia                          :epic:
-
-It would be great if the model generation in dia was slightly more
-interactive:
-
-- dia could have a button to run/configure an external tool, where the
-  setup for dogen would be kept.
-- pushing an execute button would code generate.
-- pushing a validate button would validate the current diagram, taking
-  into account declared references. references to types that are not
-  resolved could make the class or function go red.
-
-The idea is to do the least intrusive changes in dia that would
-provide us with this support. In order to access dogen, instead of
-running the executable and parsing the command line output, it would
-make more sense to create a C interface that supports these specific
-use cases (and nothing else).
-
-Dia already has a plugin interface, so we should bind to that rather
-than require dia to compile against dogen.
-
-*** Dia limitations that impact dogen usage                            :epic:
-
-Collection of limitations we found in Dia that are annoying when using
-it in anger with dogen:
-
-- moving types in and out of packages does not work very well.
-- comments for packages are missing.
-- cannot wrap attributes; this is a problem when we have attributes
-  with very long types.
-- changing a diagram in the filesystem does not trigger any alerts:
-  its very easy to loose changes because one updates the files from
-  git but the diagram was opened in dia, and did not refresh.
-- crossing lines (associations, etc) should "curve" up so that one can
-  still follow the relationship.
-- dia should have a UUID associated with each element so we can track
-  those and know of renames.
-- dia should have an XMI export.
-- dia should allow selecting groups of objects based on some criteria:
-  stereotypes matching regex, class names, classes in namespace, etc.
-- attributes should have stereotypes.
-
-It seems like dia is also using GitHub these days:
-
-- https://github.com/GNOME/dia
-- https://gitlab.gnome.org/GNOME/dia
-
-If we have a go at creating any patches for the above ideas we should
-submit a PR. This repo cannot be used to submit PRs.
-
-Investigation on Python: it seems its fairly trivial to extend dia
-using python:
-
-- [[https://wiki.gnome.org/Apps/Dia/Python][Dia Python Plugin]]: includes lots of scripts.
-- [[http://pastebin.com/pPkL3PxQ][Manipulating UML in Dia's Python Console]]
-- [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
-
-Another interesting thing to do is to add validation support at the
-Dia level. First we need validation support to be implemented. Once
-that is done, we could create a python plugin that calls dogen on the
-diagram, retrieves the errors (marked against Dia objects) and then
-updates the diagram with errors/warnings. For example, we could mark
-the classes in red/yellow. If dia had tooltips we could also display
-the errors as tooltips.
 
 *** Consider adding YQL support                                        :epic:
 
