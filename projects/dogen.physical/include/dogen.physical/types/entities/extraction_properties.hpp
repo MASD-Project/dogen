@@ -30,9 +30,6 @@
 
 namespace dogen::physical::entities {
 
-/**
- * @brief Properties related to extraction.
- */
 class extraction_properties final {
 public:
     extraction_properties() = default;
@@ -46,15 +43,10 @@ public:
     explicit extraction_properties(const boost::filesystem::path& cpp_headers_output_directory);
 
 public:
-    /**
-     * @brief Directory in which to place C++ header files. Must be a relative path.
-     */
-    /**@{*/
     const boost::filesystem::path& cpp_headers_output_directory() const;
     boost::filesystem::path& cpp_headers_output_directory();
     void cpp_headers_output_directory(const boost::filesystem::path& v);
     void cpp_headers_output_directory(const boost::filesystem::path&& v);
-    /**@}*/
 
 public:
     bool operator==(const extraction_properties& rhs) const;

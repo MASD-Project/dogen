@@ -188,9 +188,9 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
       << "\"enable_backend_directories\": " << v.enable_backend_directories() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"project_path_properties\": " << v.project_path_properties()
+      << "\"project_path_properties\": " << v.project_path_properties() << ", "
+      << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);
 }

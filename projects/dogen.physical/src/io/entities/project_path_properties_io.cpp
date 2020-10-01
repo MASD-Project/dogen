@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const project_path_properties& v) {
       << "\"tests_directory_name\": " << "\"" << tidy_up_string(v.tests_directory_name()) << "\"" << ", "
       << "\"templates_directory_name\": " << "\"" << tidy_up_string(v.templates_directory_name()) << "\"" << ", "
       << "\"templates_file_extension\": " << "\"" << tidy_up_string(v.templates_file_extension()) << "\"" << ", "
-      << "\"enable_unique_file_names\": " << v.enable_unique_file_names()
+      << "\"enable_unique_file_names\": " << v.enable_unique_file_names() << ", "
+      << "\"headers_output_directory\": " << "\"" << tidy_up_string(v.headers_output_directory()) << "\""
       << " }";
     return(s);
 }

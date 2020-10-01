@@ -53,7 +53,8 @@ public:
         const std::string& tests_directory_name,
         const std::string& templates_directory_name,
         const std::string& templates_file_extension,
-        const bool enable_unique_file_names);
+        const bool enable_unique_file_names,
+        const std::string& headers_output_directory);
 
 public:
     const std::string& include_directory_name() const;
@@ -102,6 +103,16 @@ public:
     bool enable_unique_file_names() const;
     void enable_unique_file_names(const bool v);
 
+    /**
+     * @brief Directory in which to place C++ header files. Must be a relative path.
+     */
+    /**@{*/
+    const std::string& headers_output_directory() const;
+    std::string& headers_output_directory();
+    void headers_output_directory(const std::string& v);
+    void headers_output_directory(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const project_path_properties& rhs) const;
     bool operator!=(const project_path_properties& rhs) const {
@@ -123,6 +134,7 @@ private:
     std::string templates_directory_name_;
     std::string templates_file_extension_;
     bool enable_unique_file_names_;
+    std::string headers_output_directory_;
 };
 
 }

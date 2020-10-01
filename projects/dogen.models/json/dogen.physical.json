@@ -1369,18 +1369,6 @@
       ]
     },
     {
-      "name": "entities::extraction_properties",
-      "documentation": "Properties related to extraction.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "cpp_headers_output_directory",
-          "type": "boost::filesystem::path",
-          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::denormalised_archetype_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1621,16 +1609,16 @@
           "documentation": "If true, backends should have backend-specific directories to store their artefacts.\n"
         },
         {
-          "name": "extraction_properties",
-          "type": "extraction_properties"
-        },
-        {
           "name": "enabled_archetype_for_element",
           "type": "std::unordered_set<identification::entities::logical_meta_physical_id>"
         },
         {
           "name": "project_path_properties",
           "type": "project_path_properties"
+        },
+        {
+          "name": "extraction_properties",
+          "type": "extraction_properties"
         }
       ]
     },
@@ -1759,6 +1747,11 @@
         {
           "name": "enable_unique_file_names",
           "type": "bool"
+        },
+        {
+          "name": "headers_output_directory",
+          "type": "std::string",
+          "documentation": "Directory in which to place C++ header files. Must be a relative path.\n"
         }
       ]
     },
@@ -1862,6 +1855,16 @@
           "tagged_values": {
             "masd.variability.binding_point": "global"
           }
+        }
+      ]
+    },
+    {
+      "name": "entities::extraction_properties",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cpp_headers_output_directory",
+          "type": "boost::filesystem::path"
         }
       ]
     }
