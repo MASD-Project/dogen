@@ -249,8 +249,9 @@ std::unordered_map<physical_meta_id,
                    entities::denormalised_archetype_properties>
 meta_model_properties_transform::obtain_denormalised_archetype_properties(
     const identification::entities::physical_meta_name_indices& idx,
-    const entities::meta_model_properties& mmp) {
+    entities::meta_model_properties& mmp) {
 
+    // FIXME: we are not iterating through the part properties.
     std::unordered_map<physical_meta_id,
                        entities::denormalised_archetype_properties> r;
     for (const auto& backend_pair : idx.archetype_names_by_backend_by_facet()) {
@@ -297,7 +298,10 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
                     BOOST_THROW_EXCEPTION(
                         transform_exception(archetype_not_found + an.value()));
                 }
-                const auto& archetype(k->second);
+                auto& archetype(k->second);
+                archetype.backend_properties(backend);
+                archetype.facet_properties(facet);
+
                 dap.archetype_enabled(archetype.enabled());
                 dap.archetype_overwrite(archetype.overwrite());
                 r.insert(std::make_pair(an, dap));

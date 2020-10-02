@@ -165,7 +165,7 @@ private:
                               entities::denormalised_archetype_properties>
     obtain_denormalised_archetype_properties(
         const identification::entities::physical_meta_name_indices& idx,
-        const entities::meta_model_properties& mmp);
+        entities::meta_model_properties& mmp);
 
     /**
      * @brief Returns the IDs of all enabled backends.
