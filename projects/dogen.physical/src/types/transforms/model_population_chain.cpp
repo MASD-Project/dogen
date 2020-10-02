@@ -26,7 +26,6 @@
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
-#include "dogen.physical/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
 #include "dogen.physical/types/transforms/model_population_chain.hpp"
 
@@ -70,7 +69,6 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      */
     formatting_transform::apply(ctx, m);
     generability_transform::apply(ctx, m);
-    extraction_properties_transform::apply(ctx, m);
 
     stp.end_chain(m);
 }

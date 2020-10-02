@@ -1444,13 +1444,6 @@
       ]
     },
     {
-      "name": "transforms::extraction_properties_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "entities::backend_properties",
       "documentation": "Properties related to the backend.\n",
       "fallback_element_type": "masd::object",
@@ -1615,10 +1608,6 @@
         {
           "name": "project_path_properties",
           "type": "project_path_properties"
-        },
-        {
-          "name": "extraction_properties",
-          "type": "extraction_properties"
         }
       ]
     },
@@ -1857,16 +1846,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "global"
           }
-        }
-      ]
-    },
-    {
-      "name": "entities::extraction_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "cpp_headers_output_directory",
-          "type": "boost::filesystem::path"
         }
       ]
     }

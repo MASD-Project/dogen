@@ -23,7 +23,6 @@
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
 #include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
-#include "dogen.physical/io/entities/extraction_properties_io.hpp"
 #include "dogen.physical/io/entities/meta_model_properties_io.hpp"
 #include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 #include "dogen.physical/io/entities/project_path_properties_io.hpp"
@@ -182,8 +181,7 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"project_path_properties\": " << v.project_path_properties() << ", "
-      << "\"extraction_properties\": " << v.extraction_properties()
+      << "\"project_path_properties\": " << v.project_path_properties()
       << " }";
     return(s);
 }

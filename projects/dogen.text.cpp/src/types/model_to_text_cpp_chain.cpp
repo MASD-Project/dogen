@@ -74,10 +74,10 @@ formattables::locator model_to_text_cpp_chain::make_locator(
     const auto& mn(m.logical().name());
     const auto odp(output_directory_path);
     const auto& mmp(m.physical().meta_model_properties());
-    const auto& ep(mmp.extraction_properties());
-    const auto chodp(ep.cpp_headers_output_directory());
+    const auto& ppp(mmp.project_path_properties());
+    const auto hod(ppp.headers_output_directory());
     const auto ekd(enable_backend_directories);
-    const formattables::locator r(odp, chodp, fm, frp, cfg, mn, ekd);
+    const formattables::locator r(odp, hod, fm, frp, cfg, mn, ekd);
     return r;
 }
 
