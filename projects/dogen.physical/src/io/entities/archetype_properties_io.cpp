@@ -21,6 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/part_properties_io.hpp"
+#include "dogen.physical/io/entities/facet_properties_io.hpp"
+#include "dogen.physical/io/entities/backend_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_properties_io.hpp"
 
 namespace boost {
@@ -60,7 +63,10 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
-      << "\"computed_postfix\": " << "\"" << tidy_up_string(v.computed_postfix()) << "\""
+      << "\"computed_postfix\": " << "\"" << tidy_up_string(v.computed_postfix()) << "\"" << ", "
+      << "\"backend_properties\": " << v.backend_properties() << ", "
+      << "\"facet_properties\": " << v.facet_properties() << ", "
+      << "\"part_properties\": " << v.part_properties()
       << " }";
     return(s);
 }

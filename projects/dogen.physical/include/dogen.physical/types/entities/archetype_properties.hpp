@@ -28,6 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
+#include "dogen.physical/types/entities/part_properties.hpp"
+#include "dogen.physical/types/entities/facet_properties.hpp"
+#include "dogen.physical/types/entities/backend_properties.hpp"
 
 namespace dogen::physical::entities {
 
@@ -50,7 +53,10 @@ public:
         const bool enabled,
         const boost::optional<bool>& overwrite,
         const std::string& postfix,
-        const std::string& computed_postfix);
+        const std::string& computed_postfix,
+        const dogen::physical::entities::backend_properties& backend_properties,
+        const dogen::physical::entities::facet_properties& facet_properties,
+        const dogen::physical::entities::part_properties& part_properties);
 
 public:
     /**
@@ -91,6 +97,21 @@ public:
     void computed_postfix(const std::string&& v);
     /**@}*/
 
+    const dogen::physical::entities::backend_properties& backend_properties() const;
+    dogen::physical::entities::backend_properties& backend_properties();
+    void backend_properties(const dogen::physical::entities::backend_properties& v);
+    void backend_properties(const dogen::physical::entities::backend_properties&& v);
+
+    const dogen::physical::entities::facet_properties& facet_properties() const;
+    dogen::physical::entities::facet_properties& facet_properties();
+    void facet_properties(const dogen::physical::entities::facet_properties& v);
+    void facet_properties(const dogen::physical::entities::facet_properties&& v);
+
+    const dogen::physical::entities::part_properties& part_properties() const;
+    dogen::physical::entities::part_properties& part_properties();
+    void part_properties(const dogen::physical::entities::part_properties& v);
+    void part_properties(const dogen::physical::entities::part_properties&& v);
+
 public:
     bool operator==(const archetype_properties& rhs) const;
     bool operator!=(const archetype_properties& rhs) const {
@@ -106,6 +127,9 @@ private:
     boost::optional<bool> overwrite_;
     std::string postfix_;
     std::string computed_postfix_;
+    dogen::physical::entities::backend_properties backend_properties_;
+    dogen::physical::entities::facet_properties facet_properties_;
+    dogen::physical::entities::part_properties part_properties_;
 };
 
 }

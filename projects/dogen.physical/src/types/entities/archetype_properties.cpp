@@ -29,17 +29,26 @@ archetype_properties::archetype_properties(archetype_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       postfix_(std::move(rhs.postfix_)),
-      computed_postfix_(std::move(rhs.computed_postfix_)) { }
+      computed_postfix_(std::move(rhs.computed_postfix_)),
+      backend_properties_(std::move(rhs.backend_properties_)),
+      facet_properties_(std::move(rhs.facet_properties_)),
+      part_properties_(std::move(rhs.part_properties_)) { }
 
 archetype_properties::archetype_properties(
     const bool enabled,
     const boost::optional<bool>& overwrite,
     const std::string& postfix,
-    const std::string& computed_postfix)
+    const std::string& computed_postfix,
+    const dogen::physical::entities::backend_properties& backend_properties,
+    const dogen::physical::entities::facet_properties& facet_properties,
+    const dogen::physical::entities::part_properties& part_properties)
     : enabled_(enabled),
       overwrite_(overwrite),
       postfix_(postfix),
-      computed_postfix_(computed_postfix) { }
+      computed_postfix_(computed_postfix),
+      backend_properties_(backend_properties),
+      facet_properties_(facet_properties),
+      part_properties_(part_properties) { }
 
 void archetype_properties::swap(archetype_properties& other) noexcept {
     using std::swap;
@@ -47,13 +56,19 @@ void archetype_properties::swap(archetype_properties& other) noexcept {
     swap(overwrite_, other.overwrite_);
     swap(postfix_, other.postfix_);
     swap(computed_postfix_, other.computed_postfix_);
+    swap(backend_properties_, other.backend_properties_);
+    swap(facet_properties_, other.facet_properties_);
+    swap(part_properties_, other.part_properties_);
 }
 
 bool archetype_properties::operator==(const archetype_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         postfix_ == rhs.postfix_ &&
-        computed_postfix_ == rhs.computed_postfix_;
+        computed_postfix_ == rhs.computed_postfix_ &&
+        backend_properties_ == rhs.backend_properties_ &&
+        facet_properties_ == rhs.facet_properties_ &&
+        part_properties_ == rhs.part_properties_;
 }
 
 archetype_properties& archetype_properties::operator=(archetype_properties other) {
@@ -116,6 +131,54 @@ void archetype_properties::computed_postfix(const std::string& v) {
 
 void archetype_properties::computed_postfix(const std::string&& v) {
     computed_postfix_ = std::move(v);
+}
+
+const dogen::physical::entities::backend_properties& archetype_properties::backend_properties() const {
+    return backend_properties_;
+}
+
+dogen::physical::entities::backend_properties& archetype_properties::backend_properties() {
+    return backend_properties_;
+}
+
+void archetype_properties::backend_properties(const dogen::physical::entities::backend_properties& v) {
+    backend_properties_ = v;
+}
+
+void archetype_properties::backend_properties(const dogen::physical::entities::backend_properties&& v) {
+    backend_properties_ = std::move(v);
+}
+
+const dogen::physical::entities::facet_properties& archetype_properties::facet_properties() const {
+    return facet_properties_;
+}
+
+dogen::physical::entities::facet_properties& archetype_properties::facet_properties() {
+    return facet_properties_;
+}
+
+void archetype_properties::facet_properties(const dogen::physical::entities::facet_properties& v) {
+    facet_properties_ = v;
+}
+
+void archetype_properties::facet_properties(const dogen::physical::entities::facet_properties&& v) {
+    facet_properties_ = std::move(v);
+}
+
+const dogen::physical::entities::part_properties& archetype_properties::part_properties() const {
+    return part_properties_;
+}
+
+dogen::physical::entities::part_properties& archetype_properties::part_properties() {
+    return part_properties_;
+}
+
+void archetype_properties::part_properties(const dogen::physical::entities::part_properties& v) {
+    part_properties_ = v;
+}
+
+void archetype_properties::part_properties(const dogen::physical::entities::part_properties&& v) {
+    part_properties_ = std::move(v);
 }
 
 }

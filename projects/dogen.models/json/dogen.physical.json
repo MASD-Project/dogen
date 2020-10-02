@@ -1554,6 +1554,18 @@
           "name": "computed_postfix",
           "type": "std::string",
           "documentation": "Computed postfix to apply to all artefacts of this archetype.\n"
+        },
+        {
+          "name": "backend_properties",
+          "type": "backend_properties"
+        },
+        {
+          "name": "facet_properties",
+          "type": "facet_properties"
+        },
+        {
+          "name": "part_properties",
+          "type": "part_properties"
         }
       ]
     },
