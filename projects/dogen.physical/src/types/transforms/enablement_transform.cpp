@@ -52,7 +52,7 @@ static std::string overwrite_feature("overwrite");
 
 const std::string null_artefact("Artefact cannot be null: ");
 const std::string global_configuration_not_found(
-    "Could not find global enablement configuration for formatter: ");
+    "Could not find global enablement configuration for archetype: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string duplicate_element_archetype("Duplicate element archetype: ");
 const std::string logical_meta_id_not_found("Logical meta ID not found: ");
@@ -170,12 +170,11 @@ void enablement_transform::populate_enablement_properties(
 }
 
 void enablement_transform::compute_enablement_for_artefact(
-    const entities::denormalised_archetype_properties&
-    global_enablement_properties, const physical_meta_id& archetype,
+    const entities::archetype_properties& archetype_properties,
     entities::artefact& a) {
 
-    const auto& gep(global_enablement_properties);
-    auto& lep(a.enablement_properties());
+    const auto& global(archetype_properties);
+    auto& local(a.enablement_properties());
 
     /*
      * If the overwrite flag is set locally at the archetype or facet
@@ -212,49 +211,50 @@ void enablement_transform::compute_enablement_for_artefact(
             return s.str();
         });
     BOOST_LOG_SEV(lg, trace) << "Overwrite flags. Local archetype: "
-                             << lambda(lep.archetype_overwrite())
+                             << lambda(local.archetype_overwrite())
                              << " Local facet: "
-                             << lambda(lep.facet_overwrite())
+                             << lambda(local.facet_overwrite())
                              << " Global archetype: "
-                             << lambda(gep.archetype_overwrite())
+                             << lambda(local.archetype_overwrite())
                              << " Global facet: "
-                             << gep.facet_overwrite();
+                             << local.facet_overwrite();
 
-    if (lep.archetype_overwrite())
-        lep.overwrite(*lep.archetype_overwrite());
-    else if (lep.facet_overwrite())
-        lep.overwrite(*lep.facet_overwrite());
-    else if (gep.archetype_overwrite())
-        lep.overwrite(*gep.archetype_overwrite());
+    if (local.archetype_overwrite())
+        local.overwrite(*local.archetype_overwrite());
+    else if (local.facet_overwrite())
+        local.overwrite(*local.facet_overwrite());
+    else if (global.overwrite())
+        local.overwrite(*global.overwrite());
     else
-        lep.overwrite(gep.facet_overwrite());
+        local.overwrite(global.facet_properties().overwrite());
 
     /*
      * Ensure we log the enablement details with the early returns.
      */
     auto log_scope_exit(make_scope_exit([&]() mutable {
-            BOOST_LOG_SEV(lg, trace) << "Enablement for: " << archetype
-                                     << " value: " << lep.enabled()
-                                     << " overwrite: " << lep.overwrite();
+            BOOST_LOG_SEV(lg, trace) << "Enablement for: "
+                                     << archetype_properties.meta_id()
+                                     << " value: " << local.enabled()
+                                     << " overwrite: " << local.overwrite();
         }));
 
     /*
-     * If the entire backend has been disabled globally, the formatter
-     * will be disabled too.
+     * If the entire backend has been disabled globally, the text
+     * transform will be disabled too.
      */
-    if (!gep.backend_enabled()) {
+    if (!global.backend_properties().enabled()) {
         BOOST_LOG_SEV(lg, trace) << "Backend is disabled.";
-        lep.enabled(false);
+        local.enabled(false);
         return;
     }
 
     /*
-     * Check to see if the formatter enablement field has been set
-     * locally. If so, it takes precedence over the facet
+     * Check to see if the text transform enablement field has been
+     * set locally. If so, it takes precedence over the facet
      * configuration.
      */
-    if (lep.archetype_enabled()) {
-        lep.enabled(*lep.archetype_enabled());
+    if (local.archetype_enabled()) {
+        local.enabled(*local.archetype_enabled());
         return;
     }
 
@@ -275,8 +275,8 @@ void enablement_transform::compute_enablement_for_artefact(
      * apply to. So its kind of "local" but really more like "profile
      * level local".
      */
-    if (lep.facet_enabled()) {
-        lep.enabled(*lep.facet_enabled());
+    if (local.facet_enabled()) {
+        local.enabled(*local.facet_enabled());
         return;
     }
 
@@ -298,14 +298,14 @@ void enablement_transform::compute_enablement_for_artefact(
      * course support this scenario for local enablement, which is
      * very common.
      */
-    lep.enabled(gep.archetype_enabled() && gep.facet_enabled());
+    local.enabled(global.enabled() && global.facet_properties().enabled());
 }
 
 void enablement_transform::compute_enablement_for_region(
     const std::unordered_map<identification::entities::logical_meta_id,
     identification::entities::archetype_name_set>& pmn_by_lmid,
-    const std::unordered_map<physical_meta_id,
-    entities::denormalised_archetype_properties>& global_enablement_properties,
+    const std::unordered_map<identification::entities::physical_meta_id,
+    entities::archetype_properties> archetype_properties,
     std::unordered_set<logical_meta_physical_id>& enabled_archetype_for_element,
     entities::region& pr) {
 
@@ -360,8 +360,8 @@ void enablement_transform::compute_enablement_for_region(
          * Global enablement must always be present for all
          * archetypes.
          */
-        const auto i(global_enablement_properties.find(pmid));
-        if (i == global_enablement_properties.end()) {
+        const auto i(archetype_properties.find(pmid));
+        if (i == archetype_properties.end()) {
             BOOST_LOG_SEV(lg, error) << global_configuration_not_found << pmid;
             BOOST_THROW_EXCEPTION(transform_exception(
                     global_configuration_not_found + pmid.value()));
@@ -372,7 +372,7 @@ void enablement_transform::compute_enablement_for_region(
          * Compute the enablement values for this artefact. If it is
          * not enabled there is no much to be done so bomb out.
          */
-        compute_enablement_for_artefact(gep, pmid, a);
+        compute_enablement_for_artefact(gep, a);
         if (!a.enablement_properties().enabled()) {
             BOOST_LOG_SEV(lg, trace) << "Artefact not enabled.";
             continue;
@@ -430,12 +430,12 @@ void enablement_transform::apply(const context& ctx, entities::model& m) {
      * Now, for each artefact, compute their enablement properties.
      */
     const auto& mmp(m.meta_model_properties());
-    const auto& dap(mmp.denormalised_archetype_properties());
+    const auto& ap(mmp.archetype_properties());
     const auto& lmn(in.archetype_names_by_logical_meta_name());
     std::unordered_set<logical_meta_physical_id> eafe;
     for(auto& pair : m.regions_by_logical_id()) {
         auto& as(pair.second);
-        compute_enablement_for_region(lmn, dap, eafe, as);
+        compute_enablement_for_region(lmn, ap, eafe, as);
     }
 
     /*
