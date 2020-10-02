@@ -4961,13 +4961,13 @@ The format used is dependent on the technical space the artefact belongs to.#</d
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="156,-108"/>
+        <dia:point val="149,-109"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.95,-108.05;177.34,-102.75"/>
+        <dia:rectangle val="148.95,-109.05;170.34,-103.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="156,-108"/>
+        <dia:point val="149,-109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -5171,7 +5171,7 @@ The format used is dependent on the technical space the artefact belongs to.#</d
         <dia:point val="175.38,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="174.63,-104.45;186.262,-96.2"/>
+        <dia:rectangle val="174.63,-105.45;178.262,-96.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5179,8 +5179,8 @@ The format used is dependent on the technical space the artefact belongs to.#</d
       <dia:attribute name="orth_points">
         <dia:point val="175.38,-97"/>
         <dia:point val="175.38,-99"/>
-        <dia:point val="186.062,-99"/>
-        <dia:point val="186.062,-104.4"/>
+        <dia:point val="178.062,-99"/>
+        <dia:point val="178.062,-105.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11686,13 +11686,13 @@ space. If you are targetting more than one, it will automatically be set to true
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O84">
       <dia:attribute name="obj_pos">
-        <dia:point val="181,-108"/>
+        <dia:point val="173,-109"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="180.95,-108.05;191.175,-104.35"/>
+        <dia:rectangle val="172.95,-109.05;183.175,-105.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="181,-108"/>
+        <dia:point val="173,-109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -17645,13 +17645,13 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="215,-108"/>
+        <dia:point val="208,-109"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="214.95,-108.05;229.795,-100.35"/>
+        <dia:rectangle val="207.95,-109.05;222.795,-101.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="215,-108"/>
+        <dia:point val="208,-109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -18036,13 +18036,13 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O134">
       <dia:attribute name="obj_pos">
-        <dia:point val="204,-118"/>
+        <dia:point val="197,-118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="203.95,-118.05;218.795,-110.35"/>
+        <dia:rectangle val="196.95,-118.05;211.795,-110.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="204,-118"/>
+        <dia:point val="197,-118"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -18289,13 +18289,13 @@ The overwrite flag is computed from the configuration read out.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O135">
       <dia:attribute name="obj_pos">
-        <dia:point val="197,-97"/>
+        <dia:point val="198,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="196.95,-97.05;212.565,-88.55"/>
+        <dia:rectangle val="197.95,-97.05;213.565,-88.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="197,-97"/>
+        <dia:point val="198,-97"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -18914,13 +18914,13 @@ computed values on the back of physical transforms.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O137">
       <dia:attribute name="obj_pos">
-        <dia:point val="193,-108"/>
+        <dia:point val="186,-109"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="192.95,-108.05;208.565,-101.95"/>
+        <dia:rectangle val="185.95,-109.05;201.565,-102.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="193,-108"/>
+        <dia:point val="186,-109"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -19791,7 +19791,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="158.19,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.44,-102.85;166.845,-96.2"/>
+        <dia:rectangle val="157.44,-103.85;159.845,-96.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19799,8 +19799,8 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="158.19,-97"/>
         <dia:point val="158.19,-99"/>
-        <dia:point val="166.645,-99"/>
-        <dia:point val="166.645,-102.8"/>
+        <dia:point val="159.645,-99"/>
+        <dia:point val="159.645,-103.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21389,7 +21389,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="195.545,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.795,-88.65;204.957,-82.4"/>
+        <dia:rectangle val="194.795,-88.65;205.957,-82.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21397,8 +21397,8 @@ Only required when the part is located outside of the component directory.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="195.545,-84"/>
         <dia:point val="195.545,-87"/>
-        <dia:point val="204.757,-87"/>
-        <dia:point val="204.757,-88.6"/>
+        <dia:point val="205.757,-87"/>
+        <dia:point val="205.757,-88.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21467,19 +21467,19 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O156">
       <dia:attribute name="obj_pos">
-        <dia:point val="197,-97"/>
+        <dia:point val="198,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="196.25,-102;200.957,-95.4"/>
+        <dia:rectangle val="193.707,-103;198.75,-95.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="197,-97"/>
-        <dia:point val="197,-99"/>
-        <dia:point val="200.757,-99"/>
-        <dia:point val="200.757,-101.95"/>
+        <dia:point val="198,-97"/>
+        <dia:point val="198,-99"/>
+        <dia:point val="193.757,-99"/>
+        <dia:point val="193.757,-102.95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21548,19 +21548,19 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O157">
       <dia:attribute name="obj_pos">
-        <dia:point val="204.757,-97"/>
+        <dia:point val="205.757,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="204.007,-110.45;211.572,-95.4"/>
+        <dia:rectangle val="204.322,-110.45;206.507,-95.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="204.757,-97"/>
-        <dia:point val="204.757,-99"/>
-        <dia:point val="211.373,-99"/>
-        <dia:point val="211.373,-110.4"/>
+        <dia:point val="205.757,-97"/>
+        <dia:point val="205.757,-99"/>
+        <dia:point val="204.373,-99"/>
+        <dia:point val="204.373,-110.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21629,19 +21629,19 @@ Only required when the part is located outside of the component directory.#</dia
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O158">
       <dia:attribute name="obj_pos">
-        <dia:point val="212.515,-97"/>
+        <dia:point val="213.515,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.765,-100.45;222.572,-95.4"/>
+        <dia:rectangle val="212.765,-101.45;215.572,-95.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="212.515,-97"/>
-        <dia:point val="212.515,-99"/>
-        <dia:point val="222.373,-99"/>
-        <dia:point val="222.373,-100.4"/>
+        <dia:point val="213.515,-97"/>
+        <dia:point val="213.515,-99"/>
+        <dia:point val="215.373,-99"/>
+        <dia:point val="215.373,-101.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
