@@ -54,6 +54,7 @@ static const std::string cpp_backend("masd.cpp");
 static std::string enabled_feature("enabled");
 static std::string directory_feature("directory_name");
 static std::string overwrite_feature("overwrite");
+static std::string postfix_feature("postfix");
 const std::string cpp_headers_output_directory_feature(
     "masd.cpp.headers_output_directory");
 const std::string enable_backend_directories_feature(
@@ -116,10 +117,12 @@ meta_model_properties_transform::make_facet_feature_group(
     std::unordered_map<physical_meta_id, facet_feature_group> r;
     for (const auto& pair : idx.facet_names_by_backend_name()) {
         for (const auto& fct : pair.second) {
+            const auto idv(fct.value());
             facet_feature_group fg;
-            fg.enabled = s.get_by_name(fct.value(), enabled_feature);
-            fg.overwrite = s.get_by_name(fct.value(), overwrite_feature);
-            fg.directory_name = s.get_by_name(fct.value(), directory_feature);
+            fg.enabled = s.get_by_name(idv, enabled_feature);
+            fg.overwrite = s.get_by_name(idv, overwrite_feature);
+            fg.directory_name = s.get_by_name(idv, directory_feature);
+            fg.postfix = s.get_by_name(idv, postfix_feature);
             r.insert(std::make_pair(fct, fg));
         }
     }
@@ -134,11 +137,12 @@ meta_model_properties_transform::make_archetype_feature_group(
     const feature_selector s(fm);
     std::unordered_map<physical_meta_id, archetype_feature_group> r;
     for (const auto& pmn : idx.all()) {
-        const auto pmid(pmn.id().value());
+        const auto idv(pmn.id().value());
         archetype_feature_group fg;
-        fg.enabled = s.get_by_name(pmid, enabled_feature);
-        fg.overwrite = s.get_by_name(pmid, overwrite_feature);
-        r.insert(std::make_pair(pmid, fg));
+        fg.enabled = s.get_by_name(idv, enabled_feature);
+        fg.overwrite = s.get_by_name(idv, overwrite_feature);
+        fg.postfix = s.get_by_name(idv, postfix_feature);
+        r.insert(std::make_pair(idv, fg));
     }
     return r;
 }
@@ -216,6 +220,8 @@ meta_model_properties_transform::obtain_facet_properties(
         fp.enabled(s.get_boolean_content_or_default(fg.enabled));
         fp.overwrite(s.get_boolean_content_or_default(fg.overwrite));
         fp.directory_name(s.get_text_content_or_default(fg.directory_name));
+        fp.postfix(s.get_text_content_or_default(fg.postfix));
+
         r[facet_id] = fp;
     }
 
@@ -241,6 +247,8 @@ meta_model_properties_transform::obtain_archetype_properties(
         ap.enabled(s.get_boolean_content_or_default(fg.enabled));
         if (s.has_configuration_point(fg.overwrite))
             ap.overwrite(s.get_boolean_content(fg.overwrite));
+
+        ap.postfix(s.get_text_content_or_default(fg.postfix));
         r[archetype_id] = ap;
     }
 
@@ -366,6 +374,9 @@ inline void compute_directory_name(const Element& e, Properties& p) {
         p.computed_directory_name(p.directory_name());
     else
         p.computed_directory_name(e.directory_name());
+
+    BOOST_LOG_SEV(lg, trace) << "Computed directory name: "
+                             << p.computed_directory_name();
 }
 
 template<typename Element, typename Properties>
@@ -375,6 +386,8 @@ inline void compute_postfix(const Element& e, Properties& p) {
         p.computed_postfix(p.postfix());
     else
         p.computed_postfix(e.postfix());
+
+    BOOST_LOG_SEV(lg, trace) << "Computed postfix: " << p.computed_postfix();
 }
 
 void meta_model_properties_transform::compute_directory_names_and_postfixes(
@@ -383,6 +396,8 @@ void meta_model_properties_transform::compute_directory_names_and_postfixes(
 
     for (const auto& be : mm.backends()) {
         const auto& bid(be.meta_name().id());
+        BOOST_LOG_SEV(lg, trace) << "Processing backend: " << bid.value();
+
         const auto i(mmp.backend_properties().find(bid));
         if (i == mmp.backend_properties().end()) {
             BOOST_LOG_SEV(lg, error) << backend_not_found << bid;
@@ -393,8 +408,10 @@ void meta_model_properties_transform::compute_directory_names_and_postfixes(
         auto& bp(i->second);
         compute_directory_name(be, bp);
 
-        for (auto& pair : be.facets()) {
-            const auto& fid(pair.first);
+        for (const auto& fct_pair : be.facets()) {
+            const auto& fid(fct_pair.first);
+            BOOST_LOG_SEV(lg, trace) << "Processing facet: " << fid.value();
+
              const auto j(mmp.facet_properties().find(fid));
              if (j == mmp.facet_properties().end()) {
                  BOOST_LOG_SEV(lg, error) << facet_not_found << fid;
@@ -402,10 +419,27 @@ void meta_model_properties_transform::compute_directory_names_and_postfixes(
                      transform_exception(facet_not_found + fid.value()));
              }
 
-             auto& fctp(j->second);
-             const auto& fct(pair.second);
-             compute_directory_name(fct, fctp);
-             compute_postfix(fct, fctp);
+             auto& fp(j->second);
+             const auto& fct(fct_pair.second);
+             compute_directory_name(fct, fp);
+             compute_postfix(fct, fp);
+
+             for (const auto& arch_pair: fct.archetypes()) {
+                 const auto& arch_id(arch_pair.first);
+                 BOOST_LOG_SEV(lg, trace) << "Processing archetype: "
+                                          << arch_id.value();
+
+                 const auto k(mmp.archetype_properties().find(arch_id));
+                 if (k == mmp.archetype_properties().end()) {
+                     BOOST_LOG_SEV(lg, error) << archetype_not_found << arch_id;
+                     BOOST_THROW_EXCEPTION(transform_exception(
+                             archetype_not_found + arch_id.value()));
+                 }
+
+                 auto& ap(k->second);
+                 const auto& arch(arch_pair.second);
+                 compute_postfix(arch, ap);
+             }
         }
 
         // FIXME
@@ -481,12 +515,6 @@ apply(const context& ctx, entities::model& m) {
     mmp.project_path_properties(obtain_project_path_properties(fm,cfg));
 
     /*
-     * Now populate the denormalised archetype properties by querying
-     * the containers we've already populated.
-     */
-    populate_denormalised_archetype_properties(idx, mmp);
-
-    /*
      * Obtain the set of enabled backends.
      */
     mmp.enabled_backends(obtain_enabled_backends(mmp));
@@ -497,9 +525,15 @@ apply(const context& ctx, entities::model& m) {
     compute_enable_backend_directories(fm, cfg, mmp);
 
     /*
-     * Finally, compute the directory names and postfixes.
+     * Compute the directory names and postfixes.
      */
     compute_directory_names_and_postfixes(pmm, mmp);
+
+    /*
+     * Finally populate the denormalised archetype properties by
+     * querying the containers we've already populated.
+     */
+    populate_denormalised_archetype_properties(idx, mmp);
 
     stp.end_transform(m);
 }

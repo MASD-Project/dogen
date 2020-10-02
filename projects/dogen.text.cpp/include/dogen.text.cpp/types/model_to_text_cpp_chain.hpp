@@ -76,17 +76,6 @@ private:
         const text::entities::model& m) const;
 
     /**
-     * @brief Creates a file locator.
-     */
-    formattables::locator make_locator(
-        const boost::filesystem::path& output_directory_path,
-        const variability::entities::feature_model& fm,
-        const variability::entities::configuration& cfg,
-        const transforms::repository& frp,
-        const bool enable_backend_directories,
-        const text::entities::model& m) const;
-
-    /**
      * @brief Create the files representation of the formattables model.
      */
     void apply(boost::shared_ptr<tracing::tracer> tracer,

@@ -64,23 +64,6 @@ model_to_text_cpp_chain::create_formattables_model(
     return fw.execute(feature_model, rcfg, l, frp, m);
 }
 
-formattables::locator model_to_text_cpp_chain::make_locator(
-    const boost::filesystem::path& output_directory_path,
-    const variability::entities::feature_model& fm,
-    const variability::entities::configuration& cfg,
-    const transforms::repository& frp, const bool enable_backend_directories,
-    const text::entities::model& m) const {
-
-    const auto& mn(m.logical().name());
-    const auto odp(output_directory_path);
-    const auto& mmp(m.physical().meta_model_properties());
-    const auto& ppp(mmp.project_path_properties());
-    const auto hod(ppp.headers_output_directory());
-    const auto ekd(enable_backend_directories);
-    const formattables::locator r(odp, hod, fm, frp, cfg, mn, ekd);
-    return r;
-}
-
 identification::entities::physical_meta_id
 model_to_text_cpp_chain::id() const {
     static identification::entities::physical_meta_id r("masd.cpp");
@@ -117,8 +100,8 @@ model_to_text_cpp_chain::technical_space() const {
     return identification::entities::technical_space::cpp;
 }
 
-void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
-    const bool enable_backend_directories,  text::entities::model& m) const {
+void model_to_text_cpp_chain::apply(const text::transforms::context& ctx,
+    const bool /*enable_backend_directories*/, text::entities::model& m) const {
     const auto id(m.provenance().logical_name().id());
     tracing::scoped_chain_tracer stp(lg, "C++ M2T chain", transform_id,
         id.value(), *ctx.tracer());
@@ -126,12 +109,10 @@ void model_to_text_cpp_chain::apply( const text::transforms::context& ctx,
     /*
      * Create the locator.
      */
-    const auto& odp(ctx.output_directory_path());
     const auto& feature_model(*ctx.feature_model());
     const auto& rcfg(*m.logical().root_module()->configuration());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(odp, feature_model, rcfg, frp,
-            enable_backend_directories, m));
+    const formattables::locator l(m.physical());
 
     /*
      * Generate the formattables model.
