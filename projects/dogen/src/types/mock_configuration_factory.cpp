@@ -57,7 +57,6 @@ make(const boost::filesystem::path& target, const std::string& activity) const {
     BOOST_LOG_SEV(lg, debug) << "Creating mock configuration.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic_string();
 
-
     using namespace dogen;
     configuration r;
 
@@ -83,6 +82,7 @@ make(const boost::filesystem::path& target, const std::string& activity) const {
         tracing_configuration tcfg;
         tcfg.level(tracing_level::detail);
         tcfg.format(tracing_format::org_mode);
+        tcfg.backend(tracing_backend::file);
         tcfg.guids_enabled(true);
         tcfg.logging_impact("severe");
         tcfg.output_directory(r.byproduct_directory() / tracing_directory);
