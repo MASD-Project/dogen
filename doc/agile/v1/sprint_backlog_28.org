@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-01 Thu 12:36]
+#+CAPTION: Clock summary at [2020-10-02 Fri 12:20]
 | <75>                                                        |         |       |      |       |
 | Headline                                                    | Time    |       |      |     % |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                | *22:19* |       |      | 100.0 |
+| *Total time*                                                | *26:35* |       |      | 100.0 |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                     | 22:19   |       |      | 100.0 |
-| Active                                                      |         | 22:19 |      | 100.0 |
-| edit release notes for previous sprint                      |         |       | 3:44 |  16.7 |
-| Create a demo and presentation for previous sprint          |         |       | 0:39 |   2.9 |
-| Sprint and product backlog grooming                         |         |       | 3:09 |  14.1 |
-| Directory names and postfixes are PMM properties            |         |       | 5:27 |  24.4 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.4 |
-| Analysis on a formatables refactor                          |         |       | 0:31 |   2.3 |
-| Rename =name= to =codec= name                               |         |       | 0:20 |   1.5 |
-| Add full and relative path processing to PM                 |         |       | 2:27 |  11.0 |
-| Create a factory transform for parts and archetype kinds    |         |       | 3:45 |  16.8 |
-| Create a video series on the formatables refactor           |         |       | 0:15 |   1.1 |
-| Move C++ locator into physical model                        |         |       | 1:43 |   7.7 |
+| Stories                                                     | 26:35   |       |      | 100.0 |
+| Active                                                      |         | 26:35 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |  14.0 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   2.4 |
+| Sprint and product backlog grooming                         |         |       | 3:09 |  11.8 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  20.5 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.2 |
+| Analysis on a formatables refactor                          |         |       | 0:31 |   1.9 |
+| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   3.8 |
+| Rename =name= to =codec= name                               |         |       | 0:20 |   1.3 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |   9.2 |
+| Create a factory transform for parts and archetype kinds    |         |       | 3:45 |  14.1 |
+| Create a video series on the formatables refactor           |         |       | 0:15 |   0.9 |
+| Move C++ locator into physical model                        |         |       | 4:59 |  18.7 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -363,6 +364,16 @@ representation so that we do not have to hold so much state in the
 brain when refactoring. This also means we can reduce an open ended
 problem to a series of well-defined software engineering tasks.
 
+*** COMPLETED Tracing of orchestration chains is incorrect            :story:
+    CLOSED: [2020-10-02 Fri 12:16]
+    :LOGBOOK:
+    CLOCK: [2020-10-02 Fri 11:16]--[2020-10-02 Fri 12:16] =>  1:00
+    :END:
+
+Whilst looking for tracing information, we noticed that the layout of
+directories does not correspond to the chains in source code. Fix the
+transforms as required.
+
 *** STARTED Rename =name= to =codec= name                             :story:
     :LOGBOOK:
     CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
@@ -458,6 +469,10 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-10-02 Fri 12:16]
+    CLOCK: [2020-10-02 Fri 09:52]--[2020-10-02 Fri 11:15] =>  1:23
+    CLOCK: [2020-10-02 Fri 09:01]--[2020-10-02 Fri 09:51] =>  0:50
+    CLOCK: [2020-10-01 Thu 15:22]--[2020-10-01 Thu 16:25] =>  1:03
     CLOCK: [2020-10-01 Thu 10:52]--[2020-10-01 Thu 12:35] =>  1:43
     :END:
 
@@ -469,6 +484,36 @@ from a coding perspective (video uploads, etc).
   archetype. Then use the kind to determine the locator function to
   call.
 - merge extraction properties with =project_path_properties=.
+
+*** Create a de-normalised representation of archetype properties     :story:
+
+At present we have a two-step process: we first read the global
+configuration for a model, create the corresponding properties
+(e.g. backend, facet, archetype properties) and then we post-process
+these to create the =denormalised_archetype_properties=. However, we
+never really need to think about the individual properties because
+they are always used in the context of an artefact, which means we
+care about the de-normalised archetype properties only. Therefore we
+should:
+
+- have a =archetype_properties= that is composed of all other
+  properties;
+- change the =meta_model_properties_transform= to create internal
+  indices of properties as a first step for the final property
+  generation but do not expose these containers.
+
+Notes:
+
+- we can't remove the top-level containers just yet because they are
+  used within the formatables namespace. However, these appear to be
+  legacy use cases, so we should be able to do so when we get rid of
+  this namespace.
+
+*** Fix name of configuration tracing file                            :story:
+
+This name looks incorrect:
+
+: 00000-configuration--initial_input.json
 
 *** Move C# locator into physical model                               :story:
 
