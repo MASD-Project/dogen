@@ -13,26 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-02 Fri 12:20]
+#+CAPTION: Clock summary at [2020-10-02 Fri 18:08]
 | <75>                                                        |         |       |      |       |
 | Headline                                                    | Time    |       |      |     % |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                | *26:35* |       |      | 100.0 |
+| *Total time*                                                | *32:44* |       |      | 100.0 |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                     | 26:35   |       |      | 100.0 |
-| Active                                                      |         | 26:35 |      | 100.0 |
-| edit release notes for previous sprint                      |         |       | 3:44 |  14.0 |
-| Create a demo and presentation for previous sprint          |         |       | 0:39 |   2.4 |
-| Sprint and product backlog grooming                         |         |       | 3:09 |  11.8 |
-| Directory names and postfixes are PMM properties            |         |       | 5:27 |  20.5 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.2 |
-| Analysis on a formatables refactor                          |         |       | 0:31 |   1.9 |
-| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   3.8 |
-| Rename =name= to =codec= name                               |         |       | 0:20 |   1.3 |
-| Add full and relative path processing to PM                 |         |       | 2:27 |   9.2 |
-| Create a factory transform for parts and archetype kinds    |         |       | 3:45 |  14.1 |
-| Create a video series on the formatables refactor           |         |       | 0:15 |   0.9 |
-| Move C++ locator into physical model                        |         |       | 4:59 |  18.7 |
+| Stories                                                     | 32:44   |       |      | 100.0 |
+| Active                                                      |         | 32:44 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |  11.4 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   2.0 |
+| Sprint and product backlog grooming                         |         |       | 3:09 |   9.6 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  16.6 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.0 |
+| Analysis on a formatables refactor                          |         |       | 0:31 |   1.6 |
+| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   3.1 |
+| Issues with emacs                                           |         |       | 1:09 |   3.5 |
+| Rename =name= to =codec= name                               |         |       | 0:20 |   1.0 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |   7.5 |
+| Create a factory transform for parts and archetype kinds    |         |       | 5:30 |  16.8 |
+| Create a video series on the formatables refactor           |         |       | 0:15 |   0.8 |
+| Move C++ locator into physical model                        |         |       | 8:14 |  25.2 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -374,6 +375,16 @@ Whilst looking for tracing information, we noticed that the layout of
 directories does not correspond to the chains in source code. Fix the
 transforms as required.
 
+*** STARTED Issues with emacs                                         :story:
+    :LOGBOOK:
+    CLOCK: [2020-10-02 Fri 14:51]--[2020-10-02 Fri 16:00] =>  1:09
+    :END:
+
+Time spent troubleshooting emacs issues.
+
+- problems loading very long lines in log file. Tried using [[https://www.emacswiki.org/emacs/SoLong][so-long]]
+  and fundamental, but still could not solve the problem.
+
 *** STARTED Rename =name= to =codec= name                             :story:
     :LOGBOOK:
     CLOCK: [2020-09-24 Thu 20:38]--[2020-09-24 Thu 20:58] =>  0:20
@@ -437,6 +448,7 @@ clear. We need a container with:
 
 *** STARTED Create a factory transform for parts and archetype kinds  :story:
     :LOGBOOK:
+    CLOCK: [2020-10-02 Fri 16:22]--[2020-10-02 Fri 18:07] =>  1:45
     CLOCK: [2020-09-27 Sun 14:28]--[2020-09-27 Sun 16:56] =>  2:28
     CLOCK: [2020-09-27 Sun 13:50]--[2020-09-27 Sun 13:59] =>  0:09
     CLOCK: [2020-09-27 Sun 13:26]--[2020-09-27 Sun 13:40] =>  0:14
@@ -469,7 +481,9 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
-    CLOCK: [2020-10-02 Fri 12:16]
+    CLOCK: [2020-10-02 Fri 16:01]--[2020-10-02 Fri 18:07] =>  2:06
+    CLOCK: [2020-10-02 Fri 14:30]--[2020-10-02 Fri 14:50] =>  0:20
+    CLOCK: [2020-10-02 Fri 12:16]--[2020-10-02 Fri 13:05] =>  0:49
     CLOCK: [2020-10-02 Fri 09:52]--[2020-10-02 Fri 11:15] =>  1:23
     CLOCK: [2020-10-02 Fri 09:01]--[2020-10-02 Fri 09:51] =>  0:50
     CLOCK: [2020-10-01 Thu 15:22]--[2020-10-01 Thu 16:25] =>  1:03
@@ -478,12 +492,12 @@ from a coding perspective (video uploads, etc).
 
 - move locator configuration to physical model, reusing meta-model
   properties as required.
+- merge extraction properties with =project_path_properties=.
 - create a locator helper in physical model.
 - create a legacy full path transform in physical model. Have a set of
   simple functions that return the archetype kind given an
   archetype. Then use the kind to determine the locator function to
   call.
-- merge extraction properties with =project_path_properties=.
 
 *** Create a de-normalised representation of archetype properties     :story:
 
@@ -508,6 +522,14 @@ Notes:
   used within the formatables namespace. However, these appear to be
   legacy use cases, so we should be able to do so when we get rid of
   this namespace.
+
+*** Validate no two artefacts have the same ID                        :story:
+
+At present it is possible to generate two artefacts with the same path
+(which is the physical ID) and then have them overwrite each
+other. This causes diffs that are very difficult to get to the bottom
+of. It would be better to fail with a validation that detects
+duplicates.
 
 *** Fix name of configuration tracing file                            :story:
 
