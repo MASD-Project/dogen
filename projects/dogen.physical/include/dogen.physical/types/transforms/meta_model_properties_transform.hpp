@@ -159,11 +159,9 @@ private:
         const variability::entities::configuration& cfg);
 
     /**
-     * @brief Reads the de-normalised archetype properties.
+     * @brief Populates the de-normalised archetype properties.
      */
-    static std::unordered_map<identification::entities::physical_meta_id,
-                              entities::denormalised_archetype_properties>
-    obtain_denormalised_archetype_properties(
+    static void populate_denormalised_archetype_properties(
         const identification::entities::physical_meta_name_indices& idx,
         entities::meta_model_properties& mmp);
 

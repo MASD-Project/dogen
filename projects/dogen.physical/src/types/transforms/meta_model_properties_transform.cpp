@@ -248,15 +248,11 @@ meta_model_properties_transform::obtain_archetype_properties(
     return r;
 }
 
-std::unordered_map<physical_meta_id,
-                   entities::denormalised_archetype_properties>
-meta_model_properties_transform::obtain_denormalised_archetype_properties(
+void meta_model_properties_transform::populate_denormalised_archetype_properties(
     const identification::entities::physical_meta_name_indices& idx,
     entities::meta_model_properties& mmp) {
 
     // FIXME: we are not iterating through the part properties.
-    std::unordered_map<physical_meta_id,
-                       entities::denormalised_archetype_properties> r;
     for (const auto& backend_pair : idx.archetype_names_by_backend_by_facet()) {
         /*
          * First we locate the backend for the current batch of
@@ -290,11 +286,6 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
              * populate the denormalised properties.
              */
             for (const auto& an : facet_pair.second) {
-                entities::denormalised_archetype_properties dap;
-                dap.backend_enabled(backend.enabled());
-                dap.facet_enabled(facet.enabled());
-                dap.facet_overwrite(facet.overwrite());
-
                 const auto k(mmp.archetype_properties().find(an));
                 if (k == mmp.archetype_properties().end()) {
                     BOOST_LOG_SEV(lg, error) << archetype_not_found << an;
@@ -304,14 +295,9 @@ meta_model_properties_transform::obtain_denormalised_archetype_properties(
                 auto& archetype(k->second);
                 archetype.backend_properties(backend);
                 archetype.facet_properties(facet);
-
-                dap.archetype_enabled(archetype.enabled());
-                dap.archetype_overwrite(archetype.overwrite());
-                r.insert(std::make_pair(an, dap));
             }
         }
     }
-    return r;
 }
 
 std::unordered_set<identification::entities::physical_meta_id>
@@ -498,8 +484,7 @@ apply(const context& ctx, entities::model& m) {
      * Now populate the denormalised archetype properties by querying
      * the containers we've already populated.
      */
-    mmp.denormalised_archetype_properties(
-        obtain_denormalised_archetype_properties(idx, mmp));
+    populate_denormalised_archetype_properties(idx, mmp);
 
     /*
      * Obtain the set of enabled backends.
