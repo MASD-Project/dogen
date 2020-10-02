@@ -23,23 +23,27 @@
 namespace dogen::physical::entities {
 
 part_properties::part_properties(part_properties&& rhs)
-    : file_path_(std::move(rhs.file_path_)),
+    : meta_name_(std::move(rhs.meta_name_)),
+      file_path_(std::move(rhs.file_path_)),
       relative_path_(std::move(rhs.relative_path_)),
       directory_name_(std::move(rhs.directory_name_)),
       computed_directory_name_(std::move(rhs.computed_directory_name_)) { }
 
 part_properties::part_properties(
+    const dogen::identification::entities::physical_meta_name& meta_name,
     const boost::filesystem::path& file_path,
     const boost::filesystem::path& relative_path,
     const std::string& directory_name,
     const std::string& computed_directory_name)
-    : file_path_(file_path),
+    : meta_name_(meta_name),
+      file_path_(file_path),
       relative_path_(relative_path),
       directory_name_(directory_name),
       computed_directory_name_(computed_directory_name) { }
 
 void part_properties::swap(part_properties& other) noexcept {
     using std::swap;
+    swap(meta_name_, other.meta_name_);
     swap(file_path_, other.file_path_);
     swap(relative_path_, other.relative_path_);
     swap(directory_name_, other.directory_name_);
@@ -47,7 +51,8 @@ void part_properties::swap(part_properties& other) noexcept {
 }
 
 bool part_properties::operator==(const part_properties& rhs) const {
-    return file_path_ == rhs.file_path_ &&
+    return meta_name_ == rhs.meta_name_ &&
+        file_path_ == rhs.file_path_ &&
         relative_path_ == rhs.relative_path_ &&
         directory_name_ == rhs.directory_name_ &&
         computed_directory_name_ == rhs.computed_directory_name_;
@@ -57,6 +62,22 @@ part_properties& part_properties::operator=(part_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::identification::entities::physical_meta_name& part_properties::meta_name() const {
+    return meta_name_;
+}
+
+dogen::identification::entities::physical_meta_name& part_properties::meta_name() {
+    return meta_name_;
+}
+
+void part_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
+    meta_name_ = v;
+}
+
+void part_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const boost::filesystem::path& part_properties::file_path() const {

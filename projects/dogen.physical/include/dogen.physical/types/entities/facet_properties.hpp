@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -44,6 +45,7 @@ public:
 
 public:
     facet_properties(
+        const dogen::identification::entities::physical_meta_name& meta_name,
         const bool enabled,
         const bool overwrite,
         const std::string& directory_name,
@@ -52,6 +54,16 @@ public:
         const std::string& computed_postfix);
 
 public:
+    /**
+     * @brief Meta-name for this meta-element.
+     */
+    /**@{*/
+    const dogen::identification::entities::physical_meta_name& meta_name() const;
+    dogen::identification::entities::physical_meta_name& meta_name();
+    void meta_name(const dogen::identification::entities::physical_meta_name& v);
+    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    /**@}*/
+
     /**
      * @brief If true, the facet is enabled.
      */
@@ -119,6 +131,7 @@ public:
     facet_properties& operator=(facet_properties other);
 
 private:
+    dogen::identification::entities::physical_meta_name meta_name_;
     bool enabled_;
     bool overwrite_;
     std::string directory_name_;

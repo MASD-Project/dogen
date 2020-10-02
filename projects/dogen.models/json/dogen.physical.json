@@ -1446,6 +1446,9 @@
     {
       "name": "entities::backend_properties",
       "documentation": "Properties related to the backend.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1496,6 +1499,9 @@
     {
       "name": "entities::facet_properties",
       "documentation": "Properties related to the facet.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1533,6 +1539,9 @@
     {
       "name": "entities::archetype_properties",
       "documentation": "Properties related to the archetype.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1626,6 +1635,9 @@
     {
       "name": "entities::part_properties",
       "documentation": "Properties related to the part.\n",
+      "stereotypes": [
+        "MetaNameable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
