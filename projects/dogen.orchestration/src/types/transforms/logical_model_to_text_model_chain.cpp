@@ -130,15 +130,15 @@ text::entities::model_set logical_model_to_text_model_chain::
 apply(const context& ctx, const logical::entities::output_model_set& loms) {
     const auto id(loms.name().id());
     const auto& tracer(*ctx.text_context().tracer());
-    tracing::scoped_transform_tracer stp(lg,
-        "logical model to text model transform", transform_id, id.value(),
+    tracing::scoped_chain_tracer stp(lg,
+        "logical model to text model chain", transform_id, id.value(),
         tracer, loms);
 
     text::entities::model_set r;
     for(const auto& lm : loms.models())
         r.models().push_back(apply(ctx, lm));
 
-    stp.end_transform(r);
+    stp.end_chain(r);
     return r;
 }
 
