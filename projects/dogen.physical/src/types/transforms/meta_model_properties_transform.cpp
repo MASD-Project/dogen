@@ -184,13 +184,14 @@ meta_model_properties_transform::obtain_backend_properties(
     const configuration_selector s(cfg);
     std::unordered_map<physical_meta_id, entities::backend_properties> r;
     for (const auto& pair : fgs) {
-        const auto& backend(pair.first);
+        const auto& backend_id(pair.first);
         const auto& fg(pair.second);
 
         entities::backend_properties bp;
+        bp.meta_id(backend_id);
         bp.enabled(s.get_boolean_content_or_default(fg.enabled));
         bp.directory_name(s.get_text_content_or_default(fg.directory_name));
-        r[backend] = bp;
+        r[backend_id] = bp;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created backend properties. Result: " << r;
@@ -207,14 +208,15 @@ meta_model_properties_transform::obtain_facet_properties(
     const configuration_selector s(cfg);
     std::unordered_map<physical_meta_id, entities::facet_properties> r;
     for (const auto& pair : fgs) {
-        const auto& facet(pair.first);
+        const auto& facet_id(pair.first);
         const auto& fg(pair.second);
 
         entities::facet_properties fp;
+        fp.meta_id(facet_id);
         fp.enabled(s.get_boolean_content_or_default(fg.enabled));
         fp.overwrite(s.get_boolean_content_or_default(fg.overwrite));
         fp.directory_name(s.get_text_content_or_default(fg.directory_name));
-        r[facet] = fp;
+        r[facet_id] = fp;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created facet properties. Result: " << r;
@@ -231,14 +233,15 @@ meta_model_properties_transform::obtain_archetype_properties(
     const configuration_selector s(cfg);
     std::unordered_map<physical_meta_id, entities::archetype_properties> r;
     for (const auto& pair : fgs) {
-        const auto& archetype(pair.first);
+        const auto& archetype_id(pair.first);
         const auto& fg(pair.second);
 
         entities::archetype_properties ap;
+        ap.meta_id(archetype_id);
         ap.enabled(s.get_boolean_content_or_default(fg.enabled));
         if (s.has_configuration_point(fg.overwrite))
             ap.overwrite(s.get_boolean_content(fg.overwrite));
-        r[archetype] = ap;
+        r[archetype_id] = ap;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Created archetype properties. Result: " << r;
