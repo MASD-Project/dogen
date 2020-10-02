@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/facet_properties_io.hpp"
-#include "dogen.identification/io/entities/physical_meta_name_io.hpp"
+#include "dogen.identification/io/entities/physical_meta_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -43,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::facet_properties\"" << ", "
-      << "\"meta_name\": " << v.meta_name() << ", "
+      << "\"meta_id\": " << v.meta_id() << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "

@@ -27,14 +27,14 @@ facet_properties::facet_properties()
       overwrite_(static_cast<bool>(0)) { }
 
 facet_properties::facet_properties(
-    const dogen::identification::entities::physical_meta_name& meta_name,
+    const dogen::identification::entities::physical_meta_id& meta_id,
     const bool enabled,
     const bool overwrite,
     const std::string& directory_name,
     const std::string& computed_directory_name,
     const std::string& postfix,
     const std::string& computed_postfix)
-    : meta_name_(meta_name),
+    : meta_id_(meta_id),
       enabled_(enabled),
       overwrite_(overwrite),
       directory_name_(directory_name),
@@ -44,7 +44,7 @@ facet_properties::facet_properties(
 
 void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
-    swap(meta_name_, other.meta_name_);
+    swap(meta_id_, other.meta_id_);
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(directory_name_, other.directory_name_);
@@ -54,7 +54,7 @@ void facet_properties::swap(facet_properties& other) noexcept {
 }
 
 bool facet_properties::operator==(const facet_properties& rhs) const {
-    return meta_name_ == rhs.meta_name_ &&
+    return meta_id_ == rhs.meta_id_ &&
         enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         directory_name_ == rhs.directory_name_ &&
@@ -69,20 +69,20 @@ facet_properties& facet_properties::operator=(facet_properties other) {
     return *this;
 }
 
-const dogen::identification::entities::physical_meta_name& facet_properties::meta_name() const {
-    return meta_name_;
+const dogen::identification::entities::physical_meta_id& facet_properties::meta_id() const {
+    return meta_id_;
 }
 
-dogen::identification::entities::physical_meta_name& facet_properties::meta_name() {
-    return meta_name_;
+dogen::identification::entities::physical_meta_id& facet_properties::meta_id() {
+    return meta_id_;
 }
 
-void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name& v) {
-    meta_name_ = v;
+void facet_properties::meta_id(const dogen::identification::entities::physical_meta_id& v) {
+    meta_id_ = v;
 }
 
-void facet_properties::meta_name(const dogen::identification::entities::physical_meta_name&& v) {
-    meta_name_ = std::move(v);
+void facet_properties::meta_id(const dogen::identification::entities::physical_meta_id&& v) {
+    meta_id_ = std::move(v);
 }
 
 bool facet_properties::enabled() const {

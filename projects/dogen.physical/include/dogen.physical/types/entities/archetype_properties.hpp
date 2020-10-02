@@ -31,7 +31,7 @@
 #include "dogen.physical/types/entities/part_properties.hpp"
 #include "dogen.physical/types/entities/facet_properties.hpp"
 #include "dogen.physical/types/entities/backend_properties.hpp"
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 
 namespace dogen::physical::entities {
 
@@ -51,7 +51,7 @@ public:
 
 public:
     archetype_properties(
-        const dogen::identification::entities::physical_meta_name& meta_name,
+        const dogen::identification::entities::physical_meta_id& meta_id,
         const bool enabled,
         const boost::optional<bool>& overwrite,
         const std::string& postfix,
@@ -62,13 +62,13 @@ public:
 
 public:
     /**
-     * @brief Meta-name for this meta-element.
+     * @brief Meta-id of the physical meta-element.
      */
     /**@{*/
-    const dogen::identification::entities::physical_meta_name& meta_name() const;
-    dogen::identification::entities::physical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::physical_meta_name& v);
-    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    const dogen::identification::entities::physical_meta_id& meta_id() const;
+    dogen::identification::entities::physical_meta_id& meta_id();
+    void meta_id(const dogen::identification::entities::physical_meta_id& v);
+    void meta_id(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
     /**
@@ -135,7 +135,7 @@ public:
     archetype_properties& operator=(archetype_properties other);
 
 private:
-    dogen::identification::entities::physical_meta_name meta_name_;
+    dogen::identification::entities::physical_meta_id meta_id_;
     bool enabled_;
     boost::optional<bool> overwrite_;
     std::string postfix_;

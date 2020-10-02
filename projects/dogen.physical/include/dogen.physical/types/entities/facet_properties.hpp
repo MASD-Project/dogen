@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
 
 namespace dogen::physical::entities {
 
@@ -45,7 +45,7 @@ public:
 
 public:
     facet_properties(
-        const dogen::identification::entities::physical_meta_name& meta_name,
+        const dogen::identification::entities::physical_meta_id& meta_id,
         const bool enabled,
         const bool overwrite,
         const std::string& directory_name,
@@ -55,13 +55,13 @@ public:
 
 public:
     /**
-     * @brief Meta-name for this meta-element.
+     * @brief Meta-id of the physical meta-element.
      */
     /**@{*/
-    const dogen::identification::entities::physical_meta_name& meta_name() const;
-    dogen::identification::entities::physical_meta_name& meta_name();
-    void meta_name(const dogen::identification::entities::physical_meta_name& v);
-    void meta_name(const dogen::identification::entities::physical_meta_name&& v);
+    const dogen::identification::entities::physical_meta_id& meta_id() const;
+    dogen::identification::entities::physical_meta_id& meta_id();
+    void meta_id(const dogen::identification::entities::physical_meta_id& v);
+    void meta_id(const dogen::identification::entities::physical_meta_id&& v);
     /**@}*/
 
     /**
@@ -131,7 +131,7 @@ public:
     facet_properties& operator=(facet_properties other);
 
 private:
-    dogen::identification::entities::physical_meta_name meta_name_;
+    dogen::identification::entities::physical_meta_id meta_id_;
     bool enabled_;
     bool overwrite_;
     std::string directory_name_;
