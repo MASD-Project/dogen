@@ -30,7 +30,7 @@
 namespace {
 
 const std::string
-transform_id("orchestration.transforms.physical_model_production_chain");
+transform_id("orchestration.transforms.text_model_production_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

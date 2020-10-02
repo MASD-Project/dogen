@@ -37,8 +37,7 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.generate_report_transform");
+const std::string transform_id("physical.transforms.generate_report_transform");
 
 const std::string reason_invalid("invalid");
 const std::string reason_newly_generated("newly generated");

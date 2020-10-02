@@ -26,8 +26,8 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.update_outputting_properties_transform");
+const std::string
+transform_id("physical.transforms.update_outputting_properties_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

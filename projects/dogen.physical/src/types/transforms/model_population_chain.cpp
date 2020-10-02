@@ -31,8 +31,7 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.write_artefacts_transform");
+const std::string transform_id("physical.transforms.model_population_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

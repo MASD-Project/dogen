@@ -35,8 +35,7 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.generate_patch_transform");
+const std::string transform_id("physical.transforms.generate_patch_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

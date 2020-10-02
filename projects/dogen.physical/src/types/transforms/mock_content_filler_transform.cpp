@@ -25,8 +25,8 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.mock_content_filler_transform");
+const std::string
+transform_id("physical.transforms.mock_content_filler_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

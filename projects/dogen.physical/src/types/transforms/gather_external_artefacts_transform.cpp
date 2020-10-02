@@ -35,8 +35,8 @@
 
 namespace {
 
-const std::string transform_id(
-    "physical.transforms.gather_external_artefacts_transform");
+const std::string
+transform_id("physical.transforms.gather_external_artefacts_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
