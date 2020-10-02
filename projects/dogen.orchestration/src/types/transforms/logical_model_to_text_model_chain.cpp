@@ -43,12 +43,12 @@
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/helpers/logical_to_physical_projector.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
-#include "dogen.orchestration/types/transforms/logical_model_to_text_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_text_model_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "orchestration.transforms.logical_model_to_text_model_transform");
+    "orchestration.transforms.logical_model_to_text_model_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -59,7 +59,7 @@ const std::string duplicate_id("Duplicate logical name: ");
 namespace dogen::orchestration::transforms {
 
 physical::entities::model
-logical_model_to_text_model_transform::
+logical_model_to_text_model_chain::
 create_physical_model(const logical::entities::model& lm,
     const identification::entities::logical_provenance& provenance,
     const std::list<text::entities::logical_physical_region>& regions) {
@@ -87,7 +87,7 @@ create_physical_model(const logical::entities::model& lm,
     return r;
 }
 
-text::entities::model logical_model_to_text_model_transform::
+text::entities::model logical_model_to_text_model_chain::
 apply(const context& ctx, const logical::entities::model& lm) {
     /*
      * The logical model can simply be copied across.
@@ -126,7 +126,7 @@ apply(const context& ctx, const logical::entities::model& lm) {
     return r;
 }
 
-text::entities::model_set logical_model_to_text_model_transform::
+text::entities::model_set logical_model_to_text_model_chain::
 apply(const context& ctx, const logical::entities::output_model_set& loms) {
     const auto id(loms.name().id());
     const auto& tracer(*ctx.text_context().tracer());

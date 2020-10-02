@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_CHAIN_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_TEXT_MODEL_CHAIN_HPP
 
 #include "dogen.identification/types/entities/logical_provenance.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -37,7 +37,7 @@ namespace dogen::orchestration::transforms {
  * @brief Transforms a logical model representation into a text
  * representation, performing an expansion into physical space.
  */
-class logical_model_to_text_model_transform final {
+class logical_model_to_text_model_chain final {
 private:
     /**
      * @brief Create a physical model from the supplied regions.
