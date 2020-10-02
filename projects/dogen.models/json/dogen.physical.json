@@ -1369,32 +1369,6 @@
       ]
     },
     {
-      "name": "entities::denormalised_archetype_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "backend_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "facet_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "facet_overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "archetype_enabled",
-          "type": "bool"
-        },
-        {
-          "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
-        }
-      ]
-    },
-    {
       "name": "transforms::model_population_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1612,10 +1586,6 @@
         {
           "name": "part_properties",
           "type": "std::unordered_map<identification::entities::physical_meta_id, part_properties>"
-        },
-        {
-          "name": "denormalised_archetype_properties",
-          "type": "std::unordered_map<identification::entities::physical_meta_id, denormalised_archetype_properties>"
         },
         {
           "name": "enabled_backends",

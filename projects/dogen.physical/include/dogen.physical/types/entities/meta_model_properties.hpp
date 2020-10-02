@@ -38,7 +38,6 @@
 #include "dogen.physical/types/entities/archetype_kind_properties.hpp"
 #include "dogen.identification/hash/entities/physical_meta_id_hash.hpp"
 #include "dogen.identification/types/entities/logical_meta_physical_id.hpp"
-#include "dogen.physical/types/entities/denormalised_archetype_properties.hpp"
 #include "dogen.identification/hash/entities/logical_meta_physical_id_hash.hpp"
 
 namespace dogen::physical::entities {
@@ -68,7 +67,6 @@ public:
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties>& archetype_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties>& archetype_kind_properties,
         const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& part_properties,
-        const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties,
         const std::unordered_set<dogen::identification::entities::physical_meta_id>& enabled_backends,
         const std::unordered_set<dogen::identification::entities::logical_meta_physical_id>& enabled_archetype_for_element,
         const dogen::physical::entities::project_path_properties& project_path_properties);
@@ -119,11 +117,6 @@ public:
     void part_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>& v);
     void part_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties>&& v);
 
-    const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties() const;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& denormalised_archetype_properties();
-    void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v);
-    void denormalised_archetype_properties(const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>&& v);
-
     /**
      * @brief Contains the IDs of all of the backends which are enabled.
      */
@@ -162,7 +155,6 @@ private:
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_properties> archetype_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::archetype_kind_properties> archetype_kind_properties_;
     std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::part_properties> part_properties_;
-    std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties> denormalised_archetype_properties_;
     std::unordered_set<dogen::identification::entities::physical_meta_id> enabled_backends_;
     std::unordered_set<dogen::identification::entities::logical_meta_physical_id> enabled_archetype_for_element_;
     dogen::physical::entities::project_path_properties project_path_properties_;

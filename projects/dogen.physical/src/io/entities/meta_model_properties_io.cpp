@@ -28,7 +28,6 @@
 #include "dogen.physical/io/entities/project_path_properties_io.hpp"
 #include "dogen.physical/io/entities/archetype_kind_properties_io.hpp"
 #include "dogen.identification/io/entities/logical_meta_physical_id_io.hpp"
-#include "dogen.physical/io/entities/denormalised_archetype_properties_io.hpp"
 
 namespace std {
 
@@ -122,24 +121,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::identification::entities::physical_meta_id, dogen::physical::entities::denormalised_archetype_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::identification::entities::physical_meta_id>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -178,7 +159,6 @@ std::ostream& operator<<(std::ostream& s, const meta_model_properties& v) {
       << "\"archetype_properties\": " << v.archetype_properties() << ", "
       << "\"archetype_kind_properties\": " << v.archetype_kind_properties() << ", "
       << "\"part_properties\": " << v.part_properties() << ", "
-      << "\"denormalised_archetype_properties\": " << v.denormalised_archetype_properties() << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
       << "\"project_path_properties\": " << v.project_path_properties()
