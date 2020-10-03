@@ -1856,6 +1856,13 @@
           "documentation": "Meta-id of the physical meta-element.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::legacy_paths_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
