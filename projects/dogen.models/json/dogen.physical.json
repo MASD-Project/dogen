@@ -1863,6 +1863,64 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::legacy_archetype_kind",
+      "documentation": "Kinds of archetypes available across all technical spaces.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "visual_studio_solution",
+          "type": ""
+        },
+        {
+          "name": "visual_studio_project",
+          "type": ""
+        },
+        {
+          "name": "odb_options",
+          "type": ""
+        },
+        {
+          "name": "msbuild_targets",
+          "type": ""
+        },
+        {
+          "name": "tests_cmakelists",
+          "type": ""
+        },
+        {
+          "name": "source_cmakelists",
+          "type": ""
+        },
+        {
+          "name": "include_cmakelists",
+          "type": ""
+        },
+        {
+          "name": "cpp_header",
+          "type": ""
+        },
+        {
+          "name": "cpp_implementation",
+          "type": ""
+        },
+        {
+          "name": "tests_cpp_main",
+          "type": ""
+        },
+        {
+          "name": "tests_cpp_implementation",
+          "type": ""
+        },
+        {
+          "name": "templates",
+          "type": ""
+        }
+      ]
     }
   ]
 }
