@@ -13,27 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-02 Fri 18:08]
+#+CAPTION: Clock summary at [2020-10-03 Sat 17:52]
 | <75>                                                        |         |       |      |       |
 | Headline                                                    | Time    |       |      |     % |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                | *32:44* |       |      | 100.0 |
+| *Total time*                                                | *34:25* |       |      | 100.0 |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                     | 32:44   |       |      | 100.0 |
-| Active                                                      |         | 32:44 |      | 100.0 |
-| edit release notes for previous sprint                      |         |       | 3:44 |  11.4 |
-| Create a demo and presentation for previous sprint          |         |       | 0:39 |   2.0 |
-| Sprint and product backlog grooming                         |         |       | 3:09 |   9.6 |
-| Directory names and postfixes are PMM properties            |         |       | 5:27 |  16.6 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   1.0 |
-| Analysis on a formatables refactor                          |         |       | 0:31 |   1.6 |
-| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   3.1 |
-| Issues with emacs                                           |         |       | 1:09 |   3.5 |
+| Stories                                                     | 34:25   |       |      | 100.0 |
+| Active                                                      |         | 34:25 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |  10.8 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   1.9 |
+| Sprint and product backlog grooming                         |         |       | 3:09 |   9.2 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  15.8 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   0.9 |
+| Analysis on a formatables refactor                          |         |       | 0:31 |   1.5 |
+| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   2.9 |
+| Issues with emacs                                           |         |       | 1:09 |   3.3 |
 | Rename =name= to =codec= name                               |         |       | 0:20 |   1.0 |
-| Add full and relative path processing to PM                 |         |       | 2:27 |   7.5 |
-| Create a factory transform for parts and archetype kinds    |         |       | 5:30 |  16.8 |
-| Create a video series on the formatables refactor           |         |       | 0:15 |   0.8 |
-| Move C++ locator into physical model                        |         |       | 8:14 |  25.2 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |   7.1 |
+| Create a factory transform for parts and archetype kinds    |         |       | 5:30 |  16.0 |
+| Create a video series on the formatables refactor           |         |       | 0:15 |   0.7 |
+| Move C++ locator into physical model                        |         |       | 9:55 |  28.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -481,6 +481,7 @@ from a coding perspective (video uploads, etc).
 
 *** STARTED Move C++ locator into physical model                      :story:
     :LOGBOOK:
+    CLOCK: [2020-10-03 Sat 16:11]--[2020-10-03 Sat 17:52] =>  1:41
     CLOCK: [2020-10-02 Fri 16:01]--[2020-10-02 Fri 18:07] =>  2:06
     CLOCK: [2020-10-02 Fri 14:30]--[2020-10-02 Fri 14:50] =>  0:20
     CLOCK: [2020-10-02 Fri 12:16]--[2020-10-02 Fri 13:05] =>  0:49
