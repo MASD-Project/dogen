@@ -21,28 +21,28 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 
+#include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/legacy_archetype_kind.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Populates the include and full paths in artefacts.
+ */
 class legacy_paths_transform final {
-public:
-    legacy_paths_transform() = default;
-    legacy_paths_transform(const legacy_paths_transform&) = default;
-    legacy_paths_transform(legacy_paths_transform&&) = default;
-    ~legacy_paths_transform() = default;
-    legacy_paths_transform& operator=(const legacy_paths_transform&) = default;
+private:
+    static entities::legacy_archetype_kind
+    get_archetye_kind(const std::string& archetype_name);
 
 public:
-    bool operator==(const legacy_paths_transform& rhs) const;
-    bool operator!=(const legacy_paths_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

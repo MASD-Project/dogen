@@ -26,6 +26,7 @@
 #include "dogen.physical/types/transforms/enablement_transform.hpp"
 #include "dogen.physical/types/transforms/formatting_transform.hpp"
 #include "dogen.physical/types/transforms/generability_transform.hpp"
+#include "dogen.physical/types/transforms/legacy_paths_transform.hpp"
 #include "dogen.physical/types/transforms/meta_model_properties_transform.hpp"
 #include "dogen.physical/types/transforms/model_population_chain.hpp"
 
@@ -56,6 +57,7 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      * input.
      */
     paths_transform::apply(ctx, m);
+    // legacy_paths_transform::apply(ctx, m);
 
     /*
      * Update enablement for all artefacts.
