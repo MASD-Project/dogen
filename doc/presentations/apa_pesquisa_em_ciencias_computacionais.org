@@ -1,0 +1,187 @@
+* Pesquisa Científica em Ciência da Computação
+
+  Marco Craveiro
+  Domain Driven Development
+  9 de Outubro de 2020
+
+* Síntese da Apresentação
+
+  - Contexto pessoal e profissional.
+  - A estrutura do mundo da pesquisa.
+  - Percurso inicial como pesquisador.
+  - Desenvolvimento de software dirigido a modelos.
+  - Reflexões sobre 6 anos em pesquisa.
+  - Q & A.
+
+* Contexto pessoal e profissional - I
+
+  - Nascido em Luanda; 16 anos em Portugal, 22 na Inglaterra.
+  - Primeira parte da vida académica feita em Portugal.
+  - Segunda parte feita em Inglaterra.
+  - Vida profissional feita na Inglaterra.
+
+* Contexto pessoal e profissional - II
+
+  - Programador desde os 11 anos.
+  - Escolaridade feita sempre com a programação como alvo.
+  - Não estudei Engenharia de Software por não ter entrado na
+    universidade desejada.
+  - BSc em Gestão Empresarial.
+
+* Contexto pessoal e profissional - III
+
+  - Inglaterra valorizou as capacidades latentes, mesmo sem
+    certificados.
+  - Empresas inglesas promovem o estudo académico.
+  - MSc em Ciência da Computação (part-time).
+  - Carreira de 22 anos em programação, grande foco em Linux.
+  - Engenheiro sénior de software em mercados financeiros (cambiais).
+
+* Contexto pessoal e profissional - IV
+
+  - Português como lingua nativa, mas enferrujado.
+  - Identificação forte com a diaspora Angolana.
+  - Familiares e amigos da minha geração retornaram.
+  - Tentei o retorno várias vezes mas não fui bem sucedido.
+
+* A estrutura do mundo da pesquisa - I
+
+  Hierarquia informal de um laboratório (lab):
+
+  - "Professor": pesquisador sénior com a visão global.
+  - "Research Fellows": doutorados com bastante experiência no campo
+    que fazem supervisão.
+  - "Post-Docs": recém doutorados que trabalham em laboratórios
+    diferentes por períodos curtos (~2 anos).
+  - "PhD Students": estudantes que estão a tentar fazer o
+    doutoramento.
+  - "Undergrads": alunos que não estão no programa de PhD mas que
+    podem ajudar com tarefas auxiliares (MSc, BSc).
+
+* A estrutura do mundo da pesquisa - II
+
+  Objetivos como estudante:
+
+  - encontrar o campo certo.
+  - dentro desse campo, encontrar a área certa.
+  - encontrar um supervisor que tenha interesse nessa área e
+    conhecimentos.
+  - encontrar um tópico para o qual exista alguma pesquisa, mas também
+    um "gap".
+  - criar uma hipótese que explique esse "gap".
+  - conseguir obter evidências que provem ou desprovem a hipótese.
+
+* A estrutura do mundo da pesquisa - III
+
+  - Escrever artigos em jornais científicos é a forma de avaliação.
+  - Existem uma hierarquia de jornais: quanto mais "prestigioso" o
+    jornal mais "importante" é considerado o artigo.
+  - A carreira do pesquisador é impactada significativamente pelo número
+    de artigos publicados.
+
+* A estrutura do mundo da pesquisa - IV
+
+  - O mundo da pesquisa é bastante formal.
+  - Uma carreira verdadeiramente académica é muito difícil.
+  - A grande maioria de estudantes deixa a academia ou durante ou depois
+    do PhD.
+  - Salários na academia são mais baixos do que na indústria (muitas
+    vezes significativamente).
+
+* Percurso inicial como pesquisador - I
+
+  - Percurso relativamente acidentado.
+  - Deixei a academia em 2002; pouco contacto com o meio académico.
+  - Doutorado foi um objetivo pessoal mas não profissional.
+  - Tentativa de entrada desde 2010, sem sucesso.
+
+* Percurso inicial como pesquisador - II
+
+  - PhD: entrada em 2014 para o laboratório de Ciência
+    Neuro-Computacional, dentro de Ciência Computacional.
+  - Modo de ensino part-time.
+  - De 2014 a 2016 fui supervisionado por um jovem especialista de
+    grande renome na matéria.
+
+* Percurso inicial como pesquisador - III
+
+  - Campo muito interessante: aplicações vastas incluindo
+    Aprendizagem Automática
+  - Campo bastante difícil: junção de matemática e biologia.
+  - [[https://mcraveiro.blogspot.com/2015/08/nerd-food-neurons-for-computer-geeks.html][Nerd Food: Neurons for Computer Geeks - Part I: A Neuron From Up
+    On High]]
+  - Depois de 2 anos difíceis, com a saída do supervisor resolvi mudar
+    de tópico.
+
+* Percurso inicial como pesquisador - IV
+
+  - Definição de uma visão para o curso:
+    - Doutorado com impacto moderado em termos profissionais.
+    - Alvo: utilizar a pesquisa para responder a questões de importância
+      pessoal (e.g. "fundamentais").
+    - Área da geração de código era familiar profissionalmente e de
+      grande interesse pessoal.
+    - Grande ênfase em publicações abertas e Open Source.
+
+* Desenvolvimento de software dirigido a modelos - I
+
+  - Tópico bastante popular durante 1990 e 2000, mas de reduzida
+    dimensão no presente.
+  - O objetivo principal é reduzir o custo do desenvolvimento de
+    software através da automação.
+  - Programadores "humanos" devem ser usados apenas onde acrescentam
+    valor.
+  - MDE evolve dos conceitos iniciais de geração de código e da criação
+    de Linguagens Específicas de Domínio (DSL).
+
+* Desenvolvimento de software dirigido a modelos - II
+
+  - Um modelo formal é definido através de uma linguagem de definição de
+    modelos (chamado de meta-modelo).
+  - O gerador de código utiliza o meta-modelo e transformações para
+    criar o código desejado.
+
+* Desenvolvimento de software dirigido a modelos - III
+
+  #+begin_quote
+  Um modelo pode ser definido como uma descrição ou especificação de um
+  sistema e seu ambiente. Um modelo, geralmente é representado por uma
+  combinação de gráficos e explicações textuais (OMG MDA Guide 2003).
+  #+end_quote
+
+  #+begin_quote
+  Uma abordagem é Model-Driven porque utiliza modelos para direcionar
+  diretamente o entendimento, projeto, construção, deployment, operação,
+  manutenção e modificação do sistema (OMG MDA Guide 2003).
+  #+end_quote
+
+  (em apresentação de De Prof. Rosana T. Vaccare Braga)
+
+* Desenvolvimento de software dirigido a modelos - IV
+
+  - MDE é considerado demasiado complexo para ter aplicações nos casos
+    de desenvolvimento "comuns".
+  - Objetivo da minha pesquisa é encontrar um meio-termo com algumas das
+    vantagens de MDE sem toda a complexidade associada.
+  - Criação de um projeto aberto: https://github.com/MASD-Project/dogen
+
+* Desenvolvimento de software dirigido a modelos - V
+
+  - Exemplo de modelo em UML para Dogen.
+
+[[../blog/images/dogen_physical_model.png]]
+
+* - Reflexões sobre 6 anos em pesquisa
+
+  - Extremamente difícil, sobretudo em part-time.
+  - Consome bastante tempo e o progresso é bastante lento.
+  - Require disciplina e método, sobretudo na gestão do tempo e na
+    motivação.
+  - Bastante motivante quando se alcança um resultado, mas demora muito
+    tempo.
+  - A escolha do primeiro curso é importante, mas dá sempre para
+    consertar.
+
+* Q & A
+
+  - Perguntas e respostas (Q & A)
