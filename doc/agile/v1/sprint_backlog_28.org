@@ -13,27 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-10-03 Sat 17:52]
+#+CAPTION: Clock summary at [2020-10-10 Sat 12:34]
 | <75>                                                        |         |       |      |       |
 | Headline                                                    | Time    |       |      |     % |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                | *34:25* |       |      | 100.0 |
+| *Total time*                                                | *40:00* |       |      | 100.0 |
 |-------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                     | 34:25   |       |      | 100.0 |
-| Active                                                      |         | 34:25 |      | 100.0 |
-| edit release notes for previous sprint                      |         |       | 3:44 |  10.8 |
-| Create a demo and presentation for previous sprint          |         |       | 0:39 |   1.9 |
-| Sprint and product backlog grooming                         |         |       | 3:09 |   9.2 |
-| Directory names and postfixes are PMM properties            |         |       | 5:27 |  15.8 |
-| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   0.9 |
-| Analysis on a formatables refactor                          |         |       | 0:31 |   1.5 |
-| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   2.9 |
-| Issues with emacs                                           |         |       | 1:09 |   3.3 |
-| Rename =name= to =codec= name                               |         |       | 0:20 |   1.0 |
-| Add full and relative path processing to PM                 |         |       | 2:27 |   7.1 |
-| Create a factory transform for parts and archetype kinds    |         |       | 5:30 |  16.0 |
-| Create a video series on the formatables refactor           |         |       | 0:15 |   0.7 |
-| Move C++ locator into physical model                        |         |       | 9:55 |  28.8 |
+| Stories                                                     | 40:00   |       |      | 100.0 |
+| Active                                                      |         | 40:00 |      | 100.0 |
+| edit release notes for previous sprint                      |         |       | 3:44 |   9.3 |
+| Create a demo and presentation for previous sprint          |         |       | 0:39 |   1.6 |
+| Sprint and product backlog grooming                         |         |       | 3:33 |   8.9 |
+| Directory names and postfixes are PMM properties            |         |       | 5:27 |  13.6 |
+| Move =enabled= and =overwrite= into =enablement_properties= |         |       | 0:19 |   0.8 |
+| Analysis on a formatables refactor                          |         |       | 0:31 |   1.3 |
+| Tracing of orchestration chains is incorrect                |         |       | 1:00 |   2.5 |
+| Presentation for APA                                        |         |       | 5:11 |  13.0 |
+| Issues with emacs                                           |         |       | 1:09 |   2.9 |
+| Rename =name= to =codec= name                               |         |       | 0:20 |   0.8 |
+| Add full and relative path processing to PM                 |         |       | 2:27 |   6.1 |
+| Create a factory transform for parts and archetype kinds    |         |       | 5:30 |  13.8 |
+| Create a video series on the formatables refactor           |         |       | 0:15 |   0.6 |
+| Move C++ locator into physical model                        |         |       | 9:55 |  24.8 |
 #+tblfm: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -205,6 +206,7 @@ Time spent creating the demo and presentation.
 ***** The logical-physical space
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-10-09 Fri 09:51]--[2020-10-09 Fri 10:15] =>  0:24
     CLOCK: [2020-10-01 Thu 10:17]--[2020-10-01 Thu 10:23] =>  0:06
     CLOCK: [2020-10-01 Thu 09:00]--[2020-10-01 Thu 09:45] =>  0:45
     CLOCK: [2020-09-26 Sat 07:25]--[2020-09-26 Sat 07:38] =>  0:13
@@ -374,6 +376,51 @@ problem to a series of well-defined software engineering tasks.
 Whilst looking for tracing information, we noticed that the layout of
 directories does not correspond to the chains in source code. Fix the
 transforms as required.
+
+*** COMPLETED Presentation for APA                                    :story:
+    CLOSED: [2020-10-10 Sat 12:33]
+    :LOGBOOK:
+    CLOCK: [2020-10-09 Fri 18:40]--[2020-10-09 Fri 21:10] =>  2:30
+    CLOCK: [2020-10-09 Fri 14:38]--[2020-10-09 Fri 14:57] =>  0:19
+    CLOCK: [2020-10-09 Fri 14:15]--[2020-10-09 Fri 14:37] =>  0:22
+    CLOCK: [2020-10-09 Fri 10:16]--[2020-10-09 Fri 12:16] =>  2:00
+    :END:
+
+We need to do a 30 min presentation on Dogen and research in general.
+
+- Youtube: https://www.youtube.com/watch?v=yKfAhkYtQYM&ab_channel=Confer%C3%AAnciaAPA
+- Flyer:
+
+#+begin_quote
+Como é fazer pesquisa em ciência da computação?
+
+Para o dia 9  de Outubro na Sexta-feira , horário do evento 18:50.
+
+Marco Craveiro Angolano fazendo doutorado (PHD) em ciência da
+computação na Universidade de Hertfordshire na Inglaterra é também
+programador sénior em mercados financeiros na City of London, lidando
+há mais de 15 anos com produtos financeiros complexos (derivativos em
+FX). A sua carreira estende-se a mais de 20 anos de programação
+profissional.
+
+Ele recebeu o Bacharelato de Gestão pela Universidade do Algarve,
+Portugal (1998) e o Mestrado em Ciências Computacionais pela
+Universidade de Hertfordshire, Inglaterra (2002). Desde 2014
+encontra-se no programa de doutoramento da mesma universidade, em
+ciência da computação, onde estuda geração automática de código-fonte
+a partir de modelos (MDE - Model Driven Engineering).
+
+Na comunidade open source, ele é conhecido como o autor de Dogen
+(https://github.com/MASD-Project/dogen), um projecto aberto que visa
+trazer as tecnologias de MDE à comunidade geral de engenheiros de
+software.
+
+Você pode participar da live no dia 9 de Outubro na Sexta-feira pelo
+nosso canal no youtube :
+https://youtube.com/channel/UC8WJYRikef3TWiqbtwQooSw...  Ou pela nossa
+página no facebook :
+https://facebook.com/Confer%C3%AAncia-APA-105017044613068
+#+end_quote
 
 *** STARTED Issues with emacs                                         :story:
     :LOGBOOK:

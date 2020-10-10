@@ -10948,7 +10948,8 @@ Now if you change =book= then this will not compile.
 
 Links:
 
-- [[https://github.com/Neargye/nameof][nameof]]
+- [[https://github.com/Neargye/nameof][nameof GH]]
+
 
 *** Consider adding support for secure string                         :story:
 
@@ -15750,6 +15751,12 @@ Links:
 
 - [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-format][HPX clang format]]
 - [[https://engineering.mongodb.com/post/succeeding-with-clangformat-part-1-pitfalls-and-planning][Succeeding With ClangFormat, Part 1: Pitfalls And Planning]]
+- [[https://github.com/basiliscos/cpp-rotor/blob/master/.clang-format][example: clang format in rotor]]
+- [[https://github.com/jbapple-cloudera/clang-format-infer][clang-format-infer GH]]
+- [[https://zed0.co.uk/clang-format-configurator/][clang-format-configurator]]
+- http://clangformat.com/
+- [[https://github.com/johnmcfarlane/unformat][Unformat]]: Python3 utility to generate a .clang-format file from
+  example code-base.
 
 *** Consider adding an emblem for clang's analysis checks             :story:
 
@@ -15928,6 +15935,22 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Investigate CG-SQL
+
+#+begin_quote
+CG/SQL is a code generation system for the popular SQLite library that
+allows developers to write stored procedures in a variant of
+Transact-SQL (T-SQL) and compile them into C code that uses SQLite’s C
+API to do the coded operations. CG/SQL enables engineers to create
+highly complex stored procedures with very large queries, without the
+manual code checking that existing methods require.
+#+end_quote
+
+Links:
+
+- [[https://github.com/facebookincubator/cg-sQL][GH]]
+- [[https://engineering.fb.com/open-source/cg-sql/][CG/SQL: Easy, accurate code generation for SQLite]]
 
 *** AWS boilerplate generation                                        :story:
 
@@ -19719,6 +19742,34 @@ Links:
 
 - [[http://0pointer.net/blog/walkthrough-for-portable-services-in-go.html][Portable Services Walkthrough (Go Edition)]]
 - [[http://0pointer.net/blog/walkthrough-for-portable-services.html][Portable Services with systemd v239]]
+
+*** Add support for the sobjectizer actor framework                   :story:
+
+#+begin_quote
+SObjectizer is one of a few cross-platform and OpenSource "actor
+frameworks" for C++. But SObjectizer supports not only Actor Model,
+but also Publish-Subscribe Model and CSP-like channels. The goal of
+SObjectizer is significant simplification of development of concurrent
+and multithreaded applications in C++.
+#+end_quote
+
+Links:
+
+- [[https://github.com/Stiffstream/sobjectizer][GH]]
+
+*** Add support for the rotor actor framework                         :story:
+
+#+begin_quote
+rotor is a non-intrusive event loop friendly C++ actor micro
+framework, similar to its elder brothers like caf and sobjectizer. The
+new release came out under the flag of pluginization, which affects
+the entire lifetime of an actor.
+#+end_quote
+
+Links:
+
+- [[https://github.com/basiliscos/cpp-rotor][GH]]
+- [[https://habr.com/ru/company/crazypanda/blog/522588/][What's new in rotor v0.09]]
 
 *** Add support for CAF serialisation                                 :story:
 
