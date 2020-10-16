@@ -109,28 +109,8 @@ identification::entities::logical_provenance projector::
 make_logical_provenance(const logical::entities::element& e) const {
     identification::entities::logical_provenance r;
     r.codec(e.provenance());
-
-    using identification::entities::logical_meta_id;
-    logical_meta_id mid(e.meta_name().id());
-    r.logical_meta_name().id(mid);
-    r.logical_meta_name().simple(e.meta_name().simple());
-
-    const auto& n(e.name());
-    r.logical_name().simple(n.simple());
-
-    using identification::entities::logical_id;
-    r.logical_name().id(logical_id(n.qualified().dot()));
-
-    auto& qn(r.logical_name().qualified());
-    qn.dot(n.qualified().dot());
-    qn.colon(n.qualified().colon());
-    qn.identifiable(n.qualified().identifiable());
-
-    auto& l(r.logical_name().location());
-    l.external_modules(n.location().external_modules());
-    l.model_modules(n.location().model_modules());
-    l.internal_modules(n.location().internal_modules());
-
+    r.logical_meta_name(e.meta_name());
+    r.logical_name(e.name());
     return r;
 }
 
