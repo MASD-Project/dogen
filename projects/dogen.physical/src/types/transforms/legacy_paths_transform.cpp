@@ -24,6 +24,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
@@ -214,7 +215,8 @@ private:
      */
     boost::filesystem::path
     make_facet_path(const std::string& archetype, const std::string& extension,
-        const identification::entities::logical_name& n) const;
+        const identification::entities::logical_name& n,
+        const bool is_csharp = false) const;
     boost::filesystem::path make_facet_path_temp(const std::string& archetype,
         const std::string& file_name,
         const identification::entities::logical_name& n) const;
@@ -553,7 +555,8 @@ locator::make_project_path(const boost::filesystem::path output_directory_path,
         const auto dn(i->second.computed_directory_name());
         if (dn.empty()) {
             BOOST_LOG_SEV(lg, error) << missing_backend_directory;
-            BOOST_THROW_EXCEPTION(transform_exception(missing_backend_directory));
+            BOOST_THROW_EXCEPTION(
+                transform_exception(missing_backend_directory));
         }
         r /= dn;
     }
@@ -563,7 +566,8 @@ locator::make_project_path(const boost::filesystem::path output_directory_path,
 }
 
 boost::filesystem::path locator::make_facet_path(const std::string& archetype,
-    const std::string& extension, const logical_name& n) const {
+    const std::string& extension, const logical_name& n,
+    const bool is_csharp) const {
     BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -604,11 +608,18 @@ boost::filesystem::path locator::make_facet_path(const std::string& archetype,
     std::ostringstream stream;
     stream << n.simple();
 
-    if (!ap.computed_postfix().empty())
-        stream << underscore << ap.computed_postfix();
+    if (!ap.computed_postfix().empty()) {
+        if (!is_csharp)
+            stream << underscore;
+        stream<< ap.computed_postfix();
+    }
 
-    if (!ap.facet_properties().computed_postfix().empty())
-        stream << underscore << ap.facet_properties().computed_postfix();
+    if (!ap.facet_properties().computed_postfix().empty()) {
+        if (!is_csharp)
+            stream << underscore;
+
+        stream << ap.facet_properties().computed_postfix();
+    }
 
     if (!extension.empty())
         stream << dot << extension;
@@ -1024,12 +1035,13 @@ boost::filesystem::path locator::make_full_path_for_visual_studio_solution(
 boost::filesystem::path locator::make_full_path_for_csharp(
     const logical_name& n, const std::string& archetype) const {
 
-    auto r(make_full_path_to_implementation_directory());
-    const auto extension(".cs");
-    const auto facet_path(make_facet_path(archetype, extension, n));
+    auto r(project_path_);
+    const auto extension("cs");
+    const auto facet_path(make_facet_path(archetype, extension, n,
+            true/*is_csharp*/));
     r /= facet_path;
 
-    BOOST_LOG_SEV(lg, trace) << "Full path tests c++ implementation: " << r;
+    BOOST_LOG_SEV(lg, trace) << "Full path c#: " << r;
     return r;
 }
 
@@ -1049,8 +1061,8 @@ locator::facet_directories() const {
 
 using entities::legacy_archetype_kind;
 
-legacy_archetype_kind
-legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
+legacy_archetype_kind legacy_paths_transform::
+get_archetye_kind(const std::string& archetype_name, const bool is_tests) {
     if (archetype_name == archetype_class_header_factory_ak ||
         archetype_name == archetype_class_header_transform_ak ||
         archetype_name == archetype_kind_class_header_factory_ak ||
@@ -1091,7 +1103,9 @@ legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
         archetype_name == primitive_implementation_ak ||
         archetype_name == type_registrar_implementation_ak ||
         archetype_name == variability_initializer_implementation_ak)
-        return legacy_archetype_kind::cpp_implementation;
+        return is_tests ?
+            legacy_archetype_kind::tests_cpp_implementation :
+            legacy_archetype_kind::cpp_implementation;
     else if (archetype_name == include_cmakelists_ak)
         return legacy_archetype_kind::include_cmakelists;
     else if (archetype_name == source_cmakelists_ak)
@@ -1101,13 +1115,15 @@ legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
     else if (archetype_name == logic_less_template_ak)
         return legacy_archetype_kind::templates;
     else if (archetype_name == main_ak)
-        return legacy_archetype_kind::tests_cpp_main;
+        return is_tests ?
+            legacy_archetype_kind::tests_cpp_main :
+            legacy_archetype_kind::cpp_implementation;
     else if (archetype_name == msbuild_targets_ak)
-        return legacy_archetype_kind::tests_cpp_main;
+        return legacy_archetype_kind::msbuild_targets;
     else if (archetype_name == common_odb_options_ak ||
         archetype_name == object_odb_options_ak ||
         archetype_name == primitive_odb_options_ak)
-        return legacy_archetype_kind::tests_cpp_main;
+        return legacy_archetype_kind::odb_options;
     else if (archetype_name == project_ak)
         return legacy_archetype_kind::visual_studio_project;
     else if (archetype_name == solution_ak)
@@ -1129,7 +1145,8 @@ get_path_for_archetype(const identification::entities::logical_name& ln,
 
     const auto& pmid(pmn.id());
     const auto an(pmn.location().archetype());
-    const auto ak(get_archetye_kind(an));
+    const bool is_tests(pmn.location().facet() == "tests");
+    const auto ak(get_archetye_kind(an, is_tests));
 
     BOOST_LOG_SEV(lg, debug) << "Processing archetype. ID: "
                              << pmid.value() << " Name: " << an;
@@ -1154,7 +1171,6 @@ get_path_for_archetype(const identification::entities::logical_name& ln,
     case legacy_archetype_kind::cpp_implementation:
         return l.make_full_path_for_cpp_implementation(ln, pmid.value());
     case legacy_archetype_kind::tests_cpp_main:
-        return l.make_full_path_for_tests_cpp_main(ln, pmid.value());
     case legacy_archetype_kind::tests_cpp_implementation:
         return l.make_full_path_for_tests_cpp_implementation(ln, pmid.value());
     case legacy_archetype_kind::templates:
@@ -1180,8 +1196,8 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
             auto& a(artefact_pair.second);
             const auto& ln(region.provenance().logical_name());
-            auto& pp(a->path_properties());
-            pp.file_path(get_path_for_archetype(ln, a->meta_name(), l));
+            const auto fp(get_path_for_archetype(ln, a->meta_name(), l));
+            a->path_properties().file_path(fp);
         }
     }
 

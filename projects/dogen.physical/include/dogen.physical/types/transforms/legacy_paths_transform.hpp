@@ -44,7 +44,7 @@ class locator;
 class legacy_paths_transform final {
 private:
     static entities::legacy_archetype_kind
-    get_archetye_kind(const std::string& archetype_name);
+    get_archetye_kind(const std::string& archetype_name, const bool is_tests);
 
     static boost::filesystem::path
     get_path_for_archetype(const identification::entities::logical_name& ln,
