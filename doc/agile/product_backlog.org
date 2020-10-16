@@ -8630,6 +8630,8 @@ See also:
 - [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
 - [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
 - [[https://www.reddit.com/r/cpp/comments/grpux6/which_gcc_flags_do_you_use_often/][Which GCC flags do you use often?]]
+- [[https://tobias.hieta.se/llvm11-release][LLVM 11.0.0 Released - Here are some highlights for C/C++
+  developers]]: section on new warnings.
 
 Merged stories:
 
@@ -15935,6 +15937,24 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Investigate build time library configuration post
+
+#+begin_quote
+Why do libraries offer these build-time switches? What do they
+accomplish?
+
+In the majority of situations, I believe that offering compile-time
+tweaks are an antipattern. I could write a detailed post on why, but
+that’s not the point I want to focus on.
+
+Instead, I want to focus on the cases where having these dials and
+switches is hugely beneficial or essential.
+#+end_quote
+
+Links:
+
+- [[https://vector-of-bool.github.io/2020/10/04/lib-configuration.html][A New Approach to Build-Time Library Configuration]]
 
 *** Investigate CG-SQL
 
