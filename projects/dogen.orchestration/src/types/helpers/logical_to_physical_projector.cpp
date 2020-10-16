@@ -225,7 +225,7 @@ void projector::add(boost::shared_ptr<logical::entities::element> e) {
 
         identification::helpers::physical_id_factory f;
         using namespace identification::entities;
-        const logical_id id(e->name().qualified().dot());
+        const logical_id id(e->name().id());
         a->name().id(f.make(id, pmn.id()));
         a->provenance(pr.provenance());
 
