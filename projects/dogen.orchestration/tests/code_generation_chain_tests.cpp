@@ -142,7 +142,7 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
 BOOST_AUTO_TEST_SUITE(code_generation_chain_tests)
 
 BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_code) {
-    SETUP_TEST_LOG_DEBUG("dogen_variability_dia_produces_expected_model");
+    SETUP_TEST_LOG("dogen_variability_dia_produces_expected_model");
     using dogen::utility::test_data::dogen_product;
     const auto t(dogen_product::input_dogen_variability_dia());
     const auto od(dogen_product::output_directory());
@@ -195,7 +195,7 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
 }
 
 BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off) {
-    SETUP_TEST_LOG_DEBUG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
+    SETUP_TEST_LOG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
 
     /*
      * Note: this test is for model cpp_ref_impl.skip_empty_dirs. The
