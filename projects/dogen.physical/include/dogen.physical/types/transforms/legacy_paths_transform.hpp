@@ -21,7 +21,10 @@
 #ifndef DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 #define DOGEN_PHYSICAL_TYPES_TRANSFORMS_LEGACY_PATHS_TRANSFORM_HPP
 
+#include "dogen.identification/types/entities/logical_name.hpp"
 #include "dogen.identification/types/entities/physical_meta_id.hpp"
+#include "dogen.identification/types/entities/physical_meta_name.hpp"
+#include <boost/filesystem/path.hpp>
 #include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,6 +36,8 @@
 
 namespace dogen::physical::transforms {
 
+class locator;
+
 /**
  * @brief Populates the include and full paths in artefacts.
  */
@@ -40,6 +45,11 @@ class legacy_paths_transform final {
 private:
     static entities::legacy_archetype_kind
     get_archetye_kind(const std::string& archetype_name);
+
+    static boost::filesystem::path
+    get_path_for_archetype(const identification::entities::logical_name& ln,
+        const identification::entities::physical_meta_name& pmn,
+        const locator& l);
 
 public:
     static void apply(const context& ctx, entities::model& m);

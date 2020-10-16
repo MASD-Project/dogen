@@ -64,19 +64,26 @@ const std::string missing_backend_directory(
 const std::string invalid_archetype("Archetype does not have a kind: ");
 const std::string invalid_archetype_kind("Archetype kind is not supported: ");
 
-const std::string archetype_class_header_factory_ak("archetype_class_header_factory");
-const std::string archetype_class_header_transform_ak("archetype_class_header_transform");
-const std::string archetype_kind_class_header_factory_ak("archetype_kind_class_header_factory");
-const std::string backend_class_header_factory_ak("backend_class_header_factory");
-const std::string backend_class_header_transform_ak("backend_class_header_transform");
+const std::string archetype_class_header_factory_ak(
+    "archetype_class_header_factory");
+const std::string archetype_class_header_transform_ak(
+    "archetype_class_header_transform");
+const std::string archetype_kind_class_header_factory_ak(
+    "archetype_kind_class_header_factory");
+const std::string backend_class_header_factory_ak(
+    "backend_class_header_factory");
+const std::string backend_class_header_transform_ak(
+    "backend_class_header_transform");
 const std::string builtin_header_ak("builtin_header");
 const std::string class_header_ak("class_header");
 const std::string enum_header_ak("enum_header");
 const std::string exception_header_ak("exception_header");
 const std::string facet_class_header_factory_ak("facet_class_header_factory");
-const std::string facet_class_header_transform_ak("facet_class_header_transform");
+const std::string facet_class_header_transform_ak(
+    "facet_class_header_transform");
 const std::string feature_bundle_header_ak("feature_bundle_header");
-const std::string feature_template_bundle_header_ak("feature_template_bundle_header");
+const std::string feature_template_bundle_header_ak(
+    "feature_template_bundle_header");
 const std::string namespace_header_ak("namespace_header");
 const std::string part_class_header_factory_ak("part_class_header_factory");
 const std::string part_class_header_transform_ak("part_class_header_transform");
@@ -88,6 +95,10 @@ const std::string primitive_forward_declarations_ak(
     "primitive_forward_declarations");
 const std::string visitor_forward_declarations_ak(
     "visitor_forward_declarations");
+const std::string variability_initializer_header_ak(
+    "variability_initializer_header");
+const std::string variability_initializer_implementation_ak(
+    "variability_initializer_implementation");
 
 const std::string archetype_class_implementation_factory_ak(
     "archetype_class_implementation_factory");
@@ -128,6 +139,13 @@ const std::string object_odb_options_ak("object_odb_options");
 const std::string primitive_odb_options_ak("primitive_odb_options");
 const std::string project_ak("project");
 const std::string solution_ak("solution");
+
+const std::string class_ak("class");
+const std::string enum_ak("enum");
+const std::string exception_ak("exception");
+const std::string primitive_ak("primitive");
+const std::string builtin_ak("builtin");
+const std::string assistant_ak("assistant");
 
 }
 
@@ -392,6 +410,13 @@ public:
         const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_solution(
+        const identification::entities::logical_name& n,
+        const std::string& archetype) const;
+
+    /**
+     * @brief Generate the full path for C# files.
+     */
+    boost::filesystem::path make_full_path_for_csharp(
         const identification::entities::logical_name& n,
         const std::string& archetype) const;
 
@@ -986,6 +1011,18 @@ boost::filesystem::path locator::make_full_path_for_visual_studio_solution(
     return make_full_path_for_project(temp, archetype);
 }
 
+boost::filesystem::path locator::make_full_path_for_csharp(
+    const logical_name& n, const std::string& archetype) const {
+
+    auto r(make_full_path_to_implementation_directory());
+    const auto extension(".cs");
+    const auto facet_path(make_facet_path(archetype, extension, n));
+    r /= facet_path;
+
+    BOOST_LOG_SEV(lg, trace) << "Full path tests c++ implementation: " << r;
+    return r;
+}
+
 std::unordered_map<std::string, std::string>
 locator::facet_directories() const {
     std::unordered_map<std::string, std::string> r;
@@ -1025,7 +1062,8 @@ legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
         archetype_name == visitor_header_ak ||
         archetype_name == class_forward_declarations_ak ||
         archetype_name == primitive_forward_declarations_ak ||
-        archetype_name == visitor_forward_declarations_ak)
+        archetype_name == visitor_forward_declarations_ak ||
+        archetype_name == variability_initializer_header_ak)
         return legacy_archetype_kind::cpp_header;
     else if (archetype_name == archetype_class_implementation_factory_ak ||
         archetype_name == archetype_class_implementation_transform_ak ||
@@ -1041,7 +1079,8 @@ legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
         archetype_name == part_class_implementation_factory_ak ||
         archetype_name == part_class_implementation_transform_ak ||
         archetype_name == primitive_implementation_ak ||
-        archetype_name == type_registrar_implementation_ak)
+        archetype_name == type_registrar_implementation_ak ||
+        archetype_name == variability_initializer_implementation_ak)
         return legacy_archetype_kind::cpp_implementation;
     else if (archetype_name == include_cmakelists_ak)
         return legacy_archetype_kind::include_cmakelists;
@@ -1063,10 +1102,62 @@ legacy_paths_transform::get_archetye_kind(const std::string& archetype_name) {
         return legacy_archetype_kind::visual_studio_project;
     else if (archetype_name == solution_ak)
         return legacy_archetype_kind::visual_studio_solution;
+    else if (archetype_name == class_ak || archetype_name == enum_ak ||
+        archetype_name == exception_ak || archetype_name == primitive_ak ||
+        archetype_name == builtin_ak || archetype_name == assistant_ak)
+        return legacy_archetype_kind::csharp_implementation;
 
     BOOST_LOG_SEV(lg, error) << invalid_archetype << archetype_name;
     BOOST_THROW_EXCEPTION(
         transform_exception(invalid_archetype + archetype_name));
+}
+
+boost::filesystem::path legacy_paths_transform::
+get_path_for_archetype(const identification::entities::logical_name& ln,
+    const identification::entities::physical_meta_name& pmn,
+    const locator& l) {
+
+    const auto& pmid(pmn.id());
+    const auto an(pmn.location().archetype());
+    const auto ak(get_archetye_kind(an));
+
+    BOOST_LOG_SEV(lg, debug) << "Processing archetype. ID: "
+                             << pmid.value() << " Name: " << an;
+
+    switch (ak) {
+    case legacy_archetype_kind::visual_studio_solution:
+        return l.make_full_path_for_visual_studio_solution(ln, pmid.value());
+    case legacy_archetype_kind::visual_studio_project:
+        return l.make_full_path_for_visual_studio_project(ln, pmid.value());
+    case legacy_archetype_kind::odb_options:
+        return l.make_full_path_for_odb_options(ln, pmid.value());
+    case legacy_archetype_kind::msbuild_targets:
+        return l.make_full_path_for_msbuild_targets(ln, pmid.value());
+    case legacy_archetype_kind::tests_cmakelists:
+        return l.make_full_path_for_tests_cmakelists(ln, pmid.value());
+    case legacy_archetype_kind::source_cmakelists:
+        return l.make_full_path_for_source_cmakelists(ln, pmid.value());
+    case legacy_archetype_kind::include_cmakelists:
+        return l.make_full_path_for_include_cmakelists(ln, pmid.value());
+    case legacy_archetype_kind::cpp_header:
+        return l.make_full_path_for_cpp_header(ln, pmid.value());
+    case legacy_archetype_kind::cpp_implementation:
+        return l.make_full_path_for_cpp_implementation(ln, pmid.value());
+    case legacy_archetype_kind::tests_cpp_main:
+        return l.make_full_path_for_tests_cpp_main(ln, pmid.value());
+    case legacy_archetype_kind::tests_cpp_implementation:
+        return l.make_full_path_for_tests_cpp_implementation(ln, pmid.value());
+    case legacy_archetype_kind::templates:
+        return l.make_full_path_for_templates(ln, pmid.value());
+    case legacy_archetype_kind::csharp_implementation:
+        return l.make_full_path_for_csharp(ln, pmid.value());
+    default: {
+        std::ostringstream os;
+        os << invalid_archetype_kind << ak;
+        const auto msg(os.str());
+        BOOST_LOG_SEV(lg, error) << msg;
+        BOOST_THROW_EXCEPTION(transform_exception(msg));
+    } }
 }
 
 void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
@@ -1079,64 +1170,8 @@ void legacy_paths_transform::apply(const context& ctx, entities::model& m) {
         for (auto& artefact_pair : region.artefacts_by_archetype()) {
             auto& a(artefact_pair.second);
             const auto& ln(region.provenance().logical_name());
-            const auto& pmid(a->meta_name().id());
-            const auto an(a->meta_name().location().archetype());
-            const auto ak(get_archetye_kind(an));
-            switch (ak) {
-            case legacy_archetype_kind::visual_studio_solution:
-                a->file_path(l.make_full_path_for_visual_studio_solution(ln,
-                        pmid.value()));
-                break;
-            case legacy_archetype_kind::visual_studio_project:
-                a->file_path(l.make_full_path_for_visual_studio_project(ln,
-                        pmid.value()));
-                break;
-            case legacy_archetype_kind::odb_options:
-                a->file_path(
-                    l.make_full_path_for_odb_options(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::msbuild_targets:
-                a->file_path(
-                    l.make_full_path_for_msbuild_targets(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::tests_cmakelists:
-                a->file_path(
-                    l.make_full_path_for_tests_cmakelists(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::source_cmakelists:
-                a->file_path(
-                    l.make_full_path_for_source_cmakelists(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::include_cmakelists:
-                a->file_path(
-                    l.make_full_path_for_include_cmakelists(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::cpp_header:
-                a->file_path(l.make_full_path_for_cpp_header(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::cpp_implementation:
-                a->file_path(
-                    l.make_full_path_for_cpp_implementation(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::tests_cpp_main:
-                a->file_path(
-                    l.make_full_path_for_tests_cpp_main(ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::tests_cpp_implementation:
-                a->file_path(l.make_full_path_for_tests_cpp_implementation(
-                        ln, pmid.value()));
-                break;
-            case legacy_archetype_kind::templates:
-                a->file_path(l.make_full_path_for_templates(ln, pmid.value()));
-                break;
-
-            default: {
-                std::ostringstream os;
-                os << invalid_archetype_kind << ak;
-                const auto msg(os.str());
-                BOOST_LOG_SEV(lg, error) << msg;
-                BOOST_THROW_EXCEPTION(transform_exception(msg));
-            } }
+            auto& pp(a->path_properties());
+            pp.file_path(get_path_for_archetype(ln, a->meta_name(), l));
         }
     }
 
