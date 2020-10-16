@@ -57,7 +57,7 @@ void model_population_chain::apply(const context& ctx, entities::model& m) {
      * input.
      */
     paths_transform::apply(ctx, m);
-    // legacy_paths_transform::apply(ctx, m);
+    legacy_paths_transform::apply(ctx, m);
 
     /*
      * Update enablement for all artefacts.
