@@ -590,8 +590,13 @@ boost::filesystem::path locator::make_facet_path(const std::string& archetype,
      * Modules other than the model module contribute their simple
      * names to the directories.
      */
-    if (n != model_name_ && n.is_container())
-            r /= n.simple();
+    if (n != model_name_ && n.is_container()) {
+        BOOST_LOG_SEV(lg, trace) << "Adding module name.";
+        r /= n.simple();
+    } else {
+        BOOST_LOG_SEV(lg, trace) << "NOT adding module name. Container: "
+                                 << n.is_container();
+    }
 
     /*
      * Handle the file name.
@@ -616,7 +621,7 @@ boost::filesystem::path locator::make_facet_path(const std::string& archetype,
 boost::filesystem::path
 locator::make_facet_path_temp(const std::string& archetype,
     const std::string& file_name, const logical_name& n) const {
-    BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
+    BOOST_LOG_SEV(lg, trace) << "Making facet path TEMP for: "
                              << n.qualified().dot();
 
     /*
@@ -642,8 +647,13 @@ locator::make_facet_path_temp(const std::string& archetype,
      * Modules other than the model module contribute their simple
      * names to the directories.
      */
-    if (n != model_name_ && n.is_container())
+    if (n != model_name_ && n.is_container()) {
+        BOOST_LOG_SEV(lg, trace) << "Adding module name.";
         r /= n.simple();
+    } else {
+        BOOST_LOG_SEV(lg, trace) << "NOT adding module name. Container: "
+                                 << n.is_container();
+    }
 
     /*
      * Handle the file name.
