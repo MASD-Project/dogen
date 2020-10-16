@@ -3881,19 +3881,19 @@ Used to obtain the default archetype for referencing.#</dia:string>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="17,-55"/>
+        <dia:point val="16,-55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,-56.05;216.05,2.05"/>
+        <dia:rectangle val="15.95,-56.05;216.05,2.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="17,-55"/>
+        <dia:point val="16,-55"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="199"/>
+        <dia:real val="200"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="57"/>
@@ -10646,7 +10646,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="114.03,-118.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.013,-118.45;114.88,-108.95"/>
+        <dia:rectangle val="107.012,-118.45;114.88,-108.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14828,7 +14828,7 @@ element.#</dia:string>
         <dia:point val="28.1425,-78.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.4262,-79.55;28.8925,-72.2503"/>
+        <dia:rectangle val="25.4263,-79.55;28.8925,-72.2503"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21389,7 +21389,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="195.545,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.795,-88.65;205.957,-82.4"/>
+        <dia:rectangle val="194.795,-88.65;205.957,-83.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21470,7 +21470,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="198,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="193.707,-103;198.75,-95.4"/>
+        <dia:rectangle val="193.707,-103;198.75,-96.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21551,7 +21551,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="205.757,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="204.322,-110.45;206.507,-95.4"/>
+        <dia:rectangle val="204.323,-110.45;206.507,-96.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21632,7 +21632,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="213.515,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="212.765,-101.45;215.572,-95.4"/>
+        <dia:rectangle val="212.765,-101.45;215.573,-96.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21851,7 +21851,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="172.773,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.023,-93.45;186.447,-82.4"/>
+        <dia:rectangle val="172.023,-93.45;186.448,-83.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21932,7 +21932,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="172.773,-73.9497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.023,-74.6997;175.727,-68.4"/>
+        <dia:rectangle val="172.023,-74.6997;175.727,-69.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22193,7 +22193,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="153.055,-13.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="152.305,-14.65;157.05,-12.3"/>
+        <dia:rectangle val="152.305,-14.65;157.05,-13.045"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22274,7 +22274,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:point val="199,-84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="198.95,-84.05;209.77,-71.55"/>
+        <dia:rectangle val="198.95,-84.05;209.77,-70.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="199,-84"/>
@@ -22283,7 +22283,7 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:real val="10.720000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="13.200000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#legacy_archetype_kind#</dia:string>
@@ -22632,6 +22632,29 @@ Only required when the part is located outside of the component directory.#</dia
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#templates#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#csharp_implementation#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

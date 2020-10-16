@@ -69,6 +69,9 @@ std::ostream& operator<<(std::ostream& s, const legacy_archetype_kind& v) {
     case legacy_archetype_kind::templates:
         attr = "\"templates\"";
         break;
+    case legacy_archetype_kind::csharp_implementation:
+        attr = "\"csharp_implementation\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for legacy_archetype_kind");
     }

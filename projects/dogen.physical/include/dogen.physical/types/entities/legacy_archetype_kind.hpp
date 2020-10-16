@@ -43,7 +43,8 @@ enum class legacy_archetype_kind : unsigned int {
     cpp_implementation = 9,
     tests_cpp_main = 10,
     tests_cpp_implementation = 11,
-    templates = 12
+    templates = 12,
+    csharp_implementation = 13
 };
 
 }
