@@ -1647,6 +1647,26 @@
           "name": "file_path",
           "type": "boost::filesystem::path",
           "documentation": "Full path to the file corresponding to this artefact.\n"
+        },
+        {
+          "name": "header_guard",
+          "type": "std::string",
+          "documentation": "C++ header guard for this artefact, if any,\n"
+        },
+        {
+          "name": "inclusion_dependencies",
+          "type": "std::list<std::string>",
+          "documentation": "C++ Inlusion dependencies for this artefact.\n"
+        },
+        {
+          "name": "primary_inclusion_directive",
+          "type": "std::string",
+          "documentation": "The main inclusion directive needed for this element.\n"
+        },
+        {
+          "name": "secondary_inclusion_directives",
+          "type": "std::list<std::string>",
+          "documentation": "Any other directives that are also needed for this element.\n"
         }
       ]
     },

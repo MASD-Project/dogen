@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
@@ -40,7 +42,12 @@ public:
     path_properties(path_properties&& rhs);
 
 public:
-    explicit path_properties(const boost::filesystem::path& file_path);
+    path_properties(
+        const boost::filesystem::path& file_path,
+        const std::string& header_guard,
+        const std::list<std::string>& inclusion_dependencies,
+        const std::string& primary_inclusion_directive,
+        const std::list<std::string>& secondary_inclusion_directives);
 
 public:
     /**
@@ -51,6 +58,46 @@ public:
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief C++ header guard for this artefact, if any,
+     */
+    /**@{*/
+    const std::string& header_guard() const;
+    std::string& header_guard();
+    void header_guard(const std::string& v);
+    void header_guard(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief C++ Inlusion dependencies for this artefact.
+     */
+    /**@{*/
+    const std::list<std::string>& inclusion_dependencies() const;
+    std::list<std::string>& inclusion_dependencies();
+    void inclusion_dependencies(const std::list<std::string>& v);
+    void inclusion_dependencies(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief The main inclusion directive needed for this element.
+     */
+    /**@{*/
+    const std::string& primary_inclusion_directive() const;
+    std::string& primary_inclusion_directive();
+    void primary_inclusion_directive(const std::string& v);
+    void primary_inclusion_directive(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Any other directives that are also needed for this element.
+     */
+    /**@{*/
+    const std::list<std::string>& secondary_inclusion_directives() const;
+    std::list<std::string>& secondary_inclusion_directives();
+    void secondary_inclusion_directives(const std::list<std::string>& v);
+    void secondary_inclusion_directives(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -65,6 +112,10 @@ public:
 
 private:
     boost::filesystem::path file_path_;
+    std::string header_guard_;
+    std::list<std::string> inclusion_dependencies_;
+    std::string primary_inclusion_directive_;
+    std::list<std::string> secondary_inclusion_directives_;
 };
 
 }
