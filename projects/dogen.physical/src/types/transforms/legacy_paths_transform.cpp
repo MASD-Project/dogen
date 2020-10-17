@@ -52,7 +52,8 @@ const std::string underscore("_");
 const std::string double_quote("\"");
 const std::string dot(".");
 const std::string separator("_");
-const physical_meta_id backend_id("masd.cpp");
+const physical_meta_id cpp_backend_id("masd.cpp");
+const physical_meta_id csharp_backend_id("masd.csharp");
 
 const std::string missing_facet_configuration(
     "Could not find configuration for facet: ");
@@ -201,11 +202,13 @@ public:
 
 private:
     /**
-     * @brief Returns the absolute path to the project folder.
+     * @brief Returns the absolute path to the project folder, for the
+     * supplied backend.
      */
-    static boost::filesystem::path
-    make_project_path(const boost::filesystem::path output_directory_path,
-        const physical::entities::model& pm);
+    static boost::filesystem::path make_project_path(
+        const boost::filesystem::path output_directory_path,
+        const physical::entities::model& pm,
+        const physical_meta_id& backend_id);
 
     /**
      * @brief Generates the facet path segment of a file path.
@@ -307,7 +310,8 @@ public:
     /**
      * @brief Generate the full path to the implementation directory
      */
-    boost::filesystem::path make_full_path_to_implementation_directory() const;
+    boost::filesystem::path make_full_path_to_implementation_directory(
+        const bool is_csharp = false) const;
 
     /**
      * @brief Generate the full path to the facet include directory.
@@ -382,7 +386,7 @@ public:
      */
     boost::filesystem::path make_full_path_for_msbuild_targets(
         const identification::entities::logical_name& n,
-        const std::string& archetype) const;
+        const std::string& archetype, const bool is_csharp) const;
 
     /**
      * @brief Generate the relatvie path for odb options.
@@ -401,19 +405,19 @@ public:
 
     boost::filesystem::path make_full_path_for_project(
         const identification::entities::logical_name& n,
-        const std::string& archetype) const;
+        const std::string& archetype, const bool is_csharp) const;
 
     boost::filesystem::path make_full_path_for_solution(
         const identification::entities::logical_name& n,
-        const std::string& archetype) const;
+        const std::string& archetype, const bool is_csharp) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_project(
         const identification::entities::logical_name& n,
-        const std::string& archetype) const;
+        const std::string& archetype, const bool is_csharp) const;
 
     boost::filesystem::path make_full_path_for_visual_studio_solution(
         const identification::entities::logical_name& n,
-        const std::string& archetype) const;
+        const std::string& archetype, const bool is_csharp) const;
 
     /**
      * @brief Generate the full path for C# files.
@@ -428,7 +432,8 @@ public:
 private:
     const physical::entities::model& physical_model_;
     const identification::entities::logical_name& model_name_;
-    const boost::filesystem::path project_path_;
+    const boost::filesystem::path cpp_project_path_;
+    const boost::filesystem::path csharp_project_path_;
     const boost::filesystem::path headers_project_path_;
     const boost::filesystem::path output_directory_path_;
     const boost::filesystem::path templates_project_path_;
@@ -440,9 +445,13 @@ using identification::entities::logical_name;
 locator::locator(const physical::entities::model& pm)
     : physical_model_(pm),
       model_name_(pm.provenance().logical_name()),
-      project_path_(make_project_path(
-              pm.meta_model_properties().output_directory_path(), pm)),
-      headers_project_path_(make_headers_path(project_path_, pm)),
+      cpp_project_path_(make_project_path(
+              pm.meta_model_properties().output_directory_path(), pm,
+              cpp_backend_id)),
+      csharp_project_path_(make_project_path(
+              pm.meta_model_properties().output_directory_path(), pm,
+              csharp_backend_id)),
+      headers_project_path_(make_headers_path(cpp_project_path_, pm)),
       output_directory_path_(
           pm.meta_model_properties().output_directory_path()),
       templates_project_path_(make_templates_path(pm)),
@@ -536,7 +545,7 @@ std::string locator::postfix_for_facet(const std::string& facet) const {
 
 boost::filesystem::path
 locator::make_project_path(const boost::filesystem::path output_directory_path,
-    const physical::entities::model& pm) {
+    const physical::entities::model& pm, const physical_meta_id& backend_id) {
     boost::filesystem::path r(output_directory_path);
     const auto& mm(pm.provenance().logical_name().location().model_modules());
     r /= boost::algorithm::join(mm, dot);
@@ -705,7 +714,7 @@ locator::make_inclusion_path(const std::string& archetype,
 }
 
 boost::filesystem::path locator::project_path() const {
-    return project_path_;
+    return cpp_project_path_;
 }
 
 boost::filesystem::path locator::headers_project_path() const {
@@ -809,11 +818,11 @@ boost::filesystem::path locator::make_full_path_to_include_directory() const {
     return r;
 }
 
-boost::filesystem::path
-locator::make_full_path_to_implementation_directory() const {
+boost::filesystem::path locator::
+make_full_path_to_implementation_directory(const bool is_csharp) const {
     const auto& mmp(physical_model_.meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
-    auto r(project_path_);
+    auto r(is_csharp ? csharp_project_path_ : cpp_project_path_);
     r /= ppp.source_directory_name();
 
     BOOST_LOG_SEV(lg, trace) << "Full path to implementation dir: " << r;
@@ -859,7 +868,7 @@ boost::filesystem::path locator::make_relative_implementation_path_for_facet(
 
 boost::filesystem::path locator::make_full_path_for_templates(
     const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+    auto r(cpp_project_path_);
 
     const auto& mmp(physical_model_.meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
@@ -874,7 +883,7 @@ boost::filesystem::path locator::make_full_path_for_templates(
 
 boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
     const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+    auto r(cpp_project_path_);
 
     const auto& mmp(physical_model_.meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
@@ -890,7 +899,7 @@ boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
 boost::filesystem::path locator::make_full_path_for_tests_cpp_main(
     const logical_name& n, const std::string& archetype) const {
 
-    auto r(project_path_);
+    auto r(cpp_project_path_);
     const auto& mmp(physical_model_.meta_model_properties());
     const auto& ppp(mmp.project_path_properties());
     const auto extension(ppp.implementation_file_extension());
@@ -923,7 +932,7 @@ boost::filesystem::path locator::make_full_path_for_include_cmakelists(
      * Note that we are placing the "include" CMake file with the
      * project directory rather than the project headers directory.
      */
-    auto r(project_path_);
+    auto r(cpp_project_path_);
     r /= n.simple() + ".txt";
     return r;
 }
@@ -937,7 +946,7 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 
 boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
     const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+    auto r(cpp_project_path_);
     const auto facet_path(make_facet_path_temp(archetype,
             n.simple() + ".txt", n));
     r /= facet_path;
@@ -946,8 +955,8 @@ boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
 
 boost::filesystem::path locator::
 make_full_path_for_msbuild_targets(const logical_name& n,
-    const std::string& /*archetype*/) const {
-    auto r(make_full_path_to_implementation_directory());
+    const std::string& /*archetype*/, const bool is_csharp) const {
+    auto r(make_full_path_to_implementation_directory(is_csharp));
     r /= n.simple() + ".targets";
     return r;
 }
@@ -995,47 +1004,52 @@ boost::filesystem::path locator::make_relative_path_for_odb_options(
 
 boost::filesystem::path locator::make_full_path_for_odb_options(
     const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+    auto r(cpp_project_path_);
     r /= make_relative_path_for_odb_options(n, archetype);
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_project(
-    const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+    const logical_name& n, const std::string& archetype,
+    const bool is_csharp) const {
+    auto r(is_csharp ? csharp_project_path_ : cpp_project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
     return r;
 }
 
-boost::filesystem::path locator::make_full_path_for_solution(
-    const logical_name& n, const std::string& archetype) const {
-    auto r(project_path_);
+boost::filesystem::path locator::
+make_full_path_for_solution(const logical_name& n, const std::string& archetype,
+    const bool is_csharp) const {
+    auto r(is_csharp ? csharp_project_path_ : cpp_project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_visual_studio_project(
-    const logical_name& n, const std::string& archetype) const {
+    const logical_name& n, const std::string& archetype,
+    const bool is_csharp) const {
     auto temp(n);
     using boost::algorithm::join;
-    temp.simple(join(n.location().model_modules(), ".") + ".vcxproj");
-    return make_full_path_for_project(temp, archetype);
+    const std::string extension(is_csharp ? ".csproj" : ".vcxproj");
+    temp.simple(join(n.location().model_modules(), ".") + extension);
+    return make_full_path_for_project(temp, archetype, is_csharp);
 }
 
 boost::filesystem::path locator::make_full_path_for_visual_studio_solution(
-    const logical_name& n, const std::string& archetype) const {
+    const logical_name& n, const std::string& archetype,
+    const bool is_csharp) const {
     auto temp(n);
     using boost::algorithm::join;
     temp.simple(join(n.location().model_modules(), ".") + ".sln");
-    return make_full_path_for_project(temp, archetype);
+    return make_full_path_for_project(temp, archetype, is_csharp);
 }
 
 boost::filesystem::path locator::make_full_path_for_csharp(
     const logical_name& n, const std::string& archetype) const {
 
-    auto r(project_path_);
+    auto r(csharp_project_path_);
     const auto extension("cs");
     const auto facet_path(make_facet_path(archetype, extension, n,
             true/*is_csharp*/));
@@ -1145,38 +1159,40 @@ get_path_for_archetype(const identification::entities::logical_name& ln,
 
     const auto& pmid(pmn.id());
     const auto an(pmn.location().archetype());
+    const bool is_csharp(pmn.location().backend() == "csharp");
     const bool is_tests(pmn.location().facet() == "tests");
     const auto ak(get_archetye_kind(an, is_tests));
 
     BOOST_LOG_SEV(lg, debug) << "Processing archetype. ID: "
                              << pmid.value() << " Name: " << an;
 
+    const auto v(pmid.value());
     switch (ak) {
     case legacy_archetype_kind::visual_studio_solution:
-        return l.make_full_path_for_visual_studio_solution(ln, pmid.value());
+        return l.make_full_path_for_visual_studio_solution(ln, v, is_csharp);
     case legacy_archetype_kind::visual_studio_project:
-        return l.make_full_path_for_visual_studio_project(ln, pmid.value());
+        return l.make_full_path_for_visual_studio_project(ln, v, is_csharp);
     case legacy_archetype_kind::odb_options:
-        return l.make_full_path_for_odb_options(ln, pmid.value());
+        return l.make_full_path_for_odb_options(ln, v);
     case legacy_archetype_kind::msbuild_targets:
-        return l.make_full_path_for_msbuild_targets(ln, pmid.value());
+        return l.make_full_path_for_msbuild_targets(ln, v, is_csharp);
     case legacy_archetype_kind::tests_cmakelists:
-        return l.make_full_path_for_tests_cmakelists(ln, pmid.value());
+        return l.make_full_path_for_tests_cmakelists(ln, v);
     case legacy_archetype_kind::source_cmakelists:
-        return l.make_full_path_for_source_cmakelists(ln, pmid.value());
+        return l.make_full_path_for_source_cmakelists(ln, v);
     case legacy_archetype_kind::include_cmakelists:
-        return l.make_full_path_for_include_cmakelists(ln, pmid.value());
+        return l.make_full_path_for_include_cmakelists(ln, v);
     case legacy_archetype_kind::cpp_header:
-        return l.make_full_path_for_cpp_header(ln, pmid.value());
+        return l.make_full_path_for_cpp_header(ln, v);
     case legacy_archetype_kind::cpp_implementation:
-        return l.make_full_path_for_cpp_implementation(ln, pmid.value());
+        return l.make_full_path_for_cpp_implementation(ln, v);
     case legacy_archetype_kind::tests_cpp_main:
     case legacy_archetype_kind::tests_cpp_implementation:
-        return l.make_full_path_for_tests_cpp_implementation(ln, pmid.value());
+        return l.make_full_path_for_tests_cpp_implementation(ln, v);
     case legacy_archetype_kind::templates:
-        return l.make_full_path_for_templates(ln, pmid.value());
+        return l.make_full_path_for_templates(ln, v);
     case legacy_archetype_kind::csharp_implementation:
-        return l.make_full_path_for_csharp(ln, pmid.value());
+        return l.make_full_path_for_csharp(ln, v);
     default: {
         std::ostringstream os;
         os << invalid_archetype_kind << ak;
