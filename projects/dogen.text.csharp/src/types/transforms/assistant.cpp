@@ -289,7 +289,7 @@ std::ostream& assistant::stream() {
 void assistant::update_artefact() {
     artefact_.content(stream_.str());
 
-    const auto fp(artefact_properties_.file_path());
+    const auto fp(artefact_.path_properties().file_path());
     artefact_.file_path(fp);
 
     const auto arch(physical_meta_name_.id());

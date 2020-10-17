@@ -685,7 +685,7 @@ std::ostream& assistant::stream() {
 void assistant::update_artefact() const {
     artefact_.content(stream_.str());
 
-    const auto fp(artefact_properties_.file_path());
+    const auto fp(artefact_.path_properties().file_path());
     artefact_.file_path(fp);
 
     physical::entities::operation op;
